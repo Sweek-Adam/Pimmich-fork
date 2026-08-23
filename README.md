@@ -215,6 +215,18 @@ Pour toute question ou problème, consultez notre **Foire Aux Questions (FAQ.md)
 
 > 🗓️ À partir de juin 2025 — Une version majeure chaque mois
 
+## ✅ Août 2026 - Mises à jour de Stabilité, Performance & Compatibilité Pi 2/3/4/5
+- 🚀 **Mise à jour asynchrone & Keep-Alives (anti-timeout) :** Toutes les tâches lourdes (Samba, Immich, photo/video prep) s'exécutent en arrière-plan avec pings réseau toutes les 10s pour éviter toute déconnexion de l'interface d'administration.
+- 🔁 **Synchronisation intelligente incrémentale :** Seuls les nouveaux médias et les suppressions sont synchronisés, préservant la bande passante, le CPU et l'usure de la carte SD.
+- ⚡ **Optimisation de la mémoire GPU (CMA) :** Technique innovante de réduction de fenêtre 1x1 masquée (`pygame.HIDDEN`) pour libérer 100% de la mémoire GPU lors de la lecture vidéo `mpv`, résolvant les crashs et lenteurs sous Wayland/Sway.
+- ⏱️ **Lecture vidéo instantanée :** Suppression des appels lents à `ffprobe` au profit d'un Watchdog de sécurité fixe de 90 secondes. La vidéo se lance en moins d'une seconde.
+- 📺 **Affichage vidéo robuste devant le diaporama :** Option `--ontop` sélective pour garantir que les vidéos se lisent toujours au premier plan, devant la fenêtre de Pygame sur Pi 1 et 2.
+- 🎨 **Transitions optimisées à 30/60 FPS :** Le fondu enchaîné est calculé à 50% de résolution sur Pi 1/2/3 (75% de pixels en moins à traiter) puis mis à l'échelle via l'accélération matérielle de SDL2, avec un sélecteur de FPS dans l'interface admin.
+- 🤫 **Zéro bruit CPU sonore au repos :** Le mixeur audio Pygame n'est initialisé qu'à la demande. Évite de charger les serveurs son (Pipewire) en tâche de fond et économise 40% de CPU sur les anciens Pi.
+- 🌐 **Vitesse réseau améliorée :** Optimisation de la détection Wi-Fi pour contourner les appels réseau lents sur les systèmes uniquement câblés (Pi 2).
+- 📦 **Dépendances optionnelles :** Support HEIF/HEIC et commandes vocales optionnels pour garantir le succès de l'installation sur toutes les architectures système, géré à la volée dans `setup.sh`.
+- 🇫🇷 **Langue française native :** Configuration et génération automatique de la locale `fr_FR.UTF-8` lors de l'installation pour des dates affichées en français natif.
+
 ## ✅ Mai 2026
 - 🚀 **Compatibilité Debian Trixie (Debian 13) :**
     - ✅ Migration complète vers **Python 3.13**.

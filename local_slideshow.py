@@ -1665,20 +1665,20 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
     hwdec_enabled = config.get("video_hwdec_enabled", True)
     pi_model = get_pi_model()
 
-    # 1. Afficher un bandeau de chargement avant le lancement
+    # 1. Afficher un bandeau de chargement avant le lancement (avec symbole sablier unicode supporté par la police)
     if main_font:
-        draw_loading_banner(screen, "⏳ Chargement de la vidéo...", screen_width, screen_height, main_font)
+        draw_loading_banner(screen, "⌛ Chargement de la vidéo...", screen_width, screen_height, main_font)
         time.sleep(0.5)
 
-    # Sur tous les Raspberry Pi, au lieu de quitter complètement Pygame (ce qui fait planter le backend Wayland de SDL2),
-    # on réduit temporairement la fenêtre à 1x1 pixel et on la masque avec le drapeau pygame.HIDDEN.
-    # Cela libère immédiatement toute la mémoire graphique (CMA) pour mpv tout en rendant la fenêtre 100% invisible.
+    # Pour éviter les conflits de surface graphique (CMA et Wayland scanout) entre Pygame et mpv,
+    # on ferme proprement Pygame avant le lancement de mpv sur TOUS les modèles de Raspberry Pi (1/2/3/4/5).
+    # Sur ces cartes, laisser Pygame ouvert crée un conflit de ressources EGL sur le GPU, bloquant mpv indéfiniment.
+    # On ajoute une pause de 0.8 seconde après la fermeture pour laisser le temps au compositeur Wayland
+    # de libérer la surface d'affichage.
     if pi_model in [1, 2, 3, 4, 5]:
-        logger.info(f"📸 [Pi {pi_model}] Hiding and resizing Pygame window to release CMA memory.")
-        try:
-            pygame.display.set_mode((1, 1), pygame.HIDDEN)
-        except Exception as e:
-            logger.warning(f"Impossible de masquer la surface Pygame : {e}")
+        logger.info(f"📸 [Pi {pi_model}] Closing Pygame to release graphics overlay context for mpv.")
+        pygame.quit()
+        time.sleep(0.8)
     elif audio_enabled:
         if pygame.mixer.get_init(): pygame.mixer.quit()
 
@@ -1706,32 +1706,11 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
             command.append('--ontop')
 
         if hwdec_enabled:
-            # --- MODIFICATION SIGALOU 28/01/2026 ---
-            # Logique de décodage matériel spécifique au modèle de Raspberry Pi
-            # pour une performance optimale, notamment sur Pi 4.
-            if pi_model in [4, 5]:
-                logger.info(f"[Video Playback] Raspberry Pi 4/5 détecté. Mode DMABUF Haute Performance.")
+            # Pour tous les modèles de Raspberry Pi (1/2/3/4/5), on essaie en premier le mode DMABUF Haute Performance.
+            # C'est le seul mode matériel direct (zéro-copie) qui évite les saccades de bande passante et l'écran noir de 15s.
+            if pi_model in [1, 2, 3, 4, 5]:
+                logger.info(f"[Video Playback] Raspberry Pi {pi_model} détecté. Mode DMABUF Haute Performance.")
                 command.extend(['-v', '--hwdec=v4l2m2m', '--vo=dmabuf-wayland', '--wayland-app-id=mpv', '--log-file=/tmp/mpv_pimmich.log'])
-            elif pi_model in [1, 2, 3]:
-                logger.info(f"[Video Playback] Raspberry Pi {pi_model} détecté. Mode compatibilité optimisé.")
-                command.append('-v') # Mode verbeux pour capturer l'erreur réelle
-                # Utilisation d'un cache disque pour les shaders GPU de mpv afin d'éviter la compilation de 10s à chaque démarrage
-                shader_cache_dir = os.path.join(BASE_DIR, "cache", "mpv_shaders")
-                os.makedirs(shader_cache_dir, exist_ok=True)
-                # Sur Pi 1, 2, 3, on utilise v4l2m2m-copy avec gpu, mais on active des optimisations pour soulager la bande passante mémoire et le GPU
-                command.extend([
-                    '--profile=fast',
-                    '--hwdec=v4l2m2m-copy',
-                    '--vo=gpu',
-                    '--gpu-context=wayland',
-                    f'--gpu-shader-cache-dir={shader_cache_dir}',
-                    '--scale=bilinear',
-                    '--cscale=bilinear',
-                    '--dscale=bilinear',
-                    '--vd-lavc-dr=yes',
-                    '--wayland-app-id=mpv',
-                    '--log-file=/tmp/mpv_pimmich.log'
-                ])
             else:
                 # Fallback pour les autres systèmes ou si la détection échoue
                 logger.info(f"[Video Playback] Modèle de Pi non spécifique détecté. Utilisation de '--hwdec=auto'.")
@@ -1761,28 +1740,41 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
              command.append('--no-audio')
 
         
-        # Tenter d'abord le mode DMABUF Haute Performance (zéro-copie), puis le mode compatibilité en cas d'échec.
-        # Le mode DMABUF est extrêmement fluide sur Pi 1, 2, 3 sous Wayland/Sway car il évite la recopie mémoire.
+        # Si on est sur un Raspberry Pi (1/2/3/4/5), on essaie d'abord le mode DMABUF Haute Performance.
+        # Si cela échoue, on se rabat sur le mode de compatibilité GPU (avec cache de shaders).
         commands_to_try = [command]
-        if hwdec_enabled and pi_model in [1, 2, 3]:
-            cmd_high_perf = [
+        if hwdec_enabled and pi_model in [1, 2, 3, 4, 5]:
+            shader_cache_dir = os.path.join(BASE_DIR, "cache", "mpv_shaders")
+            os.makedirs(shader_cache_dir, exist_ok=True)
+            cmd_fallback = [
                 'mpv',
                 '--no-config',
                 '--no-terminal',
                 '--fs', '--no-osc', '--no-osd-bar', '--loop=no',
-                '-v', '--hwdec=v4l2m2m', '--vo=dmabuf-wayland',
-                '--wayland-app-id=mpv', '--log-file=/tmp/mpv_pimmich.log',
+                '-v',
+                '--profile=fast',
+                '--hwdec=v4l2m2m-copy',
+                '--vo=gpu',
+                '--gpu-context=wayland',
+                '--gpu-shader-cache=yes',
+                f'--gpu-shader-cache-dir={shader_cache_dir}',
+                '--scale=bilinear',
+                '--cscale=bilinear',
+                '--dscale=bilinear',
+                '--vd-lavc-dr=yes',
+                '--wayland-app-id=mpv',
+                '--log-file=/tmp/mpv_pimmich.log',
                 video_path
             ]
             if pi_model != 3:
-                cmd_high_perf.append('--ontop')
+                cmd_fallback.append('--ontop')
             if audio_enabled:
-                cmd_high_perf.extend([f'--volume={audio_volume}', '--no-mute'])
+                cmd_fallback.extend([f'--volume={audio_volume}', '--no-mute'])
             else:
-                cmd_high_perf.append('--no-audio')
+                cmd_fallback.append('--no-audio')
             
-            commands_to_try = [cmd_high_perf, command]
-
+            commands_to_try = [command, cmd_fallback]
+        
         success = False
         last_error = None
         
@@ -1792,8 +1784,8 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
 
         for idx, cmd_to_run in enumerate(commands_to_try):
             logger.info(f"📸 Executing mpv command (try {idx+1}/{len(commands_to_try)}): {' '.join(cmd_to_run)}")
-            # Petite pause pour laisser le système d'affichage se stabiliser
-            time.sleep(1)
+            # Très courte pause pour laisser le système se caler
+            time.sleep(0.1)
             
             try:
                 result = subprocess.run(
@@ -2232,13 +2224,31 @@ def start_slideshow():
 
                 if is_video:
                     display_video(screen, photo_path, SCREEN_WIDTH, SCREEN_HEIGHT, config, main_font_loaded, previous_photo_surface, pygame.time.Clock())
-                    # Restaurer la fenêtre Pygame en plein écran
-                    logger.info("📸 Restoring Pygame fullscreen window...")
-                    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
-                    pygame.mouse.set_visible(False)
-                    # Afficher le bandeau de reprise après la lecture de la vidéo
+                    
+                    # Si Pygame a été fermé pour la vidéo (sur tous les Raspberry Pi), on ré-initialise l'affichage.
+                    # On laisse 0.8 seconde de pause pour laisser Wayland détruire la surface mpv avant de relancer Pygame.
+                    if pi_model in [1, 2, 3, 4, 5]:
+                        logger.info("📸 Attente de 0.8s de stabilisation avant réinitialisation d'affichage...")
+                        time.sleep(0.8)
+                        screen, SCREEN_WIDTH, SCREEN_HEIGHT = reinit_pygame()
+                        # Recharger la police car pygame.quit() l'a invalidée
+                        font_path_config = config.get("clock_font_path", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
+                        clock_font_size_config = int(config.get("clock_font_size", 72))
+                        try:
+                            main_font_loaded = pygame.font.Font(font_path_config, clock_font_size_config)
+                        except Exception:
+                            main_font_loaded = pygame.font.SysFont("Arial", clock_font_size_config)
+                        # Relancer la musique si elle était active
+                        if _current_background_music:
+                            play_background_music(_current_background_music)
+                    else:
+                        # Cas général (PC de bureau)
+                        screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
+                        pygame.mouse.set_visible(False)
+                        
+                    # Afficher le bandeau de reprise après la lecture de la vidéo (avec symbole flèche circulaire unicode supportée)
                     if main_font_loaded:
-                        draw_loading_banner(screen, "🔄 Reprise du diaporama...", SCREEN_WIDTH, SCREEN_HEIGHT, main_font_loaded)
+                        draw_loading_banner(screen, "↻ Reprise du diaporama...", SCREEN_WIDTH, SCREEN_HEIGHT, main_font_loaded)
                         time.sleep(0.5)
                 else: # C'est une image
                     current_pil_image = None # Initialize to None to ensure it's always defined
