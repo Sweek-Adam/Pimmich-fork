@@ -330,18 +330,26 @@ def prepare_video(source_path, dest_path, output_width, output_height):
         except Exception as e:
             print(f"[Video Prep] Avertissement : Impossible de détecter les encodeurs ({e}). Utilisation de l'encodeur logiciel par défaut.")
         
+        # Encoder dans un fichier temporaire, hors des dossiers lus par le diaporama, puis le renommer une fois terminé :
+        # une conversion interrompue (redémarrage, coupure) ne laisse jamais de vidéo tronquée considérée comme prête.
+        tmp_dir = Path(dest_path).parent.parent.parent / ".prep_tmp"
+        tmp_dir.mkdir(parents=True, exist_ok=True)
+        tmp_path = tmp_dir / f"{Path(dest_path).parent.name}_{Path(dest_path).name}"
+
         command = [
             'ffmpeg', '-i', source_path, '-vf', f"scale='min({output_width},iw)':'min({output_height},ih)':force_original_aspect_ratio=decrease,pad={output_width}:{output_height}:(ow-iw)/2:(oh-ih)/2",
             '-c:v', encoder, *encoder_params,
             '-pix_fmt', 'yuv420p',  # Ajout pour une meilleure compatibilité
             '-c:a', 'aac', '-b:a', '128k',
-            '-y', dest_path
+            '-y', str(tmp_path)
         ]
         
         result = subprocess.run(command, check=False, capture_output=True, text=True, encoding='utf-8')
         
         if result.returncode != 0:
+            tmp_path.unlink(missing_ok=True)
             raise Exception(f"ffmpeg a échoué avec le code {result.returncode}. Erreur: {result.stderr.strip()}")
+        os.replace(tmp_path, dest_path)
     
     except Exception as video_e:
         raise Exception(f"Erreur lors du traitement de la vidéo '{os.path.basename(source_path)}': {video_e}")
