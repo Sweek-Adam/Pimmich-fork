@@ -2,6 +2,7 @@ import os
 import json
 import shutil
 import subprocess
+import threading
 from pathlib import Path
 
 TARGET_DIR = Path("static/photos/gdrive")
@@ -16,6 +17,8 @@ DRIVE_API = "https://www.googleapis.com/drive/v3"
 SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
 # Profondeur maximale de l'arborescence proposée dans le choix des dossiers (rclone)
 RCLONE_FOLDER_DEPTH = 4
+# Empêche deux synchronisations simultanées (worker automatique + bouton d'import)
+_sync_lock = threading.Lock()
 
 
 def _is_media(name):
@@ -259,6 +262,16 @@ def import_gdrive_photos(config):
     Synchronise les photos des dossiers Google Drive sélectionnés et retourne des objets structurés pour le suivi.
     Télécharge uniquement les fichiers nouveaux ou modifiés et supprime les fichiers locaux obsolètes.
     """
+    if not _sync_lock.acquire(blocking=False):
+        yield {"type": "error", "message": "Une synchronisation Google Drive est déjà en cours, réessayez dans un instant."}
+        return
+    try:
+        yield from _import_gdrive_photos(config)
+    finally:
+        _sync_lock.release()
+
+
+def _import_gdrive_photos(config):
     backend_name = resolve_backend_name(config)
     # Les dossiers choisis avec une autre méthode de connexion n'ont pas le même identifiant
     folders = [f for f in config.get("gdrive_folders", []) if f.get("backend", backend_name) == backend_name]
@@ -291,8 +304,12 @@ def import_gdrive_photos(config):
         manifest = _load_manifest()
 
         # --- Phase 2: Supprimer les fichiers locaux obsolètes (retirés du Drive ou dossier désélectionné) ---
-        # Les fichiers mis à la corbeille après import appartiennent désormais au cadre : on ne les retire pas
-        obsolete_ids = [fid for fid in manifest if fid not in remote_files and not manifest[fid].get("trashed")]
+        # En mode corbeille, le Drive n'est qu'une boîte d'envoi : un fichier qui en disparaît reste sur le cadre.
+        # Les fichiers déjà mis à la corbeille appartiennent au cadre dans tous les cas.
+        if trash_after_import:
+            obsolete_ids = []
+        else:
+            obsolete_ids = [fid for fid in manifest if fid not in remote_files and not manifest[fid].get("trashed")]
         if obsolete_ids:
             yield {"type": "progress", "stage": "CLEANING", "percent": 15, "message": f"Suppression de {len(obsolete_ids)} photos obsolètes..."}
             for fid in obsolete_ids:
@@ -318,11 +335,16 @@ def import_gdrive_photos(config):
         def trash_on_drive(files):
             trashed = 0
             for f in files:
+                # Marquer le fichier comme « à garder » AVANT de le retirer du Drive : si l'opération est
+                # interrompue (redémarrage, coupure), il ne sera jamais pris pour un fichier supprimé.
+                manifest[f["id"]]["trashed"] = True
+                _save_manifest(manifest)
                 try:
                     backend.trash(f)
-                    manifest[f["id"]]["trashed"] = True
                     trashed += 1
                 except NotImplementedError as e:
+                    manifest[f["id"]].pop("trashed", None)
+                    _save_manifest(manifest)
                     yield {"type": "warning", "message": str(e)}
                     break
                 except Exception as e:
