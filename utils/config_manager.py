@@ -33,6 +33,8 @@ def create_default_config():
         "smb_path": "/",
         "smb_auto_update": False,
         "smb_update_interval_hours": 24,
+        "gdrive_backend": "auto",
+        "gdrive_rclone_remote": "",
         "gdrive_folders": [],
         "gdrive_recursive": True,
         "gdrive_auto_update": False,

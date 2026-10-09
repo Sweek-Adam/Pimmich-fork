@@ -36,7 +36,7 @@ from utils.prepare_all_photos import prepare_all_photos_with_progress
 from utils.import_usb_photos import import_usb_photos  # Déplacé dans utils
 from utils.metadata_utils import get_photo_metadata # Import get_photo_metadata
 from utils.import_samba import import_samba_photos
-from utils.import_gdrive import import_gdrive_photos, list_folders as list_gdrive_folders, parse_service_account_key, save_service_account_key, get_service_account_email
+from utils.import_gdrive import import_gdrive_photos, list_folders as list_gdrive_folders, list_rclone_remotes, resolve_backend_name, parse_service_account_key, save_service_account_key, get_service_account_email
 from utils.image_filters import apply_filter_to_image, add_text_to_polaroid, add_text_to_image, create_polaroid_effect
 from utils.voice_control_manager import start_voice_control, stop_voice_control, is_voice_control_running
 from utils.telegram_bot import PimmichBot
@@ -941,7 +941,7 @@ def configure():
             'smart_plug_on_url', 'smart_plug_off_url', 'smart_plug_on_delay', 'smart_plug_status_url',
             'smb_host', 'smb_share', 'smb_path', 'smb_user', 'smb_password', 'video_audio_output', 'video_audio_volume', 'telegram_boost_duration_days',
             'telegram_boost_factor', 'screen_orientation',
-            'smb_update_interval_hours', 'gdrive_update_interval_hours'
+            'smb_update_interval_hours', 'gdrive_update_interval_hours', 'gdrive_backend', 'gdrive_rclone_remote'
             # New fields
             , 'wifi_ssid', 'wifi_password', 'info_display_duration', 'telegram_bot_token',
             'telegram_authorized_users', 'voice_control_language',
@@ -1055,9 +1055,10 @@ def configure():
         config["smb_auto_update"] = 'smb_auto_update' in request.form
         config["gdrive_auto_update"] = 'gdrive_auto_update' in request.form
         config["gdrive_recursive"] = 'gdrive_recursive' in request.form
-        # Dossiers Google Drive sélectionnés (valeurs "id|chemin")
+        # Dossiers Google Drive sélectionnés (valeurs "id|chemin"), liés à la méthode de connexion utilisée
+        gdrive_backend = resolve_backend_name({"gdrive_backend": request.form.get('gdrive_backend', config.get('gdrive_backend', 'auto'))})
         config["gdrive_folders"] = [
-            {"id": v.split('|', 1)[0], "name": v.split('|', 1)[1] if '|' in v else v}
+            {"id": v.split('|', 1)[0], "name": v.split('|', 1)[1] if '|' in v else v, "backend": gdrive_backend}
             for v in request.form.getlist('gdrive_folders')
         ]
         gdrive_key = request.form.get('gdrive_service_account_json', '').strip()
@@ -1123,6 +1124,7 @@ def configure():
         favorite_photos=favorite_photos, # Nouvelle variable pour l'onglet des favoris
         slideshow_running=slideshow_running,
         gdrive_service_email=get_service_account_email(),
+        gdrive_rclone_remotes=list_rclone_remotes(),
         invitations=invitations,
         pending_photos=pending_photos_list
     )
@@ -1276,9 +1278,11 @@ def gdrive_folders():
     """Liste les dossiers Google Drive accessibles au compte de service.
     Utilise la clé fournie dans la requête (pas encore enregistrée) ou, à défaut, la clé enregistrée."""
     data = request.get_json(silent=True) or {}
+    # Utiliser les choix du formulaire (pas forcément encore enregistrés)
+    gdrive_config = {"gdrive_backend": data.get("backend", "auto"), "gdrive_rclone_remote": data.get("remote", "")}
     try:
         key_info = parse_service_account_key(data["key"]) if data.get("key", "").strip() else None
-        folders = list_gdrive_folders(key_info)
+        folders = list_gdrive_folders(gdrive_config, key_info)
     except ValueError as e:
         return jsonify({"success": False, "message": str(e)}), 400
     except Exception as e:

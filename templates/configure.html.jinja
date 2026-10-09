@@ -1017,7 +1017,29 @@
                     <legend>
                         <h3>{{ _("Configuration Google Drive") }}</h3>
                     </legend>
-                    <p class="text-sm text-gray-600 mb-3">{{ _("Pimmich se connecte à Google Drive avec un compte de service. Créez-en un dans la console Google Cloud (API Google Drive activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez ensuite vos dossiers de photos avec l'adresse e-mail du compte de service.") }}</p>
+                    {% set gdrive_backend = config.get('gdrive_backend', 'auto') %}
+                    <label for="gdrive_backend">{{ _("Méthode de connexion :") }}</label>
+                    <select id="gdrive_backend" name="gdrive_backend">
+                        <option value="auto" {% if gdrive_backend == 'auto' %}selected{% endif %}>{{ _("Automatique (rclone si configuré, sinon compte de service)") }}</option>
+                        <option value="rclone" {% if gdrive_backend == 'rclone' %}selected{% endif %}>{{ _("rclone (compte Google déjà configuré sur le Raspberry Pi)") }}</option>
+                        <option value="service_account" {% if gdrive_backend == 'service_account' %}selected{% endif %}>{{ _("Compte de service Google") }}</option>
+                    </select>
+
+                    <div id="gdrive-rclone-section" class="mt-3">
+                        {% if gdrive_rclone_remotes %}
+                        <label for="gdrive_rclone_remote">{{ _("Remote rclone :") }}</label>
+                        <select id="gdrive_rclone_remote" name="gdrive_rclone_remote">
+                            {% for remote in gdrive_rclone_remotes %}
+                            <option value="{{ remote }}" {% if config.get('gdrive_rclone_remote') == remote %}selected{% endif %}>{{ remote }}:</option>
+                            {% endfor %}
+                        </select>
+                        {% else %}
+                        <p class="text-sm text-gray-600">{{ _("Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « rclone config » sur le Raspberry Pi.") }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div id="gdrive-sa-section" class="mt-3">
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Créez un compte de service dans la console Google Cloud (API Google Drive activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez ensuite vos dossiers de photos avec l'adresse e-mail du compte de service.") }}</p>
 
                     {% if gdrive_service_email %}
                     <p class="mb-2"><strong>{{ _("Compte de service configuré :") }}</strong>
@@ -1029,6 +1051,7 @@
                     <textarea id="gdrive_service_account_json" name="gdrive_service_account_json" rows="4"
                         class="font-mono text-xs"
                         placeholder="{% if gdrive_service_email %}{{ _('Laisser vide pour conserver la clé actuelle') }}{% else %}{&quot;type&quot;: &quot;service_account&quot;, ...}{% endif %}"></textarea>
+                    </div>
 
                     <div class="mt-4">
                         <button type="button" id="gdrive-list-folders-btn"
@@ -3990,6 +4013,22 @@
                 document.getElementById("samba-import-btn").addEventListener("click", () => handleImportProcess('samba'));
                 document.getElementById("gdrive-import-btn").addEventListener("click", () => handleImportProcess('gdrive'));
 
+                // ----- GOOGLE DRIVE : MÉTHODE DE CONNEXION -----
+                const gdriveHasRclone = {{ 'true' if gdrive_rclone_remotes else 'false' }};
+                function updateGdriveBackendSections() {
+                    const backend = document.getElementById("gdrive_backend").value;
+                    const useRclone = backend === "rclone" || (backend === "auto" && gdriveHasRclone);
+                    document.getElementById("gdrive-rclone-section").classList.toggle("hidden", !useRclone);
+                    document.getElementById("gdrive-sa-section").classList.toggle("hidden", useRclone);
+                }
+                document.getElementById("gdrive_backend").addEventListener("change", () => {
+                    updateGdriveBackendSections();
+                    // Les identifiants de dossiers diffèrent selon la méthode : il faut les choisir à nouveau
+                    document.getElementById("gdrive-folders-list").innerHTML =
+                        `<p class="text-sm text-gray-500">{{ _("Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » pour choisir à nouveau les dossiers.") }}</p>`;
+                });
+                updateGdriveBackendSections();
+
                 // ----- GOOGLE DRIVE : CHOIX DES DOSSIERS -----
                 document.getElementById("gdrive-list-folders-btn").addEventListener("click", async () => {
                     const btn = document.getElementById("gdrive-list-folders-btn");
@@ -4005,7 +4044,11 @@
                         const response = await fetch('/api/gdrive/folders', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ key: key })
+                            body: JSON.stringify({
+                                key: key,
+                                backend: document.getElementById("gdrive_backend").value,
+                                remote: document.getElementById("gdrive_rclone_remote")?.value || ""
+                            })
                         });
                         const data = await response.json();
                         if (!data.success) throw new Error(data.message);
