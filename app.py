@@ -36,6 +36,7 @@ from utils.prepare_all_photos import prepare_all_photos_with_progress
 from utils.import_usb_photos import import_usb_photos  # Déplacé dans utils
 from utils.metadata_utils import get_photo_metadata # Import get_photo_metadata
 from utils.import_samba import import_samba_photos
+from utils.import_gdrive import import_gdrive_photos, list_folders as list_gdrive_folders, parse_service_account_key, save_service_account_key, get_service_account_email
 from utils.image_filters import apply_filter_to_image, add_text_to_polaroid, add_text_to_image, create_polaroid_effect
 from utils.voice_control_manager import start_voice_control, stop_voice_control, is_voice_control_running
 from utils.telegram_bot import PimmichBot
@@ -243,6 +244,7 @@ class WorkerStatus:
 
 immich_status_manager = WorkerStatus()
 samba_status_manager = WorkerStatus()
+gdrive_status_manager = WorkerStatus()
 telegram_status_manager = WorkerStatus()
 
 # Historique pour le graphique de température CPU (conserve les 60 dernières mesures)
@@ -939,7 +941,7 @@ def configure():
             'smart_plug_on_url', 'smart_plug_off_url', 'smart_plug_on_delay', 'smart_plug_status_url',
             'smb_host', 'smb_share', 'smb_path', 'smb_user', 'smb_password', 'video_audio_output', 'video_audio_volume', 'telegram_boost_duration_days',
             'telegram_boost_factor', 'screen_orientation',
-            'smb_update_interval_hours'
+            'smb_update_interval_hours', 'gdrive_update_interval_hours'
             # New fields
             , 'wifi_ssid', 'wifi_password', 'info_display_duration', 'telegram_bot_token',
             'telegram_authorized_users', 'voice_control_language',
@@ -951,7 +953,7 @@ def configure():
             if key in request.form:
                 value = request.form.get(key)
                 # Gérer les champs numériques
-                if key in ['display_duration', 'clock_offset_x', 'clock_offset_y', 'clock_font_size', 'weather_update_interval_minutes', 'immich_update_interval_hours', 'smb_update_interval_hours', 'display_width', 'display_height', 'info_display_duration', 'tide_offset_x', 'tide_offset_y', 'video_audio_volume', 'favorite_boost_factor', 'telegram_boost_duration_days', 'telegram_boost_factor', 'button_pin', 'smart_plug_on_delay', 'anniversary_boost_factor']: # Integer fields
+                if key in ['display_duration', 'clock_offset_x', 'clock_offset_y', 'clock_font_size', 'weather_update_interval_minutes', 'immich_update_interval_hours', 'smb_update_interval_hours', 'gdrive_update_interval_hours', 'display_width', 'display_height', 'info_display_duration', 'tide_offset_x', 'tide_offset_y', 'video_audio_volume', 'favorite_boost_factor', 'telegram_boost_duration_days', 'telegram_boost_factor', 'button_pin', 'smart_plug_on_delay', 'anniversary_boost_factor']: # Integer fields
                     try:
                         config[key] = int(value)
                     except (ValueError, TypeError):
@@ -1051,6 +1053,19 @@ def configure():
         config["immich_auto_update"] = 'immich_auto_update' in request.form
         config["random_content_in_album"] = "random_content_in_album" in request.form
         config["smb_auto_update"] = 'smb_auto_update' in request.form
+        config["gdrive_auto_update"] = 'gdrive_auto_update' in request.form
+        config["gdrive_recursive"] = 'gdrive_recursive' in request.form
+        # Dossiers Google Drive sélectionnés (valeurs "id|chemin")
+        config["gdrive_folders"] = [
+            {"id": v.split('|', 1)[0], "name": v.split('|', 1)[1] if '|' in v else v}
+            for v in request.form.getlist('gdrive_folders')
+        ]
+        gdrive_key = request.form.get('gdrive_service_account_json', '').strip()
+        if gdrive_key:
+            try:
+                save_service_account_key(parse_service_account_key(gdrive_key))
+            except ValueError as e:
+                flash(_("Clé Google Drive non enregistrée : %(error)s", error=str(e)), "error")
 
         config["telegram_bot_enabled"] = 'telegram_bot_enabled' in request.form # 'telegram_enabled' is removed
         config["show_date"] = 'show_date' in request.form
@@ -1107,6 +1122,7 @@ def configure():
         prepared_photos_by_source=prepared_media_by_source, # Le template utilise ce nom de variable
         favorite_photos=favorite_photos, # Nouvelle variable pour l'onglet des favoris
         slideshow_running=slideshow_running,
+        gdrive_service_email=get_service_account_email(),
         invitations=invitations,
         pending_photos=pending_photos_list
     )
@@ -1212,6 +1228,62 @@ def import_samba():
                 yield ": keep-alive\n\n"
 
     return Response(generate(), mimetype='text/event-stream', headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
+
+@app.route("/import-gdrive")
+@login_required
+def import_gdrive():
+    # Nettoyer le drapeau d'annulation avant de commencer
+    cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+    if cancel_flag.exists(): cancel_flag.unlink()
+
+    config = load_config()
+    @stream_with_context
+    def generate():
+        import queue
+        import threading
+
+        q = queue.Queue()
+
+        def run_import():
+            try:
+                for update in import_gdrive_photos(config):
+                    q.put(update)
+                q.put(None)
+            except Exception as e:
+                q.put({"type": "error", "message": f"Erreur critique : {str(e)}"})
+                q.put(None)
+
+        t = threading.Thread(target=run_import)
+        t.daemon = True
+        t.start()
+
+        while True:
+            try:
+                update = q.get(timeout=10)
+                if update is None:
+                    break
+                yield f"data: {json.dumps(update, ensure_ascii=False)}\n\n"
+                if update.get("type") == "error":
+                    break
+            except queue.Empty:
+                yield ": keep-alive\n\n"
+
+    return Response(generate(), mimetype='text/event-stream', headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
+
+@app.route('/api/gdrive/folders', methods=['POST'])
+@login_required
+def gdrive_folders():
+    """Liste les dossiers Google Drive accessibles au compte de service.
+    Utilise la clé fournie dans la requête (pas encore enregistrée) ou, à défaut, la clé enregistrée."""
+    data = request.get_json(silent=True) or {}
+    try:
+        key_info = parse_service_account_key(data["key"]) if data.get("key", "").strip() else None
+        folders = list_gdrive_folders(key_info)
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    except Exception as e:
+        return jsonify({"success": False, "message": f"Erreur Google Drive : {e}"}), 500
+    return jsonify({"success": True, "folders": folders})
 
 @app.route("/import-smartphone", methods=['POST'])
 @login_required
@@ -1580,6 +1652,12 @@ def samba_update_status():
     """Retourne l'état actuel du worker de mise à jour Samba."""
     return jsonify(samba_status_manager.get_status())
 
+@app.route('/gdrive_update_status')
+@login_required
+def gdrive_update_status():
+    """Retourne l'état actuel du worker de mise à jour Google Drive."""
+    return jsonify(gdrive_status_manager.get_status())
+
 @app.route('/telegram_update_status')
 @login_required
 def telegram_update_status():
@@ -1630,6 +1708,7 @@ def download_photos():
 
 _immich_first_run_skipped = False
 _samba_first_run_skipped = False
+_gdrive_first_run_skipped = False
 
 def schedule_worker():
     """
@@ -1958,6 +2037,73 @@ def samba_update_worker():
             samba_status_manager.update_status(message="En attente...")
         time.sleep(sleep_seconds)
 
+def gdrive_update_worker():
+    """
+    Thread en arrière-plan qui synchronise périodiquement les dossiers Google Drive sélectionnés.
+    """
+    print("Démarrage du worker de mise à jour automatique Google Drive")
+    global _gdrive_first_run_skipped
+    while True:
+        config = load_config()
+        is_enabled = config.get("gdrive_auto_update", False)
+        interval_hours = config.get("gdrive_update_interval_hours", 24)
+        sleep_seconds = (interval_hours * 3600) if is_enabled else (15 * 60)
+
+        if not _gdrive_first_run_skipped and config.get("skip_initial_auto_import", False):
+            _gdrive_first_run_skipped = True
+            with app.app_context():
+                gdrive_status_manager.update_status(message=_("Import initial ignoré."), next_run=datetime.now() + timedelta(seconds=sleep_seconds))
+            time.sleep(sleep_seconds)
+            continue
+        _gdrive_first_run_skipped = True
+
+        if is_enabled:
+            try:
+                with app.app_context():
+                    gdrive_status_manager.update_status(message=_("Lancement de l'import..."))
+                import_success = False
+                for update in import_gdrive_photos(config):
+                    gdrive_status_manager.update_status(message=update.get('message', ''))
+                    if update.get("type") == "error":
+                        logger.info(f"[Auto-Update Google Drive] Erreur lors de l'import : {update.get('message')}")
+                    if update.get("type") == "done":
+                        import_success = True
+
+                if import_success:
+                    with app.app_context():
+                        gdrive_status_manager.update_status(message=_("Préparation des photos..."))
+                    # Charger les légendes manuelles pour Google Drive
+                    description_map = {Path(path).name: caption for path, caption in load_text_states().items()
+                                       if Path(path).parts and Path(path).parts[0] == "gdrive"}
+                    screen_width = config.get("display_width", 1920)
+                    screen_height = config.get("display_height", 1080)
+                    prep_successful = False
+                    for update in prepare_all_photos_with_progress(screen_width, screen_height, "gdrive", description_map=description_map):
+                        gdrive_status_manager.update_status(message=update.get('message', ''))
+                        if update.get("type") == "error":
+                            break
+                        if update.get("type") == "done":
+                            prep_successful = True
+
+                    with app.app_context():
+                        if prep_successful:
+                            if is_slideshow_running():
+                                restart_slideshow_for_update()
+                            gdrive_status_manager.update_status(last_run=datetime.now(), message=_("Dernière mise à jour réussie."))
+                        else:
+                            gdrive_status_manager.update_status(message=_("Mise à jour terminée avec avertissements/erreurs."))
+            except Exception as e:
+                logger.error(f"[Auto-Update Google Drive] Erreur critique dans le worker : {e}", exc_info=True)
+                gdrive_status_manager.update_status(message=f"Erreur critique : {e}")
+        else:
+            with app.app_context():
+                gdrive_status_manager.update_status(message=_("Mise à jour automatique Google Drive désactivée."))
+
+        gdrive_status_manager.update_status(next_run=datetime.now() + timedelta(seconds=sleep_seconds))
+        if is_enabled:
+            gdrive_status_manager.update_status(message="En attente...")
+        time.sleep(sleep_seconds)
+
 def telegram_bot_worker():
     """
     Thread en arrière-plan qui lance et maintient le bot Telegram actif.
@@ -2179,6 +2325,54 @@ def trigger_reboot():
         return jsonify({"success": True, "message": "Redémarrage initié"})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route('/api/switch_to_desktop', methods=['POST'])
+@login_required
+def switch_to_desktop():
+    """Quitte le mode cadre photo et repasse sur le bureau Raspberry Pi OS au prochain démarrage.
+
+    Annule les étapes 9 et 10 de setup.sh : démarrage en mode bureau (auto-login)
+    au lieu de la console, et suppression du lancement automatique de Sway.
+    """
+    # Le bureau n'existe que sur Raspberry Pi OS "with desktop" (pas sur la version Lite)
+    if not (shutil.which('lightdm') or os.path.exists('/usr/sbin/lightdm')):
+        return jsonify({"success": False, "message": _("Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération annulée.")}), 400
+
+    bash_profile = os.path.join(os.path.expanduser('~'), '.bash_profile')
+    original_profile = None
+    try:
+        # 1. Retirer le lancement automatique de Sway du .bash_profile
+        if os.path.exists(bash_profile):
+            with open(bash_profile, 'r') as f:
+                original_profile = f.read()
+            new_profile = re.sub(
+                r'if \[\[ -z \$DISPLAY \]\] && \[\[ \$\(tty\) = /dev/tty1 \]\]; then\s*\n\s*exec sway\s*\n\s*fi\s*\n?',
+                '', original_profile)
+            if new_profile != original_profile:
+                shutil.copy2(bash_profile, bash_profile + '.pimmich.bak')
+                with open(bash_profile, 'w') as f:
+                    f.write(new_profile)
+
+        # 2. Démarrage en mode bureau avec auto-login (B4)
+        result = subprocess.run(['sudo', '-n', 'raspi-config', 'nonint', 'do_boot_behaviour', 'B4'],
+                                capture_output=True, text=True, timeout=60)
+        if result.returncode != 0:
+            raise RuntimeError(result.stderr.strip() or "raspi-config a échoué")
+    except Exception as e:
+        # Restaurer le .bash_profile pour ne pas laisser le système dans un état intermédiaire
+        if original_profile is not None:
+            with open(bash_profile, 'w') as f:
+                f.write(original_profile)
+        logger.error(f"Erreur lors du passage au bureau Raspberry Pi OS : {e}")
+        return jsonify({"success": False, "message": str(e)}), 500
+
+    # 3. Redémarrer en arrière-plan pour que la réponse HTTP puisse être envoyée
+    def delayed_reboot():
+        time.sleep(2)
+        subprocess.run(['sudo', '-n', 'reboot'], check=False)
+    threading.Thread(target=delayed_reboot, daemon=True).start()
+
+    return jsonify({"success": True, "message": _("Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera plus automatiquement.")})
 
 @app.route('/api/ping', methods=['GET'])
 def ping():
@@ -3764,6 +3958,8 @@ if __name__ == '__main__':
     immich_thread.start()
     samba_thread = threading.Thread(target=samba_update_worker, daemon=True)
     samba_thread.start()
+    gdrive_thread = threading.Thread(target=gdrive_update_worker, daemon=True)
+    gdrive_thread.start()
     telegram_thread = threading.Thread(target=telegram_bot_worker, daemon=True)
     telegram_thread.start()
     

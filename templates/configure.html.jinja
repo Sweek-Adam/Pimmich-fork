@@ -937,6 +937,10 @@
                         <label class="form-check-label ml-2" for="display_source_samba">{{ _("Photos Samba") }}</label>
                     </div>
                     <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_gdrive" name="display_sources" value="gdrive" {% if 'gdrive' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_gdrive">{{ _("Photos Google Drive") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_smartphone" name="display_sources" value="smartphone" {% if 'smartphone' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_smartphone">{{ _("Photos Smartphone") }}</label>
                     </div>
@@ -1007,6 +1011,69 @@
                                 class="font-mono">...</span></p>
                     </div>
 
+                </fieldset>
+
+                <fieldset class="mt-4">
+                    <legend>
+                        <h3>{{ _("Configuration Google Drive") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Pimmich se connecte à Google Drive avec un compte de service. Créez-en un dans la console Google Cloud (API Google Drive activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez ensuite vos dossiers de photos avec l'adresse e-mail du compte de service.") }}</p>
+
+                    {% if gdrive_service_email %}
+                    <p class="mb-2"><strong>{{ _("Compte de service configuré :") }}</strong>
+                        <span class="font-mono select-all">{{ gdrive_service_email }}</span></p>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Partagez vos dossiers Google Drive avec cette adresse (en lecture seule).") }}</p>
+                    {% endif %}
+
+                    <label for="gdrive_service_account_json">{{ _("Clé JSON du compte de service :") }}</label>
+                    <textarea id="gdrive_service_account_json" name="gdrive_service_account_json" rows="4"
+                        class="font-mono text-xs"
+                        placeholder="{% if gdrive_service_email %}{{ _('Laisser vide pour conserver la clé actuelle') }}{% else %}{&quot;type&quot;: &quot;service_account&quot;, ...}{% endif %}"></textarea>
+
+                    <div class="mt-4">
+                        <button type="button" id="gdrive-list-folders-btn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            <i class="fab fa-google-drive mr-1"></i>{{ _("Afficher mes dossiers Google Drive") }}</button>
+                        <span id="gdrive-folders-status" class="ml-4 font-medium"></span>
+                    </div>
+
+                    <p class="mt-4 mb-2 font-semibold">{{ _("Dossiers à afficher dans le diaporama :") }}</p>
+                    <div id="gdrive-folders-list" class="max-h-64 overflow-y-auto p-2 bg-gray-50 border rounded">
+                        {% for folder in config.get('gdrive_folders', []) %}
+                        <div class="form-check my-1">
+                            <input class="form-check-input" type="checkbox" name="gdrive_folders"
+                                id="gdrive_folder_{{ folder.id }}" value="{{ folder.id }}|{{ folder.name }}" checked>
+                            <label class="form-check-label ml-2" for="gdrive_folder_{{ folder.id }}">{{ folder.name }}</label>
+                        </div>
+                        {% else %}
+                        <p id="gdrive-folders-empty" class="text-sm text-gray-500">{{ _("Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google Drive ».") }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="gdrive_recursive" name="gdrive_recursive" {% if config.get('gdrive_recursive', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="gdrive_recursive">{{ _("Inclure les sous-dossiers") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600">{{ _("Pensez à enregistrer la configuration après avoir choisi les dossiers, puis lancez l'import depuis l'onglet « Actions ».") }}</p>
+
+                    <hr class="my-4">
+                    <h5 class="text-lg font-semibold mt-2">{{ _("Mise à jour automatique (Google Drive)") }}</h5>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="gdrive_auto_update" name="gdrive_auto_update" {% if config.get('gdrive_auto_update') %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="gdrive_auto_update">{{ _("Activer la mise à jour automatique") }}</label>
+                    </div>
+                    <label for="gdrive_update_interval_hours">{{ _("Intervalle de mise à jour (heures):") }}</label>
+                    <input type="number" id="gdrive_update_interval_hours" name="gdrive_update_interval_hours"
+                        value="{{ config.get('gdrive_update_interval_hours', 24) }}" min="1">
+
+                    <div id="gdrive-worker-status-container" class="mt-4 p-3 bg-gray-100 rounded-lg border">
+                        <p><strong>{{ _("État du service :") }}</strong> <span id="gdrive-worker-status-message"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Dernière mise à jour :") }}</strong> <span id="gdrive-last-update-time"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Prochaine mise à jour :") }}</strong> <span id="gdrive-next-update-time"
+                                class="font-mono">...</span></p>
+                    </div>
                 </fieldset>
 
                 <fieldset class="mt-4">
@@ -1564,6 +1631,15 @@
                     </div>
                     <div id="samba-import-status" class="status-messages"></div>
 
+                    <button id="gdrive-import-btn"
+                        class="import-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <i class="fab fa-google-drive"></i> {{ _("Importer depuis Google Drive") }}
+                    </button>
+                    <div id="gdrive-progress-container" class="progress-container hidden">
+                        <div id="gdrive-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <div id="gdrive-import-status" class="status-messages"></div>
+
                     <!-- NOUVEAU: Conteneur pour l'aperçu de la préparation -->
                     <div id="preparation-preview-container"
                         class="hidden mt-4 p-3 bg-gray-100 rounded-lg border text-center">
@@ -1902,6 +1978,36 @@
                         <i class="fas fa-power-off"></i> {{ _("Éteindre le système") }}
                     </button>
                 </form>
+                <button type="button" id="switch-desktop-btn"
+                    class="system-button bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded mt-3">
+                    <i class="fab fa-raspberry-pi mr-1"></i> {{ _("Repasser sur Raspberry Pi OS (bureau)") }}
+                </button>
+                <div id="switch-desktop-status" class="status-messages mt-2"></div>
+                <script>
+                    document.getElementById("switch-desktop-btn").addEventListener("click", () => {
+                        if (!confirm("{{ _('Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se lancera plus automatiquement. Pour revenir au mode cadre photo, relancez setup.sh. Continuer ?') }}")) {
+                            return;
+                        }
+                        const btn = document.getElementById("switch-desktop-btn");
+                        const statusDiv = document.getElementById("switch-desktop-status");
+                        btn.disabled = true;
+                        btn.classList.add("opacity-50", "cursor-not-allowed");
+                        fetch('/api/switch_to_desktop', { method: 'POST' })
+                            .then(r => r.json())
+                            .then(data => {
+                                statusDiv.innerHTML = `<p class="${data.success ? 'text-green-600' : 'text-red-600'}">${data.message}</p>`;
+                                if (!data.success) {
+                                    btn.disabled = false;
+                                    btn.classList.remove("opacity-50", "cursor-not-allowed");
+                                }
+                            })
+                            .catch(err => {
+                                statusDiv.innerHTML = `<p class="text-red-600">${err}</p>`;
+                                btn.disabled = false;
+                                btn.classList.remove("opacity-50", "cursor-not-allowed");
+                            });
+                    });
+                </script>
             </fieldset>
         </div>
 
@@ -3882,6 +3988,61 @@
                 document.getElementById("usb-import-btn").addEventListener("click", () => handleImportProcess('usb'));
                 document.getElementById("immich-import-btn").addEventListener("click", () => handleImportProcess('immich'));
                 document.getElementById("samba-import-btn").addEventListener("click", () => handleImportProcess('samba'));
+                document.getElementById("gdrive-import-btn").addEventListener("click", () => handleImportProcess('gdrive'));
+
+                // ----- GOOGLE DRIVE : CHOIX DES DOSSIERS -----
+                document.getElementById("gdrive-list-folders-btn").addEventListener("click", async () => {
+                    const btn = document.getElementById("gdrive-list-folders-btn");
+                    const statusSpan = document.getElementById("gdrive-folders-status");
+                    const listDiv = document.getElementById("gdrive-folders-list");
+                    const key = document.getElementById("gdrive_service_account_json").value;
+
+                    btn.disabled = true;
+                    statusSpan.textContent = "{{ _('Chargement...') }}";
+                    statusSpan.className = "ml-4 font-medium text-gray-600";
+
+                    try {
+                        const response = await fetch('/api/gdrive/folders', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ key: key })
+                        });
+                        const data = await response.json();
+                        if (!data.success) throw new Error(data.message);
+
+                        // Conserver les dossiers déjà cochés
+                        const selected = new Set(Array.from(listDiv.querySelectorAll('input[name="gdrive_folders"]:checked'))
+                            .map(cb => cb.value.split('|')[0]));
+                        listDiv.innerHTML = "";
+                        if (data.folders.length === 0) {
+                            listDiv.innerHTML = `<p class="text-sm text-gray-500">{{ _("Aucun dossier trouvé. Avez-vous partagé vos dossiers avec l'adresse du compte de service ?") }}</p>`;
+                        }
+                        data.folders.forEach(folder => {
+                            const row = document.createElement('div');
+                            row.className = "form-check my-1";
+                            const cb = document.createElement('input');
+                            cb.type = "checkbox";
+                            cb.className = "form-check-input";
+                            cb.name = "gdrive_folders";
+                            cb.id = `gdrive_folder_${folder.id}`;
+                            cb.value = `${folder.id}|${folder.name}`;
+                            cb.checked = selected.has(folder.id);
+                            const label = document.createElement('label');
+                            label.className = "form-check-label ml-2";
+                            label.htmlFor = cb.id;
+                            label.textContent = folder.name;
+                            row.append(cb, label);
+                            listDiv.appendChild(row);
+                        });
+                        statusSpan.textContent = `${data.folders.length} {{ _("dossier(s) trouvé(s)") }}`;
+                        statusSpan.className = "ml-4 font-medium text-green-600";
+                    } catch (error) {
+                        statusSpan.textContent = error.message;
+                        statusSpan.className = "ml-4 font-medium text-red-600";
+                    } finally {
+                        btn.disabled = false;
+                    }
+                });
 
                 // ----- TEST SAMBA CONNECTION -----
                 document.getElementById("samba-test-btn").addEventListener("click", async () => {
@@ -4620,11 +4781,13 @@
                 // Mise à jour initiale au chargement de la page
                 fetchWorkerStatus("immich", "immich-worker-status-message", "immich-last-update-time", "immich-next-update-time");
                 fetchWorkerStatus("samba", "samba-worker-status-message", "samba-last-update-time", "samba-next-update-time");
+                fetchWorkerStatus("gdrive", "gdrive-worker-status-message", "gdrive-last-update-time", "gdrive-next-update-time");
 
                 // Mise à jour périodique toutes les 5 secondes
                 setInterval(() => {
                     fetchWorkerStatus("immich", "immich-worker-status-message", "immich-last-update-time", "immich-next-update-time");
                     fetchWorkerStatus("samba", "samba-worker-status-message", "samba-last-update-time", "samba-next-update-time");
+                    fetchWorkerStatus("gdrive", "gdrive-worker-status-message", "gdrive-last-update-time", "gdrive-next-update-time");
                 }, 5000); // 5000 ms = 5 secondes
                 fetchAndPopulateResolutions(); // Charger les résolutions au démarrage
                 setInterval(updateSlideshowControlsState, 5000); // Mettre à jour l'état des boutons
