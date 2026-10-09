@@ -326,7 +326,8 @@ def _import_gdrive_photos(config):
         for fid, f in remote_files.items():
             entry = manifest.get(fid)
             if entry and entry.get("modifiedTime") == f.get("modifiedTime") and (TARGET_DIR / entry["name"]).exists():
-                if trash_after_import:
+                # Ne pas réessayer indéfiniment un fichier que Google refuse de mettre à la corbeille
+                if trash_after_import and not entry.get("trash_denied"):
                     to_trash.append(f)
                 continue
             name = entry["name"] if entry else _local_name(f, used_names)
@@ -348,7 +349,14 @@ def _import_gdrive_photos(config):
                     yield {"type": "warning", "message": str(e)}
                     break
                 except Exception as e:
-                    yield {"type": "warning", "message": f"Impossible de mettre {f['name']} à la corbeille Google Drive : {e}"}
+                    if "insufficientFilePermissions" in str(e) or "403" in str(e):
+                        # Seul le propriétaire d'un fichier peut le mettre à la corbeille (ex : photo déposée par un
+                        # autre compte dans un dossier partagé). Le fichier reste sur le cadre, on ne réessaie plus.
+                        manifest[f["id"]]["trash_denied"] = True
+                        _save_manifest(manifest)
+                        yield {"type": "warning", "message": f"{f['name']} gardé sur le cadre mais laissé sur Google Drive : seul son propriétaire peut le mettre à la corbeille."}
+                    else:
+                        yield {"type": "warning", "message": f"Impossible de mettre {f['name']} à la corbeille Google Drive : {e}"}
             if trashed:
                 yield {"type": "info", "message": f"{trashed} fichier(s) importé(s) mis à la corbeille Google Drive."}
 
