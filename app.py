@@ -24,7 +24,8 @@ import signal
 import traceback
 
 from utils.download_album import download_and_extract_album
-from utils.auth import login_required # type: ignore
+from utils.auth import login_required, admin_required, is_admin # type: ignore
+from utils import user_manager
 from utils.slideshow_manager import is_slideshow_running, start_slideshow, stop_slideshow, restart_slideshow_process, restart_slideshow_for_update
 from utils.config_manager import load_config, save_config
 from utils.playlist_manager import load_playlists, save_playlists
@@ -191,6 +192,27 @@ def inject_locale():
 def inject_instance_id():
     """Injecte l'ID d'instance pour le suivi du redémarrage."""
     return dict(APP_INSTANCE_ID=APP_INSTANCE_ID)
+
+@app.context_processor
+def inject_current_user():
+    """Injecte le compte connecté et son rôle dans les templates."""
+    return dict(current_username=session.get('username'), is_admin=is_admin())
+
+# Réglages contenant des secrets : masqués et non modifiables pour les comptes non administrateurs
+SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormglass_api_key', 'telegram_bot_token',
+                      'telegram_authorized_users', 'porcupine_access_key', 'home_assistant_token', 'wifi_ssid', 'wifi_password']
+
+@app.before_request
+def refresh_user_role():
+    """Applique immédiatement la suppression d'un compte ou le changement de son rôle."""
+    username = session.get('username')
+    if not session.get('logged_in') or not username or username == load_credentials().get('username'):
+        return
+    role = user_manager.get_role(username)
+    if role is None:
+        session.clear()
+    else:
+        session['role'] = role
 
 
 # Chemins de base
@@ -840,7 +862,7 @@ def manage_pending_photo():
     return jsonify({"success": False, "message": _("Action inconnue.")}), 400
 
 @app.route('/debug/pending')
-@login_required
+@admin_required
 def debug_pending():
     """Route de diagnostic pour voir les fichiers bruts."""
     if not PENDING_UPLOADS_DIR.exists():
@@ -857,8 +879,13 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        if username and password and check_credentials(username, password):
+        role = None
+        if username and password:
+            role = 'admin' if check_credentials(username, password) else user_manager.authenticate(username, password)
+        if role:
             session['logged_in'] = True
+            session['username'] = username
+            session['role'] = role
             flash(_("Connexion réussie"), "success")
             return redirect(url_for('configure'))
         else:
@@ -868,6 +895,8 @@ def login():
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session.pop('logged_in', None)
+    session.pop('username', None)
+    session.pop('role', None)
     flash(_("Déconnexion réussie"), "success")
     return redirect(url_for('login'))
 
@@ -888,6 +917,7 @@ def configure():
         logger.error(f"🔳️ Erreur lors du listage des fichiers en attente : {e}")
 
     config = load_config()
+    saved_secrets = {key: config.get(key) for key in SECRET_CONFIG_KEYS}
     invitations = load_invitations()
 
     # Récupérer la liste des photos en attente pour le template
@@ -1062,7 +1092,7 @@ def configure():
             for v in request.form.getlist('gdrive_folders')
         ]
         gdrive_key = request.form.get('gdrive_service_account_json', '').strip()
-        if gdrive_key:
+        if gdrive_key and is_admin():
             try:
                 save_service_account_key(parse_service_account_key(gdrive_key))
             except ValueError as e:
@@ -1086,6 +1116,9 @@ def configure():
         if 'voice_control_device_index' in request.form:
             config['voice_control_device_index'] = request.form['voice_control_device_index']
 
+        if not is_admin():
+            # Les comptes non administrateurs ne voient pas les secrets et ne peuvent pas les modifier
+            config.update(saved_secrets)
         save_config(config)
         restart_slideshow_process() # Redémarre uniquement le processus du diaporama
         flash(_("Configuration enregistrée. Le diaporama a été relancé pour appliquer les changements."), "success")
@@ -1117,9 +1150,14 @@ def configure():
             if media.get('is_favorite'):
                 favorite_photos.append(media)
 
+    if not is_admin():
+        config = {**config, **{key: '' for key in SECRET_CONFIG_KEYS}}
+
     return render_template(
         'configure.html.jinja',
         config=config,
+        users=user_manager.list_users() if is_admin() else [],
+        main_admin_username=load_credentials().get('username', 'admin'),
         prepared_photos_by_source=prepared_media_by_source, # Le template utilise ce nom de variable
         favorite_photos=favorite_photos, # Nouvelle variable pour l'onglet des favoris
         slideshow_running=slideshow_running,
@@ -2280,19 +2318,19 @@ def delete_source_photos(source_name):
         return jsonify({"success": False, "message": f"Erreur serveur : {e}"}), 500
 
 @app.route('/shutdown', methods=['POST'])
-@login_required
+@admin_required
 def shutdown():
     subprocess.run(['sudo', '-n', 'shutdown', 'now'], check=False)
     return redirect(url_for('configure'))
 
 @app.route('/reboot', methods=['POST'])
-@login_required
+@admin_required
 def reboot():
     subprocess.run(['sudo', '-n', 'reboot'], check=False)
     return redirect(url_for('configure'))
 
 @app.route('/system_reboot', methods=['POST'])
-@login_required
+@admin_required
 def system_reboot():
     """Affiche la page de redémarrage et lance le reboot après 1 seconde."""
     # Supprimer le fichier log si coché
@@ -2311,7 +2349,7 @@ def system_reboot():
     return render_template('rebooting.html.jinja')
 
 @app.route('/update', methods=['GET'])
-@login_required
+@admin_required
 def update_view():
     """Affiche la page dédiée au processus de mise à jour."""
     return render_template('update.html.jinja')
@@ -2322,7 +2360,7 @@ def rebooting():
     return render_template('rebooting.html.jinja')
 
 @app.route('/api/trigger_reboot', methods=['POST'])
-@login_required
+@admin_required
 def trigger_reboot():
     """Lance la commande de redémarrage système."""
     try:
@@ -2341,7 +2379,7 @@ def trigger_reboot():
         return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/switch_to_desktop', methods=['POST'])
-@login_required
+@admin_required
 def switch_to_desktop():
     """Quitte le mode cadre photo et repasse sur le bureau Raspberry Pi OS au prochain démarrage.
 
@@ -2419,7 +2457,7 @@ def ping():
 
 
 @app.route('/restart_app', methods=['POST'])
-@login_required
+@admin_required
 def restart_app():
     """Redémarre uniquement l'application web Flask."""
     # Code de sortie spécial pour indiquer au script shell de redémarrer l'application
@@ -3146,7 +3184,7 @@ def current_photo_status():
     return jsonify({"current_photo": None, "status": "running"})
 
 @app.route('/save_wifi_settings', methods=['POST'])
-@login_required
+@admin_required
 def save_wifi_settings():
     ssid = request.form.get('wifi_ssid')
     password = request.form.get('wifi_password')
@@ -3236,11 +3274,63 @@ def change_password_route():
         return redirect(url_for('configure'))
 
     try:
-        change_password(new_password)
+        username = session.get('username')
+        if username and username != load_credentials().get('username'):
+            user_manager.set_password(username, new_password)
+        else:
+            change_password(new_password)
         flash(_("Mot de passe mis à jour avec succès. Il sera nécessaire pour votre prochaine connexion."), "success")
     except Exception as e:
         flash(_("Erreur lors du changement de mot de passe : %(error)s", error=e), "danger")
 
+    return redirect(url_for('configure'))
+
+@app.route('/users/create', methods=['POST'])
+@admin_required
+def create_user_route():
+    """Crée un compte utilisateur (réservé aux administrateurs)."""
+    try:
+        user_manager.create_user(request.form.get('username'), request.form.get('password'), request.form.get('role', 'user'),
+                                 reserved_names=(load_credentials().get('username', 'admin'),))
+        flash(_("Compte « %(name)s » créé.", name=request.form.get('username', '').strip()), "success")
+    except ValueError as e:
+        flash(str(e), "error")
+    return redirect(url_for('configure'))
+
+@app.route('/users/<username>/delete', methods=['POST'])
+@admin_required
+def delete_user_route(username):
+    if username == session.get('username'):
+        flash(_("Vous ne pouvez pas supprimer votre propre compte."), "error")
+        return redirect(url_for('configure'))
+    try:
+        user_manager.delete_user(username)
+        flash(_("Compte « %(name)s » supprimé.", name=username), "success")
+    except ValueError as e:
+        flash(str(e), "error")
+    return redirect(url_for('configure'))
+
+@app.route('/users/<username>/password', methods=['POST'])
+@admin_required
+def reset_user_password_route(username):
+    try:
+        user_manager.set_password(username, request.form.get('password'))
+        flash(_("Mot de passe de « %(name)s » modifié.", name=username), "success")
+    except ValueError as e:
+        flash(str(e), "error")
+    return redirect(url_for('configure'))
+
+@app.route('/users/<username>/role', methods=['POST'])
+@admin_required
+def set_user_role_route(username):
+    if username == session.get('username'):
+        flash(_("Vous ne pouvez pas modifier votre propre rôle."), "error")
+        return redirect(url_for('configure'))
+    try:
+        user_manager.set_role(username, request.form.get('role'))
+        flash(_("Rôle de « %(name)s » modifié.", name=username), "success")
+    except ValueError as e:
+        flash(str(e), "error")
     return redirect(url_for('configure'))
 
 @app.route('/api/interface_status/<interface_name>')
@@ -3255,7 +3345,7 @@ def get_interface_status_api(interface_name):
     return jsonify({"success": True, **status})
 
 @app.route('/api/set_interface_state', methods=['POST'])
-@login_required
+@admin_required
 def set_interface_state_api():
     """Active ou désactive une interface réseau."""
     data = request.get_json()
@@ -3276,7 +3366,7 @@ def set_interface_state_api():
 # --- Lancement de l'application ---
 
 @app.route('/api/backup_settings')
-@login_required
+@admin_required
 def backup_settings_api():
     """Permet de télécharger le fichier de configuration actuel."""
     try:
@@ -3287,7 +3377,7 @@ def backup_settings_api():
         return redirect(url_for('configure'))
 
 @app.route('/api/restore_settings', methods=['POST'])
-@login_required
+@admin_required
 def restore_settings_api():
     """Restaure la configuration à partir d'un fichier de sauvegarde."""
     if 'backup_file' not in request.files:
@@ -3401,7 +3491,7 @@ def get_system_info_api():
         return jsonify({"success": False, "message": str(e)})
 
 @app.route('/api/list_logs', methods=['GET'])
-@login_required
+@admin_required
 def list_logs():
     """Retourne la liste des fichiers de log qui existent réellement."""
     available_logs = []
@@ -3415,7 +3505,7 @@ def list_logs():
     return jsonify({"success": True, "logs": available_logs})
 
 @app.route('/api/logs')
-@login_required
+@admin_required
 def get_logs_api():
     """Retourne le contenu d'un fichier de log spécifié."""
     log_type = request.args.get('type', 'app')
@@ -3440,7 +3530,7 @@ def get_logs_api():
         return jsonify({"success": False, "message": str(e)})
 
 @app.route('/api/clear_logs', methods=['POST'])
-@login_required
+@admin_required
 def clear_logs_api():
     """Efface le contenu d'un fichier de log spécifié."""
     data = request.get_json()
@@ -3462,7 +3552,7 @@ def clear_logs_api():
         return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/update_app', methods=['GET'])
-@login_required
+@admin_required
 def update_app():
     """
     Met à jour l'application depuis GitHub et la redémarre.
@@ -3529,7 +3619,7 @@ def update_app():
     return Response(generate(), mimetype='text/event-stream', headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
 
 @app.route('/api/expand_filesystem', methods=['POST'])
-@login_required
+@admin_required
 def expand_filesystem():
     """
     Lance le script qui étend le système de fichiers racine.
@@ -3817,7 +3907,7 @@ def delete_telegram_invitation(code):
         return jsonify({"success": False, "message": "Invitation non trouvée."}), 404
 
 @app.route('/api/scan_wifi', methods=['GET'])
-@login_required
+@admin_required
 def scan_wifi():
     """Scanne les réseaux Wi-Fi disponibles et les retourne en JSON."""
     try:

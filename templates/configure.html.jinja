@@ -188,6 +188,9 @@
                     class="{% if current_lang == 'ja' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">JA</a>
             </div>
             <div class="logout-link">
+                {% if current_username %}
+                <span class="text-gray-600 mr-2"><i class="fas fa-user mr-1"></i>{{ current_username }}{% if not is_admin %} ({{ _("utilisateur") }}){% endif %}</span>
+                {% endif %}
                 <a href="/logout">{{ _('Se déconnecter') }}</a>
             </div>
         </div>
@@ -308,6 +311,10 @@
 
         <div id="group-maintenance" class="sub-nav-group hidden">
             <div class="tabs flex overflow-x-auto pb-2">
+                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-comptes')"
+                    title="{{ _('Gérez votre mot de passe et les comptes utilisateurs.') }}"><i class="fas fa-users fa-fw mr-2"></i>{{
+                    _('Comptes') }}</button>
+                {% if is_admin %}
                 <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-network')"
                     title="{{ _('Gérez les paramètres Wi-Fi et réseau.') }}"><i class="fas fa-wifi fa-fw mr-2"></i>{{
                     _('Réseau') }}</button>
@@ -320,6 +327,7 @@
                 <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-logs')"
                     title="{{ _('Consultez les journaux système.') }}"><i class="fas fa-file-alt fa-fw mr-2"></i>{{
                     _('Logs') }}</button>
+                {% endif %}
             </div>
         </div>
 
@@ -1855,14 +1863,13 @@
             </div>
         </div>
 
-        <div id="tab-maintenance" class="tabcontent">
+        <div id="tab-comptes" class="tabcontent">
             <fieldset>
                 <legend>
                     <h3>{{ _("Sécurité") }}</h3>
                 </legend>
                 <form action="{{ url_for('change_password_route') }}" method="post" id="password-change-form">
-                    <h4 class="text-lg font-semibold text-gray-800 mb-2">{{ _("Changer le mot de passe de l'interface")
-                        }}</h4>
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">{{ _("Changer mon mot de passe") }}</h4>
                     <div class="mb-4">
                         <label for="new_password" class="block text-sm font-medium text-gray-700">{{ _("Nouveau mot de
                             passe") }}</label>
@@ -1903,6 +1910,93 @@
                 </form>
             </fieldset>
 
+            {% if is_admin %}
+            <fieldset class="mt-6">
+                <legend>
+                    <h3>{{ _("Comptes utilisateurs") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Les administrateurs ont accès à tout. Les utilisateurs peuvent régler le diaporama, importer et gérer les photos, mais n'ont accès ni aux comptes, ni au réseau, ni à la maintenance, et ne voient pas les mots de passe et jetons enregistrés.") }}</p>
+
+                <table class="w-full text-sm border rounded mb-4">
+                    <thead class="bg-gray-100 text-left">
+                        <tr>
+                            <th class="p-2">{{ _("Nom") }}</th>
+                            <th class="p-2">{{ _("Rôle") }}</th>
+                            <th class="p-2">{{ _("Actions") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t">
+                            <td class="p-2 font-semibold">{{ main_admin_username }}</td>
+                            <td class="p-2">{{ _("Administrateur principal") }}</td>
+                            <td class="p-2 text-gray-500">{{ _("Compte créé à l'installation (non supprimable)") }}</td>
+                        </tr>
+                        {% for user in users %}
+                        <tr class="border-t">
+                            <td class="p-2 font-semibold">{{ user.username }}
+                                {% if user.created %}<div class="text-xs text-gray-500 font-normal">{{ _("créé le") }} {{ user.created }}</div>{% endif %}</td>
+                            <td class="p-2">
+                                {% if user.username == current_username %}
+                                {{ _("Administrateur") if user.role == 'admin' else _("Utilisateur") }}
+                                {% else %}
+                                <form method="POST" action="{{ url_for('set_user_role_route', username=user.username) }}">
+                                    <select name="role" onchange="this.form.submit()" class="text-sm">
+                                        <option value="user" {% if user.role == 'user' %}selected{% endif %}>{{ _("Utilisateur") }}</option>
+                                        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>{{ _("Administrateur") }}</option>
+                                    </select>
+                                </form>
+                                {% endif %}
+                            </td>
+                            <td class="p-2">
+                                <form method="POST" action="{{ url_for('reset_user_password_route', username=user.username) }}" class="inline-flex items-center gap-2 mb-1">
+                                    <input type="password" name="password" required minlength="6" placeholder="{{ _('Nouveau mot de passe') }}" class="text-sm">
+                                    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white text-sm py-1 px-2 rounded whitespace-nowrap">
+                                        <i class="fas fa-key"></i> {{ _("Changer") }}</button>
+                                </form>
+                                {% if user.username != current_username %}
+                                <form method="POST" action="{{ url_for('delete_user_route', username=user.username) }}" class="inline"
+                                    onsubmit="return confirm('{{ _('Supprimer ce compte ?') }}');">
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white text-sm py-1 px-2 rounded">
+                                        <i class="fas fa-trash-alt"></i> {{ _("Supprimer") }}</button>
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">{{ _("Créer un compte") }}</h4>
+                <form method="POST" action="{{ url_for('create_user_route') }}" class="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+                    <div>
+                        <label for="new_user_username">{{ _("Nom d'utilisateur") }}</label>
+                        <input type="text" id="new_user_username" name="username" required pattern="[A-Za-z0-9_.\-]{2,32}"
+                            title="{{ _('2 à 32 caractères : lettres, chiffres, . _ -') }}" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="new_user_password">{{ _("Mot de passe") }}</label>
+                        <input type="password" id="new_user_password" name="password" required minlength="6" autocomplete="new-password">
+                    </div>
+                    <div>
+                        <label for="new_user_role">{{ _("Rôle") }}</label>
+                        <select id="new_user_role" name="role">
+                            <option value="user" selected>{{ _("Utilisateur") }}</option>
+                            <option value="admin">{{ _("Administrateur") }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
+                            <i class="fas fa-user-plus mr-1"></i>{{ _("Créer") }}</button>
+                    </div>
+                </form>
+            </fieldset>
+            {% else %}
+            <p class="mt-6 p-3 bg-blue-50 border border-blue-200 rounded text-sm text-gray-700">
+                <i class="fas fa-info-circle mr-1"></i>{{ _("Vous êtes connecté avec un compte utilisateur : la gestion des comptes, le réseau, la maintenance et les mots de passe ou jetons enregistrés sont réservés aux administrateurs.") }}</p>
+            {% endif %}
+        </div>
+
+        <div id="tab-maintenance" class="tabcontent">
             <fieldset class="mt-6">
                 <legend>
                     <h3>{{ _("Sauvegarde et Restauration") }}</h3>
@@ -3169,7 +3263,7 @@
 
                 // Gérer la visibilité du bouton "Enregistrer"
                 const saveButton = document.getElementById('save-changes-btn');
-                const tabsWithoutSaveButton = ['tab-apercu', 'tab-actions', 'tab-validation', 'tab-favoris', 'tab-playlists', 'tab-network', 'tab-maintenance', 'tab-stats', 'tab-logs'];
+                const tabsWithoutSaveButton = ['tab-comptes', 'tab-apercu', 'tab-actions', 'tab-validation', 'tab-favoris', 'tab-playlists', 'tab-network', 'tab-maintenance', 'tab-stats', 'tab-logs'];
                 if (tabId === 'tab-validation') {
                     refreshValidationTab(); // On rafraîchit la grille et le badge
                 }
@@ -3331,6 +3425,9 @@
 
                 // Trouver à quel groupe appartient l'onglet actif
                 const activeTabElement = document.querySelector(`.tablink[onclick*="'${activeTabId}'"]`);
+                if (!activeTabElement) {
+                    activeMainGroup = null; // Onglet non accessible (ex : réservé aux administrateurs)
+                }
                 if (activeTabElement) {
                     const parentGroup = activeTabElement.closest('.sub-nav-group');
                     if (parentGroup) {
