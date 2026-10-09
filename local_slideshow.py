@@ -23,6 +23,7 @@ from pathlib import Path
 from utils.text_drawer import draw_text_with_outline
 from utils.metadata_utils import get_photo_metadata, load_photo_metadata_cache # Import from new utility
 from utils.config_manager import load_config
+from utils.audio_output import apply_audio_output
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -2327,4 +2328,6 @@ def start_slideshow():
         logger.info(f"🖼️ Pygame exited cleanly.")
 
 if __name__ == "__main__":
+    # Appliquer la sortie audio choisie (HDMI / jack) avant de lancer vidéos et musique
+    apply_audio_output(load_config().get("video_audio_output", "auto"))
     start_slideshow()
