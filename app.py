@@ -941,7 +941,7 @@ def configure():
             'smart_plug_on_url', 'smart_plug_off_url', 'smart_plug_on_delay', 'smart_plug_status_url',
             'smb_host', 'smb_share', 'smb_path', 'smb_user', 'smb_password', 'video_audio_output', 'video_audio_volume', 'telegram_boost_duration_days',
             'telegram_boost_factor', 'screen_orientation',
-            'smb_update_interval_hours', 'gdrive_update_interval_hours', 'gdrive_backend', 'gdrive_rclone_remote'
+            'smb_update_interval_hours', 'gdrive_update_interval_minutes', 'gdrive_backend', 'gdrive_rclone_remote'
             # New fields
             , 'wifi_ssid', 'wifi_password', 'info_display_duration', 'telegram_bot_token',
             'telegram_authorized_users', 'voice_control_language',
@@ -953,7 +953,7 @@ def configure():
             if key in request.form:
                 value = request.form.get(key)
                 # Gérer les champs numériques
-                if key in ['display_duration', 'clock_offset_x', 'clock_offset_y', 'clock_font_size', 'weather_update_interval_minutes', 'immich_update_interval_hours', 'smb_update_interval_hours', 'gdrive_update_interval_hours', 'display_width', 'display_height', 'info_display_duration', 'tide_offset_x', 'tide_offset_y', 'video_audio_volume', 'favorite_boost_factor', 'telegram_boost_duration_days', 'telegram_boost_factor', 'button_pin', 'smart_plug_on_delay', 'anniversary_boost_factor']: # Integer fields
+                if key in ['display_duration', 'clock_offset_x', 'clock_offset_y', 'clock_font_size', 'weather_update_interval_minutes', 'immich_update_interval_hours', 'smb_update_interval_hours', 'gdrive_update_interval_minutes', 'display_width', 'display_height', 'info_display_duration', 'tide_offset_x', 'tide_offset_y', 'video_audio_volume', 'favorite_boost_factor', 'telegram_boost_duration_days', 'telegram_boost_factor', 'button_pin', 'smart_plug_on_delay', 'anniversary_boost_factor']: # Integer fields
                     try:
                         config[key] = int(value)
                     except (ValueError, TypeError):
@@ -2044,36 +2044,31 @@ def samba_update_worker():
 def gdrive_update_worker():
     """
     Thread en arrière-plan qui synchronise périodiquement les dossiers Google Drive sélectionnés.
+    La préparation et le redémarrage du diaporama n'ont lieu que si quelque chose a changé.
     """
     print("Démarrage du worker de mise à jour automatique Google Drive")
-    global _gdrive_first_run_skipped
+    first_run = True
     while True:
         config = load_config()
         is_enabled = config.get("gdrive_auto_update", False)
-        interval_hours = config.get("gdrive_update_interval_hours", 24)
-        sleep_seconds = (interval_hours * 3600) if is_enabled else (15 * 60)
 
-        if not _gdrive_first_run_skipped and config.get("skip_initial_auto_import", False):
-            _gdrive_first_run_skipped = True
+        if first_run and config.get("skip_initial_auto_import", False):
             with app.app_context():
-                gdrive_status_manager.update_status(message=_("Import initial ignoré."), next_run=datetime.now() + timedelta(seconds=sleep_seconds))
-            time.sleep(sleep_seconds)
-            continue
-        _gdrive_first_run_skipped = True
-
-        if is_enabled:
+                gdrive_status_manager.update_status(message=_("Import initial ignoré."))
+        elif is_enabled:
             try:
                 with app.app_context():
-                    gdrive_status_manager.update_status(message=_("Lancement de l'import..."))
-                import_success = False
+                    gdrive_status_manager.update_status(message=_("Recherche de nouveautés..."))
+                changes = None
                 for update in import_gdrive_photos(config):
-                    gdrive_status_manager.update_status(message=update.get('message', ''))
                     if update.get("type") == "error":
                         logger.info(f"[Auto-Update Google Drive] Erreur lors de l'import : {update.get('message')}")
+                    gdrive_status_manager.update_status(message=update.get('message', ''))
                     if update.get("type") == "done":
-                        import_success = True
+                        changes = update.get("changes", 1)
 
-                if import_success:
+                # Au premier passage, on prépare quand même pour rattraper un import interrompu
+                if changes or (changes == 0 and first_run):
                     with app.app_context():
                         gdrive_status_manager.update_status(message=_("Préparation des photos..."))
                     # Charger les légendes manuelles pour Google Drive
@@ -2091,22 +2086,37 @@ def gdrive_update_worker():
 
                     with app.app_context():
                         if prep_successful:
-                            if is_slideshow_running():
+                            if changes and is_slideshow_running():
                                 restart_slideshow_for_update()
                             gdrive_status_manager.update_status(last_run=datetime.now(), message=_("Dernière mise à jour réussie."))
                         else:
                             gdrive_status_manager.update_status(message=_("Mise à jour terminée avec avertissements/erreurs."))
+                elif changes == 0:
+                    with app.app_context():
+                        gdrive_status_manager.update_status(last_run=datetime.now(), message=_("Aucune nouveauté."))
             except Exception as e:
                 logger.error(f"[Auto-Update Google Drive] Erreur critique dans le worker : {e}", exc_info=True)
                 gdrive_status_manager.update_status(message=f"Erreur critique : {e}")
         else:
             with app.app_context():
                 gdrive_status_manager.update_status(message=_("Mise à jour automatique Google Drive désactivée."))
+        first_run = False
 
-        gdrive_status_manager.update_status(next_run=datetime.now() + timedelta(seconds=sleep_seconds))
-        if is_enabled:
-            gdrive_status_manager.update_status(message="En attente...")
-        time.sleep(sleep_seconds)
+        # Attente jusqu'à la prochaine vérification, en relisant la config toutes les 30 s
+        # pour prendre en compte immédiatement un changement d'intervalle ou une activation.
+        cycle_start = datetime.now()
+        while True:
+            config = load_config()
+            enabled_now = config.get("gdrive_auto_update", False)
+            interval_minutes = max(1, int(config.get("gdrive_update_interval_minutes", 60) or 60))
+            next_run = cycle_start + timedelta(minutes=interval_minutes)
+            gdrive_status_manager.update_status(next_run=next_run if enabled_now else None)
+            if enabled_now and not is_enabled:
+                break  # Vient d'être activée : lancer tout de suite
+            if enabled_now and datetime.now() >= next_run:
+                break
+            is_enabled = enabled_now
+            time.sleep(30)
 
 def telegram_bot_worker():
     """

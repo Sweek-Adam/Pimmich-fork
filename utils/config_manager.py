@@ -38,7 +38,7 @@ def create_default_config():
         "gdrive_folders": [],
         "gdrive_recursive": True,
         "gdrive_auto_update": False,
-        "gdrive_update_interval_hours": 24,
+        "gdrive_update_interval_minutes": 60,
         "display_sources": ["immich"],
         "show_clock": True,
         "clock_format": "%H:%M",

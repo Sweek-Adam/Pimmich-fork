@@ -281,7 +281,7 @@ def import_gdrive_photos(config):
             with open(MANIFEST_FILE, 'w') as mf:
                 json.dump(manifest, mf)
             yield {"type": "info", "message": "Aucune nouvelle photo à importer. Les dossiers sont à jour."}
-            yield {"type": "done", "stage": "IMPORT_COMPLETE", "percent": 100, "message": "Synchronisation terminée. Aucune nouvelle photo."}
+            yield {"type": "done", "stage": "IMPORT_COMPLETE", "percent": 100, "message": "Synchronisation terminée. Aucune nouvelle photo.", "changes": len(obsolete_ids)}
             return
 
         yield {"type": "stats", "stage": "COPYING", "percent": 20, "message": f"Début du téléchargement de {total} fichiers...", "total": total}
@@ -314,7 +314,7 @@ def import_gdrive_photos(config):
         with open(MANIFEST_FILE, 'w') as mf:
             json.dump(manifest, mf)
 
-        yield {"type": "done", "stage": "IMPORT_COMPLETE", "percent": 80, "message": f"{downloaded} photos synchronisées depuis Google Drive.", "total_imported": downloaded}
+        yield {"type": "done", "stage": "IMPORT_COMPLETE", "percent": 80, "message": f"{downloaded} photos synchronisées depuis Google Drive.", "total_imported": downloaded, "changes": downloaded + len(obsolete_ids)}
 
     except ValueError as e:
         yield {"type": "error", "message": str(e)}

@@ -1085,9 +1085,10 @@
                         <input class="form-check-input" type="checkbox" id="gdrive_auto_update" name="gdrive_auto_update" {% if config.get('gdrive_auto_update') %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="gdrive_auto_update">{{ _("Activer la mise à jour automatique") }}</label>
                     </div>
-                    <label for="gdrive_update_interval_hours">{{ _("Intervalle de mise à jour (heures):") }}</label>
-                    <input type="number" id="gdrive_update_interval_hours" name="gdrive_update_interval_hours"
-                        value="{{ config.get('gdrive_update_interval_hours', 24) }}" min="1">
+                    <label for="gdrive_update_interval_minutes">{{ _("Vérifier les nouveautés toutes les (minutes) :") }}</label>
+                    <input type="number" id="gdrive_update_interval_minutes" name="gdrive_update_interval_minutes"
+                        value="{{ config.get('gdrive_update_interval_minutes', 60) }}" min="1">
+                    <p class="text-sm text-gray-600 mt-1">{{ _("Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées ou supprimées.") }}</p>
 
                     <div id="gdrive-worker-status-container" class="mt-4 p-3 bg-gray-100 rounded-lg border">
                         <p><strong>{{ _("État du service :") }}</strong> <span id="gdrive-worker-status-message"
