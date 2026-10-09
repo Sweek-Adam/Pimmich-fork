@@ -37,6 +37,7 @@ def create_default_config():
         "gdrive_rclone_remote": "",
         "gdrive_folders": [],
         "gdrive_recursive": True,
+        "gdrive_trash_after_import": False,
         "gdrive_auto_update": False,
         "gdrive_update_interval_minutes": 60,
         "display_sources": ["immich"],

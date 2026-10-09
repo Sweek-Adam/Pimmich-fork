@@ -77,6 +77,13 @@ class RcloneBackend:
         if result.returncode != 0:
             raise RuntimeError(result.stderr.strip() or "rclone copyto a échoué")
 
+    def trash(self, f):
+        """Met le fichier dans la corbeille Google Drive (récupérable pendant 30 jours)."""
+        result = subprocess.run(["rclone", "deletefile", "--drive-use-trash=true", f"{self.remote}:{f['remote_path']}"],
+                                capture_output=True, text=True, timeout=120)
+        if result.returncode != 0:
+            raise RuntimeError(result.stderr.strip() or "rclone deletefile a échoué")
+
 
 # --- Méthode 2 : compte de service Google (API Drive) ---
 
@@ -177,6 +184,10 @@ class ServiceAccountBackend:
                 for chunk in resp.iter_content(chunk_size=1024 * 1024):
                     out.write(chunk)
 
+    def trash(self, f):
+        # Un compte de service n'est pas propriétaire des fichiers partagés avec lui : Google refuse la mise à la corbeille
+        raise NotImplementedError("La mise à la corbeille après import n'est possible qu'avec la connexion rclone.")
+
 
 # --- Point d'entrée commun ---
 
@@ -220,6 +231,29 @@ def _load_manifest():
     return {}
 
 
+def _save_manifest(manifest):
+    TARGET_DIR.mkdir(parents=True, exist_ok=True)
+    with open(MANIFEST_FILE, 'w') as mf:
+        json.dump(manifest, mf)
+
+
+def remove_local_media(stem=None):
+    """
+    Retire du cadre les fichiers Google Drive téléchargés (tous, ou ceux portant ce nom sans extension),
+    pour qu'ils ne soient pas préparés à nouveau. Appelé lors d'une suppression depuis l'Aperçu.
+    """
+    manifest = _load_manifest()
+    for fid, entry in list(manifest.items()):
+        if stem is None or Path(entry["name"]).stem == stem:
+            (TARGET_DIR / entry["name"]).unlink(missing_ok=True)
+            del manifest[fid]
+    if TARGET_DIR.exists():
+        for f in TARGET_DIR.iterdir():
+            if f.is_file() and f != MANIFEST_FILE and (stem is None or f.stem == stem):
+                f.unlink(missing_ok=True)
+    _save_manifest(manifest)
+
+
 def import_gdrive_photos(config):
     """
     Synchronise les photos des dossiers Google Drive sélectionnés et retourne des objets structurés pour le suivi.
@@ -229,6 +263,7 @@ def import_gdrive_photos(config):
     # Les dossiers choisis avec une autre méthode de connexion n'ont pas le même identifiant
     folders = [f for f in config.get("gdrive_folders", []) if f.get("backend", backend_name) == backend_name]
     recursive = config.get("gdrive_recursive", True)
+    trash_after_import = config.get("gdrive_trash_after_import", False)
 
     if not folders:
         yield {"type": "error", "message": "Aucun dossier Google Drive sélectionné."}
@@ -256,7 +291,8 @@ def import_gdrive_photos(config):
         manifest = _load_manifest()
 
         # --- Phase 2: Supprimer les fichiers locaux obsolètes (retirés du Drive ou dossier désélectionné) ---
-        obsolete_ids = [fid for fid in manifest if fid not in remote_files]
+        # Les fichiers mis à la corbeille après import appartiennent désormais au cadre : on ne les retire pas
+        obsolete_ids = [fid for fid in manifest if fid not in remote_files and not manifest[fid].get("trashed")]
         if obsolete_ids:
             yield {"type": "progress", "stage": "CLEANING", "percent": 15, "message": f"Suppression de {len(obsolete_ids)} photos obsolètes..."}
             for fid in obsolete_ids:
@@ -269,17 +305,37 @@ def import_gdrive_photos(config):
         # --- Phase 3: Déterminer les fichiers à télécharger ---
         used_names = {entry["name"] for entry in manifest.values()}
         to_download = []
+        to_trash = []  # Fichiers déjà présents sur le cadre, à mettre à la corbeille sur le Drive
         for fid, f in remote_files.items():
             entry = manifest.get(fid)
             if entry and entry.get("modifiedTime") == f.get("modifiedTime") and (TARGET_DIR / entry["name"]).exists():
+                if trash_after_import:
+                    to_trash.append(f)
                 continue
             name = entry["name"] if entry else _local_name(f, used_names)
             to_download.append((f, name))
 
+        def trash_on_drive(files):
+            trashed = 0
+            for f in files:
+                try:
+                    backend.trash(f)
+                    manifest[f["id"]]["trashed"] = True
+                    trashed += 1
+                except NotImplementedError as e:
+                    yield {"type": "warning", "message": str(e)}
+                    break
+                except Exception as e:
+                    yield {"type": "warning", "message": f"Impossible de mettre {f['name']} à la corbeille Google Drive : {e}"}
+            if trashed:
+                yield {"type": "info", "message": f"{trashed} fichier(s) importé(s) mis à la corbeille Google Drive."}
+
+        if to_trash:
+            yield from trash_on_drive(to_trash)
+
         total = len(to_download)
         if total == 0:
-            with open(MANIFEST_FILE, 'w') as mf:
-                json.dump(manifest, mf)
+            _save_manifest(manifest)
             yield {"type": "info", "message": "Aucune nouvelle photo à importer. Les dossiers sont à jour."}
             yield {"type": "done", "stage": "IMPORT_COMPLETE", "percent": 100, "message": "Synchronisation terminée. Aucune nouvelle photo.", "changes": len(obsolete_ids)}
             return
@@ -289,6 +345,7 @@ def import_gdrive_photos(config):
         # --- Phase 4: Télécharger ---
         cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
         downloaded = 0
+        downloaded_files = []
         for i, (f, name) in enumerate(to_download, 1):
             if cancel_flag.exists():
                 yield {"type": "warning", "message": "Import annulé par l'utilisateur."}
@@ -299,6 +356,7 @@ def import_gdrive_photos(config):
                 backend.download(f, tmp)
                 tmp.replace(dest)
                 manifest[f["id"]] = {"name": name, "modifiedTime": f.get("modifiedTime")}
+                downloaded_files.append(f)
                 downloaded += 1
             except Exception as e:
                 tmp.unlink(missing_ok=True)
@@ -311,8 +369,11 @@ def import_gdrive_photos(config):
                 "current": i, "total": total
             }
 
-        with open(MANIFEST_FILE, 'w') as mf:
-            json.dump(manifest, mf)
+        # Mise à la corbeille seulement une fois le fichier bien enregistré sur le cadre
+        _save_manifest(manifest)
+        if trash_after_import and downloaded_files:
+            yield from trash_on_drive(downloaded_files)
+        _save_manifest(manifest)
 
         yield {"type": "done", "stage": "IMPORT_COMPLETE", "percent": 80, "message": f"{downloaded} photos synchronisées depuis Google Drive.", "total_imported": downloaded, "changes": downloaded + len(obsolete_ids)}
 

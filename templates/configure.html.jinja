@@ -1085,6 +1085,11 @@
                         <input class="form-check-input" type="checkbox" id="gdrive_recursive" name="gdrive_recursive" {% if config.get('gdrive_recursive', True) %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="gdrive_recursive">{{ _("Inclure les sous-dossiers") }}</label>
                     </div>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="gdrive_trash_after_import" name="gdrive_trash_after_import" {% if config.get('gdrive_trash_after_import') %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="gdrive_trash_after_import">{{ _("Mettre les fichiers à la corbeille Google Drive après import") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo importée part dans la corbeille du Drive (récupérable 30 jours) et reste sur le cadre jusqu'à ce que vous la supprimiez dans l'onglet « Aperçu ». Uniquement avec la connexion rclone.") }}</p>
                     <p class="text-sm text-gray-600">{{ _("Pensez à enregistrer la configuration après avoir choisi les dossiers, puis lancez l'import depuis l'onglet « Actions ».") }}</p>
 
                     <hr class="my-4">
@@ -2223,7 +2228,7 @@
                 {% if photos %}
                 <fieldset class="mb-6 p-4 border rounded-lg bg-gray-50/50">
                     <div class="flex justify-between items-center border-b pb-2 mb-4">
-                        <h4 class="text-xl font-semibold text-gray-800">{{ source_name.capitalize() }}</h4>
+                        <h4 class="text-xl font-semibold text-gray-800">{% if source_name == 'gdrive' %}<i class="fab fa-google-drive mr-2"></i>Google Drive{% else %}{{ source_name.capitalize() }}{% endif %}</h4>
                         <div class="flex items-center gap-x-4">
                             <!-- Compteur de photos -->
                             <span class="text-sm text-gray-500 font-medium">{{ ngettext('%(num)d photo', '%(num)d

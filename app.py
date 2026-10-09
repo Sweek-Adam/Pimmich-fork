@@ -37,7 +37,7 @@ from utils.prepare_all_photos import prepare_all_photos_with_progress
 from utils.import_usb_photos import import_usb_photos  # Déplacé dans utils
 from utils.metadata_utils import get_photo_metadata # Import get_photo_metadata
 from utils.import_samba import import_samba_photos
-from utils.import_gdrive import import_gdrive_photos, list_folders as list_gdrive_folders, list_rclone_remotes, resolve_backend_name, parse_service_account_key, save_service_account_key, get_service_account_email
+from utils.import_gdrive import import_gdrive_photos, remove_local_media as remove_local_gdrive_media, list_folders as list_gdrive_folders, list_rclone_remotes, resolve_backend_name, parse_service_account_key, save_service_account_key, get_service_account_email
 from utils.image_filters import apply_filter_to_image, add_text_to_polaroid, add_text_to_image, create_polaroid_effect
 from utils.voice_control_manager import start_voice_control, stop_voice_control, is_voice_control_running
 from utils.telegram_bot import PimmichBot
@@ -1085,6 +1085,7 @@ def configure():
         config["smb_auto_update"] = 'smb_auto_update' in request.form
         config["gdrive_auto_update"] = 'gdrive_auto_update' in request.form
         config["gdrive_recursive"] = 'gdrive_recursive' in request.form
+        config["gdrive_trash_after_import"] = 'gdrive_trash_after_import' in request.form
         # Dossiers Google Drive sélectionnés (valeurs "id|chemin"), liés à la méthode de connexion utilisée
         gdrive_backend = resolve_backend_name({"gdrive_backend": request.form.get('gdrive_backend', config.get('gdrive_backend', 'auto'))})
         config["gdrive_folders"] = [
@@ -2270,6 +2271,10 @@ def delete_photo(photo):
         if backup_path.is_file():
             backup_path.unlink()
         
+        # Google Drive : retirer aussi le fichier téléchargé, sinon il serait préparé à nouveau
+        if photo_path_obj.parts[2:3] == ('gdrive',):
+            remove_local_gdrive_media(photo_path_obj.stem)
+
         # Supprimer l'état du filtre pour cette photo
         states = load_filter_states()
         if states.pop(photo, None):
@@ -2304,6 +2309,9 @@ def delete_source_photos(source_name):
         if backup_dir.is_dir():
             shutil.rmtree(backup_dir)
             logger.info(f"Dossier de sauvegarde supprimé : {backup_dir}")
+
+        if source_name == 'gdrive':
+            remove_local_gdrive_media()
 
         # Supprimer les états de filtre pour cette source
         states = load_filter_states()
