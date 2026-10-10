@@ -16,7 +16,7 @@ from pathlib import Path
 import pytest
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
-COPIED = ["app.py", "utils", "templates", "translations", "babel.cfg", "voice_control.py", "local_slideshow.py"]
+COPIED = ["app.py", "web", "utils", "templates", "translations", "babel.cfg", "voice_control.py", "local_slideshow.py"]
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin-test-pass"
 
@@ -57,8 +57,10 @@ def sandbox():
 @pytest.fixture(scope="session")
 def app_module():
     import app as app_module
-    # Ne jamais redémarrer le vrai diaporama pendant les tests
-    app_module.restart_slideshow_process = lambda: None
+    # Ne jamais redémarrer le vrai diaporama pendant les tests (dans tous les modules qui l'importent)
+    for module in list(sys.modules.values()):
+        if getattr(module, "restart_slideshow_process", None) is not None and module.__name__ != "utils.slideshow_manager":
+            module.restart_slideshow_process = lambda: None
     app_module.app.config["TESTING"] = True
     return app_module
 
