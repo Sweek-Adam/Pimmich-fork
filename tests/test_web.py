@@ -134,3 +134,17 @@ def test_guest_upload_page_is_installable_and_accepts_files(app_module, client):
                        content_type="multipart/form-data", headers=SAME_ORIGIN)
     assert resp.status_code == 302
     assert any(p.name.startswith("vacances_") for p in app_module.PENDING_UPLOADS_DIR.iterdir())
+
+
+def test_session_cookie_is_secure_only_over_https(client):
+    from conftest import ADMIN_PASSWORD
+    resp = client.post("/login", data={"username": ADMIN_USERNAME, "password": ADMIN_PASSWORD},
+                       headers={"Sec-Fetch-Site": "same-origin", "X-Forwarded-Proto": "https"})
+    assert "Secure" in resp.headers["Set-Cookie"]
+    resp = client.post("/login", data={"username": ADMIN_USERNAME, "password": ADMIN_PASSWORD}, headers=SAME_ORIGIN)
+    assert "Secure" not in resp.headers["Set-Cookie"]
+
+
+def test_https_origin_is_accepted(admin_client):
+    # Création de compte invalide : refusée par la validation (302), pas par la protection CSRF (403), et sans effet
+    assert admin_client.post("/users/create", data={"username": "x"}, headers={"Origin": "https://localhost"}).status_code == 302

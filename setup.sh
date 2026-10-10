@@ -84,38 +84,9 @@ if [ -f /etc/nginx/sites-enabled/default ]; then
     echo "⛔ Fichier de config par défaut supprimé"
 fi
 
-# Créer une nouvelle config pour Pimmich
-sudo tee /etc/nginx/sites-available/pimmich > /dev/null <<'EOL'
-server {
-    listen 80;
-    server_name _;
-
-    client_max_body_size 200M;
-
-    location / {
-        proxy_pass http://127.0.0.1:5000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-
-        # Augmenter les timeouts pour les opérations longues comme l'import de vidéos
-        proxy_connect_timeout 600s;
-        proxy_send_timeout 600s;
-        proxy_read_timeout 600s;
-    }
-}
-EOL
-
-# Activer la nouvelle config
-if [ ! -f /etc/nginx/sites-enabled/pimmich ]; then
-    sudo ln -s /etc/nginx/sites-available/pimmich /etc/nginx/sites-enabled/
-    echo "✅ Configuration Pimmich activée dans NGINX"
-fi
-
-# Redémarrer NGINX
-sudo systemctl restart nginx
-echo "✅ NGINX redémarré et prêt"
+# Configuration nginx (HTTPS pour l'administration, HTTP conservé pour la page d'envoi des invités)
+sudo bash "$(dirname "$0")/utils/enable_https.sh"
+sudo systemctl enable nginx
 
 echo "=== [6/12] Création de l’environnement Python ==="
 cd "$(dirname "$0")"

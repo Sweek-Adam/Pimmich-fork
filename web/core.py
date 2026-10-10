@@ -291,9 +291,22 @@ app.secret_key = load_secret_key(CREDENTIALS_PATH)
 
 # Cookie de session non envoyé par les requêtes provenant d'autres sites (protection CSRF)
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-
-
 app.config['SESSION_COOKIE_HTTPONLY'] = True
+
+# Derrière nginx : le schéma d'origine (http/https) est transmis par X-Forwarded-Proto.
+# Flask n'écoute qu'en local, seul nginx (ou un processus du cadre) peut fixer cet en-tête.
+from werkzeug.middleware.proxy_fix import ProxyFix
+from flask.sessions import SecureCookieSessionInterface
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1)
+
+
+class _SchemeAwareSessionInterface(SecureCookieSessionInterface):
+    """Cookie de session marqué « Secure » quand il est créé en HTTPS : il n'est alors jamais renvoyé en clair."""
+    def get_cookie_secure(self, app):
+        return request.scheme == "https"
+
+
+app.session_interface = _SchemeAwareSessionInterface()
 
 
 # Jeton partagé avec les processus locaux (commande vocale, bouton physique)
