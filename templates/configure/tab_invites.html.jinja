@@ -9,13 +9,35 @@
                             <p class="mb-3">{{ _("Les personnes connectées à votre Wi-Fi scannent ce QR code (ou ouvrent l'adresse ci-dessous) pour envoyer des photos et écrire des messages sur le cadre.") }}</p>
                             <p class="font-mono text-lg mb-4 break-all" id="guest-page-url">http://{{ request.host.split(':')[0] or '…' }}/upload</p>
                             <div class="flex flex-wrap gap-2">
-                                <a href="/upload" target="_blank" class="btn-secondary"><i class="fas fa-external-link-alt mr-1"></i>{{ _("Ouvrir la page invités") }}</a>
-                                <button type="button" class="btn-secondary" onclick="window.open('{{ url_for('guest_qr_png') }}').print()"><i class="fas fa-print mr-1"></i>{{ _("Imprimer le QR code") }}</button>
+                                <button type="button" id="guest-share" class="btn-primary guest-invite"><i class="fas fa-share-alt mr-1"></i>{{ _("Partager le lien") }}</button>
+                                <a href="/upload" target="_blank" class="btn-secondary guest-invite"><i class="fas fa-external-link-alt mr-1"></i>{{ _("Ouvrir la page invités") }}</a>
+                                <button type="button" class="btn-secondary guest-invite" onclick="window.open('{{ url_for('guest_qr_png') }}').print()"><i class="fas fa-print mr-1"></i>{{ _("Imprimer le QR code") }}</button>
                             </div>
+                            <p id="guest-share-status" class="text-sm text-green-700 mt-2"></p>
                             <p class="text-sm text-gray-600 mt-3">{{ _("Les photos des invités passent par « À valider » avant d'être affichées.") }}</p>
                         </div>
                     </div>
                 </fieldset>
+
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        // Lien partagé, ouvert ou QR code imprimé : l'étape « Inviter la famille » de l'accueil est faite
+                        const mark = () => fetch("/api/setup/mark", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ step: "guests" }) });
+                        document.querySelectorAll(".guest-invite").forEach(el => el.addEventListener("click", mark));
+                        document.getElementById("guest-share").addEventListener("click", async () => {
+                            const url = document.getElementById("guest-page-url").textContent.trim();
+                            const status = document.getElementById("guest-share-status");
+                            try {
+                                if (navigator.share) {
+                                    await navigator.share({ title: {{ _("Notre cadre photo")|tojson }}, text: {{ _("Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi de la maison) :")|tojson }}, url });
+                                } else {
+                                    await navigator.clipboard.writeText(url);
+                                    status.textContent = {{ _("Lien copié : collez-le dans un message à la famille.")|tojson }};
+                                }
+                            } catch (e) { /* partage annulé */ }
+                        });
+                    });
+                </script>
 
                 <fieldset class="mt-6">
                     <legend>

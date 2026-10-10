@@ -34,6 +34,22 @@ def _pending_guest_photos():
     return sum(1 for f in pending.iterdir() if f.is_file() and not f.name.startswith(".")) if pending.exists() else 0
 
 
+def guests_invited(config):
+    """La famille est invitée : Telegram configuré, envoi reçu d'un invité, ou lien partagé depuis l'interface."""
+    if config.get("telegram_bot_token") or "guests" in (config.get("setup_marks") or []):
+        return True
+    if _pending_guest_photos():
+        return True
+    validated = PROJECT_DIR / "static" / "prepared" / "invités"
+    if validated.exists() and any(f.is_file() for f in validated.iterdir()):
+        return True
+    try:
+        from utils.messages_manager import list_messages
+        return any(m.get("guest") for m in list_messages())
+    except Exception:
+        return False
+
+
 def source_configured(config):
     return bool(config.get("immich_url") and config.get("immich_token")) or bool(config.get("smb_host")) or bool(config.get("gdrive_folders"))
 
@@ -100,9 +116,9 @@ def setup_steps(config, is_admin):
     steps = [
         {"key": "source", "title": N_("Choisir une source de photos"), "done": source_configured(config) or _prepared_count() > 0, "tab": "tab-sources"},
         {"key": "photos", "title": N_("Importer des photos"), "done": _prepared_count() > 0, "tab": "tab-actions"},
-        {"key": "hours", "title": N_("Régler les heures d'affichage"), "done": bool(config.get("active_start_weekday") or config.get("_hours_reviewed")), "tab": "tab-affichage"},
+        {"key": "hours", "title": N_("Régler les heures d'affichage"), "done": bool(config.get("active_start_weekday")), "tab": "tab-affichage"},
         {"key": "ambiance", "title": N_("Choisir une ambiance"), "done": bool(config.get("ambiance")), "tab": "tab-accueil"},
-        {"key": "guests", "title": N_("Inviter la famille (QR code, Telegram)"), "done": bool(config.get("telegram_bot_token")) or bool(config.get("_guests_reviewed")), "tab": "tab-invites"},
+        {"key": "guests", "title": N_("Inviter la famille (QR code, Telegram)"), "done": guests_invited(config), "tab": "tab-invites"},
     ]
     if is_admin:
         steps += [

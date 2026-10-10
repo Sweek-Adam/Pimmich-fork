@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 20:52+0200\n"
+"POT-Creation-Date: 2026-10-10 21:44+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -2220,69 +2220,87 @@ msgid ""
 msgstr ""
 
 #: templates/configure/tab_invites.html.jinja:12
-msgid "Ouvrir la page invités"
+msgid "Partager le lien"
 msgstr ""
 
 #: templates/configure/tab_invites.html.jinja:13
+msgid "Ouvrir la page invités"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:14
 msgid "Imprimer le QR code"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:15
+#: templates/configure/tab_invites.html.jinja:17
 msgid "Les photos des invités passent par « À valider » avant d'être affichées."
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:22
+#: templates/configure/tab_invites.html.jinja:32
+msgid "Notre cadre photo"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:32
+msgid ""
+"Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi"
+" de la maison) :"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:35
+msgid "Lien copié : collez-le dans un message à la famille."
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:44
 msgid "QR code pour les invités"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:24
+#: templates/configure/tab_invites.html.jinja:46
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
 "pour envoyer des photos ou écrire un message depuis un téléphone connecté"
 " au même Wi-Fi."
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:27
+#: templates/configure/tab_invites.html.jinja:49
 msgid "Afficher le QR code"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:29
+#: templates/configure/tab_invites.html.jinja:51
 msgid "Position :"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:32
+#: templates/configure/tab_invites.html.jinja:54
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:33
+#: templates/configure/tab_invites.html.jinja:55
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:34
+#: templates/configure/tab_invites.html.jinja:56
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:35
+#: templates/configure/tab_invites.html.jinja:57
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:39
+#: templates/configure/tab_invites.html.jinja:61
 msgid "Autoriser les invités à écrire des messages"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:41
+#: templates/configure/tab_invites.html.jinja:63
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
@@ -2382,7 +2400,7 @@ msgid ""
 "photos ne sont pas incluses."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:110
+#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:126
 msgid "Activer la sauvegarde automatique"
 msgstr ""
 
@@ -2916,7 +2934,7 @@ msgid ""
 "composition : elles se déplacent ensemble."
 msgstr ""
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:91
+#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:108
 msgid "Le diaporama n'est pas en cours."
 msgstr ""
 
@@ -2932,7 +2950,7 @@ msgstr ""
 msgid "Afficher maintenant"
 msgstr ""
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:176
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:193
 msgid "Musique du diaporama"
 msgstr ""
 
@@ -3753,103 +3771,103 @@ msgstr ""
 msgid "Photomaton"
 msgstr ""
 
-#: utils/health.py:54
+#: utils/health.py:70
 msgid "Aucune photo à afficher"
 msgstr ""
 
-#: utils/health.py:55
+#: utils/health.py:71
 msgid ""
 "Ajoutez une source de photos (Google Drive, Immich, partage réseau, clé "
 "USB) puis lancez un import."
 msgstr ""
 
-#: utils/health.py:57
+#: utils/health.py:73
 msgid "Le diaporama est arrêté"
 msgstr ""
 
-#: utils/health.py:57
+#: utils/health.py:73
 msgid "Il devrait tourner à cette heure-ci. Relancez-le depuis l'accueil."
 msgstr ""
 
-#: utils/health.py:60
+#: utils/health.py:76
 msgid "Problème de synchronisation"
 msgstr ""
 
-#: utils/health.py:63
+#: utils/health.py:79
 msgid "Photos d'invités à valider"
 msgstr ""
 
-#: utils/health.py:63
+#: utils/health.py:79
 #, python-format
 msgid "%(count)s photo(s) attendent votre validation."
 msgstr ""
 
-#: utils/health.py:66
+#: utils/health.py:82
 msgid "Photos laissées sur Google Drive"
 msgstr ""
 
-#: utils/health.py:67
+#: utils/health.py:83
 #, python-format
 msgid ""
 "%(count)s photo(s) déposée(s) par un autre compte ne peuvent pas être "
 "mises à la corbeille du Drive : elles restent affichées sur le cadre."
 msgstr ""
 
-#: utils/health.py:76
+#: utils/health.py:92
 msgid "Espace disque faible"
 msgstr ""
 
-#: utils/health.py:76
+#: utils/health.py:92
 #, python-format
 msgid ""
 "%(free)s Go libres. Supprimez des photos ou activez le nettoyage "
 "automatique."
 msgstr ""
 
-#: utils/health.py:85
+#: utils/health.py:101
 msgid "La sauvegarde a échoué"
 msgstr ""
 
-#: utils/health.py:87
+#: utils/health.py:103
 msgid "Sauvegarde ancienne"
 msgstr ""
 
-#: utils/health.py:87
+#: utils/health.py:103
 msgid "Aucune sauvegarde réussie depuis plus de 7 jours."
 msgstr ""
 
-#: utils/health.py:91
+#: utils/health.py:107
 msgid "Connexion non chiffrée"
 msgstr ""
 
-#: utils/health.py:92
+#: utils/health.py:108
 msgid ""
 "Sur le Raspberry Pi, lancez une fois : sudo "
 "~/pimmich/utils/enable_https.sh (active le HTTPS et corrige la "
 "configuration nginx)."
 msgstr ""
 
-#: utils/health.py:101
+#: utils/health.py:117
 msgid "Choisir une source de photos"
 msgstr ""
 
-#: utils/health.py:102
+#: utils/health.py:118
 msgid "Importer des photos"
 msgstr ""
 
-#: utils/health.py:103
+#: utils/health.py:119
 msgid "Régler les heures d'affichage"
 msgstr ""
 
-#: utils/health.py:104
+#: utils/health.py:120
 msgid "Choisir une ambiance"
 msgstr ""
 
-#: utils/health.py:105
+#: utils/health.py:121
 msgid "Inviter la famille (QR code, Telegram)"
 msgstr ""
 
-#: utils/health.py:109
+#: utils/health.py:125
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr ""
 
@@ -4220,36 +4238,41 @@ msgstr ""
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr ""
 
-#: web/routes_home.py:79
+#: web/routes_home.py:68
+msgid "Étape inconnue."
+msgstr ""
+
+#: web/routes_home.py:96
 msgid "Mes réglages"
 msgstr ""
 
-#: web/routes_home.py:80
+#: web/routes_home.py:97
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr ""
 
-#: web/routes_home.py:89 web/routes_playlists.py:72 web/routes_slideshow.py:513
+#: web/routes_home.py:106 web/routes_playlists.py:72
+#: web/routes_slideshow.py:513
 msgid "Disposition inconnue."
 msgstr ""
 
-#: web/routes_home.py:94
+#: web/routes_home.py:111
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr ""
 
-#: web/routes_home.py:156
+#: web/routes_home.py:173
 msgid "Musique introuvable."
 msgstr ""
 
-#: web/routes_home.py:160 web/routes_music.py:260
+#: web/routes_home.py:177 web/routes_music.py:260
 msgid "Volume invalide."
 msgstr ""
 
-#: web/routes_home.py:164 web/routes_system.py:627
+#: web/routes_home.py:181 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr ""
 
-#: web/routes_home.py:171
+#: web/routes_home.py:188
 msgid "Réglages du son enregistrés."
 msgstr ""
 

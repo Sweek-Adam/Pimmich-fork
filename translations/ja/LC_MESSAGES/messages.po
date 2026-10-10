@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 20:52+0200\n"
+"POT-Creation-Date: 2026-10-10 21:44+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -2255,22 +2255,40 @@ msgstr ""
 "をスキャン（または下のアドレスを開く）すると、写真を送ったりフォトフレームにメッセージを書いたりできます。"
 
 #: templates/configure/tab_invites.html.jinja:12
+msgid "Partager le lien"
+msgstr "リンクを共有"
+
+#: templates/configure/tab_invites.html.jinja:13
 msgid "Ouvrir la page invités"
 msgstr "ゲストページを開く"
 
-#: templates/configure/tab_invites.html.jinja:13
+#: templates/configure/tab_invites.html.jinja:14
 msgid "Imprimer le QR code"
 msgstr "QR code を印刷"
 
-#: templates/configure/tab_invites.html.jinja:15
+#: templates/configure/tab_invites.html.jinja:17
 msgid "Les photos des invités passent par « À valider » avant d'être affichées."
 msgstr "ゲストの写真は、表示される前に「承認待ち」を経由します。"
 
-#: templates/configure/tab_invites.html.jinja:22
+#: templates/configure/tab_invites.html.jinja:32
+msgid "Notre cadre photo"
+msgstr "わが家のフォトフレーム"
+
+#: templates/configure/tab_invites.html.jinja:32
+msgid ""
+"Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi"
+" de la maison) :"
+msgstr "わが家のフォトフレームに写真やメッセージを送ってください（家の Wi-Fi から）："
+
+#: templates/configure/tab_invites.html.jinja:35
+msgid "Lien copié : collez-le dans un message à la famille."
+msgstr "リンクをコピーしました。家族へのメッセージに貼り付けてください。"
+
+#: templates/configure/tab_invites.html.jinja:44
 msgid "QR code pour les invités"
 msgstr "ゲスト用QRコード"
 
-#: templates/configure/tab_invites.html.jinja:24
+#: templates/configure/tab_invites.html.jinja:46
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
 "pour envoyer des photos ou écrire un message depuis un téléphone connecté"
@@ -2279,47 +2297,47 @@ msgstr ""
 "スライドショーにゲストページへのQRコードを常に表示し、同じWi-"
 "Fiに接続したスマートフォンから写真を送ったりメッセージを書いたりできるようにします。"
 
-#: templates/configure/tab_invites.html.jinja:27
+#: templates/configure/tab_invites.html.jinja:49
 msgid "Afficher le QR code"
 msgstr "QRコードを表示"
 
-#: templates/configure/tab_invites.html.jinja:29
+#: templates/configure/tab_invites.html.jinja:51
 msgid "Position :"
 msgstr "位置："
 
-#: templates/configure/tab_invites.html.jinja:32
+#: templates/configure/tab_invites.html.jinja:54
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "右下"
 
-#: templates/configure/tab_invites.html.jinja:33
+#: templates/configure/tab_invites.html.jinja:55
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "左下"
 
-#: templates/configure/tab_invites.html.jinja:34
+#: templates/configure/tab_invites.html.jinja:56
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "右上"
 
-#: templates/configure/tab_invites.html.jinja:35
+#: templates/configure/tab_invites.html.jinja:57
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "左上"
 
-#: templates/configure/tab_invites.html.jinja:39
+#: templates/configure/tab_invites.html.jinja:61
 msgid "Autoriser les invités à écrire des messages"
 msgstr "ゲストのメッセージ投稿を許可"
 
-#: templates/configure/tab_invites.html.jinja:41
+#: templates/configure/tab_invites.html.jinja:63
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
@@ -2423,7 +2441,7 @@ msgstr ""
 "設定、アカウント、プレイリスト、お気に入り、招待、メッセージを Google Drive のフォルダにバックアップします（rclone "
 "接続）。写真は含まれません。"
 
-#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:110
+#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:126
 msgid "Activer la sauvegarde automatique"
 msgstr "自動バックアップを有効にする"
 
@@ -2989,7 +3007,7 @@ msgstr ""
 "写真をドラッグして順番を変更できます。リストの先頭の写真が、現在の写真のすぐ次に表示されます。▶ "
 "ボタンを押すとすぐに表示されます。紫の枠は同じ組み写真に含まれる写真をまとめたもので、一緒に移動します。"
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:91
+#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:108
 msgid "Le diaporama n'est pas en cours."
 msgstr "スライドショーは実行されていません。"
 
@@ -3005,7 +3023,7 @@ msgstr "組み写真（ここから開始、準備中）"
 msgid "Afficher maintenant"
 msgstr "今すぐ表示"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:176
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:193
 msgid "Musique du diaporama"
 msgstr "スライドショーの音楽"
 
@@ -3879,76 +3897,76 @@ msgstr "スクラップブック"
 msgid "Photomaton"
 msgstr "証明写真"
 
-#: utils/health.py:54
+#: utils/health.py:70
 msgid "Aucune photo à afficher"
 msgstr "表示する写真がありません"
 
-#: utils/health.py:55
+#: utils/health.py:71
 msgid ""
 "Ajoutez une source de photos (Google Drive, Immich, partage réseau, clé "
 "USB) puis lancez un import."
 msgstr "写真のソース（Google Drive、Immich、ネットワーク共有、USB メモリ）を追加して、インポートを実行してください。"
 
-#: utils/health.py:57
+#: utils/health.py:73
 msgid "Le diaporama est arrêté"
 msgstr "スライドショーが停止しています"
 
-#: utils/health.py:57
+#: utils/health.py:73
 msgid "Il devrait tourner à cette heure-ci. Relancez-le depuis l'accueil."
 msgstr "この時間帯は再生中のはずです。ホームから再開してください。"
 
-#: utils/health.py:60
+#: utils/health.py:76
 msgid "Problème de synchronisation"
 msgstr "同期の問題"
 
-#: utils/health.py:63
+#: utils/health.py:79
 msgid "Photos d'invités à valider"
 msgstr "承認待ちのゲスト写真"
 
-#: utils/health.py:63
+#: utils/health.py:79
 #, python-format
 msgid "%(count)s photo(s) attendent votre validation."
 msgstr "%(count)s 枚の写真が承認を待っています。"
 
-#: utils/health.py:66
+#: utils/health.py:82
 msgid "Photos laissées sur Google Drive"
 msgstr "Google Drive に残っている写真"
 
-#: utils/health.py:67
+#: utils/health.py:83
 #, python-format
 msgid ""
 "%(count)s photo(s) déposée(s) par un autre compte ne peuvent pas être "
 "mises à la corbeille du Drive : elles restent affichées sur le cadre."
 msgstr "別のアカウントがアップロードした %(count)s 枚の写真は Drive のゴミ箱に移動できないため、フォトフレームに表示されたままになります。"
 
-#: utils/health.py:76
+#: utils/health.py:92
 msgid "Espace disque faible"
 msgstr "ディスク容量が不足しています"
 
-#: utils/health.py:76
+#: utils/health.py:92
 #, python-format
 msgid ""
 "%(free)s Go libres. Supprimez des photos ou activez le nettoyage "
 "automatique."
 msgstr "空き容量 %(free)s GB。写真を削除するか、自動クリーンアップを有効にしてください。"
 
-#: utils/health.py:85
+#: utils/health.py:101
 msgid "La sauvegarde a échoué"
 msgstr "バックアップに失敗しました"
 
-#: utils/health.py:87
+#: utils/health.py:103
 msgid "Sauvegarde ancienne"
 msgstr "バックアップが古くなっています"
 
-#: utils/health.py:87
+#: utils/health.py:103
 msgid "Aucune sauvegarde réussie depuis plus de 7 jours."
 msgstr "7日以上バックアップが成功していません。"
 
-#: utils/health.py:91
+#: utils/health.py:107
 msgid "Connexion non chiffrée"
 msgstr "暗号化されていない接続"
 
-#: utils/health.py:92
+#: utils/health.py:108
 msgid ""
 "Sur le Raspberry Pi, lancez une fois : sudo "
 "~/pimmich/utils/enable_https.sh (active le HTTPS et corrige la "
@@ -3957,27 +3975,27 @@ msgstr ""
 "Raspberry Pi で一度だけ次を実行してください：sudo ~/pimmich/utils/enable_https.sh（HTTPS "
 "を有効にし、nginx の設定を修正します）。"
 
-#: utils/health.py:101
+#: utils/health.py:117
 msgid "Choisir une source de photos"
 msgstr "写真のソースを選択"
 
-#: utils/health.py:102
+#: utils/health.py:118
 msgid "Importer des photos"
 msgstr "写真をインポート"
 
-#: utils/health.py:103
+#: utils/health.py:119
 msgid "Régler les heures d'affichage"
 msgstr "表示時間を設定"
 
-#: utils/health.py:104
+#: utils/health.py:120
 msgid "Choisir une ambiance"
 msgstr "ムードを選択"
 
-#: utils/health.py:105
+#: utils/health.py:121
 msgid "Inviter la famille (QR code, Telegram)"
 msgstr "家族を招待（QR code、Telegram）"
 
-#: utils/health.py:109
+#: utils/health.py:125
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr "接続を保護（HTTPS）"
 
@@ -4348,36 +4366,41 @@ msgstr "すでに複数のメッセージを送信しています。1時間後�
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "ありがとうございます！メッセージはフォトフレームに表示されます（%(date)s まで）。"
 
-#: web/routes_home.py:79
+#: web/routes_home.py:68
+msgid "Étape inconnue."
+msgstr "不明なステップです。"
+
+#: web/routes_home.py:96
 msgid "Mes réglages"
 msgstr "自分の設定"
 
-#: web/routes_home.py:80
+#: web/routes_home.py:97
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "ムード「%(name)s」を適用しました。"
 
-#: web/routes_home.py:89 web/routes_playlists.py:72 web/routes_slideshow.py:513
+#: web/routes_home.py:106 web/routes_playlists.py:72
+#: web/routes_slideshow.py:513
 msgid "Disposition inconnue."
 msgstr "不明なレイアウトです。"
 
-#: web/routes_home.py:94
+#: web/routes_home.py:111
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "レイアウトを準備中です… 数秒で表示されます。"
 
-#: web/routes_home.py:156
+#: web/routes_home.py:173
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
-#: web/routes_home.py:160 web/routes_music.py:260
+#: web/routes_home.py:177 web/routes_music.py:260
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:164 web/routes_system.py:627
+#: web/routes_home.py:181 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
-#: web/routes_home.py:171
+#: web/routes_home.py:188
 msgid "Réglages du son enregistrés."
 msgstr "サウンド設定を保存しました。"
 

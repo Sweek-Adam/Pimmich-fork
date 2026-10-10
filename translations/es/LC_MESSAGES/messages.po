@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 20:52+0200\n"
+"POT-Creation-Date: 2026-10-10 21:44+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -2322,22 +2322,42 @@ msgstr ""
 "dirección de abajo) para enviar fotos y escribir mensajes en el marco."
 
 #: templates/configure/tab_invites.html.jinja:12
+msgid "Partager le lien"
+msgstr "Compartir el enlace"
+
+#: templates/configure/tab_invites.html.jinja:13
 msgid "Ouvrir la page invités"
 msgstr "Abrir la página de invitados"
 
-#: templates/configure/tab_invites.html.jinja:13
+#: templates/configure/tab_invites.html.jinja:14
 msgid "Imprimer le QR code"
 msgstr "Imprimir el QR code"
 
-#: templates/configure/tab_invites.html.jinja:15
+#: templates/configure/tab_invites.html.jinja:17
 msgid "Les photos des invités passent par « À valider » avant d'être affichées."
 msgstr "Las fotos de los invitados pasan por «Por validar» antes de mostrarse."
 
-#: templates/configure/tab_invites.html.jinja:22
+#: templates/configure/tab_invites.html.jinja:32
+msgid "Notre cadre photo"
+msgstr "Nuestro marco de fotos"
+
+#: templates/configure/tab_invites.html.jinja:32
+msgid ""
+"Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi"
+" de la maison) :"
+msgstr ""
+"Envía tus fotos y mensajes a nuestro marco de fotos (desde el Wi-Fi de "
+"casa):"
+
+#: templates/configure/tab_invites.html.jinja:35
+msgid "Lien copié : collez-le dans un message à la famille."
+msgstr "Enlace copiado: pégalo en un mensaje a la familia."
+
+#: templates/configure/tab_invites.html.jinja:44
 msgid "QR code pour les invités"
 msgstr "Código QR para invitados"
 
-#: templates/configure/tab_invites.html.jinja:24
+#: templates/configure/tab_invites.html.jinja:46
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
 "pour envoyer des photos ou écrire un message depuis un téléphone connecté"
@@ -2347,47 +2367,47 @@ msgstr ""
 "de invitados, para enviar fotos o escribir un mensaje desde un teléfono "
 "conectado a la misma red Wi-Fi."
 
-#: templates/configure/tab_invites.html.jinja:27
+#: templates/configure/tab_invites.html.jinja:49
 msgid "Afficher le QR code"
 msgstr "Mostrar el código QR"
 
-#: templates/configure/tab_invites.html.jinja:29
+#: templates/configure/tab_invites.html.jinja:51
 msgid "Position :"
 msgstr "Posición:"
 
-#: templates/configure/tab_invites.html.jinja:32
+#: templates/configure/tab_invites.html.jinja:54
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "Abajo a la derecha"
 
-#: templates/configure/tab_invites.html.jinja:33
+#: templates/configure/tab_invites.html.jinja:55
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "Abajo a la izquierda"
 
-#: templates/configure/tab_invites.html.jinja:34
+#: templates/configure/tab_invites.html.jinja:56
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "Arriba a la derecha"
 
-#: templates/configure/tab_invites.html.jinja:35
+#: templates/configure/tab_invites.html.jinja:57
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "Arriba a la izquierda"
 
-#: templates/configure/tab_invites.html.jinja:39
+#: templates/configure/tab_invites.html.jinja:61
 msgid "Autoriser les invités à écrire des messages"
 msgstr "Permitir que los invitados escriban mensajes"
 
-#: templates/configure/tab_invites.html.jinja:41
+#: templates/configure/tab_invites.html.jinja:63
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
@@ -2500,7 +2520,7 @@ msgstr ""
 "invitaciones y mensajes en una carpeta de su Google Drive (conexión "
 "rclone). Las fotos no se incluyen."
 
-#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:110
+#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:126
 msgid "Activer la sauvegarde automatique"
 msgstr "Activar la copia de seguridad automática"
 
@@ -3091,7 +3111,7 @@ msgstr ""
 "inmediato. Los marcos morados agrupan las fotos de una misma composición:"
 " se mueven juntas."
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:91
+#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:108
 msgid "Le diaporama n'est pas en cours."
 msgstr "La presentación no está en curso."
 
@@ -3107,7 +3127,7 @@ msgstr "Composición (empieza aquí, en preparación)"
 msgid "Afficher maintenant"
 msgstr "Mostrar ahora"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:176
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:193
 msgid "Musique du diaporama"
 msgstr "Música de la presentación"
 
@@ -4023,11 +4043,11 @@ msgstr "Scrapbook"
 msgid "Photomaton"
 msgstr "Fotomatón"
 
-#: utils/health.py:54
+#: utils/health.py:70
 msgid "Aucune photo à afficher"
 msgstr "No hay fotos que mostrar"
 
-#: utils/health.py:55
+#: utils/health.py:71
 msgid ""
 "Ajoutez une source de photos (Google Drive, Immich, partage réseau, clé "
 "USB) puis lancez un import."
@@ -4035,32 +4055,32 @@ msgstr ""
 "Añade una fuente de fotos (Google Drive, Immich, recurso compartido de "
 "red, memoria USB) y luego inicia una importación."
 
-#: utils/health.py:57
+#: utils/health.py:73
 msgid "Le diaporama est arrêté"
 msgstr "La presentación está detenida"
 
-#: utils/health.py:57
+#: utils/health.py:73
 msgid "Il devrait tourner à cette heure-ci. Relancez-le depuis l'accueil."
 msgstr "Debería estar en marcha a esta hora. Reiníciala desde el inicio."
 
-#: utils/health.py:60
+#: utils/health.py:76
 msgid "Problème de synchronisation"
 msgstr "Problema de sincronización"
 
-#: utils/health.py:63
+#: utils/health.py:79
 msgid "Photos d'invités à valider"
 msgstr "Fotos de invitados por validar"
 
-#: utils/health.py:63
+#: utils/health.py:79
 #, python-format
 msgid "%(count)s photo(s) attendent votre validation."
 msgstr "%(count)s foto(s) esperan tu validación."
 
-#: utils/health.py:66
+#: utils/health.py:82
 msgid "Photos laissées sur Google Drive"
 msgstr "Fotos que quedan en Google Drive"
 
-#: utils/health.py:67
+#: utils/health.py:83
 #, python-format
 msgid ""
 "%(count)s photo(s) déposée(s) par un autre compte ne peuvent pas être "
@@ -4069,34 +4089,34 @@ msgstr ""
 "%(count)s foto(s) subida(s) por otra cuenta no se pueden mover a la "
 "papelera de Drive: siguen mostrándose en el marco."
 
-#: utils/health.py:76
+#: utils/health.py:92
 msgid "Espace disque faible"
 msgstr "Poco espacio en disco"
 
-#: utils/health.py:76
+#: utils/health.py:92
 #, python-format
 msgid ""
 "%(free)s Go libres. Supprimez des photos ou activez le nettoyage "
 "automatique."
 msgstr "%(free)s GB libres. Elimina fotos o activa la limpieza automática."
 
-#: utils/health.py:85
+#: utils/health.py:101
 msgid "La sauvegarde a échoué"
 msgstr "La copia de seguridad ha fallado"
 
-#: utils/health.py:87
+#: utils/health.py:103
 msgid "Sauvegarde ancienne"
 msgstr "Copia de seguridad antigua"
 
-#: utils/health.py:87
+#: utils/health.py:103
 msgid "Aucune sauvegarde réussie depuis plus de 7 jours."
 msgstr "Ninguna copia de seguridad correcta desde hace más de 7 días."
 
-#: utils/health.py:91
+#: utils/health.py:107
 msgid "Connexion non chiffrée"
 msgstr "Conexión no cifrada"
 
-#: utils/health.py:92
+#: utils/health.py:108
 msgid ""
 "Sur le Raspberry Pi, lancez une fois : sudo "
 "~/pimmich/utils/enable_https.sh (active le HTTPS et corrige la "
@@ -4105,27 +4125,27 @@ msgstr ""
 "En la Raspberry Pi, ejecuta una vez: sudo ~/pimmich/utils/enable_https.sh"
 " (activa HTTPS y corrige la configuración de nginx)."
 
-#: utils/health.py:101
+#: utils/health.py:117
 msgid "Choisir une source de photos"
 msgstr "Elegir una fuente de fotos"
 
-#: utils/health.py:102
+#: utils/health.py:118
 msgid "Importer des photos"
 msgstr "Importar fotos"
 
-#: utils/health.py:103
+#: utils/health.py:119
 msgid "Régler les heures d'affichage"
 msgstr "Ajustar el horario de visualización"
 
-#: utils/health.py:104
+#: utils/health.py:120
 msgid "Choisir une ambiance"
 msgstr "Elegir un ambiente"
 
-#: utils/health.py:105
+#: utils/health.py:121
 msgid "Inviter la famille (QR code, Telegram)"
 msgstr "Invitar a la familia (QR code, Telegram)"
 
-#: utils/health.py:109
+#: utils/health.py:125
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr "Proteger la conexión (HTTPS)"
 
@@ -4506,36 +4526,41 @@ msgstr "Ya has enviado varios mensajes: inténtalo de nuevo dentro de una hora."
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "¡Gracias! Tu mensaje se mostrará en el marco (hasta el %(date)s)."
 
-#: web/routes_home.py:79
+#: web/routes_home.py:68
+msgid "Étape inconnue."
+msgstr "Paso desconocido."
+
+#: web/routes_home.py:96
 msgid "Mes réglages"
 msgstr "Mis ajustes"
 
-#: web/routes_home.py:80
+#: web/routes_home.py:97
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "Ambiente «%(name)s» aplicado."
 
-#: web/routes_home.py:89 web/routes_playlists.py:72 web/routes_slideshow.py:513
+#: web/routes_home.py:106 web/routes_playlists.py:72
+#: web/routes_slideshow.py:513
 msgid "Disposition inconnue."
 msgstr "Disposición desconocida."
 
-#: web/routes_home.py:94
+#: web/routes_home.py:111
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Preparando la disposición... aparecerá en unos segundos."
 
-#: web/routes_home.py:156
+#: web/routes_home.py:173
 msgid "Musique introuvable."
 msgstr "Música no encontrada."
 
-#: web/routes_home.py:160 web/routes_music.py:260
+#: web/routes_home.py:177 web/routes_music.py:260
 msgid "Volume invalide."
 msgstr "Volumen no válido."
 
-#: web/routes_home.py:164 web/routes_system.py:627
+#: web/routes_home.py:181 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr "Ajuste no válido."
 
-#: web/routes_home.py:171
+#: web/routes_home.py:188
 msgid "Réglages du son enregistrés."
 msgstr "Ajustes de sonido guardados."
 

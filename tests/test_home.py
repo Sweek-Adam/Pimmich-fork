@@ -121,3 +121,22 @@ def test_new_year_layout():
     assert "nouvel_an" in compositions.FORMATS and "nouvel_an" in compositions.SEASONAL
     image = new_year([Image.new("RGB", (120, 90), c) for c in ("red", "green", "blue")], None, 640, 360, random.Random(1))
     assert image.size == (640, 360)
+
+
+def test_inviting_the_family_completes_the_setup_step(admin_client, sandbox, monkeypatch):
+    monkeypatch.setattr(health, "_pending_guest_photos", lambda: 0)
+    step = lambda: next(s for s in admin_client.get("/api/setup").get_json()["steps"] if s["key"] == "guests")
+    assert not step()["done"]
+    assert admin_client.post("/api/setup/mark", json={"step": "guests"}, headers=SAME_ORIGIN).get_json()["success"]
+    assert step()["done"]  # lien partagé depuis l'onglet Invités
+    assert admin_client.post("/api/setup/mark", json={"step": "https"}, headers=SAME_ORIGIN).status_code == 400
+
+
+def test_guest_photo_received_completes_the_setup_step(sandbox, monkeypatch):
+    monkeypatch.setattr(health, "_pending_guest_photos", lambda: 0)
+    folder = sandbox / "static" / "prepared" / "invités"
+    monkeypatch.setattr(health, "PROJECT_DIR", sandbox)
+    assert not health.guests_invited({})
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / "photo.jpg").write_bytes(b"x")
+    assert health.guests_invited({})

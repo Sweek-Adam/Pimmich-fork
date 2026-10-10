@@ -57,6 +57,23 @@ def setup_dismiss_api():
     return jsonify({"success": True})
 
 
+SETUP_MARKS = {"guests"}  # étapes validées par une action de l'utilisateur (ex. lien des invités partagé)
+
+
+@app.route('/api/setup/mark', methods=['POST'])
+@login_required
+def setup_mark_api():
+    step = (request.get_json(silent=True) or {}).get("step")
+    if step not in SETUP_MARKS:
+        return jsonify({"success": False, "message": _("Étape inconnue.")}), 400
+    config = dict(load_config())
+    marks = set(config.get("setup_marks") or [])
+    if step not in marks:
+        config["setup_marks"] = sorted(marks | {step})
+        save_config(config)
+    return jsonify({"success": True})
+
+
 @app.route('/api/ambiances', methods=['GET'])
 @login_required
 def ambiances_api():
