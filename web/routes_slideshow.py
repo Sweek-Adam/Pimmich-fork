@@ -54,44 +54,40 @@ def restart_slideshow_for_update_route():
         return jsonify({"success": False, "message": str(e)}), 500
 
 
+def start_photo_playlist(playlist_id):
+    """Lance une playlist de photos sur le cadre (et sa musique Spotify associée) : (succès, message, code HTTP)."""
+    playlists = load_playlists()
+    target_playlist = next((p for p in playlists if p.get('id') == playlist_id), None)
+    if not target_playlist:
+        return False, "Playlist non trouvée.", 404
+    if not target_playlist.get('photos'):
+        return False, "La playlist est vide.", 400
+    playlist_data_to_save = {
+        "name": target_playlist.get('name', 'Playlist'),
+        "photos": target_playlist.get('photos', []),
+        "music_file": target_playlist.get('music_file'),
+        "layout": target_playlist.get('layout', layout_engine.AUTO),  # disposition propre à la playlist
+    }
+    # Écrire les données dans le fichier temporaire que le diaporama lira
+    with open(CUSTOM_PLAYLIST_FILE, 'w') as f:
+        json.dump(playlist_data_to_save, f)
+    # Redémarrer le diaporama pour charger la nouvelle playlist sans éteindre l'écran
+    restart_slideshow_for_update()
+    links = load_config().get("spotify_links") or {}
+    spotify.play_linked_in_background(links.get(f"playlist:{playlist_id}"), logger)  # musique Spotify associée
+    return True, f"Lancement du diaporama pour la playlist '{target_playlist.get('name')}'.", 200
+
+
 @app.route('/api/playlists/play', methods=['POST'])
 @login_or_internal_required
 def play_playlist():
     # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
-
-    data = request.get_json()
-    playlist_id = data.get('id')
+    playlist_id = (request.get_json(silent=True) or {}).get('id')
     if not playlist_id:
         return jsonify({"success": False, "message": "ID de playlist manquant."}), 400
-
     try:
-        playlists = load_playlists()
-        target_playlist = next((p for p in playlists if p.get('id') == playlist_id), None)
-
-        if not target_playlist:
-            return jsonify({"success": False, "message": "Playlist non trouvée."}), 404
-
-        if not target_playlist.get('photos'):
-            return jsonify({"success": False, "message": "La playlist est vide."}), 400
-
-        # CORRECTION : Créer un objet JSON avec le nom, les photos ET la musique
-        playlist_data_to_save = {
-            "name": target_playlist.get('name', 'Playlist'),
-            "photos": target_playlist.get('photos', []),
-            "music_file": target_playlist.get('music_file'), # Nouveau champ optionnel
-            "layout": target_playlist.get('layout', layout_engine.AUTO),  # disposition propre à la playlist
-        }
-
-        # Écrire les données dans le fichier temporaire que le diaporama lira
-        with open(CUSTOM_PLAYLIST_FILE, 'w') as f:
-            json.dump(playlist_data_to_save, f)
-        
-        # Redémarrer le diaporama pour charger la nouvelle playlist sans éteindre l'écran
-        restart_slideshow_for_update()
-        links = load_config().get("spotify_links") or {}
-        spotify.play_linked_in_background(links.get(f"playlist:{playlist_id}"), logger)  # musique Spotify associée
-
-        return jsonify({"success": True, "message": f"Lancement du diaporama pour la playlist '{target_playlist.get('name')}'."})
+        ok, message, status = start_photo_playlist(playlist_id)
+        return jsonify({"success": ok, "message": message}), status
     except Exception as e:
         logger.info(f"Erreur lors du lancement de la playlist : {e}")
         return jsonify({"success": False, "message": "Erreur interne du serveur."}), 500

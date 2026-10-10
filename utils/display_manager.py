@@ -165,9 +165,16 @@ def send_smart_plug_command(url):
 
 
 def set_display_power(on=True):
-    """Allume/éteint l'écran (prise ou logiciel)."""
+    """Allume/éteint l'écran (prise ou logiciel), et la TV par HDMI-CEC si activé."""
     logger.info(f"⏻ set_display_power({on})")
     config = load_config()
+    if config.get("cec_enabled"):
+        try:
+            from utils import cec
+            done = cec.tv_on() if on else cec.tv_standby()
+            logger.info(f"📺 HDMI-CEC : TV {'allumée' if on else 'en veille'} ({'ok' if done else 'sans réponse'})")
+        except Exception as e:
+            logger.warning(f"📺 HDMI-CEC indisponible : {e}")
     
     if config.get("smart_plug_enabled"):
         if on:

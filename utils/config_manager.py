@@ -95,6 +95,7 @@ def create_default_config():
         "tide_offset_x": 0,
         "tide_offset_y": 0,
         # --- Paramètres de la prise connectée ---
+        "cec_enabled": False,  # TV pilotée par HDMI-CEC (allumage / veille avec le cadre)
         "smart_plug_enabled": False,
         "smart_plug_on_url": "",
         "smart_plug_off_url": "",

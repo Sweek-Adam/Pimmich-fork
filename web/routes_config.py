@@ -186,6 +186,7 @@ def configure():
         config["pan_zoom_enabled"] = 'pan_zoom_enabled' in request.form # New checkbox handling
         config["button_enabled"] = 'button_enabled' in request.form
         config["smart_plug_enabled"] = 'smart_plug_enabled' in request.form
+        config["cec_enabled"] = 'cec_enabled' in request.form
         config["transition_enabled"] = 'transition_enabled' in request.form # New checkbox handling
         config["clock_background_enabled"] = 'clock_background_enabled' in request.form
         config["slideshow_video_enabled"] = 'slideshow_video_enabled' in request.form
