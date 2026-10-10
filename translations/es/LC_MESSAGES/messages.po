@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 21:50+0200\n"
+"POT-Creation-Date: 2026-10-10 22:28+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -3624,14 +3624,43 @@ msgstr ""
 "vídeos."
 
 #: templates/configure/tab_sources.html.jinja:265
+msgid "Photos que le cadre ne peut pas retirer du Drive"
+msgstr "Fotos que el marco no puede quitar de Drive"
+
+#: templates/configure/tab_sources.html.jinja:267
+msgid ""
+"Ces photos ont été déposées dans le dossier par un autre compte Google : "
+"seul leur propriétaire peut les mettre à la corbeille. Elles restent "
+"affichées sur le cadre. Supprimez-les vous-même depuis Drive (si vous en "
+"avez le droit) ou demandez à leur propriétaire, puis cliquez sur « "
+"Réessayer »."
+msgstr ""
+"Estas fotos las añadió a la carpeta otra cuenta de Google: solo su "
+"propietario puede enviarlas a la papelera. Siguen mostrándose en el "
+"marco. Elimínalas tú desde Drive (si tienes permiso) o pídeselo a su "
+"propietario y luego pulsa «Reintentar»."
+
+#: templates/configure/tab_sources.html.jinja:269
+msgid "Réessayer à la prochaine synchronisation"
+msgstr "Reintentar en la próxima sincronización"
+
+#: templates/configure/tab_sources.html.jinja:275
+msgid "Ouvrir dans Drive"
+msgstr "Abrir en Drive"
+
+#: templates/configure/tab_sources.html.jinja:275
+msgid "(plus sur le cadre)"
+msgstr "(ya no está en el marco)"
+
+#: templates/configure/tab_sources.html.jinja:306
 msgid "Options de démarrage"
 msgstr "Opciones de arranque"
 
-#: templates/configure/tab_sources.html.jinja:269
+#: templates/configure/tab_sources.html.jinja:310
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr "Omitir la primera importación automática al iniciar"
 
-#: templates/configure/tab_sources.html.jinja:271
+#: templates/configure/tab_sources.html.jinja:312
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -4643,6 +4672,15 @@ msgstr "Ajuste no válido."
 #: web/routes_home.py:188
 msgid "Réglages du son enregistrés."
 msgstr "Ajustes de sonido guardados."
+
+#: web/routes_imports.py:423
+#, python-format
+msgid ""
+"%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
+"prochaine synchronisation."
+msgstr ""
+"%(count)s foto(s) se volverán a enviar a la papelera en la próxima "
+"sincronización."
 
 #: web/routes_integrations.py:109
 msgid "Le token du bot est requis."

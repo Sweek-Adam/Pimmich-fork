@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 21:50+0200\n"
+"POT-Creation-Date: 2026-10-10 22:28+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -3499,14 +3499,42 @@ msgid ""
 msgstr "写真や動画が追加または削除された場合にのみ、スライドショーが再起動されます。"
 
 #: templates/configure/tab_sources.html.jinja:265
+msgid "Photos que le cadre ne peut pas retirer du Drive"
+msgstr "フォトフレームが Drive から削除できない写真"
+
+#: templates/configure/tab_sources.html.jinja:267
+msgid ""
+"Ces photos ont été déposées dans le dossier par un autre compte Google : "
+"seul leur propriétaire peut les mettre à la corbeille. Elles restent "
+"affichées sur le cadre. Supprimez-les vous-même depuis Drive (si vous en "
+"avez le droit) ou demandez à leur propriétaire, puis cliquez sur « "
+"Réessayer »."
+msgstr ""
+"これらの写真は別の Google "
+"アカウントがフォルダに追加したもので、ゴミ箱に移動できるのは所有者だけです。写真はフォトフレームに表示されたままです。Drive "
+"から自分で削除する（権限がある場合）か所有者に依頼してから、「再試行」をクリックしてください。"
+
+#: templates/configure/tab_sources.html.jinja:269
+msgid "Réessayer à la prochaine synchronisation"
+msgstr "次回の同期で再試行"
+
+#: templates/configure/tab_sources.html.jinja:275
+msgid "Ouvrir dans Drive"
+msgstr "Drive で開く"
+
+#: templates/configure/tab_sources.html.jinja:275
+msgid "(plus sur le cadre)"
+msgstr "（フォトフレームにはありません）"
+
+#: templates/configure/tab_sources.html.jinja:306
 msgid "Options de démarrage"
 msgstr "ブートオプション"
 
-#: templates/configure/tab_sources.html.jinja:269
+#: templates/configure/tab_sources.html.jinja:310
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr "起動時の最初の自動インポートをスキップする"
 
-#: templates/configure/tab_sources.html.jinja:271
+#: templates/configure/tab_sources.html.jinja:312
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -4481,6 +4509,13 @@ msgstr "無効な設定です。"
 #: web/routes_home.py:188
 msgid "Réglages du son enregistrés."
 msgstr "サウンド設定を保存しました。"
+
+#: web/routes_imports.py:423
+#, python-format
+msgid ""
+"%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
+"prochaine synchronisation."
+msgstr "%(count)s 枚の写真を次回の同期で再度ゴミ箱に移動します。"
 
 #: web/routes_integrations.py:109
 msgid "Le token du bot est requis."

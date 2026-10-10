@@ -260,6 +260,47 @@
                     </div>
                 </fieldset>
 
+                <fieldset class="mt-4 hidden" id="gdrive-denied-box">
+                    <legend>
+                        <h3><i class="fab fa-google-drive mr-2"></i>{{ _("Photos que le cadre ne peut pas retirer du Drive") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Ces photos ont été déposées dans le dossier par un autre compte Google : seul leur propriétaire peut les mettre à la corbeille. Elles restent affichées sur le cadre. Supprimez-les vous-même depuis Drive (si vous en avez le droit) ou demandez à leur propriétaire, puis cliquez sur « Réessayer ».") }}</p>
+                    <ul id="gdrive-denied" class="denied-list"></ul>
+                    <button type="button" id="gdrive-denied-retry" class="btn-secondary mt-3"><i class="fas fa-redo mr-1"></i>{{ _("Réessayer à la prochaine synchronisation") }}</button>
+                    <span id="gdrive-denied-status" class="text-sm ml-2"></span>
+                </fieldset>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const OPEN = {{ _("Ouvrir dans Drive")|tojson }}, GONE = {{ _("(plus sur le cadre)")|tojson }};
+                        async function loadDenied() {
+                            const data = await (await fetch("/api/gdrive/denied")).json();
+                            $("gdrive-denied-box").classList.toggle("hidden", !data.files.length);
+                            $("gdrive-denied").innerHTML = "";
+                            data.files.forEach(f => {
+                                const li = document.createElement("li");
+                                const name = document.createElement("span");
+                                name.className = "denied-name";
+                                name.textContent = f.remote_path + (f.local ? "" : " " + GONE);
+                                li.appendChild(name);
+                                if (f.drive_url) {
+                                    const a = document.createElement("a");
+                                    a.href = f.drive_url; a.target = "_blank"; a.rel = "noopener"; a.className = "link";
+                                    a.innerHTML = '<i class="fas fa-external-link-alt mr-1"></i>'; a.append(OPEN);
+                                    li.appendChild(a);
+                                }
+                                $("gdrive-denied").appendChild(li);
+                            });
+                        }
+                        $("gdrive-denied-retry").addEventListener("click", async () => {
+                            const r = await (await fetch("/api/gdrive/denied/retry", { method: "POST" })).json();
+                            $("gdrive-denied-status").textContent = r.message;
+                            loadDenied();
+                        });
+                        loadDenied();
+                    });
+                </script>
+
                 <fieldset class="mt-4">
                     <legend>
                         <h3>{{ _("Options de démarrage") }}</h3>

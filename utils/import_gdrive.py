@@ -3,6 +3,7 @@ import json
 import shutil
 import subprocess
 import threading
+from datetime import datetime
 from pathlib import Path
 
 TARGET_DIR = Path("static/photos/gdrive")
@@ -39,6 +40,32 @@ def list_rclone_remotes(refresh=False):
     remotes = _list_rclone_remotes()
     _remotes_cache.update(time=time.time(), value=remotes)
     return list(remotes)
+
+
+def trash_denied_files():
+    """Photos importées que Google refuse de mettre à la corbeille (déposées par un autre compte)."""
+    manifest = _load_manifest()
+    files = []
+    for fid, entry in manifest.items():
+        if not entry.get("trash_denied"):
+            continue
+        real_id = "/" not in fid  # identifiant Google Drive (et non chemin de secours)
+        files.append({"id": fid, "name": entry.get("name", ""), "remote_path": entry.get("remote_path") or entry.get("name", ""),
+                      "denied_at": entry.get("denied_at", ""), "drive_url": f"https://drive.google.com/file/d/{fid}/view" if real_id else None,
+                      "local": (TARGET_DIR / entry.get("name", "")).is_file()})
+    return sorted(files, key=lambda f: f["remote_path"].lower())
+
+
+def retry_trash_denied():
+    """Réessayer à la prochaine synchronisation (ex. le propriétaire vous a donné les droits)."""
+    manifest = _load_manifest()
+    count = 0
+    for entry in manifest.values():
+        if entry.pop("trash_denied", None):
+            entry.pop("denied_at", None)
+            count += 1
+    _save_manifest(manifest)
+    return count
 
 
 def _list_rclone_remotes():
@@ -338,6 +365,8 @@ def _import_gdrive_photos(config):
         to_trash = []  # Fichiers déjà présents sur le cadre, à mettre à la corbeille sur le Drive
         for fid, f in remote_files.items():
             entry = manifest.get(fid)
+            if entry is not None:
+                entry["remote_path"] = f.get("remote_path") or f["name"]  # chemin dans le Drive (liste des photos non supprimables)
             if entry and entry.get("modifiedTime") == f.get("modifiedTime") and (TARGET_DIR / entry["name"]).exists():
                 # Ne pas réessayer indéfiniment un fichier que Google refuse de mettre à la corbeille
                 if trash_after_import and not entry.get("trash_denied"):
@@ -366,6 +395,7 @@ def _import_gdrive_photos(config):
                         # Seul le propriétaire d'un fichier peut le mettre à la corbeille (ex : photo déposée par un
                         # autre compte dans un dossier partagé). Le fichier reste sur le cadre, on ne réessaie plus.
                         manifest[f["id"]]["trash_denied"] = True
+                        manifest[f["id"]]["denied_at"] = datetime.now().strftime("%Y-%m-%d %H:%M")
                         _save_manifest(manifest)
                         yield {"type": "warning", "message": f"{f['name']} gardé sur le cadre mais laissé sur Google Drive : seul son propriétaire peut le mettre à la corbeille."}
                     else:
@@ -398,7 +428,7 @@ def _import_gdrive_photos(config):
             try:
                 backend.download(f, tmp)
                 tmp.replace(dest)
-                manifest[f["id"]] = {"name": name, "modifiedTime": f.get("modifiedTime")}
+                manifest[f["id"]] = {"name": name, "modifiedTime": f.get("modifiedTime"), "remote_path": f.get("remote_path") or f["name"]}
                 downloaded_files.append(f)
                 downloaded += 1
             except Exception as e:

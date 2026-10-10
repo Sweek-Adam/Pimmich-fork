@@ -119,3 +119,22 @@ def test_concurrent_sync_is_refused(drive):
 
 def test_no_folder_selected_is_an_error(drive):
     assert run({"gdrive_folders": []})[-1]["type"] == "error"
+
+
+def test_list_and_retry_files_google_refuses_to_trash(admin_client, tmp_path, monkeypatch):
+    import json as _json
+    from utils import import_gdrive
+    target = tmp_path / "gdrive"
+    target.mkdir()
+    (target / "photo_tante.jpg").write_bytes(b"x")
+    monkeypatch.setattr(import_gdrive, "TARGET_DIR", target)
+    monkeypatch.setattr(import_gdrive, "MANIFEST_FILE", target / ".gdrive_manifest.json")
+    (target / ".gdrive_manifest.json").write_text(_json.dumps({
+        "1AbCdEfGhIjK": {"name": "photo_tante.jpg", "trash_denied": True, "remote_path": "Cadre-Photo/Noël/photo_tante.jpg", "denied_at": "2026-10-10 21:00"},
+        "2ZyXwVuTsRqP": {"name": "a_moi.jpg", "trashed": True}}))
+    files = admin_client.get("/api/gdrive/denied").get_json()["files"]
+    assert [f["remote_path"] for f in files] == ["Cadre-Photo/Noël/photo_tante.jpg"]
+    assert files[0]["drive_url"] == "https://drive.google.com/file/d/1AbCdEfGhIjK/view" and files[0]["local"]
+    resp = admin_client.post("/api/gdrive/denied/retry", headers={"Sec-Fetch-Site": "same-origin"}).get_json()
+    assert resp["success"] and "1" in resp["message"]
+    assert admin_client.get("/api/gdrive/denied").get_json()["files"] == []

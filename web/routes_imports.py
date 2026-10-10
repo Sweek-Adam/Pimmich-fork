@@ -1,5 +1,6 @@
 """Imports de photos (USB, Immich, Samba, Google Drive, smartphone) et préparation."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from web.core import _
 
 
 @app.route("/import-usb")
@@ -403,3 +404,20 @@ def cancel_import():
         return jsonify({"success": True, "message": "Signal d'annulation envoyé."})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
+
+
+# --- Google Drive : photos que le cadre ne peut pas mettre à la corbeille ---
+
+@app.route('/api/gdrive/denied', methods=['GET'])
+@login_required
+def gdrive_denied_api():
+    from utils.import_gdrive import trash_denied_files
+    return jsonify({"success": True, "files": trash_denied_files()})
+
+
+@app.route('/api/gdrive/denied/retry', methods=['POST'])
+@login_required
+def gdrive_denied_retry_api():
+    from utils.import_gdrive import retry_trash_denied
+    count = retry_trash_denied()
+    return jsonify({"success": True, "message": _("%(count)s photo(s) seront de nouveau proposées à la corbeille à la prochaine synchronisation.", count=count)})

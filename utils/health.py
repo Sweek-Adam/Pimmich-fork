@@ -81,7 +81,7 @@ def checks(config, slideshow_running, is_admin, proxy_host_ok=True, worker_messa
     if denied:
         add("info", N_("Photos laissées sur Google Drive"),
             N_("%(count)s photo(s) déposée(s) par un autre compte ne peuvent pas être mises à la corbeille du Drive : elles restent affichées sur le cadre."),
-            "tab-sources", count=denied)
+            "tab-sources", count=denied)  # liste détaillée : Sources > Photos que le cadre ne peut pas retirer du Drive
     if not is_admin:
         return items
 

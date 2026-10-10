@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 21:50+0200\n"
+"POT-Creation-Date: 2026-10-10 22:28+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -3403,14 +3403,39 @@ msgid ""
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:265
-msgid "Options de démarrage"
+msgid "Photos que le cadre ne peut pas retirer du Drive"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:267
+msgid ""
+"Ces photos ont été déposées dans le dossier par un autre compte Google : "
+"seul leur propriétaire peut les mettre à la corbeille. Elles restent "
+"affichées sur le cadre. Supprimez-les vous-même depuis Drive (si vous en "
+"avez le droit) ou demandez à leur propriétaire, puis cliquez sur « "
+"Réessayer »."
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:269
+msgid "Réessayer à la prochaine synchronisation"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:275
+msgid "Ouvrir dans Drive"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:275
+msgid "(plus sur le cadre)"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:306
+msgid "Options de démarrage"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:310
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:271
+#: templates/configure/tab_sources.html.jinja:312
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -4352,6 +4377,13 @@ msgstr ""
 
 #: web/routes_home.py:188
 msgid "Réglages du son enregistrés."
+msgstr ""
+
+#: web/routes_imports.py:423
+#, python-format
+msgid ""
+"%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
+"prochaine synchronisation."
 msgstr ""
 
 #: web/routes_integrations.py:109
