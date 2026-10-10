@@ -33,6 +33,7 @@
                         <input class="form-check-input" type="checkbox" id="compositions_seasonal" name="compositions_seasonal" {% if config.get('compositions_seasonal', True) %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="compositions_seasonal">{{ _("Thèmes de saison seulement pendant leur période (et plus fréquents à ce moment-là)") }}</label>
                     </div>
+                    <p class="text-sm text-gray-600 mb-2"><i class="fas fa-comment-dots msg-ok"></i> {{ _("affiche les messages dans la composition (un message à afficher déclenche l'une de ces dispositions)") }} · <i class="fas fa-comment-slash msg-no"></i> {{ _("messages affichés seuls") }}</p>
                     <p class="text-sm text-gray-600 mb-2">{{ _("Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon la saison.") }}</p>
                     {% for title, items in [(_("Formats"), composition_formats), (_("Thèmes"), composition_themes)] %}
                     <h4 class="text-md font-semibold mt-4 mb-2">{{ title }}</h4>
@@ -44,6 +45,7 @@
                             <span class="flex items-center gap-2 p-2 text-sm">
                                 <input type="checkbox" name="compositions_styles" value="{{ key }}" {% if key in composition_enabled %}checked{% endif %}>
                                 {{ _(label) }}{% if item|length > 2 and item[2] %} <i class="fas fa-calendar-alt text-gray-400" title="{{ _('Thème de saison') }}"></i>{% endif %}
+                                {% if key in message_layouts %}<i class="fas fa-comment-dots msg-ok ml-auto" title="{{ _('Affiche les messages') }}{{ _(' (jusqu’à 3, dans des fantômes)') if key == 'halloween' else '' }}"></i>{% else %}<i class="fas fa-comment-slash msg-no ml-auto" title="{{ _('Les messages sont affichés seuls, en plein écran') }}"></i>{% endif %}
                             </span>
                         </label>
                         {% endfor %}

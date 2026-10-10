@@ -911,7 +911,11 @@ def prepare_composition(config, plan, playlist, start, width, height, force=Fals
             messages = {m["id"]: m for m in list_messages() if not m.get("hidden")} if include_messages else {}
             for _attempt in range(4):  # un autre format si celui-ci ne peut pas accueillir les photos suivantes
                 style = layout_engine.pick_format(plan, rng)
-                chunk = layout_engine.take_chunk(snapshot, start, layout_engine.photo_count(style, rng))
+                count = layout_engine.photo_count(style, rng)
+                chunk = layout_engine.take_chunk(snapshot, start, count)
+                if include_messages and layout_engine.accepts_messages(style) and style not in compositions.LIMITS:
+                    extra = sum(map(layout_engine.is_message, chunk))  # un message ne prend pas la place d'une photo
+                    chunk = layout_engine.take_chunk(snapshot, start, count + extra) if extra else chunk
                 image, used = layout_engine.render_chunk(style, chunk, messages, width, height, include_messages, rng)
                 if image is not None:
                     break
@@ -932,7 +936,7 @@ def prepare_composition(config, plan, playlist, start, width, height, force=Fals
     _composition["thread"].start()
 
 
-def upcoming_compositions(plan, playlist, start, counter):
+def upcoming_compositions(plan, playlist, start, counter, include_messages=True):
     """
     Où tomberont les prochaines compositions parmi les médias suivants (onglet « À suivre »).
     Exact pour celle déjà préparée ; la suivante n'est connue que par la photo où elle commencera.
@@ -941,7 +945,8 @@ def upcoming_compositions(plan, playlist, start, counter):
     limit = min(play_queue.UPCOMING_COUNT, len(playlist))
     while offset < limit and playlist:
         index %= len(playlist)
-        if layout_engine.wants_composition(plan, counter) and not layout_engine.is_video(playlist[index]):
+        wanted, slot_plan = layout_engine.plan_for_slide(plan, playlist[index], counter, include_messages)
+        if wanted and slot_plan.formats:
             ready = _composition["ready"] if _composition["target"] == (id(playlist), index) else None
             if not ready:
                 found.append({"at": offset, "count": None, "style": None, "image": None})
@@ -962,7 +967,7 @@ def publish_queue(**context):
         if not ctx.get("playlist"):
             return
         try:
-            planned = upcoming_compositions(ctx["plan"], ctx["playlist"], ctx["next_index"], ctx["next_counter"])
+            planned = upcoming_compositions(ctx["plan"], ctx["playlist"], ctx["next_index"], ctx["next_counter"], ctx.get("include_messages", True))
         except Exception as e:
             logger.debug(f"[À suivre] Compositions non calculées : {e}")
             planned = []
@@ -2531,7 +2536,12 @@ def start_slideshow():
                 forced_layout = pop_forced_layout()  # « afficher maintenant » depuis l'interface (une fois)
                 slide_plan = layout_engine.resolve(config, forced_layout) if forced_layout else layout_plan
                 composition_path, composition_used = None, 0
-                wanted = bool(slide_plan.formats) and (forced_layout is not None or layout_engine.wants_composition(slide_plan, _composition["counter"]))
+                include_messages = config.get("compositions_include_messages", True)
+                if forced_layout is not None:
+                    wanted = bool(slide_plan.formats)
+                else:  # un message arrive : affiché dans une disposition qui accepte les messages, plutôt que seul
+                    wanted, slide_plan = layout_engine.plan_for_slide(slide_plan, playlist[playlist_index], _composition["counter"], include_messages)
+                    wanted = wanted and bool(slide_plan.formats)
                 if wanted and not layout_engine.is_video(playlist[playlist_index]):
                     prepare_composition(config, slide_plan, playlist, playlist_index, SCREEN_WIDTH, SCREEN_HEIGHT, force=forced_layout is not None)
                     # On attend la composition préparée pour cette diapositive (l'écran garde l'image précédente) :
@@ -2545,9 +2555,10 @@ def start_slideshow():
                 next_counter = 0 if composition_path else _composition["counter"] + 1
                 publish_queue(playlist=playlist, index=playlist_index, override=composition_path,
                               consumed=composition_used if composition_path else 1,
-                              plan=layout_plan, next_index=next_index, next_counter=next_counter)
-                if layout_engine.wants_composition(layout_plan, next_counter) and not layout_engine.is_video(playlist[next_index]):
-                    prepare_composition(config, layout_plan, playlist, next_index, SCREEN_WIDTH, SCREEN_HEIGHT)
+                              plan=layout_plan, next_index=next_index, next_counter=next_counter, include_messages=include_messages)
+                next_wanted, next_plan = layout_engine.plan_for_slide(layout_plan, playlist[next_index], next_counter, include_messages)
+                if next_wanted and next_plan.formats:
+                    prepare_composition(config, next_plan, playlist, next_index, SCREEN_WIDTH, SCREEN_HEIGHT)
                 
                 # Réinitialiser les requêtes de changement de photo
                 global next_photo_requested, previous_photo_requested

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:46+0200\n"
+"POT-Creation-Date: 2026-10-10 19:58+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1037
+#: local_slideshow.py:1042
 msgid "Photos & messages"
 msgstr "Photos & messages"
 
-#: local_slideshow.py:1349
+#: local_slideshow.py:1354
 msgid "Données de marée non disponibles"
 msgstr "Tide data unavailable"
 
-#: local_slideshow.py:1446
+#: local_slideshow.py:1451
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Anniversary) %(num)d year ago"
 
-#: local_slideshow.py:1446
+#: local_slideshow.py:1451
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Anniversary) %(num)d years ago"
 
-#: local_slideshow.py:2477
+#: local_slideshow.py:2482
 msgid "Aucune photo trouvée."
 msgstr "No photos found."
 
-#: local_slideshow.py:2478
+#: local_slideshow.py:2483
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configure at: http://%(ip)s"
 
-#: local_slideshow.py:2479
+#: local_slideshow.py:2484
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credentials in credentials.json at the root of the SD card)"
 
-#: local_slideshow.py:2480
+#: local_slideshow.py:2485
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Screen resolution: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2481
+#: local_slideshow.py:2486
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Retrying in 60 seconds..."
 
-#: local_slideshow.py:2507
+#: local_slideshow.py:2512
 msgid "Scannez pour configurer"
 msgstr "Scan to configure"
 
@@ -1085,7 +1085,7 @@ msgstr "Error during detection."
 
 #: templates/configure/scripts_status.html.jinja:517
 #: templates/configure/tab_accueil.html.jinja:17
-#: templates/configure/tab_accueil.html.jinja:123
+#: templates/configure/tab_accueil.html.jinja:124
 msgid "Le diaporama est arrêté."
 msgstr "The slideshow is stopped."
 
@@ -1291,46 +1291,55 @@ msgid "Tout"
 msgstr "All"
 
 #: templates/configure/tab_accueil.html.jinja:88
-#: templates/configure/tab_dispositions.html.jinja:37
+#: templates/configure/tab_dispositions.html.jinja:38
 msgid "Formats"
 msgstr "Layouts"
 
 #: templates/configure/tab_accueil.html.jinja:89
-#: templates/configure/tab_dispositions.html.jinja:37
+#: templates/configure/tab_dispositions.html.jinja:38
 msgid "Thèmes"
 msgstr "Themes"
 
-#: templates/configure/tab_accueil.html.jinja:91
+#: templates/configure/tab_accueil.html.jinja:90
+msgid "Avec messages"
+msgstr "With messages"
+
+#: templates/configure/tab_accueil.html.jinja:92
 msgid "Rechercher…"
 msgstr "Search…"
 
-#: templates/configure/tab_accueil.html.jinja:94
-#: templates/configure/tab_accueil.html.jinja:124
+#: templates/configure/tab_accueil.html.jinja:95
+#: templates/configure/tab_accueil.html.jinja:125
 msgid "Selon mes réglages"
 msgstr "Per my settings"
 
-#: templates/configure/tab_accueil.html.jinja:95
-#: templates/configure/tab_accueil.html.jinja:125
+#: templates/configure/tab_accueil.html.jinja:96
+#: templates/configure/tab_accueil.html.jinja:126
 msgid "Compositions au hasard"
 msgstr "Random compositions"
 
-#: templates/configure/tab_accueil.html.jinja:108
+#: templates/configure/tab_accueil.html.jinja:102
+#: templates/configure/tab_dispositions.html.jinja:48
+msgid "Affiche les messages"
+msgstr "Shows messages"
+
+#: templates/configure/tab_accueil.html.jinja:109
 msgid "Afficher maintenant (une fois)"
 msgstr "Show now (once)"
 
-#: templates/configure/tab_accueil.html.jinja:109
+#: templates/configure/tab_accueil.html.jinja:110
 msgid "Utiliser jusqu'à nouvel ordre"
 msgstr "Use until further notice"
 
-#: templates/configure/tab_accueil.html.jinja:120
+#: templates/configure/tab_accueil.html.jinja:121
 msgid "Tout va bien."
 msgstr "All good."
 
-#: templates/configure/tab_accueil.html.jinja:121
+#: templates/configure/tab_accueil.html.jinja:122
 msgid "Régler"
 msgstr "Adjust"
 
-#: templates/configure/tab_accueil.html.jinja:122
+#: templates/configure/tab_accueil.html.jinja:123
 msgid "Rien à afficher pour l'instant."
 msgstr "Nothing to show yet."
 
@@ -1988,6 +1997,18 @@ msgstr "Seasonal themes only during their period (and more frequent at that time
 
 #: templates/configure/tab_dispositions.html.jinja:36
 msgid ""
+"affiche les messages dans la composition (un message à afficher déclenche"
+" l'une de ces dispositions)"
+msgstr ""
+"shows messages inside the composition (a message waiting to be shown "
+"triggers one of these layouts)"
+
+#: templates/configure/tab_dispositions.html.jinja:36
+msgid "messages affichés seuls"
+msgstr "messages shown on their own"
+
+#: templates/configure/tab_dispositions.html.jinja:37
+msgid ""
 "Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · "
 "Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon "
 "la saison."
@@ -1996,9 +2017,17 @@ msgstr ""
 "Easter: 2 weeks around Easter · Spring, Autumn, Winter: according to the "
 "season."
 
-#: templates/configure/tab_dispositions.html.jinja:46
+#: templates/configure/tab_dispositions.html.jinja:47
 msgid "Thème de saison"
 msgstr "Seasonal theme"
+
+#: templates/configure/tab_dispositions.html.jinja:48
+msgid " (jusqu’à 3, dans des fantômes)"
+msgstr " (up to 3, in ghosts)"
+
+#: templates/configure/tab_dispositions.html.jinja:48
+msgid "Les messages sont affichés seuls, en plein écran"
+msgstr "Messages are shown on their own, full screen"
 
 #: templates/configure/tab_favoris.html.jinja:4
 msgid "Vos photos favorites"
@@ -2863,7 +2892,7 @@ msgstr ""
 "                            Wi-Fi regulations)"
 
 #: templates/configure/tab_network.html.jinja:33
-#: utils/themed_compositions.py:533
+#: utils/themed_compositions.py:630
 msgid "France"
 msgstr "France"
 
@@ -4082,63 +4111,63 @@ msgstr "Merry Christmas"
 msgid "Joyeux Halloween"
 msgstr "Happy Halloween"
 
-#: utils/themed_compositions.py:306
+#: utils/themed_compositions.py:403
 msgid "Joyeuses Pâques"
 msgstr "Happy Easter"
 
-#: utils/themed_compositions.py:345
+#: utils/themed_compositions.py:442
 msgid "Bonnes vacances !"
 msgstr "Happy holidays!"
 
-#: utils/themed_compositions.py:365 utils/themed_compositions.py:531
+#: utils/themed_compositions.py:462 utils/themed_compositions.py:628
 msgid "Islande"
 msgstr "Iceland"
 
-#: utils/themed_compositions.py:400 utils/themed_compositions.py:532
+#: utils/themed_compositions.py:497 utils/themed_compositions.py:629
 msgid "Japon"
 msgstr "Japan"
 
-#: utils/themed_compositions.py:439
+#: utils/themed_compositions.py:536
 msgid "Vive la France"
 msgstr "Vive la France"
 
-#: utils/themed_compositions.py:461
+#: utils/themed_compositions.py:558
 msgid "La montagne"
 msgstr "The mountains"
 
-#: utils/themed_compositions.py:492
+#: utils/themed_compositions.py:589
 msgid "La mer"
 msgstr "The sea"
 
-#: utils/themed_compositions.py:520
+#: utils/themed_compositions.py:617
 msgid "Vive la plage !"
 msgstr "Beach life!"
 
-#: utils/themed_compositions.py:527
+#: utils/themed_compositions.py:624
 msgid "Noël"
 msgstr "Christmas"
 
-#: utils/themed_compositions.py:528
+#: utils/themed_compositions.py:625
 msgid "Halloween"
 msgstr "Halloween"
 
-#: utils/themed_compositions.py:529
+#: utils/themed_compositions.py:626
 msgid "Pâques"
 msgstr "Easter"
 
-#: utils/themed_compositions.py:530
+#: utils/themed_compositions.py:627
 msgid "Vacances"
 msgstr "Holidays"
 
-#: utils/themed_compositions.py:534
+#: utils/themed_compositions.py:631
 msgid "Montagne"
 msgstr "Mountains"
 
-#: utils/themed_compositions.py:535
+#: utils/themed_compositions.py:632
 msgid "Mer"
 msgstr "Sea"
 
-#: utils/themed_compositions.py:536
+#: utils/themed_compositions.py:633
 msgid "Plage"
 msgstr "Beach"
 
@@ -4234,23 +4263,23 @@ msgstr "Comic book"
 msgid "Album ancien"
 msgstr "Old album"
 
-#: web/core.py:902
+#: web/core.py:903
 msgid "Code d'invitation invalide."
 msgstr "Invalid invitation code."
 
-#: web/core.py:908
+#: web/core.py:909
 msgid "Ce code d'invitation a expiré."
 msgstr "This invitation code has expired."
 
-#: web/core.py:914
+#: web/core.py:915
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "You are already authorized. Send me a photo!"
 
-#: web/core.py:916
+#: web/core.py:917
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "This invitation code has already been used."
 
-#: web/core.py:927
+#: web/core.py:928
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "

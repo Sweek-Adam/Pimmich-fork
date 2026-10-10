@@ -87,6 +87,7 @@
                                 <button type="button" class="chip active" data-filter="all">{{ _("Tout") }}</button>
                                 <button type="button" class="chip" data-filter="format">{{ _("Formats") }}</button>
                                 <button type="button" class="chip" data-filter="theme">{{ _("Thèmes") }}</button>
+                                <button type="button" class="chip" data-filter="messages"><i class="fas fa-comment-dots"></i> {{ _("Avec messages") }}</button>
                             </div>
                             <input type="search" id="layout-picker-search" placeholder="{{ _('Rechercher…') }}">
                         </div>
@@ -96,9 +97,9 @@
                         </div>
                         <div id="layout-picker-grid" class="picker-grid">
                             {% for value, label, group in layout_choices if value not in ('auto', 'compositions') %}
-                            <button type="button" class="picker-card" data-layout="{{ value }}" data-group="{{ group or 'format' }}" data-label="{{ _(label)|lower }}">
+                            <button type="button" class="picker-card" data-layout="{{ value }}" data-group="{{ group or 'format' }}" data-label="{{ _(label)|lower }}" data-messages="{{ 1 if value in message_layouts else 0 }}">
                                 <img src="{{ url_for('static', filename='composition_previews/' ~ value ~ '.jpg') }}" alt="" loading="lazy">
-                                <span>{{ _(label) }}</span>
+                                <span>{{ _(label) }}{% if value in message_layouts %} <i class="fas fa-comment-dots msg-ok" title="{{ _('Affiche les messages') }}"></i>{% endif %}</span>
                             </button>
                             {% endfor %}
                         </div>
@@ -125,7 +126,7 @@
                             random: {{ _("Compositions au hasard")|tojson }},
                         };
                         const LABELS = { auto: T.auto, compositions: T.random };
-                        document.querySelectorAll("#layout-picker-grid .picker-card").forEach(c => LABELS[c.dataset.layout] = c.querySelector("span").textContent);
+                        document.querySelectorAll("#layout-picker-grid .picker-card").forEach(c => LABELS[c.dataset.layout] = c.querySelector("span").textContent.trim());
 
                         // --- Assistant de démarrage ---
                         async function loadSetup() {
@@ -198,7 +199,8 @@
                             const filter = picker.querySelector(".chip.active").dataset.filter;
                             const q = $("layout-picker-search").value.trim().toLowerCase();
                             picker.querySelectorAll("#layout-picker-grid .picker-card").forEach(c => {
-                                c.classList.toggle("hidden", (filter !== "all" && c.dataset.group !== filter && c.dataset.layout !== "unique") || (q && !c.dataset.label.includes(q)));
+                                const hidden = filter === "messages" ? c.dataset.messages !== "1" : (filter !== "all" && c.dataset.group !== filter && c.dataset.layout !== "unique");
+                                c.classList.toggle("hidden", hidden || (q && !c.dataset.label.includes(q)));
                             });
                         }
                         picker.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", () => {

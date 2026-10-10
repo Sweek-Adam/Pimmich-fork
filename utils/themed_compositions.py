@@ -270,8 +270,105 @@ def halloween(photos, message, W, H, rng):
                             max(8, size // 18), (20, 14, 22)) for p in photos]
     _place_row(canvas, elements, H * 0.5, rng, 0.8, 0.05, 8)
     _title(canvas, _translate(N_("Joyeux Halloween")), MARKER, int(H * 0.085), (255, 150, 40), (W * 0.42, H * 0.12), glow=(255, 120, 0), max_width=W * 0.6)
-    _message_note(canvas, message, rng, "fiche", (0.88, 0.62), 0.2)
+    # Les messages flottent dans de petits fantômes (sans message : un fantôme décoratif)
+    messages = [m for m in (message if isinstance(message, list) else [message]) if m][:len(GHOST_SPOTS)]
+    for (gx, gy), msg in zip(GHOST_SPOTS, messages or [None]):
+        ghost = base.rotated(_ghost(msg, int(H * (0.36 if msg else 0.15)), rng), rng.uniform(-7, 7))
+        if not msg:
+            gx, gy = DECOR_GHOST_SPOT
+        _paste_glow(canvas, ghost, base._inside((W * gx, H * gy), ghost, W, H))
     return canvas.convert("RGB")
+
+
+GHOST_SPOTS = [(0.87, 0.7), (0.13, 0.7), (0.09, 0.26)]  # centres (fractions de l'écran), dans l'ordre d'arrivée
+DECOR_GHOST_SPOT = (0.64, 0.24)
+
+
+def _ghost_text(message):
+    title, body = (message.get("title") or "").strip(), (message.get("body") or "").strip()
+    return (f"{title}\n{body}" if title and body else title or body), (message.get("signature") or "").strip()
+
+
+def _ghost(message, height, rng):
+    """Petit fantôme (RGBA) ; s'il porte un message, le texte est écrit sur son ventre."""
+    width = int(height * 0.82)
+    scale = 3  # dessin en grand puis réduit : contours lisses
+    w, h = width * scale, height * scale
+    body = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(body)
+    head = w * 0.92
+    left, right, top = (w - head) / 2, (w + head) / 2, h * 0.02
+    draw.ellipse([left, top, right, top + head], fill=(250, 250, 255, 238))
+    draw.rectangle([left, top + head / 2, right, h * 0.86], fill=(250, 250, 255, 238))
+    waves = 4  # bas ondulé
+    step = head / waves
+    for k in range(waves):
+        x0 = left + k * step
+        draw.ellipse([x0, h * 0.8, x0 + step, h * 0.98 - (k % 2) * h * 0.04], fill=(250, 250, 255, 238))
+    for k in range(1, waves, 2):  # creux entre les vagues
+        x0 = left + k * step
+        draw.ellipse([x0 + step * 0.1, h * 0.9, x0 + step * 0.9, h * 1.08], fill=(0, 0, 0, 0))
+    # Yeux et bouche
+    eye_y, eye_r = top + head * (0.3 if message else 0.36), head * (0.06 if message else 0.075)
+    for ex in (w / 2 - head * 0.18, w / 2 + head * 0.18):
+        draw.ellipse([ex - eye_r, eye_y - eye_r * 1.35, ex + eye_r, eye_y + eye_r * 1.35], fill=(30, 20, 40, 255))
+        draw.ellipse([ex - eye_r * 0.35, eye_y - eye_r * 1.0, ex + eye_r * 0.15, eye_y - eye_r * 0.45], fill=(255, 255, 255, 230))
+    mouth_y = top + head * (0.45 if message else 0.56)
+    m = 0.045 if message else 0.06
+    draw.ellipse([w / 2 - head * m, mouth_y - head * m * 0.8, w / 2 + head * m, mouth_y + head * m * 1.2], fill=(30, 20, 40, 255))
+    if not message:
+        for cx in (w / 2 - head * 0.3, w / 2 + head * 0.3):  # joues
+            draw.ellipse([cx - head * 0.06, mouth_y - head * 0.06, cx + head * 0.06, mouth_y], fill=(255, 170, 190, 160))
+    ghost = body.resize((width, height), Image.LANCZOS)
+    if message:
+        _ghost_write(ghost, message, rng)
+    return ghost
+
+
+def _ghost_write(ghost, message, rng):
+    """Écrit le message sur le ventre du fantôme, en réduisant la police jusqu'à ce qu'il tienne."""
+    from utils.message_renderer import _wrap
+    text, signature = _ghost_text(message)
+    if not text and not signature:
+        return
+    w, h = ghost.size
+    box_w, box_top, box_bottom = w * 0.8, h * 0.47, h * 0.87
+    draw = ImageDraw.Draw(ghost)
+    color, sign_color = (70, 36, 100, 255), (200, 90, 20, 255)
+    size = int(h * 0.12)
+    while size > 9:
+        font, sign_font = _font(HAND, size), _font(HAND2, max(9, int(size * 0.85)))
+        lines = _wrap(draw, text, font, box_w) if text else []
+        line_h = size * 1.08
+        total = len(lines) * line_h + (size * 0.95 if signature else 0)
+        if total <= box_bottom - box_top:
+            break
+        size -= 1
+    else:  # trop long même en petit : on coupe
+        font, sign_font = _font(HAND, 9), _font(HAND2, 9)
+        lines, line_h = _wrap(draw, text, font, box_w)[:4], 10
+        if lines:
+            lines[-1] = lines[-1].rstrip(" .") + "…"
+        total = len(lines) * line_h + (9 if signature else 0)
+    y = box_top + (box_bottom - box_top - total) / 2
+    for line in lines:
+        draw.text((w / 2, y), line, font=font, fill=color, anchor="ma")
+        y += line_h
+    if signature:
+        draw.text((w / 2, y + size * 0.05), f"— {signature}", font=sign_font, fill=sign_color, anchor="ma")
+
+
+def _paste_glow(canvas, element, center):
+    """Colle un fantôme (centré sur `center`) avec un halo bleuté plutôt qu'une ombre portée."""
+    x, y = int(center[0] - element.width / 2), int(center[1] - element.height / 2)
+    halo = Image.new("RGBA", element.size, (170, 200, 255, 0))
+    halo.putalpha(element.getchannel("A").point(lambda a: int(a * 0.7)))
+    layer = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    layer.paste(halo, (x, y), halo)
+    canvas.alpha_composite(layer.filter(ImageFilter.GaussianBlur(max(6, element.height // 14))))
+    layer = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    layer.paste(element, (x, y), element)
+    canvas.alpha_composite(layer)
 
 
 def easter_theme(photos, message, W, H, rng):

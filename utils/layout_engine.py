@@ -12,7 +12,7 @@ Les compositions prennent les photos suivantes de la playlist, dans l'ordre : un
 « consomme » 4 diapositives. L'onglet « À suivre » et l'ordre des playlists restent ainsi cohérents.
 """
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 from utils import compositions
@@ -130,6 +130,34 @@ def take_chunk(playlist, start, count):
     return chunk
 
 
+def is_message(path):
+    """Diapositive d'un message (source « messages »)."""
+    return Path(path).parent.name == "messages"
+
+
+def accepts_messages(style):
+    """La disposition peut afficher un message (note, fantôme...) au milieu des photos."""
+    return style in compositions.FORMATS and bool(compositions.FORMATS[style][3])
+
+
+MESSAGE_SLOTS = {"halloween": 3}  # dispositions qui accueillent plusieurs messages à la fois
+
+
+def plan_for_slide(plan, path, counter, include_messages=True):
+    """
+    (composition voulue ?, plan à utiliser) pour la diapositive `path`.
+    Un message arrive : il est affiché dans une composition qui accepte les messages (plutôt que seul),
+    si une telle disposition est disponible.
+    """
+    if is_video(path):
+        return False, plan
+    if include_messages and plan.formats and is_message(path):
+        formats = [f for f in plan.formats if accepts_messages(f)]
+        if formats:
+            return True, replace(plan, formats=formats)
+    return wants_composition(plan, counter), plan
+
+
 def message_for_path(path, messages_by_id):
     """Message correspondant à une image de la source « messages », sinon None."""
     p = Path(path)
@@ -142,23 +170,27 @@ def render_chunk(style, chunk, messages_by_id, width, height, include_messages=T
     """
     Compose les diapositives `chunk` (dans l'ordre) avec le format `style`.
     Retourne (image, nombre de diapositives utilisées) ou (None, 0) si le format ne peut pas les accueillir.
-    Un message de la file devient une note dans la composition (au plus un par composition).
+    Un message de la file devient une note dans la composition (un seul, sauf MESSAGE_SLOTS : plusieurs fantômes).
     """
     rng = rng or random.Random()
-    _label, min_n, _max_n, accepts_message, render = compositions.FORMATS[style]
-    message, photos, used = None, [], 0
+    _label, min_n, max_n, accepts_message, render = compositions.FORMATS[style]
+    slots = MESSAGE_SLOTS.get(style, 1)
+    notes, photos, used = [], [], 0
     for path in chunk:
         note = message_for_path(path, messages_by_id) if include_messages and accepts_message else None
-        if note is not None and message is None:
-            message = note
+        if note is not None and len(notes) < slots:
+            notes.append(note)
             used += 1
             continue
+        if len(photos) >= max_n:
+            break  # disposition complète : les diapositives suivantes restent pour la suite
         photo = compositions.load_photo(path, max_side=max(width, height) // (1 if len(chunk) <= 3 else 2))
         if photo is not None:
             photos.append(photo)
         used += 1
+    message = notes if slots > 1 else (notes[0] if notes else None)  # plusieurs messages : liste (ex. fantômes)
     # Ajuster au nombre d'éléments accepté par la mise en page (les diapositives en trop restent pour la suite)
-    takes_slot = 1 if (message is not None and style in compositions.LIMITS) else 0
+    takes_slot = 1 if (notes and style in compositions.LIMITS) else 0
     if style in compositions.LIMITS:
         while photos and len(photos) + takes_slot not in compositions.LIMITS[style]:
             photos.pop()

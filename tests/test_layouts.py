@@ -164,3 +164,41 @@ def test_empty_every_field_is_not_saved_as_zero(admin_client):
     assert load_config()["compositions_every"] == 3
     admin_client.post("/configure", data={"compositions_every": "0"}, headers=headers)
     assert load_config()["compositions_every"] == 0
+
+
+def test_a_message_is_shown_inside_a_layout_that_accepts_messages():
+    only = lambda keys: [k for k in comp.FORMATS if k not in keys]  # réglage : formats décochés
+    plan = le.resolve({"unique_enabled": True, "compositions_every": 50, "compositions_disabled": only({"pellicule", "liege", "halloween"}),
+                       "compositions_seasonal": False})
+    wanted, used = le.plan_for_slide(plan, "/static/prepared/messages/abc.jpg", 0)
+    assert wanted and "pellicule" not in used.formats and set(used.formats) <= {"liege", "halloween"}  # pas en photo unique
+    assert le.plan_for_slide(plan, "/static/prepared/photos/a.jpg", 0) == (False, plan)
+    assert le.plan_for_slide(plan, "/static/prepared/messages/abc.jpg", 0, include_messages=False) == (False, plan)
+    only_film = le.resolve({"unique_enabled": True, "compositions_every": 50, "compositions_disabled": only({"pellicule"})})
+    assert le.plan_for_slide(only_film, "/static/prepared/messages/abc.jpg", 0) == (False, only_film)  # aucune ne convient : seul
+    assert not le.plan_for_slide(plan, "/static/prepared/photos/film.mp4", 99)[0]
+
+
+def test_halloween_shows_several_messages_in_ghosts(tmp_path):
+    folder, messages = tmp_path / "messages", {}
+    folder.mkdir()
+    chunk = []
+    for i, text in enumerate(["Bouh !", "Joyeux Halloween à tous"]):
+        (folder / f"m{i}.jpg").write_bytes(b"")
+        messages[f"m{i}"] = {"id": f"m{i}", "title": "", "body": text, "signature": "Léa"}
+        chunk.append(str(folder / f"m{i}.jpg"))
+    for i in range(4):
+        path = tmp_path / f"p{i}.jpg"
+        Image.new("RGB", (120, 90), (40 * i, 90, 160)).save(path)
+        chunk.append(str(path))
+    image, used = le.render_chunk("halloween", chunk, messages, 640, 360, rng=random.Random(1))
+    assert image is not None and used == 5  # 2 messages + 3 photos (la 4e reste pour la suite)
+    from utils import themed_compositions as t
+    ghost = t._ghost(messages["m1"], 200, random.Random(1))
+    assert ghost.mode == "RGBA" and ghost.getpixel((ghost.width // 2, int(ghost.height * 0.65)))[3] > 200  # ventre opaque, texte lisible
+
+
+def test_layout_picker_marks_layouts_with_messages(admin_client):
+    html = admin_client.get("/configure").get_data(as_text=True)
+    assert 'data-layout="halloween" data-group="theme"' in html and 'data-filter="messages"' in html
+    assert 'data-layout="photomaton" data-group="format" data-label="photomaton" data-messages="0"' in html

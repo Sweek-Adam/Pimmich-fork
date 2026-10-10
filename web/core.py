@@ -378,7 +378,8 @@ def inject_styles_and_formats():
     return dict(message_styles=[(k, v["label"]) for k, v in STYLES.items()],
                 composition_formats=[("unique", "Photo unique")] + formats, composition_themes=themes,
                 composition_enabled=enabled, layout_choices=choice_options(),
-                layout_override=config.get("layout_override", "auto"))
+                layout_override=config.get("layout_override", "auto"),
+                message_layouts={k for k, v in FORMATS.items() if v[3]})  # dispositions qui affichent les messages
 
 @app.context_processor
 def inject_disk_alert():
