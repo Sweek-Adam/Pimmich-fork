@@ -3,7 +3,7 @@
                 <legend>
                     <h3>{{ _("À suivre dans le diaporama") }}</h3>
                 </legend>
-                <p class="text-sm text-gray-600 mb-4">{{ _("Faites glisser une photo pour changer l'ordre : la première de la liste sera affichée juste après la photo actuelle. Le bouton ▶ l'affiche immédiatement.") }}</p>
+                <p class="text-sm text-gray-600 mb-4">{{ _("Faites glisser une photo pour changer l'ordre : la première de la liste sera affichée juste après la photo actuelle. Le bouton ▶ l'affiche immédiatement. Les cadres violets regroupent les photos d'une même composition : elles se déplacent ensemble.") }}</p>
 
                 <div id="queue-not-running" class="hidden p-3 bg-gray-100 rounded text-gray-600">{{ _("Le diaporama n'est pas en cours.") }}</div>
 
@@ -29,7 +29,7 @@
 
                     async function sendOrder(playNow) {
                         busyUntil = Date.now() + 4000;
-                        const order = [...list.querySelectorAll("li")].map(li => li.dataset.path);
+                        const order = [...list.querySelectorAll("li")].flatMap(li => JSON.parse(li.dataset.paths));
                         const resp = await fetch('/api/slideshow/queue', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ order, play_now: !!playNow }) });
                         const data = await resp.json();
                         say(data.message, data.success);
@@ -45,20 +45,50 @@
                             $("queue-current-name").textContent = `${data.current.source} · ${data.current.name}`;
                         }
                         list.innerHTML = "";
-                        data.upcoming.forEach((item, i) => {
+                        const slots = data.slots || data.upcoming.map(item => ({ ...item, type: "photo" }));
+                        slots.forEach((slot, i) => {
                             const li = document.createElement("li");
-                            li.dataset.path = item.path;
-                            li.className = "relative cursor-move rounded overflow-hidden border bg-white shadow-sm";
-                            li.title = `${item.source} · ${item.name}`;
-                            const img = document.createElement("img");
-                            img.src = item.thumb;
-                            img.className = "w-full h-20 object-cover pointer-events-none";
-                            img.loading = "lazy";
+                            const group = slot.type === "composition";
+                            const items = group ? slot.items : [slot];
+                            li.dataset.paths = JSON.stringify(items.map(item => item.path));
+                            li.className = "relative cursor-move rounded overflow-hidden bg-white shadow-sm " +
+                                (group ? "col-span-2 border-2 " + (slot.pending ? "border-dashed border-indigo-300" : "border-indigo-500") : "border");
+                            li.title = group ? `${slot.label} · ${items.map(item => item.name).join(", ")}` : `${slot.source} · ${slot.name}`;
+                            if (group && slot.image) {
+                                const img = document.createElement("img");
+                                img.src = slot.image;
+                                img.className = "w-full h-20 object-contain bg-gray-900 pointer-events-none";
+                                li.appendChild(img);
+                            } else if (group) {
+                                const strip = document.createElement("div");
+                                strip.className = "flex h-20 pointer-events-none";
+                                items.forEach(item => {
+                                    const img = document.createElement("img");
+                                    img.src = item.thumb; img.loading = "lazy";
+                                    img.className = "h-full flex-1 min-w-0 object-cover";
+                                    strip.appendChild(img);
+                                });
+                                li.appendChild(strip);
+                            } else {
+                                const img = document.createElement("img");
+                                img.src = slot.thumb;
+                                img.className = "w-full h-20 object-cover pointer-events-none";
+                                img.loading = "lazy";
+                                li.appendChild(img);
+                            }
                             const num = document.createElement("span");
                             num.className = "queue-num absolute top-1 left-1 bg-black bg-opacity-60 text-white text-xs px-1.5 rounded";
                             num.textContent = i + 1;
-                            li.append(img, num);
-                            if (item.video) {
+                            li.appendChild(num);
+                            if (group) {
+                                const badge = document.createElement("span");
+                                badge.className = "absolute bottom-1 left-1 right-1 truncate bg-indigo-600 bg-opacity-90 text-white text-xs px-1.5 py-0.5 rounded";
+                                badge.innerHTML = '<i class="fas fa-th-large mr-1"></i>';
+                                badge.append(slot.pending
+                                    ? {{ _("Composition (commence ici, en préparation)")|tojson }}
+                                    : `${slot.label} · ${items.length} ${ {{ _("photos")|tojson }} }`);
+                                li.appendChild(badge);
+                            } else if (slot.video) {
                                 const v = document.createElement("span");
                                 v.className = "absolute bottom-1 left-1 text-white text-xs";
                                 v.innerHTML = '<i class="fas fa-video"></i>';

@@ -1,12 +1,14 @@
-{% from 'configure/_layout_select.html.jinja' import layout_select %}
             <div id="tab-dispositions" class="tabcontent">
                 <fieldset>
                     <legend>
                         <h3><i class="fas fa-th-large mr-2"></i>{{ _("Disposition du moment") }}</h3>
                     </legend>
-                    <p class="text-sm text-gray-600 mb-3">{{ _("Choix rapide, appliqué immédiatement au diaporama (aussi disponible sous l'aperçu en haut de page). « Selon les réglages » utilise les dispositions cochées ci-dessous.") }}</p>
-                    {{ layout_select("layout-override-tab", layout_override, _("Selon les réglages"), "layout-override-select") }}
-                    <span class="layout-override-status ml-3 text-sm"></span>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Choisissez une disposition à afficher une seule fois tout de suite, ou à utiliser jusqu'à nouvel ordre. « Selon mes réglages » utilise les dispositions cochées ci-dessous.") }}</p>
+                    <button type="button" class="layout-current open-layout-picker max-w-md">
+                        <i class="fas fa-th-large"></i>
+                        <span><small>{{ _("Disposition") }}</small><strong class="layout-current-label">…</strong></span>
+                        <i class="fas fa-chevron-right ml-auto"></i>
+                    </button>
                 </fieldset>
 
                 <fieldset class="mt-6">
@@ -48,21 +50,3 @@
                     {% endfor %}
                 </fieldset>
             </div>
-            <script>
-                window.addEventListener("DOMContentLoaded", () => {
-                    // Choix rapide de la disposition : les sélecteurs (aperçu en haut de page, onglet Dispositions) restent synchronisés
-                    const selects = document.querySelectorAll(".layout-override-select");
-                    selects.forEach(select => select.addEventListener("change", async () => {
-                        selects.forEach(other => other.value = select.value);
-                        const statuses = document.querySelectorAll(".layout-override-status");
-                        try {
-                            const resp = await fetch('/api/slideshow/layout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ layout: select.value }) });
-                            const data = await resp.json();
-                            statuses.forEach(s => { s.textContent = data.message; s.className = "layout-override-status ml-3 text-sm " + (data.success ? "text-green-600" : "text-red-600"); });
-                            if (typeof showToast === "function" && data.success) showToast(data.message);
-                        } catch (e) {
-                            statuses.forEach(s => { s.textContent = {{ _("Erreur de communication avec le serveur.")|tojson }}; s.className = "layout-override-status ml-3 text-sm text-red-600"; });
-                        }
-                    }));
-                });
-            </script>

@@ -6,6 +6,18 @@
   ]
  ],
  [
+  "/api/ambiance",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/ambiances",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/apply_filter",
   [
    "POST"
@@ -85,6 +97,18 @@
  ],
  [
   "/api/get_pending_photos",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/guest_qr.png",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/health",
   [
    "GET"
   ]
@@ -282,6 +306,18 @@
   ]
  ],
  [
+  "/api/setup",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/setup/dismiss",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/slideshow/layout",
   [
    "GET"
@@ -289,6 +325,12 @@
  ],
  [
   "/api/slideshow/layout",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/slideshow/layout/now",
   [
    "POST"
   ]
@@ -363,6 +405,18 @@
   "/api/smart_plug/status",
   [
    "GET"
+  ]
+ ],
+ [
+  "/api/sound",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/sound",
+  [
+   "POST"
   ]
  ],
  [

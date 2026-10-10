@@ -124,23 +124,7 @@ def switch_to_desktop():
 def ping():
     """Endpoint simple pour vérifier que le serveur est disponible."""
     # Calcul de la plage d'activité pour informer la page d'update
-    config = load_config()
-    now = datetime.now()
-    is_weekend = now.weekday() >= 5
-    if is_weekend:
-        start_str = config.get("active_start_weekend", config.get("active_start", "07:00"))
-        end_str = config.get("active_end_weekend", config.get("active_end", "23:00"))
-    else:
-        start_str = config.get("active_start_weekday", config.get("active_start", "07:00"))
-        end_str = config.get("active_end_weekday", config.get("active_end", "22:00"))
-    
-    is_active = True
-    try:
-        start_t = datetime.strptime(start_str, "%H:%M").time()
-        end_t = datetime.strptime(end_str, "%H:%M").time()
-        now_t = now.time()
-        is_active = (start_t <= now_t <= end_t) if start_t <= end_t else (now_t >= start_t or now_t <= end_t)
-    except: pass
+    is_active = is_active_hours(load_config())
 
     return jsonify({
         "status": "ok",

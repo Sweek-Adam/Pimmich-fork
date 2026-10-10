@@ -1,0 +1,122 @@
+        <div id="autosave-indicator" role="status" aria-live="polite"></div>
+        <script>
+            // ===== Structure de l'application : navigation, état, recherche, enregistrement automatique =====
+
+            // Aller directement à un onglet (depuis l'accueil, la recherche, l'assistant...)
+            window.goToTab = function (tabId) {
+                const button = document.querySelector(`.tablink[onclick*="'${tabId}'"]`);
+                if (!button) return;
+                const group = button.closest(".sub-nav-group");
+                const nav = group && document.querySelector(`.main-nav-link[data-group="${group.id}"]`);
+                if (nav) nav.click();
+                button.click();
+                window.scrollTo({ top: 0 });
+            };
+
+            window.addEventListener("DOMContentLoaded", () => {
+                const $ = (id) => document.getElementById(id);
+
+                // --- Titre de la rubrique ---
+                const setTitle = (group) => {
+                    const link = document.querySelector(`#app-sidebar .main-nav-link[data-group="${group}"] span`);
+                    if (link) $("app-section-title").textContent = link.textContent;
+                };
+                document.querySelectorAll(".main-nav-link").forEach(link => link.addEventListener("click", () => setTitle(link.dataset.group)));
+                const active = document.querySelector("#app-sidebar .main-nav-link.active");
+                if (active) setTitle(active.dataset.group);
+
+                // --- État du diaporama ---
+                const ON = {{ _("En marche")|tojson }}, OFF = {{ _("Arrêté")|tojson }}, NIGHT = {{ _("En veille")|tojson }};
+                async function refreshStatus() {
+                    try {
+                        const data = await (await fetch('/api/ping', { cache: 'no-cache' })).json();
+                        const pill = $("app-status-pill");
+                        pill.classList.toggle("on", data.slideshow_running);
+                        pill.classList.toggle("off", !data.slideshow_running);
+                        pill.querySelector(".label").textContent = data.slideshow_running ? ON : (data.is_active_hours ? OFF : NIGHT);
+                    } catch (e) { /* serveur en redémarrage */ }
+                }
+                refreshStatus();
+                setInterval(refreshStatus, 10000);
+
+                // --- Recherche dans les réglages ---
+                const index = [];
+                document.querySelectorAll(".tabcontent").forEach(tab => {
+                    const tabButton = document.querySelector(`.tablink[onclick*="'${tab.id}'"]`);
+                    if (!tabButton) return;  // onglet non accessible (ex. réservé aux administrateurs)
+                    const group = tabButton.closest(".sub-nav-group");
+                    const section = group && document.querySelector(`#app-sidebar .main-nav-link[data-group="${group.id}"] span`);
+                    const where = [section && section.textContent, tabButton.textContent.trim()].filter(Boolean).join(" › ");
+                    tab.querySelectorAll("label, legend h3, h4, h5, .card-title, .form-check-label").forEach(el => {
+                        const text = el.textContent.replace(/\s+/g, " ").trim();
+                        if (text.length > 1 && text.length < 140) index.push({ text, where, tab: tab.id, el });
+                    });
+                });
+                const normalize = (t) => t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+                const search = $("settings-search"), results = $("settings-search-results");
+                let hits = [];
+                function showResults() {
+                    const q = normalize(search.value.trim());
+                    if (q.length < 2) { results.classList.add("hidden"); return; }
+                    const words = q.split(/\s+/);
+                    hits = index.filter(i => { const t = normalize(i.text + " " + i.where); return words.every(w => t.includes(w)); }).slice(0, 10);
+                    results.innerHTML = hits.length
+                        ? hits.map((h, n) => `<button type="button" data-n="${n}" class="${n === 0 ? "focus" : ""}">${h.text.replace(/</g, "&lt;")}<small>${h.where}</small></button>`).join("")
+                        : `<div class="p-3 muted">{{ _("Aucun réglage trouvé.") }}</div>`;
+                    results.classList.remove("hidden");
+                    results.querySelectorAll("button").forEach(b => b.addEventListener("click", () => openHit(hits[Number(b.dataset.n)])));
+                }
+                function openHit(hit) {
+                    if (!hit) return;
+                    results.classList.add("hidden");
+                    search.value = "";
+                    goToTab(hit.tab);
+                    setTimeout(() => {
+                        const target = hit.el.closest(".form-check, div, fieldset") || hit.el;
+                        target.scrollIntoView({ behavior: "smooth", block: "center" });
+                        target.classList.remove("search-hit"); void target.offsetWidth; target.classList.add("search-hit");
+                    }, 200);
+                }
+                search.addEventListener("input", showResults);
+                search.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") { e.preventDefault(); openHit(hits[0]); }
+                    if (e.key === "Escape") { results.classList.add("hidden"); search.blur(); }
+                });
+                document.addEventListener("click", (e) => { if (!e.target.closest(".app-search")) results.classList.add("hidden"); });
+
+                // --- Enregistrement automatique des réglages ---
+                const form = document.querySelector('form[action="/configure"]');
+                const indicator = $("autosave-indicator");
+                let timer = null, hideTimer = null;
+                const show = (text, error) => {
+                    indicator.textContent = text;
+                    indicator.classList.toggle("error", !!error);
+                    indicator.classList.add("show");
+                    clearTimeout(hideTimer);
+                    if (!error) hideTimer = setTimeout(() => indicator.classList.remove("show"), 1800);
+                };
+                async function save() {
+                    timer = null;
+                    show({{ _("Enregistrement…")|tojson }});
+                    try {
+                        const resp = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { "X-Autosave": "1" } });
+                        const data = await resp.json();
+                        show(data.success ? "✓ " + {{ _("Enregistré")|tojson }} : data.message, !data.success);
+                    } catch (e) {
+                        show({{ _("Échec de l'enregistrement : vérifiez la connexion au cadre.")|tojson }}, true);
+                    }
+                }
+                const schedule = (delay) => { clearTimeout(timer); timer = setTimeout(save, delay); };
+                if (form) {
+                    form.addEventListener("change", (e) => { if (e.target.name) schedule(400); });
+                    form.addEventListener("input", (e) => { if (e.target.name && /text|number|password|search|url|email|textarea/.test(e.target.type || e.target.tagName.toLowerCase())) schedule(1500); });
+                    form.addEventListener("submit", (e) => { e.preventDefault(); schedule(0); });
+                    // Modification en attente au moment de quitter la page : envoyée quand même
+                    window.addEventListener("beforeunload", () => {
+                        if (!timer) return;
+                        clearTimeout(timer);
+                        fetch(form.action, { method: "POST", body: new FormData(form), headers: { "X-Autosave": "1" }, keepalive: true });
+                    });
+                }
+            });
+        </script>

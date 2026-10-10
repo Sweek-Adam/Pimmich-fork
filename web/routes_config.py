@@ -1,6 +1,18 @@
 """Page de configuration principale (affichage et enregistrement des réglages)."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from utils.compositions import FORMATS as COMPOSITION_FORMATS
+
+_restart_timer = {"timer": None}
+AUTOSAVE_RESTART_DELAY = 4  # secondes après la dernière modification
+
+
+def schedule_slideshow_restart():
+    """Relance le diaporama quelques secondes après la dernière modification (regroupe les changements)."""
+    if _restart_timer["timer"]:
+        _restart_timer["timer"].cancel()
+    _restart_timer["timer"] = threading.Timer(AUTOSAVE_RESTART_DELAY, restart_slideshow_process)
+    _restart_timer["timer"].daemon = True
+    _restart_timer["timer"].start()
 from web.core import _
 
 
@@ -236,6 +248,10 @@ def configure():
             # Les comptes non administrateurs ne voient pas les secrets et ne peuvent pas les modifier
             config.update(saved_secrets)
         save_config(config)
+        if request.headers.get("X-Autosave"):
+            # Enregistrement automatique : le diaporama est relancé une seule fois après une série de modifications
+            schedule_slideshow_restart()
+            return jsonify({"success": True, "message": _("Enregistré")})
         restart_slideshow_process() # Redémarre uniquement le processus du diaporama
         flash(_("Configuration enregistrée. Le diaporama a été relancé pour appliquer les changements."), "success")
         return redirect(url_for('configure'))

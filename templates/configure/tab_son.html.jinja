@@ -1,0 +1,86 @@
+            <div id="tab-son" class="tabcontent">
+                <section class="card">
+                    <h2 class="card-title"><i class="fas fa-music text-indigo-500 mr-2"></i>{{ _("Musique du diaporama") }}</h2>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Jouée en boucle pendant le diaporama. Chaque playlist peut avoir sa propre musique (rubrique Playlists).") }}</p>
+                    <div class="grid md:grid-cols-2 gap-4 items-end">
+                        <div>
+                            <label for="sound-music" class="block">{{ _("Musique") }}</label>
+                            <select id="sound-music" class="w-full"><option value="">{{ _("Aucune musique") }}</option></select>
+                        </div>
+                        <div>
+                            <label for="sound-volume">{{ _("Volume") }} : <span id="sound-volume-value">80</span> %</label>
+                            <input type="range" id="sound-volume" min="0" max="100" step="5" class="w-full">
+                        </div>
+                    </div>
+                    <audio id="sound-preview" controls class="w-full mt-3 hidden"></audio>
+                    <div class="flex flex-wrap items-center gap-3 mt-4">
+                        <button type="button" id="sound-save" class="btn-primary"><i class="fas fa-check mr-1"></i>{{ _("Appliquer") }}</button>
+                        <label class="btn-secondary cursor-pointer"><i class="fas fa-upload mr-1"></i>{{ _("Ajouter une musique (MP3, WAV)") }}
+                            <input type="file" id="sound-upload" accept=".mp3,.wav,audio/mpeg,audio/wav" class="hidden"></label>
+                        <span id="sound-status" class="text-sm"></span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3">{{ _("Le son des vidéos (activé ou non, sortie HDMI ou jack, volume) se règle dans Écran > Affichage.") }}
+                        <button type="button" class="link" onclick="goToTab('tab-affichage')">{{ _("Y aller") }}</button></p>
+                </section>
+
+                <section class="card">
+                    <h2 class="card-title"><i class="fas fa-broadcast-tower text-indigo-500 mr-2"></i>{{ _("Spotify, Deezer et autres applications") }}</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="receiver">
+                            <h3><i class="fab fa-spotify text-green-600"></i> Spotify Connect <span id="recv-spotify" class="badge">…</span></h3>
+                            <p>{{ _("Dans l'application Spotify, choisissez « Cadre photo » comme appareil : la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire.") }}</p>
+                        </div>
+                        <div class="receiver">
+                            <h3><i class="fab fa-apple"></i> AirPlay <span id="recv-airplay" class="badge">…</span></h3>
+                            <p>{{ _("Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle application (Deezer, Apple Music, YouTube...) vers « Cadre photo ».") }}</p>
+                        </div>
+                    </div>
+                    <div id="receivers-install" class="install-hint hidden">
+                        <p>{{ _("Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :") }}</p>
+                        <code>~/pimmich/utils/enable_music_receivers.sh</code>
+                    </div>
+                </section>
+
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const say = (text, ok) => { $("sound-status").textContent = text; $("sound-status").className = "text-sm " + (ok ? "text-green-600" : "text-red-600"); };
+                        const ON = {{ _("Actif")|tojson }}, OFF = {{ _("Non installé")|tojson }};
+                        async function load() {
+                            const data = await (await fetch('/api/sound')).json();
+                            const select = $("sound-music");
+                            select.querySelectorAll("option:not([value=''])").forEach(o => o.remove());
+                            data.files.forEach(f => { const o = document.createElement("option"); o.value = o.textContent = f; select.appendChild(o); });
+                            select.value = data.background_music || "";
+                            $("sound-volume").value = data.music_volume; $("sound-volume-value").textContent = data.music_volume;
+                            preview();
+                            for (const [key, active] of Object.entries(data.receivers)) {
+                                const badge = $(`recv-${key}`);
+                                badge.textContent = active ? ON : OFF;
+                                badge.className = "badge " + (active ? "on" : "off");
+                            }
+                            $("receivers-install").classList.toggle("hidden", Object.values(data.receivers).every(Boolean));
+                        }
+                        function preview() {
+                            const file = $("sound-music").value;
+                            $("sound-preview").classList.toggle("hidden", !file);
+                            if (file) $("sound-preview").src = `/static/music/${encodeURIComponent(file)}`;
+                        }
+                        $("sound-music").addEventListener("change", preview);
+                        $("sound-volume").addEventListener("input", () => $("sound-volume-value").textContent = $("sound-volume").value);
+                        $("sound-save").addEventListener("click", async () => {
+                            const data = await (await fetch('/api/sound', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ background_music: $("sound-music").value, music_volume: Number($("sound-volume").value) }) })).json();
+                            say(data.message, data.success);
+                        });
+                        $("sound-upload").addEventListener("change", async (e) => {
+                            const form = new FormData(); form.append("music_file", e.target.files[0]);
+                            const data = await (await fetch('/api/upload_music', { method: 'POST', body: form })).json();
+                            say(data.message, data.success);
+                            await load();
+                            if (data.success) { $("sound-music").value = e.target.files[0].name.replace(/[^\w.\-]/g, "_"); preview(); }
+                        });
+                        load();
+                    });
+                </script>
+            </div>

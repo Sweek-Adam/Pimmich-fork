@@ -17,6 +17,10 @@ if "--real-photos" in sys.argv:
         if (real / name).exists() and not target.exists():
             target.symlink_to(real / name)
 
+previews = conftest._SANDBOX / "static" / "composition_previews"  # aperçus des dispositions (versionnés)
+if not previews.exists() and (HERE.parent.parent / "static" / "composition_previews").exists():
+    previews.symlink_to(HERE.parent.parent / "static" / "composition_previews")
+
 import app as app_module  # noqa: E402
 for module in list(sys.modules.values()):  # ne jamais toucher au vrai diaporama
     if getattr(module, "restart_slideshow_process", None) is not None and module.__name__ != "utils.slideshow_manager":

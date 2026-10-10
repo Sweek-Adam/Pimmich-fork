@@ -574,7 +574,7 @@
                 });
 
                 // --- Logique de restauration de l'état au chargement de la page ---
-                let activeTabId = localStorage.getItem('activeTab') || 'tab-affichage';
+                let activeTabId = localStorage.getItem('activeTab') || 'tab-accueil';
                 let activeMainGroup = localStorage.getItem('activeMainGroup');
 
                 // Trouver à quel groupe appartient l'onglet actif
@@ -591,8 +591,8 @@
 
                 // Si aucun groupe valide n'est trouvé, revenir au groupe par défaut
                 if (!activeMainGroup || !document.getElementById(activeMainGroup)) {
-                    activeMainGroup = 'group-diaporama';
-                    activeTabId = 'tab-affichage'; // Réinitialiser aussi l'onglet
+                    activeMainGroup = 'group-accueil';
+                    activeTabId = 'tab-accueil'; // Réinitialiser aussi l'onglet
                 }
 
                 // On utilise l'événement 'load' (au lieu de DOMContentLoaded) pour s'assurer que tout est prêt.

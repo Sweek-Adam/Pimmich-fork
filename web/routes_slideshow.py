@@ -1,6 +1,6 @@
 """Pilotage du diaporama : lecture, veille, sources, durée, écran et résolution."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
-from utils import play_queue, layout_engine
+from utils import play_queue, layout_engine, compositions
 from web.core import _, _send_slideshow_signal
 
 
@@ -447,7 +447,33 @@ def slideshow_queue():
     if not state or not is_slideshow_running():
         return jsonify({"success": True, "running": False, "current": None, "upcoming": []})
     upcoming = [item for item in map(_queue_item, state.get("upcoming", [])) if item]
-    return jsonify({"success": True, "running": True, "current": _queue_item(state.get("current", "")), "upcoming": upcoming})
+    return jsonify({"success": True, "running": True, "current": _queue_item(state.get("current", "")), "upcoming": upcoming,
+                    "slots": _queue_slots(state.get("upcoming", []), state.get("compositions", []))})
+
+
+def _queue_slots(paths, planned):
+    """
+    Les suivants tels qu'ils seront affichés : photo seule, ou composition regroupant plusieurs photos.
+    Une composition pas encore préparée n'a qu'une photo (celle par laquelle elle commencera) et `pending`.
+    """
+    starts = {c.get("at"): c for c in planned if isinstance(c, dict)}
+    slots, index = [], 0
+    while index < len(paths):
+        plan = starts.get(index)
+        if not plan:
+            item = _queue_item(paths[index])
+            if item:
+                slots.append(dict(item, type="photo"))
+            index += 1
+            continue
+        count = plan.get("count") or 1
+        items = [item for item in map(_queue_item, paths[index:index + count]) if item]
+        style = compositions.FORMATS.get(plan.get("style") or "")
+        image = _queue_item(plan["image"]) if plan.get("image") else None
+        slots.append({"type": "composition", "pending": not plan.get("count"), "items": items,
+                      "label": _(style[0]) if style else _("Composition"), "image": image["thumb"] if image else None})
+        index += count
+    return slots
 
 
 @app.route('/api/slideshow/queue', methods=['POST'])

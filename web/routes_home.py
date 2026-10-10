@@ -1,0 +1,159 @@
+"""Accueil : santé du cadre, assistant de démarrage, ambiances, disposition immédiate, QR code des invités."""
+from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from web.core import _, _send_slideshow_signal
+import io
+import qrcode
+from flask import send_file
+from utils import ambiances, health, layout_engine
+
+FORCE_LAYOUT_FILE = Path("/tmp/pimmich_force_layout.json")
+
+
+def _tr(text, **params):
+    """Traduit un texte marqué N_ ailleurs (appel indirect : l'extracteur ne doit pas prendre la clé du dict pour un texte)."""
+    return _(text, **params) if params else _(text)
+
+
+def _translated(items):
+    """Traduit les textes (marqués N_) et insère leurs paramètres."""
+    out = []
+    for item in items:
+        item = dict(item)
+        params = item.pop("params", {}) or {}
+        item["title"] = _tr(item["title"])
+        item["detail"] = _tr(item["detail"], **params)
+        out.append(item)
+    return out
+
+
+@app.route('/api/health', methods=['GET'])
+@login_required
+def health_api():
+    config = dict(load_config())
+    config["_active_hours"] = is_active_hours(config)
+    workers = {"Immich": immich_status_manager.get_status().get("status_message"),
+               "Samba": samba_status_manager.get_status().get("status_message"),
+               "Google Drive": gdrive_status_manager.get_status().get("status_message")}
+    items = health.checks(config, is_slideshow_running(), is_admin(), proxy_host_ok=bool(request.host), worker_messages=workers)
+    return jsonify({"success": True, "items": _translated(items)})
+
+
+@app.route('/api/setup', methods=['GET'])
+@login_required
+def setup_api():
+    config = load_config()
+    steps = [dict(s, title=_tr(s["title"])) for s in health.setup_steps(config, is_admin())]
+    return jsonify({"success": True, "steps": steps, "dismissed": bool(config.get("setup_dismissed")),
+                    "done": sum(1 for s in steps if s["done"]), "total": len(steps)})
+
+
+@app.route('/api/setup/dismiss', methods=['POST'])
+@login_required
+def setup_dismiss_api():
+    config = dict(load_config())
+    config["setup_dismissed"] = bool((request.get_json(silent=True) or {}).get("dismissed", True))
+    save_config(config)
+    return jsonify({"success": True})
+
+
+@app.route('/api/ambiances', methods=['GET'])
+@login_required
+def ambiances_api():
+    current = load_config().get("ambiance")
+    items = [dict(a, label=_tr(a["label"]), description=_tr(a["description"])) for a in ambiances.listing(current)]
+    return jsonify({"success": True, "ambiances": items, "current": current, "can_restore": bool(load_config().get("ambiance_backup"))})
+
+
+@app.route('/api/ambiance', methods=['POST'])
+@login_required
+def apply_ambiance_api():
+    key = (request.get_json(silent=True) or {}).get("ambiance")
+    try:
+        config = ambiances.apply(load_config(), key)
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    save_config(config)
+    restart_slideshow_process()
+    label = _("Mes réglages") if key == ambiances.MINE else _tr(ambiances.AMBIANCES[key]["label"])
+    return jsonify({"success": True, "message": _("Ambiance « %(name)s » appliquée.", name=label)})
+
+
+@app.route('/api/slideshow/layout/now', methods=['POST'])
+@login_or_internal_required
+def force_layout_now_api():
+    """Affiche tout de suite une diapositive avec cette disposition (une seule fois), puis le diaporama reprend."""
+    layout = (request.get_json(silent=True) or {}).get("layout")
+    if not layout_engine.is_valid_choice(layout) or layout == layout_engine.AUTO:
+        return jsonify({"success": False, "message": _("Disposition inconnue.")}), 400
+    if not is_slideshow_running():
+        return jsonify({"success": False, "message": _("Le diaporama n'est pas en cours.")}), 409
+    FORCE_LAYOUT_FILE.write_text(json.dumps({"layout": layout, "requested": time.time()}))
+    _send_slideshow_signal(signal.SIGUSR1)  # passer tout de suite à la diapositive suivante
+    return jsonify({"success": True, "message": _("Préparation de la disposition... elle s'affiche dans quelques secondes.")})
+
+
+def _local_ip():
+    """Adresse IP du cadre sur le réseau local."""
+    try:
+        return subprocess.run(["hostname", "-I"], capture_output=True, text=True, timeout=3).stdout.split()[0]
+    except (OSError, subprocess.SubprocessError, IndexError):
+        return request.host.split(":")[0] or "127.0.0.1"
+
+
+@app.route('/api/guest_qr.png', methods=['GET'])
+@login_required
+def guest_qr_png():
+    """QR code de la page invités, à afficher ou imprimer."""
+    url = f"http://{_local_ip()}/upload"
+    qr = qrcode.QRCode(border=2, box_size=12)
+    qr.add_data(url)
+    qr.make(fit=True)
+    buffer = io.BytesIO()
+    qr.make_image(fill_color="black", back_color="white").save(buffer, "PNG")
+    buffer.seek(0)
+    response = send_file(buffer, mimetype="image/png")
+    response.headers["X-Guest-Url"] = url
+    return response
+
+
+# --- Son : musique de fond du diaporama, enceinte Spotify Connect / récepteur AirPlay ---
+
+MUSIC_DIR = BASE_DIR / "static" / "music"
+
+
+def _service_active(name):
+    """Vrai si le service (utilisateur ou système) est actif."""
+    for command in (["systemctl", "--user", "is-active", name], ["systemctl", "is-active", name]):
+        try:
+            if subprocess.run(command, capture_output=True, text=True, timeout=5).stdout.strip() == "active":
+                return True
+        except (OSError, subprocess.SubprocessError):
+            pass
+    return False
+
+
+@app.route('/api/sound', methods=['GET'])
+@login_required
+def sound_settings_api():
+    config = load_config()
+    files = sorted(f.name for f in MUSIC_DIR.iterdir() if f.suffix.lower() in (".mp3", ".wav")) if MUSIC_DIR.exists() else []
+    return jsonify({"success": True, "background_music": config.get("background_music", ""), "music_volume": config.get("music_volume", 80),
+                    "files": files, "receivers": {"spotify": _service_active("pimmich-spotify"), "airplay": _service_active("pimmich-airplay")}})
+
+
+@app.route('/api/sound', methods=['POST'])
+@login_required
+def save_sound_settings_api():
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    music = data.get("background_music", config.get("background_music", "")) or ""
+    if music and not (MUSIC_DIR / Path(music).name).is_file():
+        return jsonify({"success": False, "message": _("Musique introuvable.")}), 400
+    try:
+        volume = max(0, min(100, int(data.get("music_volume", config.get("music_volume", 80)))))
+    except (TypeError, ValueError):
+        return jsonify({"success": False, "message": _("Volume invalide.")}), 400
+    config["background_music"], config["music_volume"] = Path(music).name if music else "", volume
+    save_config(config)
+    restart_slideshow_process()
+    return jsonify({"success": True, "message": _("Réglages du son enregistrés.")})

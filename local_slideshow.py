@@ -201,6 +201,10 @@ def play_background_music(filename):
         try:
             if not pygame.mixer.get_init(): pygame.mixer.init()
             pygame.mixer.music.load(str(music_path))
+            try:
+                pygame.mixer.music.set_volume(max(0, min(100, int(load_config().get("music_volume", 80)))) / 100)
+            except (TypeError, ValueError):
+                pass
             pygame.mixer.music.play(-1) # -1 pour boucler à l'infini
             logger.info(f"🎵 Musique de fond lancée : {filename}")
         except Exception as e:
@@ -863,16 +867,35 @@ def control_fan(temperature, threshold=55, pin=14):
 
 # --- Dispositions : compositions préparées en arrière-plan pour ne jamais ralentir le diaporama ---
 # Une composition est préparée pour un emplacement précis de la playlist (les photos qui suivent, dans l'ordre).
-_composition = {"thread": None, "ready": None, "target": None, "counter": 0, "slot": 0}
+_composition = {"thread": None, "ready": None, "target": None, "counter": 0, "slot": 0, "style": None}
+_queue_lock = threading.Lock()
+_queue_context = {}  # dernier état publié pour l'onglet « À suivre » (republié quand une composition est prête)
 
 
-def prepare_composition(config, plan, playlist, start, width, height):
+FORCE_LAYOUT_FILE = Path("/tmp/pimmich_force_layout.json")
+
+
+def pop_forced_layout():
+    """Disposition demandée « maintenant » depuis l'interface (valable une fois, 2 minutes au plus)."""
+    try:
+        data = json.loads(FORCE_LAYOUT_FILE.read_text())
+        FORCE_LAYOUT_FILE.unlink(missing_ok=True)
+        if time.time() - data.get("requested", 0) < 120:
+            return data.get("layout")
+    except (OSError, ValueError):
+        pass
+    return None
+
+
+def prepare_composition(config, plan, playlist, start, width, height, force=False):
     """Prépare en arrière-plan la composition qui commencera à l'indice `start` de cette playlist."""
     target = (id(playlist), start)
-    if _composition["target"] == target and (_composition["ready"] or (_composition["thread"] and _composition["thread"].is_alive())):
+    if not force and _composition["target"] == target and (_composition["ready"] or (_composition["thread"] and _composition["thread"].is_alive())):
         return  # déjà prête ou en cours pour cet emplacement
     if _composition["thread"] and _composition["thread"].is_alive():
-        return  # une autre préparation est en cours : on ne surcharge pas le processeur
+        if not force:
+            return  # une autre préparation est en cours : on ne surcharge pas le processeur
+        _composition["thread"].join(30)  # disposition forcée : on attend la fin de la préparation en cours
     _composition.update(target=target, ready=None)
     compositions.set_full_photos(config.get("compositions_full_photos", True))
     include_messages = config.get("compositions_include_messages", True)
@@ -896,13 +919,51 @@ def prepare_composition(config, plan, playlist, start, width, height):
             path = compositions.OUTPUT_DIR / f"composition_{_composition['slot']}.jpg"
             image.save(path, "JPEG", quality=88)
             if _composition["target"] == target:
-                _composition["ready"] = (str(path), used)
+                _composition["ready"], _composition["style"] = (str(path), used), style
+                publish_queue()  # la composition apparaît dans « À suivre »
             logger.info(f"[Dispositions] « {style} » ({used} photos) prête en {time.time() - started:.1f}s")
         except Exception as e:
             logger.warning(f"[Dispositions] Préparation impossible : {e}")
 
     _composition["thread"] = threading.Thread(target=work, daemon=True)
     _composition["thread"].start()
+
+
+def upcoming_compositions(plan, playlist, start, counter):
+    """
+    Où tomberont les prochaines compositions parmi les médias suivants (onglet « À suivre »).
+    Exact pour celle déjà préparée ; la suivante n'est connue que par la photo où elle commencera.
+    """
+    found, offset, index = [], 0, start
+    limit = min(play_queue.UPCOMING_COUNT, len(playlist))
+    while offset < limit and playlist:
+        index %= len(playlist)
+        if layout_engine.wants_composition(plan, counter) and not layout_engine.is_video(playlist[index]):
+            ready = _composition["ready"] if _composition["target"] == (id(playlist), index) else None
+            if not ready:
+                found.append({"at": offset, "count": None, "style": None, "image": None})
+                break
+            path, used = ready
+            found.append({"at": offset, "count": used, "style": _composition["style"], "image": path})
+            offset, index, counter = offset + used, index + used, 0
+        else:
+            offset, index, counter = offset + 1, index + 1, counter + 1
+    return found
+
+
+def publish_queue(**context):
+    """Publie l'état de la file « À suivre » (le contexte est mémorisé pour être republié plus tard)."""
+    with _queue_lock:  # appelée par la boucle principale et par la préparation en arrière-plan
+        _queue_context.update(context)
+        ctx = _queue_context
+        if not ctx.get("playlist"):
+            return
+        try:
+            planned = upcoming_compositions(ctx["plan"], ctx["playlist"], ctx["next_index"], ctx["next_counter"])
+        except Exception as e:
+            logger.debug(f"[À suivre] Compositions non calculées : {e}")
+            planned = []
+        play_queue.publish_state(ctx["playlist"], ctx["index"], ctx["override"], ctx["consumed"], planned)
 
 
 def take_composition(playlist, start, wait_seconds=0):
@@ -2068,6 +2129,10 @@ def start_slideshow():
         custom_playlist = None
         playlist_name = None
         custom_layout = None  # disposition propre à la playlist (None : comme le diaporama)
+        # Musique de fond du diaporama principal (une playlist peut avoir la sienne)
+        if not os.path.exists(CUSTOM_PLAYLIST_FILE) and config.get("background_music"):
+            _current_background_music = config.get("background_music")
+            play_background_music(_current_background_music)
         is_custom_run = False # Drapeau pour indiquer un cycle de playlist unique
         if os.path.exists(CUSTOM_PLAYLIST_FILE):
             try:
@@ -2327,18 +2392,24 @@ def start_slideshow():
 
                 # Disposition de cette diapositive : photo unique ou composition des photos suivantes
                 layout_plan = layout_engine.resolve(config, custom_layout if is_custom_run else None)
+                forced_layout = pop_forced_layout()  # « afficher maintenant » depuis l'interface (une fois)
+                slide_plan = layout_engine.resolve(config, forced_layout) if forced_layout else layout_plan
                 composition_path, composition_used = None, 0
-                if layout_engine.wants_composition(layout_plan, _composition["counter"]) and not layout_engine.is_video(playlist[playlist_index]):
-                    prepare_composition(config, layout_plan, playlist, playlist_index, SCREEN_WIDTH, SCREEN_HEIGHT)
-                    # Sans photo unique, on attend la composition (l'écran garde l'image précédente)
-                    composition_path, composition_used = take_composition(playlist, playlist_index, 0 if layout_plan.unique else 40)
+                wanted = bool(slide_plan.formats) and (forced_layout is not None or layout_engine.wants_composition(slide_plan, _composition["counter"]))
+                if wanted and not layout_engine.is_video(playlist[playlist_index]):
+                    prepare_composition(config, slide_plan, playlist, playlist_index, SCREEN_WIDTH, SCREEN_HEIGHT, force=forced_layout is not None)
+                    # On attend la composition préparée pour cette diapositive (l'écran garde l'image précédente) :
+                    # sinon, quand la préparation dure plus que l'affichage d'une photo, les compositions ne passent jamais
+                    composition_path, composition_used = take_composition(playlist, playlist_index, wait_seconds=40)
 
                 photo_path = composition_path or playlist[playlist_index]
-                play_queue.publish_state(playlist, playlist_index, composition_path)
 
                 # Préparer dès maintenant la composition suivante, pendant l'affichage de celle-ci
                 next_index = (playlist_index + (composition_used if composition_path else 1)) % len(playlist)
                 next_counter = 0 if composition_path else _composition["counter"] + 1
+                publish_queue(playlist=playlist, index=playlist_index, override=composition_path,
+                              consumed=composition_used if composition_path else 1,
+                              plan=layout_plan, next_index=next_index, next_counter=next_counter)
                 if layout_engine.wants_composition(layout_plan, next_counter) and not layout_engine.is_video(playlist[next_index]):
                     prepare_composition(config, layout_plan, playlist, next_index, SCREEN_WIDTH, SCREEN_HEIGHT)
                 

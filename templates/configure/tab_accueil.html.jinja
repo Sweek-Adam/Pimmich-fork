@@ -1,0 +1,221 @@
+            <div id="tab-accueil" class="tabcontent">
+                <!-- Assistant de démarrage (masqué une fois terminé ou fermé) -->
+                <section id="setup-card" class="card hidden">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="card-title"><i class="fas fa-rocket text-indigo-500 mr-2"></i>{{ _("Bien démarrer") }}</h2>
+                        <button type="button" id="setup-dismiss" class="text-sm text-gray-500 hover:text-gray-800">{{ _("Masquer") }}</button>
+                    </div>
+                    <div class="progress"><div id="setup-progress" style="width:0%"></div></div>
+                    <ol id="setup-steps" class="setup-steps"></ol>
+                </section>
+
+                <div class="home-grid">
+                    <!-- À l'écran -->
+                    <section class="card home-now">
+                        <h2 class="card-title"><i class="fas fa-tv text-indigo-500 mr-2"></i>{{ _("À l'écran") }}</h2>
+                        <div id="live-preview-container">
+                            <p id="live-preview-status" class="now-empty hidden">{{ _("Le diaporama est arrêté.") }}</p>
+                            <div id="live-preview-box" class="now-preview hidden">
+                                <img id="live-preview-image" src="" alt="{{ _('Photo en cours') }}">
+                            </div>
+                            <div id="live-preview-controls" class="now-controls hidden">
+                                <button type="button" class="slideshow-control-btn round" data-command="previous" title="{{ _('Photo précédente') }}"><i class="fas fa-step-backward"></i></button>
+                                <button type="button" class="slideshow-control-btn round big" data-command="toggle_pause" title="{{ _('Pause/Lecture') }}"><i class="slideshow-pause-icon fas fa-pause"></i></button>
+                                <button type="button" class="slideshow-control-btn round" data-command="next" title="{{ _('Photo suivante') }}"><i class="fas fa-step-forward"></i></button>
+                                <button type="button" class="notification-toggle-btn round" title="{{ _('Activer/Désactiver les notifications') }}"><i class="fas fa-bell"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" id="open-layout-picker" class="layout-current open-layout-picker">
+                            <i class="fas fa-th-large"></i>
+                            <span><small>{{ _("Disposition") }}</small><strong id="layout-current-label" class="layout-current-label">…</strong></span>
+                            <i class="fas fa-chevron-right ml-auto"></i>
+                        </button>
+                    </section>
+
+                    <!-- Santé et actions rapides -->
+                    <div class="home-side">
+                        <section class="card">
+                            <h2 class="card-title"><i class="fas fa-heartbeat text-rose-500 mr-2"></i>{{ _("État du cadre") }}</h2>
+                            <ul id="health-list" class="health-list"><li class="muted">{{ _("Vérification…") }}</li></ul>
+                        </section>
+                        <section class="card">
+                            <h2 class="card-title"><i class="fas fa-bolt text-amber-500 mr-2"></i>{{ _("Actions rapides") }}</h2>
+                            <div class="quick-actions">
+                                <button type="button" onclick="goToTab('tab-messages')"><i class="fas fa-comment-alt"></i>{{ _("Écrire un message") }}</button>
+                                <button type="button" onclick="goToTab('tab-actions')"><i class="fas fa-cloud-upload-alt"></i>{{ _("Ajouter des photos") }}</button>
+                                <button type="button" onclick="goToTab('tab-playlists')"><i class="fas fa-play-circle"></i>{{ _("Lancer une playlist") }}</button>
+                                <button type="button" onclick="goToTab('tab-invites')"><i class="fas fa-qrcode"></i>{{ _("Inviter des proches") }}</button>
+                                <button type="button" onclick="goToTab('tab-son')"><i class="fas fa-music"></i>{{ _("Musique") }}</button>
+                                <button type="button" onclick="goToTab('tab-apercu')"><i class="fas fa-th"></i>{{ _("Mes photos") }}</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- À suivre -->
+                <section class="card">
+                    <div class="flex items-center justify-between">
+                        <h2 class="card-title"><i class="fas fa-stream text-indigo-500 mr-2"></i>{{ _("À suivre") }}</h2>
+                        <button type="button" class="link" onclick="goToTab('tab-queue')">{{ _("Réorganiser") }} <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div id="home-queue" class="home-queue"><span class="muted">…</span></div>
+                </section>
+
+                <!-- Ambiances -->
+                <section class="card">
+                    <div class="flex items-center justify-between">
+                        <h2 class="card-title"><i class="fas fa-magic text-purple-500 mr-2"></i>{{ _("Ambiance") }}</h2>
+                        <button type="button" id="ambiance-restore" class="link hidden">{{ _("Revenir à mes réglages") }}</button>
+                    </div>
+                    <div id="ambiances" class="ambiances"></div>
+                </section>
+
+                <!-- Sélecteur visuel de disposition -->
+                <div id="layout-picker" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="layout-picker-title">
+                    <div class="modal-panel">
+                        <div class="modal-head">
+                            <h2 id="layout-picker-title" class="card-title">{{ _("Choisir une disposition") }}</h2>
+                            <button type="button" class="modal-close" aria-label="{{ _('Fermer') }}">&times;</button>
+                        </div>
+                        <div class="picker-toolbar">
+                            <div class="chips">
+                                <button type="button" class="chip active" data-filter="all">{{ _("Tout") }}</button>
+                                <button type="button" class="chip" data-filter="format">{{ _("Formats") }}</button>
+                                <button type="button" class="chip" data-filter="theme">{{ _("Thèmes") }}</button>
+                            </div>
+                            <input type="search" id="layout-picker-search" placeholder="{{ _('Rechercher…') }}">
+                        </div>
+                        <div class="picker-special">
+                            <button type="button" class="picker-card special" data-layout="auto"><i class="fas fa-sliders-h"></i><span>{{ _("Selon mes réglages") }}</span></button>
+                            <button type="button" class="picker-card special" data-layout="compositions"><i class="fas fa-random"></i><span>{{ _("Compositions au hasard") }}</span></button>
+                        </div>
+                        <div id="layout-picker-grid" class="picker-grid">
+                            {% for value, label, group in layout_choices if value not in ('auto', 'compositions') %}
+                            <button type="button" class="picker-card" data-layout="{{ value }}" data-group="{{ group or 'format' }}" data-label="{{ _(label)|lower }}">
+                                <img src="{{ url_for('static', filename='composition_previews/' ~ value ~ '.jpg') }}" alt="" loading="lazy">
+                                <span>{{ _(label) }}</span>
+                            </button>
+                            {% endfor %}
+                        </div>
+                        <div id="layout-picker-actions" class="picker-actions hidden">
+                            <p><strong id="layout-picker-chosen"></strong></p>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" class="btn-secondary" data-mode="now"><i class="fas fa-bolt mr-1"></i>{{ _("Afficher maintenant (une fois)") }}</button>
+                                <button type="button" class="btn-primary" data-mode="always"><i class="fas fa-thumbtack mr-1"></i>{{ _("Utiliser jusqu'à nouvel ordre") }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const esc = (t) => { const d = document.createElement("div"); d.textContent = t ?? ""; return d.innerHTML; };
+                        const T = {
+                            ok: {{ _("Tout va bien.")|tojson }},
+                            fix: {{ _("Régler")|tojson }},
+                            empty: {{ _("Rien à afficher pour l'instant.")|tojson }},
+                            stopped: {{ _("Le diaporama est arrêté.")|tojson }},
+                            auto: {{ _("Selon mes réglages")|tojson }},
+                            random: {{ _("Compositions au hasard")|tojson }},
+                        };
+                        const LABELS = { auto: T.auto, compositions: T.random };
+                        document.querySelectorAll("#layout-picker-grid .picker-card").forEach(c => LABELS[c.dataset.layout] = c.querySelector("span").textContent);
+
+                        // --- Assistant de démarrage ---
+                        async function loadSetup() {
+                            const data = await (await fetch('/api/setup')).json();
+                            if (!data.success || data.dismissed || data.done === data.total) { $("setup-card").classList.add("hidden"); return; }
+                            $("setup-card").classList.remove("hidden");
+                            $("setup-progress").style.width = `${Math.round(100 * data.done / data.total)}%`;
+                            $("setup-steps").innerHTML = data.steps.map(s => `<li class="${s.done ? "done" : ""}">
+                                <i class="fas ${s.done ? "fa-check-circle" : "fa-circle"}"></i><span>${esc(s.title)}</span>
+                                ${s.done ? "" : `<button type="button" class="link" data-tab="${esc(s.tab)}">${esc(T.fix)} <i class="fas fa-arrow-right"></i></button>`}</li>`).join("");
+                            $("setup-steps").querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => goToTab(b.dataset.tab)));
+                        }
+                        $("setup-dismiss").addEventListener("click", async () => {
+                            await fetch('/api/setup/dismiss', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"dismissed": true}' });
+                            $("setup-card").classList.add("hidden");
+                        });
+
+                        // --- Santé du cadre ---
+                        async function loadHealth() {
+                            const data = await (await fetch('/api/health')).json();
+                            const icons = { error: "fa-times-circle", warning: "fa-exclamation-triangle", info: "fa-info-circle" };
+                            $("health-list").innerHTML = data.items.length ? data.items.map(i => `<li class="${i.level}">
+                                <i class="fas ${icons[i.level]}"></i><div><strong>${esc(i.title)}</strong><p>${esc(i.detail)}</p></div>
+                                ${i.tab ? `<button type="button" class="link" data-tab="${esc(i.tab)}">${esc(T.fix)}</button>` : ""}</li>`).join("")
+                                : `<li class="ok"><i class="fas fa-check-circle"></i><div><strong>${esc(T.ok)}</strong></div></li>`;
+                            $("health-list").querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => goToTab(b.dataset.tab)));
+                        }
+
+                        // --- À suivre ---
+                        async function loadQueue() {
+                            const data = await (await fetch('/api/slideshow/queue')).json();
+                            if (!data.running) { $("home-queue").innerHTML = `<span class="muted">${esc(T.stopped)}</span>`; return; }
+                            const slots = data.slots || data.upcoming.map(i => ({ ...i, type: "photo" }));
+                            $("home-queue").innerHTML = slots.length ? slots.slice(0, 12).map(s => s.type === "composition"
+                                ? `<span class="hq-compo${s.pending ? " pending" : ""}" title="${esc(s.label)}"><img src="${esc(s.image || s.items[0].thumb)}" loading="lazy"><i class="fas fa-th-large"></i></span>`
+                                : `<img src="${esc(s.thumb)}" title="${esc(s.name)}" loading="lazy">`).join("") : `<span class="muted">${esc(T.empty)}</span>`;
+                        }
+
+                        // --- Ambiances ---
+                        async function loadAmbiances() {
+                            const data = await (await fetch('/api/ambiances')).json();
+                            $("ambiances").innerHTML = data.ambiances.map(a => `<button type="button" class="ambiance ${a.active ? "active" : ""}" data-key="${esc(a.key)}">
+                                <i class="fas ${esc(a.icon)}"></i><strong>${esc(a.label)}</strong><small>${esc(a.description)}</small></button>`).join("");
+                            $("ambiance-restore").classList.toggle("hidden", !data.can_restore);
+                            $("ambiances").querySelectorAll("[data-key]").forEach(b => b.addEventListener("click", () => applyAmbiance(b.dataset.key)));
+                        }
+                        async function applyAmbiance(key) {
+                            const data = await (await fetch('/api/ambiance', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ambiance: key }) })).json();
+                            showToast(data.message);
+                            loadAmbiances(); loadLayout(); loadSetup();
+                        }
+                        $("ambiance-restore").addEventListener("click", () => applyAmbiance("perso"));
+
+                        // --- Disposition : sélecteur visuel ---
+                        let chosen = null;
+                        async function loadLayout() {
+                            const data = await (await fetch('/api/slideshow/layout')).json();
+                            document.querySelectorAll(".layout-current-label").forEach(l => l.textContent = LABELS[data.layout] || data.layout);
+                            document.querySelectorAll(".picker-card").forEach(c => c.classList.toggle("current", c.dataset.layout === data.layout));
+                        }
+                        const picker = $("layout-picker");
+                        document.body.appendChild(picker);  // utilisable depuis n'importe quel onglet (Accueil, Dispositions)
+                        const openPicker = () => { picker.classList.remove("hidden"); $("layout-picker-search").focus(); };
+                        const closePicker = () => { picker.classList.add("hidden"); $("layout-picker-actions").classList.add("hidden"); chosen = null; };
+                        document.querySelectorAll(".open-layout-picker").forEach(b => b.addEventListener("click", openPicker));
+                        picker.querySelector(".modal-close").addEventListener("click", closePicker);
+                        picker.addEventListener("click", (e) => { if (e.target === picker) closePicker(); });
+                        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !picker.classList.contains("hidden")) closePicker(); });
+                        function filterPicker() {
+                            const filter = picker.querySelector(".chip.active").dataset.filter;
+                            const q = $("layout-picker-search").value.trim().toLowerCase();
+                            picker.querySelectorAll("#layout-picker-grid .picker-card").forEach(c => {
+                                c.classList.toggle("hidden", (filter !== "all" && c.dataset.group !== filter && c.dataset.layout !== "unique") || (q && !c.dataset.label.includes(q)));
+                            });
+                        }
+                        picker.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", () => {
+                            picker.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === chip)); filterPicker();
+                        }));
+                        $("layout-picker-search").addEventListener("input", filterPicker);
+                        picker.querySelectorAll(".picker-card").forEach(card => card.addEventListener("click", () => {
+                            chosen = card.dataset.layout;
+                            picker.querySelectorAll(".picker-card").forEach(c => c.classList.toggle("selected", c === card));
+                            $("layout-picker-chosen").textContent = LABELS[chosen];
+                            $("layout-picker-actions").classList.remove("hidden");
+                            picker.querySelector('[data-mode="now"]').classList.toggle("hidden", chosen === "auto");
+                        }));
+                        picker.querySelectorAll("[data-mode]").forEach(btn => btn.addEventListener("click", async () => {
+                            const url = btn.dataset.mode === "now" ? '/api/slideshow/layout/now' : '/api/slideshow/layout';
+                            const data = await (await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ layout: chosen }) })).json();
+                            showToast(data.message);
+                            if (data.success) { closePicker(); loadLayout(); }
+                        }));
+
+                        loadSetup(); loadHealth(); loadQueue(); loadAmbiances(); loadLayout();
+                        setInterval(() => { if ($("tab-accueil").offsetParent) { loadQueue(); loadHealth(); } }, 15000);
+                    });
+                </script>
+            </div>

@@ -8,6 +8,8 @@
     <title>{{ _('Configuration') }} - Pimmich</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#4f46e5">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <!-- GLightbox CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -16,6 +18,7 @@
     <!-- Chart.js pour les graphiques -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% include 'configure/styles.html.jinja' %}
+{% include 'configure/styles_app.html.jinja' %}
 </head>
 
 <body class="relative min-h-screen">
@@ -26,11 +29,6 @@
         <p id="global-toast-message"></p>
     </div>
 
-    {% if disk_alert %}
-    <div class="max-w-xl mx-auto mt-4 p-3 rounded border border-red-300 bg-red-50 text-red-800 text-sm">
-        <i class="fas fa-hdd mr-1"></i>{{ _("Espace disque faible : %(free)s Go libres (seuil : %(threshold)s Go). Supprimez des photos ou activez le nettoyage automatique dans Système > Maintenance.", free=disk_alert.free_gb, threshold=disk_alert.threshold_gb) }}
-    </div>
-    {% endif %}
     <!-- Messages flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -67,185 +65,97 @@
     {% endif %}
     {% endwith %}
 
-    <!-- Contenu principal -->
-    <div class="relative z-10 container mx-auto p-4 bg-white/80 backdrop-blur-md rounded-xl shadow-xl mt-8">
-        <div class="flex justify-between items-center mb-4">
-            <div class="language-selector text-sm">
-                <span class="font-semibold">{{ _('Langue') }}:</span>
-                {% set current_lang = get_locale() %}
-                <a href="?lang=fr"
-                    class="{% if current_lang == 'fr' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">FR</a>
-                |
-                <a href="?lang=en"
-                    class="{% if current_lang == 'en' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">EN</a>
-                |
-                <a href="?lang=es"
-                    class="{% if current_lang == 'es' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">ES</a>
-                |
-                <a href="?lang=de"
-                    class="{% if current_lang == 'de' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">DE</a>
-                |
-                <a href="?lang=ja"
-                    class="{% if current_lang == 'ja' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">JA</a>
+    {% set current_lang = get_locale() %}
+    <!-- Structure de l'application : menu latéral (ordinateur), barre du bas (téléphone) -->
+    <div id="app-shell">
+        <aside id="app-sidebar">
+            <a class="app-brand" href="#" onclick="goToTab('tab-accueil'); return false;">
+                <img src="{{ url_for('static', filename='pwa/icon-192.png') }}" alt="" class="app-brand-icon">
+                <span>Pimmich</span>
+            </a>
+            <nav class="app-nav">
+                {% for group, icon, label in [('group-accueil', 'fa-home', _('Accueil')), ('group-photos', 'fa-images', _('Photos')), ('group-ecran', 'fa-tv', _('Écran')), ('group-partage', 'fa-user-friends', _('Partage')), ('group-systeme', 'fa-cog', _('Système'))] %}
+                <button type="button" class="main-nav-link" data-group="{{ group }}"><i class="fas {{ icon }} fa-fw"></i><span>{{ label }}</span>{% if group == 'group-partage' %}<span id="interactions-pending-badge" class="nav-badge hidden">0</span>{% endif %}</button>
+                {% endfor %}
+            </nav>
+            <div class="app-credits">
+                {{ _("Pimmich par") }} <a href="https://github.com/gotenash" target="_blank" rel="noopener noreferrer">Gotenash</a>
+                &amp; <a href="https://github.com/Sigalou" target="_blank" rel="noopener noreferrer">Sigalou</a>
+                · <a href="https://www.gadgetaulab.fr" target="_blank" rel="noopener noreferrer">Gadgetaulab</a>
             </div>
-            <div class="logout-link">
-                {% if current_username %}
-                <span class="text-gray-600 mr-2"><i class="fas fa-user mr-1"></i>{{ current_username }}{% if not is_admin %} ({{ _("utilisateur") }}){% endif %}</span>
-                {% endif %}
-                <a href="/logout">{{ _('Se déconnecter') }}</a>
-            </div>
-        </div>
-        <div class="flex justify-between items-center mb-2 h-auto py-2">
-            <div class="flex items-center gap-4">
-                <a href="https://github.com/gotenash" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ url_for('static', filename='gotenash.jpg') }}" alt="Avatar Gotenash"
-                        class="h-16 w-16 rounded-full object-cover shadow-md">
-                </a>
-                <a href="https://github.com/Sigalou" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ url_for('static', filename='sigalou.png') }}" alt="Avatar Sigalou"
-                        class="h-16 w-16 rounded-full object-cover shadow-md">
-                </a>
-                <a href="https://www.gadgetaulab.fr" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ url_for('static', filename='logo_gadgeto.png') }}" alt="Logo Gadgetaulab" class="h-16">
-                </a>
-            </div>
+        </aside>
 
-            <img src="{{ url_for('static', filename='pimmich_logo.png') }}" alt="Logo Pimmich" class="h-16">
-
-            {% from 'configure/_layout_select.html.jinja' import layout_select %}
-            <div id="live-preview-container" class="cadre-bois p-4 flex flex-col items-center">
-                <p id="live-preview-status" class="text-gray-500 italic hidden">{{ _("Le diaporama est arrêté.") }}</p>
-
-                <div id="live-preview-box" class="relative mt-1 w-64 h-40 flex items-center justify-center bg-gray-100 rounded-lg shadow-inner overflow-hidden border border-gray-200 hidden">
-                    <img id="live-preview-image" src="" alt="{{ _('Photo en cours') }}"
-                        class="max-w-full max-h-full object-contain">
-
-                    <!-- Boutons de contrôle toujours visibles, en bas de l'image -->
-                    <div id="live-preview-controls"
-                        class="absolute bottom-2 left-0 right-0 flex items-center justify-center gap-3 hidden">
-                        <button type="button"
-                            class="notification-toggle-btn bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-transform transform hover:scale-110"
-                            title="{{ _('Activer/Désactiver les notifications') }}">
-                            <i class="fas fa-bell fa-xs"></i>
-                        </button>
-                        <button type="button"
-                            class="slideshow-control-btn bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-transform transform hover:scale-110"
-                            data-command="previous" title="{{ _('Photo précédente') }}">
-                            <i class="fas fa-backward fa-xs"></i>
-                        </button>
-                        <button type="button"
-                            class="slideshow-control-btn bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-transform transform hover:scale-110"
-                            data-command="toggle_pause" title="{{ _('Pause/Lecture') }}">
-                            <i class="slideshow-pause-icon fas fa-pause fa-xs"></i>
-                        </button>
-                        <button type="button"
-                            class="slideshow-control-btn bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-transform transform hover:scale-110"
-                            data-command="next" title="{{ _('Photo suivante') }}">
-                            <i class="fas fa-forward fa-xs"></i>
-                        </button>
+        <div id="app-content">
+            <header id="app-topbar">
+                <h1 id="app-section-title">{{ _('Accueil') }}</h1>
+                <div class="app-search">
+                    <i class="fas fa-search"></i>
+                    <input type="search" id="settings-search" placeholder="{{ _('Rechercher un réglage…') }}" autocomplete="off">
+                    <div id="settings-search-results" class="hidden"></div>
+                </div>
+                <span id="app-status-pill" class="status-pill" title="{{ _('État du diaporama') }}"><span class="dot"></span><span class="label">…</span></span>
+                <details class="app-user-menu">
+                    <summary><i class="fas fa-user-circle"></i><span class="hidden md:inline">{{ current_username or '' }}</span></summary>
+                    <div class="menu">
+                        {% if not is_admin %}<p class="text-xs text-gray-500 mb-2">{{ _("Compte utilisateur") }}</p>{% endif %}
+                        <p class="text-xs font-semibold text-gray-500 mb-1">{{ _('Langue') }}</p>
+                        <div class="flex gap-2 mb-3">
+                            {% for code in ['fr', 'en', 'es', 'de', 'ja'] %}<a href="?lang={{ code }}" class="lang {% if current_lang == code %}active{% endif %}">{{ code|upper }}</a>{% endfor %}
+                        </div>
+                        <a href="#" onclick="goToTab('tab-comptes'); this.closest('details').open = false; return false;"><i class="fas fa-key fa-fw"></i> {{ _('Mon compte') }}</a>
+                        <a href="/logout"><i class="fas fa-sign-out-alt fa-fw"></i> {{ _('Se déconnecter') }}</a>
                     </div>
+                </details>
+            </header>
+
+            <!-- Sous-rubriques de chaque rubrique -->
+            <div id="group-accueil" class="sub-nav-group hidden">
+                <div class="tabs single"><button type="button" class="tablink" onclick="openTab(event, 'tab-accueil')"><i class="fas fa-home fa-fw"></i>{{ _('Accueil') }}</button></div>
+            </div>
+            <div id="group-photos" class="sub-nav-group hidden">
+                <div class="tabs">
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-actions')"><i class="fas fa-file-import fa-fw"></i>{{ _('Importer') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-sources')"><i class="fas fa-folder-open fa-fw"></i>{{ _('Sources') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-apercu')"><i class="fas fa-th fa-fw"></i>{{ _('Bibliothèque') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-queue')"><i class="fas fa-stream fa-fw"></i>{{ _('À suivre') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-playlists')"><i class="fas fa-list-ul fa-fw"></i>{{ _('Playlists') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-favoris')"><i class="fas fa-star fa-fw"></i>{{ _('Favoris') }} <span id="favorites-count-badge" class="nav-badge yellow hidden">0</span></button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-messages')"><i class="fas fa-comment-alt fa-fw"></i>{{ _('Messages') }}</button>
                 </div>
-                <div class="mt-2 flex items-center gap-1 text-xs" title="{{ _('Disposition du diaporama') }}">
-                    <i class="fas fa-th-large text-gray-600"></i>
-                    {{ layout_select("layout-override-header", layout_override, _("Selon les réglages"), "layout-override-select text-xs py-0 rounded border-gray-300") }}
+            </div>
+            <div id="group-ecran" class="sub-nav-group hidden">
+                <div class="tabs">
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-dispositions')"><i class="fas fa-th-large fa-fw"></i>{{ _('Dispositions') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-affichage')"><i class="fas fa-desktop fa-fw"></i>{{ _('Affichage') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-heure')"><i class="fas fa-clock fa-fw"></i>{{ _('Horloge & météo') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-metadata')"><i class="fas fa-info-circle fa-fw"></i>{{ _('Infos des photos') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-son')"><i class="fas fa-music fa-fw"></i>{{ _('Son') }}</button>
                 </div>
             </div>
-        </div>
-
-        <!-- Nouvelle navigation par groupes -->
-        <div id="main-nav" class="flex justify-center space-x-1 sm:space-x-2 p-1 bg-transparent rounded-lg mb-4">
-            <button class="main-nav-link inline-flex items-center" data-group="group-diaporama"><i
-                    class="fas fa-desktop fa-fw mr-2"></i>{{ _('Diaporama') }}</button>
-            <button class="main-nav-link inline-flex items-center" data-group="group-contenu"><i
-                    class="fas fa-photo-video fa-fw mr-2"></i>{{ _('Contenu') }}</button>
-            <button class="main-nav-link inline-flex items-center" data-group="group-interactions"><i
-                    class="fas fa-comments fa-fw mr-2"></i>{{ _('Interactions') }} <span id="interactions-pending-badge"
-                    class="hidden bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 inline-flex items-center justify-center ml-1">0</span></button>
-            <button class="main-nav-link inline-flex items-center" data-group="group-maintenance"><i
-                    class="fas fa-server fa-fw mr-2"></i>{{ _('Système') }}</button>
-        </div>
-
-        <!-- Conteneurs de sous-navigation pour chaque groupe -->
-        <div id="group-diaporama" class="sub-nav-group hidden">
-            <div class="tabs flex overflow-x-auto pb-2">
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-affichage')"
-                    title="{{ _('Gérez les paramètres d\'affichage du diaporama, la durée, les transitions...') }}"><i
-                        class="fas fa-desktop fa-fw mr-2"></i>{{ _('Affichage') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-dispositions')"
-                    title="{{ _('Photo unique, compositions et thèmes : choisissez comment les photos sont présentées.') }}"><i
-                        class="fas fa-th-large fa-fw mr-2"></i>{{ _('Dispositions') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-heure')"
-                    title="{{ _('Configurez l\'affichage de l\'heure, la météo et les marées.') }}"><i
-                        class="fas fa-clock fa-fw mr-2"></i>{{ _('Horloge & Infos') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-vocal')"
-                    title="{{ _('Configurez le contrôle vocal du diaporama.') }}"><i
-                        class="fas fa-microphone-alt fa-fw mr-2"></i>{{ _('Vocal') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-metadata')"><i
-                        class="fas fa-info-circle fa-fw mr-2"></i>{{ _('Métadonnées') }}</button>
+            <div id="group-partage" class="sub-nav-group hidden">
+                <div class="tabs">
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-invites')"><i class="fas fa-qrcode fa-fw"></i>{{ _('Invités') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-validation')"><i class="fas fa-check-circle fa-fw"></i>{{ _('À valider') }} <span id="pending-count-badge" class="nav-badge hidden">0</span></button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-telegram')"><i class="fab fa-telegram-plane fa-fw"></i>{{ _('Telegram') }}</button>
+                </div>
             </div>
-        </div>
-
-        <div id="group-contenu" class="sub-nav-group hidden">
-            <div class="tabs flex overflow-x-auto pb-2">
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-sources')"
-                    title="{{ _('Configurez les sources de photos (Immich, Samba, USB...).') }}"><i
-                        class="fas fa-folder-open fa-fw mr-2"></i>{{ _('Sources') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-apercu')"
-                    title="{{ _('Visualisez et gérez toutes les photos prêtes pour le diaporama.') }}"><i
-                        class="fas fa-eye fa-fw mr-2"></i>{{ _('Aperçu') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-messages')"
-                    title="{{ _('Écrivez des messages qui s\'affichent dans le diaporama.') }}"><i
-                        class="fas fa-comment-alt fa-fw mr-2"></i>{{ _('Messages') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-queue')"
-                    title="{{ _('Voyez et réorganisez les prochaines photos du diaporama.') }}"><i
-                        class="fas fa-stream fa-fw mr-2"></i>{{ _('À suivre') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-playlists')"
-                    title="{{ _('Créez et gérez vos albums photo personnalisés.') }}"><i
-                        class="fas fa-list-ul fa-fw mr-2"></i>{{ _('Playlists') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-favoris')"
-                    title="{{ _('Retrouvez et gérez vos photos favorites.') }}"><i class="fas fa-star fa-fw mr-2"></i>{{
-                    _('Favoris') }} <span id="favorites-count-badge"
-                        class="hidden bg-yellow-400 text-white text-xs font-bold rounded-full h-5 w-5 inline-flex items-center justify-center ml-1">0</span></button>
+            <div id="group-systeme" class="sub-nav-group hidden">
+                <div class="tabs">
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-comptes')"><i class="fas fa-users fa-fw"></i>{{ _('Comptes') }}</button>
+                    {% if is_admin %}
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-maintenance')"><i class="fas fa-tools fa-fw"></i>{{ _('Maintenance') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-network')"><i class="fas fa-wifi fa-fw"></i>{{ _('Réseau') }}</button>
+                    {% endif %}
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-vocal')"><i class="fas fa-microphone-alt fa-fw"></i>{{ _('Commande vocale') }}</button>
+                    {% if is_admin %}
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-stats')"><i class="fas fa-chart-bar fa-fw"></i>{{ _('Statistiques') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-logs')"><i class="fas fa-file-alt fa-fw"></i>{{ _('Journaux') }}</button>
+                    {% endif %}
+                </div>
             </div>
-        </div>
 
-        <div id="group-interactions" class="sub-nav-group hidden">
-            <div class="tabs flex overflow-x-auto pb-2">
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-telegram')"
-                    title="{{ _('Configurez la réception de photos via le bot Telegram.') }}"><i
-                        class="fab fa-telegram-plane fa-fw mr-2"></i>{{ _('Telegram') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-validation')"
-                    title="{{ _('Validez ou rejetez les photos envoyées par les invités.') }}"><i
-                        class="fas fa-check-circle fa-fw mr-2"></i>{{ _('Validation') }} <span id="pending-count-badge"
-                        class="hidden bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 inline-flex items-center justify-center ml-1">0</span></button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-actions')"
-                    title="{{ _('Lancez les imports, contrôlez le diaporama et envoyez des photos.') }}"><i
-                        class="fas fa-cogs fa-fw mr-2"></i>{{ _('Actions') }}</button>
-            </div>
-        </div>
-
-        <div id="group-maintenance" class="sub-nav-group hidden">
-            <div class="tabs flex overflow-x-auto pb-2">
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-comptes')"
-                    title="{{ _('Gérez votre mot de passe et les comptes utilisateurs.') }}"><i class="fas fa-users fa-fw mr-2"></i>{{
-                    _('Comptes') }}</button>
-                {% if is_admin %}
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-network')"
-                    title="{{ _('Gérez les paramètres Wi-Fi et réseau.') }}"><i class="fas fa-wifi fa-fw mr-2"></i>{{
-                    _('Réseau') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-maintenance')"
-                    title="{{ _('Gérez les mises à jour, sauvegardes et contrôles système.') }}"><i
-                        class="fas fa-tools fa-fw mr-2"></i>{{ _('Maintenance') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-stats')"
-                    title="{{ _('Consultez les statistiques d\'utilisation du système.') }}"><i
-                        class="fas fa-chart-bar fa-fw mr-2"></i>{{ _('Statistiques') }}</button>
-                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-logs')"
-                    title="{{ _('Consultez les journaux système.') }}"><i class="fas fa-file-alt fa-fw mr-2"></i>{{
-                    _('Logs') }}</button>
-                {% endif %}
-            </div>
-        </div>
-
+            <main id="app-main">
+{% include 'configure/tab_accueil.html.jinja' %}
         <form method="POST" action="/configure">
 
 {% include 'configure/tab_affichage.html.jinja' %}
@@ -257,6 +167,7 @@
 
 {% include 'configure/tab_sources.html.jinja' %}
 
+{% include 'configure/tab_invites.html.jinja' %}
 {% include 'configure/tab_telegram.html.jinja' %}
 
 {% include 'configure/tab_vocal.html.jinja' %}
@@ -291,11 +202,23 @@
 {% include 'configure/tab_favoris.html.jinja' %}
 
 
+{% include 'configure/tab_son.html.jinja' %}
+            </main>
+        </div>
+
+        <nav id="app-bottomnav">
+            {% for group, icon, label in [('group-accueil', 'fa-home', _('Accueil')), ('group-photos', 'fa-images', _('Photos')), ('group-ecran', 'fa-tv', _('Écran')), ('group-partage', 'fa-user-friends', _('Partage')), ('group-systeme', 'fa-cog', _('Système'))] %}
+            <button type="button" class="main-nav-link" data-group="{{ group }}"><i class="fas {{ icon }}"></i><span>{{ label }}</span></button>
+            {% endfor %}
+        </nav>
+    </div>
+
         <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 {% include 'configure/scripts_gallery.html.jinja' %}
 {% include 'configure/scripts_main.html.jinja' %}
 
 {% include 'configure/scripts_status.html.jinja' %}
+{% include 'configure/scripts_app.html.jinja' %}
 </body>
 </html>

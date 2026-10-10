@@ -26,19 +26,23 @@ def _cycle(playlist, start):
     return playlist[start:] + playlist[:start] if playlist else []
 
 
-def publish_state(playlist, current_index, current_override=None):
+def publish_state(playlist, current_index, current_override=None, consumed=1, compositions=None):
     """
     Publie le média affiché et les suivants (dans l'ordre où ils seront affichés).
-    `current_override` : média affiché hors playlist (composition) ; playlist[current_index] est alors le suivant.
+    `current_override` : média affiché hors playlist (composition des `consumed` diapositives à partir de current_index).
+    `compositions` : emplacements des prochaines compositions dans la liste des suivants
+    ({"at": position, "count": nombre de photos regroupées ou None si pas encore préparée, "style", "image"}).
     """
     if not playlist:
         return
     if current_override:
-        current, upcoming = current_override, _cycle(playlist, current_index)[:min(UPCOMING_COUNT, len(playlist))]
+        current = current_override
     else:
-        current, upcoming = playlist[current_index], _cycle(playlist, current_index + 1)[:min(UPCOMING_COUNT, len(playlist) - 1)]
+        current, consumed = playlist[current_index], 1
+    count = max(0, min(UPCOMING_COUNT, len(playlist) - consumed))
+    upcoming = _cycle(playlist, (current_index + consumed) % len(playlist))[:count]
     try:
-        _write_json(STATE_FILE, {"current": current, "upcoming": upcoming, "updated": time.time()})
+        _write_json(STATE_FILE, {"current": current, "upcoming": upcoming, "compositions": compositions or [], "updated": time.time()})
     except OSError:
         pass
 

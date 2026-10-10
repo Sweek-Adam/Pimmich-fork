@@ -120,3 +120,25 @@ def test_single_photo_checkbox_is_saved(admin_client):
     admin_client.post("/configure", data={"compositions_form": "1", "compositions_styles": ["unique", "liege"]}, headers=SAME_ORIGIN)
     config = load_config()
     assert config["unique_enabled"] and comp.enabled_formats(config) == ["liege"]
+
+
+def test_slow_composition_is_still_shown(monkeypatch, sandbox):
+    """Préparation plus longue que l'affichage d'une photo : la composition attendue passe quand même."""
+    import os
+    import time
+    os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
+    pytest.importorskip("pygame")
+    import local_slideshow as ls
+    monkeypatch.setattr(comp, "OUTPUT_DIR", sandbox / "static" / "compositions")
+    monkeypatch.setattr(ls, "list_messages", lambda: [])
+    monkeypatch.setattr(ls, "publish_queue", lambda **_: None)
+
+    def slow_render(style, chunk, messages, width, height, include_messages, rng):
+        time.sleep(0.5)
+        return Image.new("RGB", (32, 18)), len(chunk)
+    monkeypatch.setattr(le, "render_chunk", slow_render)
+    plan = le.resolve({"unique_enabled": True, "compositions_every": 2, "composition_formats": ["mosaique"]})
+    playlist = [f"p{i}.jpg" for i in range(8)]
+    ls.prepare_composition({}, plan, playlist, 2, 64, 36)
+    path, used = ls.take_composition(playlist, 2, wait_seconds=40)
+    assert path and used >= 2
