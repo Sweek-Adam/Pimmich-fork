@@ -2645,7 +2645,10 @@ def start_slideshow():
                         continue
 
                     if current_pil_image: # Only proceed if image was successfully loaded
-                        display_photo_with_pan_zoom(screen, current_pil_image, SCREEN_WIDTH, SCREEN_HEIGHT, config, main_font_loaded, photo_path)
+                        slide_config = config
+                        if composition_path:  # plusieurs photos à regarder : durée allongée si besoin
+                            slide_config = dict(config, display_duration=layout_engine.composition_seconds(config, composition_used))
+                        display_photo_with_pan_zoom(screen, current_pil_image, SCREEN_WIDTH, SCREEN_HEIGHT, slide_config, main_font_loaded, photo_path)
                         previous_photo_surface = screen.copy()
                     else:
                         logger.info(f"🖼️ Skipping photo {photo_path} due to loading error.")

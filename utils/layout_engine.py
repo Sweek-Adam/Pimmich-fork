@@ -49,7 +49,10 @@ def resolve(config, choice=None, today=None):
     Un format choisi explicitement est utilisé même hors de sa saison.
     """
     choice = choice if choice not in (None, AUTO) else config.get("layout_override", AUTO)
-    every = max(1, int(config.get("compositions_every", 5) or 5))
+    try:
+        every = max(0, int(config.get("compositions_every", 5)))  # 0 : les compositions s'enchaînent
+    except (TypeError, ValueError):
+        every = 5
     seasonal = config.get("compositions_seasonal", True)
     enabled = compositions.enabled_formats(config)
     if seasonal:
@@ -69,6 +72,18 @@ def resolve(config, choice=None, today=None):
     if not unique and not formats:
         unique = True
     return LayoutPlan(unique, formats, every, seasonal)
+
+
+SECONDS_PER_PHOTO = 2.5  # une composition reste affichée assez longtemps pour regarder chaque photo
+
+
+def composition_seconds(config, photos):
+    """Durée d'affichage d'une composition : au moins la durée réglée, allongée selon le nombre de photos."""
+    try:
+        base = float(config.get("display_duration", 10))
+    except (TypeError, ValueError):
+        base = 10
+    return max(base, round(photos * SECONDS_PER_PHOTO))
 
 
 def wants_composition(plan, photos_since_composition):

@@ -97,6 +97,8 @@ def configure():
         ]:
             if key in request.form:
                 value = request.form.get(key)
+                if key == 'compositions_every' and not (value or "").strip():
+                    continue  # champ vidé pendant la saisie : 0 a un sens (compositions enchaînées), on attend un nombre
                 # Gérer les champs numériques
                 if key in ['display_duration', 'compositions_every', 'clock_offset_x', 'clock_offset_y', 'clock_font_size', 'weather_update_interval_minutes', 'immich_update_interval_hours', 'smb_update_interval_hours', 'gdrive_update_interval_minutes', 'display_width', 'display_height', 'info_display_duration', 'tide_offset_x', 'tide_offset_y', 'video_audio_volume', 'favorite_boost_factor', 'telegram_boost_duration_days', 'telegram_boost_factor', 'button_pin', 'smart_plug_on_delay', 'anniversary_boost_factor']: # Integer fields
                     try:

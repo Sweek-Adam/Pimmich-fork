@@ -142,3 +142,25 @@ def test_slow_composition_is_still_shown(monkeypatch, sandbox):
     ls.prepare_composition({}, plan, playlist, 2, 64, 36)
     path, used = ls.take_composition(playlist, 2, wait_seconds=40)
     assert path and used >= 2
+
+
+def test_zero_means_back_to_back_compositions():
+    plan = le.resolve({"unique_enabled": True, "compositions_every": 0})
+    assert plan.unique and plan.every == 0 and plan.formats
+    assert all(le.wants_composition(plan, n) for n in range(4))  # aucune photo seule entre deux compositions
+    assert le.resolve({"compositions_every": "abc"}).every == 5
+
+
+def test_compositions_stay_long_enough_to_look_at_each_photo():
+    assert le.composition_seconds({"display_duration": 1}, 4) == 10      # durée allongée automatiquement
+    assert le.composition_seconds({"display_duration": 30}, 4) == 30     # jamais raccourcie
+
+
+def test_empty_every_field_is_not_saved_as_zero(admin_client):
+    from utils.config_manager import load_config
+    headers = {"Sec-Fetch-Site": "same-origin", "X-Autosave": "1"}
+    admin_client.post("/configure", data={"compositions_every": "3"}, headers=headers)
+    admin_client.post("/configure", data={"compositions_every": ""}, headers=headers)  # champ vidé pendant la saisie
+    assert load_config()["compositions_every"] == 3
+    admin_client.post("/configure", data={"compositions_every": "0"}, headers=headers)
+    assert load_config()["compositions_every"] == 0

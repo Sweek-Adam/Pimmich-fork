@@ -18,8 +18,9 @@
                     <p class="text-sm text-gray-600 mb-3">{{ _("Cochez les dispositions du diaporama. Avec « Photo unique » et des compositions : une composition toutes les N photos. Sans « Photo unique » : uniquement des compositions. Une composition regroupe les photos qui suivent dans le diaporama ou la playlist, dans leur ordre ; un message qui en fait partie devient une note.") }}</p>
                     <input type="hidden" name="compositions_form" value="1">
                     <label for="compositions_every">{{ _("Une composition toutes les (photos) :") }}</label>
-                    <input type="number" id="compositions_every" name="compositions_every" min="1" max="100" class="w-24"
+                    <input type="number" id="compositions_every" name="compositions_every" min="0" max="100" class="w-24"
                         value="{{ config.get('compositions_every', 5) }}">
+                    <p class="text-sm text-gray-600 mt-1">{{ _("0 : les compositions s'enchaînent, sans photo seule entre elles. Une composition reste affichée au moins 2,5 secondes par photo (la durée du diaporama est allongée si besoin).") }}</p>
                     <div class="form-check form-switch my-3">
                         <input class="form-check-input" type="checkbox" id="compositions_full_photos" name="compositions_full_photos" {% if config.get('compositions_full_photos', True) %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="compositions_full_photos">{{ _("Photos entières (sans recadrage)") }}</label>

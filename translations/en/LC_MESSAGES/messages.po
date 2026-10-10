@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:36+0200\n"
+"POT-Creation-Date: 2026-10-10 19:41+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -407,7 +407,7 @@ msgstr "No settings found."
 msgid "Enregistrement…"
 msgstr "Saving…"
 
-#: templates/configure/scripts_app.html.jinja:104 web/routes_config.py:254
+#: templates/configure/scripts_app.html.jinja:104 web/routes_config.py:256
 msgid "Enregistré"
 msgstr "Saved"
 
@@ -1122,12 +1122,12 @@ msgid "Tout"
 msgstr "All"
 
 #: templates/configure/tab_accueil.html.jinja:88
-#: templates/configure/tab_dispositions.html.jinja:36
+#: templates/configure/tab_dispositions.html.jinja:37
 msgid "Formats"
 msgstr "Layouts"
 
 #: templates/configure/tab_accueil.html.jinja:89
-#: templates/configure/tab_dispositions.html.jinja:36
+#: templates/configure/tab_dispositions.html.jinja:37
 msgid "Thèmes"
 msgstr "Themes"
 
@@ -1793,21 +1793,31 @@ msgstr ""
 msgid "Une composition toutes les (photos) :"
 msgstr "One composition every (photos):"
 
-#: templates/configure/tab_dispositions.html.jinja:25
+#: templates/configure/tab_dispositions.html.jinja:23
+msgid ""
+"0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
+"composition reste affichée au moins 2,5 secondes par photo (la durée du "
+"diaporama est allongée si besoin)."
+msgstr ""
+"0: compositions follow one another, with no single photo in between. A "
+"composition stays on screen at least 2.5 seconds per photo (the slideshow"
+" duration is extended if needed)."
+
+#: templates/configure/tab_dispositions.html.jinja:26
 msgid "Photos entières (sans recadrage)"
 msgstr "Whole photos (no cropping)"
 
-#: templates/configure/tab_dispositions.html.jinja:29
+#: templates/configure/tab_dispositions.html.jinja:30
 msgid "Inclure les messages dans les compositions"
 msgstr "Include messages in compositions"
 
-#: templates/configure/tab_dispositions.html.jinja:33
+#: templates/configure/tab_dispositions.html.jinja:34
 msgid ""
 "Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
 "moment-là)"
 msgstr "Seasonal themes only during their period (and more frequent at that time)"
 
-#: templates/configure/tab_dispositions.html.jinja:35
+#: templates/configure/tab_dispositions.html.jinja:36
 msgid ""
 "Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · "
 "Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon "
@@ -1817,7 +1827,7 @@ msgstr ""
 "Easter: 2 weeks around Easter · Spring, Autumn, Winter: according to the "
 "season."
 
-#: templates/configure/tab_dispositions.html.jinja:45
+#: templates/configure/tab_dispositions.html.jinja:46
 msgid "Thème de saison"
 msgstr "Seasonal theme"
 
@@ -4158,12 +4168,12 @@ msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
 
-#: web/routes_config.py:227
+#: web/routes_config.py:229
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:256
+#: web/routes_config.py:258
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
