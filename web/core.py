@@ -87,7 +87,7 @@ from utils.security import load_secret_key, ensure_internal_token, csrf_violatio
 from utils import user_manager
 
 
-from utils.slideshow_manager import is_slideshow_running, start_slideshow, stop_slideshow, restart_slideshow_process, restart_slideshow_for_update
+from utils.slideshow_manager import is_slideshow_running, start_slideshow, stop_slideshow, restart_slideshow_process, restart_slideshow_for_update, restart_after_imports
 
 
 from utils.config_manager import load_config, save_config

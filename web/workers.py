@@ -102,6 +102,7 @@ def schedule_worker():
                 save_config(config)
             
             last_schedule_state = in_schedule
+            restart_after_imports()  # filet de sécurité : redémarrage reporté pendant un import terminé sans préparation
             manual_override = config.get('manual_override')
             slideshow_is_running = is_slideshow_running()
 

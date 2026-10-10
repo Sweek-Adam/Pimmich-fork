@@ -209,11 +209,61 @@ def stop_slideshow():
     logger.info("📟 Extinction de l'écran")
     set_display_power(on=False)
 
-def restart_slideshow_for_update():
+# --- Redémarrages : jamais un diaporama endormi, jamais pendant un import ---
+_restart_state = {"pending": False, "last": 0.0}
+RESTART_DEBOUNCE = 10  # deux demandes rapprochées : un seul redémarrage
+
+
+def _import_in_progress():
+    try:
+        from utils import import_progress
+        return any(item["active"] for item in import_progress.snapshot())
+    except Exception:
+        return False
+
+
+def _restart_allowed(force_start, reason):
+    """
+    Faut-il redémarrer maintenant ? Pas si le diaporama est arrêté (il reprendra les réglages à son prochain
+    démarrage), ni pendant un import (il est relancé une seule fois, quand toutes les photos sont préparées).
+    """
+    if not force_start and not is_slideshow_running():
+        logger.info(f"📟 {reason} : diaporama arrêté, rien à redémarrer (réglages pris au prochain démarrage)")
+        return False
+    if not force_start and _import_in_progress():
+        _restart_state["pending"] = True
+        logger.info(f"📟 {reason} : import en cours, redémarrage reporté à la fin de la préparation des photos")
+        return False
+    if not force_start and time.time() - _restart_state["last"] < RESTART_DEBOUNCE:
+        return False
+    _restart_state["last"] = time.time()
+    return True
+
+
+def restart_after_imports():
+    """Appelé à la fin des imports : redémarrage reporté pendant la préparation, fait maintenant (une fois)."""
+    if _restart_state["pending"] and not _import_in_progress():
+        _restart_state["pending"] = False
+        if is_slideshow_running():
+            _restart_state["last"] = 0
+            restart_slideshow_for_update()
+
+
+try:
+    from utils import import_progress as _import_progress
+    _import_progress.ON_FINISHED.append(lambda: restart_after_imports())
+except Exception:  # pragma: no cover
+    pass
+
+
+def restart_slideshow_for_update(force_start=False):
     """
     Redémarre le diaporama après une mise à jour de contenu, sans éteindre l'écran.
     C'est la fonction à utiliser par les workers de mise à jour automatique.
+    `force_start` : démarrer même s'il est arrêté (action explicite : lancer une playlist...).
     """
+    if not _restart_allowed(force_start, "Mise à jour de contenu"):
+        return
     logger.info("📟 Redémarrage du diaporama pour mise à jour de contenu")
 
     # 1. Arrêter le processus existant (sans appeler set_display_power)
@@ -231,11 +281,14 @@ def restart_slideshow_for_update():
     start_slideshow()
     logger.info("📟 Diaporama redémarré pour mise à jour")
 
-def restart_slideshow_process():
+def restart_slideshow_process(force_start=False):
     """
     Redémarre uniquement le processus du diaporama, sans affecter l'alimentation de l'écran.
     Idéal pour appliquer les changements de configuration sans cycle de redémarrage complet.
+    Un diaporama arrêté (la nuit) n'est pas réveillé ; pendant un import, le redémarrage est reporté.
     """
+    if not _restart_allowed(force_start, "Changement de réglages"):
+        return
     logger.info("📟 Redémarrage du processus de diaporama demandé")
 
     # 1. Arrêter le processus existant (sans appeler set_display_power)

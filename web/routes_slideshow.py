@@ -71,8 +71,13 @@ def start_photo_playlist(playlist_id):
     # Écrire les données dans le fichier temporaire que le diaporama lira
     with open(CUSTOM_PLAYLIST_FILE, 'w') as f:
         json.dump(playlist_data_to_save, f)
-    # Redémarrer le diaporama pour charger la nouvelle playlist sans éteindre l'écran
-    restart_slideshow_for_update()
+    # Lancer la playlist (même si le diaporama dormait : c'est une demande explicite)
+    config = load_config()
+    if not is_active_hours(config) and config.get("manual_override") != "start":
+        config = dict(config)
+        config["manual_override"] = "start"  # en dehors des heures : le planning ne doit pas l'arrêter aussitôt
+        save_config(config)
+    restart_slideshow_for_update(force_start=True)
     links = load_config().get("spotify_links") or {}
     spotify.play_linked_in_background(links.get(f"playlist:{playlist_id}"), logger)  # musique Spotify associée
     return True, f"Lancement du diaporama pour la playlist '{target_playlist.get('name')}'.", 200
@@ -102,8 +107,8 @@ def restart_standard_slideshow():
         if os.path.exists(CUSTOM_PLAYLIST_FILE):
             os.remove(CUSTOM_PLAYLIST_FILE)
         
-        # Redémarrer le diaporama en mode standard sans éteindre l'écran
-        restart_slideshow_for_update()
+        # Redémarrer le diaporama en mode standard sans éteindre l'écran (demande explicite : tout de suite)
+        restart_slideshow_for_update(force_start=is_slideshow_running())
         return jsonify({"success": True, "message": "Diaporama standard relancé."})
     except Exception as e:
         logger.info(f"Erreur lors du redémarrage du diaporama standard : {e}")
@@ -511,7 +516,7 @@ def set_slideshow_layout():
     config["layout_override"] = choice
     save_config(config)
     if is_slideshow_running():
-        restart_slideshow_for_update()
+        restart_slideshow_for_update(force_start=True)  # choix explicite : appliqué tout de suite, même pendant un import
     return jsonify({"success": True, "message": _("Disposition appliquée au diaporama.")})
 
 

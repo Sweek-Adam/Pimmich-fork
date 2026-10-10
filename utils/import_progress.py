@@ -17,6 +17,7 @@ FORGET_AFTER = 20          # un import terminé reste affiché quelques secondes
 
 _lock = threading.Lock()
 _imports = {}
+ON_FINISHED = []  # fonctions appelées à la fin d'une préparation
 
 
 def _phase():
@@ -65,6 +66,12 @@ def finish(source, phase):
         entry[phase]["percent"] = 100
         if phase == "prepare":
             entry["finished"] = time.time()
+    if phase == "prepare":
+        for callback in list(ON_FINISHED):  # ex. redémarrage du diaporama reporté pendant l'import
+            try:
+                callback()
+            except Exception:
+                pass
 
 
 def tracked(source, phase, generator):
