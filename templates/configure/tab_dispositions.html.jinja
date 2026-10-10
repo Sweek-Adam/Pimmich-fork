@@ -13,6 +13,71 @@
 
                 <fieldset class="mt-6">
                     <legend>
+                        <h3><i class="fas fa-layer-group mr-2"></i>{{ _("Mes configurations") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à l'autre d'un clic.") }}</p>
+                    <div id="lp-list" class="lp-list"></div>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <input type="text" id="lp-name" maxlength="60" class="flex-1" placeholder="{{ _('Nom (ex : Soirée, Calme, Noël en famille)') }}">
+                        <button type="button" id="lp-save" class="btn-secondary"><i class="fas fa-save mr-1"></i>{{ _("Enregistrer la sélection ci-dessous") }}</button>
+                    </div>
+                    <p id="lp-status" class="text-sm mt-2"></p>
+                </fieldset>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { activate: {{ _("Activer")|tojson }}, active: {{ _("Active")|tojson }}, update: {{ _("Remplacer par la sélection")|tojson }},
+                                    remove: {{ _("Supprimer")|tojson }}, layouts: {{ _("disposition(s)")|tojson }}, none: {{ _("Aucune configuration enregistrée.")|tojson }},
+                                    confirmRemove: {{ _("Supprimer cette configuration ?")|tojson }} };
+                        const say = (t, ok) => { $("lp-status").textContent = t || ""; $("lp-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const selection = () => ({
+                            formats: [...document.querySelectorAll('input[name="compositions_styles"]:checked')].map(c => c.value).filter(v => v !== "unique"),
+                            unique: !!document.querySelector('input[name="compositions_styles"][value="unique"]:checked'),
+                            every: Number(($("compositions_every") || {}).value || 5),
+                        });
+                        const call = async (url, method, body) => (await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined })).json();
+                        function render(presets) {
+                            const box = $("lp-list");
+                            if (!presets.length) { box.innerHTML = `<p class="muted">${T.none}</p>`; return; }
+                            box.innerHTML = "";
+                            presets.forEach(p => {
+                                const card = document.createElement("div");
+                                card.className = "lp-card" + (p.active ? " active" : "");
+                                const title = document.createElement("div");
+                                title.innerHTML = `<strong></strong><small>${p.count} ${T.layouts}</small>`;
+                                title.querySelector("strong").textContent = p.name;
+                                const actions = document.createElement("div");
+                                actions.className = "lp-actions";
+                                const act = document.createElement("button");
+                                act.type = "button"; act.className = p.active ? "badge on" : "btn-primary text-sm";
+                                act.textContent = p.active ? T.active : T.activate; act.disabled = p.active;
+                                act.addEventListener("click", async () => {
+                                    const r = await call(`/api/layout_presets/${p.id}/activate`, "POST");
+                                    say(r.message, r.success);
+                                    if (r.success) setTimeout(() => location.reload(), 600);  // cases cochées mises à jour
+                                });
+                                const upd = document.createElement("button");
+                                upd.type = "button"; upd.className = "link"; upd.textContent = T.update;
+                                upd.addEventListener("click", async () => { const r = await call("/api/layout_presets", "POST", { id: p.id, selection: selection() }); say(r.message, r.success); if (r.success) render(r.presets); });
+                                const del = document.createElement("button");
+                                del.type = "button"; del.className = "link text-red-600"; del.textContent = T.remove;
+                                del.addEventListener("click", async () => { if (!confirm(T.confirmRemove)) return; const r = await call(`/api/layout_presets/${p.id}`, "DELETE"); say(r.message, r.success); render(r.presets); });
+                                actions.append(act, upd, del);
+                                card.append(title, actions);
+                                box.appendChild(card);
+                            });
+                        }
+                        $("lp-save").addEventListener("click", async () => {
+                            const r = await call("/api/layout_presets", "POST", { name: $("lp-name").value, selection: selection() });
+                            say(r.message, r.success);
+                            if (r.success) { $("lp-name").value = ""; render(r.presets); }
+                        });
+                        (async () => render((await (await fetch("/api/layout_presets")).json()).presets))();
+                    });
+                </script>
+
+                <fieldset class="mt-6">
+                    <legend>
                         <h3>{{ _("Dispositions utilisées") }}</h3>
                     </legend>
                     <p class="text-sm text-gray-600 mb-3">{{ _("Cochez les dispositions du diaporama. Avec « Photo unique » et des compositions : une composition toutes les N photos. Sans « Photo unique » : uniquement des compositions. Une composition regroupe les photos qui suivent dans le diaporama ou la playlist, dans leur ordre ; un message qui en fait partie devient une note.") }}</p>

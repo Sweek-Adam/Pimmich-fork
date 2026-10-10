@@ -7,7 +7,7 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # version figée : pas de changement de système imposé (passage à 26.04 le moment venu)
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5

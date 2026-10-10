@@ -249,6 +249,14 @@
         .playlist-cover img:only-child { grid-column: span 2; grid-row: span 2; }
         .playlist-cover.empty { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.4rem; }
         @media (max-width: 860px) { .pl-grid { grid-template-columns: repeat(3, 1fr); } }
+        .picker-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .picker-presets.hidden { display: none; }
+        .lp-list { display: grid; gap: 8px; }
+        .lp-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 12px; background: var(--bg); border: 2px solid transparent; }
+        .lp-card.active { border-color: var(--ok); background: #f0fdf4; }
+        .lp-card small { display: block; color: var(--muted); }
+        .lp-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        #lp-name { border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; min-width: 200px; }
         .hw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
         .hw-grid > div { background: var(--bg); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
         .hw-grid small { color: var(--muted); }

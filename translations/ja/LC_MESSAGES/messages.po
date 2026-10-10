@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:06+0200\n"
+"POT-Creation-Date: 2026-10-10 23:09+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -1366,7 +1366,7 @@ msgstr "検出中にエラーが発生しました。"
 
 #: templates/configure/scripts_status.html.jinja:517
 #: templates/configure/tab_accueil.html.jinja:17
-#: templates/configure/tab_accueil.html.jinja:125
+#: templates/configure/tab_accueil.html.jinja:126
 msgid "Le diaporama est arrêté."
 msgstr "スライドショーが停止されます。"
 
@@ -1566,12 +1566,12 @@ msgid "Tout"
 msgstr "すべて"
 
 #: templates/configure/tab_accueil.html.jinja:89
-#: templates/configure/tab_dispositions.html.jinja:38
+#: templates/configure/tab_dispositions.html.jinja:103
 msgid "Formats"
 msgstr "レイアウト"
 
 #: templates/configure/tab_accueil.html.jinja:90
-#: templates/configure/tab_dispositions.html.jinja:38
+#: templates/configure/tab_dispositions.html.jinja:103
 msgid "Thèmes"
 msgstr "テーマ"
 
@@ -1583,46 +1583,50 @@ msgstr "メッセージ付き"
 msgid "Rechercher…"
 msgstr "検索…"
 
-#: templates/configure/tab_accueil.html.jinja:96
-#: templates/configure/tab_accueil.html.jinja:126
+#: templates/configure/tab_accueil.html.jinja:97
+#: templates/configure/tab_accueil.html.jinja:127
 msgid "Selon mes réglages"
 msgstr "自分の設定どおり"
 
-#: templates/configure/tab_accueil.html.jinja:97
-#: templates/configure/tab_accueil.html.jinja:127
+#: templates/configure/tab_accueil.html.jinja:98
+#: templates/configure/tab_accueil.html.jinja:128
 msgid "Compositions au hasard"
 msgstr "ランダムな組み写真"
 
-#: templates/configure/tab_accueil.html.jinja:103
-#: templates/configure/tab_dispositions.html.jinja:48
+#: templates/configure/tab_accueil.html.jinja:104
+#: templates/configure/tab_dispositions.html.jinja:113
 msgid "Affiche les messages"
 msgstr "メッセージを表示"
 
-#: templates/configure/tab_accueil.html.jinja:110
+#: templates/configure/tab_accueil.html.jinja:111
 msgid "Afficher maintenant (une fois)"
 msgstr "今すぐ表示（1回）"
 
-#: templates/configure/tab_accueil.html.jinja:111
+#: templates/configure/tab_accueil.html.jinja:112
 msgid "Utiliser jusqu'à nouvel ordre"
 msgstr "次の変更まで使用"
 
-#: templates/configure/tab_accueil.html.jinja:122
+#: templates/configure/tab_accueil.html.jinja:123
 msgid "Tout va bien."
 msgstr "問題ありません。"
 
-#: templates/configure/tab_accueil.html.jinja:123
+#: templates/configure/tab_accueil.html.jinja:124
 msgid "Régler"
 msgstr "設定する"
 
-#: templates/configure/tab_accueil.html.jinja:124
+#: templates/configure/tab_accueil.html.jinja:125
 msgid "Rien à afficher pour l'instant."
 msgstr "まだ表示するものがありません。"
 
-#: templates/configure/tab_accueil.html.jinja:229
+#: templates/configure/tab_accueil.html.jinja:198
+msgid "Mes configurations :"
+msgstr "マイ設定："
+
+#: templates/configure/tab_accueil.html.jinja:245
 msgid "il y a 1 an"
 msgstr "1 年前"
 
-#: templates/configure/tab_accueil.html.jinja:229
+#: templates/configure/tab_accueil.html.jinja:245
 #: utils/themed_compositions_extra.py:547
 #, python-format
 msgid "il y a %(num)s ans"
@@ -2204,6 +2208,7 @@ msgid "Supprimer ce compte ?"
 msgstr "このアカウントを削除しますか？"
 
 #: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
 msgid "Supprimer"
 msgstr "削除"
 
@@ -2243,10 +2248,52 @@ msgid ""
 msgstr "今すぐ1回だけ表示するか、次に変更するまで使用するレイアウトを選んでください。「自分の設定どおり」では、下でチェックしたレイアウトを使用します。"
 
 #: templates/configure/tab_dispositions.html.jinja:16
+msgid "Mes configurations"
+msgstr "マイ設定"
+
+#: templates/configure/tab_dispositions.html.jinja:18
+msgid ""
+"Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
+" l'autre d'un clic."
+msgstr "レイアウトの組み合わせに名前を付けて保存し、ワンクリックで切り替えられます。"
+
+#: templates/configure/tab_dispositions.html.jinja:21
+msgid "Nom (ex : Soirée, Calme, Noël en famille)"
+msgstr "名前（例：パーティー、落ち着き、家族のクリスマス）"
+
+#: templates/configure/tab_dispositions.html.jinja:22
+msgid "Enregistrer la sélection ci-dessous"
+msgstr "下の選択を保存"
+
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Activer"
+msgstr "有効にする"
+
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Active"
+msgstr "有効"
+
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Remplacer par la sélection"
+msgstr "選択内容で置き換える"
+
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "disposition(s)"
+msgstr "レイアウト"
+
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Aucune configuration enregistrée."
+msgstr "保存された設定はありません。"
+
+#: templates/configure/tab_dispositions.html.jinja:31
+msgid "Supprimer cette configuration ?"
+msgstr "この設定を削除しますか？"
+
+#: templates/configure/tab_dispositions.html.jinja:81
 msgid "Dispositions utilisées"
 msgstr "使用するレイアウト"
 
-#: templates/configure/tab_dispositions.html.jinja:18
+#: templates/configure/tab_dispositions.html.jinja:83
 msgid ""
 "Cochez les dispositions du diaporama. Avec « Photo unique » et des "
 "compositions : une composition toutes les N photos. Sans « Photo unique »"
@@ -2255,11 +2302,11 @@ msgid ""
 "qui en fait partie devient une note."
 msgstr "スライドショーのレイアウトをチェックしてください。「1枚表示」とコラージュを選ぶと、N枚ごとにコラージュを1回表示します。「1枚表示」なしではコラージュのみになります。コラージュはスライドショーやプレイリストの次の写真を順番どおりにまとめ、その中のメッセージはメモになります。"
 
-#: templates/configure/tab_dispositions.html.jinja:20
+#: templates/configure/tab_dispositions.html.jinja:85
 msgid "Une composition toutes les (photos) :"
 msgstr "コラージュの頻度（写真○枚ごと）："
 
-#: templates/configure/tab_dispositions.html.jinja:23
+#: templates/configure/tab_dispositions.html.jinja:88
 msgid ""
 "0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
 "composition reste affichée au moins 2,5 secondes par photo (la durée du "
@@ -2268,46 +2315,46 @@ msgstr ""
 "0：コラージュを続けて表示し、間に単独の写真を挟みません。コラージュは写真 1 枚につき 2.5 "
 "秒以上表示されます（必要に応じて表示時間を延長します）。"
 
-#: templates/configure/tab_dispositions.html.jinja:26
+#: templates/configure/tab_dispositions.html.jinja:91
 msgid "Photos entières (sans recadrage)"
 msgstr "写真全体を表示（トリミングなし）"
 
-#: templates/configure/tab_dispositions.html.jinja:30
+#: templates/configure/tab_dispositions.html.jinja:95
 msgid "Inclure les messages dans les compositions"
 msgstr "コラージュにメッセージを含める"
 
-#: templates/configure/tab_dispositions.html.jinja:34
+#: templates/configure/tab_dispositions.html.jinja:99
 msgid ""
 "Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
 "moment-là)"
 msgstr "季節のテーマは期間中のみ表示（その期間はより頻繁に表示）"
 
-#: templates/configure/tab_dispositions.html.jinja:36
+#: templates/configure/tab_dispositions.html.jinja:101
 msgid ""
 "affiche les messages dans la composition (un message à afficher déclenche"
 " l'une de ces dispositions)"
 msgstr "コラージュの中にメッセージを表示（表示待ちのメッセージがあると、これらのレイアウトのいずれかが使われます）"
 
-#: templates/configure/tab_dispositions.html.jinja:36
+#: templates/configure/tab_dispositions.html.jinja:101
 msgid "messages affichés seuls"
 msgstr "メッセージは単独で表示"
 
-#: templates/configure/tab_dispositions.html.jinja:37
+#: templates/configure/tab_dispositions.html.jinja:102
 msgid ""
 "Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · "
 "Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon "
 "la saison."
 msgstr "クリスマス：12月1日～1月6日 · ハロウィン：10月15日～11月2日 · イースター：イースター前後2週間 · 春・秋・冬：季節に応じて"
 
-#: templates/configure/tab_dispositions.html.jinja:47
+#: templates/configure/tab_dispositions.html.jinja:112
 msgid "Thème de saison"
 msgstr "季節のテーマ"
 
-#: templates/configure/tab_dispositions.html.jinja:48
+#: templates/configure/tab_dispositions.html.jinja:113
 msgid " (jusqu’à 3, dans des fantômes)"
 msgstr "（最大 3 件、おばけの中に）"
 
-#: templates/configure/tab_dispositions.html.jinja:48
+#: templates/configure/tab_dispositions.html.jinja:113
 msgid "Les messages sont affichés seuls, en plein écran"
 msgstr "メッセージは単独で全画面表示されます"
 
@@ -4557,6 +4604,18 @@ msgstr "1枚表示"
 msgid "Compositions uniquement (au hasard)"
 msgstr "コラージュのみ（ランダム）"
 
+#: utils/layout_presets.py:57
+msgid "Nom manquant."
+msgstr "名前がありません。"
+
+#: utils/layout_presets.py:67 utils/layout_presets.py:80
+msgid "Configuration introuvable."
+msgstr "設定が見つかりません。"
+
+#: utils/layout_presets.py:70
+msgid "Ce nom existe déjà."
+msgstr "この名前はすでに使われています。"
+
 #: utils/message_renderer.py:30
 msgid "Nuit"
 msgstr "ナイト"
@@ -5205,6 +5264,18 @@ msgstr "新しい順番を保存しました。"
 #: web/routes_slideshow.py:515
 msgid "Disposition appliquée au diaporama."
 msgstr "レイアウトをスライドショーに適用しました。"
+
+#: web/routes_slideshow.py:545
+msgid "Configuration enregistrée."
+msgstr "設定を保存しました。"
+
+#: web/routes_slideshow.py:558
+msgid "Configuration activée."
+msgstr "設定を有効にしました。"
+
+#: web/routes_slideshow.py:567
+msgid "Configuration supprimée."
+msgstr "設定を削除しました。"
 
 #: web/routes_system.py:84
 msgid ""

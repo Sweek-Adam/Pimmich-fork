@@ -92,6 +92,7 @@
                             </div>
                             <input type="search" id="layout-picker-search" placeholder="{{ _('Rechercher…') }}">
                         </div>
+                        <div id="picker-presets" class="picker-presets hidden"></div>
                         <div class="picker-special">
                             <button type="button" class="picker-card special" data-layout="auto"><i class="fas fa-sliders-h"></i><span>{{ _("Selon mes réglages") }}</span></button>
                             <button type="button" class="picker-card special" data-layout="compositions"><i class="fas fa-random"></i><span>{{ _("Compositions au hasard") }}</span></button>
@@ -190,7 +191,22 @@
                         }
                         const picker = $("layout-picker");
                         document.body.appendChild(picker);  // utilisable depuis n'importe quel onglet (Accueil, Dispositions)
-                        const openPicker = () => { picker.classList.remove("hidden"); $("layout-picker-search").focus(); };
+                        async function loadPresets() {  // « Mes configurations » : un clic pour en activer une
+                            const data = await (await fetch("/api/layout_presets")).json();
+                            const box = $("picker-presets");
+                            box.classList.toggle("hidden", !data.presets.length);
+                            box.innerHTML = `<span class="muted">{{ _("Mes configurations :") }}</span>`;
+                            data.presets.forEach(p => {
+                                const b = document.createElement("button");
+                                b.type = "button"; b.className = "chip" + (p.active ? " active" : ""); b.textContent = p.name;
+                                b.addEventListener("click", async () => {
+                                    const r = await (await fetch(`/api/layout_presets/${p.id}/activate`, { method: "POST" })).json();
+                                    showToast(r.message); closePicker(); loadLayout();
+                                });
+                                box.appendChild(b);
+                            });
+                        }
+                        const openPicker = () => { picker.classList.remove("hidden"); $("layout-picker-search").focus(); loadPresets(); };
                         const closePicker = () => { picker.classList.add("hidden"); $("layout-picker-actions").classList.add("hidden"); chosen = null; };
                         document.querySelectorAll(".open-layout-picker").forEach(b => b.addEventListener("click", openPicker));
                         picker.querySelector(".modal-close").addEventListener("click", closePicker);

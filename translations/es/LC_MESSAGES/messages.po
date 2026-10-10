@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:06+0200\n"
+"POT-Creation-Date: 2026-10-10 23:09+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -1392,7 +1392,7 @@ msgstr "Error durante la detección."
 
 #: templates/configure/scripts_status.html.jinja:517
 #: templates/configure/tab_accueil.html.jinja:17
-#: templates/configure/tab_accueil.html.jinja:125
+#: templates/configure/tab_accueil.html.jinja:126
 msgid "Le diaporama est arrêté."
 msgstr "La presentación de diapositivas se detiene."
 
@@ -1596,12 +1596,12 @@ msgid "Tout"
 msgstr "Todo"
 
 #: templates/configure/tab_accueil.html.jinja:89
-#: templates/configure/tab_dispositions.html.jinja:38
+#: templates/configure/tab_dispositions.html.jinja:103
 msgid "Formats"
 msgstr "Formatos"
 
 #: templates/configure/tab_accueil.html.jinja:90
-#: templates/configure/tab_dispositions.html.jinja:38
+#: templates/configure/tab_dispositions.html.jinja:103
 msgid "Thèmes"
 msgstr "Temas"
 
@@ -1613,46 +1613,50 @@ msgstr "Con mensajes"
 msgid "Rechercher…"
 msgstr "Buscar…"
 
-#: templates/configure/tab_accueil.html.jinja:96
-#: templates/configure/tab_accueil.html.jinja:126
+#: templates/configure/tab_accueil.html.jinja:97
+#: templates/configure/tab_accueil.html.jinja:127
 msgid "Selon mes réglages"
 msgstr "Según mis ajustes"
 
-#: templates/configure/tab_accueil.html.jinja:97
-#: templates/configure/tab_accueil.html.jinja:127
+#: templates/configure/tab_accueil.html.jinja:98
+#: templates/configure/tab_accueil.html.jinja:128
 msgid "Compositions au hasard"
 msgstr "Composiciones aleatorias"
 
-#: templates/configure/tab_accueil.html.jinja:103
-#: templates/configure/tab_dispositions.html.jinja:48
+#: templates/configure/tab_accueil.html.jinja:104
+#: templates/configure/tab_dispositions.html.jinja:113
 msgid "Affiche les messages"
 msgstr "Muestra los mensajes"
 
-#: templates/configure/tab_accueil.html.jinja:110
+#: templates/configure/tab_accueil.html.jinja:111
 msgid "Afficher maintenant (une fois)"
 msgstr "Mostrar ahora (una vez)"
 
-#: templates/configure/tab_accueil.html.jinja:111
+#: templates/configure/tab_accueil.html.jinja:112
 msgid "Utiliser jusqu'à nouvel ordre"
 msgstr "Usar hasta nuevo aviso"
 
-#: templates/configure/tab_accueil.html.jinja:122
+#: templates/configure/tab_accueil.html.jinja:123
 msgid "Tout va bien."
 msgstr "Todo va bien."
 
-#: templates/configure/tab_accueil.html.jinja:123
+#: templates/configure/tab_accueil.html.jinja:124
 msgid "Régler"
 msgstr "Ajustar"
 
-#: templates/configure/tab_accueil.html.jinja:124
+#: templates/configure/tab_accueil.html.jinja:125
 msgid "Rien à afficher pour l'instant."
 msgstr "Nada que mostrar por ahora."
 
-#: templates/configure/tab_accueil.html.jinja:229
+#: templates/configure/tab_accueil.html.jinja:198
+msgid "Mes configurations :"
+msgstr "Mis configuraciones:"
+
+#: templates/configure/tab_accueil.html.jinja:245
 msgid "il y a 1 an"
 msgstr "hace 1 año"
 
-#: templates/configure/tab_accueil.html.jinja:229
+#: templates/configure/tab_accueil.html.jinja:245
 #: utils/themed_compositions_extra.py:547
 #, python-format
 msgid "il y a %(num)s ans"
@@ -2257,6 +2261,7 @@ msgid "Supprimer ce compte ?"
 msgstr "¿Eliminar esta cuenta?"
 
 #: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
 msgid "Supprimer"
 msgstr "Eliminar"
 
@@ -2302,10 +2307,52 @@ msgstr ""
 "marcadas abajo."
 
 #: templates/configure/tab_dispositions.html.jinja:16
+msgid "Mes configurations"
+msgstr "Mis configuraciones"
+
+#: templates/configure/tab_dispositions.html.jinja:18
+msgid ""
+"Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
+" l'autre d'un clic."
+msgstr "Guarda tus disposiciones con un nombre y cambia de una a otra con un clic."
+
+#: templates/configure/tab_dispositions.html.jinja:21
+msgid "Nom (ex : Soirée, Calme, Noël en famille)"
+msgstr "Nombre (p. ej. Fiesta, Tranquilo, Navidad en familia)"
+
+#: templates/configure/tab_dispositions.html.jinja:22
+msgid "Enregistrer la sélection ci-dessous"
+msgstr "Guardar la selección de abajo"
+
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Activer"
+msgstr "Activar"
+
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Active"
+msgstr "Activa"
+
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Remplacer par la sélection"
+msgstr "Reemplazar por la selección"
+
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "disposition(s)"
+msgstr "disposición(es)"
+
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Aucune configuration enregistrée."
+msgstr "No hay ninguna configuración guardada."
+
+#: templates/configure/tab_dispositions.html.jinja:31
+msgid "Supprimer cette configuration ?"
+msgstr "¿Eliminar esta configuración?"
+
+#: templates/configure/tab_dispositions.html.jinja:81
 msgid "Dispositions utilisées"
 msgstr "Disposiciones utilizadas"
 
-#: templates/configure/tab_dispositions.html.jinja:18
+#: templates/configure/tab_dispositions.html.jinja:83
 msgid ""
 "Cochez les dispositions du diaporama. Avec « Photo unique » et des "
 "compositions : une composition toutes les N photos. Sans « Photo unique »"
@@ -2319,11 +2366,11 @@ msgstr ""
 "presentación o de la lista, en su orden; un mensaje entre ellas se "
 "convierte en una nota."
 
-#: templates/configure/tab_dispositions.html.jinja:20
+#: templates/configure/tab_dispositions.html.jinja:85
 msgid "Une composition toutes les (photos) :"
 msgstr "Una composición cada (fotos):"
 
-#: templates/configure/tab_dispositions.html.jinja:23
+#: templates/configure/tab_dispositions.html.jinja:88
 msgid ""
 "0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
 "composition reste affichée au moins 2,5 secondes par photo (la durée du "
@@ -2333,15 +2380,15 @@ msgstr ""
 "composición se muestra al menos 2,5 segundos por foto (la duración de la "
 "presentación se alarga si hace falta)."
 
-#: templates/configure/tab_dispositions.html.jinja:26
+#: templates/configure/tab_dispositions.html.jinja:91
 msgid "Photos entières (sans recadrage)"
 msgstr "Fotos enteras (sin recortar)"
 
-#: templates/configure/tab_dispositions.html.jinja:30
+#: templates/configure/tab_dispositions.html.jinja:95
 msgid "Inclure les messages dans les compositions"
 msgstr "Incluir los mensajes en las composiciones"
 
-#: templates/configure/tab_dispositions.html.jinja:34
+#: templates/configure/tab_dispositions.html.jinja:99
 msgid ""
 "Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
 "moment-là)"
@@ -2349,7 +2396,7 @@ msgstr ""
 "Temas de temporada solo durante su periodo (y más frecuentes en ese "
 "momento)"
 
-#: templates/configure/tab_dispositions.html.jinja:36
+#: templates/configure/tab_dispositions.html.jinja:101
 msgid ""
 "affiche les messages dans la composition (un message à afficher déclenche"
 " l'une de ces dispositions)"
@@ -2357,11 +2404,11 @@ msgstr ""
 "muestra los mensajes dentro de la composición (un mensaje pendiente "
 "activa una de estas disposiciones)"
 
-#: templates/configure/tab_dispositions.html.jinja:36
+#: templates/configure/tab_dispositions.html.jinja:101
 msgid "messages affichés seuls"
 msgstr "mensajes mostrados solos"
 
-#: templates/configure/tab_dispositions.html.jinja:37
+#: templates/configure/tab_dispositions.html.jinja:102
 msgid ""
 "Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · "
 "Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon "
@@ -2371,15 +2418,15 @@ msgstr ""
 "noviembre · Pascua: 2 semanas alrededor de Pascua · Primavera, Otoño, "
 "Invierno: según la estación."
 
-#: templates/configure/tab_dispositions.html.jinja:47
+#: templates/configure/tab_dispositions.html.jinja:112
 msgid "Thème de saison"
 msgstr "Tema de temporada"
 
-#: templates/configure/tab_dispositions.html.jinja:48
+#: templates/configure/tab_dispositions.html.jinja:113
 msgid " (jusqu’à 3, dans des fantômes)"
 msgstr " (hasta 3, en fantasmas)"
 
-#: templates/configure/tab_dispositions.html.jinja:48
+#: templates/configure/tab_dispositions.html.jinja:113
 msgid "Les messages sont affichés seuls, en plein écran"
 msgstr "Los mensajes se muestran solos, a pantalla completa"
 
@@ -4730,6 +4777,18 @@ msgstr "Foto única"
 msgid "Compositions uniquement (au hasard)"
 msgstr "Solo composiciones (al azar)"
 
+#: utils/layout_presets.py:57
+msgid "Nom manquant."
+msgstr "Falta el nombre."
+
+#: utils/layout_presets.py:67 utils/layout_presets.py:80
+msgid "Configuration introuvable."
+msgstr "Configuración no encontrada."
+
+#: utils/layout_presets.py:70
+msgid "Ce nom existe déjà."
+msgstr "Este nombre ya existe."
+
 #: utils/message_renderer.py:30
 msgid "Nuit"
 msgstr "Noche"
@@ -5402,6 +5461,18 @@ msgstr "Nuevo orden guardado."
 #: web/routes_slideshow.py:515
 msgid "Disposition appliquée au diaporama."
 msgstr "Disposición aplicada a la presentación."
+
+#: web/routes_slideshow.py:545
+msgid "Configuration enregistrée."
+msgstr "Configuración guardada."
+
+#: web/routes_slideshow.py:558
+msgid "Configuration activée."
+msgstr "Configuración activada."
+
+#: web/routes_slideshow.py:567
+msgid "Configuration supprimée."
+msgstr "Configuración eliminada."
 
 #: web/routes_system.py:84
 msgid ""

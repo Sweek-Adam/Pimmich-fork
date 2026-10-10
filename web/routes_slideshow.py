@@ -513,3 +513,55 @@ def set_slideshow_layout():
     if is_slideshow_running():
         restart_slideshow_for_update()
     return jsonify({"success": True, "message": _("Disposition appliquée au diaporama.")})
+
+
+# --- Configurations de dispositions enregistrées ---
+
+def _presets_response(config, message=None):
+    from utils import layout_presets
+    data = {"success": True, "presets": layout_presets.listing(config)}
+    if message:
+        data["message"] = message
+    return jsonify(data)
+
+
+@app.route('/api/layout_presets', methods=['GET'])
+@login_required
+def layout_presets_api():
+    return _presets_response(load_config())
+
+
+@app.route('/api/layout_presets', methods=['POST'])
+@login_required
+def layout_presets_save_api():
+    """Enregistre les dispositions cochées sous un nom (ou met à jour une configuration : « id »)."""
+    from utils import layout_presets
+    data = request.get_json(silent=True) or {}
+    try:
+        config = layout_presets.save(load_config(), data.get("name", ""), data.get("id"), data.get("selection"))
+    except ValueError as e:
+        return jsonify({"success": False, "message": _(str(e))}), 400
+    save_config(config)
+    return _presets_response(config, _("Configuration enregistrée."))
+
+
+@app.route('/api/layout_presets/<preset_id>/activate', methods=['POST'])
+@login_required
+def layout_presets_activate_api(preset_id):
+    from utils import layout_presets
+    try:
+        config = layout_presets.activate(load_config(), preset_id)
+    except ValueError as e:
+        return jsonify({"success": False, "message": _(str(e))}), 404
+    save_config(config)
+    restart_slideshow_process()
+    return _presets_response(config, _("Configuration activée."))
+
+
+@app.route('/api/layout_presets/<preset_id>', methods=['DELETE'])
+@login_required
+def layout_presets_delete_api(preset_id):
+    from utils import layout_presets
+    config = layout_presets.delete(load_config(), preset_id)
+    save_config(config)
+    return _presets_response(config, _("Configuration supprimée."))

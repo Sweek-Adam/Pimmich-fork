@@ -162,6 +162,30 @@
   ]
  ],
  [
+  "/api/layout_presets",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/layout_presets",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/layout_presets/<preset_id>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
+  "/api/layout_presets/<preset_id>/activate",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/library",
   [
    "GET"
