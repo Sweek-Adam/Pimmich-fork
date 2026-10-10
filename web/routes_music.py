@@ -294,3 +294,104 @@ def music_volume_api():
     if not music_remote.set_volume(volume):
         return jsonify({"success": False, "message": _("Le son du cadre ne répond pas.")}), 500
     return jsonify({"success": True, "volume": max(0, min(100, volume))})
+
+
+# --- Radios et podcasts ---
+
+def _radio_favorites(config):
+    return [f for f in config.get("radio_favorites") or [] if isinstance(f, dict) and f.get("url")]
+
+
+@app.route('/api/radio', methods=['GET'])
+@login_required
+def radio_status_api():
+    from utils import radio
+    config = load_config()
+    return jsonify({"success": True, "stations": radio.STATIONS, "favorites": _radio_favorites(config),
+                    "podcasts": config.get("podcasts") or [], "playing": radio.playing()})
+
+
+@app.route('/api/radio/search', methods=['GET'])
+@login_required
+def radio_search_api():
+    from utils import radio
+    try:
+        return jsonify({"success": True, "stations": radio.search(request.args.get("q", ""))})
+    except requests.RequestException:
+        return jsonify({"success": False, "message": _("L'annuaire des radios ne répond pas.")}), 502
+
+
+@app.route('/api/radio/play', methods=['POST'])
+@login_required
+def radio_play_api():
+    from utils import radio
+    data = request.get_json(silent=True) or {}
+    try:
+        radio.play(data.get("url", ""), (data.get("name") or "Radio").strip(), volume=load_config().get("music_volume", 80))
+    except ValueError:
+        return jsonify({"success": False, "message": _("Adresse de radio invalide.")}), 400
+    except OSError:
+        return jsonify({"success": False, "message": _("Lecteur audio (mpv) introuvable sur le cadre.")}), 500
+    return jsonify({"success": True, "message": _("Radio lancée sur le cadre.")})
+
+
+@app.route('/api/radio/stop', methods=['POST'])
+@login_required
+def radio_stop_api():
+    from utils import radio
+    radio.stop()
+    return jsonify({"success": True, "message": _("Radio arrêtée.")})
+
+
+@app.route('/api/radio/favorites', methods=['POST'])
+@login_required
+def radio_favorites_api():
+    """Ajoute (ou retire, « remove ») une radio favorite."""
+    from utils import radio
+    data = request.get_json(silent=True) or {}
+    url, name = data.get("url", ""), (data.get("name") or "").strip()[:80]
+    if not radio._valid_url(url):
+        return jsonify({"success": False, "message": _("Adresse de radio invalide.")}), 400
+    config = dict(load_config())
+    favorites = [f for f in _radio_favorites(config) if f["url"] != url]
+    if not data.get("remove"):
+        favorites.append({"name": name or url, "url": url})
+    config["radio_favorites"] = favorites[:50]
+    save_config(config)
+    return jsonify({"success": True, "favorites": favorites})
+
+
+@app.route('/api/podcasts', methods=['POST'])
+@login_required
+def podcasts_api():
+    """Ajoute un podcast (flux RSS vérifié) ou en retire un (« remove »)."""
+    from utils import radio
+    data = request.get_json(silent=True) or {}
+    feed = (data.get("feed") or "").strip()
+    config = dict(load_config())
+    podcasts = [p for p in config.get("podcasts") or [] if p.get("feed") != feed]
+    if not data.get("remove"):
+        try:
+            episode = radio.latest_episode(feed)
+        except Exception:  # flux introuvable, invalide ou XML illisible
+            return jsonify({"success": False, "message": _("Flux de podcast introuvable ou invalide.")}), 400
+        podcasts.append({"name": episode["show"] or feed, "feed": feed})
+    config["podcasts"] = podcasts[:30]
+    save_config(config)
+    return jsonify({"success": True, "podcasts": podcasts})
+
+
+@app.route('/api/podcast/play', methods=['POST'])
+@login_required
+def podcast_play_api():
+    """Lit le dernier épisode d'un podcast enregistré."""
+    from utils import radio
+    feed = (request.get_json(silent=True) or {}).get("feed", "")
+    if feed not in [p.get("feed") for p in load_config().get("podcasts") or []]:
+        return jsonify({"success": False, "message": _("Podcast inconnu.")}), 404
+    try:
+        episode = radio.latest_episode(feed)
+        radio.play(episode["url"], f"{episode['show']} — {episode['title']}", kind="podcast", volume=load_config().get("music_volume", 80))
+    except Exception:  # flux introuvable, invalide ou épisode absent
+        return jsonify({"success": False, "message": _("Épisode introuvable.")}), 502
+    return jsonify({"success": True, "message": _("Dernier épisode lancé : %(title)s", title=episode["title"])})

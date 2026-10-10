@@ -408,6 +408,18 @@
   ]
  ],
  [
+  "/api/podcast/play",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/podcasts",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/presence",
   [
    "GET"
@@ -415,6 +427,36 @@
  ],
  [
   "/api/presence",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/radio",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/radio/favorites",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/radio/play",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/radio/search",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/radio/stop",
   [
    "POST"
   ]

@@ -215,7 +215,7 @@ def save_sound_settings_api():
 
 NOW_PLAYING_MODES = ("off", "change", "always")
 CORNERS = ("bottom_left", "bottom_right", "top_left", "top_right")
-SOURCE_LABELS = {"spotify": "Spotify", "airplay": "AirPlay", "bluetooth": "Bluetooth", "pimmich": N_("Musique du diaporama")}
+SOURCE_LABELS = {"spotify": "Spotify", "airplay": "AirPlay", "bluetooth": "Bluetooth", "radio": "Radio", "pimmich": N_("Musique du diaporama")}
 
 
 @app.route('/api/now_playing', methods=['GET'])

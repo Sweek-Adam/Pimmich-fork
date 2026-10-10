@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:21+0200\n"
+"POT-Creation-Date: 2026-10-10 23:25+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -596,6 +596,7 @@ msgid "Toutes"
 msgstr "Todas"
 
 #: templates/configure/_playlist_builder.html.jinja:40
+#: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:212
 msgid "Retirer"
 msgstr "Quitar"
@@ -614,6 +615,59 @@ msgstr "Memoria USB"
 #: utils/import_progress.py:14
 msgid "Téléphone"
 msgstr "Teléfono"
+
+#: templates/configure/_son_radio.html.jinja:2
+msgid "Radios et podcasts"
+msgstr "Radios y pódcasts"
+
+#: templates/configure/_son_radio.html.jinja:5
+msgid "Arrêter"
+msgstr "Detener"
+
+#: templates/configure/_son_radio.html.jinja:7
+msgid "Radios"
+msgstr "Radios"
+
+#: templates/configure/_son_radio.html.jinja:10
+msgid "Mes radios"
+msgstr "Mis radios"
+
+#: templates/configure/_son_radio.html.jinja:13
+msgid "Trouver une radio"
+msgstr "Buscar una radio"
+
+#: templates/configure/_son_radio.html.jinja:14
+msgid "Nom de la radio (ex : RTL, Chérie FM, BBC...)"
+msgstr "Nombre de la radio (p. ej. Cadena SER, RNE, BBC...)"
+
+#: templates/configure/_son_radio.html.jinja:16
+msgid "Podcasts"
+msgstr "Pódcasts"
+
+#: templates/configure/_son_radio.html.jinja:19
+msgid "Adresse du flux RSS du podcast"
+msgstr "Dirección del feed RSS del pódcast"
+
+#: templates/configure/_son_radio.html.jinja:20
+#: templates/configure/tab_affichage.html.jinja:211
+msgid "Ajouter"
+msgstr "Añadir"
+
+#: templates/configure/_son_radio.html.jinja:27
+msgid "Ajouter à mes radios"
+msgstr "Añadir a mis radios"
+
+#: templates/configure/_son_radio.html.jinja:27
+msgid "Retirer de mes radios"
+msgstr "Quitar de mis radios"
+
+#: templates/configure/_son_radio.html.jinja:28
+msgid "Aucune radio trouvée."
+msgstr "No se ha encontrado ninguna radio."
+
+#: templates/configure/_son_radio.html.jinja:28
+msgid "Écouter le dernier épisode"
+msgstr "Escuchar el último episodio"
 
 #: templates/configure/_son_spotify.html.jinja:5
 msgid "Associer le cadre à votre compte"
@@ -2029,10 +2083,6 @@ msgstr "fuera"
 #: templates/configure/tab_affichage.html.jinja:211
 msgid "Prénom"
 msgstr "Nombre"
-
-#: templates/configure/tab_affichage.html.jinja:211
-msgid "Ajouter"
-msgstr "Añadir"
 
 #: templates/configure/tab_affichage.html.jinja:212
 msgid "Pas de playlist"
@@ -3833,11 +3883,11 @@ msgstr ""
 " la presentación, Spotify y AirPlay. Mientras suena Spotify o AirPlay, la"
 " música de la presentación se pone en pausa."
 
-#: templates/configure/tab_son.html.jinja:54
+#: templates/configure/tab_son.html.jinja:56
 msgid "Le cadre comme enceinte"
 msgstr "El marco como altavoz"
 
-#: templates/configure/tab_son.html.jinja:58
+#: templates/configure/tab_son.html.jinja:60
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -3845,7 +3895,7 @@ msgstr ""
 "En la aplicación Spotify, elige «Cadre photo» como dispositivo: la música"
 " sale por la pantalla del marco. Se necesita una cuenta Spotify Premium."
 
-#: templates/configure/tab_son.html.jinja:62
+#: templates/configure/tab_son.html.jinja:64
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -3853,7 +3903,7 @@ msgstr ""
 "Desde un iPhone, iPad o Mac, envía el sonido de cualquier aplicación "
 "(Deezer, Apple Music, YouTube...) a «Cadre photo»."
 
-#: templates/configure/tab_son.html.jinja:67
+#: templates/configure/tab_son.html.jinja:69
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -3865,35 +3915,35 @@ msgstr ""
 "dispositivo nuevo durante 3 minutos después de pulsar «Vincular un "
 "teléfono»."
 
-#: templates/configure/tab_son.html.jinja:69
+#: templates/configure/tab_son.html.jinja:71
 msgid "Associer un téléphone"
 msgstr "Vincular un teléfono"
 
-#: templates/configure/tab_son.html.jinja:75
+#: templates/configure/tab_son.html.jinja:77
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "Para activar estas funciones, ejecuta una vez en la Raspberry Pi:"
 
-#: templates/configure/tab_son.html.jinja:84
+#: templates/configure/tab_son.html.jinja:86
 msgid "Actif"
 msgstr "Activo"
 
-#: templates/configure/tab_son.html.jinja:84
+#: templates/configure/tab_son.html.jinja:86
 msgid "Non installé"
 msgstr "No instalado"
 
-#: templates/configure/tab_son.html.jinja:128
+#: templates/configure/tab_son.html.jinja:130
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Visible: elige «Cadre photo» en el teléfono"
 
-#: templates/configure/tab_son.html.jinja:128
+#: templates/configure/tab_son.html.jinja:130
 msgid "connecté"
 msgstr "conectado"
 
-#: templates/configure/tab_son.html.jinja:129
+#: templates/configure/tab_son.html.jinja:131
 msgid "Oublier"
 msgstr "Olvidar"
 
-#: templates/configure/tab_son.html.jinja:129
+#: templates/configure/tab_son.html.jinja:131
 msgid "Aucun téléphone associé."
 msgstr "Ningún teléfono vinculado."
 
@@ -5599,6 +5649,43 @@ msgstr "No hay música en curso."
 #: web/routes_music.py:295
 msgid "Le son du cadre ne répond pas."
 msgstr "El sonido del marco no responde."
+
+#: web/routes_music.py:321
+msgid "L'annuaire des radios ne répond pas."
+msgstr "El directorio de radios no responde."
+
+#: web/routes_music.py:332 web/routes_music.py:354
+msgid "Adresse de radio invalide."
+msgstr "Dirección de radio no válida."
+
+#: web/routes_music.py:334
+msgid "Lecteur audio (mpv) introuvable sur le cadre."
+msgstr "Reproductor de audio (mpv) no encontrado en el marco."
+
+#: web/routes_music.py:335
+msgid "Radio lancée sur le cadre."
+msgstr "Radio reproduciéndose en el marco."
+
+#: web/routes_music.py:343
+msgid "Radio arrêtée."
+msgstr "Radio detenida."
+
+#: web/routes_music.py:377
+msgid "Flux de podcast introuvable ou invalide."
+msgstr "Feed de pódcast no encontrado o no válido."
+
+#: web/routes_music.py:391
+msgid "Podcast inconnu."
+msgstr "Pódcast desconocido."
+
+#: web/routes_music.py:396
+msgid "Épisode introuvable."
+msgstr "Episodio no encontrado."
+
+#: web/routes_music.py:397
+#, python-format
+msgid "Dernier épisode lancé : %(title)s"
+msgstr "Último episodio en reproducción: %(title)s"
 
 #: web/routes_playlists.py:81
 msgid "Disposition de la playlist enregistrée."

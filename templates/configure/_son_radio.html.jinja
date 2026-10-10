@@ -1,0 +1,106 @@
+                <section class="card" id="radio-card">
+                    <h2 class="card-title"><i class="fas fa-broadcast-tower text-indigo-500 mr-2"></i>{{ _("Radios et podcasts") }}</h2>
+                    <div id="rd-now" class="rd-now hidden">
+                        <span><i class="fas fa-volume-up"></i> <strong id="rd-now-name"></strong></span>
+                        <button type="button" id="rd-stop" class="btn-secondary"><i class="fas fa-stop mr-1"></i>{{ _("Arrêter") }}</button>
+                    </div>
+                    <h3 class="font-semibold mt-2 mb-2">{{ _("Radios") }}</h3>
+                    <div id="rd-stations" class="rd-grid"></div>
+                    <div id="rd-fav-box" class="hidden">
+                        <h3 class="font-semibold mt-4 mb-2">{{ _("Mes radios") }}</h3>
+                        <div id="rd-favorites" class="rd-grid"></div>
+                    </div>
+                    <h3 class="font-semibold mt-4 mb-2">{{ _("Trouver une radio") }}</h3>
+                    <input type="search" id="rd-search" class="w-full" placeholder="{{ _('Nom de la radio (ex : RTL, Chérie FM, BBC...)') }}">
+                    <div id="rd-results" class="rd-results"></div>
+                    <h3 class="font-semibold mt-4 mb-2">{{ _("Podcasts") }}</h3>
+                    <div id="rd-podcasts" class="rd-grid"></div>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <input type="url" id="rd-feed" class="flex-1" placeholder="{{ _('Adresse du flux RSS du podcast') }}">
+                        <button type="button" id="rd-add-feed" class="btn-secondary"><i class="fas fa-plus mr-1"></i>{{ _("Ajouter") }}</button>
+                    </div>
+                    <p id="rd-status" class="text-sm mt-2"></p>
+                </section>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { fav: {{ _("Ajouter à mes radios")|tojson }}, unfav: {{ _("Retirer de mes radios")|tojson }}, remove: {{ _("Retirer")|tojson }},
+                                    none: {{ _("Aucune radio trouvée.")|tojson }}, latest: {{ _("Écouter le dernier épisode")|tojson }} };
+                        const say = (t, ok) => { $("rd-status").textContent = t || ""; $("rd-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                        let favorites = [];
+                        const play = async (s) => { const r = await post("/api/radio/play", { url: s.url, name: s.name }); say(r.message, r.success); setTimeout(load, 800); };
+                        function tile(s, starred) {
+                            const card = document.createElement("div"); card.className = "rd-tile";
+                            const btn = document.createElement("button"); btn.type = "button"; btn.className = "rd-play";
+                            btn.innerHTML = '<i class="fas fa-play"></i>';
+                            const label = document.createElement("span");
+                            label.innerHTML = "<strong></strong><small></small>";
+                            label.querySelector("strong").textContent = s.name;
+                            label.querySelector("small").textContent = [s.genre, s.country].filter(Boolean).join(" · ");
+                            btn.append(label);
+                            btn.addEventListener("click", () => play(s));
+                            const star = document.createElement("button"); star.type = "button"; star.className = "rd-star" + (starred ? " on" : "");
+                            star.title = starred ? T.unfav : T.fav; star.setAttribute("aria-label", star.title);
+                            star.innerHTML = '<i class="fas fa-star"></i>';
+                            star.addEventListener("click", async () => {
+                                const r = await post("/api/radio/favorites", { url: s.url, name: s.name, remove: starred });
+                                if (r.success) { favorites = r.favorites; renderFavorites(); }
+                            });
+                            card.append(btn, star);
+                            return card;
+                        }
+                        const isFav = (s) => favorites.some(f => f.url === s.url);
+                        function renderFavorites() {
+                            $("rd-fav-box").classList.toggle("hidden", !favorites.length);
+                            $("rd-favorites").innerHTML = "";
+                            favorites.forEach(f => $("rd-favorites").appendChild(tile(f, true)));
+                        }
+                        async function load() {
+                            const d = await (await fetch("/api/radio")).json();
+                            favorites = d.favorites;
+                            $("rd-stations").innerHTML = "";
+                            d.stations.forEach(s => $("rd-stations").appendChild(tile(s, isFav(s))));
+                            renderFavorites();
+                            $("rd-now").classList.toggle("hidden", !d.playing);
+                            if (d.playing) $("rd-now-name").textContent = d.playing.name;
+                            $("rd-podcasts").innerHTML = "";
+                            d.podcasts.forEach(p => {
+                                const card = document.createElement("div"); card.className = "rd-tile";
+                                const btn = document.createElement("button"); btn.type = "button"; btn.className = "rd-play"; btn.title = T.latest;
+                                btn.innerHTML = '<i class="fas fa-podcast"></i>';
+                                const label = document.createElement("span"); label.innerHTML = "<strong></strong>"; label.querySelector("strong").textContent = p.name;
+                                btn.append(label);
+                                btn.addEventListener("click", async () => { say("…", true); const r = await post("/api/podcast/play", { feed: p.feed }); say(r.message, r.success); setTimeout(load, 800); });
+                                const rm = document.createElement("button"); rm.type = "button"; rm.className = "rd-star"; rm.title = T.remove; rm.setAttribute("aria-label", T.remove);
+                                rm.innerHTML = '<i class="fas fa-times"></i>';
+                                rm.addEventListener("click", async () => { await post("/api/podcasts", { feed: p.feed, remove: true }); load(); });
+                                card.append(btn, rm);
+                                $("rd-podcasts").appendChild(card);
+                            });
+                        }
+                        let searchTimer = null;
+                        $("rd-search").addEventListener("input", () => {
+                            clearTimeout(searchTimer);
+                            searchTimer = setTimeout(async () => {
+                                const q = $("rd-search").value.trim();
+                                if (q.length < 2) { $("rd-results").innerHTML = ""; return; }
+                                const d = await (await fetch("/api/radio/search?q=" + encodeURIComponent(q))).json();
+                                $("rd-results").innerHTML = "";
+                                if (!d.success) { say(d.message, false); return; }
+                                if (!d.stations.length) { $("rd-results").innerHTML = `<p class="muted">${T.none}</p>`; return; }
+                                const grid = document.createElement("div"); grid.className = "rd-grid";
+                                d.stations.forEach(s => grid.appendChild(tile(s, isFav(s))));
+                                $("rd-results").appendChild(grid);
+                            }, 450);
+                        });
+                        $("rd-stop").addEventListener("click", async () => { const r = await post("/api/radio/stop"); say(r.message, r.success); load(); });
+                        $("rd-add-feed").addEventListener("click", async () => {
+                            const r = await post("/api/podcasts", { feed: $("rd-feed").value.trim() });
+                            say(r.message || "", r.success);
+                            if (r.success) { $("rd-feed").value = ""; load(); }
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-son'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        load();
+                    });
+                </script>

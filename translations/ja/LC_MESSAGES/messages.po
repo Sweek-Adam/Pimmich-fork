@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:21+0200\n"
+"POT-Creation-Date: 2026-10-10 23:25+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -590,6 +590,7 @@ msgid "Toutes"
 msgstr "すべて"
 
 #: templates/configure/_playlist_builder.html.jinja:40
+#: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:212
 msgid "Retirer"
 msgstr "外す"
@@ -608,6 +609,59 @@ msgstr "USB メモリ"
 #: utils/import_progress.py:14
 msgid "Téléphone"
 msgstr "スマートフォン"
+
+#: templates/configure/_son_radio.html.jinja:2
+msgid "Radios et podcasts"
+msgstr "ラジオとポッドキャスト"
+
+#: templates/configure/_son_radio.html.jinja:5
+msgid "Arrêter"
+msgstr "停止"
+
+#: templates/configure/_son_radio.html.jinja:7
+msgid "Radios"
+msgstr "ラジオ"
+
+#: templates/configure/_son_radio.html.jinja:10
+msgid "Mes radios"
+msgstr "お気に入りのラジオ"
+
+#: templates/configure/_son_radio.html.jinja:13
+msgid "Trouver une radio"
+msgstr "ラジオを探す"
+
+#: templates/configure/_son_radio.html.jinja:14
+msgid "Nom de la radio (ex : RTL, Chérie FM, BBC...)"
+msgstr "ラジオ名（例：NHK、J-WAVE、BBC など）"
+
+#: templates/configure/_son_radio.html.jinja:16
+msgid "Podcasts"
+msgstr "ポッドキャスト"
+
+#: templates/configure/_son_radio.html.jinja:19
+msgid "Adresse du flux RSS du podcast"
+msgstr "ポッドキャストの RSS フィードのアドレス"
+
+#: templates/configure/_son_radio.html.jinja:20
+#: templates/configure/tab_affichage.html.jinja:211
+msgid "Ajouter"
+msgstr "追加"
+
+#: templates/configure/_son_radio.html.jinja:27
+msgid "Ajouter à mes radios"
+msgstr "お気に入りに追加"
+
+#: templates/configure/_son_radio.html.jinja:27
+msgid "Retirer de mes radios"
+msgstr "お気に入りから外す"
+
+#: templates/configure/_son_radio.html.jinja:28
+msgid "Aucune radio trouvée."
+msgstr "ラジオが見つかりません。"
+
+#: templates/configure/_son_radio.html.jinja:28
+msgid "Écouter le dernier épisode"
+msgstr "最新エピソードを再生"
 
 #: templates/configure/_son_spotify.html.jinja:5
 msgid "Associer le cadre à votre compte"
@@ -1984,10 +2038,6 @@ msgstr "外出中"
 #: templates/configure/tab_affichage.html.jinja:211
 msgid "Prénom"
 msgstr "名前"
-
-#: templates/configure/tab_affichage.html.jinja:211
-msgid "Ajouter"
-msgstr "追加"
 
 #: templates/configure/tab_affichage.html.jinja:212
 msgid "Pas de playlist"
@@ -3698,11 +3748,11 @@ msgstr ""
 "スライドショーの音楽、Spotify、AirPlay 用の小さく控えめな表示（ジャケット、曲名、アーティスト）。Spotify または "
 "AirPlay の再生中は、スライドショーの音楽が一時停止します。"
 
-#: templates/configure/tab_son.html.jinja:54
+#: templates/configure/tab_son.html.jinja:56
 msgid "Le cadre comme enceinte"
 msgstr "フォトフレームをスピーカーとして使う"
 
-#: templates/configure/tab_son.html.jinja:58
+#: templates/configure/tab_son.html.jinja:60
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -3710,7 +3760,7 @@ msgstr ""
 "Spotify アプリでデバイスとして「Cadre photo」を選ぶと、フォトフレームの画面から音楽が流れます。Spotify Premium "
 "アカウントが必要です。"
 
-#: templates/configure/tab_son.html.jinja:62
+#: templates/configure/tab_son.html.jinja:64
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -3718,7 +3768,7 @@ msgstr ""
 "iPhone、iPad、Mac から、任意のアプリ（Deezer、Apple Music、YouTube など）の音声を「Cadre "
 "photo」に送信できます。"
 
-#: templates/configure/tab_son.html.jinja:67
+#: templates/configure/tab_son.html.jinja:69
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -3729,35 +3779,35 @@ msgstr ""
 "など）：一度ペアリングすれば、次からは自動で再接続されます。新しい機器を受け付けるのは「スマートフォンをペアリング」を押してから 3 "
 "分間だけです。"
 
-#: templates/configure/tab_son.html.jinja:69
+#: templates/configure/tab_son.html.jinja:71
 msgid "Associer un téléphone"
 msgstr "スマートフォンをペアリング"
 
-#: templates/configure/tab_son.html.jinja:75
+#: templates/configure/tab_son.html.jinja:77
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "これらの機能を有効にするには、Raspberry Pi で一度だけ次を実行してください："
 
-#: templates/configure/tab_son.html.jinja:84
+#: templates/configure/tab_son.html.jinja:86
 msgid "Actif"
 msgstr "有効"
 
-#: templates/configure/tab_son.html.jinja:84
+#: templates/configure/tab_son.html.jinja:86
 msgid "Non installé"
 msgstr "未インストール"
 
-#: templates/configure/tab_son.html.jinja:128
+#: templates/configure/tab_son.html.jinja:130
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "検出可能：スマートフォンで「Cadre photo」を選んでください"
 
-#: templates/configure/tab_son.html.jinja:128
+#: templates/configure/tab_son.html.jinja:130
 msgid "connecté"
 msgstr "接続中"
 
-#: templates/configure/tab_son.html.jinja:129
+#: templates/configure/tab_son.html.jinja:131
 msgid "Oublier"
 msgstr "削除"
 
-#: templates/configure/tab_son.html.jinja:129
+#: templates/configure/tab_son.html.jinja:131
 msgid "Aucun téléphone associé."
 msgstr "ペアリング済みのスマートフォンはありません。"
 
@@ -5398,6 +5448,43 @@ msgstr "再生中の音楽はありません。"
 #: web/routes_music.py:295
 msgid "Le son du cadre ne répond pas."
 msgstr "フォトフレームの音声が応答しません。"
+
+#: web/routes_music.py:321
+msgid "L'annuaire des radios ne répond pas."
+msgstr "ラジオのディレクトリが応答しません。"
+
+#: web/routes_music.py:332 web/routes_music.py:354
+msgid "Adresse de radio invalide."
+msgstr "ラジオのアドレスが無効です。"
+
+#: web/routes_music.py:334
+msgid "Lecteur audio (mpv) introuvable sur le cadre."
+msgstr "フォトフレームに音声プレーヤー（mpv）が見つかりません。"
+
+#: web/routes_music.py:335
+msgid "Radio lancée sur le cadre."
+msgstr "フォトフレームでラジオを再生しました。"
+
+#: web/routes_music.py:343
+msgid "Radio arrêtée."
+msgstr "ラジオを停止しました。"
+
+#: web/routes_music.py:377
+msgid "Flux de podcast introuvable ou invalide."
+msgstr "ポッドキャストのフィードが見つからないか無効です。"
+
+#: web/routes_music.py:391
+msgid "Podcast inconnu."
+msgstr "不明なポッドキャストです。"
+
+#: web/routes_music.py:396
+msgid "Épisode introuvable."
+msgstr "エピソードが見つかりません。"
+
+#: web/routes_music.py:397
+#, python-format
+msgid "Dernier épisode lancé : %(title)s"
+msgstr "最新エピソードを再生中：%(title)s"
 
 #: web/routes_playlists.py:81
 msgid "Disposition de la playlist enregistrée."

@@ -68,7 +68,7 @@ def actions_for(source):
         return list(ACTIONS) if spotify.connected() else []
     if source in ("airplay", "bluetooth"):
         return list(ACTIONS) if _mpris_player(source) else []
-    if source == "pimmich":
+    if source in ("pimmich", "radio"):
         return ["pause", "play"]
     return []
 
@@ -91,6 +91,14 @@ def control(source, action):
             return "unsupported"
         result = _run("playerctl", "--player", player, action)
         return None if result is not None and result.returncode == 0 else "unreachable"
+    if source == "radio":
+        from utils import radio
+        if action not in ("pause", "play"):
+            return "unsupported"
+        if not radio.set_paused(action == "pause"):
+            return "unreachable"
+        now_playing.update("radio", state="paused" if action == "pause" else "playing")
+        return None
     if source == "pimmich":
         if action not in ("pause", "play"):
             return "unsupported"

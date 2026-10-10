@@ -21,8 +21,8 @@ from pathlib import Path
 STATE_FILE = Path("/tmp/pimmich_now_playing.json")
 COVER_DIR = Path("/tmp/pimmich_covers")
 AIRPLAY_PIPE = Path("/tmp/shairport-sync-metadata")
-SOURCES = ("spotify", "airplay", "bluetooth", "pimmich")
-EXTERNAL = ("spotify", "airplay", "bluetooth")
+SOURCES = ("spotify", "airplay", "bluetooth", "radio", "pimmich")
+EXTERNAL = ("spotify", "airplay", "bluetooth", "radio")
 
 
 def _load():
