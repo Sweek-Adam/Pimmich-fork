@@ -45,6 +45,7 @@ from utils.voice_control_manager import start_voice_control, stop_voice_control,
 from utils.telegram_bot import PimmichBot
 import secrets
 import smbclient
+from smbprotocol.exceptions import SMBException
 
 APP_INSTANCE_ID = secrets.token_hex(8)
 
@@ -148,9 +149,13 @@ werkzeug_logger.setLevel(logging.WARNING)
 
 app = Flask(__name__)
 
+# Fichier d'identification du compte administrateur principal (créé par setup.sh).
+# PIMMICH_CREDENTIALS_PATH permet de le remplacer (tests automatisés).
+CREDENTIALS_PATH = os.environ.get('PIMMICH_CREDENTIALS_PATH', '/boot/firmware/credentials.json')
+
 # --- Clé secrète ---
 # Jamais de clé par défaut connue : elle permettrait de fabriquer une session administrateur.
-app.secret_key = load_secret_key('/boot/firmware/credentials.json')
+app.secret_key = load_secret_key(CREDENTIALS_PATH)
 # Cookie de session non envoyé par les requêtes provenant d'autres sites (protection CSRF)
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 app.config['SESSION_COOKIE_HTTPONLY'] = True
@@ -232,7 +237,6 @@ BASE_DIR = Path(__file__).resolve().parent
 VIDEO_EXTENSIONS = ('.mp4', '.mov', '.avi', '.mkv')
 PENDING_UPLOADS_DIR = BASE_DIR / "static" / "pending_uploads"
 CONFIG_PATH = 'config/config.json'
-CREDENTIALS_PATH = '/boot/firmware/credentials.json'
 FILTER_STATES_PATH = 'config/filter_states.json'
 FAVORITES_PATH = 'config/favorites.json'
 POLAROID_TEXTS_PATH = 'config/polaroid_texts.json'
@@ -2208,24 +2212,6 @@ def telegram_bot_worker():
         else:
             telegram_status_manager.update_status(message="Bot désactivé ou non configuré.")
         time.sleep(60) # Attendre avant de vérifier à nouveau la config ou de relancer
-# --- Import depuis Clé USB ---
-
-@app.route("/import_usb_progress")
-@login_required
-def import_usb_progress():
-    @stream_with_context
-    def generate(): # type: ignore
-        try:
-            yield "Import depuis la clé USB...\n"
-            import_usb_photos()
-            yield "Préparation des photos...\n"
-            prepare_all_photos()
-            yield "Terminé. (100%)\n"
-        except Exception as e:
-            yield f"Erreur : {str(e)}\n"
-    return Response(generate(), mimetype="text/plain")
-
-
 # --- Gestion Diaporama ---
 
 @app.route("/slideshow")
