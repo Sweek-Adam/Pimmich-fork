@@ -131,6 +131,14 @@
                         <label for="anniversary_boost_factor" style="min-width: 200px;">{{ _("Facteur de boost anniversaire :") }}</label>
                         <input type="number" id="anniversary_boost_factor" name="anniversary_boost_factor" value="{{ config.get('anniversary_boost_factor', 2) }}" min="0">
                     </div>
+                    <div class="mt-4 p-3 rounded-lg bg-yellow-50">
+                        <h4 class="font-semibold mb-1"><i class="fas fa-star text-yellow-600 mr-1"></i>{{ _("Ce jour-là") }}</h4>
+                        <p class="text-sm text-gray-600 mb-2">{{ _("Les photos prises un jour comme aujourd'hui, les années précédentes (toutes les sources : date de l'appareil photo, ou du nom du fichier pour WhatsApp et les téléphones).") }}</p>
+                        <label class="block"><input type="checkbox" name="memories_banner" {% if config.get('memories_banner', True) %}checked{% endif %}>
+                            <span class="ml-2">{{ _("Ruban « Il y a 5 ans » sur ces photos") }}</span></label>
+                        <label class="block mt-1"><input type="checkbox" name="memories_composition" {% if config.get('memories_composition', True) %}checked{% endif %}>
+                            <span class="ml-2">{{ _("Composition « Ce jour-là » (une photo par année) toutes les 30 minutes") }}</span></label>
+                    </div>
                     <div style="margin-top: 16px;">
                         <label>
                             <input type="checkbox" name="slideshow_video_enabled" {% if config.get('slideshow_video_enabled', True) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher les vidéos dans le diaporama") }}</span>

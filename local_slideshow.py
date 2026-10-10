@@ -14,7 +14,7 @@ import subprocess, sys
 import glob
 import collections
 import math
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import json
 import qrcode
 import psutil
@@ -32,6 +32,7 @@ from utils import compositions, layout_engine
 from utils import play_queue
 from utils import now_playing
 from utils import music_remote
+from utils import photo_index
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -365,7 +366,7 @@ def perform_transition(screen, old_image_surface, new_image_path, duration, scre
     new_surface_scaled.blit(temp_surf, (img_x, img_y))
 
     # Récupérer les métadonnées pour l'image en cours de transition
-    photo_metadata = get_photo_metadata(new_image_path)
+    photo_metadata = display_metadata(new_image_path)
 
     # Pré-calculer l'overlay pour ne pas le redessiner à chaque frame (optimisation performances)
     overlay_surface = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
@@ -789,6 +790,65 @@ def get_path_to_display(photo_path_obj, source, filter_states):
             
     return path_to_display
 
+_photo_index_cache = {}
+_memories = {"path": None, "photos": 0, "shown_at": 0, "day": None}
+MEMORIES_EVERY = 30 * 60  # « Ce jour-là » : toutes les 30 minutes
+
+
+def prepare_memories(config, width, height):
+    """Compose en arrière-plan « Ce jour-là » (photos prises un jour comme aujourd'hui, les années précédentes)."""
+    today = date.today()
+    if not config.get("memories_composition", True) or _memories["day"] == today:
+        return
+    _memories.update(day=today, path=None, photos=0)
+
+    def work():
+        try:
+            from utils.themed_compositions_extra import memories_board
+            found = photo_index.on_this_day(today, photo_index.load())
+            by_year = {}
+            for key, taken in found:  # une photo par année (la diversité des années fait le charme)
+                by_year.setdefault(taken.year, (key, taken))
+            chosen = list(by_year.values())[-5:] if len(by_year) >= 2 else found[:5]
+            items = []
+            for key, taken in chosen:
+                image = compositions.load_photo(str(PREPARED_BASE_DIR / key), max_side=max(width, height) // 2)
+                if image is not None:
+                    items.append((image, taken))
+            if len(items) < 2:
+                return
+            path = compositions.OUTPUT_DIR / "memories_today.jpg"
+            compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            memories_board(items, width, height, random.Random(), today).save(path, "JPEG", quality=88)
+            _memories.update(path=str(path), photos=len(items))
+            logger.info(f"[Ce jour-là] {len(items)} souvenir(s) du {today.strftime('%d/%m')} prêts")
+        except Exception as e:
+            logger.warning(f"[Ce jour-là] Composition impossible : {e}")
+    threading.Thread(target=work, daemon=True).start()
+
+
+def pop_memories_slide():
+    """La composition « Ce jour-là » si c'est le moment de la montrer, sinon None."""
+    if _memories["path"] and time.time() - _memories["shown_at"] > MEMORIES_EVERY and os.path.exists(_memories["path"]):
+        _memories["shown_at"] = time.time()
+        return _memories["path"]
+    return None
+
+
+def refresh_photo_index():
+    """Met l'index des photos à jour en arrière-plan (dates, GPS) : « Ce jour-là », carte, légendes..."""
+    def work():
+        global _photo_index_cache
+        try:
+            read = photo_index.update()
+            _photo_index_cache = photo_index.load()
+            if read:
+                logger.info(f"[Index] {read} photo(s) ajoutée(s) à l'index ({len(_photo_index_cache)} au total)")
+        except Exception as e:
+            logger.warning(f"[Index] Mise à jour impossible : {e}")
+    threading.Thread(target=work, daemon=True).start()
+
+
 def build_playlist(media_list, config, favorites):
     """
     Construit la playlist finale en appliquant les boosts pour les favoris et les photos récentes.
@@ -813,8 +873,13 @@ def build_playlist(media_list, config, favorites):
         if normalized_relative_path in favorites:
             for _ in range(favorite_boost): playlist.append(media_path)
 
-        # --- Boost d'anniversaire ---
+        # --- Boost d'anniversaire (« Ce jour-là ») : date de l'index des photos, toutes sources ---
         if anniversary_boost_enabled:
+            taken = photo_index.taken(media_path, _photo_index_cache)
+            if taken:
+                if taken.month == datetime.now().month and taken.day == datetime.now().day and taken.year < datetime.now().year:
+                    for _ in range(anniversary_boost_factor): playlist.append(media_path)
+                continue
             photo_metadata = get_photo_metadata(media_path)
             if photo_metadata:
                 date_priority = [
@@ -1233,8 +1298,76 @@ def draw_now_playing(screen, screen_width, screen_height, config):
 
 
 # New function to draw the overlay elements (clock, date, weather)
+def display_metadata(path):
+    """Métadonnées affichées : celles d'Immich, complétées par l'index des photos (date et GPS, toutes sources)."""
+    meta = dict(get_photo_metadata(path) or {})
+    entry = photo_index.info(path, _photo_index_cache or None)
+    if entry.get("date") and not any(meta.get(k) for k in ("dateTimeOriginal", "DateTimeOriginal", "subSecDateTimeOriginal", "createDate", "CreateDate")):
+        meta["dateTimeOriginal"] = entry["date"]
+    if entry.get("lat") is not None and meta.get("latitude") is None:
+        meta["latitude"], meta["longitude"] = entry["lat"], entry["lon"]
+    return meta
+
+
+_memory_banner_cache = {"key": None, "surface": None}
+
+
+def memory_years(photo_metadata, today=None):
+    """Photo prise un jour comme aujourd'hui, les années précédentes : (années, date), sinon None."""
+    raw = next((photo_metadata.get(k) for k in ("dateTimeOriginal", "DateTimeOriginal", "subSecDateTimeOriginal", "createDate", "CreateDate")
+                if photo_metadata and photo_metadata.get(k)), None)
+    if not raw:
+        return None
+    try:
+        taken = datetime.fromisoformat(str(raw).replace("Z", "+00:00")).replace(tzinfo=None)
+    except ValueError:
+        return None
+    today = today or datetime.now()
+    if taken.month == today.month and taken.day == today.day and taken.year < today.year:
+        return today.year - taken.year, taken
+    return None
+
+
+def draw_memory_banner(screen, screen_width, screen_height, config, photo_metadata):
+    """Ruban « Il y a 5 ans · 10 octobre 2021 » sur les photos prises un jour comme aujourd'hui."""
+    if not config.get("memories_banner", True):
+        return
+    found = memory_years(photo_metadata)
+    if not found:
+        return
+    years, taken = found
+    try:
+        key = (years, taken.date(), screen_width)
+        cache = _memory_banner_cache
+        if cache["key"] != key:
+            unit = max(40, int(min(screen_width, screen_height) * 0.05))
+            big, small = _np_font(int(unit * 0.62), bold=True), _np_font(int(unit * 0.4))
+            title = big.render((_("Il y a %(num)d an") if years == 1 else _("Il y a %(num)d ans")) % {"num": years}, True, (60, 36, 6))
+            months = [_("janvier"), _("février"), _("mars"), _("avril"), _("mai"), _("juin"), _("juillet"), _("août"),
+                      _("septembre"), _("octobre"), _("novembre"), _("décembre")]
+            sub = small.render(f"{taken.day} {months[taken.month - 1]} {taken.year}", True, (90, 60, 20))
+            pad = unit // 3
+            width = max(title.get_width(), sub.get_width()) + unit + 3 * pad
+            surface = pygame.Surface((width, title.get_height() + sub.get_height() + 2 * pad), pygame.SRCALPHA)
+            pygame.draw.rect(surface, (255, 214, 120, 235), surface.get_rect(), border_radius=surface.get_height() // 2)
+            star_r = unit // 2.6
+            cx, cy = pad + unit // 2, surface.get_height() // 2
+            points = [(cx + (star_r if i % 2 == 0 else star_r * 0.45) * math.cos(-math.pi / 2 + i * math.pi / 5),
+                       cy + (star_r if i % 2 == 0 else star_r * 0.45) * math.sin(-math.pi / 2 + i * math.pi / 5)) for i in range(10)]
+            pygame.draw.polygon(surface, (200, 120, 10), points)
+            x = unit + 2 * pad
+            surface.blit(title, (x, pad))
+            surface.blit(sub, (x, pad + title.get_height()))
+            cache["key"], cache["surface"] = key, surface
+        surface = _memory_banner_cache["surface"]
+        screen.blit(surface, ((screen_width - surface.get_width()) // 2, int(screen_height * 0.03)))
+    except Exception as e:
+        logger.debug(f"Ruban « Ce jour-là » non affiché : {e}")
+
+
 def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata=None):
     draw_guest_qr(screen, screen_width, screen_height, config)
+    draw_memory_banner(screen, screen_width, screen_height, config, photo_metadata)
     sync_background_music()
     draw_now_playing(screen, screen_width, screen_height, config)
     now = datetime.now()
@@ -1497,7 +1630,7 @@ def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_m
                 logger.info(f"[Display] Erreur formatage date : {e}")
 
         # Mention "Anniversaire" (Il y a X ans)
-        if config.get("anniversary_boost_enabled", True) and date_taken_str:
+        if config.get("anniversary_boost_enabled", True) and date_taken_str and not config.get("memories_banner", True):
             try:
                 p_date = datetime.fromisoformat(date_taken_str.replace('Z', '+00:00'))
                 now = datetime.now()
@@ -1825,7 +1958,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
     """
     global paused, next_photo_requested, previous_photo_requested
     # Modification Sigalou 25/01/2026 - Récupération des métadonnées de la photo
-    photo_metadata = get_photo_metadata(photo_path) if photo_path else None
+    photo_metadata = display_metadata(photo_path) if photo_path else None
     # Fin Modification Sigalou 25/01/2026
 
     # Préparer l'image et les métadonnées dès le début pour éviter les erreurs de définition (NameError)
@@ -2470,6 +2603,10 @@ def start_slideshow():
 
                 all_media = [get_path_to_display(photo_path_obj, source, filter_states) for source, photo_path_obj in candidates]
                 
+                if not _photo_index_cache:
+                    _photo_index_cache.update(photo_index.load())  # index déjà construit : utilisable tout de suite
+                refresh_photo_index()
+                prepare_memories(config, SCREEN_WIDTH, SCREEN_HEIGHT)
                 playlist = build_playlist(all_media, config, favorites)
                 random.shuffle(playlist)
 
@@ -2601,6 +2738,9 @@ def start_slideshow():
                 else:  # un message arrive : affiché dans une disposition qui accepte les messages, plutôt que seul
                     wanted, slide_plan = layout_engine.plan_for_slide(slide_plan, playlist[playlist_index], _composition["counter"], include_messages)
                     wanted = wanted and bool(slide_plan.formats)
+                memories_slide = None if forced_layout is not None else pop_memories_slide()
+                if memories_slide:  # « Ce jour-là » : une diapositive en plus, sans décaler la playlist
+                    composition_path, composition_used, wanted = memories_slide, 0, False
                 if wanted and not layout_engine.is_video(playlist[playlist_index]):
                     prepare_composition(config, slide_plan, playlist, playlist_index, SCREEN_WIDTH, SCREEN_HEIGHT, force=forced_layout is not None, base_plan=layout_plan)
                     # On attend la composition préparée pour cette diapositive (l'écran garde l'image précédente) :
@@ -2717,7 +2857,7 @@ def start_slideshow():
                     if current_pil_image: # Only proceed if image was successfully loaded
                         slide_config = config
                         if composition_path:  # plusieurs photos à regarder : durée allongée si besoin
-                            slide_config = dict(config, display_duration=layout_engine.composition_seconds(config, composition_used))
+                            slide_config = dict(config, display_duration=layout_engine.composition_seconds(config, composition_used or _memories["photos"]))
                         display_photo_with_pan_zoom(screen, current_pil_image, SCREEN_WIDTH, SCREEN_HEIGHT, slide_config, main_font_loaded, photo_path)
                         previous_photo_surface = screen.copy()
                     else:

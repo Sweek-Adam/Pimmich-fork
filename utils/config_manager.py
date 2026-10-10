@@ -146,6 +146,8 @@ def create_default_config():
         # --- Telegram notification in overlay --- 
         "display_telegram_notification_overlay": True,
         "anniversary_boost_enabled": True,
+        "memories_banner": True,  # « Ce jour-là » : ruban « Il y a 5 ans »
+        "memories_composition": True,  # « Ce jour-là » : composition toutes les 30 minutes
         "anniversary_boost_factor": 2
     }
 

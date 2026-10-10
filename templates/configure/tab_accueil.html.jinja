@@ -62,6 +62,11 @@
                     <div id="home-queue" class="home-queue"><span class="muted">…</span></div>
                 </section>
 
+                <section class="card hidden" id="home-memories">
+                    <h2 class="card-title"><i class="fas fa-star text-yellow-600 mr-2"></i>{{ _("Ce jour-là") }}</h2>
+                    <div id="home-memories-list" class="memories-strip"></div>
+                </section>
+
                 <!-- Ambiances -->
                 <section class="card">
                     <div class="flex items-center justify-between">
@@ -217,7 +222,16 @@
                             if (data.success) { closePicker(); loadLayout(); }
                         }));
 
-                        loadSetup(); loadHealth(); loadQueue(); loadAmbiances(); loadLayout();
+                        // --- Ce jour-là ---
+                        async function loadMemories() {
+                            const data = await (await fetch('/api/memories/today')).json();
+                            $("home-memories").classList.toggle("hidden", !data.items.length);
+                            const ago = (n) => n === 1 ? {{ _("il y a 1 an")|tojson }} : {{ _("il y a %(num)s ans", num="__N__")|tojson }}.replace("__N__", n);
+                            $("home-memories-list").innerHTML = data.items.map(m =>
+                                `<figure><img src="${esc(m.thumb)}" loading="lazy" alt=""><figcaption><strong>${m.year}</strong> ${esc(ago(m.years_ago))}</figcaption></figure>`).join("");
+                        }
+
+                        loadSetup(); loadHealth(); loadQueue(); loadAmbiances(); loadLayout(); loadMemories();
                         setInterval(() => { if ($("tab-accueil").offsetParent) { loadQueue(); loadHealth(); } }, 15000);
                     });
                 </script>

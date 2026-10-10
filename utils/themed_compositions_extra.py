@@ -531,6 +531,35 @@ def new_year(photos, message, W, H, rng):
     return canvas.convert("RGB")
 
 
+def memories_board(items, W, H, rng, today=None):
+    """
+    « Ce jour-là » : photos prises un jour comme aujourd'hui, les années précédentes, chacune avec son année.
+    `items` : [(image, date)] (les plus anciennes d'abord).
+    """
+    today = today or date.today()
+    canvas = _textured(_gradient(W, H, (250, 240, 222), (238, 222, 196)), rng, 10).convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+    items = items[:5]
+    size = _photo_size(W, H, len(items), 0.92)
+    elements = []
+    for image, taken in items:
+        years = today.year - taken.year
+        label = (_t(N_("il y a %(num)s an")) if years == 1 else _t(N_("il y a %(num)s ans"))) % {"num": years}
+        border = max(8, size // 20)
+        card = base.framed(base.print_photo(image, size, size * 0.8), border, (255, 253, 248), bottom=border * 5)
+        cd = ImageDraw.Draw(card)
+        font_year, font_ago = _font(HAND2, int(border * 2.8)), _font(HAND2, int(border * 1.7))
+        cd.text((card.width / 2, card.height - border * 3.4), str(taken.year), font=font_year, fill=(150, 70, 30), anchor="mm")
+        cd.text((card.width / 2, card.height - border * 1.4), label, font=font_ago, fill=(120, 100, 80), anchor="mm")
+        elements.append(card)
+    _place_row(canvas, elements, H * 0.56, rng, 0.84, 0.05, 7)
+    months = [N_("janvier"), N_("février"), N_("mars"), N_("avril"), N_("mai"), N_("juin"), N_("juillet"), N_("août"),
+              N_("septembre"), N_("octobre"), N_("novembre"), N_("décembre")]
+    _title(canvas, f"{_t(N_('Ce jour-là'))} · {today.day} {_t(months[today.month - 1])}", HAND2, int(H * 0.1), (150, 70, 30), (W / 2, H * 0.12),
+           shadow=False, max_width=W * 0.8)
+    return canvas.convert("RGB")
+
+
 THEMES = {
     "hokusai": (N_("Hokusai – La Grande Vague"), 2, 3, True, hokusai),
     "fuji": (N_("Mont Fuji"), 3, 4, True, fuji),

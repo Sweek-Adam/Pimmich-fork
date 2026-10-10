@@ -46,6 +46,18 @@ def hardware_api():
     return jsonify({"success": True, **hardware.status()})
 
 
+@app.route('/api/memories/today', methods=['GET'])
+@login_required
+def memories_today_api():
+    """« Ce jour-là » : photos prises un jour comme aujourd'hui, les années précédentes."""
+    from utils import photo_index
+    today = datetime.now().date()
+    items = [{"thumb": url_for("static", filename=f"prepared/{key}"), "year": taken.year, "years_ago": today.year - taken.year}
+             for key, taken in photo_index.on_this_day(today)
+             if (photo_index.PREPARED_DIR / key).is_file()]
+    return jsonify({"success": True, "items": items[-24:]})
+
+
 @app.route('/api/setup', methods=['GET'])
 @login_required
 def setup_api():
