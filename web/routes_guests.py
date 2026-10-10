@@ -1,5 +1,6 @@
 """Photos des invités : page d'envoi publique, validation, invitations Telegram."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import import_progress
 import io
 from flask import send_file
 from utils import messages_manager, rate_limit
@@ -184,7 +185,7 @@ def manage_pending_photo():
         try:
             preparation_successful = False
             # Utiliser la fonction importée correcte et la source 'guests'
-            for update in prepare_all_photos_with_progress(screen_width, screen_height, source_type=target_source):
+            for update in import_progress.tracked(target_source, "prepare", prepare_all_photos_with_progress(screen_width, screen_height, source_type=target_source)):
                 # On vérifie si la préparation s'est terminée avec succès en lisant le flux d'événements
                 if update.get("type") == "done":
                     preparation_successful = True

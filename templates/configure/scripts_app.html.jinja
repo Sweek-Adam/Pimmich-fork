@@ -1,4 +1,5 @@
         <div id="autosave-indicator" role="status" aria-live="polite"></div>
+        <div id="import-toasts" aria-live="polite"></div>
         <script>
             // ===== Structure de l'application : navigation, état, recherche, enregistrement automatique =====
 
@@ -15,6 +16,40 @@
 
             window.addEventListener("DOMContentLoaded", () => {
                 const $ = (id) => document.getElementById(id);
+
+                // --- Imports en cours : notification persistante (téléchargement, préparation, photos préparées) ---
+                const IMP = { title: {{ _("Import")|tojson }}, download: {{ _("Téléchargement")|tojson }}, prepare: {{ _("Préparation")|tojson }},
+                              prepared: {{ _("photos préparées")|tojson }}, done: {{ _("Import terminé")|tojson }}, error: {{ _("Erreur")|tojson }},
+                              waiting: {{ _("en attente")|tojson }}, close: {{ _("Masquer")|tojson }} };
+                const hidden = new Set();
+                let importTimer = null;
+                const bar = (label, step, extra) => `<div class="imp-row"><div class="imp-label"><span>${label}</span><span>${step.percent} %${extra ? " · " + extra : ""}</span></div>
+                    <div class="imp-bar"><div style="width:${step.percent}%"></div></div></div>`;
+                async function refreshImports() {
+                    let data;
+                    try { data = await (await fetch("/api/imports/progress", { cache: "no-cache" })).json(); } catch (e) { return scheduleImports(10000); }
+                    const box = $("import-toasts");
+                    const visible = data.imports.filter(i => !hidden.has(i.source + i.started));
+                    box.innerHTML = visible.map(i => {
+                        const key = i.source + i.started;
+                        const showDownload = i.download.total > 0 || i.download.percent > 0;
+                        const prepTotal = i.prepare.total;
+                        const prepExtra = prepTotal ? `${i.prepare.current} / ${prepTotal} ${IMP.prepared}` : (i.prepare.percent ? "" : IMP.waiting);
+                        const status = i.error ? `<p class="imp-error">${IMP.error} : ${i.error.replace(/</g, "&lt;")}</p>` : "";
+                        return `<section class="imp-toast${i.active ? "" : " finished"}" data-key="${key}">
+                            <header><i class="fas ${i.active ? "fa-sync-alt fa-spin" : "fa-check-circle"}"></i>
+                                <strong>${i.active ? IMP.title + " · " + i.label : IMP.done + " · " + i.label}</strong>
+                                <button type="button" class="imp-close" title="${IMP.close}" aria-label="${IMP.close}">&times;</button></header>
+                            ${showDownload ? bar(IMP.download, i.download, i.download.total ? `${i.download.current} / ${i.download.total}` : "") : ""}
+                            ${bar(IMP.prepare, i.prepare, prepExtra)}
+                            ${status}
+                        </section>`;
+                    }).join("");
+                    box.querySelectorAll(".imp-close").forEach(b => b.addEventListener("click", () => { hidden.add(b.closest(".imp-toast").dataset.key); refreshImports(); }));
+                    scheduleImports(data.imports.some(i => i.active) ? 2500 : 10000);
+                }
+                const scheduleImports = (ms) => { clearTimeout(importTimer); importTimer = setTimeout(refreshImports, ms); };
+                refreshImports();
 
                 // --- Titre de la rubrique ---
                 const setTitle = (group) => {

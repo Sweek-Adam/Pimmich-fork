@@ -1,5 +1,6 @@
 """Imports de photos (USB, Immich, Samba, Google Drive, smartphone) et préparation."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import import_progress
 from web.core import _
 
 
@@ -16,7 +17,7 @@ def import_usb():
             """Formate les données en événement Server-Sent Event (SSE)."""
             return f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
         try:
-            for update in import_usb_photos():
+            for update in import_progress.tracked("usb", "download", import_usb_photos()):
                 yield stream_event(update)
         except Exception as e:
             yield stream_event({"type": "error", "message": f"Erreur critique : {str(e)}"})
@@ -41,7 +42,7 @@ def import_immich():
         
         def run_import():
             try:
-                for update in download_and_extract_album(config):
+                for update in import_progress.tracked("immich", "download", download_and_extract_album(config)):
                     q.put(update)
                 q.put(None)
             except Exception as e:
@@ -83,7 +84,7 @@ def import_samba():
         
         def run_import():
             try:
-                for update in import_samba_photos(config):
+                for update in import_progress.tracked("samba", "download", import_samba_photos(config)):
                     q.put(update)
                 q.put(None)
             except Exception as e:
@@ -125,7 +126,7 @@ def import_gdrive():
 
         def run_import():
             try:
-                for update in import_gdrive_photos(config):
+                for update in import_progress.tracked("gdrive", "download", import_gdrive_photos(config)):
                     q.put(update)
                 q.put(None)
             except Exception as e:
@@ -207,7 +208,7 @@ def import_smartphone():
             yield stream_event({"type": "progress", "stage": "PREPARING", "percent": 80, "message": f"{len(uploaded_files)} photos reçues, préparation en cours..."})
 
             # --- Étape 2: Préparation des photos ---
-            for update in prepare_all_photos_with_progress(screen_width, screen_height, source_type="smartphone"):
+            for update in import_progress.tracked("smartphone", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, source_type="smartphone")):
                 # Ajouter l'URL d'aperçu
                 if update.get("current_photo_path"):
                     update["current_photo_url"] = url_for('static', filename=f"prepared/smartphone/{update['current_photo_path']}")
@@ -320,7 +321,7 @@ def prepare_photos():
                     final_caption_map[filename] = caption
 
                 # Lancer la préparation et envoyer les mises à jour dans la queue.
-                for update in prepare_all_photos_with_progress(screen_width, screen_height, source_type=source, description_map=final_caption_map):
+                for update in import_progress.tracked(source, "prepare", prepare_all_photos_with_progress(screen_width, screen_height, source_type=source, description_map=final_caption_map)):
                     q.put(update)
                 q.put(None) # Marqueur de fin
             except Exception as e:
@@ -421,3 +422,14 @@ def gdrive_denied_retry_api():
     from utils.import_gdrive import retry_trash_denied
     count = retry_trash_denied()
     return jsonify({"success": True, "message": _("%(count)s photo(s) seront de nouveau proposées à la corbeille à la prochaine synchronisation.", count=count)})
+
+
+@app.route('/api/imports/progress', methods=['GET'])
+@login_required
+def imports_progress_api():
+    """Imports en cours (téléchargement et préparation) : notification persistante de l'interface."""
+    items = import_progress.snapshot()
+    translate = _  # appel indirect : l'extracteur ne doit pas prendre la clé « label » pour un texte
+    for item in items:
+        item["label"] = translate(item["label"])
+    return jsonify({"success": True, "imports": items})

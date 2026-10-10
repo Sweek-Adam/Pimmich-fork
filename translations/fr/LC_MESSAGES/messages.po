@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 22:57+0200\n"
+"POT-Creation-Date: 2026-10-10 23:01+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Son"
 msgstr ""
 
-#: templates/configure.html.jinja:137
+#: templates/configure.html.jinja:137 utils/import_progress.py:14
 msgid "Invités"
 msgstr ""
 
@@ -705,31 +705,65 @@ msgstr ""
 msgid "Demande de code à Spotify…"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:29
+#: templates/configure/scripts_app.html.jinja:21
+msgid "Import"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:21
+msgid "Téléchargement"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:21
+msgid "Préparation"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:22
+msgid "photos préparées"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:22
+msgid "Import terminé"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:22
+#: templates/configure/scripts_gallery.html.jinja:9
+msgid "Erreur"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:23
+msgid "en attente"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:23
+#: templates/configure/tab_accueil.html.jinja:6
+msgid "Masquer"
+msgstr ""
+
+#: templates/configure/scripts_app.html.jinja:64
 msgid "En marche"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:29
+#: templates/configure/scripts_app.html.jinja:64
 msgid "Arrêté"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:29
+#: templates/configure/scripts_app.html.jinja:64
 msgid "En veille"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:65
+#: templates/configure/scripts_app.html.jinja:100
 msgid "Aucun réglage trouvé."
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:100
+#: templates/configure/scripts_app.html.jinja:135
 msgid "Enregistrement…"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:104 web/routes_config.py:259
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:259
 msgid "Enregistré"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:106
+#: templates/configure/scripts_app.html.jinja:141
 msgid "Échec de l'enregistrement : vérifiez la connexion au cadre."
 msgstr ""
 
@@ -750,10 +784,6 @@ msgstr ""
 #: templates/configure/tab_stats.html.jinja:15
 #: templates/configure/tab_stats.html.jinja:18
 msgid "Chargement..."
-msgstr ""
-
-#: templates/configure/scripts_gallery.html.jinja:9
-msgid "Erreur"
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:10
@@ -1324,10 +1354,6 @@ msgstr ""
 
 #: templates/configure/tab_accueil.html.jinja:5
 msgid "Bien démarrer"
-msgstr ""
-
-#: templates/configure/tab_accueil.html.jinja:6
-msgid "Masquer"
 msgstr ""
 
 #: templates/configure/tab_accueil.html.jinja:15
@@ -2935,7 +2961,7 @@ msgstr ""
 msgid "Aucun message publié."
 msgstr ""
 
-#: templates/configure/tab_messages.html.jinja:98 web/routes_guests.py:328
+#: templates/configure/tab_messages.html.jinja:98 web/routes_guests.py:329
 msgid "Invité"
 msgstr ""
 
@@ -4283,6 +4309,18 @@ msgstr ""
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr ""
 
+#: utils/import_progress.py:13
+msgid "Partage réseau"
+msgstr ""
+
+#: utils/import_progress.py:13
+msgid "Clé USB"
+msgstr ""
+
+#: utils/import_progress.py:14
+msgid "Téléphone"
+msgstr ""
+
 #: utils/layout_engine.py:35
 msgid "Selon les réglages"
 msgstr ""
@@ -4608,73 +4646,73 @@ msgid ""
 "changements."
 msgstr ""
 
-#: web/routes_guests.py:35
+#: web/routes_guests.py:36
 #, python-format
 msgid "L'accès pour l'invité '%(name)s' a été révoqué."
 msgstr ""
 
-#: web/routes_guests.py:80 web/routes_guests.py:85
+#: web/routes_guests.py:81 web/routes_guests.py:86
 msgid "Aucun fichier sélectionné."
 msgstr ""
 
-#: web/routes_guests.py:103
+#: web/routes_guests.py:104
 #, python-format
 msgid "%(count)s photo(s) envoyée(s) pour validation avec succès !"
 msgstr ""
 
-#: web/routes_guests.py:164
+#: web/routes_guests.py:165
 msgid "Photo rejetée."
 msgstr ""
 
-#: web/routes_guests.py:207
+#: web/routes_guests.py:208
 msgid "Photo approuvée et préparée. Le diaporama a été mis à jour."
 msgstr ""
 
-#: web/routes_guests.py:209
+#: web/routes_guests.py:210
 msgid "La préparation de la photo a échoué. La photo reste en attente."
 msgstr ""
 
-#: web/routes_guests.py:213
+#: web/routes_guests.py:214
 msgid "Action inconnue."
 msgstr ""
 
-#: web/routes_guests.py:289
+#: web/routes_guests.py:290
 msgid "Les messages des invités sont désactivés."
 msgstr ""
 
-#: web/routes_guests.py:300
+#: web/routes_guests.py:301
 msgid "Trop d'aperçus, réessayez plus tard."
 msgstr ""
 
-#: web/routes_guests.py:322
+#: web/routes_guests.py:323
 msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr ""
 
-#: web/routes_guests.py:339
+#: web/routes_guests.py:340
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr ""
 
-#: web/routes_guests.py:371
+#: web/routes_guests.py:372
 msgid ""
 "Lancez d'abord une fois sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
 msgstr ""
 
-#: web/routes_guests.py:374
+#: web/routes_guests.py:375
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr ""
 
-#: web/routes_guests.py:380
+#: web/routes_guests.py:381
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr ""
 
-#: web/routes_guests.py:381
+#: web/routes_guests.py:382
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr ""
 
-#: web/routes_guests.py:391
+#: web/routes_guests.py:392
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr ""
 
@@ -4716,7 +4754,7 @@ msgstr ""
 msgid "Réglages du son enregistrés."
 msgstr ""
 
-#: web/routes_imports.py:423
+#: web/routes_imports.py:424
 #, python-format
 msgid ""
 "%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
@@ -5052,56 +5090,56 @@ msgstr ""
 msgid "Erreur interne du serveur : %(error)s"
 msgstr ""
 
-#: web/workers.py:159 web/workers.py:268 web/workers.py:361
+#: web/workers.py:160 web/workers.py:269 web/workers.py:362
 msgid "Import initial ignoré."
 msgstr ""
 
-#: web/workers.py:172 web/workers.py:281
+#: web/workers.py:173 web/workers.py:282
 #, python-format
 msgid "Mise à jour auto. activée. Intervalle : %(hours)sh."
 msgstr ""
 
-#: web/workers.py:178
+#: web/workers.py:179
 msgid "Lancement du téléchargement..."
 msgstr ""
 
-#: web/workers.py:210 web/workers.py:301 web/workers.py:377
+#: web/workers.py:211 web/workers.py:302 web/workers.py:378
 msgid "Préparation des photos..."
 msgstr ""
 
-#: web/workers.py:225 web/workers.py:324
+#: web/workers.py:226 web/workers.py:325
 msgid "Mise à jour terminée. Redémarrage du diaporama..."
 msgstr ""
 
-#: web/workers.py:230 web/workers.py:329 web/workers.py:395
+#: web/workers.py:231 web/workers.py:330 web/workers.py:396
 msgid "Dernière mise à jour réussie."
 msgstr ""
 
-#: web/workers.py:233 web/workers.py:332 web/workers.py:397
+#: web/workers.py:234 web/workers.py:333 web/workers.py:398
 msgid "Mise à jour terminée avec avertissements/erreurs."
 msgstr ""
 
-#: web/workers.py:240
+#: web/workers.py:241
 msgid "Mise à jour automatique désactivée."
 msgstr ""
 
-#: web/workers.py:287
+#: web/workers.py:288
 msgid "Lancement de l'import..."
 msgstr ""
 
-#: web/workers.py:338
+#: web/workers.py:339
 msgid "Mise à jour automatique Samba désactivée."
 msgstr ""
 
-#: web/workers.py:365
+#: web/workers.py:366
 msgid "Recherche de nouveautés..."
 msgstr ""
 
-#: web/workers.py:400
+#: web/workers.py:401
 msgid "Aucune nouveauté."
 msgstr ""
 
-#: web/workers.py:406
+#: web/workers.py:407
 msgid "Mise à jour automatique Google Drive désactivée."
 msgstr ""
 
