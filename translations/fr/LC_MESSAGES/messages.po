@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 21:44+0200\n"
+"POT-Creation-Date: 2026-10-10 21:50+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -134,6 +134,7 @@ msgid "À suivre"
 msgstr ""
 
 #: templates/configure.html.jinja:121
+#: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr ""
 
@@ -390,14 +391,17 @@ msgid "Aucune musique en cours de lecture."
 msgstr ""
 
 #: templates/configure/_music_remote.html.jinja:11
+#: templates/configure/_son_spotify.html.jinja:62
 msgid "Précédent"
 msgstr ""
 
 #: templates/configure/_music_remote.html.jinja:12
+#: templates/configure/_son_spotify.html.jinja:63
 msgid "Lecture / pause"
 msgstr ""
 
 #: templates/configure/_music_remote.html.jinja:13
+#: templates/configure/_son_spotify.html.jinja:64
 msgid "Suivant"
 msgstr ""
 
@@ -503,55 +507,129 @@ msgid "Déconnecter"
 msgstr ""
 
 #: templates/configure/_son_spotify.html.jinja:50
-#: templates/configure/_son_spotify.html.jinja:71
-msgid "Lire sur le cadre"
+msgid "Lecture en cours"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:52
-msgid "Rechercher une playlist…"
+#: templates/configure/_son_spotify.html.jinja:51
+msgid ""
+"Rien ne joue sur votre compte Spotify pour le moment : lancez une "
+"playlist ci-dessous ou recherchez un titre."
 msgstr ""
 
 #: templates/configure/_son_spotify.html.jinja:58
-msgid "Musiques associées"
+msgid "Écouter sur le cadre"
 msgstr ""
 
 #: templates/configure/_son_spotify.html.jinja:59
+msgid "Avancement"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:61
+msgid "Lecture aléatoire"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:65
+msgid "Répéter"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:67
+msgid "Volume Spotify"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:71
+msgid "À suivre sur Spotify"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:76
+msgid "Rechercher"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:77
+msgid "Titre, artiste, album, playlist…"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:81
+#: templates/configure/_son_spotify.html.jinja:101
+msgid "Lire sur le cadre"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:83
+msgid "Rechercher une playlist…"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:88
+msgid "Musiques associées"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:89
 msgid ""
 "Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou "
 "la playlist de photos."
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:70
+#: templates/configure/_son_spotify.html.jinja:100
 #: templates/configure/tab_accueil.html.jinja:68
 msgid "Ambiance"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:70
+#: templates/configure/_son_spotify.html.jinja:100
 msgid "Playlist de photos"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:71
+#: templates/configure/_son_spotify.html.jinja:101
 #: templates/configure/tab_son.html.jinja:8
 msgid "Aucune musique"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:72
+#: templates/configure/_son_spotify.html.jinja:102
 msgid "titres"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:72
+#: templates/configure/_son_spotify.html.jinja:102
 msgid "Aucune playlist trouvée."
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:73
+#: templates/configure/_son_spotify.html.jinja:103
 msgid "Compte :"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:73
+#: templates/configure/_son_spotify.html.jinja:103
 msgid "Copié"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:140
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "sur"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "Ajouter à la file"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "Écouter maintenant sur le cadre"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:111
+msgid "Ajouté à la file d'attente."
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:111
+msgid "Aucun résultat."
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Titres"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Artistes"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Albums"
+msgstr ""
+
+#: templates/configure/_son_spotify.html.jinja:281
 msgid "Demande de code à Spotify…"
 msgstr ""
 
@@ -4264,7 +4342,7 @@ msgstr ""
 msgid "Musique introuvable."
 msgstr ""
 
-#: web/routes_home.py:177 web/routes_music.py:260
+#: web/routes_home.py:177 web/routes_music.py:293
 msgid "Volume invalide."
 msgstr ""
 
@@ -4410,6 +4488,7 @@ msgid "Spotify est déconnecté de l'interface."
 msgstr ""
 
 #: web/routes_music.py:159 web/routes_music.py:171 web/routes_music.py:183
+#: web/routes_music.py:194
 msgid "Spotify ne répond pas : vérifiez la connexion internet du cadre."
 msgstr ""
 
@@ -4417,37 +4496,37 @@ msgstr ""
 msgid "Lecture lancée sur le cadre."
 msgstr ""
 
-#: web/routes_music.py:197
+#: web/routes_music.py:230
 msgid "Association invalide."
 msgstr ""
 
-#: web/routes_music.py:206
+#: web/routes_music.py:239
 msgid "Musique associée enregistrée."
 msgstr ""
 
-#: web/routes_music.py:211
+#: web/routes_music.py:244
 msgid "Cette source ne peut pas être commandée d'ici."
 msgstr ""
 
-#: web/routes_music.py:212
+#: web/routes_music.py:245
 msgid "Le lecteur ne répond pas."
 msgstr ""
 
-#: web/routes_music.py:235
+#: web/routes_music.py:268
 msgid ""
 "Pour commander Spotify d'ici, connectez-le (Écran > Son > Spotify, étape "
 "2)."
 msgstr ""
 
-#: web/routes_music.py:236
+#: web/routes_music.py:269
 msgid "Commandez la lecture depuis le téléphone."
 msgstr ""
 
-#: web/routes_music.py:246
+#: web/routes_music.py:279
 msgid "Aucune musique en cours."
 msgstr ""
 
-#: web/routes_music.py:262
+#: web/routes_music.py:295
 msgid "Le son du cadre ne répond pas."
 msgstr ""
 

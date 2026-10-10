@@ -47,10 +47,40 @@
 
                     <div id="sp-music" class="hidden">
                         <div class="spotify-step">
+                            <h3><span class="step-num"><i class="fas fa-headphones"></i></span>{{ _("Lecture en cours") }}</h3>
+                            <p id="spp-idle" class="text-sm text-gray-600">{{ _("Rien ne joue sur votre compte Spotify pour le moment : lancez une playlist ci-dessous ou recherchez un titre.") }}</p>
+                            <div id="spp" class="sp-player hidden">
+                                <img id="spp-cover" alt="">
+                                <div class="spp-main">
+                                    <strong id="spp-title"></strong>
+                                    <span id="spp-artist" class="muted"></span>
+                                    <span class="spp-device"><i class="fas fa-volume-up"></i> <span id="spp-device"></span>
+                                        <button type="button" id="spp-transfer" class="link hidden">{{ _("Écouter sur le cadre") }}</button></span>
+                                    <div class="spp-progress"><span id="spp-pos">0:00</span><input type="range" id="spp-seek" min="0" max="1000" value="0" aria-label="{{ _('Avancement') }}"><span id="spp-dur">0:00</span></div>
+                                    <div class="spp-controls mr-buttons">
+                                        <button type="button" data-sp="shuffle" title="{{ _('Lecture aléatoire') }}" aria-label="{{ _('Lecture aléatoire') }}"><i class="fas fa-random"></i></button>
+                                        <button type="button" data-sp="previous" title="{{ _('Précédent') }}" aria-label="{{ _('Précédent') }}"><i class="fas fa-step-backward"></i></button>
+                                        <button type="button" data-sp="toggle" class="mr-main" title="{{ _('Lecture / pause') }}" aria-label="{{ _('Lecture / pause') }}"><i class="fas fa-play"></i></button>
+                                        <button type="button" data-sp="next" title="{{ _('Suivant') }}" aria-label="{{ _('Suivant') }}"><i class="fas fa-step-forward"></i></button>
+                                        <button type="button" data-sp="repeat" title="{{ _('Répéter') }}" aria-label="{{ _('Répéter') }}"><i class="fas fa-redo"></i><span class="spp-one">1</span></button>
+                                    </div>
+                                    <label class="mr-volume spp-volume"><i class="fas fa-volume-down"></i><input type="range" id="spp-volume" min="0" max="100" step="5" aria-label="{{ _('Volume Spotify') }}"><span id="spp-volume-value" class="mr-volume-value"></span></label>
+                                </div>
+                            </div>
+                            <div id="spp-queue-box" class="hidden mt-3">
+                                <h4 class="font-semibold text-sm mb-2">{{ _("À suivre sur Spotify") }}</h4>
+                                <ol id="spp-queue" class="spp-list"></ol>
+                            </div>
+                        </div>
+                        <div class="spotify-step">
+                            <h3><span class="step-num"><i class="fas fa-search"></i></span>{{ _("Rechercher") }}</h3>
+                            <input type="search" id="spp-search" placeholder="{{ _('Titre, artiste, album, playlist…') }}" class="w-full">
+                            <div id="spp-results" class="spp-results"></div>
+                        </div>
+                        <div class="spotify-step">
                             <h3><span class="step-num"><i class="fas fa-play"></i></span>{{ _("Lire sur le cadre") }}</h3>
                             <div class="flex flex-wrap items-center gap-2 mb-3">
                                 <input type="search" id="sp-filter" placeholder="{{ _('Rechercher une playlist…') }}" class="flex-1">
-
                             </div>
                             <div id="sp-playlists" class="sp-playlists"></div>
                         </div>
@@ -74,7 +104,117 @@
                         };
                         const say = (text, ok) => { $("sp-message").textContent = text || ""; $("sp-message").className = "text-sm mt-2 " + (ok ? "text-green-600" : "text-red-600"); };
                         const post = async (url, body) => (await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) })).json();
-                        let state = null, lists = [], polling = null;
+                        let state = null, lists = [], polling = null, playerTimer = null;
+                        // --- Lecture en cours sur Spotify ---
+                        const fmt = (ms) => { const t = Math.max(0, Math.round(ms / 1000)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`; };
+                        const P = { on: {{ _("sur")|tojson }}, add: {{ _("Ajouter à la file")|tojson }}, playNow: {{ _("Écouter maintenant sur le cadre")|tojson }},
+                                    added: {{ _("Ajouté à la file d'attente.")|tojson }}, none: {{ _("Aucun résultat.")|tojson }},
+                                    tracks: {{ _("Titres")|tojson }}, artists: {{ _("Artistes")|tojson }}, albums: {{ _("Albums")|tojson }}, playlists: {{ _("Playlists")|tojson }} };
+                        let player = null, seeking = false, volTimer = null, tick = Date.now();
+                        const spAction = async (action, value) => {
+                            const r = await post('/api/spotify/player', { action, value });
+                            if (!r.success) say(r.message, false); else setTimeout(loadPlayer, 600);
+                            return r;
+                        };
+                        async function loadPlayer() {
+                            if (!$("tab-son").offsetParent || !state || !state.connected) return;
+                            try { player = await (await fetch('/api/spotify/player')).json(); } catch (e) { return; }
+                            tick = Date.now();
+                            renderPlayer();
+                        }
+                        function renderPlayer() {
+                            const active = player && player.success && player.active;
+                            $("spp").classList.toggle("hidden", !active);
+                            $("spp-idle").classList.toggle("hidden", !!active);
+                            $("spp-queue-box").classList.toggle("hidden", !active || !player.queue.length);
+                            if (!active) return;
+                            const t = player.track;
+                            if ($("spp-cover").getAttribute("src") !== t.image) $("spp-cover").src = t.image || "";
+                            $("spp-title").textContent = t.name;
+                            $("spp-artist").textContent = [t.artists, t.album].filter(Boolean).join(" · ");
+                            $("spp-device").textContent = `${P.on} ${player.device}`;
+                            $("spp-transfer").classList.toggle("hidden", player.on_frame);
+                            $("spp-dur").textContent = fmt(t.duration_ms);
+                            updateProgress();
+                            document.querySelector('[data-sp="toggle"] i').className = "fas " + (player.playing ? "fa-pause" : "fa-play");
+                            document.querySelector('[data-sp="shuffle"]').classList.toggle("on", player.shuffle);
+                            const repeat = document.querySelector('[data-sp="repeat"]');
+                            repeat.classList.toggle("on", player.repeat !== "off");
+                            repeat.classList.toggle("one", player.repeat === "track");
+                            $("spp-volume").closest("label").classList.toggle("hidden", player.volume === null || player.volume === undefined);
+                            if (!volTimer && player.volume !== null) { $("spp-volume").value = player.volume; $("spp-volume-value").textContent = `${player.volume} %`; }
+                            $("spp-queue").innerHTML = "";
+                            player.queue.forEach(q => $("spp-queue").appendChild(trackRow(q, false)));
+                        }
+                        function updateProgress() {
+                            if (!player || !player.active || seeking) return;
+                            const pos = Math.min(player.track.duration_ms, player.progress_ms + (player.playing ? Date.now() - tick : 0));
+                            $("spp-pos").textContent = fmt(pos);
+                            $("spp-seek").value = player.track.duration_ms ? Math.round(1000 * pos / player.track.duration_ms) : 0;
+                        }
+                        setInterval(updateProgress, 1000);
+                        $("spp-seek").addEventListener("input", () => { seeking = true; $("spp-pos").textContent = fmt(player.track.duration_ms * $("spp-seek").value / 1000); });
+                        $("spp-seek").addEventListener("change", async () => {
+                            const ms = Math.round(player.track.duration_ms * $("spp-seek").value / 1000);
+                            player.progress_ms = ms; tick = Date.now(); seeking = false;
+                            await spAction("seek", ms);
+                        });
+                        document.querySelectorAll("[data-sp]").forEach(b => b.addEventListener("click", async () => {
+                            const what = b.dataset.sp;
+                            if (what === "toggle") { const r = await post('/api/spotify/control', { action: player.playing ? "pause" : "resume" }); if (!r.success) say(r.message, false); setTimeout(loadPlayer, 600); }
+                            else if (what === "previous" || what === "next") { const r = await post('/api/spotify/control', { action: what }); if (!r.success) say(r.message, false); setTimeout(loadPlayer, 800); }
+                            else if (what === "shuffle") spAction("shuffle", !player.shuffle);
+                            else if (what === "repeat") spAction("repeat", { off: "context", context: "track", track: "off" }[player.repeat] || "off");
+                        }));
+                        $("spp-transfer").addEventListener("click", () => spAction("transfer"));
+                        $("spp-volume").addEventListener("input", () => {
+                            $("spp-volume-value").textContent = `${$("spp-volume").value} %`;
+                            clearTimeout(volTimer);
+                            volTimer = setTimeout(async () => { await spAction("volume", Number($("spp-volume").value)); volTimer = null; }, 300);
+                        });
+                        function trackRow(t, actions) {
+                            const li = document.createElement("li");
+                            const img = document.createElement(t.thumb ? "img" : "span");
+                            if (t.thumb) { img.src = t.thumb; img.loading = "lazy"; img.alt = ""; } else { img.className = "np-nocover"; img.innerHTML = '<i class="fas fa-music"></i>'; }
+                            const text = document.createElement("span"); text.className = "spp-text";
+                            const name = document.createElement("strong"); name.textContent = t.name;
+                            const sub = document.createElement("small"); sub.textContent = t.artists || "";
+                            text.append(name, sub); li.append(img, text);
+                            if (actions) {
+                                const bar = document.createElement("span"); bar.className = "spp-row-actions";
+                                const playBtn = document.createElement("button"); playBtn.type = "button"; playBtn.title = P.playNow; playBtn.setAttribute("aria-label", P.playNow);
+                                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                                playBtn.addEventListener("click", () => spAction("play_uri", t.uri));
+                                bar.appendChild(playBtn);
+                                if (/^spotify:(track|episode):/.test(t.uri)) {
+                                    const addBtn = document.createElement("button"); addBtn.type = "button"; addBtn.title = P.add; addBtn.setAttribute("aria-label", P.add);
+                                    addBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                                    addBtn.addEventListener("click", async () => { const r = await spAction("queue_uri", t.uri); if (r.success) say(P.added, true); });
+                                    bar.appendChild(addBtn);
+                                }
+                                li.appendChild(bar);
+                            }
+                            return li;
+                        }
+                        let searchTimer = null;
+                        $("spp-search").addEventListener("input", () => {
+                            clearTimeout(searchTimer);
+                            searchTimer = setTimeout(async () => {
+                                const q = $("spp-search").value.trim(), box = $("spp-results");
+                                if (q.length < 2) { box.innerHTML = ""; return; }
+                                const r = await (await fetch('/api/spotify/search?q=' + encodeURIComponent(q))).json();
+                                box.innerHTML = "";
+                                if (!r.success) { say(r.message, false); return; }
+                                const groups = [[P.tracks, r.tracks], [P.artists, r.artists], [P.albums, r.albums], [P.playlists, r.playlists]].filter(g => g[1].length);
+                                if (!groups.length) { box.innerHTML = `<p class="muted">${P.none}</p>`; return; }
+                                groups.forEach(([title, items]) => {
+                                    const h = document.createElement("h4"); h.className = "font-semibold text-sm mt-3 mb-1"; h.textContent = title;
+                                    const ol = document.createElement("ol"); ol.className = "spp-list";
+                                    items.forEach(i => ol.appendChild(trackRow(i, true)));
+                                    box.append(h, ol);
+                                });
+                            }, 400);
+                        });
 
                         async function load() {
                             state = await (await fetch('/api/spotify')).json();
@@ -87,11 +227,12 @@
                             $("sp-redirect").textContent = state.redirect_uri;
                             $("sp-client-id").value = state.client_id || "";
                             const hasClient = !!state.client_id;
-                            $("sp-setup").classList.toggle("hidden", hasClient && !$("sp-setup").dataset.force);
+                            $("sp-setup").classList.toggle("hidden", (hasClient || state.connected) && !$("sp-setup").dataset.force);
                             $("sp-login").classList.toggle("hidden", !hasClient || state.connected);
                             $("sp-connected").classList.toggle("hidden", !state.connected);
                             $("sp-music").classList.toggle("hidden", !state.connected);
                             if (state.connected && !lists.length) loadPlaylists();
+                            if (state.connected && !playerTimer) { loadPlayer(); playerTimer = setInterval(loadPlayer, 4000); }
                         }
 
                         async function loadPlaylists() {
@@ -156,6 +297,7 @@
                         });
                         $("sp-disconnect").addEventListener("click", async () => { const r = await post('/api/spotify/disconnect'); say(r.message, r.success); lists = []; load(); });
                         $("sp-filter").addEventListener("input", renderPlaylists);
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-son'\"], .main-nav-link[data-group]").forEach(b => b.addEventListener("click", () => setTimeout(loadPlayer, 100)));
                         load();
                     });
                 </script>

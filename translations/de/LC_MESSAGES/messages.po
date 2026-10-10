@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 21:44+0200\n"
+"POT-Creation-Date: 2026-10-10 21:50+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -134,6 +134,7 @@ msgid "À suivre"
 msgstr "Als Nächstes"
 
 #: templates/configure.html.jinja:121
+#: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
@@ -394,14 +395,17 @@ msgid "Aucune musique en cours de lecture."
 msgstr "Es wird keine Musik abgespielt."
 
 #: templates/configure/_music_remote.html.jinja:11
+#: templates/configure/_son_spotify.html.jinja:62
 msgid "Précédent"
 msgstr "Zurück"
 
 #: templates/configure/_music_remote.html.jinja:12
+#: templates/configure/_son_spotify.html.jinja:63
 msgid "Lecture / pause"
 msgstr "Wiedergabe / Pause"
 
 #: templates/configure/_music_remote.html.jinja:13
+#: templates/configure/_son_spotify.html.jinja:64
 msgid "Suivant"
 msgstr "Weiter"
 
@@ -519,19 +523,63 @@ msgid "Déconnecter"
 msgstr "Trennen"
 
 #: templates/configure/_son_spotify.html.jinja:50
+msgid "Lecture en cours"
+msgstr "Aktuelle Wiedergabe"
+
+#: templates/configure/_son_spotify.html.jinja:51
+msgid ""
+"Rien ne joue sur votre compte Spotify pour le moment : lancez une "
+"playlist ci-dessous ou recherchez un titre."
+msgstr ""
+"Auf Ihrem Spotify-Konto läuft gerade nichts: Starten Sie unten eine "
+"Playlist oder suchen Sie einen Titel."
+
+#: templates/configure/_son_spotify.html.jinja:58
+msgid "Écouter sur le cadre"
+msgstr "Auf dem Rahmen hören"
+
+#: templates/configure/_son_spotify.html.jinja:59
+msgid "Avancement"
+msgstr "Fortschritt"
+
+#: templates/configure/_son_spotify.html.jinja:61
+msgid "Lecture aléatoire"
+msgstr "Zufallswiedergabe"
+
+#: templates/configure/_son_spotify.html.jinja:65
+msgid "Répéter"
+msgstr "Wiederholen"
+
+#: templates/configure/_son_spotify.html.jinja:67
+msgid "Volume Spotify"
+msgstr "Spotify-Lautstärke"
+
 #: templates/configure/_son_spotify.html.jinja:71
+msgid "À suivre sur Spotify"
+msgstr "Als Nächstes auf Spotify"
+
+#: templates/configure/_son_spotify.html.jinja:76
+msgid "Rechercher"
+msgstr "Suchen"
+
+#: templates/configure/_son_spotify.html.jinja:77
+msgid "Titre, artiste, album, playlist…"
+msgstr "Titel, Interpret, Album, Playlist…"
+
+#: templates/configure/_son_spotify.html.jinja:81
+#: templates/configure/_son_spotify.html.jinja:101
 msgid "Lire sur le cadre"
 msgstr "Auf dem Rahmen abspielen"
 
-#: templates/configure/_son_spotify.html.jinja:52
+#: templates/configure/_son_spotify.html.jinja:83
 msgid "Rechercher une playlist…"
 msgstr "Playlist suchen…"
 
-#: templates/configure/_son_spotify.html.jinja:58
+#: templates/configure/_son_spotify.html.jinja:88
 msgid "Musiques associées"
 msgstr "Zugeordnete Musik"
 
-#: templates/configure/_son_spotify.html.jinja:59
+#: templates/configure/_son_spotify.html.jinja:89
 msgid ""
 "Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou "
 "la playlist de photos."
@@ -539,37 +587,69 @@ msgstr ""
 "Startet automatisch auf dem Rahmen, wenn Sie das Ambiente oder die Foto-"
 "Playlist auswählen."
 
-#: templates/configure/_son_spotify.html.jinja:70
+#: templates/configure/_son_spotify.html.jinja:100
 #: templates/configure/tab_accueil.html.jinja:68
 msgid "Ambiance"
 msgstr "Stimmung"
 
-#: templates/configure/_son_spotify.html.jinja:70
+#: templates/configure/_son_spotify.html.jinja:100
 msgid "Playlist de photos"
 msgstr "Foto-Playlist"
 
-#: templates/configure/_son_spotify.html.jinja:71
+#: templates/configure/_son_spotify.html.jinja:101
 #: templates/configure/tab_son.html.jinja:8
 msgid "Aucune musique"
 msgstr "Keine Musik"
 
-#: templates/configure/_son_spotify.html.jinja:72
+#: templates/configure/_son_spotify.html.jinja:102
 msgid "titres"
 msgstr "Titel"
 
-#: templates/configure/_son_spotify.html.jinja:72
+#: templates/configure/_son_spotify.html.jinja:102
 msgid "Aucune playlist trouvée."
 msgstr "Keine Playlist gefunden."
 
-#: templates/configure/_son_spotify.html.jinja:73
+#: templates/configure/_son_spotify.html.jinja:103
 msgid "Compte :"
 msgstr "Konto:"
 
-#: templates/configure/_son_spotify.html.jinja:73
+#: templates/configure/_son_spotify.html.jinja:103
 msgid "Copié"
 msgstr "Kopiert"
 
-#: templates/configure/_son_spotify.html.jinja:140
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "sur"
+msgstr "auf"
+
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "Ajouter à la file"
+msgstr "Zur Warteschlange hinzufügen"
+
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "Écouter maintenant sur le cadre"
+msgstr "Jetzt auf dem Rahmen abspielen"
+
+#: templates/configure/_son_spotify.html.jinja:111
+msgid "Ajouté à la file d'attente."
+msgstr "Zur Warteschlange hinzugefügt."
+
+#: templates/configure/_son_spotify.html.jinja:111
+msgid "Aucun résultat."
+msgstr "Keine Ergebnisse."
+
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Titres"
+msgstr "Titel"
+
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Artistes"
+msgstr "Interpreten"
+
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Albums"
+msgstr "Alben"
+
+#: templates/configure/_son_spotify.html.jinja:281
 msgid "Demande de code à Spotify…"
 msgstr "Code wird bei Spotify angefordert…"
 
@@ -4559,7 +4639,7 @@ msgstr "Layout wird vorbereitet... es erscheint in wenigen Sekunden."
 msgid "Musique introuvable."
 msgstr "Musik nicht gefunden."
 
-#: web/routes_home.py:177 web/routes_music.py:260
+#: web/routes_home.py:177 web/routes_music.py:293
 msgid "Volume invalide."
 msgstr "Ungültige Lautstärke."
 
@@ -4711,6 +4791,7 @@ msgid "Spotify est déconnecté de l'interface."
 msgstr "Spotify wurde von der Oberfläche getrennt."
 
 #: web/routes_music.py:159 web/routes_music.py:171 web/routes_music.py:183
+#: web/routes_music.py:194
 msgid "Spotify ne répond pas : vérifiez la connexion internet du cadre."
 msgstr "Spotify antwortet nicht: Prüfen Sie die Internetverbindung des Rahmens."
 
@@ -4718,23 +4799,23 @@ msgstr "Spotify antwortet nicht: Prüfen Sie die Internetverbindung des Rahmens.
 msgid "Lecture lancée sur le cadre."
 msgstr "Wiedergabe auf dem Rahmen gestartet."
 
-#: web/routes_music.py:197
+#: web/routes_music.py:230
 msgid "Association invalide."
 msgstr "Ungültige Zuordnung."
 
-#: web/routes_music.py:206
+#: web/routes_music.py:239
 msgid "Musique associée enregistrée."
 msgstr "Zugeordnete Musik gespeichert."
 
-#: web/routes_music.py:211
+#: web/routes_music.py:244
 msgid "Cette source ne peut pas être commandée d'ici."
 msgstr "Diese Quelle lässt sich von hier aus nicht steuern."
 
-#: web/routes_music.py:212
+#: web/routes_music.py:245
 msgid "Le lecteur ne répond pas."
 msgstr "Der Player antwortet nicht."
 
-#: web/routes_music.py:235
+#: web/routes_music.py:268
 msgid ""
 "Pour commander Spotify d'ici, connectez-le (Écran > Son > Spotify, étape "
 "2)."
@@ -4742,15 +4823,15 @@ msgstr ""
 "Um Spotify von hier aus zu steuern, verbinden Sie es (Bildschirm > Ton > "
 "Spotify, Schritt 2)."
 
-#: web/routes_music.py:236
+#: web/routes_music.py:269
 msgid "Commandez la lecture depuis le téléphone."
 msgstr "Steuern Sie die Wiedergabe über das Telefon."
 
-#: web/routes_music.py:246
+#: web/routes_music.py:279
 msgid "Aucune musique en cours."
 msgstr "Es läuft keine Musik."
 
-#: web/routes_music.py:262
+#: web/routes_music.py:295
 msgid "Le son du cadre ne répond pas."
 msgstr "Der Ton des Rahmens antwortet nicht."
 

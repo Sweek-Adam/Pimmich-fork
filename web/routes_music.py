@@ -184,6 +184,39 @@ def spotify_control_api():
     return jsonify({"success": True})
 
 
+def _spotify_call(function, *args):
+    """Appel à l'API Spotify avec les messages d'erreur de l'interface."""
+    try:
+        return function(*args), None
+    except spotify.SpotifyError as e:
+        return None, _spotify_error(e)
+    except (requests.RequestException, ValueError, TypeError):
+        return None, (jsonify({"success": False, "message": _("Spotify ne répond pas : vérifiez la connexion internet du cadre.")}), 502)
+
+
+@app.route('/api/spotify/player', methods=['GET'])
+@login_required
+def spotify_player_api():
+    """Lecture en cours sur le compte : titre, avancement, appareil, file d'attente."""
+    state, error = _spotify_call(spotify.player_state)
+    return error or jsonify({"success": True, **state})
+
+
+@app.route('/api/spotify/player', methods=['POST'])
+@login_required
+def spotify_player_action_api():
+    data = request.get_json(silent=True) or {}
+    _result, error = _spotify_call(spotify.player_action, data.get("action", ""), data.get("value"))
+    return error or jsonify({"success": True})
+
+
+@app.route('/api/spotify/search', methods=['GET'])
+@login_required
+def spotify_search_api():
+    results, error = _spotify_call(spotify.search, request.args.get("q", ""))
+    return error or jsonify({"success": True, **results})
+
+
 @app.route('/api/spotify/links', methods=['POST'])
 @login_required
 def spotify_links_api():

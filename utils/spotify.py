@@ -260,6 +260,96 @@ def control(action):
     api(method, path)
 
 
+# --- Lecture en cours (gestion depuis l'interface) ---
+
+def _images(item):
+    images = (item.get("album") or {}).get("images") or item.get("images") or []
+    return images
+
+
+def _track(item):
+    """Titre (ou épisode) -> champs utiles à l'interface."""
+    if not item:
+        return None
+    images = _images(item)
+    artists = ", ".join(a.get("name", "") for a in item.get("artists") or []) or (item.get("show") or {}).get("name", "")
+    return {"name": item.get("name", ""), "artists": artists, "album": (item.get("album") or {}).get("name", ""),
+            "uri": item.get("uri", ""), "duration_ms": item.get("duration_ms", 0),
+            "image": images[0]["url"] if images else None, "thumb": images[-1]["url"] if images else None}
+
+
+def player_state():
+    """Ce que joue le compte : titre, avancement, appareil, aléatoire, répétition, volume, file d'attente."""
+    data = api("GET", "/me/player?additional_types=episode")
+    if not data or not data.get("item"):
+        return {"active": False, "devices": [d.get("name") for d in api("GET", "/me/player/devices").get("devices", [])]}
+    device = data.get("device") or {}
+    try:
+        upcoming = [_track(t) for t in (api("GET", "/me/player/queue").get("queue") or [])[:8]]
+    except SpotifyError:
+        upcoming = []
+    return {"active": True, "playing": bool(data.get("is_playing")), "progress_ms": data.get("progress_ms") or 0,
+            "track": _track(data["item"]), "shuffle": bool(data.get("shuffle_state")), "repeat": data.get("repeat_state", "off"),
+            "device": device.get("name", ""), "on_frame": device.get("name", "").lower() == DEVICE_NAME.lower(),
+            "volume": device.get("volume_percent"), "queue": [t for t in upcoming if t]}
+
+
+REPEAT_MODES = ("off", "context", "track")
+
+
+def player_action(action, value=None):
+    """Avancer, aléatoire, répétition, volume, lecture sur le cadre, jouer ou ajouter à la file un titre."""
+    if action == "seek":
+        api("PUT", f"/me/player/seek?position_ms={max(0, int(value))}")
+    elif action == "shuffle":
+        api("PUT", f"/me/player/shuffle?state={'true' if value else 'false'}")
+    elif action == "repeat":
+        if value not in REPEAT_MODES:
+            raise SpotifyError("invalid_action")
+        api("PUT", f"/me/player/repeat?state={value}")
+    elif action == "volume":
+        api("PUT", f"/me/player/volume?volume_percent={max(0, min(100, int(value)))}")
+    elif action == "transfer":
+        device = frame_device_id()
+        if not device:
+            raise SpotifyError("no_device")
+        api("PUT", "/me/player", json={"device_ids": [device], "play": True})
+    elif action in ("play_uri", "queue_uri"):
+        if not TRACK_URI.match(value or "") and not URI.match(value or ""):
+            raise SpotifyError("invalid_uri")
+        if action == "queue_uri":
+            if not TRACK_URI.match(value):
+                raise SpotifyError("invalid_uri")
+            api("POST", f"/me/player/queue?uri={value}")
+        elif TRACK_URI.match(value):
+            device = frame_device_id()
+            if not device:
+                raise SpotifyError("no_device")
+            api("PUT", f"/me/player/play?device_id={device}", json={"uris": [value]})
+        else:
+            play_on_frame(value)
+    else:
+        raise SpotifyError("invalid_action")
+
+
+TRACK_URI = re.compile(r"^spotify:(track|episode):[A-Za-z0-9]{10,40}$")
+
+
+def search(query, limit=6):
+    """Recherche : titres, artistes, albums et playlists."""
+    query = (query or "").strip()[:100]
+    if not query:
+        return {"tracks": [], "playlists": [], "albums": [], "artists": []}
+    from urllib.parse import quote
+    data = api("GET", f"/search?q={quote(query)}&type=track,playlist,album,artist&limit={limit}")
+    simple = lambda item: {"name": item.get("name", ""), "uri": item.get("uri", ""),
+                           "thumb": (item.get("images") or [{}])[-1].get("url") if item.get("images") else None}
+    return {"tracks": [_track(t) for t in (data.get("tracks") or {}).get("items") or [] if t],
+            "playlists": [simple(p) for p in (data.get("playlists") or {}).get("items") or [] if p],
+            "albums": [dict(simple(a), artists=", ".join(x.get("name", "") for x in a.get("artists") or [])) for a in (data.get("albums") or {}).get("items") or [] if a],
+            "artists": [simple(a) for a in (data.get("artists") or {}).get("items") or [] if a]}
+
+
 def play_linked_in_background(uri, logger=None):
     """Lance la musique associée (ambiance, playlist de photos) sans faire attendre l'interface."""
     def run():

@@ -164,3 +164,45 @@ def test_ambiance_starts_its_spotify_playlist(admin_client, sp, monkeypatch):
     admin_client.post("/api/ambiance", json={"ambiance": "zen"}, headers=SAME_ORIGIN)
     assert started == ["spotify:playlist:37i9dQZF1DWZqd5JICZI0u"]
     admin_client.post("/api/ambiance", json={"ambiance": "perso"}, headers=SAME_ORIGIN)
+
+
+def test_spotify_player_state_and_actions(sp, monkeypatch):
+    track = {"name": "Clair de lune", "uri": "spotify:track:4uLU6hMCjMI75M1A2tKUQC", "duration_ms": 300000,
+             "artists": [{"name": "Debussy"}], "album": {"name": "Suite", "images": [{"url": "https://i/640"}, {"url": "https://i/64"}]}}
+    calls = []
+
+    def api(method, path, **kw):
+        calls.append((method, path, kw.get("json")))
+        if path.startswith("/me/player?"):
+            return {"is_playing": True, "progress_ms": 1000, "item": track, "shuffle_state": True, "repeat_state": "off",
+                    "device": {"name": "iPhone de Léa", "volume_percent": 40}}
+        if path == "/me/player/queue":
+            return {"queue": [track]}
+        if path == "/me/player/devices":
+            return {"devices": [{"id": "d1", "name": "Cadre photo"}]}
+        return {}
+    monkeypatch.setattr(sp, "api", api)
+    state = sp.player_state()
+    assert state["active"] and state["track"]["artists"] == "Debussy" and state["track"]["image"] == "https://i/640"
+    assert not state["on_frame"] and state["volume"] == 40 and state["queue"][0]["thumb"] == "https://i/64"
+    sp.player_action("transfer")
+    assert ("PUT", "/me/player", {"device_ids": ["d1"], "play": True}) in calls
+    sp.player_action("queue_uri", track["uri"])
+    assert ("POST", f"/me/player/queue?uri={track['uri']}", None) in calls
+    sp.player_action("play_uri", track["uri"])
+    assert ("PUT", "/me/player/play?device_id=d1", {"uris": [track["uri"]]}) in calls
+    sp.player_action("volume", 250)
+    assert calls[-1][1] == "/me/player/volume?volume_percent=100"
+    for bad in (("repeat", "always"), ("queue_uri", "spotify:playlist:37i9dQZF1DXcBWIGoYBM5M"), ("play_uri", "x"), ("explode", None)):
+        with pytest.raises(sp.SpotifyError):
+            sp.player_action(*bad)
+
+
+def test_spotify_search_api(admin_client, sp, monkeypatch):
+    monkeypatch.setattr(sp, "api", lambda method, path, **kw: {
+        "tracks": {"items": [{"name": "Titre", "uri": "spotify:track:4uLU6hMCjMI75M1A2tKUQC", "artists": [{"name": "A"}], "album": {"images": []}}]},
+        "playlists": {"items": [None, {"name": "Été", "uri": "spotify:playlist:37i9dQZF1DXcBWIGoYBM5M", "images": [{"url": "u"}]}]}})
+    data = admin_client.get("/api/spotify/search?q=été").get_json()
+    assert data["tracks"][0]["name"] == "Titre" and data["playlists"][0]["thumb"] == "u" and data["albums"] == []
+    monkeypatch.setattr(sp, "api", lambda *a, **k: (_ for _ in ()).throw(sp.SpotifyError("not_connected")))
+    assert admin_client.get("/api/spotify/player").status_code == 400

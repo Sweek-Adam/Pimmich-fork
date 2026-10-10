@@ -96,7 +96,7 @@
                             }
                             const play = document.createElement("button");
                             play.type = "button";
-                            play.className = "absolute top-1 right-1 bg-green-600 hover:bg-green-700 text-white text-xs w-6 h-6 rounded-full";
+                            play.className = "queue-play";
                             play.innerHTML = '<i class="fas fa-play"></i>';
                             play.title = {{ _("Afficher maintenant")|tojson }};
                             play.addEventListener("click", (e) => {
