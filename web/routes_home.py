@@ -194,7 +194,7 @@ def now_playing_api():
 @app.route('/api/now_playing/cover', methods=['GET'])
 @login_required
 def now_playing_cover():
-    info = now_playing.current(exclude=() if is_slideshow_running() else ("pimmich",))
+    info = now_playing.latest(exclude=() if is_slideshow_running() else ("pimmich",))  # aussi en pause (télécommande)
     cover = Path(info["cover"]) if info and info.get("cover") else None
     if not cover or cover.parent != now_playing.COVER_DIR or not cover.is_file():  # uniquement le dossier des pochettes
         return "", 404

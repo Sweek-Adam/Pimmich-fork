@@ -30,11 +30,7 @@
                             <span><small>{{ _("Disposition") }}</small><strong id="layout-current-label" class="layout-current-label">…</strong></span>
                             <i class="fas fa-chevron-right ml-auto"></i>
                         </button>
-                        <button type="button" id="home-now-playing" class="now-playing compact hidden w-full text-left" onclick="goToTab('tab-son')">
-                            <img id="home-np-cover" alt="" class="hidden">
-                            <span id="home-np-nocover" class="np-nocover"><i class="fas fa-music"></i></span>
-                            <span class="np-text"><strong id="home-np-title"></strong><small id="home-np-artist"></small></span>
-                        </button>
+                        {% set remote_show_idle = false %}{% include 'configure/_music_remote.html.jinja' %}
                     </section>
 
                     <!-- Santé et actions rapides -->
@@ -135,7 +131,7 @@
                             $("setup-card").classList.remove("hidden");
                             $("setup-progress").style.width = `${Math.round(100 * data.done / data.total)}%`;
                             $("setup-steps").innerHTML = data.steps.map(s => `<li class="${s.done ? "done" : ""}">
-                                <i class="fas ${s.done ? "fa-check-circle" : "fa-circle"}"></i><span>${esc(s.title)}</span>
+                                <i class="${s.done ? "fas fa-check-circle" : "far fa-circle"}"></i><span>${esc(s.title)}</span>
                                 ${s.done ? "" : `<button type="button" class="link" data-tab="${esc(s.tab)}">${esc(T.fix)} <i class="fas fa-arrow-right"></i></button>`}</li>`).join("");
                             $("setup-steps").querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => goToTab(b.dataset.tab)));
                         }
@@ -221,22 +217,8 @@
                             if (data.success) { closePicker(); loadLayout(); }
                         }));
 
-                        // --- Musique en cours ---
-                        async function loadNowPlaying() {
-                            try {
-                                const { playing } = await (await fetch('/api/now_playing')).json();
-                                $("home-now-playing").classList.toggle("hidden", !playing);
-                                if (!playing) return;
-                                $("home-np-title").textContent = playing.title;
-                                $("home-np-artist").textContent = [playing.artist, playing.source_label].filter(Boolean).join(" · ");
-                                $("home-np-cover").classList.toggle("hidden", !playing.cover); $("home-np-nocover").classList.toggle("hidden", !!playing.cover);
-                                if (playing.cover && $("home-np-cover").getAttribute("src") !== playing.cover) $("home-np-cover").src = playing.cover;
-                            } catch (e) { /* le cadre redémarre */ }
-                        }
-
-                        loadSetup(); loadHealth(); loadQueue(); loadAmbiances(); loadLayout(); loadNowPlaying();
+                        loadSetup(); loadHealth(); loadQueue(); loadAmbiances(); loadLayout();
                         setInterval(() => { if ($("tab-accueil").offsetParent) { loadQueue(); loadHealth(); } }, 15000);
-                        setInterval(() => { if ($("tab-accueil").offsetParent) loadNowPlaying(); }, 5000);
                     });
                 </script>
             </div>

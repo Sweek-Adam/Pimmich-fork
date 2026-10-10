@@ -142,7 +142,7 @@
         .progress > div { height: 100%; background: linear-gradient(90deg, #6366f1, #a855f7); border-radius: 999px; transition: width .4s; }
         .setup-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
         .setup-steps li { display: flex; align-items: center; gap: 10px; }
-        .setup-steps li i { color: var(--border); } .setup-steps li.done i { color: var(--ok); }
+        .setup-steps li > i { color: #7c8496; } .setup-steps li.done > i { color: var(--ok); }
         .setup-steps li.done span { color: var(--muted); text-decoration: line-through; }
         .setup-steps li .link { margin-left: auto; white-space: nowrap; flex-shrink: 0; }
 
@@ -168,21 +168,25 @@
         .picker-card.current { border-color: var(--ok); }
         .picker-card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
         .picker-card.hidden { display: none; }
-        .msg-ok { color: #7c3aed; } .msg-no { color: #cbd5e1; }
+        /* Couleurs absentes de Tailwind 2 (sinon : texte blanc sur fond blanc) */
+        .bg-orange-500 { background-color: #ea580c; } .hover\:bg-orange-600:hover { background-color: #c2410c; }
+        .text-orange-500 { color: #ea580c; } .hover\:text-orange-700:hover { color: #9a3412; }
+        .text-rose-500 { color: #e11d48; } .text-amber-500 { color: #d97706; }
+        /* Contraste des boutons et icônes : teintes Tailwind trop claires pour du blanc ou sur du blanc */
+        .bg-green-500 { background-color: #059669; } .hover\:bg-green-600:hover { background-color: #047857; }
+        .bg-gray-400 { background-color: #7c8496; }
+        .text-gray-400 { color: #7c8496; }
+        .msg-ok { color: #7c3aed; } .msg-no { color: #7c8496; }
         .chip i { margin-right: 4px; }
         .picker-actions { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
         .picker-actions.hidden { display: none; }
         .receiver { background: var(--bg); border-radius: 12px; padding: 14px; }
         .receiver h3 { font-weight: 700; margin-bottom: 6px; }
-        .now-playing { display: flex; align-items: center; gap: 12px; background: var(--bg); border-radius: 14px; padding: 10px 12px; }
-        .now-playing.hidden { display: none; }
-        .now-playing img, .np-nocover { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+        .np-nocover { width: 56px; height: 56px; border-radius: 10px; flex-shrink: 0; }
         .np-nocover { display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; }
         .np-text { display: flex; flex-direction: column; min-width: 0; flex: 1; }
         .np-text strong, .np-text small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .np-text small { color: var(--muted); }
-        .now-playing.compact { margin-top: 10px; padding: 8px 10px; }
-        .now-playing.compact img, .now-playing.compact .np-nocover { width: 40px; height: 40px; }
         .receiver p { font-size: .88rem; color: var(--muted); }
         .install-hint { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: #fffbeb; border: 1px solid #fde68a; font-size: .9rem; }
         .install-hint code { display: block; overflow-wrap: anywhere; }
@@ -205,9 +209,30 @@
         .sp-playlist > span:last-child { display: flex; flex-direction: column; min-width: 0; }
         .sp-playlist strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sp-playlist small { color: var(--muted); }
-        .sp-controls { display: inline-flex; gap: 6px; }
-        .sp-controls button { width: 38px; height: 38px; border-radius: 999px; background: var(--bg); }
-        .sp-controls button:hover { background: var(--accent-soft); color: var(--accent); }
+        /* Télécommande de la musique */
+        .music-remote { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; background: var(--bg); border-radius: 16px; padding: 12px 14px; margin-top: 10px; }
+        .music-remote.hidden { display: none; }
+        .music-remote .mr-idle { display: none; margin: 0; }
+        .music-remote.idle > :not(.mr-idle) { display: none; }
+        .music-remote.idle .mr-idle { display: block; }
+        .mr-track { display: flex; align-items: center; gap: 12px; flex: 1 1 220px; min-width: 0; }
+        .mr-track img, .mr-track .np-nocover { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+        .mr-buttons { display: flex; align-items: center; gap: 8px; }
+        .mr-buttons button { -webkit-appearance: none; appearance: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+                             width: 42px; height: 42px; border-radius: 999px; background: #fff; color: var(--text); font-size: 1rem; box-shadow: 0 1px 3px rgba(20, 24, 40, .12); }
+        .mr-buttons button i { color: inherit; }
+        .mr-buttons button:hover:not(:disabled) { background: var(--accent-soft); color: var(--accent); }
+        .mr-buttons .mr-main { width: 50px; height: 50px; background: var(--accent); color: #fff; font-size: 1.15rem; }
+        .mr-buttons .mr-main:hover:not(:disabled) { background: #4338ca; color: #fff; }
+        .mr-buttons button:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
+        .mr-volume { display: flex; align-items: center; gap: 8px; color: var(--muted); flex: 0 1 220px; }
+        .mr-volume input { flex: 1; accent-color: var(--accent); }
+        .mr-volume-value { font-size: .8rem; min-width: 36px; text-align: right; }
+        .mr-buttons.hidden { display: none; }
+        .mr-hint { margin: 0; font-size: .85rem; flex: 1 1 200px; }
+        .mr-hint:empty { display: none; }
+        .mr-message { flex-basis: 100%; margin: 0; font-size: .85rem; color: var(--err); }
+        .mr-message:empty { display: none; }
         .sp-links { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 8px 12px; align-items: center; }
         @media (max-width: 860px) { .sp-links { grid-template-columns: 1fr; } }
         .install-hint code { display: block; margin-top: 6px; font-family: ui-monospace, Menlo, monospace; background: #fff; padding: 6px 10px; border-radius: 8px; }

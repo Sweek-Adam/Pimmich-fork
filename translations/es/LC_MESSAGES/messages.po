@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:58+0200\n"
+"POT-Creation-Date: 2026-10-10 20:48+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1042
+#: local_slideshow.py:1045
 msgid "Photos & messages"
 msgstr "Fotos y mensajes"
 
-#: local_slideshow.py:1354
+#: local_slideshow.py:1366
 msgid "Données de marée non disponibles"
 msgstr "Datos de mareas no disponibles"
 
-#: local_slideshow.py:1451
+#: local_slideshow.py:1463
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Aniversario) Hace %(num)d año"
 
-#: local_slideshow.py:1451
+#: local_slideshow.py:1463
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:2482
+#: local_slideshow.py:2494
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:2483
+#: local_slideshow.py:2495
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:2484
+#: local_slideshow.py:2496
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:2485
+#: local_slideshow.py:2497
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2486
+#: local_slideshow.py:2498
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:2512
+#: local_slideshow.py:2524
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -129,7 +129,7 @@ msgid "Bibliothèque"
 msgstr "Biblioteca"
 
 #: templates/configure.html.jinja:120
-#: templates/configure/tab_accueil.html.jinja:63
+#: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "A continuación"
 
@@ -391,6 +391,27 @@ msgstr "archivo(s) enviándose..."
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Envío demasiado grande: envíe menos archivos a la vez."
 
+#: templates/configure/_music_remote.html.jinja:4
+msgid "Aucune musique en cours de lecture."
+msgstr "No se está reproduciendo música."
+
+#: templates/configure/_music_remote.html.jinja:11
+msgid "Précédent"
+msgstr "Anterior"
+
+#: templates/configure/_music_remote.html.jinja:12
+msgid "Lecture / pause"
+msgstr "Reproducir / pausa"
+
+#: templates/configure/_music_remote.html.jinja:13
+msgid "Suivant"
+msgstr "Siguiente"
+
+#: templates/configure/_music_remote.html.jinja:16
+#: templates/configure/_music_remote.html.jinja:18
+msgid "Volume du cadre"
+msgstr "Volumen del marco"
+
 #: templates/configure/_son_spotify.html.jinja:5
 msgid "Associer le cadre à votre compte"
 msgstr "Vincula el marco a tu cuenta"
@@ -496,7 +517,7 @@ msgid "Déconnecter"
 msgstr "Desconectar"
 
 #: templates/configure/_son_spotify.html.jinja:50
-#: templates/configure/_son_spotify.html.jinja:76
+#: templates/configure/_son_spotify.html.jinja:71
 msgid "Lire sur le cadre"
 msgstr "Reproducir en el marco"
 
@@ -504,27 +525,11 @@ msgstr "Reproducir en el marco"
 msgid "Rechercher une playlist…"
 msgstr "Buscar una playlist…"
 
-#: templates/configure/_son_spotify.html.jinja:54
-msgid "Précédent"
-msgstr "Anterior"
-
-#: templates/configure/_son_spotify.html.jinja:55
-msgid "Pause"
-msgstr "Pausa"
-
-#: templates/configure/_son_spotify.html.jinja:56
-msgid "Lecture"
-msgstr "Reproducir"
-
-#: templates/configure/_son_spotify.html.jinja:57
-msgid "Suivant"
-msgstr "Siguiente"
-
-#: templates/configure/_son_spotify.html.jinja:63
+#: templates/configure/_son_spotify.html.jinja:58
 msgid "Musiques associées"
 msgstr "Música asociada"
 
-#: templates/configure/_son_spotify.html.jinja:64
+#: templates/configure/_son_spotify.html.jinja:59
 msgid ""
 "Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou "
 "la playlist de photos."
@@ -532,37 +537,37 @@ msgstr ""
 "Se reproduce automáticamente en el marco cuando eliges el ambiente o la "
 "playlist de fotos."
 
-#: templates/configure/_son_spotify.html.jinja:75
-#: templates/configure/tab_accueil.html.jinja:72
+#: templates/configure/_son_spotify.html.jinja:70
+#: templates/configure/tab_accueil.html.jinja:68
 msgid "Ambiance"
 msgstr "Ambiente"
 
-#: templates/configure/_son_spotify.html.jinja:75
+#: templates/configure/_son_spotify.html.jinja:70
 msgid "Playlist de photos"
 msgstr "Playlist de fotos"
 
-#: templates/configure/_son_spotify.html.jinja:76
+#: templates/configure/_son_spotify.html.jinja:71
 #: templates/configure/tab_son.html.jinja:8
 msgid "Aucune musique"
 msgstr "Sin música"
 
-#: templates/configure/_son_spotify.html.jinja:77
+#: templates/configure/_son_spotify.html.jinja:72
 msgid "titres"
 msgstr "canciones"
 
-#: templates/configure/_son_spotify.html.jinja:77
+#: templates/configure/_son_spotify.html.jinja:72
 msgid "Aucune playlist trouvée."
 msgstr "No se ha encontrado ninguna playlist."
 
-#: templates/configure/_son_spotify.html.jinja:78
+#: templates/configure/_son_spotify.html.jinja:73
 msgid "Compte :"
 msgstr "Cuenta:"
 
-#: templates/configure/_son_spotify.html.jinja:78
+#: templates/configure/_son_spotify.html.jinja:73
 msgid "Copié"
 msgstr "Copiado"
 
-#: templates/configure/_son_spotify.html.jinja:145
+#: templates/configure/_son_spotify.html.jinja:140
 msgid "Demande de code à Spotify…"
 msgstr "Solicitando un código a Spotify…"
 
@@ -1093,7 +1098,7 @@ msgstr "Error durante la detección."
 
 #: templates/configure/scripts_status.html.jinja:517
 #: templates/configure/tab_accueil.html.jinja:17
-#: templates/configure/tab_accueil.html.jinja:124
+#: templates/configure/tab_accueil.html.jinja:120
 msgid "Le diaporama est arrêté."
 msgstr "La presentación de diapositivas se detiene."
 
@@ -1240,114 +1245,114 @@ msgstr "Activar/Desactivar notificaciones"
 msgid "Disposition"
 msgstr "Disposición"
 
-#: templates/configure/tab_accueil.html.jinja:43
+#: templates/configure/tab_accueil.html.jinja:39
 msgid "État du cadre"
 msgstr "Estado del marco"
 
-#: templates/configure/tab_accueil.html.jinja:44
+#: templates/configure/tab_accueil.html.jinja:40
 msgid "Vérification…"
 msgstr "Comprobando…"
 
-#: templates/configure/tab_accueil.html.jinja:47
+#: templates/configure/tab_accueil.html.jinja:43
 msgid "Actions rapides"
 msgstr "Acciones rápidas"
 
-#: templates/configure/tab_accueil.html.jinja:49
+#: templates/configure/tab_accueil.html.jinja:45
 #: templates/configure/tab_messages.html.jinja:4
 msgid "Écrire un message"
 msgstr "Escribir un mensaje"
 
-#: templates/configure/tab_accueil.html.jinja:50
+#: templates/configure/tab_accueil.html.jinja:46
 msgid "Ajouter des photos"
 msgstr "Añadir fotos"
 
-#: templates/configure/tab_accueil.html.jinja:51
+#: templates/configure/tab_accueil.html.jinja:47
 msgid "Lancer une playlist"
 msgstr "Iniciar una playlist"
 
-#: templates/configure/tab_accueil.html.jinja:52
+#: templates/configure/tab_accueil.html.jinja:48
 msgid "Inviter des proches"
 msgstr "Invitar a tus seres queridos"
 
-#: templates/configure/tab_accueil.html.jinja:53
+#: templates/configure/tab_accueil.html.jinja:49
 #: templates/configure/tab_son.html.jinja:7
 msgid "Musique"
 msgstr "Música"
 
-#: templates/configure/tab_accueil.html.jinja:54
+#: templates/configure/tab_accueil.html.jinja:50
 msgid "Mes photos"
 msgstr "Mis fotos"
 
-#: templates/configure/tab_accueil.html.jinja:64
+#: templates/configure/tab_accueil.html.jinja:60
 msgid "Réorganiser"
 msgstr "Reordenar"
 
-#: templates/configure/tab_accueil.html.jinja:73
+#: templates/configure/tab_accueil.html.jinja:69
 msgid "Revenir à mes réglages"
 msgstr "Volver a mis ajustes"
 
-#: templates/configure/tab_accueil.html.jinja:82
+#: templates/configure/tab_accueil.html.jinja:78
 msgid "Choisir une disposition"
 msgstr "Elegir una disposición"
 
-#: templates/configure/tab_accueil.html.jinja:83
+#: templates/configure/tab_accueil.html.jinja:79
 msgid "Fermer"
 msgstr "Cerrar"
 
-#: templates/configure/tab_accueil.html.jinja:87
+#: templates/configure/tab_accueil.html.jinja:83
 msgid "Tout"
 msgstr "Todo"
 
-#: templates/configure/tab_accueil.html.jinja:88
+#: templates/configure/tab_accueil.html.jinja:84
 #: templates/configure/tab_dispositions.html.jinja:38
 msgid "Formats"
 msgstr "Formatos"
 
-#: templates/configure/tab_accueil.html.jinja:89
+#: templates/configure/tab_accueil.html.jinja:85
 #: templates/configure/tab_dispositions.html.jinja:38
 msgid "Thèmes"
 msgstr "Temas"
 
-#: templates/configure/tab_accueil.html.jinja:90
+#: templates/configure/tab_accueil.html.jinja:86
 msgid "Avec messages"
 msgstr "Con mensajes"
 
-#: templates/configure/tab_accueil.html.jinja:92
+#: templates/configure/tab_accueil.html.jinja:88
 msgid "Rechercher…"
 msgstr "Buscar…"
 
-#: templates/configure/tab_accueil.html.jinja:95
-#: templates/configure/tab_accueil.html.jinja:125
+#: templates/configure/tab_accueil.html.jinja:91
+#: templates/configure/tab_accueil.html.jinja:121
 msgid "Selon mes réglages"
 msgstr "Según mis ajustes"
 
-#: templates/configure/tab_accueil.html.jinja:96
-#: templates/configure/tab_accueil.html.jinja:126
+#: templates/configure/tab_accueil.html.jinja:92
+#: templates/configure/tab_accueil.html.jinja:122
 msgid "Compositions au hasard"
 msgstr "Composiciones aleatorias"
 
-#: templates/configure/tab_accueil.html.jinja:102
+#: templates/configure/tab_accueil.html.jinja:98
 #: templates/configure/tab_dispositions.html.jinja:48
 msgid "Affiche les messages"
 msgstr "Muestra los mensajes"
 
-#: templates/configure/tab_accueil.html.jinja:109
+#: templates/configure/tab_accueil.html.jinja:105
 msgid "Afficher maintenant (une fois)"
 msgstr "Mostrar ahora (una vez)"
 
-#: templates/configure/tab_accueil.html.jinja:110
+#: templates/configure/tab_accueil.html.jinja:106
 msgid "Utiliser jusqu'à nouvel ordre"
 msgstr "Usar hasta nuevo aviso"
 
-#: templates/configure/tab_accueil.html.jinja:121
+#: templates/configure/tab_accueil.html.jinja:117
 msgid "Tout va bien."
 msgstr "Todo va bien."
 
-#: templates/configure/tab_accueil.html.jinja:122
+#: templates/configure/tab_accueil.html.jinja:118
 msgid "Régler"
 msgstr "Ajustar"
 
-#: templates/configure/tab_accueil.html.jinja:123
+#: templates/configure/tab_accueil.html.jinja:119
 msgid "Rien à afficher pour l'instant."
 msgstr "Nada que mostrar por ahora."
 
@@ -2353,28 +2358,28 @@ msgstr "Posición:"
 #: templates/configure/tab_invites.html.jinja:32
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
-#: templates/configure/tab_son.html.jinja:48
+#: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "Abajo a la derecha"
 
 #: templates/configure/tab_invites.html.jinja:33
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
-#: templates/configure/tab_son.html.jinja:47
+#: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "Abajo a la izquierda"
 
 #: templates/configure/tab_invites.html.jinja:34
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
-#: templates/configure/tab_son.html.jinja:50
+#: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "Arriba a la derecha"
 
 #: templates/configure/tab_invites.html.jinja:35
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
-#: templates/configure/tab_son.html.jinja:49
+#: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "Arriba a la izquierda"
 
@@ -2860,7 +2865,7 @@ msgid "Couleur du contour (hex)"
 msgstr "Color del contorno (hexadecimal)"
 
 #: templates/configure/tab_metadata.html.jinja:142
-#: templates/configure/tab_son.html.jinja:45
+#: templates/configure/tab_son.html.jinja:39
 msgid "Position"
 msgstr "Posición"
 
@@ -3135,30 +3140,26 @@ msgid "Y aller"
 msgstr "Ir"
 
 #: templates/configure/tab_son.html.jinja:27
-msgid "Lecteur à l'écran"
-msgstr "Reproductor en pantalla"
+msgid "Musique en cours"
+msgstr "Música en curso"
 
-#: templates/configure/tab_son.html.jinja:34
-msgid "Aucune musique en cours de lecture."
-msgstr "No se está reproduciendo música."
-
-#: templates/configure/tab_son.html.jinja:37
+#: templates/configure/tab_son.html.jinja:31
 msgid "Afficher le morceau sur le cadre"
 msgstr "Mostrar la canción en el marco"
 
-#: templates/configure/tab_son.html.jinja:39
+#: templates/configure/tab_son.html.jinja:33
 msgid "Quelques secondes à chaque nouveau morceau"
 msgstr "Unos segundos con cada canción nueva"
 
-#: templates/configure/tab_son.html.jinja:40
+#: templates/configure/tab_son.html.jinja:34
 msgid "En permanence pendant la lecture"
 msgstr "Siempre durante la reproducción"
 
-#: templates/configure/tab_son.html.jinja:41
+#: templates/configure/tab_son.html.jinja:35
 msgid "Ne pas afficher"
 msgstr "No mostrar"
 
-#: templates/configure/tab_son.html.jinja:54
+#: templates/configure/tab_son.html.jinja:48
 msgid ""
 "Un petit encart discret (pochette, titre, artiste) pour la musique du "
 "diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la "
@@ -3168,11 +3169,11 @@ msgstr ""
 " la presentación, Spotify y AirPlay. Mientras suena Spotify o AirPlay, la"
 " música de la presentación se pone en pausa."
 
-#: templates/configure/tab_son.html.jinja:60
+#: templates/configure/tab_son.html.jinja:54
 msgid "Le cadre comme enceinte"
 msgstr "El marco como altavoz"
 
-#: templates/configure/tab_son.html.jinja:64
+#: templates/configure/tab_son.html.jinja:58
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -3180,7 +3181,7 @@ msgstr ""
 "En la aplicación Spotify, elige «Cadre photo» como dispositivo: la música"
 " sale por la pantalla del marco. Se necesita una cuenta Spotify Premium."
 
-#: templates/configure/tab_son.html.jinja:68
+#: templates/configure/tab_son.html.jinja:62
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -3188,7 +3189,7 @@ msgstr ""
 "Desde un iPhone, iPad o Mac, envía el sonido de cualquier aplicación "
 "(Deezer, Apple Music, YouTube...) a «Cadre photo»."
 
-#: templates/configure/tab_son.html.jinja:73
+#: templates/configure/tab_son.html.jinja:67
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -3200,35 +3201,35 @@ msgstr ""
 "dispositivo nuevo durante 3 minutos después de pulsar «Vincular un "
 "teléfono»."
 
-#: templates/configure/tab_son.html.jinja:75
+#: templates/configure/tab_son.html.jinja:69
 msgid "Associer un téléphone"
 msgstr "Vincular un teléfono"
 
-#: templates/configure/tab_son.html.jinja:81
+#: templates/configure/tab_son.html.jinja:75
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "Para activar estas funciones, ejecuta una vez en la Raspberry Pi:"
 
-#: templates/configure/tab_son.html.jinja:90
+#: templates/configure/tab_son.html.jinja:84
 msgid "Actif"
 msgstr "Activo"
 
-#: templates/configure/tab_son.html.jinja:90
+#: templates/configure/tab_son.html.jinja:84
 msgid "Non installé"
 msgstr "No instalado"
 
-#: templates/configure/tab_son.html.jinja:149
+#: templates/configure/tab_son.html.jinja:128
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Visible: elige «Cadre photo» en el teléfono"
 
-#: templates/configure/tab_son.html.jinja:149
+#: templates/configure/tab_son.html.jinja:128
 msgid "connecté"
 msgstr "conectado"
 
-#: templates/configure/tab_son.html.jinja:150
+#: templates/configure/tab_son.html.jinja:129
 msgid "Oublier"
 msgstr "Olvidar"
 
-#: templates/configure/tab_son.html.jinja:150
+#: templates/configure/tab_son.html.jinja:129
 msgid "Aucun téléphone associé."
 msgstr "Ningún teléfono vinculado."
 
@@ -4490,7 +4491,7 @@ msgstr "Preparando la disposición... aparecerá en unos segundos."
 msgid "Musique introuvable."
 msgstr "Música no encontrada."
 
-#: web/routes_home.py:160
+#: web/routes_home.py:160 web/routes_music.py:260
 msgid "Volume invalide."
 msgstr "Volumen no válido."
 
@@ -4654,6 +4655,34 @@ msgstr "Asociación no válida."
 #: web/routes_music.py:206
 msgid "Musique associée enregistrée."
 msgstr "Música asociada guardada."
+
+#: web/routes_music.py:211
+msgid "Cette source ne peut pas être commandée d'ici."
+msgstr "Esta fuente no se puede controlar desde aquí."
+
+#: web/routes_music.py:212
+msgid "Le lecteur ne répond pas."
+msgstr "El reproductor no responde."
+
+#: web/routes_music.py:235
+msgid ""
+"Pour commander Spotify d'ici, connectez-le (Écran > Son > Spotify, étape "
+"2)."
+msgstr ""
+"Para controlar Spotify desde aquí, conéctalo (Pantalla > Sonido > "
+"Spotify, paso 2)."
+
+#: web/routes_music.py:236
+msgid "Commandez la lecture depuis le téléphone."
+msgstr "Controla la reproducción desde el teléfono."
+
+#: web/routes_music.py:246
+msgid "Aucune musique en cours."
+msgstr "No hay música en curso."
+
+#: web/routes_music.py:262
+msgid "Le son du cadre ne répond pas."
+msgstr "El sonido del marco no responde."
 
 #: web/routes_playlists.py:78
 msgid "Disposition de la playlist enregistrée."

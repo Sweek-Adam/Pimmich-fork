@@ -68,6 +68,17 @@ def current(exclude=()):
     return playing[0]
 
 
+def latest(exclude=(), max_pause=3 * 3600):
+    """Pour la télécommande : le morceau qui joue, sinon le dernier mis en pause (moins de 3 h), sinon None."""
+    playing = current(exclude)
+    if playing:
+        return playing
+    paused = [dict(entry, source=source) for source, entry in _load().items()
+              if source in SOURCES and source not in exclude and isinstance(entry, dict) and entry.get("state") == "paused"
+              and entry.get("title") and time.time() - entry.get("updated", 0) < max_pause]
+    return max(paused, key=lambda e: e.get("updated", 0)) if paused else None
+
+
 def external_playing():
     """Vrai si Spotify ou AirPlay joue (la musique du diaporama se met alors en pause)."""
     return any(_load().get(s, {}).get("state") == "playing" for s in EXTERNAL)

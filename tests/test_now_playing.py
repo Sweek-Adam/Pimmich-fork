@@ -117,3 +117,34 @@ def test_slideshow_draws_a_discreet_player(monkeypatch):
     ls._now_playing_cache.update(read=0)
     assert ls.now_playing_visible(config) is None
     assert ls.now_playing_visible(dict(config, now_playing_display="always"))["title"] == "Un morceau"
+
+
+def test_music_remote_api(admin_client, monkeypatch):
+    from web import routes_music
+    from utils import music_remote
+    monkeypatch.setattr(routes_music, "is_slideshow_running", lambda: True)
+    monkeypatch.setattr(music_remote, "get_volume", lambda: (60, False))
+    data = admin_client.get("/api/music/remote").get_json()
+    assert data["track"] is None and data["volume"] == 60
+    np.update("airplay", state="paused", title="Titre", artist="Artiste")
+    monkeypatch.setattr(music_remote, "_mpris_player", lambda source: "ShairportSync")
+    data = admin_client.get("/api/music/remote").get_json()
+    assert data["track"]["title"] == "Titre" and not data["track"]["playing"] and data["actions"] == ["previous", "pause", "play", "next"]
+    sent = []
+    monkeypatch.setattr(music_remote, "_run", lambda *args, **kw: sent.append(args) or type("R", (), {"returncode": 0, "stdout": ""})())
+    assert admin_client.post("/api/music/remote", json={"action": "play"}, headers=SAME_ORIGIN).get_json()["success"]
+    assert sent[-1] == ("playerctl", "--player", "ShairportSync", "play")
+    assert admin_client.post("/api/music/remote", json={"action": "rm -rf"}, headers=SAME_ORIGIN).status_code == 400
+    assert admin_client.post("/api/music/volume", json={"volume": 140}, headers=SAME_ORIGIN).get_json()["volume"] == 100
+    assert sent[-2][:3] == ("wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@") and sent[-2][3] == "1.00"
+
+
+def test_slideshow_music_pause_from_the_remote(tmp_path, monkeypatch):
+    from utils import music_remote
+    monkeypatch.setattr(music_remote, "COMMAND_FILE", tmp_path / "cmd.json")
+    np.update("pimmich", state="playing", title="Douce")
+    assert music_remote.actions_for("pimmich") == ["pause", "play"]
+    assert music_remote.control("pimmich", "next") == "unsupported"
+    assert music_remote.control("pimmich", "pause") is None
+    assert np.latest()["state"] == "paused" and np.current() is None  # la télécommande reste affichée en pause
+    assert music_remote.pop_command() == "pause" and music_remote.pop_command() is None

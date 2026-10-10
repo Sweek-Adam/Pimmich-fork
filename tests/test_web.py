@@ -150,3 +150,20 @@ def test_session_cookie_is_secure_only_over_https(client):
 def test_https_origin_is_accepted(admin_client):
     # Création de compte invalide : refusée par la validation (302), pas par la protection CSRF (403), et sans effet
     assert admin_client.post("/users/create", data={"username": "x"}, headers={"Origin": "https://localhost"}).status_code == 302
+
+
+def test_templates_only_use_colors_known_to_tailwind_2():
+    """Tailwind 2 (CDN) n'a pas orange, teal, amber... : une classe inconnue donne un texte blanc sur fond blanc."""
+    import re
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent / "templates"
+    styles = (root / "configure" / "styles_app.html.jinja").read_text()
+    defined = {name.replace("\\:", ":") for name in re.findall(r"\.((?:[\w-]|\\:)+)", styles)}
+    missing = set()
+    for path in root.rglob("*.jinja"):
+        if path.name.startswith("styles"):
+            continue
+        for cls in re.findall(r"(?<![\w:-])((?:hover:|focus:)?(?:bg|text|border|ring)-(?:orange|teal|cyan|amber|lime|emerald|sky|violet|fuchsia|rose|slate)-\d{2,3})\b", path.read_text()):
+            if cls not in defined:
+                missing.add(f"{path.name}: {cls}")
+    assert not missing, sorted(missing)

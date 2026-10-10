@@ -1,0 +1,84 @@
+{#- Télécommande de la musique (Spotify, AirPlay, Bluetooth, musique du diaporama) et volume du cadre.
+    Incluse dans l'accueil et dans Écran > Son ; un seul script initialise toutes les télécommandes. -#}
+<div class="music-remote hidden{{ ' show-idle' if remote_show_idle else '' }}">
+    <p class="mr-idle muted">{{ _("Aucune musique en cours de lecture.") }}</p>
+    <div class="mr-track">
+        <img class="mr-cover hidden" alt="">
+        <span class="mr-nocover np-nocover"><i class="fas fa-music"></i></span>
+        <span class="np-text"><strong class="mr-title"></strong><small class="mr-artist"></small></span>
+    </div>
+    <div class="mr-buttons">
+        <button type="button" data-action="previous" title="{{ _('Précédent') }}" aria-label="{{ _('Précédent') }}"><i class="fas fa-step-backward"></i></button>
+        <button type="button" data-action="toggle" class="mr-main" title="{{ _('Lecture / pause') }}" aria-label="{{ _('Lecture / pause') }}"><i class="fas fa-play"></i></button>
+        <button type="button" data-action="next" title="{{ _('Suivant') }}" aria-label="{{ _('Suivant') }}"><i class="fas fa-step-forward"></i></button>
+    </div>
+    <p class="mr-hint muted"></p>
+    <label class="mr-volume" title="{{ _('Volume du cadre') }}">
+        <i class="fas fa-volume-down"></i>
+        <input type="range" min="0" max="100" step="5" aria-label="{{ _('Volume du cadre') }}">
+        <span class="mr-volume-value"></span>
+    </label>
+    <p class="mr-message"></p>
+</div>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        if (window.__musicRemote) return;
+        window.__musicRemote = true;
+        const remotes = [...document.querySelectorAll(".music-remote")];
+        let state = null, volumeTimer = null;
+        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })).json();
+
+        function render() {
+            remotes.forEach(r => {
+                const t = state && state.track;
+                r.classList.toggle("hidden", !t && !r.classList.contains("show-idle"));
+                r.classList.toggle("idle", !t);
+                if (!t) return;
+                r.querySelector(".mr-title").textContent = t.title;
+                r.querySelector(".mr-artist").textContent = [t.artist, t.source_label].filter(Boolean).join(" · ");
+                const cover = r.querySelector(".mr-cover");
+                cover.classList.toggle("hidden", !t.cover); r.querySelector(".mr-nocover").classList.toggle("hidden", !!t.cover);
+                if (t.cover && cover.getAttribute("src") !== t.cover) cover.src = t.cover;
+                const can = (a) => state.actions.includes(a);
+                r.querySelector(".mr-buttons").classList.toggle("hidden", !state.actions.length);  // source non pilotable d'ici
+                r.querySelector(".mr-hint").textContent = state.actions.length ? "" : (state.hint || "");
+                r.querySelector('[data-action="previous"]').disabled = !can("previous");
+                r.querySelector('[data-action="next"]').disabled = !can("next");
+                const main = r.querySelector('[data-action="toggle"]');
+                main.disabled = !can(t.playing ? "pause" : "play");
+                main.querySelector("i").className = "fas " + (t.playing ? "fa-pause" : "fa-play");
+                const vol = r.querySelector(".mr-volume");
+                vol.classList.toggle("hidden", state.volume === null);
+                if (state.volume !== null && !volumeTimer) {
+                    vol.querySelector("input").value = state.volume;
+                    vol.querySelector(".mr-volume-value").textContent = `${state.volume} %`;
+                }
+            });
+        }
+        async function refresh() {
+            if (!remotes.some(r => r.closest(".tabcontent") && r.closest(".tabcontent").offsetParent)) return;  // aucune visible
+            try { state = await (await fetch("/api/music/remote")).json(); render(); } catch (e) { /* le cadre redémarre */ }
+        }
+        const say = (r, text) => { const m = r.querySelector(".mr-message"); m.textContent = text || ""; setTimeout(() => { if (m.textContent === text) m.textContent = ""; }, 4000); };
+
+        remotes.forEach(r => {
+            r.querySelectorAll(".mr-buttons button").forEach(b => b.addEventListener("click", async () => {
+                let action = b.dataset.action;
+                if (action === "toggle") action = state.track.playing ? "pause" : "play";
+                b.disabled = true;
+                const res = await post("/api/music/remote", { action });
+                if (!res.success) say(r, res.message);
+                setTimeout(refresh, 800);
+            }));
+            const input = r.querySelector(".mr-volume input");
+            input.addEventListener("input", () => {
+                remotes.forEach(o => { o.querySelector(".mr-volume input").value = input.value; o.querySelector(".mr-volume-value").textContent = `${input.value} %`; });
+                clearTimeout(volumeTimer);
+                volumeTimer = setTimeout(async () => { const res = await post("/api/music/volume", { volume: Number(input.value) }); volumeTimer = null; if (!res.success) say(r, res.message); }, 250);
+            });
+        });
+        document.querySelectorAll(".tablink, .main-nav-link").forEach(b => b.addEventListener("click", () => setTimeout(refresh, 80)));
+        refresh();
+        setInterval(refresh, 5000);
+    });
+</script>

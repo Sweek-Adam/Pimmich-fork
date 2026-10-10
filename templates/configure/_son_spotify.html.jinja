@@ -50,12 +50,7 @@
                             <h3><span class="step-num"><i class="fas fa-play"></i></span>{{ _("Lire sur le cadre") }}</h3>
                             <div class="flex flex-wrap items-center gap-2 mb-3">
                                 <input type="search" id="sp-filter" placeholder="{{ _('Rechercher une playlist…') }}" class="flex-1">
-                                <span class="sp-controls">
-                                    <button type="button" data-action="previous" title="{{ _('Précédent') }}"><i class="fas fa-step-backward"></i></button>
-                                    <button type="button" data-action="pause" title="{{ _('Pause') }}"><i class="fas fa-pause"></i></button>
-                                    <button type="button" data-action="resume" title="{{ _('Lecture') }}"><i class="fas fa-play"></i></button>
-                                    <button type="button" data-action="next" title="{{ _('Suivant') }}"><i class="fas fa-step-forward"></i></button>
-                                </span>
+
                             </div>
                             <div id="sp-playlists" class="sp-playlists"></div>
                         </div>
@@ -161,10 +156,6 @@
                         });
                         $("sp-disconnect").addEventListener("click", async () => { const r = await post('/api/spotify/disconnect'); say(r.message, r.success); lists = []; load(); });
                         $("sp-filter").addEventListener("input", renderPlaylists);
-                        document.querySelectorAll(".sp-controls button").forEach(b => b.addEventListener("click", async () => {
-                            const r = await post('/api/spotify/control', { action: b.dataset.action });
-                            if (!r.success) say(r.message, false);
-                        }));
                         load();
                     });
                 </script>

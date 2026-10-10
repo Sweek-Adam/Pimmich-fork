@@ -5,10 +5,10 @@ import secrets
 
 import requests
 
-from utils import ambiances, bluetooth_control, spotify
+from utils import ambiances, bluetooth_control, music_remote, now_playing, spotify
 from utils.message_renderer import N_
 from utils.playlist_manager import load_playlists
-from web.routes_home import _service_active, _tr
+from web.routes_home import SOURCE_LABELS, _service_active, _tr
 
 
 # --- Bluetooth ---
@@ -204,3 +204,60 @@ def spotify_links_api():
     config["spotify_links"] = links
     save_config(config)
     return jsonify({"success": True, "message": _("Musique associée enregistrée.")})
+
+
+# --- Télécommande (toutes sources) ---
+
+REMOTE_ERRORS = dict(SPOTIFY_ERRORS, unsupported=N_("Cette source ne peut pas être commandée d'ici."),
+                     unreachable=N_("Le lecteur ne répond pas."))
+
+
+def _remote_track():
+    return now_playing.latest(exclude=() if is_slideshow_running() else ("pimmich",))
+
+
+@app.route('/api/music/remote', methods=['GET'])
+@login_required
+def music_remote_api():
+    """Morceau en cours ou en pause, commandes possibles et volume du cadre."""
+    track = _remote_track()
+    volume, muted = music_remote.get_volume()
+    data = {"success": True, "volume": volume, "muted": muted, "track": None, "actions": []}
+    if track:
+        cover = track.get("cover")
+        has_cover = bool(cover) and Path(cover).parent == now_playing.COVER_DIR and Path(cover).is_file()
+        data["track"] = {"title": track.get("title", ""), "artist": track.get("artist", ""), "source": track["source"],
+                         "source_label": _tr(SOURCE_LABELS.get(track["source"], track["source"])),
+                         "playing": track.get("state") == "playing",
+                         "cover": url_for("now_playing_cover", v=Path(cover).name) if has_cover else None}
+        data["actions"] = music_remote.actions_for(track["source"])
+        if not data["actions"]:
+            data["hint"] = _("Pour commander Spotify d'ici, connectez-le (Écran > Son > Spotify, étape 2).") if track["source"] == "spotify" \
+                else _("Commandez la lecture depuis le téléphone.")
+    return jsonify(data)
+
+
+@app.route('/api/music/remote', methods=['POST'])
+@login_required
+def music_remote_control_api():
+    action = (request.get_json(silent=True) or {}).get("action", "")
+    track = _remote_track()
+    if not track:
+        return jsonify({"success": False, "message": _("Aucune musique en cours.")}), 409
+    error = music_remote.control(track["source"], action)
+    if error:
+        message = REMOTE_ERRORS.get(error)
+        return jsonify({"success": False, "message": _tr(message) if message else error}), 400
+    return jsonify({"success": True})
+
+
+@app.route('/api/music/volume', methods=['POST'])
+@login_required
+def music_volume_api():
+    try:
+        volume = int((request.get_json(silent=True) or {}).get("volume"))
+    except (TypeError, ValueError):
+        return jsonify({"success": False, "message": _("Volume invalide.")}), 400
+    if not music_remote.set_volume(volume):
+        return jsonify({"success": False, "message": _("Le son du cadre ne répond pas.")}), 500
+    return jsonify({"success": True, "volume": max(0, min(100, volume))})

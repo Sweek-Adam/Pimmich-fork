@@ -24,14 +24,8 @@
                 </section>
 
                 <section class="card">
-                    <h2 class="card-title"><i class="fas fa-compact-disc text-indigo-500 mr-2"></i>{{ _("Lecteur à l'écran") }}</h2>
-                    <div id="np-now" class="now-playing hidden">
-                        <img id="np-cover" alt="" class="hidden">
-                        <span id="np-nocover" class="np-nocover"><i class="fas fa-music"></i></span>
-                        <span class="np-text"><strong id="np-title"></strong><small id="np-artist"></small></span>
-                        <span id="np-source" class="badge on"></span>
-                    </div>
-                    <p id="np-idle" class="text-sm text-gray-600 mb-3">{{ _("Aucune musique en cours de lecture.") }}</p>
+                    <h2 class="card-title"><i class="fas fa-compact-disc text-indigo-500 mr-2"></i>{{ _("Musique en cours") }}</h2>
+                    {% set remote_show_idle = true %}{% include 'configure/_music_remote.html.jinja' %}
                     <div class="grid md:grid-cols-2 gap-4 mt-3">
                         <div>
                             <label for="np-display" class="block">{{ _("Afficher le morceau sur le cadre") }}</label>
@@ -111,21 +105,6 @@
                         }
                         $("np-display").addEventListener("change", saveDisplay);
                         $("np-position").addEventListener("change", saveDisplay);
-                        async function nowPlaying() {
-                            if (!$("tab-son").offsetParent) return;  // onglet masqué
-                            try {
-                                const { playing } = await (await fetch('/api/now_playing')).json();
-                                $("np-now").classList.toggle("hidden", !playing);
-                                $("np-idle").classList.toggle("hidden", !!playing);
-                                if (!playing) return;
-                                $("np-title").textContent = playing.title; $("np-artist").textContent = playing.artist || playing.album || "";
-                                $("np-source").textContent = playing.source_label;
-                                $("np-cover").classList.toggle("hidden", !playing.cover); $("np-nocover").classList.toggle("hidden", !!playing.cover);
-                                if (playing.cover && $("np-cover").getAttribute("src") !== playing.cover) $("np-cover").src = playing.cover;
-                            } catch (e) { /* le cadre redémarre */ }
-                        }
-                        document.querySelectorAll(".tablink[onclick*=\"'tab-son'\"]").forEach(b => b.addEventListener("click", () => setTimeout(nowPlaying, 50)));
-                        setInterval(nowPlaying, 5000);
                         function preview() {
                             const file = $("sound-music").value;
                             $("sound-preview").classList.toggle("hidden", !file);
@@ -179,7 +158,7 @@
                         });
                         setInterval(() => { if ($("tab-son").offsetParent) loadBluetooth(); }, 5000);
 
-                        load(); nowPlaying(); loadBluetooth();
+                        load(); loadBluetooth();
                     });
                 </script>
             </div>

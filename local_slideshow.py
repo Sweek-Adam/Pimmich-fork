@@ -31,6 +31,7 @@ from utils.messages_manager import pop_priority, list_messages
 from utils import compositions, layout_engine
 from utils import play_queue
 from utils import now_playing
+from utils import music_remote
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -1054,7 +1055,7 @@ def draw_guest_qr(screen, screen_width, screen_height, config):
 
 
 # --- Morceau en cours (Spotify, AirPlay, musique du diaporama) ---
-_background_music_state = {"paused": False, "checked": 0}
+_background_music_state = {"paused": False, "checked": 0, "held": False}
 _now_playing_cache = {"read": 0, "info": None, "key": None, "surface": None}
 NOW_PLAYING_SECONDS = 12  # mode « à chaque nouveau morceau » : durée d'affichage
 
@@ -1066,6 +1067,15 @@ def sync_background_music():
         return
     state["checked"] = time.time()
     try:
+        command = music_remote.pop_command()  # télécommande de l'interface
+        if command == "pause" and pygame.mixer.music.get_busy():
+            pygame.mixer.music.pause()
+            state["held"] = True
+        elif command == "play" and state.get("held"):
+            pygame.mixer.music.unpause()
+            state["held"] = False
+        if state.get("held"):
+            return  # mise en pause depuis l'interface : on ne la reprend pas automatiquement
         external = now_playing.external_playing()
         if external and not state["paused"] and pygame.mixer.music.get_busy():
             pygame.mixer.music.pause()

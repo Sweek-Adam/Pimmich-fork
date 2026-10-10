@@ -17,7 +17,7 @@ if ! command -v librespot >/dev/null; then
     curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
     sudo systemctl disable --now raspotify 2>/dev/null || true
 fi
-sudo apt-get install -y shairport-sync
+sudo apt-get install -y shairport-sync playerctl  # playerctl : télécommande de l'interface (MPRIS)
 sudo systemctl disable --now shairport-sync 2>/dev/null || true
 
 echo "=== Enceinte Bluetooth (A2DP) ==="
@@ -41,6 +41,15 @@ wireplumber.profiles = {
 CONF
 systemctl --user restart wireplumber || true
 
+SHAIRPORT_CONF="$HOME/.config/pimmich/shairport-sync.conf"
+cat > "$SHAIRPORT_CONF" <<'CONF'
+// Pimmich : commandes (lecture, pause, suivant) depuis l'interface, via MPRIS sur la session
+general = {
+  mpris_service_bus = "Session";
+  dbus_service_bus = "Session";
+};
+CONF
+
 # Services utilisateur : le son passe par PipeWire, comme les vidéos et la musique du diaporama
 mkdir -p "$UNIT_DIR"
 cat > "$UNIT_DIR/pimmich-spotify.service" <<UNIT
@@ -63,8 +72,8 @@ After=pipewire-pulse.service
 
 [Service]
 # Port 5100 : le port par défaut d'AirPlay (5000) est celui de Pimmich
-# -M -g : métadonnées et pochettes dans un tube, lues par pimmich-airplay-meta
-ExecStart=/usr/bin/shairport-sync -a "$NAME" -p 5100 -M -g --metadata-pipename=/tmp/shairport-sync-metadata -o pa
+# -c : télécommande MPRIS sur la session de l'utilisateur ; -M -g : métadonnées et pochettes dans un tube, lues par pimmich-airplay-meta
+ExecStart=/usr/bin/shairport-sync -c "$SHAIRPORT_CONF" -a "$NAME" -p 5100 -M -g --metadata-pipename=/tmp/shairport-sync-metadata -o pa
 Restart=on-failure
 
 [Install]
@@ -99,8 +108,21 @@ RestartSec=5
 [Install]
 WantedBy=default.target
 UNIT
+cat > "$UNIT_DIR/pimmich-bt-mpris.service" <<UNIT
+[Unit]
+Description=Pimmich - télécommande des téléphones Bluetooth (MPRIS)
+After=pimmich-bluetooth.service
+
+[Service]
+ExecStart=/usr/bin/mpris-proxy
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+UNIT
 systemctl --user daemon-reload
-SERVICES="pimmich-spotify.service pimmich-airplay.service pimmich-airplay-meta.service pimmich-bluetooth.service"
+SERVICES="pimmich-spotify.service pimmich-airplay.service pimmich-airplay-meta.service pimmich-bluetooth.service pimmich-bt-mpris.service"
 systemctl --user enable $SERVICES
 systemctl --user restart $SERVICES  # nouvelles options prises en compte
 sudo loginctl enable-linger "$USER"  # les services démarrent avec le cadre, même sans session ouverte

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:58+0200\n"
+"POT-Creation-Date: 2026-10-10 20:48+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1042
+#: local_slideshow.py:1045
 msgid "Photos & messages"
 msgstr "写真とメッセージ"
 
-#: local_slideshow.py:1354
+#: local_slideshow.py:1366
 msgid "Données de marée non disponibles"
 msgstr "潮汐データは利用できません"
 
-#: local_slideshow.py:1451
+#: local_slideshow.py:1463
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:1451
+#: local_slideshow.py:1463
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:2482
+#: local_slideshow.py:2494
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:2483
+#: local_slideshow.py:2495
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:2484
+#: local_slideshow.py:2496
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:2485
+#: local_slideshow.py:2497
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2486
+#: local_slideshow.py:2498
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:2512
+#: local_slideshow.py:2524
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -129,7 +129,7 @@ msgid "Bibliothèque"
 msgstr "ライブラリ"
 
 #: templates/configure.html.jinja:120
-#: templates/configure/tab_accueil.html.jinja:63
+#: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "次に表示"
 
@@ -387,6 +387,27 @@ msgstr "件のファイルを送信中..."
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "送信サイズが大きすぎます。一度に送信するファイル数を減らしてください。"
 
+#: templates/configure/_music_remote.html.jinja:4
+msgid "Aucune musique en cours de lecture."
+msgstr "再生中の音楽はありません。"
+
+#: templates/configure/_music_remote.html.jinja:11
+msgid "Précédent"
+msgstr "前へ"
+
+#: templates/configure/_music_remote.html.jinja:12
+msgid "Lecture / pause"
+msgstr "再生 / 一時停止"
+
+#: templates/configure/_music_remote.html.jinja:13
+msgid "Suivant"
+msgstr "次へ"
+
+#: templates/configure/_music_remote.html.jinja:16
+#: templates/configure/_music_remote.html.jinja:18
+msgid "Volume du cadre"
+msgstr "フォトフレームの音量"
+
 #: templates/configure/_son_spotify.html.jinja:5
 msgid "Associer le cadre à votre compte"
 msgstr "フォトフレームをアカウントにリンク"
@@ -484,7 +505,7 @@ msgid "Déconnecter"
 msgstr "接続解除"
 
 #: templates/configure/_son_spotify.html.jinja:50
-#: templates/configure/_son_spotify.html.jinja:76
+#: templates/configure/_son_spotify.html.jinja:71
 msgid "Lire sur le cadre"
 msgstr "フォトフレームで再生"
 
@@ -492,63 +513,47 @@ msgstr "フォトフレームで再生"
 msgid "Rechercher une playlist…"
 msgstr "プレイリストを検索…"
 
-#: templates/configure/_son_spotify.html.jinja:54
-msgid "Précédent"
-msgstr "前へ"
-
-#: templates/configure/_son_spotify.html.jinja:55
-msgid "Pause"
-msgstr "一時停止"
-
-#: templates/configure/_son_spotify.html.jinja:56
-msgid "Lecture"
-msgstr "再生"
-
-#: templates/configure/_son_spotify.html.jinja:57
-msgid "Suivant"
-msgstr "次へ"
-
-#: templates/configure/_son_spotify.html.jinja:63
+#: templates/configure/_son_spotify.html.jinja:58
 msgid "Musiques associées"
 msgstr "関連付けた音楽"
 
-#: templates/configure/_son_spotify.html.jinja:64
+#: templates/configure/_son_spotify.html.jinja:59
 msgid ""
 "Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou "
 "la playlist de photos."
 msgstr "アンビエンスまたは写真プレイリストを選ぶと、フォトフレームで自動的に再生されます。"
 
-#: templates/configure/_son_spotify.html.jinja:75
-#: templates/configure/tab_accueil.html.jinja:72
+#: templates/configure/_son_spotify.html.jinja:70
+#: templates/configure/tab_accueil.html.jinja:68
 msgid "Ambiance"
 msgstr "ムード"
 
-#: templates/configure/_son_spotify.html.jinja:75
+#: templates/configure/_son_spotify.html.jinja:70
 msgid "Playlist de photos"
 msgstr "写真プレイリスト"
 
-#: templates/configure/_son_spotify.html.jinja:76
+#: templates/configure/_son_spotify.html.jinja:71
 #: templates/configure/tab_son.html.jinja:8
 msgid "Aucune musique"
 msgstr "音楽なし"
 
-#: templates/configure/_son_spotify.html.jinja:77
+#: templates/configure/_son_spotify.html.jinja:72
 msgid "titres"
 msgstr "曲"
 
-#: templates/configure/_son_spotify.html.jinja:77
+#: templates/configure/_son_spotify.html.jinja:72
 msgid "Aucune playlist trouvée."
 msgstr "プレイリストが見つかりません。"
 
-#: templates/configure/_son_spotify.html.jinja:78
+#: templates/configure/_son_spotify.html.jinja:73
 msgid "Compte :"
 msgstr "アカウント："
 
-#: templates/configure/_son_spotify.html.jinja:78
+#: templates/configure/_son_spotify.html.jinja:73
 msgid "Copié"
 msgstr "コピーしました"
 
-#: templates/configure/_son_spotify.html.jinja:145
+#: templates/configure/_son_spotify.html.jinja:140
 msgid "Demande de code à Spotify…"
 msgstr "Spotify にコードをリクエスト中…"
 
@@ -1071,7 +1076,7 @@ msgstr "検出中にエラーが発生しました。"
 
 #: templates/configure/scripts_status.html.jinja:517
 #: templates/configure/tab_accueil.html.jinja:17
-#: templates/configure/tab_accueil.html.jinja:124
+#: templates/configure/tab_accueil.html.jinja:120
 msgid "Le diaporama est arrêté."
 msgstr "スライドショーが停止されます。"
 
@@ -1214,114 +1219,114 @@ msgstr "通知を有効/無効にする"
 msgid "Disposition"
 msgstr "レイアウト"
 
-#: templates/configure/tab_accueil.html.jinja:43
+#: templates/configure/tab_accueil.html.jinja:39
 msgid "État du cadre"
 msgstr "フォトフレームの状態"
 
-#: templates/configure/tab_accueil.html.jinja:44
+#: templates/configure/tab_accueil.html.jinja:40
 msgid "Vérification…"
 msgstr "確認中…"
 
-#: templates/configure/tab_accueil.html.jinja:47
+#: templates/configure/tab_accueil.html.jinja:43
 msgid "Actions rapides"
 msgstr "クイック操作"
 
-#: templates/configure/tab_accueil.html.jinja:49
+#: templates/configure/tab_accueil.html.jinja:45
 #: templates/configure/tab_messages.html.jinja:4
 msgid "Écrire un message"
 msgstr "メッセージを書く"
 
-#: templates/configure/tab_accueil.html.jinja:50
+#: templates/configure/tab_accueil.html.jinja:46
 msgid "Ajouter des photos"
 msgstr "写真を追加"
 
-#: templates/configure/tab_accueil.html.jinja:51
+#: templates/configure/tab_accueil.html.jinja:47
 msgid "Lancer une playlist"
 msgstr "プレイリストを再生"
 
-#: templates/configure/tab_accueil.html.jinja:52
+#: templates/configure/tab_accueil.html.jinja:48
 msgid "Inviter des proches"
 msgstr "家族や友人を招待"
 
-#: templates/configure/tab_accueil.html.jinja:53
+#: templates/configure/tab_accueil.html.jinja:49
 #: templates/configure/tab_son.html.jinja:7
 msgid "Musique"
 msgstr "音楽"
 
-#: templates/configure/tab_accueil.html.jinja:54
+#: templates/configure/tab_accueil.html.jinja:50
 msgid "Mes photos"
 msgstr "マイ写真"
 
-#: templates/configure/tab_accueil.html.jinja:64
+#: templates/configure/tab_accueil.html.jinja:60
 msgid "Réorganiser"
 msgstr "並べ替え"
 
-#: templates/configure/tab_accueil.html.jinja:73
+#: templates/configure/tab_accueil.html.jinja:69
 msgid "Revenir à mes réglages"
 msgstr "自分の設定に戻す"
 
-#: templates/configure/tab_accueil.html.jinja:82
+#: templates/configure/tab_accueil.html.jinja:78
 msgid "Choisir une disposition"
 msgstr "レイアウトを選択"
 
-#: templates/configure/tab_accueil.html.jinja:83
+#: templates/configure/tab_accueil.html.jinja:79
 msgid "Fermer"
 msgstr "閉じる"
 
-#: templates/configure/tab_accueil.html.jinja:87
+#: templates/configure/tab_accueil.html.jinja:83
 msgid "Tout"
 msgstr "すべて"
 
-#: templates/configure/tab_accueil.html.jinja:88
+#: templates/configure/tab_accueil.html.jinja:84
 #: templates/configure/tab_dispositions.html.jinja:38
 msgid "Formats"
 msgstr "レイアウト"
 
-#: templates/configure/tab_accueil.html.jinja:89
+#: templates/configure/tab_accueil.html.jinja:85
 #: templates/configure/tab_dispositions.html.jinja:38
 msgid "Thèmes"
 msgstr "テーマ"
 
-#: templates/configure/tab_accueil.html.jinja:90
+#: templates/configure/tab_accueil.html.jinja:86
 msgid "Avec messages"
 msgstr "メッセージ付き"
 
-#: templates/configure/tab_accueil.html.jinja:92
+#: templates/configure/tab_accueil.html.jinja:88
 msgid "Rechercher…"
 msgstr "検索…"
 
-#: templates/configure/tab_accueil.html.jinja:95
-#: templates/configure/tab_accueil.html.jinja:125
+#: templates/configure/tab_accueil.html.jinja:91
+#: templates/configure/tab_accueil.html.jinja:121
 msgid "Selon mes réglages"
 msgstr "自分の設定どおり"
 
-#: templates/configure/tab_accueil.html.jinja:96
-#: templates/configure/tab_accueil.html.jinja:126
+#: templates/configure/tab_accueil.html.jinja:92
+#: templates/configure/tab_accueil.html.jinja:122
 msgid "Compositions au hasard"
 msgstr "ランダムな組み写真"
 
-#: templates/configure/tab_accueil.html.jinja:102
+#: templates/configure/tab_accueil.html.jinja:98
 #: templates/configure/tab_dispositions.html.jinja:48
 msgid "Affiche les messages"
 msgstr "メッセージを表示"
 
-#: templates/configure/tab_accueil.html.jinja:109
+#: templates/configure/tab_accueil.html.jinja:105
 msgid "Afficher maintenant (une fois)"
 msgstr "今すぐ表示（1回）"
 
-#: templates/configure/tab_accueil.html.jinja:110
+#: templates/configure/tab_accueil.html.jinja:106
 msgid "Utiliser jusqu'à nouvel ordre"
 msgstr "次の変更まで使用"
 
-#: templates/configure/tab_accueil.html.jinja:121
+#: templates/configure/tab_accueil.html.jinja:117
 msgid "Tout va bien."
 msgstr "問題ありません。"
 
-#: templates/configure/tab_accueil.html.jinja:122
+#: templates/configure/tab_accueil.html.jinja:118
 msgid "Régler"
 msgstr "設定する"
 
-#: templates/configure/tab_accueil.html.jinja:123
+#: templates/configure/tab_accueil.html.jinja:119
 msgid "Rien à afficher pour l'instant."
 msgstr "まだ表示するものがありません。"
 
@@ -2285,28 +2290,28 @@ msgstr "位置："
 #: templates/configure/tab_invites.html.jinja:32
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
-#: templates/configure/tab_son.html.jinja:48
+#: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "右下"
 
 #: templates/configure/tab_invites.html.jinja:33
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
-#: templates/configure/tab_son.html.jinja:47
+#: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "左下"
 
 #: templates/configure/tab_invites.html.jinja:34
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
-#: templates/configure/tab_son.html.jinja:50
+#: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "右上"
 
 #: templates/configure/tab_invites.html.jinja:35
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
-#: templates/configure/tab_son.html.jinja:49
+#: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "左上"
 
@@ -2771,7 +2776,7 @@ msgid "Couleur du contour (hex)"
 msgstr "輪郭色(16進数)"
 
 #: templates/configure/tab_metadata.html.jinja:142
-#: templates/configure/tab_son.html.jinja:45
+#: templates/configure/tab_son.html.jinja:39
 msgid "Position"
 msgstr "位置"
 
@@ -3029,30 +3034,26 @@ msgid "Y aller"
 msgstr "移動"
 
 #: templates/configure/tab_son.html.jinja:27
-msgid "Lecteur à l'écran"
-msgstr "画面上のプレーヤー"
+msgid "Musique en cours"
+msgstr "再生中の音楽"
 
-#: templates/configure/tab_son.html.jinja:34
-msgid "Aucune musique en cours de lecture."
-msgstr "再生中の音楽はありません。"
-
-#: templates/configure/tab_son.html.jinja:37
+#: templates/configure/tab_son.html.jinja:31
 msgid "Afficher le morceau sur le cadre"
 msgstr "フォトフレームに曲を表示"
 
-#: templates/configure/tab_son.html.jinja:39
+#: templates/configure/tab_son.html.jinja:33
 msgid "Quelques secondes à chaque nouveau morceau"
 msgstr "新しい曲ごとに数秒間"
 
-#: templates/configure/tab_son.html.jinja:40
+#: templates/configure/tab_son.html.jinja:34
 msgid "En permanence pendant la lecture"
 msgstr "再生中は常に表示"
 
-#: templates/configure/tab_son.html.jinja:41
+#: templates/configure/tab_son.html.jinja:35
 msgid "Ne pas afficher"
 msgstr "表示しない"
 
-#: templates/configure/tab_son.html.jinja:54
+#: templates/configure/tab_son.html.jinja:48
 msgid ""
 "Un petit encart discret (pochette, titre, artiste) pour la musique du "
 "diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la "
@@ -3061,11 +3062,11 @@ msgstr ""
 "スライドショーの音楽、Spotify、AirPlay 用の小さく控えめな表示（ジャケット、曲名、アーティスト）。Spotify または "
 "AirPlay の再生中は、スライドショーの音楽が一時停止します。"
 
-#: templates/configure/tab_son.html.jinja:60
+#: templates/configure/tab_son.html.jinja:54
 msgid "Le cadre comme enceinte"
 msgstr "フォトフレームをスピーカーとして使う"
 
-#: templates/configure/tab_son.html.jinja:64
+#: templates/configure/tab_son.html.jinja:58
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -3073,7 +3074,7 @@ msgstr ""
 "Spotify アプリでデバイスとして「Cadre photo」を選ぶと、フォトフレームの画面から音楽が流れます。Spotify Premium "
 "アカウントが必要です。"
 
-#: templates/configure/tab_son.html.jinja:68
+#: templates/configure/tab_son.html.jinja:62
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -3081,7 +3082,7 @@ msgstr ""
 "iPhone、iPad、Mac から、任意のアプリ（Deezer、Apple Music、YouTube など）の音声を「Cadre "
 "photo」に送信できます。"
 
-#: templates/configure/tab_son.html.jinja:73
+#: templates/configure/tab_son.html.jinja:67
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -3092,35 +3093,35 @@ msgstr ""
 "など）：一度ペアリングすれば、次からは自動で再接続されます。新しい機器を受け付けるのは「スマートフォンをペアリング」を押してから 3 "
 "分間だけです。"
 
-#: templates/configure/tab_son.html.jinja:75
+#: templates/configure/tab_son.html.jinja:69
 msgid "Associer un téléphone"
 msgstr "スマートフォンをペアリング"
 
-#: templates/configure/tab_son.html.jinja:81
+#: templates/configure/tab_son.html.jinja:75
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "これらの機能を有効にするには、Raspberry Pi で一度だけ次を実行してください："
 
-#: templates/configure/tab_son.html.jinja:90
+#: templates/configure/tab_son.html.jinja:84
 msgid "Actif"
 msgstr "有効"
 
-#: templates/configure/tab_son.html.jinja:90
+#: templates/configure/tab_son.html.jinja:84
 msgid "Non installé"
 msgstr "未インストール"
 
-#: templates/configure/tab_son.html.jinja:149
+#: templates/configure/tab_son.html.jinja:128
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "検出可能：スマートフォンで「Cadre photo」を選んでください"
 
-#: templates/configure/tab_son.html.jinja:149
+#: templates/configure/tab_son.html.jinja:128
 msgid "connecté"
 msgstr "接続中"
 
-#: templates/configure/tab_son.html.jinja:150
+#: templates/configure/tab_son.html.jinja:129
 msgid "Oublier"
 msgstr "削除"
 
-#: templates/configure/tab_son.html.jinja:150
+#: templates/configure/tab_son.html.jinja:129
 msgid "Aucun téléphone associé."
 msgstr "ペアリング済みのスマートフォンはありません。"
 
@@ -4338,7 +4339,7 @@ msgstr "レイアウトを準備中です… 数秒で表示されます。"
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
-#: web/routes_home.py:160
+#: web/routes_home.py:160 web/routes_music.py:260
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
@@ -4498,6 +4499,32 @@ msgstr "無効な関連付けです。"
 #: web/routes_music.py:206
 msgid "Musique associée enregistrée."
 msgstr "関連付けた音楽を保存しました。"
+
+#: web/routes_music.py:211
+msgid "Cette source ne peut pas être commandée d'ici."
+msgstr "このソースはここから操作できません。"
+
+#: web/routes_music.py:212
+msgid "Le lecteur ne répond pas."
+msgstr "プレーヤーが応答しません。"
+
+#: web/routes_music.py:235
+msgid ""
+"Pour commander Spotify d'ici, connectez-le (Écran > Son > Spotify, étape "
+"2)."
+msgstr "ここから Spotify を操作するには、接続してください（ディスプレイ > サウンド > Spotify、ステップ 2）。"
+
+#: web/routes_music.py:236
+msgid "Commandez la lecture depuis le téléphone."
+msgstr "再生はスマートフォンから操作してください。"
+
+#: web/routes_music.py:246
+msgid "Aucune musique en cours."
+msgstr "再生中の音楽はありません。"
+
+#: web/routes_music.py:262
+msgid "Le son du cadre ne répond pas."
+msgstr "フォトフレームの音声が応答しません。"
 
 #: web/routes_playlists.py:78
 msgid "Disposition de la playlist enregistrée."
