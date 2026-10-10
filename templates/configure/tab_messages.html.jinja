@@ -95,7 +95,7 @@
                             const info = document.createElement("div");
                             info.className = "p-2 text-xs text-gray-600 flex justify-between items-center gap-2";
                             const meta = document.createElement("span");
-                            meta.textContent = `${m.created}${m.author ? ' · ' + m.author : ''}${m.expires ? ' · {{ _("jusqu\'au") }} ' + m.expires : ''}`;
+                            meta.textContent = `${m.created}${m.author ? ' · ' + m.author : ''}${m.expires ? ' · ' + {{ _("jusqu'au")|tojson }} + ' ' + m.expires : ''}`;
                             const del = document.createElement("button");
                             del.type = "button";
                             del.className = "bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded";
