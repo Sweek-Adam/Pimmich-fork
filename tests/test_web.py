@@ -167,3 +167,16 @@ def test_templates_only_use_colors_known_to_tailwind_2():
             if cls not in defined:
                 missing.add(f"{path.name}: {cls}")
     assert not missing, sorted(missing)
+
+
+def test_pages_work_without_internet():
+    """Interface utilisable même si la box n'a plus internet : aucune bibliothèque chargée depuis un CDN."""
+    import re
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+    remote = re.compile(r"""<(?:script|link)[^>]+(?:src|href)=["']https?://""")
+    offenders = [p.name for p in (root / "templates").rglob("*.jinja") if remote.search(p.read_text())]
+    assert not offenders, offenders
+    for path in ("tailwind/tailwind.min.css", "fontawesome/css/all.min.css", "fontawesome/webfonts/fa-solid-900.woff2",
+                 "sortable/Sortable.min.js", "glightbox/glightbox.min.js", "chartjs/chart.umd.min.js"):
+        assert (root / "static" / "vendor" / path).is_file(), path

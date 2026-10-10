@@ -6,17 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ _('Configuration') }} - Pimmich</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/tailwind/tailwind.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#4f46e5">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <!-- GLightbox CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/glightbox/glightbox.min.css') }}" />
     <!-- Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/fontawesome/css/all.min.css') }}">
     <!-- Chart.js pour les graphiques -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='vendor/chartjs/chart.umd.min.js') }}"></script>
 {% include 'configure/styles.html.jinja' %}
 {% include 'configure/styles_app.html.jinja' %}
 </head>
@@ -213,8 +213,8 @@
         </nav>
     </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script src="{{ url_for('static', filename='vendor/glightbox/glightbox.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/sortable/Sortable.min.js') }}"></script>
 {% include 'configure/scripts_gallery.html.jinja' %}
 {% include 'configure/scripts_main.html.jinja' %}
 

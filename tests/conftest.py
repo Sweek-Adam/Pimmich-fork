@@ -28,6 +28,7 @@ for name in COPIED:
     elif src.exists():
         shutil.copy2(src, _SANDBOX / name)
 (_SANDBOX / "static").mkdir()
+(_SANDBOX / "static" / "vendor").symlink_to(PROJECT_DIR / "static" / "vendor")  # bibliothèques de l'interface (CSS, JS, icônes)
 shutil.copytree(PROJECT_DIR / "static" / "pwa", _SANDBOX / "static" / "pwa")
 shutil.copytree(PROJECT_DIR / "static" / "fonts", _SANDBOX / "static" / "fonts")
 (_SANDBOX / "config").mkdir()
