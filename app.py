@@ -209,7 +209,8 @@ SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormg
 def protect_against_csrf():
     """Refuse les requêtes d'action envoyées depuis un autre site (CSRF)."""
     if csrf_violation(request):
-        logger.warning(f"[Sécurité] Requête inter-site refusée : {request.method} {request.path}")
+        logger.warning(f"[Sécurité] Requête inter-site refusée : {request.method} {request.path} "
+                       f"(Sec-Fetch-Site={request.headers.get('Sec-Fetch-Site')}, Origin={request.headers.get('Origin')}, Host={request.host!r})")
         return jsonify({"success": False, "message": "Requête refusée (origine non autorisée)."}), 403
 
 @app.before_request

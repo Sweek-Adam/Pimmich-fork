@@ -4,8 +4,10 @@ Sécurité de l'application web : clé de session, jeton des appels internes et 
 import os
 import json
 import hmac
+import socket
 import secrets
 import logging
+from functools import lru_cache
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -86,6 +88,23 @@ def is_internal_request(request):
 STATE_CHANGING_GET_PREFIXES = ("/api/update_app", "/import-", "/prepare-photos")
 
 
+@lru_cache(maxsize=1)
+def _local_host_names():
+    """Noms et adresses IP sous lesquels le cadre est joignable (pour valider l'en-tête Origin)."""
+    names = {"localhost", "127.0.0.1", "::1"}
+    hostname = socket.gethostname().lower()
+    names.update({hostname, f"{hostname}.local"})
+    try:
+        import psutil
+        for addrs in psutil.net_if_addrs().values():
+            for addr in addrs:
+                if addr.family in (socket.AF_INET, socket.AF_INET6):
+                    names.add(addr.address.split("%")[0].lower())
+    except Exception:
+        pass
+    return frozenset(names)
+
+
 def is_cross_site_request(request):
     """
     Vrai si la requête provient d'un autre site que l'interface Pimmich.
@@ -101,8 +120,12 @@ def is_cross_site_request(request):
         return False  # Client non navigateur (curl, scripts) : pas de cookie de session tiers à détourner
     if origin == "null":
         return True
-    hosts = {h.lstrip("\\") for h in (request.host, request.headers.get("X-Forwarded-Host")) if h}
-    return urlparse(origin).netloc not in hosts
+    parsed = urlparse(origin)
+    hosts = {h for h in (request.host, request.headers.get("X-Forwarded-Host")) if h}
+    if parsed.netloc in hosts:
+        return False
+    # Le Host transmis par le proxy peut être absent ou faux : on accepte aussi les adresses du cadre lui-même
+    return (parsed.hostname or "").lower() not in _local_host_names()
 
 
 def csrf_violation(request):
