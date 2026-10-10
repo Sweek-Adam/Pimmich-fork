@@ -350,10 +350,19 @@ def prepare_video(source_path, dest_path, output_width, output_height):
         if shutil.which("nice"):
             command = ["nice", "-n", "15", *command]
         result = subprocess.run(command, check=False, capture_output=True, text=True, encoding='utf-8')
-        
+
+        if result.returncode != 0 and encoder != 'libx264':
+            # L'encodeur matériel refuse certaines vidéos (ex. HEVC de téléphone sur Pi 3) : nouvel essai en logiciel
+            print(f"[Video Prep] Encodeur matériel {encoder} en échec, nouvel essai avec libx264 (plus lent)")
+            tmp_path.unlink(missing_ok=True)
+            software = ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-profile:v', 'high', '-level', '4.0']
+            index = command.index('-c:v')
+            command = command[:index] + software + command[index + 2 + len(encoder_params):]
+            result = subprocess.run(command, check=False, capture_output=True, text=True, encoding='utf-8')
+
         if result.returncode != 0:
             tmp_path.unlink(missing_ok=True)
-            raise Exception(f"ffmpeg a échoué avec le code {result.returncode}. Erreur: {result.stderr.strip()}")
+            raise Exception(f"ffmpeg a échoué avec le code {result.returncode}. Erreur: {result.stderr.strip()[-600:]}")
         os.replace(tmp_path, dest_path)
     
     except Exception as video_e:
