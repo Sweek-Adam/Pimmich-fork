@@ -36,7 +36,8 @@ Description=Pimmich - récepteur AirPlay
 After=pipewire-pulse.service
 
 [Service]
-ExecStart=/usr/bin/shairport-sync -a "$NAME" -o pa
+# Port 5100 : le port par défaut d'AirPlay (5000) est celui de Pimmich
+ExecStart=/usr/bin/shairport-sync -a "$NAME" -p 5100 -o pa
 Restart=on-failure
 
 [Install]
