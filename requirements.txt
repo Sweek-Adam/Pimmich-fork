@@ -1,6 +1,6 @@
 Flask==2.3.2
 requests==2.31.0
-Pillow==10.4.0
+Pillow>=12.3  # versions compatibles avec la dernière version de Python (et le Raspberry Pi)
 pygame-ce  # version communautaire maintenue de pygame (s'importe aussi avec « import pygame »)
 psutil
 smbprotocol

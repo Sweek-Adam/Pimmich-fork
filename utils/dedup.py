@@ -25,7 +25,7 @@ def dhash(path):
     with Image.open(path) as image:
         image.draft("L", (image.width // 8 or 1, image.height // 8 or 1))  # décodage JPEG accéléré
         small = image.convert("L").resize((9, 8), Image.LANCZOS)
-    pixels = list(small.getdata())
+    pixels = list(small.get_flattened_data() if hasattr(small, "get_flattened_data") else small.getdata())  # getdata : retiré dans Pillow 14
     value = 0
     for row in range(8):
         for col in range(8):
