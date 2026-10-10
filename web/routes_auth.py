@@ -1,5 +1,6 @@
 """Connexion, déconnexion, mot de passe et comptes utilisateurs."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import login_throttle
 from web.core import _
 
 
@@ -13,16 +14,25 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+        ip = login_throttle.client_ip(request)
+        wait = login_throttle.seconds_locked(username, ip)
+        if wait:
+            logger.warning(f"[Sécurité] Connexion refusée (trop de tentatives) pour '{username}' depuis {ip}")
+            flash(_("Trop de tentatives de connexion. Réessayez dans %(minutes)s minute(s).", minutes=(wait + 59) // 60), "error")
+            return render_template('login.html.jinja'), 429
         role = None
         if username and password:
             role = 'admin' if check_credentials(username, password) else user_manager.authenticate(username, password)
         if role:
+            login_throttle.register_success(username, ip)
             session['logged_in'] = True
             session['username'] = username
             session['role'] = role
             flash(_("Connexion réussie"), "success")
             return redirect(url_for('configure'))
         else:
+            login_throttle.register_failure(username, ip)
+            logger.warning(f"[Sécurité] Échec de connexion pour '{username}' depuis {ip}")
             flash(_("Identifiants invalides"), "error")
     return render_template('login.html.jinja')
 

@@ -102,3 +102,12 @@ def user_client(app_module, users_file):
 
 def pytest_sessionfinish(session, exitstatus):
     shutil.rmtree(_SANDBOX, ignore_errors=True)
+
+
+@pytest.fixture(autouse=True)
+def reset_login_throttle():
+    """Les échecs de connexion d'un test ne doivent pas bloquer les suivants."""
+    from utils import login_throttle
+    login_throttle.reset()
+    yield
+    login_throttle.reset()
