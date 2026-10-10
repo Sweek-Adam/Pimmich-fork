@@ -462,6 +462,60 @@
   ]
  ],
  [
+  "/api/spotify",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/spotify/client_id",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/spotify/control",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/spotify/disconnect",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/spotify/link",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/spotify/links",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/spotify/play",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/spotify/playlists",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/spotify/unlink",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/switch_to_desktop",
   [
    "POST"
@@ -719,6 +773,18 @@
  ],
  [
   "/slideshow_view",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/spotify/callback",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/spotify/login",
   [
    "GET"
   ]

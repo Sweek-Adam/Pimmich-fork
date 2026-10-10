@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:41+0200\n"
+"POT-Creation-Date: 2026-10-10 19:46+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -390,6 +390,181 @@ msgstr "archivo(s) enviándose..."
 #: templates/upload.html.jinja:189
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Envío demasiado grande: envíe menos archivos a la vez."
+
+#: templates/configure/_son_spotify.html.jinja:5
+msgid "Associer le cadre à votre compte"
+msgstr "Vincula el marco a tu cuenta"
+
+#: templates/configure/_son_spotify.html.jinja:6
+msgid ""
+"Le cadre apparaît alors dans vos appareils Spotify, même quand vous "
+"n'êtes pas à la maison. Compte Premium nécessaire."
+msgstr ""
+"El marco aparecerá entonces en tus dispositivos de Spotify, incluso "
+"cuando no estés en casa. Se necesita una cuenta Premium."
+
+#: templates/configure/_son_spotify.html.jinja:8
+msgid "Associé"
+msgstr "Vinculado"
+
+#: templates/configure/_son_spotify.html.jinja:10
+msgid "Dissocier"
+msgstr "Desvincular"
+
+#: templates/configure/_son_spotify.html.jinja:13
+msgid "Associer mon compte"
+msgstr "Vincular mi cuenta"
+
+#: templates/configure/_son_spotify.html.jinja:16
+msgid ""
+"Ouvrez ce lien sur votre téléphone ou votre ordinateur, connectez-vous à "
+"Spotify et validez :"
+msgstr ""
+"Abre este enlace en tu teléfono u ordenador, inicia sesión en Spotify y "
+"confirma:"
+
+#: templates/configure/_son_spotify.html.jinja:18
+msgid "Code :"
+msgstr "Código:"
+
+#: templates/configure/_son_spotify.html.jinja:19
+msgid "Cette page se met à jour toute seule une fois l'association validée."
+msgstr "Esta página se actualizará sola cuando se confirme la vinculación."
+
+#: templates/configure/_son_spotify.html.jinja:24
+msgid "Choisir la musique depuis cette page"
+msgstr "Elige la música desde esta página"
+
+#: templates/configure/_son_spotify.html.jinja:26
+msgid ""
+"Une seule fois : Spotify demande de créer une « application » personnelle"
+" (gratuit, 5 minutes)."
+msgstr ""
+"Solo una vez: Spotify pide crear una «aplicación» personal (gratis, 5 "
+"minutos)."
+
+#: templates/configure/_son_spotify.html.jinja:28
+msgid "Ouvrez"
+msgstr "Abre"
+
+#: templates/configure/_son_spotify.html.jinja:28
+msgid "et cliquez sur « Create app »."
+msgstr "y haz clic en «Create app»."
+
+#: templates/configure/_son_spotify.html.jinja:29
+msgid "Nom : Pimmich. Dans « Redirect URIs », collez cette adresse :"
+msgstr "Nombre: Pimmich. En «Redirect URIs», pega esta dirección:"
+
+#: templates/configure/_son_spotify.html.jinja:30
+msgid "Copier"
+msgstr "Copiar"
+
+#: templates/configure/_son_spotify.html.jinja:31
+msgid "Cochez « Web API », acceptez les conditions et enregistrez."
+msgstr "Marca «Web API», acepta las condiciones y guarda."
+
+#: templates/configure/_son_spotify.html.jinja:32
+msgid "Copiez le « Client ID » de l'application ici :"
+msgstr "Copia aquí el «Client ID» de la aplicación:"
+
+#: templates/configure/_son_spotify.html.jinja:34
+msgid "Enregistrer"
+msgstr "Guardar"
+
+#: templates/configure/_son_spotify.html.jinja:36
+msgid ""
+"Ouvrez toujours l'interface avec la même adresse que celle déclarée ci-"
+"dessus (même adresse IP ou même nom)."
+msgstr ""
+"Abre siempre la interfaz con la misma dirección que la indicada arriba "
+"(misma dirección IP o mismo nombre)."
+
+#: templates/configure/_son_spotify.html.jinja:39
+msgid "Se connecter à Spotify"
+msgstr "Conectar con Spotify"
+
+#: templates/configure/_son_spotify.html.jinja:40
+msgid "Changer d'application"
+msgstr "Cambiar de aplicación"
+
+#: templates/configure/_son_spotify.html.jinja:43
+msgid "Connecté"
+msgstr "Conectado"
+
+#: templates/configure/_son_spotify.html.jinja:44
+msgid "Déconnecter"
+msgstr "Desconectar"
+
+#: templates/configure/_son_spotify.html.jinja:50
+#: templates/configure/_son_spotify.html.jinja:76
+msgid "Lire sur le cadre"
+msgstr "Reproducir en el marco"
+
+#: templates/configure/_son_spotify.html.jinja:52
+msgid "Rechercher une playlist…"
+msgstr "Buscar una playlist…"
+
+#: templates/configure/_son_spotify.html.jinja:54
+msgid "Précédent"
+msgstr "Anterior"
+
+#: templates/configure/_son_spotify.html.jinja:55
+msgid "Pause"
+msgstr "Pausa"
+
+#: templates/configure/_son_spotify.html.jinja:56
+msgid "Lecture"
+msgstr "Reproducir"
+
+#: templates/configure/_son_spotify.html.jinja:57
+msgid "Suivant"
+msgstr "Siguiente"
+
+#: templates/configure/_son_spotify.html.jinja:63
+msgid "Musiques associées"
+msgstr "Música asociada"
+
+#: templates/configure/_son_spotify.html.jinja:64
+msgid ""
+"Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou "
+"la playlist de photos."
+msgstr ""
+"Se reproduce automáticamente en el marco cuando eliges el ambiente o la "
+"playlist de fotos."
+
+#: templates/configure/_son_spotify.html.jinja:75
+#: templates/configure/tab_accueil.html.jinja:72
+msgid "Ambiance"
+msgstr "Ambiente"
+
+#: templates/configure/_son_spotify.html.jinja:75
+msgid "Playlist de photos"
+msgstr "Playlist de fotos"
+
+#: templates/configure/_son_spotify.html.jinja:76
+#: templates/configure/tab_son.html.jinja:8
+msgid "Aucune musique"
+msgstr "Sin música"
+
+#: templates/configure/_son_spotify.html.jinja:77
+msgid "titres"
+msgstr "canciones"
+
+#: templates/configure/_son_spotify.html.jinja:77
+msgid "Aucune playlist trouvée."
+msgstr "No se ha encontrado ninguna playlist."
+
+#: templates/configure/_son_spotify.html.jinja:78
+msgid "Compte :"
+msgstr "Cuenta:"
+
+#: templates/configure/_son_spotify.html.jinja:78
+msgid "Copié"
+msgstr "Copiado"
+
+#: templates/configure/_son_spotify.html.jinja:145
+msgid "Demande de code à Spotify…"
+msgstr "Solicitando un código a Spotify…"
 
 #: templates/configure/scripts_app.html.jinja:29
 msgid "En marche"
@@ -1106,10 +1281,6 @@ msgstr "Mis fotos"
 #: templates/configure/tab_accueil.html.jinja:64
 msgid "Réorganiser"
 msgstr "Reordenar"
-
-#: templates/configure/tab_accueil.html.jinja:72
-msgid "Ambiance"
-msgstr "Ambiente"
 
 #: templates/configure/tab_accueil.html.jinja:73
 msgid "Revenir à mes réglages"
@@ -2886,7 +3057,7 @@ msgstr ""
 "inmediato. Los marcos morados agrupan las fotos de una misma composición:"
 " se mueven juntas."
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:90
+#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:91
 msgid "Le diaporama n'est pas en cours."
 msgstr "La presentación no está en curso."
 
@@ -2902,7 +3073,7 @@ msgstr "Composición (empieza aquí, en preparación)"
 msgid "Afficher maintenant"
 msgstr "Mostrar ahora"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:175
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:176
 msgid "Musique du diaporama"
 msgstr "Música de la presentación"
 
@@ -2913,10 +3084,6 @@ msgid ""
 msgstr ""
 "Se reproduce en bucle durante la presentación. Cada playlist puede tener "
 "su propia música (sección Playlists)."
-
-#: templates/configure/tab_son.html.jinja:8
-msgid "Aucune musique"
-msgstr "Sin música"
 
 #: templates/configure/tab_son.html.jinja:11
 msgid "Volume"
@@ -2972,11 +3139,11 @@ msgstr ""
 " la presentación, Spotify y AirPlay. Mientras suena Spotify o AirPlay, la"
 " música de la presentación se pone en pausa."
 
-#: templates/configure/tab_son.html.jinja:58
-msgid "Spotify, Deezer et autres applications"
-msgstr "Spotify, Deezer y otras aplicaciones"
+#: templates/configure/tab_son.html.jinja:60
+msgid "Le cadre comme enceinte"
+msgstr "El marco como altavoz"
 
-#: templates/configure/tab_son.html.jinja:62
+#: templates/configure/tab_son.html.jinja:64
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -2984,7 +3151,7 @@ msgstr ""
 "En la aplicación Spotify, elige «Cadre photo» como dispositivo: la música"
 " sale por la pantalla del marco. Se necesita una cuenta Spotify Premium."
 
-#: templates/configure/tab_son.html.jinja:66
+#: templates/configure/tab_son.html.jinja:68
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -2992,7 +3159,7 @@ msgstr ""
 "Desde un iPhone, iPad o Mac, envía el sonido de cualquier aplicación "
 "(Deezer, Apple Music, YouTube...) a «Cadre photo»."
 
-#: templates/configure/tab_son.html.jinja:71
+#: templates/configure/tab_son.html.jinja:73
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -3004,35 +3171,35 @@ msgstr ""
 "dispositivo nuevo durante 3 minutos después de pulsar «Vincular un "
 "teléfono»."
 
-#: templates/configure/tab_son.html.jinja:73
+#: templates/configure/tab_son.html.jinja:75
 msgid "Associer un téléphone"
 msgstr "Vincular un teléfono"
 
-#: templates/configure/tab_son.html.jinja:79
+#: templates/configure/tab_son.html.jinja:81
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "Para activar estas funciones, ejecuta una vez en la Raspberry Pi:"
 
-#: templates/configure/tab_son.html.jinja:88
+#: templates/configure/tab_son.html.jinja:90
 msgid "Actif"
 msgstr "Activo"
 
-#: templates/configure/tab_son.html.jinja:88
+#: templates/configure/tab_son.html.jinja:90
 msgid "Non installé"
 msgstr "No instalado"
 
-#: templates/configure/tab_son.html.jinja:147
+#: templates/configure/tab_son.html.jinja:149
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Visible: elige «Cadre photo» en el teléfono"
 
-#: templates/configure/tab_son.html.jinja:147
+#: templates/configure/tab_son.html.jinja:149
 msgid "connecté"
 msgstr "conectado"
 
-#: templates/configure/tab_son.html.jinja:148
+#: templates/configure/tab_son.html.jinja:150
 msgid "Oublier"
 msgstr "Olvidar"
 
-#: templates/configure/tab_son.html.jinja:148
+#: templates/configure/tab_son.html.jinja:150
 msgid "Aucun téléphone associé."
 msgstr "Ningún teléfono vinculado."
 
@@ -4273,36 +4440,36 @@ msgstr "Ya has enviado varios mensajes: inténtalo de nuevo dentro de una hora."
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "¡Gracias! Tu mensaje se mostrará en el marco (hasta el %(date)s)."
 
-#: web/routes_home.py:78
+#: web/routes_home.py:79
 msgid "Mes réglages"
 msgstr "Mis ajustes"
 
-#: web/routes_home.py:79
+#: web/routes_home.py:80
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "Ambiente «%(name)s» aplicado."
 
-#: web/routes_home.py:88 web/routes_playlists.py:72 web/routes_slideshow.py:511
+#: web/routes_home.py:89 web/routes_playlists.py:72 web/routes_slideshow.py:513
 msgid "Disposition inconnue."
 msgstr "Disposición desconocida."
 
-#: web/routes_home.py:93
+#: web/routes_home.py:94
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Preparando la disposición... aparecerá en unos segundos."
 
-#: web/routes_home.py:155
+#: web/routes_home.py:156
 msgid "Musique introuvable."
 msgstr "Música no encontrada."
 
-#: web/routes_home.py:159
+#: web/routes_home.py:160
 msgid "Volume invalide."
 msgstr "Volumen no válido."
 
-#: web/routes_home.py:163 web/routes_system.py:627
+#: web/routes_home.py:164 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr "Ajuste no válido."
 
-#: web/routes_home.py:170
+#: web/routes_home.py:171
 msgid "Réglages du son enregistrés."
 msgstr "Ajustes de sonido guardados."
 
@@ -4349,15 +4516,15 @@ msgstr "Mensaje oculto: ya no se muestra."
 msgid "Message de nouveau affiché."
 msgstr "Mensaje mostrado de nuevo."
 
-#: web/routes_music.py:22
+#: web/routes_music.py:28
 msgid "L'enceinte Bluetooth n'est pas installée."
 msgstr "El altavoz Bluetooth no está instalado."
 
-#: web/routes_music.py:24
+#: web/routes_music.py:30
 msgid "Impossible de rendre le cadre visible en Bluetooth."
 msgstr "No se pudo hacer visible el marco por Bluetooth."
 
-#: web/routes_music.py:26
+#: web/routes_music.py:32
 msgid ""
 "Le cadre est visible pendant 3 minutes : choisissez « Cadre photo » dans "
 "les réglages Bluetooth du téléphone."
@@ -4365,30 +4532,112 @@ msgstr ""
 "El marco es visible durante 3 minutos: elige «Cadre photo» en los ajustes"
 " Bluetooth del teléfono."
 
-#: web/routes_music.py:36
+#: web/routes_music.py:42
 msgid "Appareil inconnu."
 msgstr "Dispositivo desconocido."
 
-#: web/routes_music.py:37
+#: web/routes_music.py:43
 msgid "Appareil oublié."
 msgstr "Dispositivo olvidado."
 
-#: web/routes_music.py:37
+#: web/routes_music.py:43
 msgid "Impossible d'oublier cet appareil."
 msgstr "No se pudo olvidar este dispositivo."
+
+#: web/routes_music.py:49
+msgid "Spotify n'est pas connecté."
+msgstr "Spotify no está conectado."
+
+#: web/routes_music.py:50
+msgid "La connexion à Spotify a expiré : reconnectez-vous."
+msgstr "La conexión con Spotify ha caducado: vuelve a conectarte."
+
+#: web/routes_music.py:51
+msgid ""
+"Le cadre n'apparaît pas dans votre compte Spotify : associez-le d'abord "
+"(étape 1)."
+msgstr "El marco no aparece en tu cuenta de Spotify: vincúlalo primero (paso 1)."
+
+#: web/routes_music.py:52
+msgid "Spotify refuse la lecture : un compte Premium est nécessaire."
+msgstr "Spotify rechaza la reproducción: se necesita una cuenta Premium."
+
+#: web/routes_music.py:53
+msgid "Playlist Spotify invalide."
+msgstr "Playlist de Spotify no válida."
+
+#: web/routes_music.py:54
+msgid "Commande inconnue."
+msgstr "Comando desconocido."
+
+#: web/routes_music.py:97
+msgid "Le cadre n'est plus associé à ce compte Spotify."
+msgstr "El marco ya no está vinculado a esta cuenta de Spotify."
+
+#: web/routes_music.py:105
+msgid "Identifiant client invalide (32 caractères, chiffres et lettres a à f)."
+msgstr "Client ID no válido (32 caracteres, números y letras de la a a la f)."
+
+#: web/routes_music.py:109
+msgid "Identifiant enregistré : vous pouvez vous connecter."
+msgstr "Client ID guardado: ya puedes conectarte."
+
+#: web/routes_music.py:118
+msgid "Saisissez d'abord l'identifiant client de votre application Spotify."
+msgstr "Introduce primero el Client ID de tu aplicación de Spotify."
+
+#: web/routes_music.py:131
+msgid "Connexion Spotify refusée (demande expirée) : recommencez."
+msgstr "Conexión con Spotify rechazada (solicitud caducada): vuelve a intentarlo."
+
+#: web/routes_music.py:133
+msgid "Connexion Spotify annulée."
+msgstr "Conexión con Spotify cancelada."
+
+#: web/routes_music.py:137
+msgid "Spotify est connecté."
+msgstr "Spotify está conectado."
+
+#: web/routes_music.py:140
+msgid ""
+"Connexion Spotify impossible : vérifiez l'identifiant client et l'adresse"
+" de retour."
+msgstr ""
+"No se puede conectar con Spotify: comprueba el Client ID y la dirección "
+"de redirección."
+
+#: web/routes_music.py:148
+msgid "Spotify est déconnecté de l'interface."
+msgstr "Spotify se ha desconectado de la interfaz."
+
+#: web/routes_music.py:159 web/routes_music.py:171 web/routes_music.py:183
+msgid "Spotify ne répond pas : vérifiez la connexion internet du cadre."
+msgstr "Spotify no responde: comprueba la conexión a internet del marco."
+
+#: web/routes_music.py:172
+msgid "Lecture lancée sur le cadre."
+msgstr "Reproducción iniciada en el marco."
+
+#: web/routes_music.py:197
+msgid "Association invalide."
+msgstr "Asociación no válida."
+
+#: web/routes_music.py:206
+msgid "Musique associée enregistrée."
+msgstr "Música asociada guardada."
 
 #: web/routes_playlists.py:78
 msgid "Disposition de la playlist enregistrée."
 msgstr "Disposición de la lista guardada."
 
-#: web/routes_slideshow.py:381
+#: web/routes_slideshow.py:383
 #, python-format
 msgid "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
 msgstr ""
 "Resolución aplicada: %(width) SX %(height)s. La presentación de "
 "diapositivas se ha reiniciado."
 
-#: web/routes_slideshow.py:383
+#: web/routes_slideshow.py:385
 #, python-format
 msgid ""
 "Résolution appliquée : %(width)sx%(height)s. Le diaporama n'était pas en "
@@ -4397,19 +4646,19 @@ msgstr ""
 "Resolución aplicada: %(width) SX %(height)s. La presentación de "
 "diapositivas no estaba en progreso."
 
-#: web/routes_slideshow.py:474
+#: web/routes_slideshow.py:476
 msgid "Composition"
 msgstr "Composición"
 
-#: web/routes_slideshow.py:485 web/routes_slideshow.py:490
+#: web/routes_slideshow.py:487 web/routes_slideshow.py:492
 msgid "Ordre invalide."
 msgstr "Orden no válido."
 
-#: web/routes_slideshow.py:495
+#: web/routes_slideshow.py:497
 msgid "Nouvel ordre enregistré."
 msgstr "Nuevo orden guardado."
 
-#: web/routes_slideshow.py:517
+#: web/routes_slideshow.py:519
 msgid "Disposition appliquée au diaporama."
 msgstr "Disposición aplicada a la presentación."
 

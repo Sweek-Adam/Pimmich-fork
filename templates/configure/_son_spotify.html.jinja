@@ -1,0 +1,170 @@
+                <section class="card" id="spotify-card">
+                    <h2 class="card-title"><i class="fab fa-spotify text-green-600 mr-2"></i>Spotify</h2>
+
+                    <div class="spotify-step">
+                        <h3><span class="step-num">1</span>{{ _("Associer le cadre à votre compte") }}</h3>
+                        <p class="text-sm text-gray-600">{{ _("Le cadre apparaît alors dans vos appareils Spotify, même quand vous n'êtes pas à la maison. Compte Premium nécessaire.") }}</p>
+                        <div id="sp-linked" class="hidden mt-2 flex flex-wrap items-center gap-3">
+                            <span class="badge on"><i class="fas fa-check mr-1"></i>{{ _("Associé") }}</span>
+                            <span id="sp-account" class="text-sm"></span>
+                            <button type="button" id="sp-unlink" class="link">{{ _("Dissocier") }}</button>
+                        </div>
+                        <div id="sp-unlinked" class="hidden mt-2">
+                            <button type="button" id="sp-link" class="btn-secondary"><i class="fas fa-link mr-1"></i>{{ _("Associer mon compte") }}</button>
+                        </div>
+                        <div id="sp-pairing" class="hidden pair-box">
+                            <p>{{ _("Ouvrez ce lien sur votre téléphone ou votre ordinateur, connectez-vous à Spotify et validez :") }}</p>
+                            <a id="sp-pair-url" href="#" target="_blank" rel="noopener" class="btn-primary inline-block my-2"><i class="fas fa-external-link-alt mr-1"></i>spotify.com/pair</a>
+                            <p>{{ _("Code :") }} <strong id="sp-pair-code" class="pair-code"></strong></p>
+                            <p class="text-sm text-gray-600">{{ _("Cette page se met à jour toute seule une fois l'association validée.") }}</p>
+                        </div>
+                    </div>
+
+                    <div class="spotify-step">
+                        <h3><span class="step-num">2</span>{{ _("Choisir la musique depuis cette page") }}</h3>
+                        <div id="sp-setup" class="hidden">
+                            <p class="text-sm text-gray-600">{{ _("Une seule fois : Spotify demande de créer une « application » personnelle (gratuit, 5 minutes).") }}</p>
+                            <ol class="setup-guide">
+                                <li>{{ _("Ouvrez") }} <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener" class="link">developer.spotify.com/dashboard</a> {{ _("et cliquez sur « Create app ».") }}</li>
+                                <li>{{ _("Nom : Pimmich. Dans « Redirect URIs », collez cette adresse :") }}
+                                    <span class="copy-line"><code id="sp-redirect"></code><button type="button" id="sp-copy" class="link">{{ _("Copier") }}</button></span>
+                                    {{ _("Cochez « Web API », acceptez les conditions et enregistrez.") }}</li>
+                                <li>{{ _("Copiez le « Client ID » de l'application ici :") }}
+                                    <span class="flex flex-wrap gap-2 mt-1"><input type="text" id="sp-client-id" class="font-mono" size="34" maxlength="32" placeholder="0123456789abcdef0123456789abcdef">
+                                    <button type="button" id="sp-save-client" class="btn-secondary">{{ _("Enregistrer") }}</button></span></li>
+                            </ol>
+                            <p class="text-xs text-gray-500 mt-2">{{ _("Ouvrez toujours l'interface avec la même adresse que celle déclarée ci-dessus (même adresse IP ou même nom).") }}</p>
+                        </div>
+                        <div id="sp-login" class="hidden mt-2">
+                            <a href="{{ url_for('spotify_login') }}" class="btn-primary inline-block"><i class="fab fa-spotify mr-1"></i>{{ _("Se connecter à Spotify") }}</a>
+                            <button type="button" id="sp-change-client" class="link ml-3">{{ _("Changer d'application") }}</button>
+                        </div>
+                        <div id="sp-connected" class="hidden mt-2 flex flex-wrap items-center gap-3">
+                            <span class="badge on"><i class="fas fa-check mr-1"></i>{{ _("Connecté") }}</span>
+                            <button type="button" id="sp-disconnect" class="link">{{ _("Déconnecter") }}</button>
+                        </div>
+                    </div>
+
+                    <div id="sp-music" class="hidden">
+                        <div class="spotify-step">
+                            <h3><span class="step-num"><i class="fas fa-play"></i></span>{{ _("Lire sur le cadre") }}</h3>
+                            <div class="flex flex-wrap items-center gap-2 mb-3">
+                                <input type="search" id="sp-filter" placeholder="{{ _('Rechercher une playlist…') }}" class="flex-1">
+                                <span class="sp-controls">
+                                    <button type="button" data-action="previous" title="{{ _('Précédent') }}"><i class="fas fa-step-backward"></i></button>
+                                    <button type="button" data-action="pause" title="{{ _('Pause') }}"><i class="fas fa-pause"></i></button>
+                                    <button type="button" data-action="resume" title="{{ _('Lecture') }}"><i class="fas fa-play"></i></button>
+                                    <button type="button" data-action="next" title="{{ _('Suivant') }}"><i class="fas fa-step-forward"></i></button>
+                                </span>
+                            </div>
+                            <div id="sp-playlists" class="sp-playlists"></div>
+                        </div>
+                        <div class="spotify-step">
+                            <h3><span class="step-num"><i class="fas fa-magic"></i></span>{{ _("Musiques associées") }}</h3>
+                            <p class="text-sm text-gray-600 mb-2">{{ _("Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou la playlist de photos.") }}</p>
+                            <div id="sp-links" class="sp-links"></div>
+                        </div>
+                    </div>
+                    <p id="sp-message" class="text-sm mt-2"></p>
+                </section>
+
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = {
+                            ambiance: {{ _("Ambiance")|tojson }}, playlist: {{ _("Playlist de photos")|tojson }},
+                            none: {{ _("Aucune musique")|tojson }}, play: {{ _("Lire sur le cadre")|tojson }},
+                            tracks: {{ _("titres")|tojson }}, empty: {{ _("Aucune playlist trouvée.")|tojson }},
+                            account: {{ _("Compte :")|tojson }}, copied: {{ _("Copié")|tojson }},
+                        };
+                        const say = (text, ok) => { $("sp-message").textContent = text || ""; $("sp-message").className = "text-sm mt-2 " + (ok ? "text-green-600" : "text-red-600"); };
+                        const post = async (url, body) => (await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) })).json();
+                        let state = null, lists = [], polling = null;
+
+                        async function load() {
+                            state = await (await fetch('/api/spotify')).json();
+                            $("sp-linked").classList.toggle("hidden", !state.linked);
+                            $("sp-unlinked").classList.toggle("hidden", state.linked || state.pending);
+                            $("sp-pairing").classList.toggle("hidden", !state.pending);
+                            $("sp-account").textContent = state.account ? `${T.account} ${state.account}` : "";
+                            if (state.pending && state.url) { $("sp-pair-url").href = state.url; $("sp-pair-code").textContent = state.code || ""; }
+                            if (!state.pending && polling) { clearInterval(polling); polling = null; }
+                            $("sp-redirect").textContent = state.redirect_uri;
+                            $("sp-client-id").value = state.client_id || "";
+                            const hasClient = !!state.client_id;
+                            $("sp-setup").classList.toggle("hidden", hasClient && !$("sp-setup").dataset.force);
+                            $("sp-login").classList.toggle("hidden", !hasClient || state.connected);
+                            $("sp-connected").classList.toggle("hidden", !state.connected);
+                            $("sp-music").classList.toggle("hidden", !state.connected);
+                            if (state.connected && !lists.length) loadPlaylists();
+                        }
+
+                        async function loadPlaylists() {
+                            const data = await (await fetch('/api/spotify/playlists')).json();
+                            if (!data.success) { say(data.message, false); return; }
+                            lists = data.playlists;
+                            renderPlaylists(); renderLinks();
+                        }
+
+                        function renderPlaylists() {
+                            const q = $("sp-filter").value.trim().toLowerCase();
+                            const box = $("sp-playlists"); box.innerHTML = "";
+                            const shown = lists.filter(p => !q || p.name.toLowerCase().includes(q));
+                            if (!shown.length) { box.innerHTML = `<p class="muted">${T.empty}</p>`; return; }
+                            shown.forEach(p => {
+                                const card = document.createElement("button");
+                                card.type = "button"; card.className = "sp-playlist"; card.title = T.play;
+                                const img = document.createElement(p.image ? "img" : "span");
+                                if (p.image) { img.src = p.image; img.loading = "lazy"; img.alt = ""; } else { img.className = "np-nocover"; img.innerHTML = '<i class="fas fa-music"></i>'; }
+                                const text = document.createElement("span");
+                                const name = document.createElement("strong"); name.textContent = p.name;
+                                const count = document.createElement("small"); count.textContent = `${p.tracks} ${T.tracks}`;
+                                text.append(name, count);
+                                card.append(img, text);
+                                card.addEventListener("click", async () => { const r = await post('/api/spotify/play', { uri: p.uri }); say(r.message, r.success); });
+                                box.appendChild(card);
+                            });
+                        }
+
+                        function renderLinks() {
+                            const box = $("sp-links"); box.innerHTML = "";
+                            const rows = [...state.ambiances.map(a => ({ key: `ambiance:${a.key}`, label: `${T.ambiance} · ${a.label}` })),
+                                          ...state.photo_playlists.map(p => ({ key: `playlist:${p.id}`, label: `${T.playlist} · ${p.name}` }))];
+                            rows.forEach(row => {
+                                const label = document.createElement("label"); label.textContent = row.label;
+                                const select = document.createElement("select");
+                                select.add(new Option(T.none, ""));
+                                lists.forEach(p => select.add(new Option(p.name, p.uri)));
+                                select.value = state.links[row.key] || "";
+                                select.addEventListener("change", async () => { const r = await post('/api/spotify/links', { key: row.key, uri: select.value }); say(r.message, r.success); state.links[row.key] = select.value; });
+                                box.append(label, select);
+                            });
+                        }
+
+                        $("sp-link").addEventListener("click", async () => {
+                            say({{ _("Demande de code à Spotify…")|tojson }}, true);
+                            const r = await post('/api/spotify/link');
+                            if (!r.success) { say(r.message, false); return; }
+                            say("", true);
+                            await load();
+                            polling = setInterval(load, 3000);
+                        });
+                        $("sp-unlink").addEventListener("click", async () => { const r = await post('/api/spotify/unlink'); say(r.message, r.success); load(); });
+                        $("sp-save-client").addEventListener("click", async () => {
+                            const r = await post('/api/spotify/client_id', { client_id: $("sp-client-id").value });
+                            say(r.message, r.success);
+                            if (r.success) { delete $("sp-setup").dataset.force; load(); }
+                        });
+                        $("sp-change-client").addEventListener("click", () => { $("sp-setup").dataset.force = "1"; $("sp-setup").classList.remove("hidden"); });
+                        $("sp-copy").addEventListener("click", async () => {
+                            try { await navigator.clipboard.writeText($("sp-redirect").textContent); $("sp-copy").textContent = T.copied; } catch (e) { /* copie manuelle */ }
+                        });
+                        $("sp-disconnect").addEventListener("click", async () => { const r = await post('/api/spotify/disconnect'); say(r.message, r.success); lists = []; load(); });
+                        $("sp-filter").addEventListener("input", renderPlaylists);
+                        document.querySelectorAll(".sp-controls button").forEach(b => b.addEventListener("click", async () => {
+                            const r = await post('/api/spotify/control', { action: b.dataset.action });
+                            if (!r.success) say(r.message, false);
+                        }));
+                        load();
+                    });
+                </script>

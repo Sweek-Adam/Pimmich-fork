@@ -1,6 +1,6 @@
 """Pilotage du diaporama : lecture, veille, sources, durée, écran et résolution."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
-from utils import play_queue, layout_engine, compositions
+from utils import play_queue, layout_engine, compositions, spotify
 from web.core import _, _send_slideshow_signal
 
 
@@ -88,6 +88,8 @@ def play_playlist():
         
         # Redémarrer le diaporama pour charger la nouvelle playlist sans éteindre l'écran
         restart_slideshow_for_update()
+        links = load_config().get("spotify_links") or {}
+        spotify.play_linked_in_background(links.get(f"playlist:{playlist_id}"), logger)  # musique Spotify associée
 
         return jsonify({"success": True, "message": f"Lancement du diaporama pour la playlist '{target_playlist.get('name')}'."})
     except Exception as e:

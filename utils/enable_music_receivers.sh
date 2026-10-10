@@ -7,6 +7,9 @@ set -euo pipefail
 NAME="${1:-Cadre photo}"
 UNIT_DIR="$HOME/.config/systemd/user"
 PIMMICH_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+# Identifiants Spotify du cadre (association à un compte depuis l'interface), hors du dossier de Pimmich
+SPOTIFY_CACHE="$HOME/.config/pimmich/spotify-connect"
+mkdir -p "$SPOTIFY_CACHE" && chmod 700 "$HOME/.config/pimmich" "$SPOTIFY_CACHE"
 
 echo "=== Installation de librespot (Spotify Connect) et shairport-sync (AirPlay) ==="
 if ! command -v librespot >/dev/null; then
@@ -47,7 +50,7 @@ After=pipewire-pulse.service
 
 [Service]
 # --onevent : le morceau en cours (titre, artiste, pochette) est transmis au cadre pour l'affichage
-ExecStart=/usr/bin/librespot --name "$NAME" --backend pulseaudio --bitrate 160 --initial-volume 70 --device-type speaker --onevent "$PIMMICH_DIR/utils/librespot_event.sh"
+ExecStart=/usr/bin/librespot --name "$NAME" --backend pulseaudio --bitrate 160 --initial-volume 70 --device-type speaker --system-cache "$SPOTIFY_CACHE" --onevent "$PIMMICH_DIR/utils/librespot_event.sh"
 Restart=on-failure
 
 [Install]

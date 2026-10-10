@@ -54,8 +54,10 @@
                     <p class="text-sm text-gray-600 mt-3">{{ _("Un petit encart discret (pochette, titre, artiste) pour la musique du diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la musique du diaporama se met en pause.") }}</p>
                 </section>
 
+                {% include 'configure/_son_spotify.html.jinja' %}
+
                 <section class="card">
-                    <h2 class="card-title"><i class="fas fa-broadcast-tower text-indigo-500 mr-2"></i>{{ _("Spotify, Deezer et autres applications") }}</h2>
+                    <h2 class="card-title"><i class="fas fa-broadcast-tower text-indigo-500 mr-2"></i>{{ _("Le cadre comme enceinte") }}</h2>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="receiver">
                             <h3><i class="fab fa-spotify text-green-600"></i> Spotify Connect <span id="recv-spotify" class="badge">…</span></h3>

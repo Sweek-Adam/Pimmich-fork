@@ -4,7 +4,7 @@ from web.core import _, _send_slideshow_signal
 import io
 import qrcode
 from flask import send_file
-from utils import ambiances, health, layout_engine, now_playing
+from utils import ambiances, health, layout_engine, now_playing, spotify
 from utils.message_renderer import N_
 
 FORCE_LAYOUT_FILE = Path("/tmp/pimmich_force_layout.json")
@@ -75,6 +75,7 @@ def apply_ambiance_api():
         return jsonify({"success": False, "message": str(e)}), 400
     save_config(config)
     restart_slideshow_process()
+    spotify.play_linked_in_background((config.get("spotify_links") or {}).get(f"ambiance:{key}"), logger)  # musique associée
     label = _("Mes réglages") if key == ambiances.MINE else _tr(ambiances.AMBIANCES[key]["label"])
     return jsonify({"success": True, "message": _("Ambiance « %(name)s » appliquée.", name=label)})
 
