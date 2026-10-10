@@ -20,7 +20,7 @@ def _translated(items):
     out = []
     for item in items:
         item = dict(item)
-        params = item.pop("params", {}) or {}
+        params = {k: _tr(v) if isinstance(v, str) else v for k, v in (item.pop("params", {}) or {}).items()}
         item["title"] = _tr(item["title"])
         item["detail"] = _tr(item["detail"], **params)
         out.append(item)
@@ -37,6 +37,13 @@ def health_api():
                "Google Drive": gdrive_status_manager.get_status().get("status_message")}
     items = health.checks(config, is_slideshow_running(), is_admin(), proxy_host_ok=bool(request.host), worker_messages=workers)
     return jsonify({"success": True, "items": _translated(items)})
+
+
+@app.route('/api/hardware', methods=['GET'])
+@login_required
+def hardware_api():
+    from utils import hardware
+    return jsonify({"success": True, **hardware.status()})
 
 
 @app.route('/api/setup', methods=['GET'])

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 22:28+0200\n"
+"POT-Creation-Date: 2026-10-10 22:30+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -2415,10 +2415,58 @@ msgid "Projet réalisé dans le cadre du Gadgetaulab"
 msgstr ""
 
 #: templates/configure/tab_maintenance.html.jinja:4
+msgid "Matériel"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:7
+msgid "Modèle"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:8
+msgid "Température"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:9
+msgid "Alimentation"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:10
+msgid "Carte SD"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "Correcte"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "Insuffisante en ce moment"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "A faibli depuis le démarrage"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "Aucune erreur"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "erreur(s)"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "Inconnu"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:19
+msgid "Alimentation conseillée pour ce modèle :"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:38
 msgid "Sauvegarde et Restauration"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:6
+#: templates/configure/tab_maintenance.html.jinja:40
 msgid ""
 "Sauvegardez votre configuration (API, partages,\n"
 "                    affichage...) dans un fichier. Vous pourrez le "
@@ -2426,123 +2474,123 @@ msgid ""
 "                    installation."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:12
+#: templates/configure/tab_maintenance.html.jinja:46
 msgid "Sauvegarder la configuration"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:15
+#: templates/configure/tab_maintenance.html.jinja:49
 msgid "Télécharger la sauvegarde"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:20
+#: templates/configure/tab_maintenance.html.jinja:54
 msgid "Restaurer une configuration"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:22
+#: templates/configure/tab_maintenance.html.jinja:56
 msgid ""
 "Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
 "fichier de sauvegarde."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:27
+#: templates/configure/tab_maintenance.html.jinja:61
 msgid "Restaurer"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:35
+#: templates/configure/tab_maintenance.html.jinja:69
 msgid "Espace disque"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:38
+#: templates/configure/tab_maintenance.html.jinja:72
 msgid "Alerter sous (Go libres) :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:42
+#: templates/configure/tab_maintenance.html.jinja:76
 msgid "Libérer de la place automatiquement"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:44
+#: templates/configure/tab_maintenance.html.jinja:78
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
 "sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont"
 " jamais supprimés."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:49
+#: templates/configure/tab_maintenance.html.jinja:83
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:51
+#: templates/configure/tab_maintenance.html.jinja:85
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
 "messages dans un dossier de votre Google Drive (connexion rclone). Les "
 "photos ne sont pas incluses."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:126
+#: templates/configure/tab_maintenance.html.jinja:88 utils/health.py:150
 msgid "Activer la sauvegarde automatique"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:57
+#: templates/configure/tab_maintenance.html.jinja:91
 msgid "Dossier Google Drive :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:59
+#: templates/configure/tab_maintenance.html.jinja:93
 msgid "Toutes les (heures) :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:61
+#: templates/configure/tab_maintenance.html.jinja:95
 msgid "Sauvegardes conservées :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:67
+#: templates/configure/tab_maintenance.html.jinja:101
 msgid "Enregistrer ces réglages"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:69
+#: templates/configure/tab_maintenance.html.jinja:103
 msgid "Sauvegarder maintenant"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:71
+#: templates/configure/tab_maintenance.html.jinja:105
 msgid "Restaurer la dernière sauvegarde"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:83
+#: templates/configure/tab_maintenance.html.jinja:117
 msgid "Go libres sur"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:83
+#: templates/configure/tab_maintenance.html.jinja:117
 msgid "utilisés"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:84
+#: templates/configure/tab_maintenance.html.jinja:118
 msgid "espace faible"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:85
+#: templates/configure/tab_maintenance.html.jinja:119
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:92
+#: templates/configure/tab_maintenance.html.jinja:126
 msgid "Dernière sauvegarde réussie :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:93
+#: templates/configure/tab_maintenance.html.jinja:127
 msgid "Dernier échec :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:106
+#: templates/configure/tab_maintenance.html.jinja:140
 msgid "Sauvegarde en cours..."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:108
+#: templates/configure/tab_maintenance.html.jinja:142
 msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:117
+#: templates/configure/tab_maintenance.html.jinja:151
 msgid "Mise à jour de l'application"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:119
+#: templates/configure/tab_maintenance.html.jinja:153
 msgid ""
 "Cliquez sur le bouton pour rechercher et installer les\n"
 "                    dernières mises à jour de Pimmich depuis GitHub. "
@@ -2550,19 +2598,19 @@ msgid ""
 "                    mise à jour."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:124
+#: templates/configure/tab_maintenance.html.jinja:158
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:125
+#: templates/configure/tab_maintenance.html.jinja:159
 msgid "Lancer la mise à jour"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:131
+#: templates/configure/tab_maintenance.html.jinja:165
 msgid "Système de Fichiers de la Carte SD"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:133
+#: templates/configure/tab_maintenance.html.jinja:167
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -2571,56 +2619,56 @@ msgid ""
 " l'opération."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:137
+#: templates/configure/tab_maintenance.html.jinja:171
 msgid "Note :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:137
+#: templates/configure/tab_maintenance.html.jinja:171
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
 " prochain démarrage."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:142
+#: templates/configure/tab_maintenance.html.jinja:176
 msgid "Étendre le système de fichiers"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:149
+#: templates/configure/tab_maintenance.html.jinja:183
 msgid "Contrôle du système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:152
+#: templates/configure/tab_maintenance.html.jinja:186
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:155
+#: templates/configure/tab_maintenance.html.jinja:189
 msgid "Redémarrer l'application web"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:164
+#: templates/configure/tab_maintenance.html.jinja:198
 msgid "Redémarrer le système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:172
+#: templates/configure/tab_maintenance.html.jinja:206
 msgid "Supprimer les logs"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:177
+#: templates/configure/tab_maintenance.html.jinja:211
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:180
+#: templates/configure/tab_maintenance.html.jinja:214
 msgid "Éteindre le système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:185
+#: templates/configure/tab_maintenance.html.jinja:219
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:190
+#: templates/configure/tab_maintenance.html.jinja:224
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
@@ -3012,7 +3060,7 @@ msgid ""
 "composition : elles se déplacent ensemble."
 msgstr ""
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:108
+#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:115
 msgid "Le diaporama n'est pas en cours."
 msgstr ""
 
@@ -3028,7 +3076,7 @@ msgstr ""
 msgid "Afficher maintenant"
 msgstr ""
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:193
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:200
 msgid "Musique du diaporama"
 msgstr ""
 
@@ -3874,103 +3922,158 @@ msgstr ""
 msgid "Photomaton"
 msgstr ""
 
-#: utils/health.py:70
+#: utils/health.py:61
+msgid "du Raspberry Pi"
+msgstr ""
+
+#: utils/health.py:63
+msgid "Alimentation insuffisante en ce moment"
+msgstr ""
+
+#: utils/health.py:64
+#, python-format
+msgid ""
+"Le cadre manque de courant : il peut ralentir, figer ou redémarrer. "
+"Utilisez une alimentation officielle %(supply)s et un câble court."
+msgstr ""
+
+#: utils/health.py:67
+msgid "Le cadre a manqué de courant"
+msgstr ""
+
+#: utils/health.py:68
+#, python-format
+msgid ""
+"Depuis son démarrage, l'alimentation a faibli au moins une fois. "
+"Conseillé : alimentation officielle %(supply)s et câble court."
+msgstr ""
+
+#: utils/health.py:72
+msgid "Le cadre chauffe trop"
+msgstr ""
+
+#: utils/health.py:72
+#, python-format
+msgid "%(temp)s °C : aérez le boîtier ou ajoutez un dissipateur."
+msgstr ""
+
+#: utils/health.py:74
+msgid "Le cadre a chaud"
+msgstr ""
+
+#: utils/health.py:74
+#, python-format
+msgid "%(temp)s °C : il ralentit pour se protéger. Aérez le boîtier."
+msgstr ""
+
+#: utils/health.py:76
+msgid "La carte SD signale des erreurs"
+msgstr ""
+
+#: utils/health.py:77
+#, python-format
+msgid ""
+"%(count)s erreur(s) d'écriture ou de lecture : faites une sauvegarde et "
+"prévoyez de remplacer la carte."
+msgstr ""
+
+#: utils/health.py:94
 msgid "Aucune photo à afficher"
 msgstr ""
 
-#: utils/health.py:71
+#: utils/health.py:95
 msgid ""
 "Ajoutez une source de photos (Google Drive, Immich, partage réseau, clé "
 "USB) puis lancez un import."
 msgstr ""
 
-#: utils/health.py:73
+#: utils/health.py:97
 msgid "Le diaporama est arrêté"
 msgstr ""
 
-#: utils/health.py:73
+#: utils/health.py:97
 msgid "Il devrait tourner à cette heure-ci. Relancez-le depuis l'accueil."
 msgstr ""
 
-#: utils/health.py:76
+#: utils/health.py:100
 msgid "Problème de synchronisation"
 msgstr ""
 
-#: utils/health.py:79
+#: utils/health.py:103
 msgid "Photos d'invités à valider"
 msgstr ""
 
-#: utils/health.py:79
+#: utils/health.py:103
 #, python-format
 msgid "%(count)s photo(s) attendent votre validation."
 msgstr ""
 
-#: utils/health.py:82
+#: utils/health.py:106
 msgid "Photos laissées sur Google Drive"
 msgstr ""
 
-#: utils/health.py:83
+#: utils/health.py:107
 #, python-format
 msgid ""
 "%(count)s photo(s) déposée(s) par un autre compte ne peuvent pas être "
 "mises à la corbeille du Drive : elles restent affichées sur le cadre."
 msgstr ""
 
-#: utils/health.py:92
+#: utils/health.py:116
 msgid "Espace disque faible"
 msgstr ""
 
-#: utils/health.py:92
+#: utils/health.py:116
 #, python-format
 msgid ""
 "%(free)s Go libres. Supprimez des photos ou activez le nettoyage "
 "automatique."
 msgstr ""
 
-#: utils/health.py:101
+#: utils/health.py:125
 msgid "La sauvegarde a échoué"
 msgstr ""
 
-#: utils/health.py:103
+#: utils/health.py:127
 msgid "Sauvegarde ancienne"
 msgstr ""
 
-#: utils/health.py:103
+#: utils/health.py:127
 msgid "Aucune sauvegarde réussie depuis plus de 7 jours."
 msgstr ""
 
-#: utils/health.py:107
+#: utils/health.py:131
 msgid "Connexion non chiffrée"
 msgstr ""
 
-#: utils/health.py:108
+#: utils/health.py:132
 msgid ""
 "Sur le Raspberry Pi, lancez une fois : sudo "
 "~/pimmich/utils/enable_https.sh (active le HTTPS et corrige la "
 "configuration nginx)."
 msgstr ""
 
-#: utils/health.py:117
+#: utils/health.py:141
 msgid "Choisir une source de photos"
 msgstr ""
 
-#: utils/health.py:118
+#: utils/health.py:142
 msgid "Importer des photos"
 msgstr ""
 
-#: utils/health.py:119
+#: utils/health.py:143
 msgid "Régler les heures d'affichage"
 msgstr ""
 
-#: utils/health.py:120
+#: utils/health.py:144
 msgid "Choisir une ambiance"
 msgstr ""
 
-#: utils/health.py:121
+#: utils/health.py:145
 msgid "Inviter la famille (QR code, Telegram)"
 msgstr ""
 
-#: utils/health.py:125
+#: utils/health.py:149
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr ""
 
@@ -4341,41 +4444,41 @@ msgstr ""
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr ""
 
-#: web/routes_home.py:68
+#: web/routes_home.py:75
 msgid "Étape inconnue."
 msgstr ""
 
-#: web/routes_home.py:96
+#: web/routes_home.py:103
 msgid "Mes réglages"
 msgstr ""
 
-#: web/routes_home.py:97
+#: web/routes_home.py:104
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr ""
 
-#: web/routes_home.py:106 web/routes_playlists.py:72
+#: web/routes_home.py:113 web/routes_playlists.py:72
 #: web/routes_slideshow.py:513
 msgid "Disposition inconnue."
 msgstr ""
 
-#: web/routes_home.py:111
+#: web/routes_home.py:118
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr ""
 
-#: web/routes_home.py:173
+#: web/routes_home.py:180
 msgid "Musique introuvable."
 msgstr ""
 
-#: web/routes_home.py:177 web/routes_music.py:293
+#: web/routes_home.py:184 web/routes_music.py:293
 msgid "Volume invalide."
 msgstr ""
 
-#: web/routes_home.py:181 web/routes_system.py:627
+#: web/routes_home.py:188 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr ""
 
-#: web/routes_home.py:188
+#: web/routes_home.py:195
 msgid "Réglages du son enregistrés."
 msgstr ""
 

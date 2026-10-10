@@ -1,4 +1,38 @@
         <div id="tab-maintenance" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3><i class="fas fa-microchip mr-2"></i>{{ _("Matériel") }}</h3>
+                </legend>
+                <div id="hw-grid" class="hw-grid">
+                    <div><small>{{ _("Modèle") }}</small><strong id="hw-model">…</strong></div>
+                    <div><small>{{ _("Température") }}</small><strong id="hw-temp">…</strong></div>
+                    <div><small>{{ _("Alimentation") }}</small><strong id="hw-power">…</strong></div>
+                    <div><small>{{ _("Carte SD") }}</small><strong id="hw-sd">…</strong></div>
+                </div>
+                <p id="hw-supply" class="text-sm text-gray-600 mt-3"></p>
+            </fieldset>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const T = { ok: {{ _("Correcte")|tojson }}, now: {{ _("Insuffisante en ce moment")|tojson }}, boot: {{ _("A faibli depuis le démarrage")|tojson }},
+                                sdOk: {{ _("Aucune erreur")|tojson }}, sdErr: {{ _("erreur(s)")|tojson }}, unknown: {{ _("Inconnu")|tojson }},
+                                supply: {{ _("Alimentation conseillée pour ce modèle :")|tojson }} };
+                    const set = (id, text, level) => { $(id).textContent = text; $(id).className = level ? `hw-${level}` : ""; };
+                    async function load() {
+                        if (!$("tab-maintenance").offsetParent) return;
+                        const hw = await (await fetch("/api/hardware")).json();
+                        set("hw-model", hw.model || T.unknown);
+                        set("hw-temp", hw.temperature === null ? T.unknown : `${hw.temperature} °C`, hw.temperature >= 80 ? "err" : hw.temperature >= 70 ? "warn" : "ok");
+                        set("hw-power", hw.undervoltage_now === null ? T.unknown : hw.undervoltage_now ? T.now : hw.undervoltage_since_boot ? T.boot : T.ok,
+                            hw.undervoltage_now ? "err" : hw.undervoltage_since_boot ? "warn" : "ok");
+                        set("hw-sd", hw.sd_errors === null ? T.unknown : hw.sd_errors ? `${hw.sd_errors} ${T.sdErr}` : T.sdOk, hw.sd_errors ? "warn" : "ok");
+                        $("hw-supply").textContent = hw.supply ? `${T.supply} ${hw.supply}` : "";
+                    }
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-maintenance'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                    load();
+                    setInterval(load, 15000);
+                });
+            </script>
             <fieldset class="mt-6">
                 <legend>
                     <h3>{{ _("Sauvegarde et Restauration") }}</h3>

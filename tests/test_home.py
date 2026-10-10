@@ -140,3 +140,24 @@ def test_guest_photo_received_completes_the_setup_step(sandbox, monkeypatch):
     folder.mkdir(parents=True, exist_ok=True)
     (folder / "photo.jpg").write_bytes(b"x")
     assert health.guests_invited({})
+
+
+def test_power_heat_and_sd_problems_are_reported(monkeypatch):
+    from utils import hardware
+    monkeypatch.setattr(health, "_prepared_count", lambda: 10)
+    monkeypatch.setattr(health, "_pending_guest_photos", lambda: 0)
+    monkeypatch.setattr(health, "_gdrive_denied_count", lambda: 0)
+    state = {"model": "Raspberry Pi 3 Model B Plus Rev 1.3", "supply": "5,1 V / 2,5 A (micro-USB)", "temperature": 72.0,
+             "throttled": 0x50000, "undervoltage_now": False, "undervoltage_since_boot": True, "slowed_by_heat": False, "sd_errors": 2}
+    monkeypatch.setattr(hardware, "status", lambda: state)
+    titles = [i["title"] for i in health.checks({"_active_hours": False}, slideshow_running=False, is_admin=False)]
+    assert titles == ["Le cadre a manqué de courant", "Le cadre a chaud", "La carte SD signale des erreurs"]
+    assert hardware.recommended_supply("Raspberry Pi 3 Model B Plus Rev 1.3").startswith("5,1 V / 2,5 A")
+    assert hardware.recommended_supply("Raspberry Pi 5 Model B") .startswith("5,1 V / 5 A")
+
+
+def test_throttled_flags_are_decoded(monkeypatch):
+    from utils import hardware
+    monkeypatch.setattr(hardware, "throttled", lambda: 0x50005)
+    hw = hardware.status()
+    assert hw["undervoltage_now"] and hw["undervoltage_since_boot"] and not hw["slowed_by_heat"]

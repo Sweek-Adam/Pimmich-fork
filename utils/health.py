@@ -54,6 +54,29 @@ def source_configured(config):
     return bool(config.get("immich_url") and config.get("immich_token")) or bool(config.get("smb_host")) or bool(config.get("gdrive_folders"))
 
 
+def _hardware_checks(add):
+    """Alimentation, chaleur et carte SD : causes fréquentes de plantages et de lenteurs."""
+    from utils import hardware
+    hw = hardware.status()
+    supply = hw["supply"] or N_("du Raspberry Pi")  # « alimentation officielle du Raspberry Pi »
+    if hw["undervoltage_now"]:
+        add("error", N_("Alimentation insuffisante en ce moment"),
+            N_("Le cadre manque de courant : il peut ralentir, figer ou redémarrer. Utilisez une alimentation officielle %(supply)s et un câble court."),
+            "tab-maintenance", supply=supply)
+    elif hw["undervoltage_since_boot"]:
+        add("warning", N_("Le cadre a manqué de courant"),
+            N_("Depuis son démarrage, l'alimentation a faibli au moins une fois. Conseillé : alimentation officielle %(supply)s et câble court."),
+            "tab-maintenance", supply=supply)
+    temp = hw["temperature"]
+    if temp is not None and temp >= 80:
+        add("error", N_("Le cadre chauffe trop"), N_("%(temp)s °C : aérez le boîtier ou ajoutez un dissipateur."), "tab-maintenance", temp=temp)
+    elif (temp is not None and temp >= 70) or hw["slowed_by_heat"]:
+        add("warning", N_("Le cadre a chaud"), N_("%(temp)s °C : il ralentit pour se protéger. Aérez le boîtier."), "tab-maintenance", temp=temp if temp is not None else "?")
+    if hw["sd_errors"]:
+        add("warning", N_("La carte SD signale des erreurs"),
+            N_("%(count)s erreur(s) d'écriture ou de lecture : faites une sauvegarde et prévoyez de remplacer la carte."), "tab-maintenance", count=hw["sd_errors"])
+
+
 def checks(config, slideshow_running, is_admin, proxy_host_ok=True, worker_messages=None, now=None):
     """
     Liste des problèmes et conseils : {level: error|warning|info, title, detail, tab (onglet où agir)}.
@@ -65,6 +88,7 @@ def checks(config, slideshow_running, is_admin, proxy_host_ok=True, worker_messa
     def add(level, title, detail, tab=None, **params):
         items.append({"level": level, "title": title, "detail": detail, "tab": tab, "params": params})
 
+    _hardware_checks(add)
     photos = _prepared_count()
     if photos == 0:
         add("warning", N_("Aucune photo à afficher"),

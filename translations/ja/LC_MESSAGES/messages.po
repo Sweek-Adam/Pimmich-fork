@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 22:28+0200\n"
+"POT-Creation-Date: 2026-10-10 22:30+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -2452,10 +2452,58 @@ msgid "Projet réalisé dans le cadre du Gadgetaulab"
 msgstr "Gadgetaulabの一環として実施されたプロジェクト"
 
 #: templates/configure/tab_maintenance.html.jinja:4
+msgid "Matériel"
+msgstr "ハードウェア"
+
+#: templates/configure/tab_maintenance.html.jinja:7
+msgid "Modèle"
+msgstr "モデル"
+
+#: templates/configure/tab_maintenance.html.jinja:8
+msgid "Température"
+msgstr "温度"
+
+#: templates/configure/tab_maintenance.html.jinja:9
+msgid "Alimentation"
+msgstr "電源"
+
+#: templates/configure/tab_maintenance.html.jinja:10
+msgid "Carte SD"
+msgstr "SD カード"
+
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "Correcte"
+msgstr "正常"
+
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "Insuffisante en ce moment"
+msgstr "現在不足しています"
+
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "A faibli depuis le démarrage"
+msgstr "起動後に低下しました"
+
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "Aucune erreur"
+msgstr "エラーなし"
+
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "erreur(s)"
+msgstr "件のエラー"
+
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "Inconnu"
+msgstr "不明"
+
+#: templates/configure/tab_maintenance.html.jinja:19
+msgid "Alimentation conseillée pour ce modèle :"
+msgstr "このモデルの推奨電源："
+
+#: templates/configure/tab_maintenance.html.jinja:38
 msgid "Sauvegarde et Restauration"
 msgstr "バックアップと復元"
 
-#: templates/configure/tab_maintenance.html.jinja:6
+#: templates/configure/tab_maintenance.html.jinja:40
 msgid ""
 "Sauvegardez votre configuration (API, partages,\n"
 "                    affichage...) dans un fichier. Vous pourrez le "
@@ -2463,41 +2511,41 @@ msgid ""
 "                    installation."
 msgstr "設定（API、共有、表示など）をファイルに保存します。後で、または新しいインストール環境で復元できます。"
 
-#: templates/configure/tab_maintenance.html.jinja:12
+#: templates/configure/tab_maintenance.html.jinja:46
 msgid "Sauvegarder la configuration"
 msgstr "設定の保存"
 
-#: templates/configure/tab_maintenance.html.jinja:15
+#: templates/configure/tab_maintenance.html.jinja:49
 msgid "Télécharger la sauvegarde"
 msgstr "バックアップをダウンロードする"
 
-#: templates/configure/tab_maintenance.html.jinja:20
+#: templates/configure/tab_maintenance.html.jinja:54
 msgid "Restaurer une configuration"
 msgstr "構成を復元する"
 
-#: templates/configure/tab_maintenance.html.jinja:22
+#: templates/configure/tab_maintenance.html.jinja:56
 msgid ""
 "Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
 "fichier de sauvegarde."
 msgstr "本気ですか？現在の設定はバックアップ ファイルの内容によって上書きされます。"
 
-#: templates/configure/tab_maintenance.html.jinja:27
+#: templates/configure/tab_maintenance.html.jinja:61
 msgid "Restaurer"
 msgstr "復元する"
 
-#: templates/configure/tab_maintenance.html.jinja:35
+#: templates/configure/tab_maintenance.html.jinja:69
 msgid "Espace disque"
 msgstr "ディスク容量"
 
-#: templates/configure/tab_maintenance.html.jinja:38
+#: templates/configure/tab_maintenance.html.jinja:72
 msgid "Alerter sous (Go libres) :"
 msgstr "警告するしきい値（空き GB）："
 
-#: templates/configure/tab_maintenance.html.jinja:42
+#: templates/configure/tab_maintenance.html.jinja:76
 msgid "Libérer de la place automatiquement"
 msgstr "自動的に空き容量を確保"
 
-#: templates/configure/tab_maintenance.html.jinja:44
+#: templates/configure/tab_maintenance.html.jinja:78
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
 "sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont"
@@ -2506,11 +2554,11 @@ msgstr ""
 "しきい値を下回ると、Google Drive から既に削除された Google Drive "
 "の写真や動画が古いものから順にフォトフレームから削除されます。お気に入りは削除されません。"
 
-#: templates/configure/tab_maintenance.html.jinja:49
+#: templates/configure/tab_maintenance.html.jinja:83
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr "Google Drive への自動バックアップ"
 
-#: templates/configure/tab_maintenance.html.jinja:51
+#: templates/configure/tab_maintenance.html.jinja:85
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
 "messages dans un dossier de votre Google Drive (connexion rclone). Les "
@@ -2519,71 +2567,71 @@ msgstr ""
 "設定、アカウント、プレイリスト、お気に入り、招待、メッセージを Google Drive のフォルダにバックアップします（rclone "
 "接続）。写真は含まれません。"
 
-#: templates/configure/tab_maintenance.html.jinja:54 utils/health.py:126
+#: templates/configure/tab_maintenance.html.jinja:88 utils/health.py:150
 msgid "Activer la sauvegarde automatique"
 msgstr "自動バックアップを有効にする"
 
-#: templates/configure/tab_maintenance.html.jinja:57
+#: templates/configure/tab_maintenance.html.jinja:91
 msgid "Dossier Google Drive :"
 msgstr "Google Drive フォルダ："
 
-#: templates/configure/tab_maintenance.html.jinja:59
+#: templates/configure/tab_maintenance.html.jinja:93
 msgid "Toutes les (heures) :"
 msgstr "間隔（時間）："
 
-#: templates/configure/tab_maintenance.html.jinja:61
+#: templates/configure/tab_maintenance.html.jinja:95
 msgid "Sauvegardes conservées :"
 msgstr "保持するバックアップ数："
 
-#: templates/configure/tab_maintenance.html.jinja:67
+#: templates/configure/tab_maintenance.html.jinja:101
 msgid "Enregistrer ces réglages"
 msgstr "この設定を保存"
 
-#: templates/configure/tab_maintenance.html.jinja:69
+#: templates/configure/tab_maintenance.html.jinja:103
 msgid "Sauvegarder maintenant"
 msgstr "今すぐバックアップ"
 
-#: templates/configure/tab_maintenance.html.jinja:71
+#: templates/configure/tab_maintenance.html.jinja:105
 msgid "Restaurer la dernière sauvegarde"
 msgstr "最新のバックアップを復元"
 
-#: templates/configure/tab_maintenance.html.jinja:83
+#: templates/configure/tab_maintenance.html.jinja:117
 msgid "Go libres sur"
 msgstr "GB 空き / 全体"
 
-#: templates/configure/tab_maintenance.html.jinja:83
+#: templates/configure/tab_maintenance.html.jinja:117
 msgid "utilisés"
 msgstr "使用済み"
 
-#: templates/configure/tab_maintenance.html.jinja:84
+#: templates/configure/tab_maintenance.html.jinja:118
 msgid "espace faible"
 msgstr "空き容量不足"
 
-#: templates/configure/tab_maintenance.html.jinja:85
+#: templates/configure/tab_maintenance.html.jinja:119
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr "件の Google Drive メディアが自動的に削除される可能性があります。"
 
-#: templates/configure/tab_maintenance.html.jinja:92
+#: templates/configure/tab_maintenance.html.jinja:126
 msgid "Dernière sauvegarde réussie :"
 msgstr "最後に成功したバックアップ："
 
-#: templates/configure/tab_maintenance.html.jinja:93
+#: templates/configure/tab_maintenance.html.jinja:127
 msgid "Dernier échec :"
 msgstr "最後の失敗："
 
-#: templates/configure/tab_maintenance.html.jinja:106
+#: templates/configure/tab_maintenance.html.jinja:140
 msgid "Sauvegarde en cours..."
 msgstr "バックアップ中..."
 
-#: templates/configure/tab_maintenance.html.jinja:108
+#: templates/configure/tab_maintenance.html.jinja:142
 msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
 msgstr "現在の設定を Drive の最新バックアップで置き換えます。よろしいですか？"
 
-#: templates/configure/tab_maintenance.html.jinja:117
+#: templates/configure/tab_maintenance.html.jinja:151
 msgid "Mise à jour de l'application"
 msgstr "アプリケーションのアップデート"
 
-#: templates/configure/tab_maintenance.html.jinja:119
+#: templates/configure/tab_maintenance.html.jinja:153
 msgid ""
 "Cliquez sur le bouton pour rechercher et installer les\n"
 "                    dernières mises à jour de Pimmich depuis GitHub. "
@@ -2593,19 +2641,19 @@ msgstr ""
 "ボタンをクリックすると、GitHub から Pimmich "
 "の最新アップデートを確認してインストールします。アップデート後、アプリケーションは自動的に再起動します。"
 
-#: templates/configure/tab_maintenance.html.jinja:124
+#: templates/configure/tab_maintenance.html.jinja:158
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "アップデートを開始しますか?追跡ページにリダイレクトされます。"
 
-#: templates/configure/tab_maintenance.html.jinja:125
+#: templates/configure/tab_maintenance.html.jinja:159
 msgid "Lancer la mise à jour"
 msgstr "アップデートを開始する"
 
-#: templates/configure/tab_maintenance.html.jinja:131
+#: templates/configure/tab_maintenance.html.jinja:165
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SDカードファイルシステム"
 
-#: templates/configure/tab_maintenance.html.jinja:133
+#: templates/configure/tab_maintenance.html.jinja:167
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -2616,56 +2664,56 @@ msgstr ""
 "イメージより大きい SD カードに Pimmich "
 "を書き込んだ場合は、このオプションでパーティションを拡張し、利用可能な容量をすべて使用できます。操作を完了するにはシステムの再起動が必要です。"
 
-#: templates/configure/tab_maintenance.html.jinja:137
+#: templates/configure/tab_maintenance.html.jinja:171
 msgid "Note :"
 msgstr "注記 ："
 
-#: templates/configure/tab_maintenance.html.jinja:137
+#: templates/configure/tab_maintenance.html.jinja:171
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
 " prochain démarrage."
 msgstr "この操作は安全で、データは削除されません。次回起動時に拡張されるようシステムを準備するだけです。"
 
-#: templates/configure/tab_maintenance.html.jinja:142
+#: templates/configure/tab_maintenance.html.jinja:176
 msgid "Étendre le système de fichiers"
 msgstr "ファイルシステムを拡張する"
 
-#: templates/configure/tab_maintenance.html.jinja:149
+#: templates/configure/tab_maintenance.html.jinja:183
 msgid "Contrôle du système"
 msgstr "システム制御"
 
-#: templates/configure/tab_maintenance.html.jinja:152
+#: templates/configure/tab_maintenance.html.jinja:186
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr "Web アプリケーションのみを再起動してもよろしいですか?オペレーティング システムは再起動されません。"
 
-#: templates/configure/tab_maintenance.html.jinja:155
+#: templates/configure/tab_maintenance.html.jinja:189
 msgid "Redémarrer l'application web"
 msgstr "Webアプリケーションを再起動します"
 
-#: templates/configure/tab_maintenance.html.jinja:164
+#: templates/configure/tab_maintenance.html.jinja:198
 msgid "Redémarrer le système"
 msgstr "システムを再起動します"
 
-#: templates/configure/tab_maintenance.html.jinja:172
+#: templates/configure/tab_maintenance.html.jinja:206
 msgid "Supprimer les logs"
 msgstr "ログの削除"
 
-#: templates/configure/tab_maintenance.html.jinja:177
+#: templates/configure/tab_maintenance.html.jinja:211
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "システムの電源を切ってもよろしいですか?"
 
-#: templates/configure/tab_maintenance.html.jinja:180
+#: templates/configure/tab_maintenance.html.jinja:214
 msgid "Éteindre le système"
 msgstr "システムをシャットダウンします"
 
-#: templates/configure/tab_maintenance.html.jinja:185
+#: templates/configure/tab_maintenance.html.jinja:219
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Raspberry Pi OS（デスクトップ）に戻す"
 
-#: templates/configure/tab_maintenance.html.jinja:190
+#: templates/configure/tab_maintenance.html.jinja:224
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
@@ -3085,7 +3133,7 @@ msgstr ""
 "写真をドラッグして順番を変更できます。リストの先頭の写真が、現在の写真のすぐ次に表示されます。▶ "
 "ボタンを押すとすぐに表示されます。紫の枠は同じ組み写真に含まれる写真をまとめたもので、一緒に移動します。"
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:108
+#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:115
 msgid "Le diaporama n'est pas en cours."
 msgstr "スライドショーは実行されていません。"
 
@@ -3101,7 +3149,7 @@ msgstr "組み写真（ここから開始、準備中）"
 msgid "Afficher maintenant"
 msgstr "今すぐ表示"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:193
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:200
 msgid "Musique du diaporama"
 msgstr "スライドショーの音楽"
 
@@ -4003,76 +4051,133 @@ msgstr "スクラップブック"
 msgid "Photomaton"
 msgstr "証明写真"
 
-#: utils/health.py:70
+#: utils/health.py:61
+msgid "du Raspberry Pi"
+msgstr "Raspberry Pi 用"
+
+#: utils/health.py:63
+msgid "Alimentation insuffisante en ce moment"
+msgstr "現在、電源が不足しています"
+
+#: utils/health.py:64
+#, python-format
+msgid ""
+"Le cadre manque de courant : il peut ralentir, figer ou redémarrer. "
+"Utilisez une alimentation officielle %(supply)s et un câble court."
+msgstr ""
+"フォトフレームの電力が不足しています。動作が遅くなったり、止まったり、再起動したりすることがあります。公式電源 %(supply)s "
+"と短いケーブルを使ってください。"
+
+#: utils/health.py:67
+msgid "Le cadre a manqué de courant"
+msgstr "フォトフレームの電力が不足しました"
+
+#: utils/health.py:68
+#, python-format
+msgid ""
+"Depuis son démarrage, l'alimentation a faibli au moins une fois. "
+"Conseillé : alimentation officielle %(supply)s et câble court."
+msgstr "起動後、少なくとも 1 回電源が低下しました。推奨：公式電源 %(supply)s と短いケーブル。"
+
+#: utils/health.py:72
+msgid "Le cadre chauffe trop"
+msgstr "フォトフレームが過熱しています"
+
+#: utils/health.py:72
+#, python-format
+msgid "%(temp)s °C : aérez le boîtier ou ajoutez un dissipateur."
+msgstr "%(temp)s °C：ケースの通気を良くするか、ヒートシンクを付けてください。"
+
+#: utils/health.py:74
+msgid "Le cadre a chaud"
+msgstr "フォトフレームが熱くなっています"
+
+#: utils/health.py:74
+#, python-format
+msgid "%(temp)s °C : il ralentit pour se protéger. Aérez le boîtier."
+msgstr "%(temp)s °C：保護のため動作を遅くしています。ケースの通気を良くしてください。"
+
+#: utils/health.py:76
+msgid "La carte SD signale des erreurs"
+msgstr "SD カードがエラーを報告しています"
+
+#: utils/health.py:77
+#, python-format
+msgid ""
+"%(count)s erreur(s) d'écriture ou de lecture : faites une sauvegarde et "
+"prévoyez de remplacer la carte."
+msgstr "読み書きエラー %(count)s 件：バックアップを取り、カードの交換を検討してください。"
+
+#: utils/health.py:94
 msgid "Aucune photo à afficher"
 msgstr "表示する写真がありません"
 
-#: utils/health.py:71
+#: utils/health.py:95
 msgid ""
 "Ajoutez une source de photos (Google Drive, Immich, partage réseau, clé "
 "USB) puis lancez un import."
 msgstr "写真のソース（Google Drive、Immich、ネットワーク共有、USB メモリ）を追加して、インポートを実行してください。"
 
-#: utils/health.py:73
+#: utils/health.py:97
 msgid "Le diaporama est arrêté"
 msgstr "スライドショーが停止しています"
 
-#: utils/health.py:73
+#: utils/health.py:97
 msgid "Il devrait tourner à cette heure-ci. Relancez-le depuis l'accueil."
 msgstr "この時間帯は再生中のはずです。ホームから再開してください。"
 
-#: utils/health.py:76
+#: utils/health.py:100
 msgid "Problème de synchronisation"
 msgstr "同期の問題"
 
-#: utils/health.py:79
+#: utils/health.py:103
 msgid "Photos d'invités à valider"
 msgstr "承認待ちのゲスト写真"
 
-#: utils/health.py:79
+#: utils/health.py:103
 #, python-format
 msgid "%(count)s photo(s) attendent votre validation."
 msgstr "%(count)s 枚の写真が承認を待っています。"
 
-#: utils/health.py:82
+#: utils/health.py:106
 msgid "Photos laissées sur Google Drive"
 msgstr "Google Drive に残っている写真"
 
-#: utils/health.py:83
+#: utils/health.py:107
 #, python-format
 msgid ""
 "%(count)s photo(s) déposée(s) par un autre compte ne peuvent pas être "
 "mises à la corbeille du Drive : elles restent affichées sur le cadre."
 msgstr "別のアカウントがアップロードした %(count)s 枚の写真は Drive のゴミ箱に移動できないため、フォトフレームに表示されたままになります。"
 
-#: utils/health.py:92
+#: utils/health.py:116
 msgid "Espace disque faible"
 msgstr "ディスク容量が不足しています"
 
-#: utils/health.py:92
+#: utils/health.py:116
 #, python-format
 msgid ""
 "%(free)s Go libres. Supprimez des photos ou activez le nettoyage "
 "automatique."
 msgstr "空き容量 %(free)s GB。写真を削除するか、自動クリーンアップを有効にしてください。"
 
-#: utils/health.py:101
+#: utils/health.py:125
 msgid "La sauvegarde a échoué"
 msgstr "バックアップに失敗しました"
 
-#: utils/health.py:103
+#: utils/health.py:127
 msgid "Sauvegarde ancienne"
 msgstr "バックアップが古くなっています"
 
-#: utils/health.py:103
+#: utils/health.py:127
 msgid "Aucune sauvegarde réussie depuis plus de 7 jours."
 msgstr "7日以上バックアップが成功していません。"
 
-#: utils/health.py:107
+#: utils/health.py:131
 msgid "Connexion non chiffrée"
 msgstr "暗号化されていない接続"
 
-#: utils/health.py:108
+#: utils/health.py:132
 msgid ""
 "Sur le Raspberry Pi, lancez une fois : sudo "
 "~/pimmich/utils/enable_https.sh (active le HTTPS et corrige la "
@@ -4081,27 +4186,27 @@ msgstr ""
 "Raspberry Pi で一度だけ次を実行してください：sudo ~/pimmich/utils/enable_https.sh（HTTPS "
 "を有効にし、nginx の設定を修正します）。"
 
-#: utils/health.py:117
+#: utils/health.py:141
 msgid "Choisir une source de photos"
 msgstr "写真のソースを選択"
 
-#: utils/health.py:118
+#: utils/health.py:142
 msgid "Importer des photos"
 msgstr "写真をインポート"
 
-#: utils/health.py:119
+#: utils/health.py:143
 msgid "Régler les heures d'affichage"
 msgstr "表示時間を設定"
 
-#: utils/health.py:120
+#: utils/health.py:144
 msgid "Choisir une ambiance"
 msgstr "ムードを選択"
 
-#: utils/health.py:121
+#: utils/health.py:145
 msgid "Inviter la famille (QR code, Telegram)"
 msgstr "家族を招待（QR code、Telegram）"
 
-#: utils/health.py:125
+#: utils/health.py:149
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr "接続を保護（HTTPS）"
 
@@ -4472,41 +4577,41 @@ msgstr "すでに複数のメッセージを送信しています。1時間後�
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "ありがとうございます！メッセージはフォトフレームに表示されます（%(date)s まで）。"
 
-#: web/routes_home.py:68
+#: web/routes_home.py:75
 msgid "Étape inconnue."
 msgstr "不明なステップです。"
 
-#: web/routes_home.py:96
+#: web/routes_home.py:103
 msgid "Mes réglages"
 msgstr "自分の設定"
 
-#: web/routes_home.py:97
+#: web/routes_home.py:104
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "ムード「%(name)s」を適用しました。"
 
-#: web/routes_home.py:106 web/routes_playlists.py:72
+#: web/routes_home.py:113 web/routes_playlists.py:72
 #: web/routes_slideshow.py:513
 msgid "Disposition inconnue."
 msgstr "不明なレイアウトです。"
 
-#: web/routes_home.py:111
+#: web/routes_home.py:118
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "レイアウトを準備中です… 数秒で表示されます。"
 
-#: web/routes_home.py:173
+#: web/routes_home.py:180
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
-#: web/routes_home.py:177 web/routes_music.py:293
+#: web/routes_home.py:184 web/routes_music.py:293
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:181 web/routes_system.py:627
+#: web/routes_home.py:188 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
-#: web/routes_home.py:188
+#: web/routes_home.py:195
 msgid "Réglages du son enregistrés."
 msgstr "サウンド設定を保存しました。"
 
