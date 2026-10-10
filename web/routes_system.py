@@ -1,5 +1,6 @@
 """Système : arrêt, redémarrage, mises à jour, réseau, sauvegarde, logs et informations."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import disk_monitor, drive_backup, messages_manager
 from web.core import _
 
 
@@ -603,3 +604,65 @@ def scan_wifi():
         return jsonify({"success": False, "message": "Le scan Wi-Fi a pris trop de temps (timeout)."}), 500
     except Exception as e:
         return jsonify({"success": False, "message": f"Erreur inattendue : {str(e)}"}), 500
+
+
+# --- Espace disque et sauvegarde automatique sur Google Drive ---
+
+MAINTENANCE_SETTINGS = {
+    "disk_alert_free_gb": float, "disk_auto_cleanup": bool, "backup_drive_enabled": bool,
+    "backup_drive_folder": str, "backup_drive_interval_hours": float, "backup_drive_keep": int,
+}
+
+
+@app.route('/api/maintenance/status', methods=['GET'])
+@admin_required
+def maintenance_status():
+    config = load_config()
+    status = {"success": True, "disk": disk_monitor.disk_status(config), "backup": drive_backup.load_status(),
+              "settings": {k: config.get(k) for k in MAINTENANCE_SETTINGS}}
+    status["disk"]["cleanable_count"] = len(disk_monitor.cleanup_candidates())
+    return jsonify(status)
+
+
+@app.route('/api/maintenance/settings', methods=['POST'])
+@admin_required
+def maintenance_settings():
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())  # copie : load_config() renvoie le cache, qui ne doit pas garder une valeur refusée
+    try:
+        for key, kind in MAINTENANCE_SETTINGS.items():
+            if key in data:
+                config[key] = bool(data[key]) if kind is bool else kind(data[key])
+        if config["disk_alert_free_gb"] < 0 or config["backup_drive_interval_hours"] < 1 or config["backup_drive_keep"] < 1:
+            raise ValueError
+        folder = str(config["backup_drive_folder"]).strip().strip("/")
+        if not folder or ".." in folder or ":" in folder:
+            raise ValueError
+        config["backup_drive_folder"] = folder
+    except (TypeError, ValueError):
+        return jsonify({"success": False, "message": _("Réglage invalide.")}), 400
+    save_config(config)
+    return jsonify({"success": True, "message": _("Réglages enregistrés.")})
+
+
+@app.route('/api/backup/drive', methods=['POST'])
+@admin_required
+def backup_drive_now():
+    try:
+        status = drive_backup.backup_now(load_config())
+    except Exception as e:
+        return jsonify({"success": False, "message": _("Sauvegarde impossible : %(error)s", error=str(e))}), 500
+    return jsonify({"success": True, "message": _("Sauvegarde envoyée sur Google Drive : %(name)s", name=status["last_name"])})
+
+
+@app.route('/api/backup/drive/restore', methods=['POST'])
+@admin_required
+def backup_drive_restore():
+    try:
+        name, restored = drive_backup.restore_latest(load_config())
+    except Exception as e:
+        return jsonify({"success": False, "message": _("Restauration impossible : %(error)s", error=str(e))}), 500
+    config = load_config()
+    messages_manager.ensure_images(int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+    restart_slideshow_process()
+    return jsonify({"success": True, "message": _("Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page.", name=name, count=len(restored))})

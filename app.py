@@ -34,6 +34,8 @@ if __name__ == '__main__':
     gdrive_thread.start()
     telegram_thread = threading.Thread(target=telegram_bot_worker, daemon=True)
     telegram_thread.start()
+    maintenance_thread = threading.Thread(target=maintenance_worker, daemon=True)
+    maintenance_thread.start()
     
     # Démarrer le worker de planification du diaporama
     scheduler_thread = threading.Thread(target=schedule_worker, daemon=True)

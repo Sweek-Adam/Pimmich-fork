@@ -67,13 +67,10 @@ def preview(title, body, signature, style, width, height):
 
 
 def list_messages():
-    """Messages existants (les plus récents d'abord) ; ceux dont l'image a été supprimée sont oubliés."""
+    """Messages existants, les plus récents d'abord."""
     with _lock:
         messages = _load()
-        kept = [m for m in messages if image_path(m["id"]).exists()]
-        if len(kept) != len(messages):
-            _save(kept)
-    return sorted(kept, key=lambda m: m.get("created", ""), reverse=True)
+    return sorted(messages, key=lambda m: m.get("created", ""), reverse=True)
 
 
 def create_message(title, body, signature, style, expires, author, width, height):
@@ -122,7 +119,32 @@ def purge_expired(today=None):
     return len(expired)
 
 
+def _render_to_file(m, width, height):
+    PREPARED_DIR.mkdir(parents=True, exist_ok=True)
+    render_message(m["title"], m["body"], m["signature"], m["style"], width, height).save(image_path(m["id"]), "JPEG", quality=90)
+
+
 def rerender_all(width, height):
-    """Régénère les images (après un changement de résolution ou d'orientation de l'écran)."""
+    """Régénère toutes les images (par exemple pour un nouveau style de rendu)."""
     for m in list_messages():
-        render_message(m["title"], m["body"], m["signature"], m["style"], width, height).save(image_path(m["id"]), "JPEG", quality=90)
+        _render_to_file(m, width, height)
+
+
+def ensure_images(width, height):
+    """
+    Régénère les images manquantes ou dont la taille ne correspond plus à l'écran
+    (changement de résolution ou d'orientation, restauration d'une sauvegarde). Retourne le nombre d'images refaites.
+    """
+    from PIL import Image
+    count = 0
+    for m in list_messages():
+        path = image_path(m["id"])
+        try:
+            with Image.open(path) as image:
+                if image.size == (width, height):
+                    continue
+        except OSError:
+            pass  # image absente ou illisible
+        _render_to_file(m, width, height)
+        count += 1
+    return count

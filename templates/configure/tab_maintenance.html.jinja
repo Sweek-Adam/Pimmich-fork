@@ -32,6 +32,88 @@
 
             <fieldset class="mt-6">
                 <legend>
+                    <h3>{{ _("Espace disque") }}</h3>
+                </legend>
+                <p id="disk-summary" class="mb-3">…</p>
+                <label for="disk_alert_free_gb">{{ _("Alerter sous (Go libres) :") }}</label>
+                <input type="number" id="disk_alert_free_gb" min="0" step="0.5" class="w-32">
+                <div class="form-check form-switch my-3">
+                    <input class="form-check-input" type="checkbox" id="disk_auto_cleanup">
+                    <label class="form-check-label ml-2" for="disk_auto_cleanup">{{ _("Libérer de la place automatiquement") }}</label>
+                </div>
+                <p class="text-sm text-gray-600">{{ _("Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont jamais supprimés.") }}</p>
+            </fieldset>
+
+            <fieldset class="mt-6">
+                <legend>
+                    <h3>{{ _("Sauvegarde automatique sur Google Drive") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Sauvegarde les réglages, comptes, playlists, favoris, invitations et messages dans un dossier de votre Google Drive (connexion rclone). Les photos ne sont pas incluses.") }}</p>
+                <div class="form-check form-switch my-3">
+                    <input class="form-check-input" type="checkbox" id="backup_drive_enabled">
+                    <label class="form-check-label ml-2" for="backup_drive_enabled">{{ _("Activer la sauvegarde automatique") }}</label>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div><label for="backup_drive_folder">{{ _("Dossier Google Drive :") }}</label>
+                        <input type="text" id="backup_drive_folder"></div>
+                    <div><label for="backup_drive_interval_hours">{{ _("Toutes les (heures) :") }}</label>
+                        <input type="number" id="backup_drive_interval_hours" min="1"></div>
+                    <div><label for="backup_drive_keep">{{ _("Sauvegardes conservées :") }}</label>
+                        <input type="number" id="backup_drive_keep" min="1"></div>
+                </div>
+                <p id="backup-summary" class="mt-3 text-sm"></p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                    <button type="button" id="maintenance-save-btn" class="system-button bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                        <i class="fas fa-save mr-2"></i>{{ _("Enregistrer ces réglages") }}</button>
+                    <button type="button" id="backup-now-btn" class="system-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                        <i class="fab fa-google-drive mr-2"></i>{{ _("Sauvegarder maintenant") }}</button>
+                    <button type="button" id="backup-restore-btn" class="system-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                        <i class="fas fa-undo mr-2"></i>{{ _("Restaurer la dernière sauvegarde") }}</button>
+                </div>
+                <p id="maintenance-status" class="mt-3 text-sm"></p>
+                <script>
+                    (function () {
+                        const $ = (id) => document.getElementById(id);
+                        const say = (text, ok) => { $("maintenance-status").textContent = text; $("maintenance-status").className = `mt-3 text-sm ${ok ? 'text-green-600' : 'text-red-600'}`; };
+                        const fmt = (iso) => iso ? new Date(iso).toLocaleString() : "—";
+                        async function load() {
+                            const data = await (await fetch('/api/maintenance/status')).json();
+                            if (!data.success) return;
+                            const d = data.disk, s = data.settings, b = data.backup;
+                            $("disk-summary").innerHTML = `<strong>${d.free_gb} {{ _("Go libres sur") }} ${d.total_gb} Go</strong> (${d.used_percent} % {{ _("utilisés") }})`
+                                + (d.low ? ` — <span class="text-red-600 font-semibold">{{ _("espace faible") }}</span>` : '')
+                                + `<br><span class="text-sm text-gray-600">${d.cleanable_count} {{ _("média(s) Google Drive pourraient être supprimés automatiquement.") }}</span>`;
+                            $("disk_alert_free_gb").value = s.disk_alert_free_gb;
+                            $("disk_auto_cleanup").checked = !!s.disk_auto_cleanup;
+                            $("backup_drive_enabled").checked = !!s.backup_drive_enabled;
+                            $("backup_drive_folder").value = s.backup_drive_folder;
+                            $("backup_drive_interval_hours").value = s.backup_drive_interval_hours;
+                            $("backup_drive_keep").value = s.backup_drive_keep;
+                            $("backup-summary").innerHTML = `{{ _("Dernière sauvegarde réussie :") }} <strong>${fmt(b.last_success)}</strong>`
+                                + (b.last_error ? `<br><span class="text-red-600">{{ _("Dernier échec :") }} ${fmt(b.last_attempt)} — ${b.last_error.replace(/</g, '&lt;')}</span>` : '');
+                        }
+                        async function post(url, body) {
+                            const resp = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+                            const data = await resp.json();
+                            say(data.message, data.success);
+                            load();
+                        }
+                        $("maintenance-save-btn").addEventListener("click", () => post('/api/maintenance/settings', {
+                            disk_alert_free_gb: $("disk_alert_free_gb").value, disk_auto_cleanup: $("disk_auto_cleanup").checked,
+                            backup_drive_enabled: $("backup_drive_enabled").checked, backup_drive_folder: $("backup_drive_folder").value,
+                            backup_drive_interval_hours: $("backup_drive_interval_hours").value, backup_drive_keep: $("backup_drive_keep").value,
+                        }));
+                        $("backup-now-btn").addEventListener("click", () => { say("{{ _('Sauvegarde en cours...') }}", true); post('/api/backup/drive'); });
+                        $("backup-restore-btn").addEventListener("click", () => {
+                            if (confirm("{{ _('Remplacer les réglages actuels par la dernière sauvegarde du Drive ?') }}")) post('/api/backup/drive/restore');
+                        });
+                        load();
+                    })();
+                </script>
+            </fieldset>
+
+            <fieldset class="mt-6">
+                <legend>
                     <h3>{{ _("Mise à jour de l'application") }}</h3>
                 </legend>
                 <p class="text-sm text-gray-600 mb-3">{{ _("Cliquez sur le bouton pour rechercher et installer les

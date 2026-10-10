@@ -26,6 +26,11 @@
         <p id="global-toast-message"></p>
     </div>
 
+    {% if disk_alert %}
+    <div class="max-w-xl mx-auto mt-4 p-3 rounded border border-red-300 bg-red-50 text-red-800 text-sm">
+        <i class="fas fa-hdd mr-1"></i>{{ _("Espace disque faible : %(free)s Go libres (seuil : %(threshold)s Go). Supprimez des photos ou activez le nettoyage automatique dans Système > Maintenance.", free=disk_alert.free_gb, threshold=disk_alert.threshold_gb) }}
+    </div>
+    {% endif %}
     <!-- Messages flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}

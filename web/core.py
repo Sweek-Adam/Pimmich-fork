@@ -352,6 +352,18 @@ def inject_current_user():
     """Injecte le compte connecté et son rôle dans les templates."""
     return dict(current_username=session.get('username'), is_admin=is_admin())
 
+@app.context_processor
+def inject_disk_alert():
+    """Alerte d'espace disque faible, affichée aux administrateurs."""
+    if not session.get('logged_in') or not is_admin():
+        return {}
+    from utils.disk_monitor import disk_status
+    try:
+        status = disk_status(load_config())
+    except OSError:
+        return {}
+    return dict(disk_alert=status if status["low"] else None)
+
 
 # Réglages contenant des secrets : masqués et non modifiables pour les comptes non administrateurs
 SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormglass_api_key', 'telegram_bot_token',

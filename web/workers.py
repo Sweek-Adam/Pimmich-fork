@@ -1,5 +1,6 @@
 """Tâches de fond : planification du diaporama, mises à jour automatiques des sources, bot Telegram."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import messages_manager, disk_monitor, drive_backup
 from web.core import _
 
 
@@ -517,3 +518,45 @@ def migrate_guest_folders():
         config['display_sources'] = list(new_sources)
         save_config(config)
         logger.info(f"[Migration] Configuration mise à jour : sources {sources} -> {list(new_sources)}")
+
+
+MAINTENANCE_INTERVAL = 10 * 60  # secondes
+
+
+def run_maintenance_once():
+    """
+    Tâches périodiques : messages expirés, images des messages à la taille de l'écran,
+    espace disque (alerte et nettoyage optionnel) et sauvegarde automatique sur Google Drive.
+    """
+    config = load_config()
+    refresh_slideshow = False
+
+    if messages_manager.purge_expired():
+        refresh_slideshow = True
+    if messages_manager.ensure_images(int(config.get("display_width", 1920)), int(config.get("display_height", 1080))):
+        refresh_slideshow = True
+
+    status = disk_monitor.disk_status(config)
+    if status["low"]:
+        logger.warning(f"[Disque] Espace libre faible : {status['free_gb']} Go (seuil {status['threshold_gb']} Go)")
+        if config.get("disk_auto_cleanup") and disk_monitor.free_space(config):
+            refresh_slideshow = True
+
+    if drive_backup.is_due(config):
+        try:
+            drive_backup.backup_now(config)
+        except Exception:
+            pass  # l'échec est enregistré dans l'état de la sauvegarde et affiché dans l'interface
+
+    if refresh_slideshow and is_slideshow_running():
+        restart_slideshow_for_update()
+
+
+def maintenance_worker():
+    print("Démarrage du worker de maintenance (messages, espace disque, sauvegarde)")
+    while True:
+        try:
+            run_maintenance_once()
+        except Exception as e:
+            logger.error(f"[Maintenance] Erreur : {e}", exc_info=True)
+        time.sleep(MAINTENANCE_INTERVAL)

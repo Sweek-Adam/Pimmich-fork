@@ -24,6 +24,18 @@
   ]
  ],
  [
+  "/api/backup/drive",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/backup/drive/restore",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/backup_settings",
   [
    "GET"
@@ -91,6 +103,18 @@
  ],
  [
   "/api/logs",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/maintenance/settings",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/maintenance/status",
   [
    "GET"
   ]
