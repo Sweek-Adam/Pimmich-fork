@@ -24,6 +24,37 @@
                 </section>
 
                 <section class="card">
+                    <h2 class="card-title"><i class="fas fa-compact-disc text-indigo-500 mr-2"></i>{{ _("Lecteur à l'écran") }}</h2>
+                    <div id="np-now" class="now-playing hidden">
+                        <img id="np-cover" alt="" class="hidden">
+                        <span id="np-nocover" class="np-nocover"><i class="fas fa-music"></i></span>
+                        <span class="np-text"><strong id="np-title"></strong><small id="np-artist"></small></span>
+                        <span id="np-source" class="badge on"></span>
+                    </div>
+                    <p id="np-idle" class="text-sm text-gray-600 mb-3">{{ _("Aucune musique en cours de lecture.") }}</p>
+                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                        <div>
+                            <label for="np-display" class="block">{{ _("Afficher le morceau sur le cadre") }}</label>
+                            <select id="np-display" class="w-full">
+                                <option value="change">{{ _("Quelques secondes à chaque nouveau morceau") }}</option>
+                                <option value="always">{{ _("En permanence pendant la lecture") }}</option>
+                                <option value="off">{{ _("Ne pas afficher") }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="np-position" class="block">{{ _("Position") }}</label>
+                            <select id="np-position" class="w-full">
+                                <option value="bottom_left">{{ _("En bas à gauche") }}</option>
+                                <option value="bottom_right">{{ _("En bas à droite") }}</option>
+                                <option value="top_left">{{ _("En haut à gauche") }}</option>
+                                <option value="top_right">{{ _("En haut à droite") }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3">{{ _("Un petit encart discret (pochette, titre, artiste) pour la musique du diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la musique du diaporama se met en pause.") }}</p>
+                </section>
+
+                <section class="card">
                     <h2 class="card-title"><i class="fas fa-broadcast-tower text-indigo-500 mr-2"></i>{{ _("Spotify, Deezer et autres applications") }}</h2>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="receiver">
@@ -60,7 +91,30 @@
                                 badge.className = "badge " + (active ? "on" : "off");
                             }
                             $("receivers-install").classList.toggle("hidden", Object.values(data.receivers).every(Boolean));
+                            $("np-display").value = data.now_playing_display; $("np-position").value = data.now_playing_position;
                         }
+                        async function saveDisplay() {
+                            const data = await (await fetch('/api/sound', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ now_playing_display: $("np-display").value, now_playing_position: $("np-position").value }) })).json();
+                            if (typeof showToast === "function") showToast(data.message);
+                        }
+                        $("np-display").addEventListener("change", saveDisplay);
+                        $("np-position").addEventListener("change", saveDisplay);
+                        async function nowPlaying() {
+                            if (!$("tab-son").offsetParent) return;  // onglet masqué
+                            try {
+                                const { playing } = await (await fetch('/api/now_playing')).json();
+                                $("np-now").classList.toggle("hidden", !playing);
+                                $("np-idle").classList.toggle("hidden", !!playing);
+                                if (!playing) return;
+                                $("np-title").textContent = playing.title; $("np-artist").textContent = playing.artist || playing.album || "";
+                                $("np-source").textContent = playing.source_label;
+                                $("np-cover").classList.toggle("hidden", !playing.cover); $("np-nocover").classList.toggle("hidden", !!playing.cover);
+                                if (playing.cover && $("np-cover").getAttribute("src") !== playing.cover) $("np-cover").src = playing.cover;
+                            } catch (e) { /* le cadre redémarre */ }
+                        }
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-son'\"]").forEach(b => b.addEventListener("click", () => setTimeout(nowPlaying, 50)));
+                        setInterval(nowPlaying, 5000);
                         function preview() {
                             const file = $("sound-music").value;
                             $("sound-preview").classList.toggle("hidden", !file);
@@ -80,7 +134,7 @@
                             await load();
                             if (data.success) { $("sound-music").value = e.target.files[0].name.replace(/[^\w.\-]/g, "_"); preview(); }
                         });
-                        load();
+                        load(); nowPlaying();
                     });
                 </script>
             </div>

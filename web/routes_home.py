@@ -4,7 +4,8 @@ from web.core import _, _send_slideshow_signal
 import io
 import qrcode
 from flask import send_file
-from utils import ambiances, health, layout_engine
+from utils import ambiances, health, layout_engine, now_playing
+from utils.message_renderer import N_
 
 FORCE_LAYOUT_FILE = Path("/tmp/pimmich_force_layout.json")
 
@@ -138,6 +139,8 @@ def sound_settings_api():
     config = load_config()
     files = sorted(f.name for f in MUSIC_DIR.iterdir() if f.suffix.lower() in (".mp3", ".wav")) if MUSIC_DIR.exists() else []
     return jsonify({"success": True, "background_music": config.get("background_music", ""), "music_volume": config.get("music_volume", 80),
+                    "now_playing_display": config.get("now_playing_display", "change"),
+                    "now_playing_position": config.get("now_playing_position", "bottom_left"),
                     "files": files, "receivers": {"spotify": _service_active("pimmich-spotify"), "airplay": _service_active("pimmich-airplay")}})
 
 
@@ -153,7 +156,44 @@ def save_sound_settings_api():
         volume = max(0, min(100, int(data.get("music_volume", config.get("music_volume", 80)))))
     except (TypeError, ValueError):
         return jsonify({"success": False, "message": _("Volume invalide.")}), 400
+    display = data.get("now_playing_display", config.get("now_playing_display", "change"))
+    position = data.get("now_playing_position", config.get("now_playing_position", "bottom_left"))
+    if display not in NOW_PLAYING_MODES or position not in CORNERS:
+        return jsonify({"success": False, "message": _("Réglage invalide.")}), 400
+    music_changed = (Path(music).name if music else "", volume) != (config.get("background_music", ""), config.get("music_volume", 80))
     config["background_music"], config["music_volume"] = Path(music).name if music else "", volume
+    config["now_playing_display"], config["now_playing_position"] = display, position
     save_config(config)
-    restart_slideshow_process()
+    if music_changed:  # l'affichage du lecteur est relu en direct par le diaporama
+        restart_slideshow_process()
     return jsonify({"success": True, "message": _("Réglages du son enregistrés.")})
+
+
+NOW_PLAYING_MODES = ("off", "change", "always")
+CORNERS = ("bottom_left", "bottom_right", "top_left", "top_right")
+SOURCE_LABELS = {"spotify": "Spotify", "airplay": "AirPlay", "pimmich": N_("Musique du diaporama")}
+
+
+@app.route('/api/now_playing', methods=['GET'])
+@login_required
+def now_playing_api():
+    """Morceau en cours (Spotify, AirPlay ou musique du diaporama), pour l'accueil et l'onglet Son."""
+    info = now_playing.current(exclude=() if is_slideshow_running() else ("pimmich",))
+    if not info:
+        return jsonify({"success": True, "playing": None})
+    cover = info.get("cover")
+    has_cover = bool(cover) and Path(cover).parent == now_playing.COVER_DIR and Path(cover).is_file()
+    return jsonify({"success": True, "playing": {
+        "title": info.get("title", ""), "artist": info.get("artist", ""), "album": info.get("album", ""),
+        "source": info["source"], "source_label": _tr(SOURCE_LABELS.get(info["source"], info["source"])),
+        "cover": url_for("now_playing_cover", v=Path(cover).name) if has_cover else None}})
+
+
+@app.route('/api/now_playing/cover', methods=['GET'])
+@login_required
+def now_playing_cover():
+    info = now_playing.current(exclude=() if is_slideshow_running() else ("pimmich",))
+    cover = Path(info["cover"]) if info and info.get("cover") else None
+    if not cover or cover.parent != now_playing.COVER_DIR or not cover.is_file():  # uniquement le dossier des pochettes
+        return "", 404
+    return send_file(cover, mimetype="image/jpeg", max_age=3600)

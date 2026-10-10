@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:03+0200\n"
+"POT-Creation-Date: 2026-10-10 19:25+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1034
+#: local_slideshow.py:1037
 msgid "Photos & messages"
 msgstr "Fotos & Nachrichten"
 
-#: local_slideshow.py:1219
+#: local_slideshow.py:1349
 msgid "Données de marée non disponibles"
 msgstr "Gezeitendaten nicht verfügbar"
 
-#: local_slideshow.py:1316
+#: local_slideshow.py:1446
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Jahrestag) Vor %(num)d Jahr"
 
-#: local_slideshow.py:1316
+#: local_slideshow.py:1446
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Jahrestag) Vor %(num)d Jahren"
 
-#: local_slideshow.py:2341
+#: local_slideshow.py:2477
 msgid "Aucune photo trouvée."
 msgstr "Keine Fotos gefunden."
 
-#: local_slideshow.py:2342
+#: local_slideshow.py:2478
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Konfigurieren unter: http://%(ip)s"
 
-#: local_slideshow.py:2343
+#: local_slideshow.py:2479
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Zugangsdaten in credentials.json im Stammverzeichnis der SD-Karte)"
 
-#: local_slideshow.py:2344
+#: local_slideshow.py:2480
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Bildschirmauflösung: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2345
+#: local_slideshow.py:2481
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Neuer Versuch in 60 Sekunden..."
 
-#: local_slideshow.py:2371
+#: local_slideshow.py:2507
 msgid "Scannez pour configurer"
 msgstr "Zum Konfigurieren scannen"
 
@@ -129,7 +129,7 @@ msgid "Bibliothèque"
 msgstr "Bibliothek"
 
 #: templates/configure.html.jinja:120
-#: templates/configure/tab_accueil.html.jinja:58
+#: templates/configure/tab_accueil.html.jinja:63
 msgid "À suivre"
 msgstr "Als Nächstes"
 
@@ -918,7 +918,7 @@ msgstr "Fehler bei der Erkennung."
 
 #: templates/configure/scripts_status.html.jinja:517
 #: templates/configure/tab_accueil.html.jinja:17
-#: templates/configure/tab_accueil.html.jinja:118
+#: templates/configure/tab_accueil.html.jinja:123
 msgid "Le diaporama est arrêté."
 msgstr "Die Diashow wird gestoppt."
 
@@ -1065,109 +1065,109 @@ msgstr "Benachrichtigungen aktivieren/deaktivieren"
 msgid "Disposition"
 msgstr "Layout"
 
-#: templates/configure/tab_accueil.html.jinja:38
+#: templates/configure/tab_accueil.html.jinja:43
 msgid "État du cadre"
 msgstr "Rahmen-Status"
 
-#: templates/configure/tab_accueil.html.jinja:39
+#: templates/configure/tab_accueil.html.jinja:44
 msgid "Vérification…"
 msgstr "Wird geprüft…"
 
-#: templates/configure/tab_accueil.html.jinja:42
+#: templates/configure/tab_accueil.html.jinja:47
 msgid "Actions rapides"
 msgstr "Schnellaktionen"
 
-#: templates/configure/tab_accueil.html.jinja:44
+#: templates/configure/tab_accueil.html.jinja:49
 #: templates/configure/tab_messages.html.jinja:4
 msgid "Écrire un message"
 msgstr "Nachricht schreiben"
 
-#: templates/configure/tab_accueil.html.jinja:45
+#: templates/configure/tab_accueil.html.jinja:50
 msgid "Ajouter des photos"
 msgstr "Fotos hinzufügen"
 
-#: templates/configure/tab_accueil.html.jinja:46
+#: templates/configure/tab_accueil.html.jinja:51
 msgid "Lancer une playlist"
 msgstr "Playlist starten"
 
-#: templates/configure/tab_accueil.html.jinja:47
+#: templates/configure/tab_accueil.html.jinja:52
 msgid "Inviter des proches"
 msgstr "Liebe Menschen einladen"
 
-#: templates/configure/tab_accueil.html.jinja:48
+#: templates/configure/tab_accueil.html.jinja:53
 #: templates/configure/tab_son.html.jinja:7
 msgid "Musique"
 msgstr "Musik"
 
-#: templates/configure/tab_accueil.html.jinja:49
+#: templates/configure/tab_accueil.html.jinja:54
 msgid "Mes photos"
 msgstr "Meine Fotos"
 
-#: templates/configure/tab_accueil.html.jinja:59
+#: templates/configure/tab_accueil.html.jinja:64
 msgid "Réorganiser"
 msgstr "Neu anordnen"
 
-#: templates/configure/tab_accueil.html.jinja:67
+#: templates/configure/tab_accueil.html.jinja:72
 msgid "Ambiance"
 msgstr "Stimmung"
 
-#: templates/configure/tab_accueil.html.jinja:68
+#: templates/configure/tab_accueil.html.jinja:73
 msgid "Revenir à mes réglages"
 msgstr "Zurück zu meinen Einstellungen"
 
-#: templates/configure/tab_accueil.html.jinja:77
+#: templates/configure/tab_accueil.html.jinja:82
 msgid "Choisir une disposition"
 msgstr "Layout wählen"
 
-#: templates/configure/tab_accueil.html.jinja:78
+#: templates/configure/tab_accueil.html.jinja:83
 msgid "Fermer"
 msgstr "Schließen"
 
-#: templates/configure/tab_accueil.html.jinja:82
+#: templates/configure/tab_accueil.html.jinja:87
 msgid "Tout"
 msgstr "Alle"
 
-#: templates/configure/tab_accueil.html.jinja:83
+#: templates/configure/tab_accueil.html.jinja:88
 #: templates/configure/tab_dispositions.html.jinja:36
 msgid "Formats"
 msgstr "Formate"
 
-#: templates/configure/tab_accueil.html.jinja:84
+#: templates/configure/tab_accueil.html.jinja:89
 #: templates/configure/tab_dispositions.html.jinja:36
 msgid "Thèmes"
 msgstr "Themen"
 
-#: templates/configure/tab_accueil.html.jinja:86
+#: templates/configure/tab_accueil.html.jinja:91
 msgid "Rechercher…"
 msgstr "Suchen…"
 
-#: templates/configure/tab_accueil.html.jinja:89
-#: templates/configure/tab_accueil.html.jinja:119
+#: templates/configure/tab_accueil.html.jinja:94
+#: templates/configure/tab_accueil.html.jinja:124
 msgid "Selon mes réglages"
 msgstr "Nach meinen Einstellungen"
 
-#: templates/configure/tab_accueil.html.jinja:90
-#: templates/configure/tab_accueil.html.jinja:120
+#: templates/configure/tab_accueil.html.jinja:95
+#: templates/configure/tab_accueil.html.jinja:125
 msgid "Compositions au hasard"
 msgstr "Zufällige Kompositionen"
 
-#: templates/configure/tab_accueil.html.jinja:103
+#: templates/configure/tab_accueil.html.jinja:108
 msgid "Afficher maintenant (une fois)"
 msgstr "Jetzt anzeigen (einmal)"
 
-#: templates/configure/tab_accueil.html.jinja:104
+#: templates/configure/tab_accueil.html.jinja:109
 msgid "Utiliser jusqu'à nouvel ordre"
 msgstr "Bis auf Weiteres verwenden"
 
-#: templates/configure/tab_accueil.html.jinja:115
+#: templates/configure/tab_accueil.html.jinja:120
 msgid "Tout va bien."
 msgstr "Alles in Ordnung."
 
-#: templates/configure/tab_accueil.html.jinja:116
+#: templates/configure/tab_accueil.html.jinja:121
 msgid "Régler"
 msgstr "Einstellen"
 
-#: templates/configure/tab_accueil.html.jinja:117
+#: templates/configure/tab_accueil.html.jinja:122
 msgid "Rien à afficher pour l'instant."
 msgstr "Noch nichts anzuzeigen."
 
@@ -2143,24 +2143,28 @@ msgstr "Position:"
 #: templates/configure/tab_invites.html.jinja:32
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
+#: templates/configure/tab_son.html.jinja:48
 msgid "En bas à droite"
 msgstr "Unten rechts"
 
 #: templates/configure/tab_invites.html.jinja:33
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
+#: templates/configure/tab_son.html.jinja:47
 msgid "En bas à gauche"
 msgstr "Unten links"
 
 #: templates/configure/tab_invites.html.jinja:34
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
+#: templates/configure/tab_son.html.jinja:50
 msgid "En haut à droite"
 msgstr "Oben rechts"
 
 #: templates/configure/tab_invites.html.jinja:35
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
+#: templates/configure/tab_son.html.jinja:49
 msgid "En haut à gauche"
 msgstr "Oben links"
 
@@ -2645,6 +2649,7 @@ msgid "Couleur du contour (hex)"
 msgstr "Umrissfarbe (hex)"
 
 #: templates/configure/tab_metadata.html.jinja:142
+#: templates/configure/tab_son.html.jinja:45
 msgid "Position"
 msgstr "Position"
 
@@ -2872,7 +2877,7 @@ msgstr ""
 "sofort an. Violette Rahmen fassen Fotos derselben Komposition zusammen: "
 "Sie werden gemeinsam verschoben."
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:89
+#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:90
 msgid "Le diaporama n'est pas en cours."
 msgstr "Die Diashow läuft nicht."
 
@@ -2888,7 +2893,7 @@ msgstr "Komposition (beginnt hier, in Vorbereitung)"
 msgid "Afficher maintenant"
 msgstr "Jetzt anzeigen"
 
-#: templates/configure/tab_son.html.jinja:3
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:174
 msgid "Musique du diaporama"
 msgstr "Diashow-Musik"
 
@@ -2925,10 +2930,44 @@ msgid "Y aller"
 msgstr "Hin"
 
 #: templates/configure/tab_son.html.jinja:27
+msgid "Lecteur à l'écran"
+msgstr "Player auf dem Bildschirm"
+
+#: templates/configure/tab_son.html.jinja:34
+msgid "Aucune musique en cours de lecture."
+msgstr "Es wird keine Musik abgespielt."
+
+#: templates/configure/tab_son.html.jinja:37
+msgid "Afficher le morceau sur le cadre"
+msgstr "Titel auf dem Rahmen anzeigen"
+
+#: templates/configure/tab_son.html.jinja:39
+msgid "Quelques secondes à chaque nouveau morceau"
+msgstr "Einige Sekunden bei jedem neuen Titel"
+
+#: templates/configure/tab_son.html.jinja:40
+msgid "En permanence pendant la lecture"
+msgstr "Dauerhaft während der Wiedergabe"
+
+#: templates/configure/tab_son.html.jinja:41
+msgid "Ne pas afficher"
+msgstr "Nicht anzeigen"
+
+#: templates/configure/tab_son.html.jinja:54
+msgid ""
+"Un petit encart discret (pochette, titre, artiste) pour la musique du "
+"diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la "
+"musique du diaporama se met en pause."
+msgstr ""
+"Ein kleiner, dezenter Kasten (Cover, Titel, Interpret) für die Diashow-"
+"Musik, Spotify und AirPlay. Während Spotify oder AirPlay spielt, pausiert"
+" die Diashow-Musik."
+
+#: templates/configure/tab_son.html.jinja:58
 msgid "Spotify, Deezer et autres applications"
 msgstr "Spotify, Deezer und andere Apps"
 
-#: templates/configure/tab_son.html.jinja:31
+#: templates/configure/tab_son.html.jinja:62
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -2936,7 +2975,7 @@ msgstr ""
 "Wähle in der Spotify-App „Cadre photo“ als Gerät: Die Musik kommt aus dem"
 " Bildschirm des Rahmens. Spotify-Premium-Konto erforderlich."
 
-#: templates/configure/tab_son.html.jinja:35
+#: templates/configure/tab_son.html.jinja:66
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -2944,15 +2983,15 @@ msgstr ""
 "Sende von einem iPhone, iPad oder Mac den Ton jeder beliebigen App "
 "(Deezer, Apple Music, YouTube...) an „Cadre photo“."
 
-#: templates/configure/tab_son.html.jinja:39
+#: templates/configure/tab_son.html.jinja:70
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "Um diese Funktionen zu aktivieren, führe einmal auf dem Raspberry Pi aus:"
 
-#: templates/configure/tab_son.html.jinja:48
+#: templates/configure/tab_son.html.jinja:79
 msgid "Actif"
 msgstr "Aktiv"
 
-#: templates/configure/tab_son.html.jinja:48
+#: templates/configure/tab_son.html.jinja:79
 msgid "Non installé"
 msgstr "Nicht installiert"
 
@@ -4200,32 +4239,36 @@ msgstr ""
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "Danke! Ihre Nachricht wird auf dem Bilderrahmen angezeigt (bis %(date)s)."
 
-#: web/routes_home.py:77
+#: web/routes_home.py:78
 msgid "Mes réglages"
 msgstr "Meine Einstellungen"
 
-#: web/routes_home.py:78
+#: web/routes_home.py:79
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "Stimmung „%(name)s“ angewendet."
 
-#: web/routes_home.py:87 web/routes_playlists.py:72 web/routes_slideshow.py:511
+#: web/routes_home.py:88 web/routes_playlists.py:72 web/routes_slideshow.py:511
 msgid "Disposition inconnue."
 msgstr "Unbekannte Anordnung."
 
-#: web/routes_home.py:92
+#: web/routes_home.py:93
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Layout wird vorbereitet... es erscheint in wenigen Sekunden."
 
-#: web/routes_home.py:151
+#: web/routes_home.py:154
 msgid "Musique introuvable."
 msgstr "Musik nicht gefunden."
 
-#: web/routes_home.py:155
+#: web/routes_home.py:158
 msgid "Volume invalide."
 msgstr "Ungültige Lautstärke."
 
-#: web/routes_home.py:159
+#: web/routes_home.py:162 web/routes_system.py:627
+msgid "Réglage invalide."
+msgstr "Ungültige Einstellung."
+
+#: web/routes_home.py:169
 msgid "Réglages du son enregistrés."
 msgstr "Toneinstellungen gespeichert."
 
@@ -4382,10 +4425,6 @@ msgstr "Fehler während der Wiederherstellung: %(error)s"
 #: web/routes_system.py:357
 msgid "name_key"
 msgstr "name_key"
-
-#: web/routes_system.py:627
-msgid "Réglage invalide."
-msgstr "Ungültige Einstellung."
 
 #: web/routes_system.py:629
 msgid "Réglages enregistrés."

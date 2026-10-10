@@ -30,6 +30,7 @@ from utils.dedup import remove_duplicates
 from utils.messages_manager import pop_priority, list_messages
 from utils import compositions, layout_engine
 from utils import play_queue
+from utils import now_playing
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -206,6 +207,8 @@ def play_background_music(filename):
             except (TypeError, ValueError):
                 pass
             pygame.mixer.music.play(-1) # -1 pour boucler à l'infini
+            _background_music_state["paused"] = False
+            now_playing.update("pimmich", state="playing", title=now_playing.pretty_title(filename), artist="", album="", cover=None, changed=time.time())
             logger.info(f"🎵 Musique de fond lancée : {filename}")
         except Exception as e:
             logger.error(f"❌ Erreur lors de la lecture de la musique : {e}")
@@ -1043,9 +1046,136 @@ def draw_guest_qr(screen, screen_width, screen_height, config):
         logger.debug(f"QR code invités non affiché : {e}")
 
 
+# --- Morceau en cours (Spotify, AirPlay, musique du diaporama) ---
+_background_music_state = {"paused": False, "checked": 0}
+_now_playing_cache = {"read": 0, "info": None, "key": None, "surface": None}
+NOW_PLAYING_SECONDS = 12  # mode « à chaque nouveau morceau » : durée d'affichage
+
+
+def sync_background_music():
+    """Met la musique du diaporama en pause pendant que Spotify ou AirPlay joue, puis la reprend."""
+    state = _background_music_state
+    if time.time() - state["checked"] < 1 or not pygame.mixer.get_init():
+        return
+    state["checked"] = time.time()
+    try:
+        external = now_playing.external_playing()
+        if external and not state["paused"] and pygame.mixer.music.get_busy():
+            pygame.mixer.music.pause()
+            state["paused"] = True
+            now_playing.update("pimmich", state="paused")
+        elif not external and state["paused"]:
+            pygame.mixer.music.unpause()
+            state["paused"] = False
+            now_playing.update("pimmich", state="playing")
+    except Exception as e:
+        logger.debug(f"Musique de fond : synchronisation impossible : {e}")
+
+
+def _now_playing_info():
+    cache = _now_playing_cache
+    if time.time() - cache["read"] > 0.5:  # fichier relu au plus deux fois par seconde
+        cache["read"], cache["info"] = time.time(), now_playing.current()
+    return cache["info"]
+
+
+def now_playing_visible(config):
+    """Morceau à afficher maintenant (selon le réglage), sinon None."""
+    mode = config.get("now_playing_display", "change")
+    info = _now_playing_info()
+    if mode == "off" or not info:
+        return None
+    if mode == "change" and time.time() - info.get("changed", 0) > NOW_PLAYING_SECONDS:
+        return None
+    return info
+
+
+def now_playing_key(config):
+    """Change quand le lecteur doit être redessiné (nouveau morceau, apparition, disparition)."""
+    info = now_playing_visible(config)
+    return (info.get("title"), info.get("artist"), info.get("cover")) if info else None
+
+
+def _np_font(size, bold=False):
+    path = f"/usr/share/fonts/truetype/dejavu/DejaVuSans{'-Bold' if bold else ''}.ttf"
+    return pygame.font.Font(path if os.path.exists(path) else None, size)
+
+
+def _ellipsize(font, text, max_width):
+    if font.size(text)[0] <= max_width:
+        return text
+    while text and font.size(text + "…")[0] > max_width:
+        text = text[:-1]
+    return text.rstrip() + "…"
+
+
+def _now_playing_surface(info, screen_width, screen_height):
+    cache = _now_playing_cache
+    key = (info.get("title"), info.get("artist"), info.get("cover"), screen_width, screen_height)
+    if cache["key"] == key:
+        return cache["surface"]
+    unit = max(48, int(min(screen_width, screen_height) * 0.06))  # hauteur de la pochette
+    pad = max(8, unit // 6)
+    title_font, artist_font = _np_font(max(14, int(unit * 0.32)), bold=True), _np_font(max(12, int(unit * 0.27)))
+    max_text = int(screen_width * 0.28)
+    title = title_font.render(_ellipsize(title_font, info.get("title", ""), max_text), True, (255, 255, 255))
+    artist_text = info.get("artist") or ""
+    artist = artist_font.render(_ellipsize(artist_font, artist_text, max_text), True, (215, 215, 215)) if artist_text else None
+    text_width = max(title.get_width(), artist.get_width() if artist else 0)
+    surface = pygame.Surface((unit + text_width + 3 * pad, unit + 2 * pad), pygame.SRCALPHA)
+    pygame.draw.rect(surface, (0, 0, 0, 140), surface.get_rect(), border_radius=unit // 3)
+    cover = None
+    if info.get("cover") and os.path.exists(info["cover"]):
+        try:
+            cover_img = Image.open(info["cover"]).convert("RGB")
+            cover_img = ImageOps.fit(cover_img, (unit, unit))
+            cover = pygame.image.fromstring(cover_img.tobytes(), cover_img.size, "RGB")
+        except Exception:
+            cover = None
+    if cover:
+        surface.blit(cover, (pad, pad))
+    else:  # pas de pochette : petite note de musique dessinée
+        box = pygame.Rect(pad, pad, unit, unit)
+        pygame.draw.rect(surface, (79, 70, 229, 230), box, border_radius=unit // 5)
+        cx, cy, r = box.x + unit * 0.42, box.y + unit * 0.68, max(3, unit // 9)
+        pygame.draw.circle(surface, (255, 255, 255), (int(cx), int(cy)), r)
+        pygame.draw.line(surface, (255, 255, 255), (int(cx + r - 1), int(cy)), (int(cx + r - 1), int(box.y + unit * 0.25)), max(2, unit // 22))
+        pygame.draw.line(surface, (255, 255, 255), (int(cx + r - 1), int(box.y + unit * 0.25)), (int(cx + r + unit * 0.2), int(box.y + unit * 0.33)), max(2, unit // 22))
+    x = unit + 2 * pad
+    if artist:
+        top = pad + (unit - title.get_height() - artist.get_height()) // 2
+        surface.blit(title, (x, top))
+        surface.blit(artist, (x, top + title.get_height()))
+    else:
+        surface.blit(title, (x, pad + (unit - title.get_height()) // 2))
+    cache["key"], cache["surface"] = key, surface
+    return surface
+
+
+def draw_now_playing(screen, screen_width, screen_height, config):
+    """Petit lecteur discret : pochette, titre et artiste du morceau en cours."""
+    try:
+        info = now_playing_visible(config)
+        if not info:
+            return
+        surface = _now_playing_surface(info, screen_width, screen_height)
+        margin = 15
+        corner = config.get("now_playing_position", "bottom_left")
+        x = margin if corner.endswith("left") else screen_width - surface.get_width() - margin
+        y = margin if corner.startswith("top") else screen_height - surface.get_height() - margin
+        qr = _guest_qr_cache.get("surface")
+        if config.get("show_guest_qr", True) and qr is not None and corner == config.get("guest_qr_position", "bottom_right"):
+            y += (qr.get_height() + margin) * (1 if corner.startswith("top") else -1)  # au-dessus (ou en dessous) du QR code
+        screen.blit(surface, (x, y))
+    except Exception as e:
+        logger.debug(f"Lecteur non affiché : {e}")
+
+
 # New function to draw the overlay elements (clock, date, weather)
 def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata=None):
     draw_guest_qr(screen, screen_width, screen_height, config)
+    sync_background_music()
+    draw_now_playing(screen, screen_width, screen_height, config)
     now = datetime.now()
     text_color = parse_color(config.get("clock_color", "#FFFFFF"))
     outline_color = parse_color(config.get("clock_outline_color", "#000000"))
@@ -1677,6 +1807,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
             # Affichage statique : blit une fois et attendre la durée
             draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata)
             pygame.display.flip()
+            shown_music_key = now_playing_key(config)
             # Boucle d'attente pour rester réactif aux signaux
             start_sleep = time.time()
             while time.time() - start_sleep < display_duration:
@@ -1711,7 +1842,11 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                 config = load_config() # Rafraîchir la config ici aussi
                 ticks = pygame.time.get_ticks()
                 p_count = get_today_postcard_count() if config.get("display_telegram_notification_overlay", True) else 0
-                if was_paused or p_count > 0:
+                sync_background_music()
+                music_key = now_playing_key(config)  # nouveau morceau, ou fin de son affichage : on redessine
+                music_changed = music_key != shown_music_key
+                shown_music_key = music_key
+                if was_paused or p_count > 0 or music_changed:
                     screen.blit(pygame_image_base, (0, 0))
                     draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata)
                     if p_count > 0 and (ticks // 500) % 2 != 0:
@@ -2129,6 +2264,7 @@ def start_slideshow():
         custom_playlist = None
         playlist_name = None
         custom_layout = None  # disposition propre à la playlist (None : comme le diaporama)
+        now_playing.update("pimmich", state="stopped")  # état laissé par une exécution précédente
         # Musique de fond du diaporama principal (une playlist peut avoir la sienne)
         if not os.path.exists(CUSTOM_PLAYLIST_FILE) and config.get("background_music"):
             _current_background_music = config.get("background_music")
@@ -2541,6 +2677,7 @@ def start_slideshow():
                 if pygame.mixer.get_init() and pygame.mixer.music.get_busy():
                     pygame.mixer.music.fadeout(2000)
                 _current_background_music = None
+                now_playing.update("pimmich", state="stopped")
                 is_custom_run = False # Le prochain tour de boucle while True construira la playlist par défaut.
                 update_status_file({"is_custom": False})
                 playlist = [] # Vider la playlist pour forcer la reconstruction.

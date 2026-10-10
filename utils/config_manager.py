@@ -46,6 +46,8 @@ def create_default_config():
         "unique_enabled": True,
         "background_music": "",
         "music_volume": 80,
+        "now_playing_display": "change",  # lecteur à l'écran : off, change (à chaque nouveau morceau), always
+        "now_playing_position": "bottom_left",
         "setup_dismissed": False,
         "ambiance": None,
         "ambiance_backup": {},

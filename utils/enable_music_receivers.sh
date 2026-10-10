@@ -6,6 +6,7 @@
 set -euo pipefail
 NAME="${1:-Cadre photo}"
 UNIT_DIR="$HOME/.config/systemd/user"
+PIMMICH_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "=== Installation de librespot (Spotify Connect) et shairport-sync (AirPlay) ==="
 if ! command -v librespot >/dev/null; then
@@ -24,7 +25,8 @@ Description=Pimmich - enceinte Spotify Connect
 After=pipewire-pulse.service
 
 [Service]
-ExecStart=/usr/bin/librespot --name "$NAME" --backend pulseaudio --bitrate 160 --initial-volume 70 --device-type speaker
+# --onevent : le morceau en cours (titre, artiste, pochette) est transmis au cadre pour l'affichage
+ExecStart=/usr/bin/librespot --name "$NAME" --backend pulseaudio --bitrate 160 --initial-volume 70 --device-type speaker --onevent "$PIMMICH_DIR/utils/librespot_event.sh"
 Restart=on-failure
 
 [Install]
@@ -37,13 +39,29 @@ After=pipewire-pulse.service
 
 [Service]
 # Port 5100 : le port par défaut d'AirPlay (5000) est celui de Pimmich
-ExecStart=/usr/bin/shairport-sync -a "$NAME" -p 5100 -o pa
+# -M -g : métadonnées et pochettes dans un tube, lues par pimmich-airplay-meta
+ExecStart=/usr/bin/shairport-sync -a "$NAME" -p 5100 -M -g --metadata-pipename=/tmp/shairport-sync-metadata -o pa
 Restart=on-failure
 
 [Install]
 WantedBy=default.target
 UNIT
+cat > "$UNIT_DIR/pimmich-airplay-meta.service" <<UNIT
+[Unit]
+Description=Pimmich - morceau en cours (AirPlay)
+After=pimmich-airplay.service
+
+[Service]
+WorkingDirectory=$PIMMICH_DIR
+ExecStart=$PIMMICH_DIR/venv/bin/python -m utils.now_playing airplay
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+UNIT
 systemctl --user daemon-reload
-systemctl --user enable --now pimmich-spotify.service pimmich-airplay.service
+systemctl --user enable pimmich-spotify.service pimmich-airplay.service pimmich-airplay-meta.service
+systemctl --user restart pimmich-spotify.service pimmich-airplay.service pimmich-airplay-meta.service  # nouvelles options prises en compte
 sudo loginctl enable-linger "$USER"  # les services démarrent avec le cadre, même sans session ouverte
 echo "✅ « $NAME » est disponible comme enceinte dans Spotify (Premium) et en AirPlay."
