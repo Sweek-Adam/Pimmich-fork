@@ -52,6 +52,38 @@ AMBIANCES = {
         "settings": lambda: {"layout_override": "unique", "display_duration": 20, "transition_enabled": True,
                              "transition_type": "fade", "transition_duration": 2.5, "pan_zoom_enabled": True},
     },
+    # Fêtes : thèmes de saison utilisables toute l'année quand l'ambiance est choisie
+    "halloween": {
+        "label": N_("Halloween"), "icon": "fa-ghost",
+        "description": N_("Citrouilles et chauves-souris ; les messages s'affichent dans de petits fantômes."),
+        "settings": lambda: {"layout_override": "auto", "unique_enabled": True, "compositions_enabled": True,
+                             "compositions_disabled": _only("halloween", "automne"), "compositions_seasonal": False,
+                             "compositions_every": 2, "compositions_include_messages": True, "display_duration": 10,
+                             "show_guest_qr": True, "guest_messages_enabled": True},
+    },
+    "noel": {
+        "label": N_("Noël"), "icon": "fa-gifts",
+        "description": N_("Boules de Noël, neige et paysages d'hiver, avec les messages de la famille."),
+        "settings": lambda: {"layout_override": "auto", "unique_enabled": True, "compositions_enabled": True,
+                             "compositions_disabled": _only("noel", "hiver", "polaroids"), "compositions_seasonal": False,
+                             "compositions_every": 2, "compositions_include_messages": True, "display_duration": 10,
+                             "transition_enabled": True, "transition_type": "fade", "show_guest_qr": True, "guest_messages_enabled": True},
+    },
+    "nouvel_an": {
+        "label": N_("Nouvel An"), "icon": "fa-star",
+        "description": N_("Feux d'artifice et confettis pour souhaiter la bonne année ; rythme de fête."),
+        "settings": lambda: {"layout_override": "auto", "unique_enabled": True, "compositions_enabled": True,
+                             "compositions_disabled": _only("nouvel_an", "mosaique", "polaroids", "annees80"), "compositions_seasonal": False,
+                             "compositions_every": 2, "compositions_include_messages": True, "display_duration": 8,
+                             "show_guest_qr": True, "guest_messages_enabled": True},
+    },
+    "paques": {
+        "label": N_("Pâques"), "icon": "fa-egg",
+        "description": N_("Œufs, herbe fraîche et fleurs de printemps."),
+        "settings": lambda: {"layout_override": "auto", "unique_enabled": True, "compositions_enabled": True,
+                             "compositions_disabled": _only("paques", "printemps"), "compositions_seasonal": False,
+                             "compositions_every": 3, "compositions_include_messages": True, "display_duration": 10},
+    },
 }
 MINE = "perso"
 

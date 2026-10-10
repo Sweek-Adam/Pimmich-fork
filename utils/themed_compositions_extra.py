@@ -1,8 +1,9 @@
 """
 Compositions à thème, suite : Hokusai, mont Fuji, espace, années 80, années 70, printemps, automne, hiver,
-anniversaire, cinéma, bande dessinée, carnet de voyage, album ancien.
+anniversaire, cinéma, bande dessinée, carnet de voyage, album ancien, nouvel an.
 """
 import math
+from datetime import date
 
 from PIL import Image, ImageDraw, ImageFilter
 
@@ -482,6 +483,54 @@ def old_album(photos, message, W, H, rng):
     return canvas.convert("RGB")
 
 
+def _firework(canvas, cx, cy, radius, color, rng):
+    """Bouquet de feu d'artifice : rayons scintillants et halo."""
+    layer = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(layer)
+    rays = rng.randint(16, 26)
+    for k in range(rays):
+        a = k * 2 * math.pi / rays + rng.uniform(-0.08, 0.08)
+        r0, r1 = radius * rng.uniform(0.15, 0.3), radius * rng.uniform(0.75, 1.0)
+        draw.line([(cx + r0 * math.cos(a), cy + r0 * math.sin(a)), (cx + r1 * math.cos(a), cy + r1 * math.sin(a))],
+                  fill=color + (230,), width=max(2, int(radius * 0.025)))
+        tip = max(2, radius * 0.035)
+        x, y = cx + r1 * math.cos(a), cy + r1 * math.sin(a)
+        draw.ellipse([x - tip, y - tip, x + tip, y + tip], fill=(255, 250, 220, 255))
+    glow = layer.filter(ImageFilter.GaussianBlur(radius * 0.08))
+    canvas.alpha_composite(glow)
+    canvas.alpha_composite(layer)
+
+
+def new_year_label(today=None):
+    """« Bonne année 2027 » : à partir de l'été, l'année qui arrive ; en début d'année, l'année en cours."""
+    today = today or date.today()
+    return f"{_t(N_('Bonne année'))} {today.year + 1 if today.month >= 7 else today.year}"
+
+
+def new_year(photos, message, W, H, rng):
+    canvas = _vignette(_gradient(W, H, (10, 14, 40), (34, 20, 70)), 0.5).convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+    for _ in range(160):  # étoiles
+        x, y, r = rng.uniform(0, W), rng.uniform(0, H * 0.75), rng.uniform(0.6, 2.2)
+        draw.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, rng.randint(90, 220)))
+    palette = [(255, 205, 80), (255, 110, 160), (110, 210, 255), (180, 140, 255), (255, 255, 255)]
+    for fx, fy, fr in ((0.12, 0.2, 0.17), (0.86, 0.17, 0.2), (0.62, 0.1, 0.11), (0.3, 0.08, 0.09)):
+        _firework(canvas, W * fx + rng.uniform(-W * 0.02, W * 0.02), H * fy, H * fr, rng.choice(palette), rng)
+    for _ in range(170):  # confettis dorés et serpentins
+        x, y, s = rng.uniform(0, W), rng.uniform(H * 0.55, H), H * rng.uniform(0.004, 0.011)
+        color = rng.choice([(255, 210, 90), (240, 180, 60), (255, 120, 170), (120, 210, 255), (255, 255, 255)])
+        a = rng.uniform(0, math.pi)
+        dx, dy, ex, ey = s * math.cos(a), s * math.sin(a), -s * 0.45 * math.sin(a), s * 0.45 * math.cos(a)
+        draw.polygon([(x - dx - ex, y - dy - ey), (x + dx - ex, y + dy - ey), (x + dx + ex, y + dy + ey), (x - dx + ex, y - dy + ey)], fill=color)
+    size = _photo_size(W, H, len(photos), 0.9)
+    elements = [base.framed(base.framed(base.print_photo(p, size, size * 0.78), max(4, size // 45), (230, 190, 90)).convert("RGB"),
+                            max(8, size // 20), (250, 246, 236)) for p in photos]
+    _place_row(canvas, elements, H * 0.56, rng, 0.78, 0.05, 7)
+    _title(canvas, new_year_label(), HAND2, int(H * 0.13), (255, 214, 110), (W / 2, H * 0.14), glow=(255, 170, 40), max_width=W * 0.6)
+    _message_note(canvas, message, rng, "fiche", (0.87, 0.82), 0.19)
+    return canvas.convert("RGB")
+
+
 THEMES = {
     "hokusai": (N_("Hokusai – La Grande Vague"), 2, 3, True, hokusai),
     "fuji": (N_("Mont Fuji"), 3, 4, True, fuji),
@@ -496,4 +545,5 @@ THEMES = {
     "bd": (N_("Bande dessinée"), 3, 4, True, comic),
     "carnet": (N_("Carnet de voyage"), 3, 4, True, travel_map),
     "album": (N_("Album ancien"), 3, 4, True, old_album),
+    "nouvel_an": (N_("Nouvel An"), 3, 4, True, new_year),
 }

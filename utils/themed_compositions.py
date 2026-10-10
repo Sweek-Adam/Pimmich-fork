@@ -47,6 +47,8 @@ def in_season(theme, today=None):
         return (today.month == 10 and today.day >= 15) or (today.month == 11 and today.day <= 2)
     if theme == "paques":
         return abs((today - easter(today.year)).days) <= 14
+    if theme == "nouvel_an":
+        return (today.month == 12 and today.day >= 26) or (today.month == 1 and today.day <= 7)
     md = (today.month, today.day)
     if theme == "printemps":
         return (3, 20) <= md <= (6, 20)
@@ -57,7 +59,7 @@ def in_season(theme, today=None):
     return True
 
 
-SEASONAL = {"noel", "halloween", "paques", "printemps", "automne", "hiver"}
+SEASONAL = {"noel", "halloween", "paques", "printemps", "automne", "hiver", "nouvel_an"}
 
 
 # --- Outils de dessin ---

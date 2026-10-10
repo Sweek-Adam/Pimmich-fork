@@ -97,3 +97,27 @@ def test_new_home_layout_is_rendered(admin_client):
     html = admin_client.get("/configure").get_data(as_text=True)
     for marker in ('id="tab-accueil"', 'id="app-bottomnav"', 'id="settings-search"', 'id="layout-picker"', 'id="tab-son"', 'id="tab-invites"'):
         assert marker in html
+
+
+def test_holiday_ambiances_work_all_year():
+    from datetime import date
+    from utils import layout_engine
+    for key, theme in (("halloween", "halloween"), ("noel", "noel"), ("nouvel_an", "nouvel_an"), ("paques", "paques")):
+        config = ambiances.apply({"compositions_seasonal": True}, key)
+        plan = layout_engine.resolve(config, today=date(2026, 6, 15))  # en plein été
+        assert theme in plan.formats, key
+    restored = ambiances.apply(ambiances.apply({"compositions_seasonal": True}, "noel"), ambiances.MINE)
+    assert restored["compositions_seasonal"] is True
+
+
+def test_new_year_layout():
+    from datetime import date
+    import random
+    from PIL import Image
+    from utils import compositions, themed_compositions as t
+    from utils.themed_compositions_extra import new_year, new_year_label
+    assert new_year_label(date(2026, 12, 31)).endswith("2027") and new_year_label(date(2027, 1, 3)).endswith("2027")
+    assert t.in_season("nouvel_an", date(2026, 12, 28)) and not t.in_season("nouvel_an", date(2026, 3, 1))
+    assert "nouvel_an" in compositions.FORMATS and "nouvel_an" in compositions.SEASONAL
+    image = new_year([Image.new("RGB", (120, 90), c) for c in ("red", "green", "blue")], None, 640, 360, random.Random(1))
+    assert image.size == (640, 360)

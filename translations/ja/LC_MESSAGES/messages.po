@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 20:48+0200\n"
+"POT-Creation-Date: 2026-10-10 20:52+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -2830,7 +2830,7 @@ msgstr ""
 "                            Wi-Fi規制）"
 
 #: templates/configure/tab_network.html.jinja:33
-#: utils/themed_compositions.py:630
+#: utils/themed_compositions.py:632
 msgid "France"
 msgstr "フランス"
 
@@ -3801,6 +3801,44 @@ msgstr "Zen"
 msgid "Une photo à la fois, lente, avec un léger mouvement."
 msgstr "1枚ずつ、ゆっくりと、かすかな動きを添えて。"
 
+#: utils/ambiances.py:57 utils/themed_compositions.py:627
+msgid "Halloween"
+msgstr "ハロウィン"
+
+#: utils/ambiances.py:58
+msgid ""
+"Citrouilles et chauves-souris ; les messages s'affichent dans de petits "
+"fantômes."
+msgstr "かぼちゃとコウモリ。メッセージは小さなおばけの中に表示されます。"
+
+#: utils/ambiances.py:65 utils/themed_compositions.py:626
+msgid "Noël"
+msgstr "クリスマス"
+
+#: utils/ambiances.py:66
+msgid ""
+"Boules de Noël, neige et paysages d'hiver, avec les messages de la "
+"famille."
+msgstr "クリスマスオーナメント、雪、冬の景色と家族からのメッセージ。"
+
+#: utils/ambiances.py:73 utils/themed_compositions_extra.py:548
+msgid "Nouvel An"
+msgstr "お正月"
+
+#: utils/ambiances.py:74
+msgid ""
+"Feux d'artifice et confettis pour souhaiter la bonne année ; rythme de "
+"fête."
+msgstr "花火と紙吹雪で新年をお祝い。パーティーのテンポで。"
+
+#: utils/ambiances.py:81 utils/themed_compositions.py:628
+msgid "Pâques"
+msgstr "イースター"
+
+#: utils/ambiances.py:82
+msgid "Œufs, herbe fraîche et fleurs de printemps."
+msgstr "たまご、若草、春の花。"
+
 #: utils/auth.py:24
 msgid "Action réservée aux administrateurs."
 msgstr "管理者専用の操作です。"
@@ -4003,163 +4041,155 @@ msgstr "マンガの吹き出し"
 msgid "Minimal"
 msgstr "ミニマル"
 
-#: utils/themed_compositions.py:222
+#: utils/themed_compositions.py:224
 msgid "Joyeux Noël"
 msgstr "メリークリスマス"
 
-#: utils/themed_compositions.py:272
+#: utils/themed_compositions.py:274
 msgid "Joyeux Halloween"
 msgstr "ハッピーハロウィン"
 
-#: utils/themed_compositions.py:403
+#: utils/themed_compositions.py:405
 msgid "Joyeuses Pâques"
 msgstr "ハッピーイースター"
 
-#: utils/themed_compositions.py:442
+#: utils/themed_compositions.py:444
 msgid "Bonnes vacances !"
 msgstr "楽しい休暇を！"
 
-#: utils/themed_compositions.py:462 utils/themed_compositions.py:628
+#: utils/themed_compositions.py:464 utils/themed_compositions.py:630
 msgid "Islande"
 msgstr "アイスランド"
 
-#: utils/themed_compositions.py:497 utils/themed_compositions.py:629
+#: utils/themed_compositions.py:499 utils/themed_compositions.py:631
 msgid "Japon"
 msgstr "日本"
 
-#: utils/themed_compositions.py:536
+#: utils/themed_compositions.py:538
 msgid "Vive la France"
 msgstr "フランス万歳"
 
-#: utils/themed_compositions.py:558
+#: utils/themed_compositions.py:560
 msgid "La montagne"
 msgstr "山"
 
-#: utils/themed_compositions.py:589
+#: utils/themed_compositions.py:591
 msgid "La mer"
 msgstr "海"
 
-#: utils/themed_compositions.py:617
+#: utils/themed_compositions.py:619
 msgid "Vive la plage !"
 msgstr "ビーチ最高！"
 
-#: utils/themed_compositions.py:624
-msgid "Noël"
-msgstr "クリスマス"
-
-#: utils/themed_compositions.py:625
-msgid "Halloween"
-msgstr "ハロウィン"
-
-#: utils/themed_compositions.py:626
-msgid "Pâques"
-msgstr "イースター"
-
-#: utils/themed_compositions.py:627
+#: utils/themed_compositions.py:629
 msgid "Vacances"
 msgstr "休暇"
 
-#: utils/themed_compositions.py:631
+#: utils/themed_compositions.py:633
 msgid "Montagne"
 msgstr "山"
 
-#: utils/themed_compositions.py:632
+#: utils/themed_compositions.py:634
 msgid "Mer"
 msgstr "海"
 
-#: utils/themed_compositions.py:633
+#: utils/themed_compositions.py:635
 msgid "Plage"
 msgstr "ビーチ"
 
-#: utils/themed_compositions_extra.py:93
+#: utils/themed_compositions_extra.py:94
 msgid "La Grande Vague"
 msgstr "神奈川沖浪裏"
 
-#: utils/themed_compositions_extra.py:154
-#: utils/themed_compositions_extra.py:487
+#: utils/themed_compositions_extra.py:155
+#: utils/themed_compositions_extra.py:536
 msgid "Mont Fuji"
 msgstr "富士山"
 
-#: utils/themed_compositions_extra.py:185
+#: utils/themed_compositions_extra.py:186
 msgid "Dans les étoiles"
 msgstr "星の中で"
 
-#: utils/themed_compositions_extra.py:218
-#: utils/themed_compositions_extra.py:489
+#: utils/themed_compositions_extra.py:219
+#: utils/themed_compositions_extra.py:538
 msgid "Années 80"
 msgstr "80年代"
 
-#: utils/themed_compositions_extra.py:245
-#: utils/themed_compositions_extra.py:490
+#: utils/themed_compositions_extra.py:246
+#: utils/themed_compositions_extra.py:539
 msgid "Années 70"
 msgstr "70年代"
 
-#: utils/themed_compositions_extra.py:272
+#: utils/themed_compositions_extra.py:273
 msgid "Le printemps"
 msgstr "春"
 
-#: utils/themed_compositions_extra.py:301
+#: utils/themed_compositions_extra.py:302
 msgid "L'automne"
 msgstr "秋"
 
-#: utils/themed_compositions_extra.py:328
+#: utils/themed_compositions_extra.py:329
 msgid "L'hiver"
 msgstr "冬"
 
-#: utils/themed_compositions_extra.py:352
+#: utils/themed_compositions_extra.py:353
 msgid "Joyeux anniversaire !"
 msgstr "お誕生日おめでとう！"
 
-#: utils/themed_compositions_extra.py:385
+#: utils/themed_compositions_extra.py:386
 msgid "À l'affiche"
 msgstr "上映中"
 
-#: utils/themed_compositions_extra.py:413
+#: utils/themed_compositions_extra.py:414
 msgid "WOUAH !"
 msgstr "ワオ！"
 
-#: utils/themed_compositions_extra.py:454
-#: utils/themed_compositions_extra.py:497
+#: utils/themed_compositions_extra.py:455
+#: utils/themed_compositions_extra.py:546
 msgid "Carnet de voyage"
 msgstr "旅の手帳"
 
-#: utils/themed_compositions_extra.py:479
+#: utils/themed_compositions_extra.py:480
 msgid "Souvenir"
 msgstr "思い出"
 
-#: utils/themed_compositions_extra.py:486
+#: utils/themed_compositions_extra.py:507
+msgid "Bonne année"
+msgstr "Happy New Year"
+
+#: utils/themed_compositions_extra.py:535
 msgid "Hokusai – La Grande Vague"
 msgstr "北斎 – 神奈川沖浪裏"
 
-#: utils/themed_compositions_extra.py:488
+#: utils/themed_compositions_extra.py:537
 msgid "Espace"
 msgstr "宇宙"
 
-#: utils/themed_compositions_extra.py:491
+#: utils/themed_compositions_extra.py:540
 msgid "Printemps"
 msgstr "春"
 
-#: utils/themed_compositions_extra.py:492
+#: utils/themed_compositions_extra.py:541
 msgid "Automne"
 msgstr "秋"
 
-#: utils/themed_compositions_extra.py:493
+#: utils/themed_compositions_extra.py:542
 msgid "Hiver"
 msgstr "冬"
 
-#: utils/themed_compositions_extra.py:494
+#: utils/themed_compositions_extra.py:543
 msgid "Anniversaire"
 msgstr "誕生日"
 
-#: utils/themed_compositions_extra.py:495
+#: utils/themed_compositions_extra.py:544
 msgid "Cinéma"
 msgstr "映画"
 
-#: utils/themed_compositions_extra.py:496
+#: utils/themed_compositions_extra.py:545
 msgid "Bande dessinée"
 msgstr "コミック"
 
-#: utils/themed_compositions_extra.py:498
+#: utils/themed_compositions_extra.py:547
 msgid "Album ancien"
 msgstr "古いアルバム"
 

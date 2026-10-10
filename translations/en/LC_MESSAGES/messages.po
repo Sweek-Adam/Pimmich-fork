@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 20:48+0200\n"
+"POT-Creation-Date: 2026-10-10 20:52+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -2897,7 +2897,7 @@ msgstr ""
 "                            Wi-Fi regulations)"
 
 #: templates/configure/tab_network.html.jinja:33
-#: utils/themed_compositions.py:630
+#: utils/themed_compositions.py:632
 msgid "France"
 msgstr "France"
 
@@ -3898,6 +3898,46 @@ msgstr "Zen"
 msgid "Une photo à la fois, lente, avec un léger mouvement."
 msgstr "One photo at a time, slow, with gentle motion."
 
+#: utils/ambiances.py:57 utils/themed_compositions.py:627
+msgid "Halloween"
+msgstr "Halloween"
+
+#: utils/ambiances.py:58
+msgid ""
+"Citrouilles et chauves-souris ; les messages s'affichent dans de petits "
+"fantômes."
+msgstr "Pumpkins and bats; messages appear inside little ghosts."
+
+#: utils/ambiances.py:65 utils/themed_compositions.py:626
+msgid "Noël"
+msgstr "Christmas"
+
+#: utils/ambiances.py:66
+msgid ""
+"Boules de Noël, neige et paysages d'hiver, avec les messages de la "
+"famille."
+msgstr ""
+"Christmas baubles, snow and winter landscapes, with messages from the "
+"family."
+
+#: utils/ambiances.py:73 utils/themed_compositions_extra.py:548
+msgid "Nouvel An"
+msgstr "New Year"
+
+#: utils/ambiances.py:74
+msgid ""
+"Feux d'artifice et confettis pour souhaiter la bonne année ; rythme de "
+"fête."
+msgstr "Fireworks and confetti to wish a happy new year; party pace."
+
+#: utils/ambiances.py:81 utils/themed_compositions.py:628
+msgid "Pâques"
+msgstr "Easter"
+
+#: utils/ambiances.py:82
+msgid "Œufs, herbe fraîche et fleurs de printemps."
+msgstr "Eggs, fresh grass and spring flowers."
+
 #: utils/auth.py:24
 msgid "Action réservée aux administrateurs."
 msgstr "Action reserved for administrators."
@@ -4104,163 +4144,155 @@ msgstr "Comic bubble"
 msgid "Minimal"
 msgstr "Minimal"
 
-#: utils/themed_compositions.py:222
+#: utils/themed_compositions.py:224
 msgid "Joyeux Noël"
 msgstr "Merry Christmas"
 
-#: utils/themed_compositions.py:272
+#: utils/themed_compositions.py:274
 msgid "Joyeux Halloween"
 msgstr "Happy Halloween"
 
-#: utils/themed_compositions.py:403
+#: utils/themed_compositions.py:405
 msgid "Joyeuses Pâques"
 msgstr "Happy Easter"
 
-#: utils/themed_compositions.py:442
+#: utils/themed_compositions.py:444
 msgid "Bonnes vacances !"
 msgstr "Happy holidays!"
 
-#: utils/themed_compositions.py:462 utils/themed_compositions.py:628
+#: utils/themed_compositions.py:464 utils/themed_compositions.py:630
 msgid "Islande"
 msgstr "Iceland"
 
-#: utils/themed_compositions.py:497 utils/themed_compositions.py:629
+#: utils/themed_compositions.py:499 utils/themed_compositions.py:631
 msgid "Japon"
 msgstr "Japan"
 
-#: utils/themed_compositions.py:536
+#: utils/themed_compositions.py:538
 msgid "Vive la France"
 msgstr "Vive la France"
 
-#: utils/themed_compositions.py:558
+#: utils/themed_compositions.py:560
 msgid "La montagne"
 msgstr "The mountains"
 
-#: utils/themed_compositions.py:589
+#: utils/themed_compositions.py:591
 msgid "La mer"
 msgstr "The sea"
 
-#: utils/themed_compositions.py:617
+#: utils/themed_compositions.py:619
 msgid "Vive la plage !"
 msgstr "Beach life!"
 
-#: utils/themed_compositions.py:624
-msgid "Noël"
-msgstr "Christmas"
-
-#: utils/themed_compositions.py:625
-msgid "Halloween"
-msgstr "Halloween"
-
-#: utils/themed_compositions.py:626
-msgid "Pâques"
-msgstr "Easter"
-
-#: utils/themed_compositions.py:627
+#: utils/themed_compositions.py:629
 msgid "Vacances"
 msgstr "Holidays"
 
-#: utils/themed_compositions.py:631
+#: utils/themed_compositions.py:633
 msgid "Montagne"
 msgstr "Mountains"
 
-#: utils/themed_compositions.py:632
+#: utils/themed_compositions.py:634
 msgid "Mer"
 msgstr "Sea"
 
-#: utils/themed_compositions.py:633
+#: utils/themed_compositions.py:635
 msgid "Plage"
 msgstr "Beach"
 
-#: utils/themed_compositions_extra.py:93
+#: utils/themed_compositions_extra.py:94
 msgid "La Grande Vague"
 msgstr "The Great Wave"
 
-#: utils/themed_compositions_extra.py:154
-#: utils/themed_compositions_extra.py:487
+#: utils/themed_compositions_extra.py:155
+#: utils/themed_compositions_extra.py:536
 msgid "Mont Fuji"
 msgstr "Mount Fuji"
 
-#: utils/themed_compositions_extra.py:185
+#: utils/themed_compositions_extra.py:186
 msgid "Dans les étoiles"
 msgstr "Among the stars"
 
-#: utils/themed_compositions_extra.py:218
-#: utils/themed_compositions_extra.py:489
+#: utils/themed_compositions_extra.py:219
+#: utils/themed_compositions_extra.py:538
 msgid "Années 80"
 msgstr "The 80s"
 
-#: utils/themed_compositions_extra.py:245
-#: utils/themed_compositions_extra.py:490
+#: utils/themed_compositions_extra.py:246
+#: utils/themed_compositions_extra.py:539
 msgid "Années 70"
 msgstr "The 70s"
 
-#: utils/themed_compositions_extra.py:272
+#: utils/themed_compositions_extra.py:273
 msgid "Le printemps"
 msgstr "Springtime"
 
-#: utils/themed_compositions_extra.py:301
+#: utils/themed_compositions_extra.py:302
 msgid "L'automne"
 msgstr "Autumn"
 
-#: utils/themed_compositions_extra.py:328
+#: utils/themed_compositions_extra.py:329
 msgid "L'hiver"
 msgstr "Winter"
 
-#: utils/themed_compositions_extra.py:352
+#: utils/themed_compositions_extra.py:353
 msgid "Joyeux anniversaire !"
 msgstr "Happy birthday!"
 
-#: utils/themed_compositions_extra.py:385
+#: utils/themed_compositions_extra.py:386
 msgid "À l'affiche"
 msgstr "Now showing"
 
-#: utils/themed_compositions_extra.py:413
+#: utils/themed_compositions_extra.py:414
 msgid "WOUAH !"
 msgstr "WOW!"
 
-#: utils/themed_compositions_extra.py:454
-#: utils/themed_compositions_extra.py:497
+#: utils/themed_compositions_extra.py:455
+#: utils/themed_compositions_extra.py:546
 msgid "Carnet de voyage"
 msgstr "Travel journal"
 
-#: utils/themed_compositions_extra.py:479
+#: utils/themed_compositions_extra.py:480
 msgid "Souvenir"
 msgstr "Memories"
 
-#: utils/themed_compositions_extra.py:486
+#: utils/themed_compositions_extra.py:507
+msgid "Bonne année"
+msgstr "Happy New Year"
+
+#: utils/themed_compositions_extra.py:535
 msgid "Hokusai – La Grande Vague"
 msgstr "Hokusai – The Great Wave"
 
-#: utils/themed_compositions_extra.py:488
+#: utils/themed_compositions_extra.py:537
 msgid "Espace"
 msgstr "Space"
 
-#: utils/themed_compositions_extra.py:491
+#: utils/themed_compositions_extra.py:540
 msgid "Printemps"
 msgstr "Spring"
 
-#: utils/themed_compositions_extra.py:492
+#: utils/themed_compositions_extra.py:541
 msgid "Automne"
 msgstr "Autumn"
 
-#: utils/themed_compositions_extra.py:493
+#: utils/themed_compositions_extra.py:542
 msgid "Hiver"
 msgstr "Winter"
 
-#: utils/themed_compositions_extra.py:494
+#: utils/themed_compositions_extra.py:543
 msgid "Anniversaire"
 msgstr "Birthday"
 
-#: utils/themed_compositions_extra.py:495
+#: utils/themed_compositions_extra.py:544
 msgid "Cinéma"
 msgstr "Cinema"
 
-#: utils/themed_compositions_extra.py:496
+#: utils/themed_compositions_extra.py:545
 msgid "Bande dessinée"
 msgstr "Comic book"
 
-#: utils/themed_compositions_extra.py:498
+#: utils/themed_compositions_extra.py:547
 msgid "Album ancien"
 msgstr "Old album"
 
