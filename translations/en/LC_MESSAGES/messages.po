@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:38+0200\n"
+"POT-Creation-Date: 2026-10-10 23:45+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -227,7 +227,7 @@ msgstr "Favorites"
 
 #: templates/configure.html.jinja:123
 #: templates/configure/tab_apercu.html.jinja:14
-#: templates/configure/tab_sources.html.jinja:102
+#: templates/configure/tab_sources.html.jinja:106
 msgid "Messages"
 msgstr "Messages"
 
@@ -331,7 +331,7 @@ msgstr "Password"
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:189 templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:193 templates/login.html.jinja:69
 msgid "Afficher/Cacher le mot de passe"
 msgstr "Show/Hide Password"
 
@@ -866,6 +866,7 @@ msgid "Aucune playlist trouvée."
 msgstr "No playlists found."
 
 #: templates/configure/_son_spotify.html.jinja:103
+#: templates/configure/tab_sources.html.jinja:322
 msgid "Compte :"
 msgstr "Account:"
 
@@ -4035,31 +4036,31 @@ msgid "Mise à jour automatique (Immich)"
 msgstr "Automatic update (Immich)"
 
 #: templates/configure/tab_sources.html.jinja:47
-#: templates/configure/tab_sources.html.jinja:206
-#: templates/configure/tab_sources.html.jinja:298
+#: templates/configure/tab_sources.html.jinja:210
+#: templates/configure/tab_sources.html.jinja:302
 msgid "Activer la mise à jour automatique"
 msgstr "Enable automatic update"
 
 #: templates/configure/tab_sources.html.jinja:49
-#: templates/configure/tab_sources.html.jinja:208
+#: templates/configure/tab_sources.html.jinja:212
 msgid "Intervalle de mise à jour (heures):"
 msgstr "Update Interval (min):"
 
 #: templates/configure/tab_sources.html.jinja:54
-#: templates/configure/tab_sources.html.jinja:213
-#: templates/configure/tab_sources.html.jinja:306
+#: templates/configure/tab_sources.html.jinja:217
+#: templates/configure/tab_sources.html.jinja:310
 msgid "État du service :"
 msgstr "Service status:"
 
 #: templates/configure/tab_sources.html.jinja:56
-#: templates/configure/tab_sources.html.jinja:215
-#: templates/configure/tab_sources.html.jinja:308
+#: templates/configure/tab_sources.html.jinja:219
+#: templates/configure/tab_sources.html.jinja:312
 msgid "Dernière mise à jour :"
 msgstr "Last updated:"
 
 #: templates/configure/tab_sources.html.jinja:58
-#: templates/configure/tab_sources.html.jinja:217
-#: templates/configure/tab_sources.html.jinja:310
+#: templates/configure/tab_sources.html.jinja:221
+#: templates/configure/tab_sources.html.jinja:314
 msgid "Prochaine mise à jour :"
 msgstr "Next update:"
 
@@ -4104,11 +4105,15 @@ msgstr "Photos received via Telegram"
 msgid "Photos des invités (validées)"
 msgstr "Guest photos (approved)"
 
-#: templates/configure/tab_sources.html.jinja:107
+#: templates/configure/tab_sources.html.jinja:102
+msgid "Autres clouds (Dropbox, OneDrive...)"
+msgstr "Other clouds (Dropbox, OneDrive...)"
+
+#: templates/configure/tab_sources.html.jinja:111
 msgid "Masquer les photos en double entre les sources"
 msgstr "Hide duplicate photos across sources"
 
-#: templates/configure/tab_sources.html.jinja:109
+#: templates/configure/tab_sources.html.jinja:113
 msgid ""
 "Une même photo reçue par plusieurs sources (ex. Google Drive et Telegram)"
 " n'est affichée qu'une fois, de préférence celle mise en favori."
@@ -4116,11 +4121,11 @@ msgstr ""
 "The same photo received from several sources (e.g. Google Drive and "
 "Telegram) is shown only once, preferably the one marked as favorite."
 
-#: templates/configure/tab_sources.html.jinja:112
+#: templates/configure/tab_sources.html.jinja:116
 msgid "Tri automatique"
 msgstr "Automatic sorting"
 
-#: templates/configure/tab_sources.html.jinja:113
+#: templates/configure/tab_sources.html.jinja:117
 msgid ""
 "Écarte du diaporama les photos ratées. Rien n'est supprimé : vous pouvez "
 "remettre chaque photo d'un clic."
@@ -4128,91 +4133,91 @@ msgstr ""
 "Keeps failed shots out of the slideshow. Nothing is deleted: you can put "
 "each photo back in one click."
 
-#: templates/configure/tab_sources.html.jinja:114
+#: templates/configure/tab_sources.html.jinja:118
 msgid "Activer le tri automatique"
 msgstr "Enable automatic sorting"
 
-#: templates/configure/tab_sources.html.jinja:116
+#: templates/configure/tab_sources.html.jinja:120
 msgid "Photos floues"
 msgstr "Blurry photos"
 
-#: templates/configure/tab_sources.html.jinja:117
+#: templates/configure/tab_sources.html.jinja:121
 msgid "Photos très sombres"
 msgstr "Very dark photos"
 
-#: templates/configure/tab_sources.html.jinja:118
+#: templates/configure/tab_sources.html.jinja:122
 msgid "Captures d'écran"
 msgstr "Screenshots"
 
-#: templates/configure/tab_sources.html.jinja:119
+#: templates/configure/tab_sources.html.jinja:123
 msgid "Rafales : seule la plus nette est gardée"
 msgstr "Bursts: only the sharpest is kept"
 
-#: templates/configure/tab_sources.html.jinja:128
+#: templates/configure/tab_sources.html.jinja:132
 msgid "Voir les photos écartées"
 msgstr "See set-aside photos"
 
-#: templates/configure/tab_sources.html.jinja:128
+#: templates/configure/tab_sources.html.jinja:132
 msgid "Aucune photo écartée."
 msgstr "No photo set aside."
 
-#: templates/configure/tab_sources.html.jinja:128
+#: templates/configure/tab_sources.html.jinja:132
 msgid "Remettre"
 msgstr "Put back"
 
-#: templates/configure/tab_sources.html.jinja:129
+#: templates/configure/tab_sources.html.jinja:133
 msgid "floue"
 msgstr "blurry"
 
-#: templates/configure/tab_sources.html.jinja:129
+#: templates/configure/tab_sources.html.jinja:133
 msgid "très sombre"
 msgstr "very dark"
 
-#: templates/configure/tab_sources.html.jinja:129
+#: templates/configure/tab_sources.html.jinja:133
 msgid "capture d'écran"
 msgstr "screenshot"
 
-#: templates/configure/tab_sources.html.jinja:129
+#: templates/configure/tab_sources.html.jinja:133
 msgid "rafale"
 msgstr "burst"
 
-#: templates/configure/tab_sources.html.jinja:165
+#: templates/configure/tab_sources.html.jinja:169
 msgid "Configuration du partage Samba (Windows)"
 msgstr "Configuring Samba Sharing (Windows)"
 
-#: templates/configure/tab_sources.html.jinja:167
+#: templates/configure/tab_sources.html.jinja:171
 msgid "Serveur :"
 msgstr "Server :"
 
-#: templates/configure/tab_sources.html.jinja:169
+#: templates/configure/tab_sources.html.jinja:173
 msgid "ex: 192.168.1.50 ou MON-NAS"
 msgstr "eg.: 192.168.1.50 or MON-NAS"
 
-#: templates/configure/tab_sources.html.jinja:171
+#: templates/configure/tab_sources.html.jinja:175
 msgid "Nom du partage :"
 msgstr "Share name:"
 
-#: templates/configure/tab_sources.html.jinja:173
+#: templates/configure/tab_sources.html.jinja:177
 msgid "ex: Photos"
 msgstr "e.g.: Photos"
 
-#: templates/configure/tab_sources.html.jinja:175
+#: templates/configure/tab_sources.html.jinja:179
 msgid "Chemin dans le partage (optionnel) :"
 msgstr "Path in the share (optional):"
 
-#: templates/configure/tab_sources.html.jinja:177
+#: templates/configure/tab_sources.html.jinja:181
 msgid "ex: Famille/2024"
 msgstr "ex: Family/2024"
 
-#: templates/configure/tab_sources.html.jinja:179
+#: templates/configure/tab_sources.html.jinja:183
 msgid "Nom d'utilisateur (optionnel) :"
 msgstr "Username (optional):"
 
-#: templates/configure/tab_sources.html.jinja:182
+#: templates/configure/tab_sources.html.jinja:186
 msgid "Mot de passe (optionnel) :"
 msgstr "Password (optional) :"
 
-#: templates/configure/tab_sources.html.jinja:197
+#: templates/configure/tab_sources.html.jinja:201
 msgid ""
 "Tester la\n"
 "                            connexion"
@@ -4220,35 +4225,35 @@ msgstr ""
 "Test the\n"
 "                            connection"
 
-#: templates/configure/tab_sources.html.jinja:203
+#: templates/configure/tab_sources.html.jinja:207
 msgid "Mise à jour automatique (Samba)"
 msgstr "Automatic update (Samba)"
 
-#: templates/configure/tab_sources.html.jinja:225
+#: templates/configure/tab_sources.html.jinja:229
 msgid "Configuration Google Drive"
 msgstr "Google Drive configuration"
 
-#: templates/configure/tab_sources.html.jinja:228
+#: templates/configure/tab_sources.html.jinja:232
 msgid "Méthode de connexion :"
 msgstr "Connection method:"
 
-#: templates/configure/tab_sources.html.jinja:230
+#: templates/configure/tab_sources.html.jinja:234
 msgid "Automatique (rclone si configuré, sinon compte de service)"
 msgstr "Automatic (rclone if configured, otherwise service account)"
 
-#: templates/configure/tab_sources.html.jinja:231
+#: templates/configure/tab_sources.html.jinja:235
 msgid "rclone (compte Google déjà configuré sur le Raspberry Pi)"
 msgstr "rclone (Google account already configured on the Raspberry Pi)"
 
-#: templates/configure/tab_sources.html.jinja:232
+#: templates/configure/tab_sources.html.jinja:236
 msgid "Compte de service Google"
 msgstr "Google service account"
 
-#: templates/configure/tab_sources.html.jinja:237
+#: templates/configure/tab_sources.html.jinja:241
 msgid "Remote rclone :"
 msgstr "rclone remote:"
 
-#: templates/configure/tab_sources.html.jinja:244
+#: templates/configure/tab_sources.html.jinja:248
 msgid ""
 "Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « "
 "rclone config » sur le Raspberry Pi."
@@ -4256,7 +4261,7 @@ msgstr ""
 "No rclone Google Drive remote found. To create one, run “rclone config” "
 "on the Raspberry Pi."
 
-#: templates/configure/tab_sources.html.jinja:249
+#: templates/configure/tab_sources.html.jinja:253
 msgid ""
 "Créez un compte de service dans la console Google Cloud (API Google Drive"
 " activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez "
@@ -4267,45 +4272,46 @@ msgstr ""
 "Drive API enabled), download its JSON key and paste it below. Then share "
 "your photo folders with the service account's email address."
 
-#: templates/configure/tab_sources.html.jinja:252
+#: templates/configure/tab_sources.html.jinja:256
 msgid "Compte de service configuré :"
 msgstr "Configured service account:"
 
-#: templates/configure/tab_sources.html.jinja:254
+#: templates/configure/tab_sources.html.jinja:258
 msgid "Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
 msgstr "Share your Google Drive folders with this address (read-only)."
 
-#: templates/configure/tab_sources.html.jinja:257
+#: templates/configure/tab_sources.html.jinja:261
 msgid "Clé JSON du compte de service :"
 msgstr "Service account JSON key:"
 
-#: templates/configure/tab_sources.html.jinja:260
+#: templates/configure/tab_sources.html.jinja:264
 msgid "Laisser vide pour conserver la clé actuelle"
 msgstr "Leave empty to keep the current key"
 
-#: templates/configure/tab_sources.html.jinja:266
+#: templates/configure/tab_sources.html.jinja:270
 msgid "Afficher mes dossiers Google Drive"
 msgstr "Show my Google Drive folders"
 
-#: templates/configure/tab_sources.html.jinja:270
+#: templates/configure/tab_sources.html.jinja:274
 msgid "Dossiers à afficher dans le diaporama :"
 msgstr "Folders to show in the slideshow:"
 
-#: templates/configure/tab_sources.html.jinja:279
+#: templates/configure/tab_sources.html.jinja:283
 msgid ""
 "Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google "
 "Drive »."
 msgstr "No folder selected. Click “Show my Google Drive folders”."
 
-#: templates/configure/tab_sources.html.jinja:285
+#: templates/configure/tab_sources.html.jinja:289
+#: templates/configure/tab_sources.html.jinja:341
 msgid "Inclure les sous-dossiers"
 msgstr "Include subfolders"
 
-#: templates/configure/tab_sources.html.jinja:289
+#: templates/configure/tab_sources.html.jinja:293
 msgid "Mettre les fichiers à la corbeille Google Drive après import"
 msgstr "Move files to the Google Drive trash after import"
 
-#: templates/configure/tab_sources.html.jinja:291
+#: templates/configure/tab_sources.html.jinja:295
 msgid ""
 "Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
 "importée part dans la corbeille du Drive (récupérable 30 jours) et reste "
@@ -4316,7 +4322,7 @@ msgstr ""
 " the Drive trash (recoverable for 30 days) and stays on the frame until "
 "you delete it in the “Preview” tab. Only with the rclone connection."
 
-#: templates/configure/tab_sources.html.jinja:292
+#: templates/configure/tab_sources.html.jinja:296
 msgid ""
 "Pensez à enregistrer la configuration après avoir choisi les dossiers, "
 "puis lancez l'import depuis l'onglet « Actions »."
@@ -4324,25 +4330,94 @@ msgstr ""
 "Remember to save the configuration after choosing the folders, then start"
 " the import from the “Actions” tab."
 
-#: templates/configure/tab_sources.html.jinja:295
+#: templates/configure/tab_sources.html.jinja:299
 msgid "Mise à jour automatique (Google Drive)"
 msgstr "Automatic update (Google Drive)"
 
-#: templates/configure/tab_sources.html.jinja:300
+#: templates/configure/tab_sources.html.jinja:304
 msgid "Vérifier les nouveautés toutes les (minutes) :"
 msgstr "Check for new items every (minutes):"
 
-#: templates/configure/tab_sources.html.jinja:303
+#: templates/configure/tab_sources.html.jinja:307
 msgid ""
 "Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées "
 "ou supprimées."
 msgstr "The slideshow is only restarted if photos or videos were added or removed."
 
-#: templates/configure/tab_sources.html.jinja:317
+#: templates/configure/tab_sources.html.jinja:320
+msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
+msgstr "Other clouds: Dropbox, OneDrive, pCloud..."
+
+#: templates/configure/tab_sources.html.jinja:324
+msgid "Ajouter un compte"
+msgstr "Add an account"
+
+#: templates/configure/tab_sources.html.jinja:329
+msgid "Choisissez le service :"
+msgstr "Choose the service:"
+
+#: templates/configure/tab_sources.html.jinja:329
+msgid "et un nom court :"
+msgstr "and a short name:"
+
+#: templates/configure/tab_sources.html.jinja:330
+msgid ""
+"Sur un ordinateur (avec un navigateur), installez rclone "
+"(rclone.org/downloads) puis lancez :"
+msgstr ""
+"On a computer (with a browser), install rclone (rclone.org/downloads) "
+"then run:"
+
+#: templates/configure/tab_sources.html.jinja:332
+#, python-brace-format
+msgid ""
+"Connectez-vous dans la page qui s'ouvre, puis copiez le texte affiché "
+"entre accolades { ... }."
+msgstr ""
+"Sign in on the page that opens, then copy the text shown between braces {"
+" ... }."
+
+#: templates/configure/tab_sources.html.jinja:333
+msgid "Collez-le ici :"
+msgstr "Paste it here:"
+
+#: templates/configure/tab_sources.html.jinja:334
+msgid "Ajouter le compte"
+msgstr "Add the account"
+
+#: templates/configure/tab_sources.html.jinja:339
+msgid "Dossiers à afficher"
+msgstr "Folders to show"
+
+#: templates/configure/tab_sources.html.jinja:342
+msgid ""
+"Retirer les photos du cloud une fois importées (elles restent dans sa "
+"corbeille 30 jours)"
+msgstr ""
+"Remove photos from the cloud once imported (they stay in its trash for 30"
+" days)"
+
+#: templates/configure/tab_sources.html.jinja:343
+msgid "Synchroniser automatiquement (toutes les heures)"
+msgstr "Sync automatically (every hour)"
+
+#: templates/configure/tab_sources.html.jinja:344
+msgid "Synchroniser maintenant"
+msgstr "Sync now"
+
+#: templates/configure/tab_sources.html.jinja:351
+msgid "Aucun compte"
+msgstr "No account"
+
+#: templates/configure/tab_sources.html.jinja:351
+msgid "Lecture des dossiers…"
+msgstr "Reading folders…"
+
+#: templates/configure/tab_sources.html.jinja:407
 msgid "Photos que le cadre ne peut pas retirer du Drive"
 msgstr "Photos the frame can't remove from Drive"
 
-#: templates/configure/tab_sources.html.jinja:319
+#: templates/configure/tab_sources.html.jinja:409
 msgid ""
 "Ces photos ont été déposées dans le dossier par un autre compte Google : "
 "seul leur propriétaire peut les mettre à la corbeille. Elles restent "
@@ -4355,27 +4430,27 @@ msgstr ""
 "them yourself in Drive (if you are allowed to) or ask their owner, then "
 "click “Retry”."
 
-#: templates/configure/tab_sources.html.jinja:321
+#: templates/configure/tab_sources.html.jinja:411
 msgid "Réessayer à la prochaine synchronisation"
 msgstr "Retry at the next sync"
 
-#: templates/configure/tab_sources.html.jinja:327
+#: templates/configure/tab_sources.html.jinja:417
 msgid "Ouvrir dans Drive"
 msgstr "Open in Drive"
 
-#: templates/configure/tab_sources.html.jinja:327
+#: templates/configure/tab_sources.html.jinja:417
 msgid "(plus sur le cadre)"
 msgstr "(no longer on the frame)"
 
-#: templates/configure/tab_sources.html.jinja:358
+#: templates/configure/tab_sources.html.jinja:448
 msgid "Options de démarrage"
 msgstr "Boot Options"
 
-#: templates/configure/tab_sources.html.jinja:362
+#: templates/configure/tab_sources.html.jinja:452
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr "Skip the first automatic import at startup"
 
-#: templates/configure/tab_sources.html.jinja:364
+#: templates/configure/tab_sources.html.jinja:454
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -5606,6 +5681,26 @@ msgid ""
 "%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
 "prochaine synchronisation."
 msgstr "%(count)s photo(s) will be offered to the trash again at the next sync."
+
+#: web/routes_imports.py:482
+msgid "Compte ajouté : choisissez maintenant les dossiers."
+msgstr "Account added: now choose the folders."
+
+#: web/routes_imports.py:503
+msgid "Compte inconnu."
+msgstr "Unknown account."
+
+#: web/routes_imports.py:514
+msgid "Réglages du cloud enregistrés."
+msgstr "Cloud settings saved."
+
+#: web/routes_imports.py:522
+msgid "Choisissez d'abord un compte et des dossiers."
+msgstr "First choose an account and folders."
+
+#: web/routes_imports.py:524
+msgid "Synchronisation lancée : suivez-la dans la notification en bas de l'écran."
+msgstr "Sync started: follow it in the notification at the bottom of the screen."
 
 #: web/routes_integrations.py:109
 msgid "Le token du bot est requis."

@@ -98,6 +98,10 @@
                         <label class="form-check-label ml-2" for="display_source_invites">{{ _('Photos des invités (validées)') }}</label>
                     </div>
                     <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_cloud" name="display_sources" value="cloud" {% if 'cloud' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_cloud">{{ _("Autres clouds (Dropbox, OneDrive...)") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_messages">{{ _('Messages') }}</label>
                     </div>
@@ -311,6 +315,92 @@
                                 class="font-mono">...</span></p>
                     </div>
                 </fieldset>
+
+                <fieldset class="mt-4" id="cloud-box">
+                    <legend><h3><i class="fas fa-cloud mr-2"></i>{{ _("Autres clouds : Dropbox, OneDrive, pCloud...") }}</h3></legend>
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <label for="cl-remote">{{ _("Compte :") }}</label>
+                        <select id="cl-remote"></select>
+                        {% if is_admin %}<button type="button" id="cl-add-open" class="link">{{ _("Ajouter un compte") }}</button>{% endif %}
+                    </div>
+                    {% if is_admin %}
+                    <div id="cl-add" class="hidden mt-3 p-3 rounded-lg bg-gray-50">
+                        <ol class="setup-guide">
+                            <li>{{ _("Choisissez le service :") }} <select id="cl-provider"></select> {{ _("et un nom court :") }} <input type="text" id="cl-name" value="dropbox" maxlength="32" class="w-32"></li>
+                            <li>{{ _("Sur un ordinateur (avec un navigateur), installez rclone (rclone.org/downloads) puis lancez :") }}
+                                <span class="copy-line"><code id="cl-cmd">rclone authorize "dropbox"</code></span>
+                                {{ _("Connectez-vous dans la page qui s'ouvre, puis copiez le texte affiché entre accolades { ... }.") }}</li>
+                            <li>{{ _("Collez-le ici :") }}<textarea id="cl-token" rows="3" class="w-full font-mono text-xs mt-1" placeholder='{"access_token":"...","token_type":"bearer",...}'></textarea>
+                                <button type="button" id="cl-add-save" class="btn-primary mt-2">{{ _("Ajouter le compte") }}</button></li>
+                        </ol>
+                    </div>
+                    {% endif %}
+                    <div id="cl-folders-box" class="hidden mt-3">
+                        <p class="font-semibold mb-1">{{ _("Dossiers à afficher") }}</p>
+                        <div id="cl-folders" class="cl-folders"></div>
+                        <label class="flex items-center gap-2 mt-2"><input type="checkbox" id="cl-recursive"> {{ _("Inclure les sous-dossiers") }}</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" id="cl-trash"> {{ _("Retirer les photos du cloud une fois importées (elles restent dans sa corbeille 30 jours)") }}</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" id="cl-auto"> {{ _("Synchroniser automatiquement (toutes les heures)") }}</label>
+                        <button type="button" id="cl-sync" class="btn-secondary mt-2"><i class="fas fa-sync-alt mr-1"></i>{{ _("Synchroniser maintenant") }}</button>
+                    </div>
+                    <p id="cl-status" class="text-sm mt-2"></p>
+                </fieldset>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { none: {{ _("Aucun compte")|tojson }}, loading: {{ _("Lecture des dossiers…")|tojson }} };
+                        const say = (t, ok) => { $("cl-status").textContent = t || ""; $("cl-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                        let state = null;
+                        async function load() {
+                            state = await (await fetch("/api/cloud")).json();
+                            $("cl-remote").innerHTML = `<option value="">${T.none}</option>` + state.remotes.map(r => `<option value="${r.name}">${r.label} (${r.name})</option>`).join("");
+                            $("cl-remote").value = state.remote || "";
+                            if ($("cl-provider") && !$("cl-provider").options.length) {
+                                Object.entries(state.providers).filter(([k]) => !["webdav", "sftp"].includes(k)).forEach(([k, v]) => $("cl-provider").add(new Option(v, k)));
+                            }
+                            $("cl-recursive").checked = state.recursive; $("cl-trash").checked = state.trash; $("cl-auto").checked = state.auto;
+                            $("cl-folders-box").classList.toggle("hidden", !state.remote);
+                            if (state.remote) loadFolders();
+                        }
+                        async function loadFolders() {
+                            $("cl-folders").textContent = T.loading;
+                            const d = await (await fetch("/api/cloud/folders")).json();
+                            if (!d.success) { $("cl-folders").textContent = ""; say(d.message, false); return; }
+                            const chosen = new Set(state.folders.map(f => f.id));
+                            $("cl-folders").innerHTML = "";
+                            d.folders.forEach(f => {
+                                const label = document.createElement("label");
+                                const box = document.createElement("input"); box.type = "checkbox"; box.checked = chosen.has(f.id);
+                                box.addEventListener("change", saveFolders);
+                                box.dataset.id = f.id; box.dataset.name = f.name;
+                                label.append(box, document.createTextNode(" " + f.name));
+                                $("cl-folders").appendChild(label);
+                            });
+                        }
+                        async function saveFolders() {
+                            const folders = [...document.querySelectorAll("#cl-folders input:checked")].map(b => ({ id: b.dataset.id, name: b.dataset.name }));
+                            const r = await post("/api/cloud", { folders }); say(r.message, r.success); state.folders = folders;
+                        }
+                        $("cl-remote").addEventListener("change", async () => { const r = await post("/api/cloud", { remote: $("cl-remote").value, folders: [] }); say(r.message, r.success); load(); });
+                        [["cl-recursive", "recursive"], ["cl-trash", "trash"], ["cl-auto", "auto"]].forEach(([id, key]) =>
+                            $(id).addEventListener("change", async () => { const r = await post("/api/cloud", { [key]: $(id).checked }); say(r.message, r.success); }));
+                        $("cl-sync").addEventListener("click", async () => { const r = await post("/api/cloud/sync"); say(r.message, r.success); });
+                        if ($("cl-add-open")) {
+                            $("cl-add-open").addEventListener("click", () => $("cl-add").classList.toggle("hidden"));
+                            const cmd = () => { $("cl-cmd").textContent = `rclone authorize "${$("cl-provider").value}"`; if (!$("cl-name").dataset.edited) $("cl-name").value = $("cl-provider").value; };
+                            $("cl-provider").addEventListener("change", cmd);
+                            $("cl-name").addEventListener("input", () => $("cl-name").dataset.edited = "1");
+                            $("cl-add-save").addEventListener("click", async () => {
+                                const r = await post("/api/cloud/remote", { name: $("cl-name").value.trim(), provider: $("cl-provider").value, token: $("cl-token").value.trim() });
+                                say(r.message, r.success);
+                                if (r.success) { $("cl-token").value = ""; $("cl-add").classList.add("hidden"); load(); }
+                            });
+                        }
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-sources'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        load();
+                    });
+                </script>
 
                 <fieldset class="mt-4 hidden" id="gdrive-denied-box">
                     <legend>

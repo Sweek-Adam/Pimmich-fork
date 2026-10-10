@@ -38,8 +38,9 @@ if __name__ == '__main__':
     telegram_thread.start()
     maintenance_thread = threading.Thread(target=maintenance_worker, daemon=True)
     maintenance_thread.start()
-    from web.workers import presence_worker
+    from web.workers import presence_worker, cloud_update_worker
     threading.Thread(target=presence_worker, daemon=True).start()
+    threading.Thread(target=cloud_update_worker, daemon=True).start()
     # Préchauffer le cache des remotes rclone (lent sur Pi 3) pour que la page de configuration s'ouvre vite
     from utils.import_gdrive import list_rclone_remotes
     threading.Thread(target=list_rclone_remotes, daemon=True).start()

@@ -433,3 +433,92 @@ def imports_progress_api():
     for item in items:
         item["label"] = translate(item["label"])
     return jsonify({"success": True, "imports": items})
+
+
+# --- Autres clouds (Dropbox, OneDrive, pCloud...) via rclone ---
+
+def run_cloud_sync(config):
+    """Synchronise puis prépare les photos du cloud (suivi dans la notification des imports)."""
+    from utils import import_cloud
+    changes = 0
+    for update in import_progress.tracked("cloud", "download", import_cloud.import_cloud_photos(config)):
+        if update.get("type") == "done":
+            changes = update.get("changes", 0)
+        if update.get("type") == "error":
+            from web.workers import notify_sync_error
+            notify_sync_error("Cloud", update.get("message", ""))
+    if changes:
+        for _update in import_progress.tracked("cloud", "prepare", prepare_all_photos_with_progress(
+                config.get("display_width", 1920), config.get("display_height", 1080), source_type="cloud")):
+            pass
+        if is_slideshow_running():
+            restart_slideshow_for_update()
+    return changes
+
+
+@app.route('/api/cloud', methods=['GET'])
+@login_required
+def cloud_status_api():
+    from utils import import_cloud
+    config = load_config()
+    return jsonify({"success": True, "remotes": import_cloud.remotes(), "providers": import_cloud.PROVIDERS,
+                    "remote": config.get("cloud_rclone_remote", ""), "folders": config.get("cloud_folders") or [],
+                    "recursive": config.get("cloud_recursive", True), "trash": config.get("cloud_trash_after_import", False),
+                    "auto": config.get("cloud_auto_update", False)})
+
+
+@app.route('/api/cloud/remote', methods=['POST'])
+@admin_required
+def cloud_add_remote_api():
+    from utils import import_cloud
+    data = request.get_json(silent=True) or {}
+    try:
+        import_cloud.add_remote(data.get("name", ""), data.get("provider", ""), data.get("token", ""))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    config = dict(load_config())
+    config["cloud_rclone_remote"] = data["name"]
+    save_config(config)
+    return jsonify({"success": True, "message": _("Compte ajouté : choisissez maintenant les dossiers.")})
+
+
+@app.route('/api/cloud/folders', methods=['GET'])
+@login_required
+def cloud_folders_api():
+    from utils import import_cloud
+    try:
+        return jsonify({"success": True, "folders": import_cloud.list_folders(load_config())})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)[:300]}), 502
+
+
+@app.route('/api/cloud', methods=['POST'])
+@login_required
+def cloud_save_api():
+    from utils import import_cloud
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    if "remote" in data:
+        if data["remote"] and data["remote"] not in [r["name"] for r in import_cloud.remotes()]:
+            return jsonify({"success": False, "message": _("Compte inconnu.")}), 400
+        config["cloud_rclone_remote"] = data["remote"]
+    if "folders" in data:
+        config["cloud_folders"] = [{"id": str(f.get("id", ""))[:300], "name": str(f.get("name", ""))[:300]}
+                                   for f in data["folders"] if isinstance(f, dict) and f.get("id")][:50]
+    for key, field in (("recursive", "cloud_recursive"), ("trash", "cloud_trash_after_import"), ("auto", "cloud_auto_update")):
+        if key in data:
+            config[field] = bool(data[key])
+    if config.get("cloud_folders") and "cloud" not in config.get("display_sources", []):
+        config["display_sources"] = list(config.get("display_sources", [])) + ["cloud"]
+    save_config(config)
+    return jsonify({"success": True, "message": _("Réglages du cloud enregistrés.")})
+
+
+@app.route('/api/cloud/sync', methods=['POST'])
+@login_required
+def cloud_sync_api():
+    config = load_config()
+    if not config.get("cloud_rclone_remote") or not config.get("cloud_folders"):
+        return jsonify({"success": False, "message": _("Choisissez d'abord un compte et des dossiers.")}), 400
+    threading.Thread(target=run_cloud_sync, args=(config,), daemon=True).start()
+    return jsonify({"success": True, "message": _("Synchronisation lancée : suivez-la dans la notification en bas de l'écran.")})

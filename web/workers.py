@@ -674,3 +674,17 @@ def notify_import_done(entry):
 
 
 import_progress.ON_IMPORT_DONE.append(notify_import_done)
+
+
+def cloud_update_worker():
+    """Synchronisation automatique des autres clouds (Dropbox, OneDrive...)."""
+    from web.routes_imports import run_cloud_sync
+    time.sleep(120)  # laisser le cadre démarrer
+    while True:
+        config = load_config()
+        try:
+            if config.get("cloud_auto_update") and config.get("cloud_rclone_remote") and config.get("cloud_folders"):
+                run_cloud_sync(config)
+        except Exception as e:
+            logger.warning(f"[Cloud] Synchronisation automatique : {e}")
+        time.sleep(max(15, int(config.get("cloud_update_interval_minutes", 60))) * 60)
