@@ -39,6 +39,68 @@
                     });
                 </script>
 
+                {% if is_admin %}
+                <fieldset class="mt-6" id="remote-guests">
+                    <legend>
+                        <h3><i class="fas fa-globe-europe mr-2"></i>{{ _("Hors de la maison") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("La famille peut aussi envoyer photos et messages depuis chez elle, avec un lien secret. Seule la page d'envoi est publiée (via Tailscale) : l'administration et vos photos ne sont jamais accessibles depuis internet. Les photos passent toujours par « À valider ».") }}</p>
+                    <div id="rg-setup" class="install-hint hidden"></div>
+                    <label class="flex items-center gap-2 my-2"><input type="checkbox" id="rg-enabled"> <strong>{{ _("Autoriser les envois depuis l'extérieur") }}</strong></label>
+                    <div id="rg-link-box" class="hidden mt-3 flex flex-col md:flex-row gap-4 items-start">
+                        <img id="rg-qr" alt="{{ _('QR code du lien secret') }}" class="w-40 h-40 border rounded-lg bg-white p-2">
+                        <div class="flex-1 min-w-0">
+                            <p class="font-mono text-sm break-all bg-gray-50 rounded p-2" id="rg-link"></p>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <button type="button" id="rg-share" class="btn-primary"><i class="fas fa-share-alt mr-1"></i>{{ _("Partager le lien") }}</button>
+                                <button type="button" id="rg-new" class="btn-secondary"><i class="fas fa-sync-alt mr-1"></i>{{ _("Changer le lien") }}</button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">{{ _("« Changer le lien » rend l'ancien inutilisable (par exemple s'il a circulé trop largement).") }}</p>
+                        </div>
+                    </div>
+                    <p id="rg-status" class="text-sm mt-2"></p>
+                </fieldset>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                        const T = { noTs: {{ _("Tailscale n'est pas installé sur le cadre : https://tailscale.com/download/linux")|tojson }},
+                                    off: {{ _("Tailscale est installé mais pas connecté : lancez « sudo tailscale up » sur le cadre.")|tojson }},
+                                    entry: {{ _("Une seule fois, lancez sur le Raspberry Pi : ~/pimmich/utils/enable_remote_guests.sh")|tojson }},
+                                    copied: {{ _("Lien copié : collez-le dans un message à la famille.")|tojson }},
+                                    shareText: {{ _("Envoyez vos photos et vos messages sur notre cadre photo, où que vous soyez :")|tojson }} };
+                        const say = (t, ok) => { $("rg-status").textContent = t || ""; $("rg-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        async function load() {
+                            const d = await (await fetch("/api/remote_guests")).json();
+                            const problem = !d.installed ? T.noTs : !d.connected ? T.off : !d.entry_ready ? T.entry : "";
+                            $("rg-setup").textContent = problem;
+                            $("rg-setup").classList.toggle("hidden", !problem);
+                            $("rg-enabled").checked = d.enabled;
+                            $("rg-enabled").disabled = !!problem && !d.enabled;
+                            $("rg-link-box").classList.toggle("hidden", !d.link);
+                            if (d.link) { $("rg-link").textContent = d.link; $("rg-qr").src = "/api/guest_qr.png?remote=1&t=" + Date.now(); }
+                        }
+                        $("rg-enabled").addEventListener("change", async () => {
+                            $("rg-enabled").disabled = true;
+                            const r = await post("/api/remote_guests", { enabled: $("rg-enabled").checked });
+                            say(r.message, r.success);
+                            await load();
+                        });
+                        $("rg-new").addEventListener("click", async () => { const r = await post("/api/remote_guests/new_link"); say(r.message, r.success); load(); });
+                        $("rg-share").addEventListener("click", async () => {
+                            const url = $("rg-link").textContent;
+                            try {
+                                if (navigator.share) await navigator.share({ title: {{ _("Notre cadre photo")|tojson }}, text: T.shareText, url });
+                                else { await navigator.clipboard.writeText(url); say(T.copied, true); }
+                                fetch("/api/setup/mark", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ step: "guests" }) });
+                            } catch (e) { /* partage annulé */ }
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-invites'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        load();
+                    });
+                </script>
+                {% endif %}
+
                 <fieldset class="mt-6">
                     <legend>
                         <h3><i class="fas fa-qrcode mr-2"></i>{{ _("QR code pour les invités") }}</h3>

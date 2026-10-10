@@ -337,3 +337,55 @@ def guest_message_publish():
     if is_slideshow_running():
         restart_slideshow_for_update()
     return jsonify({"success": True, "message": _("Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s).", date=message["expires"])})
+
+
+# --- Invités hors de la maison (Tailscale Funnel) ---
+
+def _remote_entry_ready():
+    """L'entrée nginx réservée aux invités (port local 8088) est installée."""
+    import socket
+    from utils import remote_guests
+    with socket.socket() as sock:
+        sock.settimeout(1)
+        return sock.connect_ex(("127.0.0.1", remote_guests.REMOTE_PORT)) == 0
+
+
+@app.route('/api/remote_guests', methods=['GET'])
+@admin_required
+def remote_guests_status_api():
+    from utils import remote_guests
+    config = load_config()
+    status = remote_guests.tailscale_status()
+    token = config.get("guest_link_token")
+    link = f"https://{status['dns_name']}/upload?k={token}" if status["dns_name"] and token else None
+    return jsonify({"success": True, "enabled": bool(config.get("remote_guests_enabled")), "entry_ready": _remote_entry_ready(),
+                    "link": link if config.get("remote_guests_enabled") else None, **status})
+
+
+@app.route('/api/remote_guests', methods=['POST'])
+@admin_required
+def remote_guests_toggle_api():
+    from utils import remote_guests
+    enabled = bool((request.get_json(silent=True) or {}).get("enabled"))
+    if enabled and not _remote_entry_ready():
+        return jsonify({"success": False, "message": _("Lancez d'abord une fois sur le Raspberry Pi : ~/pimmich/utils/enable_remote_guests.sh")}), 409
+    ok, output = remote_guests.set_funnel(enabled)
+    if not ok and enabled:
+        return jsonify({"success": False, "message": _("Tailscale refuse la publication : %(detail)s", detail=output[-400:])}), 502
+    config = dict(load_config())
+    config["remote_guests_enabled"] = enabled
+    if enabled and not config.get("guest_link_token"):
+        config["guest_link_token"] = remote_guests.new_token()
+    save_config(config)
+    return jsonify({"success": True, "message": _("Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien.") if enabled
+                    else _("La page invités n'est plus accessible depuis internet.")})
+
+
+@app.route('/api/remote_guests/new_link', methods=['POST'])
+@admin_required
+def remote_guests_new_link_api():
+    from utils import remote_guests
+    config = dict(load_config())
+    config["guest_link_token"] = remote_guests.new_token()
+    save_config(config)
+    return jsonify({"success": True, "message": _("Nouveau lien créé : l'ancien ne fonctionne plus.")})

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ _("Lien invalide") }} - Pimmich</title>
+  <link href="{{ url_for('static', filename='vendor/tailwind/tailwind.min.css') }}" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+  <main class="max-w-md bg-white rounded-2xl shadow p-8 text-center">
+    <img src="{{ url_for('static', filename='pimmich_logo.png') }}" alt="" class="w-16 h-16 mx-auto mb-4">
+    <h1 class="text-xl font-bold mb-2">{{ _("Ce lien ne fonctionne plus") }}</h1>
+    <p class="text-gray-600">{{ _("Pour envoyer des photos ou un message sur le cadre, demandez un nouveau lien à la personne qui vous a invité.") }}</p>
+  </main>
+</body>
+</html>

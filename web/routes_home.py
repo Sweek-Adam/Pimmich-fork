@@ -141,8 +141,14 @@ def _local_ip():
 @app.route('/api/guest_qr.png', methods=['GET'])
 @login_required
 def guest_qr_png():
-    """QR code de la page invités, à afficher ou imprimer."""
+    """QR code de la page invités (sur le Wi-Fi ; ?remote=1 : lien secret utilisable de partout), à afficher ou imprimer."""
     url = f"http://{_local_ip()}/upload"
+    if request.args.get("remote") and is_admin():
+        from utils import remote_guests
+        config, status = load_config(), remote_guests.tailscale_status()
+        if not (config.get("remote_guests_enabled") and config.get("guest_link_token") and status["dns_name"]):
+            return "", 404
+        url = f"https://{status['dns_name']}/upload?k={config['guest_link_token']}"
     qr = qrcode.QRCode(border=2, box_size=12)
     qr.add_data(url)
     qr.make(fit=True)

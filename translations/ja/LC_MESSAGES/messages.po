@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 22:47+0200\n"
+"POT-Creation-Date: 2026-10-10 22:50+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -265,6 +265,20 @@ msgstr "ログ"
 #: templates/configure.html.jinja:178
 msgid "Enregistrer les modifications"
 msgstr "変更を保存する"
+
+#: templates/guest_link_invalid.html.jinja:6
+msgid "Lien invalide"
+msgstr "無効なリンク"
+
+#: templates/guest_link_invalid.html.jinja:13
+msgid "Ce lien ne fonctionne plus"
+msgstr "このリンクは使用できなくなりました"
+
+#: templates/guest_link_invalid.html.jinja:14
+msgid ""
+"Pour envoyer des photos ou un message sur le cadre, demandez un nouveau "
+"lien à la personne qui vous a invité."
+msgstr "フォトフレームに写真やメッセージを送るには、招待してくれた人に新しいリンクを頼んでください。"
 
 #: templates/login.html.jinja:7
 msgid "Connexion"
@@ -2422,6 +2436,7 @@ msgstr ""
 "をスキャン（または下のアドレスを開く）すると、写真を送ったりフォトフレームにメッセージを書いたりできます。"
 
 #: templates/configure/tab_invites.html.jinja:12
+#: templates/configure/tab_invites.html.jinja:55
 msgid "Partager le lien"
 msgstr "リンクを共有"
 
@@ -2438,6 +2453,7 @@ msgid "Les photos des invités passent par « À valider » avant d'être affich
 msgstr "ゲストの写真は、表示される前に「承認待ち」を経由します。"
 
 #: templates/configure/tab_invites.html.jinja:32
+#: templates/configure/tab_invites.html.jinja:93
 msgid "Notre cadre photo"
 msgstr "わが家のフォトフレーム"
 
@@ -2448,14 +2464,71 @@ msgid ""
 msgstr "わが家のフォトフレームに写真やメッセージを送ってください（家の Wi-Fi から）："
 
 #: templates/configure/tab_invites.html.jinja:35
+#: templates/configure/tab_invites.html.jinja:70
 msgid "Lien copié : collez-le dans un message à la famille."
 msgstr "リンクをコピーしました。家族へのメッセージに貼り付けてください。"
 
-#: templates/configure/tab_invites.html.jinja:44
+#: templates/configure/tab_invites.html.jinja:45
+msgid "Hors de la maison"
+msgstr "家の外から"
+
+#: templates/configure/tab_invites.html.jinja:47
+msgid ""
+"La famille peut aussi envoyer photos et messages depuis chez elle, avec "
+"un lien secret. Seule la page d'envoi est publiée (via Tailscale) : "
+"l'administration et vos photos ne sont jamais accessibles depuis "
+"internet. Les photos passent toujours par « À valider »."
+msgstr ""
+"家族は秘密のリンクを使って自宅から写真やメッセージを送ることもできます。公開されるのは送信ページだけで（Tailscale "
+"経由）、管理画面やあなたの写真がインターネットから見られることはありません。写真は引き続き「承認待ち」を経由します。"
+
+#: templates/configure/tab_invites.html.jinja:49
+msgid "Autoriser les envois depuis l'extérieur"
+msgstr "外部からの送信を許可"
+
+#: templates/configure/tab_invites.html.jinja:51
+msgid "QR code du lien secret"
+msgstr "秘密のリンクの QR コード"
+
+#: templates/configure/tab_invites.html.jinja:56
+msgid "Changer le lien"
+msgstr "リンクを変更"
+
+#: templates/configure/tab_invites.html.jinja:58
+msgid ""
+"« Changer le lien » rend l'ancien inutilisable (par exemple s'il a "
+"circulé trop largement)."
+msgstr "「リンクを変更」を押すと古いリンクは使えなくなります（広まりすぎた場合など）。"
+
+#: templates/configure/tab_invites.html.jinja:67
+msgid ""
+"Tailscale n'est pas installé sur le cadre : "
+"https://tailscale.com/download/linux"
+msgstr "フォトフレームに Tailscale がインストールされていません：https://tailscale.com/download/linux"
+
+#: templates/configure/tab_invites.html.jinja:68
+msgid ""
+"Tailscale est installé mais pas connecté : lancez « sudo tailscale up » "
+"sur le cadre."
+msgstr "Tailscale はインストールされていますが接続されていません。フォトフレームで「sudo tailscale up」を実行してください。"
+
+#: templates/configure/tab_invites.html.jinja:69
+msgid ""
+"Une seule fois, lancez sur le Raspberry Pi : "
+"~/pimmich/utils/enable_remote_guests.sh"
+msgstr "Raspberry Pi で一度だけ実行してください：~/pimmich/utils/enable_remote_guests.sh"
+
+#: templates/configure/tab_invites.html.jinja:71
+msgid ""
+"Envoyez vos photos et vos messages sur notre cadre photo, où que vous "
+"soyez :"
+msgstr "どこからでも、わが家のフォトフレームに写真やメッセージを送ってください："
+
+#: templates/configure/tab_invites.html.jinja:106
 msgid "QR code pour les invités"
 msgstr "ゲスト用QRコード"
 
-#: templates/configure/tab_invites.html.jinja:46
+#: templates/configure/tab_invites.html.jinja:108
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
 "pour envoyer des photos ou écrire un message depuis un téléphone connecté"
@@ -2464,47 +2537,47 @@ msgstr ""
 "スライドショーにゲストページへのQRコードを常に表示し、同じWi-"
 "Fiに接続したスマートフォンから写真を送ったりメッセージを書いたりできるようにします。"
 
-#: templates/configure/tab_invites.html.jinja:49
+#: templates/configure/tab_invites.html.jinja:111
 msgid "Afficher le QR code"
 msgstr "QRコードを表示"
 
-#: templates/configure/tab_invites.html.jinja:51
+#: templates/configure/tab_invites.html.jinja:113
 msgid "Position :"
 msgstr "位置："
 
-#: templates/configure/tab_invites.html.jinja:54
+#: templates/configure/tab_invites.html.jinja:116
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "右下"
 
-#: templates/configure/tab_invites.html.jinja:55
+#: templates/configure/tab_invites.html.jinja:117
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "左下"
 
-#: templates/configure/tab_invites.html.jinja:56
+#: templates/configure/tab_invites.html.jinja:118
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "右上"
 
-#: templates/configure/tab_invites.html.jinja:57
+#: templates/configure/tab_invites.html.jinja:119
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "左上"
 
-#: templates/configure/tab_invites.html.jinja:61
+#: templates/configure/tab_invites.html.jinja:123
 msgid "Autoriser les invités à écrire des messages"
 msgstr "ゲストのメッセージ投稿を許可"
 
-#: templates/configure/tab_invites.html.jinja:63
+#: templates/configure/tab_invites.html.jinja:125
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
@@ -3238,7 +3311,7 @@ msgstr "組み写真（ここから開始、準備中）"
 msgid "Afficher maintenant"
 msgstr "今すぐ表示"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:212
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:218
 msgid "Musique du diaporama"
 msgstr "スライドショーの音楽"
 
@@ -4516,23 +4589,23 @@ msgstr "コミック"
 msgid "Album ancien"
 msgstr "古いアルバム"
 
-#: web/core.py:903
+#: web/core.py:930
 msgid "Code d'invitation invalide."
 msgstr "招待コードが無効です。"
 
-#: web/core.py:909
+#: web/core.py:936
 msgid "Ce code d'invitation a expiré."
 msgstr "この招待コードの有効期限は切れています。"
 
-#: web/core.py:915
+#: web/core.py:942
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "あなたはすでに認可されています。写真を送ってください！"
 
-#: web/core.py:917
+#: web/core.py:944
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "この招待コードはすでに使用されています。"
 
-#: web/core.py:928
+#: web/core.py:955
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
@@ -4671,6 +4744,29 @@ msgstr "すでに複数のメッセージを送信しています。1時間後�
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "ありがとうございます！メッセージはフォトフレームに表示されます（%(date)s まで）。"
 
+#: web/routes_guests.py:371
+msgid ""
+"Lancez d'abord une fois sur le Raspberry Pi : "
+"~/pimmich/utils/enable_remote_guests.sh"
+msgstr "まず Raspberry Pi で一度実行してください：~/pimmich/utils/enable_remote_guests.sh"
+
+#: web/routes_guests.py:374
+#, python-format
+msgid "Tailscale refuse la publication : %(detail)s"
+msgstr "Tailscale が公開を拒否しました：%(detail)s"
+
+#: web/routes_guests.py:380
+msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
+msgstr "ゲストはリンクを使ってどこからでも送信できるようになりました。"
+
+#: web/routes_guests.py:381
+msgid "La page invités n'est plus accessible depuis internet."
+msgstr "ゲストページはインターネットからアクセスできなくなりました。"
+
+#: web/routes_guests.py:391
+msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
+msgstr "新しいリンクを作成しました。古いリンクは使えません。"
+
 #: web/routes_home.py:87
 msgid "Étape inconnue."
 msgstr "不明なステップです。"
@@ -4693,19 +4789,19 @@ msgstr "不明なレイアウトです。"
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "レイアウトを準備中です… 数秒で表示されます。"
 
-#: web/routes_home.py:192
+#: web/routes_home.py:198
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
-#: web/routes_home.py:196 web/routes_music.py:293
+#: web/routes_home.py:202 web/routes_music.py:293
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:200 web/routes_system.py:627
+#: web/routes_home.py:206 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
-#: web/routes_home.py:207
+#: web/routes_home.py:213
 msgid "Réglages du son enregistrés."
 msgstr "サウンド設定を保存しました。"
 

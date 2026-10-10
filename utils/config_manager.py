@@ -48,6 +48,8 @@ def create_default_config():
         "music_volume": 80,
         "now_playing_display": "change",  # lecteur à l'écran : off, change (à chaque nouveau morceau), always
         "now_playing_position": "bottom_left",
+        "remote_guests_enabled": False,  # page invités publiée sur internet (Tailscale Funnel), avec lien secret
+        "guest_link_token": "",
         "spotify_client_id": "",  # application Spotify personnelle (pilotage depuis l'interface)
         "spotify_links": {},  # musiques Spotify associées : {"ambiance:fete" ou "playlist:<id>": "spotify:playlist:..."}
         "setup_dismissed": False,

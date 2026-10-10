@@ -2,7 +2,7 @@
 Cœur de l'application web : création de l'application Flask, journalisation, sécurité,
 constantes et fonctions utilitaires partagées par les routes et les workers.
 """
-from flask import Flask, render_template, request, redirect, url_for, session, flash, stream_with_context, Response, jsonify, send_from_directory
+from flask import Flask, abort, render_template, request, redirect, url_for, session, flash, stream_with_context, Response, jsonify, send_from_directory
 
 
 import os
@@ -65,7 +65,6 @@ from pathlib import Path
 from werkzeug.security import check_password_hash
 
 
-import secrets
 
 
 import signal
@@ -397,6 +396,34 @@ def inject_disk_alert():
 # Réglages contenant des secrets : masqués et non modifiables pour les comptes non administrateurs
 SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormglass_api_key', 'telegram_bot_token',
                       'telegram_authorized_users', 'porcupine_access_key', 'home_assistant_token', 'wifi_ssid', 'wifi_password']
+
+
+@app.before_request
+def guard_remote_requests():
+    """
+    Requêtes venues d'internet (Tailscale Funnel, marquées par nginx) : uniquement la page invités et ses fichiers,
+    et seulement avec le lien secret. Tout le reste (administration, photos) est introuvable.
+    """
+    from utils import remote_guests
+    if request.headers.get(remote_guests.REMOTE_HEADER) != "1":
+        return None
+    config = load_config()
+    if not config.get("remote_guests_enabled"):
+        abort(404)
+    if request.endpoint == "static":
+        if not remote_guests.static_allowed((request.view_args or {}).get("filename", "")):
+            abort(404)
+        return None
+    if request.endpoint not in remote_guests.ALLOWED_ENDPOINTS:
+        abort(404)
+    token = config.get("guest_link_token") or ""
+    given = request.args.get("k", "")
+    if token and given and secrets.compare_digest(given, token):
+        session["guest_link"] = token  # le lien a été ouvert : les envois suivants n'ont plus besoin du jeton
+        return None
+    if token and secrets.compare_digest(str(session.get("guest_link", "")), token):
+        return None
+    return render_template("guest_link_invalid.html.jinja"), 403
 
 
 @app.before_request
