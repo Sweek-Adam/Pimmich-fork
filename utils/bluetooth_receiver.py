@@ -138,8 +138,9 @@ def main():
     if not adapter:
         raise SystemExit("Aucun adaptateur Bluetooth")
     props = dbus.Interface(bus.get_object(BUS_NAME, adapter), "org.freedesktop.DBus.Properties")
-    props.Set("org.bluez.Adapter1", "Alias", dbus.String(DEVICE_NAME))
     props.Set("org.bluez.Adapter1", "Powered", dbus.Boolean(True))
+    # Le nom est fixé après la mise sous tension : BlueZ reprend sinon le nom de la machine
+    GLib.timeout_add_seconds(2, lambda: props.Set("org.bluez.Adapter1", "Alias", dbus.String(DEVICE_NAME)) and False)
     props.Set("org.bluez.Adapter1", "DiscoverableTimeout", dbus.UInt32(180))
     props.Set("org.bluez.Adapter1", "Pairable", dbus.Boolean(bool(props.Get("org.bluez.Adapter1", "Discoverable"))))
 
