@@ -120,3 +120,17 @@ def test_new_texts_are_translated(admin_client, lang, expected):
     html = admin_client.get(f"/configure?lang={lang}").get_data(as_text=True)
     assert expected in html
     assert "Comptes utilisateurs" not in html
+
+
+def test_guest_upload_page_is_installable_and_accepts_files(app_module, client):
+    import io
+    html = client.get("/upload").get_data(as_text=True)
+    assert 'rel="manifest"' in html and 'accept="image/*,video/*"' in html
+    manifest = client.get("/static/pwa/manifest.json").get_json()
+    assert manifest["start_url"] == "/upload"
+    for icon in manifest["icons"]:
+        assert client.get(icon["src"]).status_code == 200
+    resp = client.post("/handle_upload", data={"photos": (io.BytesIO(b"\xff\xd8\xff fake jpeg"), "vacances.jpg")},
+                       content_type="multipart/form-data", headers=SAME_ORIGIN)
+    assert resp.status_code == 302
+    assert any(p.name.startswith("vacances_") for p in app_module.PENDING_UPLOADS_DIR.iterdir())

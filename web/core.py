@@ -301,7 +301,7 @@ ensure_internal_token()
 
 
 # --- Limiter la taille des uploads ---
-app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # même limite que nginx (client_max_body_size)
 
 
 def get_locale():

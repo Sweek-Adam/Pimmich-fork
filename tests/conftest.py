@@ -28,6 +28,7 @@ for name in COPIED:
     elif src.exists():
         shutil.copy2(src, _SANDBOX / name)
 (_SANDBOX / "static").mkdir()
+shutil.copytree(PROJECT_DIR / "static" / "pwa", _SANDBOX / "static" / "pwa")
 (_SANDBOX / "config").mkdir()
 
 # Compte administrateur principal de test
