@@ -188,6 +188,7 @@ def configure():
         config["gdrive_auto_update"] = 'gdrive_auto_update' in request.form
         config["gdrive_recursive"] = 'gdrive_recursive' in request.form
         config["gdrive_trash_after_import"] = 'gdrive_trash_after_import' in request.form
+        config["hide_duplicates"] = 'hide_duplicates' in request.form
         # Dossiers Google Drive sélectionnés (valeurs "id|chemin"), liés à la méthode de connexion utilisée
         gdrive_backend = resolve_backend_name({"gdrive_backend": request.form.get('gdrive_backend', config.get('gdrive_backend', 'auto'))})
         config["gdrive_folders"] = [

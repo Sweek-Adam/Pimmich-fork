@@ -101,6 +101,12 @@
                         <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_messages">{{ _('Messages') }}</label>
                     </div>
+                    <hr class="my-3">
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="hide_duplicates" name="hide_duplicates" {% if config.get('hide_duplicates', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="hide_duplicates">{{ _("Masquer les photos en double entre les sources") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600">{{ _("Une même photo reçue par plusieurs sources (ex. Google Drive et Telegram) n'est affichée qu'une fois, de préférence celle mise en favori.") }}</p>
                 </fieldset>
                 <fieldset class="mt-4">
                     <legend>

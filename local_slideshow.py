@@ -25,6 +25,7 @@ from utils.metadata_utils import get_photo_metadata, load_photo_metadata_cache #
 from utils.config_manager import load_config
 from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
+from utils.dedup import remove_duplicates
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -2058,18 +2059,24 @@ def start_slideshow():
                 display_sources = config.get("display_sources", ["immich"])
                 slideshow_video_enabled = config.get("slideshow_video_enabled", True)
                 
-                all_media = []
+                candidates = []  # (source, photo de base)
                 for source in display_sources:
                     source_dir = PREPARED_BASE_DIR / source
                     if source_dir.is_dir():
-                        base_photos = [f for f in source_dir.iterdir() if f.is_file() and (f.suffix.lower() in ('.jpg', '.jpeg', '.png') or f.suffix.lower() in VIDEO_EXTENSIONS) and not f.name.endswith(('_polaroid.jpg', '_thumbnail.jpg', '_postcard.jpg'))]
+                        base_photos = sorted(f for f in source_dir.iterdir() if f.is_file() and (f.suffix.lower() in ('.jpg', '.jpeg', '.png') or f.suffix.lower() in VIDEO_EXTENSIONS) and not f.name.endswith(('_polaroid.jpg', '_thumbnail.jpg', '_postcard.jpg')))
                         for photo_path_obj in base_photos:
                             # Filtrer les vidéos si l'option est désactivée
                             if photo_path_obj.suffix.lower() in VIDEO_EXTENSIONS and not slideshow_video_enabled:
                                 continue
-                                
-                            path_to_display = get_path_to_display(photo_path_obj, source, filter_states)
-                            all_media.append(path_to_display)
+                            candidates.append((source, photo_path_obj))
+
+                # Même photo reçue par plusieurs sources : n'en garder qu'une (de préférence celle mise en favori)
+                if config.get("hide_duplicates", True):
+                    candidates.sort(key=lambda c: f"{c[0]}/{c[1].name}" not in favorites)  # tri stable : favoris d'abord
+                    kept = set(remove_duplicates([str(p) for _, p in candidates]))
+                    candidates = [c for c in candidates if str(c[1]) in kept]
+
+                all_media = [get_path_to_display(photo_path_obj, source, filter_states) for source, photo_path_obj in candidates]
                 
                 playlist = build_playlist(all_media, config, favorites)
                 random.shuffle(playlist)

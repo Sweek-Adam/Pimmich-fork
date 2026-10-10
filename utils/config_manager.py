@@ -36,6 +36,7 @@ def create_default_config():
         "gdrive_backend": "auto",
         "gdrive_rclone_remote": "",
         "gdrive_folders": [],
+        "hide_duplicates": True,
         "disk_alert_free_gb": 2,
         "disk_auto_cleanup": False,
         "backup_drive_enabled": False,
