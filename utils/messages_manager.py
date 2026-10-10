@@ -15,6 +15,10 @@ from utils.message_renderer import render_message, STYLES, DEFAULT_STYLE
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 MESSAGES_FILE = PROJECT_DIR / "config" / "messages.json"
 PREPARED_DIR = PROJECT_DIR / "static" / "prepared" / "messages"
+# Messages masqués : leur image est rangée hors du dossier lu par le diaporama
+HIDDEN_DIR = PROJECT_DIR / "static" / "messages_hidden"
+# File des médias à afficher en priorité au prochain démarrage du diaporama (le plus récent en premier)
+PRIORITY_FILE = PROJECT_DIR / "cache" / "priority_media.json"
 SOURCE_NAME = "messages"
 MAX_TITLE, MAX_BODY, MAX_SIGNATURE = 120, 1000, 80
 
@@ -35,8 +39,41 @@ def _save(messages):
     tmp.replace(MESSAGES_FILE)
 
 
-def image_path(message_id):
-    return PREPARED_DIR / f"{message_id}.jpg"
+def image_path(message_id, hidden=False):
+    return (HIDDEN_DIR if hidden else PREPARED_DIR) / f"{message_id}.jpg"
+
+
+def _path(message):
+    return image_path(message["id"], message.get("hidden", False))
+
+
+def _unlink_images(message_id):
+    image_path(message_id).unlink(missing_ok=True)
+    image_path(message_id, hidden=True).unlink(missing_ok=True)
+
+
+# --- File prioritaire : un nouveau message passe avant les autres (dernier arrivé, premier affiché) ---
+
+def push_priority(path):
+    with _lock:
+        try:
+            queue = json.loads(PRIORITY_FILE.read_text())
+        except (OSError, json.JSONDecodeError):
+            queue = []
+        queue = [str(path)] + [p for p in queue if p != str(path)]
+        PRIORITY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        PRIORITY_FILE.write_text(json.dumps(queue[:50]))
+
+
+def pop_priority():
+    """Retourne la file (le plus récent en premier) et la vide : chaque média n'est prioritaire qu'une fois."""
+    with _lock:
+        try:
+            queue = json.loads(PRIORITY_FILE.read_text())
+        except (OSError, json.JSONDecodeError):
+            return []
+        PRIORITY_FILE.unlink(missing_ok=True)
+    return [p for p in queue if Path(p).exists()]
 
 
 def validate(title, body, signature, style, expires):
@@ -93,6 +130,42 @@ def create_message(title, body, signature, style, expires, author, width, height
         messages = _load()
         messages.append(message)
         _save(messages)
+    push_priority(image_path(message["id"]))
+    return message
+
+
+def _update(message_id, **fields):
+    with _lock:
+        messages = _load()
+        for m in messages:
+            if m["id"] == message_id:
+                m.update(fields)
+                _save(messages)
+                return m
+    raise ValueError("Message introuvable.")
+
+
+def set_expires(message_id, expires):
+    """Change la date de fin d'affichage (None : sans limite)."""
+    if expires:
+        try:
+            expires_date = date.fromisoformat(expires)
+        except ValueError:
+            raise ValueError("Date de fin invalide.")
+        if expires_date < date.today():
+            raise ValueError("La date de fin est déjà passée.")
+        expires = expires_date.isoformat()
+    return _update(message_id, expires=expires or None)
+
+
+def set_hidden(message_id, hidden):
+    """Masque ou réaffiche un message dans le diaporama sans le supprimer."""
+    hidden = bool(hidden)
+    source, target = image_path(message_id, not hidden), image_path(message_id, hidden)
+    message = _update(message_id, hidden=hidden)
+    if source.exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        source.replace(target)
     return message
 
 
@@ -102,14 +175,14 @@ def delete_message(message_id):
         messages = _load()
         remaining = [m for m in messages if m["id"] != message_id]
         _save(remaining)
-    image_path(message_id).unlink(missing_ok=True)
+    _unlink_images(message_id)
     return len(remaining) != len(messages)
 
 
 def delete_all_messages():
     with _lock:
         for m in _load():
-            image_path(m["id"]).unlink(missing_ok=True)
+            _unlink_images(m["id"])
         _save([])
 
 
@@ -122,13 +195,13 @@ def purge_expired(today=None):
         if expired:
             _save([m for m in messages if m not in expired])
     for m in expired:
-        image_path(m["id"]).unlink(missing_ok=True)
+        _unlink_images(m["id"])
     return len(expired)
 
 
 def _render_to_file(m, width, height):
-    PREPARED_DIR.mkdir(parents=True, exist_ok=True)
-    render_message(m["title"], m["body"], m["signature"], m["style"], width, height).save(image_path(m["id"]), "JPEG", quality=90)
+    _path(m).parent.mkdir(parents=True, exist_ok=True)
+    render_message(m["title"], m["body"], m["signature"], m["style"], width, height).save(_path(m), "JPEG", quality=90)
 
 
 def rerender_all(width, height):
@@ -145,7 +218,7 @@ def ensure_images(width, height):
     from PIL import Image
     count = 0
     for m in list_messages():
-        path = image_path(m["id"])
+        path = _path(m)
         try:
             with Image.open(path) as image:
                 if image.size == (width, height):

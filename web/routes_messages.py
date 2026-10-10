@@ -64,3 +64,27 @@ def delete_message_api(message_id):
         return jsonify({"success": False, "message": _("Message introuvable.")}), 404
     _refresh_slideshow()
     return jsonify({"success": True, "message": _("Message supprimé.")})
+
+
+@app.route('/api/messages/<message_id>/expires', methods=['POST'])
+@login_required
+def set_message_expires_api(message_id):
+    data = request.get_json(silent=True) or {}
+    try:
+        message = messages_manager.set_expires(message_id, data.get("expires"))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    return jsonify({"success": True, "message": _("Date de fin enregistrée."), "item": message})
+
+
+@app.route('/api/messages/<message_id>/visibility', methods=['POST'])
+@login_required
+def set_message_visibility_api(message_id):
+    data = request.get_json(silent=True) or {}
+    try:
+        message = messages_manager.set_hidden(message_id, data.get("hidden", True))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 404
+    _refresh_slideshow()
+    text = _("Message masqué : il n'est plus affiché.") if message["hidden"] else _("Message de nouveau affiché.")
+    return jsonify({"success": True, "message": text, "item": message})

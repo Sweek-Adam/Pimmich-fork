@@ -77,3 +77,61 @@ def test_rerender_follows_screen_resolution():
     mm.rerender_all(180, 320)
     with Image.open(mm.image_path(message["id"])) as image:
         assert image.size == (180, 320)
+
+
+def test_new_messages_are_shown_first_newest_first():
+    mm.pop_priority()
+    first = mm.create_message("A", "a", "", "nuit", None, "admin", 320, 180)
+    second = mm.create_message("B", "b", "", "nuit", None, "invité", 320, 180, guest=True)
+    assert mm.pop_priority() == [str(mm.image_path(second["id"])), str(mm.image_path(first["id"]))]
+    assert mm.pop_priority() == []  # prioritaires une seule fois
+
+
+def test_slideshow_puts_priority_media_first(tmp_path):
+    import local_slideshow as ls
+    photos = [str(tmp_path / f"{n}.jpg") for n in ("p1", "p2", "msg_old", "msg_new")]
+    playlist = [photos[0], photos[2], photos[1], photos[3], photos[0]]  # favoris répétés possibles
+    queue = [photos[3], photos[2], str(tmp_path / "absent.jpg")]
+    result = ls.apply_priority(playlist, photos, queue)
+    assert result[:2] == [photos[3], photos[2]]
+    assert result.count(photos[3]) == 1 and result.count(photos[2]) == 1
+    assert result[2:] == [photos[0], photos[1], photos[0]]
+    assert ls.apply_priority(playlist, photos, []) == playlist
+
+
+def test_hide_and_show_message_without_deleting(user_client):
+    item = publish(user_client).get_json()["item"]
+    resp = user_client.post(f"/api/messages/{item['id']}/visibility", json={"hidden": True}, headers=SAME_ORIGIN)
+    assert resp.get_json()["item"]["hidden"]
+    assert not mm.image_path(item["id"]).exists()            # plus dans le dossier lu par le diaporama
+    assert mm.image_path(item["id"], hidden=True).exists()   # mais conservé
+    assert [m["id"] for m in mm.list_messages()] == [item["id"]]
+    user_client.post(f"/api/messages/{item['id']}/visibility", json={"hidden": False}, headers=SAME_ORIGIN)
+    assert mm.image_path(item["id"]).exists() and not mm.image_path(item["id"], hidden=True).exists()
+
+
+def test_hidden_message_image_is_regenerated_in_hidden_place():
+    message = mm.create_message("A", "a", "", "nuit", None, "admin", 320, 180)
+    mm.set_hidden(message["id"], True)
+    mm.image_path(message["id"], hidden=True).unlink()
+    assert mm.ensure_images(320, 180) == 1
+    assert mm.image_path(message["id"], hidden=True).exists() and not mm.image_path(message["id"]).exists()
+
+
+def test_admin_can_change_or_remove_expiry(user_client):
+    item = publish(user_client).get_json()["item"]
+    later = (date.today() + timedelta(days=30)).isoformat()
+    resp = user_client.post(f"/api/messages/{item['id']}/expires", json={"expires": later}, headers=SAME_ORIGIN)
+    assert resp.get_json()["item"]["expires"] == later
+    resp = user_client.post(f"/api/messages/{item['id']}/expires", json={"expires": None}, headers=SAME_ORIGIN)
+    assert resp.get_json()["item"]["expires"] is None
+    past = (date.today() - timedelta(days=1)).isoformat()
+    assert user_client.post(f"/api/messages/{item['id']}/expires", json={"expires": past}, headers=SAME_ORIGIN).status_code == 400
+    assert user_client.post("/api/messages/000000000000/expires", json={}, headers=SAME_ORIGIN).status_code == 400
+
+
+def test_deleting_hidden_message_removes_its_image():
+    message = mm.create_message("A", "a", "", "nuit", None, "admin", 320, 180)
+    mm.set_hidden(message["id"], True)
+    mm.delete_message(message["id"])
+    assert not mm.image_path(message["id"], hidden=True).exists()

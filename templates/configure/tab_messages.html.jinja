@@ -87,26 +87,71 @@
                         $("messages-empty").classList.toggle("hidden", data.messages.length > 0);
                         data.messages.forEach(m => {
                             const card = document.createElement("div");
-                            card.className = "border rounded-lg overflow-hidden bg-white shadow-sm";
+                            card.className = "border rounded-lg overflow-hidden bg-white shadow-sm" + (m.hidden ? " opacity-60" : "");
                             const img = document.createElement("img");
-                            img.src = `/static/prepared/messages/${m.id}.jpg?v=${encodeURIComponent(m.created)}`;
+                            img.src = `/static/${m.hidden ? 'messages_hidden' : 'prepared/messages'}/${m.id}.jpg?v=${encodeURIComponent(m.created)}`;
                             img.className = "w-full";
                             img.alt = m.title || m.body;
+
                             const info = document.createElement("div");
-                            info.className = "p-2 text-xs text-gray-600 flex justify-between items-center gap-2";
-                            const meta = document.createElement("span");
-                            meta.textContent = `${m.created}${m.author ? ' · ' + m.author : ''}${m.expires ? ' · ' + {{ _("jusqu'au")|tojson }} + ' ' + m.expires : ''}`;
+                            info.className = "p-2 text-xs text-gray-600 space-y-2";
+                            const meta = document.createElement("div");
+                            meta.className = "flex flex-wrap gap-1 items-center";
+                            const badge = (text, cls) => { const b = document.createElement("span"); b.className = `px-2 py-0.5 rounded-full ${cls}`; b.textContent = text; return b; };
+                            if (m.guest) meta.appendChild(badge({{ _("Invité")|tojson }}, "bg-blue-100 text-blue-800"));
+                            if (m.hidden) meta.appendChild(badge({{ _("Masqué")|tojson }}, "bg-gray-200 text-gray-700"));
+                            const when = document.createElement("span");
+                            when.textContent = `${m.created}${m.author ? ' · ' + m.author : ''}`;
+                            meta.appendChild(when);
+
+                            const row = document.createElement("div");
+                            row.className = "flex items-center gap-2";
+                            const label = document.createElement("label");
+                            label.textContent = {{ _("Jusqu'au :")|tojson }};
+                            const date = document.createElement("input");
+                            date.type = "date";
+                            date.value = m.expires || "";
+                            date.className = "text-xs p-1 border rounded flex-1";
+                            date.title = {{ _("Laisser vide pour afficher sans limite")|tojson }};
+                            const saveDate = document.createElement("button");
+                            saveDate.type = "button";
+                            saveDate.className = "bg-indigo-500 hover:bg-indigo-700 text-white py-1 px-2 rounded";
+                            saveDate.innerHTML = '<i class="fas fa-check"></i>';
+                            saveDate.title = {{ _("Enregistrer la date de fin")|tojson }};
+                            saveDate.addEventListener("click", async () => {
+                                const resp = await fetch(`/api/messages/${m.id}/expires`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ expires: date.value || null }) });
+                                const result = await resp.json();
+                                status(result.message, result.success);
+                                if (result.success) loadMessages();
+                            });
+                            row.append(label, date, saveDate);
+
+                            const actions = document.createElement("div");
+                            actions.className = "flex gap-2 justify-end";
+                            const toggle = document.createElement("button");
+                            toggle.type = "button";
+                            toggle.className = "bg-gray-500 hover:bg-gray-700 text-white py-1 px-2 rounded";
+                            toggle.innerHTML = m.hidden ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+                            toggle.title = m.hidden ? {{ _("Afficher de nouveau dans le diaporama")|tojson }} : {{ _("Masquer du diaporama sans supprimer")|tojson }};
+                            toggle.addEventListener("click", async () => {
+                                const resp = await fetch(`/api/messages/${m.id}/visibility`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ hidden: !m.hidden }) });
+                                const result = await resp.json();
+                                status(result.message, result.success);
+                                loadMessages();
+                            });
                             const del = document.createElement("button");
                             del.type = "button";
                             del.className = "bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded";
                             del.innerHTML = '<i class="fas fa-trash-alt"></i>';
-                            del.title = "{{ _('Supprimer ce message') }}";
+                            del.title = {{ _("Supprimer ce message")|tojson }};
                             del.addEventListener("click", async () => {
-                                if (!confirm("{{ _('Supprimer ce message ?') }}")) return;
+                                if (!confirm({{ _("Supprimer ce message ?")|tojson }})) return;
                                 await fetch(`/api/messages/${m.id}`, { method: 'DELETE' });
                                 loadMessages();
                             });
-                            info.append(meta, del);
+                            actions.append(toggle, del);
+
+                            info.append(meta, row, actions);
                             card.append(img, info);
                             list.appendChild(card);
                         });

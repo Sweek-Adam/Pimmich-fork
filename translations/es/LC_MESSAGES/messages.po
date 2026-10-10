@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 12:53+0200\n"
+"POT-Creation-Date: 2026-10-10 13:08+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: es <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:896
+#: local_slideshow.py:915
 msgid "Photos & messages"
 msgstr "Fotos y mensajes"
 
-#: local_slideshow.py:1081
+#: local_slideshow.py:1100
 msgid "Données de marée non disponibles"
 msgstr "Datos de mareas no disponibles"
 
-#: local_slideshow.py:1178
+#: local_slideshow.py:1197
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Aniversario) Hace %(num)d año"
 
-#: local_slideshow.py:1178
+#: local_slideshow.py:1197
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:2192
+#: local_slideshow.py:2214
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:2193
+#: local_slideshow.py:2215
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:2194
+#: local_slideshow.py:2216
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:2195
+#: local_slideshow.py:2217
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2196
+#: local_slideshow.py:2218
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:2222
+#: local_slideshow.py:2244
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -2294,15 +2294,39 @@ msgstr "Mensajes publicados"
 msgid "Aucun message publié."
 msgstr "Ningún mensaje publicado."
 
-#: templates/configure/tab_messages.html.jinja:98
-msgid "jusqu'au"
-msgstr "hasta el"
+#: templates/configure/tab_messages.html.jinja:101 web/routes_guests.py:328
+msgid "Invité"
+msgstr "Invitado"
 
-#: templates/configure/tab_messages.html.jinja:103
+#: templates/configure/tab_messages.html.jinja:102
+msgid "Masqué"
+msgstr "Oculto"
+
+#: templates/configure/tab_messages.html.jinja:110
+msgid "Jusqu'au :"
+msgstr "Hasta:"
+
+#: templates/configure/tab_messages.html.jinja:115
+msgid "Laisser vide pour afficher sans limite"
+msgstr "Dejar vacío para mostrar sin límite"
+
+#: templates/configure/tab_messages.html.jinja:120
+msgid "Enregistrer la date de fin"
+msgstr "Guardar la fecha de fin"
+
+#: templates/configure/tab_messages.html.jinja:135
+msgid "Afficher de nouveau dans le diaporama"
+msgstr "Volver a mostrar en la presentación"
+
+#: templates/configure/tab_messages.html.jinja:135
+msgid "Masquer du diaporama sans supprimer"
+msgstr "Ocultar de la presentación sin eliminar"
+
+#: templates/configure/tab_messages.html.jinja:146
 msgid "Supprimer ce message"
 msgstr "Eliminar este mensaje"
 
-#: templates/configure/tab_messages.html.jinja:105
+#: templates/configure/tab_messages.html.jinja:148
 msgid "Supprimer ce message ?"
 msgstr "¿Eliminar este mensaje?"
 
@@ -3418,10 +3442,6 @@ msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr ""
 "Ya has enviado varios mensajes: inténtalo de nuevo dentro de una hora."
 
-#: web/routes_guests.py:328
-msgid "Invité"
-msgstr "Invitado"
-
 #: web/routes_guests.py:339
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
@@ -3457,6 +3477,18 @@ msgstr "Mensaje no encontrado."
 #: web/routes_messages.py:66
 msgid "Message supprimé."
 msgstr "Mensaje eliminado."
+
+#: web/routes_messages.py:77
+msgid "Date de fin enregistrée."
+msgstr "Fecha de fin guardada."
+
+#: web/routes_messages.py:89
+msgid "Message masqué : il n'est plus affiché."
+msgstr "Mensaje oculto: ya no se muestra."
+
+#: web/routes_messages.py:89
+msgid "Message de nouveau affiché."
+msgstr "Mensaje mostrado de nuevo."
 
 #: web/routes_slideshow.py:379
 #, python-format

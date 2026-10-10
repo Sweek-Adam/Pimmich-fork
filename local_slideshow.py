@@ -26,6 +26,7 @@ from utils.config_manager import load_config
 from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
 from utils.dedup import remove_duplicates
+from utils.messages_manager import pop_priority
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -856,6 +857,24 @@ def control_fan(temperature, threshold=55, pin=14):
         # logger.info(f"Ventilateur activé (température : {temperature}°C, seuil : {threshold}°C)") # Commenté pour réduire le bruit dans les logs
     else:
         set_gpio_output(pin, False)
+
+def apply_priority(playlist, all_media, queue):
+    """
+    Place en tête de la playlist les médias de la file prioritaire (déjà dans l'ordre « dernier arrivé,
+    premier affiché ») qui font partie des médias affichables, sans les répéter ensuite.
+    """
+    available = {os.path.realpath(p): p for p in all_media}
+    priority = []
+    for p in queue:
+        real = os.path.realpath(p)
+        if real in available and available[real] not in priority:
+            priority.append(available[real])
+    if not priority:
+        return playlist
+    first = {os.path.realpath(p) for p in priority}
+    logger.info(f"[Diaporama] {len(priority)} nouveau(x) message(s) affiché(s) en premier")
+    return priority + [p for p in playlist if os.path.realpath(p) not in first]
+
 
 # --- QR code permanent vers la page invités (envoi de photos et de messages) ---
 _guest_qr_cache = {"ip": None, "ip_time": 0, "key": None, "surface": None}
@@ -2129,6 +2148,9 @@ def start_slideshow():
                 
                 playlist = build_playlist(all_media, config, favorites)
                 random.shuffle(playlist)
+
+                # Médias tout juste publiés (nouveaux messages) : affichés en premier, le plus récent d'abord
+                playlist = apply_priority(playlist, all_media, pop_priority())
             
             # --- Chargement de la police à chaque itération ---
             # C'est plus robuste, surtout après une réinitialisation de l'affichage.

@@ -144,6 +144,18 @@
   ]
  ],
  [
+  "/api/messages/<message_id>/expires",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/messages/<message_id>/visibility",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/messages/preview",
   [
    "POST"

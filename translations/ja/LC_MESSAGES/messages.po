@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 12:53+0200\n"
+"POT-Creation-Date: 2026-10-10 13:08+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:896
+#: local_slideshow.py:915
 msgid "Photos & messages"
 msgstr "写真とメッセージ"
 
-#: local_slideshow.py:1081
+#: local_slideshow.py:1100
 msgid "Données de marée non disponibles"
 msgstr "潮汐データは利用できません"
 
-#: local_slideshow.py:1178
+#: local_slideshow.py:1197
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:1178
+#: local_slideshow.py:1197
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:2192
+#: local_slideshow.py:2214
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:2193
+#: local_slideshow.py:2215
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:2194
+#: local_slideshow.py:2216
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:2195
+#: local_slideshow.py:2217
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2196
+#: local_slideshow.py:2218
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:2222
+#: local_slideshow.py:2244
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -2226,15 +2226,39 @@ msgstr "公開済みメッセージ"
 msgid "Aucun message publié."
 msgstr "公開済みのメッセージはありません。"
 
-#: templates/configure/tab_messages.html.jinja:98
-msgid "jusqu'au"
-msgstr "まで"
+#: templates/configure/tab_messages.html.jinja:101 web/routes_guests.py:328
+msgid "Invité"
+msgstr "ゲスト"
 
-#: templates/configure/tab_messages.html.jinja:103
+#: templates/configure/tab_messages.html.jinja:102
+msgid "Masqué"
+msgstr "非表示"
+
+#: templates/configure/tab_messages.html.jinja:110
+msgid "Jusqu'au :"
+msgstr "表示期限："
+
+#: templates/configure/tab_messages.html.jinja:115
+msgid "Laisser vide pour afficher sans limite"
+msgstr "空欄にすると期限なしで表示します"
+
+#: templates/configure/tab_messages.html.jinja:120
+msgid "Enregistrer la date de fin"
+msgstr "表示期限を保存"
+
+#: templates/configure/tab_messages.html.jinja:135
+msgid "Afficher de nouveau dans le diaporama"
+msgstr "スライドショーに再表示"
+
+#: templates/configure/tab_messages.html.jinja:135
+msgid "Masquer du diaporama sans supprimer"
+msgstr "削除せずにスライドショーから非表示"
+
+#: templates/configure/tab_messages.html.jinja:146
 msgid "Supprimer ce message"
 msgstr "このメッセージを削除"
 
-#: templates/configure/tab_messages.html.jinja:105
+#: templates/configure/tab_messages.html.jinja:148
 msgid "Supprimer ce message ?"
 msgstr "このメッセージを削除しますか？"
 
@@ -3309,10 +3333,6 @@ msgstr "プレビューが多すぎます。しばらくしてからもう一度
 msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr "すでに複数のメッセージを送信しています。1時間後にもう一度お試しください。"
 
-#: web/routes_guests.py:328
-msgid "Invité"
-msgstr "ゲスト"
-
 #: web/routes_guests.py:339
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
@@ -3348,6 +3368,18 @@ msgstr "メッセージが見つかりません。"
 #: web/routes_messages.py:66
 msgid "Message supprimé."
 msgstr "メッセージを削除しました。"
+
+#: web/routes_messages.py:77
+msgid "Date de fin enregistrée."
+msgstr "表示期限を保存しました。"
+
+#: web/routes_messages.py:89
+msgid "Message masqué : il n'est plus affiché."
+msgstr "メッセージを非表示にしました。表示されなくなります。"
+
+#: web/routes_messages.py:89
+msgid "Message de nouveau affiché."
+msgstr "メッセージを再表示しました。"
 
 #: web/routes_slideshow.py:379
 #, python-format
