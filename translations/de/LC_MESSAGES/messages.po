@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 22:50+0200\n"
+"POT-Creation-Date: 2026-10-10 22:54+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -2897,28 +2897,63 @@ msgstr "Anwendungsaktualisierung"
 
 #: templates/configure/tab_maintenance.html.jinja:153
 msgid ""
-"Cliquez sur le bouton pour rechercher et installer les\n"
-"                    dernières mises à jour de Pimmich depuis GitHub. "
-"L'application redémarrera automatiquement après la\n"
-"                    mise à jour."
+"Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
+"version ne démarre pas, le cadre revient tout seul à la version "
+"précédente."
 msgstr ""
-"Klicken Sie auf die Schaltfläche, um die neuesten Pimmich-Updates von "
-"GitHub zu suchen und zu installieren. Die Anwendung startet nach dem "
-"Update automatisch neu."
+"Pimmich aktualisiert sich über GitHub und startet dann neu. Startet die "
+"neue Version nicht, kehrt der Rahmen automatisch zur vorherigen Version "
+"zurück."
 
-#: templates/configure/tab_maintenance.html.jinja:158
+#: templates/configure/tab_maintenance.html.jinja:155
+msgid "Version installée :"
+msgstr "Installierte Version:"
+
+#: templates/configure/tab_maintenance.html.jinja:162
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "Update starten? Sie werden zur Tracking-Seite weitergeleitet."
 
-#: templates/configure/tab_maintenance.html.jinja:159
+#: templates/configure/tab_maintenance.html.jinja:163
 msgid "Lancer la mise à jour"
 msgstr "Starten Sie das Update"
 
 #: templates/configure/tab_maintenance.html.jinja:165
+msgid "Revenir à la version précédente"
+msgstr "Zur vorherigen Version zurückkehren"
+
+#: templates/configure/tab_maintenance.html.jinja:169
+msgid "Pimmich est à jour."
+msgstr "Pimmich ist auf dem neuesten Stand."
+
+#: templates/configure/tab_maintenance.html.jinja:169
+msgid "Mise à jour disponible :"
+msgstr "Update verfügbar:"
+
+#: templates/configure/tab_maintenance.html.jinja:169
+msgid "changement(s)"
+msgstr "Änderung(en)"
+
+#: templates/configure/tab_maintenance.html.jinja:170
+msgid "Impossible de joindre GitHub (connexion internet ?)."
+msgstr "GitHub ist nicht erreichbar (Internetverbindung?)."
+
+#: templates/configure/tab_maintenance.html.jinja:171
+msgid "Dernière mise à jour en cours de validation (redémarrage)."
+msgstr "Letztes Update wird überprüft (Neustart)."
+
+#: templates/configure/tab_maintenance.html.jinja:172
+msgid "Le cadre est revenu à une version précédente."
+msgstr "Der Rahmen ist zu einer früheren Version zurückgekehrt."
+
+#: templates/configure/tab_maintenance.html.jinja:173
+msgid "Revenir à la version précédente ? Pimmich va redémarrer."
+msgstr "Zur vorherigen Version zurückkehren? Pimmich startet neu."
+
+#: templates/configure/tab_maintenance.html.jinja:203
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SD-Kartendateisystem"
 
-#: templates/configure/tab_maintenance.html.jinja:167
+#: templates/configure/tab_maintenance.html.jinja:205
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -2931,11 +2966,11 @@ msgstr ""
 "den gesamten verfügbaren Speicherplatz zu nutzen. Zum Abschluss ist ein "
 "Neustart des Systems erforderlich."
 
-#: templates/configure/tab_maintenance.html.jinja:171
+#: templates/configure/tab_maintenance.html.jinja:209
 msgid "Note :"
 msgstr "Notiz :"
 
-#: templates/configure/tab_maintenance.html.jinja:171
+#: templates/configure/tab_maintenance.html.jinja:209
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
@@ -2944,15 +2979,15 @@ msgstr ""
 "Dieser Vorgang ist sicher und löscht keine Daten. Er bereitet das System "
 "lediglich darauf vor, sich beim nächsten Start zu erweitern."
 
-#: templates/configure/tab_maintenance.html.jinja:176
+#: templates/configure/tab_maintenance.html.jinja:214
 msgid "Étendre le système de fichiers"
 msgstr "Dateisystem erweitern"
 
-#: templates/configure/tab_maintenance.html.jinja:183
+#: templates/configure/tab_maintenance.html.jinja:221
 msgid "Contrôle du système"
 msgstr "Systemsteuerung"
 
-#: templates/configure/tab_maintenance.html.jinja:186
+#: templates/configure/tab_maintenance.html.jinja:224
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
@@ -2960,31 +2995,31 @@ msgstr ""
 "Sind Sie sicher, dass Sie NUR die Webanwendung neu starten möchten? Das "
 "Betriebssystem wird nicht neu gestartet."
 
-#: templates/configure/tab_maintenance.html.jinja:189
+#: templates/configure/tab_maintenance.html.jinja:227
 msgid "Redémarrer l'application web"
 msgstr "Starten Sie die Webanwendung neu"
 
-#: templates/configure/tab_maintenance.html.jinja:198
+#: templates/configure/tab_maintenance.html.jinja:236
 msgid "Redémarrer le système"
 msgstr "Starten Sie das System neu"
 
-#: templates/configure/tab_maintenance.html.jinja:206
+#: templates/configure/tab_maintenance.html.jinja:244
 msgid "Supprimer les logs"
 msgstr "Protokolle löschen"
 
-#: templates/configure/tab_maintenance.html.jinja:211
+#: templates/configure/tab_maintenance.html.jinja:249
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "Sind Sie sicher, dass Sie das System AUSSCHALTEN möchten?"
 
-#: templates/configure/tab_maintenance.html.jinja:214
+#: templates/configure/tab_maintenance.html.jinja:252
 msgid "Éteindre le système"
 msgstr "Fahren Sie das System herunter"
 
-#: templates/configure/tab_maintenance.html.jinja:219
+#: templates/configure/tab_maintenance.html.jinja:257
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Zurück zu Raspberry Pi OS (Desktop)"
 
-#: templates/configure/tab_maintenance.html.jinja:224
+#: templates/configure/tab_maintenance.html.jinja:262
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
@@ -4992,7 +5027,7 @@ msgstr "Musik nicht gefunden."
 msgid "Volume invalide."
 msgstr "Ungültige Lautstärke."
 
-#: web/routes_home.py:206 web/routes_system.py:627
+#: web/routes_home.py:206 web/routes_system.py:653
 msgid "Réglage invalide."
 msgstr "Ungültige Einstellung."
 
@@ -5304,26 +5339,38 @@ msgstr "Fehler während der Wiederherstellung: %(error)s"
 msgid "name_key"
 msgstr "name_key"
 
-#: web/routes_system.py:629
+#: web/routes_system.py:493
+msgid "Aucune version précédente connue."
+msgstr "Keine vorherige Version bekannt."
+
+#: web/routes_system.py:501
+msgid ""
+"Retour à la version précédente en cours : Pimmich redémarre dans quelques"
+" minutes."
+msgstr ""
+"Rückkehr zur vorherigen Version läuft: Pimmich startet in einigen Minuten"
+" neu."
+
+#: web/routes_system.py:655
 msgid "Réglages enregistrés."
 msgstr "Einstellungen gespeichert."
 
-#: web/routes_system.py:638
+#: web/routes_system.py:664
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr "Sicherung fehlgeschlagen: %(error)s"
 
-#: web/routes_system.py:639
+#: web/routes_system.py:665
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr "Sicherung an Google Drive gesendet: %(name)s"
 
-#: web/routes_system.py:648
+#: web/routes_system.py:674
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr "Wiederherstellung fehlgeschlagen: %(error)s"
 
-#: web/routes_system.py:652
+#: web/routes_system.py:678
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr ""

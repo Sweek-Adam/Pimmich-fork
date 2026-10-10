@@ -463,9 +463,9 @@ def update_app():
         if return_code == 0:
             yield stream_event({"stage": "RESTART", "percent": 100, "message": "Mise à jour terminée. Redémarrage du système en cours..."})
             def restart_server():
-                time.sleep(10)
-                print("[Update] Redémarrage du système suite à la mise à jour...")
-                subprocess.run(['sudo', '-n', 'reboot'], check=False)
+                time.sleep(5)
+                print("[Update] Redémarrage de Pimmich sur la nouvelle version...")
+                os._exit(42)  # start_pimmich.sh relance l'application (et le diaporama) : pas besoin de redémarrer le Pi
             
             restart_thread = threading.Thread(target=restart_server)
             restart_thread.start()
@@ -473,6 +473,32 @@ def update_app():
             yield stream_event({"type": "error", "message": f"La mise à jour a échoué. Le script a retourné le code d'erreur {return_code}."})
 
     return Response(generate(), mimetype='text/event-stream', headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
+
+
+@app.route('/api/update/check', methods=['GET'])
+@admin_required
+def update_check_api():
+    """Version installée, mises à jour disponibles et liste des changements."""
+    from utils import updater
+    return jsonify(updater.check(fetch=request.args.get("fetch", "1") != "0"))
+
+
+@app.route('/api/update/rollback', methods=['POST'])
+@admin_required
+def update_rollback_api():
+    """Revient à la version d'avant la dernière mise à jour, puis redémarre Pimmich."""
+    from utils import updater
+    previous = updater.previous_version()
+    if not previous:
+        return jsonify({"success": False, "message": _("Aucune version précédente connue.")}), 409
+    script = Path(app.root_path) / "update_script.sh"
+
+    def run():
+        subprocess.run(["/bin/bash", str(script), "--rollback", previous], capture_output=True, timeout=1800)
+        time.sleep(2)
+        os._exit(42)  # relance sur la version précédente
+    threading.Thread(target=run, daemon=True).start()
+    return jsonify({"success": True, "message": _("Retour à la version précédente en cours : Pimmich redémarre dans quelques minutes.")})
 
 
 @app.route('/api/expand_filesystem', methods=['POST'])

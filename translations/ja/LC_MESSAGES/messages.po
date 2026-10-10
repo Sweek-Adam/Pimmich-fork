@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 22:50+0200\n"
+"POT-Creation-Date: 2026-10-10 22:54+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -2795,27 +2795,60 @@ msgstr "アプリケーションのアップデート"
 
 #: templates/configure/tab_maintenance.html.jinja:153
 msgid ""
-"Cliquez sur le bouton pour rechercher et installer les\n"
-"                    dernières mises à jour de Pimmich depuis GitHub. "
-"L'application redémarrera automatiquement après la\n"
-"                    mise à jour."
-msgstr ""
-"ボタンをクリックすると、GitHub から Pimmich "
-"の最新アップデートを確認してインストールします。アップデート後、アプリケーションは自動的に再起動します。"
+"Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
+"version ne démarre pas, le cadre revient tout seul à la version "
+"précédente."
+msgstr "Pimmich は GitHub から更新して再起動します。新しいバージョンが起動しない場合は、自動的に前のバージョンに戻ります。"
 
-#: templates/configure/tab_maintenance.html.jinja:158
+#: templates/configure/tab_maintenance.html.jinja:155
+msgid "Version installée :"
+msgstr "インストール済みのバージョン："
+
+#: templates/configure/tab_maintenance.html.jinja:162
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "アップデートを開始しますか?追跡ページにリダイレクトされます。"
 
-#: templates/configure/tab_maintenance.html.jinja:159
+#: templates/configure/tab_maintenance.html.jinja:163
 msgid "Lancer la mise à jour"
 msgstr "アップデートを開始する"
 
 #: templates/configure/tab_maintenance.html.jinja:165
+msgid "Revenir à la version précédente"
+msgstr "前のバージョンに戻す"
+
+#: templates/configure/tab_maintenance.html.jinja:169
+msgid "Pimmich est à jour."
+msgstr "Pimmich は最新です。"
+
+#: templates/configure/tab_maintenance.html.jinja:169
+msgid "Mise à jour disponible :"
+msgstr "アップデートがあります："
+
+#: templates/configure/tab_maintenance.html.jinja:169
+msgid "changement(s)"
+msgstr "件の変更"
+
+#: templates/configure/tab_maintenance.html.jinja:170
+msgid "Impossible de joindre GitHub (connexion internet ?)."
+msgstr "GitHub に接続できません（インターネット接続を確認してください）。"
+
+#: templates/configure/tab_maintenance.html.jinja:171
+msgid "Dernière mise à jour en cours de validation (redémarrage)."
+msgstr "最新のアップデートを確認中です（再起動）。"
+
+#: templates/configure/tab_maintenance.html.jinja:172
+msgid "Le cadre est revenu à une version précédente."
+msgstr "フォトフレームは前のバージョンに戻りました。"
+
+#: templates/configure/tab_maintenance.html.jinja:173
+msgid "Revenir à la version précédente ? Pimmich va redémarrer."
+msgstr "前のバージョンに戻しますか？Pimmich が再起動します。"
+
+#: templates/configure/tab_maintenance.html.jinja:203
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SDカードファイルシステム"
 
-#: templates/configure/tab_maintenance.html.jinja:167
+#: templates/configure/tab_maintenance.html.jinja:205
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -2826,56 +2859,56 @@ msgstr ""
 "イメージより大きい SD カードに Pimmich "
 "を書き込んだ場合は、このオプションでパーティションを拡張し、利用可能な容量をすべて使用できます。操作を完了するにはシステムの再起動が必要です。"
 
-#: templates/configure/tab_maintenance.html.jinja:171
+#: templates/configure/tab_maintenance.html.jinja:209
 msgid "Note :"
 msgstr "注記 ："
 
-#: templates/configure/tab_maintenance.html.jinja:171
+#: templates/configure/tab_maintenance.html.jinja:209
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
 " prochain démarrage."
 msgstr "この操作は安全で、データは削除されません。次回起動時に拡張されるようシステムを準備するだけです。"
 
-#: templates/configure/tab_maintenance.html.jinja:176
+#: templates/configure/tab_maintenance.html.jinja:214
 msgid "Étendre le système de fichiers"
 msgstr "ファイルシステムを拡張する"
 
-#: templates/configure/tab_maintenance.html.jinja:183
+#: templates/configure/tab_maintenance.html.jinja:221
 msgid "Contrôle du système"
 msgstr "システム制御"
 
-#: templates/configure/tab_maintenance.html.jinja:186
+#: templates/configure/tab_maintenance.html.jinja:224
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr "Web アプリケーションのみを再起動してもよろしいですか?オペレーティング システムは再起動されません。"
 
-#: templates/configure/tab_maintenance.html.jinja:189
+#: templates/configure/tab_maintenance.html.jinja:227
 msgid "Redémarrer l'application web"
 msgstr "Webアプリケーションを再起動します"
 
-#: templates/configure/tab_maintenance.html.jinja:198
+#: templates/configure/tab_maintenance.html.jinja:236
 msgid "Redémarrer le système"
 msgstr "システムを再起動します"
 
-#: templates/configure/tab_maintenance.html.jinja:206
+#: templates/configure/tab_maintenance.html.jinja:244
 msgid "Supprimer les logs"
 msgstr "ログの削除"
 
-#: templates/configure/tab_maintenance.html.jinja:211
+#: templates/configure/tab_maintenance.html.jinja:249
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "システムの電源を切ってもよろしいですか?"
 
-#: templates/configure/tab_maintenance.html.jinja:214
+#: templates/configure/tab_maintenance.html.jinja:252
 msgid "Éteindre le système"
 msgstr "システムをシャットダウンします"
 
-#: templates/configure/tab_maintenance.html.jinja:219
+#: templates/configure/tab_maintenance.html.jinja:257
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Raspberry Pi OS（デスクトップ）に戻す"
 
-#: templates/configure/tab_maintenance.html.jinja:224
+#: templates/configure/tab_maintenance.html.jinja:262
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
@@ -4797,7 +4830,7 @@ msgstr "音楽が見つかりません。"
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:206 web/routes_system.py:627
+#: web/routes_home.py:206 web/routes_system.py:653
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
@@ -5082,26 +5115,36 @@ msgstr "復元中のエラー: %(error)s"
 msgid "name_key"
 msgstr "名前キー"
 
-#: web/routes_system.py:629
+#: web/routes_system.py:493
+msgid "Aucune version précédente connue."
+msgstr "前のバージョンが見つかりません。"
+
+#: web/routes_system.py:501
+msgid ""
+"Retour à la version précédente en cours : Pimmich redémarre dans quelques"
+" minutes."
+msgstr "前のバージョンに戻しています。数分後に Pimmich が再起動します。"
+
+#: web/routes_system.py:655
 msgid "Réglages enregistrés."
 msgstr "設定を保存しました。"
 
-#: web/routes_system.py:638
+#: web/routes_system.py:664
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr "バックアップできません：%(error)s"
 
-#: web/routes_system.py:639
+#: web/routes_system.py:665
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr "バックアップを Google Drive に送信しました：%(name)s"
 
-#: web/routes_system.py:648
+#: web/routes_system.py:674
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr "復元できません：%(error)s"
 
-#: web/routes_system.py:652
+#: web/routes_system.py:678
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr "バックアップ %(name)s を復元しました（%(count)s 個のファイル）。ページを再読み込みしてください。"

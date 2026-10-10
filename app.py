@@ -52,6 +52,20 @@ if __name__ == '__main__':
         print("Le contrôle vocal est activé, démarrage du service...")
         start_voice_control()
 
+    # Après une mise à jour : version validée une fois l'application stable (sinon start_pimmich.sh revient en arrière)
+    def confirm_update():
+        import time
+        import urllib.request
+        from utils import updater
+        time.sleep(120)
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:5000/login", timeout=10) as resp:
+                if resp.status == 200 and updater.mark_healthy():
+                    print("[Mise à jour] Nouvelle version validée.")
+        except OSError:
+            pass
+    threading.Thread(target=confirm_update, daemon=True).start()
+
     # Écoute uniquement en local : l'accès réseau passe par nginx (port 80)
     app.run(host='127.0.0.1', port=5000)
 

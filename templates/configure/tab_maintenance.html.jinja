@@ -150,14 +150,52 @@
                 <legend>
                     <h3>{{ _("Mise à jour de l'application") }}</h3>
                 </legend>
-                <p class="text-sm text-gray-600 mb-3">{{ _("Cliquez sur le bouton pour rechercher et installer les
-                    dernières mises à jour de Pimmich depuis GitHub. L'application redémarrera automatiquement après la
-                    mise à jour.") }}</p>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle version ne démarre pas, le cadre revient tout seul à la version précédente.") }}</p>
+                <div class="update-box">
+                    <p><span class="muted">{{ _("Version installée :") }}</span> <code id="upd-current">…</code></p>
+                    <p id="upd-status" class="font-semibold mt-1"></p>
+                    <ul id="upd-changes" class="upd-changes hidden"></ul>
+                    <p id="upd-state" class="text-sm mt-2"></p>
+                </div>
                 <a href="/update" 
                    class="system-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
                    onclick="return confirm('{{ _('Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi.') }}')">
                     <i class="fas fa-cloud-download-alt mr-2"></i>{{ _("Lancer la mise à jour") }}
                 </a>
+                <button type="button" id="upd-rollback" class="btn-secondary ml-2 hidden"><i class="fas fa-undo mr-1"></i>{{ _("Revenir à la version précédente") }}</button>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { upToDate: {{ _("Pimmich est à jour.")|tojson }}, available: {{ _("Mise à jour disponible :")|tojson }}, changes: {{ _("changement(s)")|tojson }},
+                                    offline: {{ _("Impossible de joindre GitHub (connexion internet ?).")|tojson }},
+                                    pending: {{ _("Dernière mise à jour en cours de validation (redémarrage).")|tojson }},
+                                    rolled: {{ _("Le cadre est revenu à une version précédente.")|tojson }},
+                                    confirm: {{ _("Revenir à la version précédente ? Pimmich va redémarrer.")|tojson }} };
+                        let loaded = false;
+                        async function check() {
+                            if (loaded || !$("tab-maintenance").offsetParent) return;
+                            loaded = true;
+                            const d = await (await fetch("/api/update/check")).json();
+                            $("upd-current").textContent = d.current && d.current.sha ? `${d.current.sha} (${(d.current.date || "").slice(0, 10)})` : "?";
+                            if (!d.success) { $("upd-status").textContent = T.offline; return; }
+                            $("upd-status").textContent = d.behind ? `${T.available} ${d.behind} ${T.changes}` : T.upToDate;
+                            $("upd-status").className = "font-semibold mt-1 " + (d.behind ? "text-indigo-700" : "text-green-700");
+                            $("upd-changes").classList.toggle("hidden", !d.changes.length);
+                            $("upd-changes").innerHTML = "";
+                            d.changes.forEach(c => { const li = document.createElement("li"); li.textContent = c.title; $("upd-changes").appendChild(li); });
+                            const st = d.state || {};
+                            $("upd-state").textContent = st.status === "pending" ? T.pending : st.status === "rolled_back" ? T.rolled : "";
+                            $("upd-rollback").classList.toggle("hidden", !st.previous);
+                        }
+                        $("upd-rollback").addEventListener("click", async () => {
+                            if (!confirm(T.confirm)) return;
+                            const r = await (await fetch("/api/update/rollback", { method: "POST" })).json();
+                            $("upd-state").textContent = r.message;
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-maintenance'\"]").forEach(b => b.addEventListener("click", () => setTimeout(check, 50)));
+                        check();
+                    });
+                </script>
             </fieldset>
 
             <fieldset class="mt-6">

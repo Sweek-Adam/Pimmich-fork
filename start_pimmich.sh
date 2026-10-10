@@ -43,9 +43,21 @@ cleanup() {
     sleep 1 # Laisser le temps aux processus de se terminer
 }
 
+# Retour automatique à la version précédente si l'application plante en boucle juste après une mise à jour
+QUICK_CRASHES=0
+rollback_if_broken_update() {
+    local previous
+    previous=$(python3 -c 'import json,sys; s=json.load(open("config/.update_state.json")); print(s["previous"] if s.get("status")=="pending" else "")' 2>/dev/null)
+    if [ -n "$previous" ]; then
+        echo "📟📟$(date +'%d-%m %H:%M:%S') 📟 ⏪ La nouvelle version plante au démarrage : retour à la version précédente ($previous)..." >> logs/pimmich.log
+        ./update_script.sh --rollback "$previous" >> logs/pimmich.log 2>&1 || true
+    fi
+}
+
 while true; do
     # Nettoyer avant chaque lancement
     cleanup
+    STARTED_AT=$(date +%s)
 
 		echo "📟📟$(date +'%d-%m %H:%M:%S') 📟 ================================================================" >> logs/pimmich.log
 		echo "📟📟$(date +'%d-%m %H:%M:%S') 📟 🚀 Lancement de l'application Pimmich... 🚀🚀🚀🚀🚀🚀🚀🚀🚀" >> logs/pimmich.log
@@ -72,6 +84,15 @@ while true; do
     fi
 
     if [ $exit_code -ne $RESTART_CODE ]; then
+        if [ $(( $(date +%s) - STARTED_AT )) -lt 90 ]; then
+            QUICK_CRASHES=$((QUICK_CRASHES + 1))
+        else
+            QUICK_CRASHES=0
+        fi
+        if [ $QUICK_CRASHES -ge 3 ]; then
+            rollback_if_broken_update
+            QUICK_CRASHES=0
+        fi
         echo "📟📟$(date +'%d-%m %H:%M:%S') 📟 🔄 Redémarrage demandé dans 5s..." >> logs/pimmich.log
         sleep 5 # Pause de sécurité pour éviter une boucle rapide en cas de crash
         continue

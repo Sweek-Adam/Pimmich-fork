@@ -667,6 +667,18 @@
   ]
  ],
  [
+  "/api/update/check",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/update/rollback",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/update_app",
   [
    "GET"
