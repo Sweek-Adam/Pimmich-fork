@@ -2521,9 +2521,7 @@ def cancel_import():
 @app.route('/api/playlists/play', methods=['POST'])
 @login_or_internal_required
 def play_playlist():
-    # Sécurité : n'accepter que les requêtes venant de la machine elle-même (contrôle vocal) ou d'un utilisateur connecté
-    if not session.get('logged_in') and request.remote_addr != '127.0.0.1':
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
 
     data = request.get_json()
     playlist_id = data.get('id')
@@ -2579,10 +2577,7 @@ def restart_standard_slideshow():
 @login_or_internal_required
 def toggle_sleep_api():
     """Bascule l'état du diaporama (actif/veille). Pour utilisation avec un bouton physique."""
-    # Sécurité : n'accepter que les requêtes venant de la machine elle-même
-    if request.remote_addr != '127.0.0.1':
-        logger.warning(f"Tentative d'accès non autorisé à toggle_sleep depuis {request.remote_addr}")
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
     
     try:
         if is_slideshow_running():
@@ -2893,8 +2888,7 @@ def system_shutdown():
 @login_or_internal_required
 def display_power():
     """Allume ou éteint l'écran."""
-    if request.remote_addr != '127.0.0.1':
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
     
     data = request.get_json()
     state = data.get('state') # 'on' or 'off'
@@ -2918,8 +2912,7 @@ def display_power():
 @login_or_internal_required
 def play_source_as_playlist(source_name):
     """Joue toutes les photos d'une source donnée comme une playlist."""
-    if request.remote_addr != '127.0.0.1':
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
 
     source_dir = PREPARED_DIR / source_name
     if not source_dir.is_dir():
@@ -2951,10 +2944,7 @@ def play_source_as_playlist(source_name):
 @login_or_internal_required
 def toggle_source():
     """Active ou désactive une source dans la configuration."""
-    app.logger.info(f"API /api/sources/toggle reçue de {request.remote_addr}")
-    if request.remote_addr != '127.0.0.1':
-        app.logger.warning(f"Accès non autorisé à /api/sources/toggle de {request.remote_addr}")
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
         
     data = request.get_json()
     source_name = data.get('source')
@@ -2995,9 +2985,7 @@ def toggle_source():
 @login_or_internal_required
 def set_slideshow_duration():
     """Modifie la durée d'affichage des photos et redémarre le diaporama."""
-    # Sécurité : n'accepter que les requêtes venant de la machine elle-même
-    if request.remote_addr != '127.0.0.1':
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
     
     data = request.get_json()
     duration = data.get('duration')
@@ -3053,8 +3041,7 @@ def slideshow_toggle_pause():
 @login_or_internal_required
 def toggle_notifications_api():
     """Bascule l'affichage des notifications sur le diaporama."""
-    if not session.get('logged_in') and request.remote_addr != '127.0.0.1':
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
     
     try:
         config = load_config()

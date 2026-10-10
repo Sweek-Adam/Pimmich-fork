@@ -259,7 +259,10 @@ def process_command(command_text, lang='fr'):
             # Mapper les noms de source parlés aux noms techniques
             source_map = {
                 "samba": "samba", "immich": "immich", "usb": "usb", "u s b": "usb",
-                "telegram": "telegram", "smartphone": "smartphone"            }
+                "telegram": "telegram", "smartphone": "smartphone",
+                "google drive": "gdrive", "drive": "gdrive",
+                "invités": "invités", "guests": "invités",
+            }
             
             if action and source_name in source_map:
                 play_sound('command_source_toggle')
@@ -432,14 +435,14 @@ def main():
                 "photo", "suivante", "précédente", "pause", "lecture", "lance", "lancer", "la", "playlist",
                 "éteindre", "le", "cadre", "passer", "en", "mode", "veille", "réveiller", "revenir", "au", "diaporama", "principal",
                 "afficher", "les", "cartes", "postales", "reçues", "activer", "désactiver", "source", "samba", "immich",
-                "usb", "u", "s", "b", "telegram", "smartphone",
+                "usb", "u", "s", "b", "telegram", "smartphone", "google", "drive", "invités",
                 "durée", "pendant", "secondes", "cinq", "dix", "quinze", "vingt", "trente", "soixante", "[unk]"
             ]
         else: # English
             base_commands = [
                 "photo", "next", "previous", "pause", "play", "playlist", "shut", "down", "the", "frame", "sleep", "mode", "return", "to", "main", "slideshow",
                 "wake", "up", "show", "postcards", "enable", "disable", "activate", "deactivate", "source", "samba", "immich", 
-                "usb", "telegram", "smartphone", "duration", "for", "seconds", "five", "ten", "fifteen", "twenty", "thirty", "sixty", "[unk]"
+                "usb", "telegram", "smartphone", "google", "drive", "guests", "duration", "for", "seconds", "five", "ten", "fifteen", "twenty", "thirty", "sixty", "[unk]"
             ]
 
         for name in playlist_names:
