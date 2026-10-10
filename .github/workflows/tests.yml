@@ -12,10 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Python 3.13 (comme Raspberry Pi OS Trixie)
+      - name: Python (dernière version stable)
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.x"
+          check-latest: true
           cache: pip
 
       - name: Polices (rendu des messages)

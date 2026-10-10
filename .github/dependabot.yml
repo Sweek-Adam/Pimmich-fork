@@ -1,0 +1,15 @@
+# Mises à jour automatiques des dépendances (une demande de fusion par mise à jour, testée par la CI)
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: [dépendances]
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    labels: [dépendances]
