@@ -193,6 +193,70 @@
                     </ul>
                     </p>
 
+                    <div class="mb-4 p-3 rounded-lg bg-gray-50" id="presence-box">
+                        <label class="flex items-center gap-2"><input type="checkbox" id="pr-enabled">
+                            <strong>{{ _("Réveil à l'arrivée d'un membre de la famille") }}</strong></label>
+                        <p class="text-sm text-gray-600 mt-1">{{ _("Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi après une absence, le cadre se réveille (30 minutes, même la nuit), affiche « Bienvenue à la maison » et peut lancer sa playlist.") }}</p>
+                        <ul id="pr-devices" class="pr-list"></ul>
+                        <details class="mt-2"><summary class="link">{{ _("Ajouter un téléphone vu sur le Wi-Fi") }}</summary>
+                            <p class="text-xs text-gray-500 my-1">{{ _("Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, sinon l'adresse change.") }}</p>
+                            <ul id="pr-detected" class="pr-list"></ul>
+                            <button type="button" id="pr-refresh" class="link">{{ _("Actualiser") }}</button>
+                        </details>
+                        <p id="pr-status" class="text-sm mt-1"></p>
+                    </div>
+                    <script>
+                        window.addEventListener("DOMContentLoaded", () => {
+                            const $ = (id) => document.getElementById(id);
+                            const T = { home: {{ _("à la maison")|tojson }}, away: {{ _("absent")|tojson }}, name: {{ _("Prénom")|tojson }}, add: {{ _("Ajouter")|tojson }},
+                                        remove: {{ _("Retirer")|tojson }}, noPlaylist: {{ _("Pas de playlist")|tojson }}, none: {{ _("Aucun appareil détecté.")|tojson }} };
+                            let devices = [], playlists = [];
+                            const save = async () => {
+                                const r = await (await fetch("/api/presence", { method: "POST", headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({ enabled: $("pr-enabled").checked, devices }) })).json();
+                                $("pr-status").textContent = r.message || ""; $("pr-status").className = "text-sm mt-1 " + (r.success ? "text-green-700" : "text-red-600");
+                            };
+                            function render(data) {
+                                $("pr-enabled").checked = data.enabled;
+                                devices = data.devices.map(d => ({ mac: d.mac, name: d.name, playlist: d.playlist }));
+                                $("pr-devices").innerHTML = "";
+                                data.devices.forEach((d, i) => {
+                                    const li = document.createElement("li");
+                                    const dot = document.createElement("span"); dot.className = "pr-dot" + (d.present ? " on" : ""); dot.title = d.present ? T.home : T.away;
+                                    const name = document.createElement("input"); name.value = d.name || ""; name.placeholder = T.name; name.maxLength = 40;
+                                    name.addEventListener("change", () => { devices[i].name = name.value; save(); });
+                                    const pl = document.createElement("select");
+                                    pl.add(new Option(T.noPlaylist, ""));
+                                    playlists.forEach(p => pl.add(new Option(p.name, p.id)));
+                                    pl.value = d.playlist || "";
+                                    pl.addEventListener("change", () => { devices[i].playlist = pl.value || null; save(); });
+                                    const rm = document.createElement("button"); rm.type = "button"; rm.className = "link text-red-600"; rm.textContent = T.remove;
+                                    rm.addEventListener("click", async () => { devices.splice(i, 1); await save(); load(); });
+                                    const mac = document.createElement("small"); mac.className = "muted"; mac.textContent = d.mac;
+                                    li.append(dot, name, mac, pl, rm);
+                                    $("pr-devices").appendChild(li);
+                                });
+                                $("pr-detected").innerHTML = data.detected.length ? "" : `<li class="muted">${T.none}</li>`;
+                                data.detected.forEach(n => {
+                                    const li = document.createElement("li");
+                                    const label = document.createElement("span"); label.textContent = `${n.name || n.ip} · ${n.mac}`;
+                                    const add = document.createElement("button"); add.type = "button"; add.className = "link"; add.textContent = T.add;
+                                    add.addEventListener("click", async () => { devices.push({ mac: n.mac, name: (n.name || "").replace(/^(iPhone|Galaxy|Pixel)[-_ ]?(de[-_ ])?/i, ""), playlist: null }); await save(); load(); });
+                                    li.append(label, add);
+                                    $("pr-detected").appendChild(li);
+                                });
+                            }
+                            async function load() {
+                                const [data, pls] = await Promise.all([fetch("/api/presence").then(r => r.json()), fetch("/api/playlists").then(r => r.json())]);
+                                playlists = Array.isArray(pls) ? pls : [];
+                                render(data);
+                            }
+                            $("pr-enabled").addEventListener("change", save);
+                            $("pr-refresh").addEventListener("click", load);
+                            document.querySelectorAll(".tablink[onclick*=\"'tab-affichage'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                            load();
+                        });
+                    </script>
                     <div class="mb-4 p-3 rounded-lg bg-gray-50">
                         <label class="flex items-center gap-2"><input type="checkbox" name="cec_enabled" {% if config.get('cec_enabled') %}checked{% endif %}>
                             <strong>{{ _("Piloter la télévision par HDMI-CEC") }}</strong></label>

@@ -251,6 +251,11 @@
         @media (max-width: 860px) { .pl-grid { grid-template-columns: repeat(3, 1fr); } }
         .picker-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
         .picker-presets.hidden { display: none; }
+        .pr-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+        .pr-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; background: #fff; border-radius: 10px; padding: 6px 10px; }
+        .pr-list input { border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; width: 140px; }
+        .pr-dot { width: 10px; height: 10px; border-radius: 999px; background: #cbd5e1; }
+        .pr-dot.on { background: var(--ok); }
         .lp-list { display: grid; gap: 8px; }
         .lp-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 12px; background: var(--bg); border: 2px solid transparent; }
         .lp-card.active { border-color: var(--ok); background: #f0fdf4; }

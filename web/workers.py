@@ -561,3 +561,68 @@ def maintenance_worker():
         except Exception as e:
             logger.error(f"[Maintenance] Erreur : {e}", exc_info=True)
         time.sleep(MAINTENANCE_INTERVAL)
+
+
+# --- Présence : accueil des membres de la famille qui rentrent à la maison ---
+
+PRESENCE_WAKE_MINUTES = 30
+
+
+def handle_arrival(device, config):
+    """Un téléphone de la famille revient : réveil du cadre, mot d'accueil, playlist de la personne."""
+    from utils import presence
+    name = (device.get("name") or "").strip() or _("vous")
+    logger.info(f"🏠 Présence : arrivée de {name}")
+    try:
+        state = presence.load_state()
+        entry = state.setdefault(device["mac"].lower(), {})
+        if entry.get("welcome_id"):  # un seul mot d'accueil par personne
+            try:
+                messages_manager.delete_message(entry["welcome_id"])
+            except ValueError:
+                pass
+        tomorrow = (datetime.now() + timedelta(days=1)).date().isoformat()
+        message = messages_manager.create_message("", _("Bienvenue à la maison, %(name)s !", name=name), "", "festif", tomorrow, "Pimmich",
+                                                  config.get("display_width", 1920), config.get("display_height", 1080))
+        entry["welcome_id"] = message["id"]
+        presence.save_state(state)
+    except Exception as e:
+        logger.warning(f"🏠 Mot d'accueil impossible : {e}")
+    if not is_slideshow_running():  # en dehors des heures : réveil pour un moment
+        config = dict(load_config())
+        config["manual_override"] = "start"
+        config["presence_wake_until"] = time.time() + PRESENCE_WAKE_MINUTES * 60
+        save_config(config)
+        set_display_power(on=True)
+        time.sleep(3)
+        start_slideshow()
+    if device.get("playlist"):
+        try:
+            from web.routes_slideshow import start_photo_playlist
+            start_photo_playlist(device["playlist"])
+        except Exception as e:
+            logger.warning(f"🏠 Playlist de {name} non lancée : {e}")
+
+
+def presence_worker():
+    """Surveille toutes les 30 s les téléphones de la famille sur le Wi-Fi."""
+    from utils import presence
+    while True:
+        try:
+            config = load_config()
+            devices = config.get("presence_devices") or []
+            if config.get("presence_enabled") and devices:
+                for device in presence.tick(devices):
+                    with app.app_context():
+                        handle_arrival(device, config)
+            # Fin du réveil « arrivée » : le cadre reprend ses heures normales
+            until = config.get("presence_wake_until")
+            if until and time.time() > until:
+                config = dict(load_config())
+                config.pop("presence_wake_until", None)
+                if config.get("manual_override") == "start" and not is_active_hours(config):
+                    config["manual_override"] = None
+                save_config(config)
+        except Exception as e:
+            logger.warning(f"🏠 Présence : {e}")
+        time.sleep(30)

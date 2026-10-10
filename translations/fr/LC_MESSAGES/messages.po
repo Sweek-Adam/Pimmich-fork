@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:09+0200\n"
+"POT-Creation-Date: 2026-10-10 23:12+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -584,6 +584,7 @@ msgid "Toutes"
 msgstr ""
 
 #: templates/configure/_playlist_builder.html.jinja:40
+#: templates/configure/tab_affichage.html.jinja:212
 msgid "Retirer"
 msgstr ""
 
@@ -1930,78 +1931,130 @@ msgid "Exemples d'URLs :"
 msgstr ""
 
 #: templates/configure/tab_affichage.html.jinja:198
-msgid "Piloter la télévision par HDMI-CEC"
+msgid "Réveil à l'arrivée d'un membre de la famille"
 msgstr ""
 
 #: templates/configure/tab_affichage.html.jinja:199
+msgid ""
+"Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi "
+"après une absence, le cadre se réveille (30 minutes, même la nuit), "
+"affiche « Bienvenue à la maison » et peut lancer sa playlist."
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:201
+msgid "Ajouter un téléphone vu sur le Wi-Fi"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:202
+msgid ""
+"Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
+"Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
+"sinon l'adresse change."
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:204
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:211
+msgid "à la maison"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:211
+msgid "absent"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:211
+msgid "Prénom"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:211
+msgid "Ajouter"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:212
+msgid "Pas de playlist"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:212
+msgid "Aucun appareil détecté."
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:262
+msgid "Piloter la télévision par HDMI-CEC"
+msgstr ""
+
+#: templates/configure/tab_affichage.html.jinja:263
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
 "veille avec lui. Activez aussi « HDMI-CEC » (Anynet+, Bravia Sync, "
 "SimpLink...) dans les réglages de la TV."
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:204
+#: templates/configure/tab_affichage.html.jinja:268
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:211
+#: templates/configure/tab_affichage.html.jinja:275
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:218
+#: templates/configure/tab_affichage.html.jinja:282
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:227
-#: templates/configure/tab_affichage.html.jinja:240
+#: templates/configure/tab_affichage.html.jinja:291
+#: templates/configure/tab_affichage.html.jinja:304
 msgid "Tester"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:231
+#: templates/configure/tab_affichage.html.jinja:295
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:244
+#: templates/configure/tab_affichage.html.jinja:308
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:249
+#: templates/configure/tab_affichage.html.jinja:313
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:252
+#: templates/configure/tab_affichage.html.jinja:316
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:258
+#: templates/configure/tab_affichage.html.jinja:322
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:264
+#: templates/configure/tab_affichage.html.jinja:328
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:272
+#: templates/configure/tab_affichage.html.jinja:336
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:277
+#: templates/configure/tab_affichage.html.jinja:341
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr ""
 
@@ -2740,11 +2793,6 @@ msgstr ""
 
 #: templates/configure/tab_logs.html.jinja:7
 msgid "Sélectionner un log :"
-msgstr ""
-
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
 msgstr ""
 
 #: templates/configure/tab_logs.html.jinja:16
@@ -4902,6 +4950,14 @@ msgstr ""
 msgid "Réglages du son enregistrés."
 msgstr ""
 
+#: web/routes_home.py:270
+msgid "Adresse d'appareil invalide."
+msgstr ""
+
+#: web/routes_home.py:276
+msgid "Réglages de présence enregistrés."
+msgstr ""
+
 #: web/routes_imports.py:424
 #, python-format
 msgid ""
@@ -5314,5 +5370,14 @@ msgstr ""
 
 #: web/workers.py:407
 msgid "Mise à jour automatique Google Drive désactivée."
+msgstr ""
+
+#: web/workers.py:574
+msgid "vous"
+msgstr ""
+
+#: web/workers.py:585
+#, python-format
+msgid "Bienvenue à la maison, %(name)s !"
 msgstr ""
 

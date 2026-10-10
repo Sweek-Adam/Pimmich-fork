@@ -241,3 +241,36 @@ def now_playing_cover():
     if not cover or cover.parent != now_playing.COVER_DIR or not cover.is_file():  # uniquement le dossier des pochettes
         return "", 404
     return send_file(cover, mimetype="image/jpeg", max_age=3600)
+
+
+# --- Présence : téléphones de la famille sur le Wi-Fi ---
+
+@app.route('/api/presence', methods=['GET'])
+@login_required
+def presence_api():
+    """Téléphones suivis (présents ou non) et appareils vus en ce moment sur le réseau."""
+    from utils import presence
+    config = load_config()
+    devices = config.get("presence_devices") or []
+    known = {d.get("mac", "").lower() for d in devices}
+    detected = [dict(n, name=presence.hostname(n["ip"])) for n in presence.neighbors() if n["mac"] not in known]
+    return jsonify({"success": True, "enabled": bool(config.get("presence_enabled")), "devices": presence.status(devices),
+                    "detected": detected[:40]})
+
+
+@app.route('/api/presence', methods=['POST'])
+@login_required
+def presence_save_api():
+    from utils import presence
+    data = request.get_json(silent=True) or {}
+    devices = []
+    for d in data.get("devices") or []:
+        mac = str(d.get("mac", "")).lower().strip()
+        if not presence.MAC.match(mac):
+            return jsonify({"success": False, "message": _("Adresse d'appareil invalide.")}), 400
+        devices.append({"mac": mac, "name": str(d.get("name", "")).strip()[:40], "playlist": str(d.get("playlist") or "")[:40] or None})
+    config = dict(load_config())
+    config["presence_enabled"] = bool(data.get("enabled"))
+    config["presence_devices"] = devices
+    save_config(config)
+    return jsonify({"success": True, "message": _("Réglages de présence enregistrés.")})
