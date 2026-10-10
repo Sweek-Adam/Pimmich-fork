@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:25+0200\n"
+"POT-Creation-Date: 2026-10-10 19:36+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -2803,7 +2803,7 @@ msgstr "組み写真（ここから開始、準備中）"
 msgid "Afficher maintenant"
 msgstr "今すぐ表示"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:174
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:175
 msgid "Musique du diaporama"
 msgstr "スライドショーの音楽"
 
@@ -2888,17 +2888,48 @@ msgstr ""
 "iPhone、iPad、Mac から、任意のアプリ（Deezer、Apple Music、YouTube など）の音声を「Cadre "
 "photo」に送信できます。"
 
-#: templates/configure/tab_son.html.jinja:70
+#: templates/configure/tab_son.html.jinja:71
+msgid ""
+"Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
+"fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
+" un nouvel appareil que pendant 3 minutes après un appui sur « Associer "
+"un téléphone »."
+msgstr ""
+"Android スマートフォン向け（Deezer、YouTube Music "
+"など）：一度ペアリングすれば、次からは自動で再接続されます。新しい機器を受け付けるのは「スマートフォンをペアリング」を押してから 3 "
+"分間だけです。"
+
+#: templates/configure/tab_son.html.jinja:73
+msgid "Associer un téléphone"
+msgstr "スマートフォンをペアリング"
+
+#: templates/configure/tab_son.html.jinja:79
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "これらの機能を有効にするには、Raspberry Pi で一度だけ次を実行してください："
 
-#: templates/configure/tab_son.html.jinja:79
+#: templates/configure/tab_son.html.jinja:88
 msgid "Actif"
 msgstr "有効"
 
-#: templates/configure/tab_son.html.jinja:79
+#: templates/configure/tab_son.html.jinja:88
 msgid "Non installé"
 msgstr "未インストール"
+
+#: templates/configure/tab_son.html.jinja:147
+msgid "Visible : choisissez « Cadre photo » sur le téléphone"
+msgstr "検出可能：スマートフォンで「Cadre photo」を選んでください"
+
+#: templates/configure/tab_son.html.jinja:147
+msgid "connecté"
+msgstr "接続中"
+
+#: templates/configure/tab_son.html.jinja:148
+msgid "Oublier"
+msgstr "削除"
+
+#: templates/configure/tab_son.html.jinja:148
+msgid "Aucun téléphone associé."
+msgstr "ペアリング済みのスマートフォンはありません。"
 
 #: templates/configure/tab_sources.html.jinja:4
 msgid "Configuration de l'album photo Immich"
@@ -4110,19 +4141,19 @@ msgstr "不明なレイアウトです。"
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "レイアウトを準備中です… 数秒で表示されます。"
 
-#: web/routes_home.py:154
+#: web/routes_home.py:155
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
-#: web/routes_home.py:158
+#: web/routes_home.py:159
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:162 web/routes_system.py:627
+#: web/routes_home.py:163 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
-#: web/routes_home.py:169
+#: web/routes_home.py:170
 msgid "Réglages du son enregistrés."
 msgstr "サウンド設定を保存しました。"
 
@@ -4168,6 +4199,32 @@ msgstr "メッセージを非表示にしました。表示されなくなりま
 #: web/routes_messages.py:89
 msgid "Message de nouveau affiché."
 msgstr "メッセージを再表示しました。"
+
+#: web/routes_music.py:22
+msgid "L'enceinte Bluetooth n'est pas installée."
+msgstr "Bluetooth スピーカーがインストールされていません。"
+
+#: web/routes_music.py:24
+msgid "Impossible de rendre le cadre visible en Bluetooth."
+msgstr "フォトフレームを Bluetooth で検出可能にできませんでした。"
+
+#: web/routes_music.py:26
+msgid ""
+"Le cadre est visible pendant 3 minutes : choisissez « Cadre photo » dans "
+"les réglages Bluetooth du téléphone."
+msgstr "3 分間検出可能です：スマートフォンの Bluetooth 設定で「Cadre photo」を選んでください。"
+
+#: web/routes_music.py:36
+msgid "Appareil inconnu."
+msgstr "不明な機器です。"
+
+#: web/routes_music.py:37
+msgid "Appareil oublié."
+msgstr "機器を削除しました。"
+
+#: web/routes_music.py:37
+msgid "Impossible d'oublier cet appareil."
+msgstr "この機器を削除できませんでした。"
 
 #: web/routes_playlists.py:78
 msgid "Disposition de la playlist enregistrée."

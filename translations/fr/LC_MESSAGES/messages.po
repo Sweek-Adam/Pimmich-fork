@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:25+0200\n"
+"POT-Creation-Date: 2026-10-10 19:36+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -2732,7 +2732,7 @@ msgstr ""
 msgid "Afficher maintenant"
 msgstr ""
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:174
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:175
 msgid "Musique du diaporama"
 msgstr ""
 
@@ -2811,16 +2811,44 @@ msgid ""
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
 msgstr ""
 
-#: templates/configure/tab_son.html.jinja:70
+#: templates/configure/tab_son.html.jinja:71
+msgid ""
+"Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
+"fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
+" un nouvel appareil que pendant 3 minutes après un appui sur « Associer "
+"un téléphone »."
+msgstr ""
+
+#: templates/configure/tab_son.html.jinja:73
+msgid "Associer un téléphone"
+msgstr ""
+
+#: templates/configure/tab_son.html.jinja:79
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr ""
 
-#: templates/configure/tab_son.html.jinja:79
+#: templates/configure/tab_son.html.jinja:88
 msgid "Actif"
 msgstr ""
 
-#: templates/configure/tab_son.html.jinja:79
+#: templates/configure/tab_son.html.jinja:88
 msgid "Non installé"
+msgstr ""
+
+#: templates/configure/tab_son.html.jinja:147
+msgid "Visible : choisissez « Cadre photo » sur le téléphone"
+msgstr ""
+
+#: templates/configure/tab_son.html.jinja:147
+msgid "connecté"
+msgstr ""
+
+#: templates/configure/tab_son.html.jinja:148
+msgid "Oublier"
+msgstr ""
+
+#: templates/configure/tab_son.html.jinja:148
+msgid "Aucun téléphone associé."
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:4
@@ -3987,19 +4015,19 @@ msgstr ""
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr ""
 
-#: web/routes_home.py:154
+#: web/routes_home.py:155
 msgid "Musique introuvable."
 msgstr ""
 
-#: web/routes_home.py:158
+#: web/routes_home.py:159
 msgid "Volume invalide."
 msgstr ""
 
-#: web/routes_home.py:162 web/routes_system.py:627
+#: web/routes_home.py:163 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr ""
 
-#: web/routes_home.py:169
+#: web/routes_home.py:170
 msgid "Réglages du son enregistrés."
 msgstr ""
 
@@ -4044,6 +4072,32 @@ msgstr ""
 
 #: web/routes_messages.py:89
 msgid "Message de nouveau affiché."
+msgstr ""
+
+#: web/routes_music.py:22
+msgid "L'enceinte Bluetooth n'est pas installée."
+msgstr ""
+
+#: web/routes_music.py:24
+msgid "Impossible de rendre le cadre visible en Bluetooth."
+msgstr ""
+
+#: web/routes_music.py:26
+msgid ""
+"Le cadre est visible pendant 3 minutes : choisissez « Cadre photo » dans "
+"les réglages Bluetooth du téléphone."
+msgstr ""
+
+#: web/routes_music.py:36
+msgid "Appareil inconnu."
+msgstr ""
+
+#: web/routes_music.py:37
+msgid "Appareil oublié."
+msgstr ""
+
+#: web/routes_music.py:37
+msgid "Impossible d'oublier cet appareil."
 msgstr ""
 
 #: web/routes_playlists.py:78

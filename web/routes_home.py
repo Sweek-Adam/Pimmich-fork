@@ -141,7 +141,8 @@ def sound_settings_api():
     return jsonify({"success": True, "background_music": config.get("background_music", ""), "music_volume": config.get("music_volume", 80),
                     "now_playing_display": config.get("now_playing_display", "change"),
                     "now_playing_position": config.get("now_playing_position", "bottom_left"),
-                    "files": files, "receivers": {"spotify": _service_active("pimmich-spotify"), "airplay": _service_active("pimmich-airplay")}})
+                    "files": files, "receivers": {"spotify": _service_active("pimmich-spotify"), "airplay": _service_active("pimmich-airplay"),
+                                  "bluetooth": _service_active("pimmich-bluetooth")}})
 
 
 @app.route('/api/sound', methods=['POST'])
@@ -171,7 +172,7 @@ def save_sound_settings_api():
 
 NOW_PLAYING_MODES = ("off", "change", "always")
 CORNERS = ("bottom_left", "bottom_right", "top_left", "top_right")
-SOURCE_LABELS = {"spotify": "Spotify", "airplay": "AirPlay", "pimmich": N_("Musique du diaporama")}
+SOURCE_LABELS = {"spotify": "Spotify", "airplay": "AirPlay", "bluetooth": "Bluetooth", "pimmich": N_("Musique du diaporama")}
 
 
 @app.route('/api/now_playing', methods=['GET'])

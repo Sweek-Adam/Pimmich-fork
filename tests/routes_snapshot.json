@@ -54,6 +54,24 @@
   ]
  ],
  [
+  "/api/bluetooth",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/bluetooth/forget",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/bluetooth/pair",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/cancel_import",
   [
    "POST"

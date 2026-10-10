@@ -66,6 +66,15 @@
                             <p>{{ _("Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle application (Deezer, Apple Music, YouTube...) vers « Cadre photo ».") }}</p>
                         </div>
                     </div>
+                    <div class="receiver mt-4">
+                        <h3><i class="fab fa-bluetooth-b text-blue-600"></i> Bluetooth <span id="recv-bluetooth" class="badge">…</span></h3>
+                        <p>{{ _("Pour les téléphones Android (Deezer, YouTube Music...) : associez une fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte un nouvel appareil que pendant 3 minutes après un appui sur « Associer un téléphone ».") }}</p>
+                        <div class="flex flex-wrap items-center gap-3 mt-3">
+                            <button type="button" id="bt-pair" class="btn-secondary"><i class="fab fa-bluetooth-b mr-1"></i>{{ _("Associer un téléphone") }}</button>
+                            <span id="bt-status" class="text-sm"></span>
+                        </div>
+                        <ul id="bt-devices" class="bt-devices"></ul>
+                    </div>
                     <div id="receivers-install" class="install-hint hidden">
                         <p>{{ _("Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :") }}</p>
                         <code>~/pimmich/utils/enable_music_receivers.sh</code>
@@ -134,7 +143,41 @@
                             await load();
                             if (data.success) { $("sound-music").value = e.target.files[0].name.replace(/[^\w.\-]/g, "_"); preview(); }
                         });
-                        load(); nowPlaying();
+                        // --- Bluetooth ---
+                        const BT = { visible: {{ _("Visible : choisissez « Cadre photo » sur le téléphone")|tojson }}, connected: {{ _("connecté")|tojson }},
+                                     forget: {{ _("Oublier")|tojson }}, none: {{ _("Aucun téléphone associé.")|tojson }} };
+                        async function loadBluetooth() {
+                            try {
+                                const data = await (await fetch('/api/bluetooth')).json();
+                                const badge = $("recv-bluetooth");
+                                badge.textContent = data.service ? ON : OFF; badge.className = "badge " + (data.service ? "on" : "off");
+                                $("bt-pair").disabled = !data.service;
+                                const list = $("bt-devices"); list.innerHTML = "";
+                                if (!data.devices.length && data.service) list.innerHTML = `<li class="muted">${BT.none}</li>`;
+                                data.devices.forEach(d => {
+                                    const li = document.createElement("li");
+                                    const name = document.createElement("span");
+                                    name.textContent = d.name + (d.connected ? ` · ${BT.connected}` : "");
+                                    if (d.connected) name.className = "text-green-700 font-semibold";
+                                    const btn = document.createElement("button");
+                                    btn.type = "button"; btn.className = "link"; btn.textContent = BT.forget;
+                                    btn.addEventListener("click", async () => {
+                                        const r = await (await fetch('/api/bluetooth/forget', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mac: d.mac }) })).json();
+                                        say(r.message, r.success); loadBluetooth();
+                                    });
+                                    li.append(name, btn); list.appendChild(li);
+                                });
+                                $("bt-status").textContent = data.discoverable ? BT.visible : "";
+                            } catch (e) { /* le cadre redémarre */ }
+                        }
+                        $("bt-pair").addEventListener("click", async () => {
+                            const data = await (await fetch('/api/bluetooth/pair', { method: 'POST' })).json();
+                            say(data.message, data.success);
+                            loadBluetooth();
+                        });
+                        setInterval(() => { if ($("tab-son").offsetParent) loadBluetooth(); }, 5000);
+
+                        load(); nowPlaying(); loadBluetooth();
                     });
                 </script>
             </div>

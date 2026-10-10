@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 19:25+0200\n"
+"POT-Creation-Date: 2026-10-10 19:36+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -2868,7 +2868,7 @@ msgstr "Composition (starts here, being prepared)"
 msgid "Afficher maintenant"
 msgstr "Show now"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:174
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:175
 msgid "Musique du diaporama"
 msgstr "Slideshow music"
 
@@ -2958,17 +2958,48 @@ msgstr ""
 "From an iPhone, iPad or Mac, send audio from any app (Deezer, Apple "
 "Music, YouTube...) to “Cadre photo”."
 
-#: templates/configure/tab_son.html.jinja:70
+#: templates/configure/tab_son.html.jinja:71
+msgid ""
+"Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
+"fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
+" un nouvel appareil que pendant 3 minutes après un appui sur « Associer "
+"un téléphone »."
+msgstr ""
+"For Android phones (Deezer, YouTube Music...): pair the phone once and it"
+" reconnects by itself afterwards. The frame only accepts a new device for"
+" 3 minutes after you press “Pair a phone”."
+
+#: templates/configure/tab_son.html.jinja:73
+msgid "Associer un téléphone"
+msgstr "Pair a phone"
+
+#: templates/configure/tab_son.html.jinja:79
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "To enable these features, run once on the Raspberry Pi:"
 
-#: templates/configure/tab_son.html.jinja:79
+#: templates/configure/tab_son.html.jinja:88
 msgid "Actif"
 msgstr "Active"
 
-#: templates/configure/tab_son.html.jinja:79
+#: templates/configure/tab_son.html.jinja:88
 msgid "Non installé"
 msgstr "Not installed"
+
+#: templates/configure/tab_son.html.jinja:147
+msgid "Visible : choisissez « Cadre photo » sur le téléphone"
+msgstr "Visible: choose “Cadre photo” on the phone"
+
+#: templates/configure/tab_son.html.jinja:147
+msgid "connecté"
+msgstr "connected"
+
+#: templates/configure/tab_son.html.jinja:148
+msgid "Oublier"
+msgstr "Forget"
+
+#: templates/configure/tab_son.html.jinja:148
+msgid "Aucun téléphone associé."
+msgstr "No phone paired."
 
 #: templates/configure/tab_sources.html.jinja:4
 msgid "Configuration de l'album photo Immich"
@@ -4202,19 +4233,19 @@ msgstr "Unknown layout."
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Preparing the layout... it will appear in a few seconds."
 
-#: web/routes_home.py:154
+#: web/routes_home.py:155
 msgid "Musique introuvable."
 msgstr "Music not found."
 
-#: web/routes_home.py:158
+#: web/routes_home.py:159
 msgid "Volume invalide."
 msgstr "Invalid volume."
 
-#: web/routes_home.py:162 web/routes_system.py:627
+#: web/routes_home.py:163 web/routes_system.py:627
 msgid "Réglage invalide."
 msgstr "Invalid setting."
 
-#: web/routes_home.py:169
+#: web/routes_home.py:170
 msgid "Réglages du son enregistrés."
 msgstr "Sound settings saved."
 
@@ -4260,6 +4291,34 @@ msgstr "Message hidden: it is no longer shown."
 #: web/routes_messages.py:89
 msgid "Message de nouveau affiché."
 msgstr "Message shown again."
+
+#: web/routes_music.py:22
+msgid "L'enceinte Bluetooth n'est pas installée."
+msgstr "The Bluetooth speaker is not installed."
+
+#: web/routes_music.py:24
+msgid "Impossible de rendre le cadre visible en Bluetooth."
+msgstr "Could not make the frame visible over Bluetooth."
+
+#: web/routes_music.py:26
+msgid ""
+"Le cadre est visible pendant 3 minutes : choisissez « Cadre photo » dans "
+"les réglages Bluetooth du téléphone."
+msgstr ""
+"The frame is visible for 3 minutes: choose “Cadre photo” in the phone's "
+"Bluetooth settings."
+
+#: web/routes_music.py:36
+msgid "Appareil inconnu."
+msgstr "Unknown device."
+
+#: web/routes_music.py:37
+msgid "Appareil oublié."
+msgstr "Device forgotten."
+
+#: web/routes_music.py:37
+msgid "Impossible d'oublier cet appareil."
+msgstr "Could not forget this device."
 
 #: web/routes_playlists.py:78
 msgid "Disposition de la playlist enregistrée."

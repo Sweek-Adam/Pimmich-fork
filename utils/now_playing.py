@@ -2,6 +2,7 @@
 Morceau en cours de lecture, quelle que soit la source :
 - « spotify » : librespot (Spotify Connect) appelle `utils/librespot_event.sh` à chaque événement ;
 - « airplay » : shairport-sync écrit ses métadonnées dans un tube, lu par `python -m utils.now_playing airplay` ;
+- « bluetooth » : titres AVRCP du téléphone, transmis par utils/bluetooth_receiver.py ;
 - « pimmich » : la musique de fond du diaporama (local_slideshow.py).
 L'état est partagé par un petit fichier JSON (lu par le diaporama et l'interface d'administration).
 Bibliothèque standard uniquement : le module est lancé par librespot, hors de l'application.
@@ -20,8 +21,8 @@ from pathlib import Path
 STATE_FILE = Path("/tmp/pimmich_now_playing.json")
 COVER_DIR = Path("/tmp/pimmich_covers")
 AIRPLAY_PIPE = Path("/tmp/shairport-sync-metadata")
-SOURCES = ("spotify", "airplay", "pimmich")
-EXTERNAL = ("spotify", "airplay")
+SOURCES = ("spotify", "airplay", "bluetooth", "pimmich")
+EXTERNAL = ("spotify", "airplay", "bluetooth")
 
 
 def _load():

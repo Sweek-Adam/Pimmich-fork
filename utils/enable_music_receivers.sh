@@ -17,6 +17,27 @@ fi
 sudo apt-get install -y shairport-sync
 sudo systemctl disable --now shairport-sync 2>/dev/null || true
 
+echo "=== Enceinte Bluetooth (A2DP) ==="
+sudo apt-get install -y rfkill python3-dbus python3-gi
+sudo rfkill unblock bluetooth
+# Classe « Audio / haut-parleur » : les téléphones affichent le cadre comme une enceinte
+if ! grep -q "^Class = 0x240414" /etc/bluetooth/main.conf; then
+    sudo sed -i 's/^#\?\s*Class = .*/Class = 0x240414/' /etc/bluetooth/main.conf
+    grep -q "^Class = 0x240414" /etc/bluetooth/main.conf || echo "Class = 0x240414" | sudo tee -a /etc/bluetooth/main.conf >/dev/null
+fi
+sudo systemctl enable bluetooth
+sudo systemctl restart bluetooth
+# WirePlumber : Bluetooth actif même sans session graphique ouverte
+mkdir -p "$HOME/.config/wireplumber/wireplumber.conf.d"
+cat > "$HOME/.config/wireplumber/wireplumber.conf.d/90-pimmich-bluetooth.conf" <<'CONF'
+wireplumber.profiles = {
+  main = {
+    monitor.bluez.seat-monitoring = disabled
+  }
+}
+CONF
+systemctl --user restart wireplumber || true
+
 # Services utilisateur : le son passe par PipeWire, comme les vidéos et la musique du diaporama
 mkdir -p "$UNIT_DIR"
 cat > "$UNIT_DIR/pimmich-spotify.service" <<UNIT
@@ -60,8 +81,24 @@ RestartSec=5
 [Install]
 WantedBy=default.target
 UNIT
+cat > "$UNIT_DIR/pimmich-bluetooth.service" <<UNIT
+[Unit]
+Description=Pimmich - enceinte Bluetooth
+After=pipewire-pulse.service
+
+[Service]
+WorkingDirectory=$PIMMICH_DIR
+# Python du système : il fournit dbus et gi
+ExecStart=/usr/bin/python3 -m utils.bluetooth_receiver
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+UNIT
 systemctl --user daemon-reload
-systemctl --user enable pimmich-spotify.service pimmich-airplay.service pimmich-airplay-meta.service
-systemctl --user restart pimmich-spotify.service pimmich-airplay.service pimmich-airplay-meta.service  # nouvelles options prises en compte
+SERVICES="pimmich-spotify.service pimmich-airplay.service pimmich-airplay-meta.service pimmich-bluetooth.service"
+systemctl --user enable $SERVICES
+systemctl --user restart $SERVICES  # nouvelles options prises en compte
 sudo loginctl enable-linger "$USER"  # les services démarrent avec le cadre, même sans session ouverte
-echo "✅ « $NAME » est disponible comme enceinte dans Spotify (Premium) et en AirPlay."
+echo "✅ « $NAME » est disponible comme enceinte dans Spotify (Premium), en AirPlay et en Bluetooth."

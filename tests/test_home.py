@@ -60,7 +60,7 @@ def test_sound_api(admin_client, sandbox):
     music.mkdir(parents=True, exist_ok=True)
     (music / "douce.mp3").write_bytes(b"ID3")
     data = admin_client.get("/api/sound").get_json()
-    assert "douce.mp3" in data["files"] and set(data["receivers"]) == {"spotify", "airplay"}
+    assert "douce.mp3" in data["files"] and set(data["receivers"]) == {"spotify", "airplay", "bluetooth"}
     resp = admin_client.post("/api/sound", json={"background_music": "douce.mp3", "music_volume": 150}, headers=SAME_ORIGIN)
     assert resp.get_json()["success"]
     from utils.config_manager import load_config
