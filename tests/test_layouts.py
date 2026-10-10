@@ -91,7 +91,7 @@ def no_restart(monkeypatch):
     from web import routes_slideshow
     calls = []
     monkeypatch.setattr(routes_slideshow, "is_slideshow_running", lambda: True)
-    monkeypatch.setattr(routes_slideshow, "restart_slideshow_for_update", lambda: calls.append(1))
+    monkeypatch.setattr(routes_slideshow, "restart_slideshow_for_update", lambda **kw: calls.append(1))
     return calls
 
 
