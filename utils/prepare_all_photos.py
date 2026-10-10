@@ -1,4 +1,5 @@
 import os
+import shutil
 from PIL import Image, ImageFilter, ImageDraw, ImageFont
 import json
 try:
@@ -345,6 +346,9 @@ def prepare_video(source_path, dest_path, output_width, output_height):
             '-y', str(tmp_path)
         ]
         
+        # Priorité basse : le diaporama reste fluide et le Raspberry Pi évite les pics de consommation
+        if shutil.which("nice"):
+            command = ["nice", "-n", "15", *command]
         result = subprocess.run(command, check=False, capture_output=True, text=True, encoding='utf-8')
         
         if result.returncode != 0:
@@ -370,6 +374,12 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
     """Prépare les photos et retourne des objets structurés pour le suivi."""
     if description_map is None:
         description_map = {}
+    # Ce fil de préparation passe après le diaporama et l'interface (Linux : priorité par fil d'exécution)
+    try:
+        import threading
+        os.setpriority(os.PRIO_PROCESS, threading.get_native_id(), 10)
+    except (AttributeError, OSError, PermissionError):
+        pass
     
     # Charger les textes saisis par l'utilisateur
     user_text_map = {}
