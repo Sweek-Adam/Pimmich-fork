@@ -192,6 +192,7 @@ def configure():
             config["compositions_disabled"] = [k for k in COMPOSITION_FORMATS if k not in checked]
             config.pop("compositions_styles", None)
             config["compositions_seasonal"] = 'compositions_seasonal' in request.form
+            config["compositions_full_photos"] = 'compositions_full_photos' in request.form
         config["immich_auto_update"] = 'immich_auto_update' in request.form
         config["random_content_in_album"] = "random_content_in_album" in request.form
         config["smb_auto_update"] = 'smb_auto_update' in request.form

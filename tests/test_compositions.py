@@ -71,12 +71,13 @@ def test_notes_for_compositions(kind):
 
 def test_composition_settings_are_saved(admin_client):
     from utils.config_manager import load_config
-    admin_client.post("/configure", data={"compositions_form": "1", "compositions_enabled": "on", "compositions_every": "7",
+    admin_client.post("/configure", data={"compositions_form": "1", "compositions_enabled": "on", "compositions_every": "7", "compositions_full_photos": "on",
                                           "compositions_styles": ["liege", "inconnu"]}, headers={"Sec-Fetch-Site": "same-origin"})
     config = load_config()
     from utils.compositions import enabled_formats
     assert config["compositions_every"] == 7 and enabled_formats(config) == ["liege"]
     assert config["compositions_enabled"] and not config["compositions_include_messages"] and not config["compositions_seasonal"]
+    assert config["compositions_full_photos"]
 
 
 from datetime import date
@@ -128,3 +129,33 @@ def test_titles_in_unsupported_scripts_are_skipped():
     assert canvas.getbbox() == (0, 0, 200, 100) and canvas.convert("L").getextrema() == (0, 0)
     themed._title(canvas, "Joyeux Noël – fête", themed.HAND2, 40, (255, 255, 255), (100, 50))
     assert canvas.convert("L").getextrema()[1] > 0
+
+
+@pytest.fixture()
+def full_photos():
+    comp.set_full_photos(True)
+    yield
+    comp.set_full_photos(True)
+
+
+def test_print_photo_keeps_the_whole_photo(full_photos):
+    portrait = Image.new("RGB", (300, 400), (200, 0, 0))
+    out = comp.print_photo(portrait, 400, 300)
+    assert abs(out.width / out.height - 0.75) < 0.02           # proportions conservées : rien n'est coupé
+    assert 0.8 < (out.width * out.height) / (400 * 300) < 1.05  # surface comparable à la boîte
+    comp.set_full_photos(False)
+    assert comp.print_photo(portrait, 400, 300).size == (400, 300)  # mode recadrage
+
+
+def test_cell_photo_shows_whole_photo_on_blurred_fill(full_photos):
+    photo = Image.new("RGB", (400, 300), (0, 0, 255))
+    cell = comp.cell_photo(photo, 300, 400)
+    assert cell.size == (300, 400)
+    assert cell.getpixel((150, 200)) == (0, 0, 255)       # la photo est au centre, entière (300 × 225)
+    assert cell.getpixel((150, 50)) != (0, 0, 255)        # au-dessus : fond flou assombri
+
+
+def test_proportional_widths(full_photos):
+    photos = [Image.new("RGB", (300, 400)), Image.new("RGB", (800, 400))]
+    widths = comp.proportional_widths(photos, 1000, 400)
+    assert abs(sum(widths) - 1000) < 1 and widths[1] > widths[0] * 2

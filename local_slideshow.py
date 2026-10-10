@@ -874,6 +874,7 @@ def prepare_composition_async(config, all_media, width, height):
     styles = compositions.enabled_formats(config)
     include_messages = config.get("compositions_include_messages", True)
     seasonal = config.get("compositions_seasonal", True)
+    compositions.set_full_photos(config.get("compositions_full_photos", True))
 
     def work():
         try:

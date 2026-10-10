@@ -45,7 +45,7 @@ def _seal(canvas, x, y, size, text="P"):
 
 def _ukiyoe_print(photo, size, rng):
     """Photo en estampe : passe-partout beige et fin liseré indigo."""
-    inner = base.framed(base.cover(photo, size * 0.78, size), max(4, size // 50), INDIGO).convert("RGB")
+    inner = base.framed(base.print_photo(photo, size * 0.78, size), max(4, size // 50), INDIGO).convert("RGB")
     return base.framed(inner, max(10, size // 16), (244, 234, 210))
 
 
@@ -147,7 +147,7 @@ def fuji(photos, message, W, H, rng):
     draw.rectangle([tx - tw * 0.42, ty - tw * 0.82, tx + tw * 0.42, ty - tw * 0.76], fill=red)
     draw.polygon([(tx - tw * 0.55, ty - tw * 1.02), (tx + tw * 0.55, ty - tw * 1.02), (tx + tw * 0.48, ty - tw * 0.92), (tx - tw * 0.48, ty - tw * 0.92)], fill=(30, 20, 20))
     size = int(min(H * 0.34, W * 0.6 / len(photos)))
-    elements = [base.framed(base.cover(p, size, size * 0.75), max(8, size // 22), (252, 248, 240)) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size * 0.75), max(8, size // 22), (252, 248, 240)) for p in photos]
     for i, element in enumerate(elements):
         x = W * (0.3 + 0.62 * (i + 0.5) / len(elements))
         _paste_with_shadow(canvas, base.rotated(element, rng.uniform(-4, 4)), base._inside((x, H * 0.78), element, W, H))
@@ -208,7 +208,7 @@ def synthwave(photos, message, W, H, rng):
     size = _photo_size(W, H, len(photos), 0.9)
     elements = []
     for p in photos:
-        photo = base.framed(base.cover(p, size, size * 0.75), max(4, size // 50), (60, 240, 255))
+        photo = base.framed(base.print_photo(p, size, size * 0.75), max(4, size // 50), (60, 240, 255))
         glow = Image.new("RGBA", (photo.width + size // 5, photo.height + size // 5), (0, 0, 0, 0))
         ImageDraw.Draw(glow).rectangle([size // 10, size // 10, glow.width - size // 10, glow.height - size // 10], fill=(60, 240, 255, 180))
         glow = glow.filter(ImageFilter.GaussianBlur(size // 20))
@@ -233,11 +233,11 @@ def seventies(photos, message, W, H, rng):
     size = _photo_size(W, H, len(photos), 0.95)
     elements = []
     for p in photos:
-        photo = base.cover(p, size, size).convert("RGBA")
+        photo = base.print_photo(p, size, size).convert("RGBA")
         mask = Image.new("L", photo.size, 0)
-        ImageDraw.Draw(mask).rounded_rectangle([0, 0, size - 1, size - 1], radius=size // 7, fill=255)
+        ImageDraw.Draw(mask).rounded_rectangle([0, 0, photo.width - 1, photo.height - 1], radius=size // 7, fill=255)
         photo.putalpha(mask)
-        card = Image.new("RGBA", (size + size // 8, size + size // 8), (0, 0, 0, 0))
+        card = Image.new("RGBA", (photo.width + size // 8, photo.height + size // 8), (0, 0, 0, 0))
         ImageDraw.Draw(card).rounded_rectangle([0, 0, card.width - 1, card.height - 1], radius=size // 6, fill=(255, 246, 225, 255))
         card.alpha_composite(photo, (size // 16, size // 16))
         elements.append(card)
@@ -267,7 +267,7 @@ def spring(photos, message, W, H, rng):
         petal = rng.choice([(255, 255, 255), (255, 190, 210), (255, 230, 120), (200, 180, 255)])
         _flower(draw, x, y, H * rng.uniform(0.018, 0.035), petal, (250, 190, 40), rng.choice([5, 6, 8]), rng.uniform(0, 1))
     size = _photo_size(W, H, len(photos), 0.92)
-    elements = [base.framed(base.cover(p, size, size * 0.8), max(8, size // 20), (255, 255, 255)) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size * 0.8), max(8, size // 20), (255, 255, 255)) for p in photos]
     _place_row(canvas, elements, H * 0.52, rng, 0.82, 0.04, 6)
     _title(canvas, _t(N_("Le printemps")), HAND2, int(H * 0.1), (80, 140, 80), (W / 2, H * 0.19), shadow=False)
     _message_note(canvas, message, rng, "postit", (0.88, 0.76), 0.17)
@@ -296,7 +296,7 @@ def autumn(photos, message, W, H, rng):
         _leaf(draw, rng.uniform(0, W), rng.uniform(0, H), H * rng.uniform(0.02, 0.045), rng.uniform(0, 6.3),
               rng.choice([(220, 80, 30), (240, 150, 30), (190, 50, 40), (250, 200, 60), (160, 90, 40)]), maple=rng.random() < 0.5)
     size = _photo_size(W, H, len(photos), 0.92)
-    elements = [base.framed(base.cover(p, size, size), max(8, size // 20), (252, 248, 240), bottom=max(8, size // 20) * 4) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size), max(8, size // 20), (252, 248, 240), bottom=max(8, size // 20) * 4) for p in photos]
     _place_row(canvas, elements, H * 0.53, rng, 0.82, 0.05, 9)
     _title(canvas, _t(N_("L'automne")), HAND2, int(H * 0.11), (110, 40, 20), (W / 2, H * 0.12), shadow=False)
     _message_note(canvas, message, rng, "fiche", (0.88, 0.85), 0.16)
@@ -320,7 +320,7 @@ def winter(photos, message, W, H, rng):
     size = _photo_size(W, H, len(photos), 0.88)
     elements = []
     for p in photos:
-        frame = base.framed(base.cover(p, size, size * 0.8), max(10, size // 14), (130, 85, 50))
+        frame = base.framed(base.print_photo(p, size, size * 0.8), max(10, size // 14), (130, 85, 50))
         fd = ImageDraw.Draw(frame)
         fd.ellipse([-size * 0.05, -size * 0.06, frame.width + size * 0.05, size * 0.09], fill=(252, 253, 255))  # neige sur le cadre
         elements.append(frame)
@@ -347,7 +347,7 @@ def birthday(photos, message, W, H, rng):
             draw.polygon([(bx, by + rh), (bx - rw * 0.15, by + rh * 1.15), (bx + rw * 0.15, by + rh * 1.15)], fill=color)
             draw.ellipse([bx - rw * 0.55, by - rh * 0.65, bx - rw * 0.2, by - rh * 0.25], fill=(255, 255, 255, 140))
     size = _photo_size(W, H, len(photos), 0.85)
-    elements = [base.framed(base.cover(p, size, size), max(8, size // 20), (255, 255, 255), bottom=max(8, size // 20) * 4) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size), max(8, size // 20), (255, 255, 255), bottom=max(8, size // 20) * 4) for p in photos]
     _place_row(canvas, elements, H * 0.56, rng, 0.7, 0.05, 8)
     _title(canvas, _t(N_("Joyeux anniversaire !")), MARKER, int(H * 0.08), (230, 60, 110), (W / 2, H * 0.12), shadow=False, max_width=W * 0.7)
     _message_note(canvas, message, rng, "postit", (0.5, 0.88), 0.15)
@@ -368,7 +368,7 @@ def cinema(photos, message, W, H, rng):
     size = int(min(_photo_size(W, H, len(photos), 1.0), W * 0.68 / len(photos) * 0.92))
     elements = []
     for p in photos:  # écrans entourés d'ampoules
-        photo = base.framed(base.cover(p, size, size * 0.62), max(14, size // 12), (40, 30, 26))
+        photo = base.framed(base.print_photo(p, size, size * 0.62), max(14, size // 12), (40, 30, 26))
         bulbs = Image.new("RGBA", photo.size, (0, 0, 0, 0))
         bd = ImageDraw.Draw(bulbs)
         step, r, m = max(18, size // 12), max(4, size // 60), max(7, size // 24)
@@ -392,13 +392,13 @@ def comic(photos, message, W, H, rng):
     draw = ImageDraw.Draw(canvas)
     gutter, border = int(H * 0.025), max(5, H // 140)
     n = len(photos)
-    widths = [rng.uniform(0.8, 1.2) for _ in range(n)]
-    total = sum(widths)
+    panel_widths = base.proportional_widths(photos, W - gutter * (n + 1), H * 0.92) if base.FULL_PHOTOS else \
+        [(W - gutter * (n + 1)) * f / sum(fs) for fs in [[rng.uniform(0.8, 1.2) for _ in range(n)]] for f in fs]
     x = gutter
     for i, photo in enumerate(photos):  # cases légèrement inclinées
-        w = (W - gutter * (n + 1)) * widths[i] / total
+        w = panel_widths[i]
         top, bottom = gutter + rng.uniform(0, H * 0.04), H - gutter - rng.uniform(0, H * 0.04)
-        panel = base.cover(photo, w, bottom - top)
+        panel = base.cell_photo(photo, w, bottom - top)
         dots = Image.new("L", panel.size, 0)  # trame de points façon impression BD
         dd = ImageDraw.Draw(dots)
         step = max(8, H // 120)
@@ -446,7 +446,7 @@ def travel_map(photos, message, W, H, rng):
     size = _photo_size(W, H, len(photos), 0.85)
     elements = []
     for p in photos:
-        photo = base.framed(base.cover(p, size, size * 0.78), max(6, size // 26), (250, 246, 236))
+        photo = base.framed(base.print_photo(p, size, size * 0.78), max(6, size // 26), (250, 246, 236))
         tape = base.tape_strip(int(size * 0.35), max(10, size // 12), rng)
         photo.alpha_composite(base.rotated(tape, rng.uniform(-8, 8)).resize((int(size * 0.35), max(10, size // 10))), (int(photo.width / 2 - size * 0.17), 0))
         elements.append(photo)
@@ -461,7 +461,7 @@ def old_album(photos, message, W, H, rng):
     size = _photo_size(W, H, len(photos), 0.92)
     elements = []
     for p in photos:
-        photo = base.cover(p, size, size * 0.8)
+        photo = base.print_photo(p, size, size * 0.8)
         photo = Image.blend(photo, photo.convert("L").convert("RGB"), 0.5)  # couleurs passées
         card = base.framed(photo, max(10, size // 16), (244, 240, 228))
         cd = ImageDraw.Draw(card)

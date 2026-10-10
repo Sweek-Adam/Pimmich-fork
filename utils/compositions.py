@@ -68,6 +68,49 @@ def fit_inside(image, max_w, max_h):
     return image.resize((max(1, int(image.width * scale)), max(1, int(image.height * scale))), Image.LANCZOS)
 
 
+# Photos entières (réglage « compositions_full_photos ») : aucune photo n'est coupée dans les compositions
+FULL_PHOTOS = True
+
+
+def set_full_photos(enabled):
+    global FULL_PHOTOS
+    FULL_PHOTOS = bool(enabled)
+
+
+def print_photo(image, box_w, box_h):
+    """
+    Photo pour un tirage libre (polaroïd, cadre, carte...). En mode photos entières, le tirage prend les
+    proportions de la photo, avec une surface comparable à celle de la boîte (une photo en hauteur n'est pas
+    minuscule à côté d'une photo en largeur) ; sinon la photo est recadrée pour remplir la boîte.
+    """
+    if not FULL_PHOTOS:
+        return cover(image, box_w, box_h)
+    ratio = image.width / image.height
+    area = box_w * box_h
+    w, h = math.sqrt(area * ratio), math.sqrt(area / ratio)
+    limit = max(box_w, box_h) * 1.1  # pas de tirage démesuré pour les panoramas
+    scale = min(1.0, limit / max(w, h))
+    return image.resize((max(1, int(w * scale)), max(1, int(h * scale))), Image.LANCZOS)
+
+
+def blurred_fill(image, width, height):
+    """Fond flou et légèrement assombri, tiré de la photo elle-même."""
+    background = cover(image, max(1, int(width) // 4), max(1, int(height) // 4)).filter(ImageFilter.GaussianBlur(4))
+    background = background.resize((max(1, int(width)), max(1, int(height))), Image.BILINEAR)
+    return Image.blend(background, Image.new("RGB", background.size, (0, 0, 0)), 0.25)
+
+
+def cell_photo(image, width, height):
+    """Photo pour une case de taille imposée : photo entière centrée sur un fond flou d'elle-même (ou recadrée)."""
+    width, height = max(1, int(width)), max(1, int(height))
+    if not FULL_PHOTOS:
+        return cover(image, width, height)
+    canvas = blurred_fill(image, width, height)
+    photo = fit_inside(image, width, height)
+    canvas.paste(photo, ((width - photo.width) // 2, (height - photo.height) // 2))
+    return canvas
+
+
 # --- Éléments graphiques ---
 
 def framed(image, border, color=(255, 255, 255), bottom=None):
@@ -216,7 +259,7 @@ def polaroids(photos, message, W, H, rng):
             element = _note_or_tile(item, side * 0.95, side * 0.95, rng, "fiche")
         else:
             border = max(8, int(side * 0.05))
-            element = framed(cover(item, side * 0.86, side * 0.86), border, (250, 250, 246), bottom=border * 4)
+            element = framed(print_photo(item, side * 0.86, side * 0.86), border, (250, 250, 246), bottom=border * 4)
         element = rotated(element, rng.uniform(-14, 14))
         _paste_with_shadow(canvas, element, _inside((cx, cy), element, W, H))
     return canvas.convert("RGB")
@@ -243,7 +286,7 @@ def mosaic(photos, message, W, H, rng):
         if isinstance(item, dict):
             tile = render_message(item.get("title"), item.get("body"), item.get("signature"), item.get("style", "nuit"), bw, bh)
         else:
-            tile = cover(item, bw, bh)
+            tile = cell_photo(item, bw, bh)
         canvas.paste(tile, (bx, by))
     return canvas
 
@@ -263,7 +306,7 @@ def filmstrip(photos, message, W, H, rng):
         for y in (hole, strip_h - 2 * hole):
             draw.rounded_rectangle([x, y, x + hole, y + hole], radius=hole // 4, fill=(230, 226, 214, 255))
     for i, photo in enumerate(photos):
-        tile = cover(photo, frame_w, frame_h)
+        tile = cell_photo(photo, frame_w, frame_h)
         tile = Image.blend(tile, ImageOps.colorize(ImageOps.grayscale(tile), (30, 20, 10), (255, 240, 210)), 0.15)  # teinte argentique
         strip.paste(tile, (gap + i * (frame_w + gap), 3 * hole))
     scale = min(1.0, W * 0.96 / strip_w)
@@ -292,20 +335,32 @@ def gallery_wall(photos, message, W, H, rng):
                                    int(side * 0.75), int(side * 0.95)).convert("RGB")
         else:
             portrait = item.height > item.width
-            inner = cover(item, side * (0.72 if portrait else 1.0), side * (0.95 if portrait else 0.72))
+            inner = print_photo(item, side * (0.72 if portrait else 1.0), side * (0.95 if portrait else 0.72))
         mat = framed(inner, max(10, int(side * 0.08)), (250, 248, 242))
         frame = framed(mat.convert("RGB"), max(6, int(side * 0.035)), frame_color)
         _paste_with_shadow(canvas, frame, (fx * W, fy * H))
     return canvas.convert("RGB")
 
 
+def proportional_widths(photos, total_width, height, min_share=0.18):
+    """Largeurs de cases proportionnelles aux photos (mode photos entières), sinon égales."""
+    if not FULL_PHOTOS:
+        return [total_width / len(photos)] * len(photos)
+    widths = [p.width / p.height * height for p in photos]
+    scale = total_width / sum(widths)
+    widths = [max(w * scale, total_width * min_share) for w in widths]  # pas de case trop étroite
+    scale = total_width / sum(widths)
+    return [w * scale for w in widths]
+
+
 def duo(photos, message, W, H, rng):
     count = len(photos)
     gap = max(6, int(W * 0.008))
     canvas = Image.new("RGB", (W, H), (12, 12, 12))
-    width = (W - (count + 1) * gap) // count
-    for i, photo in enumerate(photos):
-        canvas.paste(cover(photo, width, H - 2 * gap), (gap + i * (width + gap), gap))
+    x = gap
+    for photo, width in zip(photos, proportional_widths(photos, W - (count + 1) * gap, H - 2 * gap)):
+        canvas.paste(cell_photo(photo, width, H - 2 * gap), (int(x), gap))
+        x += width + gap
     return canvas
 
 
@@ -313,7 +368,7 @@ def magazine(photos, message, W, H, rng):
     canvas = Image.new("RGB", (W, H), (252, 251, 248))
     margin = int(min(W, H) * 0.05)
     big_w = int(W * 0.6)
-    canvas.paste(cover(photos[0], big_w - margin, H - 2 * margin), (margin, margin))
+    canvas.paste(cell_photo(photos[0], big_w - margin, H - 2 * margin), (margin, margin))
     col_x = big_w + margin // 2
     col_w = W - col_x - margin
     col_h = (H - 3 * margin) // 2
@@ -325,7 +380,7 @@ def magazine(photos, message, W, H, rng):
             tile = render_message(item.get("title"), item.get("body"), item.get("signature"), "minimal", col_w, col_h)
             ImageDraw.Draw(tile).rectangle([0, 0, col_w - 1, col_h - 1], outline=(30, 30, 30), width=2)
         else:
-            tile = cover(item, col_w, col_h)
+            tile = cell_photo(item, col_w, col_h)
         canvas.paste(tile, (col_x, y))
     draw = ImageDraw.Draw(canvas)
     draw.line([(col_x - margin // 4, margin), (col_x - margin // 4, H - margin)], fill=(40, 40, 40), width=2)
@@ -366,7 +421,7 @@ def photobooth(photos, message, W, H, rng):
     for s in range(strips):
         strip = Image.new("RGBA", (strip_w, strip_h), (250, 250, 248, 255))
         for i in range(per_strip):
-            photo = ImageOps.grayscale(cover(photos[s * per_strip + i], strip_w - 2 * pad, shot)).convert("RGB")
+            photo = ImageOps.grayscale(cell_photo(photos[s * per_strip + i], strip_w - 2 * pad, shot)).convert("RGB")
             strip.paste(photo, (pad, pad + i * (shot + pad)))
         cx = W * (s + 1) / (strips + 1)
         _paste_with_shadow(canvas, rotated(strip, rng.uniform(-4, 4)), (cx, H / 2))

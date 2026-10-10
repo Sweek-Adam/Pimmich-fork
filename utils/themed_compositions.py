@@ -95,10 +95,26 @@ def _shape_mask(w, h, shape):
     return mask.resize((w, h), Image.LANCZOS)
 
 
+def _fill_shape(photo, w, h, shape):
+    """
+    Contenu d'une forme. En mode photos entières, la photo complète tient dans le plus grand rectangle inscrit
+    dans la forme, sur un fond flou d'elle-même ; sinon elle est recadrée pour remplir la forme.
+    """
+    if not base.FULL_PHOTOS:
+        return base.cover(photo, w, h)
+    content = base.blurred_fill(photo, w, h)
+    a, b = w / 2 * (0.9 if shape == "egg" else 0.97), h / 2 * (0.9 if shape == "egg" else 0.97)
+    r = photo.width / photo.height
+    half_h = 1 / math.sqrt((r / a) ** 2 + (1 / b) ** 2)  # rectangle de proportions r inscrit dans l'ellipse
+    fitted = photo.resize((max(1, int(2 * half_h * r)), max(1, int(2 * half_h))), Image.LANCZOS)
+    content.paste(fitted, ((w - fitted.width) // 2, (h - fitted.height) // 2 + (int(h * 0.04) if shape == "egg" else 0)))
+    return content
+
+
 def _shaped(photo, size, shape, ring=0, ring_colors=None):
-    """Photo recadrée dans une forme (cercle, œuf), avec éventuellement un contour de couleur."""
+    """Photo dans une forme (cercle, œuf), avec éventuellement un contour de couleur."""
     w, h = size
-    inner = base.cover(photo, w, h).convert("RGBA")
+    inner = _fill_shape(photo, w, h, shape).convert("RGBA")
     inner.putalpha(_shape_mask(w, h, shape))
     if not ring:
         return inner
@@ -250,7 +266,7 @@ def halloween(photos, message, W, H, rng):
         draw.chord([px - pr * 0.5, py - pr * 0.3, px + pr * 0.5, py + pr * 0.5], 0, 180, fill=(255, 230, 90))
     # Photos dans des cadres sombres
     size = _photo_size(W, H, len(photos), 0.95)
-    elements = [base.framed(base.framed(base.cover(p, size, size * 0.8), max(4, size // 40), (240, 120, 20)).convert("RGB"),
+    elements = [base.framed(base.framed(base.print_photo(p, size, size * 0.8), max(4, size // 40), (240, 120, 20)).convert("RGB"),
                             max(8, size // 18), (20, 14, 22)) for p in photos]
     _place_row(canvas, elements, H * 0.5, rng, 0.8, 0.05, 8)
     _title(canvas, _translate(N_("Joyeux Halloween")), MARKER, int(H * 0.085), (255, 150, 40), (W * 0.42, H * 0.12), glow=(255, 120, 0), max_width=W * 0.6)
@@ -324,7 +340,7 @@ def holidays(photos, message, W, H, rng):
             sd.line([(r * 0.4, r * (1.1 + k * 0.25)), (r * 2.6, r * (1.1 + k * 0.25))], fill=color, width=max(2, int(r / 18)))
         canvas.alpha_composite(base.rotated(stamp, rng.uniform(-30, 30)), (int(sx - r * 1.5), int(sy - r * 1.5)))
     size = _photo_size(W, H, len(photos), 0.95)
-    elements = [base.framed(base.cover(p, size, size * 0.8), max(8, size // 20), (252, 250, 244), bottom=max(8, size // 20) * 3) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size * 0.8), max(8, size // 20), (252, 250, 244), bottom=max(8, size // 20) * 3) for p in photos]
     _place_row(canvas, elements, H * 0.5, rng, 0.84, 0.05, 9)
     _title(canvas, _translate(N_("Bonnes vacances !")), MARKER, int(H * 0.08), (40, 70, 150), (W * 0.38, H * 0.13), shadow=False, max_width=W * 0.6)
     _message_note(canvas, message, rng, "postit", (0.86, 0.8), 0.2)
@@ -344,7 +360,7 @@ def iceland(photos, message, W, H, rng):
     canvas.alpha_composite(aurora.filter(ImageFilter.GaussianBlur(H * 0.03)))
     _mountains(canvas, [(52, 66, 96, 255), (26, 34, 56, 255)], rng, 0.6, snow=True)
     size = _photo_size(W, H, len(photos), 0.9)
-    elements = [base.framed(base.cover(p, size, size * 0.75), max(8, size // 22), (250, 252, 255)) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size * 0.75), max(8, size // 22), (250, 252, 255)) for p in photos]
     _place_row(canvas, elements, H * 0.55, rng, 0.84, 0.03, 3)
     _title(canvas, _translate(N_("Islande")), "DejaVuSans-ExtraLight.ttf", int(H * 0.09), (230, 255, 245), (W / 2, H * 0.12), glow=(80, 255, 180), max_width=W * 0.6)
     _message_note(canvas, message, rng, "fiche", (0.88, 0.85), 0.18)
@@ -378,7 +394,7 @@ def japan(photos, message, W, H, rng):
                          fill=(255, rng.randrange(170, 200), rng.randrange(195, 215)))
         draw.ellipse([bx - s * 0.35, by - s * 0.35, bx + s * 0.35, by + s * 0.35], fill=(230, 90, 120))
     size = _photo_size(W, H, len(photos), 0.9)
-    elements = [base.framed(base.framed(base.cover(p, size * 0.8, size), max(6, size // 26), (252, 250, 245)).convert("RGB"),
+    elements = [base.framed(base.framed(base.print_photo(p, size * 0.8, size), max(6, size // 26), (252, 250, 245)).convert("RGB"),
                             max(3, size // 80), (30, 30, 30)) for p in photos]
     _place_row(canvas, elements, H * 0.52, rng, 0.8, 0.02, 0)
     _title(canvas, _translate(N_("Japon")), SERIF_BI, int(H * 0.075), (60, 40, 40), (W * 0.5, H * 0.1), shadow=False)
@@ -412,7 +428,7 @@ def france(photos, message, W, H, rng):
     size = _photo_size(W, H, len(photos), 0.9)
     elements = []
     for p in photos:
-        card = base.framed(base.cover(p, size, size * 0.72), max(8, size // 22), (255, 255, 255))
+        card = base.framed(base.print_photo(p, size, size * 0.72), max(8, size // 22), (255, 255, 255))
         cd = ImageDraw.Draw(card)
         sw = size * 0.16  # timbre
         sx, sy = card.width - sw * 1.15, sw * 0.15
@@ -440,7 +456,7 @@ def mountain(photos, message, W, H, rng):
             draw.polygon([(x, y - s * (1 - k * 0.25)), (x - s * 0.35 * (1 + k * 0.2), y - s * 0.3 * k), (x + s * 0.35 * (1 + k * 0.2), y - s * 0.3 * k)],
                          fill=(24, 50, 40))
     size = _photo_size(W, H, len(photos), 0.9)
-    elements = [base.framed(base.cover(p, size, size), max(8, size // 20), (250, 250, 246), bottom=max(8, size // 20) * 4) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size), max(8, size // 20), (250, 250, 246), bottom=max(8, size // 20) * 4) for p in photos]
     _place_row(canvas, elements, H * 0.52, rng, 0.82, 0.04, 8)
     _title(canvas, _translate(N_("La montagne")), MARKER, int(H * 0.08), (255, 255, 255), (W / 2, H * 0.1), max_width=W * 0.6)
     _message_note(canvas, message, rng, "fiche", (0.88, 0.84), 0.18)
@@ -499,7 +515,7 @@ def beach(photos, message, W, H, rng):
                 a = math.radians(205 + k * 32)
                 draw.line([(x, y), (x + s * math.cos(a), y + s * math.sin(a))], fill=(220, 170, 160), width=2)
     size = _photo_size(W, H, len(photos), 0.92)
-    elements = [base.framed(base.cover(p, size, size), max(8, size // 20), (252, 252, 248), bottom=max(8, size // 20) * 4) for p in photos]
+    elements = [base.framed(base.print_photo(p, size, size), max(8, size // 20), (252, 252, 248), bottom=max(8, size // 20) * 4) for p in photos]
     _place_row(canvas, elements, H * 0.6, rng, 0.82, 0.05, 12)
     _title(canvas, _translate(N_("Vive la plage !")), MARKER, int(H * 0.075), (255, 255, 255), (W * 0.42, H * 0.12), max_width=W * 0.6)
     _message_note(canvas, message, rng, "postit", (0.88, 0.25), 0.18)

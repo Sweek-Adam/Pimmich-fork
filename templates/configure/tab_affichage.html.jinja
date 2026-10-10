@@ -189,6 +189,11 @@
                         <label class="form-check-label ml-2" for="compositions_include_messages">{{ _("Inclure les messages dans les compositions") }}</label>
                     </div>
                     <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="compositions_full_photos" name="compositions_full_photos" {% if config.get('compositions_full_photos', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="compositions_full_photos">{{ _("Photos entières (sans recadrage)") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Les tirages prennent la forme de chaque photo ; dans les cases de taille fixe, la photo entière est posée sur un fond flou d'elle-même. Décochez pour remplir les cases en recadrant.") }}</p>
+                    <div class="form-check form-switch my-3">
                         <input class="form-check-input" type="checkbox" id="compositions_seasonal" name="compositions_seasonal" {% if config.get('compositions_seasonal', True) %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="compositions_seasonal">{{ _("Thèmes de saison seulement pendant leur période (et plus fréquents à ce moment-là)") }}</label>
                     </div>
