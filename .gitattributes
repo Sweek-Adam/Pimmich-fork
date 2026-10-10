@@ -1,1 +1,20 @@
+# Fins de ligne : LF partout dans le dépôt (les scripts shell doivent impérativement être en LF sur le Pi)
+* text=auto eol=lf
 *.sh text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.mo binary
+*.wav binary
+*.mp3 binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.onnx binary
+*.ppn binary
+*.pv binary
