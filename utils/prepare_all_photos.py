@@ -280,7 +280,10 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
                 resample_filter
             )
             
-            postcard_content = create_postcard_effect(postcard_img_content, caption=caption)
+            from utils import captions
+            caption_key = f"{source_type or Path(dest_path).parent.name}/{Path(dest_path).name}"
+            postcard_content = create_postcard_effect(postcard_img_content, caption=caption,
+                                                      style=captions.style_for(config, "photo", caption_key))
             postcard_final_img = final_img.copy()
             postcard_x_offset = (output_width - postcard_content.width) // 2
             postcard_y_offset = (output_height - postcard_content.height) // 2

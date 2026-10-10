@@ -24,6 +24,7 @@ from pathlib import Path
 from utils.text_drawer import draw_text_with_outline
 from utils.metadata_utils import get_photo_metadata, load_photo_metadata_cache # Import from new utility
 from utils.config_manager import load_config
+from utils import captions
 from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
 from utils.dedup import hashes_for, remove_duplicates
@@ -1342,6 +1343,20 @@ def draw_now_playing(screen, screen_width, screen_height, config):
 
 
 # New function to draw the overlay elements (clock, date, weather)
+_caption_overlay_cache = {}
+
+
+def _caption_overlay(text, style, width, height):
+    """Calque pygame transparent portant la légende (mis en cache : le même texte revient souvent)."""
+    key = (text, json.dumps(style, sort_keys=True), width, height)
+    if key not in _caption_overlay_cache:
+        if len(_caption_overlay_cache) > 8:
+            _caption_overlay_cache.clear()
+        image = captions.overlay(text, style, width, height)
+        _caption_overlay_cache[key] = pygame.image.frombytes(image.tobytes(), image.size, "RGBA").convert_alpha()
+    return _caption_overlay_cache[key]
+
+
 def display_metadata(path):
     """Métadonnées affichées : celles d'Immich, complétées par l'index des photos (date et GPS, toutes sources)."""
     meta = dict(get_photo_metadata(path) or {})
@@ -1644,20 +1659,6 @@ def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_m
         metadata_elements = []
         metadata_separator = "  •  "
 
-        # Récupérer la police personnalisée pour les métadonnées
-        metadata_font_path = config.get("photo_metadata_font_path", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
-        metadata_font_size = int(config.get("photo_metadata_font_size", 23))
-
-        try:
-            metadata_font = pygame.font.Font(metadata_font_path, metadata_font_size)
-        except Exception as e:
-            logger.info(f"[Display] Erreur chargement police métadonnées : {e}.")
-            metadata_font = main_font
-
-        # Couleurs personnalisées pour les métadonnées
-        metadata_text_color = parse_color(config.get("photo_metadata_color", "#ffffff"))
-        metadata_outline_color = parse_color(config.get("photo_metadata_outline_color", "#000000"))
-        
         # Extraction de la date de prise de vue (priorité 16 champs)
         date_priority = [
             "subSecDateTimeOriginal", "dateTimeOriginal", "SubSecDateTimeOriginal", "DateTimeOriginal",
@@ -1713,70 +1714,8 @@ def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_m
         # Assembler et afficher les métadonnées
         if metadata_elements:
             metadata_text = metadata_separator.join(metadata_elements)
-            metadata_surface = metadata_font.render(metadata_text, True, metadata_text_color)
-
-            # Offsets optionnels
-            metadata_offset_x = int(config.get("photo_metadata_offset_x", 0))
-            metadata_offset_y = int(config.get("photo_metadata_offset_y", 0))
-
-            # Position selon la configuration
-            position = config.get("photo_metadata_position", "bottom_left")
-
-            if position == "bottom_left":
-                metadata_rect = metadata_surface.get_rect(
-                    left=15 + metadata_offset_x,
-                    bottom=(screen_height - 15) + metadata_offset_y
-                )
-            elif position == "bottom_right":
-                metadata_rect = metadata_surface.get_rect(
-                    right=(screen_width - 15) + metadata_offset_x,
-                    bottom=(screen_height - 15) + metadata_offset_y
-                )
-            elif position == "bottom_center":
-                metadata_rect = metadata_surface.get_rect(
-                    centerx=(screen_width // 2) + metadata_offset_x,
-                    bottom=(screen_height - 15) + metadata_offset_y
-                )
-            elif position == "top_left":
-                metadata_rect = metadata_surface.get_rect(
-                    left=15 + metadata_offset_x,
-                    top=15 + metadata_offset_y
-                )
-            elif position == "top_right":
-                metadata_rect = metadata_surface.get_rect(
-                    right=(screen_width - 15) + metadata_offset_x,
-                    top=15 + metadata_offset_y
-                )
-            else:  # Fallback
-                metadata_rect = metadata_surface.get_rect(
-                    left=15 + metadata_offset_x,
-                    bottom=(screen_height - 15) + metadata_offset_y
-                )
-
-            # Dessiner le fond si activé
-            if config.get("photo_metadata_background_enabled", True):
-                bg_color_hex = config.get("photo_metadata_background_color", "#00000080")
-                bg_color_rgba = parse_color(bg_color_hex)
-
-                if len(bg_color_rgba) == 3:
-                    bg_color_rgba = bg_color_rgba + (128,)
-
-                bg_width = metadata_rect.width + 20
-                bg_height = metadata_rect.height + 10
-                bg_surface = pygame.Surface((bg_width, bg_height), pygame.SRCALPHA)
-                bg_surface.fill(bg_color_rgba)
-                screen.blit(bg_surface, (metadata_rect.left - 10, metadata_rect.top - 5))
-
-            # Dessiner le texte avec contour
-            draw_text_with_outline(
-                screen, 
-                metadata_text, 
-                metadata_font, 
-                metadata_text_color, 
-                metadata_outline_color, 
-                metadata_rect.topleft, 
-                anchor="topleft"
-            )
+            # Style des infos réglé dans l'éditeur de légendes (police, fond, contour, position...)
+            screen.blit(_caption_overlay(metadata_text, captions.style_for(config, "metadata"), screen_width, screen_height), (0, 0))
     # --- Fin Modification Sigalou 25/01/2026 ---
 
         # --- DRAPEAU PAYS en haut à droite (ajout Sigalou 29/01/2026) ---
@@ -2293,6 +2232,15 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
             else:
                 command.extend(['--hwdec=no', '--vo=x11'])
 
+        # Légende de la vidéo : sous-titres au style choisi (mêmes polices que les photos)
+        subtitle_args = []
+        try:
+            subtitle_file = captions.video_subtitles(video_path, config, "/tmp/pimmich_caption.ass")
+            if subtitle_file:
+                subtitle_args = [f'--sub-file={subtitle_file}', f'--sub-fonts-dir={os.path.join(BASE_DIR, "static", "fonts")}']
+        except Exception as e:
+            logger.info(f"[Video Playback] Légende ignorée : {e}")
+        command.extend(subtitle_args)
         command.append(video_path)
 
         if audio_enabled:
@@ -2332,6 +2280,7 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
                 '--vd-lavc-dr=yes',
                 '--wayland-app-id=mpv',
                 '--log-file=/tmp/mpv_pimmich.log',
+                *subtitle_args,
                 video_path
             ]
             if pi_model != 3:

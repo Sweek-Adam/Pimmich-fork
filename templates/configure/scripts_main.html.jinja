@@ -948,6 +948,8 @@
                         if (result.success) {
                             if (statusSpan) { statusSpan.innerHTML = '<i class="fas fa-check text-green-500"></i>'; setTimeout(() => { statusSpan.innerHTML = ''; }, 2000); }
 
+                            // Vidéo : la légende s'affiche en sous-titre, la vignette ne change pas
+                            if (/\.(mp4|mov|avi|mkv)$/i.test(photoPath)) return;
                             let newSrc;
                             if (activeFilter === 'polaroid') {
                                 const polaroidFilename = photoPath.replace(/\.[^/.]+$/, "") + '_polaroid.jpg';

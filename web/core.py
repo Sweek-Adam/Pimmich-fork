@@ -838,6 +838,7 @@ def get_prepared_photos_by_source():
                         media_item["text"] = text_states.get(media_relative_path, "")
                         media_item["active_filter"] = filter_states.get(media_relative_path, "none")
                     elif media_type == 'video':
+                        media_item["text"] = text_states.get(media_relative_path, "")
                         # Chercher la vignette correspondante pour la vidéo
                         thumbnail_name = f"{media_path_obj.stem}_thumbnail.jpg"
                         if thumbnail_name in all_filenames:

@@ -129,6 +129,7 @@
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-affichage')"><i class="fas fa-desktop fa-fw"></i>{{ _('Affichage') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-heure')"><i class="fas fa-clock fa-fw"></i>{{ _('Horloge & météo') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-metadata')"><i class="fas fa-info-circle fa-fw"></i>{{ _('Infos des photos') }}</button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-legendes')"><i class="fas fa-closed-captioning fa-fw"></i>{{ _('Légendes') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-son')"><i class="fas fa-music fa-fw"></i>{{ _('Son') }}</button>
                 </div>
             </div>
@@ -189,6 +190,8 @@
 {% include 'configure/tab_comptes.html.jinja' %}
 
 {% if is_admin %}{% include 'configure/tab_notifications.html.jinja' %}{% endif %}
+
+{% include 'configure/tab_legendes.html.jinja' %}
 
 {% include 'configure/tab_maintenance.html.jinja' %}
 

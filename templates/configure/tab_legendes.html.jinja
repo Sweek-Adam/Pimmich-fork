@@ -1,0 +1,324 @@
+            <div id="tab-legendes" class="tabcontent">
+                <section class="card">
+                    <h2 class="card-title"><i class="fas fa-closed-captioning text-indigo-500 mr-2"></i>{{ _("Style des légendes") }}</h2>
+                    <p class="text-sm text-gray-600 mb-4">{{ _("Choisissez l'apparence de chaque type de légende, comme sur Snapchat : police, taille, couleurs, fond, gras, italique, souligné, contour, ombre, position et inclinaison. Une photo ou une vidéo peut aussi avoir son propre style (bouton palette sous sa légende, dans l'onglet Aperçu).") }}</p>
+                    <div class="cap-scopes">
+                        {% for scope, icon, title, hint in [
+                            ('photo', 'fa-image', _('Photos et vidéos'), _('Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales).')),
+                            ('polaroid', 'fa-camera-retro', _('Polaroïds'), _('Texte écrit dans la marge blanche des polaroïds.')),
+                            ('metadata', 'fa-info-circle', _('Infos des photos'), _('Date et lieu affichés par le diaporama.'))] %}
+                        <div class="cap-scope">
+                            <img class="cap-scope-preview" data-scope="{{ scope }}" alt="">
+                            <div class="mt-2">
+                                <strong><i class="fas {{ icon }} mr-1"></i>{{ title }}</strong><small class="block muted">{{ hint }}</small>
+                                <button type="button" class="btn-primary cap-open mt-2" data-scope="{{ scope }}"><i class="fas fa-palette"></i>{{ _("Personnaliser") }}</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">{{ _("Les légendes déjà posées sur les photos sont redessinées automatiquement avec le nouveau style. Les vidéos affichent leur légende en sous-titre pendant la lecture.") }}</p>
+                </section>
+            </div>
+
+            <div id="cap-modal" class="cap-modal hidden" role="dialog" aria-modal="true" aria-labelledby="cap-title">
+                <div class="cap-dialog">
+                    <header class="cap-head">
+                        <h2 id="cap-title" class="card-title" style="margin:0"></h2>
+                        <button type="button" class="round" id="cap-close" title="{{ _('Fermer') }}"><i class="fas fa-times"></i></button>
+                    </header>
+                    <div class="cap-body">
+                        <div>
+                            <div class="cap-stage" id="cap-stage">
+                                <img id="cap-preview" alt="{{ _('Aperçu de la légende') }}" draggable="false">
+                                <span id="cap-pin" class="cap-pin"></span>
+                                <span id="cap-busy" class="cap-busy hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2" id="cap-drag-hint"><i class="fas fa-hand-pointer mr-1"></i>{{ _("Touchez ou faites glisser sur l'image pour placer la légende. L'aperçu est dessiné par le cadre lui-même.") }}</p>
+                            <label class="cap-label" for="cap-text">{{ _("Texte d'essai") }}</label>
+                            <input type="text" id="cap-text" class="w-full" maxlength="300">
+                        </div>
+                        <div class="cap-controls">
+                            <div class="cap-label">{{ _("Modèles") }}</div>
+                            <div class="cap-presets">
+                                {% for key, label in [('classic', _('Classique')), ('big', _('Grand texte')), ('bubble', _('Bulle')), ('label', _('Étiquette')), ('handwritten', _('Manuscrit')), ('neon', _('Néon'))] %}
+                                <button type="button" class="cap-chip" data-preset="{{ key }}">{{ label }}</button>
+                                {% endfor %}
+                            </div>
+
+                            <div class="cap-label">{{ _("Police") }}</div>
+                            <div class="cap-fonts">
+                                {% for key, label in [('caveat', 'Caveat'), ('patrick', 'Patrick Hand'), ('marker', 'Permanent Marker'), ('elite', 'Special Elite'), ('sans', _('Moderne')), ('serif', _('Classique (empattements)'))] %}
+                                <button type="button" class="cap-chip cap-font-{{ key }}" data-set="font" data-value="{{ key }}">{{ label }}</button>
+                                {% endfor %}
+                            </div>
+
+                            <div class="cap-row">
+                                <label class="cap-label" for="cap-size">{{ _("Taille") }} <span data-out="size"></span></label>
+                                <input type="range" id="cap-size" data-field="size" min="1.5" max="15" step="0.1">
+                            </div>
+
+                            <div class="cap-label">{{ _("Mise en forme") }}</div>
+                            <div class="cap-toggles">
+                                <button type="button" class="cap-chip" data-toggle="bold" title="{{ _('Gras') }}"><i class="fas fa-bold"></i></button>
+                                <button type="button" class="cap-chip" data-toggle="italic" title="{{ _('Italique') }}"><i class="fas fa-italic"></i></button>
+                                <button type="button" class="cap-chip" data-toggle="underline" title="{{ _('Souligné') }}"><i class="fas fa-underline"></i></button>
+                                <button type="button" class="cap-chip" data-toggle="uppercase" title="{{ _('Majuscules') }}">AA</button>
+                                <span class="cap-sep"></span>
+                                <button type="button" class="cap-chip" data-set="align" data-value="left" title="{{ _('Aligné à gauche') }}"><i class="fas fa-align-left"></i></button>
+                                <button type="button" class="cap-chip" data-set="align" data-value="center" title="{{ _('Centré') }}"><i class="fas fa-align-center"></i></button>
+                                <button type="button" class="cap-chip" data-set="align" data-value="right" title="{{ _('Aligné à droite') }}"><i class="fas fa-align-right"></i></button>
+                            </div>
+
+                            <div class="cap-label">{{ _("Couleur du texte") }}</div>
+                            <div class="cap-colors" data-color="color"></div>
+
+                            <div class="cap-label">{{ _("Fond") }}</div>
+                            <div class="cap-presets">
+                                {% for key, label in [('none', _('Aucun')), ('band', _('Bandeau')), ('bubble', _('Bulle')), ('box', _('Étiquette'))] %}
+                                <button type="button" class="cap-chip" data-set="background" data-value="{{ key }}">{{ label }}</button>
+                                {% endfor %}
+                            </div>
+                            <div class="cap-sub" data-when="background">
+                                <div class="cap-colors" data-color="bg_color"></div>
+                                <label class="cap-label" for="cap-bg-opacity">{{ _("Opacité du fond") }} <span data-out="bg_opacity"></span></label>
+                                <input type="range" id="cap-bg-opacity" data-field="bg_opacity" min="0" max="100" step="5">
+                            </div>
+
+                            <div class="cap-row">
+                                <label class="cap-label" for="cap-outline">{{ _("Contour") }} <span data-out="outline"></span></label>
+                                <input type="range" id="cap-outline" data-field="outline" min="0" max="10" step="1">
+                            </div>
+                            <div class="cap-sub" data-when="outline"><div class="cap-colors" data-color="outline_color"></div></div>
+
+                            <div class="cap-label">{{ _("Effet") }}</div>
+                            <div class="cap-presets">
+                                {% for key, label in [('none', _('Aucun')), ('drop', _('Ombre')), ('glow', _('Halo lumineux'))] %}
+                                <button type="button" class="cap-chip" data-set="shadow" data-value="{{ key }}">{{ label }}</button>
+                                {% endfor %}
+                            </div>
+                            <div class="cap-sub" data-when="shadow"><div class="cap-colors" data-color="shadow_color"></div></div>
+
+                            <div class="cap-row">
+                                <label class="cap-label" for="cap-rotation">{{ _("Inclinaison") }} <span data-out="rotation"></span></label>
+                                <input type="range" id="cap-rotation" data-field="rotation" min="-45" max="45" step="1">
+                            </div>
+                            <div class="cap-row">
+                                <label class="cap-label" for="cap-width">{{ _("Largeur maximale") }} <span data-out="width"></span></label>
+                                <input type="range" id="cap-width" data-field="width" min="20" max="100" step="1">
+                            </div>
+                            <div class="cap-label">{{ _("Position") }}</div>
+                            <div class="cap-presets">
+                                <button type="button" class="cap-chip" data-y="8">{{ _("En haut") }}</button>
+                                <button type="button" class="cap-chip" data-y="50">{{ _("Au milieu") }}</button>
+                                <button type="button" class="cap-chip" data-y="92">{{ _("En bas") }}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="cap-foot">
+                        <button type="button" class="link" id="cap-default">{{ _("Style par défaut") }}</button>
+                        <button type="button" class="link hidden" id="cap-general">{{ _("Reprendre le style général") }}</button>
+                        <span id="cap-status" class="text-sm"></span>
+                        <span class="flex-1"></span>
+                        <button type="button" class="btn-secondary" id="cap-cancel">{{ _("Annuler") }}</button>
+                        <button type="button" class="btn-primary" id="cap-save"><i class="fas fa-check"></i>{{ _("Enregistrer") }}</button>
+                    </footer>
+                </div>
+            </div>
+
+            <style>
+                @font-face { font-family: "Caveat"; src: url("{{ url_for('static', filename='fonts/Caveat-Regular.ttf') }}"); }
+                @font-face { font-family: "Patrick Hand"; src: url("{{ url_for('static', filename='fonts/PatrickHand-Regular.ttf') }}"); }
+                @font-face { font-family: "Permanent Marker"; src: url("{{ url_for('static', filename='fonts/PermanentMarker-Regular.ttf') }}"); }
+                @font-face { font-family: "Special Elite"; src: url("{{ url_for('static', filename='fonts/SpecialElite-Regular.ttf') }}"); }
+                .cap-font-caveat { font-family: "Caveat", cursive; font-size: 1.15rem; }
+                .cap-font-patrick { font-family: "Patrick Hand", cursive; }
+                .cap-font-marker { font-family: "Permanent Marker", cursive; }
+                .cap-font-elite { font-family: "Special Elite", monospace; }
+                .cap-font-sans { font-family: "DejaVu Sans", Verdana, sans-serif; }
+                .cap-font-serif { font-family: "DejaVu Serif", Georgia, serif; }
+                .cap-scopes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+                .cap-scope-preview { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); }
+                .cap-modal { position: fixed; inset: 0; z-index: 60; background: rgba(15, 18, 30, .55); display: flex; align-items: center; justify-content: center; padding: 16px; }
+                .cap-dialog { background: var(--card); border-radius: 16px; width: min(1100px, 100%); max-height: calc(100vh - 32px); display: flex; flex-direction: column; overflow: hidden; }
+                .cap-head, .cap-foot { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+                .cap-foot { border-top: 1px solid var(--border); border-bottom: 0; flex-wrap: wrap; }
+                .cap-head { justify-content: space-between; }
+                .cap-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; padding: 18px; overflow: auto; }
+                @media (max-width: 800px) {
+                    .cap-body { grid-template-columns: 1fr; padding-top: 0; }
+                    .cap-body > div:first-child { position: sticky; top: 0; z-index: 2; background: var(--card); padding-top: 12px; }
+                    #cap-drag-hint, .cap-body > div:first-child .cap-label { display: none; }
+                }
+                .cap-stage { position: relative; border-radius: 12px; overflow: hidden; background: #111; touch-action: none; cursor: crosshair; user-select: none; }
+                .cap-stage img { display: block; width: 100%; min-height: 120px; }
+                .cap-pin { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 2px dashed #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.45); pointer-events: none; opacity: .8; }
+                .cap-dialog input[type=text] { border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; background: #fff; margin-top: 4px; }
+                .cap-stage:not(:hover) .cap-pin { opacity: 0; }
+                .cap-busy { position: absolute; top: 8px; right: 10px; color: #fff; text-shadow: 0 0 4px #000; }
+                .cap-controls { display: flex; flex-direction: column; gap: 6px; }
+                .cap-label { font-size: .82rem; font-weight: 700; color: var(--muted); margin-top: 8px; display: block; }
+                .cap-label span { font-weight: 600; color: var(--text); margin-left: 4px; }
+                .cap-presets, .cap-fonts, .cap-toggles, .cap-colors { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+                .cap-chip { border: 1px solid var(--border); background: #fff; border-radius: 999px; padding: 5px 12px; font-size: .88rem; cursor: pointer; color: var(--text); }
+                .cap-chip:hover { background: var(--bg); }
+                .cap-chip.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+                .cap-sep { width: 1px; height: 22px; background: var(--border); margin: 0 4px; }
+                .cap-sub { padding: 8px 10px; border-radius: 10px; background: var(--bg); }
+                .cap-swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--border); cursor: pointer; padding: 0; }
+                .cap-swatch.on { box-shadow: 0 0 0 2px var(--accent); }
+                .cap-colors input[type=color] { width: 34px; height: 30px; padding: 0 2px; border-radius: 8px; }
+                .cap-controls input[type=range] { width: 100%; padding: 0; border: 0; }
+            </style>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const modal = $("cap-modal");
+                    const SWATCHES = ["#ffffff", "#000000", "#111111", "#ff3b30", "#ff9500", "#ffcc00", "#34c759", "#00c7be", "#007aff", "#5856d6", "#ff2d55", "#ff3fd2", "#a2845e", "#505050"];
+                    const TITLES = { photo: {{ _('Légendes des photos et vidéos')|tojson }}, polaroid: {{ _('Texte des polaroïds')|tojson }}, metadata: {{ _('Infos des photos (date, lieu)')|tojson }}, media: {{ _('Style de cette légende')|tojson }} };
+                    let data = null, state = null, scope = "photo", media = null, timer = null, lastUrl = null, seq = 0;
+
+                    async function loadData(photo) {
+                        data = await (await fetch("/api/captions" + (photo ? "?photo=" + encodeURIComponent(photo) : ""))).json();
+                    }
+                    async function previewBlob(sc, style, text, photo) {
+                        const r = await fetch("/api/captions/preview", { method: "POST", headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ scope: sc, style, text, photo }) });
+                        return URL.createObjectURL(await r.blob());
+                    }
+                    async function refreshScopeCards() {
+                        await loadData();
+                        for (const img of document.querySelectorAll(".cap-scope-preview")) {
+                            const sc = img.dataset.scope;
+                            img.src = await previewBlob(sc, data.styles[sc], data.samples[sc], null);
+                        }
+                    }
+
+                    function colorRow(el) {
+                        const field = el.dataset.color;
+                        el.innerHTML = "";
+                        for (const c of SWATCHES) {
+                            const b = document.createElement("button");
+                            b.type = "button"; b.className = "cap-swatch"; b.style.background = c; b.dataset.value = c; b.title = c;
+                            b.addEventListener("click", () => set(field, c));
+                            el.appendChild(b);
+                        }
+                        const input = document.createElement("input");
+                        input.type = "color"; input.title = {{ _('Autre couleur')|tojson }};
+                        input.addEventListener("input", () => set(field, input.value));
+                        el.appendChild(input);
+                    }
+                    document.querySelectorAll(".cap-colors").forEach(colorRow);
+
+                    function sync() {
+                        modal.querySelectorAll("[data-set]").forEach(b => b.classList.toggle("on", state[b.dataset.set] === b.dataset.value));
+                        modal.querySelectorAll("[data-toggle]").forEach(b => b.classList.toggle("on", !!state[b.dataset.toggle]));
+                        modal.querySelectorAll("[data-field]").forEach(i => { i.value = state[i.dataset.field]; });
+                        modal.querySelectorAll("[data-out]").forEach(o => {
+                            const v = state[o.dataset.out], f = o.dataset.out;
+                            o.textContent = f === "rotation" ? v + "°" : (f === "outline" ? (v ? v : {{ _('aucun')|tojson }}) : v + "%");
+                        });
+                        modal.querySelectorAll(".cap-colors").forEach(row => {
+                            const v = state[row.dataset.color];
+                            row.querySelectorAll(".cap-swatch").forEach(s => s.classList.toggle("on", s.dataset.value === v));
+                            row.querySelector("input[type=color]").value = v;
+                        });
+                        modal.querySelector('[data-when="background"]').classList.toggle("hidden", state.background === "none");
+                        modal.querySelector('[data-when="outline"]').classList.toggle("hidden", !state.outline);
+                        modal.querySelector('[data-when="shadow"]').classList.toggle("hidden", state.shadow === "none");
+                        const pin = $("cap-pin");
+                        pin.style.left = state.x + "%"; pin.style.top = state.y + "%";
+                        pin.classList.toggle("hidden", scope === "polaroid");
+                        $("cap-drag-hint").classList.toggle("hidden", scope === "polaroid");
+                    }
+                    function render() {
+                        clearTimeout(timer);
+                        timer = setTimeout(async () => {
+                            const mine = ++seq;
+                            $("cap-busy").classList.remove("hidden");
+                            const url = await previewBlob(scope === "media" ? "photo" : scope, state, $("cap-text").value, media);
+                            if (mine !== seq) return URL.revokeObjectURL(url);
+                            $("cap-preview").src = url;
+                            if (lastUrl) URL.revokeObjectURL(lastUrl);
+                            lastUrl = url;
+                            $("cap-busy").classList.add("hidden");
+                        }, 220);
+                    }
+                    function set(field, value) { state[field] = value; sync(); render(); }
+
+                    modal.querySelectorAll("[data-set]").forEach(b => b.addEventListener("click", () => set(b.dataset.set, b.dataset.value)));
+                    modal.querySelectorAll("[data-toggle]").forEach(b => b.addEventListener("click", () => set(b.dataset.toggle, !state[b.dataset.toggle])));
+                    modal.querySelectorAll("[data-field]").forEach(i => i.addEventListener("input", () => set(i.dataset.field, parseFloat(i.value))));
+                    modal.querySelectorAll("[data-y]").forEach(b => b.addEventListener("click", () => set("y", parseFloat(b.dataset.y))));
+                    modal.querySelectorAll("[data-preset]").forEach(b => b.addEventListener("click", () => {
+                        Object.assign(state, data.presets[b.dataset.preset]); sync(); render();
+                    }));
+                    $("cap-text").addEventListener("input", render);
+
+                    // Placement au doigt / à la souris, comme la barre de Snapchat
+                    const stage = $("cap-stage");
+                    let dragging = false;
+                    function moveTo(ev) {
+                        const r = $("cap-preview").getBoundingClientRect();
+                        state.x = Math.round(Math.min(100, Math.max(0, (ev.clientX - r.left) / r.width * 100)));
+                        state.y = Math.round(Math.min(100, Math.max(0, (ev.clientY - r.top) / r.height * 100)));
+                        sync();
+                    }
+                    stage.addEventListener("pointerdown", (ev) => { if (scope === "polaroid") return; dragging = true; stage.setPointerCapture(ev.pointerId); moveTo(ev); });
+                    stage.addEventListener("pointermove", (ev) => { if (dragging) moveTo(ev); });
+                    stage.addEventListener("pointerup", () => { if (dragging) { dragging = false; render(); } });
+
+                    function say(text, ok) { $("cap-status").textContent = text || ""; $("cap-status").className = "text-sm " + (ok ? "text-green-700" : "text-red-600"); }
+
+                    window.openCaptionEditor = async ({ scope: sc = "photo", photo = null, text = "" } = {}) => {
+                        await loadData(photo);
+                        scope = photo ? "media" : sc; media = photo;
+                        state = Object.assign({}, photo ? (data.media_style || data.styles.photo) : data.styles[sc]);
+                        $("cap-title").textContent = TITLES[scope];
+                        $("cap-text").value = text || data.samples[photo ? "photo" : sc];
+                        $("cap-general").classList.toggle("hidden", !photo || !data.media_style);
+                        $("cap-default").classList.toggle("hidden", !!photo);
+                        say("");
+                        modal.classList.remove("hidden");
+                        sync(); render();
+                    };
+                    const close = () => modal.classList.add("hidden");
+                    $("cap-close").addEventListener("click", close);
+                    $("cap-cancel").addEventListener("click", close);
+                    modal.addEventListener("click", (ev) => { if (ev.target === modal) close(); });
+                    document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !modal.classList.contains("hidden")) close(); });
+                    $("cap-default").addEventListener("click", () => { state = Object.assign({}, data.defaults[scope]); sync(); render(); });
+
+                    async function saveStyle(style) {
+                        const url = scope === "media" ? "/api/captions/media" : "/api/captions/" + scope;
+                        const body = scope === "media" ? { photo: media, style } : { style };
+                        const d = await (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })).json();
+                        if (!d.success) return say(d.message, false);
+                        if (window.showToast) window.showToast(d.message, "success");
+                        close();
+                        if (scope === "media") refreshTile(media); else refreshScopeCards();
+                    }
+                    $("cap-save").addEventListener("click", () => saveStyle(state));
+                    $("cap-general").addEventListener("click", () => saveStyle(null));
+
+                    // La photo est redessinée en arrière-plan : on recharge sa vignette un peu après
+                    function refreshTile(photo) {
+                        setTimeout(() => document.querySelectorAll(`.generic-text-input-container[data-photo="${CSS.escape(photo)}"]`).forEach(box => {
+                            const img = box.closest(".photo-tile")?.querySelector("img");
+                            if (img) img.src = img.src.split("?")[0] + "?v=" + Date.now();
+                        }), 2500);
+                    }
+
+                    document.querySelectorAll(".cap-open").forEach(b => b.addEventListener("click", () => openCaptionEditor({ scope: b.dataset.scope })));
+                    document.addEventListener("click", (ev) => {
+                        const b = ev.target.closest(".caption-style-btn");
+                        if (!b) return;
+                        const input = b.closest(".generic-text-input-container")?.querySelector(".generic-text-input");
+                        openCaptionEditor({ photo: b.dataset.photo, text: input ? input.value : "" });
+                    });
+                    let loaded = false;
+                    document.querySelectorAll(".tablink").forEach(t => t.addEventListener("click", () => {
+                        if (!loaded && (t.getAttribute("onclick") || "").includes("tab-legendes")) { loaded = true; refreshScopeCards(); }
+                    }));
+                    if (location.hash === "#tab-legendes") { loaded = true; refreshScopeCards(); }
+                });
+            </script>

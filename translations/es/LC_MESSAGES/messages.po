@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:45+0200\n"
+"POT-Creation-Date: 2026-10-11 00:09+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1198
+#: local_slideshow.py:1199
 msgid "Photos & messages"
 msgstr "Fotos y mensajes"
 
-#: local_slideshow.py:1394
+#: local_slideshow.py:1409
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "Hace %(num)d año"
 
-#: local_slideshow.py:1394
+#: local_slideshow.py:1409
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "Hace %(num)d años"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "enero"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "febrero"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "marzo"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "abril"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "mayo"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "junio"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "julio"
 
-#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "agosto"
 
-#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "septiembre"
 
-#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "octubre"
 
-#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "noviembre"
 
-#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "diciembre"
 
-#: local_slideshow.py:1592
+#: local_slideshow.py:1607
 msgid "Données de marée non disponibles"
 msgstr "Datos de mareas no disponibles"
 
-#: local_slideshow.py:1689
+#: local_slideshow.py:1690
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Aniversario) Hace %(num)d año"
 
-#: local_slideshow.py:1689
+#: local_slideshow.py:1690
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:2740
+#: local_slideshow.py:2689
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:2741
+#: local_slideshow.py:2690
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:2742
+#: local_slideshow.py:2691
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:2743
+#: local_slideshow.py:2692
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2744
+#: local_slideshow.py:2693
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:2770
+#: local_slideshow.py:2719
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -149,23 +149,23 @@ msgid "Configuration"
 msgstr "Configuración"
 
 #: templates/configure.html.jinja:77 templates/configure.html.jinja:90
-#: templates/configure.html.jinja:113 templates/configure.html.jinja:213
+#: templates/configure.html.jinja:113 templates/configure.html.jinja:216
 msgid "Accueil"
 msgstr "Inicio"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
 msgid "Photos"
 msgstr "Fotos"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
 msgid "Écran"
 msgstr "Pantalla"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
 msgid "Partage"
 msgstr "Compartir"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
 msgid "Système"
 msgstr "Sistema"
 
@@ -244,56 +244,61 @@ msgid "Horloge & météo"
 msgstr "Reloj y tiempo"
 
 #: templates/configure.html.jinja:131
+#: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "Info de las fotos"
 
 #: templates/configure.html.jinja:132
+msgid "Légendes"
+msgstr "Leyendas"
+
+#: templates/configure.html.jinja:133
 msgid "Son"
 msgstr "Sonido"
 
-#: templates/configure.html.jinja:137
+#: templates/configure.html.jinja:138
 #: templates/configure/_playlist_builder.html.jinja:43
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr "Invitados"
 
-#: templates/configure.html.jinja:138
+#: templates/configure.html.jinja:139
 msgid "À valider"
 msgstr "Por validar"
 
-#: templates/configure.html.jinja:139
+#: templates/configure.html.jinja:140
 msgid "Telegram"
 msgstr "Telegram"
 
-#: templates/configure.html.jinja:144
+#: templates/configure.html.jinja:145
 msgid "Comptes"
 msgstr "Cuentas"
 
-#: templates/configure.html.jinja:146
+#: templates/configure.html.jinja:147
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: templates/configure.html.jinja:147
+#: templates/configure.html.jinja:148
 msgid "Maintenance"
 msgstr "Mantenimiento"
 
-#: templates/configure.html.jinja:148
+#: templates/configure.html.jinja:149
 msgid "Réseau"
 msgstr "Red"
 
-#: templates/configure.html.jinja:150
+#: templates/configure.html.jinja:151
 msgid "Commande vocale"
 msgstr "Control por voz"
 
-#: templates/configure.html.jinja:152
+#: templates/configure.html.jinja:153
 msgid "Statistiques"
 msgstr "Estadística"
 
-#: templates/configure.html.jinja:153
+#: templates/configure.html.jinja:154
 msgid "Journaux"
 msgstr "Registros"
 
-#: templates/configure.html.jinja:179
+#: templates/configure.html.jinja:180
 msgid "Enregistrer les modifications"
 msgstr "Guardar cambios"
 
@@ -523,6 +528,7 @@ msgstr "Volumen del marco"
 
 #: templates/configure/_playlist_builder.html.jinja:6
 #: templates/configure/tab_accueil.html.jinja:84
+#: templates/configure/tab_legendes.html.jinja:27
 msgid "Fermer"
 msgstr "Cerrar"
 
@@ -578,6 +584,7 @@ msgstr "Crear la playlist"
 
 #: templates/configure/_playlist_builder.html.jinja:38
 #: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_legendes.html.jinja:123
 msgid "Enregistrer"
 msgstr "Guardar"
 
@@ -970,7 +977,7 @@ msgstr "No se encontró ningún ajuste."
 msgid "Enregistrement…"
 msgstr "Guardando…"
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:260
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:259
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -980,7 +987,7 @@ msgstr "Error al guardar: comprueba la conexión con el marco."
 
 #: templates/configure/scripts_gallery.html.jinja:8
 #: templates/configure/scripts_gallery.html.jinja:36
-#: templates/configure/scripts_main.html.jinja:1306
+#: templates/configure/scripts_main.html.jinja:1308
 #: templates/configure/scripts_status.html.jinja:745
 #: templates/configure/tab_heure.html.jinja:292
 #: templates/configure/tab_heure.html.jinja:295
@@ -1050,8 +1057,8 @@ msgid "Cette playlist est vide."
 msgstr "Esta lista de reproducción está vacía."
 
 #: templates/configure/scripts_gallery.html.jinja:22
-#: templates/configure/tab_apercu.html.jinja:139
-#: templates/configure/tab_favoris.html.jinja:119
+#: templates/configure/tab_apercu.html.jinja:138
+#: templates/configure/tab_favoris.html.jinja:118
 msgid "Ajouter une légende..."
 msgstr "Añadir un título..."
 
@@ -1081,17 +1088,17 @@ msgstr "Haga clic para seleccionar esta red"
 
 #: templates/configure/scripts_gallery.html.jinja:34
 #: templates/configure/scripts_gallery.html.jinja:116
-#: templates/configure/scripts_main.html.jinja:1369
-#: templates/configure/scripts_main.html.jinja:1411
+#: templates/configure/scripts_main.html.jinja:1371
+#: templates/configure/scripts_main.html.jinja:1413
 msgid "Test en cours..."
 msgstr "Prueba en progreso..."
 
 #: templates/configure/scripts_gallery.html.jinja:35
 #: templates/configure/scripts_gallery.html.jinja:130
 #: templates/configure/scripts_gallery.html.jinja:277
-#: templates/configure/scripts_main.html.jinja:1394
-#: templates/configure/scripts_main.html.jinja:1428
-#: templates/configure/scripts_main.html.jinja:1661
+#: templates/configure/scripts_main.html.jinja:1396
+#: templates/configure/scripts_main.html.jinja:1430
+#: templates/configure/scripts_main.html.jinja:1663
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
 msgid "Erreur de communication avec le serveur."
@@ -1127,7 +1134,7 @@ msgstr "Ingrese un nombre para el invitado."
 
 #: templates/configure/scripts_gallery.html.jinja:44
 #: templates/configure/scripts_gallery.html.jinja:273
-#: templates/configure/scripts_main.html.jinja:992
+#: templates/configure/scripts_main.html.jinja:994
 #: templates/configure/scripts_status.html.jinja:159
 msgid "Erreur :"
 msgstr "Error :"
@@ -1183,7 +1190,7 @@ msgid "Erreur lors du chargement des playlists."
 msgstr "Error al cargar listas de reproducción."
 
 #: templates/configure/scripts_gallery.html.jinja:57
-#: templates/configure/scripts_main.html.jinja:1085
+#: templates/configure/scripts_main.html.jinja:1087
 msgid "Lancer"
 msgstr "Lancero"
 
@@ -1272,19 +1279,19 @@ msgstr "Mostrar/Ocultar fotos"
 msgid "Disposition de la playlist"
 msgstr "Disposición de la lista"
 
-#: templates/configure/scripts_main.html.jinja:978
+#: templates/configure/scripts_main.html.jinja:980
 msgid "Veuillez entrer un nom pour la playlist."
 msgstr "Ingrese un nombre para la lista de reproducción."
 
-#: templates/configure/scripts_main.html.jinja:994
-#: templates/configure/scripts_main.html.jinja:1080
-#: templates/configure/scripts_main.html.jinja:1803
+#: templates/configure/scripts_main.html.jinja:996
+#: templates/configure/scripts_main.html.jinja:1082
+#: templates/configure/scripts_main.html.jinja:1805
 #: templates/configure/scripts_status.html.jinja:92
 #: templates/configure/scripts_status.html.jinja:164
 msgid "Erreur de communication."
 msgstr "Error de comunicación."
 
-#: templates/configure/scripts_main.html.jinja:1008
+#: templates/configure/scripts_main.html.jinja:1010
 msgid ""
 "Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront "
 "pas supprimées."
@@ -1292,55 +1299,55 @@ msgstr ""
 "¿Estás seguro de que quieres eliminar esta lista de reproducción? Las "
 "fotos no se eliminarán."
 
-#: templates/configure/scripts_main.html.jinja:1064
+#: templates/configure/scripts_main.html.jinja:1066
 msgid "Erreur lors de la suppression de la photo."
 msgstr "Error al eliminar la foto."
 
-#: templates/configure/scripts_main.html.jinja:1070
+#: templates/configure/scripts_main.html.jinja:1072
 msgid "Lancement..."
 msgstr "Lanzamiento..."
 
-#: templates/configure/scripts_main.html.jinja:1140
+#: templates/configure/scripts_main.html.jinja:1142
 msgid "Aucune playlist"
 msgstr "Sin lista de reproducción"
 
-#: templates/configure/scripts_main.html.jinja:1180
+#: templates/configure/scripts_main.html.jinja:1182
 msgid "Import en cours..."
 msgstr "Importación en curso..."
 
-#: templates/configure/scripts_main.html.jinja:1209
+#: templates/configure/scripts_main.html.jinja:1211
 msgid "Préparation :"
 msgstr "Preparación :"
 
-#: templates/configure/scripts_main.html.jinja:1218
+#: templates/configure/scripts_main.html.jinja:1220
 msgid "Préparation terminée ! Redémarrage du diaporama..."
 msgstr "¡Preparación completa! Reiniciando la presentación de diapositivas..."
 
-#: templates/configure/scripts_main.html.jinja:1225
+#: templates/configure/scripts_main.html.jinja:1227
 msgid "Diaporama redémarré. Rechargement de la page..."
 msgstr "Se reinició la presentación de diapositivas. Recargando la página..."
 
-#: templates/configure/scripts_main.html.jinja:1234
+#: templates/configure/scripts_main.html.jinja:1236
 msgid "Données de préparation invalides reçues du serveur."
 msgstr "Se recibieron datos de preparación no válidos del servidor."
 
-#: templates/configure/scripts_main.html.jinja:1242
+#: templates/configure/scripts_main.html.jinja:1244
 msgid "Erreur de connexion au serveur pour la préparation des photos."
 msgstr "Error al conectarse al servidor para preparar fotografías."
 
-#: templates/configure/scripts_main.html.jinja:1254
+#: templates/configure/scripts_main.html.jinja:1256
 msgid "Importation :"
 msgstr "Importación :"
 
-#: templates/configure/scripts_main.html.jinja:1264
+#: templates/configure/scripts_main.html.jinja:1266
 msgid "Données d'import invalides reçues du serveur."
 msgstr "Se recibieron datos de importación no válidos del servidor."
 
-#: templates/configure/scripts_main.html.jinja:1272
+#: templates/configure/scripts_main.html.jinja:1274
 msgid "Erreur de connexion au serveur pour l'import"
 msgstr "Error al conectarse al servidor para importar"
 
-#: templates/configure/scripts_main.html.jinja:1294
+#: templates/configure/scripts_main.html.jinja:1296
 msgid ""
 "Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » "
 "pour choisir à nouveau les dossiers."
@@ -1348,7 +1355,7 @@ msgstr ""
 "Método cambiado: haz clic en «Mostrar mis carpetas de Google Drive» para "
 "volver a elegir las carpetas."
 
-#: templates/configure/scripts_main.html.jinja:1327
+#: templates/configure/scripts_main.html.jinja:1329
 msgid ""
 "Aucun dossier trouvé. Avez-vous partagé vos dossiers avec l'adresse du "
 "compte de service ?"
@@ -1356,62 +1363,62 @@ msgstr ""
 "No se encontró ninguna carpeta. ¿Has compartido tus carpetas con la "
 "dirección de la cuenta de servicio?"
 
-#: templates/configure/scripts_main.html.jinja:1346
+#: templates/configure/scripts_main.html.jinja:1348
 msgid "dossier(s) trouvé(s)"
 msgstr "carpeta(s) encontrada(s)"
 
-#: templates/configure/scripts_main.html.jinja:1586
+#: templates/configure/scripts_main.html.jinja:1588
 msgid "Aucune donnée de marée à afficher."
 msgstr "No hay datos de mareas para mostrar."
 
-#: templates/configure/scripts_main.html.jinja:1589
+#: templates/configure/scripts_main.html.jinja:1591
 msgid "Impossible de charger les données."
 msgstr "No se pueden cargar datos."
 
-#: templates/configure/scripts_main.html.jinja:1594
+#: templates/configure/scripts_main.html.jinja:1596
 msgid "Erreur de connexion au serveur."
 msgstr "Error de conexión del servidor."
 
-#: templates/configure/scripts_main.html.jinja:1643
+#: templates/configure/scripts_main.html.jinja:1645
 msgid "Mise à jour en cours..."
 msgstr "Actualización en progreso..."
 
-#: templates/configure/scripts_main.html.jinja:1688
+#: templates/configure/scripts_main.html.jinja:1690
 msgid "Veuillez sélectionner au moins un fichier."
 msgstr "Seleccione al menos un archivo."
 
-#: templates/configure/scripts_main.html.jinja:1697
+#: templates/configure/scripts_main.html.jinja:1699
 msgid "Envoi en cours..."
 msgstr "Envío en curso..."
 
-#: templates/configure/scripts_main.html.jinja:1720
+#: templates/configure/scripts_main.html.jinja:1722
 msgid "Importation réussie ! Rechargement de la page..."
 msgstr "¡Importación exitosa! Recargando la página..."
 
-#: templates/configure/scripts_main.html.jinja:1729
-#: templates/configure/scripts_main.html.jinja:1762
+#: templates/configure/scripts_main.html.jinja:1731
+#: templates/configure/scripts_main.html.jinja:1764
 #: templates/configure/tab_actions.html.jinja:106
 msgid "Envoyer les photos"
 msgstr "Enviar fotos"
 
-#: templates/configure/scripts_main.html.jinja:1749
+#: templates/configure/scripts_main.html.jinja:1751
 msgid "Données invalides reçues du serveur."
 msgstr "Datos no válidos recibidos del servidor."
 
-#: templates/configure/scripts_main.html.jinja:1760
+#: templates/configure/scripts_main.html.jinja:1762
 msgid "Erreur de communication :"
 msgstr "Error de comunicación:"
 
-#: templates/configure/scripts_main.html.jinja:1791
+#: templates/configure/scripts_main.html.jinja:1793
 msgid "Envoi..."
 msgstr "Enviando..."
 
-#: templates/configure/scripts_main.html.jinja:1806
+#: templates/configure/scripts_main.html.jinja:1808
 #: templates/configure/tab_actions.html.jinja:124
 msgid "Uploader"
 msgstr "Subir"
 
-#: templates/configure/scripts_main.html.jinja:1820
+#: templates/configure/scripts_main.html.jinja:1822
 msgid "Supprimer le fichier musical"
 msgstr "Eliminar el archivo de música"
 
@@ -2293,6 +2300,11 @@ msgstr "Foto de cumpleaños!"
 msgid "Supprimer ce média"
 msgstr "Eliminar este medio"
 
+#: templates/configure/tab_apercu.html.jinja:140
+#: templates/configure/tab_favoris.html.jinja:120
+msgid "Style de la légende"
+msgstr "Estilo de la leyenda"
+
 #: templates/configure/tab_apercu.html.jinja:150
 msgid ""
 "Aucune photo préparée n'a été trouvée. Veuillez\n"
@@ -3004,28 +3016,24 @@ msgstr "Posición:"
 
 #: templates/configure/tab_invites.html.jinja:116
 #: templates/configure/tab_metadata.html.jinja:82
-#: templates/configure/tab_metadata.html.jinja:153
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "Abajo a la derecha"
 
 #: templates/configure/tab_invites.html.jinja:117
 #: templates/configure/tab_metadata.html.jinja:84
-#: templates/configure/tab_metadata.html.jinja:151
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "Abajo a la izquierda"
 
 #: templates/configure/tab_invites.html.jinja:118
 #: templates/configure/tab_metadata.html.jinja:78
-#: templates/configure/tab_metadata.html.jinja:160
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "Arriba a la derecha"
 
 #: templates/configure/tab_invites.html.jinja:119
 #: templates/configure/tab_metadata.html.jinja:80
-#: templates/configure/tab_metadata.html.jinja:158
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "Arriba a la izquierda"
@@ -3043,6 +3051,248 @@ msgstr ""
 "Los mensajes de los invitados se muestran directamente (5 por hora y por "
 "dispositivo como máximo) y desaparecen al cabo de 7 días. Puedes "
 "eliminarlos en Contenido > Mensajes."
+
+#: templates/configure/tab_legendes.html.jinja:3
+msgid "Style des légendes"
+msgstr "Estilo de las leyendas"
+
+#: templates/configure/tab_legendes.html.jinja:4
+msgid ""
+"Choisissez l'apparence de chaque type de légende, comme sur Snapchat : "
+"police, taille, couleurs, fond, gras, italique, souligné, contour, ombre,"
+" position et inclinaison. Une photo ou une vidéo peut aussi avoir son "
+"propre style (bouton palette sous sa légende, dans l'onglet Aperçu)."
+msgstr ""
+"Elige el aspecto de cada tipo de leyenda, como en Snapchat: fuente, "
+"tamaño, colores, fondo, negrita, cursiva, subrayado, contorno, sombra, "
+"posición e inclinación. Una foto o un vídeo también puede tener su propio"
+" estilo (botón de paleta bajo su leyenda, en la pestaña Vista previa)."
+
+#: templates/configure/tab_legendes.html.jinja:7
+msgid "Photos et vidéos"
+msgstr "Fotos y vídeos"
+
+#: templates/configure/tab_legendes.html.jinja:7
+msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
+msgstr "Leyenda escrita bajo cada foto o vídeo (también en las postales)."
+
+#: templates/configure/tab_legendes.html.jinja:8
+msgid "Polaroïds"
+msgstr "Polaroids"
+
+#: templates/configure/tab_legendes.html.jinja:8
+msgid "Texte écrit dans la marge blanche des polaroïds."
+msgstr "Texto escrito en el margen blanco de las polaroids."
+
+#: templates/configure/tab_legendes.html.jinja:9
+msgid "Date et lieu affichés par le diaporama."
+msgstr "Fecha y lugar mostrados por la presentación."
+
+#: templates/configure/tab_legendes.html.jinja:14
+msgid "Personnaliser"
+msgstr "Personalizar"
+
+#: templates/configure/tab_legendes.html.jinja:19
+msgid ""
+"Les légendes déjà posées sur les photos sont redessinées automatiquement "
+"avec le nouveau style. Les vidéos affichent leur légende en sous-titre "
+"pendant la lecture."
+msgstr ""
+"Las leyendas ya puestas en las fotos se vuelven a dibujar automáticamente"
+" con el nuevo estilo. Los vídeos muestran su leyenda como subtítulo "
+"durante la reproducción."
+
+#: templates/configure/tab_legendes.html.jinja:32
+msgid "Aperçu de la légende"
+msgstr "Vista previa de la leyenda"
+
+#: templates/configure/tab_legendes.html.jinja:36
+msgid ""
+"Touchez ou faites glisser sur l'image pour placer la légende. L'aperçu "
+"est dessiné par le cadre lui-même."
+msgstr ""
+"Toca o arrastra sobre la imagen para colocar la leyenda. La vista previa "
+"la dibuja el propio marco."
+
+#: templates/configure/tab_legendes.html.jinja:37
+msgid "Texte d'essai"
+msgstr "Texto de prueba"
+
+#: templates/configure/tab_legendes.html.jinja:41
+msgid "Modèles"
+msgstr "Plantillas"
+
+#: templates/configure/tab_legendes.html.jinja:43 utils/ambiances.py:22
+msgid "Classique"
+msgstr "Clásico"
+
+#: templates/configure/tab_legendes.html.jinja:43
+msgid "Grand texte"
+msgstr "Texto grande"
+
+#: templates/configure/tab_legendes.html.jinja:43
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Bulle"
+msgstr "Burbuja"
+
+#: templates/configure/tab_legendes.html.jinja:43
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Étiquette"
+msgstr "Etiqueta"
+
+#: templates/configure/tab_legendes.html.jinja:43
+msgid "Manuscrit"
+msgstr "Manuscrito"
+
+#: templates/configure/tab_legendes.html.jinja:43 utils/message_renderer.py:42
+msgid "Néon"
+msgstr "Neón"
+
+#: templates/configure/tab_legendes.html.jinja:48
+msgid "Police"
+msgstr "Policía"
+
+#: templates/configure/tab_legendes.html.jinja:50
+msgid "Moderne"
+msgstr "Moderna"
+
+#: templates/configure/tab_legendes.html.jinja:50
+msgid "Classique (empattements)"
+msgstr "Clásica (con serifa)"
+
+#: templates/configure/tab_legendes.html.jinja:56
+msgid "Taille"
+msgstr "Tamaño"
+
+#: templates/configure/tab_legendes.html.jinja:60
+msgid "Mise en forme"
+msgstr "Formato"
+
+#: templates/configure/tab_legendes.html.jinja:62
+msgid "Gras"
+msgstr "Negrita"
+
+#: templates/configure/tab_legendes.html.jinja:63
+msgid "Italique"
+msgstr "Cursiva"
+
+#: templates/configure/tab_legendes.html.jinja:64
+msgid "Souligné"
+msgstr "Subrayado"
+
+#: templates/configure/tab_legendes.html.jinja:65
+msgid "Majuscules"
+msgstr "Mayúsculas"
+
+#: templates/configure/tab_legendes.html.jinja:67
+msgid "Aligné à gauche"
+msgstr "Alinear a la izquierda"
+
+#: templates/configure/tab_legendes.html.jinja:68
+msgid "Centré"
+msgstr "Centrado"
+
+#: templates/configure/tab_legendes.html.jinja:69
+msgid "Aligné à droite"
+msgstr "Alinear a la derecha"
+
+#: templates/configure/tab_legendes.html.jinja:72
+msgid "Couleur du texte"
+msgstr "Color del texto"
+
+#: templates/configure/tab_legendes.html.jinja:75
+msgid "Fond"
+msgstr "Fondo"
+
+#: templates/configure/tab_legendes.html.jinja:77
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Aucun"
+msgstr "Ninguno"
+
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Bandeau"
+msgstr "Banda"
+
+#: templates/configure/tab_legendes.html.jinja:83
+msgid "Opacité du fond"
+msgstr "Opacidad del fondo"
+
+#: templates/configure/tab_legendes.html.jinja:88
+msgid "Contour"
+msgstr "Contorno"
+
+#: templates/configure/tab_legendes.html.jinja:93
+msgid "Effet"
+msgstr "Efecto"
+
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Ombre"
+msgstr "Sombra"
+
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Halo lumineux"
+msgstr "Halo luminoso"
+
+#: templates/configure/tab_legendes.html.jinja:102
+msgid "Inclinaison"
+msgstr "Inclinación"
+
+#: templates/configure/tab_legendes.html.jinja:106
+msgid "Largeur maximale"
+msgstr "Ancho máximo"
+
+#: templates/configure/tab_legendes.html.jinja:109
+#: templates/configure/tab_son.html.jinja:39
+msgid "Position"
+msgstr "Posición"
+
+#: templates/configure/tab_legendes.html.jinja:111
+msgid "En haut"
+msgstr "Arriba"
+
+#: templates/configure/tab_legendes.html.jinja:112
+msgid "Au milieu"
+msgstr "En el centro"
+
+#: templates/configure/tab_legendes.html.jinja:113
+msgid "En bas"
+msgstr "Abajo"
+
+#: templates/configure/tab_legendes.html.jinja:118
+msgid "Style par défaut"
+msgstr "Estilo predeterminado"
+
+#: templates/configure/tab_legendes.html.jinja:119
+msgid "Reprendre le style général"
+msgstr "Volver al estilo general"
+
+#: templates/configure/tab_legendes.html.jinja:122
+msgid "Annuler"
+msgstr "Cancelar"
+
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Légendes des photos et vidéos"
+msgstr "Leyendas de fotos y vídeos"
+
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Texte des polaroïds"
+msgstr "Texto de las polaroids"
+
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Infos des photos (date, lieu)"
+msgstr "Información de las fotos (fecha, lugar)"
+
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Style de cette légende"
+msgstr "Estilo de esta leyenda"
+
+#: templates/configure/tab_legendes.html.jinja:206
+msgid "Autre couleur"
+msgstr "Otro color"
+
+#: templates/configure/tab_legendes.html.jinja:218
+msgid "aucun"
+msgstr "ninguno"
 
 #: templates/configure/tab_logs.html.jinja:4
 msgid "Logs Système"
@@ -3577,51 +3827,28 @@ msgid "Position du drapeau"
 msgstr "Posición de la bandera"
 
 #: templates/configure/tab_metadata.html.jinja:90
-#: templates/configure/tab_metadata.html.jinja:165
 msgid "Décalage horizontal (px)"
 msgstr "Desplazamiento horizontal (px)"
 
 #: templates/configure/tab_metadata.html.jinja:97
-#: templates/configure/tab_metadata.html.jinja:172
 msgid "Décalage vertical (px)"
 msgstr "Desplazamiento vertical (px)"
 
-#: templates/configure/tab_metadata.html.jinja:105
+#: templates/configure/tab_metadata.html.jinja:107
 msgid "Style et Positionnement"
 msgstr "Estilo y posicionamiento"
 
-#: templates/configure/tab_metadata.html.jinja:109
-msgid "Taille de la police"
-msgstr "Tamaño de fuente"
+#: templates/configure/tab_metadata.html.jinja:108
+msgid ""
+"Police, couleurs, fond, contour, position : réglez-les dans l'éditeur de "
+"légendes, avec un aperçu."
+msgstr ""
+"Fuente, colores, fondo, contorno, posición: ajústalos en el editor de "
+"leyendas, con vista previa."
 
-#: templates/configure/tab_metadata.html.jinja:116
-msgid "Police"
-msgstr "Policía"
-
-#: templates/configure/tab_metadata.html.jinja:133
-msgid "Couleur du texte (hex)"
-msgstr "Color del texto (hexadecimal)"
-
-#: templates/configure/tab_metadata.html.jinja:140
-msgid "Couleur du contour (hex)"
-msgstr "Color del contorno (hexadecimal)"
-
-#: templates/configure/tab_metadata.html.jinja:147
-#: templates/configure/tab_son.html.jinja:39
-msgid "Position"
-msgstr "Posición"
-
-#: templates/configure/tab_metadata.html.jinja:156
-msgid "En bas au centre"
-msgstr "Centro inferior"
-
-#: templates/configure/tab_metadata.html.jinja:182
-msgid "Afficher un fond semi-transparent derrière les métadonnées"
-msgstr "Mostrar un fondo semitransparente detrás de los metadatos"
-
-#: templates/configure/tab_metadata.html.jinja:186
-msgid "Couleur du fond (hex RGBA)"
-msgstr "Color de fondo (RGBA hexadecimal)"
+#: templates/configure/tab_metadata.html.jinja:110
+msgid "Personnaliser le style"
+msgstr "Personalizar el estilo"
 
 #: templates/configure/tab_network.html.jinja:4
 msgid "État de la connexion Wi-Fi"
@@ -4858,10 +5085,6 @@ msgstr ""
 msgid "Résultats du diagnostic :"
 msgstr "Resultados del diagnóstico:"
 
-#: utils/ambiances.py:22
-msgid "Classique"
-msgstr "Clásico"
-
 #: utils/ambiances.py:23
 msgid "Une photo à la fois, transitions douces."
 msgstr "Una foto a la vez, transiciones suaves."
@@ -5197,10 +5420,6 @@ msgstr "Pósit"
 msgid "Ardoise"
 msgstr "Pizarra"
 
-#: utils/message_renderer.py:42
-msgid "Néon"
-msgstr "Neón"
-
 #: utils/message_renderer.py:44
 msgid "Lettre"
 msgstr "Carta"
@@ -5439,23 +5658,23 @@ msgstr "Cómic"
 msgid "Album ancien"
 msgstr "Álbum antiguo"
 
-#: web/core.py:930
+#: web/core.py:931
 msgid "Code d'invitation invalide."
 msgstr "Código de invitación no válido."
 
-#: web/core.py:936
+#: web/core.py:937
 msgid "Ce code d'invitation a expiré."
 msgstr "Este código de invitación ha caducado."
 
-#: web/core.py:942
+#: web/core.py:943
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "Ya estás autorizado. ¡Envíame una foto!"
 
-#: web/core.py:944
+#: web/core.py:945
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "Este código de invitación ya se ha utilizado."
 
-#: web/core.py:955
+#: web/core.py:956
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
@@ -5536,6 +5755,46 @@ msgstr "No puedes modificar tu propio rol."
 msgid "Rôle de « %(name)s » modifié."
 msgstr "Rol de «%(name)s» modificado."
 
+#: web/routes_captions.py:14
+msgid "Vacances à la mer avec mamie"
+msgstr "Vacaciones en el mar con la abuela"
+
+#: web/routes_captions.py:14
+msgid "Été 2025"
+msgstr "Verano 2025"
+
+#: web/routes_captions.py:14
+msgid "12 août 2025  •  Biarritz, France"
+msgstr "12 de agosto de 2025  •  Biarritz, Francia"
+
+#: web/routes_captions.py:91
+msgid "Type de légende inconnu."
+msgstr "Tipo de leyenda desconocido."
+
+#: web/routes_captions.py:101
+msgid ""
+"Style enregistré : les légendes déjà posées sont redessinées en arrière-"
+"plan."
+msgstr ""
+"Estilo guardado: las leyendas existentes se vuelven a dibujar en segundo "
+"plano."
+
+#: web/routes_captions.py:102
+msgid "Style enregistré : visible dès la photo suivante."
+msgstr "Estilo guardado: visible desde la próxima foto."
+
+#: web/routes_captions.py:112 web/routes_photos.py:283
+msgid "Photo introuvable."
+msgstr "Foto no encontrada."
+
+#: web/routes_captions.py:115
+msgid "Style de cette légende enregistré."
+msgstr "Estilo de esta leyenda guardado."
+
+#: web/routes_captions.py:116
+msgid "Cette légende reprend le style général."
+msgstr "Esta leyenda vuelve al estilo general."
+
 #: web/routes_config.py:67
 msgid ""
 "La valeur pour la limite de photos Immich est invalide. La valeur "
@@ -5549,7 +5808,7 @@ msgstr ""
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:262
+#: web/routes_config.py:261
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -5980,21 +6239,17 @@ msgstr "Episodio no encontrado."
 msgid "Dernier épisode lancé : %(title)s"
 msgstr "Último episodio en reproducción: %(title)s"
 
-#: web/routes_photos.py:271
+#: web/routes_photos.py:272
 msgid "Tri automatique enregistré : appliqué au prochain tour du diaporama."
 msgstr ""
 "Clasificación automática guardada: se aplicará en la próxima vuelta de la"
 " presentación."
 
-#: web/routes_photos.py:282
-msgid "Photo introuvable."
-msgstr "Foto no encontrada."
-
-#: web/routes_photos.py:288
+#: web/routes_photos.py:289
 msgid "Photo remise dans le diaporama."
 msgstr "Foto incluida de nuevo en la presentación."
 
-#: web/routes_photos.py:288
+#: web/routes_photos.py:289
 msgid "Photo de nouveau écartée."
 msgstr "Foto apartada de nuevo."
 

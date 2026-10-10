@@ -220,8 +220,9 @@ def set_image_text():
         if not photo_full_path.is_file():
             return jsonify({"success": False, "message": f"Photo non trouvée : {photo_full_path}"}), 404
 
-        # Appeler la fonction pour ajouter le texte
-        add_text_to_image(str(photo_full_path), text)
+        # Photos : le texte est dessiné sur l'image ; vidéos : il est affiché en sous-titre pendant la lecture
+        if photo_full_path.suffix.lower() not in VIDEO_EXTENSIONS:
+            add_text_to_image(str(photo_full_path), text)
 
         # Sauvegarder le texte dans le fichier de config
         texts = load_text_states()

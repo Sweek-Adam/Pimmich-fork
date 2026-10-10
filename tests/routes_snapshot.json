@@ -90,6 +90,30 @@
   ]
  ],
  [
+  "/api/captions",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/captions/<scope>",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/captions/media",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/captions/preview",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/clear_logs",
   [
    "POST"

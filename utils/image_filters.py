@@ -7,6 +7,8 @@ import piexif
 import json
 from datetime import date
 
+from utils import captions
+
 POLAROID_FONT_PATH = Path(__file__).parent.parent / "static" / "fonts" / "Caveat-Regular.ttf"
 # Chemin vers le cache des textes saisis par l'utilisateur
 USER_TEXT_MAP_CACHE_FILE = Path(__file__).parent.parent / "cache" / "user_texts.json"
@@ -108,7 +110,7 @@ def add_stamp_and_postmark(card_image):
         print(f"[Stamp] Erreur lors de l'ajout du timbre : {e}")
         return card_image
 
-def create_postcard_effect(img_content, caption=None):
+def create_postcard_effect(img_content, caption=None, style=None):
     """Crée un effet de carte postale inclinée avec bordure et ombre."""
     # Définir les paramètres de l'effet
     border_size = 35  # Bordure blanche principale augmentée pour un texte plus grand
@@ -131,42 +133,9 @@ def create_postcard_effect(img_content, caption=None):
         width=1
     )
 
-    # --- NOUVELLE LOGIQUE : AJOUT DE LA LÉGENDE DIRECTEMENT SUR LA PHOTO ---
-    # Cela garantit que le texte est toujours lisible, quelle que soit l'inclinaison.
+    # Légende posée sur la photo (avant l'inclinaison), avec le style choisi dans l'éditeur de légendes
     if caption and caption.strip():
-        # On travaille sur une copie pour pouvoir utiliser alpha_composite pour la transparence
-        img_with_text = img_content.copy()
-        if img_with_text.mode != 'RGBA':
-            img_with_text = img_with_text.convert('RGBA')
-
-        # Créer une couche transparente pour le bandeau et le texte
-        overlay = Image.new('RGBA', img_with_text.size, (0, 0, 0, 0))
-        draw = ImageDraw.Draw(overlay)
-        
-        try:
-            # Taille de police relative à la hauteur de l'image pour la robustesse
-            font_size = int(img_with_text.height * 0.06)
-            font = ImageFont.truetype(str(POLAROID_FONT_PATH), font_size)
-        except IOError:
-            font = ImageFont.load_default()
-        
-        # Calculer la hauteur du bandeau en fonction de la taille du texte
-        _, text_top, _, text_bottom = font.getbbox(caption)
-        text_height = text_bottom - text_top
-        band_padding = int(font_size * 0.3)
-        band_height = text_height + (band_padding * 2)
-        
-        # Positionner le bandeau en bas de l'image
-        band_y0 = img_with_text.height - band_height
-        draw.rectangle([(0, band_y0), (img_with_text.width, img_with_text.height)], fill=(0, 0, 0, 128)) # Noir semi-transparent (50% opacité)
-        
-        # Positionner et dessiner le texte en blanc, centré dans le bandeau
-        text_x = img_with_text.width / 2
-        text_y = band_y0 + (band_height / 2)
-        draw.text((text_x, text_y), caption, font=font, fill=(255, 255, 255), anchor="mm")
-        
-        # Combiner l'image et l'overlay, puis reconvertir en RGB
-        img_content = Image.alpha_composite(img_with_text, overlay).convert('RGB')
+        img_content = captions.draw(img_content, caption, style or captions.clean(None, "photo")).convert('RGB')
 
     # 1. Créer la carte avec sa bordure blanche
     card_size = (img_content.width + 2 * border_size, img_content.height + 2 * border_size)
@@ -333,13 +302,23 @@ def apply_filter_to_image(image_path_str, filter_name):
     else:
         img_to_save.save(image_path, 'JPEG', quality=90, optimize=True)
 
+def _caption_style(scope, key=None):
+    from utils.config_manager import load_config
+    try:
+        config = load_config()
+    except Exception:
+        config = {}
+    return captions.style_for(config, scope, key)
+
+
 def add_text_to_image(image_path_str, text):
     """
     Met à jour le texte pour une image, le sauvegarde, et régénère l'image de base
     et sa version carte postale si elle existe.
     """
     image_path = Path(image_path_str)
-    
+    style = _caption_style("photo", '/'.join(image_path.parts[-2:]))
+
     # --- 1. Mettre à jour le fichier de cache des textes ---
     try:
         # La clé est le chemin relatif depuis 'prepared', ex: 'immich/photo.jpg'
@@ -398,7 +377,7 @@ def add_text_to_image(image_path_str, text):
                 Image.Resampling.LANCZOS
             )
             
-            postcard_effect_img = create_postcard_effect(postcard_img_content, caption=text)
+            postcard_effect_img = create_postcard_effect(postcard_img_content, caption=text, style=style)
 
             final_postcard_img = background_img.copy()
             postcard_x_offset = (output_width - postcard_effect_img.width) // 2
@@ -419,33 +398,7 @@ def add_text_to_image(image_path_str, text):
         if img_rgba.mode != 'RGBA':
             img_rgba = img_rgba.convert('RGBA')
 
-        overlay = Image.new('RGBA', img_rgba.size, (255, 255, 255, 0))
-        draw = ImageDraw.Draw(overlay)
-        width, height = img_rgba.size
-
-        try:
-            font_path = str(POLAROID_FONT_PATH)
-            font_size = int(height * 0.05)
-            font = ImageFont.truetype(font_path, font_size)
-        except IOError:
-            font = ImageFont.load_default()
-
-        text_width = font.getlength(text)
-        _, text_top, _, text_bottom = font.getbbox(text)
-        text_height = text_bottom - text_top
-
-        rect_padding = int(font_size * 0.4)
-        rect_height = text_height + (rect_padding * 2)
-        rect_width = text_width + (rect_padding * 2)
-        rect_x1 = (width - rect_width) / 2
-        rect_y1 = height - rect_height - (height * 0.03)
-        rect_x2 = rect_x1 + rect_width
-        rect_y2 = rect_y1 + rect_height
-        
-        _draw_rounded_rectangle(draw, (rect_x1, rect_y1, rect_x2, rect_y2), int(font_size * 0.3), fill=(255, 255, 255, 180))
-        draw.text((rect_x1 + rect_width / 2, rect_y1 + rect_height / 2), text, font=font, fill=(0, 0, 0, 255), anchor="mm")
-        
-        img_composited = Image.alpha_composite(img_rgba, overlay)
+        img_composited = captions.draw(img_rgba, text, style)
         img_to_save = img_composited.convert('RGB')
 
     if exif_bytes:
@@ -488,20 +441,10 @@ def add_text_to_polaroid(polaroid_path_str, text):
     # 1. Effacer l'ancien texte en redessinant la marge du bas du polaroid
     draw.rectangle([content_x, content_bottom - padding_bottom, content_right, content_bottom], fill=frame_color)
 
-    # 2. Ajouter le nouveau texte si fourni
+    # 2. Ajouter le nouveau texte si fourni (style « polaroïd » de l'éditeur de légendes, dans la marge du bas)
     if text and text.strip():
-        try:
-            # La taille de la police est relative à la taille de la marge
-            font_size = int(padding_bottom * 0.4)
-            font = ImageFont.truetype(str(POLAROID_FONT_PATH), font_size)
-            
-            # Calculer le centre de la zone de texte du polaroid
-            text_area_center_x = (content_x + content_right) / 2
-            text_area_center_y = content_bottom - (padding_bottom / 2)
-            # Dessiner le texte en utilisant l'ancre 'mm' pour un centrage parfait
-            draw.text((text_area_center_x, text_area_center_y), text, font=font, fill=(80, 80, 80), anchor="mm")
-        except IOError:
-            print(f"Avertissement: Police non trouvée à {POLAROID_FONT_PATH}. Le texte ne sera pas ajouté.")
+        margin = (content_x, content_bottom - padding_bottom, content_width, padding_bottom)
+        img = captions.draw(img.convert('RGB'), text, _caption_style("polaroid"), area=margin, size_ref=content_height)
     # 3. Sauvegarder l'image modifiée en conservant les EXIF
     if exif_bytes:
         img.save(polaroid_path, 'JPEG', quality=95, optimize=True, exif=exif_bytes)

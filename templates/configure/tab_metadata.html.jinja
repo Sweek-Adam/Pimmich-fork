@@ -101,92 +101,13 @@
                         </div>
                     </div>
 
-                    <!-- Style & Position -->
-                    <h4 class="text-lg font-semibold mt-6 pt-4 border-t">{{ _("Style et Positionnement") }}</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                    <!-- Style : éditeur de légendes -->
+                    <div class="mt-6 pt-4 border-t flex flex-wrap items-center justify-between gap-3">
                         <div>
-                            <label for="photo_metadata_font_size" class="block text-sm font-medium text-gray-700">{{
-                                _("Taille de la police") }}</label>
-                            <input type="number" id="photo_metadata_font_size" name="photo_metadata_font_size"
-                                value="{{ config.get('photo_metadata_font_size', 23) }}"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            <h4 class="text-lg font-semibold">{{ _("Style et Positionnement") }}</h4>
+                            <p class="text-sm text-gray-600">{{ _("Police, couleurs, fond, contour, position : réglez-les dans l'éditeur de légendes, avec un aperçu.") }}</p>
                         </div>
-                        <div>
-                            <label for="photo_metadata_font_path" class="block text-sm font-medium text-gray-700">{{
-                                _("Police") }}</label>
-                            <select id="photo_metadata_font_path" name="photo_metadata_font_path"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                                {% set fonts = [
-                                ('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 'DejaVu Sans Bold'),
-                                ('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 'DejaVu Sans'),
-                                ('/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf', 'Liberation Sans'),
-                                ('/usr/share/fonts/truetype/freefont/FreeSans.ttf', 'FreeSans')
-                                ] %}
-                                {% for path, label in fonts %}
-                                <option value="{{ path }}" {% if config.get('photo_metadata_font_path')==path
-                                    %}selected{% endif %}>{{ label }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div>
-                            <label for="photo_metadata_color" class="block text-sm font-medium text-gray-700">{{
-                                _("Couleur du texte (hex)") }}</label>
-                            <input type="text" id="photo_metadata_color" name="photo_metadata_color"
-                                value="{{ config.get('photo_metadata_color', '#ffffff') }}"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                        </div>
-                        <div>
-                            <label for="photo_metadata_outline_color" class="block text-sm font-medium text-gray-700">{{
-                                _("Couleur du contour (hex)") }}</label>
-                            <input type="text" id="photo_metadata_outline_color" name="photo_metadata_outline_color"
-                                value="{{ config.get('photo_metadata_outline_color', '#000000') }}"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                        </div>
-                        <div>
-                            <label for="photo_metadata_position" class="block text-sm font-medium text-gray-700">{{
-                                _("Position") }}</label>
-                            <select id="photo_metadata_position" name="photo_metadata_position"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                                <option value="bottom_left" {% if config.get('photo_metadata_position')=='bottom_left'
-                                    %}selected{% endif %}>{{ _("En bas à gauche") }}</option>
-                                <option value="bottom_right" {% if config.get('photo_metadata_position')=='bottom_right'
-                                    %}selected{% endif %}>{{ _("En bas à droite") }}</option>
-                                <option value="bottom_center" {% if
-                                    config.get('photo_metadata_position')=='bottom_center' %}selected{% endif %}>{{
-                                    _("En bas au centre") }}</option>
-                                <option value="top_left" {% if config.get('photo_metadata_position')=='top_left'
-                                    %}selected{% endif %}>{{ _("En haut à gauche") }}</option>
-                                <option value="top_right" {% if config.get('photo_metadata_position')=='top_right'
-                                    %}selected{% endif %}>{{ _("En haut à droite") }}</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="photo_metadata_offset_x" class="block text-sm font-medium text-gray-700">{{
-                                _("Décalage horizontal (px)") }}</label>
-                            <input type="number" id="photo_metadata_offset_x" name="photo_metadata_offset_x"
-                                value="{{ config.get('photo_metadata_offset_x', 0) }}"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                        </div>
-                        <div>
-                            <label for="photo_metadata_offset_y" class="block text-sm font-medium text-gray-700">{{
-                                _("Décalage vertical (px)") }}</label>
-                            <input type="number" id="photo_metadata_offset_y" name="photo_metadata_offset_y"
-                                value="{{ config.get('photo_metadata_offset_y', 0) }}"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                        </div>
-                    </div>
-
-                    <!-- Background -->
-                    <div class="form-check form-switch my-3 pt-4 border-t">
-                        <input class="form-check-input" type="checkbox" id="photo_metadata_background_enabled" name="photo_metadata_background_enabled" {% if config.get('photo_metadata_background_enabled') %}checked{% endif %}>
-                        <label class="form-check-label ml-2" for="photo_metadata_background_enabled">{{ _("Afficher un fond semi-transparent derrière les métadonnées") }}</label>
-                    </div>
-                    <div class="mb-4">
-                        <label for="photo_metadata_background_color" class="block text-sm font-medium text-gray-700">{{
-                            _("Couleur du fond (hex RGBA)") }}</label>
-                        <input type="text" id="photo_metadata_background_color" name="photo_metadata_background_color"
-                            value="{{ config.get('photo_metadata_background_color', '#00000080') }}"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <button type="button" class="btn-primary" onclick="openCaptionEditor({ scope: 'metadata' })"><i class="fas fa-palette"></i>{{ _("Personnaliser le style") }}</button>
                     </div>
                 </fieldset>
             </div>
