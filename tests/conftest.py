@@ -29,6 +29,7 @@ for name in COPIED:
         shutil.copy2(src, _SANDBOX / name)
 (_SANDBOX / "static").mkdir()
 shutil.copytree(PROJECT_DIR / "static" / "pwa", _SANDBOX / "static" / "pwa")
+shutil.copytree(PROJECT_DIR / "static" / "fonts", _SANDBOX / "static" / "fonts")
 (_SANDBOX / "config").mkdir()
 
 # Compte administrateur principal de test

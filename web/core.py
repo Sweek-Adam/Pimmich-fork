@@ -366,6 +366,14 @@ def inject_current_user():
     return dict(current_username=session.get('username'), is_admin=is_admin())
 
 @app.context_processor
+def inject_styles_and_formats():
+    """Styles de messages et formats de compositions disponibles (libellés traduits dans les templates)."""
+    from utils.message_renderer import STYLES
+    from utils.compositions import FORMATS
+    return dict(message_styles=[(k, v["label"]) for k, v in STYLES.items()],
+                composition_formats=[(k, v[0]) for k, v in FORMATS.items()])
+
+@app.context_processor
 def inject_disk_alert():
     """Alerte d'espace disque faible, affichée aux administrateurs."""
     if not session.get('logged_in') or not is_admin():

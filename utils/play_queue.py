@@ -26,13 +26,19 @@ def _cycle(playlist, start):
     return playlist[start:] + playlist[:start] if playlist else []
 
 
-def publish_state(playlist, current_index):
-    """Publie le média affiché et les suivants (dans l'ordre où ils seront affichés)."""
+def publish_state(playlist, current_index, current_override=None):
+    """
+    Publie le média affiché et les suivants (dans l'ordre où ils seront affichés).
+    `current_override` : média affiché hors playlist (composition) ; playlist[current_index] est alors le suivant.
+    """
     if not playlist:
         return
-    upcoming = _cycle(playlist, current_index + 1)[:min(UPCOMING_COUNT, len(playlist) - 1)]
+    if current_override:
+        current, upcoming = current_override, _cycle(playlist, current_index)[:min(UPCOMING_COUNT, len(playlist))]
+    else:
+        current, upcoming = playlist[current_index], _cycle(playlist, current_index + 1)[:min(UPCOMING_COUNT, len(playlist) - 1)]
     try:
-        _write_json(STATE_FILE, {"current": playlist[current_index], "upcoming": upcoming, "updated": time.time()})
+        _write_json(STATE_FILE, {"current": current, "upcoming": upcoming, "updated": time.time()})
     except OSError:
         pass
 

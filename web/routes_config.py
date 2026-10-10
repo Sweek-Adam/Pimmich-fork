@@ -1,5 +1,6 @@
 """Page de configuration principale (affichage et enregistrement des réglages)."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils.compositions import FORMATS as COMPOSITION_FORMATS
 from web.core import _
 
 
@@ -61,7 +62,7 @@ def configure():
             'screen_height_percent', 'clock_font_size', 'clock_color',
             'clock_format', 'clock_offset_x', 'clock_offset_y',
             'clock_background_color',
-            'clock_outline_color', 'clock_font_path', 'clock_position', 'guest_qr_position',
+            'clock_outline_color', 'clock_font_path', 'clock_position', 'guest_qr_position', 'compositions_every',
             'display_width', 'display_height', # Ajout des nouvelles clés
             'transition_enabled', # Added transition_enabled
             'transition_type', 'home_assistant_token',
@@ -85,7 +86,7 @@ def configure():
             if key in request.form:
                 value = request.form.get(key)
                 # Gérer les champs numériques
-                if key in ['display_duration', 'clock_offset_x', 'clock_offset_y', 'clock_font_size', 'weather_update_interval_minutes', 'immich_update_interval_hours', 'smb_update_interval_hours', 'gdrive_update_interval_minutes', 'display_width', 'display_height', 'info_display_duration', 'tide_offset_x', 'tide_offset_y', 'video_audio_volume', 'favorite_boost_factor', 'telegram_boost_duration_days', 'telegram_boost_factor', 'button_pin', 'smart_plug_on_delay', 'anniversary_boost_factor']: # Integer fields
+                if key in ['display_duration', 'compositions_every', 'clock_offset_x', 'clock_offset_y', 'clock_font_size', 'weather_update_interval_minutes', 'immich_update_interval_hours', 'smb_update_interval_hours', 'gdrive_update_interval_minutes', 'display_width', 'display_height', 'info_display_duration', 'tide_offset_x', 'tide_offset_y', 'video_audio_volume', 'favorite_boost_factor', 'telegram_boost_duration_days', 'telegram_boost_factor', 'button_pin', 'smart_plug_on_delay', 'anniversary_boost_factor']: # Integer fields
                     try:
                         config[key] = int(value)
                     except (ValueError, TypeError):
@@ -184,6 +185,10 @@ def configure():
         config["show_clock"] = 'show_clock' in request.form
         config["show_guest_qr"] = 'show_guest_qr' in request.form
         config["guest_messages_enabled"] = 'guest_messages_enabled' in request.form
+        config["compositions_enabled"] = 'compositions_enabled' in request.form
+        config["compositions_include_messages"] = 'compositions_include_messages' in request.form
+        if 'compositions_form' in request.form:  # cases à cocher : liste vide si aucune n'est cochée
+            config["compositions_styles"] = [s for s in request.form.getlist('compositions_styles') if s in COMPOSITION_FORMATS]
         config["immich_auto_update"] = 'immich_auto_update' in request.form
         config["random_content_in_album"] = "random_content_in_album" in request.form
         config["smb_auto_update"] = 'smb_auto_update' in request.form

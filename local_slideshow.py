@@ -1,6 +1,7 @@
 import os
 import random
 import time
+import threading
 os.environ["PYGAME_BLEND_ALPHA_SDL2"] = "1"
 import pygame
 import traceback
@@ -26,7 +27,8 @@ from utils.config_manager import load_config
 from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
 from utils.dedup import remove_duplicates
-from utils.messages_manager import pop_priority
+from utils.messages_manager import pop_priority, list_messages
+from utils import compositions
 from utils import play_queue
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
@@ -858,6 +860,44 @@ def control_fan(temperature, threshold=55, pin=14):
         # logger.info(f"Ventilateur activé (température : {temperature}°C, seuil : {threshold}°C)") # Commenté pour réduire le bruit dans les logs
     else:
         set_gpio_output(pin, False)
+
+# --- Compositions de plusieurs photos, préparées en arrière-plan pour ne jamais ralentir le diaporama ---
+_composition = {"thread": None, "ready": None, "counter": 0, "slot": 0}
+
+
+def prepare_composition_async(config, all_media, width, height):
+    """Lance la préparation de la prochaine composition si aucune n'est prête ou en cours."""
+    if _composition["ready"] or (_composition["thread"] and _composition["thread"].is_alive()):
+        return
+    photos = [p for p in all_media if p.lower().endswith((".jpg", ".jpeg", ".png"))
+              and f"{os.sep}messages{os.sep}" not in p and f"{os.sep}compositions{os.sep}" not in p]
+    styles = config.get("compositions_styles") or list(compositions.FORMATS)
+    include_messages = config.get("compositions_include_messages", True)
+
+    def work():
+        try:
+            messages = [m for m in list_messages() if not m.get("hidden")] if include_messages else []
+            started = time.time()
+            style, image = compositions.compose_random(styles, photos, messages, width, height, include_messages)
+            if image is None:
+                return
+            compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            _composition["slot"] ^= 1  # deux fichiers en alternance : jamais réécrire celui affiché
+            path = compositions.OUTPUT_DIR / f"composition_{_composition['slot']}.jpg"
+            image.save(path, "JPEG", quality=88)
+            _composition["ready"] = str(path)
+            logger.info(f"[Compositions] « {style} » prête en {time.time() - started:.1f}s")
+        except Exception as e:
+            logger.warning(f"[Compositions] Préparation impossible : {e}")
+
+    _composition["thread"] = threading.Thread(target=work, daemon=True)
+    _composition["thread"].start()
+
+
+def take_composition():
+    path, _composition["ready"] = _composition["ready"], None
+    return path
+
 
 def apply_priority(playlist, all_media, queue):
     """
@@ -2263,8 +2303,16 @@ def start_slideshow():
 
                 # Ordre demandé depuis l'interface (onglet « À suivre ») : appliqué avant le média suivant
                 playlist, playlist_index = play_queue.apply_requested_order(playlist, playlist_index)
-                photo_path = playlist[playlist_index]
-                play_queue.publish_state(playlist, playlist_index)
+
+                # Composition de plusieurs photos (liège, mosaïque...) toutes les N photos, préparée en arrière-plan
+                composition_path = None
+                if not is_custom_run and config.get("compositions_enabled", True):
+                    prepare_composition_async(config, all_media, SCREEN_WIDTH, SCREEN_HEIGHT)
+                    if _composition["counter"] >= max(1, int(config.get("compositions_every", 5))):
+                        composition_path = take_composition()
+
+                photo_path = composition_path or playlist[playlist_index]
+                play_queue.publish_state(playlist, playlist_index, composition_path)
                 
                 # Réinitialiser les requêtes de changement de photo
                 global next_photo_requested, previous_photo_requested
@@ -2368,11 +2416,18 @@ def start_slideshow():
                         logger.info(f"🖼️ Skipping photo {photo_path} due to loading error.")
 
                 # --- Logique de navigation ---
-                if next_photo_requested:
+                if composition_path:
+                    # La composition s'intercale : la photo prévue n'a pas encore été affichée
+                    _composition["counter"] = 0
+                    if previous_photo_requested:
+                        playlist_index -= 1
+                elif next_photo_requested:
+                    _composition["counter"] += 1
                     playlist_index += 1
                 elif previous_photo_requested:
                     playlist_index -= 1
                 else: # Comportement normal
+                    _composition["counter"] += 1
                     playlist_index += 1
 
                 # Gérer le bouclage de la playlist

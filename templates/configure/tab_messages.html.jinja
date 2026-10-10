@@ -19,10 +19,7 @@
                             <div>
                                 <label for="message-style">{{ _("Style") }}</label>
                                 <select id="message-style">
-                                    <option value="nuit">{{ _("Nuit") }}</option>
-                                    <option value="clair">{{ _("Clair") }}</option>
-                                    <option value="carte">{{ _("Carte postale") }}</option>
-                                    <option value="festif">{{ _("Festif") }}</option>
+                                    {% for key, label in message_styles %}<option value="{{ key }}">{{ _(label) }}</option>{% endfor %}
                                 </select>
                             </div>
                             <div>

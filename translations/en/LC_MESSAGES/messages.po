@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 13:14+0200\n"
+"POT-Creation-Date: 2026-10-10 13:57+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:916
+#: local_slideshow.py:956
 msgid "Photos & messages"
 msgstr "Photos & messages"
 
-#: local_slideshow.py:1101
+#: local_slideshow.py:1141
 msgid "Données de marée non disponibles"
 msgstr "Tide data unavailable"
 
-#: local_slideshow.py:1198
+#: local_slideshow.py:1238
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Anniversary) %(num)d year ago"
 
-#: local_slideshow.py:1198
+#: local_slideshow.py:1238
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Anniversary) %(num)d years ago"
 
-#: local_slideshow.py:2215
+#: local_slideshow.py:2255
 msgid "Aucune photo trouvée."
 msgstr "No photos found."
 
-#: local_slideshow.py:2216
+#: local_slideshow.py:2256
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configure at: http://%(ip)s"
 
-#: local_slideshow.py:2217
+#: local_slideshow.py:2257
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credentials in credentials.json at the root of the SD card)"
 
-#: local_slideshow.py:2218
+#: local_slideshow.py:2258
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Screen resolution: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2219
+#: local_slideshow.py:2259
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Retrying in 60 seconds..."
 
-#: local_slideshow.py:2245
+#: local_slideshow.py:2285
 msgid "Scannez pour configurer"
 msgstr "Scan to configure"
 
@@ -77,7 +77,7 @@ msgstr ""
 "photos or enable automatic cleanup in System > Maintenance."
 
 #: templates/configure.html.jinja:74 templates/login.html.jinja:89
-#: templates/upload.html.jinja:118
+#: templates/upload.html.jinja:115
 msgid "Langue"
 msgstr "Language"
 
@@ -180,8 +180,8 @@ msgid "Visualisez et gérez toutes les photos prêtes pour le diaporama."
 msgstr "Visualize and manage all the photos ready for slideshow."
 
 #: templates/configure.html.jinja:187
-#: templates/configure/tab_messages.html.jinja:37
-#: templates/upload.html.jinja:97
+#: templates/configure/tab_messages.html.jinja:34
+#: templates/upload.html.jinja:94
 msgid "Aperçu"
 msgstr "Preview"
 
@@ -418,58 +418,38 @@ msgstr "Your message…"
 msgid "Votre prénom (optionnel)"
 msgstr "Your first name (optional)"
 
-#: templates/configure/tab_messages.html.jinja:22
-#: templates/upload.html.jinja:91
-msgid "Nuit"
-msgstr "Night"
-
-#: templates/configure/tab_messages.html.jinja:23
-#: templates/upload.html.jinja:92
-msgid "Clair"
-msgstr "Light"
-
-#: templates/configure/tab_messages.html.jinja:24
-#: templates/upload.html.jinja:93
-msgid "Carte postale"
-msgstr "Postcard"
-
-#: templates/configure/tab_messages.html.jinja:25
-#: templates/upload.html.jinja:94
-msgid "Festif"
-msgstr "Festive"
-
-#: templates/upload.html.jinja:98
+#: templates/upload.html.jinja:95
 msgid "Afficher sur le cadre"
 msgstr "Show on the frame"
 
-#: templates/configure/tab_messages.html.jinja:47
-#: templates/upload.html.jinja:101
+#: templates/configure/tab_messages.html.jinja:44
+#: templates/upload.html.jinja:98
 msgid "Aperçu du message"
 msgstr "Message preview"
 
-#: templates/upload.html.jinja:102
+#: templates/upload.html.jinja:99
 msgid "Le message reste affiché 7 jours."
 msgstr "The message stays on screen for 7 days."
 
-#: templates/upload.html.jinja:106
+#: templates/upload.html.jinja:103
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "Add this page to your phone's home screen"
 
-#: templates/upload.html.jinja:108
+#: templates/upload.html.jinja:105
 msgid ""
 "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr "in Safari, tap the Share button, then « Add to Home Screen »."
 
-#: templates/upload.html.jinja:109
+#: templates/upload.html.jinja:106
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "in Chrome, open the ⋮ menu, then « Add to Home screen »."
 
-#: templates/upload.html.jinja:111
+#: templates/upload.html.jinja:108
 msgid ""
 "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich will then open like an app, directly on this page."
 
-#: templates/upload.html.jinja:114
+#: templates/upload.html.jinja:111
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
@@ -477,15 +457,15 @@ msgstr ""
 "Return to login\n"
 "          administrator"
 
-#: templates/upload.html.jinja:161 templates/upload.html.jinja:198
+#: templates/upload.html.jinja:158 templates/upload.html.jinja:195
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr "Upload failed. Check the connection to the frame."
 
-#: templates/upload.html.jinja:181
+#: templates/upload.html.jinja:178
 msgid "fichier(s) en cours d'envoi..."
 msgstr "file(s) uploading..."
 
-#: templates/upload.html.jinja:192
+#: templates/upload.html.jinja:189
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Upload too large: send fewer files at a time."
 
@@ -1338,10 +1318,36 @@ msgid "Volume :"
 msgstr "Volume :"
 
 #: templates/configure/tab_affichage.html.jinja:176
+msgid "Compositions de plusieurs photos"
+msgstr "Multi-photo compositions"
+
+#: templates/configure/tab_affichage.html.jinja:178
+msgid ""
+"De temps en temps, le diaporama affiche plusieurs photos à la fois dans un "
+"format tiré au hasard parmi ceux cochés. Les messages peuvent y apparaître "
+"(post-it, fiche, case de texte)."
+msgstr ""
+"From time to time, the slideshow shows several photos at once in a layout "
+"picked at random among the checked ones. Messages can appear in them (sticky"
+" note, index card, text tile)."
+
+#: templates/configure/tab_affichage.html.jinja:182
+msgid "Afficher des compositions"
+msgstr "Show compositions"
+
+#: templates/configure/tab_affichage.html.jinja:184
+msgid "Une composition toutes les (photos) :"
+msgstr "One composition every (photos):"
+
+#: templates/configure/tab_affichage.html.jinja:189
+msgid "Inclure les messages dans les compositions"
+msgstr "Include messages in compositions"
+
+#: templates/configure/tab_affichage.html.jinja:207
 msgid "QR code pour les invités"
 msgstr "QR code for guests"
 
-#: templates/configure/tab_affichage.html.jinja:178
+#: templates/configure/tab_affichage.html.jinja:209
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, pour"
 " envoyer des photos ou écrire un message depuis un téléphone connecté au "
@@ -1350,43 +1356,43 @@ msgstr ""
 "Permanently shows a QR code on the slideshow linking to the guest page, to "
 "send photos or write a message from a phone on the same Wi-Fi."
 
-#: templates/configure/tab_affichage.html.jinja:181
+#: templates/configure/tab_affichage.html.jinja:212
 msgid "Afficher le QR code"
 msgstr "Show the QR code"
 
-#: templates/configure/tab_affichage.html.jinja:183
+#: templates/configure/tab_affichage.html.jinja:214
 msgid "Position :"
 msgstr "Position:"
 
-#: templates/configure/tab_affichage.html.jinja:186
+#: templates/configure/tab_affichage.html.jinja:217
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
 msgid "En bas à droite"
 msgstr "Bottom right"
 
-#: templates/configure/tab_affichage.html.jinja:187
+#: templates/configure/tab_affichage.html.jinja:218
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
 msgid "En bas à gauche"
 msgstr "Bottom left"
 
-#: templates/configure/tab_affichage.html.jinja:188
+#: templates/configure/tab_affichage.html.jinja:219
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
 msgid "En haut à droite"
 msgstr "Top right"
 
-#: templates/configure/tab_affichage.html.jinja:189
+#: templates/configure/tab_affichage.html.jinja:220
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
 msgid "En haut à gauche"
 msgstr "Top left"
 
-#: templates/configure/tab_affichage.html.jinja:193
+#: templates/configure/tab_affichage.html.jinja:224
 msgid "Autoriser les invités à écrire des messages"
 msgstr "Allow guests to write messages"
 
-#: templates/configure/tab_affichage.html.jinja:195
+#: templates/configure/tab_affichage.html.jinja:226
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les "
@@ -1395,11 +1401,11 @@ msgstr ""
 "Guest messages are shown immediately (at most 5 per hour per device) and "
 "disappear after 7 days. You can delete them in Content > Messages."
 
-#: templates/configure/tab_affichage.html.jinja:200
+#: templates/configure/tab_affichage.html.jinja:231
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Power management (Connected Socket)"
 
-#: templates/configure/tab_affichage.html.jinja:202
+#: templates/configure/tab_affichage.html.jinja:233
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser "
 "une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra "
@@ -1409,46 +1415,46 @@ msgstr ""
 "outlet (Wi-Fi) to turn off its power. Pimmich will send a simple HTTP "
 "request to the URLs you specify."
 
-#: templates/configure/tab_affichage.html.jinja:203
+#: templates/configure/tab_affichage.html.jinja:234
 msgid "Exemples d'URLs :"
 msgstr "Examples of URLs:"
 
-#: templates/configure/tab_affichage.html.jinja:215
+#: templates/configure/tab_affichage.html.jinja:246
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr "Enable smart plug control"
 
-#: templates/configure/tab_affichage.html.jinja:222
+#: templates/configure/tab_affichage.html.jinja:253
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr "Plug status: Unknown"
 
-#: templates/configure/tab_affichage.html.jinja:229
+#: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr "URL to turn the plug ON:"
 
-#: templates/configure/tab_affichage.html.jinja:238
-#: templates/configure/tab_affichage.html.jinja:251
+#: templates/configure/tab_affichage.html.jinja:269
+#: templates/configure/tab_affichage.html.jinja:282
 msgid "Tester"
 msgstr "Tester"
 
-#: templates/configure/tab_affichage.html.jinja:242
+#: templates/configure/tab_affichage.html.jinja:273
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr "URL to turn the plug OFF:"
 
-#: templates/configure/tab_affichage.html.jinja:255
+#: templates/configure/tab_affichage.html.jinja:286
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr "Delay after power-on (seconds):"
 
-#: templates/configure/tab_affichage.html.jinja:260
+#: templates/configure/tab_affichage.html.jinja:291
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la résolution."
 " Augmentez si la résolution est toujours incorrecte."
@@ -1456,27 +1462,27 @@ msgstr ""
 "Time to wait for the screen to initialize before forcing the resolution. "
 "Increase if the resolution is still incorrect."
 
-#: templates/configure/tab_affichage.html.jinja:263
+#: templates/configure/tab_affichage.html.jinja:294
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr "Status URL (optional):"
 
-#: templates/configure/tab_affichage.html.jinja:269
+#: templates/configure/tab_affichage.html.jinja:300
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "For Home Assistant, use the States API URL:"
 
-#: templates/configure/tab_affichage.html.jinja:275
+#: templates/configure/tab_affichage.html.jinja:306
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Home Assistant access token (if HA status URL):"
 
-#: templates/configure/tab_affichage.html.jinja:283
+#: templates/configure/tab_affichage.html.jinja:314
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "Show/Hide token"
 
-#: templates/configure/tab_affichage.html.jinja:288
+#: templates/configure/tab_affichage.html.jinja:319
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Create a “Long-Term Access Token” in your Home Assistant profile."
 
@@ -2254,63 +2260,63 @@ msgstr "e.g. The whole family"
 msgid "Style"
 msgstr "Style"
 
-#: templates/configure/tab_messages.html.jinja:29
+#: templates/configure/tab_messages.html.jinja:26
 msgid "Afficher jusqu'au (optionnel)"
 msgstr "Show until (optional)"
 
-#: templates/configure/tab_messages.html.jinja:40
+#: templates/configure/tab_messages.html.jinja:37
 msgid "Publier"
 msgstr "Publish"
 
-#: templates/configure/tab_messages.html.jinja:45
+#: templates/configure/tab_messages.html.jinja:42
 msgid "Aperçu à l'écran"
 msgstr "On-screen preview"
 
-#: templates/configure/tab_messages.html.jinja:48
+#: templates/configure/tab_messages.html.jinja:45
 msgid "Cliquez sur « Aperçu » pour voir le rendu."
 msgstr "Click « Preview » to see how it looks."
 
-#: templates/configure/tab_messages.html.jinja:56
+#: templates/configure/tab_messages.html.jinja:53
 msgid "Messages publiés"
 msgstr "Published messages"
 
-#: templates/configure/tab_messages.html.jinja:59
+#: templates/configure/tab_messages.html.jinja:56
 msgid "Aucun message publié."
 msgstr "No published messages."
 
-#: templates/configure/tab_messages.html.jinja:101 web/routes_guests.py:328
+#: templates/configure/tab_messages.html.jinja:98 web/routes_guests.py:328
 msgid "Invité"
 msgstr "Guest"
 
-#: templates/configure/tab_messages.html.jinja:102
+#: templates/configure/tab_messages.html.jinja:99
 msgid "Masqué"
 msgstr "Hidden"
 
-#: templates/configure/tab_messages.html.jinja:110
+#: templates/configure/tab_messages.html.jinja:107
 msgid "Jusqu'au :"
 msgstr "Until:"
 
-#: templates/configure/tab_messages.html.jinja:115
+#: templates/configure/tab_messages.html.jinja:112
 msgid "Laisser vide pour afficher sans limite"
 msgstr "Leave empty to show with no end date"
 
-#: templates/configure/tab_messages.html.jinja:120
+#: templates/configure/tab_messages.html.jinja:117
 msgid "Enregistrer la date de fin"
 msgstr "Save the end date"
 
-#: templates/configure/tab_messages.html.jinja:135
+#: templates/configure/tab_messages.html.jinja:132
 msgid "Afficher de nouveau dans le diaporama"
 msgstr "Show again in the slideshow"
 
-#: templates/configure/tab_messages.html.jinja:135
+#: templates/configure/tab_messages.html.jinja:132
 msgid "Masquer du diaporama sans supprimer"
 msgstr "Hide from the slideshow without deleting"
 
-#: templates/configure/tab_messages.html.jinja:146
+#: templates/configure/tab_messages.html.jinja:143
 msgid "Supprimer ce message"
 msgstr "Delete this message"
 
-#: templates/configure/tab_messages.html.jinja:148
+#: templates/configure/tab_messages.html.jinja:145
 msgid "Supprimer ce message ?"
 msgstr "Delete this message?"
 
@@ -3280,23 +3286,107 @@ msgstr "Diagnostic results:"
 msgid "Action réservée aux administrateurs."
 msgstr "Action reserved for administrators."
 
-#: web/core.py:887
+#: utils/compositions.py:378
+msgid "Tableau en liège"
+msgstr "Corkboard"
+
+#: utils/compositions.py:379
+msgid "Polaroïds éparpillés"
+msgstr "Scattered Polaroids"
+
+#: utils/compositions.py:380
+msgid "Mosaïque"
+msgstr "Mosaic"
+
+#: utils/compositions.py:381
+msgid "Pellicule"
+msgstr "Film strip"
+
+#: utils/compositions.py:382
+msgid "Mur de cadres"
+msgstr "Gallery wall"
+
+#: utils/compositions.py:383
+msgid "Duo / Triptyque"
+msgstr "Diptych / Triptych"
+
+#: utils/compositions.py:384
+msgid "Magazine"
+msgstr "Magazine"
+
+#: utils/compositions.py:385
+msgid "Scrapbook"
+msgstr "Scrapbook"
+
+#: utils/compositions.py:386
+msgid "Photomaton"
+msgstr "Photo booth"
+
+#: utils/message_renderer.py:30
+msgid "Nuit"
+msgstr "Night"
+
+#: utils/message_renderer.py:32
+msgid "Clair"
+msgstr "Light"
+
+#: utils/message_renderer.py:34
+msgid "Carte postale"
+msgstr "Postcard"
+
+#: utils/message_renderer.py:36
+msgid "Festif"
+msgstr "Festive"
+
+#: utils/message_renderer.py:38
+msgid "Post-it"
+msgstr "Sticky note"
+
+#: utils/message_renderer.py:40
+msgid "Ardoise"
+msgstr "Chalkboard"
+
+#: utils/message_renderer.py:42
+msgid "Néon"
+msgstr "Neon"
+
+#: utils/message_renderer.py:44
+msgid "Lettre"
+msgstr "Letter"
+
+#: utils/message_renderer.py:46
+msgid "Machine à écrire"
+msgstr "Typewriter"
+
+#: utils/message_renderer.py:48
+msgid "Pastel"
+msgstr "Pastel"
+
+#: utils/message_renderer.py:50
+msgid "Bulle de BD"
+msgstr "Comic bubble"
+
+#: utils/message_renderer.py:52
+msgid "Minimal"
+msgstr "Minimal"
+
+#: web/core.py:895
 msgid "Code d'invitation invalide."
 msgstr "Invalid invitation code."
 
-#: web/core.py:893
+#: web/core.py:901
 msgid "Ce code d'invitation a expiré."
 msgstr "This invitation code has expired."
 
-#: web/core.py:899
+#: web/core.py:907
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "You are already authorized. Send me a photo!"
 
-#: web/core.py:901
+#: web/core.py:909
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "This invitation code has already been used."
 
-#: web/core.py:912
+#: web/core.py:920
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes postales "
@@ -3372,7 +3462,7 @@ msgstr "You cannot change your own role."
 msgid "Rôle de « %(name)s » modifié."
 msgstr "Role of “%(name)s” changed."
 
-#: web/routes_config.py:54
+#: web/routes_config.py:55
 msgid ""
 "La valeur pour la limite de photos Immich est invalide. La valeur précédente"
 " est conservée."
@@ -3380,12 +3470,12 @@ msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
 
-#: web/routes_config.py:205
+#: web/routes_config.py:210
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:230
+#: web/routes_config.py:235
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."

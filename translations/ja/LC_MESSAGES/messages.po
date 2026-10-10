@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 13:14+0200\n"
+"POT-Creation-Date: 2026-10-10 13:57+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:916
+#: local_slideshow.py:956
 msgid "Photos & messages"
 msgstr "写真とメッセージ"
 
-#: local_slideshow.py:1101
+#: local_slideshow.py:1141
 msgid "Données de marée non disponibles"
 msgstr "潮汐データは利用できません"
 
-#: local_slideshow.py:1198
+#: local_slideshow.py:1238
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:1198
+#: local_slideshow.py:1238
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:2215
+#: local_slideshow.py:2255
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:2216
+#: local_slideshow.py:2256
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:2217
+#: local_slideshow.py:2257
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:2218
+#: local_slideshow.py:2258
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2219
+#: local_slideshow.py:2259
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:2245
+#: local_slideshow.py:2285
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -77,7 +77,7 @@ msgstr ""
 "メンテナンスで自動クリーンアップを有効にしてください。"
 
 #: templates/configure.html.jinja:74 templates/login.html.jinja:89
-#: templates/upload.html.jinja:118
+#: templates/upload.html.jinja:115
 msgid "Langue"
 msgstr "言語"
 
@@ -180,8 +180,8 @@ msgid "Visualisez et gérez toutes les photos prêtes pour le diaporama."
 msgstr "スライドショーの準備ができたすべての写真を表示および管理します。"
 
 #: templates/configure.html.jinja:187
-#: templates/configure/tab_messages.html.jinja:37
-#: templates/upload.html.jinja:97
+#: templates/configure/tab_messages.html.jinja:34
+#: templates/upload.html.jinja:94
 msgid "Aperçu"
 msgstr "プレビュー"
 
@@ -418,58 +418,38 @@ msgstr "メッセージ…"
 msgid "Votre prénom (optionnel)"
 msgstr "お名前（任意）"
 
-#: templates/configure/tab_messages.html.jinja:22
-#: templates/upload.html.jinja:91
-msgid "Nuit"
-msgstr "ナイト"
-
-#: templates/configure/tab_messages.html.jinja:23
-#: templates/upload.html.jinja:92
-msgid "Clair"
-msgstr "ライト"
-
-#: templates/configure/tab_messages.html.jinja:24
-#: templates/upload.html.jinja:93
-msgid "Carte postale"
-msgstr "ポストカード"
-
-#: templates/configure/tab_messages.html.jinja:25
-#: templates/upload.html.jinja:94
-msgid "Festif"
-msgstr "フェスティブ"
-
-#: templates/upload.html.jinja:98
+#: templates/upload.html.jinja:95
 msgid "Afficher sur le cadre"
 msgstr "フォトフレームに表示"
 
-#: templates/configure/tab_messages.html.jinja:47
-#: templates/upload.html.jinja:101
+#: templates/configure/tab_messages.html.jinja:44
+#: templates/upload.html.jinja:98
 msgid "Aperçu du message"
 msgstr "メッセージのプレビュー"
 
-#: templates/upload.html.jinja:102
+#: templates/upload.html.jinja:99
 msgid "Le message reste affiché 7 jours."
 msgstr "メッセージは7日間表示されます。"
 
-#: templates/upload.html.jinja:106
+#: templates/upload.html.jinja:103
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "このページをスマートフォンのホーム画面に追加"
 
-#: templates/upload.html.jinja:108
+#: templates/upload.html.jinja:105
 msgid ""
 "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr "Safari で共有ボタンをタップし、「ホーム画面に追加」を選択します。"
 
-#: templates/upload.html.jinja:109
+#: templates/upload.html.jinja:106
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "Chrome でメニュー ⋮ を開き、「ホーム画面に追加」を選択します。"
 
-#: templates/upload.html.jinja:111
+#: templates/upload.html.jinja:108
 msgid ""
 "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich がアプリとして、このページから直接開くようになります。"
 
-#: templates/upload.html.jinja:114
+#: templates/upload.html.jinja:111
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
@@ -477,15 +457,15 @@ msgstr ""
 "ログインに戻る\n"
 "          管理者"
 
-#: templates/upload.html.jinja:161 templates/upload.html.jinja:198
+#: templates/upload.html.jinja:158 templates/upload.html.jinja:195
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr "送信に失敗しました。フォトフレームへの接続を確認してください。"
 
-#: templates/upload.html.jinja:181
+#: templates/upload.html.jinja:178
 msgid "fichier(s) en cours d'envoi..."
 msgstr "件のファイルを送信中..."
 
-#: templates/upload.html.jinja:192
+#: templates/upload.html.jinja:189
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "送信サイズが大きすぎます。一度に送信するファイル数を減らしてください。"
 
@@ -1321,10 +1301,34 @@ msgid "Volume :"
 msgstr "音量 ："
 
 #: templates/configure/tab_affichage.html.jinja:176
+msgid "Compositions de plusieurs photos"
+msgstr "複数写真のコラージュ"
+
+#: templates/configure/tab_affichage.html.jinja:178
+msgid ""
+"De temps en temps, le diaporama affiche plusieurs photos à la fois dans un "
+"format tiré au hasard parmi ceux cochés. Les messages peuvent y apparaître "
+"(post-it, fiche, case de texte)."
+msgstr ""
+"スライドショーでは時々、チェックした形式の中からランダムに選んだレイアウトで複数の写真を同時に表示します。メッセージ（付箋、カード、テキスト枠）も含めることができます。"
+
+#: templates/configure/tab_affichage.html.jinja:182
+msgid "Afficher des compositions"
+msgstr "コラージュを表示"
+
+#: templates/configure/tab_affichage.html.jinja:184
+msgid "Une composition toutes les (photos) :"
+msgstr "コラージュの頻度（写真○枚ごと）："
+
+#: templates/configure/tab_affichage.html.jinja:189
+msgid "Inclure les messages dans les compositions"
+msgstr "コラージュにメッセージを含める"
+
+#: templates/configure/tab_affichage.html.jinja:207
 msgid "QR code pour les invités"
 msgstr "ゲスト用QRコード"
 
-#: templates/configure/tab_affichage.html.jinja:178
+#: templates/configure/tab_affichage.html.jinja:209
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, pour"
 " envoyer des photos ou écrire un message depuis un téléphone connecté au "
@@ -1332,54 +1336,54 @@ msgid ""
 msgstr ""
 "スライドショーにゲストページへのQRコードを常に表示し、同じWi-Fiに接続したスマートフォンから写真を送ったりメッセージを書いたりできるようにします。"
 
-#: templates/configure/tab_affichage.html.jinja:181
+#: templates/configure/tab_affichage.html.jinja:212
 msgid "Afficher le QR code"
 msgstr "QRコードを表示"
 
-#: templates/configure/tab_affichage.html.jinja:183
+#: templates/configure/tab_affichage.html.jinja:214
 msgid "Position :"
 msgstr "位置："
 
-#: templates/configure/tab_affichage.html.jinja:186
+#: templates/configure/tab_affichage.html.jinja:217
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
 msgid "En bas à droite"
 msgstr "右下"
 
-#: templates/configure/tab_affichage.html.jinja:187
+#: templates/configure/tab_affichage.html.jinja:218
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
 msgid "En bas à gauche"
 msgstr "左下"
 
-#: templates/configure/tab_affichage.html.jinja:188
+#: templates/configure/tab_affichage.html.jinja:219
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
 msgid "En haut à droite"
 msgstr "右上"
 
-#: templates/configure/tab_affichage.html.jinja:189
+#: templates/configure/tab_affichage.html.jinja:220
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
 msgid "En haut à gauche"
 msgstr "左上"
 
-#: templates/configure/tab_affichage.html.jinja:193
+#: templates/configure/tab_affichage.html.jinja:224
 msgid "Autoriser les invités à écrire des messages"
 msgstr "ゲストのメッセージ投稿を許可"
 
-#: templates/configure/tab_affichage.html.jinja:195
+#: templates/configure/tab_affichage.html.jinja:226
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les "
 "supprimer dans Contenu > Messages."
 msgstr "ゲストのメッセージはすぐに表示され（1台あたり1時間に最大5件）、7日後に消えます。コンテンツ > メッセージ から削除できます。"
 
-#: templates/configure/tab_affichage.html.jinja:200
+#: templates/configure/tab_affichage.html.jinja:231
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "電源管理 (接続されたソケット)"
 
-#: templates/configure/tab_affichage.html.jinja:202
+#: templates/configure/tab_affichage.html.jinja:233
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser "
 "une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra "
@@ -1388,72 +1392,72 @@ msgstr ""
 "画面が完全にスリープ状態にならない場合は、接続されているコンセント (Wi-Fi) を使用して電源をオフにすることができます。 Pimmich "
 "は、指定した URL に単純な HTTP リクエストを送信します。"
 
-#: templates/configure/tab_affichage.html.jinja:203
+#: templates/configure/tab_affichage.html.jinja:234
 msgid "Exemples d'URLs :"
 msgstr "URL の例:"
 
-#: templates/configure/tab_affichage.html.jinja:215
+#: templates/configure/tab_affichage.html.jinja:246
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr "スマートプラグによる制御を有効にする"
 
-#: templates/configure/tab_affichage.html.jinja:222
+#: templates/configure/tab_affichage.html.jinja:253
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr "プラグの状態：不明"
 
-#: templates/configure/tab_affichage.html.jinja:229
+#: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr "プラグをオンにする URL："
 
-#: templates/configure/tab_affichage.html.jinja:238
-#: templates/configure/tab_affichage.html.jinja:251
+#: templates/configure/tab_affichage.html.jinja:269
+#: templates/configure/tab_affichage.html.jinja:282
 msgid "Tester"
 msgstr "テスター"
 
-#: templates/configure/tab_affichage.html.jinja:242
+#: templates/configure/tab_affichage.html.jinja:273
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr "プラグをオフにする URL："
 
-#: templates/configure/tab_affichage.html.jinja:255
+#: templates/configure/tab_affichage.html.jinja:286
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr "オン後の待機時間（秒）："
 
-#: templates/configure/tab_affichage.html.jinja:260
+#: templates/configure/tab_affichage.html.jinja:291
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la résolution."
 " Augmentez si la résolution est toujours incorrecte."
 msgstr "解像度を強制する前に画面が初期化されるまで待機する時間。解像度がまだ正しくない場合は、値を増やします。"
 
-#: templates/configure/tab_affichage.html.jinja:263
+#: templates/configure/tab_affichage.html.jinja:294
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr "ステータス URL（任意）："
 
-#: templates/configure/tab_affichage.html.jinja:269
+#: templates/configure/tab_affichage.html.jinja:300
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "ホーム アシスタントの場合は、States API URL を使用します。"
 
-#: templates/configure/tab_affichage.html.jinja:275
+#: templates/configure/tab_affichage.html.jinja:306
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "ホーム アシスタント アクセス トークン (HA ステータス URL の場合):"
 
-#: templates/configure/tab_affichage.html.jinja:283
+#: templates/configure/tab_affichage.html.jinja:314
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "トークンを表示/非表示"
 
-#: templates/configure/tab_affichage.html.jinja:288
+#: templates/configure/tab_affichage.html.jinja:319
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "ホーム アシスタント プロファイルに「長期アクセス トークン」を作成します。"
 
@@ -2210,63 +2214,63 @@ msgstr "例：家族一同"
 msgid "Style"
 msgstr "スタイル"
 
-#: templates/configure/tab_messages.html.jinja:29
+#: templates/configure/tab_messages.html.jinja:26
 msgid "Afficher jusqu'au (optionnel)"
 msgstr "表示終了日（任意）"
 
-#: templates/configure/tab_messages.html.jinja:40
+#: templates/configure/tab_messages.html.jinja:37
 msgid "Publier"
 msgstr "公開"
 
-#: templates/configure/tab_messages.html.jinja:45
+#: templates/configure/tab_messages.html.jinja:42
 msgid "Aperçu à l'écran"
 msgstr "画面でプレビュー"
 
-#: templates/configure/tab_messages.html.jinja:48
+#: templates/configure/tab_messages.html.jinja:45
 msgid "Cliquez sur « Aperçu » pour voir le rendu."
 msgstr "「プレビュー」をクリックすると表示を確認できます。"
 
-#: templates/configure/tab_messages.html.jinja:56
+#: templates/configure/tab_messages.html.jinja:53
 msgid "Messages publiés"
 msgstr "公開済みメッセージ"
 
-#: templates/configure/tab_messages.html.jinja:59
+#: templates/configure/tab_messages.html.jinja:56
 msgid "Aucun message publié."
 msgstr "公開済みのメッセージはありません。"
 
-#: templates/configure/tab_messages.html.jinja:101 web/routes_guests.py:328
+#: templates/configure/tab_messages.html.jinja:98 web/routes_guests.py:328
 msgid "Invité"
 msgstr "ゲスト"
 
-#: templates/configure/tab_messages.html.jinja:102
+#: templates/configure/tab_messages.html.jinja:99
 msgid "Masqué"
 msgstr "非表示"
 
-#: templates/configure/tab_messages.html.jinja:110
+#: templates/configure/tab_messages.html.jinja:107
 msgid "Jusqu'au :"
 msgstr "表示期限："
 
-#: templates/configure/tab_messages.html.jinja:115
+#: templates/configure/tab_messages.html.jinja:112
 msgid "Laisser vide pour afficher sans limite"
 msgstr "空欄にすると期限なしで表示します"
 
-#: templates/configure/tab_messages.html.jinja:120
+#: templates/configure/tab_messages.html.jinja:117
 msgid "Enregistrer la date de fin"
 msgstr "表示期限を保存"
 
-#: templates/configure/tab_messages.html.jinja:135
+#: templates/configure/tab_messages.html.jinja:132
 msgid "Afficher de nouveau dans le diaporama"
 msgstr "スライドショーに再表示"
 
-#: templates/configure/tab_messages.html.jinja:135
+#: templates/configure/tab_messages.html.jinja:132
 msgid "Masquer du diaporama sans supprimer"
 msgstr "削除せずにスライドショーから非表示"
 
-#: templates/configure/tab_messages.html.jinja:146
+#: templates/configure/tab_messages.html.jinja:143
 msgid "Supprimer ce message"
 msgstr "このメッセージを削除"
 
-#: templates/configure/tab_messages.html.jinja:148
+#: templates/configure/tab_messages.html.jinja:145
 msgid "Supprimer ce message ?"
 msgstr "このメッセージを削除しますか？"
 
@@ -3214,23 +3218,107 @@ msgstr "診断結果:"
 msgid "Action réservée aux administrateurs."
 msgstr "管理者専用の操作です。"
 
-#: web/core.py:887
+#: utils/compositions.py:378
+msgid "Tableau en liège"
+msgstr "コルクボード"
+
+#: utils/compositions.py:379
+msgid "Polaroïds éparpillés"
+msgstr "散らばったポラロイド"
+
+#: utils/compositions.py:380
+msgid "Mosaïque"
+msgstr "モザイク"
+
+#: utils/compositions.py:381
+msgid "Pellicule"
+msgstr "フィルム"
+
+#: utils/compositions.py:382
+msgid "Mur de cadres"
+msgstr "フォトウォール"
+
+#: utils/compositions.py:383
+msgid "Duo / Triptyque"
+msgstr "2枚 / 3枚並べ"
+
+#: utils/compositions.py:384
+msgid "Magazine"
+msgstr "マガジン"
+
+#: utils/compositions.py:385
+msgid "Scrapbook"
+msgstr "スクラップブック"
+
+#: utils/compositions.py:386
+msgid "Photomaton"
+msgstr "証明写真"
+
+#: utils/message_renderer.py:30
+msgid "Nuit"
+msgstr "ナイト"
+
+#: utils/message_renderer.py:32
+msgid "Clair"
+msgstr "ライト"
+
+#: utils/message_renderer.py:34
+msgid "Carte postale"
+msgstr "ポストカード"
+
+#: utils/message_renderer.py:36
+msgid "Festif"
+msgstr "フェスティブ"
+
+#: utils/message_renderer.py:38
+msgid "Post-it"
+msgstr "付箋"
+
+#: utils/message_renderer.py:40
+msgid "Ardoise"
+msgstr "黒板"
+
+#: utils/message_renderer.py:42
+msgid "Néon"
+msgstr "ネオン"
+
+#: utils/message_renderer.py:44
+msgid "Lettre"
+msgstr "手紙"
+
+#: utils/message_renderer.py:46
+msgid "Machine à écrire"
+msgstr "タイプライター"
+
+#: utils/message_renderer.py:48
+msgid "Pastel"
+msgstr "パステル"
+
+#: utils/message_renderer.py:50
+msgid "Bulle de BD"
+msgstr "マンガの吹き出し"
+
+#: utils/message_renderer.py:52
+msgid "Minimal"
+msgstr "ミニマル"
+
+#: web/core.py:895
 msgid "Code d'invitation invalide."
 msgstr "招待コードが無効です。"
 
-#: web/core.py:893
+#: web/core.py:901
 msgid "Ce code d'invitation a expiré."
 msgstr "この招待コードの有効期限は切れています。"
 
-#: web/core.py:899
+#: web/core.py:907
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "あなたはすでに認可されています。写真を送ってください！"
 
-#: web/core.py:901
+#: web/core.py:909
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "この招待コードはすでに使用されています。"
 
-#: web/core.py:912
+#: web/core.py:920
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes postales "
@@ -3305,18 +3393,18 @@ msgstr "自分の役割は変更できません。"
 msgid "Rôle de « %(name)s » modifié."
 msgstr "「%(name)s」の役割を変更しました。"
 
-#: web/routes_config.py:54
+#: web/routes_config.py:55
 msgid ""
 "La valeur pour la limite de photos Immich est invalide. La valeur précédente"
 " est conservée."
 msgstr "イミッチ写真制限の値が無効です。以前の値が保持されます。"
 
-#: web/routes_config.py:205
+#: web/routes_config.py:210
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive のキーが保存されませんでした：%(error)s"
 
-#: web/routes_config.py:230
+#: web/routes_config.py:235
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
