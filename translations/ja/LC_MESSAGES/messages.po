@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:01+0200\n"
+"POT-Creation-Date: 2026-10-10 23:06+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -32,51 +32,63 @@ msgstr "%(num)d 年前"
 msgid "Il y a %(num)d ans"
 msgstr "%(num)d 年前"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "janvier"
 msgstr "1月"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "février"
 msgstr "2月"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "mars"
 msgstr "3月"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "avril"
 msgstr "4月"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "mai"
 msgstr "5月"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "juin"
 msgstr "6月"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "juillet"
 msgstr "7月"
 
-#: local_slideshow.py:1346 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1346 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:556
 msgid "août"
 msgstr "8月"
 
-#: local_slideshow.py:1347 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1347 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:557
 msgid "septembre"
 msgstr "9月"
 
-#: local_slideshow.py:1347 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1347 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:557
 msgid "octobre"
 msgstr "10月"
 
-#: local_slideshow.py:1347 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1347 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:557
 msgid "novembre"
 msgstr "11月"
 
-#: local_slideshow.py:1347 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1347 templates/configure/_playlist_builder.html.jinja:41
+#: utils/themed_compositions_extra.py:557
 msgid "décembre"
 msgstr "12月"
 
@@ -197,6 +209,7 @@ msgid "Playlists"
 msgstr "プレイリスト"
 
 #: templates/configure.html.jinja:122
+#: templates/configure/_playlist_builder.html.jinja:16
 msgid "Favoris"
 msgstr "お気に入り"
 
@@ -226,7 +239,9 @@ msgstr "写真の情報"
 msgid "Son"
 msgstr "サウンド"
 
-#: templates/configure.html.jinja:137 utils/import_progress.py:14
+#: templates/configure.html.jinja:137
+#: templates/configure/_playlist_builder.html.jinja:43
+#: utils/import_progress.py:14
 msgid "Invités"
 msgstr "ゲスト"
 
@@ -484,6 +499,111 @@ msgstr "次へ"
 msgid "Volume du cadre"
 msgstr "フォトフレームの音量"
 
+#: templates/configure/_playlist_builder.html.jinja:6
+#: templates/configure/tab_accueil.html.jinja:84
+msgid "Fermer"
+msgstr "閉じる"
+
+#: templates/configure/_playlist_builder.html.jinja:9
+msgid "Nom de la playlist (ex : Vacances 2024)"
+msgstr "プレイリスト名（例：2024 年の休暇）"
+
+#: templates/configure/_playlist_builder.html.jinja:10
+#: templates/configure/_playlist_builder.html.jinja:110
+#: templates/configure/scripts_gallery.html.jinja:23
+msgid "Pas de musique"
+msgstr "音楽なし"
+
+#: templates/configure/_playlist_builder.html.jinja:14
+msgid "Année"
+msgstr "年"
+
+#: templates/configure/_playlist_builder.html.jinja:14
+#: templates/configure/_playlist_builder.html.jinja:105
+msgid "Toutes les années"
+msgstr "すべての年"
+
+#: templates/configure/_playlist_builder.html.jinja:15
+msgid "Mois"
+msgstr "月"
+
+#: templates/configure/_playlist_builder.html.jinja:15
+#: templates/configure/_playlist_builder.html.jinja:106
+msgid "Tous les mois"
+msgstr "すべての月"
+
+#: templates/configure/_playlist_builder.html.jinja:17
+msgid "Tout sélectionner"
+msgstr "すべて選択"
+
+#: templates/configure/_playlist_builder.html.jinja:18
+msgid "Tout désélectionner"
+msgstr "すべて選択解除"
+
+#: templates/configure/_playlist_builder.html.jinja:20
+msgid ""
+"Touchez les photos pour les choisir. Maj + clic : sélectionner toute une "
+"série."
+msgstr "写真をタップして選びます。Shift + クリックで範囲をまとめて選択できます。"
+
+#: templates/configure/_playlist_builder.html.jinja:25
+msgid "Glissez pour changer l'ordre"
+msgstr "ドラッグして順番を変更"
+
+#: templates/configure/_playlist_builder.html.jinja:38
+msgid "Créer la playlist"
+msgstr "プレイリストを作成"
+
+#: templates/configure/_playlist_builder.html.jinja:38
+#: templates/configure/_son_spotify.html.jinja:34
+msgid "Enregistrer"
+msgstr "保存"
+
+#: templates/configure/_playlist_builder.html.jinja:38
+#: templates/configure/tab_playlists.html.jinja:64
+msgid "Nouvelle playlist"
+msgstr "新しいプレイリスト"
+
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/scripts_main.html.jinja:325
+msgid "Choisir les photos"
+msgstr "写真を選ぶ"
+
+#: templates/configure/_playlist_builder.html.jinja:39
+msgid "photo(s) choisie(s)"
+msgstr "枚を選択"
+
+#: templates/configure/_playlist_builder.html.jinja:39
+msgid "photo(s) affichée(s)"
+msgstr "枚を表示"
+
+#: templates/configure/_playlist_builder.html.jinja:40
+msgid "Donnez un nom à la playlist."
+msgstr "プレイリストに名前を付けてください。"
+
+#: templates/configure/_playlist_builder.html.jinja:40
+msgid "Toutes"
+msgstr "すべて"
+
+#: templates/configure/_playlist_builder.html.jinja:40
+msgid "Retirer"
+msgstr "外す"
+
+#: templates/configure/_playlist_builder.html.jinja:42
+#: utils/import_progress.py:13
+msgid "Partage réseau"
+msgstr "ネットワーク共有"
+
+#: templates/configure/_playlist_builder.html.jinja:42
+#: utils/import_progress.py:13
+msgid "Clé USB"
+msgstr "USB メモリ"
+
+#: templates/configure/_playlist_builder.html.jinja:43
+#: utils/import_progress.py:14
+msgid "Téléphone"
+msgstr "スマートフォン"
+
 #: templates/configure/_son_spotify.html.jinja:5
 msgid "Associer le cadre à votre compte"
 msgstr "フォトフレームをアカウントにリンク"
@@ -553,10 +673,6 @@ msgstr "「Web API」にチェックを入れ、利用規約に同意して保�
 #: templates/configure/_son_spotify.html.jinja:32
 msgid "Copiez le « Client ID » de l'application ici :"
 msgstr "アプリの「Client ID」をここに貼り付けます："
-
-#: templates/configure/_son_spotify.html.jinja:34
-msgid "Enregistrer"
-msgstr "保存"
 
 #: templates/configure/_son_spotify.html.jinja:36
 msgid ""
@@ -771,7 +887,7 @@ msgstr "保存に失敗しました：フォトフレームとの接続を確認
 
 #: templates/configure/scripts_gallery.html.jinja:8
 #: templates/configure/scripts_gallery.html.jinja:36
-#: templates/configure/scripts_main.html.jinja:1292
+#: templates/configure/scripts_main.html.jinja:1306
 #: templates/configure/scripts_status.html.jinja:745
 #: templates/configure/tab_heure.html.jinja:224
 #: templates/configure/tab_heure.html.jinja:227
@@ -846,11 +962,6 @@ msgstr "このプレイリストは空です。"
 msgid "Ajouter une légende..."
 msgstr "キャプションを追加..."
 
-#: templates/configure/scripts_gallery.html.jinja:23
-#: templates/configure/tab_playlists.html.jinja:69
-msgid "Pas de musique"
-msgstr "音楽なし"
-
 #: templates/configure/scripts_gallery.html.jinja:24
 msgid "Musique de la playlist mise à jour !"
 msgstr "プレイリストの音楽を更新しました！"
@@ -860,7 +971,6 @@ msgid "Erreur lors de la mise à jour de la musique de la playlist."
 msgstr "プレイリストの音楽の更新中にエラーが発生しました。"
 
 #: templates/configure/scripts_gallery.html.jinja:26
-#: templates/configure/tab_playlists.html.jinja:71
 msgid "Écouter la musique"
 msgstr "音楽を再生"
 
@@ -878,17 +988,17 @@ msgstr "クリックしてこのネットワークを選択します"
 
 #: templates/configure/scripts_gallery.html.jinja:34
 #: templates/configure/scripts_gallery.html.jinja:116
-#: templates/configure/scripts_main.html.jinja:1355
-#: templates/configure/scripts_main.html.jinja:1397
+#: templates/configure/scripts_main.html.jinja:1369
+#: templates/configure/scripts_main.html.jinja:1411
 msgid "Test en cours..."
 msgstr "テスト中..."
 
 #: templates/configure/scripts_gallery.html.jinja:35
 #: templates/configure/scripts_gallery.html.jinja:130
 #: templates/configure/scripts_gallery.html.jinja:277
-#: templates/configure/scripts_main.html.jinja:1380
-#: templates/configure/scripts_main.html.jinja:1414
-#: templates/configure/scripts_main.html.jinja:1647
+#: templates/configure/scripts_main.html.jinja:1394
+#: templates/configure/scripts_main.html.jinja:1428
+#: templates/configure/scripts_main.html.jinja:1661
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
 msgid "Erreur de communication avec le serveur."
@@ -924,7 +1034,7 @@ msgstr "ゲストのお名前を入力してください。"
 
 #: templates/configure/scripts_gallery.html.jinja:44
 #: templates/configure/scripts_gallery.html.jinja:273
-#: templates/configure/scripts_main.html.jinja:978
+#: templates/configure/scripts_main.html.jinja:992
 #: templates/configure/scripts_status.html.jinja:159
 msgid "Erreur :"
 msgstr "エラー ："
@@ -978,7 +1088,7 @@ msgid "Erreur lors du chargement des playlists."
 msgstr "プレイリストのロード中にエラーが発生しました。"
 
 #: templates/configure/scripts_gallery.html.jinja:57
-#: templates/configure/scripts_main.html.jinja:1071
+#: templates/configure/scripts_main.html.jinja:1085
 msgid "Lancer"
 msgstr "ランサー"
 
@@ -1055,152 +1165,152 @@ msgstr "この形式のみ"
 msgid "Uniquement ce thème"
 msgstr "このテーマのみ"
 
-#: templates/configure/scripts_main.html.jinja:297
+#: templates/configure/scripts_main.html.jinja:309
 msgid "Retirer de la playlist"
 msgstr "プレイリストから削除"
 
-#: templates/configure/scripts_main.html.jinja:307
+#: templates/configure/scripts_main.html.jinja:320
 msgid "Afficher/Cacher les photos"
 msgstr "写真の表示/非表示"
 
-#: templates/configure/scripts_main.html.jinja:312
+#: templates/configure/scripts_main.html.jinja:326
 msgid "Disposition de la playlist"
 msgstr "プレイリストのレイアウト"
 
-#: templates/configure/scripts_main.html.jinja:964
+#: templates/configure/scripts_main.html.jinja:978
 msgid "Veuillez entrer un nom pour la playlist."
 msgstr "プレイリストの名前を入力してください。"
 
-#: templates/configure/scripts_main.html.jinja:980
-#: templates/configure/scripts_main.html.jinja:1066
-#: templates/configure/scripts_main.html.jinja:1789
+#: templates/configure/scripts_main.html.jinja:994
+#: templates/configure/scripts_main.html.jinja:1080
+#: templates/configure/scripts_main.html.jinja:1803
 #: templates/configure/scripts_status.html.jinja:92
 #: templates/configure/scripts_status.html.jinja:164
 msgid "Erreur de communication."
 msgstr "通信エラーです。"
 
-#: templates/configure/scripts_main.html.jinja:994
+#: templates/configure/scripts_main.html.jinja:1008
 msgid ""
 "Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront "
 "pas supprimées."
 msgstr "このプレイリストを削除してもよろしいですか?写真は削除されません。"
 
-#: templates/configure/scripts_main.html.jinja:1050
+#: templates/configure/scripts_main.html.jinja:1064
 msgid "Erreur lors de la suppression de la photo."
 msgstr "写真の削除中にエラーが発生しました。"
 
-#: templates/configure/scripts_main.html.jinja:1056
+#: templates/configure/scripts_main.html.jinja:1070
 msgid "Lancement..."
 msgstr "打ち上げ..."
 
-#: templates/configure/scripts_main.html.jinja:1126
+#: templates/configure/scripts_main.html.jinja:1140
 msgid "Aucune playlist"
 msgstr "プレイリストがありません"
 
-#: templates/configure/scripts_main.html.jinja:1166
+#: templates/configure/scripts_main.html.jinja:1180
 msgid "Import en cours..."
 msgstr "インポート中です..."
 
-#: templates/configure/scripts_main.html.jinja:1195
+#: templates/configure/scripts_main.html.jinja:1209
 msgid "Préparation :"
 msgstr "準備 ："
 
-#: templates/configure/scripts_main.html.jinja:1204
+#: templates/configure/scripts_main.html.jinja:1218
 msgid "Préparation terminée ! Redémarrage du diaporama..."
 msgstr "準備完了！スライドショーを再開しています..."
 
-#: templates/configure/scripts_main.html.jinja:1211
+#: templates/configure/scripts_main.html.jinja:1225
 msgid "Diaporama redémarré. Rechargement de la page..."
 msgstr "スライドショーが再開されました。ページを再読み込みしています..."
 
-#: templates/configure/scripts_main.html.jinja:1220
+#: templates/configure/scripts_main.html.jinja:1234
 msgid "Données de préparation invalides reçues du serveur."
 msgstr "無効なステージング データをサーバーから受信しました。"
 
-#: templates/configure/scripts_main.html.jinja:1228
+#: templates/configure/scripts_main.html.jinja:1242
 msgid "Erreur de connexion au serveur pour la préparation des photos."
 msgstr "写真を準備するためのサーバーへの接続エラー。"
 
-#: templates/configure/scripts_main.html.jinja:1240
+#: templates/configure/scripts_main.html.jinja:1254
 msgid "Importation :"
 msgstr "輸入："
 
-#: templates/configure/scripts_main.html.jinja:1250
+#: templates/configure/scripts_main.html.jinja:1264
 msgid "Données d'import invalides reçues du serveur."
 msgstr "サーバーから無効なインポート データを受信しました。"
 
-#: templates/configure/scripts_main.html.jinja:1258
+#: templates/configure/scripts_main.html.jinja:1272
 msgid "Erreur de connexion au serveur pour l'import"
 msgstr "インポートのためのサーバーへの接続エラー"
 
-#: templates/configure/scripts_main.html.jinja:1280
+#: templates/configure/scripts_main.html.jinja:1294
 msgid ""
 "Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » "
 "pour choisir à nouveau les dossiers."
 msgstr "方式が変更されました：「Google Drive のフォルダーを表示」をクリックしてフォルダーを選び直してください。"
 
-#: templates/configure/scripts_main.html.jinja:1313
+#: templates/configure/scripts_main.html.jinja:1327
 msgid ""
 "Aucun dossier trouvé. Avez-vous partagé vos dossiers avec l'adresse du "
 "compte de service ?"
 msgstr "フォルダーが見つかりません。サービスアカウントのアドレスとフォルダーを共有しましたか？"
 
-#: templates/configure/scripts_main.html.jinja:1332
+#: templates/configure/scripts_main.html.jinja:1346
 msgid "dossier(s) trouvé(s)"
 msgstr "件のフォルダーが見つかりました"
 
-#: templates/configure/scripts_main.html.jinja:1572
+#: templates/configure/scripts_main.html.jinja:1586
 msgid "Aucune donnée de marée à afficher."
 msgstr "表示する潮汐データがありません。"
 
-#: templates/configure/scripts_main.html.jinja:1575
+#: templates/configure/scripts_main.html.jinja:1589
 msgid "Impossible de charger les données."
 msgstr "データをロードできません。"
 
-#: templates/configure/scripts_main.html.jinja:1580
+#: templates/configure/scripts_main.html.jinja:1594
 msgid "Erreur de connexion au serveur."
 msgstr "サーバー接続エラー。"
 
-#: templates/configure/scripts_main.html.jinja:1629
+#: templates/configure/scripts_main.html.jinja:1643
 msgid "Mise à jour en cours..."
 msgstr "更新中です..."
 
-#: templates/configure/scripts_main.html.jinja:1674
+#: templates/configure/scripts_main.html.jinja:1688
 msgid "Veuillez sélectionner au moins un fichier."
 msgstr "少なくとも 1 つのファイルを選択してください。"
 
-#: templates/configure/scripts_main.html.jinja:1683
+#: templates/configure/scripts_main.html.jinja:1697
 msgid "Envoi en cours..."
 msgstr "送信中..."
 
-#: templates/configure/scripts_main.html.jinja:1706
+#: templates/configure/scripts_main.html.jinja:1720
 msgid "Importation réussie ! Rechargement de la page..."
 msgstr "インポートが成功しました。ページを再読み込みしています..."
 
-#: templates/configure/scripts_main.html.jinja:1715
-#: templates/configure/scripts_main.html.jinja:1748
+#: templates/configure/scripts_main.html.jinja:1729
+#: templates/configure/scripts_main.html.jinja:1762
 #: templates/configure/tab_actions.html.jinja:106
 msgid "Envoyer les photos"
 msgstr "写真を送信する"
 
-#: templates/configure/scripts_main.html.jinja:1735
+#: templates/configure/scripts_main.html.jinja:1749
 msgid "Données invalides reçues du serveur."
 msgstr "サーバーから無効なデータを受信しました。"
 
-#: templates/configure/scripts_main.html.jinja:1746
+#: templates/configure/scripts_main.html.jinja:1760
 msgid "Erreur de communication :"
 msgstr "通信エラー:"
 
-#: templates/configure/scripts_main.html.jinja:1777
+#: templates/configure/scripts_main.html.jinja:1791
 msgid "Envoi..."
 msgstr "送信中..."
 
-#: templates/configure/scripts_main.html.jinja:1792
+#: templates/configure/scripts_main.html.jinja:1806
 #: templates/configure/tab_actions.html.jinja:124
 msgid "Uploader"
 msgstr "アップロード"
 
-#: templates/configure/scripts_main.html.jinja:1806
+#: templates/configure/scripts_main.html.jinja:1820
 msgid "Supprimer le fichier musical"
 msgstr "音楽ファイルを削除"
 
@@ -1450,10 +1560,6 @@ msgstr "自分の設定に戻す"
 #: templates/configure/tab_accueil.html.jinja:83
 msgid "Choisir une disposition"
 msgstr "レイアウトを選択"
-
-#: templates/configure/tab_accueil.html.jinja:84
-msgid "Fermer"
-msgstr "閉じる"
 
 #: templates/configure/tab_accueil.html.jinja:88
 msgid "Tout"
@@ -2114,7 +2220,6 @@ msgid "2 à 32 caractères : lettres, chiffres, . _ -"
 msgstr "2～32 文字：英字、数字、. _ -"
 
 #: templates/configure/tab_comptes.html.jinja:124
-#: templates/configure/tab_playlists.html.jinja:76
 #: templates/configure/tab_telegram.html.jinja:80
 msgid "Créer"
 msgstr "作成する"
@@ -3341,15 +3446,11 @@ msgstr ""
 "スライドショーは、\n"
 "                                逮捕された。"
 
-#: templates/configure/tab_playlists.html.jinja:64
-msgid "Créer une nouvelle playlist"
-msgstr "新しいプレイリストを作成する"
+#: templates/configure/tab_playlists.html.jinja:65
+msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
+msgstr "ソース、年、月、お気に入りで写真をまとめて選べます。"
 
-#: templates/configure/tab_playlists.html.jinja:67
-msgid "Nom de la playlist (ex: Vacances 2024)"
-msgstr "プレイリストの名前 (例: Holidays 2024)"
-
-#: templates/configure/tab_playlists.html.jinja:83
+#: templates/configure/tab_playlists.html.jinja:70
 msgid "Vos Playlists"
 msgstr "ヴォスのプレイリスト"
 
@@ -4444,18 +4545,6 @@ msgstr "家族を招待（QR code、Telegram）"
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr "接続を保護（HTTPS）"
 
-#: utils/import_progress.py:13
-msgid "Partage réseau"
-msgstr "ネットワーク共有"
-
-#: utils/import_progress.py:13
-msgid "Clé USB"
-msgstr "USB メモリ"
-
-#: utils/import_progress.py:14
-msgid "Téléphone"
-msgstr "スマートフォン"
-
 #: utils/layout_engine.py:35
 msgid "Selon les réglages"
 msgstr "設定に従う"
@@ -4864,7 +4953,7 @@ msgstr "自分の設定"
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "ムード「%(name)s」を適用しました。"
 
-#: web/routes_home.py:125 web/routes_playlists.py:72
+#: web/routes_home.py:125 web/routes_playlists.py:75
 #: web/routes_slideshow.py:509
 msgid "Disposition inconnue."
 msgstr "不明なレイアウトです。"
@@ -5072,9 +5161,22 @@ msgstr "再生中の音楽はありません。"
 msgid "Le son du cadre ne répond pas."
 msgstr "フォトフレームの音声が応答しません。"
 
-#: web/routes_playlists.py:78
+#: web/routes_playlists.py:81
 msgid "Disposition de la playlist enregistrée."
 msgstr "プレイリストのレイアウトを保存しました。"
+
+#: web/routes_playlists.py:261
+msgid "Liste de photos invalide."
+msgstr "写真リストが無効です。"
+
+#: web/routes_playlists.py:269
+#, python-format
+msgid "Photo introuvable : %(name)s"
+msgstr "写真が見つかりません：%(name)s"
+
+#: web/routes_playlists.py:314
+msgid "Playlist non trouvée."
+msgstr "プレイリストが見つかりません。"
 
 #: web/routes_slideshow.py:379
 #, python-format

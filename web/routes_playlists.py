@@ -30,10 +30,13 @@ def create_playlist():
     if any(p['name'].lower() == name.strip().lower() for p in playlists):
         return jsonify({"success": False, "message": "Une playlist avec ce nom existe déjà."}), 409
 
+    photos, error = _valid_photo_list(data.get('photos', []))
+    if error:
+        return jsonify({"success": False, "message": error}), 400
     new_playlist = {
         "id": secrets.token_hex(8),
         "name": name.strip(),
-        "photos": [],
+        "photos": photos,
         "music_file": music_file
     }
     playlists.append(new_playlist)
@@ -244,3 +247,68 @@ def reorder_playlist(playlist_id):
     except Exception as e:
         logger.info(f"Erreur lors de la réorganisation de la playlist : {e}")
         return jsonify({"success": False, "message": "Erreur interne du serveur."}), 500
+
+
+
+# --- Composition visuelle des playlists (sélection multiple, filtres) ---
+
+LIBRARY_SKIP = {"messages", "compositions"}
+
+
+def _valid_photo_list(photos):
+    """Liste de chemins « source/fichier » existants (jamais hors du dossier des photos préparées)."""
+    if not isinstance(photos, list):
+        return None, _("Liste de photos invalide.")
+    base = PREPARED_DIR.resolve()
+    clean, seen = [], set()
+    for path in photos[:5000]:
+        if not isinstance(path, str) or path in seen:
+            continue
+        full = (base / path).resolve()
+        if base not in full.parents or not full.is_file():
+            return None, _("Photo introuvable : %(name)s", name=path[:80])
+        clean.append(path)
+        seen.add(path)
+    return clean, None
+
+
+@app.route('/api/library', methods=['GET'])
+@login_required
+def library_api():
+    """Toutes les photos et vidéos préparées, avec leur date (index des photos), pour composer une playlist."""
+    from utils import photo_index
+    index, favorites = photo_index.load(), set(load_favorites())
+    items = []
+    base = PREPARED_DIR
+    for source in sorted(base.iterdir()) if base.exists() else []:
+        if not source.is_dir() or source.name in LIBRARY_SKIP or source.name.startswith("."):
+            continue
+        for f in sorted(source.iterdir()):
+            if not f.is_file() or f.name.endswith(("_polaroid.jpg", "_thumbnail.jpg", "_postcard.jpg")):
+                continue
+            is_video = f.suffix.lower() in VIDEO_EXTENSIONS
+            if not is_video and f.suffix.lower() not in (".jpg", ".jpeg", ".png", ".webp"):
+                continue
+            rel = f"{source.name}/{f.name}"
+            thumb = f"{source.name}/{f.stem}_thumbnail.jpg" if is_video else rel
+            items.append({"path": rel, "thumb": url_for("static", filename=f"prepared/{thumb}"), "source": source.name,
+                          "date": (index.get(rel) or {}).get("date"), "video": is_video, "favorite": rel in favorites})
+    dated = sorted((i for i in items if i["date"]), key=lambda i: i["date"], reverse=True)  # les plus récentes d'abord
+    items = dated + [i for i in items if not i["date"]]  # les photos sans date à la fin
+    return jsonify({"success": True, "items": items})
+
+
+@app.route('/api/playlists/<playlist_id>/photos', methods=['PUT'])
+@login_required
+def set_playlist_photos(playlist_id):
+    """Enregistre en une fois les photos (et leur ordre) d'une playlist."""
+    photos, error = _valid_photo_list((request.get_json(silent=True) or {}).get("photos"))
+    if error:
+        return jsonify({"success": False, "message": error}), 400
+    playlists = load_playlists()
+    for playlist in playlists:
+        if playlist.get("id") == playlist_id:
+            playlist["photos"] = photos
+            save_playlists(playlists)
+            return jsonify({"success": True, "count": len(photos)})
+    return jsonify({"success": False, "message": _("Playlist non trouvée.")}), 404

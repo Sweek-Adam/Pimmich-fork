@@ -1,0 +1,147 @@
+{#- Composeur visuel de playlist : sélection multiple dans toute la bibliothèque, filtres, ordre par glisser-déposer. -#}
+<div id="pl-builder" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="pl-builder-title">
+    <div class="modal-panel pl-panel">
+        <div class="modal-head">
+            <h2 id="pl-builder-title" class="card-title"></h2>
+            <button type="button" class="modal-close" aria-label="{{ _('Fermer') }}">&times;</button>
+        </div>
+        <div class="pl-top">
+            <input type="text" id="pl-name" maxlength="80" placeholder="{{ _('Nom de la playlist (ex : Vacances 2024)') }}">
+            <select id="pl-music"><option value="">{{ _('Pas de musique') }}</option></select>
+        </div>
+        <div class="pl-filters">
+            <div class="chips" id="pl-sources"></div>
+            <select id="pl-year" aria-label="{{ _('Année') }}"><option value="">{{ _('Toutes les années') }}</option></select>
+            <select id="pl-month" aria-label="{{ _('Mois') }}"><option value="">{{ _('Tous les mois') }}</option></select>
+            <label class="pl-fav"><input type="checkbox" id="pl-fav"> <i class="fas fa-star text-yellow-500"></i> {{ _("Favoris") }}</label>
+            <button type="button" id="pl-select-all" class="link">{{ _("Tout sélectionner") }}</button>
+            <button type="button" id="pl-select-none" class="link">{{ _("Tout désélectionner") }}</button>
+        </div>
+        <p class="pl-hint muted">{{ _("Touchez les photos pour les choisir. Maj + clic : sélectionner toute une série.") }} <span id="pl-shown"></span></p>
+        <div id="pl-grid" class="pl-grid"></div>
+        <div class="pl-tray">
+            <div class="pl-tray-head">
+                <strong id="pl-count"></strong>
+                <span class="muted">{{ _("Glissez pour changer l'ordre") }}</span>
+                <button type="button" id="pl-save" class="btn-primary ml-auto"><i class="fas fa-check mr-1"></i><span></span></button>
+            </div>
+            <ol id="pl-selected" class="pl-selected"></ol>
+        </div>
+        <p id="pl-message" class="text-sm text-red-600"></p>
+    </div>
+</div>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const $ = (id) => document.getElementById(id);
+        const modal = $("pl-builder");
+        document.body.appendChild(modal);
+        const T = { create: {{ _("Créer la playlist")|tojson }}, save: {{ _("Enregistrer")|tojson }}, newTitle: {{ _("Nouvelle playlist")|tojson }},
+                    editTitle: {{ _("Choisir les photos")|tojson }}, selected: {{ _("photo(s) choisie(s)")|tojson }}, shown: {{ _("photo(s) affichée(s)")|tojson }},
+                    nameNeeded: {{ _("Donnez un nom à la playlist.")|tojson }}, all: {{ _("Toutes")|tojson }}, remove: {{ _("Retirer")|tojson }},
+                    months: {{ [_("janvier"), _("février"), _("mars"), _("avril"), _("mai"), _("juin"), _("juillet"), _("août"), _("septembre"), _("octobre"), _("novembre"), _("décembre")]|tojson }},
+                    sources: { gdrive: "Google Drive", immich: "Immich", samba: {{ _("Partage réseau")|tojson }}, usb: {{ _("Clé USB")|tojson }},
+                               smartphone: {{ _("Téléphone")|tojson }}, "invités": {{ _("Invités")|tojson }}, telegram: "Telegram" } };
+        let library = [], byPath = new Map(), selected = [], editing = null, source = "", lastClicked = null, shown = [];
+
+        const visible = () => {
+            const y = $("pl-year").value, m = $("pl-month").value, fav = $("pl-fav").checked;
+            return library.filter(i => (!source || i.source === source) && (!fav || i.favorite)
+                && (!y || (i.date && i.date.slice(0, 4) === y)) && (!m || (i.date && Number(i.date.slice(5, 7)) === Number(m))));
+        };
+        function renderGrid() {
+            shown = visible();
+            const chosen = new Set(selected);
+            $("pl-shown").textContent = `· ${shown.length} ${T.shown}`;
+            $("pl-grid").innerHTML = shown.map((i, n) => `<button type="button" class="pl-tile${chosen.has(i.path) ? " on" : ""}" data-n="${n}" title="${i.path.replace(/"/g, "&quot;")}">
+                <img src="${i.thumb}" loading="lazy" alt="">${i.video ? '<i class="fas fa-video pl-video"></i>' : ""}<span class="pl-check"><i class="fas fa-check"></i></span></button>`).join("");
+        }
+        function renderTray() {
+            $("pl-count").textContent = `${selected.length} ${T.selected}`;
+            $("pl-selected").innerHTML = selected.map(p => {
+                const i = byPath.get(p);
+                return `<li data-path="${p.replace(/"/g, "&quot;")}"><img src="${i ? i.thumb : "/static/prepared/" + p}" alt=""><button type="button" class="pl-remove" title="${T.remove}" aria-label="${T.remove}">&times;</button></li>`;
+            }).join("");
+        }
+        function toggle(path, on) {
+            const at = selected.indexOf(path);
+            if (on === undefined) on = at < 0;
+            if (on && at < 0) selected.push(path);
+            if (!on && at >= 0) selected.splice(at, 1);
+        }
+        $("pl-grid").addEventListener("click", (e) => {
+            const tile = e.target.closest(".pl-tile");
+            if (!tile) return;
+            const n = Number(tile.dataset.n);
+            if (e.shiftKey && lastClicked !== null) {  // série : même état que la dernière photo touchée
+                const on = selected.includes(shown[lastClicked].path);
+                for (let k = Math.min(n, lastClicked); k <= Math.max(n, lastClicked); k++) toggle(shown[k].path, on);
+            } else {
+                toggle(shown[n].path);
+            }
+            lastClicked = n;
+            renderGrid(); renderTray();
+        });
+        $("pl-selected").addEventListener("click", (e) => {
+            const li = e.target.closest(".pl-remove") && e.target.closest("li");
+            if (li) { toggle(li.dataset.path, false); renderGrid(); renderTray(); }
+        });
+        if (window.Sortable) Sortable.create($("pl-selected"), { animation: 150, onEnd: () => { selected = [...$("pl-selected").children].map(li => li.dataset.path); } });
+        ["pl-year", "pl-month", "pl-fav"].forEach(id => $(id).addEventListener("change", () => { lastClicked = null; renderGrid(); }));
+        $("pl-select-all").addEventListener("click", () => { shown.forEach(i => toggle(i.path, true)); renderGrid(); renderTray(); });
+        $("pl-select-none").addEventListener("click", () => { shown.forEach(i => toggle(i.path, false)); renderGrid(); renderTray(); });
+
+        async function loadLibrary() {
+            const data = await (await fetch("/api/library")).json();
+            library = data.items; byPath = new Map(library.map(i => [i.path, i]));
+            const sources = [...new Set(library.map(i => i.source))];
+            $("pl-sources").innerHTML = [`<button type="button" class="chip active" data-source="">${T.all}</button>`]
+                .concat(sources.map(s => `<button type="button" class="chip" data-source="${s}">${T.sources[s] || s}</button>`)).join("");
+            $("pl-sources").querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => {
+                source = c.dataset.source; lastClicked = null;
+                $("pl-sources").querySelectorAll(".chip").forEach(o => o.classList.toggle("active", o === c));
+                renderGrid();
+            }));
+            const years = [...new Set(library.filter(i => i.date).map(i => i.date.slice(0, 4)))].sort().reverse();
+            $("pl-year").innerHTML = `<option value="">{{ _("Toutes les années") }}</option>` + years.map(y => `<option>${y}</option>`).join("");
+            $("pl-month").innerHTML = `<option value="">{{ _("Tous les mois") }}</option>` + T.months.map((m, k) => `<option value="${k + 1}">${m}</option>`).join("");
+        }
+        async function loadMusic() {
+            const data = await (await fetch("/api/music_files")).json();
+            $("pl-music").innerHTML = `<option value="">{{ _("Pas de musique") }}</option>` + (data.files || []).map(f => `<option>${f.replace(/</g, "&lt;")}</option>`).join("");
+        }
+
+        window.openPlaylistBuilder = async (playlist) => {
+            editing = playlist || null;
+            selected = playlist ? [...playlist.photos] : [];
+            $("pl-builder-title").textContent = playlist ? `${T.editTitle} · ${playlist.name}` : T.newTitle;
+            $("pl-name").value = playlist ? playlist.name : "";
+            $("pl-name").closest(".pl-top").classList.toggle("hidden", !!playlist);
+            $("pl-save").querySelector("span").textContent = playlist ? T.save : T.create;
+            $("pl-message").textContent = "";
+            modal.classList.remove("hidden");
+            await Promise.all([loadLibrary(), playlist ? null : loadMusic()]);
+            renderGrid(); renderTray();
+            if (!playlist) $("pl-name").focus();
+        };
+        const close = () => modal.classList.add("hidden");
+        modal.querySelector(".modal-close").addEventListener("click", close);
+        modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
+
+        $("pl-save").addEventListener("click", async () => {
+            let resp;
+            if (editing) {
+                resp = await fetch(`/api/playlists/${editing.id}/photos`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ photos: selected }) });
+            } else {
+                const name = $("pl-name").value.trim();
+                if (!name) { $("pl-message").textContent = T.nameNeeded; return; }
+                resp = await fetch("/api/playlists", { method: "POST", headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, music_file: $("pl-music").value || null, photos: selected }) });
+            }
+            const data = await resp.json();
+            if (!data.success) { $("pl-message").textContent = data.message; return; }
+            close();
+            if (typeof showToast === "function") showToast(`${selected.length} ${T.selected}`);
+            if (window.refreshPlaylists) window.refreshPlaylists();
+        });
+    });
+</script>

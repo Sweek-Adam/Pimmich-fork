@@ -162,6 +162,12 @@
   ]
  ],
  [
+  "/api/library",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/list_logs",
   [
    "GET"
@@ -309,6 +315,12 @@
   "/api/playlists/<playlist_id>/photos",
   [
    "POST"
+  ]
+ ],
+ [
+  "/api/playlists/<playlist_id>/photos",
+  [
+   "PUT"
   ]
  ],
  [

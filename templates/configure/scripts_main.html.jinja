@@ -241,6 +241,13 @@
                     + `<optgroup label="${esc({{ _('Uniquement ce thème')|tojson }})}">${LAYOUT_OPTIONS.filter(o => o.group === "theme").map(option).join("")}</optgroup>`;
             }
 
+            document.addEventListener("click", (event) => {
+                const btn = event.target.closest(".edit-playlist-photos-btn");
+                if (!btn || !window.openPlaylistBuilder) return;
+                const playlist = (window.__playlists || []).find(p => p.id === btn.dataset.id);
+                if (playlist) window.openPlaylistBuilder(playlist);
+            });
+            window.refreshPlaylists = () => renderPlaylists();
             async function renderPlaylists() {
                 const playlistsContainer = document.getElementById('playlists-list-container');
                 if (!playlistsContainer) return;
@@ -255,8 +262,13 @@
                         playlistsContainer.innerHTML = `<p class="text-gray-500 italic">${i18n.noPlaylists}</p>`;
                     }
 
+                    window.__playlists = playlists;
                     playlists.forEach(playlist => {
                         const photoCount = playlist.photos.length;
+                        const coverHtml = playlist.photos.slice(0, 4).map(p => {
+                            const thumb = /\.(mp4|mov|avi|mkv)$/i.test(p) ? p.substring(0, p.lastIndexOf('.')) + '_thumbnail.jpg' : p;
+                            return `<img src="/static/prepared/${thumb}" alt="" loading="lazy">`;
+                        }).join('');
                         const photoCountText = photoCount !== 1 ? `${photoCount} ${i18n.photos}` : `1 ${i18n.photo}`;
 
                         const playlistEl = document.createElement('div');
@@ -303,12 +315,14 @@
                         }
 
                         playlistEl.innerHTML = `
-                <div class="flex justify-between items-center">
+                <div class="flex flex-wrap justify-between items-center gap-3">
+                    <div class="playlist-cover${photoCount ? '' : ' empty'}">${coverHtml || '<i class="fas fa-images"></i>'}</div>
                     <div class="flex-grow cursor-pointer playlist-title-toggle" title="{{ _('Afficher/Cacher les photos') }}">
                         <h5 class="text-lg font-semibold text-gray-900">${playlist.name}</h5>
                         <p class="text-sm text-gray-500" id="photo-count-${playlist.id}">${photoCountText}</p>
                     </div>
-                    <div class="flex items-center gap-4">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button type="button" class="edit-playlist-photos-btn btn-secondary text-sm" data-id="${playlist.id}"><i class="fas fa-images mr-1"></i>{{ _("Choisir les photos") }}</button>
                         <select class="playlist-layout-select text-sm rounded-md border-gray-300 shadow-sm" data-playlist-id="${playlist.id}" title="{{ _('Disposition de la playlist') }}">
                             ${layoutOptionsHtml(playlist.layout || "auto")}
                         </select>

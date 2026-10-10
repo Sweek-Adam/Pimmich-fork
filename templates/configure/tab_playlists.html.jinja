@@ -59,23 +59,10 @@
                     </div>
                 </div>
 
-                <!-- Formulaire de création -->
-                <div class="p-4 border rounded-lg bg-gray-50/50 mb-6">
-                    <h4 class="font-semibold text-gray-800 mb-2">{{ _("Créer une nouvelle playlist") }}</h4>
-                    <div class="flex items-center gap-4">
-                        <input type="text" id="new-playlist-name" class="flex-grow rounded-md border-gray-300 shadow-sm"
-                            placeholder="{{ _('Nom de la playlist (ex: Vacances 2024)') }}">
-                        <select id="new-playlist-music" class="rounded-md border-gray-300 shadow-sm">
-                            <option value="">{{ _('Pas de musique') }}</option>
-                        </select>
-                        <button type="button" class="play-music-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold w-10 h-10 flex items-center justify-center rounded text-sm" data-target-select="new-playlist-music" disabled title="{{ _('Écouter la musique') }}">
-                            <i class="fas fa-play fa-fw"></i>
-                        </button>
-                        <button type="button" id="create-playlist-btn"
-                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                            <i class="fas fa-plus mr-2"></i>{{ _("Créer") }}
-                        </button>
-                    </div>
+                <!-- Création : composeur visuel -->
+                <div class="mb-6">
+                    <button type="button" id="new-playlist-open" class="btn-primary" onclick="openPlaylistBuilder()"><i class="fas fa-plus mr-1"></i>{{ _("Nouvelle playlist") }}</button>
+                    <span class="text-sm text-gray-600 ml-2">{{ _("Choisissez les photos d'un coup, par source, année, mois ou favoris.") }}</span>
                 </div>
 
                 <!-- Liste des playlists -->
@@ -86,4 +73,5 @@
                     </div>
                 </div>
             </fieldset>
+            {% include 'configure/_playlist_builder.html.jinja' %}
         </div>
