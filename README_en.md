@@ -1,5 +1,7 @@
 # 🖼️ Pimmich – Smart Connected Photo Frame
 
+[![Tests](https://github.com/Sweek-Adam/Pimmich-fork/actions/workflows/tests.yml/badge.svg)](https://github.com/Sweek-Adam/Pimmich-fork/actions/workflows/tests.yml)
+
 Pimmich is a Python application designed to turn a Raspberry Pi into a smart and customizable digital photo frame. It can display photos from multiple sources, be controlled by voice, and much more.
 
 <img src="static/pimmich_logo.png" alt="Pimmich Logo" width="300">

@@ -115,6 +115,7 @@ def test_session_key_is_never_the_public_default(app_module):
 
 @pytest.mark.parametrize("lang,expected", [
     ("en", "User accounts"), ("es", "Cuentas de usuario"), ("de", "Benutzerkonten"), ("ja", "ユーザーアカウント"),
+    ("en", "Write a message"), ("de", "Nachricht schreiben"), ("en", "Free up space automatically"),
 ])
 def test_new_texts_are_translated(admin_client, lang, expected):
     html = admin_client.get(f"/configure?lang={lang}").get_data(as_text=True)

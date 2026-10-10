@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 11:50+0200\n"
+"POT-Creation-Date: 2026-10-10 12:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,43 +17,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1031
+#: local_slideshow.py:1032
 msgid "Données de marée non disponibles"
 msgstr ""
 
-#: local_slideshow.py:1128
+#: local_slideshow.py:1129
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr ""
 
-#: local_slideshow.py:1128
+#: local_slideshow.py:1129
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:2136
+#: local_slideshow.py:2143
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:2137
+#: local_slideshow.py:2144
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:2138
+#: local_slideshow.py:2145
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:2139
+#: local_slideshow.py:2146
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:2140
+#: local_slideshow.py:2147
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:2166
+#: local_slideshow.py:2173
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -61,197 +61,216 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
-#: templates/configure.html.jinja:69 templates/login.html.jinja:89
-#: templates/upload.html.jinja:73
+#: templates/configure.html.jinja:31
+#, python-format
+msgid ""
+"Espace disque faible : %(free)s Go libres (seuil : %(threshold)s Go). "
+"Supprimez des photos ou activez le nettoyage automatique dans Système > "
+"Maintenance."
+msgstr ""
+
+#: templates/configure.html.jinja:74 templates/login.html.jinja:89
+#: templates/upload.html.jinja:94
 msgid "Langue"
 msgstr ""
 
-#: templates/configure.html.jinja:88
+#: templates/configure.html.jinja:93
 msgid "utilisateur"
 msgstr ""
 
-#: templates/configure.html.jinja:90
+#: templates/configure.html.jinja:95
 msgid "Se déconnecter"
 msgstr ""
 
-#: templates/configure.html.jinja:111
+#: templates/configure.html.jinja:116
 #: templates/configure/scripts_status.html.jinja:517
 msgid "Le diaporama est arrêté."
 msgstr ""
 
-#: templates/configure.html.jinja:114
+#: templates/configure.html.jinja:119
 #: templates/configure/tab_playlists.html.jinja:56
 msgid "Photo en cours"
 msgstr ""
 
-#: templates/configure.html.jinja:122
+#: templates/configure.html.jinja:127
 #: templates/configure/tab_actions.html.jinja:22
 msgid "Activer/Désactiver les notifications"
 msgstr ""
 
-#: templates/configure.html.jinja:127
+#: templates/configure.html.jinja:132
 #: templates/configure/tab_actions.html.jinja:27
 #: templates/configure/tab_playlists.html.jinja:20
 msgid "Photo précédente"
 msgstr ""
 
-#: templates/configure.html.jinja:132
+#: templates/configure.html.jinja:137
 #: templates/configure/tab_actions.html.jinja:32
 #: templates/configure/tab_playlists.html.jinja:24
 msgid "Pause/Lecture"
 msgstr ""
 
-#: templates/configure.html.jinja:137
+#: templates/configure.html.jinja:142
 #: templates/configure/tab_actions.html.jinja:37
 #: templates/configure/tab_playlists.html.jinja:28
 msgid "Photo suivante"
 msgstr ""
 
-#: templates/configure.html.jinja:148
+#: templates/configure.html.jinja:153
 msgid "Diaporama"
 msgstr ""
 
-#: templates/configure.html.jinja:150
+#: templates/configure.html.jinja:155
 msgid "Contenu"
 msgstr ""
 
-#: templates/configure.html.jinja:152
+#: templates/configure.html.jinja:157
 msgid "Interactions"
 msgstr ""
 
-#: templates/configure.html.jinja:155
+#: templates/configure.html.jinja:160
 msgid "Système"
 msgstr ""
 
-#: templates/configure.html.jinja:162
+#: templates/configure.html.jinja:167
 msgid ""
 "Gérez les paramètres d'affichage du diaporama, la durée, les "
 "transitions..."
 msgstr ""
 
-#: templates/configure.html.jinja:163
+#: templates/configure.html.jinja:168
 msgid "Affichage"
 msgstr ""
 
-#: templates/configure.html.jinja:165
+#: templates/configure.html.jinja:170
 msgid "Configurez l'affichage de l'heure, la météo et les marées."
 msgstr ""
 
-#: templates/configure.html.jinja:166
+#: templates/configure.html.jinja:171
 msgid "Horloge & Infos"
 msgstr ""
 
-#: templates/configure.html.jinja:168
+#: templates/configure.html.jinja:173
 msgid "Configurez le contrôle vocal du diaporama."
 msgstr ""
 
-#: templates/configure.html.jinja:169
+#: templates/configure.html.jinja:174
 msgid "Vocal"
 msgstr ""
 
-#: templates/configure.html.jinja:171
+#: templates/configure.html.jinja:176
 msgid "Métadonnées"
 msgstr ""
 
-#: templates/configure.html.jinja:178
+#: templates/configure.html.jinja:183
 msgid "Configurez les sources de photos (Immich, Samba, USB...)."
 msgstr ""
 
-#: templates/configure.html.jinja:179
+#: templates/configure.html.jinja:184
 msgid "Sources"
 msgstr ""
 
-#: templates/configure.html.jinja:181
+#: templates/configure.html.jinja:186
 msgid "Visualisez et gérez toutes les photos prêtes pour le diaporama."
 msgstr ""
 
-#: templates/configure.html.jinja:182
+#: templates/configure.html.jinja:187
+#: templates/configure/tab_messages.html.jinja:37
 msgid "Aperçu"
 msgstr ""
 
-#: templates/configure.html.jinja:184
+#: templates/configure.html.jinja:189
+msgid "Écrivez des messages qui s'affichent dans le diaporama."
+msgstr ""
+
+#: templates/configure.html.jinja:190
+#: templates/configure/tab_apercu.html.jinja:14
+#: templates/configure/tab_sources.html.jinja:102
+msgid "Messages"
+msgstr ""
+
+#: templates/configure.html.jinja:192
 msgid "Créez et gérez vos albums photo personnalisés."
 msgstr ""
 
-#: templates/configure.html.jinja:185
+#: templates/configure.html.jinja:193
 msgid "Playlists"
 msgstr ""
 
-#: templates/configure.html.jinja:187
+#: templates/configure.html.jinja:195
 msgid "Retrouvez et gérez vos photos favorites."
 msgstr ""
 
-#: templates/configure.html.jinja:188
+#: templates/configure.html.jinja:196
 msgid "Favoris"
 msgstr ""
 
-#: templates/configure.html.jinja:196
+#: templates/configure.html.jinja:204
 msgid "Configurez la réception de photos via le bot Telegram."
 msgstr ""
 
-#: templates/configure.html.jinja:197
+#: templates/configure.html.jinja:205
 msgid "Telegram"
 msgstr ""
 
-#: templates/configure.html.jinja:199
+#: templates/configure.html.jinja:207
 msgid "Validez ou rejetez les photos envoyées par les invités."
 msgstr ""
 
-#: templates/configure.html.jinja:200
+#: templates/configure.html.jinja:208
 msgid "Validation"
 msgstr ""
 
-#: templates/configure.html.jinja:203
+#: templates/configure.html.jinja:211
 msgid "Lancez les imports, contrôlez le diaporama et envoyez des photos."
 msgstr ""
 
-#: templates/configure.html.jinja:204
+#: templates/configure.html.jinja:212
 #: templates/configure/tab_actions.html.jinja:4
 #: templates/configure/tab_comptes.html.jinja:60
 msgid "Actions"
 msgstr ""
 
-#: templates/configure.html.jinja:211
+#: templates/configure.html.jinja:219
 msgid "Gérez votre mot de passe et les comptes utilisateurs."
 msgstr ""
 
-#: templates/configure.html.jinja:212
+#: templates/configure.html.jinja:220
 msgid "Comptes"
 msgstr ""
 
-#: templates/configure.html.jinja:215
+#: templates/configure.html.jinja:223
 msgid "Gérez les paramètres Wi-Fi et réseau."
 msgstr ""
 
-#: templates/configure.html.jinja:216
+#: templates/configure.html.jinja:224
 msgid "Réseau"
 msgstr ""
 
-#: templates/configure.html.jinja:218
+#: templates/configure.html.jinja:226
 msgid "Gérez les mises à jour, sauvegardes et contrôles système."
 msgstr ""
 
-#: templates/configure.html.jinja:219
+#: templates/configure.html.jinja:227
 msgid "Maintenance"
 msgstr ""
 
-#: templates/configure.html.jinja:221
+#: templates/configure.html.jinja:229
 msgid "Consultez les statistiques d'utilisation du système."
 msgstr ""
 
-#: templates/configure.html.jinja:222
+#: templates/configure.html.jinja:230
 msgid "Statistiques"
 msgstr ""
 
-#: templates/configure.html.jinja:224
+#: templates/configure.html.jinja:232
 msgid "Consultez les journaux système."
 msgstr ""
 
-#: templates/configure.html.jinja:225
+#: templates/configure.html.jinja:233
 msgid "Logs"
 msgstr ""
 
-#: templates/configure.html.jinja:247
+#: templates/configure.html.jinja:255
 msgid "Enregistrer les modifications"
 msgstr ""
 
@@ -273,7 +292,7 @@ msgstr ""
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:127 templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:137 templates/login.html.jinja:69
 msgid "Afficher/Cacher le mot de passe"
 msgstr ""
 
@@ -353,22 +372,50 @@ msgstr ""
 msgid "Envoyer des photos"
 msgstr ""
 
-#: templates/upload.html.jinja:51
+#: templates/upload.html.jinja:58
 msgid "Envoyer des photos pour le cadre"
 msgstr ""
 
-#: templates/upload.html.jinja:52
+#: templates/upload.html.jinja:59
 msgid "Les photos seront soumises à validation avant d'être affichées."
 msgstr ""
 
-#: templates/upload.html.jinja:64
+#: templates/upload.html.jinja:77
 msgid "Envoyer"
 msgstr ""
 
-#: templates/upload.html.jinja:69
+#: templates/upload.html.jinja:82
+msgid "Ajouter cette page à l'écran d'accueil du téléphone"
+msgstr ""
+
+#: templates/upload.html.jinja:84
+msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
+msgstr ""
+
+#: templates/upload.html.jinja:85
+msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
+msgstr ""
+
+#: templates/upload.html.jinja:87
+msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
+msgstr ""
+
+#: templates/upload.html.jinja:90
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
+msgstr ""
+
+#: templates/upload.html.jinja:126
+msgid "fichier(s) en cours d'envoi..."
+msgstr ""
+
+#: templates/upload.html.jinja:137
+msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
+msgstr ""
+
+#: templates/upload.html.jinja:143
+msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:8
@@ -1793,10 +1840,100 @@ msgid "Restaurer"
 msgstr ""
 
 #: templates/configure/tab_maintenance.html.jinja:35
+msgid "Espace disque"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:38
+msgid "Alerter sous (Go libres) :"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:42
+msgid "Libérer de la place automatiquement"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:44
+msgid ""
+"Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
+"sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont"
+" jamais supprimés."
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:49
+msgid "Sauvegarde automatique sur Google Drive"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:51
+msgid ""
+"Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
+"messages dans un dossier de votre Google Drive (connexion rclone). Les "
+"photos ne sont pas incluses."
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:54
+msgid "Activer la sauvegarde automatique"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:57
+msgid "Dossier Google Drive :"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:59
+msgid "Toutes les (heures) :"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:61
+msgid "Sauvegardes conservées :"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:67
+msgid "Enregistrer ces réglages"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:69
+msgid "Sauvegarder maintenant"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:71
+msgid "Restaurer la dernière sauvegarde"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:83
+msgid "Go libres sur"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:83
+msgid "utilisés"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:84
+msgid "espace faible"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:85
+msgid "média(s) Google Drive pourraient être supprimés automatiquement."
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:92
+msgid "Dernière sauvegarde réussie :"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:93
+msgid "Dernier échec :"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:106
+msgid "Sauvegarde en cours..."
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:108
+msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
+msgstr ""
+
+#: templates/configure/tab_maintenance.html.jinja:117
 msgid "Mise à jour de l'application"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:37
+#: templates/configure/tab_maintenance.html.jinja:119
 msgid ""
 "Cliquez sur le bouton pour rechercher et installer les\n"
 "                    dernières mises à jour de Pimmich depuis GitHub. "
@@ -1804,19 +1941,19 @@ msgid ""
 "                    mise à jour."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:42
+#: templates/configure/tab_maintenance.html.jinja:124
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:43
+#: templates/configure/tab_maintenance.html.jinja:125
 msgid "Lancer la mise à jour"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:49
+#: templates/configure/tab_maintenance.html.jinja:131
 msgid "Système de Fichiers de la Carte SD"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:51
+#: templates/configure/tab_maintenance.html.jinja:133
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -1825,60 +1962,154 @@ msgid ""
 " l'opération."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:55
+#: templates/configure/tab_maintenance.html.jinja:137
 msgid "Note :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:55
+#: templates/configure/tab_maintenance.html.jinja:137
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
 " prochain démarrage."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:60
+#: templates/configure/tab_maintenance.html.jinja:142
 msgid "Étendre le système de fichiers"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:67
+#: templates/configure/tab_maintenance.html.jinja:149
 msgid "Contrôle du système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:70
+#: templates/configure/tab_maintenance.html.jinja:152
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:73
+#: templates/configure/tab_maintenance.html.jinja:155
 msgid "Redémarrer l'application web"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:82
+#: templates/configure/tab_maintenance.html.jinja:164
 msgid "Redémarrer le système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:90
+#: templates/configure/tab_maintenance.html.jinja:172
 msgid "Supprimer les logs"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:95
+#: templates/configure/tab_maintenance.html.jinja:177
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:98
+#: templates/configure/tab_maintenance.html.jinja:180
 msgid "Éteindre le système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:103
+#: templates/configure/tab_maintenance.html.jinja:185
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:108
+#: templates/configure/tab_maintenance.html.jinja:190
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
 " setup.sh. Continuer ?"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:4
+msgid "Écrire un message"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:6
+msgid ""
+"Le message est transformé en image et s'affiche dans le diaporama comme "
+"une photo."
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:9
+msgid "Titre (optionnel)"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:10
+msgid "ex : Joyeux anniversaire !"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:12
+msgid "Message"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:13
+msgid "Votre texte…"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:15
+msgid "Signature (optionnelle)"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:16
+msgid "ex : Toute la famille"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:20
+msgid "Style"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:22
+msgid "Nuit"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:23
+msgid "Clair"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:24
+msgid "Carte postale"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:25
+msgid "Festif"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:29
+msgid "Afficher jusqu'au (optionnel)"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:40
+msgid "Publier"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:45
+msgid "Aperçu à l'écran"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:47
+msgid "Aperçu du message"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:48
+msgid "Cliquez sur « Aperçu » pour voir le rendu."
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:56
+msgid "Messages publiés"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:59
+msgid "Aucun message publié."
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:98
+msgid "jusqu'au"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:103
+msgid "Supprimer ce message"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:105
+msgid "Supprimer ce message ?"
 msgstr ""
 
 #: templates/configure/tab_metadata.html.jinja:4
@@ -2218,31 +2449,31 @@ msgid "Mise à jour automatique (Immich)"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:47
-#: templates/configure/tab_sources.html.jinja:144
-#: templates/configure/tab_sources.html.jinja:236
+#: templates/configure/tab_sources.html.jinja:154
+#: templates/configure/tab_sources.html.jinja:246
 msgid "Activer la mise à jour automatique"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:49
-#: templates/configure/tab_sources.html.jinja:146
+#: templates/configure/tab_sources.html.jinja:156
 msgid "Intervalle de mise à jour (heures):"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:54
-#: templates/configure/tab_sources.html.jinja:151
-#: templates/configure/tab_sources.html.jinja:244
+#: templates/configure/tab_sources.html.jinja:161
+#: templates/configure/tab_sources.html.jinja:254
 msgid "État du service :"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:56
-#: templates/configure/tab_sources.html.jinja:153
-#: templates/configure/tab_sources.html.jinja:246
+#: templates/configure/tab_sources.html.jinja:163
+#: templates/configure/tab_sources.html.jinja:256
 msgid "Dernière mise à jour :"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:58
-#: templates/configure/tab_sources.html.jinja:155
-#: templates/configure/tab_sources.html.jinja:248
+#: templates/configure/tab_sources.html.jinja:165
+#: templates/configure/tab_sources.html.jinja:258
 msgid "Prochaine mise à jour :"
 msgstr ""
 
@@ -2285,83 +2516,93 @@ msgstr ""
 msgid "Photos des invités (validées)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:103
-msgid "Configuration du partage Samba (Windows)"
-msgstr ""
-
-#: templates/configure/tab_sources.html.jinja:105
-msgid "Serveur :"
-msgstr ""
-
 #: templates/configure/tab_sources.html.jinja:107
-msgid "ex: 192.168.1.50 ou MON-NAS"
+msgid "Masquer les photos en double entre les sources"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:109
-msgid "Nom du partage :"
-msgstr ""
-
-#: templates/configure/tab_sources.html.jinja:111
-msgid "ex: Photos"
+msgid ""
+"Une même photo reçue par plusieurs sources (ex. Google Drive et Telegram)"
+" n'est affichée qu'une fois, de préférence celle mise en favori."
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:113
-msgid "Chemin dans le partage (optionnel) :"
+msgid "Configuration du partage Samba (Windows)"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:115
-msgid "ex: Famille/2024"
+msgid "Serveur :"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:117
+msgid "ex: 192.168.1.50 ou MON-NAS"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:119
+msgid "Nom du partage :"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:121
+msgid "ex: Photos"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:123
+msgid "Chemin dans le partage (optionnel) :"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:125
+msgid "ex: Famille/2024"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:127
 msgid "Nom d'utilisateur (optionnel) :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:120
+#: templates/configure/tab_sources.html.jinja:130
 msgid "Mot de passe (optionnel) :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:135
+#: templates/configure/tab_sources.html.jinja:145
 msgid ""
 "Tester la\n"
 "                            connexion"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:141
+#: templates/configure/tab_sources.html.jinja:151
 msgid "Mise à jour automatique (Samba)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:163
+#: templates/configure/tab_sources.html.jinja:173
 msgid "Configuration Google Drive"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:166
+#: templates/configure/tab_sources.html.jinja:176
 msgid "Méthode de connexion :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:168
+#: templates/configure/tab_sources.html.jinja:178
 msgid "Automatique (rclone si configuré, sinon compte de service)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:169
+#: templates/configure/tab_sources.html.jinja:179
 msgid "rclone (compte Google déjà configuré sur le Raspberry Pi)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:170
+#: templates/configure/tab_sources.html.jinja:180
 msgid "Compte de service Google"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:175
+#: templates/configure/tab_sources.html.jinja:185
 msgid "Remote rclone :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:182
+#: templates/configure/tab_sources.html.jinja:192
 msgid ""
 "Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « "
 "rclone config » sur le Raspberry Pi."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:187
+#: templates/configure/tab_sources.html.jinja:197
 msgid ""
 "Créez un compte de service dans la console Google Cloud (API Google Drive"
 " activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez "
@@ -2369,45 +2610,45 @@ msgid ""
 "service."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:190
+#: templates/configure/tab_sources.html.jinja:200
 msgid "Compte de service configuré :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:192
+#: templates/configure/tab_sources.html.jinja:202
 msgid "Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:195
+#: templates/configure/tab_sources.html.jinja:205
 msgid "Clé JSON du compte de service :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:198
+#: templates/configure/tab_sources.html.jinja:208
 msgid "Laisser vide pour conserver la clé actuelle"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:204
+#: templates/configure/tab_sources.html.jinja:214
 msgid "Afficher mes dossiers Google Drive"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:208
+#: templates/configure/tab_sources.html.jinja:218
 msgid "Dossiers à afficher dans le diaporama :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:217
+#: templates/configure/tab_sources.html.jinja:227
 msgid ""
 "Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google "
 "Drive »."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:223
+#: templates/configure/tab_sources.html.jinja:233
 msgid "Inclure les sous-dossiers"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:227
+#: templates/configure/tab_sources.html.jinja:237
 msgid "Mettre les fichiers à la corbeille Google Drive après import"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:229
+#: templates/configure/tab_sources.html.jinja:239
 msgid ""
 "Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
 "importée part dans la corbeille du Drive (récupérable 30 jours) et reste "
@@ -2415,35 +2656,35 @@ msgid ""
 "Uniquement avec la connexion rclone."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:230
+#: templates/configure/tab_sources.html.jinja:240
 msgid ""
 "Pensez à enregistrer la configuration après avoir choisi les dossiers, "
 "puis lancez l'import depuis l'onglet « Actions »."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:233
+#: templates/configure/tab_sources.html.jinja:243
 msgid "Mise à jour automatique (Google Drive)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:238
+#: templates/configure/tab_sources.html.jinja:248
 msgid "Vérifier les nouveautés toutes les (minutes) :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:241
+#: templates/configure/tab_sources.html.jinja:251
 msgid ""
 "Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées "
 "ou supprimées."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:255
+#: templates/configure/tab_sources.html.jinja:265
 msgid "Options de démarrage"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:259
+#: templates/configure/tab_sources.html.jinja:269
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:261
+#: templates/configure/tab_sources.html.jinja:271
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -2768,88 +3009,93 @@ msgstr ""
 msgid "Action réservée aux administrateurs."
 msgstr ""
 
-#: web/core.py:862
+#: web/core.py:887
 msgid "Code d'invitation invalide."
 msgstr ""
 
-#: web/core.py:868
+#: web/core.py:893
 msgid "Ce code d'invitation a expiré."
 msgstr ""
 
-#: web/core.py:874
+#: web/core.py:899
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr ""
 
-#: web/core.py:876
+#: web/core.py:901
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr ""
 
-#: web/core.py:887
+#: web/core.py:912
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
 "postales au cadre."
 msgstr ""
 
-#: web/routes_auth.py:23
+#: web/routes_auth.py:21
+#, python-format
+msgid "Trop de tentatives de connexion. Réessayez dans %(minutes)s minute(s)."
+msgstr ""
+
+#: web/routes_auth.py:31
 msgid "Connexion réussie"
 msgstr ""
 
-#: web/routes_auth.py:26
+#: web/routes_auth.py:36
 msgid "Identifiants invalides"
 msgstr ""
 
-#: web/routes_auth.py:35
+#: web/routes_auth.py:45
 msgid "Déconnexion réussie"
 msgstr ""
 
-#: web/routes_auth.py:47
+#: web/routes_auth.py:57
 msgid "Les deux champs de mot de passe sont requis."
 msgstr ""
 
-#: web/routes_auth.py:51
+#: web/routes_auth.py:61
 msgid "Les mots de passe ne correspondent pas."
 msgstr ""
 
-#: web/routes_auth.py:55
+#: web/routes_auth.py:65
 msgid "Le mot de passe doit contenir au moins 6 caractères."
 msgstr ""
 
-#: web/routes_auth.py:64
+#: web/routes_auth.py:74
 msgid ""
 "Mot de passe mis à jour avec succès. Il sera nécessaire pour votre "
 "prochaine connexion."
 msgstr ""
 
-#: web/routes_auth.py:66
+#: web/routes_auth.py:76
 #, python-format
 msgid "Erreur lors du changement de mot de passe : %(error)s"
 msgstr ""
 
-#: web/routes_auth.py:78
+#: web/routes_auth.py:88
 #, python-format
 msgid "Compte « %(name)s » créé."
 msgstr ""
 
-#: web/routes_auth.py:88
+#: web/routes_auth.py:98
 msgid "Vous ne pouvez pas supprimer votre propre compte."
 msgstr ""
 
-#: web/routes_auth.py:92
+#: web/routes_auth.py:102
 #, python-format
 msgid "Compte « %(name)s » supprimé."
 msgstr ""
 
-#: web/routes_auth.py:103
+#: web/routes_auth.py:113
 #, python-format
 msgid "Mot de passe de « %(name)s » modifié."
 msgstr ""
 
-#: web/routes_auth.py:113
+#: web/routes_auth.py:123
 msgid "Vous ne pouvez pas modifier votre propre rôle."
 msgstr ""
 
-#: web/routes_auth.py:117
+#: web/routes_auth.py:127
 #, python-format
 msgid "Rôle de « %(name)s » modifié."
 msgstr ""
@@ -2860,12 +3106,12 @@ msgid ""
 "précédente est conservée."
 msgstr ""
 
-#: web/routes_config.py:202
+#: web/routes_config.py:203
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr ""
 
-#: web/routes_config.py:227
+#: web/routes_config.py:228
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -2920,6 +3166,18 @@ msgstr ""
 msgid "Erreur de connexion : %(error)s"
 msgstr ""
 
+#: web/routes_messages.py:57
+msgid "Message publié : il apparaîtra dans le diaporama."
+msgstr ""
+
+#: web/routes_messages.py:64
+msgid "Message introuvable."
+msgstr ""
+
+#: web/routes_messages.py:66
+msgid "Message supprimé."
+msgstr ""
+
 #: web/routes_slideshow.py:379
 #, python-format
 msgid "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
@@ -2932,66 +3190,94 @@ msgid ""
 "cours."
 msgstr ""
 
-#: web/routes_system.py:83
+#: web/routes_system.py:84
 msgid ""
 "Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération"
 " annulée."
 msgstr ""
 
-#: web/routes_system.py:119
+#: web/routes_system.py:120
 msgid ""
 "Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera"
 " plus automatiquement."
 msgstr ""
 
-#: web/routes_system.py:169
+#: web/routes_system.py:170
 msgid ""
 "L'application web redémarre... La page sera inaccessible pendant quelques"
 " instants."
 msgstr ""
 
-#: web/routes_system.py:195
+#: web/routes_system.py:196
 msgid "Le SSID et le pays Wi-Fi sont obligatoires."
 msgstr ""
 
-#: web/routes_system.py:208
+#: web/routes_system.py:209
 msgid ""
 "Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
 " la connexion. Veuillez patienter une minute et vérifier le statut."
 msgstr ""
 
-#: web/routes_system.py:210
+#: web/routes_system.py:211
 #, python-format
 msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
 msgstr ""
 
-#: web/routes_system.py:265
+#: web/routes_system.py:266
 msgid "Le fichier de configuration n'a pas été trouvé."
 msgstr ""
 
-#: web/routes_system.py:274 web/routes_system.py:279
+#: web/routes_system.py:275 web/routes_system.py:280
 msgid "Aucun fichier de sauvegarde sélectionné."
 msgstr ""
 
-#: web/routes_system.py:289
+#: web/routes_system.py:290
 msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
 msgstr ""
 
-#: web/routes_system.py:291
+#: web/routes_system.py:292
 msgid ""
 "Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
 "valide."
 msgstr ""
 
-#: web/routes_system.py:293
+#: web/routes_system.py:294
 #, python-format
 msgid "Erreur lors de la restauration : %(error)s"
 msgstr ""
 
-#: web/routes_system.py:372
+#: web/routes_system.py:373
 msgid "name_key"
+msgstr ""
+
+#: web/routes_system.py:643
+msgid "Réglage invalide."
+msgstr ""
+
+#: web/routes_system.py:645
+msgid "Réglages enregistrés."
+msgstr ""
+
+#: web/routes_system.py:654
+#, python-format
+msgid "Sauvegarde impossible : %(error)s"
+msgstr ""
+
+#: web/routes_system.py:655
+#, python-format
+msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
+msgstr ""
+
+#: web/routes_system.py:664
+#, python-format
+msgid "Restauration impossible : %(error)s"
+msgstr ""
+
+#: web/routes_system.py:668
+#, python-format
+msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr ""
 
 #: web/routes_voice.py:32
@@ -3019,56 +3305,56 @@ msgstr ""
 msgid "Erreur interne du serveur : %(error)s"
 msgstr ""
 
-#: web/workers.py:158 web/workers.py:267 web/workers.py:360
+#: web/workers.py:159 web/workers.py:268 web/workers.py:361
 msgid "Import initial ignoré."
 msgstr ""
 
-#: web/workers.py:171 web/workers.py:280
+#: web/workers.py:172 web/workers.py:281
 #, python-format
 msgid "Mise à jour auto. activée. Intervalle : %(hours)sh."
 msgstr ""
 
-#: web/workers.py:177
+#: web/workers.py:178
 msgid "Lancement du téléchargement..."
 msgstr ""
 
-#: web/workers.py:209 web/workers.py:300 web/workers.py:376
+#: web/workers.py:210 web/workers.py:301 web/workers.py:377
 msgid "Préparation des photos..."
 msgstr ""
 
-#: web/workers.py:224 web/workers.py:323
+#: web/workers.py:225 web/workers.py:324
 msgid "Mise à jour terminée. Redémarrage du diaporama..."
 msgstr ""
 
-#: web/workers.py:229 web/workers.py:328 web/workers.py:394
+#: web/workers.py:230 web/workers.py:329 web/workers.py:395
 msgid "Dernière mise à jour réussie."
 msgstr ""
 
-#: web/workers.py:232 web/workers.py:331 web/workers.py:396
+#: web/workers.py:233 web/workers.py:332 web/workers.py:397
 msgid "Mise à jour terminée avec avertissements/erreurs."
 msgstr ""
 
-#: web/workers.py:239
+#: web/workers.py:240
 msgid "Mise à jour automatique désactivée."
 msgstr ""
 
-#: web/workers.py:286
+#: web/workers.py:287
 msgid "Lancement de l'import..."
 msgstr ""
 
-#: web/workers.py:337
+#: web/workers.py:338
 msgid "Mise à jour automatique Samba désactivée."
 msgstr ""
 
-#: web/workers.py:364
+#: web/workers.py:365
 msgid "Recherche de nouveautés..."
 msgstr ""
 
-#: web/workers.py:399
+#: web/workers.py:400
 msgid "Aucune nouveauté."
 msgstr ""
 
-#: web/workers.py:405
+#: web/workers.py:406
 msgid "Mise à jour automatique Google Drive désactivée."
 msgstr ""
 
