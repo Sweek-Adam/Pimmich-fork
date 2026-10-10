@@ -198,6 +198,12 @@
   ]
  ],
  [
+  "/api/playlists/<playlist_id>/layout",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/playlists/<playlist_id>/photos",
   [
    "POST"
@@ -271,6 +277,18 @@
  ],
  [
   "/api/set_resolution",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/slideshow/layout",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/slideshow/layout",
   [
    "POST"
   ]

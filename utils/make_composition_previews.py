@@ -47,6 +47,8 @@ def main():
             path = Path(tmp) / f"exemple_{i}.jpg"
             sample_photo(i, portrait=i % 3 == 0).save(path, quality=90)
             paths.append(str(path))
+        # « Photo unique » : une photo plein écran
+        compositions.cover(sample_photo(1), 480, 270).save(OUT / "unique.jpg", quality=82, optimize=True)
         message = {"title": "Coucou !", "body": "Bisous de Lyon", "signature": "Léa", "style": "pastel"}
         for key in compositions.FORMATS:
             image = None

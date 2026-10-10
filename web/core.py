@@ -372,9 +372,13 @@ def inject_styles_and_formats():
     from utils.compositions import FORMATS, THEME_KEYS, SEASONAL, enabled_formats
     formats = [(k, v[0]) for k, v in FORMATS.items() if k not in THEME_KEYS]
     themes = [(k, v[0], k in SEASONAL) for k, v in FORMATS.items() if k in THEME_KEYS]
+    from utils.layout_engine import choice_options
+    config = load_config()
+    enabled = set(enabled_formats(config)) | ({"unique"} if config.get("unique_enabled", True) else set())
     return dict(message_styles=[(k, v["label"]) for k, v in STYLES.items()],
-                composition_formats=formats, composition_themes=themes,
-                composition_enabled=set(enabled_formats(load_config())))
+                composition_formats=[("unique", "Photo unique")] + formats, composition_themes=themes,
+                composition_enabled=enabled, layout_choices=choice_options(),
+                layout_override=config.get("layout_override", "auto"))
 
 @app.context_processor
 def inject_disk_alert():

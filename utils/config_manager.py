@@ -43,6 +43,8 @@ def create_default_config():
         "compositions_disabled": [],
         "compositions_seasonal": True,
         "compositions_full_photos": True,
+        "unique_enabled": True,
+        "layout_override": "auto",
         "compositions_include_messages": True,
         "guest_qr_position": "bottom_right",
         "guest_messages_enabled": True,

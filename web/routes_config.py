@@ -185,7 +185,6 @@ def configure():
         config["show_clock"] = 'show_clock' in request.form
         config["show_guest_qr"] = 'show_guest_qr' in request.form
         config["guest_messages_enabled"] = 'guest_messages_enabled' in request.form
-        config["compositions_enabled"] = 'compositions_enabled' in request.form
         config["compositions_include_messages"] = 'compositions_include_messages' in request.form
         if 'compositions_form' in request.form:  # on enregistre les formats décochés : un nouveau format sera actif par défaut
             checked = set(request.form.getlist('compositions_styles'))
@@ -193,6 +192,8 @@ def configure():
             config.pop("compositions_styles", None)
             config["compositions_seasonal"] = 'compositions_seasonal' in request.form
             config["compositions_full_photos"] = 'compositions_full_photos' in request.form
+            config["unique_enabled"] = 'unique' in checked
+            config["compositions_enabled"] = True  # les formats utilisés sont ceux cochés
         config["immich_auto_update"] = 'immich_auto_update' in request.form
         config["random_content_in_album"] = "random_content_in_album" in request.form
         config["smb_auto_update"] = 'smb_auto_update' in request.form

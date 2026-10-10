@@ -1,0 +1,14 @@
+{#- Sélecteur de disposition, identique partout (choix rapide, playlists). `auto_label` : libellé du choix « auto ». -#}
+{% macro layout_select(id, current, auto_label, classes="") -%}
+<select id="{{ id }}" class="{{ classes }}">
+    {% for value, label, group in layout_choices if group is none %}
+    <option value="{{ value }}" {% if value == current %}selected{% endif %}>{{ auto_label if value == 'auto' else _(label) }}</option>
+    {% endfor %}
+    <optgroup label="{{ _('Uniquement ce format') }}">
+        {% for value, label, group in layout_choices if group == 'format' %}<option value="{{ value }}" {% if value == current %}selected{% endif %}>{{ _(label) }}</option>{% endfor %}
+    </optgroup>
+    <optgroup label="{{ _('Uniquement ce thème') }}">
+        {% for value, label, group in layout_choices if group == 'theme' %}<option value="{{ value }}" {% if value == current %}selected{% endif %}>{{ _(label) }}</option>{% endfor %}
+    </optgroup>
+</select>
+{%- endmacro %}

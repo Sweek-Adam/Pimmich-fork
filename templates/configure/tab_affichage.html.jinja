@@ -173,50 +173,6 @@
                 <!-- NOUVEAU BLOC POUR LA PRISE CONNECTÉE -->
                 <fieldset class="mt-6">
                     <legend>
-                        <h3><i class="fas fa-th-large mr-2"></i>{{ _("Compositions de plusieurs photos") }}</h3>
-                    </legend>
-                    <p class="text-sm text-gray-600 mb-3">{{ _("De temps en temps, le diaporama affiche plusieurs photos à la fois dans un format tiré au hasard parmi ceux cochés. Les messages peuvent y apparaître (post-it, fiche, case de texte).") }}</p>
-                    <input type="hidden" name="compositions_form" value="1">
-                    <div class="form-check form-switch my-2">
-                        <input class="form-check-input" type="checkbox" id="compositions_enabled" name="compositions_enabled" {% if config.get('compositions_enabled', True) %}checked{% endif %}>
-                        <label class="form-check-label ml-2" for="compositions_enabled">{{ _("Afficher des compositions") }}</label>
-                    </div>
-                    <label for="compositions_every">{{ _("Une composition toutes les (photos) :") }}</label>
-                    <input type="number" id="compositions_every" name="compositions_every" min="1" max="100" class="w-24"
-                        value="{{ config.get('compositions_every', 5) }}">
-                    <div class="form-check form-switch my-3">
-                        <input class="form-check-input" type="checkbox" id="compositions_include_messages" name="compositions_include_messages" {% if config.get('compositions_include_messages', True) %}checked{% endif %}>
-                        <label class="form-check-label ml-2" for="compositions_include_messages">{{ _("Inclure les messages dans les compositions") }}</label>
-                    </div>
-                    <div class="form-check form-switch my-3">
-                        <input class="form-check-input" type="checkbox" id="compositions_full_photos" name="compositions_full_photos" {% if config.get('compositions_full_photos', True) %}checked{% endif %}>
-                        <label class="form-check-label ml-2" for="compositions_full_photos">{{ _("Photos entières (sans recadrage)") }}</label>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">{{ _("Les tirages prennent la forme de chaque photo ; dans les cases de taille fixe, la photo entière est posée sur un fond flou d'elle-même. Décochez pour remplir les cases en recadrant.") }}</p>
-                    <div class="form-check form-switch my-3">
-                        <input class="form-check-input" type="checkbox" id="compositions_seasonal" name="compositions_seasonal" {% if config.get('compositions_seasonal', True) %}checked{% endif %}>
-                        <label class="form-check-label ml-2" for="compositions_seasonal">{{ _("Thèmes de saison seulement pendant leur période (et plus fréquents à ce moment-là)") }}</label>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">{{ _("Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon la saison.") }}</p>
-                    {% for title, items in [(_("Formats"), composition_formats), (_("Thèmes"), composition_themes)] %}
-                    <h4 class="text-md font-semibold mt-4 mb-2">{{ title }}</h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-                        {% for item in items %}
-                        {% set key, label = item[0], item[1] %}
-                        <label class="block border rounded-lg overflow-hidden cursor-pointer bg-white hover:shadow">
-                            <img src="{{ url_for('static', filename='composition_previews/' ~ key ~ '.jpg') }}" alt="{{ _(label) }}" class="w-full" loading="lazy">
-                            <span class="flex items-center gap-2 p-2 text-sm">
-                                <input type="checkbox" name="compositions_styles" value="{{ key }}" {% if key in composition_enabled %}checked{% endif %}>
-                                {{ _(label) }}{% if item|length > 2 and item[2] %} <i class="fas fa-calendar-alt text-gray-400" title="{{ _('Thème de saison') }}"></i>{% endif %}
-                            </span>
-                        </label>
-                        {% endfor %}
-                    </div>
-                    {% endfor %}
-                </fieldset>
-
-                <fieldset class="mt-6">
-                    <legend>
                         <h3><i class="fas fa-qrcode mr-2"></i>{{ _("QR code pour les invités") }}</h3>
                     </legend>
                     <p class="text-sm text-gray-600 mb-3">{{ _("Affiche en permanence sur le diaporama un QR code vers la page invités, pour envoyer des photos ou écrire un message depuis un téléphone connecté au même Wi-Fi.") }}</p>

@@ -1,6 +1,6 @@
 """Pilotage du diaporama : lecture, veille, sources, durée, écran et résolution."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
-from utils import play_queue
+from utils import play_queue, layout_engine
 from web.core import _, _send_slideshow_signal
 
 
@@ -78,7 +78,8 @@ def play_playlist():
         playlist_data_to_save = {
             "name": target_playlist.get('name', 'Playlist'),
             "photos": target_playlist.get('photos', []),
-            "music_file": target_playlist.get('music_file') # Nouveau champ optionnel
+            "music_file": target_playlist.get('music_file'), # Nouveau champ optionnel
+            "layout": target_playlist.get('layout', layout_engine.AUTO),  # disposition propre à la playlist
         }
 
         # Écrire les données dans le fichier temporaire que le diaporama lira
@@ -466,3 +467,25 @@ def slideshow_queue_reorder():
     if data.get("play_now"):
         _send_slideshow_signal(signal.SIGUSR1)  # passer tout de suite au premier média demandé
     return jsonify({"success": True, "message": _("Nouvel ordre enregistré.")})
+
+
+# --- Disposition du diaporama (choix rapide : photo unique, un format précis, compositions...) ---
+
+@app.route('/api/slideshow/layout', methods=['GET'])
+@login_required
+def get_slideshow_layout():
+    return jsonify({"success": True, "layout": load_config().get("layout_override", layout_engine.AUTO)})
+
+
+@app.route('/api/slideshow/layout', methods=['POST'])
+@login_or_internal_required
+def set_slideshow_layout():
+    choice = (request.get_json(silent=True) or {}).get("layout", layout_engine.AUTO)
+    if not layout_engine.is_valid_choice(choice):
+        return jsonify({"success": False, "message": _("Disposition inconnue.")}), 400
+    config = dict(load_config())
+    config["layout_override"] = choice
+    save_config(config)
+    if is_slideshow_running():
+        restart_slideshow_for_update()
+    return jsonify({"success": True, "message": _("Disposition appliquée au diaporama.")})

@@ -228,6 +228,19 @@
                 });
             }
 
+            // Dispositions proposées pour les playlists (même liste que le choix rapide du diaporama)
+            const LAYOUT_OPTIONS = [
+                {% for value, label, group in layout_choices %}{ value: {{ value|tojson }}, label: {{ (_("Comme le diaporama") if value == 'auto' else _(label))|tojson }}, group: {{ group|tojson }} },
+                {% endfor %}
+            ];
+            function layoutOptionsHtml(current) {
+                const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+                const option = (o) => `<option value="${esc(o.value)}" ${o.value === current ? "selected" : ""}>${esc(o.label)}</option>`;
+                return LAYOUT_OPTIONS.filter(o => !o.group).map(option).join("")
+                    + `<optgroup label="${esc({{ _('Uniquement ce format')|tojson }})}">${LAYOUT_OPTIONS.filter(o => o.group === "format").map(option).join("")}</optgroup>`
+                    + `<optgroup label="${esc({{ _('Uniquement ce thème')|tojson }})}">${LAYOUT_OPTIONS.filter(o => o.group === "theme").map(option).join("")}</optgroup>`;
+            }
+
             async function renderPlaylists() {
                 const playlistsContainer = document.getElementById('playlists-list-container');
                 if (!playlistsContainer) return;
@@ -296,6 +309,9 @@
                         <p class="text-sm text-gray-500" id="photo-count-${playlist.id}">${photoCountText}</p>
                     </div>
                     <div class="flex items-center gap-4">
+                        <select class="playlist-layout-select text-sm rounded-md border-gray-300 shadow-sm" data-playlist-id="${playlist.id}" title="{{ _('Disposition de la playlist') }}">
+                            ${layoutOptionsHtml(playlist.layout || "auto")}
+                        </select>
                         <select class="playlist-music-select text-sm rounded-md border-gray-300 shadow-sm" data-playlist-id="${playlist.id}">
                             ${musicOptionsHtml}
                         </select>
@@ -319,6 +335,17 @@
                 </div>
             `;
                         playlistsContainer.appendChild(playlistEl);
+                    });
+
+                    // Disposition propre à chaque playlist
+                    document.querySelectorAll('.playlist-layout-select').forEach(select => {
+                        select.addEventListener('change', async (event) => {
+                            const response = await fetch(`/api/playlists/${event.target.dataset.playlistId}/layout`, {
+                                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ layout: event.target.value })
+                            });
+                            const result = await response.json();
+                            if (result.success) { showToast(result.message); } else { alert(result.message); }
+                        });
                     });
 
                     // Ajouter les écouteurs pour les sélecteurs de musique

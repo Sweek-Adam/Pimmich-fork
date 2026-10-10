@@ -1,5 +1,7 @@
 """Playlists et musiques de fond."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import layout_engine
+from web.core import _
 
 
 # --- API pour la gestion des Playlists ---
@@ -59,6 +61,22 @@ def update_playlist_music(playlist_id):
 
     save_playlists(playlists)
     return jsonify({"success": True, "message": "Musique de la playlist mise à jour."})
+
+
+@app.route('/api/playlists/<playlist_id>/layout', methods=['POST'])
+@login_or_internal_required
+def update_playlist_layout(playlist_id):
+    """Disposition propre à une playlist (« auto » : comme le diaporama)."""
+    layout = (request.get_json(silent=True) or {}).get('layout', layout_engine.AUTO)
+    if not layout_engine.is_valid_choice(layout):
+        return jsonify({"success": False, "message": _("Disposition inconnue.")}), 400
+    playlists = load_playlists()
+    for playlist in playlists:
+        if playlist.get('id') == playlist_id:
+            playlist['layout'] = layout
+            save_playlists(playlists)
+            return jsonify({"success": True, "message": _("Disposition de la playlist enregistrée.")})
+    return jsonify({"success": False, "message": "Playlist non trouvée."}), 404
 
 
 @app.route('/api/music_files', methods=['GET'])

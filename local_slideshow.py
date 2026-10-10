@@ -28,7 +28,7 @@ from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
 from utils.dedup import remove_duplicates
 from utils.messages_manager import pop_priority, list_messages
-from utils import compositions
+from utils import compositions, layout_engine
 from utils import play_queue
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
@@ -861,44 +861,59 @@ def control_fan(temperature, threshold=55, pin=14):
     else:
         set_gpio_output(pin, False)
 
-# --- Compositions de plusieurs photos, préparées en arrière-plan pour ne jamais ralentir le diaporama ---
-_composition = {"thread": None, "ready": None, "counter": 0, "slot": 0}
+# --- Dispositions : compositions préparées en arrière-plan pour ne jamais ralentir le diaporama ---
+# Une composition est préparée pour un emplacement précis de la playlist (les photos qui suivent, dans l'ordre).
+_composition = {"thread": None, "ready": None, "target": None, "counter": 0, "slot": 0}
 
 
-def prepare_composition_async(config, all_media, width, height):
-    """Lance la préparation de la prochaine composition si aucune n'est prête ou en cours."""
-    if _composition["ready"] or (_composition["thread"] and _composition["thread"].is_alive()):
-        return
-    photos = [p for p in all_media if p.lower().endswith((".jpg", ".jpeg", ".png"))
-              and f"{os.sep}messages{os.sep}" not in p and f"{os.sep}compositions{os.sep}" not in p]
-    styles = compositions.enabled_formats(config)
-    include_messages = config.get("compositions_include_messages", True)
-    seasonal = config.get("compositions_seasonal", True)
+def prepare_composition(config, plan, playlist, start, width, height):
+    """Prépare en arrière-plan la composition qui commencera à l'indice `start` de cette playlist."""
+    target = (id(playlist), start)
+    if _composition["target"] == target and (_composition["ready"] or (_composition["thread"] and _composition["thread"].is_alive())):
+        return  # déjà prête ou en cours pour cet emplacement
+    if _composition["thread"] and _composition["thread"].is_alive():
+        return  # une autre préparation est en cours : on ne surcharge pas le processeur
+    _composition.update(target=target, ready=None)
     compositions.set_full_photos(config.get("compositions_full_photos", True))
+    include_messages = config.get("compositions_include_messages", True)
+    snapshot = list(playlist)
 
     def work():
         try:
-            messages = [m for m in list_messages() if not m.get("hidden")] if include_messages else []
             started = time.time()
-            style, image = compositions.compose_random(styles, photos, messages, width, height, include_messages, seasonal=seasonal)
+            rng = random.Random()
+            messages = {m["id"]: m for m in list_messages() if not m.get("hidden")} if include_messages else {}
+            for _attempt in range(4):  # un autre format si celui-ci ne peut pas accueillir les photos suivantes
+                style = layout_engine.pick_format(plan, rng)
+                chunk = layout_engine.take_chunk(snapshot, start, layout_engine.photo_count(style, rng))
+                image, used = layout_engine.render_chunk(style, chunk, messages, width, height, include_messages, rng)
+                if image is not None:
+                    break
             if image is None:
                 return
             compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
             _composition["slot"] ^= 1  # deux fichiers en alternance : jamais réécrire celui affiché
             path = compositions.OUTPUT_DIR / f"composition_{_composition['slot']}.jpg"
             image.save(path, "JPEG", quality=88)
-            _composition["ready"] = str(path)
-            logger.info(f"[Compositions] « {style} » prête en {time.time() - started:.1f}s")
+            if _composition["target"] == target:
+                _composition["ready"] = (str(path), used)
+            logger.info(f"[Dispositions] « {style} » ({used} photos) prête en {time.time() - started:.1f}s")
         except Exception as e:
-            logger.warning(f"[Compositions] Préparation impossible : {e}")
+            logger.warning(f"[Dispositions] Préparation impossible : {e}")
 
     _composition["thread"] = threading.Thread(target=work, daemon=True)
     _composition["thread"].start()
 
 
-def take_composition():
-    path, _composition["ready"] = _composition["ready"], None
-    return path
+def take_composition(playlist, start, wait_seconds=0):
+    """Composition prête pour cet emplacement : (chemin, nombre de diapositives utilisées), sinon (None, 0)."""
+    if _composition["target"] != (id(playlist), start):
+        return None, 0
+    thread = _composition["thread"]
+    if wait_seconds and not _composition["ready"] and thread and thread.is_alive():
+        thread.join(wait_seconds)  # l'écran garde la diapositive précédente pendant ce temps
+    ready, _composition["ready"], _composition["target"] = _composition["ready"], None, None
+    return ready if ready else (None, 0)
 
 
 def apply_priority(playlist, all_media, queue):
@@ -2052,6 +2067,7 @@ def start_slideshow():
         # --- Vérification et chargement de la playlist personnalisée (une seule fois) ---
         custom_playlist = None
         playlist_name = None
+        custom_layout = None  # disposition propre à la playlist (None : comme le diaporama)
         is_custom_run = False # Drapeau pour indiquer un cycle de playlist unique
         if os.path.exists(CUSTOM_PLAYLIST_FILE):
             try:
@@ -2068,6 +2084,9 @@ def start_slideshow():
                 # Convertir les chemins relatifs en chemins absolus
                 custom_playlist = [str(Path(BASE_DIR) / 'static' / 'prepared' / p) for p in custom_playlist_paths]
                 
+                if isinstance(playlist_data, dict):
+                    custom_layout = playlist_data.get('layout')
+
                 # Gestion de la musique
                 _current_background_music = playlist_data.get('music_file')
                 if _current_background_music:
@@ -2306,15 +2325,22 @@ def start_slideshow():
                 # Ordre demandé depuis l'interface (onglet « À suivre ») : appliqué avant le média suivant
                 playlist, playlist_index = play_queue.apply_requested_order(playlist, playlist_index)
 
-                # Composition de plusieurs photos (liège, mosaïque...) toutes les N photos, préparée en arrière-plan
-                composition_path = None
-                if not is_custom_run and config.get("compositions_enabled", True):
-                    prepare_composition_async(config, all_media, SCREEN_WIDTH, SCREEN_HEIGHT)
-                    if _composition["counter"] >= max(1, int(config.get("compositions_every", 5))):
-                        composition_path = take_composition()
+                # Disposition de cette diapositive : photo unique ou composition des photos suivantes
+                layout_plan = layout_engine.resolve(config, custom_layout if is_custom_run else None)
+                composition_path, composition_used = None, 0
+                if layout_engine.wants_composition(layout_plan, _composition["counter"]) and not layout_engine.is_video(playlist[playlist_index]):
+                    prepare_composition(config, layout_plan, playlist, playlist_index, SCREEN_WIDTH, SCREEN_HEIGHT)
+                    # Sans photo unique, on attend la composition (l'écran garde l'image précédente)
+                    composition_path, composition_used = take_composition(playlist, playlist_index, 0 if layout_plan.unique else 40)
 
                 photo_path = composition_path or playlist[playlist_index]
                 play_queue.publish_state(playlist, playlist_index, composition_path)
+
+                # Préparer dès maintenant la composition suivante, pendant l'affichage de celle-ci
+                next_index = (playlist_index + (composition_used if composition_path else 1)) % len(playlist)
+                next_counter = 0 if composition_path else _composition["counter"] + 1
+                if layout_engine.wants_composition(layout_plan, next_counter) and not layout_engine.is_video(playlist[next_index]):
+                    prepare_composition(config, layout_plan, playlist, next_index, SCREEN_WIDTH, SCREEN_HEIGHT)
                 
                 # Réinitialiser les requêtes de changement de photo
                 global next_photo_requested, previous_photo_requested
@@ -2419,10 +2445,12 @@ def start_slideshow():
 
                 # --- Logique de navigation ---
                 if composition_path:
-                    # La composition s'intercale : la photo prévue n'a pas encore été affichée
+                    # Une composition regroupe les diapositives qu'elle a utilisées
                     _composition["counter"] = 0
                     if previous_photo_requested:
                         playlist_index -= 1
+                    else:
+                        playlist_index += composition_used
                 elif next_photo_requested:
                     _composition["counter"] += 1
                     playlist_index += 1
@@ -2433,7 +2461,7 @@ def start_slideshow():
                     playlist_index += 1
 
                 # Gérer le bouclage de la playlist
-                if playlist_index >= len(playlist): playlist_index = 0
+                if playlist_index >= len(playlist): playlist_index %= len(playlist)  # une composition peut dépasser la fin
                 if playlist_index < 0: playlist_index = len(playlist) - 1
 
             # --- Logique de fin de playlist personnalisée ---

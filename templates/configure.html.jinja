@@ -112,6 +112,7 @@
 
             <img src="{{ url_for('static', filename='pimmich_logo.png') }}" alt="Logo Pimmich" class="h-16">
 
+            {% from 'configure/_layout_select.html.jinja' import layout_select %}
             <div id="live-preview-container" class="cadre-bois p-4 flex flex-col items-center">
                 <p id="live-preview-status" class="text-gray-500 italic hidden">{{ _("Le diaporama est arrêté.") }}</p>
 
@@ -144,6 +145,10 @@
                         </button>
                     </div>
                 </div>
+                <div class="mt-2 flex items-center gap-1 text-xs" title="{{ _('Disposition du diaporama') }}">
+                    <i class="fas fa-th-large text-gray-600"></i>
+                    {{ layout_select("layout-override-header", layout_override, _("Selon les réglages"), "layout-override-select text-xs py-0 rounded border-gray-300") }}
+                </div>
             </div>
         </div>
 
@@ -166,6 +171,9 @@
                 <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-affichage')"
                     title="{{ _('Gérez les paramètres d\'affichage du diaporama, la durée, les transitions...') }}"><i
                         class="fas fa-desktop fa-fw mr-2"></i>{{ _('Affichage') }}</button>
+                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-dispositions')"
+                    title="{{ _('Photo unique, compositions et thèmes : choisissez comment les photos sont présentées.') }}"><i
+                        class="fas fa-th-large fa-fw mr-2"></i>{{ _('Dispositions') }}</button>
                 <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-heure')"
                     title="{{ _('Configurez l\'affichage de l\'heure, la météo et les marées.') }}"><i
                         class="fas fa-clock fa-fw mr-2"></i>{{ _('Horloge & Infos') }}</button>
@@ -241,6 +249,7 @@
         <form method="POST" action="/configure">
 
 {% include 'configure/tab_affichage.html.jinja' %}
+{% include 'configure/tab_dispositions.html.jinja' %}
 
 
 {% include 'configure/tab_heure.html.jinja' %}
