@@ -1,0 +1,104 @@
+        <div id="tab-queue" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("À suivre dans le diaporama") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-4">{{ _("Faites glisser une photo pour changer l'ordre : la première de la liste sera affichée juste après la photo actuelle. Le bouton ▶ l'affiche immédiatement.") }}</p>
+
+                <div id="queue-not-running" class="hidden p-3 bg-gray-100 rounded text-gray-600">{{ _("Le diaporama n'est pas en cours.") }}</div>
+
+                <div id="queue-content" class="hidden">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img id="queue-current-img" class="w-32 h-20 object-cover rounded border-4 border-green-500" alt="">
+                        <div>
+                            <p class="text-sm font-semibold text-green-700">{{ _("Affichée en ce moment") }}</p>
+                            <p id="queue-current-name" class="text-xs text-gray-500"></p>
+                        </div>
+                    </div>
+                    <ol id="queue-list" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3"></ol>
+                    <p id="queue-status" class="mt-3 text-sm"></p>
+                </div>
+            </fieldset>
+
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const list = $("queue-list");
+                    let busyUntil = 0;  // pas de rafraîchissement pendant / juste après une manipulation
+                    const say = (text, ok) => { $("queue-status").textContent = text; $("queue-status").className = "mt-3 text-sm " + (ok ? "text-green-600" : "text-red-600"); };
+
+                    async function sendOrder(playNow) {
+                        busyUntil = Date.now() + 4000;
+                        const order = [...list.querySelectorAll("li")].map(li => li.dataset.path);
+                        const resp = await fetch('/api/slideshow/queue', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ order, play_now: !!playNow }) });
+                        const data = await resp.json();
+                        say(data.message, data.success);
+                        setTimeout(refresh, playNow ? 2500 : 4000);
+                    }
+
+                    function render(data) {
+                        $("queue-not-running").classList.toggle("hidden", data.running);
+                        $("queue-content").classList.toggle("hidden", !data.running);
+                        if (!data.running) return;
+                        if (data.current) {
+                            $("queue-current-img").src = data.current.thumb;
+                            $("queue-current-name").textContent = `${data.current.source} · ${data.current.name}`;
+                        }
+                        list.innerHTML = "";
+                        data.upcoming.forEach((item, i) => {
+                            const li = document.createElement("li");
+                            li.dataset.path = item.path;
+                            li.className = "relative cursor-move rounded overflow-hidden border bg-white shadow-sm";
+                            li.title = `${item.source} · ${item.name}`;
+                            const img = document.createElement("img");
+                            img.src = item.thumb;
+                            img.className = "w-full h-20 object-cover pointer-events-none";
+                            img.loading = "lazy";
+                            const num = document.createElement("span");
+                            num.className = "queue-num absolute top-1 left-1 bg-black bg-opacity-60 text-white text-xs px-1.5 rounded";
+                            num.textContent = i + 1;
+                            li.append(img, num);
+                            if (item.video) {
+                                const v = document.createElement("span");
+                                v.className = "absolute bottom-1 left-1 text-white text-xs";
+                                v.innerHTML = '<i class="fas fa-video"></i>';
+                                li.appendChild(v);
+                            }
+                            const play = document.createElement("button");
+                            play.type = "button";
+                            play.className = "absolute top-1 right-1 bg-green-600 hover:bg-green-700 text-white text-xs w-6 h-6 rounded-full";
+                            play.innerHTML = '<i class="fas fa-play"></i>';
+                            play.title = {{ _("Afficher maintenant")|tojson }};
+                            play.addEventListener("click", (e) => {
+                                e.stopPropagation();
+                                list.prepend(li);
+                                sendOrder(true);
+                            });
+                            li.appendChild(play);
+                            list.appendChild(li);
+                        });
+                    }
+
+                    async function refresh() {
+                        if (Date.now() < busyUntil || !$("tab-queue").offsetParent) return;  // onglet masqué ou manipulation en cours
+                        try {
+                            render(await (await fetch('/api/slideshow/queue')).json());
+                        } catch (e) { /* le diaporama redémarre : on réessaiera */ }
+                    }
+
+                    if (window.Sortable) {
+                        Sortable.create(list, {
+                            animation: 150,
+                            onStart: () => { busyUntil = Date.now() + 60000; },
+                            onEnd: () => {
+                                list.querySelectorAll(".queue-num").forEach((n, i) => n.textContent = i + 1);
+                                sendOrder(false);
+                            },
+                        });
+                    }
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-queue'\"]").forEach(b => b.addEventListener("click", () => setTimeout(refresh, 50)));
+                    refresh();
+                    setInterval(refresh, 5000);
+                });
+            </script>
+        </div>

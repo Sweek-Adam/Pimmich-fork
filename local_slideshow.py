@@ -27,6 +27,7 @@ from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
 from utils.dedup import remove_duplicates
 from utils.messages_manager import pop_priority
+from utils import play_queue
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -2260,7 +2261,10 @@ def start_slideshow():
                 if NEW_POSTCARD_FLAG.exists():
                     break
 
+                # Ordre demandé depuis l'interface (onglet « À suivre ») : appliqué avant le média suivant
+                playlist, playlist_index = play_queue.apply_requested_order(playlist, playlist_index)
                 photo_path = playlist[playlist_index]
+                play_queue.publish_state(playlist, playlist_index)
                 
                 # Réinitialiser les requêtes de changement de photo
                 global next_photo_requested, previous_photo_requested

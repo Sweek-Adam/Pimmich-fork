@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 13:08+0200\n"
+"POT-Creation-Date: 2026-10-10 13:14+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:915
+#: local_slideshow.py:916
 msgid "Photos & messages"
 msgstr ""
 
-#: local_slideshow.py:1100
+#: local_slideshow.py:1101
 msgid "Données de marée non disponibles"
 msgstr ""
 
-#: local_slideshow.py:1197
+#: local_slideshow.py:1198
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr ""
 
-#: local_slideshow.py:1197
+#: local_slideshow.py:1198
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:2214
+#: local_slideshow.py:2215
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:2215
+#: local_slideshow.py:2216
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:2216
+#: local_slideshow.py:2217
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:2217
+#: local_slideshow.py:2218
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:2218
+#: local_slideshow.py:2219
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:2244
+#: local_slideshow.py:2245
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -195,88 +195,96 @@ msgid "Messages"
 msgstr ""
 
 #: templates/configure.html.jinja:192
-msgid "Créez et gérez vos albums photo personnalisés."
+msgid "Voyez et réorganisez les prochaines photos du diaporama."
 msgstr ""
 
 #: templates/configure.html.jinja:193
-msgid "Playlists"
+msgid "À suivre"
 msgstr ""
 
 #: templates/configure.html.jinja:195
-msgid "Retrouvez et gérez vos photos favorites."
+msgid "Créez et gérez vos albums photo personnalisés."
 msgstr ""
 
 #: templates/configure.html.jinja:196
+msgid "Playlists"
+msgstr ""
+
+#: templates/configure.html.jinja:198
+msgid "Retrouvez et gérez vos photos favorites."
+msgstr ""
+
+#: templates/configure.html.jinja:199
 msgid "Favoris"
 msgstr ""
 
-#: templates/configure.html.jinja:204
+#: templates/configure.html.jinja:207
 msgid "Configurez la réception de photos via le bot Telegram."
 msgstr ""
 
-#: templates/configure.html.jinja:205
+#: templates/configure.html.jinja:208
 msgid "Telegram"
 msgstr ""
 
-#: templates/configure.html.jinja:207
+#: templates/configure.html.jinja:210
 msgid "Validez ou rejetez les photos envoyées par les invités."
 msgstr ""
 
-#: templates/configure.html.jinja:208
+#: templates/configure.html.jinja:211
 msgid "Validation"
 msgstr ""
 
-#: templates/configure.html.jinja:211
+#: templates/configure.html.jinja:214
 msgid "Lancez les imports, contrôlez le diaporama et envoyez des photos."
 msgstr ""
 
-#: templates/configure.html.jinja:212
+#: templates/configure.html.jinja:215
 #: templates/configure/tab_actions.html.jinja:4
 #: templates/configure/tab_comptes.html.jinja:60
 msgid "Actions"
 msgstr ""
 
-#: templates/configure.html.jinja:219
+#: templates/configure.html.jinja:222
 msgid "Gérez votre mot de passe et les comptes utilisateurs."
 msgstr ""
 
-#: templates/configure.html.jinja:220
+#: templates/configure.html.jinja:223
 msgid "Comptes"
 msgstr ""
 
-#: templates/configure.html.jinja:223
+#: templates/configure.html.jinja:226
 msgid "Gérez les paramètres Wi-Fi et réseau."
 msgstr ""
 
-#: templates/configure.html.jinja:224
+#: templates/configure.html.jinja:227
 msgid "Réseau"
 msgstr ""
 
-#: templates/configure.html.jinja:226
+#: templates/configure.html.jinja:229
 msgid "Gérez les mises à jour, sauvegardes et contrôles système."
 msgstr ""
 
-#: templates/configure.html.jinja:227
+#: templates/configure.html.jinja:230
 msgid "Maintenance"
 msgstr ""
 
-#: templates/configure.html.jinja:229
+#: templates/configure.html.jinja:232
 msgid "Consultez les statistiques d'utilisation du système."
 msgstr ""
 
-#: templates/configure.html.jinja:230
+#: templates/configure.html.jinja:233
 msgid "Statistiques"
 msgstr ""
 
-#: templates/configure.html.jinja:232
+#: templates/configure.html.jinja:235
 msgid "Consultez les journaux système."
 msgstr ""
 
-#: templates/configure.html.jinja:233
+#: templates/configure.html.jinja:236
 msgid "Logs"
 msgstr ""
 
-#: templates/configure.html.jinja:255
+#: templates/configure.html.jinja:258
 msgid "Enregistrer les modifications"
 msgstr ""
 
@@ -2502,6 +2510,29 @@ msgstr ""
 msgid "Vos Playlists"
 msgstr ""
 
+#: templates/configure/tab_queue.html.jinja:4
+msgid "À suivre dans le diaporama"
+msgstr ""
+
+#: templates/configure/tab_queue.html.jinja:6
+msgid ""
+"Faites glisser une photo pour changer l'ordre : la première de la liste "
+"sera affichée juste après la photo actuelle. Le bouton ▶ l'affiche "
+"immédiatement."
+msgstr ""
+
+#: templates/configure/tab_queue.html.jinja:8
+msgid "Le diaporama n'est pas en cours."
+msgstr ""
+
+#: templates/configure/tab_queue.html.jinja:14
+msgid "Affichée en ce moment"
+msgstr ""
+
+#: templates/configure/tab_queue.html.jinja:71
+msgid "Afficher maintenant"
+msgstr ""
+
 #: templates/configure/tab_sources.html.jinja:4
 msgid "Configuration de l'album photo Immich"
 msgstr ""
@@ -3296,16 +3327,24 @@ msgstr ""
 msgid "Message de nouveau affiché."
 msgstr ""
 
-#: web/routes_slideshow.py:379
+#: web/routes_slideshow.py:380
 #, python-format
 msgid "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
 msgstr ""
 
-#: web/routes_slideshow.py:381
+#: web/routes_slideshow.py:382
 #, python-format
 msgid ""
 "Résolution appliquée : %(width)sx%(height)s. Le diaporama n'était pas en "
 "cours."
+msgstr ""
+
+#: web/routes_slideshow.py:458 web/routes_slideshow.py:463
+msgid "Ordre invalide."
+msgstr ""
+
+#: web/routes_slideshow.py:468
+msgid "Nouvel ordre enregistré."
 msgstr ""
 
 #: web/routes_system.py:84

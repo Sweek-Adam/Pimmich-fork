@@ -1,5 +1,6 @@
 """Pilotage du diaporama : lecture, veille, sources, durée, écran et résolution."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import play_queue
 from web.core import _, _send_slideshow_signal
 
 
@@ -418,3 +419,50 @@ def current_photo_status():
         logger.info(f"Erreur lecture fichier photo actuelle : {e}")
         
     return jsonify({"current_photo": None, "status": "running"})
+
+
+# --- File d'attente du diaporama (onglet « À suivre ») ---
+
+STATIC_DIR = (BASE_DIR / "static").resolve()
+
+
+def _queue_item(path):
+    """Média de la file -> {chemin relatif à static, URL de miniature, type}."""
+    try:
+        relative = Path(path).resolve().relative_to(STATIC_DIR)
+    except ValueError:
+        return None
+    is_video = relative.suffix.lower() in VIDEO_EXTENSIONS
+    thumb = relative.with_name(f"{relative.stem}_thumbnail.jpg") if is_video else relative
+    source = relative.parts[1] if len(relative.parts) > 2 and relative.parts[0] == "prepared" else ""
+    return {"path": relative.as_posix(), "thumb": url_for('static', filename=thumb.as_posix()),
+            "video": is_video, "source": source, "name": relative.name}
+
+
+@app.route('/api/slideshow/queue', methods=['GET'])
+@login_required
+def slideshow_queue():
+    state = play_queue.read_state()
+    if not state or not is_slideshow_running():
+        return jsonify({"success": True, "running": False, "current": None, "upcoming": []})
+    upcoming = [item for item in map(_queue_item, state.get("upcoming", [])) if item]
+    return jsonify({"success": True, "running": True, "current": _queue_item(state.get("current", "")), "upcoming": upcoming})
+
+
+@app.route('/api/slideshow/queue', methods=['POST'])
+@login_required
+def slideshow_queue_reorder():
+    data = request.get_json(silent=True) or {}
+    order = data.get("order")
+    if not isinstance(order, list) or not order:
+        return jsonify({"success": False, "message": _("Ordre invalide.")}), 400
+    paths = []
+    for relative in order:
+        path = (STATIC_DIR / str(relative)).resolve()
+        if STATIC_DIR not in path.parents or not path.is_file():  # uniquement des médias existants du dossier static
+            return jsonify({"success": False, "message": _("Ordre invalide.")}), 400
+        paths.append(path)
+    play_queue.request_order(paths)
+    if data.get("play_now"):
+        _send_slideshow_signal(signal.SIGUSR1)  # passer tout de suite au premier média demandé
+    return jsonify({"success": True, "message": _("Nouvel ordre enregistré.")})

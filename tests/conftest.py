@@ -120,3 +120,11 @@ def reset_rate_limits():
     rate_limit.reset()
     yield
     rate_limit.reset()
+
+
+@pytest.fixture(autouse=True)
+def isolated_play_queue(tmp_path, monkeypatch):
+    """Ne jamais lire ni modifier la file d'attente du vrai diaporama (fichiers dans /tmp du cadre)."""
+    from utils import play_queue
+    monkeypatch.setattr(play_queue, "STATE_FILE", tmp_path / "queue.json")
+    monkeypatch.setattr(play_queue, "ORDER_FILE", tmp_path / "queue_order.json")

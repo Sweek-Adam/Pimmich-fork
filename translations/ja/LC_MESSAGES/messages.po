@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 13:08+0200\n"
+"POT-Creation-Date: 2026-10-10 13:14+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:915
+#: local_slideshow.py:916
 msgid "Photos & messages"
 msgstr "写真とメッセージ"
 
-#: local_slideshow.py:1100
+#: local_slideshow.py:1101
 msgid "Données de marée non disponibles"
 msgstr "潮汐データは利用できません"
 
-#: local_slideshow.py:1197
+#: local_slideshow.py:1198
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:1197
+#: local_slideshow.py:1198
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:2214
+#: local_slideshow.py:2215
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:2215
+#: local_slideshow.py:2216
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:2216
+#: local_slideshow.py:2217
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:2217
+#: local_slideshow.py:2218
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2218
+#: local_slideshow.py:2219
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:2244
+#: local_slideshow.py:2245
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -196,88 +196,96 @@ msgid "Messages"
 msgstr "メッセージ"
 
 #: templates/configure.html.jinja:192
+msgid "Voyez et réorganisez les prochaines photos du diaporama."
+msgstr "スライドショーの次の写真を確認して並べ替えます。"
+
+#: templates/configure.html.jinja:193
+msgid "À suivre"
+msgstr "次に表示"
+
+#: templates/configure.html.jinja:195
 msgid "Créez et gérez vos albums photo personnalisés."
 msgstr "パーソナライズされたフォト アルバムを作成して管理します。"
 
-#: templates/configure.html.jinja:193
+#: templates/configure.html.jinja:196
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: templates/configure.html.jinja:195
+#: templates/configure.html.jinja:198
 msgid "Retrouvez et gérez vos photos favorites."
 msgstr "お気に入りの写真を見つけて管理します。"
 
-#: templates/configure.html.jinja:196
+#: templates/configure.html.jinja:199
 msgid "Favoris"
 msgstr "お気に入り"
 
-#: templates/configure.html.jinja:204
+#: templates/configure.html.jinja:207
 msgid "Configurez la réception de photos via le bot Telegram."
 msgstr "Telegram ボット経由で写真を受信するように設定します。"
 
-#: templates/configure.html.jinja:205
+#: templates/configure.html.jinja:208
 msgid "Telegram"
 msgstr "電報"
 
-#: templates/configure.html.jinja:207
+#: templates/configure.html.jinja:210
 msgid "Validez ou rejetez les photos envoyées par les invités."
 msgstr "ゲストから送信された写真を検証または拒否します。"
 
-#: templates/configure.html.jinja:208
+#: templates/configure.html.jinja:211
 msgid "Validation"
 msgstr "検証"
 
-#: templates/configure.html.jinja:211
+#: templates/configure.html.jinja:214
 msgid "Lancez les imports, contrôlez le diaporama et envoyez des photos."
 msgstr "インポートを開始し、スライドショーを制御し、写真を送信します。"
 
-#: templates/configure.html.jinja:212
+#: templates/configure.html.jinja:215
 #: templates/configure/tab_actions.html.jinja:4
 #: templates/configure/tab_comptes.html.jinja:60
 msgid "Actions"
 msgstr "アクション"
 
-#: templates/configure.html.jinja:219
+#: templates/configure.html.jinja:222
 msgid "Gérez votre mot de passe et les comptes utilisateurs."
 msgstr "パスワードとユーザーアカウントを管理します。"
 
-#: templates/configure.html.jinja:220
+#: templates/configure.html.jinja:223
 msgid "Comptes"
 msgstr "アカウント"
 
-#: templates/configure.html.jinja:223
+#: templates/configure.html.jinja:226
 msgid "Gérez les paramètres Wi-Fi et réseau."
 msgstr "Wi-Fi とネットワーク設定を管理します。"
 
-#: templates/configure.html.jinja:224
+#: templates/configure.html.jinja:227
 msgid "Réseau"
 msgstr "ネットワーク"
 
-#: templates/configure.html.jinja:226
+#: templates/configure.html.jinja:229
 msgid "Gérez les mises à jour, sauvegardes et contrôles système."
 msgstr "アップデート、バックアップ、システムチェックを管理します。"
 
-#: templates/configure.html.jinja:227
+#: templates/configure.html.jinja:230
 msgid "Maintenance"
 msgstr "メンテナンス"
 
-#: templates/configure.html.jinja:229
+#: templates/configure.html.jinja:232
 msgid "Consultez les statistiques d'utilisation du système."
 msgstr "システム使用率の統計を表示します。"
 
-#: templates/configure.html.jinja:230
+#: templates/configure.html.jinja:233
 msgid "Statistiques"
 msgstr "統計"
 
-#: templates/configure.html.jinja:232
+#: templates/configure.html.jinja:235
 msgid "Consultez les journaux système."
 msgstr "システムログを確認してください。"
 
-#: templates/configure.html.jinja:233
+#: templates/configure.html.jinja:236
 msgid "Logs"
 msgstr "ログ"
 
-#: templates/configure.html.jinja:255
+#: templates/configure.html.jinja:258
 msgid "Enregistrer les modifications"
 msgstr "変更を保存する"
 
@@ -2560,6 +2568,29 @@ msgstr "プレイリストの名前 (例: Holidays 2024)"
 msgid "Vos Playlists"
 msgstr "ヴォスのプレイリスト"
 
+#: templates/configure/tab_queue.html.jinja:4
+msgid "À suivre dans le diaporama"
+msgstr "スライドショーで次に表示"
+
+#: templates/configure/tab_queue.html.jinja:6
+msgid ""
+"Faites glisser une photo pour changer l'ordre : la première de la liste sera"
+" affichée juste après la photo actuelle. Le bouton ▶ l'affiche "
+"immédiatement."
+msgstr "写真をドラッグして順番を変更します。リストの最初の写真が現在の写真の次に表示されます。▶ ボタンですぐに表示します。"
+
+#: templates/configure/tab_queue.html.jinja:8
+msgid "Le diaporama n'est pas en cours."
+msgstr "スライドショーは実行されていません。"
+
+#: templates/configure/tab_queue.html.jinja:14
+msgid "Affichée en ce moment"
+msgstr "現在表示中"
+
+#: templates/configure/tab_queue.html.jinja:71
+msgid "Afficher maintenant"
+msgstr "今すぐ表示"
+
 #: templates/configure/tab_sources.html.jinja:4
 msgid "Configuration de l'album photo Immich"
 msgstr "アルバム写真の構成 Immich"
@@ -3381,18 +3412,26 @@ msgstr "メッセージを非表示にしました。表示されなくなりま
 msgid "Message de nouveau affiché."
 msgstr "メッセージを再表示しました。"
 
-#: web/routes_slideshow.py:379
+#: web/routes_slideshow.py:380
 #, python-format
 msgid ""
 "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
 msgstr "適用される解像度: %(width)sx%(height)s。スライドショーを再開しました。"
 
-#: web/routes_slideshow.py:381
+#: web/routes_slideshow.py:382
 #, python-format
 msgid ""
 "Résolution appliquée : %(width)sx%(height)s. Le diaporama n'était pas en "
 "cours."
 msgstr "適用される解像度: %(width)sx%(height)s。スライドショーは進行中ではありませんでした。"
+
+#: web/routes_slideshow.py:458 web/routes_slideshow.py:463
+msgid "Ordre invalide."
+msgstr "無効な順番です。"
+
+#: web/routes_slideshow.py:468
+msgid "Nouvel ordre enregistré."
+msgstr "新しい順番を保存しました。"
 
 #: web/routes_system.py:84
 msgid ""
