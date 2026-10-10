@@ -25,6 +25,11 @@
                         <input class="form-check-input" type="checkbox" id="show_photo_location" name="show_photo_location" {% if config.get('show_photo_location') %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="show_photo_location">{{ _("Afficher la localisation (ville/pays)") }}</label>
                     </div>
+                    <div class="ml-6 mt-1 p-3 rounded-lg bg-gray-50">
+                        <label class="flex items-center gap-2"><input type="checkbox" name="geocode_enabled" {% if config.get('geocode_enabled') %}checked{% endif %}>
+                            <span>{{ _("Trouver le nom du lieu pour toutes les photos géolocalisées (Google Drive, téléphone...)") }}</span></label>
+                        <p class="text-xs text-gray-500 mt-1">{{ _("Les coordonnées GPS des photos (jamais les photos) sont envoyées à OpenStreetMap pour connaître la ville ; chaque lieu n'est demandé qu'une fois. Sans cette option, seules les photos Immich ont un lieu.") }}</p>
+                    </div>
                     <div class="mb-4">
                         <label for="photo_location_format" class="block text-sm font-medium text-gray-700">{{ _("Format
                             de la localisation") }}</label>

@@ -238,6 +238,7 @@ def configure():
         # Metadata checkboxes
         config["show_photo_date"] = 'show_photo_date' in request.form
         config["show_photo_location"] = 'show_photo_location' in request.form
+        config["geocode_enabled"] = 'geocode_enabled' in request.form
         config["show_country_flag"] = 'show_country_flag' in request.form
         config["photo_metadata_background_enabled"] = 'photo_metadata_background_enabled' in request.form
         # La gestion de l'activation/désactivation du contrôle vocal se fait maintenant via une API dédiée

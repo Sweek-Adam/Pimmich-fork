@@ -874,7 +874,7 @@ def pop_memories_slide(config=None, width=1920, height=1080):
     return None
 
 
-def refresh_photo_index():
+def refresh_photo_index(config=None):
     """Met l'index des photos à jour en arrière-plan (dates, GPS) : « Ce jour-là », carte, légendes..."""
     def work():
         global _photo_index_cache
@@ -883,6 +883,11 @@ def refresh_photo_index():
             _photo_index_cache = photo_index.load()
             if read:
                 logger.info(f"[Index] {read} photo(s) ajoutée(s) à l'index ({len(_photo_index_cache)} au total)")
+            if config and config.get("geocode_enabled"):  # noms des lieux (OpenStreetMap), par petits lots
+                from utils import geocode
+                asked = geocode.fill_places(_photo_index_cache, config.get("language", "fr"))
+                if asked:
+                    logger.info(f"[Lieux] {asked} lieu(x) demandé(s) à OpenStreetMap")
         except Exception as e:
             logger.warning(f"[Index] Mise à jour impossible : {e}")
     threading.Thread(target=work, daemon=True).start()
@@ -1345,6 +1350,11 @@ def display_metadata(path):
         meta["dateTimeOriginal"] = entry["date"]
     if entry.get("lat") is not None and meta.get("latitude") is None:
         meta["latitude"], meta["longitude"] = entry["lat"], entry["lon"]
+    if not meta.get("city") and meta.get("latitude") is not None:  # lieu connu (cache OpenStreetMap), toutes sources
+        from utils import geocode
+        place = geocode.cached(meta["latitude"], meta["longitude"])
+        if place:
+            meta["city"], meta["country"] = place.get("city", ""), place.get("country", "")
     return meta
 
 
@@ -2660,7 +2670,7 @@ def start_slideshow():
 
                 all_media = [get_path_to_display(photo_path_obj, source, filter_states) for source, photo_path_obj in candidates]
 
-                refresh_photo_index()
+                refresh_photo_index(config)
                 prepare_memories(config, SCREEN_WIDTH, SCREEN_HEIGHT)
                 playlist = build_playlist(all_media, config, favorites)
                 random.shuffle(playlist)

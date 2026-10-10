@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:35+0200\n"
+"POT-Creation-Date: 2026-10-10 23:38+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1193
+#: local_slideshow.py:1198
 msgid "Photos & messages"
 msgstr "Fotos & Nachrichten"
 
-#: local_slideshow.py:1384
+#: local_slideshow.py:1394
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "Vor %(num)d Jahr"
 
-#: local_slideshow.py:1384
+#: local_slideshow.py:1394
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "Vor %(num)d Jahren"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "Januar"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "Februar"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "März"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "April"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "Mai"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "Juni"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "Juli"
 
-#: local_slideshow.py:1385 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1395 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "August"
 
-#: local_slideshow.py:1386 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "September"
 
-#: local_slideshow.py:1386 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "Oktober"
 
-#: local_slideshow.py:1386 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "November"
 
-#: local_slideshow.py:1386 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1396 templates/configure/_playlist_builder.html.jinja:41
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "Dezember"
 
-#: local_slideshow.py:1582
+#: local_slideshow.py:1592
 msgid "Données de marée non disponibles"
 msgstr "Gezeitendaten nicht verfügbar"
 
-#: local_slideshow.py:1679
+#: local_slideshow.py:1689
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Jahrestag) Vor %(num)d Jahr"
 
-#: local_slideshow.py:1679
+#: local_slideshow.py:1689
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Jahrestag) Vor %(num)d Jahren"
 
-#: local_slideshow.py:2730
+#: local_slideshow.py:2740
 msgid "Aucune photo trouvée."
 msgstr "Keine Fotos gefunden."
 
-#: local_slideshow.py:2731
+#: local_slideshow.py:2741
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Konfigurieren unter: http://%(ip)s"
 
-#: local_slideshow.py:2732
+#: local_slideshow.py:2742
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Zugangsdaten in credentials.json im Stammverzeichnis der SD-Karte)"
 
-#: local_slideshow.py:2733
+#: local_slideshow.py:2743
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Bildschirmauflösung: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2734
+#: local_slideshow.py:2744
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Neuer Versuch in 60 Sekunden..."
 
-#: local_slideshow.py:2760
+#: local_slideshow.py:2770
 msgid "Scannez pour configurer"
 msgstr "Zum Konfigurieren scannen"
 
@@ -973,7 +973,7 @@ msgstr "Keine Einstellung gefunden."
 msgid "Enregistrement…"
 msgstr "Wird gespeichert…"
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:259
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:260
 msgid "Enregistré"
 msgstr "Gespeichert"
 
@@ -3012,29 +3012,29 @@ msgid "Position :"
 msgstr "Position:"
 
 #: templates/configure/tab_invites.html.jinja:116
-#: templates/configure/tab_metadata.html.jinja:77
-#: templates/configure/tab_metadata.html.jinja:148
+#: templates/configure/tab_metadata.html.jinja:82
+#: templates/configure/tab_metadata.html.jinja:153
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "Unten rechts"
 
 #: templates/configure/tab_invites.html.jinja:117
-#: templates/configure/tab_metadata.html.jinja:79
-#: templates/configure/tab_metadata.html.jinja:146
+#: templates/configure/tab_metadata.html.jinja:84
+#: templates/configure/tab_metadata.html.jinja:151
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "Unten links"
 
 #: templates/configure/tab_invites.html.jinja:118
-#: templates/configure/tab_metadata.html.jinja:73
-#: templates/configure/tab_metadata.html.jinja:155
+#: templates/configure/tab_metadata.html.jinja:78
+#: templates/configure/tab_metadata.html.jinja:160
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "Oben rechts"
 
 #: templates/configure/tab_invites.html.jinja:119
-#: templates/configure/tab_metadata.html.jinja:75
-#: templates/configure/tab_metadata.html.jinja:153
+#: templates/configure/tab_metadata.html.jinja:80
+#: templates/configure/tab_metadata.html.jinja:158
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "Oben links"
@@ -3523,7 +3523,25 @@ msgstr "Verwendet Python-Formatcodes (z. B. %%d/%%m/%%Y, %%B %%Y)."
 msgid "Afficher la localisation (ville/pays)"
 msgstr "Ort anzeigen (Stadt/Land)"
 
-#: templates/configure/tab_metadata.html.jinja:29
+#: templates/configure/tab_metadata.html.jinja:30
+msgid ""
+"Trouver le nom du lieu pour toutes les photos géolocalisées (Google "
+"Drive, téléphone...)"
+msgstr ""
+"Ortsnamen für alle Fotos mit GPS-Daten ermitteln (Google Drive, "
+"Telefon...)"
+
+#: templates/configure/tab_metadata.html.jinja:31
+msgid ""
+"Les coordonnées GPS des photos (jamais les photos) sont envoyées à "
+"OpenStreetMap pour connaître la ville ; chaque lieu n'est demandé qu'une "
+"fois. Sans cette option, seules les photos Immich ont un lieu."
+msgstr ""
+"Die GPS-Koordinaten der Fotos (nie die Fotos selbst) werden an "
+"OpenStreetMap gesendet, um den Ort zu ermitteln; jeder Ort wird nur "
+"einmal abgefragt. Ohne diese Option haben nur Immich-Fotos einen Ort."
+
+#: templates/configure/tab_metadata.html.jinja:34
 msgid ""
 "Format\n"
 "                            de la localisation"
@@ -3531,23 +3549,23 @@ msgstr ""
 "Formatieren\n"
 "                            des Ortes"
 
-#: templates/configure/tab_metadata.html.jinja:34
+#: templates/configure/tab_metadata.html.jinja:39
 msgid "Ville, Pays"
 msgstr "Stadt, Land"
 
-#: templates/configure/tab_metadata.html.jinja:36
+#: templates/configure/tab_metadata.html.jinja:41
 msgid "Ville uniquement"
 msgstr "Nur Stadt"
 
-#: templates/configure/tab_metadata.html.jinja:38
+#: templates/configure/tab_metadata.html.jinja:43
 msgid "Pays uniquement"
 msgstr "Nur Land"
 
-#: templates/configure/tab_metadata.html.jinja:45
+#: templates/configure/tab_metadata.html.jinja:50
 msgid "Afficher le drapeau du pays"
 msgstr "Landesflagge zeigen"
 
-#: templates/configure/tab_metadata.html.jinja:48
+#: templates/configure/tab_metadata.html.jinja:53
 msgid ""
 "Taille du\n"
 "                            drapeau"
@@ -3555,7 +3573,7 @@ msgstr ""
 "Größe von\n"
 "                            Flagge"
 
-#: templates/configure/tab_metadata.html.jinja:61
+#: templates/configure/tab_metadata.html.jinja:66
 msgid ""
 "Opacité\n"
 "                            du drapeau (0.1 à 1.0)"
@@ -3563,54 +3581,54 @@ msgstr ""
 "Opazität\n"
 "                            der Flagge (0,1 bis 1,0)"
 
-#: templates/configure/tab_metadata.html.jinja:69
+#: templates/configure/tab_metadata.html.jinja:74
 msgid "Position du drapeau"
 msgstr "Flaggenposition"
 
-#: templates/configure/tab_metadata.html.jinja:85
-#: templates/configure/tab_metadata.html.jinja:160
+#: templates/configure/tab_metadata.html.jinja:90
+#: templates/configure/tab_metadata.html.jinja:165
 msgid "Décalage horizontal (px)"
 msgstr "Horizontaler Versatz (px)"
 
-#: templates/configure/tab_metadata.html.jinja:92
-#: templates/configure/tab_metadata.html.jinja:167
+#: templates/configure/tab_metadata.html.jinja:97
+#: templates/configure/tab_metadata.html.jinja:172
 msgid "Décalage vertical (px)"
 msgstr "Vertikaler Versatz (px)"
 
-#: templates/configure/tab_metadata.html.jinja:100
+#: templates/configure/tab_metadata.html.jinja:105
 msgid "Style et Positionnement"
 msgstr "Stil und Positionierung"
 
-#: templates/configure/tab_metadata.html.jinja:104
+#: templates/configure/tab_metadata.html.jinja:109
 msgid "Taille de la police"
 msgstr "Schriftgröße"
 
-#: templates/configure/tab_metadata.html.jinja:111
+#: templates/configure/tab_metadata.html.jinja:116
 msgid "Police"
 msgstr "Polizei"
 
-#: templates/configure/tab_metadata.html.jinja:128
+#: templates/configure/tab_metadata.html.jinja:133
 msgid "Couleur du texte (hex)"
 msgstr "Textfarbe (hex)"
 
-#: templates/configure/tab_metadata.html.jinja:135
+#: templates/configure/tab_metadata.html.jinja:140
 msgid "Couleur du contour (hex)"
 msgstr "Umrissfarbe (hex)"
 
-#: templates/configure/tab_metadata.html.jinja:142
+#: templates/configure/tab_metadata.html.jinja:147
 #: templates/configure/tab_son.html.jinja:39
 msgid "Position"
 msgstr "Position"
 
-#: templates/configure/tab_metadata.html.jinja:151
+#: templates/configure/tab_metadata.html.jinja:156
 msgid "En bas au centre"
 msgstr "Unten in der Mitte"
 
-#: templates/configure/tab_metadata.html.jinja:177
+#: templates/configure/tab_metadata.html.jinja:182
 msgid "Afficher un fond semi-transparent derrière les métadonnées"
 msgstr "Halbtransparenten Hintergrund hinter den Metadaten anzeigen"
 
-#: templates/configure/tab_metadata.html.jinja:181
+#: templates/configure/tab_metadata.html.jinja:186
 msgid "Couleur du fond (hex RGBA)"
 msgstr "Hintergrundfarbe (hex RGBA)"
 
@@ -5469,7 +5487,7 @@ msgstr ""
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive-Schlüssel nicht gespeichert: %(error)s"
 
-#: web/routes_config.py:261
+#: web/routes_config.py:262
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
