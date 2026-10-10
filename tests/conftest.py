@@ -112,3 +112,11 @@ def reset_login_throttle():
     login_throttle.reset()
     yield
     login_throttle.reset()
+
+
+@pytest.fixture(autouse=True)
+def reset_rate_limits():
+    from utils import rate_limit
+    rate_limit.reset()
+    yield
+    rate_limit.reset()

@@ -1,5 +1,8 @@
 """Photos des invités : page d'envoi publique, validation, invitations Telegram."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+import io
+from flask import send_file
+from utils import messages_manager, rate_limit
 from web.core import _
 
 
@@ -67,7 +70,7 @@ def get_telegram_bot_info():
 @app.route('/upload', methods=['GET'])
 def upload_page():
     """Affiche la page publique pour envoyer des photos."""
-    return render_template('upload.html.jinja')
+    return render_template('upload.html.jinja', guest_messages_enabled=load_config().get("guest_messages_enabled", True))
 
 
 @app.route('/handle_upload', methods=['POST'])
@@ -264,3 +267,73 @@ def delete_telegram_invitation(code):
         return jsonify({"success": True, "message": "Invitation supprimée."})
     else:
         return jsonify({"success": False, "message": "Invitation non trouvée."}), 404
+
+
+# --- Messages écrits par les invités (sans compte), affichés directement ---
+
+GUEST_MESSAGES_PER_HOUR = 5     # par appareil
+GUEST_MESSAGES_PER_HOUR_ALL = 20  # tous appareils confondus (si l'adresse de l'appareil est inconnue)
+
+
+def _guest_key():
+    from utils.login_throttle import client_ip
+    import ipaddress
+    ip = client_ip(request)
+    if ip and not ipaddress.ip_address(ip).is_loopback:
+        return ip, GUEST_MESSAGES_PER_HOUR
+    return "tous", GUEST_MESSAGES_PER_HOUR_ALL  # derrière un proxy mal configuré, tous les appareils ont la même adresse
+
+
+def _guest_messages_disabled():
+    if not load_config().get("guest_messages_enabled", True):
+        return jsonify({"success": False, "message": _("Les messages des invités sont désactivés.")}), 403
+    return None
+
+
+@app.route('/upload/message/preview', methods=['POST'])
+def guest_message_preview():
+    disabled = _guest_messages_disabled()
+    if disabled:
+        return disabled
+    key, _limit = _guest_key()
+    if not rate_limit.allow(("aperçu", key), 60, 3600):
+        return jsonify({"success": False, "message": _("Trop d'aperçus, réessayez plus tard.")}), 429
+    data = request.get_json(silent=True) or {}
+    config = load_config()
+    try:
+        image = messages_manager.preview(data.get("title"), data.get("body"), data.get("signature"), data.get("style"),
+                                         int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    buffer = io.BytesIO()
+    image.save(buffer, "JPEG", quality=75)
+    buffer.seek(0)
+    return send_file(buffer, mimetype="image/jpeg")
+
+
+@app.route('/upload/message', methods=['POST'])
+def guest_message_publish():
+    disabled = _guest_messages_disabled()
+    if disabled:
+        return disabled
+    data = request.get_json(silent=True) or {}
+    key, limit = _guest_key()
+    if not rate_limit.allow(("message", key), limit, 3600):
+        return jsonify({"success": False, "message": _("Vous avez déjà envoyé plusieurs messages : réessayez dans une heure.")}), 429
+    config = load_config()
+    name = (data.get("signature") or "").strip()
+    try:
+        message = messages_manager.create_message(
+            data.get("title"), data.get("body"), name, data.get("style"), data.get("expires"),
+            f"{_('Invité')}{' : ' + name if name else ''}",
+            int(config.get("display_width", 1920)), int(config.get("display_height", 1080)), guest=True)
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    if messages_manager.SOURCE_NAME not in config.get("display_sources", []):
+        config = dict(config)
+        config["display_sources"] = config.get("display_sources", []) + [messages_manager.SOURCE_NAME]
+        save_config(config)
+    logger.info(f"[Messages] Message invité {message['id']} publié ({message['author']}, jusqu'au {message['expires']})")
+    if is_slideshow_running():
+        restart_slideshow_for_update()
+    return jsonify({"success": True, "message": _("Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s).", date=message["expires"])})

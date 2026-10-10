@@ -7,7 +7,7 @@ Chaque message est enregistré dans config/messages.json et rendu en image dans 
 import json
 import secrets
 import threading
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 from utils.message_renderer import render_message, STYLES, DEFAULT_STYLE
@@ -73,12 +73,19 @@ def list_messages():
     return sorted(messages, key=lambda m: m.get("created", ""), reverse=True)
 
 
-def create_message(title, body, signature, style, expires, author, width, height):
+GUEST_MAX_DAYS = 7  # durée d'affichage maximale d'un message d'invité
+
+
+def create_message(title, body, signature, style, expires, author, width, height, guest=False):
     title, body, signature, style, expires = validate(title, body, signature, style, expires)
+    if guest:
+        # Les messages des invités s'affichent sans validation : ils expirent toujours au bout de GUEST_MAX_DAYS jours
+        latest = (date.today() + timedelta(days=GUEST_MAX_DAYS)).isoformat()
+        expires = min(expires, latest) if expires else latest
     message = {
         "id": secrets.token_hex(6),
         "title": title, "body": body, "signature": signature, "style": style, "expires": expires,
-        "author": author or "", "created": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "author": author or "", "guest": guest, "created": datetime.now().strftime("%Y-%m-%d %H:%M"),
     }
     PREPARED_DIR.mkdir(parents=True, exist_ok=True)
     render_message(title, body, signature, style, width, height).save(image_path(message["id"]), "JPEG", quality=90)

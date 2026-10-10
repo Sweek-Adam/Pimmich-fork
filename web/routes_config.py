@@ -61,7 +61,7 @@ def configure():
             'screen_height_percent', 'clock_font_size', 'clock_color',
             'clock_format', 'clock_offset_x', 'clock_offset_y',
             'clock_background_color',
-            'clock_outline_color', 'clock_font_path', 'clock_position',
+            'clock_outline_color', 'clock_font_path', 'clock_position', 'guest_qr_position',
             'display_width', 'display_height', # Ajout des nouvelles clés
             'transition_enabled', # Added transition_enabled
             'transition_type', 'home_assistant_token',
@@ -182,6 +182,8 @@ def configure():
         config["display_telegram_notification_overlay"] = "display_telegram_notification_overlay" in request.form
         # Traitement des checkboxes
         config["show_clock"] = 'show_clock' in request.form
+        config["show_guest_qr"] = 'show_guest_qr' in request.form
+        config["guest_messages_enabled"] = 'guest_messages_enabled' in request.form
         config["immich_auto_update"] = 'immich_auto_update' in request.form
         config["random_content_in_album"] = "random_content_in_album" in request.form
         config["smb_auto_update"] = 'smb_auto_update' in request.form

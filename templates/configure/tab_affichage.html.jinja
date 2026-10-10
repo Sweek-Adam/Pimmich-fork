@@ -173,6 +173,30 @@
                 <!-- NOUVEAU BLOC POUR LA PRISE CONNECTÉE -->
                 <fieldset class="mt-6">
                     <legend>
+                        <h3><i class="fas fa-qrcode mr-2"></i>{{ _("QR code pour les invités") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Affiche en permanence sur le diaporama un QR code vers la page invités, pour envoyer des photos ou écrire un message depuis un téléphone connecté au même Wi-Fi.") }}</p>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="show_guest_qr" name="show_guest_qr" {% if config.get('show_guest_qr', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="show_guest_qr">{{ _("Afficher le QR code") }}</label>
+                    </div>
+                    <label for="guest_qr_position">{{ _("Position :") }}</label>
+                    <select id="guest_qr_position" name="guest_qr_position">
+                        {% set qr_pos = config.get('guest_qr_position', 'bottom_right') %}
+                        <option value="bottom_right" {% if qr_pos == 'bottom_right' %}selected{% endif %}>{{ _("En bas à droite") }}</option>
+                        <option value="bottom_left" {% if qr_pos == 'bottom_left' %}selected{% endif %}>{{ _("En bas à gauche") }}</option>
+                        <option value="top_right" {% if qr_pos == 'top_right' %}selected{% endif %}>{{ _("En haut à droite") }}</option>
+                        <option value="top_left" {% if qr_pos == 'top_left' %}selected{% endif %}>{{ _("En haut à gauche") }}</option>
+                    </select>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="guest_messages_enabled" name="guest_messages_enabled" {% if config.get('guest_messages_enabled', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="guest_messages_enabled">{{ _("Autoriser les invités à écrire des messages") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600">{{ _("Les messages des invités s'affichent directement (5 par heure et par appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les supprimer dans Contenu > Messages.") }}</p>
+                </fieldset>
+
+                <fieldset class="mt-6">
+                    <legend>
                         <h3><i class="fas fa-plug mr-2"></i>{{ _("Gestion de l'alimentation (Prise Connectée)") }}</h3>
                     </legend>
                     <p class="text-sm text-gray-600 mb-3">{{ _("Si votre écran ne se met pas complètement en veille, vous pouvez utiliser une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra une simple requête HTTP aux URLs que vous spécifiez.") }}<br>

@@ -857,8 +857,57 @@ def control_fan(temperature, threshold=55, pin=14):
     else:
         set_gpio_output(pin, False)
 
+# --- QR code permanent vers la page invités (envoi de photos et de messages) ---
+_guest_qr_cache = {"ip": None, "ip_time": 0, "key": None, "surface": None}
+
+
+def _guest_qr_surface(size, caption):
+    """Surface du QR code (avec sa légende), régénérée seulement si l'adresse IP ou la taille changent."""
+    cache = _guest_qr_cache
+    if time.time() - cache["ip_time"] > 300:  # l'adresse IP est relue toutes les 5 minutes
+        cache["ip"], cache["ip_time"] = get_local_ip(), time.time()
+    if not cache["ip"]:
+        return None
+    key = (cache["ip"], size, caption)
+    if cache["key"] != key:
+        qr = qrcode.QRCode(border=2)
+        qr.add_data(f"http://{cache['ip']}/upload")
+        qr.make(fit=True)
+        modules = qr.modules_count + 2 * qr.border
+        qr.box_size = max(3, size // modules)  # nombre entier de pixels par case : QR net, facile à lire
+        qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+        size = qr_img.size[0]
+        caption_font = pygame.font.Font(None, max(18, size // 6))
+        text = caption_font.render(caption, True, (255, 255, 255))
+        pad = max(6, size // 20)
+        surface = pygame.Surface((max(size, text.get_width()) + 2 * pad, size + text.get_height() + 3 * pad), pygame.SRCALPHA)
+        pygame.draw.rect(surface, (0, 0, 0, 150), surface.get_rect(), border_radius=pad * 2)
+        surface.blit(pygame.image.fromstring(qr_img.tobytes(), qr_img.size, "RGB"), ((surface.get_width() - size) // 2, pad))
+        surface.blit(text, ((surface.get_width() - text.get_width()) // 2, size + 2 * pad))
+        cache["key"], cache["surface"] = key, surface
+    return cache["surface"]
+
+
+def draw_guest_qr(screen, screen_width, screen_height, config):
+    if not config.get("show_guest_qr", True):
+        return
+    try:
+        size = max(90, int(min(screen_width, screen_height) * 0.12))
+        surface = _guest_qr_surface(size, _("Photos & messages"))
+        if surface is None:
+            return
+        margin = 15
+        corner = config.get("guest_qr_position", "bottom_right")
+        x = margin if corner.endswith("left") else screen_width - surface.get_width() - margin
+        y = margin if corner.startswith("top") else screen_height - surface.get_height() - margin
+        screen.blit(surface, (x, y))
+    except Exception as e:
+        logger.debug(f"QR code invités non affiché : {e}")
+
+
 # New function to draw the overlay elements (clock, date, weather)
 def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata=None):
+    draw_guest_qr(screen, screen_width, screen_height, config)
     now = datetime.now()
     text_color = parse_color(config.get("clock_color", "#FFFFFF"))
     outline_color = parse_color(config.get("clock_outline_color", "#000000"))

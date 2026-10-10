@@ -78,6 +78,30 @@
           </button>
         </div>
       </form>
+      {% if guest_messages_enabled %}
+      <div class="mt-8 pt-6 border-t border-gray-300">
+        <h2 class="text-center text-2xl font-semibold mb-4">{{ _('Écrire un message sur le cadre') }}</h2>
+        <input type="text" id="gm-title" maxlength="120" placeholder="{{ _('Titre (optionnel)') }}"
+          class="block w-full mb-3 p-2 border border-gray-300 rounded">
+        <textarea id="gm-body" rows="4" maxlength="1000" placeholder="{{ _('Votre message…') }}"
+          class="block w-full mb-3 p-2 border border-gray-300 rounded"></textarea>
+        <input type="text" id="gm-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}"
+          class="block w-full mb-3 p-2 border border-gray-300 rounded">
+        <select id="gm-style" class="block w-full mb-3 p-2 border border-gray-300 rounded">
+          <option value="nuit">{{ _("Nuit") }}</option>
+          <option value="clair">{{ _("Clair") }}</option>
+          <option value="carte">{{ _("Carte postale") }}</option>
+          <option value="festif">{{ _("Festif") }}</option>
+        </select>
+        <div class="flex gap-2">
+          <button type="button" id="gm-preview" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">{{ _('Aperçu') }}</button>
+          <button type="button" id="gm-publish" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">{{ _('Afficher sur le cadre') }}</button>
+        </div>
+        <p id="gm-status" class="text-center text-sm mt-3"></p>
+        <img id="gm-preview-img" class="hidden mt-3 w-full rounded border" alt="{{ _('Aperçu du message') }}">
+        <p class="text-center text-xs text-gray-500 mt-2">{{ _('Le message reste affiché 7 jours.') }}</p>
+      </div>
+      {% endif %}
       <details id="install-help" class="mt-6 text-sm text-gray-700">
         <summary class="cursor-pointer text-blue-600">{{ _("Ajouter cette page à l'écran d'accueil du téléphone") }}</summary>
         <ul class="list-disc ml-5 mt-2 space-y-1">
@@ -111,6 +135,37 @@
     </div>
   </div>
 
+  {% if guest_messages_enabled %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const status = (text, ok) => { $("gm-status").textContent = text; $("gm-status").className = "text-center text-sm mt-3 " + (ok ? "text-green-600" : "text-red-600"); };
+      const data = () => ({ title: $("gm-title").value, body: $("gm-body").value, signature: $("gm-signature").value, style: $("gm-style").value });
+      $("gm-preview").addEventListener("click", async () => {
+        const resp = await fetch("{{ url_for('guest_message_preview') }}", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data()) });
+        if (!resp.ok) { status((await resp.json()).message, false); return; }
+        const img = $("gm-preview-img");
+        if (img.src.startsWith("blob:")) URL.revokeObjectURL(img.src);
+        img.src = URL.createObjectURL(await resp.blob());
+        img.classList.remove("hidden");
+        status("", true);
+      });
+      $("gm-publish").addEventListener("click", async () => {
+        $("gm-publish").disabled = true;
+        try {
+          const resp = await fetch("{{ url_for('guest_message_publish') }}", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data()) });
+          const result = await resp.json();
+          status(result.message, result.success);
+          if (result.success) { ["gm-title", "gm-body"].forEach(id => $(id).value = ""); $("gm-preview-img").classList.add("hidden"); }
+        } catch (e) {
+          status({{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }}, false);
+        } finally {
+          $("gm-publish").disabled = false;
+        }
+      });
+    })();
+  </script>
+  {% endif %}
   <script>
     // Envoi avec barre de progression (les photos de téléphone sont lourdes) ; sans JavaScript, le formulaire reste classique
     document.getElementById("upload-form").addEventListener("submit", (event) => {
@@ -123,7 +178,7 @@
       const files = form.querySelector("input[type=file]").files;
       button.disabled = true;
       document.getElementById("upload-progress").classList.remove("hidden");
-      text.textContent = `${files.length} {{ _("fichier(s) en cours d'envoi...") }}`;
+      text.textContent = `${files.length} ` + {{ _("fichier(s) en cours d'envoi...")|tojson }};
       const xhr = new XMLHttpRequest();
       xhr.open("POST", form.action);
       xhr.upload.onprogress = (e) => {
@@ -134,13 +189,13 @@
       };
       xhr.onload = () => {
         if (xhr.status === 413) {
-          text.textContent = "{{ _('Envoi trop volumineux : envoyez moins de fichiers à la fois.') }}";
+          text.textContent = {{ _('Envoi trop volumineux : envoyez moins de fichiers à la fois.')|tojson }};
           button.disabled = false;
           return;
         }
         window.location.href = xhr.responseURL || window.location.href;  // affiche le message de confirmation
       };
-      xhr.onerror = () => { text.textContent = "{{ _('Échec de l\'envoi. Vérifiez la connexion au cadre.') }}"; button.disabled = false; };
+      xhr.onerror = () => { text.textContent = {{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }}; button.disabled = false; };
       xhr.send(new FormData(form));
     });
   </script>
