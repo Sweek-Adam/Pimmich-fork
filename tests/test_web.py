@@ -57,7 +57,7 @@ def test_user_has_limited_access(user_client):
     assert "openTab(event, 'tab-network')" not in html
     assert "Créer un compte" not in html
     for method, url in [("POST", "/restart_app"), ("POST", "/users/create"), ("POST", "/shutdown"),
-                        ("POST", "/api/switch_to_desktop"), ("GET", "/api/backup_settings"), ("GET", "/api/upstream_status")]:
+                        ("POST", "/api/switch_to_desktop"), ("GET", "/api/backup_settings")]:
         resp = user_client.open(url, method=method, headers=SAME_ORIGIN)
         assert resp.status_code in (302, 403), f"{method} {url} accessible à un utilisateur"
         if resp.status_code == 302:

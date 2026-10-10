@@ -72,24 +72,7 @@ Pimmich est riche en fonctionnalités pour offrir une expérience complète et p
 
 ## 🚀 Installation
 
-Il existe deux méthodes pour installer Pimmich.
-
-### Méthode 1 : Image pré-configurée (Recommandée et plus simple)
-
-Cette méthode est idéale pour une première installation rapide.
-
-1.  **Téléchargez l'image du mois en cours**
-    Téléchargez la version du Nouvel An (v1.6.0) directement ici : [pimmich271225.img.xz](https://github.com/gotenash/Pimmich/releases/download/v1.6.0/pimmich271225.img.xz) ou rendez-vous sur la page des Releases de Pimmich.
-
-2.  **Flashez l'image sur une carte SD**
-    Utilisez un logiciel comme Raspberry Pi Imager ou BalenaEtcher pour écrire le fichier image que vous venez de télécharger sur votre carte microSD.
-
-3.  **Démarrez votre Raspberry Pi**
-    Insérez la carte SD dans le Raspberry Pi, branchez l'écran et l'alimentation. Pimmich démarrera automatiquement.
-
-### Méthode 2 : Installation manuelle depuis le dépôt Git
-
-Cette méthode est destinée aux utilisateurs avancés ou à ceux qui souhaitent suivre le développement de près.
+### Installation depuis le dépôt Git
 
 #### ✅ Pré-requis
 
@@ -102,7 +85,7 @@ Cette méthode est destinée aux utilisateurs avancés ou à ceux qui souhaitent
 1.  **Clonez le dépôt**
     Ouvrez un terminal sur votre Raspberry Pi et exécutez :
     ```bash
-    git clone https://github.com/gotenash/pimmich.git
+    git clone https://github.com/Sweek-Adam/Pimmich-fork.git pimmich
     cd pimmich
     ```
 

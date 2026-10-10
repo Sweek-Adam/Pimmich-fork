@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 11:28+0200\n"
+"POT-Creation-Date: 2026-10-10 11:50+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
-"Language-Team: en <LL@li.org>\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: local_slideshow.py:1031
@@ -126,7 +126,8 @@ msgstr "System"
 
 #: templates/configure.html.jinja:162
 msgid ""
-"Gérez les paramètres d'affichage du diaporama, la durée, les transitions..."
+"Gérez les paramètres d'affichage du diaporama, la durée, les "
+"transitions..."
 msgstr "Manage the slideshow display parameters, duration, transitions ..."
 
 #: templates/configure.html.jinja:163
@@ -261,8 +262,7 @@ msgstr "Connection"
 
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
-#: templates/configure/tab_comptes.html.jinja:118
-#: templates/login.html.jinja:56
+#: templates/configure/tab_comptes.html.jinja:118 templates/login.html.jinja:56
 msgid "Utilisateur"
 msgstr "User"
 
@@ -274,8 +274,7 @@ msgstr "Password"
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:127
-#: templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:127 templates/login.html.jinja:69
 msgid "Afficher/Cacher le mot de passe"
 msgstr "Show/Hide Password"
 
@@ -557,8 +556,8 @@ msgid ""
 "Êtes-vous sûr de vouloir révoquer l'accès pour cet invité ? Il ne pourra "
 "plus envoyer de photos."
 msgstr ""
-"Are you sure you want to revoke access for this guest? They will no longer "
-"be able to send photos."
+"Are you sure you want to revoke access for this guest? They will no "
+"longer be able to send photos."
 
 #: templates/configure/scripts_gallery.html.jinja:49
 msgid "Le nom d'utilisateur du bot n'a pas pu être récupéré."
@@ -676,10 +675,9 @@ msgstr "Communication error."
 
 #: templates/configure/scripts_main.html.jinja:967
 msgid ""
-"Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront pas"
-" supprimées."
-msgstr ""
-"Are you sure you want to delete this playlist? Photos will not be deleted."
+"Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront "
+"pas supprimées."
+msgstr "Are you sure you want to delete this playlist? Photos will not be deleted."
 
 #: templates/configure/scripts_main.html.jinja:1023
 msgid "Erreur lors de la suppression de la photo."
@@ -731,11 +729,11 @@ msgstr "Error connecting to server for import"
 
 #: templates/configure/scripts_main.html.jinja:1253
 msgid ""
-"Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » pour "
-"choisir à nouveau les dossiers."
+"Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » "
+"pour choisir à nouveau les dossiers."
 msgstr ""
-"Method changed: click “Show my Google Drive folders” to choose the folders "
-"again."
+"Method changed: click “Show my Google Drive folders” to choose the "
+"folders again."
 
 #: templates/configure/scripts_main.html.jinja:1286
 msgid ""
@@ -893,11 +891,11 @@ msgstr "Loading error"
 
 #: templates/configure/scripts_status.html.jinja:787
 msgid ""
-"Êtes-vous sûr de vouloir effacer le contenu du log \"__LOG_NAME__\" ? Cette "
-"action est irréversible."
+"Êtes-vous sûr de vouloir effacer le contenu du log \"__LOG_NAME__\" ? "
+"Cette action est irréversible."
 msgstr ""
-"Are you sure you want to delete the contents of the log \"__LOG_NAME__\"? "
-"This action is irreversible."
+"Are you sure you want to delete the contents of the log \"__LOG_NAME__\"?"
+" This action is irreversible."
 
 #: templates/configure/scripts_status.html.jinja:802
 msgid "Erreur lors de l'effacement du log :"
@@ -909,11 +907,11 @@ msgstr "Error connecting to the API to clear the logs."
 
 #: templates/configure/scripts_status.html.jinja:905
 msgid ""
-"Cette opération va préparer le système à étendre la partition au prochain "
-"redémarrage. Voulez-vous continuer ?"
+"Cette opération va préparer le système à étendre la partition au prochain"
+" redémarrage. Voulez-vous continuer ?"
 msgstr ""
-"This operation will prepare the system to extend the partition to the next "
-"restart. Do you want to continue?"
+"This operation will prepare the system to extend the partition to the "
+"next restart. Do you want to continue?"
 
 #: templates/configure/scripts_status.html.jinja:967
 msgid "Chargement des périphériques..."
@@ -995,10 +993,11 @@ msgstr "Photo being prepared"
 #: templates/configure/tab_actions.html.jinja:90
 msgid ""
 "L'import depuis Telegram se fait automatiquement à la\n"
-"                            réception des photos. Activez la source dans l'onglet \"Sources\" pour les voir."
+"                            réception des photos. Activez la source dans "
+"l'onglet \"Sources\" pour les voir."
 msgstr ""
-"Telegram import happens automatically when photos are received. Enable the "
-"source in the \"Sources\" tab to see them."
+"Telegram import happens automatically when photos are received. Enable "
+"the source in the \"Sources\" tab to see them."
 
 #: templates/configure/tab_actions.html.jinja:98
 msgid "Importer depuis un Smartphone"
@@ -1016,7 +1015,8 @@ msgstr "Music import"
 
 #: templates/configure/tab_actions.html.jinja:116
 msgid ""
-"Téléchargez vos propres fichiers MP3 ou WAV pour accompagner vos playlists."
+"Téléchargez vos propres fichiers MP3 ou WAV pour accompagner vos "
+"playlists."
 msgstr "Upload your own MP3 or WAV files to accompany your playlists."
 
 #: templates/configure/tab_actions.html.jinja:120
@@ -1049,8 +1049,8 @@ msgstr "Portrait (Vertical)"
 
 #: templates/configure/tab_affichage.html.jinja:21
 msgid ""
-"Si vous changez l'orientation, pensez à relancer une préparation des photos "
-"(onglet Actions) pour adapter le contenu."
+"Si vous changez l'orientation, pensez à relancer une préparation des "
+"photos (onglet Actions) pour adapter le contenu."
 msgstr ""
 "If you change the orientation, remember to restart photo preparation "
 "(Actions tab) to adapt the content."
@@ -1090,8 +1090,8 @@ msgid ""
 "Force une résolution spécifique. Utile si l'écran n'est pas détecté "
 "correctement au démarrage."
 msgstr ""
-"Forces a specific resolution. Useful if the screen is not detected correctly"
-" at startup."
+"Forces a specific resolution. Useful if the screen is not detected "
+"correctly at startup."
 
 #: templates/configure/tab_affichage.html.jinja:57
 #, python-format
@@ -1174,8 +1174,7 @@ msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "Ex: 0 = no boost, 2 = 3x more chance of appearing."
 
 #: templates/configure/tab_affichage.html.jinja:127
-msgid ""
-"Activer le boost pour les photos à leur date anniversaire de prise de vue"
+msgid "Activer le boost pour les photos à leur date anniversaire de prise de vue"
 msgstr "Enable boost for photos on their shooting anniversary"
 
 #: templates/configure/tab_affichage.html.jinja:131
@@ -1191,8 +1190,7 @@ msgid "Activer le son pour les vidéos"
 msgstr "Enable sound for videos"
 
 #: templates/configure/tab_affichage.html.jinja:146
-msgid ""
-"Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
+msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr "Activate hardware video decoding (more fluid, but can be unstable)"
 
 #: templates/configure/tab_affichage.html.jinja:148
@@ -1229,9 +1227,9 @@ msgstr "Power management (Connected Socket)"
 
 #: templates/configure/tab_affichage.html.jinja:178
 msgid ""
-"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser "
-"une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra "
-"une simple requête HTTP aux URLs que vous spécifiez."
+"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
+" une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
+"enverra une simple requête HTTP aux URLs que vous spécifiez."
 msgstr ""
 "If your screen does not go to sleep completely, you can use a connected "
 "outlet (Wi-Fi) to turn off its power. Pimmich will send a simple HTTP "
@@ -1278,8 +1276,8 @@ msgstr "Delay after power-on (seconds):"
 
 #: templates/configure/tab_affichage.html.jinja:236
 msgid ""
-"Temps d'attente pour que l'écran s'initialise avant de forcer la résolution."
-" Augmentez si la résolution est toujours incorrecte."
+"Temps d'attente pour que l'écran s'initialise avant de forcer la "
+"résolution. Augmentez si la résolution est toujours incorrecte."
 msgstr ""
 "Time to wait for the screen to initialize before forcing the resolution. "
 "Increase if the resolution is still incorrect."
@@ -1315,10 +1313,11 @@ msgstr "Preview of prepared photos"
 #: templates/configure/tab_apercu.html.jinja:6
 msgid ""
 "Voici les photos qui sont prêtes à être affichées par le diaporama,\n"
-"                    classées par source. Cliquez sur une photo pour l'agrandir."
+"                    classées par source. Cliquez sur une photo pour "
+"l'agrandir."
 msgstr ""
-"Here are the photos ready to be shown by the slideshow, sorted by source. "
-"Click a photo to enlarge it."
+"Here are the photos ready to be shown by the slideshow, sorted by source."
+" Click a photo to enlarge it."
 
 #: templates/configure/tab_apercu.html.jinja:17
 #, python-format
@@ -1460,13 +1459,13 @@ msgstr "User accounts"
 #: templates/configure/tab_comptes.html.jinja:53
 msgid ""
 "Les administrateurs ont accès à tout. Les utilisateurs peuvent régler le "
-"diaporama, importer et gérer les photos, mais n'ont accès ni aux comptes, ni"
-" au réseau, ni à la maintenance, et ne voient pas les mots de passe et "
-"jetons enregistrés."
+"diaporama, importer et gérer les photos, mais n'ont accès ni aux comptes,"
+" ni au réseau, ni à la maintenance, et ne voient pas les mots de passe et"
+" jetons enregistrés."
 msgstr ""
-"Administrators have full access. Users can adjust the slideshow, import and "
-"manage photos, but have no access to accounts, network or maintenance, and "
-"cannot see saved passwords and tokens."
+"Administrators have full access. Users can adjust the slideshow, import "
+"and manage photos, but have no access to accounts, network or "
+"maintenance, and cannot see saved passwords and tokens."
 
 #: templates/configure/tab_comptes.html.jinja:58
 msgid "Nom"
@@ -1531,12 +1530,13 @@ msgstr "Create"
 
 #: templates/configure/tab_comptes.html.jinja:130
 msgid ""
-"Vous êtes connecté avec un compte utilisateur : la gestion des comptes, le "
-"réseau, la maintenance et les mots de passe ou jetons enregistrés sont "
-"réservés aux administrateurs."
+"Vous êtes connecté avec un compte utilisateur : la gestion des comptes, "
+"le réseau, la maintenance et les mots de passe ou jetons enregistrés sont"
+" réservés aux administrateurs."
 msgstr ""
 "You are logged in with a user account: account management, network, "
-"maintenance and saved passwords or tokens are reserved for administrators."
+"maintenance and saved passwords or tokens are reserved for "
+"administrators."
 
 #: templates/configure/tab_favoris.html.jinja:4
 msgid "Vos photos favorites"
@@ -1688,10 +1688,12 @@ msgstr "Uses the API"
 #: templates/configure/tab_heure.html.jinja:151
 msgid ""
 "Une clé API est\n"
-"                        requise. Vous pouvez trouver les coordonnées de votre port sur des sites comme"
+"                        requise. Vous pouvez trouver les coordonnées de "
+"votre port sur des sites comme"
 msgstr ""
 "An API key is\n"
-"                        required. You can find your port coordinates on sites like"
+"                        required. You can find your port coordinates on "
+"sites like"
 
 #: templates/configure/tab_heure.html.jinja:155
 msgid ""
@@ -1760,15 +1762,17 @@ msgstr "Attention :"
 #: templates/configure/tab_heure.html.jinja:240
 msgid ""
 "La détection automatique du fuseau horaire a\n"
-"                            échoué lors de l'installation. Le système est configuré sur <strong>UTC</strong>. L'heure\n"
+"                            échoué lors de l'installation. Le système est"
+" configuré sur <strong>UTC</strong>. L'heure\n"
 "                            affichée peut être incorrecte."
 msgstr ""
-"Automatic time zone detection failed during installation. The system is set "
-"to <strong>UTC</strong>. The displayed time may be incorrect."
+"Automatic time zone detection failed during installation. The system is "
+"set to <strong>UTC</strong>. The displayed time may be incorrect."
 
 #: templates/configure/tab_heure.html.jinja:244
 msgid ""
-"Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via SSH) et\n"
+"Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi "
+"(via SSH) et\n"
 "                            en exécutant la commande :"
 msgstr ""
 "You can fix it manually by connecting to the Raspberry Pi (via SSH) and "
@@ -1822,7 +1826,8 @@ msgstr "Backup and Restore"
 #: templates/configure/tab_maintenance.html.jinja:6
 msgid ""
 "Sauvegardez votre configuration (API, partages,\n"
-"                    affichage...) dans un fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle\n"
+"                    affichage...) dans un fichier. Vous pourrez le "
+"restaurer plus tard ou sur une nouvelle\n"
 "                    installation."
 msgstr ""
 "Back up your configuration (API, shares, display...) to a file. You can "
@@ -1845,8 +1850,8 @@ msgid ""
 "Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
 "fichier de sauvegarde."
 msgstr ""
-"Are you sure? The current configuration will be overwritten by the contents "
-"of the backup file."
+"Are you sure? The current configuration will be overwritten by the "
+"contents of the backup file."
 
 #: templates/configure/tab_maintenance.html.jinja:27
 msgid "Restaurer"
@@ -1859,104 +1864,59 @@ msgstr "Application update"
 #: templates/configure/tab_maintenance.html.jinja:37
 msgid ""
 "Cliquez sur le bouton pour rechercher et installer les\n"
-"                    dernières mises à jour de Pimmich depuis GitHub. L'application redémarrera automatiquement après la\n"
+"                    dernières mises à jour de Pimmich depuis GitHub. "
+"L'application redémarrera automatiquement après la\n"
 "                    mise à jour."
 msgstr ""
-"Click the button to check for and install the latest Pimmich updates from "
-"GitHub. The application will restart automatically after the update."
+"Click the button to check for and install the latest Pimmich updates from"
+" GitHub. The application will restart automatically after the update."
 
 #: templates/configure/tab_maintenance.html.jinja:42
-msgid ""
-"Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
+msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "Start the update? You will be redirected to the tracking page."
 
 #: templates/configure/tab_maintenance.html.jinja:43
 msgid "Lancer la mise à jour"
 msgstr "Start the update"
 
-#: templates/configure/tab_maintenance.html.jinja:47
-msgid "Vérifier le dépôt d'origine"
-msgstr "Check the upstream repository"
-
-#: templates/configure/tab_maintenance.html.jinja:57
-msgid "de plus"
-msgstr "ahead"
-
-#: templates/configure/tab_maintenance.html.jinja:60
-msgid "Vérification en cours..."
-msgstr "Checking..."
-
-#: templates/configure/tab_maintenance.html.jinja:66
-msgid ""
-"Aucune nouveauté sur le dépôt d'origine : votre version contient déjà tout "
-"son code."
-msgstr ""
-"Nothing new on the upstream repository: your version already contains all of"
-" its code."
-
-#: templates/configure/tab_maintenance.html.jinja:68
-msgid "modification(s) disponible(s) sur le dépôt d'origine"
-msgstr "change(s) available on the upstream repository"
-
-#: templates/configure/tab_maintenance.html.jinja:71
-msgid ""
-"Ces modifications ne sont pas encore dans votre fork. Pour les intégrer, sur"
-" un ordinateur : git fetch upstream, puis git merge -Xrenormalize "
-"upstream/main et git push. Lancez ensuite la mise à jour."
-msgstr ""
-"These changes are not yet in your fork. To merge them, on a computer: git "
-"fetch upstream, then git merge -Xrenormalize upstream/main and git push. "
-"Then run the update."
-
-#: templates/configure/tab_maintenance.html.jinja:73
-msgid "Cliquez sur « Lancer la mise à jour » pour les installer."
-msgstr "Click “Start update” to install them."
-
-#: templates/configure/tab_maintenance.html.jinja:77
-msgid ""
-"modification(s) de votre fork pas encore installée(s) : cliquez sur « Lancer"
-" la mise à jour »."
-msgstr "change(s) from your fork not yet installed: click “Start update”."
-
-#: templates/configure/tab_maintenance.html.jinja:82
-msgid "Vérification impossible :"
-msgstr "Unable to check:"
-
-#: templates/configure/tab_maintenance.html.jinja:92
+#: templates/configure/tab_maintenance.html.jinja:49
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SD card file system"
 
-#: templates/configure/tab_maintenance.html.jinja:94
+#: templates/configure/tab_maintenance.html.jinja:51
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
-"                    l'image, utilisez cette option pour étendre la partition et utiliser tout l'espace disponible. Un\n"
-"                    redémarrage du système sera nécessaire pour finaliser l'opération."
+"                    l'image, utilisez cette option pour étendre la "
+"partition et utiliser tout l'espace disponible. Un\n"
+"                    redémarrage du système sera nécessaire pour finaliser"
+" l'opération."
 msgstr ""
 "If you flashed Pimmich onto an SD card larger than the image, use this "
-"option to expand the partition and use all available space. A system reboot "
-"will be required to complete the operation."
+"option to expand the partition and use all available space. A system "
+"reboot will be required to complete the operation."
 
-#: templates/configure/tab_maintenance.html.jinja:98
+#: templates/configure/tab_maintenance.html.jinja:55
 msgid "Note :"
 msgstr "Note :"
 
-#: templates/configure/tab_maintenance.html.jinja:98
+#: templates/configure/tab_maintenance.html.jinja:55
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
-"                        Elle prépare simplement le système à s'étendre au prochain démarrage."
+"                        Elle prépare simplement le système à s'étendre au"
+" prochain démarrage."
 msgstr ""
-"This operation is safe and does not delete any data. It simply prepares the "
-"system to expand on the next boot."
+"This operation is safe and does not delete any data. It simply prepares "
+"the system to expand on the next boot."
 
-#: templates/configure/tab_maintenance.html.jinja:103
+#: templates/configure/tab_maintenance.html.jinja:60
 msgid "Étendre le système de fichiers"
 msgstr "Extend file system"
 
-#: templates/configure/tab_maintenance.html.jinja:110
+#: templates/configure/tab_maintenance.html.jinja:67
 msgid "Contrôle du système"
 msgstr "System control"
 
-#: templates/configure/tab_maintenance.html.jinja:113
+#: templates/configure/tab_maintenance.html.jinja:70
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
@@ -1964,39 +1924,39 @@ msgstr ""
 "Are you sure you want to restart ONLY the web application? The operating "
 "system will not be restarted."
 
-#: templates/configure/tab_maintenance.html.jinja:116
+#: templates/configure/tab_maintenance.html.jinja:73
 msgid "Redémarrer l'application web"
 msgstr "Reboot Application Web"
 
-#: templates/configure/tab_maintenance.html.jinja:125
+#: templates/configure/tab_maintenance.html.jinja:82
 msgid "Redémarrer le système"
 msgstr "Restart the system"
 
-#: templates/configure/tab_maintenance.html.jinja:133
+#: templates/configure/tab_maintenance.html.jinja:90
 msgid "Supprimer les logs"
 msgstr "Delete logs"
 
-#: templates/configure/tab_maintenance.html.jinja:138
+#: templates/configure/tab_maintenance.html.jinja:95
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "Are you sure you want to turn OFF the system?"
 
-#: templates/configure/tab_maintenance.html.jinja:141
+#: templates/configure/tab_maintenance.html.jinja:98
 msgid "Éteindre le système"
 msgstr "Shut down the system"
 
-#: templates/configure/tab_maintenance.html.jinja:146
+#: templates/configure/tab_maintenance.html.jinja:103
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Switch back to Raspberry Pi OS (desktop)"
 
-#: templates/configure/tab_maintenance.html.jinja:151
+#: templates/configure/tab_maintenance.html.jinja:108
 msgid ""
-"Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se "
-"lancera plus automatiquement. Pour revenir au mode cadre photo, relancez "
-"setup.sh. Continuer ?"
+"Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
+" lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
+" setup.sh. Continuer ?"
 msgstr ""
-"The Raspberry Pi will reboot to the Raspberry Pi OS desktop and Pimmich will"
-" no longer start automatically. To return to photo frame mode, run setup.sh "
-"again. Continue?"
+"The Raspberry Pi will reboot to the Raspberry Pi OS desktop and Pimmich "
+"will no longer start automatically. To return to photo frame mode, run "
+"setup.sh again. Continue?"
 
 #: templates/configure/tab_metadata.html.jinja:4
 msgid "Affichage des métadonnées des photos"
@@ -2166,7 +2126,8 @@ msgstr "Wi-Fi Configuration"
 #: templates/configure/tab_network.html.jinja:25
 msgid ""
 "La sélection du pays est obligatoire pour activer\n"
-"                    l'interface Wi-Fi et respecter les réglementations locales sur les fréquences radio."
+"                    l'interface Wi-Fi et respecter les réglementations "
+"locales sur les fréquences radio."
 msgstr ""
 "Selecting a country is required to enable the Wi-Fi interface and comply "
 "with local radio frequency regulations."
@@ -2230,11 +2191,13 @@ msgstr "Apply Wi-Fi settings"
 #: templates/configure/tab_network.html.jinja:71
 msgid ""
 "Note : Après avoir appliqué les paramètres, la connexion\n"
-"                    peut prendre jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à \"Connecté\",\n"
-"                    vérifiez le mot de passe puis essayez de redémarrer le système."
+"                    peut prendre jusqu'à une minute. Si le statut de "
+"connexion ci-dessus ne passe pas à \"Connecté\",\n"
+"                    vérifiez le mot de passe puis essayez de redémarrer "
+"le système."
 msgstr ""
-"Note: after applying the settings, connecting may take up to a minute. If "
-"the connection status above does not change to \"Connected\", check the "
+"Note: after applying the settings, connecting may take up to a minute. If"
+" the connection status above does not change to \"Connected\", check the "
 "password and then try rebooting the system."
 
 #: templates/configure/tab_network.html.jinja:78
@@ -2244,12 +2207,14 @@ msgstr "Network Interface Management"
 #: templates/configure/tab_network.html.jinja:80
 msgid ""
 "Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet\n"
-"                    est branché, c'est souvent un problème de priorité. Désactivez l'interface Ethernet pour forcer le\n"
-"                    système à utiliser exclusivement le Wi-Fi. Cette action redémarre le service réseau."
+"                    est branché, c'est souvent un problème de priorité. "
+"Désactivez l'interface Ethernet pour forcer le\n"
+"                    système à utiliser exclusivement le Wi-Fi. Cette "
+"action redémarre le service réseau."
 msgstr ""
-"If Wi-Fi does not connect while an Ethernet cable is plugged in, it is often"
-" a priority issue. Disable the Ethernet interface to force the system to use"
-" Wi-Fi only. This action restarts the network service."
+"If Wi-Fi does not connect while an Ethernet cable is plugged in, it is "
+"often a priority issue. Disable the Ethernet interface to force the "
+"system to use Wi-Fi only. This action restarts the network service."
 
 #: templates/configure/tab_network.html.jinja:88
 msgid "Interface Filaire (eth0)"
@@ -2262,10 +2227,12 @@ msgstr "Nearby Wi-Fi networks"
 #: templates/configure/tab_network.html.jinja:104
 msgid ""
 "Cliquez sur le bouton pour rechercher les réseaux Wi-Fi disponibles.\n"
-"                    Cliquer sur un réseau dans la liste remplira automatiquement le champ SSID ci-dessus."
+"                    Cliquer sur un réseau dans la liste remplira "
+"automatiquement le champ SSID ci-dessus."
 msgstr ""
 "Click the button to search for available Wi-Fi networks.\n"
-"                    Clicking on a network in the list will automatically populate the SSID field above."
+"                    Clicking on a network in the list will automatically "
+"populate the SSID field above."
 
 #: templates/configure/tab_playlists.html.jinja:4
 msgid "Gestion des Playlists"
@@ -2274,11 +2241,13 @@ msgstr "Playlist Management"
 #: templates/configure/tab_playlists.html.jinja:6
 msgid ""
 "Créez des albums virtuels (playlists) en sélectionnant des\n"
-"                    photos de n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant uniquement les\n"
+"                    photos de n'importe quelle source. Vous pouvez "
+"ensuite lancer un diaporama contenant uniquement les\n"
 "                    photos d'une playlist."
 msgstr ""
-"Create virtual albums (playlists) by selecting photos from any source. You "
-"can then start a slideshow containing only the photos from a playlist."
+"Create virtual albums (playlists) by selecting photos from any source. "
+"You can then start a slideshow containing only the photos from a "
+"playlist."
 
 #: templates/configure/tab_playlists.html.jinja:14
 msgid ""
@@ -2290,8 +2259,8 @@ msgstr ""
 
 #: templates/configure/tab_playlists.html.jinja:37
 msgid ""
-"Arrête la playlist en cours et relance le diaporama avec toutes les sources "
-"activées."
+"Arrête la playlist en cours et relance le diaporama avec toutes les "
+"sources activées."
 msgstr ""
 "Stop the current playlist and relaunch the slideshow with all activated "
 "sources."
@@ -2347,7 +2316,8 @@ msgstr "Limit of photos to upload (Immich)"
 #: templates/configure/tab_sources.html.jinja:34
 msgid ""
 "Nombre maximum de photos à récupérer depuis Immich.\n"
-"                        Mettez 0, -1 ou laissez vide pour ne pas avoir de limite."
+"                        Mettez 0, -1 ou laissez vide pour ne pas avoir de"
+" limite."
 msgstr ""
 "Maximum number of photos to recover from Immich.\n"
 "                        Put 0, -1 or leave empty to have no limit."
@@ -2396,7 +2366,8 @@ msgstr "Sources to display in the slideshow"
 #: templates/configure/tab_sources.html.jinja:69
 msgid ""
 "Sélectionnez les sources de photos à inclure dans le diaporama.\n"
-"                        Les photos seront mélangées entre les sources sélectionnées."
+"                        Les photos seront mélangées entre les sources "
+"sélectionnées."
 msgstr ""
 "Select photo sources to include in the slideshow.\n"
 "                        Photos will be mixed between the selected sources."
@@ -2503,29 +2474,29 @@ msgstr "rclone remote:"
 
 #: templates/configure/tab_sources.html.jinja:182
 msgid ""
-"Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « rclone "
-"config » sur le Raspberry Pi."
+"Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « "
+"rclone config » sur le Raspberry Pi."
 msgstr ""
-"No rclone Google Drive remote found. To create one, run “rclone config” on "
-"the Raspberry Pi."
+"No rclone Google Drive remote found. To create one, run “rclone config” "
+"on the Raspberry Pi."
 
 #: templates/configure/tab_sources.html.jinja:187
 msgid ""
-"Créez un compte de service dans la console Google Cloud (API Google Drive "
-"activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez ensuite "
-"vos dossiers de photos avec l'adresse e-mail du compte de service."
+"Créez un compte de service dans la console Google Cloud (API Google Drive"
+" activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez "
+"ensuite vos dossiers de photos avec l'adresse e-mail du compte de "
+"service."
 msgstr ""
-"Create a service account in the Google Cloud console (with the Google Drive "
-"API enabled), download its JSON key and paste it below. Then share your "
-"photo folders with the service account's email address."
+"Create a service account in the Google Cloud console (with the Google "
+"Drive API enabled), download its JSON key and paste it below. Then share "
+"your photo folders with the service account's email address."
 
 #: templates/configure/tab_sources.html.jinja:190
 msgid "Compte de service configuré :"
 msgstr "Configured service account:"
 
 #: templates/configure/tab_sources.html.jinja:192
-msgid ""
-"Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
+msgid "Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
 msgstr "Share your Google Drive folders with this address (read-only)."
 
 #: templates/configure/tab_sources.html.jinja:195
@@ -2546,8 +2517,8 @@ msgstr "Folders to show in the slideshow:"
 
 #: templates/configure/tab_sources.html.jinja:217
 msgid ""
-"Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google Drive "
-"»."
+"Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google "
+"Drive »."
 msgstr "No folder selected. Click “Show my Google Drive folders”."
 
 #: templates/configure/tab_sources.html.jinja:223
@@ -2561,21 +2532,21 @@ msgstr "Move files to the Google Drive trash after import"
 #: templates/configure/tab_sources.html.jinja:229
 msgid ""
 "Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
-"importée part dans la corbeille du Drive (récupérable 30 jours) et reste sur"
-" le cadre jusqu'à ce que vous la supprimiez dans l'onglet « Aperçu ». "
+"importée part dans la corbeille du Drive (récupérable 30 jours) et reste "
+"sur le cadre jusqu'à ce que vous la supprimiez dans l'onglet « Aperçu ». "
 "Uniquement avec la connexion rclone."
 msgstr ""
-"The folders then act as an “outbox”: each imported photo or video goes to "
-"the Drive trash (recoverable for 30 days) and stays on the frame until you "
-"delete it in the “Preview” tab. Only with the rclone connection."
+"The folders then act as an “outbox”: each imported photo or video goes to"
+" the Drive trash (recoverable for 30 days) and stays on the frame until "
+"you delete it in the “Preview” tab. Only with the rclone connection."
 
 #: templates/configure/tab_sources.html.jinja:230
 msgid ""
-"Pensez à enregistrer la configuration après avoir choisi les dossiers, puis "
-"lancez l'import depuis l'onglet « Actions »."
+"Pensez à enregistrer la configuration après avoir choisi les dossiers, "
+"puis lancez l'import depuis l'onglet « Actions »."
 msgstr ""
-"Remember to save the configuration after choosing the folders, then start "
-"the import from the “Actions” tab."
+"Remember to save the configuration after choosing the folders, then start"
+" the import from the “Actions” tab."
 
 #: templates/configure/tab_sources.html.jinja:233
 msgid "Mise à jour automatique (Google Drive)"
@@ -2587,10 +2558,9 @@ msgstr "Check for new items every (minutes):"
 
 #: templates/configure/tab_sources.html.jinja:241
 msgid ""
-"Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées ou "
-"supprimées."
-msgstr ""
-"The slideshow is only restarted if photos or videos were added or removed."
+"Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées "
+"ou supprimées."
+msgstr "The slideshow is only restarted if photos or videos were added or removed."
 
 #: templates/configure/tab_sources.html.jinja:255
 msgid "Options de démarrage"
@@ -2602,13 +2572,13 @@ msgstr "Skip the first automatic import at startup"
 
 #: templates/configure/tab_sources.html.jinja:261
 msgid ""
-"Si cette option est cochée, les mises à jour automatiques (Immich, Samba) ne"
-" se lanceront pas immédiatement après un redémarrage du cadre, mais "
+"Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
+" ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
 "attendront le prochain cycle programmé."
 msgstr ""
-"If this option is checked, automatic updates (Immich, Samba) will not launch"
-" immediately after a reboot of the framework, but will wait for the next "
-"scheduled cycle."
+"If this option is checked, automatic updates (Immich, Samba) will not "
+"launch immediately after a reboot of the framework, but will wait for the"
+" next scheduled cycle."
 
 #: templates/configure/tab_stats.html.jinja:4
 msgid "Informations Système"
@@ -2652,23 +2622,28 @@ msgstr "Receiving photos via Telegram"
 
 #: templates/configure/tab_telegram.html.jinja:7
 msgid ""
-"Activez cette fonction pour permettre à des utilisateurs autorisés d'envoyer des photos\n"
-"                        directement sur le cadre via un bot Telegram. Les photos reçues seront ajoutées à la source\n"
+"Activez cette fonction pour permettre à des utilisateurs autorisés "
+"d'envoyer des photos\n"
+"                        directement sur le cadre via un bot Telegram. Les"
+" photos reçues seront ajoutées à la source\n"
 "                        \"Telegram\"."
 msgstr ""
 "Enable this feature to allow authorized users to send photos\n"
-"                        directly on the frame via a Telegram bot. Photos received will be added to the source\n"
+"                        directly on the frame via a Telegram bot. Photos "
+"received will be added to the source\n"
 "                        \"Telegram\"."
 
 #: templates/configure/tab_telegram.html.jinja:11
 msgid ""
-"Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. L'ID de\n"
-"                        l'administrateur est votre propre ID utilisateur Telegram (obtenu via @userinfobot par\n"
+"Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. "
+"L'ID de\n"
+"                        l'administrateur est votre propre ID utilisateur "
+"Telegram (obtenu via @userinfobot par\n"
 "                        exemple)."
 msgstr ""
 "To create a bot and get a token, talk to @BotFather on Telegram. The "
-"administrator ID is your own Telegram user ID (obtained via @userinfobot, "
-"for example)."
+"administrator ID is your own Telegram user ID (obtained via @userinfobot,"
+" for example)."
 
 #: templates/configure/tab_telegram.html.jinja:17
 msgid "Activer le bot de réception Telegram"
@@ -2704,11 +2679,14 @@ msgstr "Managing invitations for guests"
 
 #: templates/configure/tab_telegram.html.jinja:62
 msgid ""
-"Créez des codes d'invitation uniques pour permettre à vos amis et votre famille d'envoyer\n"
-"                        des photos au cadre. Ils devront envoyer ce code à votre bot Telegram pour être autorisés."
+"Créez des codes d'invitation uniques pour permettre à vos amis et votre "
+"famille d'envoyer\n"
+"                        des photos au cadre. Ils devront envoyer ce code "
+"à votre bot Telegram pour être autorisés."
 msgstr ""
 "Create unique invitation codes to allow friends and family to send\n"
-"                        photos in the frame. They will need to send this code to your Telegram bot to be authorized."
+"                        photos in the frame. They will need to send this "
+"code to your Telegram bot to be authorized."
 
 #: templates/configure/tab_telegram.html.jinja:68
 msgid "Créer une nouvelle invitation"
@@ -2745,10 +2723,12 @@ msgstr "Telegram Source"
 #: templates/configure/tab_telegram.html.jinja:99
 msgid ""
 "N'oubliez pas d'activer la source \"Telegram\" dans l'onglet\n"
-"                        \"Sources\" pour que les photos reçues apparaissent dans le diaporama."
+"                        \"Sources\" pour que les photos reçues "
+"apparaissent dans le diaporama."
 msgstr ""
 "Don't forget to activate the \"Telegram\" source in the tab\n"
-"                        \"Sources\" so that the received photos appear in the slideshow."
+"                        \"Sources\" so that the received photos appear in"
+" the slideshow."
 
 #: templates/configure/tab_telegram.html.jinja:105
 msgid "Fréquence des Cartes Postales"
@@ -2757,10 +2737,12 @@ msgstr "Frequency of Postcards"
 #: templates/configure/tab_telegram.html.jinja:107
 msgid ""
 "Augmentez temporairement la fréquence d'affichage des\n"
-"                        nouvelles cartes postales reçues pour qu'elles apparaissent plus souvent."
+"                        nouvelles cartes postales reçues pour qu'elles "
+"apparaissent plus souvent."
 msgstr ""
 "Temporarily increase the display frequency of\n"
-"                        new postcards received so that they appear more often."
+"                        new postcards received so that they appear more "
+"often."
 
 #: templates/configure/tab_telegram.html.jinja:113
 msgid "Activer le boost pour les cartes postales récentes"
@@ -2817,12 +2799,14 @@ msgstr "Required manual step:"
 #: templates/configure/tab_vocal.html.jinja:11
 msgid ""
 "Pour utiliser le mot-clé\n"
-"                            personnalisé \"Cadre Magique\", vous devez créer un modèle sur le site de Picovoice, le\n"
-"                            télécharger, et le placer dans le dossier `voice_models` sous le nom\n"
+"                            personnalisé \"Cadre Magique\", vous devez "
+"créer un modèle sur le site de Picovoice, le\n"
+"                            télécharger, et le placer dans le dossier "
+"`voice_models` sous le nom\n"
 "                            `cadre-magique_raspberry-pi.ppn`."
 msgstr ""
-"To use the custom wake word \"Cadre Magique\", you must create a model on "
-"the Picovoice website, download it, and place it in the `voice_models` "
+"To use the custom wake word \"Cadre Magique\", you must create a model on"
+" the Picovoice website, download it, and place it in the `voice_models` "
 "folder named `cadre-magique_raspberry-pi.ppn`."
 
 #: templates/configure/tab_vocal.html.jinja:18
@@ -2870,10 +2854,11 @@ msgstr "English"
 #: templates/configure/tab_vocal.html.jinja:46
 msgid ""
 "Le changement de langue nécessite un redémarrage du\n"
-"                            service vocal (désactiver puis réactiver le contrôle vocal)."
+"                            service vocal (désactiver puis réactiver le "
+"contrôle vocal)."
 msgstr ""
-"Changing the language requires restarting the voice service (disable then "
-"re-enable voice control)."
+"Changing the language requires restarting the voice service (disable then"
+" re-enable voice control)."
 
 #: templates/configure/tab_vocal.html.jinja:51
 msgid ""
@@ -2913,10 +2898,12 @@ msgstr "Volume of Sound Notifications"
 
 #: templates/configure/tab_vocal.html.jinja:99
 msgid ""
-"Règle le volume pour les sons de notification (confirmation du contrôle vocal, réception\n"
+"Règle le volume pour les sons de notification (confirmation du contrôle "
+"vocal, réception\n"
 "                        de carte postale, etc.)."
 msgstr ""
-"Adjusts the volume for notification sounds (voice control confirmation, receiving\n"
+"Adjusts the volume for notification sounds (voice control confirmation, "
+"receiving\n"
 "                        postcard, etc.)."
 
 #: templates/configure/tab_vocal.html.jinja:103
@@ -2933,11 +2920,14 @@ msgstr "Diagnostic Audio"
 
 #: templates/configure/tab_vocal.html.jinja:119
 msgid ""
-"Si votre microphone n'apparaît pas dans la liste ci-dessus, utilisez cet outil pour\n"
-"                        vérifier si le système d'exploitation le détecte correctement."
+"Si votre microphone n'apparaît pas dans la liste ci-dessus, utilisez cet "
+"outil pour\n"
+"                        vérifier si le système d'exploitation le détecte "
+"correctement."
 msgstr ""
 "If your microphone is not listed above, use this tool to\n"
-"                        check if the operating system detects it correctly."
+"                        check if the operating system detects it "
+"correctly."
 
 #: templates/configure/tab_vocal.html.jinja:127
 msgid "Résultats du diagnostic :"
@@ -2947,27 +2937,27 @@ msgstr "Diagnostic results:"
 msgid "Action réservée aux administrateurs."
 msgstr "Action reserved for administrators."
 
-#: web/core.py:863
+#: web/core.py:862
 msgid "Code d'invitation invalide."
 msgstr "Invalid invitation code."
 
-#: web/core.py:869
+#: web/core.py:868
 msgid "Ce code d'invitation a expiré."
 msgstr "This invitation code has expired."
 
-#: web/core.py:875
+#: web/core.py:874
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "You are already authorized. Send me a photo!"
 
-#: web/core.py:877
+#: web/core.py:876
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "This invitation code has already been used."
 
-#: web/core.py:888
+#: web/core.py:887
 #, python-format
 msgid ""
-"Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes postales "
-"au cadre."
+"Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
+"postales au cadre."
 msgstr "Congratulations %(name)s! You can now send postcards to the frame."
 
 #: web/routes_auth.py:23
@@ -2996,10 +2986,9 @@ msgstr "Password must contain at least 6 characters."
 
 #: web/routes_auth.py:64
 msgid ""
-"Mot de passe mis à jour avec succès. Il sera nécessaire pour votre prochaine"
-" connexion."
-msgstr ""
-"Password successfully updated. It will be required for your next login."
+"Mot de passe mis à jour avec succès. Il sera nécessaire pour votre "
+"prochaine connexion."
+msgstr "Password successfully updated. It will be required for your next login."
 
 #: web/routes_auth.py:66
 #, python-format
@@ -3036,8 +3025,8 @@ msgstr "Role of “%(name)s” changed."
 
 #: web/routes_config.py:54
 msgid ""
-"La valeur pour la limite de photos Immich est invalide. La valeur précédente"
-" est conservée."
+"La valeur pour la limite de photos Immich est invalide. La valeur "
+"précédente est conservée."
 msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
@@ -3051,8 +3040,7 @@ msgstr "Google Drive key not saved: %(error)s"
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
-msgstr ""
-"Configuration saved. The slideshow was restarted to apply the changes."
+msgstr "Configuration saved. The slideshow was restarted to apply the changes."
 
 #: web/routes_guests.py:32
 #, python-format
@@ -3105,8 +3093,7 @@ msgstr "Connection error: %(error)s"
 
 #: web/routes_slideshow.py:379
 #, python-format
-msgid ""
-"Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
+msgid "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
 msgstr ""
 "Applied resolution: %(width) SX %(height)s. The slideshow has been "
 "restarted."
@@ -3122,27 +3109,27 @@ msgstr ""
 
 #: web/routes_system.py:83
 msgid ""
-"Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération "
-"annulée."
+"Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération"
+" annulée."
 msgstr ""
 "No desktop environment detected (Raspberry Pi OS Lite?). Operation "
 "cancelled."
 
 #: web/routes_system.py:119
 msgid ""
-"Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera "
-"plus automatiquement."
+"Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera"
+" plus automatiquement."
 msgstr ""
 "The system is rebooting to the Raspberry Pi OS desktop. Pimmich will no "
 "longer start automatically."
 
 #: web/routes_system.py:169
 msgid ""
-"L'application web redémarre... La page sera inaccessible pendant quelques "
-"instants."
+"L'application web redémarre... La page sera inaccessible pendant quelques"
+" instants."
 msgstr ""
-"The web application is rebooting... the page will be inaccessible for a few "
-"seconds."
+"The web application is rebooting... the page will be inaccessible for a "
+"few seconds."
 
 #: web/routes_system.py:195
 msgid "Le SSID et le pays Wi-Fi sont obligatoires."
@@ -3150,8 +3137,8 @@ msgstr "SSID and Wi-Fi country are mandatory."
 
 #: web/routes_system.py:208
 msgid ""
-"Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer la"
-" connexion. Veuillez patienter une minute et vérifier le statut."
+"Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
+" la connexion. Veuillez patienter une minute et vérifier le statut."
 msgstr ""
 "Wi-Fi settings applied. The network service has been restarted to force "
 "connection. Please wait a minute and check the status."
@@ -3174,8 +3161,8 @@ msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
 msgstr ""
-"Configuration successfully restored! The slideshow will restart to apply the"
-" changes."
+"Configuration successfully restored! The slideshow will restart to apply "
+"the changes."
 
 #: web/routes_system.py:291
 msgid ""
@@ -3270,578 +3257,3 @@ msgstr "Nothing new."
 msgid "Mise à jour automatique Google Drive désactivée."
 msgstr "Google Drive automatic update disabled."
 
-#~ msgid "Favoris"
-#~ msgstr "Favorites"
-
-#~ msgid ""
-#~ "Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
-#~ "lecture) :"
-#~ msgstr "Favorites frequency (number of additional additions to the playlist):"
-
-#~ msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
-#~ msgstr "Ex: 0 = no boost, 2 = 3x more chance of appearing."
-
-#~ msgid ""
-#~ "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
-#~ msgstr "Enable hardware video decoding (smoother, but may be unstable)"
-
-#~ msgid ""
-#~ "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
-#~ "Décochez si vous rencontrez des écrans bleus/noirs après les vidéos."
-#~ msgstr ""
-#~ "Check this box for smoother playback on Raspberry Pis. Uncheck if you "
-#~ "experience blue/black screens after videos."
-
-#~ msgid "Mettre en favori"
-#~ msgstr "Bookmark"
-
-#~ msgid "Ajouter une légende..."
-#~ msgstr "Add a caption..."
-
-#~ msgid "Vos photos favorites"
-#~ msgstr "Your favorite photos"
-
-#~ msgid ""
-#~ "Voici toutes vos photos marquées comme favorites. Vous pouvez les gérer ici."
-#~ msgstr ""
-#~ "Here are all your photos marked as favorites. You can manage them here."
-
-#~ msgid "Vous n'avez aucune photo en favori pour le moment."
-#~ msgstr "You don't have any favorite photos at the moment."
-
-#~ msgid "Sources des photos"
-#~ msgstr "Photo sources"
-
-#~ msgid "Prochaine Pleine Mer :"
-#~ msgstr "Next High Seas:"
-
-#~ msgid "Prochaine Basse Mer :"
-#~ msgstr "Next Low Sea:"
-
-#~ msgid "Lancement de la playlist '%(name)s'..."
-#~ msgstr "Launching the playlist '%(name)s'..."
-
-#~ msgid "Heure, Météo et Marées"
-#~ msgstr "Time, Weather and Tides"
-
-#~ msgid "app.py (Serveur Web)"
-#~ msgstr "app.py (WebServer)"
-
-#~ msgid "local_slideshow.py (Diaporama - Sortie Standard)"
-#~ msgstr "local_slideshow.py (Slideshow - Standard Output)"
-
-#~ msgid "local_slideshow.py (Diaporama - Erreurs)"
-#~ msgstr "local_slideshow.py (Slideshow - Errors)"
-
-#~ msgid "Sauvegarde de l'ordre..."
-#~ msgstr "Saving the order..."
-
-#~ msgid "Configuration enregistrée et diaporama relancé"
-#~ msgstr "Configuration saved and slideshow restarted"
-
-#~ msgid "Configuration du cadre photo connecté"
-#~ msgstr "Configuring the connected photo frame"
-
-#~ msgid "SSID (Nom du réseau)"
-#~ msgstr "SSID (Network Name)"
-
-#~ msgid "Nouveau mot de passe"
-#~ msgstr "New Password"
-
-#~ msgid "Êtes-vous sûr de vouloir REDÉMARRER le système ?"
-#~ msgstr "Are you sure you want to RESTART the system?"
-
-#~ msgid ""
-#~ "Mise à jour terminée. L'application va redémarrer. La page se rechargera "
-#~ "dans quelques instants..."
-#~ msgstr ""
-#~ "Update completed. The application will restart. The page will reload in a "
-#~ "few moments..."
-
-#~ msgid "Redémarrage en cours..."
-#~ msgstr "Reboot in progress..."
-
-#~ msgid "La page va se recharger automatiquement."
-#~ msgstr "The page will reload automatically."
-
-#~ msgid "Erreur de connexion au serveur pour la mise à jour."
-#~ msgstr "Error connecting to server for update."
-
-#~ msgid "Erreur de communication"
-#~ msgstr "Communication error"
-
-#~ msgid "Heure de début d'activité (HH:MM) :"
-#~ msgstr "Activity start time (HH:MM):"
-
-#~ msgid "Heure de fin d'activité (HH:MM) :"
-#~ msgstr "Activity end time (HH:MM):"
-
-#~ msgid "Vérifier les mises à jour"
-#~ msgstr "Check for updates"
-
-#~ msgid ""
-#~ "Êtes-vous sûr de vouloir lancer la mise à jour ? L'application sera "
-#~ "indisponible pendant le processus et redémarrera automatiquement."
-#~ msgstr ""
-#~ "Are you sure you want to start the update? The application will be "
-#~ "unavailable during the process and will restart automatically."
-
-#~ msgid "Mise à jour terminée. Redirection..."
-#~ msgstr "Update completed. Redirection..."
-
-#~ msgid "Usage:"
-#~ msgstr "Usage:"
-
-#~ msgid "{value!r} is not a valid boolean. Recognized values: {states}"
-#~ msgstr "{value!r} is not a valid boolean. Recognized values: {states}"
-
-#~ msgid "{editor}: Editing failed"
-#~ msgstr "{editor}: Editing failed"
-
-#~ msgid "{editor}: Editing failed: {e}"
-#~ msgstr "{editor}: Editing failed: {e}"
-
-#~ msgid "{text} {deprecated_message}"
-#~ msgstr "{text} {deprecated_message}"
-
-#~ msgid "Options"
-#~ msgstr "Options"
-
-#~ msgid "Got unexpected extra argument ({args})"
-#~ msgid_plural "Got unexpected extra arguments ({args})"
-#~ msgstr[0] ""
-#~ msgstr[1] ""
-
-#~ msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
-#~ msgstr ""
-#~ "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
-
-#~ msgid "Aborted!"
-#~ msgstr "Aborted!"
-
-#~ msgid "Commands"
-#~ msgstr "Commands"
-
-#~ msgid "Missing command."
-#~ msgstr "Missing command."
-
-#~ msgid "No such command {name!r}."
-#~ msgstr "No such command {name!r}."
-
-#~ msgid "Value must be an iterable."
-#~ msgstr "Value must be an iterable."
-
-#~ msgid "Takes {nargs} values but 1 was given."
-#~ msgid_plural "Takes {nargs} values but {len} were given."
-#~ msgstr[0] ""
-#~ msgstr[1] ""
-
-#~ msgid ""
-#~ "DeprecationWarning: The {param_type} {name!r} is deprecated.{extra_message}"
-#~ msgstr ""
-#~ "DeprecationWarning: The {param_type} {name!r} is deprecated.{extra_message}"
-
-#~ msgid "env var: {var}"
-#~ msgstr "env var: {var}"
-
-#~ msgid "default: {default}"
-#~ msgstr "default: {default}"
-
-#~ msgid "required"
-#~ msgstr "required"
-
-#~ msgid "(dynamic)"
-#~ msgstr "(dynamic)"
-
-#~ msgid "%(prog)s, version %(version)s"
-#~ msgstr "%(prog)s, version %(version)s"
-
-#~ msgid "Show the version and exit."
-#~ msgstr "Show the version and exit."
-
-#~ msgid "Show this message and exit."
-#~ msgstr "Show this message and exit."
-
-#~ msgid "Error: {message}"
-#~ msgstr "Error: {message}"
-
-#~ msgid "Try '{command} {option}' for help."
-#~ msgstr "Try '{command} {option}' for help."
-
-#~ msgid "Invalid value: {message}"
-#~ msgstr "Invalid value: {message}"
-
-#~ msgid "Invalid value for {param_hint}: {message}"
-#~ msgstr "Invalid value for {param_hint}: {message}"
-
-#~ msgid "Missing argument"
-#~ msgstr "Missing argument"
-
-#~ msgid "Missing option"
-#~ msgstr "Missing option"
-
-#~ msgid "Missing parameter"
-#~ msgstr "Missing parameter"
-
-#~ msgid "Missing {param_type}"
-#~ msgstr "Missing {param_type}"
-
-#~ msgid "Missing parameter: {param_name}"
-#~ msgstr "Missing parameter: {param_name}"
-
-#~ msgid "No such option: {name}"
-#~ msgstr "No such option: {name}"
-
-#~ msgid "Did you mean {possibility}?"
-#~ msgid_plural "(Possible options: {possibilities})"
-#~ msgstr[0] ""
-#~ msgstr[1] ""
-
-#~ msgid "unknown error"
-#~ msgstr "unknown error"
-
-#~ msgid "Could not open file {filename!r}: {message}"
-#~ msgstr "Could not open file {filename!r}: {message}"
-
-#~ msgid "Argument {name!r} takes {nargs} values."
-#~ msgstr "Argument {name!r} takes {nargs} values."
-
-#~ msgid "Option {name!r} does not take a value."
-#~ msgstr "Option {name!r} does not take a value."
-
-#~ msgid "Option {name!r} requires an argument."
-#~ msgid_plural "Option {name!r} requires {nargs} arguments."
-#~ msgstr[0] ""
-#~ msgstr[1] ""
-
-#~ msgid "Shell completion is not supported for Bash versions older than 4.4."
-#~ msgstr "Shell completion is not supported for Bash versions older than 4.4."
-
-#~ msgid "Couldn't detect Bash version, shell completion is not supported."
-#~ msgstr "Couldn't detect Bash version, shell completion is not supported."
-
-#~ msgid "Repeat for confirmation"
-#~ msgstr "Repeat for confirmation"
-
-#~ msgid "Error: The value you entered was invalid."
-#~ msgstr "Error: The value you entered was invalid."
-
-#~ msgid "Error: {e.message}"
-#~ msgstr "Error: {e.message}"
-
-#~ msgid "Error: The two entered values do not match."
-#~ msgstr "Error: The two entered values do not match."
-
-#~ msgid "Error: invalid input"
-#~ msgstr "Error: invalid input"
-
-#~ msgid "Press any key to continue..."
-#~ msgstr "Press any key to continue..."
-
-#~ msgid ""
-#~ "Choose from:\n"
-#~ "\t{choices}"
-#~ msgstr ""
-#~ "Choose from:\n"
-#~ "\t{choices}"
-
-#~ msgid "{value!r} is not {choice}."
-#~ msgid_plural "{value!r} is not one of {choices}."
-#~ msgstr[0] ""
-#~ msgstr[1] ""
-
-#~ msgid "{value!r} does not match the format {format}."
-#~ msgid_plural "{value!r} does not match the formats {formats}."
-#~ msgstr[0] ""
-#~ msgstr[1] ""
-
-#~ msgid "{value!r} is not a valid {number_type}."
-#~ msgstr "{value!r} is not a valid {number_type}."
-
-#~ msgid "{value} is not in the range {range}."
-#~ msgstr "{value} is not in the range {range}."
-
-#~ msgid "{value!r} is not a valid boolean."
-#~ msgstr "{value!r} is not a valid boolean."
-
-#~ msgid "{value!r} is not a valid UUID."
-#~ msgstr "{value!r} is not a valid UUID."
-
-#~ msgid "file"
-#~ msgstr "file"
-
-#~ msgid "directory"
-#~ msgstr "directory"
-
-#~ msgid "path"
-#~ msgstr "path"
-
-#~ msgid "{name} {filename!r} does not exist."
-#~ msgstr "{name} {filename!r} does not exist."
-
-#~ msgid "{name} {filename!r} is a file."
-#~ msgstr "{name} {filename!r} is a file."
-
-#~ msgid "{name} {filename!r} is a directory."
-#~ msgstr "{name} {filename!r} is a directory."
-
-#~ msgid "{name} {filename!r} is not readable."
-#~ msgstr "{name} {filename!r} is not readable."
-
-#~ msgid "{name} {filename!r} is not writable."
-#~ msgstr "{name} {filename!r} is not writable."
-
-#~ msgid "{name} {filename!r} is not executable."
-#~ msgstr "{name} {filename!r} is not executable."
-
-#~ msgid "{len_type} values are required, but {len_value} was given."
-#~ msgid_plural "{len_type} values are required, but {len_value} were given."
-#~ msgstr[0] ""
-#~ msgstr[1] ""
-
-#~ msgid "Activer le contrôle par prise connectée"
-#~ msgstr ""
-#~ "Enable socket control\n"
-#~ "                            connected"
-
-#~ msgid "Photos des invités (validées)"
-#~ msgstr "Guest photos (validated)"
-
-#~ msgid "Collez votre clé d'accès ici"
-#~ msgstr ""
-#~ "Paste\n"
-#~ "                            your access key here"
-
-#~ msgid ""
-#~ "État de la\n"
-#~ "                            prise : Inconnu"
-#~ msgstr ""
-#~ "State of the\n"
-#~ "                            taken: Unknown"
-
-#~ msgid ""
-#~ "URL\n"
-#~ "                                de Statut (Optionnel) :"
-#~ msgstr ""
-#~ "URL\n"
-#~ "                                Status (Optional):"
-
-#~ msgid ""
-#~ "Langue\n"
-#~ "                            du contrôle vocal"
-#~ msgstr ""
-#~ "Language\n"
-#~ "                            voice control"
-
-#~ msgid ""
-#~ "Amplitude du zoom (ex: 1.15 pour\n"
-#~ "                            15%% de zoom) :"
-#~ msgstr "Zoom amplitude (ex: 1.15 for 15%% zoom):"
-
-#~ msgid "État de la prise : Inconnu"
-#~ msgstr "Outlet status: Unreachable"
-
-#~ msgid "URL pour ALLUMER la prise :"
-#~ msgstr ""
-#~ "URL\n"
-#~ "                                to TURN ON the socket:"
-
-#~ msgid "URL pour ÉTEINDRE la prise :"
-#~ msgstr ""
-#~ "URL\n"
-#~ "                                to TURN OFF the socket:"
-
-#~ msgid "Délai après allumage (secondes) :"
-#~ msgstr ""
-#~ "Deadline\n"
-#~ "                                after ignition (seconds):"
-
-#~ msgid "URL de Statut (Optionnel) :"
-#~ msgstr "Password (optional) :"
-
-#~ msgid ""
-#~ "La détection automatique du fuseau horaire a échoué lors de l'installation. "
-#~ "Le système est configuré sur <strong>UTC</strong>. L'heure affichée peut "
-#~ "être incorrecte."
-#~ msgstr ""
-#~ "Automatic time zone detection has\n"
-#~ "                            failed during installation. The system is set to <strong>UTC</strong>. The time\n"
-#~ "                            displayed may be incorrect."
-
-#~ msgid ""
-#~ "Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via"
-#~ " SSH) et en exécutant la commande :"
-#~ msgstr ""
-#~ "You can fix it manually by connecting to the Raspberry Pi (via SSH) and\n"
-#~ "                            by executing the command:"
-
-#~ msgid ""
-#~ "Activer la mise à jour\n"
-#~ "                            automatique"
-#~ msgstr ""
-#~ "Activate update\n"
-#~ "                            automatic"
-
-#~ msgid ""
-#~ "Photos des invités\n"
-#~ "                            (validées)"
-#~ msgstr ""
-#~ "Guest photos\n"
-#~ "                            (validated)"
-
-#~ msgid ""
-#~ "Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. "
-#~ "L'ID de l'administrateur est votre propre ID utilisateur Telegram (obtenu "
-#~ "via @userinfobot par exemple)."
-#~ msgstr ""
-#~ "To create a bot and get a token, talk to @BotFather on Telegram. The ID of\n"
-#~ "                        admin is your own Telegram user ID (obtained via @userinfobot by\n"
-#~ "                        example)."
-
-#~ msgid ""
-#~ "Pour utiliser le mot-clé personnalisé \"Cadre Magique\", vous devez créer un"
-#~ " modèle sur le site de Picovoice, le télécharger, et le placer dans le "
-#~ "dossier `voice_models` sous le nom `cadre-magique_raspberry-pi.ppn`."
-#~ msgstr ""
-#~ "To use the keyword\n"
-#~ "                            personalized “Magic Frame”, you must create a model on the Picovoice website, the\n"
-#~ "                            download, and place it in the `voice_models` folder under the name\n"
-#~ "                            `magic-framework_raspberry-pi.ppn`."
-
-#~ msgid "Langue du contrôle vocal"
-#~ msgstr "Voice control"
-
-#~ msgid ""
-#~ "Le changement de langue nécessite un redémarrage du service vocal "
-#~ "(désactiver puis réactiver le contrôle vocal)."
-#~ msgstr ""
-#~ "Changing the language requires restarting the\n"
-#~ "                            voice service (deactivate then reactivate voice control)."
-
-#~ msgid "Clé d'accès Picovoice Porcupine"
-#~ msgstr ""
-#~ "Key\n"
-#~ "                            Access Picovoice Porcupine"
-
-#~ msgid "Obtenez votre clé via le compte gratuit (Free Tier) sur la"
-#~ msgstr ""
-#~ "Get your key via the free account (Free Tier)\n"
-#~ "                            on the"
-
-#~ msgid ""
-#~ "Utilise les codes de formatage Python (ex:\n"
-#~ "                            %%d/%%m/%%Y, %%B %%Y)."
-#~ msgstr "Uses Python formatting codes (ex: %%d/%%m/%%Y, %%B %%Y)."
-
-#~ msgid ""
-#~ "Afficher la localisation\n"
-#~ "                            (ville/pays)"
-#~ msgstr ""
-#~ "Show location\n"
-#~ "                            (city/country)"
-
-#~ msgid ""
-#~ "Afficher un fond\n"
-#~ "                            semi-transparent derrière les métadonnées"
-#~ msgstr "Show a semi-transparent background behind the metadata"
-
-#~ msgid ""
-#~ "L'import depuis Telegram se fait automatiquement à la réception des photos. "
-#~ "Activez la source dans l'onglet \"Sources\" pour les voir."
-#~ msgstr ""
-#~ "Import from Telegram is done automatically when\n"
-#~ "                            receipt of photos. Activate the source in the \"Sources\" tab to see them."
-
-#~ msgid ""
-#~ "Envoyez des photos directement depuis votre téléphone via le navigateur."
-#~ msgstr ""
-#~ "Send photos directly from your\n"
-#~ "                            phone via browser."
-
-#~ msgid ""
-#~ "Approuvez ou rejetez les photos envoyées. Les photos approuvées seront "
-#~ "ajoutées à la source \"Invités\"."
-#~ msgstr ""
-#~ "Approve or reject submitted photos. Approved photos\n"
-#~ "                        will be added to the “Guests” source."
-
-#~ msgid ""
-#~ "La sélection du pays est obligatoire pour activer l'interface Wi-Fi et "
-#~ "respecter les réglementations locales sur les fréquences radio."
-#~ msgstr ""
-#~ "Country selection is required to activate\n"
-#~ "                    the Wi-Fi interface and comply with local radio frequency regulations."
-
-#~ msgid ""
-#~ "Note : Après avoir appliqué les paramètres, la connexion peut prendre "
-#~ "jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à "
-#~ "\"Connecté\", vérifiez le mot de passe puis essayez de redémarrer le "
-#~ "système."
-#~ msgstr ""
-#~ "Note: After applying the settings, the connection\n"
-#~ "                    may take up to a minute. If the connection status above does not change to \"Connected\",\n"
-#~ "                    check the password then try restarting the system."
-
-#~ msgid ""
-#~ "Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet est branché, c'est"
-#~ " souvent un problème de priorité. Désactivez l'interface Ethernet pour "
-#~ "forcer le système à utiliser exclusivement le Wi-Fi. Cette action redémarre "
-#~ "le service réseau."
-#~ msgstr ""
-#~ "If Wi-Fi won't connect while using an Ethernet cable\n"
-#~ "                    is connected, it is often a priority problem. Disable the Ethernet interface to force the\n"
-#~ "                    system to use Wi-Fi exclusively. This action restarts the network service."
-
-#~ msgid "Changer le mot de passe de l'interface"
-#~ msgstr "Change the interface password"
-
-#~ msgid ""
-#~ "Sauvegardez votre configuration (API, partages, affichage...) dans un "
-#~ "fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle "
-#~ "installation."
-#~ msgstr ""
-#~ "Save your configuration (API, shares,\n"
-#~ "                    display...) in a file. You can restore it later or on a new one.\n"
-#~ "                    installation."
-
-#~ msgid ""
-#~ "Cliquez sur le bouton pour rechercher et installer les dernières mises à "
-#~ "jour de Pimmich depuis GitHub. L'application redémarrera automatiquement "
-#~ "après la mise à jour."
-#~ msgstr ""
-#~ "Click the button to search and install the\n"
-#~ "                    latest Pimmich updates from GitHub. The application will restart automatically after\n"
-#~ "                    update."
-
-#~ msgid ""
-#~ "Si vous avez flashé Pimmich sur une carte SD plus grande que l'image, "
-#~ "utilisez cette option pour étendre la partition et utiliser tout l'espace "
-#~ "disponible. Un redémarrage du système sera nécessaire pour finaliser "
-#~ "l'opération."
-#~ msgstr ""
-#~ "If you flashed Pimmich to an SD card larger than\n"
-#~ "                    image, use this option to extend the partition and use all available space. A\n"
-#~ "                    System restart will be required to finalize the operation."
-
-#~ msgid ""
-#~ "Cette opération est sûre et ne supprime aucune donnée. Elle prépare "
-#~ "simplement le système à s'étendre au prochain démarrage."
-#~ msgstr ""
-#~ "This operation is safe and does not delete any data.\n"
-#~ "                        It simply prepares the system to expand at the next startup."
-
-#~ msgid ""
-#~ "Voici les photos qui sont prêtes à être affichées par le diaporama, classées"
-#~ " par source. Cliquez sur une photo pour l'agrandir."
-#~ msgstr ""
-#~ "Here are the photos that are ready to be displayed by the slideshow,\n"
-#~ "                    classified by source. Click on a photo to enlarge it."
-
-#~ msgid ""
-#~ "Créez des albums virtuels (playlists) en sélectionnant des photos de "
-#~ "n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant "
-#~ "uniquement les photos d'une playlist."
-#~ msgstr ""
-#~ "Create virtual albums (playlists) by selecting\n"
-#~ "                    photos from any source. You can then launch a slideshow containing only the\n"
-#~ "                    photos from a playlist."

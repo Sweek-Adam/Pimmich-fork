@@ -422,17 +422,6 @@ def clear_logs_api():
         return jsonify({"success": False, "message": str(e)}), 500
 
 
-@app.route('/api/upstream_status', methods=['GET'])
-@admin_required
-def upstream_status():
-    """Indique les nouveautés disponibles sur le dépôt d'origine de Pimmich et sur le dépôt suivi."""
-    try:
-        return jsonify({"success": True, **check_upstream()})
-    except Exception as e:
-        logger.warning(f"[Upstream] Vérification impossible : {e}")
-        return jsonify({"success": False, "message": str(e)}), 500
-
-
 @app.route('/api/update_app', methods=['GET'])
 @admin_required
 def update_app():

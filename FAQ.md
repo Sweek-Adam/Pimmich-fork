@@ -25,7 +25,7 @@ Voici une liste de questions fréquemment posées pour vous aider à utiliser et
 **Q : Comment installer Pimmich ?**
 
 **R :** L'installation est conçue pour être simple :
-1. Clonez le dépôt GitHub : `git clone https://github.com/gotenash/pimmich.git`
+1. Clonez le dépôt GitHub : `git clone https://github.com/Sweek-Adam/Pimmich-fork.git pimmich`
 2. Allez dans le dossier : `cd pimmich`
 3. Rendez le script d'installation exécutable : `chmod +x setup.sh`
 4. Lancez le script avec les droits d'administrateur : `sudo ./setup.sh`

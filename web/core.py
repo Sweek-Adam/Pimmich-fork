@@ -80,7 +80,6 @@ from utils.download_album import download_and_extract_album
 from utils.auth import login_required, admin_required, is_admin, login_or_internal_required # type: ignore
 
 
-from utils.upstream import check_upstream
 
 
 from utils.security import load_secret_key, ensure_internal_token, csrf_violation, is_internal_request

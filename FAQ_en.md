@@ -25,7 +25,7 @@ Here is a list of frequently asked questions to help you use and troubleshoot Pi
 **Q: How do I install Pimmich?**
 
 **A:** The installation is designed to be simple:
-1. Clone the GitHub repository: `git clone https://github.com/gotenash/pimmich.git`
+1. Clone the GitHub repository: `git clone https://github.com/Sweek-Adam/Pimmich-fork.git pimmich`
 2. Go into the directory: `cd pimmich`
 3. Make the installation script executable: `chmod +x setup.sh`
 4. Run the script with administrator rights: `sudo ./setup.sh`

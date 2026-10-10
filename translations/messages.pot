@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 11:28+0200\n"
+"POT-Creation-Date: 2026-10-10 11:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1812,54 +1812,11 @@ msgstr ""
 msgid "Lancer la mise à jour"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:47
-msgid "Vérifier le dépôt d'origine"
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:57
-msgid "de plus"
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:60
-msgid "Vérification en cours..."
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:66
-msgid ""
-"Aucune nouveauté sur le dépôt d'origine : votre version contient déjà "
-"tout son code."
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:68
-msgid "modification(s) disponible(s) sur le dépôt d'origine"
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:71
-msgid ""
-"Ces modifications ne sont pas encore dans votre fork. Pour les intégrer, "
-"sur un ordinateur : git fetch upstream, puis git merge -Xrenormalize "
-"upstream/main et git push. Lancez ensuite la mise à jour."
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:73
-msgid "Cliquez sur « Lancer la mise à jour » pour les installer."
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:77
-msgid ""
-"modification(s) de votre fork pas encore installée(s) : cliquez sur « "
-"Lancer la mise à jour »."
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:82
-msgid "Vérification impossible :"
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:92
+#: templates/configure/tab_maintenance.html.jinja:49
 msgid "Système de Fichiers de la Carte SD"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:94
+#: templates/configure/tab_maintenance.html.jinja:51
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -1868,56 +1825,56 @@ msgid ""
 " l'opération."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:98
+#: templates/configure/tab_maintenance.html.jinja:55
 msgid "Note :"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:98
+#: templates/configure/tab_maintenance.html.jinja:55
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
 " prochain démarrage."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:103
+#: templates/configure/tab_maintenance.html.jinja:60
 msgid "Étendre le système de fichiers"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:110
+#: templates/configure/tab_maintenance.html.jinja:67
 msgid "Contrôle du système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:113
+#: templates/configure/tab_maintenance.html.jinja:70
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:116
+#: templates/configure/tab_maintenance.html.jinja:73
 msgid "Redémarrer l'application web"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:125
+#: templates/configure/tab_maintenance.html.jinja:82
 msgid "Redémarrer le système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:133
+#: templates/configure/tab_maintenance.html.jinja:90
 msgid "Supprimer les logs"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:138
+#: templates/configure/tab_maintenance.html.jinja:95
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:141
+#: templates/configure/tab_maintenance.html.jinja:98
 msgid "Éteindre le système"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:146
+#: templates/configure/tab_maintenance.html.jinja:103
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr ""
 
-#: templates/configure/tab_maintenance.html.jinja:151
+#: templates/configure/tab_maintenance.html.jinja:108
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
@@ -2811,23 +2768,23 @@ msgstr ""
 msgid "Action réservée aux administrateurs."
 msgstr ""
 
-#: web/core.py:863
+#: web/core.py:862
 msgid "Code d'invitation invalide."
 msgstr ""
 
-#: web/core.py:869
+#: web/core.py:868
 msgid "Ce code d'invitation a expiré."
 msgstr ""
 
-#: web/core.py:875
+#: web/core.py:874
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr ""
 
-#: web/core.py:877
+#: web/core.py:876
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr ""
 
-#: web/core.py:888
+#: web/core.py:887
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 11:28+0200\n"
+"POT-Creation-Date: 2026-10-10 11:50+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: ja <LL@li.org>\n"
 "Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: local_slideshow.py:1031
@@ -126,7 +126,8 @@ msgstr "システム"
 
 #: templates/configure.html.jinja:162
 msgid ""
-"Gérez les paramètres d'affichage du diaporama, la durée, les transitions..."
+"Gérez les paramètres d'affichage du diaporama, la durée, les "
+"transitions..."
 msgstr "スライドショーの表示設定、長さ、トランジションを管理します..."
 
 #: templates/configure.html.jinja:163
@@ -261,8 +262,7 @@ msgstr "接続"
 
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
-#: templates/configure/tab_comptes.html.jinja:118
-#: templates/login.html.jinja:56
+#: templates/configure/tab_comptes.html.jinja:118 templates/login.html.jinja:56
 msgid "Utilisateur"
 msgstr "ユーザー"
 
@@ -274,8 +274,7 @@ msgstr "パスワード"
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:127
-#: templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:127 templates/login.html.jinja:69
 msgid "Afficher/Cacher le mot de passe"
 msgstr "パスワードの表示/非表示"
 
@@ -674,8 +673,8 @@ msgstr "通信エラーです。"
 
 #: templates/configure/scripts_main.html.jinja:967
 msgid ""
-"Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront pas"
-" supprimées."
+"Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront "
+"pas supprimées."
 msgstr "このプレイリストを削除してもよろしいですか?写真は削除されません。"
 
 #: templates/configure/scripts_main.html.jinja:1023
@@ -728,8 +727,8 @@ msgstr "インポートのためのサーバーへの接続エラー"
 
 #: templates/configure/scripts_main.html.jinja:1253
 msgid ""
-"Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » pour "
-"choisir à nouveau les dossiers."
+"Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » "
+"pour choisir à nouveau les dossiers."
 msgstr "方式が変更されました：「Google Drive のフォルダーを表示」をクリックしてフォルダーを選び直してください。"
 
 #: templates/configure/scripts_main.html.jinja:1286
@@ -886,8 +885,8 @@ msgstr "読み込みエラー"
 
 #: templates/configure/scripts_status.html.jinja:787
 msgid ""
-"Êtes-vous sûr de vouloir effacer le contenu du log \"__LOG_NAME__\" ? Cette "
-"action est irréversible."
+"Êtes-vous sûr de vouloir effacer le contenu du log \"__LOG_NAME__\" ? "
+"Cette action est irréversible."
 msgstr "「__LOG_NAME__」ログの内容を削除してもよろしいですか?この操作は元に戻すことができません。"
 
 #: templates/configure/scripts_status.html.jinja:802
@@ -900,8 +899,8 @@ msgstr "ログをクリアするための API への接続中にエラーが発�
 
 #: templates/configure/scripts_status.html.jinja:905
 msgid ""
-"Cette opération va préparer le système à étendre la partition au prochain "
-"redémarrage. Voulez-vous continuer ?"
+"Cette opération va préparer le système à étendre la partition au prochain"
+" redémarrage. Voulez-vous continuer ?"
 msgstr "この操作により、システムは次回の再起動時にパーティションを拡張する準備が整います。続けますか?"
 
 #: templates/configure/scripts_status.html.jinja:967
@@ -984,7 +983,8 @@ msgstr "写真準備中"
 #: templates/configure/tab_actions.html.jinja:90
 msgid ""
 "L'import depuis Telegram se fait automatiquement à la\n"
-"                            réception des photos. Activez la source dans l'onglet \"Sources\" pour les voir."
+"                            réception des photos. Activez la source dans "
+"l'onglet \"Sources\" pour les voir."
 msgstr "Telegram からのインポートは、写真を受信すると自動的に行われます。表示するには「ソース」タブでソースを有効にしてください。"
 
 #: templates/configure/tab_actions.html.jinja:98
@@ -1003,7 +1003,8 @@ msgstr "音楽のインポート"
 
 #: templates/configure/tab_actions.html.jinja:116
 msgid ""
-"Téléchargez vos propres fichiers MP3 ou WAV pour accompagner vos playlists."
+"Téléchargez vos propres fichiers MP3 ou WAV pour accompagner vos "
+"playlists."
 msgstr "プレイリストに合わせる MP3 または WAV ファイルをアップロードしてください。"
 
 #: templates/configure/tab_actions.html.jinja:120
@@ -1036,8 +1037,8 @@ msgstr "ポートレート（縦）"
 
 #: templates/configure/tab_affichage.html.jinja:21
 msgid ""
-"Si vous changez l'orientation, pensez à relancer une préparation des photos "
-"(onglet Actions) pour adapter le contenu."
+"Si vous changez l'orientation, pensez à relancer une préparation des "
+"photos (onglet Actions) pour adapter le contenu."
 msgstr "方向を変更した場合は、必ず写真の準備 ([アクション] タブ) を再起動してコンテンツを調整してください。"
 
 #: templates/configure/tab_affichage.html.jinja:26
@@ -1157,8 +1158,7 @@ msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "例: 0 = ブーストなし、2 = 出現確率が 3 倍になります。"
 
 #: templates/configure/tab_affichage.html.jinja:127
-msgid ""
-"Activer le boost pour les photos à leur date anniversaire de prise de vue"
+msgid "Activer le boost pour les photos à leur date anniversaire de prise de vue"
 msgstr "撮影記念日に写真のブーストを有効にする"
 
 #: templates/configure/tab_affichage.html.jinja:131
@@ -1174,8 +1174,7 @@ msgid "Activer le son pour les vidéos"
 msgstr "ビデオのサウンドを有効にする"
 
 #: templates/configure/tab_affichage.html.jinja:146
-msgid ""
-"Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
+msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr "ハードウェア ビデオ デコードを有効にする (スムーズですが、不安定になる可能性があります)"
 
 #: templates/configure/tab_affichage.html.jinja:148
@@ -1212,9 +1211,9 @@ msgstr "電源管理 (接続されたソケット)"
 
 #: templates/configure/tab_affichage.html.jinja:178
 msgid ""
-"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser "
-"une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra "
-"une simple requête HTTP aux URLs que vous spécifiez."
+"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
+" une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
+"enverra une simple requête HTTP aux URLs que vous spécifiez."
 msgstr ""
 "画面が完全にスリープ状態にならない場合は、接続されているコンセント (Wi-Fi) を使用して電源をオフにすることができます。 Pimmich "
 "は、指定した URL に単純な HTTP リクエストを送信します。"
@@ -1260,8 +1259,8 @@ msgstr "オン後の待機時間（秒）："
 
 #: templates/configure/tab_affichage.html.jinja:236
 msgid ""
-"Temps d'attente pour que l'écran s'initialise avant de forcer la résolution."
-" Augmentez si la résolution est toujours incorrecte."
+"Temps d'attente pour que l'écran s'initialise avant de forcer la "
+"résolution. Augmentez si la résolution est toujours incorrecte."
 msgstr "解像度を強制する前に画面が初期化されるまで待機する時間。解像度がまだ正しくない場合は、値を増やします。"
 
 #: templates/configure/tab_affichage.html.jinja:239
@@ -1295,7 +1294,8 @@ msgstr "準備した写真をプレビューする"
 #: templates/configure/tab_apercu.html.jinja:6
 msgid ""
 "Voici les photos qui sont prêtes à être affichées par le diaporama,\n"
-"                    classées par source. Cliquez sur une photo pour l'agrandir."
+"                    classées par source. Cliquez sur une photo pour "
+"l'agrandir."
 msgstr "スライドショーで表示できる写真をソース別に表示しています。写真をクリックすると拡大表示されます。"
 
 #: templates/configure/tab_apercu.html.jinja:17
@@ -1437,11 +1437,10 @@ msgstr "ユーザーアカウント"
 #: templates/configure/tab_comptes.html.jinja:53
 msgid ""
 "Les administrateurs ont accès à tout. Les utilisateurs peuvent régler le "
-"diaporama, importer et gérer les photos, mais n'ont accès ni aux comptes, ni"
-" au réseau, ni à la maintenance, et ne voient pas les mots de passe et "
-"jetons enregistrés."
-msgstr ""
-"管理者はすべての機能を利用できます。ユーザーはスライドショーの設定や写真のインポート・管理ができますが、アカウント、ネットワーク、メンテナンスにはアクセスできず、保存されたパスワードやトークンも表示されません。"
+"diaporama, importer et gérer les photos, mais n'ont accès ni aux comptes,"
+" ni au réseau, ni à la maintenance, et ne voient pas les mots de passe et"
+" jetons enregistrés."
+msgstr "管理者はすべての機能を利用できます。ユーザーはスライドショーの設定や写真のインポート・管理ができますが、アカウント、ネットワーク、メンテナンスにはアクセスできず、保存されたパスワードやトークンも表示されません。"
 
 #: templates/configure/tab_comptes.html.jinja:58
 msgid "Nom"
@@ -1506,9 +1505,9 @@ msgstr "作成する"
 
 #: templates/configure/tab_comptes.html.jinja:130
 msgid ""
-"Vous êtes connecté avec un compte utilisateur : la gestion des comptes, le "
-"réseau, la maintenance et les mots de passe ou jetons enregistrés sont "
-"réservés aux administrateurs."
+"Vous êtes connecté avec un compte utilisateur : la gestion des comptes, "
+"le réseau, la maintenance et les mots de passe ou jetons enregistrés sont"
+" réservés aux administrateurs."
 msgstr "ユーザーアカウントでログインしています。アカウント管理、ネットワーク、メンテナンス、保存されたパスワードやトークンは管理者専用です。"
 
 #: templates/configure/tab_favoris.html.jinja:4
@@ -1661,7 +1660,8 @@ msgstr "の API を使用します"
 #: templates/configure/tab_heure.html.jinja:151
 msgid ""
 "Une clé API est\n"
-"                        requise. Vous pouvez trouver les coordonnées de votre port sur des sites comme"
+"                        requise. Vous pouvez trouver les coordonnées de "
+"votre port sur des sites comme"
 msgstr ""
 "APIキーは\n"
 "                        必須です。ポートの座標は次のようなサイトで見つけることができます。"
@@ -1677,8 +1677,8 @@ msgstr ""
 #: templates/configure/tab_heure.html.jinja:160
 msgid "Afficher les informations de marée"
 msgstr ""
-"Error 500 (Server Error)!!1500.That’s an error.There was an error. Please "
-"try again later.That’s all we know."
+"Error 500 (Server Error)!!1500.That’s an error.There was an error. Please"
+" try again later.That’s all we know."
 
 #: templates/configure/tab_heure.html.jinja:165
 msgid "Latitude (ex: 48.3904) :"
@@ -1735,7 +1735,8 @@ msgstr "注意 ："
 #: templates/configure/tab_heure.html.jinja:240
 msgid ""
 "La détection automatique du fuseau horaire a\n"
-"                            échoué lors de l'installation. Le système est configuré sur <strong>UTC</strong>. L'heure\n"
+"                            échoué lors de l'installation. Le système est"
+" configuré sur <strong>UTC</strong>. L'heure\n"
 "                            affichée peut être incorrecte."
 msgstr ""
 "インストール時にタイムゾーンの自動検出に失敗しました。システムは <strong>UTC</strong> "
@@ -1743,7 +1744,8 @@ msgstr ""
 
 #: templates/configure/tab_heure.html.jinja:244
 msgid ""
-"Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via SSH) et\n"
+"Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi "
+"(via SSH) et\n"
 "                            en exécutant la commande :"
 msgstr "Raspberry Pi に（SSH で）接続し、次のコマンドを実行して手動で修正できます："
 
@@ -1795,7 +1797,8 @@ msgstr "バックアップと復元"
 #: templates/configure/tab_maintenance.html.jinja:6
 msgid ""
 "Sauvegardez votre configuration (API, partages,\n"
-"                    affichage...) dans un fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle\n"
+"                    affichage...) dans un fichier. Vous pourrez le "
+"restaurer plus tard ou sur une nouvelle\n"
 "                    installation."
 msgstr "設定（API、共有、表示など）をファイルに保存します。後で、または新しいインストール環境で復元できます。"
 
@@ -1828,132 +1831,90 @@ msgstr "アプリケーションのアップデート"
 #: templates/configure/tab_maintenance.html.jinja:37
 msgid ""
 "Cliquez sur le bouton pour rechercher et installer les\n"
-"                    dernières mises à jour de Pimmich depuis GitHub. L'application redémarrera automatiquement après la\n"
+"                    dernières mises à jour de Pimmich depuis GitHub. "
+"L'application redémarrera automatiquement après la\n"
 "                    mise à jour."
 msgstr ""
 "ボタンをクリックすると、GitHub から Pimmich "
 "の最新アップデートを確認してインストールします。アップデート後、アプリケーションは自動的に再起動します。"
 
 #: templates/configure/tab_maintenance.html.jinja:42
-msgid ""
-"Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
+msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "アップデートを開始しますか?追跡ページにリダイレクトされます。"
 
 #: templates/configure/tab_maintenance.html.jinja:43
 msgid "Lancer la mise à jour"
 msgstr "アップデートを開始する"
 
-#: templates/configure/tab_maintenance.html.jinja:47
-msgid "Vérifier le dépôt d'origine"
-msgstr "元のリポジトリを確認"
-
-#: templates/configure/tab_maintenance.html.jinja:57
-msgid "de plus"
-msgstr "件先行"
-
-#: templates/configure/tab_maintenance.html.jinja:60
-msgid "Vérification en cours..."
-msgstr "確認中..."
-
-#: templates/configure/tab_maintenance.html.jinja:66
-msgid ""
-"Aucune nouveauté sur le dépôt d'origine : votre version contient déjà tout "
-"son code."
-msgstr "元のリポジトリに新しい変更はありません。お使いのバージョンにはすべてのコードが含まれています。"
-
-#: templates/configure/tab_maintenance.html.jinja:68
-msgid "modification(s) disponible(s) sur le dépôt d'origine"
-msgstr "件の変更が元のリポジトリで利用可能です"
-
-#: templates/configure/tab_maintenance.html.jinja:71
-msgid ""
-"Ces modifications ne sont pas encore dans votre fork. Pour les intégrer, sur"
-" un ordinateur : git fetch upstream, puis git merge -Xrenormalize "
-"upstream/main et git push. Lancez ensuite la mise à jour."
-msgstr ""
-"これらの変更はまだあなたのフォークに含まれていません。取り込むには、パソコンで git fetch upstream を実行し、続いて git "
-"merge -Xrenormalize upstream/main と git push を実行してください。その後、アップデートを実行してください。"
-
-#: templates/configure/tab_maintenance.html.jinja:73
-msgid "Cliquez sur « Lancer la mise à jour » pour les installer."
-msgstr "インストールするには「アップデートを開始」をクリックしてください。"
-
-#: templates/configure/tab_maintenance.html.jinja:77
-msgid ""
-"modification(s) de votre fork pas encore installée(s) : cliquez sur « Lancer"
-" la mise à jour »."
-msgstr "件のフォークの変更がまだインストールされていません：「アップデートを開始」をクリックしてください。"
-
-#: templates/configure/tab_maintenance.html.jinja:82
-msgid "Vérification impossible :"
-msgstr "確認できません："
-
-#: templates/configure/tab_maintenance.html.jinja:92
+#: templates/configure/tab_maintenance.html.jinja:49
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SDカードファイルシステム"
 
-#: templates/configure/tab_maintenance.html.jinja:94
+#: templates/configure/tab_maintenance.html.jinja:51
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
-"                    l'image, utilisez cette option pour étendre la partition et utiliser tout l'espace disponible. Un\n"
-"                    redémarrage du système sera nécessaire pour finaliser l'opération."
+"                    l'image, utilisez cette option pour étendre la "
+"partition et utiliser tout l'espace disponible. Un\n"
+"                    redémarrage du système sera nécessaire pour finaliser"
+" l'opération."
 msgstr ""
 "イメージより大きい SD カードに Pimmich "
 "を書き込んだ場合は、このオプションでパーティションを拡張し、利用可能な容量をすべて使用できます。操作を完了するにはシステムの再起動が必要です。"
 
-#: templates/configure/tab_maintenance.html.jinja:98
+#: templates/configure/tab_maintenance.html.jinja:55
 msgid "Note :"
 msgstr "注記 ："
 
-#: templates/configure/tab_maintenance.html.jinja:98
+#: templates/configure/tab_maintenance.html.jinja:55
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
-"                        Elle prépare simplement le système à s'étendre au prochain démarrage."
+"                        Elle prépare simplement le système à s'étendre au"
+" prochain démarrage."
 msgstr "この操作は安全で、データは削除されません。次回起動時に拡張されるようシステムを準備するだけです。"
 
-#: templates/configure/tab_maintenance.html.jinja:103
+#: templates/configure/tab_maintenance.html.jinja:60
 msgid "Étendre le système de fichiers"
 msgstr "ファイルシステムを拡張する"
 
-#: templates/configure/tab_maintenance.html.jinja:110
+#: templates/configure/tab_maintenance.html.jinja:67
 msgid "Contrôle du système"
 msgstr "システム制御"
 
-#: templates/configure/tab_maintenance.html.jinja:113
+#: templates/configure/tab_maintenance.html.jinja:70
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr "Web アプリケーションのみを再起動してもよろしいですか?オペレーティング システムは再起動されません。"
 
-#: templates/configure/tab_maintenance.html.jinja:116
+#: templates/configure/tab_maintenance.html.jinja:73
 msgid "Redémarrer l'application web"
 msgstr "Webアプリケーションを再起動します"
 
-#: templates/configure/tab_maintenance.html.jinja:125
+#: templates/configure/tab_maintenance.html.jinja:82
 msgid "Redémarrer le système"
 msgstr "システムを再起動します"
 
-#: templates/configure/tab_maintenance.html.jinja:133
+#: templates/configure/tab_maintenance.html.jinja:90
 msgid "Supprimer les logs"
 msgstr "ログの削除"
 
-#: templates/configure/tab_maintenance.html.jinja:138
+#: templates/configure/tab_maintenance.html.jinja:95
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "システムの電源を切ってもよろしいですか?"
 
-#: templates/configure/tab_maintenance.html.jinja:141
+#: templates/configure/tab_maintenance.html.jinja:98
 msgid "Éteindre le système"
 msgstr "システムをシャットダウンします"
 
-#: templates/configure/tab_maintenance.html.jinja:146
+#: templates/configure/tab_maintenance.html.jinja:103
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Raspberry Pi OS（デスクトップ）に戻す"
 
-#: templates/configure/tab_maintenance.html.jinja:151
+#: templates/configure/tab_maintenance.html.jinja:108
 msgid ""
-"Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se "
-"lancera plus automatiquement. Pour revenir au mode cadre photo, relancez "
-"setup.sh. Continuer ?"
+"Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
+" lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
+" setup.sh. Continuer ?"
 msgstr ""
 "Raspberry Pi は Raspberry Pi OS のデスクトップで再起動し、Pimmich "
 "は自動起動しなくなります。フォトフレームモードに戻すには setup.sh を再実行してください。続行しますか？"
@@ -2126,7 +2087,8 @@ msgstr "Wi-Fiの設定"
 #: templates/configure/tab_network.html.jinja:25
 msgid ""
 "La sélection du pays est obligatoire pour activer\n"
-"                    l'interface Wi-Fi et respecter les réglementations locales sur les fréquences radio."
+"                    l'interface Wi-Fi et respecter les réglementations "
+"locales sur les fréquences radio."
 msgstr "Wi-Fi インターフェースを有効にし、各地域の無線周波数規制を守るため、国の選択は必須です。"
 
 #: templates/configure/tab_network.html.jinja:29
@@ -2188,8 +2150,10 @@ msgstr "Wi-Fi設定を適用する"
 #: templates/configure/tab_network.html.jinja:71
 msgid ""
 "Note : Après avoir appliqué les paramètres, la connexion\n"
-"                    peut prendre jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à \"Connecté\",\n"
-"                    vérifiez le mot de passe puis essayez de redémarrer le système."
+"                    peut prendre jusqu'à une minute. Si le statut de "
+"connexion ci-dessus ne passe pas à \"Connecté\",\n"
+"                    vérifiez le mot de passe puis essayez de redémarrer "
+"le système."
 msgstr ""
 "注意：設定を適用した後、接続まで最大 1 "
 "分ほどかかる場合があります。上の接続状態が「接続済み」にならない場合は、パスワードを確認してからシステムを再起動してみてください。"
@@ -2201,8 +2165,10 @@ msgstr "ネットワークインターフェース管理"
 #: templates/configure/tab_network.html.jinja:80
 msgid ""
 "Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet\n"
-"                    est branché, c'est souvent un problème de priorité. Désactivez l'interface Ethernet pour forcer le\n"
-"                    système à utiliser exclusivement le Wi-Fi. Cette action redémarre le service réseau."
+"                    est branché, c'est souvent un problème de priorité. "
+"Désactivez l'interface Ethernet pour forcer le\n"
+"                    système à utiliser exclusivement le Wi-Fi. Cette "
+"action redémarre le service réseau."
 msgstr ""
 "Ethernet ケーブルが接続されていると Wi-Fi が接続されない場合、多くは優先順位の問題です。Ethernet "
 "インターフェースを無効にすると、システムは Wi-Fi のみを使用します。この操作によりネットワークサービスが再起動されます。"
@@ -2218,7 +2184,8 @@ msgstr "近くの Wi-Fi ネットワーク"
 #: templates/configure/tab_network.html.jinja:104
 msgid ""
 "Cliquez sur le bouton pour rechercher les réseaux Wi-Fi disponibles.\n"
-"                    Cliquer sur un réseau dans la liste remplira automatiquement le champ SSID ci-dessus."
+"                    Cliquer sur un réseau dans la liste remplira "
+"automatiquement le champ SSID ci-dessus."
 msgstr ""
 "ボタンをクリックして、利用可能な Wi-Fi ネットワークを検索します。\n"
 "                    リスト内のネットワークをクリックすると、上の SSID フィールドに自動的に入力されます。"
@@ -2230,7 +2197,8 @@ msgstr "プレイリスト管理"
 #: templates/configure/tab_playlists.html.jinja:6
 msgid ""
 "Créez des albums virtuels (playlists) en sélectionnant des\n"
-"                    photos de n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant uniquement les\n"
+"                    photos de n'importe quelle source. Vous pouvez "
+"ensuite lancer un diaporama contenant uniquement les\n"
 "                    photos d'une playlist."
 msgstr "任意のソースから写真を選んで仮想アルバム（プレイリスト）を作成できます。プレイリストの写真だけでスライドショーを開始することもできます。"
 
@@ -2244,8 +2212,8 @@ msgstr ""
 
 #: templates/configure/tab_playlists.html.jinja:37
 msgid ""
-"Arrête la playlist en cours et relance le diaporama avec toutes les sources "
-"activées."
+"Arrête la playlist en cours et relance le diaporama avec toutes les "
+"sources activées."
 msgstr "現在のプレイリストを停止し、すべてのソースをアクティブにしてスライドショーを再開します。"
 
 #: templates/configure/tab_playlists.html.jinja:45
@@ -2299,7 +2267,8 @@ msgstr "アップロードする写真の制限 (Immich)"
 #: templates/configure/tab_sources.html.jinja:34
 msgid ""
 "Nombre maximum de photos à récupérer depuis Immich.\n"
-"                        Mettez 0, -1 ou laissez vide pour ne pas avoir de limite."
+"                        Mettez 0, -1 ou laissez vide pour ne pas avoir de"
+" limite."
 msgstr ""
 "Immich から回復する写真の最大数。\n"
 "                        制限を設けない場合は、0、-1 を入力するか、空のままにします。"
@@ -2348,7 +2317,8 @@ msgstr "スライドショーで表示するソース"
 #: templates/configure/tab_sources.html.jinja:69
 msgid ""
 "Sélectionnez les sources de photos à inclure dans le diaporama.\n"
-"                        Les photos seront mélangées entre les sources sélectionnées."
+"                        Les photos seront mélangées entre les sources "
+"sélectionnées."
 msgstr ""
 "スライドショーに含める写真ソースを選択します。\n"
 "                        写真は選択したソース間で混合されます。"
@@ -2455,17 +2425,18 @@ msgstr "rclone リモート："
 
 #: templates/configure/tab_sources.html.jinja:182
 msgid ""
-"Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « rclone "
-"config » sur le Raspberry Pi."
+"Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « "
+"rclone config » sur le Raspberry Pi."
 msgstr ""
 "Google Drive の rclone リモートが見つかりません。作成するには、Raspberry Pi で「rclone "
 "config」を実行してください。"
 
 #: templates/configure/tab_sources.html.jinja:187
 msgid ""
-"Créez un compte de service dans la console Google Cloud (API Google Drive "
-"activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez ensuite "
-"vos dossiers de photos avec l'adresse e-mail du compte de service."
+"Créez un compte de service dans la console Google Cloud (API Google Drive"
+" activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez "
+"ensuite vos dossiers de photos avec l'adresse e-mail du compte de "
+"service."
 msgstr ""
 "Google Cloud コンソールでサービスアカウントを作成し（Google Drive API を有効化）、JSON "
 "キーをダウンロードして下に貼り付けてください。その後、写真フォルダーをサービスアカウントのメールアドレスと共有してください。"
@@ -2475,8 +2446,7 @@ msgid "Compte de service configuré :"
 msgstr "設定済みのサービスアカウント："
 
 #: templates/configure/tab_sources.html.jinja:192
-msgid ""
-"Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
+msgid "Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
 msgstr "Google Drive のフォルダーをこのアドレスと共有してください（閲覧のみ）。"
 
 #: templates/configure/tab_sources.html.jinja:195
@@ -2497,8 +2467,8 @@ msgstr "スライドショーに表示するフォルダー："
 
 #: templates/configure/tab_sources.html.jinja:217
 msgid ""
-"Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google Drive "
-"»."
+"Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google "
+"Drive »."
 msgstr "フォルダーが選択されていません。「Google Drive のフォルダーを表示」をクリックしてください。"
 
 #: templates/configure/tab_sources.html.jinja:223
@@ -2512,8 +2482,8 @@ msgstr "インポート後にファイルを Google Drive のゴミ箱に移動"
 #: templates/configure/tab_sources.html.jinja:229
 msgid ""
 "Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
-"importée part dans la corbeille du Drive (récupérable 30 jours) et reste sur"
-" le cadre jusqu'à ce que vous la supprimiez dans l'onglet « Aperçu ». "
+"importée part dans la corbeille du Drive (récupérable 30 jours) et reste "
+"sur le cadre jusqu'à ce que vous la supprimiez dans l'onglet « Aperçu ». "
 "Uniquement avec la connexion rclone."
 msgstr ""
 "フォルダーは「送信ボックス」として機能します。インポートされた写真や動画は Drive のゴミ箱に移動し（30 "
@@ -2521,8 +2491,8 @@ msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:230
 msgid ""
-"Pensez à enregistrer la configuration après avoir choisi les dossiers, puis "
-"lancez l'import depuis l'onglet « Actions »."
+"Pensez à enregistrer la configuration après avoir choisi les dossiers, "
+"puis lancez l'import depuis l'onglet « Actions »."
 msgstr "フォルダーを選択したら設定を保存し、「アクション」タブからインポートを開始してください。"
 
 #: templates/configure/tab_sources.html.jinja:233
@@ -2535,8 +2505,8 @@ msgstr "新着の確認間隔（分）："
 
 #: templates/configure/tab_sources.html.jinja:241
 msgid ""
-"Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées ou "
-"supprimées."
+"Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées "
+"ou supprimées."
 msgstr "写真や動画が追加または削除された場合にのみ、スライドショーが再起動されます。"
 
 #: templates/configure/tab_sources.html.jinja:255
@@ -2549,8 +2519,8 @@ msgstr "起動時の最初の自動インポートをスキップする"
 
 #: templates/configure/tab_sources.html.jinja:261
 msgid ""
-"Si cette option est cochée, les mises à jour automatiques (Immich, Samba) ne"
-" se lanceront pas immédiatement après un redémarrage du cadre, mais "
+"Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
+" ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
 "attendront le prochain cycle programmé."
 msgstr ""
 "このオプションがチェックされている場合、自動更新 (Immich、Samba) "
@@ -2598,8 +2568,10 @@ msgstr "電報で写真を受信する"
 
 #: templates/configure/tab_telegram.html.jinja:7
 msgid ""
-"Activez cette fonction pour permettre à des utilisateurs autorisés d'envoyer des photos\n"
-"                        directement sur le cadre via un bot Telegram. Les photos reçues seront ajoutées à la source\n"
+"Activez cette fonction pour permettre à des utilisateurs autorisés "
+"d'envoyer des photos\n"
+"                        directement sur le cadre via un bot Telegram. Les"
+" photos reçues seront ajoutées à la source\n"
 "                        \"Telegram\"."
 msgstr ""
 "この機能を有効にすると、承認されたユーザーが写真を送信できるようになります。\n"
@@ -2608,12 +2580,14 @@ msgstr ""
 
 #: templates/configure/tab_telegram.html.jinja:11
 msgid ""
-"Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. L'ID de\n"
-"                        l'administrateur est votre propre ID utilisateur Telegram (obtenu via @userinfobot par\n"
+"Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. "
+"L'ID de\n"
+"                        l'administrateur est votre propre ID utilisateur "
+"Telegram (obtenu via @userinfobot par\n"
 "                        exemple)."
 msgstr ""
-"ボットを作成してトークンを取得するには、Telegram で @BotFather に話しかけてください。管理者 ID はご自身の Telegram "
-"ユーザー ID です（@userinfobot などで取得できます）。"
+"ボットを作成してトークンを取得するには、Telegram で @BotFather に話しかけてください。管理者 ID はご自身の "
+"Telegram ユーザー ID です（@userinfobot などで取得できます）。"
 
 #: templates/configure/tab_telegram.html.jinja:17
 msgid "Activer le bot de réception Telegram"
@@ -2649,8 +2623,10 @@ msgstr "ゲストの招待状の管理"
 
 #: templates/configure/tab_telegram.html.jinja:62
 msgid ""
-"Créez des codes d'invitation uniques pour permettre à vos amis et votre famille d'envoyer\n"
-"                        des photos au cadre. Ils devront envoyer ce code à votre bot Telegram pour être autorisés."
+"Créez des codes d'invitation uniques pour permettre à vos amis et votre "
+"famille d'envoyer\n"
+"                        des photos au cadre. Ils devront envoyer ce code "
+"à votre bot Telegram pour être autorisés."
 msgstr ""
 "独自の招待コードを作成して友人や家族に送信できるようにする\n"
 "                        フレーム内の写真。承認されるには、このコードを Telegram ボットに送信する必要があります。"
@@ -2690,7 +2666,8 @@ msgstr "ソース電報"
 #: templates/configure/tab_telegram.html.jinja:99
 msgid ""
 "N'oubliez pas d'activer la source \"Telegram\" dans l'onglet\n"
-"                        \"Sources\" pour que les photos reçues apparaissent dans le diaporama."
+"                        \"Sources\" pour que les photos reçues "
+"apparaissent dans le diaporama."
 msgstr ""
 "タブで「Telegram」ソースを有効にすることを忘れないでください。\n"
 "                        「ソース」を選択すると、受信した写真がスライドショーに表示されます。"
@@ -2702,7 +2679,8 @@ msgstr "はがきの頻度"
 #: templates/configure/tab_telegram.html.jinja:107
 msgid ""
 "Augmentez temporairement la fréquence d'affichage des\n"
-"                        nouvelles cartes postales reçues pour qu'elles apparaissent plus souvent."
+"                        nouvelles cartes postales reçues pour qu'elles "
+"apparaissent plus souvent."
 msgstr ""
 "一時的に表示頻度を上げます。\n"
 "                        新しいポストカードを受け取ったので、より頻繁に表示されます。"
@@ -2760,13 +2738,15 @@ msgstr "必要な手動ステップ:"
 #: templates/configure/tab_vocal.html.jinja:11
 msgid ""
 "Pour utiliser le mot-clé\n"
-"                            personnalisé \"Cadre Magique\", vous devez créer un modèle sur le site de Picovoice, le\n"
-"                            télécharger, et le placer dans le dossier `voice_models` sous le nom\n"
+"                            personnalisé \"Cadre Magique\", vous devez "
+"créer un modèle sur le site de Picovoice, le\n"
+"                            télécharger, et le placer dans le dossier "
+"`voice_models` sous le nom\n"
 "                            `cadre-magique_raspberry-pi.ppn`."
 msgstr ""
 "カスタムキーワード「Cadre Magique」を使用するには、Picovoice "
-"のサイトでモデルを作成してダウンロードし、`voice_models` フォルダーに `cadre-magique_raspberry-pi.ppn` "
-"という名前で配置する必要があります。"
+"のサイトでモデルを作成してダウンロードし、`voice_models` フォルダーに `cadre-magique_raspberry-"
+"pi.ppn` という名前で配置する必要があります。"
 
 #: templates/configure/tab_vocal.html.jinja:18
 msgid ""
@@ -2813,7 +2793,8 @@ msgstr "英語"
 #: templates/configure/tab_vocal.html.jinja:46
 msgid ""
 "Le changement de langue nécessite un redémarrage du\n"
-"                            service vocal (désactiver puis réactiver le contrôle vocal)."
+"                            service vocal (désactiver puis réactiver le "
+"contrôle vocal)."
 msgstr "言語を変更するには、音声サービスの再起動（音声コントロールを無効にしてから再度有効にする）が必要です。"
 
 #: templates/configure/tab_vocal.html.jinja:51
@@ -2854,7 +2835,8 @@ msgstr "通知音の音量"
 
 #: templates/configure/tab_vocal.html.jinja:99
 msgid ""
-"Règle le volume pour les sons de notification (confirmation du contrôle vocal, réception\n"
+"Règle le volume pour les sons de notification (confirmation du contrôle "
+"vocal, réception\n"
 "                        de carte postale, etc.)."
 msgstr ""
 "通知音（ボイスコントロール確認、受信音）の音量を調整します。\n"
@@ -2874,8 +2856,10 @@ msgstr "診断音声"
 
 #: templates/configure/tab_vocal.html.jinja:119
 msgid ""
-"Si votre microphone n'apparaît pas dans la liste ci-dessus, utilisez cet outil pour\n"
-"                        vérifier si le système d'exploitation le détecte correctement."
+"Si votre microphone n'apparaît pas dans la liste ci-dessus, utilisez cet "
+"outil pour\n"
+"                        vérifier si le système d'exploitation le détecte "
+"correctement."
 msgstr ""
 "お使いのマイクが上記にリストされていない場合は、このツールを使用して\n"
 "                        オペレーティング システムがそれを正しく検出しているかどうかを確認してください。"
@@ -2888,27 +2872,27 @@ msgstr "診断結果:"
 msgid "Action réservée aux administrateurs."
 msgstr "管理者専用の操作です。"
 
-#: web/core.py:863
+#: web/core.py:862
 msgid "Code d'invitation invalide."
 msgstr "招待コードが無効です。"
 
-#: web/core.py:869
+#: web/core.py:868
 msgid "Ce code d'invitation a expiré."
 msgstr "この招待コードの有効期限は切れています。"
 
-#: web/core.py:875
+#: web/core.py:874
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "あなたはすでに認可されています。写真を送ってください！"
 
-#: web/core.py:877
+#: web/core.py:876
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "この招待コードはすでに使用されています。"
 
-#: web/core.py:888
+#: web/core.py:887
 #, python-format
 msgid ""
-"Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes postales "
-"au cadre."
+"Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
+"postales au cadre."
 msgstr "%(name)s おめでとうございます!ポストカードをフレームに送信できるようになりました。"
 
 #: web/routes_auth.py:23
@@ -2937,8 +2921,8 @@ msgstr "パスワードには少なくとも 6 文字を含める必要があり
 
 #: web/routes_auth.py:64
 msgid ""
-"Mot de passe mis à jour avec succès. Il sera nécessaire pour votre prochaine"
-" connexion."
+"Mot de passe mis à jour avec succès. Il sera nécessaire pour votre "
+"prochaine connexion."
 msgstr "パスワードが正常に更新されました。次回の接続に必要になります。"
 
 #: web/routes_auth.py:66
@@ -2976,8 +2960,8 @@ msgstr "「%(name)s」の役割を変更しました。"
 
 #: web/routes_config.py:54
 msgid ""
-"La valeur pour la limite de photos Immich est invalide. La valeur précédente"
-" est conservée."
+"La valeur pour la limite de photos Immich est invalide. La valeur "
+"précédente est conservée."
 msgstr "イミッチ写真制限の値が無効です。以前の値が保持されます。"
 
 #: web/routes_config.py:202
@@ -3042,8 +3026,7 @@ msgstr "接続エラー: %(error)s"
 
 #: web/routes_slideshow.py:379
 #, python-format
-msgid ""
-"Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
+msgid "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
 msgstr "適用される解像度: %(width)sx%(height)s。スライドショーを再開しました。"
 
 #: web/routes_slideshow.py:381
@@ -3055,20 +3038,20 @@ msgstr "適用される解像度: %(width)sx%(height)s。スライドショー�
 
 #: web/routes_system.py:83
 msgid ""
-"Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération "
-"annulée."
+"Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération"
+" annulée."
 msgstr "デスクトップ環境が検出されません（Raspberry Pi OS Lite?）。操作を中止しました。"
 
 #: web/routes_system.py:119
 msgid ""
-"Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera "
-"plus automatiquement."
+"Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera"
+" plus automatiquement."
 msgstr "システムを Raspberry Pi OS のデスクトップで再起動します。Pimmich は自動起動しなくなります。"
 
 #: web/routes_system.py:169
 msgid ""
-"L'application web redémarre... La page sera inaccessible pendant quelques "
-"instants."
+"L'application web redémarre... La page sera inaccessible pendant quelques"
+" instants."
 msgstr "Web アプリケーションが再起動します...ページはしばらくの間アクセスできなくなります。"
 
 #: web/routes_system.py:195
@@ -3077,10 +3060,9 @@ msgstr "SSIDとWi-Fiの国は必須です。"
 
 #: web/routes_system.py:208
 msgid ""
-"Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer la"
-" connexion. Veuillez patienter une minute et vérifier le statut."
-msgstr ""
-"Wi-Fi設定が適用されました。接続を強制するためにネットワーク サービスが再起動されました。しばらく待ってからステータスを確認してください。"
+"Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
+" la connexion. Veuillez patienter une minute et vérifier le statut."
+msgstr "Wi-Fi設定が適用されました。接続を強制するためにネットワーク サービスが再起動されました。しばらく待ってからステータスを確認してください。"
 
 #: web/routes_system.py:210
 #, python-format
@@ -3194,416 +3176,3 @@ msgstr "新着はありません。"
 msgid "Mise à jour automatique Google Drive désactivée."
 msgstr "Google Drive の自動更新を無効にしました。"
 
-#~ msgid "Amplitude du zoom (ex: 1.15 pour 15%% de zoom) :"
-#~ msgstr "ズーム振幅 (例: 15%% ズームの場合は 1.15):"
-
-#~ msgid ""
-#~ "Activer le contrôle par prise\n"
-#~ "                            connectée"
-#~ msgstr ""
-#~ "ソケット制御を有効にする\n"
-#~ "                            接続されています"
-
-#~ msgid ""
-#~ "État de la\n"
-#~ "                            prise : Inconnu"
-#~ msgstr ""
-#~ "の状態\n"
-#~ "                            撮影：不明"
-
-#~ msgid ""
-#~ "URL\n"
-#~ "                                pour ALLUMER la prise :"
-#~ msgstr ""
-#~ "URL\n"
-#~ "                                ソケットをオンにするには:"
-
-#~ msgid ""
-#~ "URL\n"
-#~ "                                pour ÉTEINDRE la prise :"
-#~ msgstr ""
-#~ "URL\n"
-#~ "                                ソケットをオフにするには:"
-
-#~ msgid ""
-#~ "Délai\n"
-#~ "                                après allumage (secondes) :"
-#~ msgstr ""
-#~ "締め切り\n"
-#~ "                                点火後 (秒):"
-
-#~ msgid ""
-#~ "URL\n"
-#~ "                                de Statut (Optionnel) :"
-#~ msgstr ""
-#~ "URL\n"
-#~ "                                ステータス (オプション):"
-
-#~ msgid ""
-#~ "La détection automatique du fuseau horaire a\n"
-#~ "                            échoué lors de l'installation. Le système est configuré sur <strong>UTC</strong>. L'heure\n"
-#~ "                            affichée peut être incorrecte."
-#~ msgstr ""
-#~ "自動タイムゾーン検出機能は、\n"
-#~ "                            インストール中に失敗しました。システムは<strong>UTC</strong>に設定されています。時間\n"
-#~ "                            表示される内容が間違っている可能性があります。"
-
-#~ msgid ""
-#~ "Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via SSH) et\n"
-#~ "                            en exécutant la commande :"
-#~ msgstr ""
-#~ "Raspberry Pi に (SSH 経由で) 接続することで手動で修正できます。\n"
-#~ "                            次のコマンドを実行します。"
-
-#~ msgid ""
-#~ "Ignorer le premier import\n"
-#~ "                            automatique au démarrage"
-#~ msgstr ""
-#~ "最初のインポートをスキップする\n"
-#~ "                            起動時に自動で"
-
-#~ msgid ""
-#~ "Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. L'ID de\n"
-#~ "                        l'administrateur est votre propre ID utilisateur Telegram (obtenu via @userinfobot par\n"
-#~ "                        exemple)."
-#~ msgstr ""
-#~ "ボットを作成してトークンを取得するには、Telegram で @BotFather に話しかけてください。のID\n"
-#~ "                        admin は自分の Telegram ユーザー ID (@userinfobot 経由で取得)\n"
-#~ "                        例）。"
-
-#~ msgid ""
-#~ "Pour utiliser le mot-clé\n"
-#~ "                            personnalisé \"Cadre Magique\", vous devez créer un modèle sur le site de Picovoice, le\n"
-#~ "                            télécharger, et le placer dans le dossier `voice_models` sous le nom\n"
-#~ "                            `cadre-magique_raspberry-pi.ppn`."
-#~ msgstr ""
-#~ "キーワードを使用するには\n"
-#~ "                            パーソナライズされた「Magic Frame」を使用するには、Picovoice Web サイトでモデルを作成する必要があります。\n"
-#~ "                            ダウンロードして、「voice_models」フォルダーに次の名前で配置します。\n"
-#~ "                            `magic-framework_raspberry-pi.ppn`。"
-
-#~ msgid ""
-#~ "Activer le contrôle vocal\n"
-#~ "                            (action immédiate)"
-#~ msgstr ""
-#~ "音声制御を有効にする\n"
-#~ "                            (即時対応)"
-
-#~ msgid ""
-#~ "Langue\n"
-#~ "                            du contrôle vocal"
-#~ msgstr ""
-#~ "言語\n"
-#~ "                            音声制御"
-
-#~ msgid ""
-#~ "Le changement de langue nécessite un redémarrage du\n"
-#~ "                            service vocal (désactiver puis réactiver le contrôle vocal)."
-#~ msgstr ""
-#~ "言語を変更するには再起動が必要です\n"
-#~ "                            音声サービス (音声コントロールを無効にしてから再度有効にします)。"
-
-#~ msgid ""
-#~ "Clé\n"
-#~ "                            d'accès Picovoice Porcupine"
-#~ msgstr ""
-#~ "キー\n"
-#~ "                            Picovoice ヤマアラシにアクセスする"
-
-#~ msgid ""
-#~ " Collez\n"
-#~ "                            votre clé d'accès ici"
-#~ msgstr ""
-#~ "ペースト\n"
-#~ "                            アクセスキーはここにあります"
-
-#~ msgid ""
-#~ "Obtenez votre clé via le compte gratuit (Free Tier)\n"
-#~ "                            sur la"
-#~ msgstr ""
-#~ "無料アカウント (無料利用枠) 経由でキーを取得します。\n"
-#~ "                            で"
-
-#~ msgid "Utilise les codes de formatage Python (ex: %%d/%%m/%%Y, %%B %%Y)."
-#~ msgstr "Python フォーマット コードを使用します (例: %%d/%%m/%%Y、%%B %%Y)。"
-
-#~ msgid "Afficher un fond semi-transparent derrière les métadonnées"
-#~ msgstr "メタデータの背後に半透明の背景を表示する"
-
-#~ msgid ""
-#~ "L'import depuis Telegram se fait automatiquement à la\n"
-#~ "                            réception des photos. Activez la source dans l'onglet \"Sources\" pour les voir."
-#~ msgstr ""
-#~ "Telegram からのインポートは次の場合に自動的に行われます。\n"
-#~ "                            写真の受け取り。 「ソース」タブでソースをアクティブにして表示します。"
-
-#~ msgid ""
-#~ "Envoyez des photos directement depuis votre\n"
-#~ "                            téléphone via le navigateur."
-#~ msgstr ""
-#~ "写真を直接送信してください\n"
-#~ "                            ブラウザ経由で電話。"
-
-#~ msgid ""
-#~ "Approuvez ou rejetez les photos envoyées. Les photos approuvées\n"
-#~ "                        seront ajoutées à la source \"Invités\"."
-#~ msgstr ""
-#~ "送信された写真を承認または拒否します。承認された写真\n"
-#~ "                        「ゲスト」ソースに追加されます。"
-
-#~ msgid ""
-#~ "La sélection du pays est obligatoire pour activer\n"
-#~ "                    l'interface Wi-Fi et respecter les réglementations locales sur les fréquences radio."
-#~ msgstr ""
-#~ "有効化するには国の選択が必要です\n"
-#~ "                    Wi-Fi インターフェイスを備えており、地域の無線周波数規制に準拠しています。"
-
-#~ msgid ""
-#~ "Note : Après avoir appliqué les paramètres, la connexion\n"
-#~ "                    peut prendre jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à \"Connecté\",\n"
-#~ "                    vérifiez le mot de passe puis essayez de redémarrer le système."
-#~ msgstr ""
-#~ "注: 設定を適用した後、接続は\n"
-#~ "                    最大 1 分かかる場合があります。上記の接続ステータスが「接続済み」に変わらない場合は、\n"
-#~ "                    パスワードを確認してからシステムを再起動してください。"
-
-#~ msgid ""
-#~ "Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet\n"
-#~ "                    est branché, c'est souvent un problème de priorité. Désactivez l'interface Ethernet pour forcer le\n"
-#~ "                    système à utiliser exclusivement le Wi-Fi. Cette action redémarre le service réseau."
-#~ msgstr ""
-#~ "イーサネット ケーブルを使用しているときに Wi-Fi が接続できない場合\n"
-#~ "                    接続されている場合、多くの場合、それは優先度の問題となります。イーサネットインターフェイスを無効にして強制的に\n"
-#~ "                    Wi-Fiを独占的に使用するシステム。このアクションにより、ネットワーク サービスが再起動されます。"
-
-#~ msgid ""
-#~ "Sauvegardez votre configuration (API, partages,\n"
-#~ "                    affichage...) dans un fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle\n"
-#~ "                    installation."
-#~ msgstr ""
-#~ "設定を保存します (API、共有、\n"
-#~ "                    表示...) ファイル内にあります。後で復元することも、新しいものに復元することもできます。\n"
-#~ "                    インストール。"
-
-#~ msgid ""
-#~ "Cliquez sur le bouton pour rechercher et installer les\n"
-#~ "                    dernières mises à jour de Pimmich depuis GitHub. L'application redémarrera automatiquement après la\n"
-#~ "                    mise à jour."
-#~ msgstr ""
-#~ "ボタンをクリックして検索してインストールします。\n"
-#~ "                    GitHub からの Pimmich の最新アップデート。アプリケーションは次の後に自動的に再起動します。\n"
-#~ "                    更新します。"
-
-#~ msgid ""
-#~ "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
-#~ "                    l'image, utilisez cette option pour étendre la partition et utiliser tout l'espace disponible. Un\n"
-#~ "                    redémarrage du système sera nécessaire pour finaliser l'opération."
-#~ msgstr ""
-#~ "Pimmich を次のサイズの SD カードにフラッシュした場合\n"
-#~ "                    画像の場合は、このオプションを使用してパーティションを拡張し、利用可能なスペースをすべて使用します。あ\n"
-#~ "                    操作を完了するにはシステムの再起動が必要です。"
-
-#~ msgid ""
-#~ "Cette opération est sûre et ne supprime aucune donnée.\n"
-#~ "                        Elle prépare simplement le système à s'étendre au prochain démarrage."
-#~ msgstr ""
-#~ "この操作は安全であり、データは削除されません。\n"
-#~ "                        これは、次回の起動時にシステムを拡張する準備をするだけです。"
-
-#~ msgid ""
-#~ "Voici les photos qui sont prêtes à être affichées par le diaporama,\n"
-#~ "                    classées par source. Cliquez sur une photo pour l'agrandir."
-#~ msgstr ""
-#~ "スライドショーで表示する準備ができている写真は次のとおりです。\n"
-#~ "                    情報源ごとに分類されています。写真をクリックすると拡大します。"
-
-#~ msgid ""
-#~ "Créez des albums virtuels (playlists) en sélectionnant des\n"
-#~ "                    photos de n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant uniquement les\n"
-#~ "                    photos d'une playlist."
-#~ msgstr ""
-#~ "選択して仮想アルバム (プレイリスト) を作成します。\n"
-#~ "                    あらゆるソースからの写真。その後、\n"
-#~ "                    プレイリストからの写真。"
-
-#~ msgid ""
-#~ "Amplitude du zoom (ex: 1.15 pour\n"
-#~ "                            15%% de zoom) :"
-#~ msgstr ""
-#~ "ズーム範囲 (例: 1.15\n"
-#~ "                            15%% ズーム):"
-
-#~ msgid "Activer le contrôle par prise connectée"
-#~ msgstr "スマートソケットコントロールを有効にする"
-
-#~ msgid "État de la prise : Inconnu"
-#~ msgstr "コンセントのステータス: 不明"
-
-#~ msgid "URL pour ALLUMER la prise :"
-#~ msgstr "ソケットをオンにする URL:"
-
-#~ msgid "URL pour ÉTEINDRE la prise :"
-#~ msgstr "ソケットをオフにするための URL:"
-
-#~ msgid "Délai après allumage (secondes) :"
-#~ msgstr "点火後の遅延 (秒):"
-
-#~ msgid "URL de Statut (Optionnel) :"
-#~ msgstr "ステータス URL (オプション):"
-
-#~ msgid ""
-#~ "La détection automatique du fuseau horaire a échoué lors de l'installation. "
-#~ "Le système est configuré sur <strong>UTC</strong>. L'heure affichée peut "
-#~ "être incorrecte."
-#~ msgstr ""
-#~ "インストール中に自動タイムゾーン検出に失敗しました。システムは<strong>UTC</strong>に設定されています。表示される時刻は誤差がある可能性があります。"
-
-#~ msgid ""
-#~ "Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via"
-#~ " SSH) et en exécutant la commande :"
-#~ msgstr "Raspberry Pi に (SSH 経由で) 接続し、次のコマンドを実行することで、手動で修正できます。"
-
-#~ msgid ""
-#~ "Activer la mise à jour\n"
-#~ "                            automatique"
-#~ msgstr ""
-#~ "アップデートをアクティブ化する\n"
-#~ "                            自動"
-
-#~ msgid ""
-#~ "Photos des invités\n"
-#~ "                            (validées)"
-#~ msgstr ""
-#~ "ゲストの写真\n"
-#~ "                            (検証済み)"
-
-#~ msgid ""
-#~ "Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. "
-#~ "L'ID de l'administrateur est votre propre ID utilisateur Telegram (obtenu "
-#~ "via @userinfobot par exemple)."
-#~ msgstr ""
-#~ "ボットを作成してトークンを取得するには、Telegram で @BotFather に話しかけてください。管理者 ID は、自分の Telegram "
-#~ "ユーザー ID (たとえば、@userinfobot 経由で取得) です。"
-
-#~ msgid ""
-#~ "Pour utiliser le mot-clé personnalisé \"Cadre Magique\", vous devez créer un"
-#~ " modèle sur le site de Picovoice, le télécharger, et le placer dans le "
-#~ "dossier `voice_models` sous le nom `cadre-magique_raspberry-pi.ppn`."
-#~ msgstr ""
-#~ "カスタム キーワード「Cadre Magique」を使用するには、Picovoice Web サイトでモデルを作成してダウンロードし、「cadre-"
-#~ "magique_raspberry-pi.ppn」という名前で「voice_models」フォルダーに配置する必要があります。"
-
-#~ msgid "Langue du contrôle vocal"
-#~ msgstr "音声制御言語"
-
-#~ msgid ""
-#~ "Le changement de langue nécessite un redémarrage du service vocal "
-#~ "(désactiver puis réactiver le contrôle vocal)."
-#~ msgstr "言語を変更するには、音声サービスを再起動する必要があります (音声コントロールを無効にしてから再度有効にする)。"
-
-#~ msgid "Clé d'accès Picovoice Porcupine"
-#~ msgstr "Picovoice ポーキュパイン アクセス キー"
-
-#~ msgid "Obtenez votre clé via le compte gratuit (Free Tier) sur la"
-#~ msgstr "無料アカウント (無料利用枠) 経由でキーを取得します。"
-
-#~ msgid ""
-#~ "Utilise les codes de formatage Python (ex:\n"
-#~ "                            %%d/%%m/%%Y, %%B %%Y)."
-#~ msgstr ""
-#~ "Python フォーマットコードを使用します (例:\n"
-#~ "                            %%d/%%m/%%Y、%%B %%Y)。"
-
-#~ msgid ""
-#~ "Afficher la localisation\n"
-#~ "                            (ville/pays)"
-#~ msgstr ""
-#~ "場所を表示\n"
-#~ "                            (都市/国)"
-
-#~ msgid ""
-#~ "Afficher un fond\n"
-#~ "                            semi-transparent derrière les métadonnées"
-#~ msgstr ""
-#~ "背景を表示する\n"
-#~ "                            メタデータの背後にある半透明"
-
-#~ msgid ""
-#~ "L'import depuis Telegram se fait automatiquement à la réception des photos. "
-#~ "Activez la source dans l'onglet \"Sources\" pour les voir."
-#~ msgstr "Telegram からのインポートは、写真を受信すると自動的に行われます。 「ソース」タブでソースをアクティブにして表示します。"
-
-#~ msgid ""
-#~ "Envoyez des photos directement depuis votre téléphone via le navigateur."
-#~ msgstr "携帯電話からブラウザ経由で写真を直接送信します。"
-
-#~ msgid ""
-#~ "Approuvez ou rejetez les photos envoyées. Les photos approuvées seront "
-#~ "ajoutées à la source \"Invités\"."
-#~ msgstr "送信された写真を承認または拒否します。承認された写真は「ゲスト」ソースに追加されます。"
-
-#~ msgid ""
-#~ "La sélection du pays est obligatoire pour activer l'interface Wi-Fi et "
-#~ "respecter les réglementations locales sur les fréquences radio."
-#~ msgstr "Wi-Fi インターフェイスを有効にし、地域の無線周波数規制に準拠するには、国の選択が必要です。"
-
-#~ msgid ""
-#~ "Note : Après avoir appliqué les paramètres, la connexion peut prendre "
-#~ "jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à "
-#~ "\"Connecté\", vérifiez le mot de passe puis essayez de redémarrer le "
-#~ "système."
-#~ msgstr ""
-#~ "注: 設定を適用した後、接続までに最大 1 "
-#~ "分かかる場合があります。上記の接続状態が「接続済み」に変わらない場合は、パスワードを確認してシステムを再起動してください。"
-
-#~ msgid ""
-#~ "Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet est branché, c'est"
-#~ " souvent un problème de priorité. Désactivez l'interface Ethernet pour "
-#~ "forcer le système à utiliser exclusivement le Wi-Fi. Cette action redémarre "
-#~ "le service réseau."
-#~ msgstr ""
-#~ "イーサネット ケーブルが接続されているにもかかわらず Wi-Fi に接続できない場合は、多くの場合、それが優先される問題です。イーサネット "
-#~ "インターフェイスを無効にして、システムが Wi-Fi のみを使用するように強制します。このアクションにより、ネットワーク サービスが再起動されます。"
-
-#~ msgid "Changer le mot de passe de l'interface"
-#~ msgstr "インターフェースのパスワードを変更する"
-
-#~ msgid ""
-#~ "Sauvegardez votre configuration (API, partages, affichage...) dans un "
-#~ "fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle "
-#~ "installation."
-#~ msgstr "設定 (API、共有、ディスプレイなど) をファイルに保存します。後で復元することも、新規インストール時に復元することもできます。"
-
-#~ msgid ""
-#~ "Cliquez sur le bouton pour rechercher et installer les dernières mises à "
-#~ "jour de Pimmich depuis GitHub. L'application redémarrera automatiquement "
-#~ "après la mise à jour."
-#~ msgstr ""
-#~ "ボタンをクリックして、GitHub から最新の Pimmich "
-#~ "アップデートを検索してインストールします。アップデート後、アプリケーションは自動的に再起動します。"
-
-#~ msgid ""
-#~ "Si vous avez flashé Pimmich sur une carte SD plus grande que l'image, "
-#~ "utilisez cette option pour étendre la partition et utiliser tout l'espace "
-#~ "disponible. Un redémarrage du système sera nécessaire pour finaliser "
-#~ "l'opération."
-#~ msgstr ""
-#~ "Pimmich をイメージより大きい SD "
-#~ "カードにフラッシュした場合は、このオプションを使用してパーティションを拡張し、利用可能なスペースをすべて使用します。操作を完了するにはシステムを再起動する必要があります。"
-
-#~ msgid ""
-#~ "Cette opération est sûre et ne supprime aucune donnée. Elle prépare "
-#~ "simplement le système à s'étendre au prochain démarrage."
-#~ msgstr "この操作は安全であり、データは削除されません。これは、次回の起動時にシステムを拡張する準備をするだけです。"
-
-#~ msgid ""
-#~ "Voici les photos qui sont prêtes à être affichées par le diaporama, classées"
-#~ " par source. Cliquez sur une photo pour l'agrandir."
-#~ msgstr "ここでは、スライドショーで表示する準備ができている写真をソース別に分類して示します。写真をクリックすると拡大します。"
-
-#~ msgid ""
-#~ "Créez des albums virtuels (playlists) en sélectionnant des photos de "
-#~ "n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant "
-#~ "uniquement les photos d'une playlist."
-#~ msgstr ""
-#~ "任意のソースから写真を選択して、仮想アルバム (プレイリスト) を作成します。その後、プレイリストの写真のみを含むスライドショーを開始できます。"
