@@ -274,3 +274,76 @@ def presence_save_api():
     config["presence_devices"] = devices
     save_config(config)
     return jsonify({"success": True, "message": _("Réglages de présence enregistrés.")})
+
+
+# --- Notifications sur le téléphone (ntfy) ---
+
+@app.route('/api/notify', methods=['GET'])
+@admin_required
+def notify_settings_api():
+    from utils import notify
+    config = load_config()
+    events = config.get("notify_events") or {}
+    url = notify.topic_url(config)
+    return jsonify({"success": True, "enabled": bool(config.get("notify_enabled")), "url": url,
+                    "app_url": url.replace("https://", "ntfy://", 1) if url else None,
+                    "server": config.get("notify_server") or notify.DEFAULT_SERVER,
+                    "events": [{"key": k, "label": _tr(v["label"]), "on": bool(events.get(k, v["default"]))} for k, v in notify.EVENTS.items()]})
+
+
+@app.route('/api/notify', methods=['POST'])
+@admin_required
+def notify_save_api():
+    from utils import notify
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    server = (data.get("server") or config.get("notify_server") or notify.DEFAULT_SERVER).strip().rstrip("/")
+    if not server.startswith(("https://", "http://")):
+        return jsonify({"success": False, "message": _("Adresse du serveur ntfy invalide.")}), 400
+    config["notify_server"] = server
+    config["notify_enabled"] = bool(data.get("enabled", config.get("notify_enabled")))
+    if config["notify_enabled"] and not config.get("notify_topic"):
+        config["notify_topic"] = notify.new_topic()
+    events = dict(config.get("notify_events") or {})
+    for key, on in (data.get("events") or {}).items():
+        if key in notify.EVENTS:
+            events[key] = bool(on)
+    config["notify_events"] = events
+    save_config(config)
+    return jsonify({"success": True, "message": _("Notifications enregistrées.")})
+
+
+@app.route('/api/notify/test', methods=['POST'])
+@admin_required
+def notify_test_api():
+    from utils import notify
+    config = load_config()
+    if not notify.send(config, "health", _("Pimmich"), _("Ceci est une notification de test du cadre photo."), force=True):
+        return jsonify({"success": False, "message": _("Activez d'abord les notifications.")}), 409
+    return jsonify({"success": True, "message": _("Notification de test envoyée.")})
+
+
+@app.route('/api/notify/new_topic', methods=['POST'])
+@admin_required
+def notify_new_topic_api():
+    from utils import notify
+    config = dict(load_config())
+    config["notify_topic"] = notify.new_topic()
+    save_config(config)
+    return jsonify({"success": True, "message": _("Nouveau canal créé : abonnez de nouveau vos téléphones.")})
+
+
+@app.route('/api/notify/qr.png', methods=['GET'])
+@admin_required
+def notify_qr_png():
+    from utils import notify
+    url = notify.topic_url(load_config())
+    if not url:
+        return "", 404
+    qr = qrcode.QRCode(border=2, box_size=10)
+    qr.add_data(url)
+    qr.make(fit=True)
+    buffer = io.BytesIO()
+    qr.make_image(fill_color="black", back_color="white").save(buffer, "PNG")
+    buffer.seek(0)
+    return send_file(buffer, mimetype="image/png")

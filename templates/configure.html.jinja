@@ -143,6 +143,7 @@
                 <div class="tabs">
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-comptes')"><i class="fas fa-users fa-fw"></i>{{ _('Comptes') }}</button>
                     {% if is_admin %}
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-notifications')"><i class="fas fa-bell fa-fw"></i>{{ _('Notifications') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-maintenance')"><i class="fas fa-tools fa-fw"></i>{{ _('Maintenance') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-network')"><i class="fas fa-wifi fa-fw"></i>{{ _('Réseau') }}</button>
                     {% endif %}
@@ -186,6 +187,8 @@
 {% include 'configure/tab_network.html.jinja' %}
 
 {% include 'configure/tab_comptes.html.jinja' %}
+
+{% if is_admin %}{% include 'configure/tab_notifications.html.jinja' %}{% endif %}
 
 {% include 'configure/tab_maintenance.html.jinja' %}
 

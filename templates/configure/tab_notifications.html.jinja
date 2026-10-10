@@ -1,0 +1,65 @@
+            <div id="tab-notifications" class="tabcontent">
+                <section class="card">
+                    <h2 class="card-title"><i class="fas fa-bell text-indigo-500 mr-2"></i>{{ _("Notifications sur votre téléphone") }}</h2>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Le cadre vous prévient sur votre téléphone (photo d'invité à valider, problème...). Gratuit et sans compte, avec l'application ntfy.") }}</p>
+                    <label class="flex items-center gap-2"><input type="checkbox" id="nt-enabled"> <strong>{{ _("Activer les notifications") }}</strong></label>
+                    <div id="nt-setup" class="hidden mt-4 flex flex-col md:flex-row gap-5 items-start">
+                        <img id="nt-qr" alt="{{ _('QR code du canal de notifications') }}" class="w-40 h-40 border rounded-lg bg-white p-2">
+                        <ol class="setup-guide flex-1">
+                            <li>{{ _("Installez l'application « ntfy » (App Store ou Google Play).") }}</li>
+                            <li>{{ _("Dans ntfy, touchez « + » puis collez l'adresse ci-dessous (ou ouvrez le lien sur le téléphone) :") }}
+                                <span class="copy-line"><code id="nt-url"></code><button type="button" id="nt-copy" class="link">{{ _("Copier") }}</button></span>
+                                <a id="nt-app" class="link" href="#">{{ _("Ouvrir dans ntfy") }}</a></li>
+                            <li>{{ _("Envoyez une notification de test pour vérifier.") }}
+                                <button type="button" id="nt-test" class="btn-secondary ml-2"><i class="fas fa-paper-plane mr-1"></i>{{ _("Tester") }}</button></li>
+                        </ol>
+                    </div>
+                    <div id="nt-events" class="mt-4 hidden">
+                        <h3 class="font-semibold mb-2">{{ _("Me prévenir pour") }}</h3>
+                        <div id="nt-event-list" class="grid gap-2"></div>
+                    </div>
+                    <details class="mt-4"><summary class="link">{{ _("Options avancées") }}</summary>
+                        <label for="nt-server" class="block mt-2 text-sm">{{ _("Serveur ntfy (si vous hébergez le vôtre)") }}</label>
+                        <input type="url" id="nt-server" class="w-full" placeholder="https://ntfy.sh">
+                        <button type="button" id="nt-new" class="link mt-2">{{ _("Changer de canal (les téléphones abonnés devront s'abonner de nouveau)") }}</button>
+                    </details>
+                    <p id="nt-status" class="text-sm mt-3"></p>
+                </section>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const say = (t, ok) => { $("nt-status").textContent = t || ""; $("nt-status").className = "text-sm mt-3 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                        let events = [];
+                        async function load() {
+                            const d = await (await fetch("/api/notify")).json();
+                            $("nt-enabled").checked = d.enabled;
+                            $("nt-server").value = d.server;
+                            $("nt-setup").classList.toggle("hidden", !d.enabled || !d.url);
+                            $("nt-events").classList.toggle("hidden", !d.enabled);
+                            if (d.url) { $("nt-url").textContent = d.url; $("nt-app").href = d.app_url; $("nt-qr").src = "/api/notify/qr.png?t=" + Date.now(); }
+                            events = d.events;
+                            $("nt-event-list").innerHTML = "";
+                            events.forEach(e => {
+                                const label = document.createElement("label"); label.className = "flex items-center gap-2";
+                                const box = document.createElement("input"); box.type = "checkbox"; box.checked = e.on;
+                                box.addEventListener("change", () => save({ events: { [e.key]: box.checked } }));
+                                label.append(box, document.createTextNode(e.label));
+                                $("nt-event-list").appendChild(label);
+                            });
+                        }
+                        async function save(extra) {
+                            const r = await post("/api/notify", Object.assign({ enabled: $("nt-enabled").checked, server: $("nt-server").value }, extra || {}));
+                            say(r.message, r.success);
+                            load();
+                        }
+                        $("nt-enabled").addEventListener("change", () => save());
+                        $("nt-server").addEventListener("change", () => save());
+                        $("nt-test").addEventListener("click", async () => { const r = await post("/api/notify/test"); say(r.message, r.success); });
+                        $("nt-new").addEventListener("click", async () => { const r = await post("/api/notify/new_topic"); say(r.message, r.success); load(); });
+                        $("nt-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText($("nt-url").textContent); } catch (e) { /* copie manuelle */ } });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-notifications'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        load();
+                    });
+                </script>
+            </div>

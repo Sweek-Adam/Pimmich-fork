@@ -189,6 +189,7 @@ def immich_update_worker():
                         logger.info(f"🖼️🔄  {update.get('message')}")
 
                     if update.get("type") == "error":
+                        notify_sync_error("Immich", update.get("message", ""))
                         logger.error(f"🖼️🔄❌ Erreur lors du téléchargement : {update.get('message')}")
                         immich_status_manager.update_status(message=f"Erreur téléchargement: {update.get('message')}")
                     immich_status_manager.update_status(message=update.get('message', '')) # Update status with download message
@@ -216,6 +217,7 @@ def immich_update_worker():
                     for update in import_progress.tracked("immich", "prepare", prepare_all_photos_with_progress(screen_width=screen_width, screen_height=screen_height, source_type="immich", description_map=final_description_map)):
                         immich_status_manager.update_status(message=update.get('message', '')) # Update status with preparation message
                         if update.get("type") == "error":
+                            notify_sync_error("Immich", update.get("message", ""))
                             logger.error(f"🖼️🔄❌ Erreur lors de la préparation : {update.get('message')}")
                             immich_status_manager.update_status(message=f"Erreur préparation: {update.get('message')}")
                             break # Sortir de la boucle de préparation
@@ -292,6 +294,7 @@ def samba_update_worker():
                 import_success = False
                 for update in import_progress.tracked("samba", "download", import_samba_photos(config)):
                     if update.get("type") == "error":
+                        notify_sync_error("Samba", update.get("message", ""))
                         logger.info(f"[Auto-Update Samba] Erreur lors de l'import : {update.get('message')}")
                         samba_status_manager.update_status(message=f"Erreur import: {update.get('message')}")
                     samba_status_manager.update_status(message=update.get('message', '')) # Update status with import message
@@ -316,6 +319,7 @@ def samba_update_worker():
                     for update in import_progress.tracked("samba", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, "samba", description_map=final_description_map)):
                         samba_status_manager.update_status(message=update.get('message', '')) # Update status with preparation message
                         if update.get("type") == "error":
+                            notify_sync_error("Samba", update.get("message", ""))
                             samba_status_manager.update_status(message=f"Erreur préparation: {update.get('message')}")
                             break
                         if update.get("type") == "done":
@@ -368,6 +372,7 @@ def gdrive_update_worker():
                 changes = None
                 for update in import_progress.tracked("gdrive", "download", import_gdrive_photos(config)):
                     if update.get("type") == "error":
+                        notify_sync_error("Google Drive", update.get("message", ""))
                         logger.info(f"[Auto-Update Google Drive] Erreur lors de l'import : {update.get('message')}")
                     gdrive_status_manager.update_status(message=update.get('message', ''))
                     if update.get("type") == "done":
@@ -386,6 +391,7 @@ def gdrive_update_worker():
                     for update in import_progress.tracked("gdrive", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, "gdrive", description_map=description_map)):
                         gdrive_status_manager.update_status(message=update.get('message', ''))
                         if update.get("type") == "error":
+                            notify_sync_error("Google Drive", update.get("message", ""))
                             break
                         if update.get("type") == "done":
                             prep_successful = True
@@ -561,6 +567,11 @@ def maintenance_worker():
             run_maintenance_once()
         except Exception as e:
             logger.error(f"[Maintenance] Erreur : {e}", exc_info=True)
+        try:
+            with app.app_context():
+                notify_frame_problems()
+        except Exception as e:
+            logger.warning(f"[Notifications] {e}")
         time.sleep(MAINTENANCE_INTERVAL)
 
 
@@ -627,3 +638,39 @@ def presence_worker():
         except Exception as e:
             logger.warning(f"🏠 Présence : {e}")
         time.sleep(30)
+
+
+
+# --- Notifications sur le téléphone ---
+
+def notify_sync_error(source, message):
+    from utils import notify
+    notify.send(load_config(), "sync", _("Problème de synchronisation"), f"{source} : {message}"[:300], key=f"sync:{source}", repeat_after=3600)
+
+
+def notify_frame_problems():
+    """Problèmes graves du cadre (alimentation, chaleur, disque...) : une alerte par problème et par jour."""
+    from utils import health, notify
+    config = load_config()
+    if not notify.wants(config, "health"):
+        return
+    items = health.checks(dict(config, _active_hours=is_active_hours(config)), is_slideshow_running(), True)
+    today = datetime.now().strftime("%Y-%m-%d")
+    for item in items:
+        if item.get("level") != "error":
+            continue
+        translate = _  # appel indirect : l'extracteur ne doit pas prendre les clés « title » / « detail » pour des textes
+        title = translate(item["title"])
+        notify.send(config, "health", title, translate(item["detail"], **(item.get("params") or {})), key=f"health:{item['title']}:{today}", repeat_after=24 * 3600)
+
+
+def notify_import_done(entry):
+    from utils import notify
+    count = entry.get("prepare", {}).get("total") or entry.get("download", {}).get("total") or 0
+    if count:
+        with app.app_context():
+            notify.send(load_config(), "imports", _("Import terminé"), _("%(count)s photo(s) ajoutée(s) depuis %(source)s.", count=count, source=_(entry.get("label", ""))),
+                        key=f"import:{entry.get('source')}:{entry.get('started')}")
+
+
+import_progress.ON_IMPORT_DONE.append(notify_import_done)

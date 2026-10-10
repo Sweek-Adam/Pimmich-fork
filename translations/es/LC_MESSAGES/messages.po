@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 23:12+0200\n"
+"POT-Creation-Date: 2026-10-10 23:21+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -137,23 +137,23 @@ msgid "Configuration"
 msgstr "Configuración"
 
 #: templates/configure.html.jinja:77 templates/configure.html.jinja:90
-#: templates/configure.html.jinja:113 templates/configure.html.jinja:210
+#: templates/configure.html.jinja:113 templates/configure.html.jinja:213
 msgid "Accueil"
 msgstr "Inicio"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:210
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
 msgid "Photos"
 msgstr "Fotos"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:210
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
 msgid "Écran"
 msgstr "Pantalla"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:210
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
 msgid "Partage"
 msgstr "Compartir"
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:210
+#: templates/configure.html.jinja:77 templates/configure.html.jinja:213
 msgid "Système"
 msgstr "Sistema"
 
@@ -258,26 +258,30 @@ msgid "Comptes"
 msgstr "Cuentas"
 
 #: templates/configure.html.jinja:146
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: templates/configure.html.jinja:147
 msgid "Maintenance"
 msgstr "Mantenimiento"
 
-#: templates/configure.html.jinja:147
+#: templates/configure.html.jinja:148
 msgid "Réseau"
 msgstr "Red"
 
-#: templates/configure.html.jinja:149
+#: templates/configure.html.jinja:150
 msgid "Commande vocale"
 msgstr "Control por voz"
 
-#: templates/configure.html.jinja:151
+#: templates/configure.html.jinja:152
 msgid "Statistiques"
 msgstr "Estadística"
 
-#: templates/configure.html.jinja:152
+#: templates/configure.html.jinja:153
 msgid "Journaux"
 msgstr "Registros"
 
-#: templates/configure.html.jinja:178
+#: templates/configure.html.jinja:179
 msgid "Enregistrer les modifications"
 msgstr "Guardar cambios"
 
@@ -676,6 +680,7 @@ msgid "Nom : Pimmich. Dans « Redirect URIs », collez cette adresse :"
 msgstr "Nombre: Pimmich. En «Redirect URIs», pega esta dirección:"
 
 #: templates/configure/_son_spotify.html.jinja:30
+#: templates/configure/tab_notifications.html.jinja:11
 msgid "Copier"
 msgstr "Copiar"
 
@@ -858,7 +863,7 @@ msgstr "Preparación"
 msgid "photos préparées"
 msgstr "fotos preparadas"
 
-#: templates/configure/scripts_app.html.jinja:22
+#: templates/configure/scripts_app.html.jinja:22 web/workers.py:672
 msgid "Import terminé"
 msgstr "Importación terminada"
 
@@ -2071,6 +2076,7 @@ msgstr "URL para ENCENDER el enchufe:"
 
 #: templates/configure/tab_affichage.html.jinja:291
 #: templates/configure/tab_affichage.html.jinja:304
+#: templates/configure/tab_notifications.html.jinja:14
 msgid "Tester"
 msgstr "Ensayador"
 
@@ -3325,7 +3331,7 @@ msgstr "Mensajes publicados"
 msgid "Aucun message publié."
 msgstr "Ningún mensaje publicado."
 
-#: templates/configure/tab_messages.html.jinja:98 web/routes_guests.py:329
+#: templates/configure/tab_messages.html.jinja:98 web/routes_guests.py:335
 msgid "Invité"
 msgstr "Invitado"
 
@@ -3619,6 +3625,64 @@ msgstr ""
 "Haga clic en el botón para buscar redes Wi-Fi disponibles.\n"
 "                    Al hacer clic en una red de la lista, se completará "
 "automáticamente el campo SSID de arriba."
+
+#: templates/configure/tab_notifications.html.jinja:3
+msgid "Notifications sur votre téléphone"
+msgstr "Notificaciones en tu teléfono"
+
+#: templates/configure/tab_notifications.html.jinja:4
+msgid ""
+"Le cadre vous prévient sur votre téléphone (photo d'invité à valider, "
+"problème...). Gratuit et sans compte, avec l'application ntfy."
+msgstr ""
+"El marco te avisa en tu teléfono (foto de invitado por validar, "
+"problema...). Gratis y sin cuenta, con la app ntfy."
+
+#: templates/configure/tab_notifications.html.jinja:5
+msgid "Activer les notifications"
+msgstr "Activar las notificaciones"
+
+#: templates/configure/tab_notifications.html.jinja:7
+msgid "QR code du canal de notifications"
+msgstr "Código QR del canal de notificaciones"
+
+#: templates/configure/tab_notifications.html.jinja:9
+msgid "Installez l'application « ntfy » (App Store ou Google Play)."
+msgstr "Instala la app «ntfy» (App Store o Google Play)."
+
+#: templates/configure/tab_notifications.html.jinja:10
+msgid ""
+"Dans ntfy, touchez « + » puis collez l'adresse ci-dessous (ou ouvrez le "
+"lien sur le téléphone) :"
+msgstr ""
+"En ntfy, toca «+» y pega la dirección de abajo (o abre el enlace en el "
+"teléfono):"
+
+#: templates/configure/tab_notifications.html.jinja:12
+msgid "Ouvrir dans ntfy"
+msgstr "Abrir en ntfy"
+
+#: templates/configure/tab_notifications.html.jinja:13
+msgid "Envoyez une notification de test pour vérifier."
+msgstr "Envía una notificación de prueba para comprobarlo."
+
+#: templates/configure/tab_notifications.html.jinja:18
+msgid "Me prévenir pour"
+msgstr "Avisarme de"
+
+#: templates/configure/tab_notifications.html.jinja:21
+msgid "Options avancées"
+msgstr "Opciones avanzadas"
+
+#: templates/configure/tab_notifications.html.jinja:22
+msgid "Serveur ntfy (si vous hébergez le vôtre)"
+msgstr "Servidor ntfy (si alojas el tuyo)"
+
+#: templates/configure/tab_notifications.html.jinja:24
+msgid "Changer de canal (les téléphones abonnés devront s'abonner de nouveau)"
+msgstr ""
+"Cambiar de canal (los teléfonos suscritos tendrán que volver a "
+"suscribirse)"
 
 #: templates/configure/tab_playlists.html.jinja:4
 msgid "Gestion des Playlists"
@@ -4733,7 +4797,7 @@ msgstr "La presentación está detenida"
 msgid "Il devrait tourner à cette heure-ci. Relancez-le depuis l'accueil."
 msgstr "Debería estar en marcha a esta hora. Reiníciala desde el inicio."
 
-#: utils/health.py:100
+#: utils/health.py:100 web/workers.py:648
 msgid "Problème de synchronisation"
 msgstr "Problema de sincronización"
 
@@ -4890,6 +4954,22 @@ msgstr "Bocadillo de cómic"
 #: utils/message_renderer.py:52
 msgid "Minimal"
 msgstr "Minimalista"
+
+#: utils/notify.py:19
+msgid "Photos et messages des invités"
+msgstr "Fotos y mensajes de invitados"
+
+#: utils/notify.py:20
+msgid "Erreurs de synchronisation"
+msgstr "Errores de sincronización"
+
+#: utils/notify.py:21
+msgid "Problèmes du cadre (alimentation, chaleur, disque)"
+msgstr "Problemas del marco (alimentación, calor, disco)"
+
+#: utils/notify.py:22
+msgid "Imports terminés"
+msgstr "Importaciones terminadas"
 
 #: utils/themed_compositions.py:224
 msgid "Joyeux Noël"
@@ -5175,45 +5255,62 @@ msgstr "Acceso para el huésped '%(name)sfue revocado."
 msgid "Aucun fichier sélectionné."
 msgstr "No hay archivos seleccionados."
 
-#: web/routes_guests.py:104
+#: web/routes_guests.py:108
+msgid "Nouvelle photo d'invité"
+msgstr "Nueva foto de invitado"
+
+#: web/routes_guests.py:108
+#, python-format
+msgid "%(count)s photo(s) à valider sur le cadre."
+msgstr "%(count)s foto(s) por validar en el marco."
+
+#: web/routes_guests.py:110
 #, python-format
 msgid "%(count)s photo(s) envoyée(s) pour validation avec succès !"
 msgstr "¡%(count)s fotos enviadas exitosamente para validación!"
 
-#: web/routes_guests.py:165
+#: web/routes_guests.py:171
 msgid "Photo rejetée."
 msgstr "Foto rechazada."
 
-#: web/routes_guests.py:208
+#: web/routes_guests.py:214
 msgid "Photo approuvée et préparée. Le diaporama a été mis à jour."
 msgstr "Foto aprobada y preparada. La presentación se ha actualizado."
 
-#: web/routes_guests.py:210
+#: web/routes_guests.py:216
 msgid "La préparation de la photo a échoué. La photo reste en attente."
 msgstr "La preparación de la foto ha fallado. La foto sigue pendiente."
 
-#: web/routes_guests.py:214
+#: web/routes_guests.py:220
 msgid "Action inconnue."
 msgstr "Acción desconocida."
 
-#: web/routes_guests.py:290
+#: web/routes_guests.py:296
 msgid "Les messages des invités sont désactivés."
 msgstr "Los mensajes de los invitados están desactivados."
 
-#: web/routes_guests.py:301
+#: web/routes_guests.py:307
 msgid "Trop d'aperçus, réessayez plus tard."
 msgstr "Demasiadas vistas previas, inténtalo más tarde."
 
-#: web/routes_guests.py:323
+#: web/routes_guests.py:329
 msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr "Ya has enviado varios mensajes: inténtalo de nuevo dentro de una hora."
 
-#: web/routes_guests.py:340
+#: web/routes_guests.py:346
+msgid "Nouveau message d'invité"
+msgstr "Nuevo mensaje de invitado"
+
+#: web/routes_guests.py:346
+msgid "Un invité"
+msgstr "Un invitado"
+
+#: web/routes_guests.py:349
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "¡Gracias! Tu mensaje se mostrará en el marco (hasta el %(date)s)."
 
-#: web/routes_guests.py:372
+#: web/routes_guests.py:381
 msgid ""
 "Lancez d'abord une fois sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
@@ -5221,20 +5318,20 @@ msgstr ""
 "Primero ejecuta una vez en la Raspberry Pi: "
 "~/pimmich/utils/enable_remote_guests.sh"
 
-#: web/routes_guests.py:375
+#: web/routes_guests.py:384
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale rechaza la publicación: %(detail)s"
 
-#: web/routes_guests.py:381
+#: web/routes_guests.py:390
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr "Los invitados ya pueden enviar desde cualquier lugar, con el enlace."
 
-#: web/routes_guests.py:382
+#: web/routes_guests.py:391
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr "La página de invitados ya no es accesible desde internet."
 
-#: web/routes_guests.py:392
+#: web/routes_guests.py:401
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr "Nuevo enlace creado: el anterior ya no funciona."
 
@@ -5252,7 +5349,7 @@ msgid "Ambiance « %(name)s » appliquée."
 msgstr "Ambiente «%(name)s» aplicado."
 
 #: web/routes_home.py:125 web/routes_playlists.py:75
-#: web/routes_slideshow.py:509
+#: web/routes_slideshow.py:514
 msgid "Disposition inconnue."
 msgstr "Disposición desconocida."
 
@@ -5283,6 +5380,34 @@ msgstr "Dirección de dispositivo no válida."
 #: web/routes_home.py:276
 msgid "Réglages de présence enregistrés."
 msgstr "Ajustes de presencia guardados."
+
+#: web/routes_home.py:302
+msgid "Adresse du serveur ntfy invalide."
+msgstr "Dirección del servidor ntfy no válida."
+
+#: web/routes_home.py:313
+msgid "Notifications enregistrées."
+msgstr "Notificaciones guardadas."
+
+#: web/routes_home.py:321
+msgid "Pimmich"
+msgstr "Pimmich"
+
+#: web/routes_home.py:321
+msgid "Ceci est une notification de test du cadre photo."
+msgstr "Esta es una notificación de prueba del marco de fotos."
+
+#: web/routes_home.py:322
+msgid "Activez d'abord les notifications."
+msgstr "Activa primero las notificaciones."
+
+#: web/routes_home.py:323
+msgid "Notification de test envoyée."
+msgstr "Notificación de prueba enviada."
+
+#: web/routes_home.py:333
+msgid "Nouveau canal créé : abonnez de nouveau vos téléphones."
+msgstr "Nuevo canal creado: vuelve a suscribir tus teléfonos."
 
 #: web/routes_imports.py:424
 #, python-format
@@ -5492,14 +5617,14 @@ msgstr "Foto no encontrada: %(name)s"
 msgid "Playlist non trouvée."
 msgstr "Playlist no encontrada."
 
-#: web/routes_slideshow.py:379
+#: web/routes_slideshow.py:384
 #, python-format
 msgid "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
 msgstr ""
 "Resolución aplicada: %(width) SX %(height)s. La presentación de "
 "diapositivas se ha reiniciado."
 
-#: web/routes_slideshow.py:381
+#: web/routes_slideshow.py:386
 #, python-format
 msgid ""
 "Résolution appliquée : %(width)sx%(height)s. Le diaporama n'était pas en "
@@ -5508,31 +5633,31 @@ msgstr ""
 "Resolución aplicada: %(width) SX %(height)s. La presentación de "
 "diapositivas no estaba en progreso."
 
-#: web/routes_slideshow.py:472
+#: web/routes_slideshow.py:477
 msgid "Composition"
 msgstr "Composición"
 
-#: web/routes_slideshow.py:483 web/routes_slideshow.py:488
+#: web/routes_slideshow.py:488 web/routes_slideshow.py:493
 msgid "Ordre invalide."
 msgstr "Orden no válido."
 
-#: web/routes_slideshow.py:493
+#: web/routes_slideshow.py:498
 msgid "Nouvel ordre enregistré."
 msgstr "Nuevo orden guardado."
 
-#: web/routes_slideshow.py:515
+#: web/routes_slideshow.py:520
 msgid "Disposition appliquée au diaporama."
 msgstr "Disposición aplicada a la presentación."
 
-#: web/routes_slideshow.py:545
+#: web/routes_slideshow.py:550
 msgid "Configuration enregistrée."
 msgstr "Configuración guardada."
 
-#: web/routes_slideshow.py:558
+#: web/routes_slideshow.py:563
 msgid "Configuration activée."
 msgstr "Configuración activada."
 
-#: web/routes_slideshow.py:567
+#: web/routes_slideshow.py:572
 msgid "Configuration supprimée."
 msgstr "Configuración eliminada."
 
@@ -5671,65 +5796,70 @@ msgstr "Servicio de control de voz deshabilitado."
 msgid "Erreur interne du serveur : %(error)s"
 msgstr "Error interno del servidor: %(error)s"
 
-#: web/workers.py:160 web/workers.py:269 web/workers.py:362
+#: web/workers.py:161 web/workers.py:272 web/workers.py:367
 msgid "Import initial ignoré."
 msgstr "Importación inicial omitida."
 
-#: web/workers.py:173 web/workers.py:282
+#: web/workers.py:174 web/workers.py:285
 #, python-format
 msgid "Mise à jour auto. activée. Intervalle : %(hours)sh."
 msgstr "Actualización auto. activada. Intervalo: %(hours)sh."
 
-#: web/workers.py:179
+#: web/workers.py:180
 msgid "Lancement du téléchargement..."
 msgstr "Iniciando la descarga..."
 
-#: web/workers.py:211 web/workers.py:302 web/workers.py:378
+#: web/workers.py:213 web/workers.py:306 web/workers.py:384
 msgid "Préparation des photos..."
 msgstr "Preparando las fotos..."
 
-#: web/workers.py:226 web/workers.py:325
+#: web/workers.py:229 web/workers.py:330
 msgid "Mise à jour terminée. Redémarrage du diaporama..."
 msgstr "Actualización completada. Reiniciando la presentación..."
 
-#: web/workers.py:231 web/workers.py:330 web/workers.py:396
+#: web/workers.py:234 web/workers.py:335 web/workers.py:403
 msgid "Dernière mise à jour réussie."
 msgstr "Última actualización correcta."
 
-#: web/workers.py:234 web/workers.py:333 web/workers.py:398
+#: web/workers.py:237 web/workers.py:338 web/workers.py:405
 msgid "Mise à jour terminée avec avertissements/erreurs."
 msgstr "Actualización completada con advertencias/errores."
 
-#: web/workers.py:241
+#: web/workers.py:244
 msgid "Mise à jour automatique désactivée."
 msgstr "Actualización automática desactivada."
 
-#: web/workers.py:288
+#: web/workers.py:291
 msgid "Lancement de l'import..."
 msgstr "Iniciando la importación..."
 
-#: web/workers.py:339
+#: web/workers.py:344
 msgid "Mise à jour automatique Samba désactivée."
 msgstr "Actualización automática de Samba desactivada."
 
-#: web/workers.py:366
+#: web/workers.py:371
 msgid "Recherche de nouveautés..."
 msgstr "Buscando novedades..."
 
-#: web/workers.py:401
+#: web/workers.py:408
 msgid "Aucune nouveauté."
 msgstr "No hay novedades."
 
-#: web/workers.py:407
+#: web/workers.py:414
 msgid "Mise à jour automatique Google Drive désactivée."
 msgstr "Actualización automática de Google Drive desactivada."
 
-#: web/workers.py:574
+#: web/workers.py:586
 msgid "vous"
 msgstr "tú"
 
-#: web/workers.py:585
+#: web/workers.py:597
 #, python-format
 msgid "Bienvenue à la maison, %(name)s !"
 msgstr "¡Bienvenido a casa, %(name)s!"
+
+#: web/workers.py:672
+#, python-format
+msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
+msgstr "%(count)s foto(s) añadida(s) desde %(source)s."
 

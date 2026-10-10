@@ -101,6 +101,12 @@ def handle_upload():
             logger.info(f"[Upload] Nouveau fichier reçu de l'invité et en attente : {final_path.name}")
             count += 1
 
+    if count:
+        from utils import notify
+        config = load_config()
+        base = notify.base_url(config)
+        notify.send(config, "guest", _("Nouvelle photo d'invité"), _("%(count)s photo(s) à valider sur le cadre.", count=count),
+                    key="guest_photo", click=f"{base}/configure#tab-validation" if base else None, repeat_after=60)
     flash(_('%(count)s photo(s) envoyée(s) pour validation avec succès !', count=count), "success")
     return redirect(url_for('upload_page'))
 
@@ -335,6 +341,9 @@ def guest_message_publish():
         config["display_sources"] = config.get("display_sources", []) + [messages_manager.SOURCE_NAME]
         save_config(config)
     logger.info(f"[Messages] Message invité {message['id']} publié ({message['author']}, jusqu'au {message['expires']})")
+    from utils import notify
+    text = " — ".join(t for t in (message.get("title"), message.get("body")) if t)[:160]
+    notify.send(config, "guest", _("Nouveau message d'invité"), f"{name or _('Un invité')} : {text}", key=f"guest_message:{message['id']}")
     if is_slideshow_running():
         restart_slideshow_for_update()
     return jsonify({"success": True, "message": _("Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s).", date=message["expires"])})
