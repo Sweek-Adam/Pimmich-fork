@@ -74,5 +74,57 @@ def test_composition_settings_are_saved(admin_client):
     admin_client.post("/configure", data={"compositions_form": "1", "compositions_enabled": "on", "compositions_every": "7",
                                           "compositions_styles": ["liege", "inconnu"]}, headers={"Sec-Fetch-Site": "same-origin"})
     config = load_config()
-    assert config["compositions_every"] == 7 and config["compositions_styles"] == ["liege"]
-    assert config["compositions_enabled"] and not config["compositions_include_messages"]
+    from utils.compositions import enabled_formats
+    assert config["compositions_every"] == 7 and enabled_formats(config) == ["liege"]
+    assert config["compositions_enabled"] and not config["compositions_include_messages"] and not config["compositions_seasonal"]
+
+
+from datetime import date
+
+from utils import themed_compositions as themed
+
+
+@pytest.mark.parametrize("year,expected", [(2024, date(2024, 3, 31)), (2025, date(2025, 4, 20)), (2026, date(2026, 4, 5)), (2027, date(2027, 3, 28))])
+def test_easter_dates(year, expected):
+    assert themed.easter(year) == expected
+
+
+@pytest.mark.parametrize("theme,today,expected", [
+    ("noel", date(2026, 12, 15), True), ("noel", date(2027, 1, 6), True), ("noel", date(2026, 7, 1), False),
+    ("halloween", date(2026, 10, 31), True), ("halloween", date(2026, 12, 1), False),
+    ("paques", date(2026, 4, 1), True), ("paques", date(2026, 6, 1), False),
+    ("hiver", date(2026, 1, 15), True), ("printemps", date(2026, 5, 1), True), ("automne", date(2026, 10, 1), True),
+    ("automne", date(2026, 5, 1), False), ("japon", date(2026, 5, 1), True),
+])
+def test_seasons(theme, today, expected):
+    assert themed.in_season(theme, today) is expected
+
+
+def test_seasonal_themes_only_in_their_period(photos, monkeypatch):
+    chosen = []
+    monkeypatch.setattr(comp, "compose", lambda style, *a, **k: chosen.append(style) or Image.new("RGB", (W, H)))
+    for seed in range(40):
+        comp.compose_random(["noel", "japon"], photos, [], W, H, rng=random.Random(seed), today=date(2026, 7, 1))
+    assert set(chosen) == {"japon"}
+    chosen.clear()
+    for seed in range(400):
+        comp.compose_random(["noel", "japon"], photos, [], W, H, rng=random.Random(seed), today=date(2026, 12, 20))
+    assert chosen.count("noel") > chosen.count("japon") * 2  # trois fois plus fréquent en saison
+    chosen.clear()
+    comp.compose_random(["noel"], photos, [], W, H, rng=random.Random(1), seasonal=False, today=date(2026, 7, 1))
+    assert chosen == ["noel"]
+
+
+def test_enabled_formats_include_new_ones_and_migrate_old_setting():
+    assert comp.enabled_formats({}) == list(comp.FORMATS)
+    assert "hokusai" in comp.enabled_formats({"compositions_disabled": ["liege"]})
+    old = comp.enabled_formats({"compositions_styles": ["liege", "duo"]})  # ancien réglage : formats de base cochés
+    assert "liege" in old and "mosaique" not in old and "fuji" in old
+
+
+def test_titles_in_unsupported_scripts_are_skipped():
+    canvas = Image.new("RGBA", (200, 100), (0, 0, 0, 255))
+    themed._title(canvas, "メリークリスマス", themed.HAND2, 40, (255, 255, 255), (100, 50))
+    assert canvas.getbbox() == (0, 0, 200, 100) and canvas.convert("L").getextrema() == (0, 0)
+    themed._title(canvas, "Joyeux Noël – fête", themed.HAND2, 40, (255, 255, 255), (100, 50))
+    assert canvas.convert("L").getextrema()[1] > 0

@@ -369,9 +369,12 @@ def inject_current_user():
 def inject_styles_and_formats():
     """Styles de messages et formats de compositions disponibles (libellés traduits dans les templates)."""
     from utils.message_renderer import STYLES
-    from utils.compositions import FORMATS
+    from utils.compositions import FORMATS, THEME_KEYS, SEASONAL, enabled_formats
+    formats = [(k, v[0]) for k, v in FORMATS.items() if k not in THEME_KEYS]
+    themes = [(k, v[0], k in SEASONAL) for k, v in FORMATS.items() if k in THEME_KEYS]
     return dict(message_styles=[(k, v["label"]) for k, v in STYLES.items()],
-                composition_formats=[(k, v[0]) for k, v in FORMATS.items()])
+                composition_formats=formats, composition_themes=themes,
+                composition_enabled=set(enabled_formats(load_config())))
 
 @app.context_processor
 def inject_disk_alert():

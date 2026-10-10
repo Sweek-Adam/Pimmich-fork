@@ -187,8 +187,11 @@ def configure():
         config["guest_messages_enabled"] = 'guest_messages_enabled' in request.form
         config["compositions_enabled"] = 'compositions_enabled' in request.form
         config["compositions_include_messages"] = 'compositions_include_messages' in request.form
-        if 'compositions_form' in request.form:  # cases à cocher : liste vide si aucune n'est cochée
-            config["compositions_styles"] = [s for s in request.form.getlist('compositions_styles') if s in COMPOSITION_FORMATS]
+        if 'compositions_form' in request.form:  # on enregistre les formats décochés : un nouveau format sera actif par défaut
+            checked = set(request.form.getlist('compositions_styles'))
+            config["compositions_disabled"] = [k for k in COMPOSITION_FORMATS if k not in checked]
+            config.pop("compositions_styles", None)
+            config["compositions_seasonal"] = 'compositions_seasonal' in request.form
         config["immich_auto_update"] = 'immich_auto_update' in request.form
         config["random_content_in_album"] = "random_content_in_album" in request.form
         config["smb_auto_update"] = 'smb_auto_update' in request.form

@@ -430,12 +430,37 @@ def compose(style, photo_paths, messages, width, height, rng=None, include_messa
     return render(photos, message, width, height, rng)
 
 
-def compose_random(enabled_styles, photo_paths, messages, width, height, include_messages=True, rng=None):
-    """Choisit un format au hasard parmi ceux activés et crée la composition (None si impossible)."""
+def enabled_formats(config):
+    """Formats activés : tous sauf ceux décochés (un nouveau format est donc actif par défaut)."""
+    disabled = config.get("compositions_disabled")
+    if disabled is None and "compositions_styles" in config:  # ancien réglage (liste des formats cochés)
+        disabled = [k for k in BASIC_FORMATS if k not in config["compositions_styles"]]
+    return [k for k in FORMATS if k not in set(disabled or [])]
+
+
+def compose_random(enabled_styles, photo_paths, messages, width, height, include_messages=True, rng=None, seasonal=True, today=None):
+    """
+    Choisit un format au hasard parmi ceux activés et crée la composition (None si impossible).
+    Avec `seasonal`, les thèmes de saison ne sont proposés que pendant leur période, et y sont trois fois plus fréquents.
+    """
     rng = rng or random.Random()
-    styles = [s for s in enabled_styles if s in FORMATS]
-    rng.shuffle(styles)
-    for style in styles:
+    weighted = []
+    for style in enabled_styles:
+        if style not in FORMATS:
+            continue
+        if seasonal and style in SEASONAL:
+            if not in_season(style, today):
+                continue
+            weighted += [style] * 3
+        else:
+            weighted.append(style)
+    tried = set()
+    while weighted:
+        style = rng.choice(weighted)
+        weighted = [s for s in weighted if s != style]
+        if style in tried:
+            continue
+        tried.add(style)
         try:
             image = compose(style, photo_paths, messages, width, height, rng, include_messages)
         except Exception as e:
@@ -444,3 +469,12 @@ def compose_random(enabled_styles, photo_paths, messages, width, height, include
         if image is not None:
             return style, image
     return None, None
+
+
+# Formats à thème (enregistrés ici : ces modules réutilisent les outils ci-dessus)
+BASIC_FORMATS = list(FORMATS)
+from utils.themed_compositions import THEMES as _THEMES, in_season, SEASONAL  # noqa: E402
+from utils.themed_compositions_extra import THEMES as _THEMES_EXTRA  # noqa: E402
+FORMATS.update(_THEMES)
+FORMATS.update(_THEMES_EXTRA)
+THEME_KEYS = list(_THEMES) + list(_THEMES_EXTRA)

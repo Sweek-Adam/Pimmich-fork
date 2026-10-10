@@ -188,18 +188,26 @@
                         <input class="form-check-input" type="checkbox" id="compositions_include_messages" name="compositions_include_messages" {% if config.get('compositions_include_messages', True) %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="compositions_include_messages">{{ _("Inclure les messages dans les compositions") }}</label>
                     </div>
-                    {% set enabled_formats = config.get('compositions_styles', []) %}
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-2">
-                        {% for key, label in composition_formats %}
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="compositions_seasonal" name="compositions_seasonal" {% if config.get('compositions_seasonal', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="compositions_seasonal">{{ _("Thèmes de saison seulement pendant leur période (et plus fréquents à ce moment-là)") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon la saison.") }}</p>
+                    {% for title, items in [(_("Formats"), composition_formats), (_("Thèmes"), composition_themes)] %}
+                    <h4 class="text-md font-semibold mt-4 mb-2">{{ title }}</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                        {% for item in items %}
+                        {% set key, label = item[0], item[1] %}
                         <label class="block border rounded-lg overflow-hidden cursor-pointer bg-white hover:shadow">
                             <img src="{{ url_for('static', filename='composition_previews/' ~ key ~ '.jpg') }}" alt="{{ _(label) }}" class="w-full" loading="lazy">
                             <span class="flex items-center gap-2 p-2 text-sm">
-                                <input type="checkbox" name="compositions_styles" value="{{ key }}" {% if key in enabled_formats %}checked{% endif %}>
-                                {{ _(label) }}
+                                <input type="checkbox" name="compositions_styles" value="{{ key }}" {% if key in composition_enabled %}checked{% endif %}>
+                                {{ _(label) }}{% if item|length > 2 and item[2] %} <i class="fas fa-calendar-alt text-gray-400" title="{{ _('Thème de saison') }}"></i>{% endif %}
                             </span>
                         </label>
                         {% endfor %}
                     </div>
+                    {% endfor %}
                 </fieldset>
 
                 <fieldset class="mt-6">

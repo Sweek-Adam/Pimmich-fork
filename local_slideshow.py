@@ -871,14 +871,15 @@ def prepare_composition_async(config, all_media, width, height):
         return
     photos = [p for p in all_media if p.lower().endswith((".jpg", ".jpeg", ".png"))
               and f"{os.sep}messages{os.sep}" not in p and f"{os.sep}compositions{os.sep}" not in p]
-    styles = config.get("compositions_styles") or list(compositions.FORMATS)
+    styles = compositions.enabled_formats(config)
     include_messages = config.get("compositions_include_messages", True)
+    seasonal = config.get("compositions_seasonal", True)
 
     def work():
         try:
             messages = [m for m in list_messages() if not m.get("hidden")] if include_messages else []
             started = time.time()
-            style, image = compositions.compose_random(styles, photos, messages, width, height, include_messages)
+            style, image = compositions.compose_random(styles, photos, messages, width, height, include_messages, seasonal=seasonal)
             if image is None:
                 return
             compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -2466,6 +2467,9 @@ def start_slideshow():
         logger.info(f"🖼️ Pygame exited cleanly.")
 
 if __name__ == "__main__":
+    # Titres des compositions à thème traduits dans la langue du cadre
+    from utils import themed_compositions
+    themed_compositions.set_translator(_)
     # Appliquer la sortie audio choisie (HDMI / jack) avant de lancer vidéos et musique
     apply_audio_output(load_config().get("video_audio_output", "auto"))
     start_slideshow()

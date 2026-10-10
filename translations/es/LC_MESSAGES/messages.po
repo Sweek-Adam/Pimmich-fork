@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-10 13:57+0200\n"
+"POT-Creation-Date: 2026-10-10 14:42+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: es <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:956
+#: local_slideshow.py:957
 msgid "Photos & messages"
 msgstr "Fotos y mensajes"
 
-#: local_slideshow.py:1141
+#: local_slideshow.py:1142
 msgid "Données de marée non disponibles"
 msgstr "Datos de mareas no disponibles"
 
-#: local_slideshow.py:1238
+#: local_slideshow.py:1239
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Aniversario) Hace %(num)d año"
 
-#: local_slideshow.py:1238
+#: local_slideshow.py:1239
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:2255
+#: local_slideshow.py:2256
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:2256
+#: local_slideshow.py:2257
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:2257
+#: local_slideshow.py:2258
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:2258
+#: local_slideshow.py:2259
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2259
+#: local_slideshow.py:2260
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:2285
+#: local_slideshow.py:2286
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -1358,11 +1358,40 @@ msgstr "Una composición cada (fotos):"
 msgid "Inclure les messages dans les compositions"
 msgstr "Incluir los mensajes en las composiciones"
 
-#: templates/configure/tab_affichage.html.jinja:207
+#: templates/configure/tab_affichage.html.jinja:193
+msgid ""
+"Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
+"moment-là)"
+msgstr ""
+"Temas de temporada solo durante su periodo (y más frecuentes en ese momento)"
+
+#: templates/configure/tab_affichage.html.jinja:195
+msgid ""
+"Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · "
+"Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon la "
+"saison."
+msgstr ""
+"Navidad: 1 de diciembre – 6 de enero · Halloween: 15 de octubre – 2 de "
+"noviembre · Pascua: 2 semanas alrededor de Pascua · Primavera, Otoño, "
+"Invierno: según la estación."
+
+#: templates/configure/tab_affichage.html.jinja:196
+msgid "Formats"
+msgstr "Formatos"
+
+#: templates/configure/tab_affichage.html.jinja:196
+msgid "Thèmes"
+msgstr "Temas"
+
+#: templates/configure/tab_affichage.html.jinja:205
+msgid "Thème de saison"
+msgstr "Tema de temporada"
+
+#: templates/configure/tab_affichage.html.jinja:215
 msgid "QR code pour les invités"
 msgstr "Código QR para invitados"
 
-#: templates/configure/tab_affichage.html.jinja:209
+#: templates/configure/tab_affichage.html.jinja:217
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, pour"
 " envoyer des photos ou écrire un message depuis un téléphone connecté au "
@@ -1372,43 +1401,43 @@ msgstr ""
 "invitados, para enviar fotos o escribir un mensaje desde un teléfono "
 "conectado a la misma red Wi-Fi."
 
-#: templates/configure/tab_affichage.html.jinja:212
+#: templates/configure/tab_affichage.html.jinja:220
 msgid "Afficher le QR code"
 msgstr "Mostrar el código QR"
 
-#: templates/configure/tab_affichage.html.jinja:214
+#: templates/configure/tab_affichage.html.jinja:222
 msgid "Position :"
 msgstr "Posición:"
 
-#: templates/configure/tab_affichage.html.jinja:217
+#: templates/configure/tab_affichage.html.jinja:225
 #: templates/configure/tab_metadata.html.jinja:77
 #: templates/configure/tab_metadata.html.jinja:148
 msgid "En bas à droite"
 msgstr "Abajo a la derecha"
 
-#: templates/configure/tab_affichage.html.jinja:218
+#: templates/configure/tab_affichage.html.jinja:226
 #: templates/configure/tab_metadata.html.jinja:79
 #: templates/configure/tab_metadata.html.jinja:146
 msgid "En bas à gauche"
 msgstr "Abajo a la izquierda"
 
-#: templates/configure/tab_affichage.html.jinja:219
+#: templates/configure/tab_affichage.html.jinja:227
 #: templates/configure/tab_metadata.html.jinja:73
 #: templates/configure/tab_metadata.html.jinja:155
 msgid "En haut à droite"
 msgstr "Arriba a la derecha"
 
-#: templates/configure/tab_affichage.html.jinja:220
+#: templates/configure/tab_affichage.html.jinja:228
 #: templates/configure/tab_metadata.html.jinja:75
 #: templates/configure/tab_metadata.html.jinja:153
 msgid "En haut à gauche"
 msgstr "Arriba a la izquierda"
 
-#: templates/configure/tab_affichage.html.jinja:224
+#: templates/configure/tab_affichage.html.jinja:232
 msgid "Autoriser les invités à écrire des messages"
 msgstr "Permitir que los invitados escriban mensajes"
 
-#: templates/configure/tab_affichage.html.jinja:226
+#: templates/configure/tab_affichage.html.jinja:234
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les "
@@ -1418,11 +1447,11 @@ msgstr ""
 "dispositivo como máximo) y desaparecen al cabo de 7 días. Puedes eliminarlos"
 " en Contenido > Mensajes."
 
-#: templates/configure/tab_affichage.html.jinja:231
+#: templates/configure/tab_affichage.html.jinja:239
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Gestión de energía (enchufe conectado)"
 
-#: templates/configure/tab_affichage.html.jinja:233
+#: templates/configure/tab_affichage.html.jinja:241
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser "
 "une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra "
@@ -1432,46 +1461,46 @@ msgstr ""
 "conectado (Wi-Fi) para apagarla. Pimmich enviará una solicitud HTTP simple a"
 " las URL que especifique."
 
-#: templates/configure/tab_affichage.html.jinja:234
+#: templates/configure/tab_affichage.html.jinja:242
 msgid "Exemples d'URLs :"
 msgstr "Exemples d'URLs :"
 
-#: templates/configure/tab_affichage.html.jinja:246
+#: templates/configure/tab_affichage.html.jinja:254
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr "Activar el control mediante enchufe inteligente"
 
-#: templates/configure/tab_affichage.html.jinja:253
+#: templates/configure/tab_affichage.html.jinja:261
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr "Estado del enchufe: Desconocido"
 
-#: templates/configure/tab_affichage.html.jinja:260
+#: templates/configure/tab_affichage.html.jinja:268
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr "URL para ENCENDER el enchufe:"
 
-#: templates/configure/tab_affichage.html.jinja:269
-#: templates/configure/tab_affichage.html.jinja:282
+#: templates/configure/tab_affichage.html.jinja:277
+#: templates/configure/tab_affichage.html.jinja:290
 msgid "Tester"
 msgstr "Ensayador"
 
-#: templates/configure/tab_affichage.html.jinja:273
+#: templates/configure/tab_affichage.html.jinja:281
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr "URL para APAGAR el enchufe:"
 
-#: templates/configure/tab_affichage.html.jinja:286
+#: templates/configure/tab_affichage.html.jinja:294
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr "Retardo tras el encendido (segundos):"
 
-#: templates/configure/tab_affichage.html.jinja:291
+#: templates/configure/tab_affichage.html.jinja:299
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la résolution."
 " Augmentez si la résolution est toujours incorrecte."
@@ -1479,27 +1508,27 @@ msgstr ""
 "Es hora de esperar a que la pantalla se inicialice antes de forzar la "
 "resolución. Aumente si la resolución aún es incorrecta."
 
-#: templates/configure/tab_affichage.html.jinja:294
+#: templates/configure/tab_affichage.html.jinja:302
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr "URL de estado (opcional):"
 
-#: templates/configure/tab_affichage.html.jinja:300
+#: templates/configure/tab_affichage.html.jinja:308
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "Para Home Assistant, utilice la URL de la API de Estados:"
 
-#: templates/configure/tab_affichage.html.jinja:306
+#: templates/configure/tab_affichage.html.jinja:314
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Token de acceso de Home Assistant (si es la URL de estado HA):"
 
-#: templates/configure/tab_affichage.html.jinja:314
+#: templates/configure/tab_affichage.html.jinja:322
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "Mostrar/Ocultar el token"
 
-#: templates/configure/tab_affichage.html.jinja:319
+#: templates/configure/tab_affichage.html.jinja:327
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Cree un \"Token de acceso a largo plazo\" en su perfil de Home Assistant."
 
@@ -2506,6 +2535,7 @@ msgstr ""
 "                            Regulaciones de Wi-Fi)"
 
 #: templates/configure/tab_network.html.jinja:33
+#: utils/themed_compositions.py:515
 msgid "France"
 msgstr "Francia"
 
@@ -3404,23 +3434,183 @@ msgstr "Bocadillo de cómic"
 msgid "Minimal"
 msgstr "Minimalista"
 
-#: web/core.py:895
+#: utils/themed_compositions.py:204
+msgid "Joyeux Noël"
+msgstr "Feliz Navidad"
+
+#: utils/themed_compositions.py:254
+msgid "Joyeux Halloween"
+msgstr "Feliz Halloween"
+
+#: utils/themed_compositions.py:288
+msgid "Joyeuses Pâques"
+msgstr "Felices Pascuas"
+
+#: utils/themed_compositions.py:327
+msgid "Bonnes vacances !"
+msgstr "¡Felices vacaciones!"
+
+#: utils/themed_compositions.py:347 utils/themed_compositions.py:513
+msgid "Islande"
+msgstr "Islandia"
+
+#: utils/themed_compositions.py:382 utils/themed_compositions.py:514
+msgid "Japon"
+msgstr "Japón"
+
+#: utils/themed_compositions.py:421
+msgid "Vive la France"
+msgstr "Viva Francia"
+
+#: utils/themed_compositions.py:443
+msgid "La montagne"
+msgstr "La montaña"
+
+#: utils/themed_compositions.py:474
+msgid "La mer"
+msgstr "El mar"
+
+#: utils/themed_compositions.py:502
+msgid "Vive la plage !"
+msgstr "¡Viva la playa!"
+
+#: utils/themed_compositions.py:509
+msgid "Noël"
+msgstr "Navidad"
+
+#: utils/themed_compositions.py:510
+msgid "Halloween"
+msgstr "Halloween"
+
+#: utils/themed_compositions.py:511
+msgid "Pâques"
+msgstr "Pascua"
+
+#: utils/themed_compositions.py:512
+msgid "Vacances"
+msgstr "Vacaciones"
+
+#: utils/themed_compositions.py:516
+msgid "Montagne"
+msgstr "Montaña"
+
+#: utils/themed_compositions.py:517
+msgid "Mer"
+msgstr "Mar"
+
+#: utils/themed_compositions.py:518
+msgid "Plage"
+msgstr "Playa"
+
+#: utils/themed_compositions_extra.py:93
+msgid "La Grande Vague"
+msgstr "La Gran Ola"
+
+#: utils/themed_compositions_extra.py:154
+#: utils/themed_compositions_extra.py:487
+msgid "Mont Fuji"
+msgstr "Monte Fuji"
+
+#: utils/themed_compositions_extra.py:185
+msgid "Dans les étoiles"
+msgstr "Entre las estrellas"
+
+#: utils/themed_compositions_extra.py:218
+#: utils/themed_compositions_extra.py:489
+msgid "Années 80"
+msgstr "Años 80"
+
+#: utils/themed_compositions_extra.py:245
+#: utils/themed_compositions_extra.py:490
+msgid "Années 70"
+msgstr "Años 70"
+
+#: utils/themed_compositions_extra.py:272
+msgid "Le printemps"
+msgstr "La primavera"
+
+#: utils/themed_compositions_extra.py:301
+msgid "L'automne"
+msgstr "El otoño"
+
+#: utils/themed_compositions_extra.py:328
+msgid "L'hiver"
+msgstr "El invierno"
+
+#: utils/themed_compositions_extra.py:352
+msgid "Joyeux anniversaire !"
+msgstr "¡Feliz cumpleaños!"
+
+#: utils/themed_compositions_extra.py:385
+msgid "À l'affiche"
+msgstr "En cartelera"
+
+#: utils/themed_compositions_extra.py:413
+msgid "WOUAH !"
+msgstr "¡GUAU!"
+
+#: utils/themed_compositions_extra.py:454
+#: utils/themed_compositions_extra.py:497
+msgid "Carnet de voyage"
+msgstr "Cuaderno de viaje"
+
+#: utils/themed_compositions_extra.py:479
+msgid "Souvenir"
+msgstr "Recuerdo"
+
+#: utils/themed_compositions_extra.py:486
+msgid "Hokusai – La Grande Vague"
+msgstr "Hokusai – La Gran Ola"
+
+#: utils/themed_compositions_extra.py:488
+msgid "Espace"
+msgstr "Espacio"
+
+#: utils/themed_compositions_extra.py:491
+msgid "Printemps"
+msgstr "Primavera"
+
+#: utils/themed_compositions_extra.py:492
+msgid "Automne"
+msgstr "Otoño"
+
+#: utils/themed_compositions_extra.py:493
+msgid "Hiver"
+msgstr "Invierno"
+
+#: utils/themed_compositions_extra.py:494
+msgid "Anniversaire"
+msgstr "Cumpleaños"
+
+#: utils/themed_compositions_extra.py:495
+msgid "Cinéma"
+msgstr "Cine"
+
+#: utils/themed_compositions_extra.py:496
+msgid "Bande dessinée"
+msgstr "Cómic"
+
+#: utils/themed_compositions_extra.py:498
+msgid "Album ancien"
+msgstr "Álbum antiguo"
+
+#: web/core.py:898
 msgid "Code d'invitation invalide."
 msgstr "Código de invitación no válido."
 
-#: web/core.py:901
+#: web/core.py:904
 msgid "Ce code d'invitation a expiré."
 msgstr "Este código de invitación ha caducado."
 
-#: web/core.py:907
+#: web/core.py:910
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "Ya estás autorizado. ¡Envíame una foto!"
 
-#: web/core.py:909
+#: web/core.py:912
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "Este código de invitación ya se ha utilizado."
 
-#: web/core.py:920
+#: web/core.py:923
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes postales "
@@ -3509,12 +3699,12 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el "
 "valor anterior."
 
-#: web/routes_config.py:210
+#: web/routes_config.py:213
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:235
+#: web/routes_config.py:238
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
