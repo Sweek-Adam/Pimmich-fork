@@ -912,14 +912,16 @@ def prepare_composition(config, plan, playlist, start, width, height, force=Fals
             for _attempt in range(4):  # un autre format si celui-ci ne peut pas accueillir les photos suivantes
                 style = layout_engine.pick_format(plan, rng)
                 count = layout_engine.photo_count(style, rng)
-                chunk = layout_engine.take_chunk(snapshot, start, count)
                 if include_messages and layout_engine.accepts_messages(style) and style not in compositions.LIMITS:
-                    extra = sum(map(layout_engine.is_message, chunk))  # un message ne prend pas la place d'une photo
-                    chunk = layout_engine.take_chunk(snapshot, start, count + extra) if extra else chunk
+                    # les messages (dans la limite de la disposition) ne prennent pas la place des photos
+                    chunk = layout_engine.take_slides(snapshot, start, count, layout_engine.MESSAGE_SLOTS.get(style, 1))
+                else:
+                    chunk = layout_engine.take_chunk(snapshot, start, count)
                 image, used = layout_engine.render_chunk(style, chunk, messages, width, height, include_messages, rng)
                 if image is not None:
                     break
             if image is None:
+                logger.info(f"[Dispositions] Aucune composition possible à partir de la diapositive {start} : affichage seul")
                 return
             compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
             _composition["slot"] ^= 1  # deux fichiers en alternance : jamais réécrire celui affiché
@@ -2522,6 +2524,9 @@ def start_slideshow():
                 time.sleep(60)
                 continue
 
+            # Messages espacés : chacun est suivi d'assez de photos pour être affiché dans une composition
+            playlist = layout_engine.spread_messages(playlist, layout_engine.resolve(config, custom_layout if is_custom_run else None),
+                                                     config.get("compositions_include_messages", True))
             playlist_index = 0
             while 0 <= playlist_index < len(playlist):
                 # Vérifier si une carte postale est arrivée pour sortir de la boucle et la traiter immédiatement

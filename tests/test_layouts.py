@@ -202,3 +202,27 @@ def test_layout_picker_marks_layouts_with_messages(admin_client):
     html = admin_client.get("/configure").get_data(as_text=True)
     assert 'data-layout="halloween" data-group="theme"' in html and 'data-filter="messages"' in html
     assert 'data-layout="photomaton" data-group="format" data-label="photomaton" data-messages="0"' in html
+
+
+def test_a_burst_of_messages_still_makes_a_composition():
+    """Beaucoup de messages à la suite : chaque composition en prend autant qu'elle peut, avec ses photos."""
+    seq = ["m/messages/1.jpg", "m/messages/2.jpg", "p/a.jpg", "m/messages/3.jpg", "m/messages/4.jpg", "m/messages/5.jpg",
+           "p/b.jpg", "p/c.jpg", "p/d.jpg"]
+    chunk = le.take_slides(seq, 0, 3, 3)
+    assert chunk == seq[:4]  # 3 messages + 1 photo : le 4e message est gardé pour la suite
+    assert le.take_slides(seq, 0, 3, 1) == seq[:1]  # une seule place : on s'arrête avant le 2e message
+    assert le.take_slides(["p/a.jpg", "p/film.mp4", "p/b.jpg"], 0, 3, 1) == ["p/a.jpg"]  # jamais au-delà d'une vidéo
+
+
+def test_messages_are_spread_so_each_composition_has_its_photos():
+    halloween = le.LayoutPlan(False, ["halloween"], 0)
+    seq = ["messages/1.jpg", "messages/2.jpg", "a.jpg", "messages/3.jpg", "messages/4.jpg", "messages/5.jpg", "b.jpg", "c.jpg", "d.jpg"]
+    assert le.spread_messages(seq, halloween) == ["messages/1.jpg", "messages/2.jpg", "a.jpg", "b.jpg", "c.jpg",
+                                                  "messages/3.jpg", "messages/4.jpg", "messages/5.jpg", "d.jpg"]
+    liege = le.LayoutPlan(True, ["liege"], 5)  # un message par composition : 3 photos après chacun
+    spread = le.spread_messages(seq, liege)
+    assert [p for p in spread if "messages" not in p] == ["a.jpg", "b.jpg", "c.jpg", "d.jpg"]  # ordre des photos inchangé
+    assert spread[:5] == ["messages/1.jpg", "a.jpg", "b.jpg", "c.jpg", "messages/2.jpg"]
+    assert sorted(spread) == sorted(seq)  # rien de perdu
+    assert le.spread_messages(seq, le.LayoutPlan(True, ["pellicule"], 5)) == seq  # pas de disposition à messages : inchangé
+    assert le.spread_messages(seq, halloween, include_messages=False) == seq

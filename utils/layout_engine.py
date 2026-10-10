@@ -158,6 +158,59 @@ def plan_for_slide(plan, path, counter, include_messages=True):
     return wants_composition(plan, counter), plan
 
 
+def spread_messages(playlist, plan, include_messages=True):
+    """
+    Espace les messages dans la playlist pour que chacun (ou chaque groupe, selon la disposition) soit suivi
+    d'assez de photos pour former une composition. L'ordre des photos et celui des messages ne changent pas :
+    un message trop proche du précédent est simplement décalé un peu plus loin.
+    """
+    formats = [f for f in plan.formats if accepts_messages(f)] if include_messages else []
+    if not formats or not any(map(is_message, playlist)):
+        return playlist
+    group_size = min(MESSAGE_SLOTS.get(f, 1) for f in formats)
+    gap = max(compositions.FORMATS[f][1] for f in formats)  # photos nécessaires après un groupe de messages
+    out, pending = [], []
+    need, open_group = 0, 0  # photos encore nécessaires ; messages du groupe en cours (pas encore suivi d'une photo)
+    for path in playlist:
+        if is_message(path):
+            pending.append(path)
+        else:
+            out.append(path)
+            need, open_group = max(0, need - 1), 0
+        while pending:
+            if 0 < open_group < group_size:  # le groupe en cours a encore de la place
+                open_group += 1
+            elif need == 0:  # assez de photos depuis le groupe précédent : nouveau groupe
+                open_group, need = 1, gap
+            else:
+                break
+            out.append(pending.pop(0))
+    return out + pending  # messages restants : en fin de boucle (la playlist recommence par des photos)
+
+
+def take_slides(playlist, start, photos_wanted, message_slots):
+    """
+    Diapositives d'une composition qui affiche les messages : jusqu'à `message_slots` messages, plus
+    `photos_wanted` photos (les messages ne prennent pas la place des photos). S'arrête avant une vidéo,
+    et avant un message en trop (il ira dans la composition suivante).
+    """
+    chunk, photos, messages = [], 0, 0
+    for offset in range(len(playlist)):
+        path = playlist[(start + offset) % len(playlist)]
+        if is_video(path):
+            break
+        if is_message(path):
+            if messages >= message_slots:
+                break
+            messages += 1
+        else:
+            photos += 1
+        chunk.append(path)
+        if photos >= photos_wanted:
+            break
+    return chunk
+
+
 def message_for_path(path, messages_by_id):
     """Message correspondant à une image de la source « messages », sinon None."""
     p = Path(path)
@@ -178,7 +231,9 @@ def render_chunk(style, chunk, messages_by_id, width, height, include_messages=T
     notes, photos, used = [], [], 0
     for path in chunk:
         note = message_for_path(path, messages_by_id) if include_messages and accepts_message else None
-        if note is not None and len(notes) < slots:
+        if note is not None:
+            if len(notes) >= slots:
+                break  # message en trop : il ira dans la composition suivante
             notes.append(note)
             used += 1
             continue
