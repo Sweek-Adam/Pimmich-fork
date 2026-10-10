@@ -827,11 +827,50 @@ def prepare_memories(config, width, height):
     threading.Thread(target=work, daemon=True).start()
 
 
-def pop_memories_slide():
-    """La composition « Ce jour-là » si c'est le moment de la montrer, sinon None."""
+_agenda = {"path": None, "photos": 4, "shown_at": time.time() - 25 * 60, "built": 0, "building": False}
+AGENDA_EVERY = 30 * 60  # « Cette semaine » : toutes les 30 minutes (5 min après le démarrage la première fois)
+AGENDA_REFRESH = 10 * 60
+
+
+def prepare_agenda(config, width, height):
+    """Compose en arrière-plan « Cette semaine » (agenda familial et comptes à rebours), rafraîchie toutes les 10 min."""
+    if not config.get("agenda_slide", True) or _agenda["building"] or time.time() - _agenda["built"] < AGENDA_REFRESH:
+        return
+    if not (config.get("calendar_ics_url") or config.get("countdowns")):
+        _agenda["path"] = None
+        return
+    _agenda["building"] = True
+
+    def work():
+        try:
+            from utils import family_calendar
+            from utils.themed_compositions_extra import week_board
+            events, countdowns = family_calendar.upcoming(config), family_calendar.countdowns(config)
+            if not events and not countdowns:
+                _agenda["path"] = None
+                return
+            path = compositions.OUTPUT_DIR / "agenda_week.jpg"
+            compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            week_board(events, countdowns, width, height, random.Random()).save(path, "JPEG", quality=88)
+            _agenda["path"] = str(path)
+        except Exception as e:
+            logger.warning(f"[Cette semaine] Diapositive impossible : {e}")
+        finally:
+            _agenda.update(built=time.time(), building=False)
+    threading.Thread(target=work, daemon=True).start()
+
+
+def pop_memories_slide(config=None, width=1920, height=1080):
+    """Diapositive spéciale à montrer maintenant (« Ce jour-là », « Cette semaine »), sinon None."""
     if _memories["path"] and time.time() - _memories["shown_at"] > MEMORIES_EVERY and os.path.exists(_memories["path"]):
         _memories["shown_at"] = time.time()
+        _agenda["shown_at"] = max(_agenda["shown_at"], time.time() - AGENDA_EVERY + 10 * 60)  # jamais l'une juste après l'autre
         return _memories["path"]
+    if config is not None:
+        prepare_agenda(config, width, height)
+    if _agenda["path"] and time.time() - _agenda["shown_at"] > AGENDA_EVERY and os.path.exists(_agenda["path"]):
+        _agenda["shown_at"] = time.time()
+        return _agenda["path"]
     return None
 
 
@@ -2738,7 +2777,7 @@ def start_slideshow():
                 else:  # un message arrive : affiché dans une disposition qui accepte les messages, plutôt que seul
                     wanted, slide_plan = layout_engine.plan_for_slide(slide_plan, playlist[playlist_index], _composition["counter"], include_messages)
                     wanted = wanted and bool(slide_plan.formats)
-                memories_slide = None if forced_layout is not None else pop_memories_slide()
+                memories_slide = None if forced_layout is not None else pop_memories_slide(config, SCREEN_WIDTH, SCREEN_HEIGHT)
                 if memories_slide:  # « Ce jour-là » : une diapositive en plus, sans décaler la playlist
                     composition_path, composition_used, wanted = memories_slide, 0, False
                 if wanted and not layout_engine.is_video(playlist[playlist_index]):
@@ -2857,7 +2896,7 @@ def start_slideshow():
                     if current_pil_image: # Only proceed if image was successfully loaded
                         slide_config = config
                         if composition_path:  # plusieurs photos à regarder : durée allongée si besoin
-                            slide_config = dict(config, display_duration=layout_engine.composition_seconds(config, composition_used or _memories["photos"]))
+                            slide_config = dict(config, display_duration=layout_engine.composition_seconds(config, composition_used or 4))
                         display_photo_with_pan_zoom(screen, current_pil_image, SCREEN_WIDTH, SCREEN_HEIGHT, slide_config, main_font_loaded, photo_path)
                         previous_photo_surface = screen.copy()
                     else:

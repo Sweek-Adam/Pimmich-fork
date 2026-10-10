@@ -1,4 +1,72 @@
             <div id="tab-heure" class="tabcontent">
+                <section class="card" id="agenda-card">
+                    <h2 class="card-title"><i class="fas fa-calendar-alt text-indigo-500 mr-2"></i>{{ _("Agenda et comptes à rebours") }}</h2>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Une diapositive « Cette semaine » passe toutes les 30 minutes : les événements des 7 prochains jours et vos comptes à rebours.") }}</p>
+                    <label class="flex items-center gap-2 mb-3"><input type="checkbox" id="ag-slide"> {{ _("Afficher la diapositive « Cette semaine »") }}</label>
+                    <label for="ag-url" class="block font-semibold">{{ _("Agenda (adresse iCal secrète)") }}</label>
+                    <p class="text-xs text-gray-500 mb-1">{{ _("Google Agenda : Paramètres > votre agenda > « Adresse secrète au format iCal ». Lecture seule, sans connexion de compte.") }}</p>
+                    <div class="flex flex-wrap gap-2">
+                        <input type="url" id="ag-url" class="flex-1" placeholder="https://calendar.google.com/calendar/ical/.../basic.ics">
+                        <button type="button" id="ag-save-url" class="btn-secondary">{{ _("Enregistrer et vérifier") }}</button>
+                    </div>
+                    <ul id="ag-preview" class="ag-list"></ul>
+                    <h3 class="font-semibold mt-4 mb-2">{{ _("Comptes à rebours") }}</h3>
+                    <ul id="ag-countdowns" class="ag-list"></ul>
+                    <div class="flex flex-wrap gap-2 mt-2 items-center">
+                        <input type="text" id="ag-cd-title" maxlength="80" class="flex-1" placeholder="{{ _('Ex : Vacances, Mariage de Julie, Noël') }}">
+                        <input type="date" id="ag-cd-date">
+                        <label class="text-sm flex items-center gap-1"><input type="checkbox" id="ag-cd-yearly"> {{ _("chaque année") }}</label>
+                        <button type="button" id="ag-cd-add" class="btn-secondary"><i class="fas fa-plus mr-1"></i>{{ _("Ajouter") }}</button>
+                    </div>
+                    <p id="ag-status" class="text-sm mt-2"></p>
+                </section>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { none: {{ _("Aucun événement dans les 7 prochains jours.")|tojson }}, remove: {{ _("Retirer")|tojson }}, yearly: {{ _("chaque année")|tojson }} };
+                        const say = (t, ok) => { $("ag-status").textContent = t || ""; $("ag-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const post = async (body) => (await fetch("/api/calendar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })).json();
+                        let countdowns = [];
+                        function renderCountdowns() {
+                            $("ag-countdowns").innerHTML = "";
+                            countdowns.forEach((c, i) => {
+                                const li = document.createElement("li");
+                                const days = Math.ceil((new Date(c.date) - new Date(new Date().toDateString())) / 86400000);
+                                const label = document.createElement("span");
+                                label.textContent = `${c.title} · ${new Date(c.date).toLocaleDateString()}${c.yearly ? " (" + T.yearly + ")" : ""}${days >= 0 ? " · J-" + days : ""}`;
+                                const rm = document.createElement("button"); rm.type = "button"; rm.className = "link text-red-600"; rm.textContent = T.remove;
+                                rm.addEventListener("click", async () => { countdowns.splice(i, 1); const r = await post({ countdowns }); say(r.message, r.success); renderCountdowns(); });
+                                li.append(label, rm);
+                                $("ag-countdowns").appendChild(li);
+                            });
+                        }
+                        async function load(preview) {
+                            const d = await (await fetch("/api/calendar" + (preview ? "?preview=1" : ""))).json();
+                            $("ag-url").value = d.url; $("ag-slide").checked = d.slide;
+                            countdowns = d.countdowns; renderCountdowns();
+                            if (preview) {
+                                $("ag-preview").innerHTML = d.preview.length ? "" : `<li class="muted">${T.none}</li>`;
+                                d.preview.forEach(e => {
+                                    const li = document.createElement("li");
+                                    const when = new Date(e.when);
+                                    li.textContent = `${when.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}${e.all_day ? "" : " " + when.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} · ${e.title}`;
+                                    $("ag-preview").appendChild(li);
+                                });
+                            }
+                        }
+                        $("ag-slide").addEventListener("change", async () => { const r = await post({ slide: $("ag-slide").checked }); say(r.message, r.success); });
+                        $("ag-save-url").addEventListener("click", async () => { const r = await post({ url: $("ag-url").value }); say(r.message, r.success); if (r.success) load(true); });
+                        $("ag-cd-add").addEventListener("click", async () => {
+                            const title = $("ag-cd-title").value.trim(), date = $("ag-cd-date").value;
+                            if (!title || !date) return;
+                            countdowns.push({ title, date, yearly: $("ag-cd-yearly").checked });
+                            const r = await post({ countdowns }); say(r.message, r.success);
+                            if (r.success) { $("ag-cd-title").value = ""; renderCountdowns(); }
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-heure'\"]").forEach(b => b.addEventListener("click", () => setTimeout(() => load(!!$("ag-url").value), 50)));
+                        load(false);
+                    });
+                </script>
                 <fieldset>
                     <legend><strong>{{ _("Affichage de l'heure") }}</strong></legend>
 

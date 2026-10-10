@@ -560,6 +560,61 @@ def memories_board(items, W, H, rng, today=None):
     return canvas.convert("RGB")
 
 
+def _fit(draw, text, font, width):
+    """Texte coupé avec « … » pour tenir dans `width`."""
+    if draw.textlength(text, font=font) <= width:
+        return text
+    while text and draw.textlength(text + "…", font=font) > width:
+        text = text[:-1]
+    return text.rstrip() + "…"
+
+
+def week_board(events, countdowns, W, H, rng, today=None):
+    """« Cette semaine » : événements de l'agenda des prochains jours et comptes à rebours."""
+    today = today or date.today()
+    canvas = _vignette(_textured(_gradient(W, H, (246, 241, 230), (232, 222, 204)), rng, 8), 0.3).convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+    days = [N_("lundi"), N_("mardi"), N_("mercredi"), N_("jeudi"), N_("vendredi"), N_("samedi"), N_("dimanche")]
+    months = [N_("janvier"), N_("février"), N_("mars"), N_("avril"), N_("mai"), N_("juin"), N_("juillet"), N_("août"),
+              N_("septembre"), N_("octobre"), N_("novembre"), N_("décembre")]
+    _title(canvas, _t(N_("Cette semaine")), HAND2, int(H * 0.11), (150, 70, 30), (W / 2, H * 0.1), shadow=False, max_width=W * 0.8)
+    left, top = W * 0.07, H * 0.22
+    col_w = W * (0.5 if countdowns else 0.86)
+    day_font, item_font, time_font = _font(MARKER, int(H * 0.042)), _font(HAND, int(H * 0.058)), _font(HAND, int(H * 0.044))
+    y, last_day = top, None
+    for event in events[:9]:
+        when = event["when"]
+        if when.date() != last_day:
+            delta = (when.date() - today).days
+            label = _t(N_("Aujourd'hui")) if delta == 0 else _t(N_("Demain")) if delta == 1 else f"{_t(days[when.weekday()])} {when.day} {_t(months[when.month - 1])}"
+            y += H * 0.015 if last_day else 0
+            draw.text((left, y), label.capitalize(), font=day_font, fill=(150, 70, 30))
+            y += H * 0.062
+            last_day = when.date()
+        hour = "" if event.get("all_day") else when.strftime("%H:%M")
+        if hour:
+            draw.text((left + W * 0.01, y + H * 0.008), hour, font=time_font, fill=(110, 100, 90))
+        draw.text((left + W * (0.085 if hour else 0.01), y), _fit(draw, event["title"], item_font, W * (0.36 if countdowns else 0.75)), font=item_font, fill=(50, 44, 40))
+        y += H * 0.07
+        if y > H * 0.9:
+            break
+    if not events:
+        draw.text((left, top), _t(N_("Rien de prévu cette semaine.")), font=item_font, fill=(110, 100, 90))
+    if countdowns:
+        x0, y0 = W * 0.56, H * 0.22
+        card_w = W * 0.38
+        for c in countdowns[:4]:
+            card_h = H * 0.16
+            draw.rounded_rectangle([x0, y0, x0 + card_w, y0 + card_h], radius=int(H * 0.025), fill=(255, 253, 248), outline=(226, 210, 180), width=3)
+            big = _font(MARKER, int(H * 0.065))
+            number = _t(N_("Aujourd'hui")) if c["days"] == 0 else f"J-{c['days']}"
+            draw.text((x0 + W * 0.02, y0 + card_h / 2), number, font=big if c["days"] else _font(MARKER, int(H * 0.04)), fill=(200, 90, 40), anchor="lm")
+            title_font = _font(HAND, int(H * 0.05))
+            draw.text((x0 + W * 0.13, y0 + card_h / 2), _fit(draw, c["title"], title_font, card_w - W * 0.145), font=title_font, fill=(50, 44, 40), anchor="lm")
+            y0 += card_h + H * 0.03
+    return canvas.convert("RGB")
+
+
 THEMES = {
     "hokusai": (N_("Hokusai – La Grande Vague"), 2, 3, True, hokusai),
     "fuji": (N_("Mont Fuji"), 3, 4, True, fuji),

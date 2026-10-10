@@ -347,3 +347,43 @@ def notify_qr_png():
     qr.make_image(fill_color="black", back_color="white").save(buffer, "PNG")
     buffer.seek(0)
     return send_file(buffer, mimetype="image/png")
+
+
+# --- Agenda familial et comptes à rebours ---
+
+@app.route('/api/calendar', methods=['GET'])
+@login_required
+def calendar_api():
+    from utils import family_calendar
+    config = load_config()
+    events = family_calendar.upcoming(config) if request.args.get("preview") else []
+    return jsonify({"success": True, "url": config.get("calendar_ics_url", ""), "slide": bool(config.get("agenda_slide", True)),
+                    "countdowns": config.get("countdowns") or [],
+                    "preview": [{"title": e["title"], "when": e["when"].isoformat(), "all_day": e["all_day"]} for e in events[:8]]})
+
+
+@app.route('/api/calendar', methods=['POST'])
+@login_required
+def calendar_save_api():
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    if "url" in data:
+        url = (data.get("url") or "").strip()
+        if url and not url.startswith(("https://", "http://", "webcal://")):
+            return jsonify({"success": False, "message": _("Adresse d'agenda invalide (elle commence par https:// ou webcal://).")}), 400
+        config["calendar_ics_url"] = url[:1000]
+    if "slide" in data:
+        config["agenda_slide"] = bool(data["slide"])
+    if "countdowns" in data:
+        clean = []
+        for c in data.get("countdowns") or []:
+            try:
+                when = datetime.strptime(str(c.get("date", "")), "%Y-%m-%d").date().isoformat()
+            except ValueError:
+                return jsonify({"success": False, "message": _("Date invalide.")}), 400
+            title = str(c.get("title", "")).strip()[:80]
+            if title:
+                clean.append({"title": title, "date": when, "yearly": bool(c.get("yearly"))})
+        config["countdowns"] = clean[:20]
+    save_config(config)
+    return jsonify({"success": True, "message": _("Agenda enregistré.")})
