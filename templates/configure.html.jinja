@@ -180,6 +180,9 @@
                 <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-apercu')"
                     title="{{ _('Visualisez et gérez toutes les photos prêtes pour le diaporama.') }}"><i
                         class="fas fa-eye fa-fw mr-2"></i>{{ _('Aperçu') }}</button>
+                <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-messages')"
+                    title="{{ _('Écrivez des messages qui s\'affichent dans le diaporama.') }}"><i
+                        class="fas fa-comment-alt fa-fw mr-2"></i>{{ _('Messages') }}</button>
                 <button class="tablink inline-flex items-center" onclick="openTab(event, 'tab-playlists')"
                     title="{{ _('Créez et gérez vos albums photo personnalisés.') }}"><i
                         class="fas fa-list-ul fa-fw mr-2"></i>{{ _('Playlists') }}</button>
@@ -263,6 +266,7 @@
 {% include 'configure/tab_logs.html.jinja' %}
 
 {% include 'configure/tab_apercu.html.jinja' %}
+{% include 'configure/tab_messages.html.jinja' %}
 
 {% include 'configure/tab_playlists.html.jinja' %}
 

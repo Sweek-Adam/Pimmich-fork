@@ -97,6 +97,10 @@
                         <input class="form-check-input" type="checkbox" id="display_source_invites" name="display_sources" value="invités" {% if 'invités' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_invites">{{ _('Photos des invités (validées)') }}</label>
                     </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_messages">{{ _('Messages') }}</label>
+                    </div>
                 </fieldset>
                 <fieldset class="mt-4">
                     <legend>

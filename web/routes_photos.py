@@ -1,5 +1,6 @@
 """Gestion des photos préparées : suppression, filtres, favoris, textes."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from utils import messages_manager
 
 
     
@@ -29,6 +30,9 @@ def delete_photo(photo):
         # Google Drive : retirer aussi le fichier téléchargé, sinon il serait préparé à nouveau
         if photo_path_obj.parts[2:3] == ('gdrive',):
             remove_local_gdrive_media(photo_path_obj.stem)
+        # Messages : oublier aussi le message correspondant
+        if photo_path_obj.parts[2:3] == ('messages',):
+            messages_manager.delete_message(photo_path_obj.stem)
 
         # Supprimer l'état du filtre pour cette photo
         states = load_filter_states()
@@ -69,6 +73,8 @@ def delete_source_photos(source_name):
 
         if source_name == 'gdrive':
             remove_local_gdrive_media()
+        if source_name == 'messages':
+            messages_manager.delete_all_messages()
 
         # Supprimer les états de filtre pour cette source
         states = load_filter_states()

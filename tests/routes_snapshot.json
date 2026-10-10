@@ -102,6 +102,30 @@
   ]
  ],
  [
+  "/api/messages",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/messages",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/messages/<message_id>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
+  "/api/messages/preview",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/music_files",
   [
    "GET"

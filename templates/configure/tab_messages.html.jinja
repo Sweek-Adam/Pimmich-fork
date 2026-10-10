@@ -1,0 +1,134 @@
+        <div id="tab-messages" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Écrire un message") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Le message est transformé en image et s'affiche dans le diaporama comme une photo.") }}</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <label for="message-title">{{ _("Titre (optionnel)") }}</label>
+                        <input type="text" id="message-title" maxlength="120" placeholder="{{ _('ex : Joyeux anniversaire !') }}">
+
+                        <label for="message-body" class="mt-3 block">{{ _("Message") }}</label>
+                        <textarea id="message-body" rows="5" maxlength="1000" placeholder="{{ _('Votre texte…') }}"></textarea>
+
+                        <label for="message-signature" class="mt-3 block">{{ _("Signature (optionnelle)") }}</label>
+                        <input type="text" id="message-signature" maxlength="80" placeholder="{{ _('ex : Toute la famille') }}">
+
+                        <div class="grid grid-cols-2 gap-3 mt-3">
+                            <div>
+                                <label for="message-style">{{ _("Style") }}</label>
+                                <select id="message-style">
+                                    <option value="nuit">{{ _("Nuit") }}</option>
+                                    <option value="clair">{{ _("Clair") }}</option>
+                                    <option value="carte">{{ _("Carte postale") }}</option>
+                                    <option value="festif">{{ _("Festif") }}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message-expires">{{ _("Afficher jusqu'au (optionnel)") }}</label>
+                                <input type="date" id="message-expires">
+                            </div>
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+                            <button type="button" id="message-preview-btn"
+                                class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                <i class="fas fa-eye mr-2"></i>{{ _("Aperçu") }}</button>
+                            <button type="button" id="message-publish-btn"
+                                class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                <i class="fas fa-paper-plane mr-2"></i>{{ _("Publier") }}</button>
+                        </div>
+                        <p id="message-status" class="mt-3 text-sm"></p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-gray-600 mb-2">{{ _("Aperçu à l'écran") }}</p>
+                        <div class="border rounded bg-gray-100 flex items-center justify-center min-h-[200px]">
+                            <img id="message-preview-img" class="max-w-full max-h-96 hidden" alt="{{ _('Aperçu du message') }}">
+                            <span id="message-preview-empty" class="text-gray-400 text-sm p-6">{{ _("Cliquez sur « Aperçu » pour voir le rendu.") }}</span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt-6">
+                <legend>
+                    <h3>{{ _("Messages publiés") }}</h3>
+                </legend>
+                <div id="messages-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                <p id="messages-empty" class="text-sm text-gray-500 hidden">{{ _("Aucun message publié.") }}</p>
+            </fieldset>
+
+            <script>
+                (function () {
+                    const $ = (id) => document.getElementById(id);
+                    const status = (text, ok) => { $("message-status").textContent = text; $("message-status").className = `mt-3 text-sm ${ok ? 'text-green-600' : 'text-red-600'}`; };
+                    const formData = () => ({
+                        title: $("message-title").value, body: $("message-body").value, signature: $("message-signature").value,
+                        style: $("message-style").value, expires: $("message-expires").value || null,
+                    });
+
+                    async function showPreview() {
+                        const resp = await fetch('/api/messages/preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData()) });
+                        if (!resp.ok) { status((await resp.json()).message, false); return false; }
+                        const img = $("message-preview-img");
+                        if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+                        img.src = URL.createObjectURL(await resp.blob());
+                        img.classList.remove("hidden");
+                        $("message-preview-empty").classList.add("hidden");
+                        status("", true);
+                        return true;
+                    }
+
+                    async function loadMessages() {
+                        const data = await (await fetch('/api/messages')).json();
+                        const list = $("messages-list");
+                        list.innerHTML = "";
+                        $("messages-empty").classList.toggle("hidden", data.messages.length > 0);
+                        data.messages.forEach(m => {
+                            const card = document.createElement("div");
+                            card.className = "border rounded-lg overflow-hidden bg-white shadow-sm";
+                            const img = document.createElement("img");
+                            img.src = `/static/prepared/messages/${m.id}.jpg?v=${encodeURIComponent(m.created)}`;
+                            img.className = "w-full";
+                            img.alt = m.title || m.body;
+                            const info = document.createElement("div");
+                            info.className = "p-2 text-xs text-gray-600 flex justify-between items-center gap-2";
+                            const meta = document.createElement("span");
+                            meta.textContent = `${m.created}${m.author ? ' · ' + m.author : ''}${m.expires ? ' · {{ _("jusqu\'au") }} ' + m.expires : ''}`;
+                            const del = document.createElement("button");
+                            del.type = "button";
+                            del.className = "bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded";
+                            del.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                            del.title = "{{ _('Supprimer ce message') }}";
+                            del.addEventListener("click", async () => {
+                                if (!confirm("{{ _('Supprimer ce message ?') }}")) return;
+                                await fetch(`/api/messages/${m.id}`, { method: 'DELETE' });
+                                loadMessages();
+                            });
+                            info.append(meta, del);
+                            card.append(img, info);
+                            list.appendChild(card);
+                        });
+                    }
+
+                    $("message-preview-btn").addEventListener("click", showPreview);
+                    $("message-publish-btn").addEventListener("click", async () => {
+                        const btn = $("message-publish-btn");
+                        btn.disabled = true;
+                        try {
+                            const resp = await fetch('/api/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData()) });
+                            const data = await resp.json();
+                            status(data.message, data.success);
+                            if (data.success) {
+                                ["message-title", "message-body", "message-signature", "message-expires"].forEach(id => $(id).value = "");
+                                loadMessages();
+                            }
+                        } finally {
+                            btn.disabled = false;
+                        }
+                    });
+                    loadMessages();
+                })();
+            </script>
+        </div>
