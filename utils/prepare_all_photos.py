@@ -10,6 +10,7 @@ import subprocess, sys
 from utils.config import load_config
 import piexif
 from utils.image_filters import create_polaroid_effect, create_postcard_effect
+from utils.message_renderer import soft_blur
 from utils.exif import get_rotation_angle
 import logging
 import re
@@ -215,7 +216,7 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
                     left = (bg_img.width - 160) // 2
                     top = (bg_img.height - 90) // 2
                     bg_img = bg_img.crop((left, top, left + 160, top + 90))
-                bg_img = bg_img.filter(ImageFilter.GaussianBlur(radius=3))
+                bg_img = soft_blur(bg_img, 3)
                 bg_img = bg_img.resize((output_width, output_height), Image.Resampling.BILINEAR)
             else:
                 bg_img = img.copy()
@@ -227,7 +228,7 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
                     left = (bg_img.width - output_width) // 2
                     top = (bg_img.height - output_height) // 2
                     bg_img = bg_img.crop((left, top, left + output_width, top + output_height))
-                bg_img = bg_img.filter(ImageFilter.GaussianBlur(radius=50))
+                bg_img = soft_blur(bg_img, 50)
             
             final_img = Image.new('RGB', (output_width, output_height), (0, 0, 0))
             final_img.paste(bg_img, (0, 0))

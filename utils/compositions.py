@@ -10,7 +10,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageOps, ImageChops
 
-from utils.message_renderer import N_, render_message, render_note, _textured, _gradient, _paste_with_shadow, _vignette
+from utils.message_renderer import N_, render_message, render_note, _textured, _gradient, _paste_with_shadow, _vignette, soft_blur
 
 logger = logging.getLogger("pimmich.compositions")
 
@@ -46,7 +46,7 @@ def load_photo(display_path, max_side=1400):
             with Image.open(candidate) as image:
                 image.draft("RGB", (max_side, max_side))
                 image = ImageOps.exif_transpose(image).convert("RGB")
-                image.thumbnail((max_side, max_side), Image.LANCZOS)
+                image.thumbnail((max_side, max_side), Image.LANCZOS, reducing_gap=2.0)
                 return image
         except Exception as e:
             logger.debug(f"Photo illisible pour une composition ({candidate}) : {e}")
@@ -57,7 +57,7 @@ def cover(image, width, height, focus_y=0.42):
     """Recadre pour remplir exactement width × height (centre légèrement remonté, souvent les visages)."""
     width, height = max(1, int(width)), max(1, int(height))
     scale = max(width / image.width, height / image.height)
-    resized = image.resize((max(width, round(image.width * scale)), max(height, round(image.height * scale))), Image.LANCZOS)
+    resized = image.resize((max(width, round(image.width * scale)), max(height, round(image.height * scale))), Image.LANCZOS, reducing_gap=2.0)
     left = (resized.width - width) // 2
     top = int((resized.height - height) * focus_y)
     return resized.crop((left, top, left + width, top + height))
@@ -65,7 +65,7 @@ def cover(image, width, height, focus_y=0.42):
 
 def fit_inside(image, max_w, max_h):
     scale = min(max_w / image.width, max_h / image.height)
-    return image.resize((max(1, int(image.width * scale)), max(1, int(image.height * scale))), Image.LANCZOS)
+    return image.resize((max(1, int(image.width * scale)), max(1, int(image.height * scale))), Image.LANCZOS, reducing_gap=2.0)
 
 
 # Photos entières (réglage « compositions_full_photos ») : aucune photo n'est coupée dans les compositions
@@ -90,7 +90,7 @@ def print_photo(image, box_w, box_h):
     w, h = math.sqrt(area * ratio), math.sqrt(area / ratio)
     limit = max(box_w, box_h) * 1.1  # pas de tirage démesuré pour les panoramas
     scale = min(1.0, limit / max(w, h))
-    return image.resize((max(1, int(w * scale)), max(1, int(h * scale))), Image.LANCZOS)
+    return image.resize((max(1, int(w * scale)), max(1, int(h * scale))), Image.LANCZOS, reducing_gap=2.0)
 
 
 def blurred_fill(image, width, height):
@@ -179,7 +179,7 @@ def texture(kind, width, height):
             for _ in range(30):  # veines
                 yy = y + rng.randrange(plank)
                 draw.line([(0, yy), (width, yy + rng.randrange(-8, 8))], fill=(104 + shade, 64 + shade, 34), width=rng.randrange(1, 3))
-        result = _vignette(_textured(result.filter(ImageFilter.GaussianBlur(1.2)), rng, 18), 0.45)
+        result = _vignette(_textured(soft_blur(result, 1.2), rng, 18), 0.45)
     elif kind == "kraft":
         result = _vignette(_textured(_gradient(width, height, (206, 172, 128), (190, 154, 110)), rng, 28), 0.25)
     elif kind == "wall":
@@ -192,7 +192,7 @@ def texture(kind, width, height):
         fold = max(30, width // 28)
         for x in range(0, width, fold):
             draw.rectangle([x, 0, x + fold // 2, height], fill=(96, 12, 22))
-        result = _vignette(result.filter(ImageFilter.GaussianBlur(fold // 3)), 0.5)
+        result = _vignette(soft_blur(result, fold // 3), 0.5)
     else:
         result = Image.new("RGB", (width, height), (255, 255, 255))
     _texture_cache[key] = result
@@ -310,7 +310,7 @@ def filmstrip(photos, message, W, H, rng):
         tile = Image.blend(tile, ImageOps.colorize(ImageOps.grayscale(tile), (30, 20, 10), (255, 240, 210)), 0.15)  # teinte argentique
         strip.paste(tile, (gap + i * (frame_w + gap), 3 * hole))
     scale = min(1.0, W * 0.96 / strip_w)
-    strip = strip.resize((int(strip_w * scale), int(strip_h * scale)), Image.LANCZOS)
+    strip = strip.resize((int(strip_w * scale), int(strip_h * scale)), Image.LANCZOS, reducing_gap=2.0)
     _paste_with_shadow(canvas, rotated(strip, rng.uniform(-3, 3)), (W / 2, H / 2))
     return canvas.convert("RGB")
 

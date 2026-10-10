@@ -361,7 +361,7 @@ def perform_transition(screen, old_image_surface, new_image_path, duration, scre
     img_y = (screen_height - new_pil_image_scaled.height) // 2
     
     # Optimisation majeure : convert() pour aligner le format de pixels de l'image sur celui de l'écran
-    temp_surf = pygame.image.fromstring(new_pil_image_scaled.tobytes(), new_pil_image_scaled.size, new_pil_image_scaled.mode).convert()
+    temp_surf = pygame.image.frombytes(new_pil_image_scaled.tobytes(), new_pil_image_scaled.size, new_pil_image_scaled.mode).convert()
     new_surface_scaled.blit(temp_surf, (img_x, img_y))
 
     # Récupérer les métadonnées pour l'image en cours de transition
@@ -891,47 +891,87 @@ def pop_forced_layout():
     return None
 
 
-def prepare_composition(config, plan, playlist, start, width, height, force=False):
-    """Prépare en arrière-plan la composition qui commencera à l'indice `start` de cette playlist."""
+_ahead = {}  # compositions préparées d'avance : {(playlist, indice): (chemin, diapositives utilisées, format)}
+AHEAD_MAX = 2
+
+
+def _render_composition(plan, snapshot, start, messages, include_messages, width, height):
+    """Compose la composition qui commence à `start` : (image, diapositives utilisées, format) ou None."""
+    rng = random.Random()
+    for _attempt in range(4):  # un autre format si celui-ci ne peut pas accueillir les photos suivantes
+        style = layout_engine.pick_format(plan, rng)
+        count = layout_engine.photo_count(style, rng)
+        if include_messages and layout_engine.accepts_messages(style) and style not in compositions.LIMITS:
+            # les messages (dans la limite de la disposition) ne prennent pas la place des photos
+            chunk = layout_engine.take_slides(snapshot, start, count, layout_engine.MESSAGE_SLOTS.get(style, 1))
+        else:
+            chunk = layout_engine.take_chunk(snapshot, start, count)
+        image, used = layout_engine.render_chunk(style, chunk, messages, width, height, include_messages, rng)
+        if image is not None:
+            return image, used, style
+    return None
+
+
+def _save_composition(image):
+    """Fichiers en rotation : jamais réécrire celui affiché ni ceux préparés d'avance."""
+    compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    _composition["slot"] = (_composition["slot"] + 1) % (AHEAD_MAX + 2)
+    path = compositions.OUTPUT_DIR / f"composition_{_composition['slot']}.jpg"
+    image.save(path, "JPEG", quality=88)
+    return str(path)
+
+
+def prepare_composition(config, plan, playlist, start, width, height, force=False, base_plan=None):
+    """
+    Prépare en arrière-plan la composition qui commencera à l'indice `start` de cette playlist,
+    puis, dans la foulée, la suivante (préparée d'avance : le diaporama n'attend plus une composition lente).
+    """
     target = (id(playlist), start)
+    for key in [k for k in _ahead if k[0] != id(playlist)]:
+        _ahead.pop(key, None)  # playlist reconstruite ou réordonnée : réserves périmées
     if not force and _composition["target"] == target and (_composition["ready"] or (_composition["thread"] and _composition["thread"].is_alive())):
         return  # déjà prête ou en cours pour cet emplacement
     if _composition["thread"] and _composition["thread"].is_alive():
         if not force:
             return  # une autre préparation est en cours : on ne surcharge pas le processeur
         _composition["thread"].join(30)  # disposition forcée : on attend la fin de la préparation en cours
+    reserved = None if force else _ahead.pop(target, None)
     _composition.update(target=target, ready=None)
     compositions.set_full_photos(config.get("compositions_full_photos", True))
     include_messages = config.get("compositions_include_messages", True)
     snapshot = list(playlist)
+    base_plan = base_plan or plan
 
     def work():
         try:
-            started = time.time()
-            rng = random.Random()
             messages = {m["id"]: m for m in list_messages() if not m.get("hidden")} if include_messages else {}
-            for _attempt in range(4):  # un autre format si celui-ci ne peut pas accueillir les photos suivantes
-                style = layout_engine.pick_format(plan, rng)
-                count = layout_engine.photo_count(style, rng)
-                if include_messages and layout_engine.accepts_messages(style) and style not in compositions.LIMITS:
-                    # les messages (dans la limite de la disposition) ne prennent pas la place des photos
-                    chunk = layout_engine.take_slides(snapshot, start, count, layout_engine.MESSAGE_SLOTS.get(style, 1))
-                else:
-                    chunk = layout_engine.take_chunk(snapshot, start, count)
-                image, used = layout_engine.render_chunk(style, chunk, messages, width, height, include_messages, rng)
-                if image is not None:
-                    break
-            if image is None:
-                logger.info(f"[Dispositions] Aucune composition possible à partir de la diapositive {start} : affichage seul")
+            if reserved:  # déjà préparée d'avance
+                path, used, style = reserved
+                if _composition["target"] == target:
+                    _composition["ready"], _composition["style"] = (path, used), style
+                    publish_queue()
+            else:
+                started = time.time()
+                result = _render_composition(plan, snapshot, start, messages, include_messages, width, height)
+                if result is None:
+                    logger.info(f"[Dispositions] Aucune composition possible à partir de la diapositive {start} : affichage seul")
+                    return
+                image, used, style = result
+                path = _save_composition(image)
+                if _composition["target"] == target:
+                    _composition["ready"], _composition["style"] = (path, used), style
+                    publish_queue()  # la composition apparaît dans « À suivre »
+                logger.info(f"[Dispositions] « {style} » ({used} photos) prête en {time.time() - started:.1f}s")
+            # La suivante, d'avance
+            nxt = layout_engine.next_composition_start(base_plan, snapshot, start + used, include_messages)
+            if nxt is None or len(_ahead) >= AHEAD_MAX or (target[0], nxt[0] % len(snapshot)) in _ahead:
                 return
-            compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-            _composition["slot"] ^= 1  # deux fichiers en alternance : jamais réécrire celui affiché
-            path = compositions.OUTPUT_DIR / f"composition_{_composition['slot']}.jpg"
-            image.save(path, "JPEG", quality=88)
-            if _composition["target"] == target:
-                _composition["ready"], _composition["style"] = (str(path), used), style
-                publish_queue()  # la composition apparaît dans « À suivre »
-            logger.info(f"[Dispositions] « {style} » ({used} photos) prête en {time.time() - started:.1f}s")
+            started = time.time()
+            result = _render_composition(nxt[1], snapshot, nxt[0] % len(snapshot), messages, include_messages, width, height)
+            if result:
+                image, used2, style2 = result
+                _ahead[(target[0], nxt[0] % len(snapshot))] = (_save_composition(image), used2, style2)
+                logger.info(f"[Dispositions] « {style2} » préparée d'avance en {time.time() - started:.1f}s")
         except Exception as e:
             logger.warning(f"[Dispositions] Préparation impossible : {e}")
 
@@ -951,11 +991,15 @@ def upcoming_compositions(plan, playlist, start, counter, include_messages=True)
         wanted, slot_plan = layout_engine.plan_for_slide(plan, playlist[index], counter, include_messages)
         if wanted and slot_plan.formats:
             ready = _composition["ready"] if _composition["target"] == (id(playlist), index) else None
+            style = _composition["style"]
+            if not ready and (id(playlist), index) in _ahead:  # préparée d'avance
+                path, used, style = _ahead[(id(playlist), index)]
+                ready = (path, used)
             if not ready:
                 found.append({"at": offset, "count": None, "style": None, "image": None})
                 break
             path, used = ready
-            found.append({"at": offset, "count": used, "style": _composition["style"], "image": path})
+            found.append({"at": offset, "count": used, "style": style, "image": path})
             offset, index, counter = offset + used, index + used, 0
         else:
             offset, index, counter = offset + 1, index + 1, counter + 1
@@ -1031,7 +1075,7 @@ def _guest_qr_surface(size, caption):
         pad = max(6, size // 20)
         surface = pygame.Surface((max(size, text.get_width()) + 2 * pad, size + text.get_height() + 3 * pad), pygame.SRCALPHA)
         pygame.draw.rect(surface, (0, 0, 0, 150), surface.get_rect(), border_radius=pad * 2)
-        surface.blit(pygame.image.fromstring(qr_img.tobytes(), qr_img.size, "RGB"), ((surface.get_width() - size) // 2, pad))
+        surface.blit(pygame.image.frombytes(qr_img.tobytes(), qr_img.size, "RGB"), ((surface.get_width() - size) // 2, pad))
         surface.blit(text, ((surface.get_width() - text.get_width()) // 2, size + 2 * pad))
         cache["key"], cache["surface"] = key, surface
     return cache["surface"]
@@ -1146,7 +1190,7 @@ def _now_playing_surface(info, screen_width, screen_height):
         try:
             cover_img = Image.open(info["cover"]).convert("RGB")
             cover_img = ImageOps.fit(cover_img, (unit, unit))
-            cover = pygame.image.fromstring(cover_img.tobytes(), cover_img.size, "RGB")
+            cover = pygame.image.frombytes(cover_img.tobytes(), cover_img.size, "RGB")
         except Exception:
             cover = None
     if cover:
@@ -1587,7 +1631,7 @@ def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_m
                             flag_pil = Image.merge('RGBA', (r, g, b, a))
                             # --- FIN AJOUT ---
                             
-                            flag_surf = pygame.image.fromstring(
+                            flag_surf = pygame.image.frombytes(
                                 flag_pil.tobytes(), flag_pil.size, flag_pil.mode
                             )
                             
@@ -1723,7 +1767,7 @@ def display_title_slide(screen, screen_width, screen_height, title, duration, co
                     angle = random.uniform(-15, 15)
                     rotated_img = image_to_rotate.rotate(angle, expand=True, resample=Image.Resampling.BICUBIC, fillcolor=(0, 0, 0, 0))
                     
-                    py_surface = pygame.image.fromstring(rotated_img.tobytes(), rotated_img.size, rotated_img.mode).convert_alpha()
+                    py_surface = pygame.image.frombytes(rotated_img.tobytes(), rotated_img.size, rotated_img.mode).convert_alpha()
                     photo_surfaces.append(py_surface)
                 except Exception as e:
                     logger.info(f"[Title Slide] Erreur lors de la préparation de l'image {path}: {e}")
@@ -1787,7 +1831,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
     # Préparer l'image et les métadonnées dès le début pour éviter les erreurs de définition (NameError)
     if pil_image.mode != 'RGB':
         pil_image = pil_image.convert('RGB')
-    pygame_image_base = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
+    pygame_image_base = pygame.image.frombytes(pil_image.tobytes(), pil_image.size, pil_image.mode)
 
 
     # Boucle de pause : si le diaporama est en pause, on attend ici.
@@ -1817,7 +1861,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
         logger.info(f"⏳ Pause de {display_duration} secondes.") # Debug print
         
         # Always blit the base image first (this will be overwritten by animation if enabled)
-        pygame_image_base = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
+        pygame_image_base = pygame.image.frombytes(pil_image.tobytes(), pil_image.size, pil_image.mode)
         screen.blit(pygame_image_base, (0, 0))
         
         if not pan_zoom_enabled: # If pan/zoom is disabled, just show static image
@@ -1881,7 +1925,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
 
             # Scale the image once using PIL for quality, then convert to Pygame surface
             scaled_pil_image = pil_image.resize((scaled_width, scaled_height), Image.Resampling.LANCZOS)
-            scaled_pygame_image = pygame.image.fromstring(scaled_pil_image.tobytes(), scaled_pil_image.size, scaled_pil_image.mode)
+            scaled_pygame_image = pygame.image.frombytes(scaled_pil_image.tobytes(), scaled_pil_image.size, scaled_pil_image.mode)
 
             # --- NOUVELLE LOGIQUE DE PANNING AMÉLIORÉE ---
             max_x_offset = scaled_width - screen_width
@@ -2484,7 +2528,7 @@ def start_slideshow():
                     ip_address_for_qr = get_local_ip()
                     url = f"http://{ip_address_for_qr}"
                     qr_img_pil = qrcode.make(url, box_size=8).convert('RGB')
-                    qr_surface = pygame.image.fromstring(qr_img_pil.tobytes(), qr_img_pil.size, qr_img_pil.mode)
+                    qr_surface = pygame.image.frombytes(qr_img_pil.tobytes(), qr_img_pil.size, qr_img_pil.mode)
                     qr_height = qr_surface.get_height()
                 except Exception as e:
                     logger.info(f"Erreur génération QR code : {e}")
@@ -2558,7 +2602,7 @@ def start_slideshow():
                     wanted, slide_plan = layout_engine.plan_for_slide(slide_plan, playlist[playlist_index], _composition["counter"], include_messages)
                     wanted = wanted and bool(slide_plan.formats)
                 if wanted and not layout_engine.is_video(playlist[playlist_index]):
-                    prepare_composition(config, slide_plan, playlist, playlist_index, SCREEN_WIDTH, SCREEN_HEIGHT, force=forced_layout is not None)
+                    prepare_composition(config, slide_plan, playlist, playlist_index, SCREEN_WIDTH, SCREEN_HEIGHT, force=forced_layout is not None, base_plan=layout_plan)
                     # On attend la composition préparée pour cette diapositive (l'écran garde l'image précédente) :
                     # sinon, quand la préparation dure plus que l'affichage d'une photo, les compositions ne passent jamais
                     composition_path, composition_used = take_composition(playlist, playlist_index, wait_seconds=40)
@@ -2573,7 +2617,7 @@ def start_slideshow():
                               plan=layout_plan, next_index=next_index, next_counter=next_counter, include_messages=include_messages)
                 next_wanted, next_plan = layout_engine.plan_for_slide(layout_plan, playlist[next_index], next_counter, include_messages)
                 if next_wanted and next_plan.formats:
-                    prepare_composition(config, next_plan, playlist, next_index, SCREEN_WIDTH, SCREEN_HEIGHT)
+                    prepare_composition(config, next_plan, playlist, next_index, SCREEN_WIDTH, SCREEN_HEIGHT, base_plan=layout_plan)
                 
                 # Réinitialiser les requêtes de changement de photo
                 global next_photo_requested, previous_photo_requested
@@ -2660,7 +2704,7 @@ def start_slideshow():
                             if current_pil_image.mode != 'RGB': current_pil_image = current_pil_image.convert('RGB')
                             # For the first image, we need to blit it directly before pan/zoom takes over
                             # This blit is only for the initial display, not part of pan/zoom animation
-                            screen.blit(pygame.image.fromstring(current_pil_image.tobytes(), current_pil_image.size, current_pil_image.mode), (0,0)) # type: ignore
+                            screen.blit(pygame.image.frombytes(current_pil_image.tobytes(), current_pil_image.size, current_pil_image.mode), (0,0)) # type: ignore
                             draw_overlay(screen, SCREEN_WIDTH, SCREEN_HEIGHT, config, main_font_loaded, None)
                             pygame.display.flip()
                     except Exception as e:

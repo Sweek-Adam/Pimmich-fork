@@ -226,3 +226,28 @@ def test_messages_are_spread_so_each_composition_has_its_photos():
     assert sorted(spread) == sorted(seq)  # rien de perdu
     assert le.spread_messages(seq, le.LayoutPlan(True, ["pellicule"], 5)) == seq  # pas de disposition à messages : inchangé
     assert le.spread_messages(seq, halloween, include_messages=False) == seq
+
+
+def test_the_following_composition_is_prepared_ahead(monkeypatch, sandbox):
+    """Pendant l'affichage d'une composition, la suivante est déjà prête : plus d'attente à l'écran."""
+    import os
+    import time
+    os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
+    pytest.importorskip("pygame")
+    import local_slideshow as ls
+    monkeypatch.setattr(comp, "OUTPUT_DIR", sandbox / "static" / "compositions")
+    monkeypatch.setattr(ls, "list_messages", lambda: [])
+    monkeypatch.setattr(ls, "publish_queue", lambda **_: None)
+    monkeypatch.setattr(ls, "_ahead", {})
+    monkeypatch.setattr(le, "render_chunk", lambda style, chunk, *a, **k: (Image.new("RGB", (32, 18)), 3))
+    monkeypatch.setattr(le, "photo_count", lambda style, rng: 3)
+    plan = le.LayoutPlan(True, ["mosaique"], 2)
+    playlist = [f"p{i}.jpg" for i in range(20)]
+    ls.prepare_composition({}, plan, playlist, 2, 64, 36)
+    ls._composition["thread"].join(5)
+    assert ls.take_composition(playlist, 2)[1] == 3
+    assert (id(playlist), 7) in ls._ahead  # 2 photos seules après la composition (2..4), puis la suivante en 7
+    ls.prepare_composition({}, plan, playlist, 7, 64, 36)  # reprise de la réserve : instantané
+    ls._composition["thread"].join(5)
+    assert ls.take_composition(playlist, 7)[0] and (id(playlist), 7) not in ls._ahead
+    assert le.next_composition_start(plan, playlist, 5)[0] == 7

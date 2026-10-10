@@ -188,6 +188,21 @@ def spread_messages(playlist, plan, include_messages=True):
     return out + pending  # messages restants : en fin de boucle (la playlist recommence par des photos)
 
 
+def next_composition_start(plan, playlist, start, include_messages=True, max_scan=40):
+    """
+    Après une composition qui se termine juste avant `start` (compteur remis à zéro), indice où commencera
+    la composition suivante, avec le plan à utiliser : (indice, plan), sinon None.
+    """
+    counter = 0
+    for offset in range(min(max_scan, len(playlist))):
+        index = start + offset
+        wanted, slot_plan = plan_for_slide(plan, playlist[index % len(playlist)], counter, include_messages)
+        if wanted and slot_plan.formats:
+            return index, slot_plan
+        counter += 1
+    return None
+
+
 def take_slides(playlist, start, photos_wanted, message_slots):
     """
     Diapositives d'une composition qui affiche les messages : jusqu'à `message_slots` messages, plus

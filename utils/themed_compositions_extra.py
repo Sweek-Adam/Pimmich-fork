@@ -7,7 +7,7 @@ from datetime import date
 
 from PIL import Image, ImageDraw, ImageFilter
 
-from utils.message_renderer import N_, _font, _gradient, _textured, _vignette, _paste_with_shadow
+from utils.message_renderer import N_, _font, _gradient, _textured, _vignette, _paste_with_shadow, soft_blur
 from utils import compositions as base
 from utils.themed_compositions import (_title, _shaped, _place_row, _message_note, _snow, _mountains, _star, _photo_size,
                                        MARKER, HAND, HAND2, SERIF_BI)
@@ -114,7 +114,7 @@ def fuji(photos, message, W, H, rng):
     sun = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
     r = H * 0.13
     ImageDraw.Draw(sun).ellipse([W * 0.5 - r, H * 0.2 - r, W * 0.5 + r, H * 0.2 + r], fill=(255, 220, 170, 255))
-    canvas.alpha_composite(sun.filter(ImageFilter.GaussianBlur(r * 0.25)))
+    canvas.alpha_composite(soft_blur(sun, r * 0.25))
     draw = ImageDraw.Draw(canvas)
     # Mont Fuji : flancs concaves, sommet aplati, calotte de neige dentelée
     cx, base_y, half = W * 0.5, H * 0.62, W * 0.42
@@ -165,7 +165,7 @@ def space(photos, message, W, H, rng):
         r = rng.uniform(H * 0.15, H * 0.4)
         x, y = rng.uniform(0, W), rng.uniform(0, H)
         nd.ellipse([x - r, y - r * 0.6, x + r, y + r * 0.6], fill=rng.choice([(120, 40, 160, 90), (30, 90, 200, 90), (200, 60, 120, 70)]))
-    canvas.alpha_composite(nebula.filter(ImageFilter.GaussianBlur(H * 0.08)))
+    canvas.alpha_composite(soft_blur(nebula, H * 0.08))
     _snow(canvas, int(W * H / 2500), rng, (0.5, 2), 255)
     draw = ImageDraw.Draw(canvas)
     px, py, pr = W * 0.88, H * 0.18, H * 0.09  # planète à anneaux
@@ -179,7 +179,7 @@ def space(photos, message, W, H, rng):
         planet = _shaped(p, (d, d), "circle", max(4, d // 40), ((140, 220, 255), (90, 120, 255)))
         halo = Image.new("RGBA", (planet.width + d // 3, planet.height + d // 3), (0, 0, 0, 0))
         ImageDraw.Draw(halo).ellipse([d // 6 - 4, d // 6 - 4, halo.width - d // 6 + 4, halo.height - d // 6 + 4], fill=(120, 200, 255, 140))
-        halo = halo.filter(ImageFilter.GaussianBlur(d // 14))
+        halo = soft_blur(halo, d // 14)
         halo.alpha_composite(planet, (d // 6, d // 6))
         elements.append(halo)
     _place_row(canvas, elements, H * 0.55, rng, 0.82, 0.12, 0)
@@ -212,7 +212,7 @@ def synthwave(photos, message, W, H, rng):
         photo = base.framed(base.print_photo(p, size, size * 0.75), max(4, size // 50), (60, 240, 255))
         glow = Image.new("RGBA", (photo.width + size // 5, photo.height + size // 5), (0, 0, 0, 0))
         ImageDraw.Draw(glow).rectangle([size // 10, size // 10, glow.width - size // 10, glow.height - size // 10], fill=(60, 240, 255, 180))
-        glow = glow.filter(ImageFilter.GaussianBlur(size // 20))
+        glow = soft_blur(glow, size // 20)
         glow.alpha_composite(photo, (size // 10, size // 10))
         elements.append(glow)
     _place_row(canvas, elements, H * 0.5, rng, 0.84, 0.03, 0)
@@ -364,7 +364,7 @@ def cinema(photos, message, W, H, rng):
             x = x0 + k * W * 0.0175
             draw.rectangle([x, 0, x + W * 0.0175, H], fill=(150 - (k % 2) * 40, 16, 24))
     draw.rectangle([0, 0, W, H * 0.06], fill=(120, 12, 20))
-    canvas = canvas.filter(ImageFilter.GaussianBlur(2)).convert("RGBA")
+    canvas = soft_blur(canvas, 2).convert("RGBA")
     draw = ImageDraw.Draw(canvas)
     size = int(min(_photo_size(W, H, len(photos), 1.0), W * 0.68 / len(photos) * 0.92))
     elements = []
@@ -379,7 +379,7 @@ def cinema(photos, message, W, H, rng):
         for y in range(m, photo.height - m + 1, step):
             for x in (m, photo.width - m):
                 bd.ellipse([x - r, y - r, x + r, y + r], fill=(255, 230, 140, 255))
-        photo.alpha_composite(bulbs.filter(ImageFilter.GaussianBlur(r)))
+        photo.alpha_composite(soft_blur(bulbs, r))
         photo.alpha_composite(bulbs)
         elements.append(photo)
     _place_row(canvas, elements, H * 0.55, rng, 0.66, 0.02, 0)
@@ -496,7 +496,7 @@ def _firework(canvas, cx, cy, radius, color, rng):
         tip = max(2, radius * 0.035)
         x, y = cx + r1 * math.cos(a), cy + r1 * math.sin(a)
         draw.ellipse([x - tip, y - tip, x + tip, y + tip], fill=(255, 250, 220, 255))
-    glow = layer.filter(ImageFilter.GaussianBlur(radius * 0.08))
+    glow = soft_blur(layer, radius * 0.08)
     canvas.alpha_composite(glow)
     canvas.alpha_composite(layer)
 

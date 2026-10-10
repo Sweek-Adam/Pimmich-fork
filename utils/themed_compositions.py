@@ -8,7 +8,7 @@ from datetime import date, timedelta
 
 from PIL import Image, ImageDraw, ImageFilter, ImageChops
 
-from utils.message_renderer import N_, _font, _gradient, _textured, _vignette, render_note, _paste_with_shadow
+from utils.message_renderer import N_, _font, _gradient, _textured, _vignette, render_note, _paste_with_shadow, soft_blur
 from utils import compositions as base
 
 MARKER, HAND, HAND2, SANS_BOLD, SERIF_BI = "PermanentMarker-Regular.ttf", "PatrickHand-Regular.ttf", "Caveat-Regular.ttf", \
@@ -78,7 +78,7 @@ def _title(canvas, text, font_name, size, color, center, glow=None, shadow=True,
         layer = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
         ImageDraw.Draw(layer).text((x + (0 if glow else size * 0.05), y + (0 if glow else size * 0.06)), text, font=font,
                                    fill=(glow or (0, 0, 0)) + (200 if glow else 110,))
-        canvas.alpha_composite(layer.filter(ImageFilter.GaussianBlur(size * (0.18 if glow else 0.06))))
+        canvas.alpha_composite(soft_blur(layer, size * (0.18 if glow else 0.06)))
     draw.text((x, y), text, font=font, fill=color)
 
 
@@ -94,7 +94,7 @@ def _shape_mask(w, h, shape):
         draw.polygon(points, fill=255)
     else:
         draw.ellipse([0, 0, w * 2 - 1, h * 2 - 1], fill=255)
-    return mask.resize((w, h), Image.LANCZOS)
+    return mask.resize((w, h), Image.LANCZOS, reducing_gap=2.0)
 
 
 def _fill_shape(photo, w, h, shape):
@@ -108,7 +108,7 @@ def _fill_shape(photo, w, h, shape):
     a, b = w / 2 * (0.9 if shape == "egg" else 0.97), h / 2 * (0.9 if shape == "egg" else 0.97)
     r = photo.width / photo.height
     half_h = 1 / math.sqrt((r / a) ** 2 + (1 / b) ** 2)  # rectangle de proportions r inscrit dans l'ellipse
-    fitted = photo.resize((max(1, int(2 * half_h * r)), max(1, int(2 * half_h))), Image.LANCZOS)
+    fitted = photo.resize((max(1, int(2 * half_h * r)), max(1, int(2 * half_h))), Image.LANCZOS, reducing_gap=2.0)
     content.paste(fitted, ((w - fitted.width) // 2, (h - fitted.height) // 2 + (int(h * 0.04) if shape == "egg" else 0)))
     return content
 
@@ -202,7 +202,7 @@ def christmas(photos, message, W, H, rng):
         color = [(255, 70, 70), (255, 210, 60), (90, 200, 255), (120, 255, 120)][i % 4]
         r = H * 0.012
         bdraw.ellipse([x - r, y, x + r, y + r * 2.6], fill=color + (255,))
-    canvas.alpha_composite(bulbs.filter(ImageFilter.GaussianBlur(H * 0.012)))
+    canvas.alpha_composite(soft_blur(bulbs, H * 0.012))
     canvas.alpha_composite(bulbs)
     # Sol enneigé
     ground = [(0, H)] + [(x, H * 0.9 + math.sin(x / W * 7) * H * 0.02) for x in range(0, W + 40, 40)] + [(W, H)]
@@ -220,7 +220,7 @@ def christmas(photos, message, W, H, rng):
         _paste_with_shadow(canvas, ball, (cx, cy))
         shine = Image.new("RGBA", (d, d), (0, 0, 0, 0))
         ImageDraw.Draw(shine).ellipse([d * 0.18, d * 0.12, d * 0.42, d * 0.3], fill=(255, 255, 255, 70))
-        canvas.alpha_composite(shine.filter(ImageFilter.GaussianBlur(d * 0.03)), (int(cx - d / 2), int(cy - d / 2)))
+        canvas.alpha_composite(soft_blur(shine, d * 0.03), (int(cx - d / 2), int(cy - d / 2)))
     _title(canvas, _translate(N_("Joyeux Noël")), HAND2, int(H * 0.11), (255, 225, 140), (W / 2, H * 0.8), glow=(255, 200, 80), max_width=W * 0.8)
     _message_note(canvas, message, rng, "fiche", (0.88, 0.78), 0.22)
     return canvas.convert("RGB")
@@ -234,7 +234,7 @@ def halloween(photos, message, W, H, rng):
     r = H * 0.16
     mx, my = W * 0.84, H * 0.2
     ImageDraw.Draw(moon).ellipse([mx - r, my - r, mx + r, my + r], fill=(255, 240, 190, 255))
-    canvas.alpha_composite(moon.filter(ImageFilter.GaussianBlur(r * 0.35)))
+    canvas.alpha_composite(soft_blur(moon, r * 0.35))
     canvas.alpha_composite(moon)
     # Toile d'araignée
     cx, cy, R = 0, 0, H * 0.32
@@ -259,7 +259,7 @@ def halloween(photos, message, W, H, rng):
         py = H - pr * 0.9
         glow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
         ImageDraw.Draw(glow).ellipse([px - pr * 1.8, py - pr * 1.5, px + pr * 1.8, py + pr * 1.5], fill=(255, 140, 0, 90))
-        canvas.alpha_composite(glow.filter(ImageFilter.GaussianBlur(pr)))
+        canvas.alpha_composite(soft_blur(glow, pr))
         for k in (-0.55, 0.55, 0):
             draw.ellipse([px + k * pr - pr * 0.75, py - pr * 0.85, px + k * pr + pr * 0.75, py + pr * 0.85], fill=(235, 110, 20) if k else (250, 130, 30))
         draw.rectangle([px - pr * 0.08, py - pr * 1.15, px + pr * 0.08, py - pr * 0.8], fill=(70, 100, 30))
@@ -321,7 +321,7 @@ def _ghost(message, height, rng):
     if not message:
         for cx in (w / 2 - head * 0.3, w / 2 + head * 0.3):  # joues
             draw.ellipse([cx - head * 0.06, mouth_y - head * 0.06, cx + head * 0.06, mouth_y], fill=(255, 170, 190, 160))
-    ghost = body.resize((width, height), Image.LANCZOS)
+    ghost = body.resize((width, height), Image.LANCZOS, reducing_gap=2.0)
     if message:
         _ghost_write(ghost, message, rng)
     return ghost
@@ -367,7 +367,7 @@ def _paste_glow(canvas, element, center):
     halo.putalpha(element.getchannel("A").point(lambda a: int(a * 0.7)))
     layer = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
     layer.paste(halo, (x, y), halo)
-    canvas.alpha_composite(layer.filter(ImageFilter.GaussianBlur(max(6, element.height // 14))))
+    canvas.alpha_composite(soft_blur(layer, max(6, element.height // 14)))
     layer = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
     layer.paste(element, (x, y), element)
     canvas.alpha_composite(layer)
@@ -456,7 +456,7 @@ def iceland(photos, message, W, H, rng):
         pts = [(x, base_y + math.sin(x / W * 5 + phase) * amp) for x in range(0, W + 30, 30)]
         for t in range(0, int(H * 0.18), 6):  # rideau vertical qui s'estompe
             adraw.line([(x, y + t) for x, y in pts], fill=color + (int(190 * (1 - t / (H * 0.18))),), width=6)
-    canvas.alpha_composite(aurora.filter(ImageFilter.GaussianBlur(H * 0.03)))
+    canvas.alpha_composite(soft_blur(aurora, H * 0.03))
     _mountains(canvas, [(52, 66, 96, 255), (26, 34, 56, 255)], rng, 0.6, snow=True)
     size = _photo_size(W, H, len(photos), 0.9)
     elements = [base.framed(base.print_photo(p, size, size * 0.75), max(8, size // 22), (250, 252, 255)) for p in photos]
@@ -545,7 +545,7 @@ def mountain(photos, message, W, H, rng):
     sun = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
     r = H * 0.1
     ImageDraw.Draw(sun).ellipse([W * 0.7 - r, H * 0.28 - r, W * 0.7 + r, H * 0.28 + r], fill=(255, 236, 200, 255))
-    canvas.alpha_composite(sun.filter(ImageFilter.GaussianBlur(r * 0.4)))
+    canvas.alpha_composite(soft_blur(sun, r * 0.4))
     _mountains(canvas, [(150, 130, 190, 255), (100, 90, 150, 255), (60, 60, 100, 255)], rng, 0.38, snow=True)
     draw = ImageDraw.Draw(canvas)
     for _ in range(26):  # sapins
@@ -569,7 +569,7 @@ def sea(photos, message, W, H, rng):
     for _ in range(7):  # rayons de lumière
         x = rng.uniform(0, W)
         rd.polygon([(x - W * 0.02, 0), (x + W * 0.02, 0), (x + W * 0.12, H), (x - W * 0.02, H)], fill=(180, 230, 255, 40))
-    canvas.alpha_composite(rays.filter(ImageFilter.GaussianBlur(W * 0.01)))
+    canvas.alpha_composite(soft_blur(rays, W * 0.01))
     draw = ImageDraw.Draw(canvas)
     for _ in range(40):  # bulles
         x, y, r = rng.uniform(0, W), rng.uniform(0, H), rng.uniform(H * 0.004, H * 0.015)
