@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-17 14:51+0200\n"
+"POT-Creation-Date: 2026-10-10 11:28+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -16,2589 +16,268 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
-#: app.py:606
-msgid "Code d'invitation invalide."
-msgstr "招待コードが無効です。"
-
-#: app.py:612
-msgid "Ce code d'invitation a expiré."
-msgstr "この招待コードの有効期限は切れています。"
-
-#: app.py:618
-msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
-msgstr "あなたはすでに認可されています。写真を送ってください！"
-
-#: app.py:620
-msgid "Ce code d'invitation a déjà été utilisé."
-msgstr "この招待コードはすでに使用されています。"
-
-#: app.py:631
-#, python-format
-msgid ""
-"Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes postales "
-"au cadre."
-msgstr "%(name)s おめでとうございます!ポストカードをフレームに送信できるようになりました。"
-
-#: app.py:659
-#, python-format
-msgid "L'accès pour l'invité '%(name)s' a été révoqué."
-msgstr "ゲスト '%(name)s' のアクセスが取り消されました。"
-
-#: app.py:702 app.py:707
-msgid "Aucun fichier sélectionné."
-msgstr "ファイルが選択されていません。"
-
-#: app.py:725
-#, python-format
-msgid "%(count)s photo(s) envoyée(s) pour validation avec succès !"
-msgstr "%(count)s 枚の写真が検証のために正常に送信されました。"
-
-#: app.py:784
-msgid "Photo rejetée."
-msgstr "写真は拒否されました。"
-
-#: app.py:827
-msgid "Photo approuvée et préparée. Le diaporama a été mis à jour."
-msgstr "写真は承認され、準備されました。スライドショーが更新されました。"
-
-#: app.py:829
-msgid "La préparation de la photo a échoué. La photo reste en attente."
-msgstr "写真の準備に失敗しました。写真は保留中のままです。"
-
-#: app.py:833
-msgid "Action inconnue."
-msgstr "アクションは不明。"
-
-#: app.py:855
-msgid "Connexion réussie"
-msgstr "接続成功"
-
-#: app.py:858
-msgid "Identifiants invalides"
-msgstr "無効な識別子"
-
-#: app.py:864
-msgid "Déconnexion réussie"
-msgstr "ログアウト成功"
-
-#: app.py:915
-msgid ""
-"La valeur pour la limite de photos Immich est invalide. La valeur précédente"
-" est conservée."
-msgstr "イミッチ写真制限の値が無効です。以前の値が保持されます。"
-
-#: app.py:1047
-msgid ""
-"Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
-"changements."
-msgstr "設定が保存されました。変更を適用するためにスライドショーが再開されました。"
-
-#: app.py:1408
-msgid "Le token du bot est requis."
-msgstr "ボットトークンは必須です。"
-
-#: app.py:1418
-#, python-format
-msgid "Token valide ! Le bot s'appelle '%(bot_name)s'."
-msgstr "有効なトークンです!ボットの名前は「%(bot_name)s」です。"
-
-#: app.py:1421
-#, python-format
-msgid "Échec de l'envoi : %(error)s"
-msgstr "送信に失敗しました: %(error)s"
-
-#: app.py:1423
-#, python-format
-msgid "Erreur de connexion : %(error)s"
-msgstr "接続エラー: %(error)s"
-
-#: app.py:1681 app.py:1789
-msgid "Import initial ignoré."
-msgstr "初期インポートは無視されました。"
-
-#: app.py:1694 app.py:1802
-#, python-format
-msgid "Mise à jour auto. activée. Intervalle : %(hours)sh."
-msgstr "自動更新。活性化された。間隔: %(hours)sh。"
-
-#: app.py:1700
-msgid "Lancement du téléchargement..."
-msgstr "ダウンロードを開始しています..."
-
-#: app.py:1732 app.py:1822
-msgid "Préparation des photos..."
-msgstr "写真を準備しています..."
-
-#: app.py:1747 app.py:1845
-msgid "Mise à jour terminée. Redémarrage du diaporama..."
-msgstr "アップデートが完了しました。スライドショーを再開しています..."
-
-#: app.py:1752 app.py:1850
-msgid "Dernière mise à jour réussie."
-msgstr "最後に成功した更新。"
-
-#: app.py:1755 app.py:1853
-msgid "Mise à jour terminée avec avertissements/erreurs."
-msgstr "更新は完了しましたが、警告/エラーが発生しました。"
-
-#: app.py:1762
-msgid "Mise à jour automatique désactivée."
-msgstr "自動更新が無効になっています。"
-
-#: app.py:1808
-msgid "Lancement de l'import..."
-msgstr "インポートの開始..."
-
-#: app.py:1859
-msgid "Mise à jour automatique Samba désactivée."
-msgstr "Samba の自動更新が無効になっています。"
-
-#: app.py:2137
-msgid ""
-"L'application web redémarre... La page sera inaccessible pendant quelques "
-"instants."
-msgstr "Web アプリケーションが再起動します...ページはしばらくの間アクセスできなくなります。"
-
-#: app.py:2396
-msgid "Le service est arrêté."
-msgstr "サービスが停止されています。"
-
-#: app.py:2405
-msgid "Démarrage du service..."
-msgstr "サービスを開始しています..."
-
-#: app.py:2691
-#, python-format
-msgid ""
-"Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
-msgstr "適用される解像度: %(width)sx%(height)s。スライドショーを再開しました。"
-
-#: app.py:2693
-#, python-format
-msgid ""
-"Résolution appliquée : %(width)sx%(height)s. Le diaporama n'était pas en "
-"cours."
-msgstr "適用される解像度: %(width)sx%(height)s。スライドショーは進行中ではありませんでした。"
-
-#: app.py:2778
-msgid "Le SSID et le pays Wi-Fi sont obligatoires."
-msgstr "SSIDとWi-Fiの国は必須です。"
-
-#: app.py:2791
-msgid ""
-"Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer la"
-" connexion. Veuillez patienter une minute et vérifier le statut."
-msgstr ""
-"Wi-Fi設定が適用されました。接続を強制するためにネットワーク サービスが再起動されました。しばらく待ってからステータスを確認してください。"
-
-#: app.py:2793
-#, python-format
-msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
-msgstr "Wi-Fi 設定の適用中にエラーが発生しました: %(error)s"
-
-#: app.py:2843
-msgid "Les deux champs de mot de passe sont requis."
-msgstr "両方のパスワードフィールドは必須です。"
-
-#: app.py:2847
-msgid "Les mots de passe ne correspondent pas."
-msgstr "パスワードが一致しません。"
-
-#: app.py:2851
-msgid "Le mot de passe doit contenir au moins 6 caractères."
-msgstr "パスワードには少なくとも 6 文字を含める必要があります。"
-
-#: app.py:2856
-msgid ""
-"Mot de passe mis à jour avec succès. Il sera nécessaire pour votre prochaine"
-" connexion."
-msgstr "パスワードが正常に更新されました。次回の接続に必要になります。"
-
-#: app.py:2858
-#, python-format
-msgid "Erreur lors du changement de mot de passe : %(error)s"
-msgstr "パスワード変更エラー: %(error)s"
-
-#: app.py:2902
-msgid "Le fichier de configuration n'a pas été trouvé."
-msgstr "設定ファイルが見つかりませんでした。"
-
-#: app.py:2910 app.py:2915
-msgid "Aucun fichier de sauvegarde sélectionné."
-msgstr "保存ファイルが選択されていません。"
-
-#: app.py:2925
-msgid ""
-"Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
-"appliquer les changements."
-msgstr "設定が正常に復元されました。変更を適用するためにスライドショーが再開されます。"
-
-#: app.py:2927
-msgid ""
-"Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
-"valide."
-msgstr "保存ファイルが無効または破損しています。これは有効な JSON ファイルではありません。"
-
-#: app.py:2929
-#, python-format
-msgid "Erreur lors de la restauration : %(error)s"
-msgstr "復元中のエラー: %(error)s"
-
-#: app.py:3030
-msgid "name_key"
-msgstr "名前キー"
-
-#: app.py:3506
-msgid "Paramètre 'enabled' manquant."
-msgstr "「有効」パラメータがありません。"
-
-#: app.py:3517
-msgid "Service de contrôle vocal activé."
-msgstr "音声コントロールサービスが有効になりました。"
-
-#: app.py:3520
-msgid "Service de contrôle vocal désactivé."
-msgstr "音声コントロールサービスが無効になっています。"
-
-#: app.py:3525
-#, python-format
-msgid "Erreur interne du serveur : %(error)s"
-msgstr "内部サーバー エラー: %(error)s"
-
-#: local_slideshow.py:974
+#: local_slideshow.py:1031
 msgid "Données de marée non disponibles"
 msgstr "潮汐データは利用できません"
 
-#: local_slideshow.py:1071
+#: local_slideshow.py:1128
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:1071
+#: local_slideshow.py:1128
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:1969
+#: local_slideshow.py:2136
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:1970
+#: local_slideshow.py:2137
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:1971
+#: local_slideshow.py:2138
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:1972
+#: local_slideshow.py:2139
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:1973
+#: local_slideshow.py:2140
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:1999
+#: local_slideshow.py:2166
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
-#: templates/configure.html.jinja:6
+#: templates/configure.html.jinja:8
 msgid "Configuration"
 msgstr "構成"
 
-#: templates/configure.html.jinja:173 templates/login.html.jinja:89
+#: templates/configure.html.jinja:69 templates/login.html.jinja:89
 #: templates/upload.html.jinja:73
 msgid "Langue"
 msgstr "言語"
 
-#: templates/configure.html.jinja:185
+#: templates/configure.html.jinja:88
+msgid "utilisateur"
+msgstr "ユーザー"
+
+#: templates/configure.html.jinja:90
 msgid "Se déconnecter"
 msgstr "ログアウト"
 
-#: templates/configure.html.jinja:206 templates/configure.html.jinja:4535
+#: templates/configure.html.jinja:111
+#: templates/configure/scripts_status.html.jinja:517
 msgid "Le diaporama est arrêté."
 msgstr "スライドショーが停止されます。"
 
-#: templates/configure.html.jinja:209 templates/configure.html.jinja:2093
+#: templates/configure.html.jinja:114
+#: templates/configure/tab_playlists.html.jinja:56
 msgid "Photo en cours"
 msgstr "写真撮影中"
 
-#: templates/configure.html.jinja:217 templates/configure.html.jinja:1466
+#: templates/configure.html.jinja:122
+#: templates/configure/tab_actions.html.jinja:22
 msgid "Activer/Désactiver les notifications"
 msgstr "通知を有効/無効にする"
 
-#: templates/configure.html.jinja:222 templates/configure.html.jinja:1471
-#: templates/configure.html.jinja:2064
+#: templates/configure.html.jinja:127
+#: templates/configure/tab_actions.html.jinja:27
+#: templates/configure/tab_playlists.html.jinja:20
 msgid "Photo précédente"
 msgstr "前の写真"
 
-#: templates/configure.html.jinja:227 templates/configure.html.jinja:1476
-#: templates/configure.html.jinja:2068
+#: templates/configure.html.jinja:132
+#: templates/configure/tab_actions.html.jinja:32
+#: templates/configure/tab_playlists.html.jinja:24
 msgid "Pause/Lecture"
 msgstr "休憩・講義"
 
-#: templates/configure.html.jinja:232 templates/configure.html.jinja:1481
-#: templates/configure.html.jinja:2072
+#: templates/configure.html.jinja:137
+#: templates/configure/tab_actions.html.jinja:37
+#: templates/configure/tab_playlists.html.jinja:28
 msgid "Photo suivante"
 msgstr "次の写真"
 
-#: templates/configure.html.jinja:243
+#: templates/configure.html.jinja:148
 msgid "Diaporama"
 msgstr "スライドショー"
 
-#: templates/configure.html.jinja:245
+#: templates/configure.html.jinja:150
 msgid "Contenu"
 msgstr "コンテンツ"
 
-#: templates/configure.html.jinja:247
+#: templates/configure.html.jinja:152
 msgid "Interactions"
 msgstr "インタラクション"
 
-#: templates/configure.html.jinja:250
+#: templates/configure.html.jinja:155
 msgid "Système"
 msgstr "システム"
 
-#: templates/configure.html.jinja:257
+#: templates/configure.html.jinja:162
 msgid ""
 "Gérez les paramètres d'affichage du diaporama, la durée, les transitions..."
 msgstr "スライドショーの表示設定、長さ、トランジションを管理します..."
 
-#: templates/configure.html.jinja:258
+#: templates/configure.html.jinja:163
 msgid "Affichage"
 msgstr "画面"
 
-#: templates/configure.html.jinja:260
+#: templates/configure.html.jinja:165
 msgid "Configurez l'affichage de l'heure, la météo et les marées."
 msgstr "時刻表示、天気、潮汐を設定します。"
 
-#: templates/configure.html.jinja:261
+#: templates/configure.html.jinja:166
 msgid "Horloge & Infos"
 msgstr "時計と情報"
 
-#: templates/configure.html.jinja:263
+#: templates/configure.html.jinja:168
 msgid "Configurez le contrôle vocal du diaporama."
 msgstr "スライドショーの音声コントロールを設定します。"
 
-#: templates/configure.html.jinja:264
+#: templates/configure.html.jinja:169
 msgid "Vocal"
 msgstr "ボーカル"
 
-#: templates/configure.html.jinja:266
+#: templates/configure.html.jinja:171
 msgid "Métadonnées"
 msgstr "メタデータ"
 
-#: templates/configure.html.jinja:273
+#: templates/configure.html.jinja:178
 msgid "Configurez les sources de photos (Immich, Samba, USB...)."
 msgstr "写真ソース (Immich、Samba、USB...) を設定します。"
 
-#: templates/configure.html.jinja:274
+#: templates/configure.html.jinja:179
 msgid "Sources"
 msgstr "情報源"
 
-#: templates/configure.html.jinja:276
+#: templates/configure.html.jinja:181
 msgid "Visualisez et gérez toutes les photos prêtes pour le diaporama."
 msgstr "スライドショーの準備ができたすべての写真を表示および管理します。"
 
-#: templates/configure.html.jinja:277
+#: templates/configure.html.jinja:182
 msgid "Aperçu"
 msgstr "プレビュー"
 
-#: templates/configure.html.jinja:279
+#: templates/configure.html.jinja:184
 msgid "Créez et gérez vos albums photo personnalisés."
 msgstr "パーソナライズされたフォト アルバムを作成して管理します。"
 
-#: templates/configure.html.jinja:280
+#: templates/configure.html.jinja:185
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: templates/configure.html.jinja:282
+#: templates/configure.html.jinja:187
 msgid "Retrouvez et gérez vos photos favorites."
 msgstr "お気に入りの写真を見つけて管理します。"
 
-#: templates/configure.html.jinja:283
+#: templates/configure.html.jinja:188
 msgid "Favoris"
 msgstr "お気に入り"
 
-#: templates/configure.html.jinja:291
+#: templates/configure.html.jinja:196
 msgid "Configurez la réception de photos via le bot Telegram."
 msgstr "Telegram ボット経由で写真を受信するように設定します。"
 
-#: templates/configure.html.jinja:292
+#: templates/configure.html.jinja:197
 msgid "Telegram"
 msgstr "電報"
 
-#: templates/configure.html.jinja:294
+#: templates/configure.html.jinja:199
 msgid "Validez ou rejetez les photos envoyées par les invités."
 msgstr "ゲストから送信された写真を検証または拒否します。"
 
-#: templates/configure.html.jinja:295
+#: templates/configure.html.jinja:200
 msgid "Validation"
 msgstr "検証"
 
-#: templates/configure.html.jinja:298
+#: templates/configure.html.jinja:203
 msgid "Lancez les imports, contrôlez le diaporama et envoyez des photos."
 msgstr "インポートを開始し、スライドショーを制御し、写真を送信します。"
 
-#: templates/configure.html.jinja:299 templates/configure.html.jinja:1448
+#: templates/configure.html.jinja:204
+#: templates/configure/tab_actions.html.jinja:4
+#: templates/configure/tab_comptes.html.jinja:60
 msgid "Actions"
 msgstr "アクション"
 
-#: templates/configure.html.jinja:306
+#: templates/configure.html.jinja:211
+msgid "Gérez votre mot de passe et les comptes utilisateurs."
+msgstr "パスワードとユーザーアカウントを管理します。"
+
+#: templates/configure.html.jinja:212
+msgid "Comptes"
+msgstr "アカウント"
+
+#: templates/configure.html.jinja:215
 msgid "Gérez les paramètres Wi-Fi et réseau."
 msgstr "Wi-Fi とネットワーク設定を管理します。"
 
-#: templates/configure.html.jinja:307
+#: templates/configure.html.jinja:216
 msgid "Réseau"
 msgstr "ネットワーク"
 
-#: templates/configure.html.jinja:309
+#: templates/configure.html.jinja:218
 msgid "Gérez les mises à jour, sauvegardes et contrôles système."
 msgstr "アップデート、バックアップ、システムチェックを管理します。"
 
-#: templates/configure.html.jinja:310
+#: templates/configure.html.jinja:219
 msgid "Maintenance"
 msgstr "メンテナンス"
 
-#: templates/configure.html.jinja:312
+#: templates/configure.html.jinja:221
 msgid "Consultez les statistiques d'utilisation du système."
 msgstr "システム使用率の統計を表示します。"
 
-#: templates/configure.html.jinja:313
+#: templates/configure.html.jinja:222
 msgid "Statistiques"
 msgstr "統計"
 
-#: templates/configure.html.jinja:315
+#: templates/configure.html.jinja:224
 msgid "Consultez les journaux système."
 msgstr "システムログを確認してください。"
 
-#: templates/configure.html.jinja:316
+#: templates/configure.html.jinja:225
 msgid "Logs"
 msgstr "ログ"
 
-#: templates/configure.html.jinja:325
-msgid "Paramètres d'affichage"
-msgstr "表示設定"
-
-#: templates/configure.html.jinja:328
-msgid "Durée d'affichage (en secondes) :"
-msgstr "表示時間 (秒単位):"
-
-#: templates/configure.html.jinja:334
-msgid "Orientation du cadre"
-msgstr "フレームの向き"
-
-#: templates/configure.html.jinja:338
-msgid "Paysage (Horizontal)"
-msgstr "横（横）"
-
-#: templates/configure.html.jinja:340
-msgid "Portrait (Vertical)"
-msgstr "ポートレート（縦）"
-
-#: templates/configure.html.jinja:342
-msgid ""
-"Si vous changez l'orientation, pensez à relancer une préparation des photos "
-"(onglet Actions) pour adapter le contenu."
-msgstr "方向を変更した場合は、必ず写真の準備 ([アクション] タブ) を再起動してコンテンツを調整してください。"
-
-#: templates/configure.html.jinja:347
-msgid "Horaires Semaine (Lun-Ven)"
-msgstr "週間営業時間 (月曜～金曜)"
-
-#: templates/configure.html.jinja:348 templates/configure.html.jinja:355
-msgid "Allumage :"
-msgstr "点火："
-
-#: templates/configure.html.jinja:350 templates/configure.html.jinja:357
-msgid "Extinction :"
-msgstr "絶滅 :"
-
-#: templates/configure.html.jinja:354
-msgid "Horaires Weekend (Sam-Dim)"
-msgstr "週末の営業時間（土～日）"
-
-#: templates/configure.html.jinja:364
-msgid "Résolution de l'écran"
-msgstr "画面解像度"
-
-#: templates/configure.html.jinja:368
-msgid "Chargement des résolutions..."
-msgstr "解像度を読み込んでいます..."
-
-#: templates/configure.html.jinja:372
-msgid "Appliquer"
-msgstr "適用する"
-
-#: templates/configure.html.jinja:375
-msgid ""
-"Force une résolution spécifique. Utile si l'écran n'est pas détecté "
-"correctement au démarrage."
-msgstr "特定の解決策を強制します。起動時に画面が正しく検出されない場合に便利です。"
-
-#: templates/configure.html.jinja:378
-#, python-format
-msgid "Hauteur utile de l'écran (%% affiché) :"
-msgstr "有効な画面の高さ (%% が表示されます):"
-
-#: templates/configure.html.jinja:384
-msgid "Largeur d'affichage cible (px) :"
-msgstr "ターゲット表示幅 (px):"
-
-#: templates/configure.html.jinja:387
-msgid "Hauteur d'affichage cible (px) :"
-msgstr "ターゲットの表示高さ (px):"
-
-#: templates/configure.html.jinja:393
-msgid "Détecter la résolution de l'écran actif"
-msgstr "アクティブな画面解像度の検出"
-
-#: templates/configure.html.jinja:393
-msgid "Détecter"
-msgstr "検出する"
-
-#: templates/configure.html.jinja:399
-msgid "Activer l'effet Pan/Zoom sur les photos"
-msgstr "写真のパン/ズーム効果を有効にする"
-
-#: templates/configure.html.jinja:403
-#, python-format
-msgid ""
-"Amplitude du zoom (ex: 1.15 pour\n"
-"                            15%% de zoom) :"
-msgstr ""
-"ズーム範囲 (例: 1.15\n"
-"                            15%% ズーム):"
-
-#: templates/configure.html.jinja:412
-msgid "Activer l'effet de transition entre les photos"
-msgstr "写真間のトランジション効果を有効にする"
-
-#: templates/configure.html.jinja:416
-msgid "Durée de transition (secondes) :"
-msgstr "移行時間 (秒):"
-
-#: templates/configure.html.jinja:421
-msgid "Type de transition :"
-msgstr "遷移タイプ:"
-
-#: templates/configure.html.jinja:424
-msgid "Fondu enchaîné"
-msgstr "クロスフェード"
-
-#: templates/configure.html.jinja:426
-msgid "Glisser depuis la gauche"
-msgstr "左からスワイプ"
-
-#: templates/configure.html.jinja:428
-msgid "Glisser depuis la droite"
-msgstr "右からスワイプ"
-
-#: templates/configure.html.jinja:430
-msgid "Glisser depuis le bas"
-msgstr "下からスワイプ"
-
-#: templates/configure.html.jinja:432
-msgid "Glisser depuis le haut"
-msgstr "上からスワイプ"
-
-#: templates/configure.html.jinja:436
-msgid ""
-"Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
-"lecture) :"
-msgstr "お気に入りの頻度 (プレイリストへの追加の数):"
-
-#: templates/configure.html.jinja:439
-msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
-msgstr "例: 0 = ブーストなし、2 = 出現確率が 3 倍になります。"
-
-#: templates/configure.html.jinja:445
-msgid ""
-"Activer le boost pour les photos à leur date anniversaire de prise de vue"
-msgstr "撮影記念日に写真のブーストを有効にする"
-
-#: templates/configure.html.jinja:449
-msgid "Facteur de boost anniversaire :"
-msgstr "誕生日ブースト係数:"
-
-#: templates/configure.html.jinja:456
-msgid "Afficher les vidéos dans le diaporama"
-msgstr "ビデオをスライドショーで表示する"
-
-#: templates/configure.html.jinja:463
-msgid "Activer le son pour les vidéos"
-msgstr "ビデオのサウンドを有効にする"
-
-#: templates/configure.html.jinja:470
-msgid ""
-"Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
-msgstr "ハードウェア ビデオ デコードを有効にする (スムーズですが、不安定になる可能性があります)"
-
-#: templates/configure.html.jinja:472
-msgid ""
-"Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
-"Décochez si vous rencontrez des écrans bleus/noirs après les vidéos."
-msgstr ""
-"Raspberry Pi "
-"での再生をよりスムーズにするには、このボックスをチェックします。ビデオの後にブルースクリーンやブラックスクリーンが発生する場合は、チェックを外します。"
-
-#: templates/configure.html.jinja:476
-msgid "Sortie audio :"
-msgstr "オーディオ出力:"
-
-#: templates/configure.html.jinja:479
-msgid "Automatique"
-msgstr "自動"
-
-#: templates/configure.html.jinja:481
-msgid "HDMI"
-msgstr "HDMI"
-
-#: templates/configure.html.jinja:483
-msgid "Jack 3.5mm (Casque)"
-msgstr "3.5mmジャック（ヘッドフォン）"
-
-#: templates/configure.html.jinja:488
-msgid "Volume :"
-msgstr "音量 ："
-
-#: templates/configure.html.jinja:500
-msgid "Gestion de l'alimentation (Prise Connectée)"
-msgstr "電源管理 (接続されたソケット)"
-
-#: templates/configure.html.jinja:502
-msgid ""
-"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser "
-"une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra "
-"une simple requête HTTP aux URLs que vous spécifiez."
-msgstr ""
-"画面が完全にスリープ状態にならない場合は、接続されているコンセント (Wi-Fi) を使用して電源をオフにすることができます。 Pimmich "
-"は、指定した URL に単純な HTTP リクエストを送信します。"
-
-#: templates/configure.html.jinja:502
-msgid "Exemples d'URLs :"
-msgstr "URL の例:"
-
-#: templates/configure.html.jinja:513
-msgid "Activer le contrôle par prise connectée"
-msgstr "スマートソケットコントロールを有効にする"
-
-#: templates/configure.html.jinja:519
-msgid "État de la prise : Inconnu"
-msgstr "コンセントのステータス: 不明"
-
-#: templates/configure.html.jinja:525
-msgid "URL pour ALLUMER la prise :"
-msgstr "ソケットをオンにする URL:"
-
-#: templates/configure.html.jinja:533 templates/configure.html.jinja:545
-msgid "Tester"
-msgstr "テスター"
-
-#: templates/configure.html.jinja:537
-msgid "URL pour ÉTEINDRE la prise :"
-msgstr "ソケットをオフにするための URL:"
-
-#: templates/configure.html.jinja:549
-msgid "Délai après allumage (secondes) :"
-msgstr "点火後の遅延 (秒):"
-
-#: templates/configure.html.jinja:553
-msgid ""
-"Temps d'attente pour que l'écran s'initialise avant de forcer la résolution."
-" Augmentez si la résolution est toujours incorrecte."
-msgstr "解像度を強制する前に画面が初期化されるまで待機する時間。解像度がまだ正しくない場合は、値を増やします。"
-
-#: templates/configure.html.jinja:556
-msgid "URL de Statut (Optionnel) :"
-msgstr "ステータス URL (オプション):"
-
-#: templates/configure.html.jinja:561
-msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
-msgstr "ホーム アシスタントの場合は、States API URL を使用します。"
-
-#: templates/configure.html.jinja:567
-msgid "Token d'accès Home Assistant (si URL de statut HA) :"
-msgstr "ホーム アシスタント アクセス トークン (HA ステータス URL の場合):"
-
-#: templates/configure.html.jinja:571
-msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
-msgstr "ホーム アシスタント プロファイルに「長期アクセス トークン」を作成します。"
-
-#: templates/configure.html.jinja:581
-msgid "Affichage de l'heure"
-msgstr "時刻表示"
-
-#: templates/configure.html.jinja:588
-msgid "Afficher l'heure"
-msgstr "ショータイム"
-
-#: templates/configure.html.jinja:593
-msgid "Taille de la police :"
-msgstr "フォントサイズ:"
-
-#: templates/configure.html.jinja:598 templates/configure.html.jinja:764
-msgid "Décalage horizontal (px) :"
-msgstr "水平オフセット (ピクセル):"
-
-#: templates/configure.html.jinja:604 templates/configure.html.jinja:771
-msgid "Décalage vertical (px) :"
-msgstr "垂直オフセット (ピクセル):"
-
-#: templates/configure.html.jinja:610
-msgid "Couleur du texte (hex) :"
-msgstr "テキストの色 (16 進数):"
-
-#: templates/configure.html.jinja:615
-msgid "Couleur du contour (hex) :"
-msgstr "アウトラインの色 (16 進数):"
-
-#: templates/configure.html.jinja:622
-msgid "Position de l'heure :"
-msgstr "時間位置:"
-
-#: templates/configure.html.jinja:625
-msgid "Gauche"
-msgstr "ゴーシュ"
-
-#: templates/configure.html.jinja:627
-msgid "Centre"
-msgstr "中心"
-
-#: templates/configure.html.jinja:629
-msgid "Droite"
-msgstr "右"
-
-#: templates/configure.html.jinja:634
-msgid "Police :"
-msgstr "警察 ："
-
-#: templates/configure.html.jinja:651
-msgid "Afficher un fond derrière l'heure/date/météo"
-msgstr "時刻/日付/天気の背景を表示します"
-
-#: templates/configure.html.jinja:655
-msgid ""
-"Couleur du fond (hex RGBA)\n"
-"                            :"
-msgstr ""
-"背景色（16進RGBA）\n"
-"                            :"
-
-#: templates/configure.html.jinja:663
-msgid "Affichage de la date"
-msgstr "日付表示"
-
-#: templates/configure.html.jinja:668
-msgid "Afficher la date (sous l'heure)"
-msgstr "日付を表示 (時間の下)"
-
-#: templates/configure.html.jinja:672
-msgid "Format de la date :"
-msgstr "日付形式:"
-
-#: templates/configure.html.jinja:678
-msgid "Affichage de la météo (OpenWeatherMap)"
-msgstr "天気表示（OpenWeatherMap）"
-
-#: templates/configure.html.jinja:684
-msgid "Afficher la météo"
-msgstr "天気を表示"
-
-#: templates/configure.html.jinja:689
-msgid "Ville :"
-msgstr "ヴィル :"
-
-#: templates/configure.html.jinja:695
-msgid "Clé API :"
-msgstr "API クレ:"
-
-#: templates/configure.html.jinja:703
-msgid "Tester la clé API et la ville"
-msgstr "API キーと都市をテストする"
-
-#: templates/configure.html.jinja:708
-msgid "Unités :"
-msgstr "単位:"
-
-#: templates/configure.html.jinja:711
-msgid "Celsius"
-msgstr "摂氏"
-
-#: templates/configure.html.jinja:713
-msgid "Fahrenheit"
-msgstr "華氏"
-
-#: templates/configure.html.jinja:718
-msgid ""
-"Intervalle de MàJ\n"
-"                            (min) :"
-msgstr ""
-"更新間隔\n"
-"                            (分):"
-
-#: templates/configure.html.jinja:726
-msgid "Affichage des marées (StormGlass Tide API)"
-msgstr "潮汐表示（StormGlass Tide API）"
-
-#: templates/configure.html.jinja:727
-msgid "Utilise l'API de"
-msgstr "の API を使用します"
-
-#: templates/configure.html.jinja:728
-msgid ""
-"Une clé API est\n"
-"                        requise. Vous pouvez trouver les coordonnées de votre port sur des sites comme"
-msgstr ""
-"APIキーは\n"
-"                        必須です。ポートの座標は次のようなサイトで見つけることができます。"
-
-#: templates/configure.html.jinja:732
-msgid ""
-"Note : Cette API fournit les hauteurs de marée, mais pas\n"
-"                        le coefficient de marée."
-msgstr ""
-"注: この API は潮位の高さを提供しますが、\n"
-"                        潮汐係数。"
-
-#: templates/configure.html.jinja:739
-msgid "Afficher les informations de marée"
-msgstr ""
-"Error 500 (Server Error)!!1500.That’s an error.There was an error. Please "
-"try again later.That’s all we know."
-
-#: templates/configure.html.jinja:744
-msgid "Latitude (ex: 48.3904) :"
-msgstr "緯度 (例: 48.3904) :"
-
-#: templates/configure.html.jinja:750
-msgid "Longitude (ex: -4.4861) :"
-msgstr "経度 (～4.4861) :"
-
-#: templates/configure.html.jinja:757
-msgid "Clé API StormGlass :"
-msgstr "Clé API StormGlass:"
-
-#: templates/configure.html.jinja:779
-msgid "Tester la connexion"
-msgstr "接続をテストする"
-
-#: templates/configure.html.jinja:782
-msgid "Forcer la mise à jour"
-msgstr "強制更新"
-
-#: templates/configure.html.jinja:790
-msgid "État Actuel des Marées"
-msgstr "現在の潮汐状況"
-
-#: templates/configure.html.jinja:793
-msgid ""
-"Dernière mise à jour des données\n"
-"                                    :"
-msgstr ""
-"最終データ更新\n"
-"                                    :"
-
-#: templates/configure.html.jinja:794 templates/configure.html.jinja:797
-#: templates/configure.html.jinja:1573 templates/configure.html.jinja:1576
-#: templates/configure.html.jinja:1580 templates/configure.html.jinja:1647
-#: templates/configure.html.jinja:1649 templates/configure.html.jinja:1653
-#: templates/configure.html.jinja:1821 templates/configure.html.jinja:1824
-#: templates/configure.html.jinja:1828 templates/configure.html.jinja:1831
-#: templates/configure.html.jinja:2264 templates/configure.html.jinja:2286
-#: templates/configure.html.jinja:4763
-msgid "Chargement..."
-msgstr "読み込み中..."
-
-#: templates/configure.html.jinja:796
-msgid "État de l'API :"
-msgstr "APIステータス:"
-
-#: templates/configure.html.jinja:803
-msgid "Fuseau Horaire"
-msgstr "タイムゾーン"
-
-#: templates/configure.html.jinja:805
-msgid "Fuseau horaire actuel du système :"
-msgstr "現在のシステムのタイムゾーン:"
-
-#: templates/configure.html.jinja:806
-msgid "Non défini"
-msgstr "未定義"
-
-#: templates/configure.html.jinja:810
-msgid "Attention :"
-msgstr "注意 ："
-
-#: templates/configure.html.jinja:810
-msgid ""
-"La détection automatique du fuseau horaire a échoué lors de l'installation. "
-"Le système est configuré sur <strong>UTC</strong>. L'heure affichée peut "
-"être incorrecte."
-msgstr ""
-"インストール中に自動タイムゾーン検出に失敗しました。システムは<strong>UTC</strong>に設定されています。表示される時刻は誤差がある可能性があります。"
-
-#: templates/configure.html.jinja:811
-msgid ""
-"Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via"
-" SSH) et en exécutant la commande :"
-msgstr "Raspberry Pi に (SSH 経由で) 接続し、次のコマンドを実行することで、手動で修正できます。"
-
-#: templates/configure.html.jinja:811
-msgid "(remplacez par votre région/ville)."
-msgstr "(あなたの地域/都市に置き換えてください)。"
-
-#: templates/configure.html.jinja:814
-msgid ""
-"Le fuseau horaire a été configuré automatiquement\n"
-"                            lors de l'installation."
-msgstr ""
-"タイムゾーンは自動的に設定されました\n"
-"                            インストール中。"
-
-#: templates/configure.html.jinja:825
-msgid "Configuration de l'album photo Immich"
-msgstr "アルバム写真の構成 Immich"
-
-#: templates/configure.html.jinja:830
-msgid "Nom technique de l'album Immich :"
-msgstr "Immich アルバムの技術名:"
-
-#: templates/configure.html.jinja:834
-msgid "URL du serveur Immich :"
-msgstr "イミッチサーバーURL:"
-
-#: templates/configure.html.jinja:837
-msgid "Token d'accès Immich :"
-msgstr "イミッチアクセストークン:"
-
-#: templates/configure.html.jinja:840
-msgid "Limite de photos à télécharger (Immich)"
-msgstr "アップロードする写真の制限 (Immich)"
-
-#: templates/configure.html.jinja:845
-msgid ""
-"Nombre maximum de photos à récupérer depuis Immich.\n"
-"                        Mettez 0, -1 ou laissez vide pour ne pas avoir de limite."
-msgstr ""
-"Immich から回復する写真の最大数。\n"
-"                        制限を設けない場合は、0、-1 を入力するか、空のままにします。"
-
-#: templates/configure.html.jinja:851
-msgid "Récupération aléatoire des images dans l'album (Immich)"
-msgstr "アルバム内の画像をランダムに復元 (Immich)"
-
-#: templates/configure.html.jinja:855
-msgid "Mise à jour automatique (Immich)"
-msgstr "自動更新 (イミッチ)"
-
-#: templates/configure.html.jinja:859
-msgid ""
-"Activer la mise à jour\n"
-"                            automatique"
-msgstr ""
-"アップデートをアクティブ化する\n"
-"                            自動"
-
-#: templates/configure.html.jinja:862 templates/configure.html.jinja:961
-msgid "Intervalle de mise à jour (heures):"
-msgstr "更新間隔 (時間):"
-
-#: templates/configure.html.jinja:867 templates/configure.html.jinja:966
-msgid "État du service :"
-msgstr "サービスステータス:"
-
-#: templates/configure.html.jinja:869 templates/configure.html.jinja:968
-msgid "Dernière mise à jour :"
-msgstr "最終更新:"
-
-#: templates/configure.html.jinja:871 templates/configure.html.jinja:970
-msgid "Prochaine mise à jour :"
-msgstr "次回の更新:"
-
-#: templates/configure.html.jinja:880
-msgid "Sources à afficher dans le diaporama"
-msgstr "スライドショーで表示するソース"
-
-#: templates/configure.html.jinja:882
-msgid ""
-"Sélectionnez les sources de photos à inclure dans le diaporama.\n"
-"                        Les photos seront mélangées entre les sources sélectionnées."
-msgstr ""
-"スライドショーに含める写真ソースを選択します。\n"
-"                        写真は選択したソース間で混合されます。"
-
-#: templates/configure.html.jinja:889
-msgid "Photos Immich"
-msgstr "写真 イミッチ"
-
-#: templates/configure.html.jinja:894
-msgid "Photos USB"
-msgstr "写真USB"
-
-#: templates/configure.html.jinja:899
-msgid "Photos Samba"
-msgstr "写真 サンバ"
-
-#: templates/configure.html.jinja:905
-msgid "Photos Smartphone"
-msgstr "写真 スマートフォン"
-
-#: templates/configure.html.jinja:912
-msgid "Photos reçues par Telegram"
-msgstr "テレグラムで受け取った写真"
-
-#: templates/configure.html.jinja:919
-msgid ""
-"Photos des invités\n"
-"                            (validées)"
-msgstr ""
-"ゲストの写真\n"
-"                            (検証済み)"
-
-#: templates/configure.html.jinja:925
-msgid "Configuration du partage Samba (Windows)"
-msgstr "Samba 共有のセットアップ (Windows)"
-
-#: templates/configure.html.jinja:927
-msgid "Serveur :"
-msgstr "サーバー:"
-
-#: templates/configure.html.jinja:929
-msgid "ex: 192.168.1.50 ou MON-NAS"
-msgstr "例: 192.168.1.50 または MON-NAS"
-
-#: templates/configure.html.jinja:931
-msgid "Nom du partage :"
-msgstr "共有名:"
-
-#: templates/configure.html.jinja:933
-msgid "ex: Photos"
-msgstr "例: 写真"
-
-#: templates/configure.html.jinja:935
-msgid "Chemin dans le partage (optionnel) :"
-msgstr "共有のパス (オプション):"
-
-#: templates/configure.html.jinja:937
-msgid "ex: Famille/2024"
-msgstr "例: 家族/2024"
-
-#: templates/configure.html.jinja:939
-msgid "Nom d'utilisateur (optionnel) :"
-msgstr "ユーザー名 (オプション):"
-
-#: templates/configure.html.jinja:942
-msgid "Mot de passe (optionnel) :"
-msgstr "パスワード (オプション):"
-
-#: templates/configure.html.jinja:948
-msgid ""
-"Tester la\n"
-"                            connexion"
-msgstr ""
-"テストしてください\n"
-"                            接続"
-
-#: templates/configure.html.jinja:954
-msgid "Mise à jour automatique (Samba)"
-msgstr "自動アップデート（Samba）"
-
-#: templates/configure.html.jinja:958
-msgid "Activer la mise à jour automatique"
-msgstr "自動更新を有効にする"
-
-#: templates/configure.html.jinja:978
-msgid "Options de démarrage"
-msgstr "ブートオプション"
-
-#: templates/configure.html.jinja:984
-msgid "Ignorer le premier import automatique au démarrage"
-msgstr "起動時の最初の自動インポートをスキップする"
-
-#: templates/configure.html.jinja:986
-msgid ""
-"Si cette option est cochée, les mises à jour automatiques (Immich, Samba) ne"
-" se lanceront pas immédiatement après un redémarrage du cadre, mais "
-"attendront le prochain cycle programmé."
-msgstr ""
-"このオプションがチェックされている場合、自動更新 (Immich、Samba) "
-"はフレームワークの再起動直後には起動されず、次にスケジュールされたサイクルまで待機します。"
-
-#: templates/configure.html.jinja:993
-msgid "Réception de photos par Telegram"
-msgstr "電報で写真を受信する"
-
-#: templates/configure.html.jinja:996
-msgid ""
-"Activez cette fonction pour permettre à des utilisateurs autorisés d'envoyer des photos\n"
-"                        directement sur le cadre via un bot Telegram. Les photos reçues seront ajoutées à la source\n"
-"                        \"Telegram\"."
-msgstr ""
-"この機能を有効にすると、承認されたユーザーが写真を送信できるようになります。\n"
-"                        Telegram ボット経由でフレームに直接送信します。受け取った写真はソースに追加されます\n"
-"                        「電報」。"
-
-#: templates/configure.html.jinja:1000
-msgid ""
-"Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. "
-"L'ID de l'administrateur est votre propre ID utilisateur Telegram (obtenu "
-"via @userinfobot par exemple)."
-msgstr ""
-"ボットを作成してトークンを取得するには、Telegram で @BotFather に話しかけてください。管理者 ID は、自分の Telegram "
-"ユーザー ID (たとえば、@userinfobot 経由で取得) です。"
-
-#: templates/configure.html.jinja:1007
-msgid "Activer le bot de réception Telegram"
-msgstr "Telegram 受信トレイ ボットを有効にする"
-
-#: templates/configure.html.jinja:1012
-msgid "Token du Bot Telegram :"
-msgstr "トークン・デュ・ボット・テレグラム："
-
-#: templates/configure.html.jinja:1019
-msgid ""
-"ID de l'administrateur\n"
-"                            :"
-msgstr ""
-"管理者ID\n"
-"                            :"
-
-#: templates/configure.html.jinja:1023
-msgid "Votre ID numérique Telegram"
-msgstr "Telegram デジタル ID"
-
-#: templates/configure.html.jinja:1029
-msgid "Tester le Token du Bot"
-msgstr "ボットのトークンのテスター"
-
-#: templates/configure.html.jinja:1033
-msgid "État du bot :"
-msgstr "ボットのステータス:"
-
-#: templates/configure.html.jinja:1040
-msgid "Gestion des invitations pour les invités"
-msgstr "ゲストの招待状の管理"
-
-#: templates/configure.html.jinja:1043
-msgid ""
-"Créez des codes d'invitation uniques pour permettre à vos amis et votre famille d'envoyer\n"
-"                        des photos au cadre. Ils devront envoyer ce code à votre bot Telegram pour être autorisés."
-msgstr ""
-"独自の招待コードを作成して友人や家族に送信できるようにする\n"
-"                        フレーム内の写真。承認されるには、このコードを Telegram ボットに送信する必要があります。"
-
-#: templates/configure.html.jinja:1049
-msgid "Créer une nouvelle invitation"
-msgstr "新しい招待状を作成する"
-
-#: templates/configure.html.jinja:1053
-msgid "Nom de l'invité (ex: Mamie)"
-msgstr "ゲストのお名前（例：おばあちゃん）"
-
-#: templates/configure.html.jinja:1055
-msgid "Valide 7 jours"
-msgstr "7日間有効"
-
-#: templates/configure.html.jinja:1056
-msgid "Valide 30 jours"
-msgstr "30日間有効"
-
-#: templates/configure.html.jinja:1057
-msgid "Valide 90 jours"
-msgstr "90日間有効"
-
-#: templates/configure.html.jinja:1061 templates/configure.html.jinja:2107
-msgid "Créer"
-msgstr "作成する"
-
-#: templates/configure.html.jinja:1068
-msgid "Invitations actives"
-msgstr "アクティブな招待状"
-
-#: templates/configure.html.jinja:1071
-msgid "Chargement des invitations..."
-msgstr "招待状を読み込んでいます..."
-
-#: templates/configure.html.jinja:1078
-msgid "Source Telegram"
-msgstr "ソース電報"
-
-#: templates/configure.html.jinja:1080
-msgid ""
-"N'oubliez pas d'activer la source \"Telegram\" dans l'onglet\n"
-"                        \"Sources\" pour que les photos reçues apparaissent dans le diaporama."
-msgstr ""
-"タブで「Telegram」ソースを有効にすることを忘れないでください。\n"
-"                        「ソース」を選択すると、受信した写真がスライドショーに表示されます。"
-
-#: templates/configure.html.jinja:1086
-msgid "Fréquence des Cartes Postales"
-msgstr "はがきの頻度"
-
-#: templates/configure.html.jinja:1088
-msgid ""
-"Augmentez temporairement la fréquence d'affichage des\n"
-"                        nouvelles cartes postales reçues pour qu'elles apparaissent plus souvent."
-msgstr ""
-"一時的に表示頻度を上げます。\n"
-"                        新しいポストカードを受け取ったので、より頻繁に表示されます。"
-
-#: templates/configure.html.jinja:1094
-msgid "Activer le boost pour les cartes postales récentes"
-msgstr "最近のポストカードのブーストを有効にする"
-
-#: templates/configure.html.jinja:1098
-msgid ""
-"Durée du boost (jours)\n"
-"                            :"
-msgstr ""
-"ブースト期間 (日)\n"
-"                            :"
-
-#: templates/configure.html.jinja:1104
-msgid "Facteur de boost :"
-msgstr "ブースト係数:"
-
-#: templates/configure.html.jinja:1108
-msgid "(Ex: 4 = 5x plus de chances d'apparaître)"
-msgstr "（例：4個＝出現確率5倍）"
-
-#: templates/configure.html.jinja:1113
-msgid "Options de l'overlay"
-msgstr "オーバーレイのオプション"
-
-#: templates/configure.html.jinja:1117
-msgid "Activer l'icône de nouvelle carte postale dans l'overlay"
-msgstr "オーバーレイで新しいポストカード アイコンを有効にする"
-
-#: templates/configure.html.jinja:1126
-msgid "Contrôle Vocal"
-msgstr "音声制御"
-
-#: templates/configure.html.jinja:1129
-msgid "Contrôlez votre diaporama à la voix avec le mot-clé \"Cadre Magique\"."
-msgstr "「Magic Frame」をキーワードに音声でスライドショーを操作します。"
-
-#: templates/configure.html.jinja:1133
-msgid "Étape Manuelle Requise :"
-msgstr "必要な手動ステップ:"
-
-#: templates/configure.html.jinja:1133
-msgid ""
-"Pour utiliser le mot-clé personnalisé \"Cadre Magique\", vous devez créer un"
-" modèle sur le site de Picovoice, le télécharger, et le placer dans le "
-"dossier `voice_models` sous le nom `cadre-magique_raspberry-pi.ppn`."
-msgstr ""
-"カスタム キーワード「Cadre Magique」を使用するには、Picovoice Web サイトでモデルを作成してダウンロードし、「cadre-"
-"magique_raspberry-pi.ppn」という名前で「voice_models」フォルダーに配置する必要があります。"
-
-#: templates/configure.html.jinja:1137
-msgid ""
-"Moteur\n"
-"                            de mot-clé"
-msgstr ""
-"エンジン\n"
-"                            キーワード"
-
-#: templates/configure.html.jinja:1142
-msgid "Picovoice Porcupine (Recommandé, nécessite une clé API)"
-msgstr "Picovoice Porcupine (推奨、API キーが必要)"
-
-#: templates/configure.html.jinja:1144
-msgid "Vosk (Totalement local, sans clé API, plus gourmand)"
-msgstr "Vosk (完全にローカル、API キーなし、より貪欲)"
-
-#: templates/configure.html.jinja:1146
-msgid ""
-"Choisissez 'Vosk' si vous ne souhaitez pas créer de\n"
-"                            compte Picovoice."
-msgstr ""
-"作成したくない場合は「Vosk」を選択してください\n"
-"                            ピコボイスアカウント。"
-
-#: templates/configure.html.jinja:1152
-msgid "Activer le contrôle vocal (action immédiate)"
-msgstr "音声制御を有効にする (即時アクション)"
-
-#: templates/configure.html.jinja:1156
-msgid "Langue du contrôle vocal"
-msgstr "音声制御言語"
-
-#: templates/configure.html.jinja:1160
-msgid "Français"
-msgstr "フランス語"
-
-#: templates/configure.html.jinja:1162
-msgid "Anglais"
-msgstr "英語"
-
-#: templates/configure.html.jinja:1164
-msgid ""
-"Le changement de langue nécessite un redémarrage du service vocal "
-"(désactiver puis réactiver le contrôle vocal)."
-msgstr "言語を変更するには、音声サービスを再起動する必要があります (音声コントロールを無効にしてから再度有効にする)。"
-
-#: templates/configure.html.jinja:1168
-msgid "Clé d'accès Picovoice Porcupine"
-msgstr "Picovoice ポーキュパイン アクセス キー"
-
-#: templates/configure.html.jinja:1171
-msgid "Collez votre clé d'accès ici"
-msgstr "ここにアクセスキーを貼り付けてください"
-
-#: templates/configure.html.jinja:1172
-msgid "Obtenez votre clé via le compte gratuit (Free Tier) sur la"
-msgstr "無料アカウント (無料利用枠) 経由でキーを取得します。"
-
-#: templates/configure.html.jinja:1178
-msgid "Périphérique d'entrée audio (Microphone)"
-msgstr "音声入力デバイス（マイク）"
-
-#: templates/configure.html.jinja:1182 templates/configure.html.jinja:4992
-msgid "Périphérique par défaut"
-msgstr "デフォルトのデバイス"
-
-#: templates/configure.html.jinja:1187
-msgid "Actualiser la liste"
-msgstr "リストを更新する"
-
-#: templates/configure.html.jinja:1192
-msgid "État du service vocal :"
-msgstr "音声サービスのステータス:"
-
-#: templates/configure.html.jinja:1201
-msgid "Volume des Notifications Sonores"
-msgstr "通知音の音量"
-
-#: templates/configure.html.jinja:1204
-msgid ""
-"Règle le volume pour les sons de notification (confirmation du contrôle vocal, réception\n"
-"                        de carte postale, etc.)."
-msgstr ""
-"通知音（ボイスコントロール確認、受信音）の音量を調整します。\n"
-"                        ポストカードなど）。"
-
-#: templates/configure.html.jinja:1208
-msgid ""
-"Volume des notifications\n"
-"                            :"
-msgstr ""
-"通知量\n"
-"                            :"
-
-#: templates/configure.html.jinja:1221
-msgid "Diagnostic Audio"
-msgstr "診断音声"
-
-#: templates/configure.html.jinja:1224
-msgid ""
-"Si votre microphone n'apparaît pas dans la liste ci-dessus, utilisez cet outil pour\n"
-"                        vérifier si le système d'exploitation le détecte correctement."
-msgstr ""
-"お使いのマイクが上記にリストされていない場合は、このツールを使用して\n"
-"                        オペレーティング システムがそれを正しく検出しているかどうかを確認してください。"
-
-#: templates/configure.html.jinja:1229 templates/configure.html.jinja:2316
-msgid "Lancer le diagnostic"
-msgstr "診断を開始する"
-
-#: templates/configure.html.jinja:1232
-msgid "Résultats du diagnostic :"
-msgstr "診断結果:"
-
-#: templates/configure.html.jinja:1244
-msgid "Affichage des métadonnées des photos"
-msgstr "写真のメタデータの表示"
-
-#: templates/configure.html.jinja:1246
-msgid ""
-"Configurez ici l'affichage des informations (date, lieu)\n"
-"                        extraites depuis Immich sur vos photos."
-msgstr ""
-"ここで情報の表示を設定します (日付、場所)\n"
-"                        あなたの写真からイミッチから抜粋しました。"
-
-#: templates/configure.html.jinja:1253
-msgid "Afficher la date de prise de vue"
-msgstr "撮影日を表示"
-
-#: templates/configure.html.jinja:1257
-msgid ""
-"Format de\n"
-"                            la date"
-msgstr ""
-"の形式\n"
-"                            日付"
-
-#: templates/configure.html.jinja:1262
-#, python-format
-msgid ""
-"Utilise les codes de formatage Python (ex:\n"
-"                            %%d/%%m/%%Y, %%B %%Y)."
-msgstr ""
-"Python フォーマットコードを使用します (例:\n"
-"                            %%d/%%m/%%Y、%%B %%Y)。"
-
-#: templates/configure.html.jinja:1270
-msgid ""
-"Afficher la localisation\n"
-"                            (ville/pays)"
-msgstr ""
-"場所を表示\n"
-"                            (都市/国)"
-
-#: templates/configure.html.jinja:1274
-msgid ""
-"Format\n"
-"                            de la localisation"
-msgstr ""
-"フォーマット\n"
-"                            場所の"
-
-#: templates/configure.html.jinja:1279
-msgid "Ville, Pays"
-msgstr "都市、国"
-
-#: templates/configure.html.jinja:1281
-msgid "Ville uniquement"
-msgstr "市内のみ"
-
-#: templates/configure.html.jinja:1283
-msgid "Pays uniquement"
-msgstr "国のみ"
-
-#: templates/configure.html.jinja:1291
-msgid "Afficher le drapeau du pays"
-msgstr "国旗を表示"
-
-#: templates/configure.html.jinja:1295
-msgid ""
-"Taille du\n"
-"                            drapeau"
-msgstr ""
-"サイズ\n"
-"                            旗"
-
-#: templates/configure.html.jinja:1308
-msgid ""
-"Opacité\n"
-"                            du drapeau (0.1 à 1.0)"
-msgstr ""
-"不透明度\n"
-"                            フラグの値 (0.1 ～ 1.0)"
-
-#: templates/configure.html.jinja:1316
-msgid "Position du drapeau"
-msgstr "旗の位置"
-
-#: templates/configure.html.jinja:1320 templates/configure.html.jinja:1402
-msgid "En haut à droite"
-msgstr "右上"
-
-#: templates/configure.html.jinja:1322 templates/configure.html.jinja:1400
-msgid "En haut à gauche"
-msgstr "左上"
-
-#: templates/configure.html.jinja:1324 templates/configure.html.jinja:1395
-msgid "En bas à droite"
-msgstr "右下"
-
-#: templates/configure.html.jinja:1326 templates/configure.html.jinja:1393
-msgid "En bas à gauche"
-msgstr "左下"
-
-#: templates/configure.html.jinja:1332 templates/configure.html.jinja:1407
-msgid "Décalage horizontal (px)"
-msgstr "水平オフセット (px)"
-
-#: templates/configure.html.jinja:1339 templates/configure.html.jinja:1414
-msgid "Décalage vertical (px)"
-msgstr "垂直オフセット (px)"
-
-#: templates/configure.html.jinja:1347
-msgid "Style et Positionnement"
-msgstr "スタイルと配置"
-
-#: templates/configure.html.jinja:1351
-msgid "Taille de la police"
-msgstr "フォントサイズ"
-
-#: templates/configure.html.jinja:1358
-msgid "Police"
-msgstr "警察"
-
-#: templates/configure.html.jinja:1375
-msgid "Couleur du texte (hex)"
-msgstr "文字色(16進数)"
-
-#: templates/configure.html.jinja:1382
-msgid "Couleur du contour (hex)"
-msgstr "輪郭色(16進数)"
-
-#: templates/configure.html.jinja:1389
-msgid "Position"
-msgstr "位置"
-
-#: templates/configure.html.jinja:1398
-msgid "En bas au centre"
-msgstr "中央下"
-
-#: templates/configure.html.jinja:1426
-msgid ""
-"Afficher un fond\n"
-"                            semi-transparent derrière les métadonnées"
-msgstr ""
-"背景を表示する\n"
-"                            メタデータの背後にある半透明"
-
-#: templates/configure.html.jinja:1431
-msgid "Couleur du fond (hex RGBA)"
-msgstr "背景色（16進RGBA）"
-
-#: templates/configure.html.jinja:1440
+#: templates/configure.html.jinja:247
 msgid "Enregistrer les modifications"
 msgstr "変更を保存する"
-
-#: templates/configure.html.jinja:1452
-msgid "Gestion du diaporama"
-msgstr "スライドショー管理"
-
-#: templates/configure.html.jinja:1457
-msgid "Arrêter le diaporama"
-msgstr "スライドショーを停止する"
-
-#: templates/configure.html.jinja:1459
-msgid "Démarrer le diaporama"
-msgstr "スライドショーを開始する"
-
-#: templates/configure.html.jinja:1488
-msgid "Importation des photos"
-msgstr "写真のインポート"
-
-#: templates/configure.html.jinja:1491
-msgid "Importer depuis la clé USB"
-msgstr "USB スティックからインポート"
-
-#: templates/configure.html.jinja:1500
-msgid "Importer depuis Immich"
-msgstr "イミッヒから輸入"
-
-#: templates/configure.html.jinja:1509
-msgid "Importer depuis Samba"
-msgstr "Sambaからインポート"
-
-#: templates/configure.html.jinja:1519
-msgid "Préparation en cours..."
-msgstr "準備中です..."
-
-#: templates/configure.html.jinja:1520
-msgid "Photo en cours de préparation"
-msgstr "写真準備中"
-
-#: templates/configure.html.jinja:1525
-msgid ""
-"L'import depuis Telegram se fait automatiquement à la réception des photos. "
-"Activez la source dans l'onglet \"Sources\" pour les voir."
-msgstr "Telegram からのインポートは、写真を受信すると自動的に行われます。 「ソース」タブでソースをアクティブにして表示します。"
-
-#: templates/configure.html.jinja:1531
-msgid "Importer depuis un Smartphone"
-msgstr "スマートフォンからのインポート"
-
-#: templates/configure.html.jinja:1532
-msgid ""
-"Envoyez des photos directement depuis votre téléphone via le navigateur."
-msgstr "携帯電話からブラウザ経由で写真を直接送信します。"
-
-#: templates/configure.html.jinja:1538 templates/configure.html.jinja:3974
-#: templates/configure.html.jinja:4007
-msgid "Envoyer les photos"
-msgstr "写真を送信する"
-
-#: templates/configure.html.jinja:1552
-msgid "Photos en attente de validation"
-msgstr "検証待ちの写真"
-
-#: templates/configure.html.jinja:1555
-msgid ""
-"Approuvez ou rejetez les photos envoyées. Les photos approuvées seront "
-"ajoutées à la source \"Invités\"."
-msgstr "送信された写真を承認または拒否します。承認された写真は「ゲスト」ソースに追加されます。"
-
-#: templates/configure.html.jinja:1558 templates/configure.html.jinja:1868
-msgid "Actualiser"
-msgstr "リフレッシュ"
-
-#: templates/configure.html.jinja:1568
-msgid "État de la connexion Wi-Fi"
-msgstr "Wi-Fi接続状況"
-
-#: templates/configure.html.jinja:1572 templates/configure.html.jinja:1646
-msgid "État:"
-msgstr "エタ:"
-
-#: templates/configure.html.jinja:1576
-msgid "Réseau (SSID):"
-msgstr "ネットワーク(SSID):"
-
-#: templates/configure.html.jinja:1580 templates/configure.html.jinja:1648
-msgid "Adresse IP:"
-msgstr "アドレスIP:"
-
-#: templates/configure.html.jinja:1587
-msgid "Configuration Wi-Fi"
-msgstr "Wi-Fiの設定"
-
-#: templates/configure.html.jinja:1588
-msgid ""
-"La sélection du pays est obligatoire pour activer l'interface Wi-Fi et "
-"respecter les réglementations locales sur les fréquences radio."
-msgstr "Wi-Fi インターフェイスを有効にし、地域の無線周波数規制に準拠するには、国の選択が必要です。"
-
-#: templates/configure.html.jinja:1591
-msgid ""
-"Pays (pour la\n"
-"                            réglementation Wi-Fi)"
-msgstr ""
-"国（\n"
-"                            Wi-Fi規制）"
-
-#: templates/configure.html.jinja:1595
-msgid "France"
-msgstr "フランス"
-
-#: templates/configure.html.jinja:1595
-msgid "États-Unis"
-msgstr "米国"
-
-#: templates/configure.html.jinja:1595
-msgid "Royaume-Uni"
-msgstr "イギリス"
-
-#: templates/configure.html.jinja:1596
-msgid "Allemagne"
-msgstr "ドイツ"
-
-#: templates/configure.html.jinja:1596
-msgid "Espagne"
-msgstr "スペイン"
-
-#: templates/configure.html.jinja:1596
-msgid "Canada"
-msgstr "カナダ"
-
-#: templates/configure.html.jinja:1596
-msgid "Belgique"
-msgstr "ベルギー"
-
-#: templates/configure.html.jinja:1597
-msgid "Suisse"
-msgstr "スイス"
-
-#: templates/configure.html.jinja:1605
-msgid ""
-"SSID (Nom du\n"
-"                            réseau)"
-msgstr ""
-"SSID（名前\n"
-"                            ネットワーク)"
-
-#: templates/configure.html.jinja:1612 templates/login.html.jinja:62
-msgid "Mot de passe"
-msgstr "パスワード"
-
-#: templates/configure.html.jinja:1621 templates/configure.html.jinja:1692
-#: templates/configure.html.jinja:1707 templates/login.html.jinja:69
-msgid "Afficher/Cacher le mot de passe"
-msgstr "パスワードの表示/非表示"
-
-#: templates/configure.html.jinja:1626
-msgid "Laissez vide si le réseau est ouvert."
-msgstr "ネットワークが開いている場合は、空のままにしておきます。"
-
-#: templates/configure.html.jinja:1630
-msgid "Appliquer les paramètres Wi-Fi"
-msgstr "Wi-Fi設定を適用する"
-
-#: templates/configure.html.jinja:1633
-msgid ""
-"Note : Après avoir appliqué les paramètres, la connexion peut prendre "
-"jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à "
-"\"Connecté\", vérifiez le mot de passe puis essayez de redémarrer le "
-"système."
-msgstr ""
-"注: 設定を適用した後、接続までに最大 1 "
-"分かかる場合があります。上記の接続状態が「接続済み」に変わらない場合は、パスワードを確認してシステムを再起動してください。"
-
-#: templates/configure.html.jinja:1638
-msgid "Gestion des Interfaces Réseau"
-msgstr "ネットワークインターフェース管理"
-
-#: templates/configure.html.jinja:1639
-msgid ""
-"Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet est branché, c'est"
-" souvent un problème de priorité. Désactivez l'interface Ethernet pour "
-"forcer le système à utiliser exclusivement le Wi-Fi. Cette action redémarre "
-"le service réseau."
-msgstr ""
-"イーサネット ケーブルが接続されているにもかかわらず Wi-Fi に接続できない場合は、多くの場合、それが優先される問題です。イーサネット "
-"インターフェイスを無効にして、システムが Wi-Fi のみを使用するように強制します。このアクションにより、ネットワーク サービスが再起動されます。"
-
-#: templates/configure.html.jinja:1645
-msgid "Interface Filaire (eth0)"
-msgstr "有線インターフェース (eth0)"
-
-#: templates/configure.html.jinja:1660
-msgid "Réseaux Wi-Fi à proximité"
-msgstr "近くの Wi-Fi ネットワーク"
-
-#: templates/configure.html.jinja:1661
-msgid ""
-"Cliquez sur le bouton pour rechercher les réseaux Wi-Fi disponibles.\n"
-"                    Cliquer sur un réseau dans la liste remplira automatiquement le champ SSID ci-dessus."
-msgstr ""
-"ボタンをクリックして、利用可能な Wi-Fi ネットワークを検索します。\n"
-"                    リスト内のネットワークをクリックすると、上の SSID フィールドに自動的に入力されます。"
-
-#: templates/configure.html.jinja:1666 templates/configure.html.jinja:2268
-msgid "Lancer le scan"
-msgstr "スキャンを開始する"
-
-#: templates/configure.html.jinja:1677 templates/configure.html.jinja:2272
-msgid "Sécurité"
-msgstr "安全"
-
-#: templates/configure.html.jinja:1680
-msgid "Changer le mot de passe de l'interface"
-msgstr "インターフェースのパスワードを変更する"
-
-#: templates/configure.html.jinja:1683
-msgid ""
-"Nouveau mot de\n"
-"                            passe"
-msgstr "新しいパスワード"
-
-#: templates/configure.html.jinja:1688
-msgid "6 caractères minimum"
-msgstr "最低6文字"
-
-#: templates/configure.html.jinja:1699
-msgid ""
-"Confirmer le\n"
-"                            nouveau mot de passe"
-msgstr ""
-"確認してください\n"
-"                            新しいパスワード"
-
-#: templates/configure.html.jinja:1712
-msgid ""
-"Les mots de passe ne\n"
-"                            correspondent pas."
-msgstr ""
-"パスワードは無効です\n"
-"                            一致しません。"
-
-#: templates/configure.html.jinja:1717
-msgid "Changer le mot de passe"
-msgstr "パスワードを変更する"
-
-#: templates/configure.html.jinja:1724
-msgid "Sauvegarde et Restauration"
-msgstr "バックアップと復元"
-
-#: templates/configure.html.jinja:1725
-msgid ""
-"Sauvegardez votre configuration (API, partages, affichage...) dans un "
-"fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle "
-"installation."
-msgstr "設定 (API、共有、ディスプレイなど) をファイルに保存します。後で復元することも、新規インストール時に復元することもできます。"
-
-#: templates/configure.html.jinja:1729
-msgid "Sauvegarder la configuration"
-msgstr "設定の保存"
-
-#: templates/configure.html.jinja:1732
-msgid "Télécharger la sauvegarde"
-msgstr "バックアップをダウンロードする"
-
-#: templates/configure.html.jinja:1737
-msgid "Restaurer une configuration"
-msgstr "構成を復元する"
-
-#: templates/configure.html.jinja:1739
-msgid ""
-"Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
-"fichier de sauvegarde."
-msgstr "本気ですか？現在の設定はバックアップ ファイルの内容によって上書きされます。"
-
-#: templates/configure.html.jinja:1744
-msgid "Restaurer"
-msgstr "復元する"
-
-#: templates/configure.html.jinja:1752
-msgid "Mise à jour de l'application"
-msgstr "アプリケーションのアップデート"
-
-#: templates/configure.html.jinja:1753
-msgid ""
-"Cliquez sur le bouton pour rechercher et installer les dernières mises à "
-"jour de Pimmich depuis GitHub. L'application redémarrera automatiquement "
-"après la mise à jour."
-msgstr ""
-"ボタンをクリックして、GitHub から最新の Pimmich "
-"アップデートを検索してインストールします。アップデート後、アプリケーションは自動的に再起動します。"
-
-#: templates/configure.html.jinja:1756
-msgid ""
-"Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
-msgstr "アップデートを開始しますか?追跡ページにリダイレクトされます。"
-
-#: templates/configure.html.jinja:1757
-msgid "Lancer la mise à jour"
-msgstr "アップデートを開始する"
-
-#: templates/configure.html.jinja:1763
-msgid "Système de Fichiers de la Carte SD"
-msgstr "SDカードファイルシステム"
-
-#: templates/configure.html.jinja:1764
-msgid ""
-"Si vous avez flashé Pimmich sur une carte SD plus grande que l'image, "
-"utilisez cette option pour étendre la partition et utiliser tout l'espace "
-"disponible. Un redémarrage du système sera nécessaire pour finaliser "
-"l'opération."
-msgstr ""
-"Pimmich をイメージより大きい SD "
-"カードにフラッシュした場合は、このオプションを使用してパーティションを拡張し、利用可能なスペースをすべて使用します。操作を完了するにはシステムを再起動する必要があります。"
-
-#: templates/configure.html.jinja:1766
-msgid "Note :"
-msgstr "注記 ："
-
-#: templates/configure.html.jinja:1766
-msgid ""
-"Cette opération est sûre et ne supprime aucune donnée. Elle prépare "
-"simplement le système à s'étendre au prochain démarrage."
-msgstr "この操作は安全であり、データは削除されません。これは、次回の起動時にシステムを拡張する準備をするだけです。"
-
-#: templates/configure.html.jinja:1770
-msgid "Étendre le système de fichiers"
-msgstr "ファイルシステムを拡張する"
-
-#: templates/configure.html.jinja:1777
-msgid "Contrôle du système"
-msgstr "システム制御"
-
-#: templates/configure.html.jinja:1780
-msgid ""
-"Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
-"système d'exploitation ne sera pas redémarré."
-msgstr "Web アプリケーションのみを再起動してもよろしいですか?オペレーティング システムは再起動されません。"
-
-#: templates/configure.html.jinja:1783
-msgid "Redémarrer l'application web"
-msgstr "Webアプリケーションを再起動します"
-
-#: templates/configure.html.jinja:1792
-msgid "Redémarrer le système"
-msgstr "システムを再起動します"
-
-#: templates/configure.html.jinja:1800
-msgid "Supprimer les logs"
-msgstr "ログの削除"
-
-#: templates/configure.html.jinja:1805
-msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
-msgstr "システムの電源を切ってもよろしいですか?"
-
-#: templates/configure.html.jinja:1808
-msgid "Éteindre le système"
-msgstr "システムをシャットダウンします"
-
-#: templates/configure.html.jinja:1817
-msgid "Informations Système"
-msgstr "システム情報"
-
-#: templates/configure.html.jinja:1821
-msgid "Température CPU:"
-msgstr "CPU温度:"
-
-#: templates/configure.html.jinja:1824
-msgid "Utilisation CPU:"
-msgstr "CPU使用率:"
-
-#: templates/configure.html.jinja:1828
-msgid "RAM:"
-msgstr "ラム："
-
-#: templates/configure.html.jinja:1831
-msgid "Stockage:"
-msgstr "ストレージ："
-
-#: templates/configure.html.jinja:1836
-msgid "Historique Température CPU (10 min)"
-msgstr "CPU 温度履歴 (10 分)"
-
-#: templates/configure.html.jinja:1840
-msgid "Historique Utilisation CPU (10 min)"
-msgstr "CPU使用率履歴(10分)"
-
-#: templates/configure.html.jinja:1844
-msgid "Historique Utilisation RAM (10 min)"
-msgstr "RAM 使用量の履歴 (10 分)"
-
-#: templates/configure.html.jinja:1848
-msgid "Historique Utilisation Disque (10 min)"
-msgstr "ディスク使用履歴 (10 分)"
-
-#: templates/configure.html.jinja:1859
-msgid "Logs Système"
-msgstr "システムログ"
-
-#: templates/configure.html.jinja:1862
-msgid "Sélectionner un log :"
-msgstr "ログを選択します:"
-
-#: templates/configure.html.jinja:1871
-msgid "Effacer les logs"
-msgstr "ログをクリアする"
-
-#: templates/configure.html.jinja:1881
-msgid "Crédits"
-msgstr "クレジット"
-
-#: templates/configure.html.jinja:1885
-msgid "Auteurs : Gotenash et Shenron"
-msgstr "著者: ゴテナシュとシェンロン"
-
-#: templates/configure.html.jinja:1890
-msgid "Projet réalisé dans le cadre du Gadgetaulab"
-msgstr "Gadgetaulabの一環として実施されたプロジェクト"
-
-#: templates/configure.html.jinja:1898
-msgid "Aperçu des photos préparées"
-msgstr "準備した写真をプレビューする"
-
-#: templates/configure.html.jinja:1899
-msgid ""
-"Voici les photos qui sont prêtes à être affichées par le diaporama, classées"
-" par source. Cliquez sur une photo pour l'agrandir."
-msgstr "ここでは、スライドショーで表示する準備ができている写真をソース別に分類して示します。写真をクリックすると拡大します。"
-
-#: templates/configure.html.jinja:1909
-#, python-format
-msgid "%(num)d photo"
-msgid_plural ""
-"%(num)d\n"
-"                                photos"
-msgstr[0] ""
-
-#: templates/configure.html.jinja:1915
-#, python-format
-msgid "Supprimer toutes les photos de la source '%(source)s'"
-msgstr "ソース「%(source)s」からすべての写真を削除します"
-
-#: templates/configure.html.jinja:1917
-msgid "Tout supprimer"
-msgstr "すべて削除"
-
-#: templates/configure.html.jinja:1954 templates/configure.html.jinja:1957
-#: templates/configure.html.jinja:2164 templates/configure.html.jinja:2167
-#, python-format
-msgid "Aperçu de %(media)s"
-msgstr "%(media)s のプレビュー"
-
-#: templates/configure.html.jinja:1971 templates/configure.html.jinja:2179
-msgid "Filtre..."
-msgstr "フィルタリングされた..."
-
-#: templates/configure.html.jinja:1973 templates/configure.html.jinja:2182
-msgid "Noir & Blanc"
-msgstr "ブラック&ホワイト"
-
-#: templates/configure.html.jinja:1975 templates/configure.html.jinja:2183
-msgid "Sépia"
-msgstr "セピア"
-
-#: templates/configure.html.jinja:1977 templates/configure.html.jinja:2186
-msgid "Vignette"
-msgstr "ビネット"
-
-#: templates/configure.html.jinja:1979 templates/configure.html.jinja:2188
-msgid "Vintage"
-msgstr "ビンテージ"
-
-#: templates/configure.html.jinja:1982 templates/configure.html.jinja:2191
-msgid "Polaroid"
-msgstr "ポラロイド"
-
-#: templates/configure.html.jinja:1986 templates/configure.html.jinja:2195
-msgid "Carte Postale"
-msgstr "ポストカード"
-
-#: templates/configure.html.jinja:1989 templates/configure.html.jinja:2198
-msgid "Polaroid Vintage"
-msgstr "ポラロイド ヴィンテージ"
-
-#: templates/configure.html.jinja:1990 templates/configure.html.jinja:2199
-msgid "Original"
-msgstr "オリジナル"
-
-#: templates/configure.html.jinja:1997 templates/configure.html.jinja:2206
-msgid "Ajouter à une playlist"
-msgstr "プレイリストに追加する"
-
-#: templates/configure.html.jinja:2001 templates/configure.html.jinja:2210
-#: templates/configure.html.jinja:2275
-msgid "Mettre en favori"
-msgstr "ブックマーク"
-
-#: templates/configure.html.jinja:2009 templates/configure.html.jinja:2218
-msgid "Sauvegarder la photo originale"
-msgstr "元の写真を保存する"
-
-#: templates/configure.html.jinja:2014 templates/configure.html.jinja:2223
-msgid "Photo anniversaire !"
-msgstr "誕生日の写真！"
-
-#: templates/configure.html.jinja:2020 templates/configure.html.jinja:2229
-msgid "Supprimer ce média"
-msgstr "このメディアを削除します"
-
-#: templates/configure.html.jinja:2031 templates/configure.html.jinja:2240
-#: templates/configure.html.jinja:2278
-msgid "Ajouter une légende..."
-msgstr "キャプションを追加..."
-
-#: templates/configure.html.jinja:2042
-msgid ""
-"Aucune photo préparée n'a été trouvée. Veuillez\n"
-"                    en importer depuis l'onglet \"Actions\"."
-msgstr ""
-"準備された写真が見つかりませんでした。お願いします\n"
-"                    「アクション」タブからインポートします。"
-
-#: templates/configure.html.jinja:2051
-msgid "Gestion des Playlists"
-msgstr "プレイリスト管理"
-
-#: templates/configure.html.jinja:2052
-msgid ""
-"Créez des albums virtuels (playlists) en sélectionnant des photos de "
-"n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant "
-"uniquement les photos d'une playlist."
-msgstr ""
-"任意のソースから写真を選択して、仮想アルバム (プレイリスト) を作成します。その後、プレイリストの写真のみを含むスライドショーを開始できます。"
-
-#: templates/configure.html.jinja:2058
-msgid ""
-"Contrôle du Diaporama\n"
-"                                Actuel"
-msgstr ""
-"スライドショーコントロール\n"
-"                                現在"
-
-#: templates/configure.html.jinja:2081
-msgid ""
-"Arrête la playlist en cours et relance le diaporama avec toutes les sources "
-"activées."
-msgstr "現在のプレイリストを停止し、すべてのソースをアクティブにしてスライドショーを再開します。"
-
-#: templates/configure.html.jinja:2082 templates/configure.html.jinja:4195
-#: templates/configure.html.jinja:4200
-msgid "Retour au diaporama standard"
-msgstr "標準のスライドショーに戻る"
-
-#: templates/configure.html.jinja:2088
-msgid "Aperçu en direct"
-msgstr "ライブプレビュー"
-
-#: templates/configure.html.jinja:2091
-msgid ""
-"Le diaporama est\n"
-"                                arrêté."
-msgstr ""
-"スライドショーは、\n"
-"                                逮捕された。"
-
-#: templates/configure.html.jinja:2101
-msgid "Créer une nouvelle playlist"
-msgstr "新しいプレイリストを作成する"
-
-#: templates/configure.html.jinja:2104
-msgid "Nom de la playlist (ex: Vacances 2024)"
-msgstr "プレイリストの名前 (例: Holidays 2024)"
-
-#: templates/configure.html.jinja:2114
-msgid "Vos Playlists"
-msgstr "ヴォスのプレイリスト"
-
-#: templates/configure.html.jinja:2125
-msgid "Vos photos favorites"
-msgstr "お気に入りの写真"
-
-#: templates/configure.html.jinja:2127
-msgid ""
-"Voici toutes vos photos marquées comme favorites. Vous pouvez les\n"
-"                    gérer ici."
-msgstr ""
-"お気に入りとしてマークされたすべての写真がここにあります。できます\n"
-"                    ここで管理してください。"
-
-#: templates/configure.html.jinja:2248
-msgid ""
-"Vous n'avez aucune\n"
-"                    photo en favori pour le moment."
-msgstr ""
-"あなたには何もありません\n"
-"                    今のところお気に入りの写真。"
-
-#: templates/configure.html.jinja:2265
-msgid "Erreur"
-msgstr "エラー"
-
-#: templates/configure.html.jinja:2266
-msgid "N/A"
-msgstr "該当なし"
-
-#: templates/configure.html.jinja:2267
-msgid "Scan en cours..."
-msgstr "スキャン中..."
-
-#: templates/configure.html.jinja:2269
-msgid "Aucun réseau Wi-Fi trouvé."
-msgstr "Wi-Fi ネットワークが見つかりません。"
-
-#: templates/configure.html.jinja:2270
-msgid "Erreur de communication avec le serveur:"
-msgstr "サーバーとの通信エラー:"
-
-#: templates/configure.html.jinja:2271
-msgid "SSID"
-msgstr "SSID"
-
-#: templates/configure.html.jinja:2273
-msgid "Signal"
-msgstr "信号"
-
-#: templates/configure.html.jinja:2274
-msgid "Aucune"
-msgstr "なし"
-
-#: templates/configure.html.jinja:2276
-msgid "Vous n'avez aucune photo en favori pour le moment."
-msgstr "現在、お気に入りの写真はありません。"
-
-#: templates/configure.html.jinja:2277
-msgid "Cette playlist est vide."
-msgstr "このプレイリストは空です。"
-
-#: templates/configure.html.jinja:2279
-msgid "Cliquer pour sélectionner ce réseau"
-msgstr "クリックしてこのネットワークを選択します"
-
-#: templates/configure.html.jinja:2284 templates/configure.html.jinja:2366
-#: templates/configure.html.jinja:3614 templates/configure.html.jinja:3656
-msgid "Test en cours..."
-msgstr "テスト中..."
-
-#: templates/configure.html.jinja:2285 templates/configure.html.jinja:2380
-#: templates/configure.html.jinja:2527 templates/configure.html.jinja:3639
-#: templates/configure.html.jinja:3673 templates/configure.html.jinja:3906
-#: templates/configure.html.jinja:4145 templates/configure.html.jinja:4287
-msgid "Erreur de communication avec le serveur."
-msgstr "サーバーとの通信エラー。"
-
-#: templates/configure.html.jinja:2287
-msgid "Aucune invitation active."
-msgstr "アクティブな招待はありません。"
-
-#: templates/configure.html.jinja:2288
-msgid "Utilisé par"
-msgstr "使用者"
-
-#: templates/configure.html.jinja:2289
-msgid "Non utilisé"
-msgstr "未使用"
-
-#: templates/configure.html.jinja:2290
-msgid "Expire le"
-msgstr "有効期限が切れます"
-
-#: templates/configure.html.jinja:2291
-msgid "Supprimer l'invitation"
-msgstr "招待状を削除する"
-
-#: templates/configure.html.jinja:2292
-msgid "Erreur lors du chargement des invitations."
-msgstr "招待状の読み込み中にエラーが発生しました。"
-
-#: templates/configure.html.jinja:2293
-msgid "Veuillez entrer un nom pour l'invité."
-msgstr "ゲストのお名前を入力してください。"
-
-#: templates/configure.html.jinja:2294 templates/configure.html.jinja:2523
-#: templates/configure.html.jinja:3327 templates/configure.html.jinja:4193
-msgid "Erreur :"
-msgstr "エラー ："
-
-#: templates/configure.html.jinja:2295
-msgid "Êtes-vous sûr de vouloir supprimer cette invitation ?"
-msgstr "この招待状を削除してもよろしいですか?"
-
-#: templates/configure.html.jinja:2296 templates/configure.html.jinja:4062
-msgid "Erreur de connexion"
-msgstr "接続エラー"
-
-#: templates/configure.html.jinja:2297
-msgid "Révoquer l'accès"
-msgstr "アクセスを取り消す"
-
-#: templates/configure.html.jinja:2298
-msgid ""
-"Êtes-vous sûr de vouloir révoquer l'accès pour cet invité ? Il ne pourra "
-"plus envoyer de photos."
-msgstr "このゲストのアクセスを取り消してもよろしいですか?彼は写真を送信できなくなります。"
-
-#: templates/configure.html.jinja:2299
-msgid "Le nom d'utilisateur du bot n'a pas pu être récupéré."
-msgstr "ボットのユーザー名を取得できませんでした。"
-
-#: templates/configure.html.jinja:2300
-msgid "Copier le lien"
-msgstr "リンクをコピー"
-
-#: templates/configure.html.jinja:2301
-msgid "La copie a échoué."
-msgstr "コピーに失敗しました。"
-
-#: templates/configure.html.jinja:2303
-msgid "photo"
-msgstr "写真"
-
-#: templates/configure.html.jinja:2304
-msgid "photos"
-msgstr "写真"
-
-#: templates/configure.html.jinja:2305
-msgid "Aucune playlist créée pour le moment."
-msgstr "プレイリストはまだ作成されていません。"
-
-#: templates/configure.html.jinja:2306
-msgid "Erreur lors du chargement des playlists."
-msgstr "プレイリストのロード中にエラーが発生しました。"
-
-#: templates/configure.html.jinja:2307 templates/configure.html.jinja:3420
-msgid "Lancer"
-msgstr "ランサー"
-
-#: templates/configure.html.jinja:2308
-msgid "Supprimer la playlist"
-msgstr "プレイリストを削除する"
-
-#: templates/configure.html.jinja:2309
-msgid "Renommer la playlist"
-msgstr "プレイリストの名前を変更する"
-
-#: templates/configure.html.jinja:2310
-msgid "Entrez le nouveau nom pour la playlist :"
-msgstr "プレイリストの新しい名前を入力します:"
-
-#: templates/configure.html.jinja:2313
-msgid "Ordre sauvegardé !"
-msgstr "注文が保存されました!"
-
-#: templates/configure.html.jinja:2317
-msgid "Diagnostic en cours..."
-msgstr "診断中です..."
-
-#: templates/configure.html.jinja:2318
-msgid "Veuillez patienter..."
-msgstr "お待ちください..."
-
-#: templates/configure.html.jinja:2361
-msgid "Veuillez entrer une URL."
-msgstr "URLを入力してください。"
-
-#: templates/configure.html.jinja:2406
-msgid "État de la prise : Allumée"
-msgstr "コンセントのステータス: オン"
-
-#: templates/configure.html.jinja:2409
-msgid "État de la prise : Éteinte"
-msgstr "コンセントのステータス: オフ"
-
-#: templates/configure.html.jinja:2418
-msgid "État : Erreur"
-msgstr "ステータス: エラー"
-
-#: templates/configure.html.jinja:2422
-msgid "État de la prise : Injoignable"
-msgstr "コンセントのステータス: 到達不能"
-
-#: templates/configure.html.jinja:2467
-msgid "Aucune photo en attente de validation."
-msgstr "検証を待っている写真はありません。"
-
-#: templates/configure.html.jinja:2496
-msgid "Approuver"
-msgstr "承認する"
-
-#: templates/configure.html.jinja:2497
-msgid "Rejeter"
-msgstr "却下する"
-
-#: templates/configure.html.jinja:2808
-msgid "Retirer de la playlist"
-msgstr "プレイリストから削除"
-
-#: templates/configure.html.jinja:2818
-msgid "Afficher/Cacher les photos"
-msgstr "写真の表示/非表示"
-
-#: templates/configure.html.jinja:3313
-msgid "Veuillez entrer un nom pour la playlist."
-msgstr "プレイリストの名前を入力してください。"
-
-#: templates/configure.html.jinja:3329 templates/configure.html.jinja:3415
-#: templates/configure.html.jinja:4126 templates/configure.html.jinja:4198
-msgid "Erreur de communication."
-msgstr "通信エラーです。"
-
-#: templates/configure.html.jinja:3343
-msgid ""
-"Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront pas"
-" supprimées."
-msgstr "このプレイリストを削除してもよろしいですか?写真は削除されません。"
-
-#: templates/configure.html.jinja:3399
-msgid "Erreur lors de la suppression de la photo."
-msgstr "写真の削除中にエラーが発生しました。"
-
-#: templates/configure.html.jinja:3405
-msgid "Lancement..."
-msgstr "打ち上げ..."
-
-#: templates/configure.html.jinja:3460
-msgid "Aucune playlist"
-msgstr "プレイリストがありません"
-
-#: templates/configure.html.jinja:3500
-msgid "Import en cours..."
-msgstr "インポート中です..."
-
-#: templates/configure.html.jinja:3529
-msgid "Préparation :"
-msgstr "準備 ："
-
-#: templates/configure.html.jinja:3538
-msgid "Préparation terminée ! Redémarrage du diaporama..."
-msgstr "準備完了！スライドショーを再開しています..."
-
-#: templates/configure.html.jinja:3545
-msgid "Diaporama redémarré. Rechargement de la page..."
-msgstr "スライドショーが再開されました。ページを再読み込みしています..."
-
-#: templates/configure.html.jinja:3554
-msgid "Données de préparation invalides reçues du serveur."
-msgstr "無効なステージング データをサーバーから受信しました。"
-
-#: templates/configure.html.jinja:3562
-msgid "Erreur de connexion au serveur pour la préparation des photos."
-msgstr "写真を準備するためのサーバーへの接続エラー。"
-
-#: templates/configure.html.jinja:3574
-msgid "Importation :"
-msgstr "輸入："
-
-#: templates/configure.html.jinja:3584
-msgid "Données d'import invalides reçues du serveur."
-msgstr "サーバーから無効なインポート データを受信しました。"
-
-#: templates/configure.html.jinja:3592
-msgid "Erreur de connexion au serveur pour l'import"
-msgstr "インポートのためのサーバーへの接続エラー"
-
-#: templates/configure.html.jinja:3831
-msgid "Aucune donnée de marée à afficher."
-msgstr "表示する潮汐データがありません。"
-
-#: templates/configure.html.jinja:3834
-msgid "Impossible de charger les données."
-msgstr "データをロードできません。"
-
-#: templates/configure.html.jinja:3839
-msgid "Erreur de connexion au serveur."
-msgstr "サーバー接続エラー。"
-
-#: templates/configure.html.jinja:3888
-msgid "Mise à jour en cours..."
-msgstr "更新中です..."
-
-#: templates/configure.html.jinja:3933
-msgid "Veuillez sélectionner au moins un fichier."
-msgstr "少なくとも 1 つのファイルを選択してください。"
-
-#: templates/configure.html.jinja:3942
-msgid "Envoi en cours..."
-msgstr "送信中..."
-
-#: templates/configure.html.jinja:3965
-msgid "Importation réussie ! Rechargement de la page..."
-msgstr "インポートが成功しました。ページを再読み込みしています..."
-
-#: templates/configure.html.jinja:3994
-msgid "Données invalides reçues du serveur."
-msgstr "サーバーから無効なデータを受信しました。"
-
-#: templates/configure.html.jinja:4005
-msgid "Erreur de communication :"
-msgstr "通信エラー:"
-
-#: templates/configure.html.jinja:4093
-msgid "Aucune résolution trouvée."
-msgstr "解決策が見つかりませんでした。"
-
-#: templates/configure.html.jinja:4097
-msgid "Erreur de chargement."
-msgstr "読み込みエラー。"
-
-#: templates/configure.html.jinja:4109
-msgid "Application en cours..."
-msgstr "申請中..."
-
-#: templates/configure.html.jinja:4166
-msgid "Notifications activées"
-msgstr "通知が有効になっています"
-
-#: templates/configure.html.jinja:4166
-msgid "Notifications désactivées"
-msgstr "通知が無効になっています"
-
-#: templates/configure.html.jinja:4183
-msgid "Redémarrage..."
-msgstr "リブート..."
-
-#: templates/configure.html.jinja:4189
-msgid "Diaporama standard relancé."
-msgstr "通常のスライドショーが再開されました。"
-
-#: templates/configure.html.jinja:4269
-msgid "Détection..."
-msgstr "検出..."
-
-#: templates/configure.html.jinja:4279
-msgid "Détecté !"
-msgstr "検出されました！"
-
-#: templates/configure.html.jinja:4282
-msgid "Échec"
-msgstr "失敗"
-
-#: templates/configure.html.jinja:4283
-msgid "Erreur lors de la détection."
-msgstr "検出中にエラーが発生しました。"
-
-#: templates/configure.html.jinja:4551
-msgid "En attente de la prochaine photo..."
-msgstr "次の写真を待っています..."
-
-#: templates/configure.html.jinja:4566 templates/configure.html.jinja:4571
-msgid "Erreur de connexion."
-msgstr "接続エラー。"
-
-#: templates/configure.html.jinja:4715
-msgid "Erreur lors de la récupération des infos système:"
-msgstr "システム情報の取得中にエラーが発生しました:"
-
-#: templates/configure.html.jinja:4722
-msgid "Erreur de communication avec l'API système:"
-msgstr "システムAPIとの通信エラー:"
-
-#: templates/configure.html.jinja:4736
-msgid "Aucun fichier de log disponible ou sélectionné."
-msgstr "使用可能なログ ファイルがないか、選択されたログ ファイルがありません。"
-
-#: templates/configure.html.jinja:4752
-msgid "Erreur:"
-msgstr "エラー："
-
-#: templates/configure.html.jinja:4756
-msgid "Erreur de connexion à l'API des logs."
-msgstr "ログ API への接続エラー。"
-
-#: templates/configure.html.jinja:4777
-msgid "Aucun log trouvé"
-msgstr "ログが見つかりません"
-
-#: templates/configure.html.jinja:4781
-msgid "Erreur de chargement"
-msgstr "読み込みエラー"
-
-#: templates/configure.html.jinja:4805
-msgid ""
-"Êtes-vous sûr de vouloir effacer le contenu du log \"__LOG_NAME__\" ? Cette "
-"action est irréversible."
-msgstr "「__LOG_NAME__」ログの内容を削除してもよろしいですか?この操作は元に戻すことができません。"
-
-#: templates/configure.html.jinja:4820
-msgid "Erreur lors de l'effacement du log :"
-msgstr "ログをクリアするときにエラーが発生しました:"
-
-#: templates/configure.html.jinja:4823
-msgid "Erreur de connexion à l'API pour effacer les logs."
-msgstr "ログをクリアするための API への接続中にエラーが発生しました。"
-
-#: templates/configure.html.jinja:4923
-msgid ""
-"Cette opération va préparer le système à étendre la partition au prochain "
-"redémarrage. Voulez-vous continuer ?"
-msgstr "この操作により、システムは次回の再起動時にパーティションを拡張する準備が整います。続けますか?"
-
-#: templates/configure.html.jinja:4985
-msgid "Chargement des périphériques..."
-msgstr "デバイスを読み込んでいます..."
-
-#: templates/configure.html.jinja:4995
-msgid "Aucun microphone trouvé."
-msgstr "マイクが見つかりません。"
-
-#: templates/configure.html.jinja:5009
-msgid "Erreur chargement"
-msgstr "読み込みエラー"
-
-#: templates/configure.html.jinja:5015
-msgid "Erreur de communication avec le serveur"
-msgstr "サーバーとの通信エラー"
-
-#: templates/configure.html.jinja:5026
-msgid "Statut inconnu"
-msgstr "ステータス不明"
-
-#: templates/configure.html.jinja:5051
-msgid "Activation en cours..."
-msgstr "アクティベーション中..."
-
-#: templates/configure.html.jinja:5051
-msgid "Désactivation en cours..."
-msgstr "非アクティブ化中です..."
-
-#: templates/configure.html.jinja:5093
-msgid "Erreur lors de la récupération des diagnostics."
-msgstr "診断情報の取得中にエラーが発生しました。"
 
 #: templates/login.html.jinja:7
 msgid "Connexion"
 msgstr "接続"
 
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:79
+#: templates/configure/tab_comptes.html.jinja:118
 #: templates/login.html.jinja:56
 msgid "Utilisateur"
 msgstr "ユーザー"
+
+#: templates/configure/tab_comptes.html.jinja:112
+#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
+msgid "Mot de passe"
+msgstr "パスワード"
+
+#: templates/configure/tab_comptes.html.jinja:18
+#: templates/configure/tab_comptes.html.jinja:33
+#: templates/configure/tab_network.html.jinja:59
+#: templates/configure/tab_sources.html.jinja:127
+#: templates/login.html.jinja:69
+msgid "Afficher/Cacher le mot de passe"
+msgstr "パスワードの表示/非表示"
 
 #: templates/login.html.jinja:79
 msgid "Se connecter"
@@ -2695,6 +374,2825 @@ msgid ""
 msgstr ""
 "ログインに戻る\n"
 "          管理者"
+
+#: templates/configure/scripts_gallery.html.jinja:8
+#: templates/configure/scripts_gallery.html.jinja:36
+#: templates/configure/scripts_main.html.jinja:1265
+#: templates/configure/scripts_status.html.jinja:745
+#: templates/configure/tab_heure.html.jinja:224
+#: templates/configure/tab_heure.html.jinja:227
+#: templates/configure/tab_network.html.jinja:9
+#: templates/configure/tab_network.html.jinja:12
+#: templates/configure/tab_network.html.jinja:16
+#: templates/configure/tab_network.html.jinja:90
+#: templates/configure/tab_network.html.jinja:92
+#: templates/configure/tab_network.html.jinja:96
+#: templates/configure/tab_stats.html.jinja:8
+#: templates/configure/tab_stats.html.jinja:11
+#: templates/configure/tab_stats.html.jinja:15
+#: templates/configure/tab_stats.html.jinja:18
+msgid "Chargement..."
+msgstr "読み込み中..."
+
+#: templates/configure/scripts_gallery.html.jinja:9
+msgid "Erreur"
+msgstr "エラー"
+
+#: templates/configure/scripts_gallery.html.jinja:10
+msgid "N/A"
+msgstr "該当なし"
+
+#: templates/configure/scripts_gallery.html.jinja:11
+msgid "Scan en cours..."
+msgstr "スキャン中..."
+
+#: templates/configure/scripts_gallery.html.jinja:12
+#: templates/configure/tab_network.html.jinja:109
+msgid "Lancer le scan"
+msgstr "スキャンを開始する"
+
+#: templates/configure/scripts_gallery.html.jinja:13
+msgid "Aucun réseau Wi-Fi trouvé."
+msgstr "Wi-Fi ネットワークが見つかりません。"
+
+#: templates/configure/scripts_gallery.html.jinja:14
+msgid "Erreur de communication avec le serveur:"
+msgstr "サーバーとの通信エラー:"
+
+#: templates/configure/scripts_gallery.html.jinja:15
+msgid "SSID"
+msgstr "SSID"
+
+#: templates/configure/scripts_gallery.html.jinja:16
+#: templates/configure/tab_comptes.html.jinja:4
+msgid "Sécurité"
+msgstr "安全"
+
+#: templates/configure/scripts_gallery.html.jinja:17
+msgid "Signal"
+msgstr "信号"
+
+#: templates/configure/scripts_gallery.html.jinja:18
+msgid "Aucune"
+msgstr "なし"
+
+#: templates/configure/scripts_gallery.html.jinja:19
+#: templates/configure/tab_apercu.html.jinja:109
+#: templates/configure/tab_favoris.html.jinja:89
+msgid "Mettre en favori"
+msgstr "ブックマーク"
+
+#: templates/configure/scripts_gallery.html.jinja:20
+msgid "Vous n'avez aucune photo en favori pour le moment."
+msgstr "現在、お気に入りの写真はありません。"
+
+#: templates/configure/scripts_gallery.html.jinja:21
+msgid "Cette playlist est vide."
+msgstr "このプレイリストは空です。"
+
+#: templates/configure/scripts_gallery.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:139
+#: templates/configure/tab_favoris.html.jinja:119
+msgid "Ajouter une légende..."
+msgstr "キャプションを追加..."
+
+#: templates/configure/scripts_gallery.html.jinja:23
+#: templates/configure/tab_playlists.html.jinja:69
+msgid "Pas de musique"
+msgstr "音楽なし"
+
+#: templates/configure/scripts_gallery.html.jinja:24
+msgid "Musique de la playlist mise à jour !"
+msgstr "プレイリストの音楽を更新しました！"
+
+#: templates/configure/scripts_gallery.html.jinja:25
+msgid "Erreur lors de la mise à jour de la musique de la playlist."
+msgstr "プレイリストの音楽の更新中にエラーが発生しました。"
+
+#: templates/configure/scripts_gallery.html.jinja:26
+#: templates/configure/tab_playlists.html.jinja:71
+msgid "Écouter la musique"
+msgstr "音楽を再生"
+
+#: templates/configure/scripts_gallery.html.jinja:27
+msgid "Arrêter la musique"
+msgstr "音楽を停止"
+
+#: templates/configure/scripts_gallery.html.jinja:28
+msgid "Aucune musique sélectionnée."
+msgstr "音楽が選択されていません。"
+
+#: templates/configure/scripts_gallery.html.jinja:29
+msgid "Cliquer pour sélectionner ce réseau"
+msgstr "クリックしてこのネットワークを選択します"
+
+#: templates/configure/scripts_gallery.html.jinja:34
+#: templates/configure/scripts_gallery.html.jinja:116
+#: templates/configure/scripts_main.html.jinja:1328
+#: templates/configure/scripts_main.html.jinja:1370
+msgid "Test en cours..."
+msgstr "テスト中..."
+
+#: templates/configure/scripts_gallery.html.jinja:35
+#: templates/configure/scripts_gallery.html.jinja:130
+#: templates/configure/scripts_gallery.html.jinja:277
+#: templates/configure/scripts_main.html.jinja:1353
+#: templates/configure/scripts_main.html.jinja:1387
+#: templates/configure/scripts_main.html.jinja:1620
+#: templates/configure/scripts_status.html.jinja:111
+#: templates/configure/scripts_status.html.jinja:269
+msgid "Erreur de communication avec le serveur."
+msgstr "サーバーとの通信エラー。"
+
+#: templates/configure/scripts_gallery.html.jinja:37
+msgid "Aucune invitation active."
+msgstr "アクティブな招待はありません。"
+
+#: templates/configure/scripts_gallery.html.jinja:38
+msgid "Utilisé par"
+msgstr "使用者"
+
+#: templates/configure/scripts_gallery.html.jinja:39
+msgid "Non utilisé"
+msgstr "未使用"
+
+#: templates/configure/scripts_gallery.html.jinja:40
+msgid "Expire le"
+msgstr "有効期限が切れます"
+
+#: templates/configure/scripts_gallery.html.jinja:41
+msgid "Supprimer l'invitation"
+msgstr "招待状を削除する"
+
+#: templates/configure/scripts_gallery.html.jinja:42
+msgid "Erreur lors du chargement des invitations."
+msgstr "招待状の読み込み中にエラーが発生しました。"
+
+#: templates/configure/scripts_gallery.html.jinja:43
+msgid "Veuillez entrer un nom pour l'invité."
+msgstr "ゲストのお名前を入力してください。"
+
+#: templates/configure/scripts_gallery.html.jinja:44
+#: templates/configure/scripts_gallery.html.jinja:273
+#: templates/configure/scripts_main.html.jinja:951
+#: templates/configure/scripts_status.html.jinja:159
+msgid "Erreur :"
+msgstr "エラー ："
+
+#: templates/configure/scripts_gallery.html.jinja:45
+msgid "Êtes-vous sûr de vouloir supprimer cette invitation ?"
+msgstr "この招待状を削除してもよろしいですか?"
+
+#: templates/configure/scripts_gallery.html.jinja:46
+#: templates/configure/scripts_status.html.jinja:28
+msgid "Erreur de connexion"
+msgstr "接続エラー"
+
+#: templates/configure/scripts_gallery.html.jinja:47
+msgid "Révoquer l'accès"
+msgstr "アクセスを取り消す"
+
+#: templates/configure/scripts_gallery.html.jinja:48
+msgid ""
+"Êtes-vous sûr de vouloir révoquer l'accès pour cet invité ? Il ne pourra "
+"plus envoyer de photos."
+msgstr "このゲストのアクセスを取り消してもよろしいですか?彼は写真を送信できなくなります。"
+
+#: templates/configure/scripts_gallery.html.jinja:49
+msgid "Le nom d'utilisateur du bot n'a pas pu être récupéré."
+msgstr "ボットのユーザー名を取得できませんでした。"
+
+#: templates/configure/scripts_gallery.html.jinja:50
+msgid "Copier le lien"
+msgstr "リンクをコピー"
+
+#: templates/configure/scripts_gallery.html.jinja:51
+msgid "La copie a échoué."
+msgstr "コピーに失敗しました。"
+
+#: templates/configure/scripts_gallery.html.jinja:53
+msgid "photo"
+msgstr "写真"
+
+#: templates/configure/scripts_gallery.html.jinja:54
+msgid "photos"
+msgstr "写真"
+
+#: templates/configure/scripts_gallery.html.jinja:55
+msgid "Aucune playlist créée pour le moment."
+msgstr "プレイリストはまだ作成されていません。"
+
+#: templates/configure/scripts_gallery.html.jinja:56
+msgid "Erreur lors du chargement des playlists."
+msgstr "プレイリストのロード中にエラーが発生しました。"
+
+#: templates/configure/scripts_gallery.html.jinja:57
+#: templates/configure/scripts_main.html.jinja:1044
+msgid "Lancer"
+msgstr "ランサー"
+
+#: templates/configure/scripts_gallery.html.jinja:58
+msgid "Supprimer la playlist"
+msgstr "プレイリストを削除する"
+
+#: templates/configure/scripts_gallery.html.jinja:59
+msgid "Renommer la playlist"
+msgstr "プレイリストの名前を変更する"
+
+#: templates/configure/scripts_gallery.html.jinja:60
+msgid "Entrez le nouveau nom pour la playlist :"
+msgstr "プレイリストの新しい名前を入力します:"
+
+#: templates/configure/scripts_gallery.html.jinja:63
+msgid "Ordre sauvegardé !"
+msgstr "注文が保存されました!"
+
+#: templates/configure/scripts_gallery.html.jinja:66
+#: templates/configure/tab_vocal.html.jinja:124
+msgid "Lancer le diagnostic"
+msgstr "診断を開始する"
+
+#: templates/configure/scripts_gallery.html.jinja:67
+msgid "Diagnostic en cours..."
+msgstr "診断中です..."
+
+#: templates/configure/scripts_gallery.html.jinja:68
+msgid "Veuillez patienter..."
+msgstr "お待ちください..."
+
+#: templates/configure/scripts_gallery.html.jinja:111
+msgid "Veuillez entrer une URL."
+msgstr "URLを入力してください。"
+
+#: templates/configure/scripts_gallery.html.jinja:156
+msgid "État de la prise : Allumée"
+msgstr "コンセントのステータス: オン"
+
+#: templates/configure/scripts_gallery.html.jinja:159
+msgid "État de la prise : Éteinte"
+msgstr "コンセントのステータス: オフ"
+
+#: templates/configure/scripts_gallery.html.jinja:168
+msgid "État : Erreur"
+msgstr "ステータス: エラー"
+
+#: templates/configure/scripts_gallery.html.jinja:172
+msgid "État de la prise : Injoignable"
+msgstr "コンセントのステータス: 到達不能"
+
+#: templates/configure/scripts_gallery.html.jinja:217
+msgid "Aucune photo en attente de validation."
+msgstr "検証を待っている写真はありません。"
+
+#: templates/configure/scripts_gallery.html.jinja:246
+msgid "Approuver"
+msgstr "承認する"
+
+#: templates/configure/scripts_gallery.html.jinja:247
+msgid "Rejeter"
+msgstr "却下する"
+
+#: templates/configure/scripts_main.html.jinja:284
+msgid "Retirer de la playlist"
+msgstr "プレイリストから削除"
+
+#: templates/configure/scripts_main.html.jinja:294
+msgid "Afficher/Cacher les photos"
+msgstr "写真の表示/非表示"
+
+#: templates/configure/scripts_main.html.jinja:937
+msgid "Veuillez entrer un nom pour la playlist."
+msgstr "プレイリストの名前を入力してください。"
+
+#: templates/configure/scripts_main.html.jinja:953
+#: templates/configure/scripts_main.html.jinja:1039
+#: templates/configure/scripts_main.html.jinja:1762
+#: templates/configure/scripts_status.html.jinja:92
+#: templates/configure/scripts_status.html.jinja:164
+msgid "Erreur de communication."
+msgstr "通信エラーです。"
+
+#: templates/configure/scripts_main.html.jinja:967
+msgid ""
+"Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront pas"
+" supprimées."
+msgstr "このプレイリストを削除してもよろしいですか?写真は削除されません。"
+
+#: templates/configure/scripts_main.html.jinja:1023
+msgid "Erreur lors de la suppression de la photo."
+msgstr "写真の削除中にエラーが発生しました。"
+
+#: templates/configure/scripts_main.html.jinja:1029
+msgid "Lancement..."
+msgstr "打ち上げ..."
+
+#: templates/configure/scripts_main.html.jinja:1099
+msgid "Aucune playlist"
+msgstr "プレイリストがありません"
+
+#: templates/configure/scripts_main.html.jinja:1139
+msgid "Import en cours..."
+msgstr "インポート中です..."
+
+#: templates/configure/scripts_main.html.jinja:1168
+msgid "Préparation :"
+msgstr "準備 ："
+
+#: templates/configure/scripts_main.html.jinja:1177
+msgid "Préparation terminée ! Redémarrage du diaporama..."
+msgstr "準備完了！スライドショーを再開しています..."
+
+#: templates/configure/scripts_main.html.jinja:1184
+msgid "Diaporama redémarré. Rechargement de la page..."
+msgstr "スライドショーが再開されました。ページを再読み込みしています..."
+
+#: templates/configure/scripts_main.html.jinja:1193
+msgid "Données de préparation invalides reçues du serveur."
+msgstr "無効なステージング データをサーバーから受信しました。"
+
+#: templates/configure/scripts_main.html.jinja:1201
+msgid "Erreur de connexion au serveur pour la préparation des photos."
+msgstr "写真を準備するためのサーバーへの接続エラー。"
+
+#: templates/configure/scripts_main.html.jinja:1213
+msgid "Importation :"
+msgstr "輸入："
+
+#: templates/configure/scripts_main.html.jinja:1223
+msgid "Données d'import invalides reçues du serveur."
+msgstr "サーバーから無効なインポート データを受信しました。"
+
+#: templates/configure/scripts_main.html.jinja:1231
+msgid "Erreur de connexion au serveur pour l'import"
+msgstr "インポートのためのサーバーへの接続エラー"
+
+#: templates/configure/scripts_main.html.jinja:1253
+msgid ""
+"Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » pour "
+"choisir à nouveau les dossiers."
+msgstr "方式が変更されました：「Google Drive のフォルダーを表示」をクリックしてフォルダーを選び直してください。"
+
+#: templates/configure/scripts_main.html.jinja:1286
+msgid ""
+"Aucun dossier trouvé. Avez-vous partagé vos dossiers avec l'adresse du "
+"compte de service ?"
+msgstr "フォルダーが見つかりません。サービスアカウントのアドレスとフォルダーを共有しましたか？"
+
+#: templates/configure/scripts_main.html.jinja:1305
+msgid "dossier(s) trouvé(s)"
+msgstr "件のフォルダーが見つかりました"
+
+#: templates/configure/scripts_main.html.jinja:1545
+msgid "Aucune donnée de marée à afficher."
+msgstr "表示する潮汐データがありません。"
+
+#: templates/configure/scripts_main.html.jinja:1548
+msgid "Impossible de charger les données."
+msgstr "データをロードできません。"
+
+#: templates/configure/scripts_main.html.jinja:1553
+msgid "Erreur de connexion au serveur."
+msgstr "サーバー接続エラー。"
+
+#: templates/configure/scripts_main.html.jinja:1602
+msgid "Mise à jour en cours..."
+msgstr "更新中です..."
+
+#: templates/configure/scripts_main.html.jinja:1647
+msgid "Veuillez sélectionner au moins un fichier."
+msgstr "少なくとも 1 つのファイルを選択してください。"
+
+#: templates/configure/scripts_main.html.jinja:1656
+msgid "Envoi en cours..."
+msgstr "送信中..."
+
+#: templates/configure/scripts_main.html.jinja:1679
+msgid "Importation réussie ! Rechargement de la page..."
+msgstr "インポートが成功しました。ページを再読み込みしています..."
+
+#: templates/configure/scripts_main.html.jinja:1688
+#: templates/configure/scripts_main.html.jinja:1721
+#: templates/configure/tab_actions.html.jinja:106
+msgid "Envoyer les photos"
+msgstr "写真を送信する"
+
+#: templates/configure/scripts_main.html.jinja:1708
+msgid "Données invalides reçues du serveur."
+msgstr "サーバーから無効なデータを受信しました。"
+
+#: templates/configure/scripts_main.html.jinja:1719
+msgid "Erreur de communication :"
+msgstr "通信エラー:"
+
+#: templates/configure/scripts_main.html.jinja:1750
+msgid "Envoi..."
+msgstr "送信中..."
+
+#: templates/configure/scripts_main.html.jinja:1765
+#: templates/configure/tab_actions.html.jinja:124
+msgid "Uploader"
+msgstr "アップロード"
+
+#: templates/configure/scripts_main.html.jinja:1779
+msgid "Supprimer le fichier musical"
+msgstr "音楽ファイルを削除"
+
+#: templates/configure/scripts_status.html.jinja:59
+msgid "Aucune résolution trouvée."
+msgstr "解決策が見つかりませんでした。"
+
+#: templates/configure/scripts_status.html.jinja:63
+msgid "Erreur de chargement."
+msgstr "読み込みエラー。"
+
+#: templates/configure/scripts_status.html.jinja:75
+msgid "Application en cours..."
+msgstr "申請中..."
+
+#: templates/configure/scripts_status.html.jinja:132
+msgid "Notifications activées"
+msgstr "通知が有効になっています"
+
+#: templates/configure/scripts_status.html.jinja:132
+msgid "Notifications désactivées"
+msgstr "通知が無効になっています"
+
+#: templates/configure/scripts_status.html.jinja:149
+msgid "Redémarrage..."
+msgstr "リブート..."
+
+#: templates/configure/scripts_status.html.jinja:155
+msgid "Diaporama standard relancé."
+msgstr "通常のスライドショーが再開されました。"
+
+#: templates/configure/scripts_status.html.jinja:161
+#: templates/configure/scripts_status.html.jinja:166
+#: templates/configure/tab_playlists.html.jinja:38
+msgid "Retour au diaporama standard"
+msgstr "標準のスライドショーに戻る"
+
+#: templates/configure/scripts_status.html.jinja:251
+msgid "Détection..."
+msgstr "検出..."
+
+#: templates/configure/scripts_status.html.jinja:261
+msgid "Détecté !"
+msgstr "検出されました！"
+
+#: templates/configure/scripts_status.html.jinja:264
+msgid "Échec"
+msgstr "失敗"
+
+#: templates/configure/scripts_status.html.jinja:265
+msgid "Erreur lors de la détection."
+msgstr "検出中にエラーが発生しました。"
+
+#: templates/configure/scripts_status.html.jinja:533
+msgid "En attente de la prochaine photo..."
+msgstr "次の写真を待っています..."
+
+#: templates/configure/scripts_status.html.jinja:548
+#: templates/configure/scripts_status.html.jinja:553
+msgid "Erreur de connexion."
+msgstr "接続エラー。"
+
+#: templates/configure/scripts_status.html.jinja:697
+msgid "Erreur lors de la récupération des infos système:"
+msgstr "システム情報の取得中にエラーが発生しました:"
+
+#: templates/configure/scripts_status.html.jinja:704
+msgid "Erreur de communication avec l'API système:"
+msgstr "システムAPIとの通信エラー:"
+
+#: templates/configure/scripts_status.html.jinja:718
+msgid "Aucun fichier de log disponible ou sélectionné."
+msgstr "使用可能なログ ファイルがないか、選択されたログ ファイルがありません。"
+
+#: templates/configure/scripts_status.html.jinja:734
+msgid "Erreur:"
+msgstr "エラー："
+
+#: templates/configure/scripts_status.html.jinja:738
+msgid "Erreur de connexion à l'API des logs."
+msgstr "ログ API への接続エラー。"
+
+#: templates/configure/scripts_status.html.jinja:759
+msgid "Aucun log trouvé"
+msgstr "ログが見つかりません"
+
+#: templates/configure/scripts_status.html.jinja:763
+msgid "Erreur de chargement"
+msgstr "読み込みエラー"
+
+#: templates/configure/scripts_status.html.jinja:787
+msgid ""
+"Êtes-vous sûr de vouloir effacer le contenu du log \"__LOG_NAME__\" ? Cette "
+"action est irréversible."
+msgstr "「__LOG_NAME__」ログの内容を削除してもよろしいですか?この操作は元に戻すことができません。"
+
+#: templates/configure/scripts_status.html.jinja:802
+msgid "Erreur lors de l'effacement du log :"
+msgstr "ログをクリアするときにエラーが発生しました:"
+
+#: templates/configure/scripts_status.html.jinja:805
+msgid "Erreur de connexion à l'API pour effacer les logs."
+msgstr "ログをクリアするための API への接続中にエラーが発生しました。"
+
+#: templates/configure/scripts_status.html.jinja:905
+msgid ""
+"Cette opération va préparer le système à étendre la partition au prochain "
+"redémarrage. Voulez-vous continuer ?"
+msgstr "この操作により、システムは次回の再起動時にパーティションを拡張する準備が整います。続けますか?"
+
+#: templates/configure/scripts_status.html.jinja:967
+msgid "Chargement des périphériques..."
+msgstr "デバイスを読み込んでいます..."
+
+#: templates/configure/scripts_status.html.jinja:974
+#: templates/configure/tab_vocal.html.jinja:77
+msgid "Périphérique par défaut"
+msgstr "デフォルトのデバイス"
+
+#: templates/configure/scripts_status.html.jinja:977
+msgid "Aucun microphone trouvé."
+msgstr "マイクが見つかりません。"
+
+#: templates/configure/scripts_status.html.jinja:991
+msgid "Erreur chargement"
+msgstr "読み込みエラー"
+
+#: templates/configure/scripts_status.html.jinja:997
+msgid "Erreur de communication avec le serveur"
+msgstr "サーバーとの通信エラー"
+
+#: templates/configure/scripts_status.html.jinja:1008
+msgid "Statut inconnu"
+msgstr "ステータス不明"
+
+#: templates/configure/scripts_status.html.jinja:1033
+msgid "Activation en cours..."
+msgstr "アクティベーション中..."
+
+#: templates/configure/scripts_status.html.jinja:1033
+msgid "Désactivation en cours..."
+msgstr "非アクティブ化中です..."
+
+#: templates/configure/scripts_status.html.jinja:1075
+msgid "Erreur lors de la récupération des diagnostics."
+msgstr "診断情報の取得中にエラーが発生しました。"
+
+#: templates/configure/tab_actions.html.jinja:8
+msgid "Gestion du diaporama"
+msgstr "スライドショー管理"
+
+#: templates/configure/tab_actions.html.jinja:13
+msgid "Arrêter le diaporama"
+msgstr "スライドショーを停止する"
+
+#: templates/configure/tab_actions.html.jinja:15
+msgid "Démarrer le diaporama"
+msgstr "スライドショーを開始する"
+
+#: templates/configure/tab_actions.html.jinja:44
+msgid "Importation des photos"
+msgstr "写真のインポート"
+
+#: templates/configure/tab_actions.html.jinja:47
+msgid "Importer depuis la clé USB"
+msgstr "USB スティックからインポート"
+
+#: templates/configure/tab_actions.html.jinja:56
+msgid "Importer depuis Immich"
+msgstr "イミッヒから輸入"
+
+#: templates/configure/tab_actions.html.jinja:65
+msgid "Importer depuis Samba"
+msgstr "Sambaからインポート"
+
+#: templates/configure/tab_actions.html.jinja:74
+msgid "Importer depuis Google Drive"
+msgstr "Google Drive からインポート"
+
+#: templates/configure/tab_actions.html.jinja:84
+msgid "Préparation en cours..."
+msgstr "準備中です..."
+
+#: templates/configure/tab_actions.html.jinja:85
+msgid "Photo en cours de préparation"
+msgstr "写真準備中"
+
+#: templates/configure/tab_actions.html.jinja:90
+msgid ""
+"L'import depuis Telegram se fait automatiquement à la\n"
+"                            réception des photos. Activez la source dans l'onglet \"Sources\" pour les voir."
+msgstr "Telegram からのインポートは、写真を受信すると自動的に行われます。表示するには「ソース」タブでソースを有効にしてください。"
+
+#: templates/configure/tab_actions.html.jinja:98
+msgid "Importer depuis un Smartphone"
+msgstr "スマートフォンからのインポート"
+
+#: templates/configure/tab_actions.html.jinja:99
+msgid ""
+"Envoyez des photos directement depuis votre\n"
+"                            téléphone via le navigateur."
+msgstr "スマートフォンのブラウザーから直接写真を送信できます。"
+
+#: templates/configure/tab_actions.html.jinja:115
+msgid "Importation de musique"
+msgstr "音楽のインポート"
+
+#: templates/configure/tab_actions.html.jinja:116
+msgid ""
+"Téléchargez vos propres fichiers MP3 ou WAV pour accompagner vos playlists."
+msgstr "プレイリストに合わせる MP3 または WAV ファイルをアップロードしてください。"
+
+#: templates/configure/tab_actions.html.jinja:120
+msgid "Sélectionner un fichier"
+msgstr "ファイルを選択"
+
+#: templates/configure/tab_actions.html.jinja:130
+msgid "Musiques disponibles"
+msgstr "利用可能な音楽"
+
+#: templates/configure/tab_affichage.html.jinja:4
+msgid "Paramètres d'affichage"
+msgstr "表示設定"
+
+#: templates/configure/tab_affichage.html.jinja:7
+msgid "Durée d'affichage (en secondes) :"
+msgstr "表示時間 (秒単位):"
+
+#: templates/configure/tab_affichage.html.jinja:13
+msgid "Orientation du cadre"
+msgstr "フレームの向き"
+
+#: templates/configure/tab_affichage.html.jinja:17
+msgid "Paysage (Horizontal)"
+msgstr "横（横）"
+
+#: templates/configure/tab_affichage.html.jinja:19
+msgid "Portrait (Vertical)"
+msgstr "ポートレート（縦）"
+
+#: templates/configure/tab_affichage.html.jinja:21
+msgid ""
+"Si vous changez l'orientation, pensez à relancer une préparation des photos "
+"(onglet Actions) pour adapter le contenu."
+msgstr "方向を変更した場合は、必ず写真の準備 ([アクション] タブ) を再起動してコンテンツを調整してください。"
+
+#: templates/configure/tab_affichage.html.jinja:26
+msgid "Horaires Semaine (Lun-Ven)"
+msgstr "週間営業時間 (月曜～金曜)"
+
+#: templates/configure/tab_affichage.html.jinja:27
+#: templates/configure/tab_affichage.html.jinja:34
+msgid "Allumage :"
+msgstr "点火："
+
+#: templates/configure/tab_affichage.html.jinja:29
+#: templates/configure/tab_affichage.html.jinja:36
+msgid "Extinction :"
+msgstr "絶滅 :"
+
+#: templates/configure/tab_affichage.html.jinja:33
+msgid "Horaires Weekend (Sam-Dim)"
+msgstr "週末の営業時間（土～日）"
+
+#: templates/configure/tab_affichage.html.jinja:43
+msgid "Résolution de l'écran"
+msgstr "画面解像度"
+
+#: templates/configure/tab_affichage.html.jinja:47
+msgid "Chargement des résolutions..."
+msgstr "解像度を読み込んでいます..."
+
+#: templates/configure/tab_affichage.html.jinja:51
+msgid "Appliquer"
+msgstr "適用する"
+
+#: templates/configure/tab_affichage.html.jinja:54
+msgid ""
+"Force une résolution spécifique. Utile si l'écran n'est pas détecté "
+"correctement au démarrage."
+msgstr "特定の解決策を強制します。起動時に画面が正しく検出されない場合に便利です。"
+
+#: templates/configure/tab_affichage.html.jinja:57
+#, python-format
+msgid "Hauteur utile de l'écran (%% affiché) :"
+msgstr "有効な画面の高さ (%% が表示されます):"
+
+#: templates/configure/tab_affichage.html.jinja:63
+msgid "Largeur d'affichage cible (px) :"
+msgstr "ターゲット表示幅 (px):"
+
+#: templates/configure/tab_affichage.html.jinja:66
+msgid "Hauteur d'affichage cible (px) :"
+msgstr "ターゲットの表示高さ (px):"
+
+#: templates/configure/tab_affichage.html.jinja:72
+msgid "Détecter la résolution de l'écran actif"
+msgstr "アクティブな画面解像度の検出"
+
+#: templates/configure/tab_affichage.html.jinja:72
+msgid "Détecter"
+msgstr "検出する"
+
+#: templates/configure/tab_affichage.html.jinja:76
+msgid "Activer l'effet Pan/Zoom sur les photos"
+msgstr "写真のパン/ズーム効果を有効にする"
+
+#: templates/configure/tab_affichage.html.jinja:80
+#, python-format
+msgid "Amplitude du zoom (ex: 1.15 pour 15%% de zoom) :"
+msgstr "ズームの強さ（例：1.15 で 15%% ズーム）："
+
+#: templates/configure/tab_affichage.html.jinja:86
+msgid "Activer l'effet de transition entre les photos"
+msgstr "写真間のトランジション効果を有効にする"
+
+#: templates/configure/tab_affichage.html.jinja:90
+msgid "Durée de transition (secondes) :"
+msgstr "移行時間 (秒):"
+
+#: templates/configure/tab_affichage.html.jinja:95
+msgid "Type de transition :"
+msgstr "遷移タイプ:"
+
+#: templates/configure/tab_affichage.html.jinja:98
+msgid "Fondu enchaîné"
+msgstr "クロスフェード"
+
+#: templates/configure/tab_affichage.html.jinja:100
+msgid "Glisser depuis la gauche"
+msgstr "左からスワイプ"
+
+#: templates/configure/tab_affichage.html.jinja:102
+msgid "Glisser depuis la droite"
+msgstr "右からスワイプ"
+
+#: templates/configure/tab_affichage.html.jinja:104
+msgid "Glisser depuis le bas"
+msgstr "下からスワイプ"
+
+#: templates/configure/tab_affichage.html.jinja:106
+msgid "Glisser depuis le haut"
+msgstr "上からスワイプ"
+
+#: templates/configure/tab_affichage.html.jinja:110
+msgid "Fréquence d'images (FPS) :"
+msgstr "フレームレート（FPS）："
+
+#: templates/configure/tab_affichage.html.jinja:112
+msgid "Automatique (30 FPS sur Pi 3, 60 FPS sinon)"
+msgstr "自動（Pi 3 では 30 FPS、それ以外は 60 FPS）"
+
+#: templates/configure/tab_affichage.html.jinja:118
+msgid ""
+"Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
+"lecture) :"
+msgstr "お気に入りの頻度 (プレイリストへの追加の数):"
+
+#: templates/configure/tab_affichage.html.jinja:121
+msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
+msgstr "例: 0 = ブーストなし、2 = 出現確率が 3 倍になります。"
+
+#: templates/configure/tab_affichage.html.jinja:127
+msgid ""
+"Activer le boost pour les photos à leur date anniversaire de prise de vue"
+msgstr "撮影記念日に写真のブーストを有効にする"
+
+#: templates/configure/tab_affichage.html.jinja:131
+msgid "Facteur de boost anniversaire :"
+msgstr "誕生日ブースト係数:"
+
+#: templates/configure/tab_affichage.html.jinja:136
+msgid "Afficher les vidéos dans le diaporama"
+msgstr "ビデオをスライドショーで表示する"
+
+#: templates/configure/tab_affichage.html.jinja:141
+msgid "Activer le son pour les vidéos"
+msgstr "ビデオのサウンドを有効にする"
+
+#: templates/configure/tab_affichage.html.jinja:146
+msgid ""
+"Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
+msgstr "ハードウェア ビデオ デコードを有効にする (スムーズですが、不安定になる可能性があります)"
+
+#: templates/configure/tab_affichage.html.jinja:148
+msgid ""
+"Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
+"Décochez si vous rencontrez des écrans bleus/noirs après les vidéos."
+msgstr ""
+"Raspberry Pi "
+"での再生をよりスムーズにするには、このボックスをチェックします。ビデオの後にブルースクリーンやブラックスクリーンが発生する場合は、チェックを外します。"
+
+#: templates/configure/tab_affichage.html.jinja:152
+msgid "Sortie audio :"
+msgstr "オーディオ出力:"
+
+#: templates/configure/tab_affichage.html.jinja:155
+msgid "Automatique"
+msgstr "自動"
+
+#: templates/configure/tab_affichage.html.jinja:157
+msgid "HDMI"
+msgstr "HDMI"
+
+#: templates/configure/tab_affichage.html.jinja:159
+msgid "Jack 3.5mm (Casque)"
+msgstr "3.5mmジャック（ヘッドフォン）"
+
+#: templates/configure/tab_affichage.html.jinja:164
+msgid "Volume :"
+msgstr "音量 ："
+
+#: templates/configure/tab_affichage.html.jinja:176
+msgid "Gestion de l'alimentation (Prise Connectée)"
+msgstr "電源管理 (接続されたソケット)"
+
+#: templates/configure/tab_affichage.html.jinja:178
+msgid ""
+"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser "
+"une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra "
+"une simple requête HTTP aux URLs que vous spécifiez."
+msgstr ""
+"画面が完全にスリープ状態にならない場合は、接続されているコンセント (Wi-Fi) を使用して電源をオフにすることができます。 Pimmich "
+"は、指定した URL に単純な HTTP リクエストを送信します。"
+
+#: templates/configure/tab_affichage.html.jinja:179
+msgid "Exemples d'URLs :"
+msgstr "URL の例:"
+
+#: templates/configure/tab_affichage.html.jinja:191
+msgid ""
+"Activer le contrôle par prise\n"
+"                            connectée"
+msgstr "スマートプラグによる制御を有効にする"
+
+#: templates/configure/tab_affichage.html.jinja:198
+msgid ""
+"État de la\n"
+"                            prise : Inconnu"
+msgstr "プラグの状態：不明"
+
+#: templates/configure/tab_affichage.html.jinja:205
+msgid ""
+"URL\n"
+"                                pour ALLUMER la prise :"
+msgstr "プラグをオンにする URL："
+
+#: templates/configure/tab_affichage.html.jinja:214
+#: templates/configure/tab_affichage.html.jinja:227
+msgid "Tester"
+msgstr "テスター"
+
+#: templates/configure/tab_affichage.html.jinja:218
+msgid ""
+"URL\n"
+"                                pour ÉTEINDRE la prise :"
+msgstr "プラグをオフにする URL："
+
+#: templates/configure/tab_affichage.html.jinja:231
+msgid ""
+"Délai\n"
+"                                après allumage (secondes) :"
+msgstr "オン後の待機時間（秒）："
+
+#: templates/configure/tab_affichage.html.jinja:236
+msgid ""
+"Temps d'attente pour que l'écran s'initialise avant de forcer la résolution."
+" Augmentez si la résolution est toujours incorrecte."
+msgstr "解像度を強制する前に画面が初期化されるまで待機する時間。解像度がまだ正しくない場合は、値を増やします。"
+
+#: templates/configure/tab_affichage.html.jinja:239
+msgid ""
+"URL\n"
+"                                de Statut (Optionnel) :"
+msgstr "ステータス URL（任意）："
+
+#: templates/configure/tab_affichage.html.jinja:245
+msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
+msgstr "ホーム アシスタントの場合は、States API URL を使用します。"
+
+#: templates/configure/tab_affichage.html.jinja:251
+msgid "Token d'accès Home Assistant (si URL de statut HA) :"
+msgstr "ホーム アシスタント アクセス トークン (HA ステータス URL の場合):"
+
+#: templates/configure/tab_affichage.html.jinja:259
+#: templates/configure/tab_sources.html.jinja:23
+#: templates/configure/tab_telegram.html.jinja:30
+msgid "Afficher/Cacher le token"
+msgstr "トークンを表示/非表示"
+
+#: templates/configure/tab_affichage.html.jinja:264
+msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
+msgstr "ホーム アシスタント プロファイルに「長期アクセス トークン」を作成します。"
+
+#: templates/configure/tab_apercu.html.jinja:4
+msgid "Aperçu des photos préparées"
+msgstr "準備した写真をプレビューする"
+
+#: templates/configure/tab_apercu.html.jinja:6
+msgid ""
+"Voici les photos qui sont prêtes à être affichées par le diaporama,\n"
+"                    classées par source. Cliquez sur une photo pour l'agrandir."
+msgstr "スライドショーで表示できる写真をソース別に表示しています。写真をクリックすると拡大表示されます。"
+
+#: templates/configure/tab_apercu.html.jinja:17
+#, python-format
+msgid "%(num)d photo"
+msgid_plural ""
+"%(num)d\n"
+"                                photos"
+msgstr[0] "%(num)d 枚の写真"
+
+#: templates/configure/tab_apercu.html.jinja:23
+#, python-format
+msgid "Supprimer toutes les photos de la source '%(source)s'"
+msgstr "ソース「%(source)s」からすべての写真を削除します"
+
+#: templates/configure/tab_apercu.html.jinja:25
+msgid "Tout supprimer"
+msgstr "すべて削除"
+
+#: templates/configure/tab_apercu.html.jinja:62
+#: templates/configure/tab_apercu.html.jinja:65
+#: templates/configure/tab_favoris.html.jinja:43
+#: templates/configure/tab_favoris.html.jinja:46
+#, python-format
+msgid "Aperçu de %(media)s"
+msgstr "%(media)s のプレビュー"
+
+#: templates/configure/tab_apercu.html.jinja:79
+#: templates/configure/tab_favoris.html.jinja:58
+msgid "Filtre..."
+msgstr "フィルタリングされた..."
+
+#: templates/configure/tab_apercu.html.jinja:81
+#: templates/configure/tab_favoris.html.jinja:61
+msgid "Noir & Blanc"
+msgstr "ブラック&ホワイト"
+
+#: templates/configure/tab_apercu.html.jinja:83
+#: templates/configure/tab_favoris.html.jinja:62
+msgid "Sépia"
+msgstr "セピア"
+
+#: templates/configure/tab_apercu.html.jinja:85
+#: templates/configure/tab_favoris.html.jinja:65
+msgid "Vignette"
+msgstr "ビネット"
+
+#: templates/configure/tab_apercu.html.jinja:87
+#: templates/configure/tab_favoris.html.jinja:67
+msgid "Vintage"
+msgstr "ビンテージ"
+
+#: templates/configure/tab_apercu.html.jinja:90
+#: templates/configure/tab_favoris.html.jinja:70
+msgid "Polaroid"
+msgstr "ポラロイド"
+
+#: templates/configure/tab_apercu.html.jinja:94
+#: templates/configure/tab_favoris.html.jinja:74
+msgid "Carte Postale"
+msgstr "ポストカード"
+
+#: templates/configure/tab_apercu.html.jinja:97
+#: templates/configure/tab_favoris.html.jinja:77
+msgid "Polaroid Vintage"
+msgstr "ポラロイド ヴィンテージ"
+
+#: templates/configure/tab_apercu.html.jinja:98
+#: templates/configure/tab_favoris.html.jinja:78
+msgid "Original"
+msgstr "オリジナル"
+
+#: templates/configure/tab_apercu.html.jinja:105
+#: templates/configure/tab_favoris.html.jinja:85
+msgid "Ajouter à une playlist"
+msgstr "プレイリストに追加する"
+
+#: templates/configure/tab_apercu.html.jinja:117
+#: templates/configure/tab_favoris.html.jinja:97
+msgid "Sauvegarder la photo originale"
+msgstr "元の写真を保存する"
+
+#: templates/configure/tab_apercu.html.jinja:122
+#: templates/configure/tab_favoris.html.jinja:102
+msgid "Photo anniversaire !"
+msgstr "誕生日の写真！"
+
+#: templates/configure/tab_apercu.html.jinja:128
+#: templates/configure/tab_favoris.html.jinja:108
+msgid "Supprimer ce média"
+msgstr "このメディアを削除します"
+
+#: templates/configure/tab_apercu.html.jinja:150
+msgid ""
+"Aucune photo préparée n'a été trouvée. Veuillez\n"
+"                    en importer depuis l'onglet \"Actions\"."
+msgstr ""
+"準備された写真が見つかりませんでした。お願いします\n"
+"                    「アクション」タブからインポートします。"
+
+#: templates/configure/tab_comptes.html.jinja:7
+msgid "Changer mon mot de passe"
+msgstr "パスワードを変更"
+
+#: templates/configure/tab_comptes.html.jinja:9
+msgid ""
+"Nouveau mot de\n"
+"                            passe"
+msgstr "新しいパスワード"
+
+#: templates/configure/tab_comptes.html.jinja:14
+msgid "6 caractères minimum"
+msgstr "最低6文字"
+
+#: templates/configure/tab_comptes.html.jinja:25
+msgid ""
+"Confirmer le\n"
+"                            nouveau mot de passe"
+msgstr ""
+"確認してください\n"
+"                            新しいパスワード"
+
+#: templates/configure/tab_comptes.html.jinja:38
+msgid ""
+"Les mots de passe ne\n"
+"                            correspondent pas."
+msgstr ""
+"パスワードは無効です\n"
+"                            一致しません。"
+
+#: templates/configure/tab_comptes.html.jinja:43
+msgid "Changer le mot de passe"
+msgstr "パスワードを変更する"
+
+#: templates/configure/tab_comptes.html.jinja:51
+msgid "Comptes utilisateurs"
+msgstr "ユーザーアカウント"
+
+#: templates/configure/tab_comptes.html.jinja:53
+msgid ""
+"Les administrateurs ont accès à tout. Les utilisateurs peuvent régler le "
+"diaporama, importer et gérer les photos, mais n'ont accès ni aux comptes, ni"
+" au réseau, ni à la maintenance, et ne voient pas les mots de passe et "
+"jetons enregistrés."
+msgstr ""
+"管理者はすべての機能を利用できます。ユーザーはスライドショーの設定や写真のインポート・管理ができますが、アカウント、ネットワーク、メンテナンスにはアクセスできず、保存されたパスワードやトークンも表示されません。"
+
+#: templates/configure/tab_comptes.html.jinja:58
+msgid "Nom"
+msgstr "名前"
+
+#: templates/configure/tab_comptes.html.jinja:59
+#: templates/configure/tab_comptes.html.jinja:116
+msgid "Rôle"
+msgstr "役割"
+
+#: templates/configure/tab_comptes.html.jinja:66
+msgid "Administrateur principal"
+msgstr "メイン管理者"
+
+#: templates/configure/tab_comptes.html.jinja:67
+msgid "Compte créé à l'installation (non supprimable)"
+msgstr "インストール時に作成されたアカウント（削除不可）"
+
+#: templates/configure/tab_comptes.html.jinja:72
+msgid "créé le"
+msgstr "作成日"
+
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:80
+#: templates/configure/tab_comptes.html.jinja:119
+msgid "Administrateur"
+msgstr "管理者"
+
+#: templates/configure/tab_comptes.html.jinja:87
+msgid "Nouveau mot de passe"
+msgstr "新しいパスワード"
+
+#: templates/configure/tab_comptes.html.jinja:89
+msgid "Changer"
+msgstr "変更"
+
+#: templates/configure/tab_comptes.html.jinja:93
+msgid "Supprimer ce compte ?"
+msgstr "このアカウントを削除しますか？"
+
+#: templates/configure/tab_comptes.html.jinja:95
+msgid "Supprimer"
+msgstr "削除"
+
+#: templates/configure/tab_comptes.html.jinja:104
+msgid "Créer un compte"
+msgstr "アカウントを作成"
+
+#: templates/configure/tab_comptes.html.jinja:107
+msgid "Nom d'utilisateur"
+msgstr "ユーザー名"
+
+#: templates/configure/tab_comptes.html.jinja:109
+msgid "2 à 32 caractères : lettres, chiffres, . _ -"
+msgstr "2～32 文字：英字、数字、. _ -"
+
+#: templates/configure/tab_comptes.html.jinja:124
+#: templates/configure/tab_playlists.html.jinja:76
+#: templates/configure/tab_telegram.html.jinja:80
+msgid "Créer"
+msgstr "作成する"
+
+#: templates/configure/tab_comptes.html.jinja:130
+msgid ""
+"Vous êtes connecté avec un compte utilisateur : la gestion des comptes, le "
+"réseau, la maintenance et les mots de passe ou jetons enregistrés sont "
+"réservés aux administrateurs."
+msgstr "ユーザーアカウントでログインしています。アカウント管理、ネットワーク、メンテナンス、保存されたパスワードやトークンは管理者専用です。"
+
+#: templates/configure/tab_favoris.html.jinja:4
+msgid "Vos photos favorites"
+msgstr "お気に入りの写真"
+
+#: templates/configure/tab_favoris.html.jinja:6
+msgid ""
+"Voici toutes vos photos marquées comme favorites. Vous pouvez les\n"
+"                    gérer ici."
+msgstr ""
+"お気に入りとしてマークされたすべての写真がここにあります。できます\n"
+"                    ここで管理してください。"
+
+#: templates/configure/tab_favoris.html.jinja:127
+msgid ""
+"Vous n'avez aucune\n"
+"                    photo en favori pour le moment."
+msgstr ""
+"あなたには何もありません\n"
+"                    今のところお気に入りの写真。"
+
+#: templates/configure/tab_heure.html.jinja:3
+msgid "Affichage de l'heure"
+msgstr "時刻表示"
+
+#: templates/configure/tab_heure.html.jinja:8
+msgid "Afficher l'heure"
+msgstr "ショータイム"
+
+#: templates/configure/tab_heure.html.jinja:13
+msgid "Taille de la police :"
+msgstr "フォントサイズ:"
+
+#: templates/configure/tab_heure.html.jinja:18
+#: templates/configure/tab_heure.html.jinja:194
+msgid "Décalage horizontal (px) :"
+msgstr "水平オフセット (ピクセル):"
+
+#: templates/configure/tab_heure.html.jinja:24
+#: templates/configure/tab_heure.html.jinja:201
+msgid "Décalage vertical (px) :"
+msgstr "垂直オフセット (ピクセル):"
+
+#: templates/configure/tab_heure.html.jinja:30
+msgid "Couleur du texte (hex) :"
+msgstr "テキストの色 (16 進数):"
+
+#: templates/configure/tab_heure.html.jinja:35
+msgid "Couleur du contour (hex) :"
+msgstr "アウトラインの色 (16 進数):"
+
+#: templates/configure/tab_heure.html.jinja:42
+msgid "Position de l'heure :"
+msgstr "時間位置:"
+
+#: templates/configure/tab_heure.html.jinja:45
+msgid "Gauche"
+msgstr "ゴーシュ"
+
+#: templates/configure/tab_heure.html.jinja:47
+msgid "Centre"
+msgstr "中心"
+
+#: templates/configure/tab_heure.html.jinja:49
+msgid "Droite"
+msgstr "右"
+
+#: templates/configure/tab_heure.html.jinja:54
+msgid "Police :"
+msgstr "警察 ："
+
+#: templates/configure/tab_heure.html.jinja:69
+msgid "Afficher un fond derrière l'heure/date/météo"
+msgstr "時刻/日付/天気の背景を表示します"
+
+#: templates/configure/tab_heure.html.jinja:73
+msgid ""
+"Couleur du fond (hex RGBA)\n"
+"                            :"
+msgstr ""
+"背景色（16進RGBA）\n"
+"                            :"
+
+#: templates/configure/tab_heure.html.jinja:81
+msgid "Affichage de la date"
+msgstr "日付表示"
+
+#: templates/configure/tab_heure.html.jinja:84
+msgid "Afficher la date (sous l'heure)"
+msgstr "日付を表示 (時間の下)"
+
+#: templates/configure/tab_heure.html.jinja:88
+msgid "Format de la date :"
+msgstr "日付形式:"
+
+#: templates/configure/tab_heure.html.jinja:94
+msgid "Affichage de la météo (OpenWeatherMap)"
+msgstr "天気表示（OpenWeatherMap）"
+
+#: templates/configure/tab_heure.html.jinja:98
+msgid "Afficher la météo"
+msgstr "天気を表示"
+
+#: templates/configure/tab_heure.html.jinja:103
+msgid "Ville :"
+msgstr "ヴィル :"
+
+#: templates/configure/tab_heure.html.jinja:109
+msgid "Clé API :"
+msgstr "API クレ:"
+
+#: templates/configure/tab_heure.html.jinja:116
+#: templates/configure/tab_heure.html.jinja:186
+msgid "Afficher/Cacher la clé API"
+msgstr "API キーを表示/非表示"
+
+#: templates/configure/tab_heure.html.jinja:126
+msgid "Tester la clé API et la ville"
+msgstr "API キーと都市をテストする"
+
+#: templates/configure/tab_heure.html.jinja:131
+msgid "Unités :"
+msgstr "単位:"
+
+#: templates/configure/tab_heure.html.jinja:134
+msgid "Celsius"
+msgstr "摂氏"
+
+#: templates/configure/tab_heure.html.jinja:136
+msgid "Fahrenheit"
+msgstr "華氏"
+
+#: templates/configure/tab_heure.html.jinja:141
+msgid ""
+"Intervalle de MàJ\n"
+"                            (min) :"
+msgstr ""
+"更新間隔\n"
+"                            (分):"
+
+#: templates/configure/tab_heure.html.jinja:149
+msgid "Affichage des marées (StormGlass Tide API)"
+msgstr "潮汐表示（StormGlass Tide API）"
+
+#: templates/configure/tab_heure.html.jinja:150
+msgid "Utilise l'API de"
+msgstr "の API を使用します"
+
+#: templates/configure/tab_heure.html.jinja:151
+msgid ""
+"Une clé API est\n"
+"                        requise. Vous pouvez trouver les coordonnées de votre port sur des sites comme"
+msgstr ""
+"APIキーは\n"
+"                        必須です。ポートの座標は次のようなサイトで見つけることができます。"
+
+#: templates/configure/tab_heure.html.jinja:155
+msgid ""
+"Note : Cette API fournit les hauteurs de marée, mais pas\n"
+"                        le coefficient de marée."
+msgstr ""
+"注: この API は潮位の高さを提供しますが、\n"
+"                        潮汐係数。"
+
+#: templates/configure/tab_heure.html.jinja:160
+msgid "Afficher les informations de marée"
+msgstr ""
+"Error 500 (Server Error)!!1500.That’s an error.There was an error. Please "
+"try again later.That’s all we know."
+
+#: templates/configure/tab_heure.html.jinja:165
+msgid "Latitude (ex: 48.3904) :"
+msgstr "緯度 (例: 48.3904) :"
+
+#: templates/configure/tab_heure.html.jinja:171
+msgid "Longitude (ex: -4.4861) :"
+msgstr "経度 (～4.4861) :"
+
+#: templates/configure/tab_heure.html.jinja:178
+msgid "Clé API StormGlass :"
+msgstr "Clé API StormGlass:"
+
+#: templates/configure/tab_heure.html.jinja:209
+msgid "Tester la connexion"
+msgstr "接続をテストする"
+
+#: templates/configure/tab_heure.html.jinja:212
+msgid "Forcer la mise à jour"
+msgstr "強制更新"
+
+#: templates/configure/tab_heure.html.jinja:220
+msgid "État Actuel des Marées"
+msgstr "現在の潮汐状況"
+
+#: templates/configure/tab_heure.html.jinja:223
+msgid ""
+"Dernière mise à jour des données\n"
+"                                    :"
+msgstr ""
+"最終データ更新\n"
+"                                    :"
+
+#: templates/configure/tab_heure.html.jinja:226
+msgid "État de l'API :"
+msgstr "APIステータス:"
+
+#: templates/configure/tab_heure.html.jinja:233
+msgid "Fuseau Horaire"
+msgstr "タイムゾーン"
+
+#: templates/configure/tab_heure.html.jinja:235
+msgid "Fuseau horaire actuel du système :"
+msgstr "現在のシステムのタイムゾーン:"
+
+#: templates/configure/tab_heure.html.jinja:236
+msgid "Non défini"
+msgstr "未定義"
+
+#: templates/configure/tab_heure.html.jinja:240
+msgid "Attention :"
+msgstr "注意 ："
+
+#: templates/configure/tab_heure.html.jinja:240
+msgid ""
+"La détection automatique du fuseau horaire a\n"
+"                            échoué lors de l'installation. Le système est configuré sur <strong>UTC</strong>. L'heure\n"
+"                            affichée peut être incorrecte."
+msgstr ""
+"インストール時にタイムゾーンの自動検出に失敗しました。システムは <strong>UTC</strong> "
+"に設定されています。表示される時刻が正しくない可能性があります。"
+
+#: templates/configure/tab_heure.html.jinja:244
+msgid ""
+"Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via SSH) et\n"
+"                            en exécutant la commande :"
+msgstr "Raspberry Pi に（SSH で）接続し、次のコマンドを実行して手動で修正できます："
+
+#: templates/configure/tab_heure.html.jinja:247
+msgid "(remplacez par votre région/ville)."
+msgstr "(あなたの地域/都市に置き換えてください)。"
+
+#: templates/configure/tab_heure.html.jinja:250
+msgid ""
+"Le fuseau horaire a été configuré automatiquement\n"
+"                            lors de l'installation."
+msgstr ""
+"タイムゾーンは自動的に設定されました\n"
+"                            インストール中。"
+
+#: templates/configure/tab_logs.html.jinja:4
+msgid "Logs Système"
+msgstr "システムログ"
+
+#: templates/configure/tab_logs.html.jinja:7
+msgid "Sélectionner un log :"
+msgstr "ログを選択します:"
+
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr "リフレッシュ"
+
+#: templates/configure/tab_logs.html.jinja:16
+msgid "Effacer les logs"
+msgstr "ログをクリアする"
+
+#: templates/configure/tab_logs.html.jinja:26
+msgid "Crédits"
+msgstr "クレジット"
+
+#: templates/configure/tab_logs.html.jinja:30
+msgid "Auteurs : Gotenash et Shenron"
+msgstr "著者: ゴテナシュとシェンロン"
+
+#: templates/configure/tab_logs.html.jinja:35
+msgid "Projet réalisé dans le cadre du Gadgetaulab"
+msgstr "Gadgetaulabの一環として実施されたプロジェクト"
+
+#: templates/configure/tab_maintenance.html.jinja:4
+msgid "Sauvegarde et Restauration"
+msgstr "バックアップと復元"
+
+#: templates/configure/tab_maintenance.html.jinja:6
+msgid ""
+"Sauvegardez votre configuration (API, partages,\n"
+"                    affichage...) dans un fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle\n"
+"                    installation."
+msgstr "設定（API、共有、表示など）をファイルに保存します。後で、または新しいインストール環境で復元できます。"
+
+#: templates/configure/tab_maintenance.html.jinja:12
+msgid "Sauvegarder la configuration"
+msgstr "設定の保存"
+
+#: templates/configure/tab_maintenance.html.jinja:15
+msgid "Télécharger la sauvegarde"
+msgstr "バックアップをダウンロードする"
+
+#: templates/configure/tab_maintenance.html.jinja:20
+msgid "Restaurer une configuration"
+msgstr "構成を復元する"
+
+#: templates/configure/tab_maintenance.html.jinja:22
+msgid ""
+"Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
+"fichier de sauvegarde."
+msgstr "本気ですか？現在の設定はバックアップ ファイルの内容によって上書きされます。"
+
+#: templates/configure/tab_maintenance.html.jinja:27
+msgid "Restaurer"
+msgstr "復元する"
+
+#: templates/configure/tab_maintenance.html.jinja:35
+msgid "Mise à jour de l'application"
+msgstr "アプリケーションのアップデート"
+
+#: templates/configure/tab_maintenance.html.jinja:37
+msgid ""
+"Cliquez sur le bouton pour rechercher et installer les\n"
+"                    dernières mises à jour de Pimmich depuis GitHub. L'application redémarrera automatiquement après la\n"
+"                    mise à jour."
+msgstr ""
+"ボタンをクリックすると、GitHub から Pimmich "
+"の最新アップデートを確認してインストールします。アップデート後、アプリケーションは自動的に再起動します。"
+
+#: templates/configure/tab_maintenance.html.jinja:42
+msgid ""
+"Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
+msgstr "アップデートを開始しますか?追跡ページにリダイレクトされます。"
+
+#: templates/configure/tab_maintenance.html.jinja:43
+msgid "Lancer la mise à jour"
+msgstr "アップデートを開始する"
+
+#: templates/configure/tab_maintenance.html.jinja:47
+msgid "Vérifier le dépôt d'origine"
+msgstr "元のリポジトリを確認"
+
+#: templates/configure/tab_maintenance.html.jinja:57
+msgid "de plus"
+msgstr "件先行"
+
+#: templates/configure/tab_maintenance.html.jinja:60
+msgid "Vérification en cours..."
+msgstr "確認中..."
+
+#: templates/configure/tab_maintenance.html.jinja:66
+msgid ""
+"Aucune nouveauté sur le dépôt d'origine : votre version contient déjà tout "
+"son code."
+msgstr "元のリポジトリに新しい変更はありません。お使いのバージョンにはすべてのコードが含まれています。"
+
+#: templates/configure/tab_maintenance.html.jinja:68
+msgid "modification(s) disponible(s) sur le dépôt d'origine"
+msgstr "件の変更が元のリポジトリで利用可能です"
+
+#: templates/configure/tab_maintenance.html.jinja:71
+msgid ""
+"Ces modifications ne sont pas encore dans votre fork. Pour les intégrer, sur"
+" un ordinateur : git fetch upstream, puis git merge -Xrenormalize "
+"upstream/main et git push. Lancez ensuite la mise à jour."
+msgstr ""
+"これらの変更はまだあなたのフォークに含まれていません。取り込むには、パソコンで git fetch upstream を実行し、続いて git "
+"merge -Xrenormalize upstream/main と git push を実行してください。その後、アップデートを実行してください。"
+
+#: templates/configure/tab_maintenance.html.jinja:73
+msgid "Cliquez sur « Lancer la mise à jour » pour les installer."
+msgstr "インストールするには「アップデートを開始」をクリックしてください。"
+
+#: templates/configure/tab_maintenance.html.jinja:77
+msgid ""
+"modification(s) de votre fork pas encore installée(s) : cliquez sur « Lancer"
+" la mise à jour »."
+msgstr "件のフォークの変更がまだインストールされていません：「アップデートを開始」をクリックしてください。"
+
+#: templates/configure/tab_maintenance.html.jinja:82
+msgid "Vérification impossible :"
+msgstr "確認できません："
+
+#: templates/configure/tab_maintenance.html.jinja:92
+msgid "Système de Fichiers de la Carte SD"
+msgstr "SDカードファイルシステム"
+
+#: templates/configure/tab_maintenance.html.jinja:94
+msgid ""
+"Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
+"                    l'image, utilisez cette option pour étendre la partition et utiliser tout l'espace disponible. Un\n"
+"                    redémarrage du système sera nécessaire pour finaliser l'opération."
+msgstr ""
+"イメージより大きい SD カードに Pimmich "
+"を書き込んだ場合は、このオプションでパーティションを拡張し、利用可能な容量をすべて使用できます。操作を完了するにはシステムの再起動が必要です。"
+
+#: templates/configure/tab_maintenance.html.jinja:98
+msgid "Note :"
+msgstr "注記 ："
+
+#: templates/configure/tab_maintenance.html.jinja:98
+msgid ""
+"Cette opération est sûre et ne supprime aucune donnée.\n"
+"                        Elle prépare simplement le système à s'étendre au prochain démarrage."
+msgstr "この操作は安全で、データは削除されません。次回起動時に拡張されるようシステムを準備するだけです。"
+
+#: templates/configure/tab_maintenance.html.jinja:103
+msgid "Étendre le système de fichiers"
+msgstr "ファイルシステムを拡張する"
+
+#: templates/configure/tab_maintenance.html.jinja:110
+msgid "Contrôle du système"
+msgstr "システム制御"
+
+#: templates/configure/tab_maintenance.html.jinja:113
+msgid ""
+"Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
+"système d'exploitation ne sera pas redémarré."
+msgstr "Web アプリケーションのみを再起動してもよろしいですか?オペレーティング システムは再起動されません。"
+
+#: templates/configure/tab_maintenance.html.jinja:116
+msgid "Redémarrer l'application web"
+msgstr "Webアプリケーションを再起動します"
+
+#: templates/configure/tab_maintenance.html.jinja:125
+msgid "Redémarrer le système"
+msgstr "システムを再起動します"
+
+#: templates/configure/tab_maintenance.html.jinja:133
+msgid "Supprimer les logs"
+msgstr "ログの削除"
+
+#: templates/configure/tab_maintenance.html.jinja:138
+msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
+msgstr "システムの電源を切ってもよろしいですか?"
+
+#: templates/configure/tab_maintenance.html.jinja:141
+msgid "Éteindre le système"
+msgstr "システムをシャットダウンします"
+
+#: templates/configure/tab_maintenance.html.jinja:146
+msgid "Repasser sur Raspberry Pi OS (bureau)"
+msgstr "Raspberry Pi OS（デスクトップ）に戻す"
+
+#: templates/configure/tab_maintenance.html.jinja:151
+msgid ""
+"Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se "
+"lancera plus automatiquement. Pour revenir au mode cadre photo, relancez "
+"setup.sh. Continuer ?"
+msgstr ""
+"Raspberry Pi は Raspberry Pi OS のデスクトップで再起動し、Pimmich "
+"は自動起動しなくなります。フォトフレームモードに戻すには setup.sh を再実行してください。続行しますか？"
+
+#: templates/configure/tab_metadata.html.jinja:4
+msgid "Affichage des métadonnées des photos"
+msgstr "写真のメタデータの表示"
+
+#: templates/configure/tab_metadata.html.jinja:6
+msgid ""
+"Configurez ici l'affichage des informations (date, lieu)\n"
+"                        extraites depuis Immich sur vos photos."
+msgstr ""
+"ここで情報の表示を設定します (日付、場所)\n"
+"                        あなたの写真からイミッチから抜粋しました。"
+
+#: templates/configure/tab_metadata.html.jinja:12
+msgid "Afficher la date de prise de vue"
+msgstr "撮影日を表示"
+
+#: templates/configure/tab_metadata.html.jinja:15
+msgid ""
+"Format de\n"
+"                            la date"
+msgstr ""
+"の形式\n"
+"                            日付"
+
+#: templates/configure/tab_metadata.html.jinja:20
+#, python-format
+msgid "Utilise les codes de formatage Python (ex: %%d/%%m/%%Y, %%B %%Y)."
+msgstr "Python の書式コードを使用します（例：%%d/%%m/%%Y、%%B %%Y）。"
+
+#: templates/configure/tab_metadata.html.jinja:26
+msgid "Afficher la localisation (ville/pays)"
+msgstr "撮影場所（市区町村/国）を表示"
+
+#: templates/configure/tab_metadata.html.jinja:29
+msgid ""
+"Format\n"
+"                            de la localisation"
+msgstr ""
+"フォーマット\n"
+"                            場所の"
+
+#: templates/configure/tab_metadata.html.jinja:34
+msgid "Ville, Pays"
+msgstr "都市、国"
+
+#: templates/configure/tab_metadata.html.jinja:36
+msgid "Ville uniquement"
+msgstr "市内のみ"
+
+#: templates/configure/tab_metadata.html.jinja:38
+msgid "Pays uniquement"
+msgstr "国のみ"
+
+#: templates/configure/tab_metadata.html.jinja:45
+msgid "Afficher le drapeau du pays"
+msgstr "国旗を表示"
+
+#: templates/configure/tab_metadata.html.jinja:48
+msgid ""
+"Taille du\n"
+"                            drapeau"
+msgstr ""
+"サイズ\n"
+"                            旗"
+
+#: templates/configure/tab_metadata.html.jinja:61
+msgid ""
+"Opacité\n"
+"                            du drapeau (0.1 à 1.0)"
+msgstr ""
+"不透明度\n"
+"                            フラグの値 (0.1 ～ 1.0)"
+
+#: templates/configure/tab_metadata.html.jinja:69
+msgid "Position du drapeau"
+msgstr "旗の位置"
+
+#: templates/configure/tab_metadata.html.jinja:73
+#: templates/configure/tab_metadata.html.jinja:155
+msgid "En haut à droite"
+msgstr "右上"
+
+#: templates/configure/tab_metadata.html.jinja:75
+#: templates/configure/tab_metadata.html.jinja:153
+msgid "En haut à gauche"
+msgstr "左上"
+
+#: templates/configure/tab_metadata.html.jinja:77
+#: templates/configure/tab_metadata.html.jinja:148
+msgid "En bas à droite"
+msgstr "右下"
+
+#: templates/configure/tab_metadata.html.jinja:79
+#: templates/configure/tab_metadata.html.jinja:146
+msgid "En bas à gauche"
+msgstr "左下"
+
+#: templates/configure/tab_metadata.html.jinja:85
+#: templates/configure/tab_metadata.html.jinja:160
+msgid "Décalage horizontal (px)"
+msgstr "水平オフセット (px)"
+
+#: templates/configure/tab_metadata.html.jinja:92
+#: templates/configure/tab_metadata.html.jinja:167
+msgid "Décalage vertical (px)"
+msgstr "垂直オフセット (px)"
+
+#: templates/configure/tab_metadata.html.jinja:100
+msgid "Style et Positionnement"
+msgstr "スタイルと配置"
+
+#: templates/configure/tab_metadata.html.jinja:104
+msgid "Taille de la police"
+msgstr "フォントサイズ"
+
+#: templates/configure/tab_metadata.html.jinja:111
+msgid "Police"
+msgstr "警察"
+
+#: templates/configure/tab_metadata.html.jinja:128
+msgid "Couleur du texte (hex)"
+msgstr "文字色(16進数)"
+
+#: templates/configure/tab_metadata.html.jinja:135
+msgid "Couleur du contour (hex)"
+msgstr "輪郭色(16進数)"
+
+#: templates/configure/tab_metadata.html.jinja:142
+msgid "Position"
+msgstr "位置"
+
+#: templates/configure/tab_metadata.html.jinja:151
+msgid "En bas au centre"
+msgstr "中央下"
+
+#: templates/configure/tab_metadata.html.jinja:177
+msgid "Afficher un fond semi-transparent derrière les métadonnées"
+msgstr "メタデータの背後に半透明の背景を表示"
+
+#: templates/configure/tab_metadata.html.jinja:181
+msgid "Couleur du fond (hex RGBA)"
+msgstr "背景色（16進RGBA）"
+
+#: templates/configure/tab_network.html.jinja:4
+msgid "État de la connexion Wi-Fi"
+msgstr "Wi-Fi接続状況"
+
+#: templates/configure/tab_network.html.jinja:8
+#: templates/configure/tab_network.html.jinja:89
+msgid "État:"
+msgstr "エタ:"
+
+#: templates/configure/tab_network.html.jinja:12
+msgid "Réseau (SSID):"
+msgstr "ネットワーク(SSID):"
+
+#: templates/configure/tab_network.html.jinja:16
+#: templates/configure/tab_network.html.jinja:91
+msgid "Adresse IP:"
+msgstr "アドレスIP:"
+
+#: templates/configure/tab_network.html.jinja:23
+msgid "Configuration Wi-Fi"
+msgstr "Wi-Fiの設定"
+
+#: templates/configure/tab_network.html.jinja:25
+msgid ""
+"La sélection du pays est obligatoire pour activer\n"
+"                    l'interface Wi-Fi et respecter les réglementations locales sur les fréquences radio."
+msgstr "Wi-Fi インターフェースを有効にし、各地域の無線周波数規制を守るため、国の選択は必須です。"
+
+#: templates/configure/tab_network.html.jinja:29
+msgid ""
+"Pays (pour la\n"
+"                            réglementation Wi-Fi)"
+msgstr ""
+"国（\n"
+"                            Wi-Fi規制）"
+
+#: templates/configure/tab_network.html.jinja:33
+msgid "France"
+msgstr "フランス"
+
+#: templates/configure/tab_network.html.jinja:33
+msgid "États-Unis"
+msgstr "米国"
+
+#: templates/configure/tab_network.html.jinja:33
+msgid "Royaume-Uni"
+msgstr "イギリス"
+
+#: templates/configure/tab_network.html.jinja:34
+msgid "Allemagne"
+msgstr "ドイツ"
+
+#: templates/configure/tab_network.html.jinja:34
+msgid "Espagne"
+msgstr "スペイン"
+
+#: templates/configure/tab_network.html.jinja:34
+msgid "Canada"
+msgstr "カナダ"
+
+#: templates/configure/tab_network.html.jinja:34
+msgid "Belgique"
+msgstr "ベルギー"
+
+#: templates/configure/tab_network.html.jinja:35
+msgid "Suisse"
+msgstr "スイス"
+
+#: templates/configure/tab_network.html.jinja:43
+msgid ""
+"SSID (Nom du\n"
+"                            réseau)"
+msgstr ""
+"SSID（名前\n"
+"                            ネットワーク)"
+
+#: templates/configure/tab_network.html.jinja:64
+msgid "Laissez vide si le réseau est ouvert."
+msgstr "ネットワークが開いている場合は、空のままにしておきます。"
+
+#: templates/configure/tab_network.html.jinja:68
+msgid "Appliquer les paramètres Wi-Fi"
+msgstr "Wi-Fi設定を適用する"
+
+#: templates/configure/tab_network.html.jinja:71
+msgid ""
+"Note : Après avoir appliqué les paramètres, la connexion\n"
+"                    peut prendre jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à \"Connecté\",\n"
+"                    vérifiez le mot de passe puis essayez de redémarrer le système."
+msgstr ""
+"注意：設定を適用した後、接続まで最大 1 "
+"分ほどかかる場合があります。上の接続状態が「接続済み」にならない場合は、パスワードを確認してからシステムを再起動してみてください。"
+
+#: templates/configure/tab_network.html.jinja:78
+msgid "Gestion des Interfaces Réseau"
+msgstr "ネットワークインターフェース管理"
+
+#: templates/configure/tab_network.html.jinja:80
+msgid ""
+"Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet\n"
+"                    est branché, c'est souvent un problème de priorité. Désactivez l'interface Ethernet pour forcer le\n"
+"                    système à utiliser exclusivement le Wi-Fi. Cette action redémarre le service réseau."
+msgstr ""
+"Ethernet ケーブルが接続されていると Wi-Fi が接続されない場合、多くは優先順位の問題です。Ethernet "
+"インターフェースを無効にすると、システムは Wi-Fi のみを使用します。この操作によりネットワークサービスが再起動されます。"
+
+#: templates/configure/tab_network.html.jinja:88
+msgid "Interface Filaire (eth0)"
+msgstr "有線インターフェース (eth0)"
+
+#: templates/configure/tab_network.html.jinja:103
+msgid "Réseaux Wi-Fi à proximité"
+msgstr "近くの Wi-Fi ネットワーク"
+
+#: templates/configure/tab_network.html.jinja:104
+msgid ""
+"Cliquez sur le bouton pour rechercher les réseaux Wi-Fi disponibles.\n"
+"                    Cliquer sur un réseau dans la liste remplira automatiquement le champ SSID ci-dessus."
+msgstr ""
+"ボタンをクリックして、利用可能な Wi-Fi ネットワークを検索します。\n"
+"                    リスト内のネットワークをクリックすると、上の SSID フィールドに自動的に入力されます。"
+
+#: templates/configure/tab_playlists.html.jinja:4
+msgid "Gestion des Playlists"
+msgstr "プレイリスト管理"
+
+#: templates/configure/tab_playlists.html.jinja:6
+msgid ""
+"Créez des albums virtuels (playlists) en sélectionnant des\n"
+"                    photos de n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant uniquement les\n"
+"                    photos d'une playlist."
+msgstr "任意のソースから写真を選んで仮想アルバム（プレイリスト）を作成できます。プレイリストの写真だけでスライドショーを開始することもできます。"
+
+#: templates/configure/tab_playlists.html.jinja:14
+msgid ""
+"Contrôle du Diaporama\n"
+"                                Actuel"
+msgstr ""
+"スライドショーコントロール\n"
+"                                現在"
+
+#: templates/configure/tab_playlists.html.jinja:37
+msgid ""
+"Arrête la playlist en cours et relance le diaporama avec toutes les sources "
+"activées."
+msgstr "現在のプレイリストを停止し、すべてのソースをアクティブにしてスライドショーを再開します。"
+
+#: templates/configure/tab_playlists.html.jinja:45
+msgid "Aucune playlist en cours"
+msgstr "再生中のプレイリストはありません"
+
+#: templates/configure/tab_playlists.html.jinja:51
+msgid "Aperçu en direct"
+msgstr "ライブプレビュー"
+
+#: templates/configure/tab_playlists.html.jinja:54
+msgid ""
+"Le diaporama est\n"
+"                                arrêté."
+msgstr ""
+"スライドショーは、\n"
+"                                逮捕された。"
+
+#: templates/configure/tab_playlists.html.jinja:64
+msgid "Créer une nouvelle playlist"
+msgstr "新しいプレイリストを作成する"
+
+#: templates/configure/tab_playlists.html.jinja:67
+msgid "Nom de la playlist (ex: Vacances 2024)"
+msgstr "プレイリストの名前 (例: Holidays 2024)"
+
+#: templates/configure/tab_playlists.html.jinja:83
+msgid "Vos Playlists"
+msgstr "ヴォスのプレイリスト"
+
+#: templates/configure/tab_sources.html.jinja:4
+msgid "Configuration de l'album photo Immich"
+msgstr "アルバム写真の構成 Immich"
+
+#: templates/configure/tab_sources.html.jinja:9
+msgid "Nom technique de l'album Immich :"
+msgstr "Immich アルバムの技術名:"
+
+#: templates/configure/tab_sources.html.jinja:13
+msgid "URL du serveur Immich :"
+msgstr "イミッチサーバーURL:"
+
+#: templates/configure/tab_sources.html.jinja:16
+msgid "Token d'accès Immich :"
+msgstr "イミッチアクセストークン:"
+
+#: templates/configure/tab_sources.html.jinja:29
+msgid "Limite de photos à télécharger (Immich)"
+msgstr "アップロードする写真の制限 (Immich)"
+
+#: templates/configure/tab_sources.html.jinja:34
+msgid ""
+"Nombre maximum de photos à récupérer depuis Immich.\n"
+"                        Mettez 0, -1 ou laissez vide pour ne pas avoir de limite."
+msgstr ""
+"Immich から回復する写真の最大数。\n"
+"                        制限を設けない場合は、0、-1 を入力するか、空のままにします。"
+
+#: templates/configure/tab_sources.html.jinja:40
+msgid "Récupération aléatoire des images dans l'album (Immich)"
+msgstr "アルバム内の画像をランダムに復元 (Immich)"
+
+#: templates/configure/tab_sources.html.jinja:44
+msgid "Mise à jour automatique (Immich)"
+msgstr "自動更新 (イミッチ)"
+
+#: templates/configure/tab_sources.html.jinja:47
+#: templates/configure/tab_sources.html.jinja:144
+#: templates/configure/tab_sources.html.jinja:236
+msgid "Activer la mise à jour automatique"
+msgstr "自動更新を有効にする"
+
+#: templates/configure/tab_sources.html.jinja:49
+#: templates/configure/tab_sources.html.jinja:146
+msgid "Intervalle de mise à jour (heures):"
+msgstr "更新間隔 (時間):"
+
+#: templates/configure/tab_sources.html.jinja:54
+#: templates/configure/tab_sources.html.jinja:151
+#: templates/configure/tab_sources.html.jinja:244
+msgid "État du service :"
+msgstr "サービスステータス:"
+
+#: templates/configure/tab_sources.html.jinja:56
+#: templates/configure/tab_sources.html.jinja:153
+#: templates/configure/tab_sources.html.jinja:246
+msgid "Dernière mise à jour :"
+msgstr "最終更新:"
+
+#: templates/configure/tab_sources.html.jinja:58
+#: templates/configure/tab_sources.html.jinja:155
+#: templates/configure/tab_sources.html.jinja:248
+msgid "Prochaine mise à jour :"
+msgstr "次回の更新:"
+
+#: templates/configure/tab_sources.html.jinja:67
+msgid "Sources à afficher dans le diaporama"
+msgstr "スライドショーで表示するソース"
+
+#: templates/configure/tab_sources.html.jinja:69
+msgid ""
+"Sélectionnez les sources de photos à inclure dans le diaporama.\n"
+"                        Les photos seront mélangées entre les sources sélectionnées."
+msgstr ""
+"スライドショーに含める写真ソースを選択します。\n"
+"                        写真は選択したソース間で混合されます。"
+
+#: templates/configure/tab_sources.html.jinja:74
+msgid "Photos Immich"
+msgstr "写真 イミッチ"
+
+#: templates/configure/tab_sources.html.jinja:78
+msgid "Photos USB"
+msgstr "写真USB"
+
+#: templates/configure/tab_sources.html.jinja:82
+msgid "Photos Samba"
+msgstr "写真 サンバ"
+
+#: templates/configure/tab_sources.html.jinja:86
+msgid "Photos Google Drive"
+msgstr "Google Drive の写真"
+
+#: templates/configure/tab_sources.html.jinja:90
+msgid "Photos Smartphone"
+msgstr "写真 スマートフォン"
+
+#: templates/configure/tab_sources.html.jinja:94
+msgid "Photos reçues par Telegram"
+msgstr "テレグラムで受け取った写真"
+
+#: templates/configure/tab_sources.html.jinja:98
+msgid "Photos des invités (validées)"
+msgstr "ゲストの写真（承認済み）"
+
+#: templates/configure/tab_sources.html.jinja:103
+msgid "Configuration du partage Samba (Windows)"
+msgstr "Samba 共有のセットアップ (Windows)"
+
+#: templates/configure/tab_sources.html.jinja:105
+msgid "Serveur :"
+msgstr "サーバー:"
+
+#: templates/configure/tab_sources.html.jinja:107
+msgid "ex: 192.168.1.50 ou MON-NAS"
+msgstr "例: 192.168.1.50 または MON-NAS"
+
+#: templates/configure/tab_sources.html.jinja:109
+msgid "Nom du partage :"
+msgstr "共有名:"
+
+#: templates/configure/tab_sources.html.jinja:111
+msgid "ex: Photos"
+msgstr "例: 写真"
+
+#: templates/configure/tab_sources.html.jinja:113
+msgid "Chemin dans le partage (optionnel) :"
+msgstr "共有のパス (オプション):"
+
+#: templates/configure/tab_sources.html.jinja:115
+msgid "ex: Famille/2024"
+msgstr "例: 家族/2024"
+
+#: templates/configure/tab_sources.html.jinja:117
+msgid "Nom d'utilisateur (optionnel) :"
+msgstr "ユーザー名 (オプション):"
+
+#: templates/configure/tab_sources.html.jinja:120
+msgid "Mot de passe (optionnel) :"
+msgstr "パスワード (オプション):"
+
+#: templates/configure/tab_sources.html.jinja:135
+msgid ""
+"Tester la\n"
+"                            connexion"
+msgstr ""
+"テストしてください\n"
+"                            接続"
+
+#: templates/configure/tab_sources.html.jinja:141
+msgid "Mise à jour automatique (Samba)"
+msgstr "自動アップデート（Samba）"
+
+#: templates/configure/tab_sources.html.jinja:163
+msgid "Configuration Google Drive"
+msgstr "Google Drive の設定"
+
+#: templates/configure/tab_sources.html.jinja:166
+msgid "Méthode de connexion :"
+msgstr "接続方式："
+
+#: templates/configure/tab_sources.html.jinja:168
+msgid "Automatique (rclone si configuré, sinon compte de service)"
+msgstr "自動（設定済みなら rclone、それ以外はサービスアカウント）"
+
+#: templates/configure/tab_sources.html.jinja:169
+msgid "rclone (compte Google déjà configuré sur le Raspberry Pi)"
+msgstr "rclone（Raspberry Pi で設定済みの Google アカウント）"
+
+#: templates/configure/tab_sources.html.jinja:170
+msgid "Compte de service Google"
+msgstr "Google サービスアカウント"
+
+#: templates/configure/tab_sources.html.jinja:175
+msgid "Remote rclone :"
+msgstr "rclone リモート："
+
+#: templates/configure/tab_sources.html.jinja:182
+msgid ""
+"Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « rclone "
+"config » sur le Raspberry Pi."
+msgstr ""
+"Google Drive の rclone リモートが見つかりません。作成するには、Raspberry Pi で「rclone "
+"config」を実行してください。"
+
+#: templates/configure/tab_sources.html.jinja:187
+msgid ""
+"Créez un compte de service dans la console Google Cloud (API Google Drive "
+"activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez ensuite "
+"vos dossiers de photos avec l'adresse e-mail du compte de service."
+msgstr ""
+"Google Cloud コンソールでサービスアカウントを作成し（Google Drive API を有効化）、JSON "
+"キーをダウンロードして下に貼り付けてください。その後、写真フォルダーをサービスアカウントのメールアドレスと共有してください。"
+
+#: templates/configure/tab_sources.html.jinja:190
+msgid "Compte de service configuré :"
+msgstr "設定済みのサービスアカウント："
+
+#: templates/configure/tab_sources.html.jinja:192
+msgid ""
+"Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
+msgstr "Google Drive のフォルダーをこのアドレスと共有してください（閲覧のみ）。"
+
+#: templates/configure/tab_sources.html.jinja:195
+msgid "Clé JSON du compte de service :"
+msgstr "サービスアカウントの JSON キー："
+
+#: templates/configure/tab_sources.html.jinja:198
+msgid "Laisser vide pour conserver la clé actuelle"
+msgstr "現在のキーを保持する場合は空欄のままにしてください"
+
+#: templates/configure/tab_sources.html.jinja:204
+msgid "Afficher mes dossiers Google Drive"
+msgstr "Google Drive のフォルダーを表示"
+
+#: templates/configure/tab_sources.html.jinja:208
+msgid "Dossiers à afficher dans le diaporama :"
+msgstr "スライドショーに表示するフォルダー："
+
+#: templates/configure/tab_sources.html.jinja:217
+msgid ""
+"Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google Drive "
+"»."
+msgstr "フォルダーが選択されていません。「Google Drive のフォルダーを表示」をクリックしてください。"
+
+#: templates/configure/tab_sources.html.jinja:223
+msgid "Inclure les sous-dossiers"
+msgstr "サブフォルダーを含める"
+
+#: templates/configure/tab_sources.html.jinja:227
+msgid "Mettre les fichiers à la corbeille Google Drive après import"
+msgstr "インポート後にファイルを Google Drive のゴミ箱に移動"
+
+#: templates/configure/tab_sources.html.jinja:229
+msgid ""
+"Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
+"importée part dans la corbeille du Drive (récupérable 30 jours) et reste sur"
+" le cadre jusqu'à ce que vous la supprimiez dans l'onglet « Aperçu ». "
+"Uniquement avec la connexion rclone."
+msgstr ""
+"フォルダーは「送信ボックス」として機能します。インポートされた写真や動画は Drive のゴミ箱に移動し（30 "
+"日間復元可能）、「プレビュー」タブで削除するまでフォトフレームに残ります。rclone 接続の場合のみ利用できます。"
+
+#: templates/configure/tab_sources.html.jinja:230
+msgid ""
+"Pensez à enregistrer la configuration après avoir choisi les dossiers, puis "
+"lancez l'import depuis l'onglet « Actions »."
+msgstr "フォルダーを選択したら設定を保存し、「アクション」タブからインポートを開始してください。"
+
+#: templates/configure/tab_sources.html.jinja:233
+msgid "Mise à jour automatique (Google Drive)"
+msgstr "自動更新（Google Drive）"
+
+#: templates/configure/tab_sources.html.jinja:238
+msgid "Vérifier les nouveautés toutes les (minutes) :"
+msgstr "新着の確認間隔（分）："
+
+#: templates/configure/tab_sources.html.jinja:241
+msgid ""
+"Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées ou "
+"supprimées."
+msgstr "写真や動画が追加または削除された場合にのみ、スライドショーが再起動されます。"
+
+#: templates/configure/tab_sources.html.jinja:255
+msgid "Options de démarrage"
+msgstr "ブートオプション"
+
+#: templates/configure/tab_sources.html.jinja:259
+msgid "Ignorer le premier import automatique au démarrage"
+msgstr "起動時の最初の自動インポートをスキップする"
+
+#: templates/configure/tab_sources.html.jinja:261
+msgid ""
+"Si cette option est cochée, les mises à jour automatiques (Immich, Samba) ne"
+" se lanceront pas immédiatement après un redémarrage du cadre, mais "
+"attendront le prochain cycle programmé."
+msgstr ""
+"このオプションがチェックされている場合、自動更新 (Immich、Samba) "
+"はフレームワークの再起動直後には起動されず、次にスケジュールされたサイクルまで待機します。"
+
+#: templates/configure/tab_stats.html.jinja:4
+msgid "Informations Système"
+msgstr "システム情報"
+
+#: templates/configure/tab_stats.html.jinja:8
+msgid "Température CPU:"
+msgstr "CPU温度:"
+
+#: templates/configure/tab_stats.html.jinja:11
+msgid "Utilisation CPU:"
+msgstr "CPU使用率:"
+
+#: templates/configure/tab_stats.html.jinja:15
+msgid "RAM:"
+msgstr "ラム："
+
+#: templates/configure/tab_stats.html.jinja:18
+msgid "Stockage:"
+msgstr "ストレージ："
+
+#: templates/configure/tab_stats.html.jinja:23
+msgid "Historique Température CPU (10 min)"
+msgstr "CPU 温度履歴 (10 分)"
+
+#: templates/configure/tab_stats.html.jinja:27
+msgid "Historique Utilisation CPU (10 min)"
+msgstr "CPU使用率履歴(10分)"
+
+#: templates/configure/tab_stats.html.jinja:31
+msgid "Historique Utilisation RAM (10 min)"
+msgstr "RAM 使用量の履歴 (10 分)"
+
+#: templates/configure/tab_stats.html.jinja:35
+msgid "Historique Utilisation Disque (10 min)"
+msgstr "ディスク使用履歴 (10 分)"
+
+#: templates/configure/tab_telegram.html.jinja:4
+msgid "Réception de photos par Telegram"
+msgstr "電報で写真を受信する"
+
+#: templates/configure/tab_telegram.html.jinja:7
+msgid ""
+"Activez cette fonction pour permettre à des utilisateurs autorisés d'envoyer des photos\n"
+"                        directement sur le cadre via un bot Telegram. Les photos reçues seront ajoutées à la source\n"
+"                        \"Telegram\"."
+msgstr ""
+"この機能を有効にすると、承認されたユーザーが写真を送信できるようになります。\n"
+"                        Telegram ボット経由でフレームに直接送信します。受け取った写真はソースに追加されます\n"
+"                        「電報」。"
+
+#: templates/configure/tab_telegram.html.jinja:11
+msgid ""
+"Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. L'ID de\n"
+"                        l'administrateur est votre propre ID utilisateur Telegram (obtenu via @userinfobot par\n"
+"                        exemple)."
+msgstr ""
+"ボットを作成してトークンを取得するには、Telegram で @BotFather に話しかけてください。管理者 ID はご自身の Telegram "
+"ユーザー ID です（@userinfobot などで取得できます）。"
+
+#: templates/configure/tab_telegram.html.jinja:17
+msgid "Activer le bot de réception Telegram"
+msgstr "Telegram 受信トレイ ボットを有効にする"
+
+#: templates/configure/tab_telegram.html.jinja:22
+msgid "Token du Bot Telegram :"
+msgstr "トークン・デュ・ボット・テレグラム："
+
+#: templates/configure/tab_telegram.html.jinja:38
+msgid ""
+"ID de l'administrateur\n"
+"                            :"
+msgstr ""
+"管理者ID\n"
+"                            :"
+
+#: templates/configure/tab_telegram.html.jinja:42
+msgid "Votre ID numérique Telegram"
+msgstr "Telegram デジタル ID"
+
+#: templates/configure/tab_telegram.html.jinja:48
+msgid "Tester le Token du Bot"
+msgstr "ボットのトークンのテスター"
+
+#: templates/configure/tab_telegram.html.jinja:52
+msgid "État du bot :"
+msgstr "ボットのステータス:"
+
+#: templates/configure/tab_telegram.html.jinja:59
+msgid "Gestion des invitations pour les invités"
+msgstr "ゲストの招待状の管理"
+
+#: templates/configure/tab_telegram.html.jinja:62
+msgid ""
+"Créez des codes d'invitation uniques pour permettre à vos amis et votre famille d'envoyer\n"
+"                        des photos au cadre. Ils devront envoyer ce code à votre bot Telegram pour être autorisés."
+msgstr ""
+"独自の招待コードを作成して友人や家族に送信できるようにする\n"
+"                        フレーム内の写真。承認されるには、このコードを Telegram ボットに送信する必要があります。"
+
+#: templates/configure/tab_telegram.html.jinja:68
+msgid "Créer une nouvelle invitation"
+msgstr "新しい招待状を作成する"
+
+#: templates/configure/tab_telegram.html.jinja:72
+msgid "Nom de l'invité (ex: Mamie)"
+msgstr "ゲストのお名前（例：おばあちゃん）"
+
+#: templates/configure/tab_telegram.html.jinja:74
+msgid "Valide 7 jours"
+msgstr "7日間有効"
+
+#: templates/configure/tab_telegram.html.jinja:75
+msgid "Valide 30 jours"
+msgstr "30日間有効"
+
+#: templates/configure/tab_telegram.html.jinja:76
+msgid "Valide 90 jours"
+msgstr "90日間有効"
+
+#: templates/configure/tab_telegram.html.jinja:87
+msgid "Invitations actives"
+msgstr "アクティブな招待状"
+
+#: templates/configure/tab_telegram.html.jinja:90
+msgid "Chargement des invitations..."
+msgstr "招待状を読み込んでいます..."
+
+#: templates/configure/tab_telegram.html.jinja:97
+msgid "Source Telegram"
+msgstr "ソース電報"
+
+#: templates/configure/tab_telegram.html.jinja:99
+msgid ""
+"N'oubliez pas d'activer la source \"Telegram\" dans l'onglet\n"
+"                        \"Sources\" pour que les photos reçues apparaissent dans le diaporama."
+msgstr ""
+"タブで「Telegram」ソースを有効にすることを忘れないでください。\n"
+"                        「ソース」を選択すると、受信した写真がスライドショーに表示されます。"
+
+#: templates/configure/tab_telegram.html.jinja:105
+msgid "Fréquence des Cartes Postales"
+msgstr "はがきの頻度"
+
+#: templates/configure/tab_telegram.html.jinja:107
+msgid ""
+"Augmentez temporairement la fréquence d'affichage des\n"
+"                        nouvelles cartes postales reçues pour qu'elles apparaissent plus souvent."
+msgstr ""
+"一時的に表示頻度を上げます。\n"
+"                        新しいポストカードを受け取ったので、より頻繁に表示されます。"
+
+#: templates/configure/tab_telegram.html.jinja:113
+msgid "Activer le boost pour les cartes postales récentes"
+msgstr "最近のポストカードのブーストを有効にする"
+
+#: templates/configure/tab_telegram.html.jinja:117
+msgid ""
+"Durée du boost (jours)\n"
+"                            :"
+msgstr ""
+"ブースト期間 (日)\n"
+"                            :"
+
+#: templates/configure/tab_telegram.html.jinja:123
+msgid "Facteur de boost :"
+msgstr "ブースト係数:"
+
+#: templates/configure/tab_telegram.html.jinja:127
+msgid "(Ex: 4 = 5x plus de chances d'apparaître)"
+msgstr "（例：4個＝出現確率5倍）"
+
+#: templates/configure/tab_telegram.html.jinja:132
+msgid "Options de l'overlay"
+msgstr "オーバーレイのオプション"
+
+#: templates/configure/tab_telegram.html.jinja:138
+msgid "Activer l'icône de nouvelle carte postale dans l'overlay"
+msgstr "オーバーレイで新しいポストカード アイコンを有効にする"
+
+#: templates/configure/tab_validation.html.jinja:4
+msgid "Photos en attente de validation"
+msgstr "検証待ちの写真"
+
+#: templates/configure/tab_validation.html.jinja:7
+msgid ""
+"Approuvez ou rejetez les photos envoyées. Les photos approuvées\n"
+"                        seront ajoutées à la source \"Invités\"."
+msgstr "送信された写真を承認または拒否します。承認された写真は「ゲスト」ソースに追加されます。"
+
+#: templates/configure/tab_vocal.html.jinja:4
+msgid "Contrôle Vocal"
+msgstr "音声制御"
+
+#: templates/configure/tab_vocal.html.jinja:7
+msgid "Contrôlez votre diaporama à la voix avec le mot-clé \"Cadre Magique\"."
+msgstr "「Magic Frame」をキーワードに音声でスライドショーを操作します。"
+
+#: templates/configure/tab_vocal.html.jinja:11
+msgid "Étape Manuelle Requise :"
+msgstr "必要な手動ステップ:"
+
+#: templates/configure/tab_vocal.html.jinja:11
+msgid ""
+"Pour utiliser le mot-clé\n"
+"                            personnalisé \"Cadre Magique\", vous devez créer un modèle sur le site de Picovoice, le\n"
+"                            télécharger, et le placer dans le dossier `voice_models` sous le nom\n"
+"                            `cadre-magique_raspberry-pi.ppn`."
+msgstr ""
+"カスタムキーワード「Cadre Magique」を使用するには、Picovoice "
+"のサイトでモデルを作成してダウンロードし、`voice_models` フォルダーに `cadre-magique_raspberry-pi.ppn` "
+"という名前で配置する必要があります。"
+
+#: templates/configure/tab_vocal.html.jinja:18
+msgid ""
+"Moteur\n"
+"                            de mot-clé"
+msgstr ""
+"エンジン\n"
+"                            キーワード"
+
+#: templates/configure/tab_vocal.html.jinja:23
+msgid "Picovoice Porcupine (Recommandé, nécessite une clé API)"
+msgstr "Picovoice Porcupine (推奨、API キーが必要)"
+
+#: templates/configure/tab_vocal.html.jinja:25
+msgid "Vosk (Totalement local, sans clé API, plus gourmand)"
+msgstr "Vosk (完全にローカル、API キーなし、より貪欲)"
+
+#: templates/configure/tab_vocal.html.jinja:27
+msgid ""
+"Choisissez 'Vosk' si vous ne souhaitez pas créer de\n"
+"                            compte Picovoice."
+msgstr ""
+"作成したくない場合は「Vosk」を選択してください\n"
+"                            ピコボイスアカウント。"
+
+#: templates/configure/tab_vocal.html.jinja:33
+msgid "Activer le contrôle vocal (action immédiate)"
+msgstr "音声制御を有効にする (即時アクション)"
+
+#: templates/configure/tab_vocal.html.jinja:37
+msgid ""
+"Langue\n"
+"                            du contrôle vocal"
+msgstr "音声コントロールの言語"
+
+#: templates/configure/tab_vocal.html.jinja:42
+msgid "Français"
+msgstr "フランス語"
+
+#: templates/configure/tab_vocal.html.jinja:44
+msgid "Anglais"
+msgstr "英語"
+
+#: templates/configure/tab_vocal.html.jinja:46
+msgid ""
+"Le changement de langue nécessite un redémarrage du\n"
+"                            service vocal (désactiver puis réactiver le contrôle vocal)."
+msgstr "言語を変更するには、音声サービスの再起動（音声コントロールを無効にしてから再度有効にする）が必要です。"
+
+#: templates/configure/tab_vocal.html.jinja:51
+msgid ""
+"Clé\n"
+"                            d'accès Picovoice Porcupine"
+msgstr "Picovoice Porcupine アクセスキー"
+
+#: templates/configure/tab_vocal.html.jinja:57
+msgid "Collez votre clé d'accès ici"
+msgstr "ここにアクセスキーを貼り付けてください"
+
+#: templates/configure/tab_vocal.html.jinja:61
+msgid "Afficher/Cacher la clé d'accès"
+msgstr "アクセスキーを表示/非表示"
+
+#: templates/configure/tab_vocal.html.jinja:66
+msgid ""
+"Obtenez votre clé via le compte gratuit (Free Tier)\n"
+"                            sur la"
+msgstr "無料アカウント（Free Tier）でキーを取得してください："
+
+#: templates/configure/tab_vocal.html.jinja:73
+msgid "Périphérique d'entrée audio (Microphone)"
+msgstr "音声入力デバイス（マイク）"
+
+#: templates/configure/tab_vocal.html.jinja:82
+msgid "Actualiser la liste"
+msgstr "リストを更新する"
+
+#: templates/configure/tab_vocal.html.jinja:87
+msgid "État du service vocal :"
+msgstr "音声サービスのステータス:"
+
+#: templates/configure/tab_vocal.html.jinja:96
+msgid "Volume des Notifications Sonores"
+msgstr "通知音の音量"
+
+#: templates/configure/tab_vocal.html.jinja:99
+msgid ""
+"Règle le volume pour les sons de notification (confirmation du contrôle vocal, réception\n"
+"                        de carte postale, etc.)."
+msgstr ""
+"通知音（ボイスコントロール確認、受信音）の音量を調整します。\n"
+"                        ポストカードなど）。"
+
+#: templates/configure/tab_vocal.html.jinja:103
+msgid ""
+"Volume des notifications\n"
+"                            :"
+msgstr ""
+"通知量\n"
+"                            :"
+
+#: templates/configure/tab_vocal.html.jinja:116
+msgid "Diagnostic Audio"
+msgstr "診断音声"
+
+#: templates/configure/tab_vocal.html.jinja:119
+msgid ""
+"Si votre microphone n'apparaît pas dans la liste ci-dessus, utilisez cet outil pour\n"
+"                        vérifier si le système d'exploitation le détecte correctement."
+msgstr ""
+"お使いのマイクが上記にリストされていない場合は、このツールを使用して\n"
+"                        オペレーティング システムがそれを正しく検出しているかどうかを確認してください。"
+
+#: templates/configure/tab_vocal.html.jinja:127
+msgid "Résultats du diagnostic :"
+msgstr "診断結果:"
+
+#: utils/auth.py:24
+msgid "Action réservée aux administrateurs."
+msgstr "管理者専用の操作です。"
+
+#: web/core.py:863
+msgid "Code d'invitation invalide."
+msgstr "招待コードが無効です。"
+
+#: web/core.py:869
+msgid "Ce code d'invitation a expiré."
+msgstr "この招待コードの有効期限は切れています。"
+
+#: web/core.py:875
+msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
+msgstr "あなたはすでに認可されています。写真を送ってください！"
+
+#: web/core.py:877
+msgid "Ce code d'invitation a déjà été utilisé."
+msgstr "この招待コードはすでに使用されています。"
+
+#: web/core.py:888
+#, python-format
+msgid ""
+"Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes postales "
+"au cadre."
+msgstr "%(name)s おめでとうございます!ポストカードをフレームに送信できるようになりました。"
+
+#: web/routes_auth.py:23
+msgid "Connexion réussie"
+msgstr "接続成功"
+
+#: web/routes_auth.py:26
+msgid "Identifiants invalides"
+msgstr "無効な識別子"
+
+#: web/routes_auth.py:35
+msgid "Déconnexion réussie"
+msgstr "ログアウト成功"
+
+#: web/routes_auth.py:47
+msgid "Les deux champs de mot de passe sont requis."
+msgstr "両方のパスワードフィールドは必須です。"
+
+#: web/routes_auth.py:51
+msgid "Les mots de passe ne correspondent pas."
+msgstr "パスワードが一致しません。"
+
+#: web/routes_auth.py:55
+msgid "Le mot de passe doit contenir au moins 6 caractères."
+msgstr "パスワードには少なくとも 6 文字を含める必要があります。"
+
+#: web/routes_auth.py:64
+msgid ""
+"Mot de passe mis à jour avec succès. Il sera nécessaire pour votre prochaine"
+" connexion."
+msgstr "パスワードが正常に更新されました。次回の接続に必要になります。"
+
+#: web/routes_auth.py:66
+#, python-format
+msgid "Erreur lors du changement de mot de passe : %(error)s"
+msgstr "パスワード変更エラー: %(error)s"
+
+#: web/routes_auth.py:78
+#, python-format
+msgid "Compte « %(name)s » créé."
+msgstr "アカウント「%(name)s」を作成しました。"
+
+#: web/routes_auth.py:88
+msgid "Vous ne pouvez pas supprimer votre propre compte."
+msgstr "自分のアカウントは削除できません。"
+
+#: web/routes_auth.py:92
+#, python-format
+msgid "Compte « %(name)s » supprimé."
+msgstr "アカウント「%(name)s」を削除しました。"
+
+#: web/routes_auth.py:103
+#, python-format
+msgid "Mot de passe de « %(name)s » modifié."
+msgstr "「%(name)s」のパスワードを変更しました。"
+
+#: web/routes_auth.py:113
+msgid "Vous ne pouvez pas modifier votre propre rôle."
+msgstr "自分の役割は変更できません。"
+
+#: web/routes_auth.py:117
+#, python-format
+msgid "Rôle de « %(name)s » modifié."
+msgstr "「%(name)s」の役割を変更しました。"
+
+#: web/routes_config.py:54
+msgid ""
+"La valeur pour la limite de photos Immich est invalide. La valeur précédente"
+" est conservée."
+msgstr "イミッチ写真制限の値が無効です。以前の値が保持されます。"
+
+#: web/routes_config.py:202
+#, python-format
+msgid "Clé Google Drive non enregistrée : %(error)s"
+msgstr "Google Drive のキーが保存されませんでした：%(error)s"
+
+#: web/routes_config.py:227
+msgid ""
+"Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
+"changements."
+msgstr "設定が保存されました。変更を適用するためにスライドショーが再開されました。"
+
+#: web/routes_guests.py:32
+#, python-format
+msgid "L'accès pour l'invité '%(name)s' a été révoqué."
+msgstr "ゲスト '%(name)s' のアクセスが取り消されました。"
+
+#: web/routes_guests.py:77 web/routes_guests.py:82
+msgid "Aucun fichier sélectionné."
+msgstr "ファイルが選択されていません。"
+
+#: web/routes_guests.py:100
+#, python-format
+msgid "%(count)s photo(s) envoyée(s) pour validation avec succès !"
+msgstr "%(count)s 枚の写真が検証のために正常に送信されました。"
+
+#: web/routes_guests.py:161
+msgid "Photo rejetée."
+msgstr "写真は拒否されました。"
+
+#: web/routes_guests.py:204
+msgid "Photo approuvée et préparée. Le diaporama a été mis à jour."
+msgstr "写真は承認され、準備されました。スライドショーが更新されました。"
+
+#: web/routes_guests.py:206
+msgid "La préparation de la photo a échoué. La photo reste en attente."
+msgstr "写真の準備に失敗しました。写真は保留中のままです。"
+
+#: web/routes_guests.py:210
+msgid "Action inconnue."
+msgstr "アクションは不明。"
+
+#: web/routes_integrations.py:109
+msgid "Le token du bot est requis."
+msgstr "ボットトークンは必須です。"
+
+#: web/routes_integrations.py:119
+#, python-format
+msgid "Token valide ! Le bot s'appelle '%(bot_name)s'."
+msgstr "有効なトークンです!ボットの名前は「%(bot_name)s」です。"
+
+#: web/routes_integrations.py:122
+#, python-format
+msgid "Échec de l'envoi : %(error)s"
+msgstr "送信に失敗しました: %(error)s"
+
+#: web/routes_integrations.py:124
+#, python-format
+msgid "Erreur de connexion : %(error)s"
+msgstr "接続エラー: %(error)s"
+
+#: web/routes_slideshow.py:379
+#, python-format
+msgid ""
+"Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
+msgstr "適用される解像度: %(width)sx%(height)s。スライドショーを再開しました。"
+
+#: web/routes_slideshow.py:381
+#, python-format
+msgid ""
+"Résolution appliquée : %(width)sx%(height)s. Le diaporama n'était pas en "
+"cours."
+msgstr "適用される解像度: %(width)sx%(height)s。スライドショーは進行中ではありませんでした。"
+
+#: web/routes_system.py:83
+msgid ""
+"Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération "
+"annulée."
+msgstr "デスクトップ環境が検出されません（Raspberry Pi OS Lite?）。操作を中止しました。"
+
+#: web/routes_system.py:119
+msgid ""
+"Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera "
+"plus automatiquement."
+msgstr "システムを Raspberry Pi OS のデスクトップで再起動します。Pimmich は自動起動しなくなります。"
+
+#: web/routes_system.py:169
+msgid ""
+"L'application web redémarre... La page sera inaccessible pendant quelques "
+"instants."
+msgstr "Web アプリケーションが再起動します...ページはしばらくの間アクセスできなくなります。"
+
+#: web/routes_system.py:195
+msgid "Le SSID et le pays Wi-Fi sont obligatoires."
+msgstr "SSIDとWi-Fiの国は必須です。"
+
+#: web/routes_system.py:208
+msgid ""
+"Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer la"
+" connexion. Veuillez patienter une minute et vérifier le statut."
+msgstr ""
+"Wi-Fi設定が適用されました。接続を強制するためにネットワーク サービスが再起動されました。しばらく待ってからステータスを確認してください。"
+
+#: web/routes_system.py:210
+#, python-format
+msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
+msgstr "Wi-Fi 設定の適用中にエラーが発生しました: %(error)s"
+
+#: web/routes_system.py:265
+msgid "Le fichier de configuration n'a pas été trouvé."
+msgstr "設定ファイルが見つかりませんでした。"
+
+#: web/routes_system.py:274 web/routes_system.py:279
+msgid "Aucun fichier de sauvegarde sélectionné."
+msgstr "保存ファイルが選択されていません。"
+
+#: web/routes_system.py:289
+msgid ""
+"Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
+"appliquer les changements."
+msgstr "設定が正常に復元されました。変更を適用するためにスライドショーが再開されます。"
+
+#: web/routes_system.py:291
+msgid ""
+"Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
+"valide."
+msgstr "保存ファイルが無効または破損しています。これは有効な JSON ファイルではありません。"
+
+#: web/routes_system.py:293
+#, python-format
+msgid "Erreur lors de la restauration : %(error)s"
+msgstr "復元中のエラー: %(error)s"
+
+#: web/routes_system.py:372
+msgid "name_key"
+msgstr "名前キー"
+
+#: web/routes_voice.py:32
+msgid "Le service est arrêté."
+msgstr "サービスが停止されています。"
+
+#: web/routes_voice.py:41
+msgid "Démarrage du service..."
+msgstr "サービスを開始しています..."
+
+#: web/routes_voice.py:78
+msgid "Paramètre 'enabled' manquant."
+msgstr "「有効」パラメータがありません。"
+
+#: web/routes_voice.py:89
+msgid "Service de contrôle vocal activé."
+msgstr "音声コントロールサービスが有効になりました。"
+
+#: web/routes_voice.py:92
+msgid "Service de contrôle vocal désactivé."
+msgstr "音声コントロールサービスが無効になっています。"
+
+#: web/routes_voice.py:97
+#, python-format
+msgid "Erreur interne du serveur : %(error)s"
+msgstr "内部サーバー エラー: %(error)s"
+
+#: web/workers.py:158 web/workers.py:267 web/workers.py:360
+msgid "Import initial ignoré."
+msgstr "初期インポートは無視されました。"
+
+#: web/workers.py:171 web/workers.py:280
+#, python-format
+msgid "Mise à jour auto. activée. Intervalle : %(hours)sh."
+msgstr "自動更新。活性化された。間隔: %(hours)sh。"
+
+#: web/workers.py:177
+msgid "Lancement du téléchargement..."
+msgstr "ダウンロードを開始しています..."
+
+#: web/workers.py:209 web/workers.py:300 web/workers.py:376
+msgid "Préparation des photos..."
+msgstr "写真を準備しています..."
+
+#: web/workers.py:224 web/workers.py:323
+msgid "Mise à jour terminée. Redémarrage du diaporama..."
+msgstr "アップデートが完了しました。スライドショーを再開しています..."
+
+#: web/workers.py:229 web/workers.py:328 web/workers.py:394
+msgid "Dernière mise à jour réussie."
+msgstr "最後に成功した更新。"
+
+#: web/workers.py:232 web/workers.py:331 web/workers.py:396
+msgid "Mise à jour terminée avec avertissements/erreurs."
+msgstr "更新は完了しましたが、警告/エラーが発生しました。"
+
+#: web/workers.py:239
+msgid "Mise à jour automatique désactivée."
+msgstr "自動更新が無効になっています。"
+
+#: web/workers.py:286
+msgid "Lancement de l'import..."
+msgstr "インポートの開始..."
+
+#: web/workers.py:337
+msgid "Mise à jour automatique Samba désactivée."
+msgstr "Samba の自動更新が無効になっています。"
+
+#: web/workers.py:364
+msgid "Recherche de nouveautés..."
+msgstr "新着を確認中..."
+
+#: web/workers.py:399
+msgid "Aucune nouveauté."
+msgstr "新着はありません。"
+
+#: web/workers.py:405
+msgid "Mise à jour automatique Google Drive désactivée."
+msgstr "Google Drive の自動更新を無効にしました。"
 
 #~ msgid "Amplitude du zoom (ex: 1.15 pour 15%% de zoom) :"
 #~ msgstr "ズーム振幅 (例: 15%% ズームの場合は 1.15):"
@@ -2927,3 +3425,185 @@ msgstr ""
 #~ "選択して仮想アルバム (プレイリスト) を作成します。\n"
 #~ "                    あらゆるソースからの写真。その後、\n"
 #~ "                    プレイリストからの写真。"
+
+#~ msgid ""
+#~ "Amplitude du zoom (ex: 1.15 pour\n"
+#~ "                            15%% de zoom) :"
+#~ msgstr ""
+#~ "ズーム範囲 (例: 1.15\n"
+#~ "                            15%% ズーム):"
+
+#~ msgid "Activer le contrôle par prise connectée"
+#~ msgstr "スマートソケットコントロールを有効にする"
+
+#~ msgid "État de la prise : Inconnu"
+#~ msgstr "コンセントのステータス: 不明"
+
+#~ msgid "URL pour ALLUMER la prise :"
+#~ msgstr "ソケットをオンにする URL:"
+
+#~ msgid "URL pour ÉTEINDRE la prise :"
+#~ msgstr "ソケットをオフにするための URL:"
+
+#~ msgid "Délai après allumage (secondes) :"
+#~ msgstr "点火後の遅延 (秒):"
+
+#~ msgid "URL de Statut (Optionnel) :"
+#~ msgstr "ステータス URL (オプション):"
+
+#~ msgid ""
+#~ "La détection automatique du fuseau horaire a échoué lors de l'installation. "
+#~ "Le système est configuré sur <strong>UTC</strong>. L'heure affichée peut "
+#~ "être incorrecte."
+#~ msgstr ""
+#~ "インストール中に自動タイムゾーン検出に失敗しました。システムは<strong>UTC</strong>に設定されています。表示される時刻は誤差がある可能性があります。"
+
+#~ msgid ""
+#~ "Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via"
+#~ " SSH) et en exécutant la commande :"
+#~ msgstr "Raspberry Pi に (SSH 経由で) 接続し、次のコマンドを実行することで、手動で修正できます。"
+
+#~ msgid ""
+#~ "Activer la mise à jour\n"
+#~ "                            automatique"
+#~ msgstr ""
+#~ "アップデートをアクティブ化する\n"
+#~ "                            自動"
+
+#~ msgid ""
+#~ "Photos des invités\n"
+#~ "                            (validées)"
+#~ msgstr ""
+#~ "ゲストの写真\n"
+#~ "                            (検証済み)"
+
+#~ msgid ""
+#~ "Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. "
+#~ "L'ID de l'administrateur est votre propre ID utilisateur Telegram (obtenu "
+#~ "via @userinfobot par exemple)."
+#~ msgstr ""
+#~ "ボットを作成してトークンを取得するには、Telegram で @BotFather に話しかけてください。管理者 ID は、自分の Telegram "
+#~ "ユーザー ID (たとえば、@userinfobot 経由で取得) です。"
+
+#~ msgid ""
+#~ "Pour utiliser le mot-clé personnalisé \"Cadre Magique\", vous devez créer un"
+#~ " modèle sur le site de Picovoice, le télécharger, et le placer dans le "
+#~ "dossier `voice_models` sous le nom `cadre-magique_raspberry-pi.ppn`."
+#~ msgstr ""
+#~ "カスタム キーワード「Cadre Magique」を使用するには、Picovoice Web サイトでモデルを作成してダウンロードし、「cadre-"
+#~ "magique_raspberry-pi.ppn」という名前で「voice_models」フォルダーに配置する必要があります。"
+
+#~ msgid "Langue du contrôle vocal"
+#~ msgstr "音声制御言語"
+
+#~ msgid ""
+#~ "Le changement de langue nécessite un redémarrage du service vocal "
+#~ "(désactiver puis réactiver le contrôle vocal)."
+#~ msgstr "言語を変更するには、音声サービスを再起動する必要があります (音声コントロールを無効にしてから再度有効にする)。"
+
+#~ msgid "Clé d'accès Picovoice Porcupine"
+#~ msgstr "Picovoice ポーキュパイン アクセス キー"
+
+#~ msgid "Obtenez votre clé via le compte gratuit (Free Tier) sur la"
+#~ msgstr "無料アカウント (無料利用枠) 経由でキーを取得します。"
+
+#~ msgid ""
+#~ "Utilise les codes de formatage Python (ex:\n"
+#~ "                            %%d/%%m/%%Y, %%B %%Y)."
+#~ msgstr ""
+#~ "Python フォーマットコードを使用します (例:\n"
+#~ "                            %%d/%%m/%%Y、%%B %%Y)。"
+
+#~ msgid ""
+#~ "Afficher la localisation\n"
+#~ "                            (ville/pays)"
+#~ msgstr ""
+#~ "場所を表示\n"
+#~ "                            (都市/国)"
+
+#~ msgid ""
+#~ "Afficher un fond\n"
+#~ "                            semi-transparent derrière les métadonnées"
+#~ msgstr ""
+#~ "背景を表示する\n"
+#~ "                            メタデータの背後にある半透明"
+
+#~ msgid ""
+#~ "L'import depuis Telegram se fait automatiquement à la réception des photos. "
+#~ "Activez la source dans l'onglet \"Sources\" pour les voir."
+#~ msgstr "Telegram からのインポートは、写真を受信すると自動的に行われます。 「ソース」タブでソースをアクティブにして表示します。"
+
+#~ msgid ""
+#~ "Envoyez des photos directement depuis votre téléphone via le navigateur."
+#~ msgstr "携帯電話からブラウザ経由で写真を直接送信します。"
+
+#~ msgid ""
+#~ "Approuvez ou rejetez les photos envoyées. Les photos approuvées seront "
+#~ "ajoutées à la source \"Invités\"."
+#~ msgstr "送信された写真を承認または拒否します。承認された写真は「ゲスト」ソースに追加されます。"
+
+#~ msgid ""
+#~ "La sélection du pays est obligatoire pour activer l'interface Wi-Fi et "
+#~ "respecter les réglementations locales sur les fréquences radio."
+#~ msgstr "Wi-Fi インターフェイスを有効にし、地域の無線周波数規制に準拠するには、国の選択が必要です。"
+
+#~ msgid ""
+#~ "Note : Après avoir appliqué les paramètres, la connexion peut prendre "
+#~ "jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à "
+#~ "\"Connecté\", vérifiez le mot de passe puis essayez de redémarrer le "
+#~ "système."
+#~ msgstr ""
+#~ "注: 設定を適用した後、接続までに最大 1 "
+#~ "分かかる場合があります。上記の接続状態が「接続済み」に変わらない場合は、パスワードを確認してシステムを再起動してください。"
+
+#~ msgid ""
+#~ "Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet est branché, c'est"
+#~ " souvent un problème de priorité. Désactivez l'interface Ethernet pour "
+#~ "forcer le système à utiliser exclusivement le Wi-Fi. Cette action redémarre "
+#~ "le service réseau."
+#~ msgstr ""
+#~ "イーサネット ケーブルが接続されているにもかかわらず Wi-Fi に接続できない場合は、多くの場合、それが優先される問題です。イーサネット "
+#~ "インターフェイスを無効にして、システムが Wi-Fi のみを使用するように強制します。このアクションにより、ネットワーク サービスが再起動されます。"
+
+#~ msgid "Changer le mot de passe de l'interface"
+#~ msgstr "インターフェースのパスワードを変更する"
+
+#~ msgid ""
+#~ "Sauvegardez votre configuration (API, partages, affichage...) dans un "
+#~ "fichier. Vous pourrez le restaurer plus tard ou sur une nouvelle "
+#~ "installation."
+#~ msgstr "設定 (API、共有、ディスプレイなど) をファイルに保存します。後で復元することも、新規インストール時に復元することもできます。"
+
+#~ msgid ""
+#~ "Cliquez sur le bouton pour rechercher et installer les dernières mises à "
+#~ "jour de Pimmich depuis GitHub. L'application redémarrera automatiquement "
+#~ "après la mise à jour."
+#~ msgstr ""
+#~ "ボタンをクリックして、GitHub から最新の Pimmich "
+#~ "アップデートを検索してインストールします。アップデート後、アプリケーションは自動的に再起動します。"
+
+#~ msgid ""
+#~ "Si vous avez flashé Pimmich sur une carte SD plus grande que l'image, "
+#~ "utilisez cette option pour étendre la partition et utiliser tout l'espace "
+#~ "disponible. Un redémarrage du système sera nécessaire pour finaliser "
+#~ "l'opération."
+#~ msgstr ""
+#~ "Pimmich をイメージより大きい SD "
+#~ "カードにフラッシュした場合は、このオプションを使用してパーティションを拡張し、利用可能なスペースをすべて使用します。操作を完了するにはシステムを再起動する必要があります。"
+
+#~ msgid ""
+#~ "Cette opération est sûre et ne supprime aucune donnée. Elle prépare "
+#~ "simplement le système à s'étendre au prochain démarrage."
+#~ msgstr "この操作は安全であり、データは削除されません。これは、次回の起動時にシステムを拡張する準備をするだけです。"
+
+#~ msgid ""
+#~ "Voici les photos qui sont prêtes à être affichées par le diaporama, classées"
+#~ " par source. Cliquez sur une photo pour l'agrandir."
+#~ msgstr "ここでは、スライドショーで表示する準備ができている写真をソース別に分類して示します。写真をクリックすると拡大します。"
+
+#~ msgid ""
+#~ "Créez des albums virtuels (playlists) en sélectionnant des photos de "
+#~ "n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant "
+#~ "uniquement les photos d'une playlist."
+#~ msgstr ""
+#~ "任意のソースから写真を選択して、仮想アルバム (プレイリスト) を作成します。その後、プレイリストの写真のみを含むスライドショーを開始できます。"
