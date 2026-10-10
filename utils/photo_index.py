@@ -83,6 +83,16 @@ def read_exif(path):
     return taken, lat, lon
 
 
+def _has_camera(path):
+    """Les informations de l'image citent un appareil photo (marque ou modèle) : ce n'est pas une capture d'écran."""
+    try:
+        with Image.open(path) as image:
+            exif = image.getexif()
+            return bool(exif.get(271) or exif.get(272))  # Make, Model
+    except Exception:
+        return False
+
+
 def _original(prepared):
     """Fichier original correspondant (même nom, extension quelconque) dans static/photos/<source>."""
     folder = ORIGINALS_DIR / prepared.parent.name
@@ -129,8 +139,13 @@ def photo_info(prepared):
     if not taken:
         taken = date_from_name(prepared.name)
         how = "name" if taken else None
+    # Qualité (tri automatique) : netteté, luminosité, capture d'écran
+    from utils import photo_quality
+    quality = photo_quality.measure(prepared)
+    original = _original(prepared)
+    quality["shot"] = photo_quality.is_screenshot(prepared, original, has_camera=_has_camera(original or prepared))
     return {"date": taken.isoformat(timespec="seconds") if taken else None, "how": how,
-            "lat": lat if isinstance(lat, (int, float)) else None, "lon": lon if isinstance(lon, (int, float)) else None}
+            "lat": lat if isinstance(lat, (int, float)) else None, "lon": lon if isinstance(lon, (int, float)) else None, "q": quality}
 
 
 def load():
@@ -158,7 +173,7 @@ def update(prepared_dir=None, limit=None):
             key = f"{path.parent.name}/{path.name}"
             seen.add(key)
             mtime = int(path.stat().st_mtime)
-            if index.get(key, {}).get("mtime") == mtime:
+            if index.get(key, {}).get("mtime") == mtime and "q" in index.get(key, {}):
                 continue
             if limit is not None and read >= limit:
                 continue  # le reste à la prochaine fois (le diaporama ne doit pas attendre)

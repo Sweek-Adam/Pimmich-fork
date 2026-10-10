@@ -108,6 +108,58 @@
                     </div>
                     <p class="text-sm text-gray-600">{{ _("Une même photo reçue par plusieurs sources (ex. Google Drive et Telegram) n'est affichée qu'une fois, de préférence celle mise en favori.") }}</p>
                 </fieldset>
+                <fieldset class="mt-4" id="quality-box">
+                    <legend><h3><i class="fas fa-magic mr-2"></i>{{ _("Tri automatique") }}</h3></legend>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Écarte du diaporama les photos ratées. Rien n'est supprimé : vous pouvez remettre chaque photo d'un clic.") }}</p>
+                    <label class="flex items-center gap-2 font-semibold"><input type="checkbox" data-q="auto_filter_enabled"> {{ _("Activer le tri automatique") }}</label>
+                    <div class="q-criteria">
+                        <label><input type="checkbox" data-q="filter_blurry"> {{ _("Photos floues") }}</label>
+                        <label><input type="checkbox" data-q="filter_dark"> {{ _("Photos très sombres") }}</label>
+                        <label><input type="checkbox" data-q="filter_screenshots"> {{ _("Captures d'écran") }}</label>
+                        <label><input type="checkbox" data-q="filter_bursts"> {{ _("Rafales : seule la plus nette est gardée") }}</label>
+                    </div>
+                    <button type="button" id="q-show" class="btn-secondary mt-2"><i class="fas fa-eye mr-1"></i><span></span></button>
+                    <div id="q-list" class="q-grid hidden"></div>
+                    <p id="q-status" class="text-sm mt-2"></p>
+                </fieldset>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { show: {{ _("Voir les photos écartées")|tojson }}, none: {{ _("Aucune photo écartée.")|tojson }}, restore: {{ _("Remettre")|tojson }},
+                                    reasons: { blurry: {{ _("floue")|tojson }}, dark: {{ _("très sombre")|tojson }}, screenshot: {{ _("capture d'écran")|tojson }}, burst: {{ _("rafale")|tojson }} } };
+                        const say = (t, ok) => { $("q-status").textContent = t || ""; $("q-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        let data = null;
+                        async function load() {
+                            data = await (await fetch("/api/quality")).json();
+                            document.querySelectorAll("#quality-box [data-q]").forEach(c => c.checked = data.settings[c.dataset.q]);
+                            $("q-show").querySelector("span").textContent = `${T.show} (${data.excluded.length})`;
+                            if (!$("q-list").classList.contains("hidden")) render();
+                        }
+                        function render() {
+                            $("q-list").innerHTML = data.excluded.length ? "" : `<p class="muted">${T.none}</p>`;
+                            data.excluded.forEach(item => {
+                                const fig = document.createElement("figure");
+                                const img = document.createElement("img"); img.src = item.thumb; img.loading = "lazy"; img.alt = "";
+                                const cap = document.createElement("figcaption");
+                                cap.textContent = item.reasons.map(r => T.reasons[r] || r).join(", ");
+                                const btn = document.createElement("button"); btn.type = "button"; btn.className = "link"; btn.textContent = T.restore;
+                                btn.addEventListener("click", async () => {
+                                    const r = await (await fetch("/api/quality/keep", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ path: item.path }) })).json();
+                                    say(r.message, r.success); if (r.success) load();
+                                });
+                                fig.append(img, cap, btn);
+                                $("q-list").appendChild(fig);
+                            });
+                        }
+                        document.querySelectorAll("#quality-box [data-q]").forEach(c => c.addEventListener("change", async () => {
+                            const r = await (await fetch("/api/quality", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ [c.dataset.q]: c.checked }) })).json();
+                            say(r.message, r.success); load();
+                        }));
+                        $("q-show").addEventListener("click", () => { $("q-list").classList.toggle("hidden"); render(); });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-sources'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        load();
+                    });
+                </script>
                 <fieldset class="mt-4">
                     <legend>
                         <h3>{{ _("Configuration du partage Samba (Windows)") }}</h3>

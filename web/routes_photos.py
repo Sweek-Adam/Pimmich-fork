@@ -1,5 +1,6 @@
 """Gestion des photos préparées : suppression, filtres, favoris, textes."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
+from web.core import _
 from utils import messages_manager
 
 
@@ -233,3 +234,55 @@ def set_image_text():
         return jsonify({"success": True, "message": "Texte mis à jour."})
     except Exception as e:
         return jsonify({"success": False, "message": f"Erreur interne du serveur : {e}"}), 500
+
+
+# --- Tri automatique (photos floues, sombres, captures d'écran, rafales) ---
+
+QUALITY_SWITCHES = ("auto_filter_enabled", "filter_blurry", "filter_dark", "filter_screenshots", "filter_bursts")
+
+
+@app.route('/api/quality', methods=['GET'])
+@login_required
+def quality_api():
+    from utils import photo_index, photo_quality
+    from utils.dedup import hashes_for
+    config = load_config()
+    index = photo_index.load()
+    hashes = None
+    if config.get("filter_bursts", True):
+        paths = [str(PREPARED_DIR / key) for key in index]
+        hashes = {photo_index.key_for(p): h for p, h in hashes_for(paths).items() if h is not None}
+    rejected = photo_quality.excluded(index, dict(config, auto_filter_enabled=True), hashes)  # liste même si le tri est en pause
+    items = [{"path": key, "thumb": url_for("static", filename=f"prepared/{key}"), "reasons": reasons}
+             for key, reasons in sorted(rejected.items()) if (PREPARED_DIR / key).is_file()]
+    return jsonify({"success": True, "settings": {k: bool(config.get(k, True)) for k in QUALITY_SWITCHES},
+                    "excluded": items, "kept": len(config.get("quality_keep") or [])})
+
+
+@app.route('/api/quality', methods=['POST'])
+@login_required
+def quality_save_api():
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    for key in QUALITY_SWITCHES:
+        if key in data:
+            config[key] = bool(data[key])
+    save_config(config)
+    return jsonify({"success": True, "message": _("Tri automatique enregistré : appliqué au prochain tour du diaporama.")})
+
+
+@app.route('/api/quality/keep', methods=['POST'])
+@login_required
+def quality_keep_api():
+    """Remet une photo écartée dans le diaporama (ou annule)."""
+    data = request.get_json(silent=True) or {}
+    path = str(data.get("path", ""))
+    base = PREPARED_DIR.resolve()
+    if not (base / path).resolve().is_file() or base not in (base / path).resolve().parents:
+        return jsonify({"success": False, "message": _("Photo introuvable.")}), 404
+    config = dict(load_config())
+    keep = set(config.get("quality_keep") or [])
+    keep.add(path) if data.get("keep", True) else keep.discard(path)
+    config["quality_keep"] = sorted(keep)
+    save_config(config)
+    return jsonify({"success": True, "message": _("Photo remise dans le diaporama.") if data.get("keep", True) else _("Photo de nouveau écartée.")})

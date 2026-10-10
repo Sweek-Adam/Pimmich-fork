@@ -26,7 +26,7 @@ from utils.metadata_utils import get_photo_metadata, load_photo_metadata_cache #
 from utils.config_manager import load_config
 from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
-from utils.dedup import remove_duplicates
+from utils.dedup import hashes_for, remove_duplicates
 from utils.messages_manager import pop_priority, list_messages
 from utils import compositions, layout_engine
 from utils import play_queue
@@ -2640,10 +2640,26 @@ def start_slideshow():
                     kept = set(remove_duplicates([str(p) for _, p in candidates]))
                     candidates = [c for c in candidates if str(c[1]) in kept]
 
-                all_media = [get_path_to_display(photo_path_obj, source, filter_states) for source, photo_path_obj in candidates]
-                
                 if not _photo_index_cache:
                     _photo_index_cache.update(photo_index.load())  # index déjà construit : utilisable tout de suite
+                # Tri automatique : photos floues, très sombres, captures d'écran, rafales (sauf photos remises à la main)
+                if config.get("auto_filter_enabled", True) and _photo_index_cache:
+                    try:
+                        from utils import photo_quality
+                        hashes = None
+                        if config.get("filter_bursts", True):
+                            paths = [str(p) for _, p in candidates]
+                            hashes = {photo_index.key_for(p): h for p, h in hashes_for(paths).items() if h is not None}
+                        rejected = photo_quality.excluded(_photo_index_cache, config, hashes)
+                        if rejected:
+                            before = len(candidates)
+                            candidates = [c for c in candidates if f"{c[0]}/{c[1].name}" not in rejected]
+                            logger.info(f"[Tri automatique] {before - len(candidates)} photo(s) écartée(s) du diaporama")
+                    except Exception as e:
+                        logger.warning(f"[Tri automatique] Ignoré : {e}")
+
+                all_media = [get_path_to_display(photo_path_obj, source, filter_states) for source, photo_path_obj in candidates]
+
                 refresh_photo_index()
                 prepare_memories(config, SCREEN_WIDTH, SCREEN_HEIGHT)
                 playlist = build_playlist(all_media, config, favorites)
