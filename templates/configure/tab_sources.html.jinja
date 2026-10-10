@@ -1,0 +1,263 @@
+            <div id="tab-sources" class="tabcontent">
+                <fieldset>
+                    <legend>
+                        <h3>{{ _("Configuration de l'album photo Immich") }}</h3>
+                    </legend>
+
+
+
+                    <label for="album_name">{{ _("Nom technique de l'album Immich :") }}</label>
+                    <input type="text" id="album_name" name="album_name" value="{{ config.album_name }}">
+
+
+                    <label for="immich_url">{{ _("URL du serveur Immich :") }}</label>
+                    <input type="url" id="immich_url" name="immich_url" value="{{ config.immich_url }}">
+
+                    <label for="immich_token">{{ _("Token d'accès Immich :") }}</label>
+                    <div class="relative mt-1">
+                        <input type="password" id="immich_token" name="immich_token" value="{{ config.immich_token }}"
+                            class="block w-full rounded-md border-gray-300 shadow-sm pr-10">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                            <button type="button"
+                                class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                data-target="immich_token" title="{{ _('Afficher/Cacher le token') }}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <label for="max_photos_to_download_immich" class="block text-sm font-medium text-gray-700">{{
+                        _('Limite de photos à télécharger (Immich)') }}</label>
+                    <input type="number" id="max_photos_to_download_immich" name="max_photos_to_download_immich"
+                        value="{{ config.get('max_photos_to_download', {}).get('immich', 10) }}"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="10">
+                    <p class="mt-2 text-sm text-gray-500">{{ _("Nombre maximum de photos à récupérer depuis Immich.
+                        Mettez 0, -1 ou laissez vide pour ne pas avoir de limite.") }}</p>
+                    <div style="margin-bottom: 8px;">
+                        <label>
+                            <input type="checkbox" name="random_content_in_album" {% if
+                                config.get('random_content_in_album', True) %}checked{% endif %}>
+                            {{ _("Récupération aléatoire des images dans l\'album (Immich)") }}
+                        </label>
+                    </div>
+                    <hr class="my-4">
+                    <h5 class="text-lg font-semibold mt-2">{{ _("Mise à jour automatique (Immich)") }}</h5>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="immich_auto_update" name="immich_auto_update" {% if config.get('immich_auto_update') %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="immich_auto_update">{{ _("Activer la mise à jour automatique") }}</label>
+                    </div>
+                    <label for="immich_update_interval_hours">{{ _("Intervalle de mise à jour (heures):") }}</label>
+                    <input type="number" id="immich_update_interval_hours" name="immich_update_interval_hours"
+                        value="{{ config.get('immich_update_interval_hours', 24) }}" min="1">
+
+                    <div id="immich-worker-status-container" class="mt-4 p-3 bg-gray-100 rounded-lg border">
+                        <p><strong>{{ _("État du service :") }}</strong> <span id="immich-worker-status-message"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Dernière mise à jour :") }}</strong> <span id="immich-last-update-time"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Prochaine mise à jour :") }}</strong> <span id="immich-next-update-time"
+                                class="font-mono">...</span></p>
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset class="mt-4">
+                    <legend>
+                        <h3>{{ _("Sources à afficher dans le diaporama") }}</h3>
+                    </legend>
+                    <p class="mb-3 text-gray-700">{{ _("Sélectionnez les sources de photos à inclure dans le diaporama.
+                        Les photos seront mélangées entre les sources sélectionnées.") }}</p>
+
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_immich" name="display_sources" value="immich" {% if 'immich' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_immich">{{ _("Photos Immich") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_usb" name="display_sources" value="usb" {% if 'usb' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_usb">{{ _("Photos USB") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_samba" name="display_sources" value="samba" {% if 'samba' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_samba">{{ _("Photos Samba") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_gdrive" name="display_sources" value="gdrive" {% if 'gdrive' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_gdrive">{{ _("Photos Google Drive") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_smartphone" name="display_sources" value="smartphone" {% if 'smartphone' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_smartphone">{{ _("Photos Smartphone") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_telegram" name="display_sources" value="telegram" {% if 'telegram' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_telegram">{{ _('Photos reçues par Telegram') }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_invites" name="display_sources" value="invités" {% if 'invités' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_invites">{{ _('Photos des invités (validées)') }}</label>
+                    </div>
+                </fieldset>
+                <fieldset class="mt-4">
+                    <legend>
+                        <h3>{{ _("Configuration du partage Samba (Windows)") }}</h3>
+                    </legend>
+                    <label for="smb_host">{{ _("Serveur :") }}</label>
+                    <input type="text" id="smb_host" name="smb_host" value="{{ config.get('smb_host', '') }}"
+                        placeholder="{{ _('ex: 192.168.1.50 ou MON-NAS') }}">
+
+                    <label for="smb_share">{{ _("Nom du partage :") }}</label>
+                    <input type="text" id="smb_share" name="smb_share" value="{{ config.get('smb_share', '') }}"
+                        placeholder="{{ _('ex: Photos') }}">
+
+                    <label for="smb_path">{{ _("Chemin dans le partage (optionnel) :") }}</label>
+                    <input type="text" id="smb_path" name="smb_path" value="{{ config.get('smb_path', '') }}"
+                        placeholder="{{ _('ex: Famille/2024') }}">
+
+                    <label for="smb_user">{{ _("Nom d'utilisateur (optionnel) :") }}</label>
+                    <input type="text" id="smb_user" name="smb_user" value="{{ config.get('smb_user', '') }}">
+
+                    <label for="smb_password">{{ _("Mot de passe (optionnel) :") }}</label>
+                    <div class="relative mt-1">
+                        <input type="password" id="smb_password" name="smb_password"
+                            value="{{ config.get('smb_password', '') }}" class="block w-full rounded-md border-gray-300 shadow-sm pr-10">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                            <button type="button"
+                                class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                data-target="smb_password" title="{{ _('Afficher/Cacher le mot de passe') }}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="button" id="samba-test-btn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">{{ _("Tester la
+                            connexion") }}</button>
+                        <span id="samba-test-status" class="ml-4 font-medium"></span>
+                    </div>
+
+                    <hr class="my-4">
+                    <h5 class="text-lg font-semibold mt-2">{{ _("Mise à jour automatique (Samba)") }}</h5>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="smb_auto_update" name="smb_auto_update" {% if config.get('smb_auto_update') %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="smb_auto_update">{{ _("Activer la mise à jour automatique") }}</label>
+                    </div>
+                    <label for="smb_update_interval_hours">{{ _("Intervalle de mise à jour (heures):") }}</label>
+                    <input type="number" id="smb_update_interval_hours" name="smb_update_interval_hours"
+                        value="{{ config.get('smb_update_interval_hours', 24) }}" min="1">
+
+                    <div id="samba-worker-status-container" class="mt-4 p-3 bg-gray-100 rounded-lg border">
+                        <p><strong>{{ _("État du service :") }}</strong> <span id="samba-worker-status-message"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Dernière mise à jour :") }}</strong> <span id="samba-last-update-time"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Prochaine mise à jour :") }}</strong> <span id="samba-next-update-time"
+                                class="font-mono">...</span></p>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="mt-4">
+                    <legend>
+                        <h3>{{ _("Configuration Google Drive") }}</h3>
+                    </legend>
+                    {% set gdrive_backend = config.get('gdrive_backend', 'auto') %}
+                    <label for="gdrive_backend">{{ _("Méthode de connexion :") }}</label>
+                    <select id="gdrive_backend" name="gdrive_backend">
+                        <option value="auto" {% if gdrive_backend == 'auto' %}selected{% endif %}>{{ _("Automatique (rclone si configuré, sinon compte de service)") }}</option>
+                        <option value="rclone" {% if gdrive_backend == 'rclone' %}selected{% endif %}>{{ _("rclone (compte Google déjà configuré sur le Raspberry Pi)") }}</option>
+                        <option value="service_account" {% if gdrive_backend == 'service_account' %}selected{% endif %}>{{ _("Compte de service Google") }}</option>
+                    </select>
+
+                    <div id="gdrive-rclone-section" class="mt-3">
+                        {% if gdrive_rclone_remotes %}
+                        <label for="gdrive_rclone_remote">{{ _("Remote rclone :") }}</label>
+                        <select id="gdrive_rclone_remote" name="gdrive_rclone_remote">
+                            {% for remote in gdrive_rclone_remotes %}
+                            <option value="{{ remote }}" {% if config.get('gdrive_rclone_remote') == remote %}selected{% endif %}>{{ remote }}:</option>
+                            {% endfor %}
+                        </select>
+                        {% else %}
+                        <p class="text-sm text-gray-600">{{ _("Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « rclone config » sur le Raspberry Pi.") }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div id="gdrive-sa-section" class="mt-3">
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Créez un compte de service dans la console Google Cloud (API Google Drive activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez ensuite vos dossiers de photos avec l'adresse e-mail du compte de service.") }}</p>
+
+                    {% if gdrive_service_email %}
+                    <p class="mb-2"><strong>{{ _("Compte de service configuré :") }}</strong>
+                        <span class="font-mono select-all">{{ gdrive_service_email }}</span></p>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Partagez vos dossiers Google Drive avec cette adresse (en lecture seule).") }}</p>
+                    {% endif %}
+
+                    <label for="gdrive_service_account_json">{{ _("Clé JSON du compte de service :") }}</label>
+                    <textarea id="gdrive_service_account_json" name="gdrive_service_account_json" rows="4"
+                        class="font-mono text-xs"
+                        placeholder="{% if gdrive_service_email %}{{ _('Laisser vide pour conserver la clé actuelle') }}{% else %}{&quot;type&quot;: &quot;service_account&quot;, ...}{% endif %}"></textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="button" id="gdrive-list-folders-btn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            <i class="fab fa-google-drive mr-1"></i>{{ _("Afficher mes dossiers Google Drive") }}</button>
+                        <span id="gdrive-folders-status" class="ml-4 font-medium"></span>
+                    </div>
+
+                    <p class="mt-4 mb-2 font-semibold">{{ _("Dossiers à afficher dans le diaporama :") }}</p>
+                    <div id="gdrive-folders-list" class="max-h-64 overflow-y-auto p-2 bg-gray-50 border rounded">
+                        {% for folder in config.get('gdrive_folders', []) %}
+                        <div class="form-check my-1">
+                            <input class="form-check-input" type="checkbox" name="gdrive_folders"
+                                id="gdrive_folder_{{ folder.id }}" value="{{ folder.id }}|{{ folder.name }}" checked>
+                            <label class="form-check-label ml-2" for="gdrive_folder_{{ folder.id }}">{{ folder.name }}</label>
+                        </div>
+                        {% else %}
+                        <p id="gdrive-folders-empty" class="text-sm text-gray-500">{{ _("Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google Drive ».") }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="gdrive_recursive" name="gdrive_recursive" {% if config.get('gdrive_recursive', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="gdrive_recursive">{{ _("Inclure les sous-dossiers") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="gdrive_trash_after_import" name="gdrive_trash_after_import" {% if config.get('gdrive_trash_after_import') %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="gdrive_trash_after_import">{{ _("Mettre les fichiers à la corbeille Google Drive après import") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo importée part dans la corbeille du Drive (récupérable 30 jours) et reste sur le cadre jusqu'à ce que vous la supprimiez dans l'onglet « Aperçu ». Uniquement avec la connexion rclone.") }}</p>
+                    <p class="text-sm text-gray-600">{{ _("Pensez à enregistrer la configuration après avoir choisi les dossiers, puis lancez l'import depuis l'onglet « Actions ».") }}</p>
+
+                    <hr class="my-4">
+                    <h5 class="text-lg font-semibold mt-2">{{ _("Mise à jour automatique (Google Drive)") }}</h5>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="gdrive_auto_update" name="gdrive_auto_update" {% if config.get('gdrive_auto_update') %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="gdrive_auto_update">{{ _("Activer la mise à jour automatique") }}</label>
+                    </div>
+                    <label for="gdrive_update_interval_minutes">{{ _("Vérifier les nouveautés toutes les (minutes) :") }}</label>
+                    <input type="number" id="gdrive_update_interval_minutes" name="gdrive_update_interval_minutes"
+                        value="{{ config.get('gdrive_update_interval_minutes', 60) }}" min="1">
+                    <p class="text-sm text-gray-600 mt-1">{{ _("Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées ou supprimées.") }}</p>
+
+                    <div id="gdrive-worker-status-container" class="mt-4 p-3 bg-gray-100 rounded-lg border">
+                        <p><strong>{{ _("État du service :") }}</strong> <span id="gdrive-worker-status-message"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Dernière mise à jour :") }}</strong> <span id="gdrive-last-update-time"
+                                class="font-mono">...</span></p>
+                        <p><strong>{{ _("Prochaine mise à jour :") }}</strong> <span id="gdrive-next-update-time"
+                                class="font-mono">...</span></p>
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-4">
+                    <legend>
+                        <h3>{{ _("Options de démarrage") }}</h3>
+                    </legend>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="skip_initial_auto_import" name="skip_initial_auto_import" {% if config.get('skip_initial_auto_import', False) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="skip_initial_auto_import">{{ _("Ignorer le premier import automatique au démarrage") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">{{ _("Si cette option est cochée, les mises à jour automatiques (Immich, Samba) ne se lanceront pas immédiatement après un redémarrage du cadre, mais attendront le prochain cycle programmé.") }}</p>
+                </fieldset>
+            </div>

@@ -1,0 +1,89 @@
+        <div id="tab-playlists" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Gestion des Playlists") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Créez des albums virtuels (playlists) en sélectionnant des
+                    photos de n'importe quelle source. Vous pouvez ensuite lancer un diaporama contenant uniquement les
+                    photos d'une playlist.") }}</p>
+
+                <!-- Bloc de contrôle du diaporama pour les playlists -->
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-2/3">
+                        <div class="p-4 border rounded-lg bg-gray-100 mb-6">
+                            <h4 class="font-semibold text-gray-800 mb-4 text-center">{{ _("Contrôle du Diaporama
+                                Actuel") }}</h4>
+                            <div class="flex items-center justify-center gap-4">
+                                <!-- Boutons de contrôle -->
+                                <button type="button"
+                                    class="slideshow-control-btn bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full w-14 h-14 flex items-center justify-center"
+                                    data-command="previous" title="{{ _('Photo précédente') }}"><i
+                                        class="fas fa-backward"></i></button>
+                                <button type="button"
+                                    class="slideshow-control-btn bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full w-16 h-16 flex items-center justify-center"
+                                    data-command="toggle_pause" title="{{ _('Pause/Lecture') }}"><i
+                                        class="slideshow-pause-icon fas fa-pause fa-lg"></i></button>
+                                <button type="button"
+                                    class="slideshow-control-btn bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full w-14 h-14 flex items-center justify-center"
+                                    data-command="next" title="{{ _('Photo suivante') }}"><i
+                                        class="fas fa-forward"></i></button>
+
+                                <!-- Séparateur vertical -->
+                                <div class="border-l border-gray-300 h-12 mx-4"></div>
+
+                                <!-- Bouton Stop -->
+                                <button type="button" id="stop-playlist-btn"
+                                    class="hidden bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+                                    title="{{ _('Arrête la playlist en cours et relance le diaporama avec toutes les sources activées.') }}">
+                                    <i class="fas fa-stop-circle mr-2"></i>{{ _("Retour au diaporama standard") }}
+                                </button>
+
+                                <!-- Bouton Informatif (quand pas de playlist) -->
+                                <button type="button" id="no-playlist-idle-btn"
+                                    class="bg-gray-400 text-white font-bold py-2 px-4 rounded inline-flex items-center cursor-not-allowed"
+                                    disabled>
+                                    <i class="fas fa-info-circle mr-2"></i>{{ _("Aucune playlist en cours") }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3">
+                        <h4 class="font-semibold text-gray-800 mb-2">{{ _("Aperçu en direct") }}</h4>
+                        <div id="playlist-live-preview-container"
+                            class="mt-2 p-3 bg-gray-100 rounded-lg border text-center">
+                            <p id="playlist-live-preview-status" class="text-gray-500 italic">{{ _("Le diaporama est
+                                arrêté.") }}</p>
+                            <img id="playlist-live-preview-image" src="" alt="{{ _('Photo en cours') }}"
+                                class="hidden mt-2 mx-auto max-w-xs max-h-48 rounded shadow">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulaire de création -->
+                <div class="p-4 border rounded-lg bg-gray-50/50 mb-6">
+                    <h4 class="font-semibold text-gray-800 mb-2">{{ _("Créer une nouvelle playlist") }}</h4>
+                    <div class="flex items-center gap-4">
+                        <input type="text" id="new-playlist-name" class="flex-grow rounded-md border-gray-300 shadow-sm"
+                            placeholder="{{ _('Nom de la playlist (ex: Vacances 2024)') }}">
+                        <select id="new-playlist-music" class="rounded-md border-gray-300 shadow-sm">
+                            <option value="">{{ _('Pas de musique') }}</option>
+                        </select>
+                        <button type="button" class="play-music-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold w-10 h-10 flex items-center justify-center rounded text-sm" data-target-select="new-playlist-music" disabled title="{{ _('Écouter la musique') }}">
+                            <i class="fas fa-play fa-fw"></i>
+                        </button>
+                        <button type="button" id="create-playlist-btn"
+                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                            <i class="fas fa-plus mr-2"></i>{{ _("Créer") }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Liste des playlists -->
+                <div>
+                    <h4 class="font-semibold text-gray-800 mb-2">{{ _("Vos Playlists") }}</h4>
+                    <div id="playlists-list-container" class="space-y-4">
+                        <!-- Les playlists seront chargées ici par JavaScript -->
+                    </div>
+                </div>
+            </fieldset>
+        </div>

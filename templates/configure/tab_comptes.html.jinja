@@ -1,0 +1,132 @@
+        <div id="tab-comptes" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Sécurité") }}</h3>
+                </legend>
+                <form action="{{ url_for('change_password_route') }}" method="post" id="password-change-form">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">{{ _("Changer mon mot de passe") }}</h4>
+                    <div class="mb-4">
+                        <label for="new_password" class="block text-sm font-medium text-gray-700">{{ _("Nouveau mot de
+                            passe") }}</label>
+                        <div class="relative mt-1">
+                            <input type="password" id="new_password" name="new_password" required minlength="6"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pr-10"
+                                placeholder="{{ _('6 caractères minimum') }}">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <button type="button"
+                                    class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                    data-target="new_password" title="{{ _('Afficher/Cacher le mot de passe') }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="confirm_password" class="block text-sm font-medium text-gray-700">{{ _("Confirmer le
+                            nouveau mot de passe") }}</label>
+                        <div class="relative mt-1">
+                            <input type="password" id="confirm_password" name="confirm_password" required minlength="6"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pr-10">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <button type="button"
+                                    class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                    data-target="confirm_password" title="{{ _('Afficher/Cacher le mot de passe') }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p id="password-error" class="mt-2 text-sm text-red-600 hidden">{{ _("Les mots de passe ne
+                            correspondent pas.") }}</p>
+                    </div>
+                    <button type="submit"
+                        class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                        <i class="fas fa-key mr-2"></i>{{ _("Changer le mot de passe") }}
+                    </button>
+                </form>
+            </fieldset>
+
+            {% if is_admin %}
+            <fieldset class="mt-6">
+                <legend>
+                    <h3>{{ _("Comptes utilisateurs") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Les administrateurs ont accès à tout. Les utilisateurs peuvent régler le diaporama, importer et gérer les photos, mais n'ont accès ni aux comptes, ni au réseau, ni à la maintenance, et ne voient pas les mots de passe et jetons enregistrés.") }}</p>
+
+                <table class="w-full text-sm border rounded mb-4">
+                    <thead class="bg-gray-100 text-left">
+                        <tr>
+                            <th class="p-2">{{ _("Nom") }}</th>
+                            <th class="p-2">{{ _("Rôle") }}</th>
+                            <th class="p-2">{{ _("Actions") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t">
+                            <td class="p-2 font-semibold">{{ main_admin_username }}</td>
+                            <td class="p-2">{{ _("Administrateur principal") }}</td>
+                            <td class="p-2 text-gray-500">{{ _("Compte créé à l'installation (non supprimable)") }}</td>
+                        </tr>
+                        {% for user in users %}
+                        <tr class="border-t">
+                            <td class="p-2 font-semibold">{{ user.username }}
+                                {% if user.created %}<div class="text-xs text-gray-500 font-normal">{{ _("créé le") }} {{ user.created }}</div>{% endif %}</td>
+                            <td class="p-2">
+                                {% if user.username == current_username %}
+                                {{ _("Administrateur") if user.role == 'admin' else _("Utilisateur") }}
+                                {% else %}
+                                <form method="POST" action="{{ url_for('set_user_role_route', username=user.username) }}">
+                                    <select name="role" onchange="this.form.submit()" class="text-sm">
+                                        <option value="user" {% if user.role == 'user' %}selected{% endif %}>{{ _("Utilisateur") }}</option>
+                                        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>{{ _("Administrateur") }}</option>
+                                    </select>
+                                </form>
+                                {% endif %}
+                            </td>
+                            <td class="p-2">
+                                <form method="POST" action="{{ url_for('reset_user_password_route', username=user.username) }}" class="inline-flex items-center gap-2 mb-1">
+                                    <input type="password" name="password" required minlength="6" placeholder="{{ _('Nouveau mot de passe') }}" class="text-sm">
+                                    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white text-sm py-1 px-2 rounded whitespace-nowrap">
+                                        <i class="fas fa-key"></i> {{ _("Changer") }}</button>
+                                </form>
+                                {% if user.username != current_username %}
+                                <form method="POST" action="{{ url_for('delete_user_route', username=user.username) }}" class="inline"
+                                    onsubmit="return confirm('{{ _('Supprimer ce compte ?') }}');">
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white text-sm py-1 px-2 rounded">
+                                        <i class="fas fa-trash-alt"></i> {{ _("Supprimer") }}</button>
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">{{ _("Créer un compte") }}</h4>
+                <form method="POST" action="{{ url_for('create_user_route') }}" class="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+                    <div>
+                        <label for="new_user_username">{{ _("Nom d'utilisateur") }}</label>
+                        <input type="text" id="new_user_username" name="username" required pattern="[A-Za-z0-9_.\-]{2,32}"
+                            title="{{ _('2 à 32 caractères : lettres, chiffres, . _ -') }}" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="new_user_password">{{ _("Mot de passe") }}</label>
+                        <input type="password" id="new_user_password" name="password" required minlength="6" autocomplete="new-password">
+                    </div>
+                    <div>
+                        <label for="new_user_role">{{ _("Rôle") }}</label>
+                        <select id="new_user_role" name="role">
+                            <option value="user" selected>{{ _("Utilisateur") }}</option>
+                            <option value="admin">{{ _("Administrateur") }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
+                            <i class="fas fa-user-plus mr-1"></i>{{ _("Créer") }}</button>
+                    </div>
+                </form>
+            </fieldset>
+            {% else %}
+            <p class="mt-6 p-3 bg-blue-50 border border-blue-200 rounded text-sm text-gray-700">
+                <i class="fas fa-info-circle mr-1"></i>{{ _("Vous êtes connecté avec un compte utilisateur : la gestion des comptes, le réseau, la maintenance et les mots de passe ou jetons enregistrés sont réservés aux administrateurs.") }}</p>
+            {% endif %}
+        </div>

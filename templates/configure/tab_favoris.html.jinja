@@ -1,0 +1,131 @@
+        <div id="tab-favoris" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Vos photos favorites") }}</h3>
+                </legend>
+                <p class="text-gray-600 mb-4">{{ _("Voici toutes vos photos marquées comme favorites. Vous pouvez les
+                    gérer ici.") }}</p>
+
+                {% if favorite_photos %}
+                <div id="favorites-photo-grid" class="photo-grid">
+                    {% for media in favorite_photos %}
+                    {% set photo_path = media.path %}
+                    {% set has_polaroid = media.has_polaroid %}
+                    {% set active_filter = media.active_filter %}
+                    <div class="photo-tile relative" data-path="{{ photo_path }}">
+                        <!-- Spinner Overlay -->
+                        <div
+                            class="spinner-overlay hidden absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded z-10">
+                            <i class="fas fa-spinner fa-spin text-white text-3xl"></i>
+                        </div>
+
+                        {% set media_url = url_for('static', filename='prepared/' + media.path) %}
+                        {% set thumb_url = '' %}
+
+                        {% if media.type == 'image' %}
+                        {% set thumb_url = media_url %}
+                        {% if media.active_filter == 'polaroid' and media.has_polaroid %}
+                        {% set polaroid_filename = media.path.rsplit('.', 1)[0] + '_polaroid.jpg' %}
+                        {% set polaroid_url = url_for('static', filename='prepared/' + polaroid_filename) %}
+                        {% set thumb_url = polaroid_url %}
+                        {% set media_url = polaroid_url %}
+                        {% elif media.active_filter == 'postcard' and media.get('has_postcard') %}
+                        {% set postcard_filename = media.path.rsplit('.', 1)[0] + '_postcard.jpg' %}
+                        {% set postcard_url = url_for('static', filename='prepared/' + postcard_filename) %}
+                        {% set thumb_url = postcard_url %}
+                        {% set media_url = postcard_url %}
+                        {% endif %}
+                        {% elif media.type == 'video' and media.thumbnail_path %}
+                        {% set thumb_url = url_for('static', filename='prepared/' + media.thumbnail_path) %}
+                        {% endif %}
+
+                        <a href="{{ media_url }}" class="glightbox block relative" data-gallery="favorites"
+                            title="{{ _('Aperçu de %(media)s', media=media.path) }}">
+                            <img src="{{ thumb_url }}"
+                                class="w-32 h-32 object-cover rounded shadow cursor-pointer hover:scale-105 transition bg-gray-200"
+                                alt="{{ _('Aperçu de %(media)s', media=media.path) }}">
+                            {% if media.type == 'video' %}
+                            <div
+                                class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 rounded">
+                                <i class="fas fa-play text-white text-3xl opacity-75"></i>
+                            </div>
+                            {% endif %}
+                        </a>
+                        <div class="photo-actions mt-1 flex flex-col w-full gap-y-1">
+                            {% if media.type == 'image' %}
+                            <select class="filter-select text-xs rounded border-gray-300 py-1 w-full"
+                                data-photo="{{ photo_path }}">
+                                <option value="none" {% if active_filter=='none' %}selected{% endif %}>{{ _("Filtre...")
+                                    }}</option>
+                                <option value="grayscale" {% if active_filter=='grayscale' %}selected{% endif %}>{{
+                                    _("Noir & Blanc") }}</option>
+                                <option value="sepia" {% if active_filter=='sepia' %}selected{% endif %}>{{ _("Sépia")
+                                    }}</option>
+                                <option value="vignette" {% if active_filter=='vignette' %}selected{% endif %}>{{
+                                    _("Vignette") }}</option>
+                                <option value="vintage" {% if active_filter=='vintage' %}selected{% endif %}>{{
+                                    _("Vintage") }}</option>
+                                {% if has_polaroid %}
+                                <option value="polaroid" {% if active_filter=='polaroid' %}selected{% endif %}>{{
+                                    _("Polaroid") }}</option>
+                                {% endif %}
+                                {% if media.get('has_postcard') %}
+                                <option value="postcard" {% if active_filter=='postcard' %}selected{% endif %}>{{
+                                    _("Carte Postale") }}</option>
+                                {% endif %}
+                                <option value="polaroid_vintage" {% if active_filter=='polaroid_vintage' %}selected{%
+                                    endif %}>{{ _("Polaroid Vintage") }}</option>
+                                <option value="original" class="text-blue-600 font-semibold">{{ _("Original") }}
+                                </option>
+                            </select>
+                            {% endif %}
+                            <div class="flex justify-end items-center w-full gap-x-2">
+                                <button type="button"
+                                    class="add-to-playlist-btn text-gray-400 hover:text-blue-500 text-xs rounded py-1 px-2 inline-flex items-center justify-center"
+                                    data-photo="{{ photo_path }}" title="{{ _('Ajouter à une playlist') }}"><i
+                                        class="fas fa-list-ul"></i></button>
+                                <button type="button"
+                                    class="favorite-btn text-gray-400 hover:text-yellow-400 text-xs rounded py-1 px-2 inline-flex items-center justify-center {% if media.is_favorite %}text-yellow-400{% endif %}"
+                                    data-photo="{{ photo_path }}" title="{{ _('Mettre en favori') }}"><i
+                                        class="fas fa-star"></i></button>
+                                {% if media.path.split('/')[0] in ['telegram', 'invités'] %}
+                                <button type="button" 
+                                   class="save-original-btn text-gray-400 hover:text-green-500 text-xs rounded py-1 px-2 inline-flex items-center justify-center"
+                                   data-url="{{ url_for('static', filename='photos/' + media.path) }}"
+                                   data-filename="{{ media.path.split('/')[-1] }}"
+                                   data-photo="{{ photo_path }}"
+                                   title="{{ _('Sauvegarder la photo originale') }}">
+                                    <i class="fas fa-save"></i>
+                                </button>
+                                {% endif %}
+                                    {% if media.is_anniversary %}
+                                <button type="button" class="text-pink-500 text-xs rounded py-1 px-2 inline-flex items-center justify-center cursor-default" title="{{ _('Photo anniversaire !') }}">
+                                        <i class="fas fa-birthday-cake"></i>
+                                    </button>
+                                    {% endif %}
+                                <button type="button"
+                                    class="delete-button text-gray-400 hover:text-red-500 text-xs rounded py-1 px-2 inline-flex items-center justify-center"
+                                    data-photo="{{ photo_path }}" title="{{ _('Supprimer ce média') }}"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="add-to-playlist-menu hidden absolute bg-white border rounded shadow-lg p-2 z-20"
+                            style="bottom: 20px; right: 20px;">
+                            <!-- Le menu des playlists sera injecté ici -->
+                        </div>
+                        {% if media.type == 'image' %}
+                        <div class="generic-text-input-container mt-2" data-photo="{{ photo_path }}">
+                            <input type="text" class="generic-text-input w-full text-xs p-1 border rounded"
+                                placeholder="{{ _('Ajouter une légende...') }}" value="{{ media.text or '' }}">
+                            <span class="generic-text-status text-xs text-gray-500 ml-1"></span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p id="no-favorites-message" class="text-center text-gray-500 italic mt-4">{{ _("Vous n'avez aucune
+                    photo en favori pour le moment.") }}</p>
+                {% endif %}
+            </fieldset>
+        </div>

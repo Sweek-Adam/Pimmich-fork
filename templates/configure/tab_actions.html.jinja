@@ -1,0 +1,137 @@
+        <div id="tab-actions" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Actions") }}</h3>
+                </legend>
+
+                <div class="action-group">
+                    <h4>{{ _("Gestion du diaporama") }}</h4>
+                    <form method="POST" action="/toggle_slideshow">
+                        <button type="submit"
+                            class="system-button {% if slideshow_running %}bg-red-500 hover:bg-red-700{% else %}bg-green-500 hover:bg-green-700{% endif %} text-white font-bold py-2 px-4 rounded">
+                            {% if slideshow_running %}
+                            <i class="fas fa-stop"></i> {{ _("Arrêter le diaporama") }}
+                            {% else %}
+                            <i class="fas fa-play"></i> {{ _("Démarrer le diaporama") }}
+                            {% endif %}
+                        </button>
+                    </form>
+                    <div class="flex justify-center items-center gap-4 mt-4" id="slideshow-controls-actions">
+                        <button type="button"
+                            class="notification-toggle-btn bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full w-16 h-16 flex items-center justify-center"
+                            title="{{ _('Activer/Désactiver les notifications') }}">
+                            <i class="fas fa-bell fa-lg"></i>
+                        </button>
+                        <button type="button"
+                            class="slideshow-control-btn bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full w-16 h-16 flex items-center justify-center"
+                            data-command="previous" title="{{ _('Photo précédente') }}">
+                            <i class="fas fa-backward fa-lg"></i>
+                        </button>
+                        <button type="button"
+                            class="slideshow-control-btn bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full w-20 h-20 flex items-center justify-center"
+                            data-command="toggle_pause" title="{{ _('Pause/Lecture') }}">
+                            <i class="slideshow-pause-icon fas fa-pause fa-2x"></i>
+                        </button>
+                        <button type="button"
+                            class="slideshow-control-btn bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full w-16 h-16 flex items-center justify-center"
+                            data-command="next" title="{{ _('Photo suivante') }}">
+                            <i class="fas fa-forward fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-group">
+                    <h4>{{ _("Importation des photos") }}</h4>
+                    <button id="usb-import-btn"
+                        class="import-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <i class="fas fa-file-import"></i> {{ _("Importer depuis la clé USB") }}
+                    </button>
+                    <div id="usb-progress-container" class="progress-container hidden">
+                        <div id="usb-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <div id="usb-import-status" class="status-messages"></div>
+
+                    <button id="immich-import-btn"
+                        class="import-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <i class="fas fa-cloud-download-alt"></i> {{ _("Importer depuis Immich") }}
+                    </button>
+                    <div id="immich-progress-container" class="progress-container hidden">
+                        <div id="immich-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <div id="immich-import-status" class="status-messages"></div>
+
+                    <button id="samba-import-btn"
+                        class="import-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <i class="fas fa-network-wired"></i> {{ _("Importer depuis Samba") }}
+                    </button>
+                    <div id="samba-progress-container" class="progress-container hidden">
+                        <div id="samba-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <div id="samba-import-status" class="status-messages"></div>
+
+                    <button id="gdrive-import-btn"
+                        class="import-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <i class="fab fa-google-drive"></i> {{ _("Importer depuis Google Drive") }}
+                    </button>
+                    <div id="gdrive-progress-container" class="progress-container hidden">
+                        <div id="gdrive-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <div id="gdrive-import-status" class="status-messages"></div>
+
+                    <!-- NOUVEAU: Conteneur pour l'aperçu de la préparation -->
+                    <div id="preparation-preview-container"
+                        class="hidden mt-4 p-3 bg-gray-100 rounded-lg border text-center">
+                        <p class="text-sm font-semibold text-gray-600 mb-2">{{ _("Préparation en cours...") }}</p>
+                        <img id="preparation-preview-image" src="" alt="{{ _('Photo en cours de préparation') }}"
+                            class="mx-auto max-w-xs max-h-48 rounded shadow">
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-600">{{ _("L'import depuis Telegram se fait automatiquement à la
+                            réception des photos. Activez la source dans l'onglet \"Sources\" pour les voir.") }}</p>
+                    </div>
+
+                    <!-- Smartphone Upload Form -->
+                    <form id="smartphone-upload-form" enctype="multipart/form-data"
+                        class="mt-4 pt-4 border-t border-gray-200">
+                        <h5 class="text-lg font-semibold mb-2 flex items-center gap-2"><i class="fas fa-mobile-alt"></i>
+                            {{ _("Importer depuis un Smartphone") }}</h5>
+                        <p class="text-sm text-gray-600 mb-3">{{ _("Envoyez des photos directement depuis votre
+                            téléphone via le navigateur.") }}</p>
+                        <input type="file" name="photos"
+                            class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none mb-3"
+                            multiple required>
+                        <button type="submit" id="import-smartphone-btn"
+                            class="import-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-upload"></i> {{ _("Envoyer les photos") }}
+                        </button>
+                    </form>
+                    <div id="smartphone-progress-container" class="progress-container hidden">
+                        <div id="smartphone-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <div id="smartphone-import-status" class="status-messages"></div>
+
+                    <hr class="my-6">
+                    <h5 class="text-lg font-semibold mb-2 flex items-center gap-2"><i class="fas fa-file-audio"></i> {{ _("Importation de musique") }}</h5>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Téléchargez vos propres fichiers MP3 ou WAV pour accompagner vos playlists.") }}</p>
+                    <div class="flex items-center gap-4">
+                        <input type="file" id="music-upload-input" accept=".mp3,.wav" class="hidden">
+                        <button type="button" onclick="document.getElementById('music-upload-input').click()" class="system-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-music"></i> {{ _("Sélectionner un fichier") }}
+                        </button>
+                        <span id="music-upload-filename" class="text-sm text-gray-500 italic"></span>
+                        <button type="button" id="music-upload-btn" class="hidden bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-upload"></i> {{ _("Uploader") }}
+                        </button>
+                    </div>
+                    <div id="music-upload-status" class="status-messages mt-2"></div>
+
+                    <div id="music-files-management" class="mt-4">
+                        <h6 class="text-md font-semibold text-gray-700 mb-2">{{ _("Musiques disponibles") }}</h6>
+                        <div id="music-files-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto p-2 bg-gray-50 rounded border">
+                            <!-- La liste sera peuplée par JS -->
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>

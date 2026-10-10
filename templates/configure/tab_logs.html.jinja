@@ -1,0 +1,38 @@
+        <div id="tab-logs" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Logs Système") }}</h3>
+                </legend>
+                <div class="mb-3">
+                    <label for="log-selector" class="form-label">{{ _("Sélectionner un log :") }}</label>
+                    <select id="log-selector" class="form-select">
+                        <!-- Les options seront chargées dynamiquement par JavaScript -->
+                    </select>
+                    <button type="button" id="refresh-logs-btn"
+                        class="btn btn-secondary bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">{{
+                        _("Actualiser") }}</button>
+                    <button type="button" id="clear-logs-btn"
+                        class="btn btn-danger bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2">{{
+                        _("Effacer les logs") }}</button>
+                </div>
+                <div class="bg-gray-800 rounded-lg overflow-auto" style="max-height: 400px;">
+                    <pre id="log-content" class="text-white p-4 text-sm"
+                        style="min-height: 150px; white-space: pre-wrap; word-break: break-all;"></pre>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt-6">
+                <legend>
+                    <h3>{{ _("Crédits") }}</h3>
+                </legend>
+                <div class="credits">
+                    <img src="{{ url_for('static', filename='gotenash.jpg') }}" width="120" alt="Auteur Gotenash">
+                    <p>{{ _("Auteurs : Gotenash et Shenron") }}</p>
+                    <a href="https://www.gadgetaulab.fr">
+                        <img src="{{ url_for('static', filename='logo_gadgeto.png') }}" width="120"
+                            alt="Logo Gadgetaulab">
+                    </a>
+                    <p>{{ _("Projet réalisé dans le cadre du Gadgetaulab") }}</p>
+                </div>
+            </fieldset>
+        </div>

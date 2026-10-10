@@ -1,0 +1,1820 @@
+        <script>
+
+            function copyToClipboard(text, successCallback, errorCallback) {
+                // Try the modern Clipboard API first (works in secure contexts like HTTPS or localhost)
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text)
+                        .then(successCallback)
+                        .catch(errorCallback);
+                    return;
+                }
+
+                // Fallback for non-secure contexts (like HTTP on a local network) or older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+
+                // Make it invisible and non-disruptive
+                textArea.style.position = "fixed";
+                textArea.style.top = "-9999px";
+                textArea.style.left = "-9999px";
+
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        successCallback();
+                    } else {
+                        errorCallback(new Error('Fallback copy command failed.'));
+                    }
+                } catch (err) {
+                    errorCallback(err);
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            }
+
+            async function loadInvitations() {
+                const invitationsListDiv = document.getElementById('invitations-list');
+                if (!invitationsListDiv) return;
+
+                invitationsListDiv.innerHTML = `<p class="text-gray-500 italic">${i18n.loading}</p>`;
+
+                // Fetch bot info and invitations in parallel
+                try {
+                    const cacheBuster = `?_=${new Date().getTime()}`;
+                    const [invitesResponse, botInfoResponse] = await Promise.all([
+                        fetch(`/api/telegram/invitations${cacheBuster}`),
+                        fetch(`/api/telegram/bot_info${cacheBuster}`)
+                    ]);
+
+                    const invitations = await invitesResponse.json();
+                    const botInfo = await botInfoResponse.json();
+
+                    const botUsername = botInfo.success ? botInfo.username : null;
+                    if (!botUsername) {
+                        console.warn("Could not fetch bot username:", botInfo.message);
+                    }
+
+                    invitationsListDiv.innerHTML = ''; // Vider la liste
+
+                    if (invitations.length === 0) {
+                        invitationsListDiv.innerHTML = `<p class="text-gray-500 italic">${i18n.noActiveInvites}</p>`;
+                        return;
+                    }
+
+                    invitations.forEach(invite => {
+                        const isExpired = new Date(invite.expires_at) < new Date();
+                        const expires = new Date(invite.expires_at).toLocaleString('fr-FR');
+                        const usedBy = invite.used_by_user_name ? `${i18n.usedBy} ${invite.used_by_user_name}` : i18n.notUsed;
+
+                        const inviteLink = botUsername ? `https://t.me/${botUsername}?start=${invite.code}` : null;
+
+                        const inviteEl = document.createElement('div');
+                        inviteEl.className = 'p-4 bg-white border rounded-lg shadow-sm space-y-3';
+
+                        // --- Statut de l'invitation ---
+                        let statusText, statusClass;
+                        if (isExpired) {
+                            statusText = 'Expirée';
+                            statusClass = 'bg-red-100 text-red-800';
+                        } else if (invite.used_by_user_id) {
+                            statusText = 'Utilisée';
+                            statusClass = 'bg-green-100 text-green-800';
+                        } else {
+                            statusText = 'En attente';
+                            statusClass = 'bg-yellow-100 text-yellow-800';
+                        }
+
+                        const statusHtml = `
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
+                    ${statusText}
+                </span>
+                ${invite.used_by_user_name ? `<span class="text-sm text-gray-600 ml-2">par <strong>${invite.used_by_user_name}</strong></span>` : ''}
+            `;
+
+                        // --- Lien d'invitation ---
+                        let linkHtml = `<div class="text-xs text-gray-500 italic mt-1">${i18n.botUsernameError}</div>`;
+                        if (inviteLink) {
+                            linkHtml = `
+                    <div class="flex items-center gap-2">
+                        <input type="text" readonly value="${inviteLink}" class="flex-grow text-xs p-1 border rounded bg-gray-50 font-mono">
+                        <button type="button" class="copy-link-btn text-gray-500 hover:text-blue-600" data-link="${inviteLink}" title="${i18n.copyLink}">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                `;
+                        }
+
+                        // --- Boutons d'action ---
+                        const revokeBtnHtml = invite.used_by_user_id && !isExpired ? `
+                <button class="revoke-invite-btn text-orange-500 hover:text-orange-700" data-code="${invite.code}" title="${i18n.revokeInvite}">
+                    <i class="fas fa-user-slash"></i>
+                </button>
+            ` : '';
+                        const deleteBtnHtml = `
+                <button class="delete-invite-btn text-red-500 hover:text-red-700" data-code="${invite.code}" title="${i18n.deleteInvite}">
+                    <i class="fas fa-trash-alt"></i>
+                </button>`;
+
+                        inviteEl.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-lg font-semibold text-gray-900">${invite.guest_name}</p>
+                        <p class="text-sm text-gray-500 mt-1">${i18n.expiresOn} ${expires}</p>
+                    </div>
+                    <div class="flex items-center gap-x-3">
+                        ${revokeBtnHtml}
+                        ${deleteBtnHtml}
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 items-center pt-3 border-t">
+                    <div class="text-sm">${statusHtml}</div>
+                    <div>${linkHtml}</div>
+                </div>
+            `;
+                        invitationsListDiv.appendChild(inviteEl);
+                    });
+                } catch (error) {
+                    invitationsListDiv.innerHTML = `<p class="text-red-500">${i18n.errorLoadingInvites}</p>`;
+                    console.error("Error loading invitations or bot info:", error);
+                }
+            }
+
+            async function fetchTelegramBotStatus() {
+                const statusSpan = document.getElementById('telegram-bot-status-message');
+                if (!statusSpan) return;
+
+                try {
+                    const response = await fetch('/telegram_bot_status');
+                    const data = await response.json();
+                    statusSpan.textContent = data.status_message;
+                    if (data.status === 'running') {
+                        statusSpan.className = 'font-mono text-green-600';
+                    } else if (data.status === 'error') {
+                        statusSpan.className = 'font-mono text-red-600';
+                    } else {
+                        statusSpan.className = 'font-mono text-gray-500';
+                    }
+                } catch (error) {
+                    statusSpan.textContent = i18n.connectionError;
+                    statusSpan.className = 'font-mono text-red-600';
+                }
+            }
+
+            function showToast(message, duration = 3000) {
+                const toast = document.getElementById('global-toast');
+                const toastMessage = document.getElementById('global-toast-message');
+                if (!toast || !toastMessage) return;
+
+                toastMessage.textContent = message;
+                toast.classList.remove('hidden');
+                // Animate in
+                setTimeout(() => {
+                    toast.classList.remove('opacity-0', 'translate-y-10');
+                }, 10);
+
+                // Animate out
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-10');
+                    setTimeout(() => {
+                        toast.classList.add('hidden');
+                    }, 300); // Wait for fade-out transition
+                }, duration);
+            }
+
+            async function savePlaylistOrder(playlistId) {
+                const grid = document.getElementById(`photos-container-${playlistId}`);
+                if (!grid) return;
+
+                const sortableInstance = Sortable.get(grid);
+                const newOrder = sortableInstance.toArray();
+
+                try {
+                    const response = await fetch(`/api/playlists/${playlistId}/reorder`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ photos: newOrder })
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        showToast(i18n.orderSaved);
+                    } else {
+                        alert(`${i18n.errorPrefix} ${result.message}`);
+                    }
+                } catch (e) {
+                    alert(i18n.commErrorServer);
+                }
+            }
+
+            function initializeSortableForPlaylists() {
+                document.querySelectorAll('.photo-grid[data-playlist-id]').forEach(grid => {
+                    // Éviter la ré-initialisation si déjà fait
+                    if (Sortable.get(grid)) {
+                        return;
+                    }
+                    new Sortable(grid, {
+                        animation: 150,
+                        ghostClass: 'bg-blue-200', // Classe pour le fantôme de l'élément déplacé
+                        dataIdAttr: 'data-id', // Spécifie quel attribut utiliser pour l'ordre
+                        onEnd: function (evt) {
+                            // Quand l'utilisateur a fini de déplacer, on sauvegarde automatiquement
+                            const playlistId = evt.to.dataset.playlistId;
+                            savePlaylistOrder(playlistId);
+                        }
+                    });
+                });
+            }
+
+            async function renderPlaylists() {
+                const playlistsContainer = document.getElementById('playlists-list-container');
+                if (!playlistsContainer) return;
+                playlistsContainer.innerHTML = `<p class="text-gray-500 italic">${i18n.loading}</p>`;
+
+                try {
+                    const response = await fetch('/api/playlists');
+                    const playlists = await response.json();
+
+                    playlistsContainer.innerHTML = '';
+                    if (playlists.length === 0) {
+                        playlistsContainer.innerHTML = `<p class="text-gray-500 italic">${i18n.noPlaylists}</p>`;
+                    }
+
+                    playlists.forEach(playlist => {
+                        const photoCount = playlist.photos.length;
+                        const photoCountText = photoCount !== 1 ? `${photoCount} ${i18n.photos}` : `1 ${i18n.photo}`;
+
+                        const playlistEl = document.createElement('div');
+                        playlistEl.className = 'playlist-card p-4 bg-white border rounded-lg shadow-sm';
+                        playlistEl.dataset.id = playlist.id;
+
+                        // Construire les options du sélecteur de musique
+                        let musicOptionsHtml = `<option value="">${i18n.noMusic}</option>`;
+                        availableMusicFiles.forEach(file => {
+                            const selected = (playlist.music_file === file) ? 'selected' : '';
+                            musicOptionsHtml += `<option value="${file}" ${selected}>${file}</option>`;
+                        });
+
+                        let photosHtml = `<p class="text-sm italic text-gray-500 col-span-full">${i18n.noPhotosInPlaylist}</p>`;
+                        if (playlist.photos.length > 0) {
+                            photosHtml = playlist.photos.map(photoPath => {
+                                const isVideo = /\.(mp4|mov|avi|mkv)$/i.test(photoPath);
+                                const mediaUrl = `/static/prepared/${photoPath}?v=${new Date().getTime()}`;
+                                let thumbUrl = mediaUrl;
+                                let videoIconHtml = '';
+
+                                if (isVideo) {
+                                    const basePath = photoPath.substring(0, photoPath.lastIndexOf('.'));
+                                    thumbUrl = `/static/prepared/${basePath}_thumbnail.jpg?v=${new Date().getTime()}`;
+                                    videoIconHtml = `
+                            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 rounded">
+                                <i class="fas fa-play text-white text-3xl opacity-75"></i>
+                            </div>
+                        `;
+                                }
+
+                                return `
+                        <div class="photo-tile relative cursor-move" data-id="${photoPath}">
+                            <a href="${mediaUrl}" class="glightbox block relative" data-gallery="playlist-${playlist.id}" title="${photoPath}">
+                                <img src="${thumbUrl}" class="w-24 h-24 object-cover rounded shadow bg-gray-200 cursor-pointer hover:scale-105 transition-transform">
+                                ${videoIconHtml}
+                            </a>
+                            <button class="remove-from-playlist-btn absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-800 transition-colors z-10" title="{{ _('Retirer de la playlist') }}">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                            }).join('');
+                        }
+
+                        playlistEl.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <div class="flex-grow cursor-pointer playlist-title-toggle" title="{{ _('Afficher/Cacher les photos') }}">
+                        <h5 class="text-lg font-semibold text-gray-900">${playlist.name}</h5>
+                        <p class="text-sm text-gray-500" id="photo-count-${playlist.id}">${photoCountText}</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <select class="playlist-music-select text-sm rounded-md border-gray-300 shadow-sm" data-playlist-id="${playlist.id}">
+                            ${musicOptionsHtml}
+                        </select>
+                        <button type="button" class="play-music-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold w-10 h-10 flex items-center justify-center rounded text-sm" data-target-select-id="${playlist.id}" data-music-file="${playlist.music_file || ''}" ${playlist.music_file ? '' : 'disabled'} title="${i18n.listenToMusic}">
+                            <i class="fas fa-play fa-fw"></i>
+                        </button>
+                        <button class="rename-playlist-btn text-gray-500 hover:text-blue-600" data-id="${playlist.id}" title="${i18n.renamePlaylist}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="start-playlist-btn bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded inline-flex items-center" data-id="${playlist.id}">
+                            <i class="fas fa-play mr-2"></i>${i18n.launch}
+                        </button>
+                        <button class="delete-playlist-btn text-red-500 hover:text-red-700" data-id="${playlist.id}" title="${i18n.deletePlaylist}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <i class="fas fa-chevron-down text-gray-400 playlist-chevron"></i>
+                    </div>
+                </div>
+                <div id="photos-container-${playlist.id}" class="hidden mt-4 photo-grid border-t pt-4" data-playlist-id="${playlist.id}">
+                    ${photosHtml}
+                </div>
+            `;
+                        playlistsContainer.appendChild(playlistEl);
+                    });
+
+                    // Ajouter les écouteurs pour les sélecteurs de musique
+                    document.querySelectorAll('.playlist-music-select').forEach(select => {
+                        select.addEventListener('change', async (event) => {
+                            const playlistId = event.target.dataset.playlistId;
+                            const musicFile = event.target.value;
+                            try {
+                                const response = await fetch(`/api/playlists/${playlistId}/update_music`, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ music_file: musicFile })
+                                });
+                                const result = await response.json();
+                                if (result.success) {
+                                    showToast(i18n.musicUpdated);
+                                } else {
+                                    alert(`${i18n.errorPrefix} ${result.message}`);
+                                }
+                            } catch (e) {
+                                alert(i18n.commErrorServer);
+                            }
+                        });
+                    });
+
+                    // Initialiser le glisser-déposer sur les grilles nouvellement créées
+                    initializeSortableForPlaylists();
+
+                    // NOUVEAU: Ré-initialiser GLightbox pour les nouvelles galeries de playlists
+                    GLightbox({
+                        selector: '#playlists-list-container .glightbox'
+                    });
+                } catch (error) {
+                    playlistsContainer.innerHTML = `<p class="text-red-500">${i18n.errorLoadingPlaylists}</p>`;
+                }
+            }
+
+            function openTab(evt, tabId) {
+                // Si on clique sur l'onglet Favoris et qu'il n'est pas déjà actif, on recharge la page
+                // pour s'assurer que la liste des favoris est à jour.
+                const clickedButton = evt ? evt.currentTarget : null;
+                if (tabId === 'tab-favoris' && clickedButton && !clickedButton.classList.contains('active')) {
+                    localStorage.setItem('activeTab', 'tab-favoris'); // On s'assure de revenir sur le bon onglet
+                    location.reload();
+                    return; // On arrête l'exécution pour laisser le rechargement se faire
+                }
+
+                const tabcontent = document.getElementsByClassName("tabcontent");
+                const tablinks = document.getElementsByClassName("tablink");
+
+                for (const tab of tabcontent) {
+                    tab.style.display = "none";
+                }
+                for (const link of tablinks) {
+                    link.classList.remove("active");
+                }
+
+                const tabElement = document.getElementById(tabId);
+                if (tabElement) {
+                    tabElement.style.display = "block";
+                }
+
+                // Gérer la classe active sur le bouton de l'onglet
+                const currentButton = evt ? evt.currentTarget : document.querySelector(`.tablink[onclick*="'${tabId}'"]`);
+                if (currentButton) {
+                    currentButton.classList.add("active");
+                }
+                localStorage.setItem('activeTab', tabId);
+
+                // Gérer la visibilité du bouton "Enregistrer"
+                const saveButton = document.getElementById('save-changes-btn');
+                const tabsWithoutSaveButton = ['tab-comptes', 'tab-apercu', 'tab-actions', 'tab-validation', 'tab-favoris', 'tab-playlists', 'tab-network', 'tab-maintenance', 'tab-stats', 'tab-logs'];
+                if (tabId === 'tab-validation') {
+                    refreshValidationTab(); // On rafraîchit la grille et le badge
+                }
+                if (saveButton) {
+                    saveButton.style.display = tabsWithoutSaveButton.includes(tabId) ? 'none' : 'block';
+                }
+
+                // Si on ouvre l'onglet Telegram, on charge les invitations
+                if (tabId === 'tab-telegram') {
+                    fetchTelegramBotStatus();
+                    loadInvitations();
+                }
+
+                if (tabId === 'tab-playlists') {
+                    renderPlaylists();
+                }
+
+                if (tabId === 'tab-vocal') {
+                    loadAudioDevices();
+                    fetchVoiceControlStatus();
+                }
+            }
+
+            let availableMusicFiles = []; 
+
+            async function loadMusicFiles() {
+                try {
+                    const response = await fetch('/api/music_files');
+                    const data = await response.json();
+                    if (data.success) {
+                        availableMusicFiles = data.files;
+                        
+                        // 1. Remplir les sélecteurs de playlist
+                        const newPlaylistMusicSelect = document.getElementById('new-playlist-music');
+                        if (newPlaylistMusicSelect) {
+                            newPlaylistMusicSelect.innerHTML = `<option value="">${i18n.noMusic}</option>`;
+                            availableMusicFiles.forEach(file => {
+                                const option = document.createElement('option');
+                                option.value = file;
+                                option.textContent = file;
+                                newPlaylistMusicSelect.appendChild(option);
+                            });
+                        }
+
+                        // 2. Remplir la liste de gestion (Actions)
+                        const listContainer = document.getElementById('music-files-list');
+                        if (listContainer) {
+                            if (availableMusicFiles.length === 0) {
+                                listContainer.innerHTML = `<p class="text-sm text-gray-500 italic col-span-full">${i18n.noMusicSelected}</p>`;
+                            } else {
+                                listContainer.innerHTML = availableMusicFiles.map(file => `
+                                    <div class="flex items-center justify-between bg-white p-2 rounded shadow-sm border border-gray-200">
+                                        <div class="flex items-center gap-2 overflow-hidden">
+                                            <i class="fas fa-music text-purple-500 text-xs"></i>
+                                            <span class="text-xs truncate font-mono" title="${file}">${file}</span>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <button type="button" class="preview-music-btn text-blue-500 hover:text-blue-700 p-1 w-6 h-6 flex items-center justify-center" data-file="${file}" title="${i18n.listenToMusic}">
+                                                <i class="fas fa-play fa-fw text-xs"></i>
+                                            </button>
+                                            <button type="button" class="delete-music-btn text-red-500 hover:text-red-700 p-1" data-file="${file}" title="${i18n.deletePlaylist}">
+                                                <i class="fas fa-trash-alt text-xs"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('');
+                            }
+                        }
+                    } else { console.error("Error loading music files:", data.message); }
+                } catch (error) { console.error("Communication error loading music files:", error); }
+            }
+
+            let currentAudioPlayer = null;
+            let currentPlayingButton = null;
+
+            function resetPlayButton(button) {
+                if (button) {
+                    const icon = button.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-stop');
+                        icon.classList.add('fa-play');
+                    }
+                    button.title = i18n.listenToMusic;
+                }
+            }
+
+            function toggleMusicPlayback(button, musicFile) {
+                const musicUrl = `/static/music/${musicFile}`;
+                const absoluteMusicUrl = new URL(musicUrl, window.location.origin).href;
+
+                if (currentAudioPlayer && currentAudioPlayer.src !== absoluteMusicUrl) {
+                    currentAudioPlayer.pause();
+                    currentAudioPlayer.currentTime = 0;
+                    resetPlayButton(currentPlayingButton);
+                }
+
+                if (currentAudioPlayer && currentAudioPlayer.src === absoluteMusicUrl && !currentAudioPlayer.paused) {
+                    currentAudioPlayer.pause();
+                    currentAudioPlayer.currentTime = 0;
+                    resetPlayButton(button);
+                    currentAudioPlayer = null;
+                    currentPlayingButton = null;
+                } else {
+                    if (!currentAudioPlayer || currentAudioPlayer.src !== absoluteMusicUrl) {
+                        currentAudioPlayer = new Audio(musicUrl);
+                        currentAudioPlayer.volume = 0.7;
+                        currentAudioPlayer.addEventListener('ended', () => {
+                            resetPlayButton(button);
+                            currentAudioPlayer = null;
+                            currentPlayingButton = null;
+                        });
+                    }
+                    currentAudioPlayer.play();
+                    const icon = button.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-play');
+                        icon.classList.add('fa-stop');
+                    }
+                    button.title = i18n.stopMusic;
+                    currentPlayingButton = button;
+                }
+            }
+
+            // Restaurer l'onglet actif au chargement de la page
+            document.addEventListener('DOMContentLoaded', async function () {
+                // --- Nouvelle gestion de la navigation par groupes ---
+                const mainNavLinks = document.querySelectorAll('.main-nav-link');
+                const subNavGroups = document.querySelectorAll('.sub-nav-group');
+
+                function switchMainGroup(targetGroup) {
+                    mainNavLinks.forEach(link => {
+                        link.classList.toggle('active', link.dataset.group === targetGroup);
+                    });
+                    subNavGroups.forEach(group => {
+                        group.classList.toggle('hidden', group.id !== targetGroup);
+                    });
+                }
+
+                mainNavLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        const targetGroup = this.dataset.group;
+                        switchMainGroup(targetGroup);
+                        localStorage.setItem('activeMainGroup', targetGroup);
+
+                        // Clique sur le premier onglet du nouveau groupe pour s'assurer qu'un onglet est toujours actif
+                        const activeGroup = document.getElementById(targetGroup);
+                        if (activeGroup) {
+                            const firstTabButton = activeGroup.querySelector('.tablink');
+                            if (firstTabButton) {
+                                firstTabButton.click(); // Cela appellera openTab et sauvegardera le nouvel onglet actif
+                            }
+                        }
+                    });
+                });
+
+                // --- Logique de restauration de l'état au chargement de la page ---
+                let activeTabId = localStorage.getItem('activeTab') || 'tab-affichage';
+                let activeMainGroup = localStorage.getItem('activeMainGroup');
+
+                // Trouver à quel groupe appartient l'onglet actif
+                const activeTabElement = document.querySelector(`.tablink[onclick*="'${activeTabId}'"]`);
+                if (!activeTabElement) {
+                    activeMainGroup = null; // Onglet non accessible (ex : réservé aux administrateurs)
+                }
+                if (activeTabElement) {
+                    const parentGroup = activeTabElement.closest('.sub-nav-group');
+                    if (parentGroup) {
+                        activeMainGroup = parentGroup.id;
+                    }
+                }
+
+                // Si aucun groupe valide n'est trouvé, revenir au groupe par défaut
+                if (!activeMainGroup || !document.getElementById(activeMainGroup)) {
+                    activeMainGroup = 'group-diaporama';
+                    activeTabId = 'tab-affichage'; // Réinitialiser aussi l'onglet
+                }
+
+                // On utilise l'événement 'load' (au lieu de DOMContentLoaded) pour s'assurer que tout est prêt.
+
+
+                // Initialiser le bouton de lecture pour la nouvelle playlist
+                const newPlaylistMusicSelect = document.getElementById('new-playlist-music');
+                const newPlaylistPlayButton = document.querySelector('.play-music-btn[data-target-select="new-playlist-music"]');
+                if (newPlaylistMusicSelect && newPlaylistPlayButton) {
+                    newPlaylistMusicSelect.addEventListener('change', (event) => {
+                        newPlaylistPlayButton.disabled = !event.target.value;
+                        resetPlayButton(newPlaylistPlayButton);
+                    });
+                    newPlaylistPlayButton.addEventListener('click', () => {
+                        const musicFile = newPlaylistMusicSelect.value;
+                        if (musicFile) toggleMusicPlayback(newPlaylistPlayButton, musicFile);
+                    });
+                }
+
+                await loadMusicFiles(); // Charger les fichiers musicaux AVANT d'activer les onglets
+
+                // Activer le bon groupe et le bon onglet
+                switchMainGroup(activeMainGroup);
+                openTab(null, activeTabId);
+
+                // --- Reste de la logique de chargement de la page ---
+
+                // Mettre à jour le badge au chargement (et la grille si l'onglet est déjà actif)
+                refreshValidationTab(); // Appel initial pour mettre à jour le badge
+
+                setInterval(refreshValidationTab, 15000); // Et le mettre à jour périodiquement
+
+                // Mettre à jour le badge des favoris
+                const favoritesCount = {{ favorite_photos | length }};
+            const favoritesBadge = document.getElementById('favorites-count-badge');
+            if (favoritesBadge) {
+                if (favoritesCount > 0) {
+                    favoritesBadge.textContent = favoritesCount;
+                    favoritesBadge.classList.remove('hidden');
+                } else {
+                    favoritesBadge.classList.add('hidden');
+                }
+            }
+
+            // Gérer l'affichage du sélecteur de sortie audio
+            const audioEnabledCheckbox = document.getElementById('video_audio_enabled');
+            const audioOutputSelector = document.getElementById('audio-output-selector');
+            const audioVolumeSelector = document.getElementById('audio-volume-selector');
+            if (audioEnabledCheckbox && audioOutputSelector && audioVolumeSelector) {
+                audioEnabledCheckbox.addEventListener('change', function () {
+                    const displayStyle = this.checked ? 'flex' : 'none';
+                    audioOutputSelector.style.display = displayStyle;
+                    audioVolumeSelector.style.display = displayStyle;
+                });
+            }
+
+            // Lier le slider et le champ numérique pour le volume
+            const volumeSlider = document.getElementById('video_audio_volume_slider');
+            const volumeNumber = document.getElementById('video_audio_volume');
+            if (volumeSlider && volumeNumber) {
+                volumeSlider.addEventListener('input', () => { volumeNumber.value = volumeSlider.value; });
+                volumeNumber.addEventListener('input', () => { volumeSlider.value = volumeNumber.value; });
+            }
+
+            // Lier le slider et le champ numérique pour le volume des notifications
+            const notificationVolumeSlider = document.getElementById('notification_volume_slider');
+            const notificationVolumeNumber = document.getElementById('notification_sound_volume');
+            if (notificationVolumeSlider && notificationVolumeNumber) {
+                notificationVolumeSlider.addEventListener('input', () => { notificationVolumeNumber.value = notificationVolumeSlider.value; });
+                notificationVolumeNumber.addEventListener('input', () => { notificationVolumeSlider.value = notificationVolumeSlider.value; });
+            }
+
+            // --- Password validation ---
+            const passwordForm = document.getElementById('password-change-form');
+            if (passwordForm) {
+                passwordForm.addEventListener('submit', function (event) {
+                    const newPassword = document.getElementById('new_password').value;
+                    const confirmPassword = document.getElementById('confirm_password').value;
+                    const errorP = document.getElementById('password-error');
+                    if (newPassword !== confirmPassword) {
+                        errorP.classList.remove('hidden');
+                        event.preventDefault(); // Stop form submission
+                    } else {
+                        errorP.classList.add('hidden');
+                    }
+                });
+            }
+});
+
+            // Script de suppression amélioré
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', async (event) => {
+                    const photo = button.dataset.photo;
+                    const confirmDelete = confirm(`Supprimer la photo ${photo} ?`);
+                    if (!confirmDelete) return;
+
+                    try {
+                        const response = await fetch(`/delete_photo/${photo}`, { method: 'DELETE' });
+
+                        if (response.ok) {
+                            // Suppression réussie - recharger la page
+                            // L'onglet actif sera automatiquement restauré grâce au localStorage
+                            location.reload();
+                        } else {
+                            alert("Erreur lors de la suppression.");
+                        }
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        alert("Erreur lors de la suppression.");
+                    }
+                });
+            });
+
+            // Script pour supprimer toutes les photos d'une source
+            document.querySelectorAll('.delete-all-btn').forEach(button => {
+                button.addEventListener('click', async (event) => {
+                    const source = button.dataset.source;
+                    const confirmDelete = confirm(`Êtes-vous sûr de vouloir supprimer TOUTES les photos de la source "${source}" ? Cette action est irréversible.`);
+                    if (!confirmDelete) return;
+
+                    try {
+                        const response = await fetch(`/delete_source_photos/${source}`, { method: 'DELETE' });
+
+                        if (response.ok) {
+                            // Recharger la page pour voir les changements
+                            location.reload();
+                        } else {
+                            const result = await response.json();
+                            alert(`Erreur lors de la suppression : ${result.message || 'Erreur inconnue'}`);
+                        }
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        alert("Erreur de communication lors de la suppression.");
+                    }
+                });
+            });
+
+            // Script pour appliquer les filtres
+            document.querySelectorAll('.filter-select').forEach(select => {
+                select.addEventListener('change', async (event) => {
+                    const filter = event.target.value;
+                    const photo = select.dataset.photo;
+
+                    const tileElement = select.closest('.photo-tile');
+                    if (!tileElement) return;
+
+                    const spinnerOverlay = tileElement.querySelector('.spinner-overlay');
+                    const imgElement = tileElement.querySelector('img');
+                    const glightboxLink = tileElement.querySelector('a.glightbox');
+
+                    // --- 1. Sauvegarder la préférence de filtre ---
+                    try {
+                        await fetch('/api/set_photo_filter', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ photo: photo, filter: filter })
+                        });
+                    } catch (e) {
+                        alert('Erreur lors de la sauvegarde de la préférence.');
+                        return;
+                    }
+
+                    // --- 2. Mettre à jour l'aperçu ---
+                    if (filter === 'none') {
+                        // Ne rien faire à l'aperçu si l'utilisateur sélectionne "Filtre..."
+                        // Pour réinitialiser, l'utilisateur doit choisir "Original".
+                        return;
+                    }
+
+                    if (filter === 'polaroid') {
+                        // Afficher instantanément la version pré-générée
+                        const polaroidPath = photo.replace('.jpg', '_polaroid.jpg');
+                        const newSrc = `/static/prepared/${polaroidPath}?v=${new Date().getTime()}`;
+                        imgElement.src = newSrc;
+                        if (glightboxLink) glightboxLink.href = newSrc;
+                    } else if (filter === 'postcard') {
+                        const postcardPath = photo.replace('.jpg', '_postcard.jpg');
+                        const newSrc = `/static/prepared/${postcardPath}?v=${new Date().getTime()}`;
+                        imgElement.src = newSrc;
+                        if (glightboxLink) glightboxLink.href = newSrc;
+                    } else {
+                        // Pour les autres filtres (y compris 'original'), les appliquer en direct
+                        if (spinnerOverlay) spinnerOverlay.classList.remove('hidden');
+
+                        try {
+                            const response = await fetch('/api/apply_filter', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ photo: photo, filter: filter })
+                            });
+                            const result = await response.json();
+
+                            if (result.success) {
+                                imgElement.onload = () => { if (spinnerOverlay) spinnerOverlay.classList.add('hidden'); imgElement.onload = null; };
+                                imgElement.onerror = () => { if (spinnerOverlay) spinnerOverlay.classList.add('hidden'); alert("Erreur chargement image."); imgElement.onerror = null; };
+                                const newSrc = `${result.new_path}?v=${new Date().getTime()}`;
+                                imgElement.src = newSrc;
+                                if (glightboxLink) glightboxLink.href = newSrc;
+                            } else {
+                                alert(`Erreur : ${result.message}`);
+                                if (spinnerOverlay) spinnerOverlay.classList.add('hidden');
+                            }
+                        } catch (error) {
+                            alert("Erreur de communication avec le serveur.");
+                            if (spinnerOverlay) spinnerOverlay.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+            // Scripts d'import améliorés avec feedback détaillé
+            document.addEventListener("DOMContentLoaded", () => {
+
+                function createStyledMessage(message, type = 'info') {
+                    const div = document.createElement('div');
+                    div.className = `status-message status-${type}`;
+                    div.textContent = message;
+                    return div;
+                }
+
+                function displayMessage(container, message, type = 'info') {
+                    // Classes CSS + icônes par type
+                    const types = {
+                        success: { class: 'bg-green-100 text-green-800 border-green-300', icon: 'fa-check-circle' },
+                        error: { class: 'bg-red-100 text-red-800 border-red-300', icon: 'fa-exclamation-circle' },
+                        warning: { class: 'bg-yellow-100 text-yellow-800 border-yellow-300', icon: 'fa-exclamation-triangle' },
+                        info: { class: 'bg-blue-100 text-blue-800 border-blue-300', icon: 'fa-info-circle' },
+                        progress: { class: 'bg-indigo-100 text-indigo-800 border-indigo-300', icon: 'fa-arrow-circle-right' }
+                    };
+
+                    const config = types[type] || types.info;
+
+                    // Message avec icône
+                    const messageElement = document.createElement('div');
+                    messageElement.className = `p-2 mb-1 rounded border shadow-sm flex items-center ${config.class}`;
+                    messageElement.innerHTML = `
+						<i class="fas ${config.icon} mr-2 text-sm"></i>
+						<span>${message}</span>
+				`;
+
+                    container.appendChild(messageElement);
+
+                    // Limite à 10 lignes (inchangé)
+                    const maxLines = 10;
+                    while (container.children.length > maxLines) {
+                        container.removeChild(container.firstChild);
+                    }
+
+                    container.scrollTop = container.scrollHeight;
+                }
+
+                // --- Gestion des favoris (placé ici pour être sûr que le DOM est chargé) ---
+                document.querySelectorAll('.favorite-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const btn = event.currentTarget;
+                        const photo = btn.dataset.photo;
+
+                        btn.disabled = true; // Empêcher les clics multiples
+
+                        try {
+                            const response = await fetch('/api/toggle_favorite', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ photo: photo })
+                            });
+                            const result = await response.json();
+                            if (result.success) {
+                                // Mettre à jour tous les boutons correspondants (un dans l'aperçu, un dans les favoris)
+                                document.querySelectorAll(`.favorite-btn[data-photo="${photo}"]`).forEach(b => {
+                                    b.classList.toggle('text-yellow-400', result.is_favorite);
+                                    b.classList.toggle('text-gray-400', !result.is_favorite);
+                                });
+
+                                // --- Logique de mise à jour dynamique ---
+                                const favoritesBadge = document.getElementById('favorites-count-badge');
+                                let count = parseInt(favoritesBadge.textContent, 10) || 0;
+
+                                if (result.is_favorite) {
+                                    count++;
+                                } else {
+                                    count = Math.max(0, count - 1);
+                                    const tileToRemove = document.querySelector(`#tab-favoris .photo-tile[data-path="${photo}"]`);
+                                    if (tileToRemove) tileToRemove.remove();
+                                }
+
+                                favoritesBadge.textContent = count;
+                                favoritesBadge.classList.toggle('hidden', count === 0);
+                                const noFavMsg = document.getElementById('no-favorites-message');
+                                if (noFavMsg && count === 0) noFavMsg.classList.remove('hidden');
+
+                            } else { alert(`Erreur: ${result.message}`); }
+                        } catch (error) { alert("Erreur de communication avec le serveur."); }
+                        finally { btn.disabled = false; }
+                    });
+                });
+
+                // --- Gestion du texte sur les Polaroids ---
+                const debounce = (func, delay) => {
+                    let timeoutId;
+                    return (...args) => {
+                        clearTimeout(timeoutId);
+                        timeoutId = setTimeout(() => {
+                            func.apply(this, args);
+                        }, delay);
+                    };
+                };
+
+                const handleGenericTextInput = async (event) => {
+                    const input = event.target;
+                    const text = input.value;
+                    const container = input.closest('.generic-text-input-container');
+                    const photoPath = container.dataset.photo;
+                    const statusSpan = container.querySelector('.generic-text-status');
+                    const tile = input.closest('.photo-tile');
+                    const imgElement = tile.querySelector('img');
+                    const glightboxLink = tile.querySelector('a.glightbox');
+
+                    if (statusSpan) statusSpan.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+                    // Trouver le filtre actif pour savoir quelle API appeler
+                    const filterSelect = document.querySelector(`.filter-select[data-photo="${photoPath}"]`);
+                    const activeFilter = filterSelect ? filterSelect.value : 'none';
+
+                    let apiUrl, bodyData;
+                    if (activeFilter === 'polaroid') {
+                        apiUrl = '/api/set_polaroid_text';
+                        bodyData = { photo: photoPath, text: text };
+                    } else {
+                        apiUrl = '/api/set_image_text';
+                        bodyData = { photo: photoPath, text: text };
+                    }
+
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(bodyData)
+                        });
+                        const result = await response.json();
+                        if (result.success) {
+                            if (statusSpan) { statusSpan.innerHTML = '<i class="fas fa-check text-green-500"></i>'; setTimeout(() => { statusSpan.innerHTML = ''; }, 2000); }
+
+                            let newSrc;
+                            if (activeFilter === 'polaroid') {
+                                const polaroidFilename = photoPath.replace(/\.[^/.]+$/, "") + '_polaroid.jpg';
+                                newSrc = `/static/prepared/${polaroidFilename}?v=${new Date().getTime()}`;
+                            } else {
+                                newSrc = `/static/prepared/${photoPath}?v=${new Date().getTime()}`;
+                            }
+                            imgElement.src = newSrc;
+                            if (glightboxLink) glightboxLink.href = newSrc;
+                        } else { if (statusSpan) statusSpan.innerHTML = `<i class="fas fa-times text-red-500" title="${result.message}"></i>`; }
+                    } catch (error) { if (statusSpan) statusSpan.innerHTML = `<i class="fas fa-exclamation-triangle text-red-500" title="${error}"></i>`; }
+                };
+
+                document.querySelectorAll('.generic-text-input').forEach(input => {
+                    input.addEventListener('input', debounce(handleGenericTextInput, 1000));
+                });
+
+                // --- GESTION DES PLAYLISTS ---
+                const playlistsContainer = document.getElementById('playlists-list-container');
+                const createPlaylistBtn = document.getElementById('create-playlist-btn');
+                const newPlaylistNameInput = document.getElementById('new-playlist-name');
+
+                if (createPlaylistBtn) {
+                    createPlaylistBtn.addEventListener('click', async () => {
+                        const name = newPlaylistNameInput.value.trim();
+                        const musicFile = document.getElementById('new-playlist-music').value;
+                        if (!name) {
+                            alert("{{ _('Veuillez entrer un nom pour la playlist.') }}");
+                            return;
+                        }
+                        try {
+                            const response = await fetch('/api/playlists', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ name, music_file: musicFile })
+                            });
+                            const result = await response.json();
+                            if (result.success) {
+                                newPlaylistNameInput.value = '';
+                                renderPlaylists();
+                            } else {
+                                alert(`{{ _("Erreur :") }} ${result.message}`);
+                            }
+                        } catch (e) { alert("{{ _('Erreur de communication.') }}"); }
+                    });
+                }
+
+                if (playlistsContainer) {
+                    playlistsContainer.addEventListener('click', async (event) => {
+                        const deleteBtn = event.target.closest('.delete-playlist-btn');
+                        const renameBtn = event.target.closest('.rename-playlist-btn');
+                        const toggleBtn = event.target.closest('.playlist-title-toggle');
+                        const removePhotoBtn = event.target.closest('.remove-from-playlist-btn');
+                        const startBtn = event.target.closest('.start-playlist-btn');
+
+                        if (deleteBtn) {
+                            const playlistId = deleteBtn.dataset.id;
+                            if (confirm("{{ _('Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront pas supprimées.') }}")) {
+                                await fetch(`/api/playlists/${playlistId}`, { method: 'DELETE' });
+                                renderPlaylists();
+                            }
+                        }
+
+                        if (renameBtn) {
+                            const playlistId = renameBtn.dataset.id;
+                            const currentName = renameBtn.closest('.playlist-card').querySelector('h5').textContent;
+                            const newName = prompt(i18n.enterNewName, currentName);
+
+                            if (newName && newName.trim() && newName.trim() !== currentName) {
+                                try {
+                                    const response = await fetch(`/api/playlists/${playlistId}/rename`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ name: newName.trim() })
+                                    });
+                                    const result = await response.json();
+                                    if (result.success) {
+                                        renderPlaylists(); // Recharger la liste pour voir le changement
+                                    } else {
+                                        alert(`${i18n.errorPrefix} ${result.message}`);
+                                    }
+                                } catch (e) {
+                                    alert(i18n.commErrorServer);
+                                }
+                            }
+                        }
+
+                        if (toggleBtn) {
+                            const playlistCard = toggleBtn.closest('.playlist-card');
+                            const playlistId = playlistCard.dataset.id;
+                            const photosContainer = document.getElementById(`photos-container-${playlistId}`);
+                            const chevron = playlistCard.querySelector('.playlist-chevron');
+                            if (photosContainer) {
+                                photosContainer.classList.toggle('hidden');
+                                chevron.classList.toggle('fa-chevron-up');
+                                chevron.classList.toggle('fa-chevron-down');
+                            }
+                        }
+
+                        if (removePhotoBtn) {
+                            const playlistCard = removePhotoBtn.closest('.playlist-card');
+                            const playlistId = playlistCard.dataset.id;
+                            const photoTile = removePhotoBtn.closest('.photo-tile');
+                            const photoPath = photoTile.dataset.id;
+
+                            photoTile.style.opacity = '0.5';
+                            const response = await fetch(`/api/playlists/${playlistId}/photos/${encodeURIComponent(photoPath)}`, { method: 'DELETE' });
+                            if (response.ok) {
+                                photoTile.remove();
+                                const countSpan = document.getElementById(`photo-count-${playlistId}`);
+                                const currentCount = parseInt(countSpan.textContent.match(/\d+/)[0] || '0', 10);
+                                const newCount = Math.max(0, currentCount - 1);
+                                countSpan.textContent = newCount !== 1 ? `${newCount} ${i18n.photos}` : `1 ${i18n.photo}`;
+                            } else { alert("{{ _('Erreur lors de la suppression de la photo.') }}"); photoTile.style.opacity = '1'; }
+                        }
+
+                        if (startBtn) {
+                            const playlistId = startBtn.dataset.id;
+                            startBtn.disabled = true;
+                            startBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>{{ _("Lancement...") }}';
+                            try {
+                                const response = await fetch('/api/playlists/play', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ id: playlistId })
+                                });
+                                const result = await response.json();
+                                alert(result.message); // Affiche le message de succès ou d'erreur
+                            } catch (e) {
+                                alert("{{ _('Erreur de communication.') }}");
+                            } finally {
+                                // Réactiver le bouton après un court délai
+                                setTimeout(() => {
+                                    startBtn.disabled = false;
+                                    startBtn.innerHTML = '<i class="fas fa-play mr-2"></i>{{ _("Lancer") }}';
+                                }, 2000);
+                            }
+                        }
+                    });
+                }
+
+                // --- Gérer les clics sur les boutons de lecture des playlists existantes via délégation ---
+                const playlistsListContainer = document.getElementById('playlists-list-container');
+                if (playlistsListContainer) {
+                    playlistsListContainer.addEventListener('click', (event) => {
+                        const btn = event.target.closest('.play-music-btn');
+                        if (btn && !btn.dataset.targetSelect) {
+                            const playlistId = btn.dataset.targetSelectId;
+                            const selectElement = document.querySelector(`.playlist-music-select[data-playlist-id="${playlistId}"]`);
+                            const musicFile = selectElement ? selectElement.value : btn.dataset.musicFile;
+                            if (musicFile) toggleMusicPlayback(btn, musicFile);
+                            else showToast(i18n.noMusicSelected, 3000);
+                        }
+                    });
+                }
+
+                // --- Logique pour ajouter une photo à une playlist ---
+                document.body.addEventListener('click', async (event) => {
+                    const addToPlaylistBtn = event.target.closest('.add-to-playlist-btn');
+                    if (addToPlaylistBtn) {
+                        const photoPath = addToPlaylistBtn.dataset.photo;
+                        const menu = addToPlaylistBtn.closest('.photo-tile').querySelector('.add-to-playlist-menu');
+
+                        // Fermer les autres menus ouverts
+                        document.querySelectorAll('.add-to-playlist-menu').forEach(m => { if (m !== menu) m.classList.add('hidden'); });
+
+                        // Remplir et afficher le menu
+                        const response = await fetch('/api/playlists');
+                        const playlists = await response.json();
+                        menu.innerHTML = '';
+                        if (playlists.length > 0) {
+                            playlists.forEach(p => {
+                                const item = document.createElement('a');
+                                item.href = '#';
+                                item.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100';
+                                item.textContent = p.name;
+                                item.dataset.playlistId = p.id;
+                                item.addEventListener('click', async (e) => {
+                                    e.preventDefault();
+                                    await fetch(`/api/playlists/${p.id}/photos`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ photo_path: photoPath })
+                                    });
+                                    menu.classList.add('hidden');
+                                });
+                                menu.appendChild(item);
+                            });
+                        } else {
+                            menu.innerHTML = `<span class="block px-4 py-2 text-sm text-gray-500 italic">{{ _("Aucune playlist") }}</span>`;
+                        }
+                        menu.classList.toggle('hidden');
+                    } else if (!event.target.closest('.add-to-playlist-menu')) {
+                        // Fermer tous les menus si on clique en dehors
+                        document.querySelectorAll('.add-to-playlist-menu').forEach(m => m.classList.add('hidden'));
+                    }
+                });
+
+                // --- Gestion du téléchargement des photos originales ---
+                document.body.addEventListener('click', (event) => {
+                    const btn = event.target.closest('.save-original-btn');
+                    if (btn && btn.tagName === 'BUTTON') {
+                        const url = btn.dataset.url;
+                        const filename = btn.dataset.filename;
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }
+                });
+
+                // ----- NOUVELLE GESTION DES IMPORTS (USB, IMMICH, SAMBA) -----
+                function handleImportProcess(source) {
+                    const btn = document.getElementById(`${source}-import-btn`);
+                    const progressBar = document.getElementById(`${source}-progress-bar`);
+                    const progressContainer = document.getElementById(`${source}-progress-container`);
+                    const statusDiv = document.getElementById(`${source}-import-status`);
+                    const allImportButtons = document.querySelectorAll('.import-button, #import-smartphone-btn');
+
+                    const previewContainer = document.getElementById('preparation-preview-container');
+                    const previewImage = document.getElementById('preparation-preview-image');
+                    const originalBtnHTML = btn.innerHTML;
+
+                    allImportButtons.forEach(b => {
+                        b.disabled = true;
+                        b.classList.add("opacity-50", "cursor-not-allowed");
+                    });
+                    btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> {{ _("Import en cours...") }}`;
+
+                    progressBar.style.width = "0%";
+                    progressBar.textContent = "0%";
+                    progressContainer.classList.remove("hidden");
+                    statusDiv.innerHTML = "";
+
+                    function restoreButtons() {
+                        allImportButtons.forEach(b => {
+                            b.disabled = false;
+                            b.classList.remove("opacity-50", "cursor-not-allowed");
+                        });
+                        btn.innerHTML = originalBtnHTML;
+                        if (previewContainer) previewContainer.classList.add('hidden');
+                    }
+
+                    function startPreparation() {
+                        //displayMessage(statusDiv, "Étape 1/2: Importation terminée. Démarrage de la préparation...", 'info');
+                        progressBar.style.width = "25%";
+                        progressBar.textContent = "25%";
+
+                        if (previewContainer) previewContainer.classList.remove('hidden');
+                        const prepareEventSource = new EventSource(`/prepare-photos?source=${source}`);
+
+                        prepareEventSource.onmessage = (event) => {
+                            try {
+                                const data = JSON.parse(event.data);
+                                progressBar.style.width = `${data.percent || 0}%`;
+                                progressBar.textContent = `${data.percent || 0}%`;
+                                displayMessage(statusDiv, `{{ _("Préparation :") }} ${data.message}`, data.type);
+
+                                // Mettre à jour l'image d'aperçu si elle est fournie
+                                if (data.current_photo_url && previewImage) {
+                                    previewImage.src = data.current_photo_url;
+                                }
+
+                                if (data.type === 'done' || data.stage === 'PREPARING_COMPLETE') {
+                                    prepareEventSource.close();
+                                    displayMessage(statusDiv, "{{ _('Préparation terminée ! Redémarrage du diaporama...') }}", 'success');
+
+                                    // Envoyer la requête pour redémarrer le diaporama
+                                    fetch('/api/slideshow/restart_for_update', { method: 'POST' })
+                                        .then(response => response.json())
+                                        .then(result => {
+                                            if (result.success) {
+                                                displayMessage(statusDiv, "{{ _('Diaporama redémarré. Rechargement de la page...') }}", 'success');
+                                            }
+                                            setTimeout(() => { location.reload(); }, 2000);
+                                        });
+                                } else if (data.type === 'error') {
+                                    prepareEventSource.close();
+                                    restoreButtons();
+                                }
+                            } catch (e) {
+                                displayMessage(statusDiv, "{{ _('Données de préparation invalides reçues du serveur.') }}", 'error');
+                                prepareEventSource.close();
+                                restoreButtons();
+                            }
+                        };
+
+                        prepareEventSource.onerror = () => {
+                            prepareEventSource.close();
+                            displayMessage(statusDiv, "{{ _('Erreur de connexion au serveur pour la préparation des photos.') }}", 'error');
+                            restoreButtons();
+                        };
+                    }
+
+                    const importEventSource = new EventSource(`/import-${source}`);
+
+                    importEventSource.onmessage = (event) => {
+                        try {
+                            const data = JSON.parse(event.data);
+                            progressBar.style.width = `${data.percent || 0}%`;
+                            progressBar.textContent = `${data.percent || 0}%`;
+                            displayMessage(statusDiv, `{{ _("Importation :") }} ${data.message}`, data.type);
+
+                            if (data.type === 'done') {
+                                importEventSource.close();
+                                startPreparation();
+                            } else if (data.type === 'error') {
+                                importEventSource.close();
+                                restoreButtons();
+                            }
+                        } catch (e) {
+                            displayMessage(statusDiv, "{{ _('Données d\'import invalides reçues du serveur.') }}", 'error');
+                            importEventSource.close();
+                            restoreButtons();
+                        }
+                    };
+
+                    importEventSource.onerror = () => {
+                        importEventSource.close();
+                        displayMessage(statusDiv, `{{ _("Erreur de connexion au serveur pour l'import") }} ${source}.`, 'error');
+                        restoreButtons();
+                    };
+                }
+
+                document.getElementById("usb-import-btn").addEventListener("click", () => handleImportProcess('usb'));
+                document.getElementById("immich-import-btn").addEventListener("click", () => handleImportProcess('immich'));
+                document.getElementById("samba-import-btn").addEventListener("click", () => handleImportProcess('samba'));
+                document.getElementById("gdrive-import-btn").addEventListener("click", () => handleImportProcess('gdrive'));
+
+                // ----- GOOGLE DRIVE : MÉTHODE DE CONNEXION -----
+                const gdriveHasRclone = {{ 'true' if gdrive_rclone_remotes else 'false' }};
+                function updateGdriveBackendSections() {
+                    const backend = document.getElementById("gdrive_backend").value;
+                    const useRclone = backend === "rclone" || (backend === "auto" && gdriveHasRclone);
+                    document.getElementById("gdrive-rclone-section").classList.toggle("hidden", !useRclone);
+                    document.getElementById("gdrive-sa-section").classList.toggle("hidden", useRclone);
+                }
+                document.getElementById("gdrive_backend").addEventListener("change", () => {
+                    updateGdriveBackendSections();
+                    // Les identifiants de dossiers diffèrent selon la méthode : il faut les choisir à nouveau
+                    document.getElementById("gdrive-folders-list").innerHTML =
+                        `<p class="text-sm text-gray-500">{{ _("Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » pour choisir à nouveau les dossiers.") }}</p>`;
+                });
+                updateGdriveBackendSections();
+
+                // ----- GOOGLE DRIVE : CHOIX DES DOSSIERS -----
+                document.getElementById("gdrive-list-folders-btn").addEventListener("click", async () => {
+                    const btn = document.getElementById("gdrive-list-folders-btn");
+                    const statusSpan = document.getElementById("gdrive-folders-status");
+                    const listDiv = document.getElementById("gdrive-folders-list");
+                    const key = document.getElementById("gdrive_service_account_json").value;
+
+                    btn.disabled = true;
+                    statusSpan.textContent = "{{ _('Chargement...') }}";
+                    statusSpan.className = "ml-4 font-medium text-gray-600";
+
+                    try {
+                        const response = await fetch('/api/gdrive/folders', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                key: key,
+                                backend: document.getElementById("gdrive_backend").value,
+                                remote: document.getElementById("gdrive_rclone_remote")?.value || ""
+                            })
+                        });
+                        const data = await response.json();
+                        if (!data.success) throw new Error(data.message);
+
+                        // Conserver les dossiers déjà cochés
+                        const selected = new Set(Array.from(listDiv.querySelectorAll('input[name="gdrive_folders"]:checked'))
+                            .map(cb => cb.value.split('|')[0]));
+                        listDiv.innerHTML = "";
+                        if (data.folders.length === 0) {
+                            listDiv.innerHTML = `<p class="text-sm text-gray-500">{{ _("Aucun dossier trouvé. Avez-vous partagé vos dossiers avec l'adresse du compte de service ?") }}</p>`;
+                        }
+                        data.folders.forEach(folder => {
+                            const row = document.createElement('div');
+                            row.className = "form-check my-1";
+                            const cb = document.createElement('input');
+                            cb.type = "checkbox";
+                            cb.className = "form-check-input";
+                            cb.name = "gdrive_folders";
+                            cb.id = `gdrive_folder_${folder.id}`;
+                            cb.value = `${folder.id}|${folder.name}`;
+                            cb.checked = selected.has(folder.id);
+                            const label = document.createElement('label');
+                            label.className = "form-check-label ml-2";
+                            label.htmlFor = cb.id;
+                            label.textContent = folder.name;
+                            row.append(cb, label);
+                            listDiv.appendChild(row);
+                        });
+                        statusSpan.textContent = `${data.folders.length} {{ _("dossier(s) trouvé(s)") }}`;
+                        statusSpan.className = "ml-4 font-medium text-green-600";
+                    } catch (error) {
+                        statusSpan.textContent = error.message;
+                        statusSpan.className = "ml-4 font-medium text-red-600";
+                    } finally {
+                        btn.disabled = false;
+                    }
+                });
+
+                // ----- TEST SAMBA CONNECTION -----
+                document.getElementById("samba-test-btn").addEventListener("click", async () => {
+                    const btn = document.getElementById("samba-test-btn");
+                    const statusSpan = document.getElementById("samba-test-status");
+
+                    // Get values from the form
+                    const host = document.getElementById("smb_host").value;
+                    const share = document.getElementById("smb_share").value;
+                    const path = document.getElementById("smb_path").value;
+                    const user = document.getElementById("smb_user").value;
+                    const password = document.getElementById("smb_password").value;
+
+                    // Provide immediate feedback
+                    statusSpan.textContent = "{{ _('Test en cours...') }}";
+                    statusSpan.className = "ml-4 font-medium text-blue-600";
+                    btn.disabled = true;
+
+                    try {
+                        const response = await fetch('/test-samba', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                smb_host: host,
+                                smb_share: share,
+                                smb_path: path,
+                                smb_user: user,
+                                smb_password: password
+                            }),
+                        });
+
+                        const result = await response.json();
+
+                        statusSpan.textContent = result.message;
+                        statusSpan.className = result.success ? "ml-4 font-medium text-green-600" : "ml-4 font-medium text-red-600";
+
+                    } catch (error) {
+                        statusSpan.textContent = "{{ _('Erreur de communication avec le serveur.') }}";
+                        statusSpan.className = "ml-4 font-medium text-red-600";
+                    } finally {
+                        btn.disabled = false;
+                    }
+                });
+
+                // ----- TEST WEATHER API -----
+                const testWeatherBtn = document.getElementById("testWeatherApiKeyBtn");
+                if (testWeatherBtn) {
+                    testWeatherBtn.addEventListener("click", async () => {
+                        const btn = testWeatherBtn;
+                        const statusSpan = document.getElementById("weatherApiTestResult");
+
+                        const apiKey = document.getElementById("weather_api_key").value;
+                        const city = document.getElementById("weather_city").value;
+
+                        statusSpan.textContent = "{{ _('Test en cours...') }}";
+                        statusSpan.className = "ml-4 font-medium text-blue-600";
+                        btn.disabled = true;
+
+                        try {
+                            const response = await fetch('/test-weather-api', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ api_key: apiKey, city: city }),
+                            });
+
+                            const result = await response.json();
+
+                            statusSpan.textContent = result.message;
+                            statusSpan.className = result.success ? "ml-4 font-medium text-green-600" : "ml-4 font-medium text-red-600";
+
+                        } catch (error) {
+                            statusSpan.textContent = "{{ _('Erreur de communication avec le serveur.') }}";
+                            statusSpan.className = "ml-4 font-medium text-red-600";
+                        } finally {
+                            btn.disabled = false;
+                        }
+                    });
+                }
+
+                // ----- TEST TELEGRAM API -----
+                const testTelegramBtn = document.getElementById("testTelegramBtn");
+                if (testTelegramBtn) {
+                    testTelegramBtn.addEventListener("click", async () => {
+                        const btn = testTelegramBtn;
+                        const statusSpan = document.getElementById("telegramTestResult");
+
+                        const token = document.getElementById("telegram_bot_token").value;
+
+                        statusSpan.textContent = i18n.testing;
+                        statusSpan.className = "ml-4 font-medium text-blue-600";
+                        btn.disabled = true;
+
+                        try {
+                            const response = await fetch('/test-telegram', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ token: token }),
+                            });
+
+                            const result = await response.json();
+
+                            statusSpan.textContent = result.message;
+                            statusSpan.className = result.success ? "ml-4 font-medium text-green-600" : "ml-4 font-medium text-red-600";
+
+                        } catch (error) {
+                            statusSpan.textContent = i18n.commErrorServer;
+                            statusSpan.className = "ml-4 font-medium text-red-600";
+                        } finally {
+                            btn.disabled = false;
+                        }
+                    });
+                }
+
+                // --- Gestion des invitations Telegram ---
+                const createInviteBtn = document.getElementById('create-invite-btn');
+                const invitationsListDiv = document.getElementById('invitations-list');
+
+                if (createInviteBtn) {
+                    createInviteBtn.addEventListener('click', async () => {
+                        const name = document.getElementById('new-invite-name').value;
+                        const duration = document.getElementById('new-invite-duration').value;
+
+                        if (!name.trim()) {
+                            alert(i18n.enterGuestName);
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch('/api/telegram/invitations', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ name, duration })
+                            });
+                            const result = await response.json();
+                            if (result.success) {
+                                document.getElementById('new-invite-name').value = '';
+                                loadInvitations(); // Recharger la liste
+                            } else {
+                                alert(`${i18n.errorPrefix} ${result.message}`);
+                            }
+                        } catch (error) {
+                            alert(i18n.commErrorServer);
+                        }
+                    });
+                }
+
+                if (invitationsListDiv) {
+                    invitationsListDiv.addEventListener('click', async (event) => {
+                        const deleteBtn = event.target.closest('.delete-invite-btn');
+                        const revokeBtn = event.target.closest('.revoke-invite-btn');
+                        const copyBtn = event.target.closest('.copy-link-btn');
+
+                        if (copyBtn) {
+                            const linkToCopy = copyBtn.dataset.link;
+                            const icon = copyBtn.querySelector('i');
+                            copyToClipboard(linkToCopy,
+                                () => { // On Success
+                                    icon.className = 'fas fa-check text-green-500';
+                                    setTimeout(() => {
+                                        icon.className = 'fas fa-copy';
+                                    }, 2000);
+                                },
+                                (err) => { // On Error
+                                    console.error('Failed to copy: ', err);
+                                    alert(i18n.copyFailed);
+                                }
+                            );
+                        }
+
+                        if (deleteBtn) {
+                            const code = deleteBtn.dataset.code;
+                            if (confirm(i18n.confirmDeleteInvite)) {
+                                try {
+                                    const response = await fetch(`/api/telegram/invitations/${code}`, { method: 'DELETE' });
+                                    const result = await response.json();
+                                    if (result.success) {
+                                        loadInvitations();
+                                    } else {
+                                        alert(`${i18n.errorPrefix} ${result.message}`);
+                                    }
+                                } catch (error) {
+                                    alert(i18n.commErrorServer);
+                                }
+                            }
+                        }
+
+                        if (revokeBtn) {
+                            const code = revokeBtn.dataset.code;
+                            if (confirm(i18n.confirmRevokeInvite)) {
+                                try {
+                                    const response = await fetch(`/api/telegram/invitations/${code}/revoke`, { method: 'POST' });
+                                    const result = await response.json();
+                                    if (result.success) {
+                                        loadInvitations(); // Recharger la liste pour voir le changement de statut
+                                    } else {
+                                        alert(`${i18n.errorPrefix} ${result.message}`);
+                                    }
+                                } catch (error) {
+                                    alert(i18n.commErrorServer);
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // --- État des marées ---
+                async function fetchTideInfo() {
+                    const tideListDiv = document.getElementById('tide-list');
+                    const tideLastUpdate = document.getElementById('tide-last-update');
+                    const tideApiStatus = document.getElementById('tide-api-status');
+
+                    try {
+                        const response = await fetch('/api/tide_info');
+                        const data = await response.json();
+
+                        tideListDiv.innerHTML = ''; // Vider la liste
+
+                        if (data.success) {
+                            tideLastUpdate.textContent = data.last_update || 'N/A';
+                            tideApiStatus.textContent = data.api_status || 'OK';
+                            tideApiStatus.className = data.api_status.includes('cooldown') || data.api_status.includes('Erreur') ? 'font-mono text-yellow-600' : 'font-mono text-green-600';
+
+                            if (data.tides && data.tides.length > 0) {
+                                data.tides.forEach(tide => {
+                                    const p = document.createElement('p');
+                                    p.innerHTML = `<strong>${tide.type}:</strong> <span class="font-mono">${tide.time} (${tide.height})</span>`;
+                                    tideListDiv.appendChild(p);
+                                });
+                            } else {
+                                tideListDiv.innerHTML = `<p class="italic">{{ _("Aucune donnée de marée à afficher.") }}</p>`;
+                            }
+                        } else {
+                            tideApiStatus.textContent = data.message || "{{ _('Impossible de charger les données.') }}";
+                            tideApiStatus.className = 'font-mono text-red-600';
+                        }
+                    } catch (error) {
+                        console.error("Erreur de communication avec l'API des marées:", error);
+                        tideApiStatus.textContent = "{{ _('Erreur de connexion au serveur.') }}";
+                        tideApiStatus.className = 'font-mono text-red-600';
+                    }
+                }
+
+
+                // ----- TEST STORMGLASS API -----
+                const testStormglassBtn = document.getElementById("testStormglassApiKeyBtn");
+                if (testStormglassBtn) {
+                    testStormglassBtn.addEventListener("click", async () => {
+                        const btn = testStormglassBtn;
+                        const statusSpan = document.getElementById("stormglassApiTestResult");
+
+                        const apiKey = document.getElementById("stormglass_api_key").value;
+                        const lat = document.getElementById("tide_latitude").value;
+                        const lon = document.getElementById("tide_longitude").value;
+
+                        statusSpan.textContent = "Test en cours...";
+                        statusSpan.className = "ml-4 font-medium text-blue-600";
+                        btn.disabled = true;
+
+                        try {
+                            const response = await fetch('/test-stormglass-api', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ api_key: apiKey, lat: lat, lon: lon }),
+                            });
+
+                            const result = await response.json();
+
+                            statusSpan.textContent = result.message;
+                            statusSpan.className = result.success ? "ml-4 font-medium text-green-600" : "ml-4 font-medium text-red-600";
+
+                        } catch (error) {
+                            statusSpan.textContent = "Erreur de communication avec le serveur.";
+                            statusSpan.className = "ml-4 font-medium text-red-600";
+                        } finally {
+                            btn.disabled = false;
+                        }
+                    });
+                }
+
+                // ----- FORCE TIDE UPDATE -----
+                const forceTideBtn = document.getElementById("forceTideUpdateBtn");
+                if (forceTideBtn) {
+                    forceTideBtn.addEventListener("click", async () => {
+                        const btn = forceTideBtn;
+                        const statusSpan = document.getElementById("forceTideUpdateResult");
+
+                        statusSpan.textContent = "{{ _('Mise à jour en cours...') }}";
+                        statusSpan.className = "ml-4 font-medium text-blue-600";
+                        btn.disabled = true;
+
+                        try {
+                            const response = await fetch('/api/force_tide_update', {
+                                method: 'POST'
+                            });
+
+                            const result = await response.json();
+
+                            statusSpan.textContent = result.message;
+                            statusSpan.className = result.success ? "ml-4 font-medium text-green-600" : "ml-4 font-medium text-red-600";
+
+                            if (result.success) {
+                                fetchTideInfo(); // Rafraîchir l'affichage de l'état des marées
+                            }
+                        } catch (error) {
+                            statusSpan.textContent = "{{ _('Erreur de communication avec le serveur.') }}";
+                            statusSpan.className = "ml-4 font-medium text-red-600";
+                        } finally {
+                            btn.disabled = false;
+                        }
+                    });
+                }
+
+                // Mise à jour périodique
+                fetchTideInfo(); // Appel initial
+                setInterval(fetchTideInfo, 30000); // Mise à jour toutes les 30 secondes
+
+                // ----- IMPORT SMARTPHONE -----
+                document.getElementById('smartphone-upload-form').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const form = event.target;
+                    const formData = new FormData(form);
+                    const btn = document.getElementById('import-smartphone-btn');
+                    const progressBar = document.getElementById('smartphone-progress-bar');
+                    const progressContainer = document.getElementById('smartphone-progress-container');
+                    const statusDiv = document.getElementById('smartphone-import-status');
+                    const allImportButtons = document.querySelectorAll('.import-button, #import-smartphone-btn');
+                    let hasErrorOccurred = false; // Flag to track errors
+
+                    // Check if files were selected
+                    if (!formData.has('photos') || !formData.get('photos').name) {
+                        displayMessage(statusDiv, "{{ _('Veuillez sélectionner au moins un fichier.') }}", 'error');
+                        return;
+                    }
+
+                    // Disable all import buttons
+                    allImportButtons.forEach(b => {
+                        b.disabled = true;
+                        b.classList.add("opacity-50", "cursor-not-allowed");
+                    });
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> {{ _("Envoi en cours...") }}';
+
+                    // Reset UI
+                    progressBar.style.width = '0%';
+                    progressBar.textContent = '0%';
+                    progressContainer.classList.remove('hidden');
+                    statusDiv.innerHTML = '';
+
+                    fetch('/import-smartphone', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Erreur HTTP: ${response.status}`);
+                            }
+                            const reader = response.body.getReader();
+                            const decoder = new TextDecoder();
+
+                            function processStream() {
+                                reader.read().then(({ done, value }) => {
+                                    if (done) { // Stream finished
+                                        if (!hasErrorOccurred) {
+                                            displayMessage(statusDiv, "{{ _('Importation réussie ! Rechargement de la page...') }}", 'success');
+                                            setTimeout(() => { location.reload(); }, 2000);
+                                        } else {
+                                            // Re-enable buttons after a delay if there was an error
+                                            setTimeout(() => {
+                                                allImportButtons.forEach(b => {
+                                                    b.disabled = false;
+                                                    b.classList.remove("opacity-50", "cursor-not-allowed");
+                                                });
+                                                btn.innerHTML = '<i class="fas fa-upload"></i> {{ _("Envoyer les photos") }}';
+                                            }, 5000);
+                                        }
+                                        return; // End the stream processing
+                                    }
+
+                                    // Process the stream chunk
+                                    const chunk = decoder.decode(value, { stream: true });
+                                    const lines = chunk.split('\n\n');
+                                    lines.forEach(line => {
+                                        if (line.startsWith('data: ')) {
+                                            try {
+                                                const data = JSON.parse(line.substring(6));
+                                                progressBar.style.width = `${data.percent || 0}%`;
+                                                progressBar.textContent = `${data.percent || 0}%`;
+                                                displayMessage(statusDiv, data.message, data.type);
+                                                if (data.type === 'error') {
+                                                    hasErrorOccurred = true;
+                                                }
+                                            } catch (e) {
+                                                displayMessage(statusDiv, "{{ _('Données invalides reçues du serveur.') }}", 'error');
+                                                hasErrorOccurred = true;
+                                            }
+                                        }
+                                    });
+                                    processStream();
+                                });
+                            }
+                            processStream();
+                        })
+                        .catch(error => {
+                            displayMessage(statusDiv, `{{ _('Erreur de communication :') }} ${error.message}`, 'error');
+                            allImportButtons.forEach(b => { b.disabled = false; b.classList.remove("opacity-50", "cursor-not-allowed"); });
+                            btn.innerHTML = '<i class="fas fa-upload"></i> {{ _("Envoyer les photos") }}';
+                        });
+                });
+
+                // --- GESTION DE L'UPLOAD DE MUSIQUE ---
+                const musicUploadInput = document.getElementById('music-upload-input');
+                const musicUploadFilename = document.getElementById('music-upload-filename');
+                const musicUploadBtn = document.getElementById('music-upload-btn');
+                const musicUploadStatus = document.getElementById('music-upload-status');
+
+                if (musicUploadInput) {
+                    musicUploadInput.addEventListener('change', function() {
+                        if (this.files && this.files[0]) {
+                            musicUploadFilename.textContent = this.files[0].name;
+                            musicUploadBtn.classList.remove('hidden');
+                        } else {
+                            musicUploadFilename.textContent = '';
+                            musicUploadBtn.classList.add('hidden');
+                        }
+                    });
+                }
+
+                if (musicUploadBtn) {
+                    musicUploadBtn.addEventListener('click', async function() {
+                        const file = musicUploadInput.files[0];
+                        if (!file) return;
+                        const formData = new FormData();
+                        formData.append('music_file', file);
+                        this.disabled = true;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> {{ _("Envoi...") }}';
+                        try {
+                            const response = await fetch('/api/upload_music', { method: 'POST', body: formData });
+                            const result = await response.json();
+                            if (result.success) {
+                                displayMessage(musicUploadStatus, result.message, 'success');
+                                musicUploadInput.value = '';
+                                musicUploadFilename.textContent = '';
+                                musicUploadBtn.classList.add('hidden');
+                                await loadMusicFiles(); // Rafraîchir les listes de sélection de musique
+                            } else { displayMessage(musicUploadStatus, result.message, 'error'); }
+                        } catch (error) {
+                            displayMessage(musicUploadStatus, "{{ _('Erreur de communication.') }}", 'error');
+                        } finally {
+                            this.disabled = false;
+                            this.innerHTML = '<i class="fas fa-upload"></i> {{ _("Uploader") }}';
+                        }
+                    });
+                }
+
+                // --- GESTION DE LA SUPPRESSION DE MUSIQUE ---
+                const musicFilesList = document.getElementById('music-files-list');
+                if (musicFilesList) {
+                    musicFilesList.addEventListener('click', async (event) => {
+                        const deleteBtn = event.target.closest('.delete-music-btn');
+                        const previewBtn = event.target.closest('.preview-music-btn');
+
+                        if (deleteBtn) {
+                            const filename = deleteBtn.dataset.file;
+                            if (confirm(`{{ _("Supprimer le fichier musical") }} '${filename}' ?`)) {
+                                try {
+                                    const response = await fetch(`/api/music_files/${filename}`, { method: 'DELETE' });
+                                    const result = await response.json();
+                                    if (result.success) {
+                                        showToast(result.message);
+                                        await loadMusicFiles(); // Rafraîchir les listes partout
+                                    } else { alert(result.message); }
+                                } catch (e) { alert(i18n.commErrorServer); }
+                            }
+                        }
+
+                        if (previewBtn) {
+                            const filename = previewBtn.dataset.file;
+                            toggleMusicPlayback(previewBtn, filename);
+                        }
+                    });
+                }
+
+                // ----- GESTION DE LA VALIDATION (Écouteurs d'événements) -----
+                // Ces écouteurs utilisent les fonctions globales définies plus haut.
+                const grid = document.getElementById('pending-photos-grid');
+                if (grid) {
+                    grid.addEventListener('click', function (event) {
+                        const approveBtn = event.target.closest('.approve-btn');
+                        const rejectBtn = event.target.closest('.reject-btn');
+                        const filename = event.target.closest('.photo-tile')?.dataset.filename;
+
+                        if (approveBtn && filename) {
+                            handlePendingAction(filename, 'approve');
+                        } else if (rejectBtn && filename) {
+                            handlePendingAction(filename, 'reject');
+                        }
+                    });
+                }
+
+                const refreshBtn = document.getElementById('refresh-pending-btn');
+                if (refreshBtn) refreshBtn.addEventListener('click', refreshValidationTab);
+            });
+
+
+        </script>

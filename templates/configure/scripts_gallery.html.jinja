@@ -1,0 +1,281 @@
+        <script>
+            const lightbox = GLightbox({
+                selector: '.glightbox'
+            });
+
+            // Translations for JavaScript
+            const i18n = {
+                loading: "{{ _('Chargement...') }}",
+                error: "{{ _('Erreur') }}",
+                notAvailable: "{{ _('N/A') }}",
+                scanInProgress: "{{ _('Scan en cours...') }}",
+                startScan: "{{ _('Lancer le scan') }}",
+                noNetworksFound: "{{ _('Aucun réseau Wi-Fi trouvé.') }}",
+                commError: "{{ _('Erreur de communication avec le serveur:') }}",
+                headerSSID: "{{ _('SSID') }}",
+                headerSecurity: "{{ _('Sécurité') }}",
+                headerSignal: "{{ _('Signal') }}",
+                noSecurity: "{{ _('Aucune') }}",
+                favoriteTooltip: "{{ _('Mettre en favori') }}",
+                noFavorites: "{{ _("Vous n'avez aucune photo en favori pour le moment.") }}",
+                noPhotosInPlaylist: "{{ _('Cette playlist est vide.') }}",
+                polaroidPlaceholder: "{{ _('Ajouter une légende...') }}",
+                noMusic: "{{ _('Pas de musique') }}",
+                musicUpdated: "{{ _('Musique de la playlist mise à jour !') }}",
+                errorUpdatingMusic: "{{ _('Erreur lors de la mise à jour de la musique de la playlist.') }}",
+                listenToMusic: "{{ _('Écouter la musique') }}",
+                stopMusic: "{{ _('Arrêter la musique') }}",
+                noMusicSelected: "{{ _('Aucune musique sélectionnée.') }}",
+                selectNetworkTitle: "{{ _('Cliquer pour sélectionner ce réseau') }}"
+            };
+
+
+            // Ajouter les traductions pour l'onglet Telegram
+            i18n.testing = "{{ _('Test en cours...') }}";
+            i18n.commErrorServer = "{{ _('Erreur de communication avec le serveur.') }}";
+            i18n.loading = "{{ _('Chargement...') }}";
+            i18n.noActiveInvites = "{{ _('Aucune invitation active.') }}";
+            i18n.usedBy = "{{ _('Utilisé par') }}";
+            i18n.notUsed = "{{ _('Non utilisé') }}";
+            i18n.expiresOn = "{{ _('Expire le') }}";
+            i18n.deleteInvite = "{{ _('Supprimer l\'invitation') }}";
+            i18n.errorLoadingInvites = "{{ _('Erreur lors du chargement des invitations.') }}";
+            i18n.enterGuestName = "{{ _('Veuillez entrer un nom pour l\'invité.') }}";
+            i18n.errorPrefix = "{{ _('Erreur :') }}";
+            i18n.confirmDeleteInvite = "{{ _('Êtes-vous sûr de vouloir supprimer cette invitation ?') }}";
+            i18n.connectionError = "{{ _('Erreur de connexion') }}";
+            i18n.revokeInvite = "{{ _('Révoquer l\'accès') }}";
+            i18n.confirmRevokeInvite = "{{ _('Êtes-vous sûr de vouloir révoquer l\'accès pour cet invité ? Il ne pourra plus envoyer de photos.') }}";
+            i18n.botUsernameError = "{{ _('Le nom d\'utilisateur du bot n\'a pas pu être récupéré.') }}";
+            i18n.copyLink = "{{ _('Copier le lien') }}";
+            i18n.copyFailed = "{{ _('La copie a échoué.') }}";
+            // Ajout pour les playlists
+            i18n.photo = "{{ _('photo') }}";
+            i18n.photos = "{{ _('photos') }}";
+            i18n.noPlaylists = "{{ _('Aucune playlist créée pour le moment.') }}";
+            i18n.errorLoadingPlaylists = "{{ _('Erreur lors du chargement des playlists.') }}";
+            i18n.launch = "{{ _('Lancer') }}";
+            i18n.deletePlaylist = "{{ _('Supprimer la playlist') }}";
+            i18n.renamePlaylist = "{{ _('Renommer la playlist') }}";
+            i18n.enterNewName = "{{ _('Entrez le nouveau nom pour la playlist :') }}";
+
+            // NOUVEAU: Traductions pour la sauvegarde automatique
+            i18n.orderSaved = "{{ _('Ordre sauvegardé !') }}";
+
+            // NOUVEAU: Traductions pour le diagnostic audio
+            i18n.runDiagnostics = "{{ _('Lancer le diagnostic') }}";
+            i18n.diagnosticsInProgress = "{{ _('Diagnostic en cours...') }}";
+            i18n.pleaseWait = "{{ _('Veuillez patienter...') }}";
+
+            // --- GESTION DE L'AFFICHAGE DES MOTS DE PASSE ---
+            document.querySelectorAll('.toggle-password-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetInputId = button.dataset.target;
+                    const passwordInput = document.getElementById(targetInputId);
+                    if (!passwordInput) return;
+
+                    const icon = button.querySelector('i');
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+
+                    // Toggle the icon
+                    if (type === 'password') {
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    } else {
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    }
+                });
+            });
+
+            // --- GESTION DE LA PRISE CONNECTÉE ---
+            const plugCheckbox = document.getElementById('smart_plug_enabled');
+            const plugOptions = document.getElementById('smart-plug-options');
+
+            // Afficher/cacher les options de la prise
+            if (plugCheckbox && plugOptions) {
+                plugCheckbox.addEventListener('change', () => {
+                    plugOptions.classList.toggle('hidden', !plugCheckbox.checked);
+                });
+            }
+
+            document.querySelectorAll('.test-plug-btn').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const targetId = button.dataset.target;
+                    const urlInput = document.getElementById(targetId);
+                    const url = urlInput.value;
+                    const statusSpan = document.getElementById('plug-test-status');
+
+                    if (!url) {
+                        statusSpan.textContent = "{{ _('Veuillez entrer une URL.') }}";
+                        statusSpan.className = 'text-sm font-medium text-red-600';
+                        return;
+                    }
+
+                    statusSpan.textContent = "{{ _('Test en cours...') }}";
+                    statusSpan.className = 'text-sm font-medium text-blue-600';
+                    button.disabled = true;
+
+                    try {
+                        const response = await fetch('/api/test_smart_plug', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ url: url })
+                        });
+                        const result = await response.json();
+                        statusSpan.textContent = result.message;
+                        statusSpan.className = result.success ? 'text-sm font-medium text-green-600' : 'text-sm font-medium text-red-600';
+                    } catch (error) {
+                        statusSpan.textContent = "{{ _('Erreur de communication avec le serveur.') }}";
+                        statusSpan.className = 'text-sm font-medium text-red-600';
+                    } finally {
+                        button.disabled = false;
+                    }
+                });
+            });
+
+            // --- NOUVEAU: GESTION DE L'INDICATEUR DE STATUT DE LA PRISE ---
+            const statusIndicator = document.getElementById('smart-plug-status-indicator');
+            const statusLight = document.getElementById('smart-plug-status-light');
+            const statusText = document.getElementById('smart-plug-status-text');
+
+            async function checkPlugStatus() {
+                if (!plugCheckbox.checked || !statusIndicator) {
+                    statusIndicator.classList.add('hidden');
+                    return;
+                }
+                statusIndicator.classList.remove('hidden');
+
+                try {
+                    const response = await fetch('/api/smart_plug/status');
+                    const data = await response.json();
+
+                    if (data.status === 'on') {
+                        statusLight.className = 'w-4 h-4 rounded-full bg-green-500';
+                        statusText.textContent = "{{ _('État de la prise : Allumée') }}";
+                    } else if (data.status === 'off') {
+                        statusLight.className = 'w-4 h-4 rounded-full bg-red-500';
+                        statusText.textContent = "{{ _('État de la prise : Éteinte') }}";
+                    } else if (data.status === 'disabled') {
+                        statusIndicator.classList.add('hidden'); // Cacher si non configuré
+                    } else { // error, unknown, unavailable...
+                        statusLight.className = 'w-4 h-4 rounded-full bg-yellow-500';
+                        // NOUVEAU: Afficher le message d'erreur détaillé de l'API
+                        let errorMessage = data.message || data.status;
+                        // Raccourcir les messages d'erreur longs pour l'affichage
+                        if (errorMessage.length > 100) errorMessage = errorMessage.substring(0, 100) + '...';
+                        statusText.textContent = `{{ _('État : Erreur') }} (${errorMessage})`;
+                    }
+                } catch (error) {
+                    statusLight.className = 'w-4 h-4 rounded-full bg-gray-400';
+                    statusText.textContent = "{{ _('État de la prise : Injoignable') }}";
+                }
+            }
+
+            // Vérifier le statut au chargement et toutes les 10 secondes
+            checkPlugStatus();
+            setInterval(checkPlugStatus, 10000);
+
+
+            // ----- GESTION DE LA VALIDATION (Fonctions globales) -----
+            // On définit ces fonctions ici pour qu'elles soient accessibles partout et éviter les erreurs de chargement.
+
+            async function refreshValidationTab() {
+                const grid = document.getElementById('pending-photos-grid');
+                const badge = document.getElementById('pending-count-badge');
+                const interactionsBadge = document.getElementById('interactions-pending-badge');
+                const validationTab = document.getElementById('tab-validation');
+                const isTabActive = validationTab && validationTab.style.display === 'block';
+
+                try {
+                    const response = await fetch(`/api/get_pending_photos?_=${new Date().getTime()}`);
+                    const data = await response.json();
+
+                    if (!data.success) {
+                        console.error("Erreur récupération photos en attente:", data.message);
+                        return;
+                    }
+
+                    const photoCount = data.photos.length;
+
+                    // Mise à jour du badge
+                    [badge, interactionsBadge].forEach(el => {
+                        if (el) {
+                            el.textContent = photoCount;
+                            if (photoCount > 0) {
+                                el.classList.remove('hidden');
+                            } else {
+                                el.classList.add('hidden');
+                            }
+                        }
+                    });
+
+                    // Mise à jour de la grille
+                    if (isTabActive && grid) {
+                        if (photoCount === 0) {
+                            grid.innerHTML = '<p class="text-center text-gray-500 italic">{{ _("Aucune photo en attente de validation.") }}</p>';
+                        } else {
+                            grid.innerHTML = '';
+                            data.photos.forEach(filename => {
+                                const tile = document.createElement('div');
+                                tile.className = 'photo-tile relative';
+                                tile.dataset.filename = filename;
+                                const imgSrc = `/static/pending_uploads/${filename}`;
+                                const isVideo = /\.(mp4|mov|avi|mkv)$/i.test(filename);
+
+                                let contentHtml;
+                                if (isVideo) {
+                                    contentHtml = `
+                              <a href="${imgSrc}" class="glightbox block relative" data-gallery="pending" title="${filename}">
+                                  <video src="${imgSrc}#t=0.1" class="w-32 h-32 object-cover rounded shadow bg-gray-200" preload="metadata" muted></video>
+                                  <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 rounded pointer-events-none">
+                                      <i class="fas fa-play text-white text-3xl opacity-75"></i>
+                                  </div>
+                              </a>`;
+                                } else {
+                                    contentHtml = `
+                              <a href="${imgSrc}" class="glightbox" data-gallery="pending" title="${filename}">
+                                  <img src="${imgSrc}" class="w-32 h-32 object-cover rounded shadow bg-gray-200">
+                              </a>`;
+                                }
+
+                                tile.innerHTML = `
+                          ${contentHtml}
+                          <div class="photo-actions mt-1 flex items-center justify-around w-full gap-x-2">
+                              <button class="approve-btn bg-green-500 hover:bg-green-600 text-white text-xs rounded py-1 px-2" title="{{ _('Approuver') }}"><i class="fas fa-check"></i></button>
+                              <button class="reject-btn bg-red-500 hover:bg-red-600 text-white text-xs rounded py-1 px-2" title="{{ _('Rejeter') }}"><i class="fas fa-times"></i></button>
+                          </div>`;
+                                grid.appendChild(tile);
+                            });
+                            if (typeof GLightbox === 'function') {
+                                GLightbox({ selector: '#pending-photos-grid .glightbox' });
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error("Erreur lors de l'actualisation des photos en attente:", error);
+                }
+            }
+
+            async function handlePendingAction(filename, action) {
+                try {
+                    const response = await fetch('/api/manage_pending_photo', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ filename: filename, action: action })
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        refreshValidationTab();
+                    } else {
+                        alert("{{ _('Erreur :') }} " + result.message);
+                    }
+                } catch (error) {
+                    console.error("Erreur lors de l'action:", error);
+                    alert("{{ _('Erreur de communication avec le serveur.') }}");
+                }
+            }
+
+        </script>

@@ -1,0 +1,255 @@
+            <div id="tab-heure" class="tabcontent">
+                <fieldset>
+                    <legend><strong>{{ _("Affichage de l'heure") }}</strong></legend>
+
+
+                    <div style="margin-bottom: 8px;">
+                        <label>
+                            <input type="checkbox" name="show_clock" {% if config.get('show_clock', False) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher l'heure") }}</span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_font_size" style="min-width: 200px;">{{ _("Taille de la police :") }}</label>
+                        <input type="number" name="clock_font_size" value="{{ config.get('clock_font_size', 48) }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_offset_x" style="min-width: 200px;">{{ _("Décalage horizontal (px) :")
+                            }}</label>
+                        <input type="number" name="clock_offset_x" value="{{ config.get('clock_offset_x', 30) }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_offset_y" style="min-width: 200px;">{{ _("Décalage vertical (px) :")
+                            }}</label>
+                        <input type="number" name="clock_offset_y" value="{{ config.get('clock_offset_y', 30) }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_color" style="min-width: 200px;">{{ _("Couleur du texte (hex) :") }}</label>
+                        <input type="text" name="clock_color" value="{{ config.get('clock_color', '#FFFFFF') }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_outline_color" style="min-width: 200px;">{{ _("Couleur du contour (hex) :")
+                            }}</label>
+                        <input type="text" name="clock_outline_color"
+                            value="{{ config.get('clock_outline_color', '#000000') }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_position" style="min-width: 200px;">{{ _("Position de l'heure :") }}</label>
+                        <select name="clock_position">
+                            <option value="left" {% if config.get('clock_position')=='left' %}selected{% endif %}>{{
+                                _('Gauche') }}</option>
+                            <option value="center" {% if config.get('clock_position')=='center' %}selected{% endif %}>{{
+                                _('Centre') }}</option>
+                            <option value="right" {% if config.get('clock_position')=='right' %}selected{% endif %}>{{
+                                _('Droite') }}</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_font_path" style="min-width: 200px;">{{ _("Police :") }}</label>
+                        <select name="clock_font_path">
+                            {% set fonts = [
+                            ('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 'DejaVu Sans Bold'),
+                            ('/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf', 'Liberation Sans'),
+                            ('/usr/share/fonts/truetype/freefont/FreeSans.ttf', 'FreeSans')
+                            ] %}
+                            {% for path, label in fonts %}
+                            <option value="{{ path }}" {% if config.get('clock_font_path')==path %}selected{% endif %}>
+                                {{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <label>
+                            <input type="checkbox" name="clock_background_enabled" {% if config.get('clock_background_enabled', False) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher un fond derrière l'heure/date/météo") }}</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="clock_background_color" style="min-width: 200px;">{{ _("Couleur du fond (hex RGBA)
+                            :") }}</label>
+                        <input type="text" name="clock_background_color"
+                            value="{{ config.get('clock_background_color', '#00000080') }}">
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-6">
+                    <legend><strong>{{ _("Affichage de la date") }}</strong></legend>
+                    <div style="margin-bottom: 8px;">
+                        <label>
+                            <input type="checkbox" name="show_date" {% if config.get('show_date', False) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher la date (sous l'heure)") }}</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="date_format" style="min-width: 200px;">{{ _("Format de la date :") }}</label>
+                        <input type="text" name="date_format" value="{{ config.get('date_format', '%A %d %B %Y') }}">
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-6">
+                    <legend><strong>{{ _("Affichage de la météo (OpenWeatherMap)") }}</strong></legend>
+
+                    <div style="margin-bottom: 8px;">
+                        <label>
+                            <input type="checkbox" name="show_weather" {% if config.get('show_weather', False) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher la météo") }}</span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="weather_city" style="min-width: 200px;">{{ _("Ville :") }}</label>
+                        <input type="text" id="weather_city" name="weather_city"
+                            value="{{ config.get('weather_city', 'Paris') }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="weather_api_key" style="min-width: 200px;">{{ _("Clé API :") }}</label>
+                        <div class="relative flex-grow">
+                            <input type="password" id="weather_api_key" name="weather_api_key"
+                                value="{{ config.get('weather_api_key', '') }}" class="w-full pr-10">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <button type="button"
+                                    class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                    data-target="weather_api_key" title="{{ _('Afficher/Cacher la clé API') }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-2 mb-4">
+                        <button type="button" id="testWeatherApiKeyBtn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm">{{
+                            _("Tester la clé API et la ville") }}</button>
+                        <span id="weatherApiTestResult" class="ml-4 font-medium"></span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="weather_units" style="min-width: 200px;">{{ _("Unités :") }}</label>
+                        <select name="weather_units" id="weather_units">
+                            <option value="metric" {% if config.get('weather_units')=='metric' %}selected{% endif %}>{{
+                                _('Celsius') }}</option>
+                            <option value="imperial" {% if config.get('weather_units')=='imperial' %}selected{% endif
+                                %}>{{ _('Fahrenheit') }}</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="weather_update_interval_minutes" style="min-width: 200px;">{{ _("Intervalle de MàJ
+                            (min) :") }}</label>
+                        <input type="number" name="weather_update_interval_minutes"
+                            value="{{ config.get('weather_update_interval_minutes', 30) }}">
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-6">
+                    <legend><strong>{{ _("Affichage des marées (StormGlass Tide API)") }}</strong></legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Utilise l'API de") }} <a href="https://stormglass.io/"
+                            target="_blank" class="text-blue-600 hover:underline">StormGlass</a>. {{ _("Une clé API est
+                        requise. Vous pouvez trouver les coordonnées de votre port sur des sites comme") }} <a
+                            href="https://www.latlong.net/" target="_blank"
+                            class="text-blue-600 hover:underline">latlong.net</a>.</p>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Note : Cette API fournit les hauteurs de marée, mais pas
+                        le coefficient de marée.") }}</p>
+
+                    <div style="margin-bottom: 8px;">
+                        <label>
+                            <input type="checkbox" name="show_tides" {% if config.get('show_tides', False) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher les informations de marée") }}</span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="tide_latitude" style="min-width: 200px;">{{ _("Latitude (ex: 48.3904) :") }}</label>
+                        <input type="text" id="tide_latitude" name="tide_latitude"
+                            value="{{ config.get('tide_latitude', '') }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="tide_longitude" style="min-width: 200px;">{{ _("Longitude (ex: -4.4861) :")
+                            }}</label>
+                        <input type="text" id="tide_longitude" name="tide_longitude"
+                            value="{{ config.get('tide_longitude', '') }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="stormglass_api_key" style="min-width: 200px;">{{ _("Clé API StormGlass :")
+                            }}</label>
+                        <div class="relative flex-grow">
+                            <input type="password" id="stormglass_api_key" name="stormglass_api_key"
+                                value="{{ config.get('stormglass_api_key', '') }}" class="w-full pr-10">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <button type="button"
+                                    class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                    data-target="stormglass_api_key" title="{{ _('Afficher/Cacher la clé API') }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="tide_offset_x" style="min-width: 200px;">{{ _("Décalage horizontal (px) :")
+                            }}</label>
+                        <input type="number" id="tide_offset_x" name="tide_offset_x"
+                            value="{{ config.get('tide_offset_x', 0) }}">
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <label for="tide_offset_y" style="min-width: 200px;">{{ _("Décalage vertical (px) :") }}</label>
+                        <input type="number" id="tide_offset_y" name="tide_offset_y"
+                            value="{{ config.get('tide_offset_y', 0) }}">
+                    </div>
+
+                    <div class="mt-2 mb-4">
+                        <button type="button" id="testStormglassApiKeyBtn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm inline-flex items-center"><i
+                                class="fas fa-plug mr-2"></i>{{ _("Tester la connexion") }}</button>
+                        <button type="button" id="forceTideUpdateBtn"
+                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded text-sm inline-flex items-center"><i
+                                class="fas fa-sync-alt mr-2"></i>{{ _("Forcer la mise à jour") }}</button>
+                    </div>
+                    <div class="mb-4">
+                        <span id="stormglassApiTestResult" class="ml-4 font-medium"></span>
+                        <span id="forceTideUpdateResult" class="ml-4 font-medium"></span>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-800 mb-2">{{ _("État Actuel des Marées") }}</h4>
+                        <div id="tide-status-container" class="p-3 bg-gray-100 rounded-lg border text-sm">
+                            <div id="tide-list" class="space-y-1"></div>
+                            <p class="mt-3 pt-2 border-t border-gray-300"><strong>{{ _("Dernière mise à jour des données
+                                    :") }}</strong> <span id="tide-last-update" class="font-mono">{{ _("Chargement...")
+                                    }}</span></p>
+                            <p><strong>{{ _("État de l'API :") }}</strong> <span id="tide-api-status"
+                                    class="font-mono text-gray-500">{{ _("Chargement...") }}</span></p>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-6">
+                    <legend><strong>{{ _("Fuseau Horaire") }}</strong></legend>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <p><strong>{{ _("Fuseau horaire actuel du système :") }}</strong> <span class="font-mono">{{
+                                config.get('timezone', _('Non défini')) }}</span></p>
+                        {% if config.get('timezone_source') == 'fallback' %}
+                        <div class="mt-2 p-3 text-sm text-yellow-800 bg-yellow-100 rounded-lg" role="alert">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            <strong>{{ _("Attention :") }}</strong> {{ _("La détection automatique du fuseau horaire a
+                            échoué lors de l'installation. Le système est configuré sur <strong>UTC</strong>. L'heure
+                            affichée peut être incorrecte.")|safe }}
+                            <br>
+                            {{ _("Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi (via SSH) et
+                            en exécutant la commande :") }} <code
+                                class="bg-gray-200 text-black p-1 rounded text-xs">sudo timedatectl set-timezone Europe/Paris</code>
+                            {{ _("(remplacez par votre région/ville).") }}
+                        </div>
+                        {% else %}
+                        <p class="text-sm text-gray-600 mt-1">{{ _("Le fuseau horaire a été configuré automatiquement
+                            lors de l'installation.") }}</p>
+                        {% endif %}
+                    </div>
+                </fieldset>
+            </div>

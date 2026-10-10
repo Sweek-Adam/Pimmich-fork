@@ -1,0 +1,41 @@
+        <div id="tab-stats" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Informations Système") }}</h3>
+                </legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <strong>{{ _("Température CPU:") }}</strong> <span id="cpu-temp">{{ _("Chargement...") }}</span>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <strong>{{ _("Utilisation CPU:") }}</strong> <span id="cpu-usage">{{ _("Chargement...")
+                            }}</span>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <strong>{{ _("RAM:") }}</strong> <span id="ram-usage">{{ _("Chargement...") }}</span>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <strong>{{ _("Stockage:") }}</strong> <span id="disk-usage">{{ _("Chargement...") }}</span>
+                    </div>
+                </div>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <h4 class="font-semibold text-gray-700 mb-2">{{ _("Historique Température CPU (10 min)") }}</h4>
+                        <div class="relative h-40"><canvas id="cpuTempChart"></canvas></div>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <h4 class="font-semibold text-gray-700 mb-2">{{ _("Historique Utilisation CPU (10 min)") }}</h4>
+                        <div class="relative h-40"><canvas id="cpuUsageChart"></canvas></div>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <h4 class="font-semibold text-gray-700 mb-2">{{ _("Historique Utilisation RAM (10 min)") }}</h4>
+                        <div class="relative h-40"><canvas id="ramUsageChart"></canvas></div>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <h4 class="font-semibold text-gray-700 mb-2">{{ _("Historique Utilisation Disque (10 min)") }}
+                        </h4>
+                        <div class="relative h-40"><canvas id="diskUsageChart"></canvas></div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>

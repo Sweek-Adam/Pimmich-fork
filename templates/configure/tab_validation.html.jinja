@@ -1,0 +1,17 @@
+        <div id="tab-validation" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("Photos en attente de validation") }}</h3>
+                </legend>
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-gray-600">{{ _('Approuvez ou rejetez les photos envoyées. Les photos approuvées
+                        seront ajoutées à la source "Invités".') }}</p>
+                    <button type="button" id="refresh-pending-btn"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center"><i
+                            class="fas fa-sync-alt mr-2"></i>{{ _("Actualiser") }}</button>
+                </div>
+                <div id="pending-photos-grid" class="photo-grid">
+                    <!-- Les photos en attente seront chargées ici par JavaScript -->
+                </div>
+            </fieldset>
+        </div>

@@ -1,0 +1,1085 @@
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Fonction pour formater les dates ISO en format lisible
+                function formatDateTime(isoString) {
+                    if (!isoString) return "N/A";
+                    const date = new Date(isoString);
+                    // Options pour un format français lisible
+                    const options = {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit', second: '2-digit',
+                        hour12: false // Format 24h
+                    };
+                    return date.toLocaleString('fr-FR', options);
+                }
+
+                // Fonction générique pour récupérer et afficher le statut d'un worker
+                async function fetchWorkerStatus(workerName, statusManagerId, lastRunId, nextRunId) {
+                    try {
+                        const response = await fetch(`/${workerName}_update_status`);
+                        const data = await response.json();
+
+                        document.getElementById(statusManagerId).textContent = data.status_message;
+                        document.getElementById(lastRunId).textContent = formatDateTime(data.last_run);
+                        document.getElementById(nextRunId).textContent = formatDateTime(data.next_run);
+
+                    } catch (error) {
+                        console.error(`Erreur lors de la récupération du statut ${workerName}:`, error);
+                        document.getElementById(statusManagerId).textContent = "{{ _('Erreur de connexion') }}";
+                        document.getElementById(lastRunId).textContent = "N/A";
+                        document.getElementById(nextRunId).textContent = "N/A";
+                    }
+                }
+
+                // --- Gestion de la résolution ---
+                const resolutionSelector = document.getElementById('resolution-selector');
+                const applyResolutionBtn = document.getElementById('apply-resolution-btn');
+                const resolutionStatus = document.getElementById('resolution-status');
+
+                async function fetchAndPopulateResolutions() {
+                    try {
+                        const response = await fetch('/api/get_available_resolutions');
+                        const data = await response.json();
+
+                        if (data.success && data.resolutions.length > 0) {
+                            resolutionSelector.innerHTML = ''; // Vider les options
+                            const currentConfigRes = `${document.getElementById('display_width').value}x${document.getElementById('display_height').value}`;
+
+                            data.resolutions.forEach(res => {
+                                const option = document.createElement('option');
+                                const resValue = `${res.width}x${res.height}`;
+                                option.value = resValue;
+                                option.textContent = res.text;
+                                if (resValue === currentConfigRes) {
+                                    option.selected = true;
+                                }
+                                resolutionSelector.appendChild(option);
+                            });
+                        } else {
+                            resolutionSelector.innerHTML = `<option>${data.message || "{{ _('Aucune résolution trouvée.') }}"}</option>`;
+                            applyResolutionBtn.disabled = true;
+                        }
+                    } catch (error) {
+                        resolutionSelector.innerHTML = `<option>{{ _("Erreur de chargement.") }}</option>`;
+                        applyResolutionBtn.disabled = true;
+                    }
+                }
+
+                if (applyResolutionBtn) {
+                    applyResolutionBtn.addEventListener('click', async () => {
+                        const selectedValue = resolutionSelector.value;
+                        if (!selectedValue.includes('x')) return;
+
+                        const [width, height] = selectedValue.split('x');
+
+                        resolutionStatus.textContent = "{{ _('Application en cours...') }}";
+                        resolutionStatus.className = 'text-sm mt-2 text-blue-600';
+                        applyResolutionBtn.disabled = true;
+
+                        try {
+                            const response = await fetch('/api/set_resolution', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ width, height })
+                            });
+                            const result = await response.json();
+                            resolutionStatus.textContent = result.message;
+                            resolutionStatus.className = result.success ? 'text-sm mt-2 text-green-600' : 'text-sm mt-2 text-red-600';
+                            // Mettre à jour les champs de texte manuels
+                            document.getElementById('display_width').value = width;
+                            document.getElementById('display_height').value = height;
+                        } catch (error) {
+                            resolutionStatus.textContent = "{{ _('Erreur de communication.') }}";
+                            resolutionStatus.className = 'text-sm mt-2 text-red-600';
+                        } finally {
+                            applyResolutionBtn.disabled = false;
+                        }
+                    });
+                }
+
+                // --- Contrôles du diaporama ---
+                async function sendSlideshowCommand(command) {
+                    try {
+                        const response = await fetch(`/api/slideshow/${command}`, { method: 'POST' });
+                        const result = await response.json();
+                        if (!result.success) {
+                            alert(`Erreur: ${result.message}`);
+                        }
+                        // Après avoir envoyé une commande, on met à jour l'état des contrôles
+                        updateSlideshowControlsState();
+                    } catch (error) {
+                        alert("{{ _('Erreur de communication avec le serveur.') }}");
+                    }
+                }
+
+                // NOUVEAU: Gestion des contrôles du diaporama (basée sur les classes)
+                document.querySelectorAll('.slideshow-control-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const command = btn.dataset.command;
+                        if (command) {
+                            sendSlideshowCommand(command);
+                        }
+                    });
+                });
+
+                // Gestion du basculement des notifications
+                document.querySelectorAll('.notification-toggle-btn').forEach(btn => {
+                    btn.addEventListener('click', async () => {
+                        try {
+                            const response = await fetch('/api/slideshow/toggle_notifications', { method: 'POST' });
+                            const result = await response.json();
+                            if (result.success) {
+                                showToast(result.enabled ? "{{ _('Notifications activées') }}" : "{{ _('Notifications désactivées') }}");
+                                updateSlideshowControlsState();
+                                // Synchroniser la checkbox dans l'onglet Telegram si elle existe
+                                const cb = document.querySelector('input[name="display_telegram_notification_overlay"]');
+                                if (cb) cb.checked = result.enabled;
+                            }
+                        } catch (error) {
+                            console.error("Erreur toggle notifications:", error);
+                        }
+                    });
+                });
+
+                // NOUVEAU: Bouton pour arrêter la playlist et revenir au standard
+                const stopPlaylistBtn = document.getElementById('stop-playlist-btn');
+                if (stopPlaylistBtn) {
+                    stopPlaylistBtn.addEventListener('click', async () => {
+                        stopPlaylistBtn.disabled = true;
+                        stopPlaylistBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>{{ _("Redémarrage...") }}';
+
+                        try {
+                            const response = await fetch('/api/slideshow/restart_standard', { method: 'POST' });
+                            const result = await response.json();
+                            if (result.success) {
+                                showToast("{{ _('Diaporama standard relancé.') }}");
+                                // Recharger la page pour s'assurer que tous les états sont corrects
+                                setTimeout(() => location.reload(), 1500);
+                            } else {
+                                alert("{{ _('Erreur :') }} " + result.message);
+                                stopPlaylistBtn.disabled = false;
+                                stopPlaylistBtn.innerHTML = '<i class="fas fa-stop-circle mr-2"></i>{{ _("Retour au diaporama standard") }}';
+                            }
+                        } catch (e) {
+                            alert("{{ _('Erreur de communication.') }}");
+                            stopPlaylistBtn.disabled = false;
+                            stopPlaylistBtn.innerHTML = '<i class="fas fa-stop-circle mr-2"></i>{{ _("Retour au diaporama standard") }}';
+                        }
+                    });
+                }
+
+                async function updateSlideshowControlsState() {
+                    const controlBtns = document.querySelectorAll('.slideshow-control-btn');
+                    if (controlBtns.length === 0) return;
+
+                    try {
+                        const response = await fetch('/api/slideshow/status');
+                        const data = await response.json();
+                        const isRunning = data.running;
+                        const isPaused = data.paused;
+
+                        // Activer/désactiver les boutons si le diaporama tourne
+                        controlBtns.forEach(btn => {
+                            btn.disabled = !isRunning;
+                        });
+
+                        // Mettre à jour l'icône de pause/lecture
+                        document.querySelectorAll('.slideshow-pause-icon').forEach(icon => {
+                            const btn = icon.closest('button');
+                            if (isRunning && isPaused) {
+                                icon.classList.remove('fa-pause');
+                                icon.classList.add('fa-play');
+                                if (btn) btn.classList.add('pulse-animation');
+                            } else {
+                                icon.classList.remove('fa-play');
+                                icon.classList.add('fa-pause');
+                                if (btn) btn.classList.remove('pulse-animation');
+                            }
+                        });
+
+                        // Mettre à jour l'état du bouton de notification
+                        const notifEnabled = data.notifications_enabled;
+                        document.querySelectorAll('.notification-toggle-btn').forEach(btn => {
+                            const icon = btn.querySelector('i');
+                            btn.classList.toggle('bg-blue-600', notifEnabled);
+                            btn.classList.toggle('bg-gray-400', !notifEnabled);
+                            icon.className = notifEnabled ? 'fas fa-bell fa-xs' : 'fas fa-bell-slash fa-xs';
+                        });
+
+                        // Gérer la visibilité du bouton d'arrêt de playlist
+                        const stopPlaylistBtn = document.getElementById('stop-playlist-btn');
+                        const noPlaylistIdleBtn = document.getElementById('no-playlist-idle-btn');
+                        if (stopPlaylistBtn && noPlaylistIdleBtn) {
+                            // On affiche le bouton d'arrêt seulement si le diaporama tourne ET qu'une playlist est active
+                            if (isRunning && data.is_custom) {
+                                stopPlaylistBtn.classList.remove('hidden');
+                                noPlaylistIdleBtn.classList.add('hidden');
+                            } else {
+                                stopPlaylistBtn.classList.add('hidden');
+                                noPlaylistIdleBtn.classList.remove('hidden');
+                            }
+                        }
+
+                    } catch (error) {
+                        console.error("Impossible de récupérer l'état du diaporama:", error);
+                    }
+                }
+
+                // Mise à jour initiale au chargement de la page
+                fetchWorkerStatus("immich", "immich-worker-status-message", "immich-last-update-time", "immich-next-update-time");
+                fetchWorkerStatus("samba", "samba-worker-status-message", "samba-last-update-time", "samba-next-update-time");
+                fetchWorkerStatus("gdrive", "gdrive-worker-status-message", "gdrive-last-update-time", "gdrive-next-update-time");
+
+                // Mise à jour périodique toutes les 5 secondes
+                setInterval(() => {
+                    fetchWorkerStatus("immich", "immich-worker-status-message", "immich-last-update-time", "immich-next-update-time");
+                    fetchWorkerStatus("samba", "samba-worker-status-message", "samba-last-update-time", "samba-next-update-time");
+                    fetchWorkerStatus("gdrive", "gdrive-worker-status-message", "gdrive-last-update-time", "gdrive-next-update-time");
+                }, 5000); // 5000 ms = 5 secondes
+                fetchAndPopulateResolutions(); // Charger les résolutions au démarrage
+                setInterval(updateSlideshowControlsState, 5000); // Mettre à jour l'état des boutons
+                updateSlideshowControlsState(); // Appel initial
+
+                // --- Détection de la résolution ---
+                const detectResBtn = document.getElementById("detect-resolution-btn");
+
+                // Only run this logic if the button exists (i.e., we are on the 'tab-affichage' tab or it's loaded)
+                if (detectResBtn) {
+                    async function fetchAndSetResolution() {
+                        const originalTooltip = detectResBtn.title;
+                        const originalText = detectResBtn.innerHTML;
+                        detectResBtn.innerHTML = "{{ _('Détection...') }}";
+                        detectResBtn.disabled = true;
+
+                        try {
+                            const response = await fetch('/get_current_resolution');
+                            const data = await response.json();
+
+                            if (data.success) {
+                                document.getElementById('display_width').value = data.width;
+                                document.getElementById('display_height').value = data.height;
+                                detectResBtn.innerHTML = "{{ _('Détecté !') }}";
+                                detectResBtn.title = `Détecté : ${data.width}x${data.height}`;
+                            } else {
+                                detectResBtn.innerHTML = "{{ _('Échec') }}";
+                                detectResBtn.title = data.message || "{{ _('Erreur lors de la détection.') }}";
+                                detectResBtn.innerHTML = originalText;
+                            }
+                        } catch (error) {
+                            detectResBtn.title = "{{ _('Erreur de communication avec le serveur.') }}";
+                            detectResBtn.innerHTML = originalText;
+                        } finally {
+                            setTimeout(() => {
+                                detectResBtn.innerHTML = originalText;
+                                detectResBtn.disabled = false;
+                                detectResBtn.title = originalTooltip;
+                            }, 2000);
+                        }
+                    }
+
+                    detectResBtn.addEventListener("click", fetchAndSetResolution);
+                }
+
+                // --- Aperçu en direct ---
+                const livePreviewImage = document.getElementById('live-preview-image');
+                const livePreviewStatus = document.getElementById('live-preview-status');
+                let diskUsageChart; // NOUVEAU: pour le graphique d'utilisation Disque
+
+                // Fonction pour créer ou mettre à jour le graphique d'utilisation Disque
+                function updateDiskUsageChart(historyData) {
+                    const ctx = document.getElementById('diskUsageChart').getContext('2d');
+                    if (!ctx) return;
+
+                    const labels = historyData.map(d => d.time);
+                    const usages = historyData.map(d => d.usage);
+
+                    if (diskUsageChart) {
+                        // Mettre à jour un graphique existant
+                        diskUsageChart.data.labels = labels;
+                        diskUsageChart.data.datasets[0].data = usages;
+                        diskUsageChart.update();
+                    } else {
+                        // Créer un nouveau graphique
+                        diskUsageChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Utilisation Disque (%)',
+                                    data: usages,
+                                    borderColor: 'rgba(139, 92, 246, 1)', // violet-500
+                                    backgroundColor: 'rgba(196, 181, 253, 0.2)', // violet-300 avec transparence
+                                    borderWidth: 2,
+                                    fill: true,
+                                    tension: 0.3
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        max: 100,
+                                        ticks: {
+                                            callback: function (value) {
+                                                return value + '%';
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
+                            }
+                        });
+                    }
+                }
+                let ramUsageChart; // NOUVEAU: pour le graphique d'utilisation RAM
+
+                // Fonction pour créer ou mettre à jour le graphique d'utilisation RAM
+                function updateRamUsageChart(historyData) {
+                    const ctx = document.getElementById('ramUsageChart').getContext('2d');
+                    if (!ctx) return;
+
+                    const labels = historyData.map(d => d.time);
+                    const usages = historyData.map(d => d.usage);
+
+                    if (ramUsageChart) {
+                        // Mettre à jour un graphique existant
+                        ramUsageChart.data.labels = labels;
+                        ramUsageChart.data.datasets[0].data = usages;
+                        ramUsageChart.update();
+                    } else {
+                        // Créer un nouveau graphique
+                        ramUsageChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Utilisation RAM (%)',
+                                    data: usages,
+                                    borderColor: 'rgba(34, 197, 94, 1)', // green-500
+                                    backgroundColor: 'rgba(134, 239, 172, 0.2)', // green-300 avec transparence
+                                    borderWidth: 2,
+                                    fill: true,
+                                    tension: 0.3
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        max: 100,
+                                        ticks: {
+                                            callback: function (value) {
+                                                return value + '%';
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
+                            }
+                        });
+                    }
+                }
+                let cpuUsageChart; // NOUVEAU: pour le graphique d'utilisation
+
+                // Fonction pour créer ou mettre à jour le graphique d'utilisation CPU
+                function updateCpuUsageChart(historyData) {
+                    const ctx = document.getElementById('cpuUsageChart').getContext('2d');
+                    if (!ctx) return;
+
+                    const labels = historyData.map(d => d.time);
+                    const usages = historyData.map(d => d.usage); // Utiliser 'usage'
+
+                    if (cpuUsageChart) {
+                        // Mettre à jour un graphique existant
+                        cpuUsageChart.data.labels = labels;
+                        cpuUsageChart.data.datasets[0].data = usages;
+                        cpuUsageChart.update();
+                    } else {
+                        // Créer un nouveau graphique
+                        cpuUsageChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Utilisation CPU (%)', // Nouveau label
+                                    data: usages,
+                                    borderColor: 'rgba(59, 130, 246, 1)', // blue-500
+                                    backgroundColor: 'rgba(147, 197, 253, 0.2)', // blue-300 avec transparence
+                                    borderWidth: 2,
+                                    fill: true,
+                                    tension: 0.3
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true, // Forcer l'axe Y à commencer à 0
+                                        max: 100, // L'utilisation ne peut pas dépasser 100%
+                                        ticks: {
+                                            callback: function (value) {
+                                                return value + '%'; // Ajouter le symbole %
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
+                            }
+                        });
+                    }
+                }
+                let cpuChart; // Variable globale pour l'instance du graphique
+
+                // Fonction pour créer ou mettre à jour le graphique de température
+                function updateCpuTempChart(historyData) {
+                    const ctx = document.getElementById('cpuTempChart').getContext('2d');
+                    if (!ctx) return;
+
+                    const labels = historyData.map(d => d.time);
+                    const temps = historyData.map(d => d.temp);
+
+                    if (cpuChart) {
+                        // Mettre à jour un graphique existant
+                        cpuChart.data.labels = labels;
+                        cpuChart.data.datasets[0].data = temps;
+                        cpuChart.update();
+                    } else {
+                        // Créer un nouveau graphique
+                        cpuChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Température CPU (°C)',
+                                    data: temps,
+                                    borderColor: 'rgba(239, 68, 68, 1)', // red-500
+                                    backgroundColor: 'rgba(252, 165, 165, 0.2)', // red-300 avec transparence
+                                    borderWidth: 2,
+                                    fill: true,
+                                    tension: 0.3 // Lignes légèrement incurvées
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: false, // Ne pas forcer l'axe Y à commencer à 0
+                                        ticks: {
+                                            callback: function (value) {
+                                                return value + '°C';
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
+                            }
+                        });
+                    }
+                }
+
+                async function updateLivePreview() {
+                    // Get elements for the 'Actions' tab
+                    const actionsLivePreviewStatus = document.getElementById('live-preview-status');
+                    const actionsLivePreviewImage = document.getElementById('live-preview-image');
+                    const actionsLivePreviewControls = document.getElementById('live-preview-controls');
+                    const actionsLivePreviewBox = document.getElementById('live-preview-box');
+
+                    // Get elements for the 'Playlists' tab
+                    const playlistLivePreviewStatus = document.getElementById('playlist-live-preview-status');
+                    const playlistLivePreviewImage = document.getElementById('playlist-live-preview-image');
+
+                    try {
+                        const response = await fetch('/current_photo_status');
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+
+                        // Function to update a specific set of live preview elements
+                        function updateElements(statusElement, imageElement, controlsElement, boxElement) {
+                            if (!statusElement || !imageElement) return; // Skip if elements don't exist
+
+                            if (data.status === 'stopped') {
+                                statusElement.textContent = "{{ _('Le diaporama est arrêté.') }}";
+                                statusElement.classList.remove('hidden');
+                                imageElement.classList.add('hidden');
+                                if (controlsElement) controlsElement.classList.add('hidden');
+                                if (boxElement) boxElement.classList.add('hidden');
+                            } else {
+                                if (data.current_photo) {
+                                    // Mettre à jour la source de l'image uniquement si elle a changé
+                                    if (imageElement.src !== data.current_photo) {
+                                        imageElement.src = data.current_photo;
+                                    }
+                                    statusElement.classList.add('hidden');
+                                    imageElement.classList.remove('hidden');
+                                    if (controlsElement) controlsElement.classList.remove('hidden');
+                                    if (boxElement) boxElement.classList.remove('hidden');
+                                } else {
+                                    statusElement.textContent = "{{ _('En attente de la prochaine photo...') }}";
+                                    statusElement.classList.remove('hidden');
+                                    imageElement.classList.add('hidden');
+                                    if (controlsElement) controlsElement.classList.add('hidden');
+                                    if (boxElement) boxElement.classList.add('hidden');
+                                }
+                            }
+                        }
+
+                        updateElements(actionsLivePreviewStatus, actionsLivePreviewImage, actionsLivePreviewControls, actionsLivePreviewBox);
+                        updateElements(playlistLivePreviewStatus, playlistLivePreviewImage);
+                    } catch (error) {
+                        console.error('Erreur de mise à jour de l\'aperçu en direct:', error);
+                        // Handle error for both sets of elements
+                        if (actionsLivePreviewStatus && actionsLivePreviewImage) {
+                            actionsLivePreviewStatus.textContent = "{{ _('Erreur de connexion.') }}";
+                            actionsLivePreviewStatus.classList.remove('hidden');
+                            actionsLivePreviewImage.classList.add('hidden');
+                        }
+                        if (playlistLivePreviewStatus && playlistLivePreviewImage) {
+                            playlistLivePreviewStatus.textContent = "{{ _('Erreur de connexion.') }}";
+                            playlistLivePreviewStatus.classList.remove('hidden');
+                            playlistLivePreviewImage.classList.add('hidden');
+                        }
+                    }
+                }
+
+                // Mettre à jour toutes les 5 secondes et une fois au chargement
+                setInterval(updateLivePreview, 5000);
+                updateLivePreview();
+
+                setInterval(fetchTelegramBotStatus, 10000);
+
+                // --- Informations Système et Logs ---
+
+                // Fonction pour récupérer et afficher l'état du Wi-Fi
+                async function fetchWifiStatus() {
+                    const stateSpan = document.getElementById('wifi-connection-state');
+                    const ssidSpan = document.getElementById('wifi-current-ssid');
+                    const ipSpan = document.getElementById('wifi-ip-address');
+
+                    try {
+                        const response = await fetch('/api/wifi_status');
+                        const data = await response.json();
+                        if (data.success) {
+                            if (data.is_connected) {
+                                stateSpan.textContent = "Connecté";
+                                stateSpan.className = "text-green-600 font-semibold";
+                                ssidSpan.textContent = data.ssid;
+                                ipSpan.textContent = data.ip_address;
+                            } else {
+                                stateSpan.textContent = "Non connecté";
+                                stateSpan.className = "text-red-600 font-semibold";
+                                ssidSpan.textContent = "N/A";
+                                ipSpan.textContent = "N/A";
+                            }
+                        } else {
+                            throw new Error("Réponse de l'API invalide");
+                        }
+                    } catch (error) {
+                        console.error("Erreur de communication avec l'API Wi-Fi:", error);
+                        stateSpan.textContent = "Erreur de connexion";
+                        stateSpan.className = "text-red-600 font-semibold";
+                        ssidSpan.textContent = "N/A";
+                        ipSpan.textContent = "N/A";
+                    }
+                }
+
+                // --- Gestion des Interfaces Réseau ---
+                async function fetchInterfaceStatus(interfaceName) {
+                    const stateSpan = document.getElementById(`${interfaceName}-state`);
+                    const ipSpan = document.getElementById(`${interfaceName}-ip`);
+                    const toggleBtn = document.getElementById(`toggle-${interfaceName}-btn`);
+
+                    if (!stateSpan || !ipSpan || !toggleBtn) return;
+
+                    try {
+                        const response = await fetch(`/api/interface_status/${interfaceName}`);
+                        const data = await response.json();
+
+                        if (data.success) {
+                            if (data.state === "UP") {
+                                stateSpan.textContent = "Activée";
+                                stateSpan.className = "font-mono text-green-600";
+                                ipSpan.textContent = data.ip_address;
+                                toggleBtn.textContent = "Désactiver";
+                                toggleBtn.className = "system-button bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded";
+                                toggleBtn.dataset.nextState = "down";
+                            } else if (data.state === "DOWN") {
+                                stateSpan.textContent = "Désactivée";
+                                stateSpan.className = "font-mono text-gray-500";
+                                ipSpan.textContent = "N/A";
+                                toggleBtn.textContent = "Activer";
+                                toggleBtn.className = "system-button bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded";
+                                toggleBtn.dataset.nextState = "up";
+                            } else { // NOT_FOUND
+                                stateSpan.textContent = "Non trouvée";
+                                stateSpan.className = "font-mono text-red-600";
+                                ipSpan.textContent = "N/A";
+                                toggleBtn.textContent = "Indisponible";
+                                toggleBtn.className = "system-button bg-gray-400 text-white font-bold py-2 px-4 rounded cursor-not-allowed";
+                                toggleBtn.disabled = true;
+                                return;
+                            }
+                            toggleBtn.disabled = false;
+                        } else { throw new Error(data.message || "Réponse API invalide"); }
+                    } catch (error) {
+                        console.error(`Erreur de communication pour l'interface ${interfaceName}:`, error);
+                        stateSpan.textContent = "Erreur"; ipSpan.textContent = "N/A";
+                        toggleBtn.textContent = "Erreur"; toggleBtn.disabled = true;
+                    }
+                }
+
+                const toggleEth0Btn = document.getElementById('toggle-eth0-btn');
+                if (toggleEth0Btn) {
+                    toggleEth0Btn.addEventListener('click', async () => {
+                        const interfaceName = 'eth0';
+                        const nextState = toggleEth0Btn.dataset.nextState;
+
+                        toggleEth0Btn.disabled = true;
+                        toggleEth0Btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+                        try {
+                            const response = await fetch('/api/set_interface_state', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ interface: interfaceName, state: nextState })
+                            });
+                            const result = await response.json();
+                            if (!result.success) { alert(`Erreur: ${result.message}`); }
+                            setTimeout(() => fetchInterfaceStatus(interfaceName), 1000);
+                        } catch (error) {
+                            alert("Erreur de communication avec le serveur.");
+                            fetchInterfaceStatus(interfaceName);
+                        }
+                    });
+                }
+
+                // Fonction pour récupérer et afficher les informations système
+                async function fetchSystemInfo() {
+                    try {
+                        const response = await fetch('/api/system_info');
+                        const data = await response.json();
+                        if (data.success) {
+                            document.getElementById('cpu-temp').textContent = data.cpu_temp;
+                            document.getElementById('cpu-usage').textContent = data.cpu_usage;
+                            document.getElementById('ram-usage').textContent = data.ram_usage;
+                            document.getElementById('disk-usage').textContent = data.disk_usage;
+                            if (data.cpu_temp_history) {
+                                updateCpuTempChart(data.cpu_temp_history);
+                            }
+                            // NOUVEAU: Mettre à jour le graphique d'utilisation CPU
+                            if (data.cpu_usage_history) {
+                                updateCpuUsageChart(data.cpu_usage_history);
+                            }
+                            // NOUVEAU: Mettre à jour le graphique d'utilisation RAM
+                            if (data.ram_usage_history) {
+                                updateRamUsageChart(data.ram_usage_history);
+                            }
+                            // NOUVEAU: Mettre à jour le graphique d'utilisation Disque
+                            if (data.disk_usage_history) {
+                                updateDiskUsageChart(data.disk_usage_history);
+                            }
+                        } else {
+                            console.error("{{ _('Erreur lors de la récupération des infos système:') }}", data.message);
+                            document.getElementById('cpu-temp').textContent = i18n.notAvailable;
+                            document.getElementById('cpu-usage').textContent = i18n.notAvailable;
+                            document.getElementById('ram-usage').textContent = i18n.notAvailable;
+                            document.getElementById('disk-usage').textContent = i18n.notAvailable;
+                        }
+                    } catch (error) {
+                        console.error("{{ _('Erreur de communication avec l\'API système:') }}", error);
+                        document.getElementById('cpu-temp').textContent = i18n.error;
+                        document.getElementById('cpu-usage').textContent = i18n.error;
+                        document.getElementById('ram-usage').textContent = i18n.error;
+                        document.getElementById('disk-usage').textContent = i18n.error;
+                    }
+                }
+
+                // Fonction pour récupérer et afficher les logs
+                async function fetchLogs() {
+                    const logSelector = document.getElementById('log-selector');
+                    const logContentElement = document.getElementById('log-content');
+                    // Gérer le cas où il n'y a pas de logs à afficher
+                    if (logSelector.options.length === 0 || !logSelector.value) {
+                        logContentElement.textContent = "{{ _('Aucun fichier de log disponible ou sélectionné.') }}";
+                        return;
+                    }
+
+                    const logType = logSelector.value;
+                    try {
+                        const response = await fetch(`/api/logs?type=${logType}`);
+                        const data = await response.json();
+                        if (data.success) {
+                            if (data.content && data.content.trim() !== '') {
+                                logContentElement.textContent = data.content;
+                            } else {
+                                logContentElement.innerHTML = '&nbsp;';
+                            }
+                            logContentElement.parentElement.scrollTop = logContentElement.parentElement.scrollHeight;
+                        } else {
+                            logContentElement.textContent = `{{ _('Erreur:') }} ${data.message}`;
+                        }
+                    } catch (error) {
+                        console.error("Erreur de communication avec l'API logs:", error);
+                        logContentElement.textContent = "{{ _('Erreur de connexion à l\'API des logs.') }}";
+                    }
+                }
+
+                // NOUVEAU: Fonction pour charger dynamiquement la liste des fichiers de log
+                async function loadLogFiles() {
+                    const logSelector = document.getElementById('log-selector');
+                    logSelector.innerHTML = `<option>{{ _('Chargement...') }}</option>`;
+                    try {
+                        const response = await fetch('/api/list_logs');
+                        const data = await response.json();
+                        logSelector.innerHTML = ''; // Vider
+                        if (data.success && data.logs.length > 0) {
+                            data.logs.forEach(log => {
+                                const option = document.createElement('option');
+                                option.value = log.key;
+                                option.textContent = log.name;
+                                logSelector.appendChild(option);
+                            });
+                            fetchLogs(); // Charger le contenu du premier log de la liste
+                        } else {
+                            logSelector.innerHTML = `<option>{{ _('Aucun log trouvé') }}</option>`;
+                            fetchLogs(); // Affichera le message "aucun log"
+                        }
+                    } catch (error) {
+                        logSelector.innerHTML = `<option>{{ _('Erreur de chargement') }}</option>`;
+                    }
+                }
+
+                // Mettre à jour les infos système (intervalles plus longs pour réduire la charge)
+                setInterval(fetchSystemInfo, 10000); // 10 secondes
+                setTimeout(() => {
+                    fetchWifiStatus();  // Premier ping après 15s
+                    setInterval(fetchWifiStatus, 3000);  // Puis toutes les 3s
+                }, 15000);
+
+
+                setInterval(() => fetchInterfaceStatus('eth0'), 30000); // 30 secondes
+                // Mettre à jour les logs toutes les 15 secondes (ou sur demande)
+                setInterval(fetchLogs, 15000); // 15 secondes
+
+                // Écouteurs d'événements pour les logs
+                document.getElementById('log-selector').addEventListener('change', fetchLogs);
+                document.getElementById('refresh-logs-btn').addEventListener('click', fetchLogs);
+                document.getElementById('clear-logs-btn').addEventListener('click', async () => {
+                    const logSelector = document.getElementById('log-selector');
+                    const logType = logSelector.value;
+                    const logName = logSelector.options[logSelector.selectedIndex].text;
+
+                    const templateMsg = `{{ _('Êtes-vous sûr de vouloir effacer le contenu du log "__LOG_NAME__" ? Cette action est irréversible.') }}`;
+                    if (!confirm(templateMsg.replace('__LOG_NAME__', logName))) {
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch('/api/clear_logs', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ type: logType })
+                        });
+                        const data = await response.json();
+                        if (data.success) {
+                            fetchLogs(); // Rafraîchir la vue pour montrer que le log est vide
+                        } else {
+                            alert(`{{ _('Erreur lors de l\'effacement du log :') }} ${data.message}`);
+                        }
+                    } catch (error) {
+                        alert("{{ _('Erreur de connexion à l\'API pour effacer les logs.') }}");
+                    }
+                });
+
+                // Appel initial au chargement de la page pour les infos système et les logs
+                fetchSystemInfo();
+                loadLogFiles(); // Remplacer l'appel direct à fetchLogs par celui-ci
+                fetchInterfaceStatus('eth0');
+                fetchWifiStatus();
+
+                // --- Scan Wi-Fi ---
+                const scanBtn = document.getElementById('scan-wifi-btn');
+                const scanBtnText = document.getElementById('scan-wifi-btn-text');
+                const resultsDiv = document.getElementById('wifi-scan-results');
+                const ssidInput = document.getElementById('wifi_ssid');
+
+                if (scanBtn) {
+                    // Fonction pour obtenir une icône Wi-Fi colorée en fonction de la force du signal
+                    function getSignalIconHtml(signal) {
+                        let colorClass = 'text-gray-400'; // Faible ou par défaut
+                        if (signal > 75) {
+                            colorClass = 'text-green-500'; // Fort
+                        } else if (signal > 50) {
+                            colorClass = 'text-green-400'; // Bon
+                        } else if (signal > 25) {
+                            colorClass = 'text-yellow-500'; // Moyen
+                        } else {
+                            colorClass = 'text-red-500'; // Faible
+                        }
+                        return `<i class="fas fa-wifi ${colorClass} fa-fw mr-2"></i>`;
+                    }
+
+                    scanBtn.addEventListener('click', function () {
+                        resultsDiv.innerHTML = `
+                <div class="p-4 text-sm text-blue-700 bg-blue-100 rounded-lg flex items-center" role="alert">
+                    <i class="fas fa-spinner fa-spin mr-3"></i>
+                    <span>${i18n.scanInProgress}</span>
+                </div>`;
+                        scanBtn.disabled = true;
+                        scanBtnText.textContent = i18n.scanInProgress;
+
+                        fetch('/api/scan_wifi')
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    if (data.networks && data.networks.length > 0) {
+                                        let table = `
+                                <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                                    <table class="w-full text-sm text-left text-gray-500">
+                                        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                                            <tr>
+                                                <th scope="col" class="py-3 px-6">${i18n.headerSSID}</th>
+                                                <th scope="col" class="py-3 px-6">${i18n.headerSecurity}</th>
+                                                <th scope="col" class="py-3 px-6">${i18n.headerSignal}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+                                        data.networks.forEach(net => {
+                                            table += `
+                                    <tr class="bg-white border-b hover:bg-gray-50 cursor-pointer wifi-row" data-ssid="${net.ssid}" title="${i18n.selectNetworkTitle}">
+                                        <td class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">${net.ssid}</td>
+                                        <td class="py-4 px-6">${net.security || i18n.noSecurity}</td>
+                                        <td class="py-4 px-6 flex items-center">${getSignalIconHtml(net.signal)}<span>${net.signal}%</span></td>
+                                    </tr>`;
+                                        });
+                                        table += '</tbody></table></div>';
+                                        resultsDiv.innerHTML = table;
+
+                                        // Ajouter les écouteurs d'événements pour chaque ligne du tableau
+                                        document.querySelectorAll('.wifi-row').forEach(row => {
+                                            row.addEventListener('click', function () {
+                                                const selectedSsid = this.dataset.ssid;
+                                                if (ssidInput) {
+                                                    ssidInput.value = selectedSsid;
+                                                    ssidInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                    ssidInput.focus();
+                                                }
+                                            });
+                                        });
+
+                                    } else {
+                                        resultsDiv.innerHTML = `<div class="p-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg" role="alert">${i18n.noNetworksFound}</div>`;
+                                    }
+                                } else {
+                                    resultsDiv.innerHTML = `<div class="p-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert"><strong>${i18n.error}:</strong> ${data.message}</div>`;
+                                }
+                            })
+                            .catch(error => {
+                                resultsDiv.innerHTML = `<div class="p-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert"><strong>${i18n.error}:</strong> ${i18n.commError} ${error}</div>`;
+                            })
+                            .finally(() => {
+                                scanBtn.disabled = false;
+                                scanBtnText.textContent = i18n.startScan;
+                            });
+                    });
+                }
+
+
+                // ----- EXPAND FILESYSTEM -----
+                document.getElementById("expand-fs-btn").addEventListener("click", () => {
+                    if (!confirm("{{ _('Cette opération va préparer le système à étendre la partition au prochain redémarrage. Voulez-vous continuer ?') }}")) {
+                        return;
+                    }
+
+                    const btn = document.getElementById("expand-fs-btn");
+                    const statusDiv = document.getElementById("expand-fs-status");
+                    const allActionButtons = document.querySelectorAll('.import-button, .system-button, #update-app-btn, #samba-test-btn, #testWeatherApiKeyBtn, #testTelegramBtn, #create-invite-btn, #scan-wifi-btn, #toggle-eth0-btn, #clear-logs-btn, #expand-fs-btn');
+
+                    statusDiv.innerHTML = ""; // Clear previous messages
+
+                    function disableAllButtons() {
+                        allActionButtons.forEach(b => { b.disabled = true; b.classList.add("opacity-50", "cursor-not-allowed"); });
+                    }
+
+                    function enableAllButtons() {
+                        allActionButtons.forEach(b => { b.disabled = false; b.classList.remove("opacity-50", "cursor-not-allowed"); });
+                    }
+
+                    disableAllButtons();
+
+                    fetch('/api/expand_filesystem', { method: 'POST' })
+                        .then(response => {
+                            const reader = response.body.getReader();
+                            const decoder = new TextDecoder();
+
+                            function processStream() {
+                                reader.read().then(({ done, value }) => {
+                                    if (done) {
+                                        enableAllButtons();
+                                        return;
+                                    }
+
+                                    const chunk = decoder.decode(value, { stream: true });
+                                    const lines = chunk.split('\n\n');
+
+                                    lines.forEach(line => {
+                                        if (line.startsWith('data: ')) {
+                                            try {
+                                                const data = JSON.parse(line.substring(6));
+                                                displayMessage(statusDiv, data.message, data.type.toLowerCase());
+                                            } catch (e) { console.error("Erreur parsing JSON:", e, "Ligne:", line); }
+                                        }
+                                    });
+                                    processStream();
+                                });
+                            }
+                            processStream();
+                        })
+                        .catch(error => {
+                            displayMessage(statusDiv, `Erreur de communication: ${error}`, 'error');
+                            enableAllButtons();
+                        });
+                });
+            });
+
+            // --- Contrôle Vocal ---
+            async function loadAudioDevices() {
+                console.log("Chargement des périphériques audio...");
+                const select = document.getElementById('voice_control_device_index');
+                if (!select) return;
+
+                const currentValue = "{{ config.get('voice_control_device_index', '') }}";
+                select.innerHTML = `<option value="">{{ _("Chargement des périphériques...") }}</option>`;
+
+                try {
+                    const response = await fetch('/api/audio_devices');
+                    const data = await response.json();
+                    console.log("Périphériques reçus:", data);
+
+                    select.innerHTML = `<option value="">{{ _("Périphérique par défaut") }}</option>`;
+                    if (data.success) {
+                        if (data.devices.length === 0) {
+                            select.innerHTML = `<option value="">{{ _("Aucun microphone trouvé.") }}</option>`;
+                        } else {
+                            data.devices.forEach(device => {
+                                const option = document.createElement('option');
+                                option.value = device.index;
+                                option.textContent = `[${device.index}] ${device.name} (${device.hostapi})`;
+                                if (String(device.index) === currentValue) {
+                                    option.selected = true;
+                                }
+                                select.appendChild(option);
+                            });
+                        }
+                    } else {
+                        // Afficher le message d'erreur spécifique renvoyé par le serveur
+                        const errorMessage = data.message || "{{ _('Erreur chargement') }}";
+                        select.innerHTML = `<option value="">${errorMessage}</option>`;
+                        console.error("Erreur API Audio:", errorMessage);
+                    }
+                } catch (error) {
+                    // Ce bloc est pour les erreurs réseau (ex: serveur non joignable)
+                    select.innerHTML = `<option value="">{{ _("Erreur de communication avec le serveur") }}</option>`;
+                }
+            }
+
+            async function fetchVoiceControlStatus() {
+                const statusSpan = document.getElementById('voice-control-status-message');
+                if (!statusSpan) return;
+
+                try {
+                    const response = await fetch('/api/voice_control/status');
+                    const data = await response.json();
+                    statusSpan.textContent = data.message || "{{ _('Statut inconnu') }}";
+                    if (data.status === 'running' || data.status === 'listening') {
+                        statusSpan.className = 'font-mono text-green-600';
+                    } else if (data.status === 'error') {
+                        statusSpan.className = 'font-mono text-red-600';
+                    } else {
+                        statusSpan.className = 'font-mono text-gray-500';
+                    }
+                } catch (error) {
+                    statusSpan.textContent = i18n.connectionError;
+                    statusSpan.className = 'font-mono text-red-600';
+                }
+            }
+
+            document.getElementById('refresh-audio-devices-btn')?.addEventListener('click', loadAudioDevices);
+            setInterval(fetchVoiceControlStatus, 5000);
+
+            // --- NOUVEAU: Gestion du toggle pour le contrôle vocal ---
+            const voiceControlToggle = document.getElementById('voice_control_enabled');
+            if (voiceControlToggle) {
+                voiceControlToggle.addEventListener('change', async (event) => {
+                    const isEnabled = event.target.checked;
+
+                    // Afficher un retour visuel immédiat
+                    const statusSpan = document.getElementById('voice-control-status-message');
+                    statusSpan.textContent = isEnabled ? "{{ _('Activation en cours...') }}" : "{{ _('Désactivation en cours...') }}";
+                    statusSpan.className = 'font-mono text-blue-600';
+
+                    try {
+                        const response = await fetch('/api/voice_control/toggle', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ enabled: isEnabled })
+                        });
+                        const result = await response.json();
+                        showToast(result.message); // Affiche la notification globale
+                        fetchVoiceControlStatus(); // Met à jour le statut immédiatement
+                    } catch (error) {
+                        showToast(i18n.commErrorServer, 5000);
+                        fetchVoiceControlStatus(); // Met à jour le statut pour refléter l'échec
+                    }
+                });
+            }
+
+            // --- Diagnostic Audio ---
+            const runDiagnosticsBtn = document.getElementById('run-audio-diagnostics-btn');
+            const diagnosticsContainer = document.getElementById('audio-diagnostics-results-container');
+            const diagnosticsPre = document.getElementById('audio-diagnostics-results');
+
+            if (runDiagnosticsBtn) {
+                runDiagnosticsBtn.addEventListener('click', async () => {
+                    runDiagnosticsBtn.disabled = true; // Correction: le bouton doit être désactivé
+                    runDiagnosticsBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i>${i18n.diagnosticsInProgress}`;
+                    diagnosticsContainer.classList.remove('hidden');
+                    diagnosticsPre.textContent = i18n.pleaseWait;
+
+                    try {
+                        const response = await fetch('/api/audio_diagnostics');
+                        const data = await response.json();
+
+                        if (data.success) {
+                            let output = "--- lsusb (Périphériques USB) ---\n";
+                            output += data.diagnostics.lsusb || 'N/A';
+                            output += "\n\n--- arecord -l (Périphériques de capture audio) ---\n";
+                            output += data.diagnostics.arecord || 'N/A';
+                            diagnosticsPre.textContent = output;
+                        } else {
+                            diagnosticsPre.textContent = "{{ _('Erreur lors de la récupération des diagnostics.') }}";
+                        }
+                    } catch (error) {
+                        diagnosticsPre.textContent = i18n.commErrorServer;
+                    } finally {
+                        runDiagnosticsBtn.disabled = false; // Correction: le bouton doit être réactivé
+                        runDiagnosticsBtn.innerHTML = `<i class="fas fa-play-circle mr-2"></i>${i18n.runDiagnostics}`;
+                    }
+                });
+            }
+        </script>

@@ -1,0 +1,115 @@
+        <div id="tab-network" class="tabcontent">
+            <fieldset>
+                <legend>
+                    <h3>{{ _("État de la connexion Wi-Fi") }}</h3>
+                </legend>
+                <div id="wifi-status-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <strong>{{ _("État:") }}</strong> <span id="wifi-connection-state" class="font-semibold">{{
+                            _("Chargement...") }}</span>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <strong>{{ _("Réseau (SSID):") }}</strong> <span id="wifi-current-ssid">{{ _("Chargement...")
+                            }}</span>
+                    </div>
+                    <div class="p-3 bg-gray-100 rounded-lg border">
+                        <strong>{{ _("Adresse IP:") }}</strong> <span id="wifi-ip-address">{{ _("Chargement...")
+                            }}</span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="mt-6">
+                <legend>
+                    <h3>{{ _("Configuration Wi-Fi") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("La sélection du pays est obligatoire pour activer
+                    l'interface Wi-Fi et respecter les réglementations locales sur les fréquences radio.") }}</p>
+                <form action="{{ url_for('save_wifi_settings') }}" method="post" id="wifi-config-form">
+                    <div class="mb-4">
+                        <label for="wifi_country" class="block text-sm font-medium text-gray-700">{{ _("Pays (pour la
+                            réglementation Wi-Fi)") }}</label>
+                        <select id="wifi_country" name="wifi_country" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            {% set countries = [('FR', _('France')), ('US', _('États-Unis')), ('GB', _('Royaume-Uni')),
+                            ('DE', _('Allemagne')), ('ES', _('Espagne')), ('CA', _('Canada')), ('BE', _('Belgique')),
+                            ('CH', _('Suisse'))] %}
+                            {% for code, name in countries %}
+                            <option value="{{ code }}" {% if config.get('wifi_country', 'FR' )==code %}selected{% endif
+                                %}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="wifi_ssid" class="block text-sm font-medium text-gray-700">{{ _("SSID (Nom du
+                            réseau)") }}</label>
+                        <input type="text" id="wifi_ssid" name="wifi_ssid" value="{{ config.get('wifi_ssid', '') }}"
+                            required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="wifi_password" class="block text-sm font-medium text-gray-700">{{ _("Mot de passe")
+                            }}</label>
+                        <div class="relative mt-1">
+                            <input type="password" id="wifi_password" name="wifi_password"
+                                value="{{ config.get('wifi_password', '') }}"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm pr-10">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <button type="button"
+                                    class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                    data-target="wifi_password" title="{{ _('Afficher/Cacher le mot de passe') }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">{{ _("Laissez vide si le réseau est ouvert.") }}</p>
+                    </div>
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                        <i class="fas fa-save mr-2"></i>{{ _("Appliquer les paramètres Wi-Fi") }}
+                    </button>
+                </form>
+                <p class="mt-3 text-xs text-gray-500">{{ _("Note : Après avoir appliqué les paramètres, la connexion
+                    peut prendre jusqu'à une minute. Si le statut de connexion ci-dessus ne passe pas à \"Connecté\",
+                    vérifiez le mot de passe puis essayez de redémarrer le système.") }}</p>
+            </fieldset>
+
+            <fieldset class="mt-6">
+                <legend>
+                    <h3>{{ _("Gestion des Interfaces Réseau") }}</h3>
+                </legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Si le Wi-Fi ne se connecte pas alors qu'un câble Ethernet
+                    est branché, c'est souvent un problème de priorité. Désactivez l'interface Ethernet pour forcer le
+                    système à utiliser exclusivement le Wi-Fi. Cette action redémarre le service réseau.") }}</p>
+
+                <!-- Interface Ethernet (eth0) -->
+                <div id="eth0-status-container"
+                    class="p-4 border rounded-lg bg-gray-50/50 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-semibold text-gray-800">{{ _("Interface Filaire (eth0)") }}</h4>
+                        <p class="text-sm"><strong>{{ _("État:") }}</strong> <span id="eth0-state" class="font-mono">{{
+                                _("Chargement...") }}</span></p>
+                        <p class="text-sm"><strong>{{ _("Adresse IP:") }}</strong> <span id="eth0-ip"
+                                class="font-mono">{{ _("Chargement...") }}</span></p>
+                    </div>
+                    <div>
+                        <button id="toggle-eth0-btn" class="system-button text-white font-bold py-2 px-4 rounded"
+                            disabled>{{ _("Chargement...") }}</button>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Bloc de scan Wi-Fi -->
+            <div class="mt-6 p-4 border rounded-lg bg-gray-50/50">
+                <h4 class="text-xl font-semibold text-gray-800 mb-2">{{ _("Réseaux Wi-Fi à proximité") }}</h4>
+                <p class="text-gray-600 mb-4">{{ _("Cliquez sur le bouton pour rechercher les réseaux Wi-Fi disponibles.
+                    Cliquer sur un réseau dans la liste remplira automatiquement le champ SSID ci-dessus.") }}</p>
+                <button id="scan-wifi-btn" type="button"
+                    class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded mb-3 inline-flex items-center">
+                    <i class="fas fa-wifi mr-2"></i>
+                    <span id="scan-wifi-btn-text">{{ _("Lancer le scan") }}</span>
+                </button>
+                <div id="wifi-scan-results" class="mt-4">
+                    <!-- Les résultats du scan apparaîtront ici -->
+                </div>
+            </div>
+        </div>

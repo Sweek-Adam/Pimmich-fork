@@ -1,0 +1,142 @@
+            <div id="tab-telegram" class="tabcontent">
+                <fieldset>
+                    <legend>
+                        <h3>{{ _("Réception de photos par Telegram") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">
+                        {{ _("Activez cette fonction pour permettre à des utilisateurs autorisés d'envoyer des photos
+                        directement sur le cadre via un bot Telegram. Les photos reçues seront ajoutées à la source
+                        \"Telegram\".") }}
+                        <br>
+                        {{ _("Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. L'ID de
+                        l'administrateur est votre propre ID utilisateur Telegram (obtenu via @userinfobot par
+                        exemple).") }}
+                    </p>
+
+                    <div style="margin-top: 16px;">
+                        <label><input type="checkbox" name="telegram_bot_enabled" {% if config.get('telegram_bot_enabled', False) %}checked{% endif %}> <span class="ml-2">{{ _("Activer le bot de réception Telegram") }}</span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-top: 8px;">
+                        <label for="telegram_bot_token" style="min-width: 200px;">{{ _("Token du Bot Telegram :")
+                            }}</label>
+                        <div class="relative flex-grow">
+                            <input type="password" id="telegram_bot_token" name="telegram_bot_token"
+                                value="{{ config.get('telegram_bot_token', '') }}" class="w-full pr-10">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <button type="button"
+                                    class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                    data-target="telegram_bot_token" title="{{ _('Afficher/Cacher le token') }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; margin-top: 8px;">
+                        <label for="telegram_authorized_users" style="min-width: 200px;">{{ _("ID de l'administrateur
+                            :") }}</label>
+                        <input type="text" id="telegram_authorized_users" name="telegram_authorized_users"
+                            value="{{ config.get('telegram_authorized_users', '') }}" class="w-full"
+                            placeholder="{{ _('Votre ID numérique Telegram') }}">
+                    </div>
+
+                    <div class="mt-4 mb-4">
+                        <button type="button" id="testTelegramBtn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm inline-flex items-center"><i
+                                class="fas fa-plug mr-2"></i>{{ _("Tester le Token du Bot") }}</button>
+                        <span id="telegramTestResult" class="ml-4 font-medium"></span>
+                    </div>
+                    <div id="telegram-bot-status-container" class="mt-4 p-3 bg-gray-100 rounded-lg border">
+                        <p><strong>{{ _("État du bot :") }}</strong> <span id="telegram-bot-status-message"
+                                class="font-mono">...</span></p>
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-6">
+                    <legend>
+                        <h3>{{ _("Gestion des invitations pour les invités") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">
+                        {{ _("Créez des codes d'invitation uniques pour permettre à vos amis et votre famille d'envoyer
+                        des photos au cadre. Ils devront envoyer ce code à votre bot Telegram pour être autorisés.") }}
+                    </p>
+
+                    <!-- Formulaire de création d'invitation -->
+                    <div class="p-4 border rounded-lg bg-gray-50/50 mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-2">{{ _("Créer une nouvelle invitation") }}</h4>
+                        <div class="flex items-center gap-4">
+                            <input type="text" id="new-invite-name"
+                                class="flex-grow rounded-md border-gray-300 shadow-sm"
+                                placeholder="{{ _('Nom de l\'invité (ex: Mamie)') }}">
+                            <select id="new-invite-duration" class="rounded-md border-gray-300 shadow-sm">
+                                <option value="7">{{ _("Valide 7 jours") }}</option>
+                                <option value="30">{{ _("Valide 30 jours") }}</option>
+                                <option value="90">{{ _("Valide 90 jours") }}</option>
+                            </select>
+                            <button type="button" id="create-invite-btn"
+                                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                <i class="fas fa-plus mr-2"></i>{{ _("Créer") }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Liste des invitations actives -->
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">{{ _("Invitations actives") }}</h4>
+                        <div id="invitations-list" class="space-y-2">
+                            <!-- Les invitations seront chargées ici par JavaScript -->
+                            <p class="text-gray-500 italic">{{ _("Chargement des invitations...") }}</p>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-4">
+                    <legend>
+                        <h3>{{ _("Source Telegram") }}</h3>
+                    </legend>
+                    <p class="mb-3 text-gray-700">{{ _("N'oubliez pas d'activer la source \"Telegram\" dans l'onglet
+                        \"Sources\" pour que les photos reçues apparaissent dans le diaporama.") }}</p>
+                </fieldset>
+
+                <fieldset class="mt-6">
+                    <legend>
+                        <h3>{{ _("Fréquence des Cartes Postales") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Augmentez temporairement la fréquence d'affichage des
+                        nouvelles cartes postales reçues pour qu'elles apparaissent plus souvent.") }}</p>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" name="telegram_boost_enabled" {% if
+                                config.get('telegram_boost_enabled', True) %}checked{% endif %}>
+                            {{ _("Activer le boost pour les cartes postales récentes") }}
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 8px;">
+                        <label for="telegram_boost_duration_days" style="min-width: 200px;">{{ _("Durée du boost (jours)
+                            :") }}</label>
+                        <input type="number" id="telegram_boost_duration_days" name="telegram_boost_duration_days"
+                            value="{{ config.get('telegram_boost_duration_days', 7) }}" min="1">
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 8px;">
+                        <label for="telegram_boost_factor" style="min-width: 200px;">{{ _("Facteur de boost :")
+                            }}</label>
+                        <input type="number" id="telegram_boost_factor" name="telegram_boost_factor"
+                            value="{{ config.get('telegram_boost_factor', 4) }}" min="0">
+                        <p class="text-sm text-gray-600 ml-2">{{ _("(Ex: 4 = 5x plus de chances d'apparaître)") }}</p>
+                    </div>
+                </fieldset>
+                <fieldset class="mt-6">
+                    <legend>
+                        <h3>{{ _("Options de l'overlay") }}</h3>
+                    </legend>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" name="display_telegram_notification_overlay" {% if
+                                config.get('display_telegram_notification_overlay', True) %}checked{% endif %}>
+                            {{ _("Activer l'icône de nouvelle carte postale dans l'overlay") }}
+                        </label>
+                    </div>
+                </fieldset>
+            </div>

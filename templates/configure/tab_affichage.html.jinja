@@ -1,0 +1,269 @@
+            <div id="tab-affichage" class="tabcontent" style="display:block">
+                <fieldset>
+                    <legend>
+                        <h3>{{ _("Paramètres d'affichage") }}</h3>
+                    </legend>
+
+                    <label for="display_duration">{{ _("Durée d'affichage (en secondes) :") }}</label>
+                    <input type="number" id="display_duration" name="display_duration"
+                        value="{{ config.display_duration }}" required>
+
+                    <div class="mt-4">
+                        <label for="screen_orientation" class="block text-sm font-medium text-gray-700">{{
+                            _("Orientation du cadre") }}</label>
+                        <select id="screen_orientation" name="screen_orientation"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            <option value="landscape" {% if config.get('screen_orientation', 'landscape' )=='landscape'
+                                %}selected{% endif %}>{{ _("Paysage (Horizontal)") }}</option>
+                            <option value="portrait" {% if config.get('screen_orientation')=='portrait' %}selected{%
+                                endif %}>{{ _("Portrait (Vertical)") }}</option>
+                        </select>
+                        <p class="text-xs text-gray-500 mt-1">{{ _("Si vous changez l'orientation, pensez à relancer une préparation des photos (onglet Actions) pour adapter le contenu.") }}</p>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-3 bg-gray-50 rounded border">
+                            <h4 class="font-semibold text-sm mb-2"><i class="fas fa-calendar-day mr-2"></i>{{ _("Horaires Semaine (Lun-Ven)") }}</h4>
+                            <label for="active_start_weekday" class="block text-xs text-gray-600 mb-1">{{ _("Allumage :") }}</label>
+                            <input type="time" id="active_start_weekday" name="active_start_weekday" value="{{ config.get('active_start_weekday', config.get('active_start', '07:00')) }}" class="w-full mb-2">
+                            <label for="active_end_weekday" class="block text-xs text-gray-600 mb-1">{{ _("Extinction :") }}</label>
+                            <input type="time" id="active_end_weekday" name="active_end_weekday" value="{{ config.get('active_end_weekday', config.get('active_end', '22:00')) }}" class="w-full">
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded border">
+                            <h4 class="font-semibold text-sm mb-2"><i class="fas fa-calendar-plus mr-2"></i>{{ _("Horaires Weekend (Sam-Dim)") }}</h4>
+                            <label for="active_start_weekend" class="block text-xs text-gray-600 mb-1">{{ _("Allumage :") }}</label>
+                            <input type="time" id="active_start_weekend" name="active_start_weekend" value="{{ config.get('active_start_weekend', config.get('active_start', '07:00')) }}" class="w-full mb-2">
+                            <label for="active_end_weekend" class="block text-xs text-gray-600 mb-1">{{ _("Extinction :") }}</label>
+                            <input type="time" id="active_end_weekend" name="active_end_weekend" value="{{ config.get('active_end_weekend', config.get('active_end', '23:00')) }}" class="w-full">
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t">
+                        <label for="resolution-selector" class="block text-sm font-medium text-gray-700">{{
+                            _("Résolution de l'écran") }}</label>
+                        <div class="flex items-center gap-2 mt-1">
+                            <select id="resolution-selector"
+                                class="flex-grow block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                <option>{{ _("Chargement des résolutions...") }}</option>
+                            </select>
+                            <button type="button" id="apply-resolution-btn"
+                                class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-sm">{{
+                                _("Appliquer") }}</button>
+                        </div>
+                        <span id="resolution-status" class="text-sm mt-2"></span>
+                        <p class="text-xs text-gray-500 mt-1">{{ _("Force une résolution spécifique. Utile si l'écran n'est pas détecté correctement au démarrage.") }}</p>
+                    </div>
+
+                    <label for="screen_height_percent">{{ _("Hauteur utile de l'écran (%% affiché) :") }}</label>
+                    <input type="number" id="screen_height_percent" name="screen_height_percent" min="10" max="100"
+                        value="{{ config.screen_height_percent }}">
+
+                    <div class="flex items-center mt-2">
+                        <div class="flex-grow">
+                            <label for="display_width">{{ _("Largeur d'affichage cible (px) :") }}</label>
+                            <input type="number" id="display_width" name="display_width"
+                                value="{{ config.get('display_width', 1920) }}">
+                            <label for="display_height" class="mt-2">{{ _("Hauteur d'affichage cible (px) :") }}</label>
+                            <input type="number" id="display_height" name="display_height"
+                                value="{{ config.get('display_height', 1080) }}">
+                        </div>
+                        <button type="button" id="detect-resolution-btn"
+                            class="ml-4 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-3 rounded text-sm"
+                            title="{{ _('Détecter la résolution de l\'écran actif') }}">{{ _('Détecter') }}</button>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" name="pan_zoom_enabled" {% if config.get('pan_zoom_enabled', False) %}checked{% endif %}> <span class="ml-2">{{ _("Activer l'effet Pan/Zoom sur les photos") }}</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 8px;">
+                        <label for="pan_zoom_factor" style="min-width: 200px;">{{ _("Amplitude du zoom (ex: 1.15 pour 15%% de zoom) :") }}</label>
+                        <input type="number" step="0.01" id="pan_zoom_factor" name="pan_zoom_factor"
+                            value="{{ config.get('pan_zoom_factor', 1.15) }}">
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" name="transition_enabled" {% if config.get('transition_enabled', True) %}checked{% endif %}> <span class="ml-2">{{ _("Activer l'effet de transition entre les photos") }}</span>
+                        </label>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <label for="transition_duration" class="w-52 flex-shrink-0">{{ _("Durée de transition (secondes) :") }}</label>
+                        <input type="number" step="0.1" id="transition_duration" name="transition_duration"
+                            value="{{ config.get('transition_duration', 1.0) }}">
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <label for="transition_type" class="w-52 flex-shrink-0">{{ _("Type de transition :") }}</label>
+                        <select name="transition_type" id="transition_type">
+                            <option value="fade" {% if config.get('transition_type')=='fade' %}selected{% endif %}>{{
+                                _('Fondu enchaîné') }}</option>
+                            <option value="slide_left" {% if config.get('transition_type')=='slide_left' %}selected{%
+                                endif %}>{{ _('Glisser depuis la gauche') }}</option>
+                            <option value="slide_right" {% if config.get('transition_type')=='slide_right' %}selected{%
+                                endif %}>{{ _('Glisser depuis la droite') }}</option>
+                            <option value="slide_up" {% if config.get('transition_type')=='slide_up' %}selected{% endif
+                                %}>{{ _('Glisser depuis le bas') }}</option>
+                            <option value="slide_down" {% if config.get('transition_type')=='slide_down' %}selected{%
+                                endif %}>{{ _('Glisser depuis le haut') }}</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <label for="transition_fps" class="w-52 flex-shrink-0">{{ _("Fréquence d'images (FPS) :") }}</label>
+                        <select name="transition_fps" id="transition_fps">
+                            <option value="auto" {% if config.get('transition_fps') == 'auto' or not config.get('transition_fps') %}selected{% endif %}>{{ _("Automatique (30 FPS sur Pi 3, 60 FPS sinon)") }}</option>
+                            <option value="30" {% if config.get('transition_fps') == '30' %}selected{% endif %}>30 FPS</option>
+                            <option value="60" {% if config.get('transition_fps') == '60' %}selected{% endif %}>60 FPS</option>
+                        </select>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <label for="favorite_boost_factor">{{ _("Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de lecture) :") }}</label>
+                        <input type="number" id="favorite_boost_factor" name="favorite_boost_factor"
+                            value="{{ config.get('favorite_boost_factor', 2) }}" min="0">
+                        <p class="text-sm text-gray-600 mt-1">{{ _("Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître.") }}</p>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" name="anniversary_boost_enabled" {% if
+                                config.get('anniversary_boost_enabled', False) %}checked{% endif %}>
+                            {{ _("Activer le boost pour les photos à leur date anniversaire de prise de vue") }}
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 8px;">
+                        <label for="anniversary_boost_factor" style="min-width: 200px;">{{ _("Facteur de boost anniversaire :") }}</label>
+                        <input type="number" id="anniversary_boost_factor" name="anniversary_boost_factor" value="{{ config.get('anniversary_boost_factor', 2) }}" min="0">
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" name="slideshow_video_enabled" {% if config.get('slideshow_video_enabled', True) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher les vidéos dans le diaporama") }}</span>
+                        </label>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" id="video_audio_enabled" name="video_audio_enabled" {% if config.get('video_audio_enabled', False) %}checked{% endif %}> <span class="ml-2">{{ _("Activer le son pour les vidéos") }}</span>
+                        </label>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" name="video_hwdec_enabled" {% if config.get('video_hwdec_enabled', False) %}checked{% endif %}> <span class="ml-2">{{ _("Activer le décodage vidéo matériel (plus fluide, mais peut être instable)") }}</span>
+                        </label>
+                        <p class="text-sm text-gray-600 mt-1">{{ _("Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. Décochez si vous rencontrez des écrans bleus/noirs après les vidéos.") }}</p>
+                    </div>
+                    <div id="audio-output-selector"
+                        style="display: flex; align-items: center; margin-top: 8px; {% if not config.get('video_audio_enabled', False) %}display: none;{% endif %}">
+                        <label for="video_audio_output" style="min-width: 200px;">{{ _("Sortie audio :") }}</label>
+                        <select name="video_audio_output" id="video_audio_output">
+                            <option value="auto" {% if config.get('video_audio_output')=='auto' %}selected{% endif %}>{{
+                                _('Automatique') }}</option>
+                            <option value="hdmi" {% if config.get('video_audio_output')=='hdmi' %}selected{% endif %}>{{
+                                _('HDMI') }}</option>
+                            <option value="jack" {% if config.get('video_audio_output')=='jack' %}selected{% endif %}>{{
+                                _('Jack 3.5mm (Casque)') }}</option>
+                        </select>
+                    </div>
+                    <div id="audio-volume-selector"
+                        style="display: flex; align-items: center; margin-top: 8px; {% if not config.get('video_audio_enabled', False) %}display: none;{% endif %}">
+                        <label for="video_audio_volume" style="min-width: 200px;">{{ _("Volume :") }}</label>
+                        <input type="range" id="video_audio_volume_slider" min="0" max="100"
+                            value="{{ config.get('video_audio_volume', 100) }}" class="w-1/2">
+                        <input type="number" id="video_audio_volume" name="video_audio_volume" min="0" max="100"
+                            value="{{ config.get('video_audio_volume', 100) }}" class="w-16 ml-2 text-center">
+                        <span class="ml-1">%</span>
+                    </div>
+                </fieldset>
+
+                <!-- NOUVEAU BLOC POUR LA PRISE CONNECTÉE -->
+                <fieldset class="mt-6">
+                    <legend>
+                        <h3><i class="fas fa-plug mr-2"></i>{{ _("Gestion de l'alimentation (Prise Connectée)") }}</h3>
+                    </legend>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Si votre écran ne se met pas complètement en veille, vous pouvez utiliser une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra une simple requête HTTP aux URLs que vous spécifiez.") }}<br>
+                    <strong>{{ _("Exemples d'URLs :") }}</strong>
+                    <ul class="list-disc list-inside text-xs text-gray-500 mt-1">
+                        <li><strong>Tasmota:</strong> `http://IP_PRISE/cm?cmnd=Power%20On`</li>
+                        <li><strong>Home Assistant (Webhook):</strong> `http://IP_HA:8123/api/webhook/pimmich_on`</li>
+                        <li><strong>Shelly:</strong> `http://IP_PRISE/relay/0?turn=on`</li>
+                        <li><strong>Kasa (via passerelle):</strong> `http://IP_PASSERELLE:PORT/on`</li>
+                    </ul>
+                    </p>
+
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="smart_plug_enabled"
+                            name="smart_plug_enabled" {% if config.get('smart_plug_enabled') %}checked{% endif %}>
+                        <label class="form-check-label" for="smart_plug_enabled">{{ _("Activer le contrôle par prise
+                            connectée") }}</label>
+                    </div>
+
+                    <div id="smart-plug-status-indicator"
+                        class="hidden items-center gap-2 mb-4 p-2 border rounded-lg bg-gray-50">
+                        <div id="smart-plug-status-light" class="w-4 h-4 rounded-full bg-gray-400"></div>
+                        <span id="smart-plug-status-text" class="text-sm font-medium text-gray-600">{{ _("État de la
+                            prise : Inconnu") }}</span>
+                    </div>
+
+                    <div id="smart-plug-options"
+                        class="space-y-4 {% if not config.get('smart_plug_enabled') %}hidden{% endif %}">
+                        <div>
+                            <label for="smart_plug_on_url" class="block text-sm font-medium text-gray-700">{{ _("URL
+                                pour ALLUMER la prise :") }}</label>
+                            <div class="flex items-center gap-2 mt-1">
+                                <input type="url" id="smart_plug_on_url" name="smart_plug_on_url"
+                                    value="{{ config.get('smart_plug_on_url', '') }}"
+                                    class="flex-grow block w-full rounded-md border-gray-300 shadow-sm"
+                                    placeholder="http://...">
+                                <button type="button"
+                                    class="test-plug-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded text-sm"
+                                    data-target="smart_plug_on_url">{{ _("Tester") }}</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="smart_plug_off_url" class="block text-sm font-medium text-gray-700">{{ _("URL
+                                pour ÉTEINDRE la prise :") }}</label>
+                            <div class="flex items-center gap-2 mt-1">
+                                <input type="url" id="smart_plug_off_url" name="smart_plug_off_url"
+                                    value="{{ config.get('smart_plug_off_url', '') }}"
+                                    class="flex-grow block w-full rounded-md border-gray-300 shadow-sm"
+                                    placeholder="http://...">
+                                <button type="button"
+                                    class="test-plug-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-sm"
+                                    data-target="smart_plug_off_url">{{ _("Tester") }}</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="smart_plug_on_delay" class="block text-sm font-medium text-gray-700">{{ _("Délai
+                                après allumage (secondes) :") }}</label>
+                            <input type="number" id="smart_plug_on_delay" name="smart_plug_on_delay"
+                                value="{{ config.get('smart_plug_on_delay', 5) }}" min="0" max="30"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:w-32">
+                            <p class="text-xs text-gray-500 mt-1">{{ _("Temps d'attente pour que l'écran s'initialise avant de forcer la résolution. Augmentez si la résolution est toujours incorrecte.") }}</p>
+                        </div>
+                        <div class="pt-4 border-t">
+                            <label for="smart_plug_status_url" class="block text-sm font-medium text-gray-700">{{ _("URL
+                                de Statut (Optionnel) :") }}</label>
+                            <input type="url" id="smart_plug_status_url" name="smart_plug_status_url"
+                                value="{{ config.get('smart_plug_status_url', '') }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="http://...">
+                            <p class="text-xs text-gray-500 mt-1">
+                                {{ _("Pour Home Assistant, utilisez l'URL de l'API des états :") }}<br>
+                                `http://IP_HA:8123/api/states/sensor.pimmich_plug_status`
+                            </p>
+                        </div>
+                        <div>
+                            <label for="home_assistant_token" class="block text-sm font-medium text-gray-700">{{
+                                _("Token d'accès Home Assistant (si URL de statut HA) :") }}</label>
+                            <div class="relative mt-1">
+                                <input type="password" id="home_assistant_token" name="home_assistant_token"
+                                    value="{{ config.get('home_assistant_token', '') }}"
+                                    class="block w-full rounded-md border-gray-300 shadow-sm pr-10">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <button type="button"
+                                        class="toggle-password-btn text-gray-500 hover:bg-gray-200 rounded-md transition-colors w-auto p-2 flex items-center justify-center mt-0 bg-transparent border-none font-normal"
+                                        data-target="home_assistant_token" title="{{ _('Afficher/Cacher le token') }}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">{{ _("Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant.") }}</p>
+                        </div>
+                        <span id="plug-test-status" class="text-sm font-medium"></span>
+                    </div>
+                </fieldset>
+            </div>
