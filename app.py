@@ -36,6 +36,9 @@ if __name__ == '__main__':
     telegram_thread.start()
     maintenance_thread = threading.Thread(target=maintenance_worker, daemon=True)
     maintenance_thread.start()
+    # Préchauffer le cache des remotes rclone (lent sur Pi 3) pour que la page de configuration s'ouvre vite
+    from utils.import_gdrive import list_rclone_remotes
+    threading.Thread(target=list_rclone_remotes, daemon=True).start()
     
     # Démarrer le worker de planification du diaporama
     scheduler_thread = threading.Thread(target=schedule_worker, daemon=True)

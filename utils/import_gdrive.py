@@ -27,8 +27,21 @@ def _is_media(name):
 
 # --- Méthode 1 : rclone (utilise un remote Google Drive déjà configuré avec `rclone config`) ---
 
-def list_rclone_remotes():
-    """Retourne les noms des remotes rclone de type Google Drive (sans le ':' final)."""
+_remotes_cache = {"time": 0.0, "value": None}
+REMOTES_CACHE_SECONDS = 600  # rclone met plusieurs secondes à démarrer sur un Raspberry Pi 3
+
+
+def list_rclone_remotes(refresh=False):
+    """Retourne les noms des remotes rclone de type Google Drive (sans le ':' final), avec un cache de 10 minutes."""
+    import time
+    if not refresh and _remotes_cache["value"] is not None and time.time() - _remotes_cache["time"] < REMOTES_CACHE_SECONDS:
+        return list(_remotes_cache["value"])
+    remotes = _list_rclone_remotes()
+    _remotes_cache.update(time=time.time(), value=remotes)
+    return list(remotes)
+
+
+def _list_rclone_remotes():
     if not shutil.which("rclone"):
         return []
     try:
