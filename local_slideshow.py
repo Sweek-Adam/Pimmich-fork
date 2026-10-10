@@ -24,6 +24,7 @@ from utils.text_drawer import draw_text_with_outline
 from utils.metadata_utils import get_photo_metadata, load_photo_metadata_cache # Import from new utility
 from utils.config_manager import load_config
 from utils.audio_output import apply_audio_output
+from utils.security import internal_headers
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 def _(text, **kwargs):
@@ -113,7 +114,7 @@ def button_callback(channel):
     logger.info(f"Bouton physique pressé (GPIO {channel}). Basculement de la veille...")
     try:
         # Appelle l'API de l'application web pour basculer l'état du diaporama
-        requests.post("http://127.0.0.1:5000/api/slideshow/toggle_sleep", timeout=5)
+        requests.post("http://127.0.0.1:5000/api/slideshow/toggle_sleep", headers=internal_headers(), timeout=5)
     except requests.RequestException as e:
         logger.error(f"Impossible de contacter l'API pour la mise en veille: {e}")
 

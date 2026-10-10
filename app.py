@@ -24,7 +24,9 @@ import signal
 import traceback
 
 from utils.download_album import download_and_extract_album
-from utils.auth import login_required, admin_required, is_admin # type: ignore
+from utils.auth import login_required, admin_required, is_admin, login_or_internal_required # type: ignore
+from utils.upstream import check_upstream
+from utils.security import load_secret_key, ensure_internal_token, csrf_violation, is_internal_request
 from utils import user_manager
 from utils.slideshow_manager import is_slideshow_running, start_slideshow, stop_slideshow, restart_slideshow_process, restart_slideshow_for_update
 from utils.config_manager import load_config, save_config
@@ -147,12 +149,13 @@ werkzeug_logger.setLevel(logging.WARNING)
 app = Flask(__name__)
 
 # --- Clé secrète ---
-try:
-    from utils.credentials_manager import load_credentials
-    credentials = load_credentials()
-    app.secret_key = credentials.get('flask_secret_key', 'supersecretkey_fallback_should_be_changed')
-except Exception:
-    app.secret_key = 'supersecretkey_fallback_should_be_changed'
+# Jamais de clé par défaut connue : elle permettrait de fabriquer une session administrateur.
+app.secret_key = load_secret_key('/boot/firmware/credentials.json')
+# Cookie de session non envoyé par les requêtes provenant d'autres sites (protection CSRF)
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+# Jeton partagé avec les processus locaux (commande vocale, bouton physique)
+ensure_internal_token()
 
 # --- Limiter la taille des uploads ---
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
@@ -201,6 +204,13 @@ def inject_current_user():
 # Réglages contenant des secrets : masqués et non modifiables pour les comptes non administrateurs
 SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormglass_api_key', 'telegram_bot_token',
                       'telegram_authorized_users', 'porcupine_access_key', 'home_assistant_token', 'wifi_ssid', 'wifi_password']
+
+@app.before_request
+def protect_against_csrf():
+    """Refuse les requêtes d'action envoyées depuis un autre site (CSRF)."""
+    if csrf_violation(request):
+        logger.warning(f"[Sécurité] Requête inter-site refusée : {request.method} {request.path}")
+        return jsonify({"success": False, "message": "Requête refusée (origine non autorisée)."}), 403
 
 @app.before_request
 def refresh_user_role():
@@ -333,9 +343,10 @@ def load_credentials():
         with open(CREDENTIALS_PATH, 'r') as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        # Fallback if file is missing or corrupt. setup.sh should create it.
-        # The hash is for the default password 'pimmich'.
-        return {"username": "admin", "password_hash": "pbkdf2:sha256:600000$YgWJtLgqgBqYvRzS$b2185c72e38933b3c655b7a748c928b1b88b1d62480579f4a1f9b1b1c8e8c8d2"}
+        # Pas de compte par défaut au mot de passe connu : setup.sh (utils/create_initial_user.py) crée ce fichier.
+        logger.error(f"Fichier d'identification {CREDENTIALS_PATH} absent ou illisible : connexion admin impossible. "
+                     f"Recréez-le avec : sudo venv/bin/python utils/create_initial_user.py --output {CREDENTIALS_PATH}")
+        return {}
 
 def check_credentials(username, password):
     credentials = load_credentials()
@@ -2222,6 +2233,7 @@ def slideshow():
     return render_template("slideshow.html.jinja")
 
 @app.route('/slideshow_view')
+@login_required
 def slideshow_view():
     all_media = [media for source_media in get_prepared_photos_by_source().values() for media in source_media]
     return render_template('slideshow_view.html.jinja', photos=all_media) # Le template s'attend probablement à une variable 'photos'
@@ -2343,7 +2355,7 @@ def system_reboot():
     """Affiche la page de redémarrage et lance le reboot après 1 seconde."""
     # Supprimer le fichier log si coché
     if request.form.get('delete_logs'):
-        log_file = '/home/pi/pimmich/logs/pimmich.log'
+        log_file = BASE_DIR / 'logs' / 'pimmich.log'
         if os.path.exists(log_file):
             try:
                 os.remove(log_file)
@@ -2506,6 +2518,7 @@ def cancel_import():
         return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/playlists/play', methods=['POST'])
+@login_or_internal_required
 def play_playlist():
     # Sécurité : n'accepter que les requêtes venant de la machine elle-même (contrôle vocal) ou d'un utilisateur connecté
     if not session.get('logged_in') and request.remote_addr != '127.0.0.1':
@@ -2546,6 +2559,7 @@ def play_playlist():
         return jsonify({"success": False, "message": "Erreur interne du serveur."}), 500
 
 @app.route('/api/slideshow/restart_standard', methods=['POST'])
+@login_or_internal_required
 def restart_standard_slideshow():
     """Arrête tout diaporama en cours et en lance un nouveau en mode standard."""
     try:
@@ -2561,6 +2575,7 @@ def restart_standard_slideshow():
         return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/slideshow/toggle_sleep', methods=['POST'])
+@login_or_internal_required
 def toggle_sleep_api():
     """Bascule l'état du diaporama (actif/veille). Pour utilisation avec un bouton physique."""
     # Sécurité : n'accepter que les requêtes venant de la machine elle-même
@@ -2585,6 +2600,7 @@ def toggle_sleep_api():
 # --- API pour la gestion des Playlists ---
 
 @app.route('/api/playlists', methods=['GET'])
+@login_or_internal_required
 def get_playlists():
     """Retourne la liste de toutes les playlists."""
     playlists = load_playlists()
@@ -2691,6 +2707,7 @@ def upload_music():
         return jsonify({"success": False, "message": "Format de fichier non supporté. MP3 ou WAV uniquement."}), 400
 
 @app.route('/api/playlists/<playlist_id>', methods=['DELETE'])
+@login_or_internal_required
 def delete_playlist(playlist_id):
     """Supprime une playlist."""
     playlists = load_playlists()
@@ -2699,6 +2716,7 @@ def delete_playlist(playlist_id):
     return jsonify({"success": True})
 
 @app.route('/api/playlists/<playlist_id>/rename', methods=['POST'])
+@login_or_internal_required
 def rename_playlist(playlist_id):
     """Renomme une playlist."""
     data = request.get_json()
@@ -2722,6 +2740,7 @@ def rename_playlist(playlist_id):
     return jsonify({"success": True, "message": "Playlist renommée."})
 
 @app.route('/api/playlists/<playlist_id>/photos', methods=['POST'])
+@login_or_internal_required
 def add_photo_to_playlist(playlist_id):
     """Ajoute une photo à une playlist."""
     data = request.get_json()
@@ -2739,6 +2758,7 @@ def add_photo_to_playlist(playlist_id):
     return jsonify({"success": False, "message": "Playlist non trouvée."}), 404
 
 @app.route('/api/playlists/<playlist_id>/photos/<path:photo_path>', methods=['DELETE'])
+@login_or_internal_required
 def remove_photo_from_playlist(playlist_id, photo_path):
     """Retire une photo d'une playlist."""
     playlists = load_playlists()
@@ -2751,6 +2771,7 @@ def remove_photo_from_playlist(playlist_id, photo_path):
     return jsonify({"success": False, "message": "Playlist non trouvée."}), 404
 
 @app.route('/api/playlists/<playlist_id>/reorder', methods=['POST'])
+@login_or_internal_required
 def reorder_playlist(playlist_id):
     """
     Réorganise les photos d'une playlist spécifique.
@@ -2857,16 +2878,18 @@ def get_audio_diagnostics():
 # --- NOUVELLES ROUTES POUR LE CONTRÔLE VOCAL AVANCÉ ---
 
 @app.route('/api/system/shutdown', methods=['POST'])
+@login_or_internal_required
 def system_shutdown():
-    """Éteint le système."""
-    # Sécurité : n'accepter que les requêtes venant de la machine elle-même
-    if request.remote_addr != '127.0.0.1':
-        return jsonify({"success": False, "message": "Accès non autorisé."}), 403
+    """Éteint le système (commande vocale ou administrateur)."""
+    # Derrière nginx, toutes les requêtes semblent venir de 127.0.0.1 : on s'appuie sur le jeton interne ou le rôle
+    if not is_internal_request(request) and not is_admin():
+        return jsonify({"success": False, "message": "Action réservée aux administrateurs."}), 403
     print("Arrêt du système demandé via API.")
     subprocess.run(['sudo', '-n', 'shutdown', '-h', 'now'])
     return jsonify({"success": True, "message": "Arrêt en cours."})
 
 @app.route('/api/display/power', methods=['POST'])
+@login_or_internal_required
 def display_power():
     """Allume ou éteint l'écran."""
     if request.remote_addr != '127.0.0.1':
@@ -2891,6 +2914,7 @@ def display_power():
     return jsonify({"success": success, "message": message})
 
 @app.route('/api/sources/play/<source_name>', methods=['POST'])
+@login_or_internal_required
 def play_source_as_playlist(source_name):
     """Joue toutes les photos d'une source donnée comme une playlist."""
     if request.remote_addr != '127.0.0.1':
@@ -2923,6 +2947,7 @@ def play_source_as_playlist(source_name):
         return jsonify({"success": False, "message": f"Erreur lors du lancement de la playlist source: {e}"}), 500
 
 @app.route('/api/sources/toggle', methods=['POST'])
+@login_or_internal_required
 def toggle_source():
     """Active ou désactive une source dans la configuration."""
     app.logger.info(f"API /api/sources/toggle reçue de {request.remote_addr}")
@@ -2966,6 +2991,7 @@ def toggle_source():
         return jsonify({"success": False, "message": f"Erreur lors de la modification de la source : {e}"}), 500
 
 @app.route('/api/slideshow/set_duration', methods=['POST'])
+@login_or_internal_required
 def set_slideshow_duration():
     """Modifie la durée d'affichage des photos et redémarre le diaporama."""
     # Sécurité : n'accepter que les requêtes venant de la machine elle-même
@@ -3008,18 +3034,22 @@ def _send_slideshow_signal(sig):
         return jsonify({"success": False, "message": f"Impossible de communiquer avec le diaporama : {e}"}), 500
 
 @app.route('/api/slideshow/next', methods=['POST'])
+@login_or_internal_required
 def slideshow_next():
     return _send_slideshow_signal(signal.SIGUSR1)
 
 @app.route('/api/slideshow/previous', methods=['POST'])
+@login_or_internal_required
 def slideshow_previous():
     return _send_slideshow_signal(signal.SIGUSR2)
 
 @app.route('/api/slideshow/toggle_pause', methods=['POST'])
+@login_or_internal_required
 def slideshow_toggle_pause():
     return _send_slideshow_signal(signal.SIGTSTP)
 
 @app.route('/api/slideshow/toggle_notifications', methods=['POST'])
+@login_or_internal_required
 def toggle_notifications_api():
     """Bascule l'affichage des notifications sur le diaporama."""
     if not session.get('logged_in') and request.remote_addr != '127.0.0.1':
@@ -3037,6 +3067,7 @@ def toggle_notifications_api():
         return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/slideshow/status')
+@login_or_internal_required
 def slideshow_status():
     if not is_slideshow_running():
         return jsonify({"running": False, "paused": False})
@@ -3557,6 +3588,16 @@ def clear_logs_api():
         else:
             return jsonify({"success": False, "message": f"Fichier de log '{log_file_path}' non trouvé."})
     except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route('/api/upstream_status', methods=['GET'])
+@admin_required
+def upstream_status():
+    """Indique les nouveautés disponibles sur le dépôt d'origine de Pimmich et sur le dépôt suivi."""
+    try:
+        return jsonify({"success": True, **check_upstream()})
+    except Exception as e:
+        logger.warning(f"[Upstream] Vérification impossible : {e}")
         return jsonify({"success": False, "message": str(e)}), 500
 
 @app.route('/api/update_app', methods=['GET'])
@@ -4085,4 +4126,5 @@ if __name__ == '__main__':
         print("Le contrôle vocal est activé, démarrage du service...")
         start_voice_control()
 
-    app.run(host='0.0.0.0', port=5000)
+    # Écoute uniquement en local : l'accès réseau passe par nginx (port 80)
+    app.run(host='127.0.0.1', port=5000)

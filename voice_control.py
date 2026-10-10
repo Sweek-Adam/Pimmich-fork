@@ -16,6 +16,7 @@ from thefuzz import process
 from num2words import num2words
 
 from utils.config_manager import load_config
+from utils.security import internal_headers
 from utils.voice_control_manager import PID_FILE as VOICE_PID_FILE, update_status_file
 
 # --- NOUVEAU: Gestion des sons ---
@@ -91,9 +92,9 @@ def send_simple_api_command(endpoint, method='POST', data=None, timeout=5):
     try:
         print(f"[Voice] Envoi de la commande vers : {api_url} (timeout: {timeout}s)")
         if method.upper() == 'POST':
-            response = requests.post(api_url, json=data, timeout=timeout)
+            response = requests.post(api_url, json=data, headers=internal_headers(), timeout=timeout)
         else:
-            response = requests.get(api_url, timeout=timeout)
+            response = requests.get(api_url, headers=internal_headers(), timeout=timeout)
 
         # Log de débogage pour voir la réponse BRUTE du serveur
         print(f"[Voice] Réponse reçue. Statut: {response.status_code}. Contenu: {response.text}")
@@ -110,7 +111,7 @@ def get_playlist_names_for_grammar():
     """Tente de récupérer les noms de playlists, avec quelques tentatives pour gérer les race conditions au démarrage."""
     for i in range(3): # Tenter 3 fois
         try:
-            response = requests.get("http://127.0.0.1:5000/api/playlists", timeout=5)
+            response = requests.get("http://127.0.0.1:5000/api/playlists", headers=internal_headers(), timeout=5)
             if response.ok:
                 playlists = response.json()
                 if isinstance(playlists, list):
@@ -133,7 +134,7 @@ def play_playlist_by_name(recognized_text, lang='fr'):
     print(f"[Voice] Trying to play playlist by matching: '{recognized_text}'")
     try:
         # 1. Récupérer la liste des playlists
-        response = requests.get("http://127.0.0.1:5000/api/playlists", timeout=5)
+        response = requests.get("http://127.0.0.1:5000/api/playlists", headers=internal_headers(), timeout=5)
         response.raise_for_status()
         playlists = response.json()
 
