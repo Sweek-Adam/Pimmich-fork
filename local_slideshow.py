@@ -1530,6 +1530,46 @@ def draw_memory_banner(screen, screen_width, screen_height, config, photo_metada
         logger.debug(f"Ruban « Ce jour-là » non affiché : {e}")
 
 
+_moon_icon_cache = {}
+
+
+def _sun_icon(size, rising):
+    """Petit soleil à l'horizon, avec une flèche vers le haut (lever) ou vers le bas (coucher)."""
+    surface = pygame.Surface((size, size), pygame.SRCALPHA)
+    color = (255, 200, 80) if rising else (255, 140, 60)
+    cx, horizon, r = size // 2, int(size * 0.72), max(3, size // 4)
+    pygame.draw.circle(surface, color, (cx, horizon), r, draw_top_right=True, draw_top_left=True)
+    pygame.draw.line(surface, color, (1, horizon), (size - 2, horizon), max(1, size // 14))
+    tip, base = (int(size * 0.08), int(size * 0.32)) if rising else (int(size * 0.32), int(size * 0.08))
+    pygame.draw.polygon(surface, color, [(cx, tip), (cx - size // 7, base), (cx + size // 7, base)])
+    return surface
+
+
+def _moon_icon(size, age):
+    key = (size, round(age))
+    if key not in _moon_icon_cache:
+        from utils import sky
+        image = sky.moon_image(size, age)
+        _moon_icon_cache.clear()
+        _moon_icon_cache[key] = pygame.image.frombytes(image.tobytes(), image.size, "RGBA")
+    return _moon_icon_cache[key]
+
+
+def sun_moon_elements(config, main_font, separator):
+    """Éléments du bandeau : ☀ lever, coucher, et la lune du jour."""
+    from utils import sky
+    info = sky.today(config)
+    size = main_font.get_height()
+    elements = [{'type': 'text', 'text': separator}]
+    for key, rising in (("sunrise", True), ("sunset", False)):
+        moment = info.get(key)
+        if moment:
+            elements.append({'type': 'icon', 'surface': _sun_icon(size, rising), 'padding': 6})
+            elements.append({'type': 'text', 'text': " " + moment.strftime("%H:%M") + " "})
+    elements.append({'type': 'icon', 'surface': _moon_icon(int(size * 0.8), info["moon"]["age"]), 'padding': 8})
+    return elements
+
+
 def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata=None):
     draw_guest_qr(screen, screen_width, screen_height, config)
     draw_memory_banner(screen, screen_width, screen_height, config, photo_metadata)
@@ -1578,6 +1618,13 @@ def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_m
                 elements.append({'type': 'text', 'text': " " + weather_str})
             except Exception as e:
                 logger.info(f"[Display] Erreur préparation météo actuelle: {e}")
+
+        # Lever / coucher du soleil et phase de la lune (calculés sur le cadre)
+        if config.get("show_sun_moon", False):
+            try:
+                elements.extend(sun_moon_elements(config, main_font, separator))
+            except Exception as e:
+                logger.debug(f"[Display] Soleil et lune : {e}")
 
         # --- Prévisions sur 3 jours ---
         if weather_and_forecast and weather_and_forecast.get('forecast'):
@@ -2041,6 +2088,42 @@ def display_title_slide(screen, screen_width, screen_height, title, duration, co
 
 # Fonction pour afficher une image et l'heure                        
 
+def weather_particles(config, screen_width, screen_height):
+    """Particules de pluie / neige si le temps actuel s'y prête (et si l'animation est activée)."""
+    if config.get("weather_animation", "start") == "off" or not config.get("show_weather", False):
+        return None
+    try:
+        from utils import weather_fx
+        data = get_weather_and_forecast(config)
+        effect = weather_fx.effect_for(((data or {}).get('current') or {}).get('weather', [{}])[0].get('icon'))
+        return weather_fx.Particles(effect, screen_width, screen_height) if effect else None
+    except Exception as e:
+        logger.debug(f"Météo animée : {e}")
+        return None
+
+
+def weather_fx_wanted(config, elapsed):
+    from utils import weather_fx
+    return weather_fx.wanted(config, elapsed)
+
+
+def draw_weather_frame(screen, background, particles):
+    screen.blit(background, (0, 0))
+    if particles.effect == "snow":
+        for _kind, center, radius in particles.shapes():
+            pygame.draw.circle(screen, (250, 250, 255), center, radius)
+    else:
+        color = (200, 210, 230)
+        for _kind, start, end in particles.shapes():
+            pygame.draw.line(screen, color, start, end, 1)
+        if particles.flash > 0.6:
+            flash = pygame.Surface(screen.get_size())
+            flash.fill((255, 255, 255))
+            flash.set_alpha(int(90 * particles.flash))
+            screen.blit(flash, (0, 0))
+    pygame.display.flip()
+
+
 def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, config, main_font, photo_path=None, ignore_postcard_flag=False):
     """
     Affiche une image préparée avec un effet de pan/zoom et gère les contrôles (pause, suivant, précédent).
@@ -2091,6 +2174,9 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
             draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata)
             pygame.display.flip()
             shown_music_key = now_playing_key(config)
+            weather_fx = weather_particles(config, screen_width, screen_height)
+            fx_background = screen.copy() if weather_fx else None
+            last_frame = time.time()
             # Boucle d'attente pour rester réactif aux signaux
             start_sleep = time.time()
             while time.time() - start_sleep < display_duration:
@@ -2134,7 +2220,22 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                     draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata)
                     if p_count > 0 and (ticks // 500) % 2 != 0:
                         draw_postcard_notification_icon(screen, screen_width, screen_height, p_count, main_font)
+                    if weather_fx:
+                        fx_background = screen.copy()
                     pygame.display.flip()
+
+                # Météo animée : pluie ou neige sur la photo (au début de l'affichage, ou tout le temps)
+                if weather_fx and weather_fx_wanted(config, time.time() - start_sleep):
+                    now_frame = time.time()
+                    weather_fx.step(min(0.2, now_frame - last_frame))
+                    last_frame = now_frame
+                    draw_weather_frame(screen, fx_background, weather_fx)
+                    time.sleep(max(0.0, 1 / 20 - (time.time() - now_frame)))
+                    continue
+                if weather_fx and fx_background is not None:
+                    screen.blit(fx_background, (0, 0))  # fin de l'animation : la photo nette
+                    pygame.display.flip()
+                    fx_background = None
 
                 time.sleep(0.1)
         else:

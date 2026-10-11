@@ -90,3 +90,24 @@ def today(config=None, now=None):
     if coords:
         found["sunrise"], found["sunset"] = sun_times(coords[0], coords[1], now.date())
     return found
+
+
+def moon_image(size, age, lit=(245, 240, 220), dark=(70, 70, 80)):
+    """Icône de la lune (image RGBA de Pillow) : partie éclairée selon son âge (0 : nouvelle lune, 14,8 : pleine)."""
+    from PIL import Image
+    theta = 2 * math.pi * (age % SYNODIC_MONTH) / SYNODIC_MONTH
+    image = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    pixels = image.load()
+    r = size / 2 - 0.5
+    for py in range(size):
+        dy = py - r
+        if abs(dy) > r:
+            continue
+        w = math.sqrt(r * r - dy * dy)
+        t = w * math.cos(theta)
+        low, high = (t, w) if theta < math.pi else (-w, -t)  # croissante : à droite ; décroissante : à gauche
+        for px in range(size):
+            dx = px - r
+            if abs(dx) <= w:
+                pixels[px, py] = (*(lit if low <= dx <= high else dark), 255)
+    return image

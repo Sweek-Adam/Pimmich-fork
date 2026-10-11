@@ -166,6 +166,21 @@
                             <input type="checkbox" name="show_weather" {% if config.get('show_weather', False) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher la météo") }}</span>
                         </label>
                     </div>
+                    <div style="margin-bottom: 8px;">
+                        <label>
+                            <input type="checkbox" name="show_sun_moon" {% if config.get('show_sun_moon', False) %}checked{% endif %}> <span class="ml-2">{{ _("Afficher le lever et le coucher du soleil, et la lune") }}</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+                        <label for="weather_animation" style="min-width: 200px;">{{ _("Pluie et neige animées :") }}</label>
+                        {% set animation = config.get('weather_animation', 'start') %}
+                        <select id="weather_animation" name="weather_animation">
+                            <option value="start" {% if animation == 'start' %}selected{% endif %}>{{ _("Au début de chaque photo (8 s)") }}</option>
+                            <option value="always" {% if animation == 'always' %}selected{% endif %}>{{ _("Pendant toute la photo") }}</option>
+                            <option value="off" {% if animation == 'off' %}selected{% endif %}>{{ _("Jamais") }}</option>
+                        </select>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-2">{{ _("Quand il pleut, neige ou fait de l'orage dehors, quelques gouttes, flocons ou éclairs passent sur la photo.") }}</p>
 
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
                         <label for="weather_city" style="min-width: 200px;">{{ _("Ville :") }}</label>

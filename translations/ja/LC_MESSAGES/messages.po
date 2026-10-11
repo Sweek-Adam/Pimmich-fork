@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:32+0200\n"
+"POT-Creation-Date: 2026-10-11 08:36+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -104,43 +104,43 @@ msgstr "11月"
 msgid "décembre"
 msgstr "12月"
 
-#: local_slideshow.py:1708
+#: local_slideshow.py:1755
 msgid "Données de marée non disponibles"
 msgstr "潮汐データは利用できません"
 
-#: local_slideshow.py:1791
+#: local_slideshow.py:1838
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:1791
+#: local_slideshow.py:1838
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:2809
+#: local_slideshow.py:2910
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:2810
+#: local_slideshow.py:2911
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:2811
+#: local_slideshow.py:2912
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:2812
+#: local_slideshow.py:2913
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2813
+#: local_slideshow.py:2914
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:2839
+#: local_slideshow.py:2940
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -1090,7 +1090,7 @@ msgstr "設定が見つかりません。"
 msgid "Enregistrement…"
 msgstr "保存中…"
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:268
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:271
 msgid "Enregistré"
 msgstr "保存しました"
 
@@ -1102,8 +1102,8 @@ msgstr "保存に失敗しました：フォトフレームとの接続を確認
 #: templates/configure/scripts_gallery.html.jinja:36
 #: templates/configure/scripts_main.html.jinja:1316
 #: templates/configure/scripts_status.html.jinja:745
-#: templates/configure/tab_heure.html.jinja:292
-#: templates/configure/tab_heure.html.jinja:295
+#: templates/configure/tab_heure.html.jinja:307
+#: templates/configure/tab_heure.html.jinja:310
 #: templates/configure/tab_network.html.jinja:9
 #: templates/configure/tab_network.html.jinja:12
 #: templates/configure/tab_network.html.jinja:16
@@ -2889,12 +2889,12 @@ msgid "Taille de la police :"
 msgstr "フォントサイズ:"
 
 #: templates/configure/tab_heure.html.jinja:86
-#: templates/configure/tab_heure.html.jinja:262
+#: templates/configure/tab_heure.html.jinja:277
 msgid "Décalage horizontal (px) :"
 msgstr "水平オフセット (ピクセル):"
 
 #: templates/configure/tab_heure.html.jinja:92
-#: templates/configure/tab_heure.html.jinja:269
+#: templates/configure/tab_heure.html.jinja:284
 msgid "Décalage vertical (px) :"
 msgstr "垂直オフセット (ピクセル):"
 
@@ -2959,35 +2959,61 @@ msgid "Afficher la météo"
 msgstr "天気を表示"
 
 #: templates/configure/tab_heure.html.jinja:171
+msgid "Afficher le lever et le coucher du soleil, et la lune"
+msgstr "日の出・日の入りと月を表示"
+
+#: templates/configure/tab_heure.html.jinja:175
+msgid "Pluie et neige animées :"
+msgstr "雨と雪のアニメーション："
+
+#: templates/configure/tab_heure.html.jinja:178
+msgid "Au début de chaque photo (8 s)"
+msgstr "各写真の最初（8秒）"
+
+#: templates/configure/tab_heure.html.jinja:179
+msgid "Pendant toute la photo"
+msgstr "写真の表示中ずっと"
+
+#: templates/configure/tab_heure.html.jinja:180
+msgid "Jamais"
+msgstr "表示しない"
+
+#: templates/configure/tab_heure.html.jinja:183
+msgid ""
+"Quand il pleut, neige ou fait de l'orage dehors, quelques gouttes, "
+"flocons ou éclairs passent sur la photo."
+msgstr "外が雨・雪・雷のとき、写真の上に雨粒や雪、稲妻が流れます。"
+
+#: templates/configure/tab_heure.html.jinja:186
 msgid "Ville :"
 msgstr "ヴィル :"
 
-#: templates/configure/tab_heure.html.jinja:177
+#: templates/configure/tab_heure.html.jinja:192
 msgid "Clé API :"
 msgstr "API クレ:"
 
-#: templates/configure/tab_heure.html.jinja:184
-#: templates/configure/tab_heure.html.jinja:254
+#: templates/configure/tab_heure.html.jinja:199
+#: templates/configure/tab_heure.html.jinja:269
 msgid "Afficher/Cacher la clé API"
 msgstr "API キーを表示/非表示"
 
-#: templates/configure/tab_heure.html.jinja:194
+#: templates/configure/tab_heure.html.jinja:209
 msgid "Tester la clé API et la ville"
 msgstr "API キーと都市をテストする"
 
-#: templates/configure/tab_heure.html.jinja:199
+#: templates/configure/tab_heure.html.jinja:214
 msgid "Unités :"
 msgstr "単位:"
 
-#: templates/configure/tab_heure.html.jinja:202
+#: templates/configure/tab_heure.html.jinja:217
 msgid "Celsius"
 msgstr "摂氏"
 
-#: templates/configure/tab_heure.html.jinja:204
+#: templates/configure/tab_heure.html.jinja:219
 msgid "Fahrenheit"
 msgstr "華氏"
 
-#: templates/configure/tab_heure.html.jinja:209
+#: templates/configure/tab_heure.html.jinja:224
 msgid ""
 "Intervalle de MàJ\n"
 "                            (min) :"
@@ -2995,15 +3021,15 @@ msgstr ""
 "更新間隔\n"
 "                            (分):"
 
-#: templates/configure/tab_heure.html.jinja:217
+#: templates/configure/tab_heure.html.jinja:232
 msgid "Affichage des marées (StormGlass Tide API)"
 msgstr "潮汐表示（StormGlass Tide API）"
 
-#: templates/configure/tab_heure.html.jinja:218
+#: templates/configure/tab_heure.html.jinja:233
 msgid "Utilise l'API de"
 msgstr "の API を使用します"
 
-#: templates/configure/tab_heure.html.jinja:219
+#: templates/configure/tab_heure.html.jinja:234
 msgid ""
 "Une clé API est\n"
 "                        requise. Vous pouvez trouver les coordonnées de "
@@ -3012,7 +3038,7 @@ msgstr ""
 "APIキーは\n"
 "                        必須です。ポートの座標は次のようなサイトで見つけることができます。"
 
-#: templates/configure/tab_heure.html.jinja:223
+#: templates/configure/tab_heure.html.jinja:238
 msgid ""
 "Note : Cette API fournit les hauteurs de marée, mais pas\n"
 "                        le coefficient de marée."
@@ -3020,38 +3046,38 @@ msgstr ""
 "注: この API は潮位の高さを提供しますが、\n"
 "                        潮汐係数。"
 
-#: templates/configure/tab_heure.html.jinja:228
+#: templates/configure/tab_heure.html.jinja:243
 msgid "Afficher les informations de marée"
 msgstr ""
 "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please"
 " try again later.That’s all we know."
 
-#: templates/configure/tab_heure.html.jinja:233
+#: templates/configure/tab_heure.html.jinja:248
 msgid "Latitude (ex: 48.3904) :"
 msgstr "緯度 (例: 48.3904) :"
 
-#: templates/configure/tab_heure.html.jinja:239
+#: templates/configure/tab_heure.html.jinja:254
 msgid "Longitude (ex: -4.4861) :"
 msgstr "経度 (～4.4861) :"
 
-#: templates/configure/tab_heure.html.jinja:246
+#: templates/configure/tab_heure.html.jinja:261
 msgid "Clé API StormGlass :"
 msgstr "Clé API StormGlass:"
 
-#: templates/configure/tab_heure.html.jinja:277
+#: templates/configure/tab_heure.html.jinja:292
 #: templates/configure/tab_sources.html.jinja:538
 msgid "Tester la connexion"
 msgstr "接続をテストする"
 
-#: templates/configure/tab_heure.html.jinja:280
+#: templates/configure/tab_heure.html.jinja:295
 msgid "Forcer la mise à jour"
 msgstr "強制更新"
 
-#: templates/configure/tab_heure.html.jinja:288
+#: templates/configure/tab_heure.html.jinja:303
 msgid "État Actuel des Marées"
 msgstr "現在の潮汐状況"
 
-#: templates/configure/tab_heure.html.jinja:291
+#: templates/configure/tab_heure.html.jinja:306
 msgid ""
 "Dernière mise à jour des données\n"
 "                                    :"
@@ -3059,27 +3085,27 @@ msgstr ""
 "最終データ更新\n"
 "                                    :"
 
-#: templates/configure/tab_heure.html.jinja:294
+#: templates/configure/tab_heure.html.jinja:309
 msgid "État de l'API :"
 msgstr "APIステータス:"
 
-#: templates/configure/tab_heure.html.jinja:301
+#: templates/configure/tab_heure.html.jinja:316
 msgid "Fuseau Horaire"
 msgstr "タイムゾーン"
 
-#: templates/configure/tab_heure.html.jinja:303
+#: templates/configure/tab_heure.html.jinja:318
 msgid "Fuseau horaire actuel du système :"
 msgstr "現在のシステムのタイムゾーン:"
 
-#: templates/configure/tab_heure.html.jinja:304
+#: templates/configure/tab_heure.html.jinja:319
 msgid "Non défini"
 msgstr "未定義"
 
-#: templates/configure/tab_heure.html.jinja:308
+#: templates/configure/tab_heure.html.jinja:323
 msgid "Attention :"
 msgstr "注意 ："
 
-#: templates/configure/tab_heure.html.jinja:308
+#: templates/configure/tab_heure.html.jinja:323
 msgid ""
 "La détection automatique du fuseau horaire a\n"
 "                            échoué lors de l'installation. Le système est"
@@ -3089,18 +3115,18 @@ msgstr ""
 "インストール時にタイムゾーンの自動検出に失敗しました。システムは <strong>UTC</strong> "
 "に設定されています。表示される時刻が正しくない可能性があります。"
 
-#: templates/configure/tab_heure.html.jinja:312
+#: templates/configure/tab_heure.html.jinja:327
 msgid ""
 "Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi "
 "(via SSH) et\n"
 "                            en exécutant la commande :"
 msgstr "Raspberry Pi に（SSH で）接続し、次のコマンドを実行して手動で修正できます："
 
-#: templates/configure/tab_heure.html.jinja:315
+#: templates/configure/tab_heure.html.jinja:330
 msgid "(remplacez par votre région/ville)."
 msgstr "(あなたの地域/都市に置き換えてください)。"
 
-#: templates/configure/tab_heure.html.jinja:318
+#: templates/configure/tab_heure.html.jinja:333
 msgid ""
 "Le fuseau horaire a été configuré automatiquement\n"
 "                            lors de l'installation."
@@ -6162,7 +6188,7 @@ msgstr "イミッチ写真制限の値が無効です。以前の値が保持さ
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive のキーが保存されませんでした：%(error)s"
 
-#: web/routes_config.py:270
+#: web/routes_config.py:273
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."

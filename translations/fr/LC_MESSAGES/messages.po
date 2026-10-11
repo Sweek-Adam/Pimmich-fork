@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:32+0200\n"
+"POT-Creation-Date: 2026-10-11 08:36+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -104,43 +104,43 @@ msgstr ""
 msgid "décembre"
 msgstr ""
 
-#: local_slideshow.py:1708
+#: local_slideshow.py:1755
 msgid "Données de marée non disponibles"
 msgstr ""
 
-#: local_slideshow.py:1791
+#: local_slideshow.py:1838
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr ""
 
-#: local_slideshow.py:1791
+#: local_slideshow.py:1838
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:2809
+#: local_slideshow.py:2910
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:2810
+#: local_slideshow.py:2911
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:2811
+#: local_slideshow.py:2912
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:2812
+#: local_slideshow.py:2913
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:2813
+#: local_slideshow.py:2914
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:2839
+#: local_slideshow.py:2940
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -1088,7 +1088,7 @@ msgstr ""
 msgid "Enregistrement…"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:268
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:271
 msgid "Enregistré"
 msgstr ""
 
@@ -1100,8 +1100,8 @@ msgstr ""
 #: templates/configure/scripts_gallery.html.jinja:36
 #: templates/configure/scripts_main.html.jinja:1316
 #: templates/configure/scripts_status.html.jinja:745
-#: templates/configure/tab_heure.html.jinja:292
-#: templates/configure/tab_heure.html.jinja:295
+#: templates/configure/tab_heure.html.jinja:307
+#: templates/configure/tab_heure.html.jinja:310
 #: templates/configure/tab_network.html.jinja:9
 #: templates/configure/tab_network.html.jinja:12
 #: templates/configure/tab_network.html.jinja:16
@@ -2861,12 +2861,12 @@ msgid "Taille de la police :"
 msgstr ""
 
 #: templates/configure/tab_heure.html.jinja:86
-#: templates/configure/tab_heure.html.jinja:262
+#: templates/configure/tab_heure.html.jinja:277
 msgid "Décalage horizontal (px) :"
 msgstr ""
 
 #: templates/configure/tab_heure.html.jinja:92
-#: templates/configure/tab_heure.html.jinja:269
+#: templates/configure/tab_heure.html.jinja:284
 msgid "Décalage vertical (px) :"
 msgstr ""
 
@@ -2929,117 +2929,143 @@ msgid "Afficher la météo"
 msgstr ""
 
 #: templates/configure/tab_heure.html.jinja:171
+msgid "Afficher le lever et le coucher du soleil, et la lune"
+msgstr ""
+
+#: templates/configure/tab_heure.html.jinja:175
+msgid "Pluie et neige animées :"
+msgstr ""
+
+#: templates/configure/tab_heure.html.jinja:178
+msgid "Au début de chaque photo (8 s)"
+msgstr ""
+
+#: templates/configure/tab_heure.html.jinja:179
+msgid "Pendant toute la photo"
+msgstr ""
+
+#: templates/configure/tab_heure.html.jinja:180
+msgid "Jamais"
+msgstr ""
+
+#: templates/configure/tab_heure.html.jinja:183
+msgid ""
+"Quand il pleut, neige ou fait de l'orage dehors, quelques gouttes, "
+"flocons ou éclairs passent sur la photo."
+msgstr ""
+
+#: templates/configure/tab_heure.html.jinja:186
 msgid "Ville :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:177
+#: templates/configure/tab_heure.html.jinja:192
 msgid "Clé API :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:184
-#: templates/configure/tab_heure.html.jinja:254
+#: templates/configure/tab_heure.html.jinja:199
+#: templates/configure/tab_heure.html.jinja:269
 msgid "Afficher/Cacher la clé API"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:194
+#: templates/configure/tab_heure.html.jinja:209
 msgid "Tester la clé API et la ville"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:199
+#: templates/configure/tab_heure.html.jinja:214
 msgid "Unités :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:202
+#: templates/configure/tab_heure.html.jinja:217
 msgid "Celsius"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:204
+#: templates/configure/tab_heure.html.jinja:219
 msgid "Fahrenheit"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:209
+#: templates/configure/tab_heure.html.jinja:224
 msgid ""
 "Intervalle de MàJ\n"
 "                            (min) :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:217
+#: templates/configure/tab_heure.html.jinja:232
 msgid "Affichage des marées (StormGlass Tide API)"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:218
+#: templates/configure/tab_heure.html.jinja:233
 msgid "Utilise l'API de"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:219
+#: templates/configure/tab_heure.html.jinja:234
 msgid ""
 "Une clé API est\n"
 "                        requise. Vous pouvez trouver les coordonnées de "
 "votre port sur des sites comme"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:223
+#: templates/configure/tab_heure.html.jinja:238
 msgid ""
 "Note : Cette API fournit les hauteurs de marée, mais pas\n"
 "                        le coefficient de marée."
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:228
+#: templates/configure/tab_heure.html.jinja:243
 msgid "Afficher les informations de marée"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:233
+#: templates/configure/tab_heure.html.jinja:248
 msgid "Latitude (ex: 48.3904) :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:239
+#: templates/configure/tab_heure.html.jinja:254
 msgid "Longitude (ex: -4.4861) :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:246
+#: templates/configure/tab_heure.html.jinja:261
 msgid "Clé API StormGlass :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:277
+#: templates/configure/tab_heure.html.jinja:292
 #: templates/configure/tab_sources.html.jinja:538
 msgid "Tester la connexion"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:280
+#: templates/configure/tab_heure.html.jinja:295
 msgid "Forcer la mise à jour"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:288
+#: templates/configure/tab_heure.html.jinja:303
 msgid "État Actuel des Marées"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:291
+#: templates/configure/tab_heure.html.jinja:306
 msgid ""
 "Dernière mise à jour des données\n"
 "                                    :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:294
+#: templates/configure/tab_heure.html.jinja:309
 msgid "État de l'API :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:301
+#: templates/configure/tab_heure.html.jinja:316
 msgid "Fuseau Horaire"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:303
+#: templates/configure/tab_heure.html.jinja:318
 msgid "Fuseau horaire actuel du système :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:304
+#: templates/configure/tab_heure.html.jinja:319
 msgid "Non défini"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:308
+#: templates/configure/tab_heure.html.jinja:323
 msgid "Attention :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:308
+#: templates/configure/tab_heure.html.jinja:323
 msgid ""
 "La détection automatique du fuseau horaire a\n"
 "                            échoué lors de l'installation. Le système est"
@@ -3047,18 +3073,18 @@ msgid ""
 "                            affichée peut être incorrecte."
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:312
+#: templates/configure/tab_heure.html.jinja:327
 msgid ""
 "Vous pouvez le corriger manuellement en vous connectant au Raspberry Pi "
 "(via SSH) et\n"
 "                            en exécutant la commande :"
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:315
+#: templates/configure/tab_heure.html.jinja:330
 msgid "(remplacez par votre région/ville)."
 msgstr ""
 
-#: templates/configure/tab_heure.html.jinja:318
+#: templates/configure/tab_heure.html.jinja:333
 msgid ""
 "Le fuseau horaire a été configuré automatiquement\n"
 "                            lors de l'installation."
@@ -6007,7 +6033,7 @@ msgstr ""
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr ""
 
-#: web/routes_config.py:270
+#: web/routes_config.py:273
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."

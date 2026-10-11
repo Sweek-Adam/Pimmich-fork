@@ -240,6 +240,9 @@ def configure():
         config["telegram_bot_enabled"] = 'telegram_bot_enabled' in request.form # 'telegram_enabled' is removed
         config["show_date"] = 'show_date' in request.form
         config["show_weather"] = 'show_weather' in request.form
+        if 'weather_animation' in request.form:  # onglet Horloge & météo
+            config["show_sun_moon"] = 'show_sun_moon' in request.form
+            config["weather_animation"] = request.form['weather_animation'] if request.form['weather_animation'] in ('start', 'always', 'off') else 'start'
         config["show_tides"] = 'show_tides' in request.form
         # Metadata checkboxes
         config["show_photo_date"] = 'show_photo_date' in request.form
