@@ -3099,7 +3099,8 @@ def start_slideshow():
                 filter_states = load_filter_states()
                 favorites = load_favorites()
                 display_sources = config.get("display_sources", ["immich"])
-                slideshow_video_enabled = config.get("slideshow_video_enabled", True)
+                videos_only = config.get("media_mode") == "videos"  # mode « Vidéos seulement » : les vidéos s'enchaînent
+                slideshow_video_enabled = config.get("slideshow_video_enabled", True) or videos_only
                 
                 candidates = []  # (source, photo de base)
                 for source in display_sources:
@@ -3136,11 +3137,23 @@ def start_slideshow():
                     except Exception as e:
                         logger.warning(f"[Tri automatique] Ignoré : {e}")
 
+                if videos_only:
+                    videos = [c for c in candidates if c[1].suffix.lower() in VIDEO_EXTENSIONS]
+                    if videos:
+                        candidates = videos
+                    else:
+                        videos_only = False
+                        logger.warning("[Vidéos seulement] Aucune vidéo dans les sources affichées : diaporama normal.")
+
                 all_media = [get_path_to_display(photo_path_obj, source, filter_states) for source, photo_path_obj in candidates]
 
                 refresh_photo_index(config)
-                prepare_memories(config, SCREEN_WIDTH, SCREEN_HEIGHT)
-                playlist = build_playlist(all_media, config, favorites)
+                if videos_only:
+                    playlist = list(all_media)  # chaque vidéo une fois par tour, dans un ordre au hasard
+                    logger.info(f"[Vidéos seulement] {len(playlist)} vidéo(s) à enchaîner")
+                else:
+                    prepare_memories(config, SCREEN_WIDTH, SCREEN_HEIGHT)
+                    playlist = build_playlist(all_media, config, favorites)
                 random.shuffle(playlist)
 
                 # Médias tout juste publiés (nouveaux messages) : affichés en premier, le plus récent d'abord
@@ -3271,7 +3284,8 @@ def start_slideshow():
                 else:  # un message arrive : affiché dans une disposition qui accepte les messages, plutôt que seul
                     wanted, slide_plan = layout_engine.plan_for_slide(slide_plan, playlist[playlist_index], _composition["counter"], include_messages)
                     wanted = wanted and bool(slide_plan.formats)
-                memories_slide = None if forced_layout is not None else pop_memories_slide(config, SCREEN_WIDTH, SCREEN_HEIGHT)
+                memories_slide = None if forced_layout is not None or config.get("media_mode") == "videos" \
+                    else pop_memories_slide(config, SCREEN_WIDTH, SCREEN_HEIGHT)
                 if memories_slide:  # « Ce jour-là » : une diapositive en plus, sans décaler la playlist
                     composition_path, composition_used, wanted = memories_slide, 0, False
                 if wanted and not layout_engine.is_video(playlist[playlist_index]):

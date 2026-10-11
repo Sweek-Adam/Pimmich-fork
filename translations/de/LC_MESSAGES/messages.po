@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:44+0200\n"
+"POT-Creation-Date: 2026-10-11 17:38+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -118,29 +118,29 @@ msgstr "(Jahrestag) Vor %(num)d Jahr"
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Jahrestag) Vor %(num)d Jahren"
 
-#: local_slideshow.py:3208
+#: local_slideshow.py:3221
 msgid "Aucune photo trouvée."
 msgstr "Keine Fotos gefunden."
 
-#: local_slideshow.py:3209
+#: local_slideshow.py:3222
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Konfigurieren unter: http://%(ip)s"
 
-#: local_slideshow.py:3210
+#: local_slideshow.py:3223
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Zugangsdaten in credentials.json im Stammverzeichnis der SD-Karte)"
 
-#: local_slideshow.py:3211
+#: local_slideshow.py:3224
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Bildschirmauflösung: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3212
+#: local_slideshow.py:3225
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Neuer Versuch in 60 Sekunden..."
 
-#: local_slideshow.py:3238
+#: local_slideshow.py:3251
 msgid "Scannez pour configurer"
 msgstr "Zum Konfigurieren scannen"
 
@@ -207,7 +207,7 @@ msgstr "Quellen"
 msgid "Bibliothèque"
 msgstr "Bibliothek"
 
-#: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:142
+#: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:158
 #: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:147
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
@@ -823,7 +823,7 @@ msgstr "Aktivieren Sie den Schwenk-/Zoomeffekt für Fotos"
 msgid "Amplitude du zoom"
 msgstr "Zoomstärke"
 
-#: frontend/src/views/DisplayView.vue:48 frontend/src/views/HomeView.vue:201
+#: frontend/src/views/DisplayView.vue:48 frontend/src/views/HomeView.vue:217
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
@@ -961,26 +961,26 @@ msgstr ""
 "Ausrichtung, Auflösung, Home Assistant, smarte Steckdose und Aufwachen "
 "bei Ankunft: klassische Oberfläche"
 
-#: frontend/src/views/HomeView.vue:128
+#: frontend/src/views/HomeView.vue:138
 msgid "Le cadre est en veille"
 msgstr "Der Rahmen ruht"
 
-#: frontend/src/views/HomeView.vue:131
+#: frontend/src/views/HomeView.vue:141
 #: templates/configure/tab_accueil.html.jinja:22
 #: templates/configure/tab_actions.html.jinja:27
 #: templates/configure/tab_playlists.html.jinja:20
 msgid "Photo précédente"
 msgstr "Vorheriges Foto"
 
-#: frontend/src/views/HomeView.vue:133
+#: frontend/src/views/HomeView.vue:143
 msgid "Reprendre"
 msgstr "Fortsetzen"
 
-#: frontend/src/views/HomeView.vue:133
+#: frontend/src/views/HomeView.vue:143
 msgid "Pause"
 msgstr "Pause"
 
-#: frontend/src/views/HomeView.vue:135
+#: frontend/src/views/HomeView.vue:145
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
 #: templates/configure/tab_invites.html.jinja:185
@@ -988,54 +988,67 @@ msgstr "Pause"
 msgid "Photo suivante"
 msgstr "Nächstes Foto"
 
-#: frontend/src/views/HomeView.vue:139
+#: frontend/src/views/HomeView.vue:149
 msgid "Mettre en veille"
 msgstr "Ruhezustand"
 
-#: frontend/src/views/HomeView.vue:139
+#: frontend/src/views/HomeView.vue:149
 msgid "Allumer le cadre"
 msgstr "Rahmen einschalten"
 
-#: frontend/src/views/HomeView.vue:151
+#: frontend/src/views/HomeView.vue:153 frontend/src/views/LibraryView.vue:104
+#: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
+#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:603
+msgid "Photos et vidéos"
+msgstr "Fotos und Videos"
+
+#: frontend/src/views/HomeView.vue:155
+#: templates/configure/_smart_albums.html.jinja:46
+#: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:603
+msgid "Vidéos seulement"
+msgstr "Nur Videos"
+
+#: frontend/src/views/HomeView.vue:167
 #: templates/configure/tab_accueil.html.jinja:39
 msgid "État du cadre"
 msgstr "Rahmen-Status"
 
-#: frontend/src/views/HomeView.vue:158
+#: frontend/src/views/HomeView.vue:174
 msgid "Ouvrir"
 msgstr "Öffnen"
 
-#: frontend/src/views/HomeView.vue:164
+#: frontend/src/views/HomeView.vue:180
 #: templates/configure/tab_accueil.html.jinja:5
 msgid "Bien démarrer"
 msgstr "Erste Schritte"
 
-#: frontend/src/views/HomeView.vue:165
+#: frontend/src/views/HomeView.vue:181
 #: templates/configure/scripts_app.html.jinja:23
 #: templates/configure/tab_accueil.html.jinja:6
 msgid "Masquer"
 msgstr "Ausblenden"
 
-#: frontend/src/views/HomeView.vue:190
+#: frontend/src/views/HomeView.vue:206
 #: templates/configure/_son_spotify.html.jinja:100
 #: templates/configure/tab_accueil.html.jinja:73
 msgid "Ambiance"
 msgstr "Stimmung"
 
-#: frontend/src/views/HomeView.vue:205 web/routes_trips.py:114
+#: frontend/src/views/HomeView.vue:221 web/routes_trips.py:114
 msgid "Il y a un an"
 msgstr "Vor einem Jahr"
 
-#: frontend/src/views/HomeView.vue:205
+#: frontend/src/views/HomeView.vue:221
 #, python-brace-format
 msgid "Il y a {n} ans"
 msgstr "Vor {n} Jahren"
 
-#: frontend/src/views/HomeView.vue:212
+#: frontend/src/views/HomeView.vue:228
 msgid "Dernières actions"
 msgstr "Letzte Aktionen"
 
-#: frontend/src/views/HomeView.vue:213 frontend/src/views/PlaylistsView.vue:156
+#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:156
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
@@ -1043,7 +1056,7 @@ msgstr "Letzte Aktionen"
 msgid "Annuler"
 msgstr "Abbrechen"
 
-#: frontend/src/views/HomeView.vue:215
+#: frontend/src/views/HomeView.vue:231
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "Noch nichts."
@@ -1107,7 +1120,7 @@ msgid ""
 "moment-là)"
 msgstr "Saisonthemen nur in ihrem Zeitraum (und dann häufiger)"
 
-#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:209
+#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:210
 msgid "Gardez au moins une disposition."
 msgstr "Behalten Sie mindestens ein Layout."
 
@@ -1226,13 +1239,6 @@ msgstr "Alle Quellen"
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "Alle"
-
-#: frontend/src/views/LibraryView.vue:104
-#: templates/configure/_smart_albums.html.jinja:44
-#: templates/configure/tab_apercu.html.jinja:10
-#: templates/configure/tab_legendes.html.jinja:7
-msgid "Photos et vidéos"
-msgstr "Fotos und Videos"
 
 #: frontend/src/views/LibraryView.vue:108
 msgid "Du"
@@ -2715,11 +2721,6 @@ msgstr "Nur Favoriten"
 msgid "Photos seulement"
 msgstr "Nur Fotos"
 
-#: templates/configure/_smart_albums.html.jinja:46
-#: templates/configure/tab_apercu.html.jinja:10
-msgid "Vidéos seulement"
-msgstr "Nur Videos"
-
 #: templates/configure/_smart_albums.html.jinja:56
 msgid "Enregistrer l'album"
 msgstr "Album speichern"
@@ -3135,7 +3136,7 @@ msgid "Enregistrement…"
 msgstr "Wird gespeichert…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:289
-#: web/routes_settings.py:176 web/routes_settings.py:219
+#: web/routes_settings.py:177 web/routes_settings.py:220
 msgid "Enregistré"
 msgstr "Gespeichert"
 
@@ -8341,8 +8342,8 @@ msgstr ""
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive-Schlüssel nicht gespeichert: %(error)s"
 
-#: web/routes_config.py:282 web/routes_settings.py:174
-#: web/routes_settings.py:217
+#: web/routes_config.py:282 web/routes_settings.py:175
+#: web/routes_settings.py:218
 msgid "Réglages modifiés"
 msgstr "Einstellungen geändert"
 
@@ -8354,7 +8355,7 @@ msgstr ""
 "Konfiguration gespeichert. Die Diashow wurde neu gestartet, um die "
 "Änderungen zu übernehmen."
 
-#: web/routes_family.py:26 web/routes_settings.py:206
+#: web/routes_family.py:26 web/routes_settings.py:207
 msgid "Liste invalide."
 msgstr "Ungültige Liste."
 
@@ -9153,16 +9154,16 @@ msgstr "Playlist nicht gefunden."
 msgid "Citation du jour enregistrée."
 msgstr "Zitat des Tages gespeichert."
 
-#: web/routes_settings.py:160
+#: web/routes_settings.py:161
 msgid "Aucun réglage à enregistrer."
 msgstr "Keine Einstellung zu speichern."
 
-#: web/routes_settings.py:164
+#: web/routes_settings.py:165
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unbekannte Einstellung: %(key)s"
 
-#: web/routes_settings.py:168
+#: web/routes_settings.py:169
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Ungültiger Wert für „%(key)s“."
@@ -9210,6 +9211,18 @@ msgstr "Konfiguration aktiviert."
 #: web/routes_slideshow.py:572
 msgid "Configuration supprimée."
 msgstr "Konfiguration gelöscht."
+
+#: web/routes_slideshow.py:597
+msgid "Mode inconnu."
+msgstr "Unbekannter Modus."
+
+#: web/routes_slideshow.py:606
+msgid "Le cadre enchaîne maintenant toutes les vidéos."
+msgstr "Der Rahmen spielt jetzt alle Videos nacheinander ab."
+
+#: web/routes_slideshow.py:607
+msgid "Retour au diaporama photos et vidéos."
+msgstr "Zurück zur Foto- und Video-Diashow."
 
 #: web/routes_smart_albums.py:13
 msgid "Noël en famille"

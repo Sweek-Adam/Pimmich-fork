@@ -73,3 +73,27 @@ def test_compositions_api(admin_client, app_module):
             else:
                 config[key] = value
         routes_settings.save_config(config)
+
+
+def test_media_mode(admin_client, app_module, sandbox, monkeypatch):
+    from web import routes_slideshow
+    monkeypatch.setattr(routes_slideshow, "is_slideshow_running", lambda: False)
+    config = routes_slideshow.load_config()
+    saved = config.get("media_mode"), config.get("display_sources")
+    folder = sandbox / "static" / "prepared" / "videotest"
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / "a.mp4").write_bytes(b"x")
+    (folder / "b.jpg").write_bytes(b"x")
+    try:
+        routes_slideshow.save_config(dict(config, display_sources=["videotest"]))
+        assert admin_client.get("/api/slideshow/media_mode").get_json()["videos"] == 1
+        assert admin_client.post("/api/slideshow/media_mode", json={"mode": "videos"}, headers=H).get_json()["success"]
+        assert routes_slideshow.load_config()["media_mode"] == "videos"
+        assert admin_client.post("/api/slideshow/media_mode", json={"mode": "photos!"}, headers=H).status_code == 400
+        assert admin_client.get("/api/history").get_json()["undo"]
+    finally:
+        config = dict(routes_slideshow.load_config())
+        config["media_mode"], config["display_sources"] = saved[0] or "all", saved[1]
+        routes_slideshow.save_config(config)
+        import shutil
+        shutil.rmtree(folder)

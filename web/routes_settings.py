@@ -47,6 +47,7 @@ SETTINGS = {
     "memories_composition": ("bool", None, True),
     # Vidéos
     "slideshow_video_enabled": ("bool", None, True),
+    "media_mode": ("choice", ["all", "videos"], "all"),
     "video_audio_enabled": ("bool", None, False),
     "video_hwdec_enabled": ("bool", None, False),
     "video_audio_output": ("choice", ["auto", "hdmi", "jack"], "auto"),

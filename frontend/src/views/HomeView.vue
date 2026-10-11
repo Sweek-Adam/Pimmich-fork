@@ -27,6 +27,7 @@ const memories = ref<{ thumb: string; years_ago: number }[]>([]);
 const events = ref<HistoryEvent[]>([]);
 const undo = ref<HistoryEvent | null>(null);
 const busy = ref(false);
+const media = ref<{ mode: string; videos: number }>({ mode: "all", videos: 0 });
 let timer: number | undefined;
 
 const setupLeft = computed(() => setup.value?.steps.filter((s) => !s.done) ?? []);
@@ -55,6 +56,7 @@ async function loadAll() {
   refreshMusic();
   get<{ items: Health[] }>("/api/health").then((d) => (health.value = d.items)).catch(() => {});
   get<{ steps: Step[]; dismissed: boolean; done: number }>("/api/setup").then((d) => (setup.value = d)).catch(() => {});
+  get<{ mode: string; videos: number }>("/api/slideshow/media_mode").then((d) => (media.value = d)).catch(() => {});
   get<{ ambiances: Ambiance[] }>("/api/ambiances").then((d) => (ambiances.value = d.ambiances)).catch(() => {});
   get<{ items: { thumb: string; years_ago: number }[] }>("/api/memories/today").then((d) => (memories.value = d.items)).catch(() => {});
   loadHistory();
@@ -76,6 +78,14 @@ async function control(action: "previous" | "next" | "toggle_pause" | "toggle_sl
   busy.value = false;
   document.dispatchEvent(new Event("pimmich:status"));
   window.setTimeout(refreshNow, action === "toggle_sleep" ? 2500 : 800);
+}
+
+async function setMediaMode(mode: string) {
+  const done = await run(() => post("/api/slideshow/media_mode", { mode }));
+  if (done) media.value = { ...media.value, mode };
+  document.dispatchEvent(new Event("pimmich:status"));
+  window.setTimeout(refreshNow, 2500);
+  loadHistory();
 }
 
 async function chooseAmbiance(key: string) {
@@ -137,6 +147,12 @@ onUnmounted(() => window.clearInterval(timer));
         <span class="spacer"></span>
         <button class="btn" type="button" :disabled="busy" @click="control('toggle_sleep')">
           <i class="fas fa-power-off"></i>{{ status.running ? t("Mettre en veille") : t("Allumer le cadre") }}</button>
+      </div>
+      <div class="modes">
+        <button type="button" class="mode" :class="{ on: media.mode !== 'videos' }" @click="setMediaMode('all')">
+          <i class="fas fa-images"></i>{{ t("Photos et vidéos") }}</button>
+        <button type="button" class="mode" :class="{ on: media.mode === 'videos' }" :disabled="!media.videos" @click="setMediaMode('videos')">
+          <i class="fas fa-film"></i>{{ t("Vidéos seulement") }} <span class="small">({{ media.videos }})</span></button>
       </div>
       <div v-if="upcoming.length" class="upcoming">
         <p class="small muted">{{ t("À suivre") }}</p>
@@ -238,6 +254,10 @@ onUnmounted(() => window.clearInterval(timer));
 .screen-off i { font-size: 2rem; }
 .controls { display: flex; align-items: center; gap: .6rem; margin-top: .9rem; flex-wrap: wrap; }
 .upcoming { margin-top: .9rem; }
+.modes { display: flex; gap: .3rem; margin-top: .9rem; background: var(--surface-2); padding: .25rem; border-radius: 999px; width: fit-content; max-width: 100%; }
+.mode { border: 0; background: none; color: var(--muted); font: inherit; font-weight: 600; padding: .4rem .9rem; border-radius: 999px; cursor: pointer; display: flex; gap: .4rem; align-items: center; }
+.mode.on { background: var(--surface); color: var(--accent); box-shadow: var(--shadow); }
+.mode:disabled { opacity: .45; cursor: default; }
 .strip { display: flex; gap: .4rem; overflow-x: auto; padding-bottom: .2rem; margin-top: .3rem; }
 .strip img { width: 88px; height: 60px; object-fit: cover; border-radius: 8px; flex: none; }
 

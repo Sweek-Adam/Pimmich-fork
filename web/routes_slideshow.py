@@ -570,3 +570,38 @@ def layout_presets_delete_api(preset_id):
     config = layout_presets.delete(load_config(), preset_id)
     save_config(config)
     return _presets_response(config, _("Configuration supprimée."))
+
+
+# --- Mode « Vidéos seulement » : le cadre enchaîne toutes les vidéos des sources affichées ---
+
+MEDIA_MODES = ("all", "videos")
+
+
+@app.route('/api/slideshow/media_mode', methods=['GET'])
+@login_or_internal_required
+def media_mode_api():
+    from utils.layout_engine import is_video
+    count = 0
+    sources = load_config().get("display_sources", [])
+    for source in sources:
+        folder = PREPARED_DIR / source
+        count += sum(1 for f in folder.iterdir() if is_video(f)) if folder.is_dir() else 0
+    return jsonify({"success": True, "mode": load_config().get("media_mode", "all"), "videos": count})
+
+
+@app.route('/api/slideshow/media_mode', methods=['POST'])
+@login_or_internal_required
+def set_media_mode_api():
+    mode = (request.get_json(silent=True) or {}).get("mode")
+    if mode not in MEDIA_MODES:
+        return jsonify({"success": False, "message": _("Mode inconnu.")}), 400
+    config = dict(load_config())
+    previous = dict(config)
+    config["media_mode"] = mode
+    save_config(config)
+    from web.routes_history import log
+    log("settings", _("Vidéos seulement") if mode == "videos" else _("Photos et vidéos"), {"type": "restore_config", "data": previous})
+    if is_slideshow_running():
+        restart_slideshow_for_update(force_start=True)  # choix explicite : appliqué tout de suite
+    return jsonify({"success": True, "message": _("Le cadre enchaîne maintenant toutes les vidéos.") if mode == "videos"
+                    else _("Retour au diaporama photos et vidéos.")})
