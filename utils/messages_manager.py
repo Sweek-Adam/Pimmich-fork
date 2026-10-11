@@ -128,6 +128,7 @@ def refresh_schedule(now=None):
 
 def _unlink_drawing(message_id):
     (PROJECT_DIR / "cache" / "drawings" / f"{message_id}.png").unlink(missing_ok=True)
+    (PROJECT_DIR / "cache" / "voice" / f"{message_id}.ogg").unlink(missing_ok=True)
 
 
 def _unlink_images(message_id):
@@ -304,6 +305,9 @@ def _render_to_file(m, width, height):
     if m.get("kind") == "drawing":
         render_drawing(m["id"], m.get("signature", ""), width, height).save(_path(m), "JPEG", quality=90)
         return
+    if m.get("kind") == "voice":
+        render_voice_card(m, width, height).save(_path(m), "JPEG", quality=90)
+        return
     render_message(m["title"], m["body"], m["signature"], m["style"], width, height).save(_path(m), "JPEG", quality=90)
 
 
@@ -390,3 +394,79 @@ def ensure_images(width, height):
         _render_to_file(m, width, height)
         count += 1
     return count
+
+
+# --- Messages vocaux : enregistrés sur le téléphone, lus par le cadre quand leur carte s'affiche ---
+
+VOICE_DIR = PROJECT_DIR / "cache" / "voice"
+MAX_VOICE_SECONDS = 90
+MAX_VOICE_BYTES = 15 * 1024 * 1024
+
+
+def voice_path(message_id):
+    return VOICE_DIR / f"{message_id}.ogg"
+
+
+def render_voice_card(message, width, height):
+    """Carte du message vocal : un micro, la durée et le prénom (le son est lu par le cadre)."""
+    from PIL import ImageDraw
+    from utils.message_renderer import _font, SANS_BOLD, SERIF_ITALIC
+    image = render_message("", " ", "", "nuit", width, height).convert("RGB")
+    draw = ImageDraw.Draw(image)
+    cx, cy, unit = width / 2, height * 0.4, min(width, height) / 12
+    accent = (255, 214, 120)
+    draw.rounded_rectangle([cx - unit * 0.6, cy - unit * 1.5, cx + unit * 0.6, cy + unit * 0.4], radius=unit * 0.6, fill=accent)
+    draw.arc([cx - unit, cy - unit * 0.9, cx + unit, cy + unit * 1.1], 0, 180, fill=accent, width=max(3, int(unit / 6)))
+    draw.line([cx, cy + unit * 1.1, cx, cy + unit * 1.6], fill=accent, width=max(3, int(unit / 6)))
+    for k, side in ((1, -1), (2, -1), (1, 1), (2, 1)):  # ondes sonores
+        r = unit * (1.4 + 0.55 * k)
+        start, end = (150, 210) if side < 0 else (-30, 30)
+        draw.arc([cx - r, cy - r * 0.9, cx + r, cy + r * 0.9], start, end, fill=(200, 200, 230), width=max(2, int(unit / 10)))
+    seconds = int(message.get("seconds") or 0)
+    title = f"{message['signature']}" if message.get("signature") else ""
+    big, small = _font(SANS_BOLD, int(height * 0.07)), _font(SERIF_ITALIC, int(height * 0.045))
+    if title:
+        draw.text((cx, height * 0.7), title, font=big, fill=(245, 245, 250), anchor="mm")
+    draw.text((cx, height * 0.8), f"{seconds // 60}:{seconds % 60:02d}", font=small, fill=accent, anchor="mm")
+    return image
+
+
+def create_voice(data, signature, author, width, height, guest=True):
+    """Enregistre un message vocal (converti en Ogg Vorbis, 90 s au plus) et sa carte dans le diaporama."""
+    import subprocess
+    import tempfile
+    if not data or len(data) > MAX_VOICE_BYTES:
+        raise ValueError("Enregistrement vide ou trop lourd.")
+    message = {"id": secrets.token_hex(6), "kind": "voice", "title": "", "body": "", "signature": (signature or "").strip()[:MAX_SIGNATURE],
+               "style": "nuit", "expires": (date.today() + timedelta(days=GUEST_MAX_DAYS)).isoformat() if guest else None,
+               "author": author or "", "guest": guest, "created": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    VOICE_DIR.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(suffix=".audio") as source:
+        source.write(data)
+        source.flush()
+        for codec in (["-ac", "1", "-c:a", "libvorbis", "-q:a", "4"], ["-ac", "2", "-c:a", "vorbis", "-strict", "-2"]):  # repli : encodeur intégré
+            result = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", source.name, "-t", str(MAX_VOICE_SECONDS), "-vn", "-ar", "44100",
+                                     "-af", "loudnorm=I=-16:TP=-1.5", *codec, str(voice_path(message["id"]))], capture_output=True, timeout=120)
+            if result.returncode == 0 or b"Invalid data" in result.stderr:
+                break
+    if result.returncode != 0 or not voice_path(message["id"]).exists():
+        voice_path(message["id"]).unlink(missing_ok=True)
+        raise ValueError("Ce fichier n'est pas un enregistrement audio lisible.")
+    try:
+        out = subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", str(voice_path(message["id"]))],
+                             capture_output=True, text=True, timeout=30).stdout
+        message["seconds"] = round(float(out.strip()))
+    except (ValueError, OSError):
+        message["seconds"] = 0
+    if message["seconds"] < 1:
+        voice_path(message["id"]).unlink(missing_ok=True)
+        raise ValueError("Enregistrement trop court.")
+    _render_to_file(message, width, height)
+    with _lock:
+        messages = _load()
+        messages.append(message)
+        _save(messages)
+    push_priority(_path(message))
+    if guest:
+        _archive(message, _path(message))
+    return message

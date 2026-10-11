@@ -417,6 +417,34 @@ def guest_drawing_publish():
     return jsonify({"success": True, "message": _("Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s).", date=message["expires"])})
 
 
+@app.route('/upload/voice', methods=['POST'])
+def guest_voice_publish():
+    """Message vocal enregistré sur le téléphone : le cadre le lit quand sa carte s'affiche."""
+    disabled = _guest_messages_disabled()
+    if disabled:
+        return disabled
+    key, limit = _guest_key()
+    if not rate_limit.allow(("message", key), limit, 3600):
+        return jsonify({"success": False, "message": _("Vous avez déjà envoyé plusieurs messages : réessayez dans une heure.")}), 429
+    file = request.files.get("voice")
+    name = (request.form.get("signature") or "").strip()
+    config = load_config()
+    try:
+        message = messages_manager.create_voice(file.read() if file else b"", name, f"{_('Invité')}{' : ' + name if name else ''}",
+                                                int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    if messages_manager.SOURCE_NAME not in config.get("display_sources", []):
+        config = dict(config, display_sources=config.get("display_sources", []) + [messages_manager.SOURCE_NAME])
+        save_config(config)
+    from utils import notify
+    notify.send(config, "guest", _("Nouveau message vocal"), _("%(name)s a laissé un message vocal.", name=name or _("Un invité")),
+                key=f"guest_message:{message['id']}")
+    if is_slideshow_running():
+        restart_slideshow_for_update()
+    return jsonify({"success": True, "message": _("Merci ! Votre message vocal sera lu par le cadre (jusqu'au %(date)s).", date=message["expires"])})
+
+
 # --- Réactions sur la photo affichée, et livre d'or (réseau de la maison seulement) ---
 
 def _now_showing():

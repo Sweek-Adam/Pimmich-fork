@@ -24,7 +24,7 @@ server {
     server_name _;
     client_max_body_size 200M;
 
-    location ~ ^/(upload|upload/message|upload/message/preview|upload/drawing|handle_upload)$ {
+    location ~ ^/(upload|upload/message|upload/message/preview|upload/drawing|upload/voice|handle_upload)$ {
         proxy_pass http://127.0.0.1:5000;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

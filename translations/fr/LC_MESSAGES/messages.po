@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:49+0200\n"
+"POT-Creation-Date: 2026-10-11 09:52+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -118,29 +118,29 @@ msgstr ""
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:3073
+#: local_slideshow.py:3109
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:3074
+#: local_slideshow.py:3110
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:3075
+#: local_slideshow.py:3111
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:3076
+#: local_slideshow.py:3112
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:3077
+#: local_slideshow.py:3113
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:3103
+#: local_slideshow.py:3139
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid "Compte utilisateur"
 msgstr ""
 
 #: templates/configure.html.jinja:101 templates/login.html.jinja:89
-#: templates/upload.html.jinja:287
+#: templates/upload.html.jinja:351
 msgid "Langue"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgid "Dessin"
 msgstr ""
 
 #: templates/guestbook.html.jinja:26 web/routes_guests.py:384
-#: web/routes_guests.py:413
+#: web/routes_guests.py:413 web/routes_guests.py:441
 msgid "Un invité"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgid "Photo affichée sur le cadre"
 msgstr ""
 
 #: templates/upload.html.jinja:104 templates/upload.html.jinja:126
-#: templates/upload.html.jinja:162
+#: templates/upload.html.jinja:152 templates/upload.html.jinja:226
 msgid "Votre prénom (optionnel)"
 msgstr ""
 
@@ -517,102 +517,140 @@ msgid "Le message reste affiché 7 jours."
 msgstr ""
 
 #: templates/upload.html.jinja:141
-msgid "Faire un dessin pour le cadre"
+msgid "Laisser un message vocal"
 msgstr ""
 
 #: templates/upload.html.jinja:142
-msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
+msgid ""
+"Le cadre le lira à voix haute quand votre message passera (90 secondes au"
+" plus)."
 msgstr ""
 
-#: templates/upload.html.jinja:146
-msgid "Trait fin"
-msgstr ""
-
-#: templates/upload.html.jinja:147
-msgid "Trait moyen"
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_dispositions.html.jinja:132
+#: templates/configure/tab_legendes.html.jinja:123
+#: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_sources.html.jinja:537
+#: templates/upload.html.jinja:144
+msgid "Enregistrer"
 msgstr ""
 
 #: templates/upload.html.jinja:148
+msgid ""
+"Enregistrez-vous avec l'application Dictaphone du téléphone, puis "
+"choisissez le fichier :"
+msgstr ""
+
+#: templates/upload.html.jinja:153
+msgid "Envoyer le message vocal"
+msgstr ""
+
+#: templates/upload.html.jinja:174
+msgid "Recommencer"
+msgstr ""
+
+#: templates/configure/_son_radio.html.jinja:5 templates/upload.html.jinja:179
+msgid "Arrêter"
+msgstr ""
+
+#: templates/upload.html.jinja:197 templates/upload.html.jinja:329
+#: templates/upload.html.jinja:394 templates/upload.html.jinja:431
+msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
+msgstr ""
+
+#: templates/upload.html.jinja:205
+msgid "Faire un dessin pour le cadre"
+msgstr ""
+
+#: templates/upload.html.jinja:206
+msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
+msgstr ""
+
+#: templates/upload.html.jinja:210
+msgid "Trait fin"
+msgstr ""
+
+#: templates/upload.html.jinja:211
+msgid "Trait moyen"
+msgstr ""
+
+#: templates/upload.html.jinja:212
 msgid "Trait épais"
 msgstr ""
 
-#: templates/upload.html.jinja:149
+#: templates/upload.html.jinja:213
 msgid "Gomme"
 msgstr ""
 
 #: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:150
+#: templates/upload.html.jinja:214
 msgid "Annuler"
 msgstr ""
 
-#: templates/upload.html.jinja:151
+#: templates/upload.html.jinja:215
 msgid "Tout effacer"
 msgstr ""
 
 #: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:152
+#: templates/upload.html.jinja:216
 msgid "Fond"
 msgstr ""
 
-#: templates/upload.html.jinja:153
+#: templates/upload.html.jinja:217
 msgid "Papier"
 msgstr ""
 
 #: templates/configure/tab_messages.html.jinja:245
-#: templates/upload.html.jinja:154 utils/message_renderer.py:40
+#: templates/upload.html.jinja:218 utils/message_renderer.py:40
 msgid "Ardoise"
 msgstr ""
 
-#: templates/upload.html.jinja:155
+#: templates/upload.html.jinja:219
 msgid "Kraft"
 msgstr ""
 
-#: templates/upload.html.jinja:159
+#: templates/upload.html.jinja:223
 msgid ""
 "Touchez le dessin pour poser l'autocollant (touchez-le à nouveau dans la "
 "liste pour revenir au crayon)."
 msgstr ""
 
-#: templates/upload.html.jinja:163
+#: templates/upload.html.jinja:227
 msgid "Envoyer le dessin"
 msgstr ""
 
-#: templates/upload.html.jinja:254
+#: templates/upload.html.jinja:318
 msgid "Faites d'abord un dessin."
 msgstr ""
 
-#: templates/upload.html.jinja:265 templates/upload.html.jinja:330
-#: templates/upload.html.jinja:367
-msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
-msgstr ""
-
-#: templates/upload.html.jinja:275
+#: templates/upload.html.jinja:339
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr ""
 
-#: templates/upload.html.jinja:277
+#: templates/upload.html.jinja:341
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr ""
 
-#: templates/upload.html.jinja:278
+#: templates/upload.html.jinja:342
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr ""
 
-#: templates/upload.html.jinja:280
+#: templates/upload.html.jinja:344
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr ""
 
-#: templates/upload.html.jinja:283
+#: templates/upload.html.jinja:347
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
 msgstr ""
 
-#: templates/upload.html.jinja:350
+#: templates/upload.html.jinja:414
 msgid "fichier(s) en cours d'envoi..."
 msgstr ""
 
-#: templates/upload.html.jinja:361
+#: templates/upload.html.jinja:425
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr ""
 
@@ -704,15 +742,6 @@ msgstr ""
 
 #: templates/configure/_playlist_builder.html.jinja:39
 msgid "Créer la playlist"
-msgstr ""
-
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/_son_spotify.html.jinja:34
-#: templates/configure/tab_dispositions.html.jinja:132
-#: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_messages.html.jinja:236
-#: templates/configure/tab_sources.html.jinja:537
-msgid "Enregistrer"
 msgstr ""
 
 #: templates/configure/_playlist_builder.html.jinja:39
@@ -871,10 +900,6 @@ msgstr ""
 
 #: templates/configure/_son_radio.html.jinja:2
 msgid "Radios et podcasts"
-msgstr ""
-
-#: templates/configure/_son_radio.html.jinja:5
-msgid "Arrêter"
 msgstr ""
 
 #: templates/configure/_son_radio.html.jinja:7
@@ -1199,7 +1224,7 @@ msgstr ""
 msgid "Enregistrement…"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:276
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:282
 msgid "Enregistré"
 msgstr ""
 
@@ -3455,17 +3480,27 @@ msgstr ""
 
 #: templates/configure/tab_invites.html.jinja:128
 msgid ""
+"Lire les messages vocaux quand leur carte s'affiche (au plus une fois par"
+" heure)"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:131
+msgid "Volume des messages vocaux :"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:136
+msgid ""
 "Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
 "😂 😮 👏)"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:130
+#: templates/configure/tab_invites.html.jinja:138
 msgid ""
 "Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
 "invités restent ensuite dans le livre d'or :"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:130
+#: templates/configure/tab_invites.html.jinja:138
 msgid "ouvrir le livre d'or"
 msgstr ""
 
@@ -4195,7 +4230,7 @@ msgid "Aucun message publié."
 msgstr ""
 
 #: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:373
-#: web/routes_guests.py:403
+#: web/routes_guests.py:403 web/routes_guests.py:433
 msgid "Invité"
 msgstr ""
 
@@ -6428,7 +6463,7 @@ msgstr ""
 msgid "Style enregistré : visible dès la photo suivante."
 msgstr ""
 
-#: web/routes_captions.py:112 web/routes_guests.py:456 web/routes_photos.py:284
+#: web/routes_captions.py:112 web/routes_guests.py:484 web/routes_photos.py:284
 msgid "Photo introuvable."
 msgstr ""
 
@@ -6446,12 +6481,12 @@ msgid ""
 "précédente est conservée."
 msgstr ""
 
-#: web/routes_config.py:243
+#: web/routes_config.py:249
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr ""
 
-#: web/routes_config.py:278
+#: web/routes_config.py:284
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -6531,7 +6566,7 @@ msgstr ""
 msgid "Trop d'aperçus, réessayez plus tard."
 msgstr ""
 
-#: web/routes_guests.py:367 web/routes_guests.py:398
+#: web/routes_guests.py:367 web/routes_guests.py:398 web/routes_guests.py:428
 msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr ""
 
@@ -6558,42 +6593,56 @@ msgstr ""
 msgid "Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr ""
 
-#: web/routes_guests.py:447
-msgid "Les réactions sont désactivées."
+#: web/routes_guests.py:441
+msgid "Nouveau message vocal"
 msgstr ""
 
-#: web/routes_guests.py:451
-msgid "Doucement ! Réessayez dans un moment."
+#: web/routes_guests.py:441
+#, python-format
+msgid "%(name)s a laissé un message vocal."
+msgstr ""
+
+#: web/routes_guests.py:445
+#, python-format
+msgid "Merci ! Votre message vocal sera lu par le cadre (jusqu'au %(date)s)."
 msgstr ""
 
 #: web/routes_guests.py:475
+msgid "Les réactions sont désactivées."
+msgstr ""
+
+#: web/routes_guests.py:479
+msgid "Doucement ! Réessayez dans un moment."
+msgstr ""
+
+#: web/routes_guests.py:503
 msgid "Page introuvable."
 msgstr ""
 
-#: web/routes_guests.py:476
+#: web/routes_guests.py:504
 msgid "Page retirée du livre d'or."
 msgstr ""
 
-#: web/routes_guests.py:515
+#: web/routes_guests.py:543
 msgid ""
 "Lancez d'abord une fois sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
 msgstr ""
 
-#: web/routes_guests.py:518
+#: web/routes_guests.py:546
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr ""
 
-#: web/routes_guests.py:524
+#: web/routes_guests.py:552
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr ""
 
-#: web/routes_guests.py:525
+#: web/routes_guests.py:553
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr ""
 
-#: web/routes_guests.py:535
+#: web/routes_guests.py:563
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr ""
 

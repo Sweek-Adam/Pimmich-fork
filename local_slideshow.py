@@ -2246,6 +2246,39 @@ def check_reaction(screen, photo_path, since):
     return since
 
 
+_voice_played = {}
+
+
+def play_voice_message(photo_path, config):
+    """Carte d'un message vocal à l'écran : le cadre lit le message (au plus une fois par heure). Renvoie sa durée."""
+    try:
+        path = Path(str(photo_path or ""))
+        if path.parent.name != "messages" or not config.get("voice_messages_enabled", True):
+            return 0
+        voice = Path(BASE_DIR) / "cache" / "voice" / f"{path.stem}.ogg"
+        if not voice.exists() or time.time() - _voice_played.get(path.stem, 0) < 3600:
+            return 0
+        if not pygame.mixer.get_init():
+            pygame.mixer.init()
+        sound = pygame.mixer.Sound(str(voice))
+        sound.set_volume(max(0.0, min(1.0, int(config.get("voice_volume", 100)) / 100)))
+        music_volume = pygame.mixer.music.get_volume()
+        pygame.mixer.music.set_volume(music_volume * 0.25)  # la musique s'efface derrière la voix
+        channel = sound.play()
+        _voice_played[path.stem] = time.time()
+        length = sound.get_length()
+
+        def restore():
+            time.sleep(length + 0.5)
+            pygame.mixer.music.set_volume(music_volume)
+        threading.Thread(target=restore, daemon=True).start()
+        logger.info(f"🎤 Message vocal lu ({length:.0f} s).")
+        return length if channel else 0
+    except Exception as e:
+        logger.info(f"🎤 Message vocal illisible : {e}")
+        return 0
+
+
 def weather_particles(config, screen_width, screen_height):
     """Particules de pluie / neige si le temps actuel s'y prête (et si l'animation est activée)."""
     if config.get("weather_animation", "start") == "off" or not config.get("show_weather", False):
@@ -2322,6 +2355,9 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
 
         pan_zoom_enabled = config.get("pan_zoom_enabled", False)
         display_duration = config.get("display_duration", 10)
+        voice_seconds = play_voice_message(photo_path, config)
+        if voice_seconds:  # la carte reste le temps d'écouter le message
+            display_duration = max(float(display_duration), voice_seconds + 2)
         logger.info(f"⏳ Pause de {display_duration} secondes.") # Debug print
         
         # Always blit the base image first (this will be overwritten by animation if enabled)

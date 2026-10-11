@@ -137,6 +137,70 @@
         <p class="text-center text-xs text-gray-500 mt-2">{{ _('Le message reste affiché 7 jours.') }}</p>
       </div>
 
+      <div class="mt-8 pt-6 border-t border-gray-300" id="voice-box">
+        <h2 class="text-center text-2xl font-semibold mb-2">{{ _('Laisser un message vocal') }}</h2>
+        <p class="text-center text-sm text-gray-600 mb-3">{{ _('Le cadre le lira à voix haute quand votre message passera (90 secondes au plus).') }}</p>
+        <div id="vc-recorder" class="hidden text-center">
+          <button type="button" id="vc-record" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full">🎤 {{ _('Enregistrer') }}</button>
+          <p id="vc-timer" class="text-sm text-gray-600 mt-2"></p>
+        </div>
+        <div id="vc-file" class="hidden">
+          <label class="block text-sm text-gray-600 mb-1" for="vc-input">{{ _("Enregistrez-vous avec l'application Dictaphone du téléphone, puis choisissez le fichier :") }}</label>
+          <input type="file" id="vc-input" accept="audio/*" capture class="block w-full text-sm">
+        </div>
+        <audio id="vc-preview" controls class="w-full mt-3 hidden"></audio>
+        <input type="text" id="vc-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}" class="block w-full mt-3 p-2 border border-gray-300 rounded">
+        <button type="button" id="vc-send" class="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" disabled>{{ _('Envoyer le message vocal') }}</button>
+        <p id="vc-status" class="text-center text-sm mt-3"></p>
+      </div>
+      <script>
+        (() => {
+          const $ = (id) => document.getElementById(id);
+          let blob = null, recorder = null, timer = null;
+          const ready = (b) => { blob = b; $("vc-preview").src = URL.createObjectURL(b); $("vc-preview").classList.remove("hidden"); $("vc-send").disabled = false; };
+          const canRecord = window.isSecureContext && navigator.mediaDevices && window.MediaRecorder;
+          $(canRecord ? "vc-recorder" : "vc-file").classList.remove("hidden");
+          $("vc-input").addEventListener("change", () => { if ($("vc-input").files[0]) ready($("vc-input").files[0]); });
+          $("vc-record").addEventListener("click", async () => {
+            if (recorder && recorder.state === "recording") { recorder.stop(); return; }
+            let stream;
+            try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+            catch (e) { $("vc-recorder").classList.add("hidden"); $("vc-file").classList.remove("hidden"); return; }
+            const chunks = [];
+            recorder = new MediaRecorder(stream);
+            recorder.ondataavailable = (e) => chunks.push(e.data);
+            recorder.onstop = () => {
+              stream.getTracks().forEach(t => t.stop()); clearInterval(timer);
+              $("vc-record").textContent = "🎤 " + {{ _('Recommencer')|tojson }};
+              ready(new Blob(chunks, { type: recorder.mimeType || "audio/webm" }));
+            };
+            recorder.start();
+            const start = Date.now();
+            $("vc-record").textContent = "⏹ " + {{ _('Arrêter')|tojson }};
+            timer = setInterval(() => {
+              const s = Math.round((Date.now() - start) / 1000);
+              $("vc-timer").textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+              if (s >= 90) recorder.stop();
+            }, 250);
+          });
+          $("vc-send").addEventListener("click", async () => {
+            if (!blob) return;
+            $("vc-send").disabled = true;
+            const form = new FormData();
+            form.append("voice", blob, "message");
+            form.append("signature", $("vc-signature").value.trim());
+            try {
+              const r = await (await fetch("{{ url_for('guest_voice_publish') }}", { method: "POST", body: form })).json();
+              $("vc-status").textContent = r.message; $("vc-status").className = "text-center text-sm mt-3 " + (r.success ? "text-green-700" : "text-red-600");
+              if (r.success) { blob = null; $("vc-preview").classList.add("hidden"); $("vc-input").value = ""; return; }
+            } catch (e) {
+              $("vc-status").textContent = {{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }};
+            }
+            $("vc-send").disabled = false;
+          });
+        })();
+      </script>
+
       <div class="mt-8 pt-6 border-t border-gray-300" id="drawing-box">
         <h2 class="text-center text-2xl font-semibold mb-2">{{ _('Faire un dessin pour le cadre') }}</h2>
         <p class="text-center text-sm text-gray-600 mb-3">{{ _('Dessinez avec le doigt, ajoutez des autocollants, puis envoyez.') }}</p>
