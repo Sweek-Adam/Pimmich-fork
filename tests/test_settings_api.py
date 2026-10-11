@@ -140,3 +140,33 @@ def test_wifi_api(admin_client, user_client, app_module, monkeypatch):
             else:
                 config[key] = value
         routes_system.save_config(config)
+
+
+def test_clock_and_interval_settings(admin_client, app_module):
+    from web import routes_settings
+    keys = ("clock_layout", "clock_background_style", "agenda_every_minutes", "memories_every_minutes", "clock_font_path")
+    before = {k: routes_settings.load_config().get(k) for k in keys}
+    try:
+        data = admin_client.post("/api/settings", json={"clock_layout": "stacked", "clock_background_style": "box",
+                                                         "agenda_every_minutes": 60, "memories_every_minutes": 15}, headers=H).get_json()
+        assert data["success"] and data["values"]["agenda_every_minutes"] == 60
+        assert admin_client.post("/api/settings", json={"agenda_every_minutes": 2}, headers=H).status_code == 400
+        assert admin_client.post("/api/settings", json={"clock_font_path": "/etc/passwd"}, headers=H).status_code == 400
+        fonts = admin_client.get("/api/settings/fonts").get_json()["fonts"]
+        assert fonts and admin_client.post("/api/settings", json={"clock_font_path": fonts[0]["value"]}, headers=H).get_json()["success"]
+    finally:
+        config = dict(routes_settings.load_config())
+        for key, value in before.items():
+            if value is None:
+                config.pop(key, None)
+            else:
+                config[key] = value
+        routes_settings.save_config(config)
+
+
+def test_special_slide_interval(app_module):
+    import local_slideshow
+    assert local_slideshow.special_every({}, "agenda_every_minutes") == 1800
+    assert local_slideshow.special_every({"agenda_every_minutes": 60}, "agenda_every_minutes") == 3600
+    assert local_slideshow.special_every({"agenda_every_minutes": 1}, "agenda_every_minutes") == 300
+    assert local_slideshow.special_every({"agenda_every_minutes": "x"}, "agenda_every_minutes") == 1800

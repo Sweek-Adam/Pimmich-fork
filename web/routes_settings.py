@@ -45,6 +45,9 @@ SETTINGS = {
     "anniversary_boost_factor": ("int", (0, 20), 2),
     "memories_banner": ("bool", None, True),
     "memories_composition": ("bool", None, True),
+    "memories_every_minutes": ("int", (5, 1440), 30),
+    "agenda_slide": ("bool", None, True),
+    "agenda_every_minutes": ("int", (5, 1440), 30),
     # Vidéos
     "slideshow_video_enabled": ("bool", None, True),
     "media_mode": ("choice", ["all", "videos"], "all"),
@@ -90,6 +93,11 @@ SETTINGS = {
     "clock_outline_color": ("color", None, "#000000"),
     "clock_background_enabled": ("bool", None, False),
     "clock_background_color": ("color", None, "#00000080"),
+    "clock_background_style": ("choice", ["band", "box"], "band"),
+    "clock_layout": ("choice", ["line", "stacked"], "line"),
+    "clock_second_line_percent": ("int", (30, 100), 55),
+    "clock_font_path": ("font", None, "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"),
+    "clock_format": ("choice", ["%H:%M", "%H:%M:%S", "%I:%M %p"], "%H:%M"),
     "show_date": ("bool", None, False),
     "date_format": ("text", 60, "%A %d %B %Y"),
     # Météo
@@ -154,6 +162,10 @@ def clean(key, value):
         if len(text) > options or any(c in text for c in "\r\n\t\x00"):
             raise ValueError
         return text.strip()
+    if kind == "font":  # uniquement une police présente sur le cadre
+        if str(value) not in {path for path, _label in clock_fonts()}:
+            raise ValueError
+        return str(value)
     if kind == "device":  # index d'un périphérique audio, ou "" (par défaut)
         text = str(value)
         if text and not text.isdigit():
@@ -164,6 +176,30 @@ def clean(key, value):
             raise ValueError
         return str(value)
     raise ValueError
+
+
+FONT_CANDIDATES = [
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", "DejaVu Sans (gras)"),
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "DejaVu Sans"),
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSans-ExtraLight.ttf", "DejaVu Sans (fin)"),
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf", "DejaVu Sans condensé (gras)"),
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", "DejaVu Serif (gras)"),
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf", "DejaVu Serif (italique)"),
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", "DejaVu Mono (gras)"),
+    ("/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", "Liberation Sans"),
+    ("/usr/share/fonts/truetype/freefont/FreeSans.ttf", "FreeSans"),
+    ("/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf", "FreeMono (gras)"),
+]
+PROJECT_FONTS = [("Caveat-Regular.ttf", "Caveat (manuscrit)"), ("PatrickHand-Regular.ttf", "Patrick Hand"),
+                 ("PermanentMarker-Regular.ttf", "Permanent Marker"), ("SpecialElite-Regular.ttf", "Special Elite (machine à écrire)")]
+
+
+def clock_fonts():
+    """Polices disponibles sur ce cadre pour l'heure : [(chemin, nom)]."""
+    found = [(path, label) for path, label in FONT_CANDIDATES if Path(path).is_file()]
+    found += [(str(BASE_DIR / "static" / "fonts" / name), label) for name, label in PROJECT_FONTS
+              if (BASE_DIR / "static" / "fonts" / name).is_file()]
+    return found
 
 
 def current_values(config=None):
@@ -275,3 +311,9 @@ def secrets_save_api():
     save_config(config)  # pas d'annulation : l'ancien secret ne doit pas être gardé dans l'historique
     schedule_slideshow_restart()
     return jsonify({"success": True, "message": _("Enregistré") if value.strip() else _("Supprimé.")})
+
+
+@app.route('/api/settings/fonts', methods=['GET'])
+@login_required
+def settings_fonts_api():
+    return jsonify({"success": True, "fonts": [{"value": path, "label": label} for path, label in clock_fonts()]})

@@ -49,11 +49,18 @@ const sections: Section[] = [
     intro: () => t("Les photos prises un jour comme aujourd'hui, les années précédentes (toutes les sources : date de l'appareil photo, ou du nom du fichier pour WhatsApp et les téléphones)."),
     fields: [
       { key: "memories_banner", label: () => t("Ruban « Il y a 5 ans » sur ces photos"), type: "toggle" },
-      { key: "memories_composition", label: () => t("Composition « Ce jour-là » (une photo par année) toutes les 30 minutes"), type: "toggle" },
+      { key: "memories_composition", label: () => t("Composition « Ce jour-là » (une photo par année)"), type: "toggle" },
+      { key: "memories_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 5, max: 1440, showIf: (v) => !!v.memories_composition },
       { key: "anniversary_boost_enabled", label: () => t("Activer le boost pour les photos à leur date anniversaire de prise de vue"), type: "toggle" },
       { key: "anniversary_boost_factor", label: () => t("Facteur de boost anniversaire :"), type: "number", min: 0, max: 20, showIf: (v) => !!v.anniversary_boost_enabled },
       { key: "favorite_boost_factor", label: () => t("Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de lecture) :"), type: "number", min: 0, max: 20,
         help: () => t("Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître.") },
+    ] },
+  { title: () => t("Agenda « Cette semaine »"), icon: "fa-calendar-check",
+    intro: () => t("Les événements des 7 prochains jours et vos comptes à rebours (réglés dans Horloge & météo)."),
+    fields: [
+      { key: "agenda_slide", label: () => t("Afficher la diapositive « Cette semaine »"), type: "toggle" },
+      { key: "agenda_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 5, max: 1440, showIf: (v) => !!v.agenda_slide },
     ] },
   { title: () => t("Vidéos"), icon: "fa-video", fields: [
     { key: "slideshow_video_enabled", label: () => t("Afficher les vidéos dans le diaporama"), type: "toggle" },

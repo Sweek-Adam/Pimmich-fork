@@ -1077,7 +1077,7 @@ def get_path_to_display(photo_path_obj, source, filter_states):
 
 _photo_index_cache = {}
 _memories = {"path": None, "photos": 0, "shown_at": 0, "day": None}
-MEMORIES_EVERY = 30 * 60  # « Ce jour-là » : toutes les 30 minutes
+MEMORIES_EVERY = 30 * 60  # « Ce jour-là » : toutes les 30 minutes par défaut (réglage memories_every_minutes)
 
 
 def prepare_memories(config, width, height):
@@ -1113,7 +1113,7 @@ def prepare_memories(config, width, height):
 
 
 _agenda = {"path": None, "photos": 4, "shown_at": time.time() - 25 * 60, "built": 0, "building": False}
-AGENDA_EVERY = 30 * 60  # « Cette semaine » : toutes les 30 minutes (5 min après le démarrage la première fois)
+AGENDA_EVERY = 30 * 60  # « Cette semaine » : toutes les 30 minutes par défaut (réglage agenda_every_minutes)
 AGENDA_REFRESH = 10 * 60
 
 
@@ -1145,15 +1145,26 @@ def prepare_agenda(config, width, height):
     threading.Thread(target=work, daemon=True).start()
 
 
+def special_every(config, key, default_minutes=30):
+    """Intervalle (secondes) entre deux passages d'une diapositive spéciale, réglable (5 min à 24 h)."""
+    try:
+        minutes = int((config or {}).get(key, default_minutes))
+    except (TypeError, ValueError):
+        minutes = default_minutes
+    return max(5, min(24 * 60, minutes)) * 60
+
+
 def pop_memories_slide(config=None, width=1920, height=1080):
     """Diapositive spéciale à montrer maintenant (« Ce jour-là », « Cette semaine »), sinon None."""
-    if _memories["path"] and time.time() - _memories["shown_at"] > MEMORIES_EVERY and os.path.exists(_memories["path"]):
+    memories_every = special_every(config, "memories_every_minutes")
+    agenda_every = special_every(config, "agenda_every_minutes")
+    if _memories["path"] and time.time() - _memories["shown_at"] > memories_every and os.path.exists(_memories["path"]):
         _memories["shown_at"] = time.time()
-        _agenda["shown_at"] = max(_agenda["shown_at"], time.time() - AGENDA_EVERY + 10 * 60)  # jamais l'une juste après l'autre
+        _agenda["shown_at"] = max(_agenda["shown_at"], time.time() - agenda_every + 10 * 60)  # jamais l'une juste après l'autre
         return _memories["path"]
     if config is not None:
         prepare_agenda(config, width, height)
-    if _agenda["path"] and time.time() - _agenda["shown_at"] > AGENDA_EVERY and os.path.exists(_agenda["path"]):
+    if _agenda["path"] and time.time() - _agenda["shown_at"] > agenda_every and os.path.exists(_agenda["path"]):
         _agenda["shown_at"] = time.time()
         return _agenda["path"]
     return None
@@ -1754,6 +1765,52 @@ def sun_moon_elements(config, main_font, separator):
     return elements
 
 
+_scaled_fonts = {}
+
+
+def _scaled_font(config, main_font, ratio):
+    """Police de l'heure à une autre taille (seconde ligne : date et météo)."""
+    size = max(10, int(main_font.get_height() * ratio * 0.85))
+    path = config.get("clock_font_path", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
+    key = (path, size)
+    if key not in _scaled_fonts:
+        try:
+            _scaled_fonts[key] = pygame.font.Font(path, size)
+        except Exception:
+            _scaled_fonts[key] = pygame.font.SysFont("Arial", size)
+    return _scaled_fonts[key]
+
+
+def _render_clock_row(row, font, text_color, outline_color):
+    """Une ligne de l'horloge (textes avec contour, icônes à la hauteur du texte) sur une surface transparente."""
+    height = font.get_height()
+    parts = []
+    for el in row:
+        if el['type'] == 'text':
+            surface = font.render(el['text'], True, text_color)
+            parts.append(('text', el, surface.get_width() + 4, surface.get_height() + 4))
+        else:
+            icon = el['surface']
+            if icon.get_height() != height:
+                icon = pygame.transform.smoothscale(icon, (max(1, int(icon.get_width() * height / icon.get_height())), height))
+            parts.append(('icon', dict(el, surface=icon), icon.get_width() + el.get('padding', 0), icon.get_height()))
+    width = sum(p[2] for p in parts) or 1
+    row_height = max([p[3] for p in parts] + [height]) or 1
+    surface = pygame.Surface((width, row_height), pygame.SRCALPHA)
+    x = 0
+    for kind, el, w, h in parts:
+        if kind == 'text':
+            if el.get('visible', True):
+                draw_text_with_outline(surface, el['text'], font, text_color, outline_color, (x + 2, (row_height - h) // 2 + 2), anchor="topleft")
+        else:
+            x += el.get('padding', 0)
+            if el.get('visible', True):
+                surface.blit(el['surface'], (x, (row_height - el['surface'].get_height()) // 2))
+            x -= el.get('padding', 0)
+        x += w
+    return surface
+
+
 def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata=None):
     draw_guest_qr(screen, screen_width, screen_height, config)
     draw_memory_banner(screen, screen_width, screen_height, config, photo_metadata)
@@ -1851,60 +1908,70 @@ def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_m
                 elements.append({'type': 'text', 'text': f" {today_postcard_count}"})
 
 
-        # --- Calcul de la taille totale et positionnement du bloc ---
-        total_width = 0
-        max_height = 0
-        for el in elements:
-            if el['type'] == 'text':
-                el['surface'] = main_font.render(el['text'], True, text_color)
-            total_width += el['surface'].get_width()
-            if el.get('padding'):
-                total_width += el['padding']
-            if el['surface'].get_height() > max_height:
-                max_height = el['surface'].get_height()
+        # --- Mise en page : une ligne, ou l'heure en grand puis le reste en dessous ; jamais plus large que l'écran ---
+        stacked = config.get("clock_layout", "line") == "stacked" and len(elements) > 1
+        rows = [elements[:1], elements[1:]] if stacked else [elements]
+        if stacked and rows[1] and rows[1][0].get('type') == 'text' and rows[1][0]['text'].startswith(separator):
+            rows[1][0] = dict(rows[1][0], text=rows[1][0]['text'][len(separator):])  # pas de « | » en début de ligne
+        try:
+            second_ratio = max(0.3, min(1.0, int(config.get("clock_second_line_percent", 55)) / 100))
+        except (TypeError, ValueError):
+            second_ratio = 0.55
+        margin = 20
+        row_surfaces = []
+        for index, row in enumerate(rows):
+            if not row:
+                continue
+            font = main_font
+            if stacked and index == 1:
+                font = _scaled_font(config, main_font, second_ratio)
+            row_surfaces.append(_render_clock_row(row, font, text_color, outline_color))
+        widest = max((r.get_width() for r in row_surfaces), default=0)
+        available = screen_width - 2 * margin
+        if widest > available:  # trop large (météo, prévisions...) : tout est réduit pour tenir dans l'écran
+            factor = available / widest
+            row_surfaces = [pygame.transform.smoothscale(r, (max(1, int(r.get_width() * factor)), max(1, int(r.get_height() * factor))))
+                            for r in row_surfaces]
+        total_height = sum(r.get_height() for r in row_surfaces) + 4 * max(0, len(row_surfaces) - 1)
+        block_width = max((r.get_width() for r in row_surfaces), default=0)
 
         offset_x = int(config.get("clock_offset_x", 0))
         offset_y = int(config.get("clock_offset_y", 0))
         position = config.get("clock_position", "center")
 
-        if position == "left":
-            block_x = offset_x
-        elif position == "right":
-            block_x = screen_width - total_width + offset_x
-        else: # center
-            block_x = (screen_width - total_width) // 2 + offset_x
-        
+        def row_x(width):
+            if position == "left":
+                x = margin + offset_x
+            elif position == "right":
+                x = screen_width - margin - width + offset_x
+            else:  # center
+                x = (screen_width - width) // 2 + offset_x
+            return max(0, min(screen_width - width, x))
+
         # Positionner le bloc en haut de l'écran avec un padding de 15px
         block_y = 15 + offset_y
 
-        # --- Dessin du fond semi-transparent ---
-        if config.get("clock_background_enabled", False):
-            bg_color_hex = config.get("clock_background_color", "#00000080")
-            bg_color_rgba = parse_color(bg_color_hex)
-            
+        # --- Fond : bandeau sur toute la largeur, ou cadre arrondi autour du texte ---
+        if config.get("clock_background_enabled", False) and row_surfaces:
+            bg_color_rgba = parse_color(config.get("clock_background_color", "#00000080"))
             if len(bg_color_rgba) == 3:
-                bg_color_rgba = bg_color_rgba + (128,) # Ajouter une semi-transparence par défaut
-            
-            bg_surface = pygame.Surface((screen_width, max_height + 20), pygame.SRCALPHA)
-            bg_surface.fill(bg_color_rgba)
-            screen.blit(bg_surface, (0, block_y - 10))
+                bg_color_rgba = bg_color_rgba + (128,)  # semi-transparence par défaut
+            if config.get("clock_background_style", "band") == "box":
+                pad = 14
+                box = pygame.Surface((block_width + 2 * pad, total_height + 2 * pad), pygame.SRCALPHA)
+                pygame.draw.rect(box, bg_color_rgba, box.get_rect(), border_radius=18)
+                screen.blit(box, (row_x(block_width) - pad, block_y - pad))
+            else:
+                bg_surface = pygame.Surface((screen_width, total_height + 20), pygame.SRCALPHA)
+                bg_surface.fill(bg_color_rgba)
+                screen.blit(bg_surface, (0, block_y - 10))
 
-        # --- Dessin des éléments séquentiellement ---
-        current_x = block_x
-        for el in elements:
-            el_y = block_y + (max_height - el['surface'].get_height()) // 2
-            
-            if el.get('padding'):
-                current_x += el['padding']
-
-            # On ne dessine l'élément que s'il est visible (par défaut True)
-            if el.get('visible', True):
-                if el['type'] == 'text':
-                    draw_text_with_outline(screen, el['text'], main_font, text_color, outline_color, (current_x, el_y), anchor="topleft")
-                elif el['type'] == 'icon':
-                    screen.blit(el['surface'], (current_x, el_y))
-            
-            current_x += el['surface'].get_width()
+        # --- Dessin des lignes ---
+        current_y = block_y
+        for row_surface in row_surfaces:
+            x = row_x(row_surface.get_width()) if position != "center" or not stacked else (screen_width - row_surface.get_width()) // 2 + offset_x
+            screen.blit(row_surface, (x, current_y))
+            current_y += row_surface.get_height() + 4
 
         # --- Bloc du bas pour les marées ---
         if config.get("show_tides", False):
