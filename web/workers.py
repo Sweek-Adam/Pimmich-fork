@@ -702,3 +702,18 @@ def icloud_update_worker():
         except Exception as e:
             logger.warning(f"[iCloud] Synchronisation automatique : {e}")
         time.sleep(max(15, int(config.get("icloud_update_interval_minutes", 60))) * 60)
+
+
+def email_worker():
+    """Relève régulière de la boîte mail du cadre."""
+    from web.routes_imports import run_email_check
+    time.sleep(90)
+    while True:
+        config = load_config()
+        try:
+            if config.get("email_enabled"):
+                run_email_check(config)
+        except Exception as e:
+            logger.warning(f"[E-mail] Relève : {e}")
+            notify_sync_error("E-mail", str(e))
+        time.sleep(max(1, int(config.get("email_check_minutes", 5))) * 60)

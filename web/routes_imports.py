@@ -718,3 +718,97 @@ def run_whatsapp_prepare():
         pass
     if is_slideshow_running():
         restart_slideshow_for_update()
+
+
+# --- Envoi par e-mail (boîte relevée en IMAP) ---
+
+def run_email_check(config):
+    """Relève la boîte mail du cadre, prépare les photos des expéditeurs autorisés, signale les autres à valider."""
+    from utils import import_email, notify
+    result = import_email.check(config)
+    if result.get("pending"):
+        base = notify.base_url(config)
+        notify.send(config, "guest", _("Nouvelle photo d'invité"), _("%(count)s photo(s) à valider sur le cadre.", count=result["pending"]),
+                    key="guest_photo", click=f"{base}/configure#tab-validation" if base else None, repeat_after=60)
+    if result.get("accepted"):
+        config = load_config()
+        if "email" not in config.get("display_sources", []):
+            config = dict(config, display_sources=list(config.get("display_sources", [])) + ["email"])
+            save_config(config)
+        for _update in import_progress.tracked("email", "prepare", prepare_all_photos_with_progress(
+                config.get("display_width", 1920), config.get("display_height", 1080), source_type="email",
+                description_map=import_email.captions())):
+            pass
+        if is_slideshow_running():
+            restart_slideshow_for_update()
+    return result
+
+
+EMAIL_PROVIDERS = {"gmail.com": "imap.gmail.com", "googlemail.com": "imap.gmail.com", "outlook.com": "outlook.office365.com",
+                   "hotmail.com": "outlook.office365.com", "hotmail.fr": "outlook.office365.com", "live.com": "outlook.office365.com",
+                   "live.fr": "outlook.office365.com", "yahoo.com": "imap.mail.yahoo.com", "yahoo.fr": "imap.mail.yahoo.com",
+                   "icloud.com": "imap.mail.me.com", "me.com": "imap.mail.me.com", "orange.fr": "imap.orange.fr",
+                   "free.fr": "imap.free.fr", "laposte.net": "imap.laposte.net", "gmx.fr": "imap.gmx.net", "gmx.com": "imap.gmx.net"}
+
+
+@app.route('/api/email', methods=['GET'])
+@login_required
+def email_status_api():
+    config = load_config()
+    return jsonify({"success": True, "enabled": config.get("email_enabled", False), "host": config.get("email_imap_host", ""),
+                    "port": config.get("email_imap_port", 993), "user": config.get("email_user", ""),
+                    "has_password": bool(config.get("email_password")), "folder": config.get("email_folder", "INBOX"),
+                    "allowed": config.get("email_allowed_senders") or [], "unknown": config.get("email_unknown_senders", "pending"),
+                    "providers": EMAIL_PROVIDERS})
+
+
+@app.route('/api/email', methods=['POST'])
+@admin_required
+def email_save_api():
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    for key, field in (("host", "email_imap_host"), ("user", "email_user"), ("folder", "email_folder")):
+        if key in data:
+            config[field] = str(data[key] or "").strip()[:200]
+    if data.get("password"):
+        config["email_password"] = str(data["password"])[:200]
+    if "port" in data:
+        try:
+            config["email_imap_port"] = max(1, min(65535, int(data["port"])))
+        except (TypeError, ValueError):
+            return jsonify({"success": False, "message": _("Port invalide.")}), 400
+    if "allowed" in data:
+        config["email_allowed_senders"] = sorted({a.strip().lower() for a in re.split(r"[\s,;]+", str(data["allowed"])) if "@" in a})[:100]
+    if data.get("unknown") in ("pending", "ignore"):
+        config["email_unknown_senders"] = data["unknown"]
+    if "enabled" in data:
+        config["email_enabled"] = bool(data["enabled"])
+    save_config(config)
+    return jsonify({"success": True, "message": _("Réglages de l'e-mail enregistrés.")})
+
+
+@app.route('/api/email/test', methods=['POST'])
+@admin_required
+def email_test_api():
+    from utils import import_email
+    try:
+        count = import_email.test(load_config())
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    except Exception as e:
+        return jsonify({"success": False, "message": _("Connexion impossible : %(error)s", error=str(e)[:200])}), 502
+    return jsonify({"success": True, "message": _("Connexion réussie : %(count)s messages dans la boîte.", count=count)})
+
+
+@app.route('/api/email/check', methods=['POST'])
+@login_required
+def email_check_api():
+    config = load_config()
+    if not config.get("email_enabled"):
+        return jsonify({"success": False, "message": _("Activez d'abord la réception par e-mail.")}), 400
+    try:
+        result = run_email_check(config)
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)[:300]}), 502
+    return jsonify({"success": True, "message": _("%(accepted)s photo(s) ajoutée(s), %(pending)s à valider, %(ignored)s ignorée(s).",
+                                                  accepted=result["accepted"], pending=result["pending"], ignored=result["ignored"])})

@@ -110,6 +110,10 @@
                         <label class="form-check-label ml-2" for="display_source_whatsapp">{{ _("WhatsApp et partages depuis le téléphone") }}</label>
                     </div>
                     <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_email" name="display_sources" value="email" {% if 'email' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_email">{{ _("Photos reçues par e-mail") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_messages">{{ _('Messages') }}</label>
                     </div>
@@ -452,6 +456,73 @@
                         load();
                     });
                 </script>
+
+                <fieldset class="mt-4" id="email-box">
+                    <legend><h3><i class="fas fa-envelope mr-2"></i>{{ _("Photos par e-mail") }}</h3></legend>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Donnez au cadre sa propre adresse e-mail (par exemple une adresse Gmail créée pour lui) : la famille y envoie ses photos en pièce jointe et elles s'affichent toutes seules. L'objet du message devient la légende.") }}</p>
+                    {% if is_admin %}
+                    <label class="flex items-center gap-2 font-semibold"><input type="checkbox" id="em-enabled"> {{ _("Relever la boîte mail (toutes les 5 minutes)") }}</label>
+                    <div class="grid gap-2 mt-2 em-grid">
+                        <label for="em-user">{{ _("Adresse du cadre") }}</label><input type="email" id="em-user" autocomplete="off" placeholder="cadre.famille@gmail.com">
+                        <label for="em-password">{{ _("Mot de passe d'application") }}</label><input type="password" id="em-password" autocomplete="new-password">
+                        <label for="em-host">{{ _("Serveur IMAP") }}</label><div class="flex gap-2"><input type="text" id="em-host" class="flex-1 min-w-0" placeholder="imap.gmail.com"><input type="number" id="em-port" class="w-24" min="1" max="65535" value="993"></div>
+                        <label for="em-folder">{{ _("Dossier") }}</label><input type="text" id="em-folder" value="INBOX">
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">{{ _("Gmail : activez la validation en deux étapes, puis créez un mot de passe d'application sur myaccount.google.com/apppasswords. Votre mot de passe habituel ne fonctionnera pas.") }}</p>
+                    <label for="em-allowed" class="block font-semibold mt-3">{{ _("Expéditeurs de confiance (affichés directement)") }}</label>
+                    <textarea id="em-allowed" rows="3" class="w-full" placeholder="mamie@orange.fr, papa@gmail.com"></textarea>
+                    <label for="em-unknown" class="block mt-2">{{ _("Photos des autres expéditeurs :") }}</label>
+                    <select id="em-unknown">
+                        <option value="pending">{{ _("À valider (comme les photos d'invités)") }}</option>
+                        <option value="ignore">{{ _("Ignorées") }}</option>
+                    </select>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <button type="button" id="em-save" class="btn-primary">{{ _("Enregistrer") }}</button>
+                        <button type="button" id="em-test" class="btn-secondary">{{ _("Tester la connexion") }}</button>
+                        <button type="button" id="em-check" class="btn-secondary"><i class="fas fa-sync-alt mr-1"></i>{{ _("Relever maintenant") }}</button>
+                    </div>
+                    {% else %}
+                    <p class="text-sm">{{ _("Seul un administrateur peut configurer la boîte mail du cadre.") }}</p>
+                    {% endif %}
+                    <p id="em-status" class="text-sm mt-2"></p>
+                </fieldset>
+                <style>
+                    .em-grid { grid-template-columns: max-content 1fr; align-items: center; }
+                    @media (max-width: 640px) { .em-grid { grid-template-columns: 1fr; } }
+                </style>
+                {% if is_admin %}
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { saved: {{ _("Mot de passe enregistré (laisser vide pour le garder)")|tojson }}, testing: {{ _("Connexion…")|tojson }} };
+                        const say = (t, ok) => { $("em-status").textContent = t || ""; $("em-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                        let providers = {};
+                        async function load() {
+                            const d = await (await fetch("/api/email")).json();
+                            providers = d.providers;
+                            $("em-enabled").checked = d.enabled; $("em-user").value = d.user; $("em-host").value = d.host; $("em-port").value = d.port;
+                            $("em-folder").value = d.folder; $("em-allowed").value = d.allowed.join(", "); $("em-unknown").value = d.unknown;
+                            $("em-password").value = ""; $("em-password").placeholder = d.has_password ? T.saved : "";
+                        }
+                        $("em-user").addEventListener("change", () => {
+                            const domain = ($("em-user").value.split("@")[1] || "").toLowerCase();
+                            if (providers[domain] && !$("em-host").value) $("em-host").value = providers[domain];
+                        });
+                        const values = () => ({ enabled: $("em-enabled").checked, user: $("em-user").value, password: $("em-password").value, host: $("em-host").value,
+                                                port: $("em-port").value, folder: $("em-folder").value, allowed: $("em-allowed").value, unknown: $("em-unknown").value });
+                        const save = async () => { const r = await post("/api/email", values()); if (r.success) await load(); return r; };
+                        $("em-save").addEventListener("click", async () => { const r = await save(); say(r.message, r.success); });
+                        $("em-enabled").addEventListener("change", async () => { const r = await save(); say(r.message, r.success); });
+                        $("em-test").addEventListener("click", async () => {
+                            const saved = await save(); if (!saved.success) { say(saved.message, false); return; }
+                            say(T.testing, true); const r = await post("/api/email/test"); say(r.message, r.success);
+                        });
+                        $("em-check").addEventListener("click", async () => { say(T.testing, true); const r = await post("/api/email/check"); say(r.message, r.success); });
+                        load();
+                    });
+                </script>
+                {% endif %}
 
                 <fieldset class="mt-4 hidden" id="gdrive-denied-box">
                     <legend>
