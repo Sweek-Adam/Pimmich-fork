@@ -33,3 +33,24 @@ def test_rotate_logs(tmp_path):
     log.write_bytes(b"y" * 2000)
     reliability.rotate_logs(tmp_path, max_bytes=1000)
     assert gzip.open(tmp_path / "pimmich.log.2.gz").read() == b"x" * 2000 and gzip.open(tmp_path / "pimmich.log.1.gz").read() == b"y" * 2000
+
+
+def test_admin_https_api(admin_client, monkeypatch):
+    from utils import remote_guests
+    monkeypatch.setattr(remote_guests, "tailscale_status", lambda: {"installed": True, "connected": True, "dns_name": "cadre.tail.ts.net", "funnel": False})
+    monkeypatch.setattr(remote_guests, "admin_https_status", lambda: True)
+    data = admin_client.get("/api/admin_https").get_json()
+    assert data["enabled"] and data["link"] == "https://cadre.tail.ts.net:8443"
+    calls = []
+    monkeypatch.setattr(remote_guests, "set_admin_https", lambda enabled: calls.append(enabled) or (False, "Serve is not enabled.\nTo enable, visit:\n\n  https://login.tailscale.com/f/serve?node=x\n"))
+    r = admin_client.post("/api/admin_https", json={"enabled": True}, headers={"Sec-Fetch-Site": "same-origin"})
+    assert r.status_code == 409 and r.get_json()["activation_url"].startswith("https://login.tailscale.com/") and calls == [True]
+
+
+def test_sd_protection(tmp_path):
+    mounts = tmp_path / "mounts"
+    mounts.write_text("/dev/mmcblk0p2 / ext4 rw 0 0\n")
+    assert reliability.sd_protection(mounts, tmp_path / "none.conf") == {"log2ram": False, "journald_limited": False}
+    mounts.write_text("/dev/mmcblk0p2 / ext4 rw 0 0\nlog2ram /var/log tmpfs rw 0 0\n")
+    (tmp_path / "j.conf").write_text("[Journal]\n")
+    assert reliability.sd_protection(mounts, tmp_path / "j.conf") == {"log2ram": True, "journald_limited": True}

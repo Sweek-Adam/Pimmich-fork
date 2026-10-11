@@ -57,19 +57,50 @@ def set_funnel(enabled, timeout=40):
     """Publie (ou retire) l'entrée invités sur internet. Retourne (ok, message ou adresse d'activation).
 
     Si Funnel n'est pas encore autorisé sur le compte Tailscale, la commande affiche une adresse d'activation puis
-    attend : on renvoie cette adresse sans attendre.
+    attend : on renvoie cette adresse sans attendre. Le retrait ne touche qu'au port 443 (pas à l'administration).
     """
+    args = ["tailscale", "funnel", "--bg", str(REMOTE_PORT)] if enabled else ["tailscale", "funnel", "--https=443", "off"]
+    return _tailscale(args, timeout)
+
+
+# --- Administration en HTTPS dans le tailnet (certificat reconnu, fourni et renouvelé par Tailscale) ---
+
+ADMIN_PORT = 8443  # le port 443 de l'adresse *.ts.net est réservé à la page invités (Funnel)
+
+
+def admin_https_status():
+    """L'administration est-elle publiée dans le tailnet (https://machine.tailnet.ts.net:8443) ?"""
+    if not shutil.which("tailscale"):
+        return False
+    result = _run("tailscale", "serve", "status", "--json")
+    try:
+        data = json.loads(result.stdout) if result and result.returncode == 0 and result.stdout.strip() else {}
+    except ValueError:
+        return False
+    return str(ADMIN_PORT) in (data.get("TCP") or {})
+
+
+def set_admin_https(enabled, timeout=60):
+    """Publie l'administration dans le tailnet seulement (jamais sur internet) : Tailscale termine le HTTPS avec un
+    vrai certificat et transmet à nginx (certificat local auto-signé, d'où « https+insecure »)."""
+    args = (["tailscale", "serve", "--bg", f"--https={ADMIN_PORT}", "https+insecure://127.0.0.1:443"] if enabled
+            else ["tailscale", "serve", f"--https={ADMIN_PORT}", "off"])
+    return _tailscale(args, timeout)
+
+
+def _tailscale(args, timeout):
+    """Lance une commande Tailscale ; si elle attend une autorisation dans la console Tailscale, renvoie tout de suite
+    (False, sortie contenant l'adresse d'activation)."""
+    import os
     import re
+    import select
     import time
-    args = ["tailscale", "funnel", "--bg", str(REMOTE_PORT)] if enabled else ["tailscale", "funnel", "reset"]
     if not shutil.which("tailscale"):
         return False, "tailscale introuvable"
     try:
         process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     except OSError as e:
         return False, str(e)
-    import os
-    import select
     output, deadline = b"", time.time() + timeout
     while time.time() < deadline:
         ready, _w, _x = select.select([process.stdout], [], [], 0.5)

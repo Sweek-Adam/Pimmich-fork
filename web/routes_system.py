@@ -823,3 +823,39 @@ def full_backup_storage_restore_api():
         threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
     restart_slideshow_process()
     return jsonify({"success": True, "message": _("%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde.", count=count)})
+
+
+# --- Administration en HTTPS sans avertissement, depuis n'importe où (Tailscale, dans le tailnet seulement) ---
+
+@app.route('/api/admin_https', methods=['GET'])
+@admin_required
+def admin_https_status_api():
+    from utils import remote_guests
+    status = remote_guests.tailscale_status()
+    enabled = remote_guests.admin_https_status() if status["installed"] else False
+    link = f"https://{status['dns_name']}:{remote_guests.ADMIN_PORT}" if status["dns_name"] else None
+    return jsonify({"success": True, "installed": status["installed"], "connected": status["connected"],
+                    "enabled": enabled, "link": link if enabled else None})
+
+
+@app.route('/api/admin_https', methods=['POST'])
+@admin_required
+def admin_https_toggle_api():
+    from utils import remote_guests
+    enabled = bool((request.get_json(silent=True) or {}).get("enabled"))
+    ok, output = remote_guests.set_admin_https(enabled)
+    if not ok:
+        activation = re.search(r"https://login\.tailscale\.com/\S+", output or "")
+        if activation:  # certificats HTTPS pas encore autorisés sur le compte Tailscale
+            return jsonify({"success": False, "activation_url": activation.group(0),
+                            "message": _("Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page qui s'ouvre), puis réessayez.")}), 409
+        return jsonify({"success": False, "message": _("Tailscale refuse la publication : %(detail)s", detail=(output or "")[-400:])}), 502
+    return jsonify({"success": True, "message": _("L'administration est accessible en HTTPS, sans avertissement, depuis vos appareils Tailscale.") if enabled
+                    else _("Accès HTTPS par Tailscale retiré.")})
+
+
+@app.route('/api/sd_protection', methods=['GET'])
+@admin_required
+def sd_protection_api():
+    from utils import reliability
+    return jsonify({"success": True, **reliability.sd_protection()})

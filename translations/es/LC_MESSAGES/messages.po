@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 11:10+0200\n"
+"POT-Creation-Date: 2026-10-11 11:21+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -377,7 +377,7 @@ msgstr "Un invitado"
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_invites.html.jinja:186
-#: templates/configure/tab_maintenance.html.jinja:213
+#: templates/configure/tab_maintenance.html.jinja:254
 #: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:495
 #: templates/guestbook.html.jinja:27
@@ -396,14 +396,14 @@ msgstr "Conexión"
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
 #: templates/configure/tab_comptes.html.jinja:118
-#: templates/configure/tab_maintenance.html.jinja:186
+#: templates/configure/tab_maintenance.html.jinja:227
 #: templates/login.html.jinja:56
 msgid "Utilisateur"
 msgstr "Usuario"
 
 #: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
-#: templates/configure/tab_maintenance.html.jinja:187
+#: templates/configure/tab_maintenance.html.jinja:228
 #: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
 msgid "Mot de passe"
 msgstr "Contraseña"
@@ -1535,6 +1535,7 @@ msgstr "Prueba en progreso..."
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
 #: templates/configure/tab_maintenance.html.jinja:140
+#: templates/configure/tab_maintenance.html.jinja:184
 msgid "Erreur de communication avec le serveur."
 msgstr "Error de comunicación con el servidor."
 
@@ -4009,7 +4010,7 @@ msgstr ""
 "https://192.168.1.30) y ese código."
 
 #: templates/configure/tab_invites.html.jinja:159
-#: templates/configure/tab_maintenance.html.jinja:185
+#: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
 msgstr "Dirección"
 
@@ -4348,7 +4349,7 @@ msgid "Alimentation"
 msgstr "Alimentación"
 
 #: templates/configure/tab_maintenance.html.jinja:10
-#: templates/configure/tab_maintenance.html.jinja:212
+#: templates/configure/tab_maintenance.html.jinja:253
 msgid "Carte SD"
 msgstr "Tarjeta SD"
 
@@ -4455,7 +4456,7 @@ msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
 msgstr "Primero añade un soporte en «Almacenamiento de fotos» más abajo."
 
 #: templates/configure/tab_maintenance.html.jinja:86
-#: templates/configure/tab_maintenance.html.jinja:303
+#: templates/configure/tab_maintenance.html.jinja:344
 msgid "Sauvegarder maintenant"
 msgstr "Hacer copia de seguridad ahora"
 
@@ -4486,19 +4487,53 @@ msgstr "Restaurando..."
 msgid "Aucun fichier sélectionné."
 msgstr "No hay archivos seleccionados."
 
+#: templates/configure/tab_maintenance.html.jinja:160
+msgid "HTTPS sans avertissement (Tailscale)"
+msgstr "HTTPS sin advertencias (Tailscale)"
+
 #: templates/configure/tab_maintenance.html.jinja:161
+msgid ""
+"Ouvre l'administration à une adresse sécurisée par un vrai certificat, "
+"depuis vos appareils connectés à Tailscale (à la maison comme ailleurs). "
+"Elle n'est jamais publiée sur internet."
+msgstr ""
+"Abre la administración en una dirección protegida por un certificado "
+"real, desde tus dispositivos conectados a Tailscale (en casa o fuera). "
+"Nunca se publica en internet."
+
+#: templates/configure/tab_maintenance.html.jinja:162
+msgid "Activer l'accès HTTPS par Tailscale"
+msgstr "Activar el acceso HTTPS por Tailscale"
+
+#: templates/configure/tab_maintenance.html.jinja:174
+msgid "Tailscale n'est pas installé sur ce cadre."
+msgstr "Tailscale no está instalado en este marco."
+
+#: templates/configure/tab_maintenance.html.jinja:175
+msgid "Tailscale n'est pas connecté."
+msgstr "Tailscale no está conectado."
+
+#: templates/configure/tab_maintenance.html.jinja:180
+msgid "Un instant..."
+msgstr "Un momento..."
+
+#: templates/configure/tab_maintenance.html.jinja:190
+msgid "Autoriser sur Tailscale"
+msgstr "Autorizar en Tailscale"
+
+#: templates/configure/tab_maintenance.html.jinja:202
 msgid "Espace disque"
 msgstr "Espacio en disco"
 
-#: templates/configure/tab_maintenance.html.jinja:164
+#: templates/configure/tab_maintenance.html.jinja:205
 msgid "Alerter sous (Go libres) :"
 msgstr "Avisar por debajo de (GB libres):"
 
-#: templates/configure/tab_maintenance.html.jinja:168
+#: templates/configure/tab_maintenance.html.jinja:209
 msgid "Libérer de la place automatiquement"
 msgstr "Liberar espacio automáticamente"
 
-#: templates/configure/tab_maintenance.html.jinja:170
+#: templates/configure/tab_maintenance.html.jinja:211
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
 "sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont"
@@ -4508,11 +4543,11 @@ msgstr ""
 "del Drive se borran del marco, empezando por los más antiguos. Los "
 "favoritos nunca se eliminan."
 
-#: templates/configure/tab_maintenance.html.jinja:174
+#: templates/configure/tab_maintenance.html.jinja:215
 msgid "Stockage des photos"
 msgstr "Almacenamiento de fotos"
 
-#: templates/configure/tab_maintenance.html.jinja:175
+#: templates/configure/tab_maintenance.html.jinja:216
 msgid ""
 "Les photos peuvent vivre ailleurs que sur la carte SD : un disque ou une "
 "clé USB branché au cadre, ou un partage réseau (NAS). Choisissez "
@@ -4525,57 +4560,57 @@ msgstr ""
 "fuente; el marco copia las fotos, comprueba la copia y libera el espacio."
 " Menos escrituras en la tarjeta SD también significa que dura más."
 
-#: templates/configure/tab_maintenance.html.jinja:179
+#: templates/configure/tab_maintenance.html.jinja:220
 msgid "Ajouter un support"
 msgstr "Añadir un soporte"
 
-#: templates/configure/tab_maintenance.html.jinja:181
+#: templates/configure/tab_maintenance.html.jinja:222
 msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
 msgstr "No se detecta ningún disco USB: conéctalo y vuelve a abrir esta pestaña."
 
-#: templates/configure/tab_maintenance.html.jinja:183
+#: templates/configure/tab_maintenance.html.jinja:224
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "Carpeta de red (NAS, ordenador)"
 
-#: templates/configure/tab_maintenance.html.jinja:189
+#: templates/configure/tab_maintenance.html.jinja:230
 msgid "Ajouter le partage"
 msgstr "Añadir la carpeta"
 
-#: templates/configure/tab_maintenance.html.jinja:193
+#: templates/configure/tab_maintenance.html.jinja:234
 msgid "Emplacement de chaque source"
 msgstr "Ubicación de cada fuente"
 
-#: templates/configure/tab_maintenance.html.jinja:212
+#: templates/configure/tab_maintenance.html.jinja:253
 msgid "libres sur"
 msgstr "libres de"
 
-#: templates/configure/tab_maintenance.html.jinja:212
+#: templates/configure/tab_maintenance.html.jinja:253
 msgid "Débranché"
 msgstr "Desconectado"
 
-#: templates/configure/tab_maintenance.html.jinja:213
+#: templates/configure/tab_maintenance.html.jinja:254
 msgid "Utiliser ce disque"
 msgstr "Usar este disco"
 
-#: templates/configure/tab_maintenance.html.jinja:213
+#: templates/configure/tab_maintenance.html.jinja:254
 #, python-brace-format
 msgid "Déplacement de « {source} » : {done} / {total} fichiers"
 msgstr "Moviendo «{source}»: {done} / {total} archivos"
 
-#: templates/configure/tab_maintenance.html.jinja:214
+#: templates/configure/tab_maintenance.html.jinja:255
 msgid "fichiers"
 msgstr "archivos"
 
-#: templates/configure/tab_maintenance.html.jinja:214
+#: templates/configure/tab_maintenance.html.jinja:255
 msgid "support débranché"
 msgstr "soporte desconectado"
 
-#: templates/configure/tab_maintenance.html.jinja:214
+#: templates/configure/tab_maintenance.html.jinja:255
 #, python-brace-format
 msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "¿Mover las fotos de «{source}» a «{target}»?"
 
-#: templates/configure/tab_maintenance.html.jinja:215
+#: templates/configure/tab_maintenance.html.jinja:256
 msgid ""
 "Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
 "un dossier « pimmich »."
@@ -4583,11 +4618,11 @@ msgstr ""
 "Se conserva el contenido actual del disco: Pimmich guarda sus fotos en "
 "una carpeta «pimmich»."
 
-#: templates/configure/tab_maintenance.html.jinja:283
+#: templates/configure/tab_maintenance.html.jinja:324
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr "Copia de seguridad automática en Google Drive"
 
-#: templates/configure/tab_maintenance.html.jinja:285
+#: templates/configure/tab_maintenance.html.jinja:326
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
 "messages dans un dossier de votre Google Drive (connexion rclone). Les "
@@ -4597,69 +4632,69 @@ msgstr ""
 "invitaciones y mensajes en una carpeta de su Google Drive (conexión "
 "rclone). Las fotos no se incluyen."
 
-#: templates/configure/tab_maintenance.html.jinja:288 utils/health.py:159
+#: templates/configure/tab_maintenance.html.jinja:329 utils/health.py:159
 msgid "Activer la sauvegarde automatique"
 msgstr "Activar la copia de seguridad automática"
 
-#: templates/configure/tab_maintenance.html.jinja:291
+#: templates/configure/tab_maintenance.html.jinja:332
 msgid "Dossier Google Drive :"
 msgstr "Carpeta de Google Drive:"
 
-#: templates/configure/tab_maintenance.html.jinja:293
+#: templates/configure/tab_maintenance.html.jinja:334
 msgid "Toutes les (heures) :"
 msgstr "Cada (horas):"
 
-#: templates/configure/tab_maintenance.html.jinja:295
+#: templates/configure/tab_maintenance.html.jinja:336
 msgid "Sauvegardes conservées :"
 msgstr "Copias de seguridad conservadas:"
 
-#: templates/configure/tab_maintenance.html.jinja:301
+#: templates/configure/tab_maintenance.html.jinja:342
 msgid "Enregistrer ces réglages"
 msgstr "Guardar esta configuración"
 
-#: templates/configure/tab_maintenance.html.jinja:305
+#: templates/configure/tab_maintenance.html.jinja:346
 msgid "Restaurer la dernière sauvegarde"
 msgstr "Restaurar la última copia de seguridad"
 
-#: templates/configure/tab_maintenance.html.jinja:317
+#: templates/configure/tab_maintenance.html.jinja:358
 msgid "Go libres sur"
 msgstr "GB libres de"
 
-#: templates/configure/tab_maintenance.html.jinja:317
+#: templates/configure/tab_maintenance.html.jinja:358
 msgid "utilisés"
 msgstr "usados"
 
-#: templates/configure/tab_maintenance.html.jinja:318
+#: templates/configure/tab_maintenance.html.jinja:359
 msgid "espace faible"
 msgstr "poco espacio"
 
-#: templates/configure/tab_maintenance.html.jinja:319
+#: templates/configure/tab_maintenance.html.jinja:360
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr "medio(s) de Google Drive podrían eliminarse automáticamente."
 
-#: templates/configure/tab_maintenance.html.jinja:326
+#: templates/configure/tab_maintenance.html.jinja:367
 msgid "Dernière sauvegarde réussie :"
 msgstr "Última copia de seguridad correcta:"
 
-#: templates/configure/tab_maintenance.html.jinja:327
+#: templates/configure/tab_maintenance.html.jinja:368
 msgid "Dernier échec :"
 msgstr "Último error:"
 
-#: templates/configure/tab_maintenance.html.jinja:340
+#: templates/configure/tab_maintenance.html.jinja:381
 msgid "Sauvegarde en cours..."
 msgstr "Copia de seguridad en curso..."
 
-#: templates/configure/tab_maintenance.html.jinja:342
+#: templates/configure/tab_maintenance.html.jinja:383
 msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
 msgstr ""
 "¿Reemplazar la configuración actual por la última copia de seguridad del "
 "Drive?"
 
-#: templates/configure/tab_maintenance.html.jinja:351
+#: templates/configure/tab_maintenance.html.jinja:392
 msgid "Mise à jour de l'application"
 msgstr "Actualización de la aplicación"
 
-#: templates/configure/tab_maintenance.html.jinja:353
+#: templates/configure/tab_maintenance.html.jinja:394
 msgid ""
 "Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
 "version ne démarre pas, le cadre revient tout seul à la version "
@@ -4668,55 +4703,55 @@ msgstr ""
 "Pimmich se actualiza desde GitHub y luego se reinicia. Si la nueva "
 "versión no arranca, el marco vuelve solo a la versión anterior."
 
-#: templates/configure/tab_maintenance.html.jinja:355
+#: templates/configure/tab_maintenance.html.jinja:396
 msgid "Version installée :"
 msgstr "Versión instalada:"
 
-#: templates/configure/tab_maintenance.html.jinja:362
+#: templates/configure/tab_maintenance.html.jinja:403
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "¿Iniciar la actualización? Serás redirigido a la página de seguimiento."
 
-#: templates/configure/tab_maintenance.html.jinja:363
+#: templates/configure/tab_maintenance.html.jinja:404
 msgid "Lancer la mise à jour"
 msgstr "Iniciar la actualización"
 
-#: templates/configure/tab_maintenance.html.jinja:365
+#: templates/configure/tab_maintenance.html.jinja:406
 msgid "Revenir à la version précédente"
 msgstr "Volver a la versión anterior"
 
-#: templates/configure/tab_maintenance.html.jinja:369
+#: templates/configure/tab_maintenance.html.jinja:410
 msgid "Pimmich est à jour."
 msgstr "Pimmich está actualizado."
 
-#: templates/configure/tab_maintenance.html.jinja:369
+#: templates/configure/tab_maintenance.html.jinja:410
 msgid "Mise à jour disponible :"
 msgstr "Actualización disponible:"
 
-#: templates/configure/tab_maintenance.html.jinja:369
+#: templates/configure/tab_maintenance.html.jinja:410
 msgid "changement(s)"
 msgstr "cambio(s)"
 
-#: templates/configure/tab_maintenance.html.jinja:370
+#: templates/configure/tab_maintenance.html.jinja:411
 msgid "Impossible de joindre GitHub (connexion internet ?)."
 msgstr "No se puede contactar con GitHub (¿conexión a internet?)."
 
-#: templates/configure/tab_maintenance.html.jinja:371
+#: templates/configure/tab_maintenance.html.jinja:412
 msgid "Dernière mise à jour en cours de validation (redémarrage)."
 msgstr "Última actualización en validación (reinicio)."
 
-#: templates/configure/tab_maintenance.html.jinja:372
+#: templates/configure/tab_maintenance.html.jinja:413
 msgid "Le cadre est revenu à une version précédente."
 msgstr "El marco ha vuelto a una versión anterior."
 
-#: templates/configure/tab_maintenance.html.jinja:373
+#: templates/configure/tab_maintenance.html.jinja:414
 msgid "Revenir à la version précédente ? Pimmich va redémarrer."
 msgstr "¿Volver a la versión anterior? Pimmich se reiniciará."
 
-#: templates/configure/tab_maintenance.html.jinja:403
+#: templates/configure/tab_maintenance.html.jinja:444
 msgid "Système de Fichiers de la Carte SD"
 msgstr "Sistema de archivos de tarjeta SD"
 
-#: templates/configure/tab_maintenance.html.jinja:405
+#: templates/configure/tab_maintenance.html.jinja:446
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -4729,11 +4764,11 @@ msgstr ""
 "disponible. Será necesario reiniciar el sistema para completar la "
 "operación."
 
-#: templates/configure/tab_maintenance.html.jinja:409
+#: templates/configure/tab_maintenance.html.jinja:450
 msgid "Note :"
 msgstr "Nota :"
 
-#: templates/configure/tab_maintenance.html.jinja:409
+#: templates/configure/tab_maintenance.html.jinja:450
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
@@ -4742,15 +4777,37 @@ msgstr ""
 "Esta operación es segura y no elimina ningún dato. Simplemente prepara el"
 " sistema para ampliarse en el próximo arranque."
 
-#: templates/configure/tab_maintenance.html.jinja:414
+#: templates/configure/tab_maintenance.html.jinja:455
 msgid "Étendre le système de fichiers"
 msgstr "Ampliar el sistema de archivos"
 
-#: templates/configure/tab_maintenance.html.jinja:421
+#: templates/configure/tab_maintenance.html.jinja:458
+msgid "Protection contre l'usure"
+msgstr "Protección contra el desgaste"
+
+#: templates/configure/tab_maintenance.html.jinja:465
+msgid ""
+"Active : les journaux sont écrits en mémoire vive et recopiés sur la "
+"carte une fois par jour."
+msgstr ""
+"Activa: los registros se escriben en la RAM y se copian a la tarjeta una "
+"vez al día."
+
+#: templates/configure/tab_maintenance.html.jinja:466
+msgid ""
+"Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur"
+" le Raspberry Pi : sudo ~/pimmich/utils/enable_sd_protection.sh puis "
+"redémarrez."
+msgstr ""
+"Inactiva. Para reducir las escrituras en la tarjeta SD, ejecuta una vez "
+"en la Raspberry Pi: sudo ~/pimmich/utils/enable_sd_protection.sh y "
+"reinicia."
+
+#: templates/configure/tab_maintenance.html.jinja:473
 msgid "Contrôle du système"
 msgstr "Control del sistema"
 
-#: templates/configure/tab_maintenance.html.jinja:424
+#: templates/configure/tab_maintenance.html.jinja:476
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
@@ -4758,31 +4815,31 @@ msgstr ""
 "¿Está seguro de que desea reiniciar SOLO la aplicación web? El sistema "
 "operativo no se reiniciará."
 
-#: templates/configure/tab_maintenance.html.jinja:427
+#: templates/configure/tab_maintenance.html.jinja:479
 msgid "Redémarrer l'application web"
 msgstr "Reiniciar la aplicación web"
 
-#: templates/configure/tab_maintenance.html.jinja:436
+#: templates/configure/tab_maintenance.html.jinja:488
 msgid "Redémarrer le système"
 msgstr "Reiniciar el sistema"
 
-#: templates/configure/tab_maintenance.html.jinja:444
+#: templates/configure/tab_maintenance.html.jinja:496
 msgid "Supprimer les logs"
 msgstr "Eliminar registros"
 
-#: templates/configure/tab_maintenance.html.jinja:449
+#: templates/configure/tab_maintenance.html.jinja:501
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "¿Está seguro que desea apagar el sistema?"
 
-#: templates/configure/tab_maintenance.html.jinja:452
+#: templates/configure/tab_maintenance.html.jinja:504
 msgid "Éteindre le système"
 msgstr "Apague el sistema"
 
-#: templates/configure/tab_maintenance.html.jinja:457
+#: templates/configure/tab_maintenance.html.jinja:509
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Volver a Raspberry Pi OS (escritorio)"
 
-#: templates/configure/tab_maintenance.html.jinja:462
+#: templates/configure/tab_maintenance.html.jinja:514
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
@@ -7696,7 +7753,7 @@ msgstr ""
 "Autoriza primero Funnel en tu cuenta de Tailscale (botón «Enable» en la "
 "página que se abre) y vuelve a activar «Fuera de casa»."
 
-#: web/routes_guests.py:558
+#: web/routes_guests.py:558 web/routes_system.py:852
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale rechaza la publicación: %(detail)s"
@@ -8543,6 +8600,26 @@ msgstr "Copia iniciada: puede tardar con muchas fotos."
 #: web/routes_system.py:813 web/routes_system.py:816
 msgid "Sauvegarde introuvable."
 msgstr "Copia no encontrada."
+
+#: web/routes_system.py:851
+msgid ""
+"Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
+"qui s'ouvre), puis réessayez."
+msgstr ""
+"Primero autoriza los certificados HTTPS en tu cuenta de Tailscale (página"
+" que se abre) y vuelve a intentarlo."
+
+#: web/routes_system.py:853
+msgid ""
+"L'administration est accessible en HTTPS, sans avertissement, depuis vos "
+"appareils Tailscale."
+msgstr ""
+"La administración es accesible por HTTPS, sin advertencias, desde tus "
+"dispositivos Tailscale."
+
+#: web/routes_system.py:854
+msgid "Accès HTTPS par Tailscale retiré."
+msgstr "Acceso HTTPS por Tailscale retirado."
 
 #: web/routes_voice.py:32
 msgid "Le service est arrêté."

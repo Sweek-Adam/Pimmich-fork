@@ -156,6 +156,47 @@
                 </script>
             </fieldset>
 
+            <fieldset class="mt-6" id="admin-https">
+                <legend><h3><i class="fas fa-lock mr-2"></i>{{ _("HTTPS sans avertissement (Tailscale)") }}</h3></legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Ouvre l'administration à une adresse sécurisée par un vrai certificat, depuis vos appareils connectés à Tailscale (à la maison comme ailleurs). Elle n'est jamais publiée sur internet.") }}</p>
+                <label class="inline-flex items-center"><input type="checkbox" id="ah-enabled" class="mr-2">{{ _("Activer l'accès HTTPS par Tailscale") }}</label>
+                <p id="ah-info" class="text-sm mt-2"></p>
+                <p class="mt-2"><a id="ah-link" class="text-blue-600 underline break-all hidden" target="_blank" rel="noopener"></a></p>
+                <script>
+                    (() => {
+                        const $ = id => document.getElementById(id);
+                        const info = (text, ok, html) => { const el = $("ah-info"); el.className = "text-sm mt-2 " + (ok === false ? "text-red-600" : "text-gray-700"); el.textContent = text || ""; if (html) el.append(" ", html); };
+                        async function load() {
+                            let d;
+                            try { d = await (await fetch("/api/admin_https")).json(); } catch (e) { return; }
+                            $("ah-enabled").checked = !!d.enabled;
+                            $("ah-enabled").disabled = !d.installed;
+                            if (!d.installed) info({{ _("Tailscale n'est pas installé sur ce cadre.")|tojson }}, false);
+                            else if (!d.connected) info({{ _("Tailscale n'est pas connecté.")|tojson }}, false);
+                            $("ah-link").classList.toggle("hidden", !d.link);
+                            if (d.link) { $("ah-link").href = d.link; $("ah-link").textContent = d.link; }
+                        }
+                        $("ah-enabled").addEventListener("change", async () => {
+                            info({{ _("Un instant...")|tojson }});
+                            let r;
+                            try {
+                                r = await (await fetch("/api/admin_https", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({enabled: $("ah-enabled").checked})})).json();
+                            } catch (e) { r = {success: false, message: {{ _("Erreur de communication avec le serveur.")|tojson }}}; }
+                            let extra = null;
+                            if (r.activation_url) {
+                                extra = document.createElement("a");
+                                extra.href = r.activation_url; extra.target = "_blank"; extra.rel = "noopener";
+                                extra.className = "text-blue-600 underline";
+                                extra.textContent = {{ _("Autoriser sur Tailscale")|tojson }};
+                            }
+                            info(r.message, !!r.success, extra);
+                            load();
+                        });
+                        load();
+                    })();
+                </script>
+            </fieldset>
+
             <fieldset class="mt-6">
                 <legend>
                     <h3>{{ _("Espace disque") }}</h3>
@@ -414,6 +455,17 @@
                     <i class="fas fa-expand-arrows-alt mr-2"></i>{{ _("Étendre le système de fichiers") }}
                 </button>
                 <div id="expand-fs-status" class="status-messages mt-2"></div>
+                <h4 class="font-semibold text-gray-800 mt-5 mb-1"><i class="fas fa-shield-alt mr-2"></i>{{ _("Protection contre l'usure") }}</h4>
+                <p id="sd-protection" class="text-sm text-gray-700"></p>
+                <script>
+                    (async () => {
+                        let d;
+                        try { d = await (await fetch("/api/sd_protection")).json(); } catch (e) { return; }
+                        const el = document.getElementById("sd-protection");
+                        if (d.log2ram) { el.className = "text-sm text-green-700"; el.textContent = {{ _("Active : les journaux sont écrits en mémoire vive et recopiés sur la carte une fois par jour.")|tojson }}; }
+                        else { el.textContent = {{ _("Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur le Raspberry Pi : sudo ~/pimmich/utils/enable_sd_protection.sh puis redémarrez.")|tojson }}; }
+                    })();
+                </script>
             </fieldset>
 
             <fieldset class="mt-6">

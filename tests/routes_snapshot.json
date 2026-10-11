@@ -6,6 +6,18 @@
   ]
  ],
  [
+  "/api/admin_https",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/admin_https",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/ambiance",
   [
    "POST"
@@ -852,6 +864,12 @@
  ],
  [
   "/api/scan_wifi",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/sd_protection",
   [
    "GET"
   ]

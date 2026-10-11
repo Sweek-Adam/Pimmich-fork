@@ -70,3 +70,12 @@ def rotate_logs(folder, max_bytes=5 * 1024 * 1024, keep=3):
             handle.truncate(0)
         rotated.append(log.name)
     return rotated
+
+
+def sd_protection(mounts="/proc/mounts", journald_conf="/etc/systemd/journald.conf.d/pimmich.conf"):
+    """Protection de la carte SD : journaux en mémoire vive (log2ram) et journald limité."""
+    try:
+        log2ram = any(line.split()[0] == "log2ram" for line in Path(mounts).read_text().splitlines() if line.strip())
+    except OSError:
+        log2ram = False
+    return {"log2ram": log2ram, "journald_limited": Path(journald_conf).is_file()}
