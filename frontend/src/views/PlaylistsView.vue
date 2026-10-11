@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from "vue";
 import { get, post } from "../api";
-import { boot, classicUrl } from "../boot";
+import SmartAlbumEditor, { type Rules } from "../components/SmartAlbumEditor.vue";
+import { boot } from "../boot";
 import { t } from "../i18n";
 import { notify, run } from "../toast";
 
-interface Playlist { id: string; name: string; photos: string[]; owner?: string; music_file?: string | null }
+interface Playlist { id: string; name: string; photos: string[]; owner?: string; music_file?: string | null; layout?: string; smart?: Rules }
+interface Suggestion { name: string; count: number; icon: string; rules: Rules }
 interface LibraryItem { path: string; thumb: string; source: string; date: string | null; video: boolean; favorite: boolean }
 
 const playlists = ref<Playlist[] | null>(null);
+const musics = ref<string[]>([]);
+const layouts = ref<{ value: string; label: string }[]>([]);
+const suggestions = ref<Suggestion[]>([]);
+const smartEditing = ref<{ id?: string; name: string; smart?: Rules } | null>(null);
 const mineOnly = ref(false);
 const library = ref<LibraryItem[]>([]);
 const thumbs = computed(() => new Map(library.value.map((i) => [i.path, i.thumb])));
@@ -25,6 +31,25 @@ const thumbOf = (path: string) => thumbs.value.get(path) || `/static/prepared/${
 
 async function load() {
   playlists.value = await get<Playlist[]>("/api/playlists");
+}
+
+async function loadExtras() {
+  get<{ files: string[] }>("/api/music_files").then((d) => (musics.value = d.files)).catch(() => {});
+  get<{ choices: { value: string; label: string }[] }>("/api/compositions").then((d) => (layouts.value = d.choices)).catch(() => {});
+  get<{ suggestions: Suggestion[] }>("/api/smart_albums").then((d) => (suggestions.value = d.suggestions)).catch(() => {});
+}
+
+async function setMusic(p: Playlist, file: string) {
+  if (await run(() => post(`/api/playlists/${p.id}/update_music`, { music_file: file || null }))) p.music_file = file || null;
+}
+
+async function setLayout(p: Playlist, layout: string) {
+  if (await run(() => post(`/api/playlists/${p.id}/layout`, { layout }))) p.layout = layout;
+}
+
+function smartSaved() {
+  load();
+  loadExtras();
 }
 
 async function loadLibrary() {
@@ -90,7 +115,7 @@ async function save() {
   load();
 }
 
-onMounted(load);
+onMounted(() => { load(); loadExtras(); });
 </script>
 
 <template>
@@ -102,8 +127,16 @@ onMounted(load);
         <button class="btn primary" type="button" @click="openEditor()"><i class="fas fa-plus"></i>{{ t("Nouvelle playlist") }}</button>
       </div>
     </div>
-    <p class="small muted">{{ t("Choisissez les photos d'un coup, par source, année, mois ou favoris.") }}
-      <a :href="classicUrl('tab-playlists')">{{ t("Albums intelligents, musique et disposition : interface classique") }}</a></p>
+    <p class="small muted">{{ t("Choisissez les photos d'un coup, par source, année, mois ou favoris.") }}</p>
+    <div class="smart">
+      <strong><i class="fas fa-magic"></i> {{ t("Albums intelligents") }}</strong>
+      <span class="small muted">{{ t("Ils se remplissent tout seuls d'après la date, les personnes ou le lieu des photos, et accueillent les nouvelles photos dès leur arrivée.") }}</span>
+      <div class="chips">
+        <button v-for="s in suggestions" :key="s.name" class="suggestion" type="button" @click="smartEditing = { name: s.name, smart: s.rules }">
+          <i class="fas" :class="s.icon"></i> + {{ s.name }} <small>{{ t("{n} photos", { n: s.count }) }}</small></button>
+        <button class="btn small" type="button" @click="smartEditing = { name: '' }"><i class="fas fa-plus"></i>{{ t("Créer un album intelligent") }}</button>
+      </div>
+    </div>
     <label class="check"><input v-model="mineOnly" type="checkbox">{{ t("Seulement mes playlists") }}</label>
     <div v-if="!playlists" class="skeleton" style="height: 140px"></div>
     <p v-else-if="!shown.length" class="muted">{{ t("Aucune playlist pour l'instant.") }}</p>
@@ -116,9 +149,20 @@ onMounted(load);
         <div class="body">
           <strong>{{ p.name }}</strong>
           <span class="small muted">{{ t("{n} photos", { n: p.photos.length }) }}<template v-if="p.owner"> · {{ p.owner }}</template></span>
+          <span v-if="p.smart" class="badge"><i class="fas fa-magic"></i> {{ t("Album intelligent") }}</span>
+          <div class="selects">
+            <select :value="p.layout || 'auto'" :title="t('Disposition de la playlist')" @change="setLayout(p, ($event.target as HTMLSelectElement).value)">
+              <option v-for="c in layouts" :key="c.value" :value="c.value">{{ c.value === "auto" ? t("Comme le diaporama") : c.label }}</option>
+            </select>
+            <select :value="p.music_file || ''" :title="t('Musique de la playlist')" @change="setMusic(p, ($event.target as HTMLSelectElement).value)">
+              <option value="">{{ t("Pas de musique") }}</option>
+              <option v-for="f in musics" :key="f" :value="f">{{ f }}</option>
+            </select>
+          </div>
           <div class="row actions">
             <button class="btn primary" type="button" :disabled="!p.photos.length" @click="play(p)"><i class="fas fa-play"></i>{{ t("Lancer") }}</button>
-            <button class="btn icon" type="button" :title="t('Modifier les photos')" @click="openEditor(p)"><i class="fas fa-images"></i></button>
+            <button v-if="p.smart" class="btn icon" type="button" :title="t('Modifier les règles')" @click="smartEditing = { id: p.id, name: p.name, smart: p.smart }"><i class="fas fa-magic"></i></button>
+            <button v-else class="btn icon" type="button" :title="t('Modifier les photos')" @click="openEditor(p)"><i class="fas fa-images"></i></button>
             <button class="btn icon" type="button" :title="t('Renommer')" @click="rename(p)"><i class="fas fa-pen"></i></button>
             <button class="btn icon danger" type="button" :title="t('Supprimer')" @click="remove(p)"><i class="fas fa-trash-alt"></i></button>
           </div>
@@ -127,6 +171,7 @@ onMounted(load);
     </div>
   </section>
 
+  <SmartAlbumEditor v-if="smartEditing" :album="smartEditing" @close="smartEditing = null" @saved="smartSaved" />
   <div v-if="editor.open" class="editor-backdrop" @click.self="editor.open = false">
     <div class="editor">
       <div class="card-head">
@@ -170,6 +215,16 @@ onMounted(load);
 .empty { grid-column: 1 / -1; grid-row: 1 / 3; display: grid; place-items: center; color: var(--muted); font-size: 1.6rem; }
 .body { padding: .7rem .8rem .8rem; display: grid; gap: .2rem; }
 .actions { margin-top: .4rem; }
+.smart { display: grid; gap: .3rem; margin: .6rem 0; padding: .7rem .8rem; border: 1px dashed var(--border); border-radius: 12px; }
+.smart i { color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
+.suggestion { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .75rem; border-radius: 999px; border: 1px dashed var(--border); font-weight: 600; font-size: .88rem; }
+.suggestion:hover { border-style: solid; background: var(--accent-soft); }
+.suggestion small { color: var(--muted); font-weight: 500; }
+.badge { justify-self: start; font-size: .78rem; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: .15rem .55rem; border-radius: 999px; }
+.selects { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; margin-top: .3rem; }
+.selects select { font: inherit; font-size: .85rem; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: .3rem .4rem; min-width: 0; }
+.btn.small { padding: .3rem .8rem; font-size: .85rem; }
 .actions .btn.icon { width: 2.3rem; height: 2.3rem; }
 .editor-backdrop { position: fixed; inset: 0; z-index: 55; background: rgba(0, 0, 0, .45); display: grid; place-items: center; padding: 1rem; }
 .editor { width: min(1100px, 100%); max-height: 100%; display: flex; flex-direction: column; background: var(--surface); border-radius: 18px; padding: 1rem; box-shadow: var(--shadow); }

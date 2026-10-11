@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 19:22+0200\n"
+"POT-Creation-Date: 2026-10-11 19:36+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -176,7 +176,9 @@ msgstr "Vorbereitung"
 msgid "téléchargement"
 msgstr "Download"
 
-#: frontend/src/i18n.ts:2 frontend/src/views/PlaylistsView.vue:118
+#: frontend/src/components/SmartAlbumEditor.vue:121 frontend/src/i18n.ts:2
+#: frontend/src/views/PlaylistsView.vue:136
+#: frontend/src/views/PlaylistsView.vue:151
 #: frontend/src/views/QueueView.vue:102 frontend/src/views/TripsView.vue:258
 #: frontend/src/views/TripsView.vue:288
 #: templates/configure/_smart_albums.html.jinja:80
@@ -203,7 +205,8 @@ msgstr "Fotos"
 msgid "Importer"
 msgstr "Importieren"
 
-#: frontend/src/nav.ts:26 templates/configure.html.jinja:145
+#: frontend/src/components/SmartAlbumEditor.vue:107 frontend/src/nav.ts:26
+#: templates/configure.html.jinja:145
 #: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr "Quellen"
@@ -225,7 +228,7 @@ msgid "Playlists"
 msgstr "Wiedergabelisten"
 
 #: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:120
-#: frontend/src/views/PlaylistsView.vue:140 templates/configure.html.jinja:149
+#: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:149
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
@@ -235,15 +238,16 @@ msgstr "Favoriten"
 msgid "Carte"
 msgstr "Karte"
 
-#: frontend/src/nav.ts:32 frontend/src/views/MessagesView.vue:148
+#: frontend/src/nav.ts:32 frontend/src/views/MessagesView.vue:145
 #: templates/configure.html.jinja:151
 #: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "Nachrichten"
 
-#: frontend/src/nav.ts:34 templates/configure.html.jinja:96
-#: templates/configure.html.jinja:245 templates/configure/_tour.html.jinja:33
+#: frontend/src/nav.ts:34 frontend/src/views/DisplayView.vue:24
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:245
+#: templates/configure/_tour.html.jinja:33
 msgid "Écran"
 msgstr "Bildschirm"
 
@@ -373,10 +377,11 @@ msgid "chaque année"
 msgstr "jedes Jahr"
 
 #: frontend/src/components/AgendaCard.vue:58
+#: frontend/src/components/PresenceCard.vue:62
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
 #: frontend/src/views/GuestsView.vue:185 frontend/src/views/GuestsView.vue:207
-#: frontend/src/views/MaintenanceView.vue:241
+#: frontend/src/views/MaintenanceView.vue:243
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
@@ -397,6 +402,7 @@ msgid "Ex : Vacances, Mariage de Julie, Noël"
 msgstr "Z. B. Urlaub, Julias Hochzeit, Weihnachten"
 
 #: frontend/src/components/AgendaCard.vue:65
+#: frontend/src/components/PresenceCard.vue:70
 #: frontend/src/components/RadioCard.vue:71
 #: templates/configure/_son_radio.html.jinja:20
 #: templates/configure/tab_affichage.html.jinja:360
@@ -492,8 +498,9 @@ msgid "Halo lumineux"
 msgstr "Leuchten"
 
 #: frontend/src/components/CaptionEditor.vue:115
+#: frontend/src/components/SmartAlbumEditor.vue:72
 #: frontend/src/views/LibraryView.vue:160
-#: frontend/src/views/PlaylistsView.vue:134
+#: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:263
 #: templates/configure/_playlist_builder.html.jinja:6
 #: templates/configure/_smart_albums.html.jinja:13
@@ -655,7 +662,8 @@ msgid "Reprendre le style général"
 msgstr "Allgemeinen Stil verwenden"
 
 #: frontend/src/components/CaptionEditor.vue:188
-#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:156
+#: frontend/src/components/SmartAlbumEditor.vue:126
+#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:201
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
@@ -664,11 +672,13 @@ msgid "Annuler"
 msgstr "Abbrechen"
 
 #: frontend/src/components/CaptionEditor.vue:189
+#: frontend/src/components/HomeAssistantCard.vue:41
+#: frontend/src/components/QuoteCard.vue:63
 #: frontend/src/components/SettingField.vue:63
 #: frontend/src/components/SpotifyCard.vue:136
 #: frontend/src/components/sources/CloudCards.vue:132
 #: frontend/src/components/sources/GdriveCard.vue:75
-#: frontend/src/views/PlaylistsView.vue:157
+#: frontend/src/views/PlaylistsView.vue:202
 #: frontend/src/views/SoundView.vue:166
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
@@ -681,6 +691,270 @@ msgstr "Abbrechen"
 #: templates/upload.html.jinja:124
 msgid "Enregistrer"
 msgstr "Speichern"
+
+#: frontend/src/components/HomeAssistantCard.vue:27
+#: templates/configure/tab_affichage.html.jinja:293
+msgid "Home Assistant (MQTT)"
+msgstr "Home Assistant (MQTT)"
+
+#: frontend/src/components/HomeAssistantCard.vue:28
+#: frontend/src/views/SoundView.vue:186
+#: templates/configure/tab_affichage.html.jinja:310
+#: templates/configure/tab_son.html.jinja:212
+msgid "connecté"
+msgstr "verbunden"
+
+#: frontend/src/components/HomeAssistantCard.vue:28
+#: templates/configure/tab_affichage.html.jinja:310
+msgid "non connecté"
+msgstr "nicht verbunden"
+
+#: frontend/src/components/HomeAssistantCard.vue:30
+#: templates/configure/tab_affichage.html.jinja:294
+msgid ""
+"Le cadre apparaît tout seul dans Home Assistant : interrupteur du "
+"diaporama (pour l'endormir ou le réveiller), choix de l'ambiance, photo "
+"suivante, et un champ « Alerte » dont le texte s'affiche aussitôt sur le "
+"cadre (ex. « La porte du garage est ouverte »)."
+msgstr ""
+"Der Rahmen erscheint automatisch in Home Assistant: Schalter für die "
+"Diashow (zum Schlafenlegen oder Aufwecken), Stimmungswahl, nächstes Foto "
+"und ein Feld „Alarm“, dessen Text sofort auf dem Rahmen erscheint (z. B. "
+"„Das Garagentor ist offen“)."
+
+#: frontend/src/components/HomeAssistantCard.vue:31
+#: frontend/src/components/PresenceCard.vue:52
+#: frontend/src/views/LayoutsView.vue:115 frontend/src/views/NetworkView.vue:87
+#: templates/configure/tab_affichage.html.jinja:295
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Activer"
+msgstr "Aktivieren"
+
+#: frontend/src/components/HomeAssistantCard.vue:33
+#: templates/configure/tab_affichage.html.jinja:297
+msgid "Serveur MQTT"
+msgstr "MQTT-Server"
+
+#: frontend/src/components/HomeAssistantCard.vue:34
+msgid "Port"
+msgstr "Port"
+
+#: frontend/src/components/HomeAssistantCard.vue:35
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:71
+#: frontend/src/views/AccountsView.vue:86
+#: frontend/src/views/MaintenanceView.vue:254
+#: templates/configure/tab_affichage.html.jinja:298
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:79
+#: templates/configure/tab_comptes.html.jinja:118
+#: templates/configure/tab_maintenance.html.jinja:227
+#: templates/login.html.jinja:37
+msgid "Utilisateur"
+msgstr "Benutzer"
+
+#: frontend/src/components/HomeAssistantCard.vue:36
+#: frontend/src/views/AccountsView.vue:84
+#: frontend/src/views/MaintenanceView.vue:255
+#: frontend/src/views/NetworkView.vue:96
+#: templates/configure/tab_affichage.html.jinja:299
+#: templates/configure/tab_comptes.html.jinja:112
+#: templates/configure/tab_maintenance.html.jinja:228
+#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:39
+msgid "Mot de passe"
+msgstr "Passwort"
+
+#: frontend/src/components/HomeAssistantCard.vue:37
+#: frontend/src/components/sources/CloudCards.vue:122
+#: templates/configure/tab_affichage.html.jinja:310
+#: templates/configure/tab_sources.html.jinja:560
+msgid "Mot de passe enregistré (laisser vide pour le garder)"
+msgstr "Passwort gespeichert (leer lassen, um es zu behalten)"
+
+#: frontend/src/components/HomeAssistantCard.vue:38
+#: templates/configure/tab_affichage.html.jinja:300
+msgid "Nom du cadre"
+msgstr "Name des Rahmens"
+
+#: frontend/src/components/HomeAssistantCard.vue:40
+#: templates/configure/tab_affichage.html.jinja:302
+msgid ""
+"Dans Home Assistant : ajoutez l'intégration MQTT (avec le module "
+"Mosquitto), puis utilisez ici le même utilisateur."
+msgstr ""
+"In Home Assistant: MQTT-Integration hinzufügen (mit dem Mosquitto-Add-on)"
+" und hier denselben Benutzer verwenden."
+
+#: frontend/src/components/PresenceCard.vue:50
+#: templates/configure/tab_affichage.html.jinja:347
+msgid "Réveil à l'arrivée d'un membre de la famille"
+msgstr "Aufwachen, wenn ein Familienmitglied nach Hause kommt"
+
+#: frontend/src/components/PresenceCard.vue:51
+#: templates/configure/tab_affichage.html.jinja:348
+msgid ""
+"Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi "
+"après une absence, le cadre se réveille (30 minutes, même la nuit), "
+"affiche « Bienvenue à la maison » et peut lancer sa playlist."
+msgstr ""
+"Wenn sich das Telefon eines Haushaltsmitglieds nach einer Abwesenheit "
+"wieder mit dem WLAN verbindet, wacht der Rahmen auf (30 Minuten, auch "
+"nachts), zeigt „Willkommen zu Hause“ und kann dessen Playlist starten."
+
+#: frontend/src/components/PresenceCard.vue:55
+#: templates/configure/tab_affichage.html.jinja:360
+msgid "à la maison"
+msgstr "zu Hause"
+
+#: frontend/src/components/PresenceCard.vue:55
+#: templates/configure/tab_affichage.html.jinja:360
+msgid "absent"
+msgstr "abwesend"
+
+#: frontend/src/components/PresenceCard.vue:56
+#: templates/configure/tab_affichage.html.jinja:360
+msgid "Prénom"
+msgstr "Vorname"
+
+#: frontend/src/components/PresenceCard.vue:59
+#: templates/configure/tab_affichage.html.jinja:361
+msgid "Pas de playlist"
+msgstr "Keine Playlist"
+
+#: frontend/src/components/PresenceCard.vue:66
+#: templates/configure/tab_affichage.html.jinja:350
+msgid "Ajouter un téléphone vu sur le Wi-Fi"
+msgstr "Ein im WLAN gesehenes Telefon hinzufügen"
+
+#: frontend/src/components/PresenceCard.vue:67
+#: templates/configure/tab_affichage.html.jinja:351
+msgid ""
+"Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
+"Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
+"sinon l'adresse change."
+msgstr ""
+"WLAN des Telefons einschalten und aktualisieren. Tipp: Auf iPhone und "
+"Android „Private / zufällige MAC-Adresse“ für dieses Netz deaktivieren, "
+"sonst ändert sich die Adresse."
+
+#: frontend/src/components/PresenceCard.vue:71
+#: templates/configure/tab_affichage.html.jinja:361
+msgid "Aucun appareil détecté."
+msgstr "Kein Gerät erkannt."
+
+#: frontend/src/components/PresenceCard.vue:73
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/NetworkView.vue:73
+#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
+#: templates/configure/tab_affichage.html.jinja:353
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr "Aktualisieren"
+
+#: frontend/src/components/QuoteCard.vue:15
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:34
+msgid "Carte postale"
+msgstr "Postkarte"
+
+#: frontend/src/components/QuoteCard.vue:15
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:30
+msgid "Nuit"
+msgstr "Nacht"
+
+#: frontend/src/components/QuoteCard.vue:15
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:48
+msgid "Pastel"
+msgstr "Pastell"
+
+#: frontend/src/components/QuoteCard.vue:15
+#: templates/configure/tab_messages.html.jinja:245
+#: templates/upload.html.jinja:213 utils/message_renderer.py:40
+msgid "Ardoise"
+msgstr "Tafel"
+
+#: frontend/src/components/QuoteCard.vue:15
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:52
+msgid "Minimal"
+msgstr "Minimal"
+
+#: frontend/src/components/QuoteCard.vue:15
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:44
+msgid "Lettre"
+msgstr "Brief"
+
+#: frontend/src/components/QuoteCard.vue:42
+#: templates/configure/tab_messages.html.jinja:215 utils/quotes.py:19
+msgid "Citation du jour"
+msgstr "Zitat des Tages"
+
+#: frontend/src/components/QuoteCard.vue:45
+#: templates/configure/tab_messages.html.jinja:216
+msgid ""
+"Chaque jour, une citation ou un proverbe (dans la langue du cadre), ou un"
+" mot de la famille, apparaît dans le diaporama, environ une fois par "
+"tour."
+msgstr ""
+"Jeden Tag erscheint ein Zitat oder Sprichwort (in der Sprache des "
+"Rahmens) oder ein Familienspruch in der Diashow, etwa einmal pro "
+"Durchlauf."
+
+#: frontend/src/components/QuoteCard.vue:46
+#: templates/configure/tab_messages.html.jinja:217
+msgid "Afficher une citation du jour"
+msgstr "Zitat des Tages anzeigen"
+
+#: frontend/src/components/QuoteCard.vue:48
+#: templates/configure/tab_messages.html.jinja:220
+msgid "Citations :"
+msgstr "Zitate:"
+
+#: frontend/src/components/QuoteCard.vue:50
+#: templates/configure/tab_messages.html.jinja:222
+msgid "Célèbres et mots de la famille"
+msgstr "Berühmte Zitate und Familiensprüche"
+
+#: frontend/src/components/QuoteCard.vue:51
+#: templates/configure/tab_messages.html.jinja:223
+msgid "Citations et proverbes célèbres"
+msgstr "Berühmte Zitate und Sprichwörter"
+
+#: frontend/src/components/QuoteCard.vue:52
+#: templates/configure/tab_messages.html.jinja:224
+msgid "Seulement les mots de la famille"
+msgstr "Nur Familiensprüche"
+
+#: frontend/src/components/QuoteCard.vue:54
+#: templates/configure/tab_messages.html.jinja:228
+msgid "Présentation :"
+msgstr "Darstellung:"
+
+#: frontend/src/components/QuoteCard.vue:56
+#: templates/configure/tab_messages.html.jinja:229
+msgid "Une différente chaque jour"
+msgstr "Jeden Tag eine andere"
+
+#: frontend/src/components/QuoteCard.vue:60
+#: templates/configure/tab_messages.html.jinja:232
+msgid "Les mots de la famille"
+msgstr "Familiensprüche"
+
+#: frontend/src/components/QuoteCard.vue:61
+msgid "On n'est pas aux pièces ! — Papi"
+msgstr "Wir sind doch nicht auf der Flucht! — Opa"
+
+#: frontend/src/components/QuoteCard.vue:62
+#: templates/configure/tab_messages.html.jinja:233
+msgid ""
+"Les phrases cultes de la maison, une par ligne. Ajoutez l'auteur après un"
+" tiret : « On n'est pas aux pièces ! — Papi »."
+msgstr ""
+"Die Kultsprüche des Hauses, einer pro Zeile. Füge den Autor nach einem "
+"Gedankenstrich hinzu: „Wir sind doch nicht auf der Flucht! — Opa“."
+
+#: frontend/src/components/QuoteCard.vue:64
+#: templates/configure/tab_messages.html.jinja:239
+msgid "Aujourd'hui :"
+msgstr "Heute:"
 
 #: frontend/src/components/RadioCard.vue:46
 #: templates/configure/_son_radio.html.jinja:2
@@ -745,6 +1019,126 @@ msgstr "Neueste Folge abspielen"
 msgid "Adresse du flux RSS du podcast"
 msgstr "Adresse des Podcast-RSS-Feeds"
 
+#: frontend/src/components/ScreenCard.vue:16
+#: frontend/src/views/DisplayView.vue:27
+#: templates/configure/tab_affichage.html.jinja:17
+#: templates/configure/tab_affichage.html.jinja:38
+msgid "Paysage (Horizontal)"
+msgstr "Landschaft (horizontal)"
+
+#: frontend/src/components/ScreenCard.vue:16
+#: frontend/src/views/DisplayView.vue:27
+#: templates/configure/tab_affichage.html.jinja:17
+#: templates/configure/tab_affichage.html.jinja:38
+msgid "Portrait (Vertical)"
+msgstr "Porträt (vertikal)"
+
+#: frontend/src/components/ScreenCard.vue:17
+#: frontend/src/views/DisplayView.vue:28
+#: templates/configure/tab_affichage.html.jinja:18
+#: templates/configure/tab_affichage.html.jinja:39
+msgid "Paysage retourné"
+msgstr "Querformat (gedreht)"
+
+#: frontend/src/components/ScreenCard.vue:17
+#: frontend/src/views/DisplayView.vue:28
+#: templates/configure/tab_affichage.html.jinja:18
+#: templates/configure/tab_affichage.html.jinja:39
+msgid "Portrait retourné"
+msgstr "Hochformat (gedreht)"
+
+#: frontend/src/components/ScreenCard.vue:64
+#: templates/configure/tab_affichage.html.jinja:143
+msgid "Résolution de l'écran"
+msgstr "Bildschirmauflösung"
+
+#: frontend/src/components/ScreenCard.vue:65
+#: templates/configure/tab_affichage.html.jinja:154
+msgid ""
+"Force une résolution spécifique. Utile si l'écran n'est pas détecté "
+"correctement au démarrage."
+msgstr ""
+"Erzwingt eine bestimmte Auflösung. Nützlich, wenn der Bildschirm beim "
+"Start nicht richtig erkannt wird."
+
+#: frontend/src/components/ScreenCard.vue:69
+#: templates/configure/tab_affichage.html.jinja:151
+#: templates/configure/tab_son.html.jinja:17
+msgid "Appliquer"
+msgstr "Anwenden"
+
+#: frontend/src/components/ScreenCard.vue:71
+msgid "Voir les résolutions de l'écran"
+msgstr "Bildschirmauflösungen anzeigen"
+
+#: frontend/src/components/ScreenCard.vue:72
+#: templates/configure/tab_affichage.html.jinja:172
+msgid "Détecter la résolution de l'écran actif"
+msgstr "Aktive Bildschirmauflösung erkennen"
+
+#: frontend/src/components/ScreenCard.vue:72
+#: templates/configure/tab_affichage.html.jinja:172
+msgid "Détecter"
+msgstr "Erkennen"
+
+#: frontend/src/components/ScreenCard.vue:74
+#: templates/configure/scripts_status.html.jinja:59
+msgid "Aucune résolution trouvée."
+msgstr "Keine Auflösung gefunden."
+
+#: frontend/src/components/ScreenCard.vue:77
+msgid "Orientation automatique"
+msgstr "Automatische Ausrichtung"
+
+#: frontend/src/components/ScreenCard.vue:78
+#: templates/configure/tab_affichage.html.jinja:25
+msgid ""
+"Branchez un petit accéléromètre I2C (MPU-6050, ADXL345 ou LIS3DH) sur le "
+"Raspberry Pi (SDA, SCL, 3,3 V, GND) et activez l'I2C (sudo raspi-config ›"
+" Interface Options › I2C). Fixez-le au dos du cadre, puis mémorisez ses "
+"positions : cadre posé en paysage d'abord, puis en portrait."
+msgstr ""
+"Schließe einen kleinen I2C-Beschleunigungssensor (MPU-6050, ADXL345 oder "
+"LIS3DH) an den Raspberry Pi an (SDA, SCL, 3,3 V, GND) und aktiviere I2C "
+"(sudo raspi-config › Interface Options › I2C). Befestige ihn hinten am "
+"Rahmen und speichere seine Positionen: zuerst Rahmen im Querformat, dann "
+"im Hochformat."
+
+#: frontend/src/components/ScreenCard.vue:79
+#: templates/configure/tab_affichage.html.jinja:26
+msgid "Capteur :"
+msgstr "Sensor:"
+
+#: frontend/src/components/ScreenCard.vue:80
+#: templates/configure/tab_affichage.html.jinja:37
+msgid "position actuelle :"
+msgstr "aktuelle Lage:"
+
+#: frontend/src/components/ScreenCard.vue:80
+#: templates/configure/tab_affichage.html.jinja:40
+msgid "cadre à plat ou position non mémorisée"
+msgstr "Rahmen liegt flach oder Lage nicht gespeichert"
+
+#: frontend/src/components/ScreenCard.vue:80
+#: templates/configure/tab_affichage.html.jinja:37
+msgid "non détecté"
+msgstr "nicht erkannt"
+
+#: frontend/src/components/ScreenCard.vue:82
+#: templates/configure/tab_affichage.html.jinja:28
+msgid "Le cadre est en paysage"
+msgstr "Der Rahmen steht im Querformat"
+
+#: frontend/src/components/ScreenCard.vue:83
+#: templates/configure/tab_affichage.html.jinja:29
+msgid "Le cadre est en portrait"
+msgstr "Der Rahmen steht im Hochformat"
+
+#: frontend/src/components/ScreenCard.vue:84
+#: templates/configure/tab_affichage.html.jinja:30
+msgid "Portrait, mais l'image était à l'envers"
+msgstr "Hochformat, aber das Bild stand auf dem Kopf"
+
 #: frontend/src/components/SettingField.vue:62
 #: frontend/src/views/NetworkView.vue:97
 msgid "Enregistré (laisser vide pour garder)"
@@ -767,6 +1161,151 @@ msgstr "Änderungen werden automatisch gespeichert."
 #: frontend/src/components/SettingsPage.vue:30
 msgid "Autres réglages : interface classique"
 msgstr "Weitere Einstellungen: klassische Oberfläche"
+
+#: frontend/src/components/SmartAlbumEditor.vue:71
+#: frontend/src/views/PlaylistsView.vue:152
+#: templates/configure/_smart_albums.html.jinja:12
+#: templates/configure/scripts_main.html.jinja:334
+msgid "Album intelligent"
+msgstr "Intelligentes Album"
+
+#: frontend/src/components/SmartAlbumEditor.vue:76
+#: frontend/src/views/GuestsView.vue:198
+#: templates/configure/_smart_albums.html.jinja:16
+#: templates/configure/tab_comptes.html.jinja:58
+#: templates/configure/tab_invites.html.jinja:161
+msgid "Nom"
+msgstr "Name"
+
+#: frontend/src/components/SmartAlbumEditor.vue:77
+#: templates/configure/_smart_albums.html.jinja:17
+msgid "ex : Les enfants, Été 2025, Noël en famille"
+msgstr "z. B. Die Kinder, Sommer 2025, Weihnachten mit der Familie"
+
+#: frontend/src/components/SmartAlbumEditor.vue:79
+#: templates/configure/_smart_albums.html.jinja:19
+msgid "Période de l'année"
+msgstr "Jahreszeit"
+
+#: frontend/src/components/SmartAlbumEditor.vue:82
+#: templates/configure/_smart_albums.html.jinja:21
+msgid "Toute l'année"
+msgstr "Ganzes Jahr"
+
+#: frontend/src/components/SmartAlbumEditor.vue:84
+#: templates/configure/_smart_albums.html.jinja:80
+msgid "Dates précises…"
+msgstr "Genaue Daten…"
+
+#: frontend/src/components/SmartAlbumEditor.vue:87
+#: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:6
+msgid "du"
+msgstr "vom"
+
+#: frontend/src/components/SmartAlbumEditor.vue:88
+#: frontend/src/views/LibraryView.vue:119
+#: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:7
+msgid "au"
+msgstr "bis"
+
+#: frontend/src/components/SmartAlbumEditor.vue:89
+#: templates/configure/_smart_albums.html.jinja:22
+msgid "(mois-jour)"
+msgstr "(Monat-Tag)"
+
+#: frontend/src/components/SmartAlbumEditor.vue:93
+#: templates/configure/_smart_albums.html.jinja:25
+msgid "Années"
+msgstr "Jahre"
+
+#: frontend/src/components/SmartAlbumEditor.vue:97
+#: frontend/src/components/sources/PeopleCard.vue:17
+#: templates/configure/_playlist_builder.html.jinja:45
+#: templates/configure/_smart_albums.html.jinja:28
+#: templates/configure/tab_sources.html.jinja:66 utils/import_progress.py:13
+msgid "Personnes"
+msgstr "Personen"
+
+#: frontend/src/components/SmartAlbumEditor.vue:100
+#: templates/configure/_smart_albums.html.jinja:31
+msgid "Toutes ensemble sur la photo (sinon : au moins une)"
+msgstr "Alle zusammen auf dem Foto (sonst: mindestens eine)"
+
+#: frontend/src/components/SmartAlbumEditor.vue:104
+#: frontend/src/views/PhotoInfoView.vue:16
+#: templates/configure/_smart_albums.html.jinja:34
+msgid "Lieu"
+msgstr "Ort"
+
+#: frontend/src/components/SmartAlbumEditor.vue:105
+#: templates/configure/_smart_albums.html.jinja:35
+msgid "ex : Biarritz, Italie"
+msgstr "z. B. Biarritz, Italien"
+
+#: frontend/src/components/SmartAlbumEditor.vue:110
+#: templates/configure/_smart_albums.html.jinja:40
+msgid "Autres"
+msgstr "Sonstiges"
+
+#: frontend/src/components/SmartAlbumEditor.vue:112
+#: templates/configure/_smart_albums.html.jinja:42
+msgid "Favoris uniquement"
+msgstr "Nur Favoriten"
+
+#: frontend/src/components/SmartAlbumEditor.vue:114
+#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:153
+#: frontend/src/views/LibraryView.vue:114
+#: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
+#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:603
+msgid "Photos et vidéos"
+msgstr "Fotos und Videos"
+
+#: frontend/src/components/SmartAlbumEditor.vue:115
+#: templates/configure/_smart_albums.html.jinja:45
+#: templates/configure/tab_apercu.html.jinja:10
+msgid "Photos seulement"
+msgstr "Nur Fotos"
+
+#: frontend/src/components/SmartAlbumEditor.vue:116
+#: frontend/src/views/HomeView.vue:155
+#: templates/configure/_smart_albums.html.jinja:46
+#: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:603
+msgid "Vidéos seulement"
+msgstr "Nur Videos"
+
+#: frontend/src/components/SmartAlbumEditor.vue:121
+#: templates/configure/_smart_albums.html.jinja:80
+msgid "Aucune pour l'instant"
+msgstr "Noch keine"
+
+#: frontend/src/components/SmartAlbumEditor.vue:127
+#: templates/configure/_smart_albums.html.jinja:56
+msgid "Enregistrer l'album"
+msgstr "Album speichern"
+
+#: frontend/src/components/SmartPlugCard.vue:31
+msgid "Tester la prise"
+msgstr "Steckdose testen"
+
+#: frontend/src/components/SmartPlugCard.vue:33
+msgid "Allumer la prise"
+msgstr "Steckdose einschalten"
+
+#: frontend/src/components/SmartPlugCard.vue:34
+msgid "Éteindre la prise"
+msgstr "Steckdose ausschalten"
+
+#: frontend/src/components/SmartPlugCard.vue:38
+#: templates/configure/tab_affichage.html.jinja:336
+msgid "Exemples d'URLs :"
+msgstr "Beispiele für URLs:"
+
+#: frontend/src/components/SmartPlugCard.vue:43
+msgid "Statut Home Assistant :"
+msgstr "Home-Assistant-Status:"
 
 #: frontend/src/components/SpotifyCard.vue:36
 #: frontend/src/views/HomeView.vue:206
@@ -1291,12 +1830,6 @@ msgstr "Adresse des Rahmens"
 msgid "Mot de passe d'application"
 msgstr "App-Passwort"
 
-#: frontend/src/components/sources/CloudCards.vue:122
-#: templates/configure/tab_affichage.html.jinja:310
-#: templates/configure/tab_sources.html.jinja:560
-msgid "Mot de passe enregistré (laisser vide pour le garder)"
-msgstr "Passwort gespeichert (leer lassen, um es zu behalten)"
-
 #: frontend/src/components/sources/CloudCards.vue:123
 #: templates/configure/tab_sources.html.jinja:531
 msgid "Serveur IMAP"
@@ -1476,13 +2009,6 @@ msgstr ""
 msgid "Mise à jour…"
 msgstr "Wird aktualisiert…"
 
-#: frontend/src/components/sources/PeopleCard.vue:17
-#: templates/configure/_playlist_builder.html.jinja:45
-#: templates/configure/_smart_albums.html.jinja:28
-#: templates/configure/tab_sources.html.jinja:66 utils/import_progress.py:13
-msgid "Personnes"
-msgstr "Personen"
-
 #: frontend/src/components/sources/PeopleCard.vue:18
 #: templates/configure/tab_sources.html.jinja:70
 msgid "Mettre à jour depuis Immich"
@@ -1658,22 +2184,9 @@ msgstr "erstellt am"
 msgid "Administrateur"
 msgstr "Administrator"
 
-#: frontend/src/views/AccountsView.vue:69
-#: frontend/src/views/AccountsView.vue:71
-#: frontend/src/views/AccountsView.vue:86
-#: frontend/src/views/MaintenanceView.vue:252
-#: templates/configure/tab_affichage.html.jinja:298
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:79
-#: templates/configure/tab_comptes.html.jinja:118
-#: templates/configure/tab_maintenance.html.jinja:227
-#: templates/login.html.jinja:37
-msgid "Utilisateur"
-msgstr "Benutzer"
-
 #: frontend/src/views/AccountsView.vue:75
 #: frontend/src/views/LayoutsView.vue:117
-#: frontend/src/views/PlaylistsView.vue:123
+#: frontend/src/views/PlaylistsView.vue:167
 #: frontend/src/views/TelegramView.vue:111
 #: templates/configure/tab_comptes.html.jinja:95
 #: templates/configure/tab_dispositions.html.jinja:30
@@ -1684,16 +2197,6 @@ msgstr "Löschen"
 #: templates/configure/tab_comptes.html.jinja:107
 msgid "Nom d'utilisateur"
 msgstr "Benutzername"
-
-#: frontend/src/views/AccountsView.vue:84
-#: frontend/src/views/MaintenanceView.vue:253
-#: frontend/src/views/NetworkView.vue:96
-#: templates/configure/tab_affichage.html.jinja:299
-#: templates/configure/tab_comptes.html.jinja:112
-#: templates/configure/tab_maintenance.html.jinja:228
-#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:39
-msgid "Mot de passe"
-msgstr "Passwort"
 
 #: frontend/src/views/AccountsView.vue:85
 #: templates/configure/tab_comptes.html.jinja:59
@@ -1712,14 +2215,6 @@ msgid ""
 msgstr ""
 "Jedes Konto hat eigene Uploads und Wiedergabelisten; ein Benutzer sieht "
 "keine sensiblen Einstellungen."
-
-#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:153
-#: frontend/src/views/LibraryView.vue:114
-#: templates/configure/_smart_albums.html.jinja:44
-#: templates/configure/tab_apercu.html.jinja:10
-#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:603
-msgid "Photos et vidéos"
-msgstr "Fotos und Videos"
 
 #: frontend/src/views/CaptionsView.vue:10
 #: templates/configure/tab_legendes.html.jinja:7
@@ -1845,13 +2340,13 @@ msgstr ""
 "verkleinert."
 
 #: frontend/src/views/ClockView.vue:29 frontend/src/views/ClockView.vue:63
-#: frontend/src/views/PhotoInfoView.vue:28
+#: frontend/src/views/PhotoInfoView.vue:31
 #: templates/configure/tab_metadata.html.jinja:90
 msgid "Décalage horizontal (px)"
 msgstr "Horizontaler Versatz (px)"
 
 #: frontend/src/views/ClockView.vue:30 frontend/src/views/ClockView.vue:64
-#: frontend/src/views/PhotoInfoView.vue:29
+#: frontend/src/views/PhotoInfoView.vue:32
 #: templates/configure/tab_metadata.html.jinja:97
 msgid "Décalage vertical (px)"
 msgstr "Vertikaler Versatz (px)"
@@ -1901,12 +2396,12 @@ msgstr "Datumsanzeige"
 msgid "Afficher la date (sous l'heure)"
 msgstr "Datum anzeigen (unterhalb der Uhrzeit)"
 
-#: frontend/src/views/ClockView.vue:41 frontend/src/views/PhotoInfoView.vue:10
+#: frontend/src/views/ClockView.vue:41 frontend/src/views/PhotoInfoView.vue:13
 #: templates/configure/tab_heure.html.jinja:156
 msgid "Format de la date :"
 msgstr "Datumsformat:"
 
-#: frontend/src/views/ClockView.vue:42 frontend/src/views/PhotoInfoView.vue:11
+#: frontend/src/views/ClockView.vue:42 frontend/src/views/PhotoInfoView.vue:14
 #, python-format
 msgid "%A : jour, %d : jour du mois, %B : mois, %Y : année."
 msgstr "%A: Wochentag, %d: Tag des Monats, %B: Monat, %Y: Jahr."
@@ -2020,239 +2515,281 @@ msgstr "Längengrad (von: -4.4861):"
 msgid "Clé API StormGlass :"
 msgstr "Clé API StormGlass:"
 
-#: frontend/src/views/DisplayView.vue:7
+#: frontend/src/views/DisplayView.vue:13
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Fondu enchaîné"
 msgstr "Überblendung"
 
-#: frontend/src/views/DisplayView.vue:7
+#: frontend/src/views/DisplayView.vue:13
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Fondu au noir"
 msgstr "Über Schwarz blenden"
 
-#: frontend/src/views/DisplayView.vue:7
+#: frontend/src/views/DisplayView.vue:13
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Zoom en fondu"
 msgstr "Zoom-Überblendung"
 
-#: frontend/src/views/DisplayView.vue:8
+#: frontend/src/views/DisplayView.vue:14
 #: templates/configure/tab_affichage.html.jinja:199
 msgid "Glisser depuis la gauche"
 msgstr "Wischen Sie von links"
 
-#: frontend/src/views/DisplayView.vue:8
+#: frontend/src/views/DisplayView.vue:14
 #: templates/configure/tab_affichage.html.jinja:199
 msgid "Glisser depuis la droite"
 msgstr "Wischen Sie von rechts"
 
-#: frontend/src/views/DisplayView.vue:9
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:200
 msgid "Glisser depuis le bas"
 msgstr "Wischen Sie von unten"
 
-#: frontend/src/views/DisplayView.vue:9
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:200
 msgid "Glisser depuis le haut"
 msgstr "Wischen Sie von oben"
 
-#: frontend/src/views/DisplayView.vue:10
+#: frontend/src/views/DisplayView.vue:16
 #: templates/configure/tab_affichage.html.jinja:201
 msgid "Pousser vers la gauche"
 msgstr "Nach links schieben"
 
-#: frontend/src/views/DisplayView.vue:10
+#: frontend/src/views/DisplayView.vue:16
 #: templates/configure/tab_affichage.html.jinja:201
 msgid "Pousser vers le haut"
 msgstr "Nach oben schieben"
 
-#: frontend/src/views/DisplayView.vue:10
+#: frontend/src/views/DisplayView.vue:16
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Rideau"
 msgstr "Vorhang"
 
-#: frontend/src/views/DisplayView.vue:11
+#: frontend/src/views/DisplayView.vue:17
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Stores"
 msgstr "Jalousie"
 
-#: frontend/src/views/DisplayView.vue:11
+#: frontend/src/views/DisplayView.vue:17
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Iris (cercle qui s'ouvre)"
 msgstr "Iris (sich öffnender Kreis)"
 
-#: frontend/src/views/DisplayView.vue:11
+#: frontend/src/views/DisplayView.vue:17
 #: templates/configure/tab_affichage.html.jinja:203
 msgid "Au hasard (une différente à chaque photo)"
 msgstr "Zufällig (bei jedem Foto eine andere)"
 
-#: frontend/src/views/DisplayView.vue:15
+#: frontend/src/views/DisplayView.vue:21
 #: templates/configure/tab_affichage.html.jinja:4
 msgid "Paramètres d'affichage"
 msgstr "Anzeigeeinstellungen"
 
-#: frontend/src/views/DisplayView.vue:16
+#: frontend/src/views/DisplayView.vue:22
 #: templates/configure/tab_affichage.html.jinja:7
 msgid "Durée d'affichage (en secondes) :"
 msgstr "Anzeigedauer (in Sekunden):"
 
-#: frontend/src/views/DisplayView.vue:18
+#: frontend/src/views/DisplayView.vue:25
+#: templates/configure/tab_affichage.html.jinja:13
+msgid "Orientation du cadre"
+msgstr "Rahmenausrichtung"
+
+#: frontend/src/views/DisplayView.vue:26
+#: templates/configure/tab_affichage.html.jinja:23
+msgid ""
+"L'écran pivote tout seul et les photos sont repréparées en arrière-plan "
+"aux nouvelles dimensions (le diaporama continue pendant ce temps)."
+msgstr ""
+"Der Bildschirm dreht sich von selbst, und die Fotos werden im Hintergrund"
+" in der neuen Größe neu vorbereitet (die Diashow läuft währenddessen "
+"weiter)."
+
+#: frontend/src/views/DisplayView.vue:29
+#: templates/configure/tab_affichage.html.jinja:19
+msgid "Automatique (capteur d'orientation)"
+msgstr "Automatisch (Lagesensor)"
+
+#: frontend/src/views/DisplayView.vue:30
+#: templates/configure/tab_affichage.html.jinja:163
+msgid "Largeur d'affichage cible (px) :"
+msgstr "Angestrebte Anzeigebreite (px):"
+
+#: frontend/src/views/DisplayView.vue:31
+#: templates/configure/tab_affichage.html.jinja:166
+msgid "Hauteur d'affichage cible (px) :"
+msgstr "Zielanzeigehöhe (px):"
+
+#: frontend/src/views/DisplayView.vue:32
+msgid "Hauteur utile de l'écran"
+msgstr "Nutzbare Bildschirmhöhe"
+
+#: frontend/src/views/DisplayView.vue:33
+msgid ""
+"Pour un écran dont le bas est caché par le cadre : les photos n'occupent "
+"que cette partie de la hauteur."
+msgstr ""
+"Für einen Bildschirm, dessen unterer Teil vom Rahmen verdeckt wird: Die "
+"Fotos nutzen nur diesen Teil der Höhe."
+
+#: frontend/src/views/DisplayView.vue:35
 #: templates/configure/tab_affichage.html.jinja:64
 msgid "Horaires Semaine (Lun-Ven)"
 msgstr "Wöchentliche Öffnungszeiten (Mo-Fr)"
 
-#: frontend/src/views/DisplayView.vue:19 frontend/src/views/DisplayView.vue:23
+#: frontend/src/views/DisplayView.vue:36 frontend/src/views/DisplayView.vue:40
 #: templates/configure/tab_affichage.html.jinja:65
 #: templates/configure/tab_affichage.html.jinja:72
 msgid "Allumage :"
 msgstr "Zündung:"
 
-#: frontend/src/views/DisplayView.vue:20 frontend/src/views/DisplayView.vue:24
+#: frontend/src/views/DisplayView.vue:37 frontend/src/views/DisplayView.vue:41
 #: templates/configure/tab_affichage.html.jinja:67
 #: templates/configure/tab_affichage.html.jinja:74
 msgid "Extinction :"
 msgstr "Aussterben:"
 
-#: frontend/src/views/DisplayView.vue:22
+#: frontend/src/views/DisplayView.vue:39
 #: templates/configure/tab_affichage.html.jinja:71
 msgid "Horaires Weekend (Sam-Dim)"
 msgstr "Öffnungszeiten am Wochenende (Sa-So)"
 
-#: frontend/src/views/DisplayView.vue:26
+#: frontend/src/views/DisplayView.vue:43
 #: templates/configure/tab_affichage.html.jinja:81
 msgid "Le soir et la nuit"
 msgstr "Abends und nachts"
 
-#: frontend/src/views/DisplayView.vue:27
+#: frontend/src/views/DisplayView.vue:44
 #: templates/configure/tab_affichage.html.jinja:83
 msgid "Baisser la luminosité le soir"
 msgstr "Abends die Helligkeit verringern"
 
-#: frontend/src/views/DisplayView.vue:27
+#: frontend/src/views/DisplayView.vue:44
 #: templates/configure/tab_affichage.html.jinja:100
 msgid "La baisse se fait en douceur (45 minutes) et dure jusqu'au matin."
 msgstr "Die Absenkung erfolgt sanft (45 Minuten) und dauert bis zum Morgen."
 
-#: frontend/src/views/DisplayView.vue:28
+#: frontend/src/views/DisplayView.vue:45
 #: templates/configure/tab_affichage.html.jinja:86
 msgid "À partir de :"
 msgstr "Ab:"
 
-#: frontend/src/views/DisplayView.vue:29
+#: frontend/src/views/DisplayView.vue:46
 #: templates/configure/tab_affichage.html.jinja:89
 msgid "Une heure précise"
 msgstr "Eine feste Uhrzeit"
 
-#: frontend/src/views/DisplayView.vue:29
+#: frontend/src/views/DisplayView.vue:46
 #: templates/configure/tab_affichage.html.jinja:90
 msgid "Le coucher du soleil"
 msgstr "Sonnenuntergang"
 
-#: frontend/src/views/DisplayView.vue:30
+#: frontend/src/views/DisplayView.vue:47
 #: templates/configure/tab_affichage.html.jinja:96
 msgid "Luminosité du soir :"
 msgstr "Helligkeit am Abend:"
 
-#: frontend/src/views/DisplayView.vue:31
+#: frontend/src/views/DisplayView.vue:48
 #: templates/configure/tab_affichage.html.jinja:101
 msgid "En dehors des heures d'affichage :"
 msgstr "Außerhalb der Anzeigezeiten:"
 
-#: frontend/src/views/DisplayView.vue:32
+#: frontend/src/views/DisplayView.vue:49
 #: templates/configure/tab_affichage.html.jinja:104
 msgid "Écran éteint"
 msgstr "Bildschirm aus"
 
-#: frontend/src/views/DisplayView.vue:32
+#: frontend/src/views/DisplayView.vue:49
 #: templates/configure/tab_affichage.html.jinja:105
 msgid "Horloge de nuit (l'heure seule, en couleur douce)"
 msgstr "Nachtuhr (nur die Uhrzeit, in sanfter Farbe)"
 
-#: frontend/src/views/DisplayView.vue:33
+#: frontend/src/views/DisplayView.vue:50
 #: templates/configure/tab_affichage.html.jinja:109
 msgid "Luminosité :"
 msgstr "Helligkeit:"
 
-#: frontend/src/views/DisplayView.vue:34
+#: frontend/src/views/DisplayView.vue:51
 #: templates/configure/tab_affichage.html.jinja:113
 msgid "Couleur :"
 msgstr "Farbe:"
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:52
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Ambre"
 msgstr "Bernstein"
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:52
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Rouge"
 msgstr "Rot"
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:52
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Blanc"
 msgstr "Weiß"
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:52
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Bleu"
 msgstr "Blau"
 
-#: frontend/src/views/DisplayView.vue:36
+#: frontend/src/views/DisplayView.vue:53
 #: templates/configure/tab_affichage.html.jinja:121
 msgid "Afficher la date"
 msgstr "Datum anzeigen"
 
-#: frontend/src/views/DisplayView.vue:38
+#: frontend/src/views/DisplayView.vue:55
 msgid "Transitions et mouvement"
 msgstr "Übergänge und Bewegung"
 
-#: frontend/src/views/DisplayView.vue:39
+#: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:186
 msgid "Activer l'effet de transition entre les photos"
 msgstr "Aktivieren Sie den Übergangseffekt zwischen Fotos"
 
-#: frontend/src/views/DisplayView.vue:40
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:195
 msgid "Type de transition :"
 msgstr "Übergangstyp:"
 
-#: frontend/src/views/DisplayView.vue:41
+#: frontend/src/views/DisplayView.vue:58
 #: templates/configure/tab_affichage.html.jinja:190
 msgid "Durée de transition (secondes) :"
 msgstr "Übergangsdauer (Sekunden):"
 
-#: frontend/src/views/DisplayView.vue:42
+#: frontend/src/views/DisplayView.vue:59
 #: templates/configure/tab_affichage.html.jinja:210
 msgid "Caler le rythme sur la musique de fond (changement de photo sur le temps)"
 msgstr "Auf die Hintergrundmusik abstimmen (Fotowechsel im Takt)"
 
-#: frontend/src/views/DisplayView.vue:43
+#: frontend/src/views/DisplayView.vue:60
 #: templates/configure/tab_affichage.html.jinja:214
 msgid "Fréquence d'images (FPS) :"
 msgstr "Bildrate (FPS):"
 
-#: frontend/src/views/DisplayView.vue:44
+#: frontend/src/views/DisplayView.vue:61
 #: templates/configure/tab_affichage.html.jinja:216
 msgid "Automatique (30 FPS sur Pi 3, 60 FPS sinon)"
 msgstr "Automatisch (30 FPS auf Pi 3, sonst 60 FPS)"
 
-#: frontend/src/views/DisplayView.vue:45
+#: frontend/src/views/DisplayView.vue:62
 #: templates/configure/tab_affichage.html.jinja:176
 msgid "Activer l'effet Pan/Zoom sur les photos"
 msgstr "Aktivieren Sie den Schwenk-/Zoomeffekt für Fotos"
 
-#: frontend/src/views/DisplayView.vue:46
+#: frontend/src/views/DisplayView.vue:63
 msgid "Amplitude du zoom"
 msgstr "Zoomstärke"
 
-#: frontend/src/views/DisplayView.vue:48 frontend/src/views/HomeView.vue:217
+#: frontend/src/views/DisplayView.vue:65 frontend/src/views/HomeView.vue:217
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
 msgid "Ce jour-là"
 msgstr "An diesem Tag"
 
-#: frontend/src/views/DisplayView.vue:49
+#: frontend/src/views/DisplayView.vue:66
 #: templates/configure/tab_affichage.html.jinja:240
 msgid ""
 "Les photos prises un jour comme aujourd'hui, les années précédentes "
@@ -2262,108 +2799,108 @@ msgstr ""
 "Fotos, die in früheren Jahren an diesem Tag aufgenommen wurden (alle "
 "Quellen: Kameradatum oder Dateiname bei WhatsApp und Telefonen)."
 
-#: frontend/src/views/DisplayView.vue:51
+#: frontend/src/views/DisplayView.vue:68
 #: templates/configure/tab_affichage.html.jinja:242
 msgid "Ruban « Il y a 5 ans » sur ces photos"
 msgstr "Band „Vor 5 Jahren“ auf diesen Fotos"
 
-#: frontend/src/views/DisplayView.vue:52
+#: frontend/src/views/DisplayView.vue:69
 msgid "Composition « Ce jour-là » (une photo par année)"
 msgstr "Komposition „An diesem Tag“ (ein Foto pro Jahr)"
 
-#: frontend/src/views/DisplayView.vue:53 frontend/src/views/DisplayView.vue:63
+#: frontend/src/views/DisplayView.vue:70 frontend/src/views/DisplayView.vue:80
 msgid "Toutes les (minutes)"
 msgstr "Alle (Minuten)"
 
-#: frontend/src/views/DisplayView.vue:54
+#: frontend/src/views/DisplayView.vue:71
 #: templates/configure/tab_affichage.html.jinja:231
 msgid "Activer le boost pour les photos à leur date anniversaire de prise de vue"
 msgstr "Aktivieren Sie den Boost für Fotos an ihrem Shooting-Jubiläum"
 
-#: frontend/src/views/DisplayView.vue:55
+#: frontend/src/views/DisplayView.vue:72
 #: templates/configure/tab_affichage.html.jinja:235
 msgid "Facteur de boost anniversaire :"
 msgstr "Geburtstags-Boost-Faktor:"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:73
 #: templates/configure/tab_affichage.html.jinja:222
 msgid ""
 "Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
 "lecture) :"
 msgstr "Häufigkeit der Favoriten (Anzahl zusätzlicher Ergänzungen zur Playlist):"
 
-#: frontend/src/views/DisplayView.vue:57
+#: frontend/src/views/DisplayView.vue:74
 #: templates/configure/tab_affichage.html.jinja:225
 msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "Beispiel: 0 = kein Boost, 2 = 3x höhere Chance auf Erscheinen."
 
-#: frontend/src/views/DisplayView.vue:59
+#: frontend/src/views/DisplayView.vue:76
 msgid "Agenda « Cette semaine »"
 msgstr "Kalender „Diese Woche“"
 
-#: frontend/src/views/DisplayView.vue:60
+#: frontend/src/views/DisplayView.vue:77
 msgid ""
 "Les événements des 7 prochains jours et vos comptes à rebours (réglés "
 "dans Horloge & météo)."
 msgstr "Termine der nächsten 7 Tage und Ihre Countdowns (unter Uhr & Wetter)."
 
-#: frontend/src/views/DisplayView.vue:62
+#: frontend/src/views/DisplayView.vue:79
 #: templates/configure/tab_heure.html.jinja:5
 msgid "Afficher la diapositive « Cette semaine »"
 msgstr "Folie „Diese Woche“ anzeigen"
 
-#: frontend/src/views/DisplayView.vue:65 frontend/src/views/LibraryView.vue:116
+#: frontend/src/views/DisplayView.vue:82 frontend/src/views/LibraryView.vue:116
 msgid "Vidéos"
 msgstr "Videos"
 
-#: frontend/src/views/DisplayView.vue:66
+#: frontend/src/views/DisplayView.vue:83
 #: templates/configure/tab_affichage.html.jinja:248
 msgid "Afficher les vidéos dans le diaporama"
 msgstr "Videos als Diashow anzeigen"
 
-#: frontend/src/views/DisplayView.vue:67
+#: frontend/src/views/DisplayView.vue:84
 #: templates/configure/tab_affichage.html.jinja:253
 msgid "Activer le son pour les vidéos"
 msgstr "Ton für Videos aktivieren"
 
-#: frontend/src/views/DisplayView.vue:68
+#: frontend/src/views/DisplayView.vue:85
 #: templates/configure/tab_affichage.html.jinja:264
 msgid "Sortie audio :"
 msgstr "Audioausgabe:"
 
-#: frontend/src/views/DisplayView.vue:69
+#: frontend/src/views/DisplayView.vue:86
 #: templates/configure/tab_affichage.html.jinja:267
 msgid "Automatique"
 msgstr "Automatisch"
 
-#: frontend/src/views/DisplayView.vue:69
+#: frontend/src/views/DisplayView.vue:86
 #: templates/configure/tab_affichage.html.jinja:269
 msgid "HDMI"
 msgstr "HDMI"
 
-#: frontend/src/views/DisplayView.vue:69
+#: frontend/src/views/DisplayView.vue:86
 #: templates/configure/tab_affichage.html.jinja:271
 msgid "Jack 3.5mm (Casque)"
 msgstr "3,5-mm-Buchse (Kopfhörer)"
 
-#: frontend/src/views/DisplayView.vue:70 frontend/src/views/VoiceView.vue:32
+#: frontend/src/views/DisplayView.vue:87 frontend/src/views/VoiceView.vue:32
 #: templates/configure/tab_affichage.html.jinja:276
 msgid "Volume :"
 msgstr "Volumen:"
 
-#: frontend/src/views/DisplayView.vue:71
+#: frontend/src/views/DisplayView.vue:88
 #: templates/configure/tab_affichage.html.jinja:286
 msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "Musik während Videos leiser stellen (danach wieder normal)"
 
-#: frontend/src/views/DisplayView.vue:72
+#: frontend/src/views/DisplayView.vue:89
 #: templates/configure/tab_affichage.html.jinja:258
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr ""
 "Hardware-Videodekodierung aktivieren (flüssiger, aber möglicherweise "
 "instabil)"
 
-#: frontend/src/views/DisplayView.vue:73
+#: frontend/src/views/DisplayView.vue:90
 #: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
@@ -2373,16 +2910,16 @@ msgstr ""
 " Raspberry Pis. Deaktivieren Sie das Kontrollkästchen, wenn nach Videos "
 "blaue/schwarze Bildschirme angezeigt werden."
 
-#: frontend/src/views/DisplayView.vue:75
+#: frontend/src/views/DisplayView.vue:92
 msgid "Télévision"
 msgstr "Fernseher"
 
-#: frontend/src/views/DisplayView.vue:76
+#: frontend/src/views/DisplayView.vue:93
 #: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Fernseher über HDMI-CEC steuern"
 
-#: frontend/src/views/DisplayView.vue:77
+#: frontend/src/views/DisplayView.vue:94
 #: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
@@ -2393,13 +2930,61 @@ msgstr ""
 "Rahmens ein und geht mit ihm in Standby. Aktivieren Sie auch „HDMI-CEC“ "
 "(Anynet+, Bravia Sync, SimpLink...) in den TV-Einstellungen."
 
-#: frontend/src/views/DisplayView.vue:84
+#: frontend/src/views/DisplayView.vue:96
+#: templates/configure/tab_affichage.html.jinja:333
+msgid "Gestion de l'alimentation (Prise Connectée)"
+msgstr "Energieverwaltung (Connected Socket)"
+
+#: frontend/src/views/DisplayView.vue:97
+#: templates/configure/tab_affichage.html.jinja:335
 msgid ""
-"Orientation, résolution, Home Assistant, prise connectée et réveil à "
-"l'arrivée : interface classique"
+"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
+" une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
+"enverra une simple requête HTTP aux URLs que vous spécifiez."
 msgstr ""
-"Ausrichtung, Auflösung, Home Assistant, smarte Steckdose und Aufwachen "
-"bei Ankunft: klassische Oberfläche"
+"Wenn Ihr Bildschirm nicht vollständig in den Ruhezustand wechselt, können"
+" Sie ihn über eine angeschlossene Steckdose (WLAN) ausschalten. Pimmich "
+"sendet eine einfache HTTP-Anfrage an die von Ihnen angegebenen URLs."
+
+#: frontend/src/views/DisplayView.vue:99
+msgid "Activer le contrôle par prise connectée"
+msgstr "Steuerung über smarte Steckdose aktivieren"
+
+#: frontend/src/views/DisplayView.vue:100
+msgid "URL pour ALLUMER la prise :"
+msgstr "URL zum EINSCHALTEN der Steckdose:"
+
+#: frontend/src/views/DisplayView.vue:101
+msgid "URL pour ÉTEINDRE la prise :"
+msgstr "URL zum AUSSCHALTEN der Steckdose:"
+
+#: frontend/src/views/DisplayView.vue:102
+msgid "Délai après allumage (secondes) :"
+msgstr "Verzögerung nach dem Einschalten (Sekunden):"
+
+#: frontend/src/views/DisplayView.vue:103
+#: templates/configure/tab_affichage.html.jinja:462
+msgid ""
+"Temps d'attente pour que l'écran s'initialise avant de forcer la "
+"résolution. Augmentez si la résolution est toujours incorrecte."
+msgstr ""
+"Warten Sie, bis der Bildschirm initialisiert ist, bevor Sie die Auflösung"
+" erzwingen. Erhöhen Sie den Wert, wenn die Auflösung immer noch falsch "
+"ist."
+
+#: frontend/src/views/DisplayView.vue:104
+msgid "URL de Statut (Optionnel) :"
+msgstr "Status-URL (optional):"
+
+#: frontend/src/views/DisplayView.vue:105
+#: templates/configure/tab_affichage.html.jinja:477
+msgid "Token d'accès Home Assistant (si URL de statut HA) :"
+msgstr "Home Assistant-Zugriffstoken (bei HA-Status-URL):"
+
+#: frontend/src/views/DisplayView.vue:106
+#: templates/configure/tab_affichage.html.jinja:490
+msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
+msgstr "Erstellen Sie in Ihrem Home Assistant-Profil ein „Long-Term Access Token“."
 
 #: frontend/src/views/GuestsView.vue:14
 #: templates/configure/tab_invites.html.jinja:112
@@ -2427,7 +3012,7 @@ msgstr "QR-Code anzeigen"
 msgid "Position :"
 msgstr "Position:"
 
-#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:27
+#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:30
 #: frontend/src/views/SoundView.vue:137
 #: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
@@ -2435,7 +3020,7 @@ msgstr "Position:"
 msgid "En bas à droite"
 msgstr "Unten rechts"
 
-#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:27
+#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:30
 #: frontend/src/views/SoundView.vue:136
 #: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
@@ -2443,7 +3028,7 @@ msgstr "Unten rechts"
 msgid "En bas à gauche"
 msgstr "Unten links"
 
-#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:26
+#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:29
 #: frontend/src/views/SoundView.vue:139
 #: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
@@ -2451,7 +3036,7 @@ msgstr "Unten links"
 msgid "En haut à droite"
 msgstr "Oben rechts"
 
-#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:26
+#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:29
 #: frontend/src/views/SoundView.vue:138
 #: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
@@ -2759,7 +3344,7 @@ msgstr ""
 "https://192.168.1.30) und diesen Code."
 
 #: frontend/src/views/GuestsView.vue:196
-#: frontend/src/views/MaintenanceView.vue:251
+#: frontend/src/views/MaintenanceView.vue:253
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
@@ -2769,13 +3354,6 @@ msgstr "Adresse"
 #: templates/configure/tab_invites.html.jinja:160
 msgid "Code"
 msgstr "Code"
-
-#: frontend/src/views/GuestsView.vue:198
-#: templates/configure/_smart_albums.html.jinja:16
-#: templates/configure/tab_comptes.html.jinja:58
-#: templates/configure/tab_invites.html.jinja:161
-msgid "Nom"
-msgstr "Name"
 
 #: frontend/src/views/GuestsView.vue:198
 #: templates/configure/tab_invites.html.jinja:161
@@ -2832,12 +3410,6 @@ msgstr "Ruhezustand"
 #: frontend/src/views/HomeView.vue:149
 msgid "Allumer le cadre"
 msgstr "Rahmen einschalten"
-
-#: frontend/src/views/HomeView.vue:155
-#: templates/configure/_smart_albums.html.jinja:46
-#: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:603
-msgid "Vidéos seulement"
-msgstr "Nur Videos"
 
 #: frontend/src/views/HomeView.vue:167
 #: templates/configure/tab_accueil.html.jinja:39
@@ -3119,7 +3691,7 @@ msgid ""
 "moment-là)"
 msgstr "Saisonthemen nur in ihrem Zeitraum (und dann häufiger)"
 
-#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:323
+#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:349
 msgid "Gardez au moins une disposition."
 msgstr "Behalten Sie mindestens ein Layout."
 
@@ -3171,12 +3743,6 @@ msgstr "Layout(s)"
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Active"
 msgstr "Aktiv"
-
-#: frontend/src/views/LayoutsView.vue:115 frontend/src/views/NetworkView.vue:87
-#: templates/configure/tab_affichage.html.jinja:295
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Activer"
-msgstr "Aktivieren"
 
 #: frontend/src/views/LayoutsView.vue:116
 #: templates/configure/tab_dispositions.html.jinja:29
@@ -3231,7 +3797,7 @@ msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "Suchen (Ort, Bildunterschrift, Dateiname…)"
 
 #: frontend/src/views/LibraryView.vue:106
-#: frontend/src/views/PlaylistsView.vue:138
+#: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "Alle Quellen"
@@ -3246,12 +3812,6 @@ msgstr "Alle"
 #: frontend/src/views/LibraryView.vue:118
 msgid "Du"
 msgstr "Vom"
-
-#: frontend/src/views/LibraryView.vue:119
-#: templates/configure/_smart_albums.html.jinja:22
-#: templates/configure/tab_apercu.html.jinja:7
-msgid "au"
-msgstr "bis"
 
 #: frontend/src/views/LibraryView.vue:124
 #, python-brace-format
@@ -3312,14 +3872,6 @@ msgstr "Nur Fehler"
 msgid "Suivre en direct"
 msgstr "Live verfolgen"
 
-#: frontend/src/views/LogsView.vue:63 frontend/src/views/NetworkView.vue:73
-#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
-#: templates/configure/tab_affichage.html.jinja:353
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
-msgstr "Aktualisieren"
-
 #: frontend/src/views/LogsView.vue:66
 #, python-brace-format
 msgid "{n} lignes affichées (les 500 dernières du fichier)"
@@ -3341,8 +3893,8 @@ msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
 msgstr "Aktuelle Einstellungen durch die letzte Sicherung aus dem Drive ersetzen?"
 
 #: frontend/src/views/MaintenanceView.vue:51
-#: frontend/src/views/MaintenanceView.vue:168
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:170
+#: frontend/src/views/MaintenanceView.vue:238
 #: templates/configure/tab_maintenance.html.jinja:10
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Carte SD"
@@ -3399,11 +3951,11 @@ msgstr ""
 "Dieser Vorgang bereitet das System darauf vor, die Partition beim "
 "nächsten Neustart zu erweitern. Möchten Sie fortfahren?"
 
-#: frontend/src/views/MaintenanceView.vue:136
+#: frontend/src/views/MaintenanceView.vue:138
 msgid "domaine public"
 msgstr "gemeinfrei"
 
-#: frontend/src/views/MaintenanceView.vue:142
+#: frontend/src/views/MaintenanceView.vue:144
 #: templates/configure/tab_maintenance.html.jinja:514
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
@@ -3414,70 +3966,70 @@ msgstr ""
 " wird nicht mehr automatisch gestartet. Um zum Bilderrahmen-Modus "
 "zurückzukehren, führen Sie setup.sh erneut aus. Fortfahren?"
 
-#: frontend/src/views/MaintenanceView.vue:162
+#: frontend/src/views/MaintenanceView.vue:164
 #: templates/configure/tab_maintenance.html.jinja:4
 msgid "Matériel"
 msgstr "Hardware"
 
-#: frontend/src/views/MaintenanceView.vue:164
+#: frontend/src/views/MaintenanceView.vue:166
 #: templates/configure/tab_maintenance.html.jinja:7
 msgid "Modèle"
 msgstr "Modell"
 
-#: frontend/src/views/MaintenanceView.vue:164
-#: frontend/src/views/MaintenanceView.vue:165
+#: frontend/src/views/MaintenanceView.vue:166
 #: frontend/src/views/MaintenanceView.vue:167
-#: frontend/src/views/MaintenanceView.vue:168
+#: frontend/src/views/MaintenanceView.vue:169
+#: frontend/src/views/MaintenanceView.vue:170
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Inconnu"
 msgstr "Unbekannt"
 
-#: frontend/src/views/MaintenanceView.vue:165
+#: frontend/src/views/MaintenanceView.vue:167
 #: templates/configure/tab_maintenance.html.jinja:8
 msgid "Température"
 msgstr "Temperatur"
 
-#: frontend/src/views/MaintenanceView.vue:166
+#: frontend/src/views/MaintenanceView.vue:168
 #: templates/configure/tab_maintenance.html.jinja:9
 msgid "Alimentation"
 msgstr "Stromversorgung"
 
-#: frontend/src/views/MaintenanceView.vue:167
+#: frontend/src/views/MaintenanceView.vue:169
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Insuffisante en ce moment"
 msgstr "Derzeit zu schwach"
 
-#: frontend/src/views/MaintenanceView.vue:167
+#: frontend/src/views/MaintenanceView.vue:169
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "A faibli depuis le démarrage"
 msgstr "Seit dem Start eingebrochen"
 
-#: frontend/src/views/MaintenanceView.vue:167
+#: frontend/src/views/MaintenanceView.vue:169
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Correcte"
 msgstr "In Ordnung"
 
-#: frontend/src/views/MaintenanceView.vue:168
+#: frontend/src/views/MaintenanceView.vue:170
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "erreur(s)"
 msgstr "Fehler"
 
-#: frontend/src/views/MaintenanceView.vue:168
+#: frontend/src/views/MaintenanceView.vue:170
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Aucune erreur"
 msgstr "Keine Fehler"
 
-#: frontend/src/views/MaintenanceView.vue:170
+#: frontend/src/views/MaintenanceView.vue:172
 #: templates/configure/tab_maintenance.html.jinja:19
 msgid "Alimentation conseillée pour ce modèle :"
 msgstr "Empfohlenes Netzteil für dieses Modell:"
 
-#: frontend/src/views/MaintenanceView.vue:175
+#: frontend/src/views/MaintenanceView.vue:177
 #: templates/configure/tab_maintenance.html.jinja:392
 msgid "Mise à jour de l'application"
 msgstr "Anwendungsaktualisierung"
 
-#: frontend/src/views/MaintenanceView.vue:176
+#: frontend/src/views/MaintenanceView.vue:178
 #: templates/configure/tab_maintenance.html.jinja:394
 msgid ""
 "Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
@@ -3488,63 +4040,63 @@ msgstr ""
 "neue Version nicht, kehrt der Rahmen automatisch zur vorherigen Version "
 "zurück."
 
-#: frontend/src/views/MaintenanceView.vue:178
-#: frontend/src/views/MaintenanceView.vue:353
+#: frontend/src/views/MaintenanceView.vue:180
+#: frontend/src/views/MaintenanceView.vue:355
 #: templates/configure/tab_maintenance.html.jinja:396
 msgid "Version installée :"
 msgstr "Installierte Version:"
 
-#: frontend/src/views/MaintenanceView.vue:179
+#: frontend/src/views/MaintenanceView.vue:181
 #: templates/configure/tab_maintenance.html.jinja:411
 msgid "Impossible de joindre GitHub (connexion internet ?)."
 msgstr "GitHub ist nicht erreichbar (Internetverbindung?)."
 
-#: frontend/src/views/MaintenanceView.vue:180
+#: frontend/src/views/MaintenanceView.vue:182
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Mise à jour disponible :"
 msgstr "Update verfügbar:"
 
-#: frontend/src/views/MaintenanceView.vue:180
+#: frontend/src/views/MaintenanceView.vue:182
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "changement(s)"
 msgstr "Änderung(en)"
 
-#: frontend/src/views/MaintenanceView.vue:180
+#: frontend/src/views/MaintenanceView.vue:182
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Pimmich est à jour."
 msgstr "Pimmich ist auf dem neuesten Stand."
 
-#: frontend/src/views/MaintenanceView.vue:182
+#: frontend/src/views/MaintenanceView.vue:184
 #: templates/configure/tab_maintenance.html.jinja:412
 msgid "Dernière mise à jour en cours de validation (redémarrage)."
 msgstr "Letztes Update wird überprüft (Neustart)."
 
-#: frontend/src/views/MaintenanceView.vue:183
+#: frontend/src/views/MaintenanceView.vue:185
 #: templates/configure/tab_maintenance.html.jinja:413
 msgid "Le cadre est revenu à une version précédente."
 msgstr "Der Rahmen ist zu einer früheren Version zurückgekehrt."
 
-#: frontend/src/views/MaintenanceView.vue:186
+#: frontend/src/views/MaintenanceView.vue:188
 #: templates/configure/tab_maintenance.html.jinja:403
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "Update starten? Sie werden zur Tracking-Seite weitergeleitet."
 
-#: frontend/src/views/MaintenanceView.vue:186
+#: frontend/src/views/MaintenanceView.vue:188
 #: templates/configure/tab_maintenance.html.jinja:404
 msgid "Lancer la mise à jour"
 msgstr "Starten Sie das Update"
 
-#: frontend/src/views/MaintenanceView.vue:187
+#: frontend/src/views/MaintenanceView.vue:189
 #: templates/configure/tab_maintenance.html.jinja:406
 msgid "Revenir à la version précédente"
 msgstr "Zur vorherigen Version zurückkehren"
 
-#: frontend/src/views/MaintenanceView.vue:192
+#: frontend/src/views/MaintenanceView.vue:194
 #: templates/configure/tab_maintenance.html.jinja:473
 msgid "Contrôle du système"
 msgstr "Systemsteuerung"
 
-#: frontend/src/views/MaintenanceView.vue:194
+#: frontend/src/views/MaintenanceView.vue:196
 #: templates/configure/tab_maintenance.html.jinja:476
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
@@ -3553,76 +4105,76 @@ msgstr ""
 "Sind Sie sicher, dass Sie NUR die Webanwendung neu starten möchten? Das "
 "Betriebssystem wird nicht neu gestartet."
 
-#: frontend/src/views/MaintenanceView.vue:195
+#: frontend/src/views/MaintenanceView.vue:197
 #: templates/configure/tab_maintenance.html.jinja:479
 msgid "Redémarrer l'application web"
 msgstr "Starten Sie die Webanwendung neu"
 
-#: frontend/src/views/MaintenanceView.vue:196
+#: frontend/src/views/MaintenanceView.vue:198
 msgid "Redémarrer le système maintenant ?"
 msgstr "System jetzt neu starten?"
 
-#: frontend/src/views/MaintenanceView.vue:197
+#: frontend/src/views/MaintenanceView.vue:199
 #: templates/configure/tab_maintenance.html.jinja:488
 msgid "Redémarrer le système"
 msgstr "Starten Sie das System neu"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:200
 #: templates/configure/tab_maintenance.html.jinja:496
 msgid "Supprimer les logs"
 msgstr "Protokolle löschen"
 
-#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:201
 #: templates/configure/tab_maintenance.html.jinja:501
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "Sind Sie sicher, dass Sie das System AUSSCHALTEN möchten?"
 
-#: frontend/src/views/MaintenanceView.vue:200
+#: frontend/src/views/MaintenanceView.vue:202
 #: templates/configure/tab_maintenance.html.jinja:504
 msgid "Éteindre le système"
 msgstr "Fahren Sie das System herunter"
 
-#: frontend/src/views/MaintenanceView.vue:201
+#: frontend/src/views/MaintenanceView.vue:203
 #: templates/configure/tab_maintenance.html.jinja:509
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Zurück zu Raspberry Pi OS (Desktop)"
 
-#: frontend/src/views/MaintenanceView.vue:207
+#: frontend/src/views/MaintenanceView.vue:209
 #: templates/configure/tab_maintenance.html.jinja:202
 msgid "Espace disque"
 msgstr "Speicherplatz"
 
-#: frontend/src/views/MaintenanceView.vue:208
+#: frontend/src/views/MaintenanceView.vue:210
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "Go libres sur"
 msgstr "GB frei von"
 
-#: frontend/src/views/MaintenanceView.vue:208
+#: frontend/src/views/MaintenanceView.vue:210
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "utilisés"
 msgstr "belegt"
 
-#: frontend/src/views/MaintenanceView.vue:209
+#: frontend/src/views/MaintenanceView.vue:211
 #: templates/configure/tab_maintenance.html.jinja:359
 msgid "espace faible"
 msgstr "wenig Speicherplatz"
 
-#: frontend/src/views/MaintenanceView.vue:210
+#: frontend/src/views/MaintenanceView.vue:212
 #: templates/configure/tab_maintenance.html.jinja:360
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr "Google Drive-Medien könnten automatisch gelöscht werden."
 
-#: frontend/src/views/MaintenanceView.vue:212
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:205
 msgid "Alerter sous (Go libres) :"
 msgstr "Warnen unter (GB frei):"
 
-#: frontend/src/views/MaintenanceView.vue:213
+#: frontend/src/views/MaintenanceView.vue:215
 #: templates/configure/tab_maintenance.html.jinja:209
 msgid "Libérer de la place automatiquement"
 msgstr "Automatisch Speicherplatz freigeben"
 
-#: frontend/src/views/MaintenanceView.vue:215
+#: frontend/src/views/MaintenanceView.vue:217
 #: templates/configure/tab_maintenance.html.jinja:211
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
@@ -3633,12 +4185,12 @@ msgstr ""
 "bereits aus dem Drive entfernt wurden, vom Bilderrahmen gelöscht – die "
 "ältesten zuerst. Favoriten werden nie gelöscht."
 
-#: frontend/src/views/MaintenanceView.vue:216
+#: frontend/src/views/MaintenanceView.vue:218
 #: templates/configure/tab_maintenance.html.jinja:324
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr "Automatische Sicherung in Google Drive"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:219
 #: templates/configure/tab_maintenance.html.jinja:326
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
@@ -3649,75 +4201,75 @@ msgstr ""
 "Nachrichten in einem Ordner Ihres Google Drive (rclone-Verbindung). Fotos"
 " sind nicht enthalten."
 
-#: frontend/src/views/MaintenanceView.vue:219
+#: frontend/src/views/MaintenanceView.vue:221
 #: templates/configure/tab_maintenance.html.jinja:329 utils/health.py:159
 msgid "Activer la sauvegarde automatique"
 msgstr "Automatische Sicherung aktivieren"
 
-#: frontend/src/views/MaintenanceView.vue:220
+#: frontend/src/views/MaintenanceView.vue:222
 #: templates/configure/tab_maintenance.html.jinja:332
 msgid "Dossier Google Drive :"
 msgstr "Google Drive-Ordner:"
 
-#: frontend/src/views/MaintenanceView.vue:221
+#: frontend/src/views/MaintenanceView.vue:223
 #: templates/configure/tab_maintenance.html.jinja:334
 msgid "Toutes les (heures) :"
 msgstr "Alle (Stunden):"
 
-#: frontend/src/views/MaintenanceView.vue:222
+#: frontend/src/views/MaintenanceView.vue:224
 #: templates/configure/tab_maintenance.html.jinja:336
 msgid "Sauvegardes conservées :"
 msgstr "Aufbewahrte Sicherungen:"
 
-#: frontend/src/views/MaintenanceView.vue:224
+#: frontend/src/views/MaintenanceView.vue:226
 #: templates/configure/tab_maintenance.html.jinja:367
 msgid "Dernière sauvegarde réussie :"
 msgstr "Letzte erfolgreiche Sicherung:"
 
-#: frontend/src/views/MaintenanceView.vue:225
+#: frontend/src/views/MaintenanceView.vue:227
 #: templates/configure/tab_maintenance.html.jinja:368
 msgid "Dernier échec :"
 msgstr "Letzter Fehlschlag:"
 
-#: frontend/src/views/MaintenanceView.vue:227
+#: frontend/src/views/MaintenanceView.vue:229
 #: templates/configure/tab_maintenance.html.jinja:342
 msgid "Enregistrer ces réglages"
 msgstr "Diese Einstellungen speichern"
 
-#: frontend/src/views/MaintenanceView.vue:228
-#: frontend/src/views/MaintenanceView.vue:287
+#: frontend/src/views/MaintenanceView.vue:230
+#: frontend/src/views/MaintenanceView.vue:289
 #: templates/configure/tab_maintenance.html.jinja:86
 #: templates/configure/tab_maintenance.html.jinja:344
 msgid "Sauvegarder maintenant"
 msgstr "Jetzt sichern"
 
-#: frontend/src/views/MaintenanceView.vue:229
+#: frontend/src/views/MaintenanceView.vue:231
 #: templates/configure/tab_maintenance.html.jinja:346
 msgid "Restaurer la dernière sauvegarde"
 msgstr "Letzte Sicherung wiederherstellen"
 
-#: frontend/src/views/MaintenanceView.vue:234
+#: frontend/src/views/MaintenanceView.vue:236
 #: templates/configure/tab_maintenance.html.jinja:215
 msgid "Stockage des photos"
 msgstr "Fotospeicher"
 
-#: frontend/src/views/MaintenanceView.vue:237
 #: frontend/src/views/MaintenanceView.vue:239
+#: frontend/src/views/MaintenanceView.vue:241
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "libres sur"
 msgstr "frei von"
 
-#: frontend/src/views/MaintenanceView.vue:240
+#: frontend/src/views/MaintenanceView.vue:242
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Débranché"
 msgstr "Getrennt"
 
-#: frontend/src/views/MaintenanceView.vue:243
+#: frontend/src/views/MaintenanceView.vue:245
 #: templates/configure/tab_maintenance.html.jinja:220
 msgid "Ajouter un support"
 msgstr "Speicher hinzufügen"
 
-#: frontend/src/views/MaintenanceView.vue:245
+#: frontend/src/views/MaintenanceView.vue:247
 #: templates/configure/tab_maintenance.html.jinja:256
 msgid ""
 "Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
@@ -3726,53 +4278,53 @@ msgstr ""
 "Der bisherige Inhalt der Festplatte bleibt erhalten: Pimmich legt seine "
 "Fotos in einem Ordner „pimmich“ ab."
 
-#: frontend/src/views/MaintenanceView.vue:246
+#: frontend/src/views/MaintenanceView.vue:248
 #: templates/configure/tab_maintenance.html.jinja:254
 msgid "Utiliser ce disque"
 msgstr "Diese Festplatte verwenden"
 
-#: frontend/src/views/MaintenanceView.vue:247
+#: frontend/src/views/MaintenanceView.vue:249
 #: templates/configure/tab_maintenance.html.jinja:222
 msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
 msgstr "Keine USB-Festplatte erkannt: Schließe sie an und öffne diesen Tab erneut."
 
-#: frontend/src/views/MaintenanceView.vue:249
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:224
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "Netzwerkfreigabe (NAS, Computer)"
 
-#: frontend/src/views/MaintenanceView.vue:255
+#: frontend/src/views/MaintenanceView.vue:257
 #: templates/configure/tab_maintenance.html.jinja:230
 msgid "Ajouter le partage"
 msgstr "Freigabe hinzufügen"
 
-#: frontend/src/views/MaintenanceView.vue:257
+#: frontend/src/views/MaintenanceView.vue:259
 #: templates/configure/tab_maintenance.html.jinja:234
 msgid "Emplacement de chaque source"
 msgstr "Speicherort jeder Quelle"
 
-#: frontend/src/views/MaintenanceView.vue:261
+#: frontend/src/views/MaintenanceView.vue:263
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "fichiers"
 msgstr "Dateien"
 
-#: frontend/src/views/MaintenanceView.vue:261
+#: frontend/src/views/MaintenanceView.vue:263
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "support débranché"
 msgstr "Speicher getrennt"
 
-#: frontend/src/views/MaintenanceView.vue:268
+#: frontend/src/views/MaintenanceView.vue:270
 #: templates/configure/tab_maintenance.html.jinja:254
 #, python-brace-format
 msgid "Déplacement de « {source} » : {done} / {total} fichiers"
 msgstr "„{source}“ wird verschoben: {done} / {total} Dateien"
 
-#: frontend/src/views/MaintenanceView.vue:273
+#: frontend/src/views/MaintenanceView.vue:275
 #: templates/configure/tab_maintenance.html.jinja:68
 msgid "Sauvegarde complète"
 msgstr "Vollständige Sicherung"
 
-#: frontend/src/views/MaintenanceView.vue:274
+#: frontend/src/views/MaintenanceView.vue:276
 #: templates/configure/tab_maintenance.html.jinja:69
 msgid ""
 "Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, "
@@ -3785,59 +4337,59 @@ msgstr ""
 "Gästebuch, Bildunterschriften, Reaktionen, Musik und Verlauf. Mit einem "
 "Klick wiederherstellbar, auf diesem Rahmen oder einer neuen Installation."
 
-#: frontend/src/views/MaintenanceView.vue:277
+#: frontend/src/views/MaintenanceView.vue:279
 #: templates/configure/tab_maintenance.html.jinja:72
 msgid "Sans les photos"
 msgstr "Ohne Fotos"
 
-#: frontend/src/views/MaintenanceView.vue:278
+#: frontend/src/views/MaintenanceView.vue:280
 #: templates/configure/tab_maintenance.html.jinja:74
 msgid "Télécharger"
 msgstr "Herunterladen"
 
-#: frontend/src/views/MaintenanceView.vue:280
+#: frontend/src/views/MaintenanceView.vue:282
 #: templates/configure/tab_maintenance.html.jinja:78
 msgid "Restaurer ce fichier"
 msgstr "Diese Datei wiederherstellen"
 
-#: frontend/src/views/MaintenanceView.vue:283
+#: frontend/src/views/MaintenanceView.vue:285
 #: templates/configure/tab_maintenance.html.jinja:81
 msgid "Avec les photos, sur un disque USB ou un NAS"
 msgstr "Mit Fotos, auf einem USB-Laufwerk oder NAS"
 
-#: frontend/src/views/MaintenanceView.vue:284
+#: frontend/src/views/MaintenanceView.vue:286
 #: templates/configure/tab_maintenance.html.jinja:82
 msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
 msgstr "Fügen Sie zuerst unten unter „Fotospeicher“ ein Speichermedium hinzu."
 
-#: frontend/src/views/MaintenanceView.vue:289
+#: frontend/src/views/MaintenanceView.vue:291
 #: templates/configure/tab_maintenance.html.jinja:112
 #, python-brace-format
 msgid "Sauvegarde en cours : {done} / {total} fichiers"
 msgstr "Sicherung läuft: {done} / {total} Dateien"
 
-#: frontend/src/views/MaintenanceView.vue:295
+#: frontend/src/views/MaintenanceView.vue:297
 #: templates/configure/tab_maintenance.html.jinja:122
 msgid "avec photos"
 msgstr "mit Fotos"
 
-#: frontend/src/views/MaintenanceView.vue:296
+#: frontend/src/views/MaintenanceView.vue:298
 #: templates/configure/tab_maintenance.html.jinja:61
 #: templates/configure/tab_maintenance.html.jinja:126
 msgid "Restaurer"
 msgstr "Wiederherstellen"
 
-#: frontend/src/views/MaintenanceView.vue:299
+#: frontend/src/views/MaintenanceView.vue:301
 #: templates/configure/tab_maintenance.html.jinja:38
 msgid "Sauvegarde et Restauration"
 msgstr "Sichern und Wiederherstellen"
 
-#: frontend/src/views/MaintenanceView.vue:301
+#: frontend/src/views/MaintenanceView.vue:303
 #: templates/configure/tab_maintenance.html.jinja:49
 msgid "Télécharger la sauvegarde"
 msgstr "Backup herunterladen"
 
-#: frontend/src/views/MaintenanceView.vue:302
+#: frontend/src/views/MaintenanceView.vue:304
 #: templates/configure/tab_maintenance.html.jinja:56
 msgid ""
 "Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
@@ -3846,17 +4398,17 @@ msgstr ""
 "Bist du sicher? Die aktuelle Konfiguration wird durch den Inhalt der "
 "Sicherungsdatei überschrieben."
 
-#: frontend/src/views/MaintenanceView.vue:304
+#: frontend/src/views/MaintenanceView.vue:306
 #: templates/configure/tab_maintenance.html.jinja:54
 msgid "Restaurer une configuration"
 msgstr "Stellen Sie eine Konfiguration wieder her"
 
-#: frontend/src/views/MaintenanceView.vue:311
+#: frontend/src/views/MaintenanceView.vue:313
 #: templates/configure/tab_maintenance.html.jinja:160
 msgid "HTTPS sans avertissement (Tailscale)"
 msgstr "HTTPS ohne Warnung (Tailscale)"
 
-#: frontend/src/views/MaintenanceView.vue:312
+#: frontend/src/views/MaintenanceView.vue:314
 #: templates/configure/tab_maintenance.html.jinja:161
 msgid ""
 "Ouvre l'administration à une adresse sécurisée par un vrai certificat, "
@@ -3867,37 +4419,37 @@ msgstr ""
 " Adresse, von Ihren mit Tailscale verbundenen Geräten (zu Hause oder "
 "unterwegs). Sie wird nie im Internet veröffentlicht."
 
-#: frontend/src/views/MaintenanceView.vue:313
+#: frontend/src/views/MaintenanceView.vue:315
 #: templates/configure/tab_maintenance.html.jinja:162
 msgid "Activer l'accès HTTPS par Tailscale"
 msgstr "HTTPS-Zugang über Tailscale aktivieren"
 
-#: frontend/src/views/MaintenanceView.vue:314
+#: frontend/src/views/MaintenanceView.vue:316
 #: templates/configure/tab_maintenance.html.jinja:174
 msgid "Tailscale n'est pas installé sur ce cadre."
 msgstr "Tailscale ist auf diesem Rahmen nicht installiert."
 
-#: frontend/src/views/MaintenanceView.vue:315
+#: frontend/src/views/MaintenanceView.vue:317
 #: templates/configure/tab_maintenance.html.jinja:175
 msgid "Tailscale n'est pas connecté."
 msgstr "Tailscale ist nicht verbunden."
 
-#: frontend/src/views/MaintenanceView.vue:316
+#: frontend/src/views/MaintenanceView.vue:318
 #: templates/configure/tab_maintenance.html.jinja:190
 msgid "Autoriser sur Tailscale"
 msgstr "Auf Tailscale erlauben"
 
-#: frontend/src/views/MaintenanceView.vue:320
+#: frontend/src/views/MaintenanceView.vue:322
 #: templates/configure/tab_maintenance.html.jinja:444
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SD-Kartendateisystem"
 
-#: frontend/src/views/MaintenanceView.vue:321
+#: frontend/src/views/MaintenanceView.vue:323
 #: templates/configure/tab_maintenance.html.jinja:458
 msgid "Protection contre l'usure"
 msgstr "Verschleißschutz"
 
-#: frontend/src/views/MaintenanceView.vue:322
+#: frontend/src/views/MaintenanceView.vue:324
 #: templates/configure/tab_maintenance.html.jinja:465
 msgid ""
 "Active : les journaux sont écrits en mémoire vive et recopiés sur la "
@@ -3906,7 +4458,7 @@ msgstr ""
 "Aktiv: Protokolle werden in den Arbeitsspeicher geschrieben und einmal "
 "täglich auf die Karte kopiert."
 
-#: frontend/src/views/MaintenanceView.vue:322
+#: frontend/src/views/MaintenanceView.vue:324
 #: templates/configure/tab_maintenance.html.jinja:466
 msgid ""
 "Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur"
@@ -3917,23 +4469,23 @@ msgstr ""
 "dem Raspberry Pi ausführen: sudo ~/pimmich/utils/enable_sd_protection.sh "
 "und neu starten."
 
-#: frontend/src/views/MaintenanceView.vue:323
+#: frontend/src/views/MaintenanceView.vue:325
 msgid "Taille de la partition"
 msgstr "Partitionsgröße"
 
-#: frontend/src/views/MaintenanceView.vue:325
+#: frontend/src/views/MaintenanceView.vue:327
 msgid "Partition système :"
 msgstr "Systempartition:"
 
-#: frontend/src/views/MaintenanceView.vue:325
+#: frontend/src/views/MaintenanceView.vue:327
 msgid "carte SD :"
 msgstr "SD-Karte:"
 
-#: frontend/src/views/MaintenanceView.vue:326
+#: frontend/src/views/MaintenanceView.vue:328
 msgid "Toute la carte SD est déjà utilisée : rien à agrandir."
 msgstr "Die gesamte SD-Karte wird bereits genutzt: nichts zu erweitern."
 
-#: frontend/src/views/MaintenanceView.vue:328
+#: frontend/src/views/MaintenanceView.vue:330
 msgid ""
 "ne sont pas utilisés sur la carte SD. L'opération ne supprime aucune "
 "donnée ; l'agrandissement se termine au prochain redémarrage."
@@ -3941,32 +4493,32 @@ msgstr ""
 "auf der SD-Karte sind ungenutzt. Dabei werden keine Daten gelöscht; die "
 "Erweiterung wird beim nächsten Neustart abgeschlossen."
 
-#: frontend/src/views/MaintenanceView.vue:329
+#: frontend/src/views/MaintenanceView.vue:331
 #: templates/configure/tab_maintenance.html.jinja:455
 msgid "Étendre le système de fichiers"
 msgstr "Dateisystem erweitern"
 
-#: frontend/src/views/MaintenanceView.vue:332
+#: frontend/src/views/MaintenanceView.vue:334
 msgid "Taille de la carte SD inconnue."
 msgstr "Größe der SD-Karte unbekannt."
 
-#: frontend/src/views/MaintenanceView.vue:337
+#: frontend/src/views/MaintenanceView.vue:339
 msgid "À propos"
 msgstr "Über"
 
-#: frontend/src/views/MaintenanceView.vue:340
+#: frontend/src/views/MaintenanceView.vue:342
 msgid "Pimmich, le projet d'origine"
 msgstr "Pimmich, das ursprüngliche Projekt"
 
-#: frontend/src/views/MaintenanceView.vue:341
+#: frontend/src/views/MaintenanceView.vue:343
 msgid "Créé par Gotenash et Shenron, dans le cadre du Gadgetaulab. Merci à eux !"
 msgstr "Erstellt von Gotenash und Shenron im Gadgetaulab. Vielen Dank an sie!"
 
-#: frontend/src/views/MaintenanceView.vue:349
+#: frontend/src/views/MaintenanceView.vue:351
 msgid "Ce cadre"
 msgstr "Dieser Rahmen"
 
-#: frontend/src/views/MaintenanceView.vue:350
+#: frontend/src/views/MaintenanceView.vue:352
 msgid ""
 "Fork personnel de Pimmich, avec de nombreuses fonctionnalités ajoutées, "
 "pour un usage purement perso."
@@ -3974,11 +4526,11 @@ msgstr ""
 "Persönlicher Fork von Pimmich mit vielen zusätzlichen Funktionen, rein "
 "für den privaten Gebrauch."
 
-#: frontend/src/views/MaintenanceView.vue:357
+#: frontend/src/views/MaintenanceView.vue:359
 msgid "Licences"
 msgstr "Lizenzen"
 
-#: frontend/src/views/MaintenanceView.vue:358
+#: frontend/src/views/MaintenanceView.vue:360
 msgid ""
 "Pimmich est distribué sous licence MIT. Les composants tiers gardent leur"
 " propre licence :"
@@ -4161,53 +4713,48 @@ msgstr "Nachrichtenvorschau"
 msgid "Cliquez sur « Aperçu » pour voir le rendu."
 msgstr "Klicken Sie auf „Vorschau“, um das Ergebnis zu sehen."
 
-#: frontend/src/views/MessagesView.vue:142
-#: templates/configure/tab_messages.html.jinja:215 utils/quotes.py:19
-msgid "Citation du jour"
-msgstr "Zitat des Tages"
-
-#: frontend/src/views/MessagesView.vue:150
+#: frontend/src/views/MessagesView.vue:147
 msgid "Aucun message pour l'instant."
 msgstr "Noch keine Nachrichten."
 
-#: frontend/src/views/MessagesView.vue:155
+#: frontend/src/views/MessagesView.vue:152
 #: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:124
 #: web/routes_guests.py:375 web/routes_guests.py:384 web/routes_guests.py:407
 #: web/routes_guests.py:416 web/routes_guests.py:439 web/routes_guests.py:447
 msgid "Invité"
 msgstr "Gast"
 
-#: frontend/src/views/MessagesView.vue:156
+#: frontend/src/views/MessagesView.vue:153
 #: templates/configure/tab_messages.html.jinja:130
 msgid "Masqué"
 msgstr "Ausgeblendet"
 
-#: frontend/src/views/MessagesView.vue:161
+#: frontend/src/views/MessagesView.vue:158
 #: templates/configure/tab_messages.html.jinja:144
 msgid "Jusqu'au :"
 msgstr "Bis:"
 
-#: frontend/src/views/MessagesView.vue:162
+#: frontend/src/views/MessagesView.vue:159
 #: templates/configure/tab_messages.html.jinja:149
 msgid "Laisser vide pour afficher sans limite"
 msgstr "Leer lassen, um ohne Enddatum anzuzeigen"
 
-#: frontend/src/views/MessagesView.vue:163
+#: frontend/src/views/MessagesView.vue:160
 #: templates/configure/tab_messages.html.jinja:154
 msgid "Enregistrer la date de fin"
 msgstr "Enddatum speichern"
 
-#: frontend/src/views/MessagesView.vue:165
+#: frontend/src/views/MessagesView.vue:162
 #: templates/configure/tab_messages.html.jinja:169
 msgid "Afficher de nouveau dans le diaporama"
 msgstr "Wieder in der Diashow anzeigen"
 
-#: frontend/src/views/MessagesView.vue:165
+#: frontend/src/views/MessagesView.vue:162
 #: templates/configure/tab_messages.html.jinja:169
 msgid "Masquer du diaporama sans supprimer"
 msgstr "In der Diashow ausblenden, ohne zu löschen"
 
-#: frontend/src/views/MessagesView.vue:167
+#: frontend/src/views/MessagesView.vue:164
 #: templates/configure/tab_messages.html.jinja:180
 msgid "Supprimer ce message"
 msgstr "Diese Nachricht löschen"
@@ -4469,45 +5016,40 @@ msgstr "Noch keine."
 msgid "Retirer la confiance"
 msgstr "Vertrauen entziehen"
 
-#: frontend/src/views/PhotoInfoView.vue:8
+#: frontend/src/views/PhotoInfoView.vue:11
 msgid "Date de prise de vue"
 msgstr "Aufnahmedatum"
 
-#: frontend/src/views/PhotoInfoView.vue:9
+#: frontend/src/views/PhotoInfoView.vue:12
 #: templates/configure/tab_metadata.html.jinja:12
 msgid "Afficher la date de prise de vue"
 msgstr "Aufnahmedatum anzeigen"
 
-#: frontend/src/views/PhotoInfoView.vue:13
-#: templates/configure/_smart_albums.html.jinja:34
-msgid "Lieu"
-msgstr "Ort"
-
-#: frontend/src/views/PhotoInfoView.vue:14
+#: frontend/src/views/PhotoInfoView.vue:17
 #: templates/configure/tab_metadata.html.jinja:26
 msgid "Afficher la localisation (ville/pays)"
 msgstr "Ort anzeigen (Stadt/Land)"
 
-#: frontend/src/views/PhotoInfoView.vue:15
+#: frontend/src/views/PhotoInfoView.vue:18
 msgid "Format du lieu"
 msgstr "Ortsformat"
 
-#: frontend/src/views/PhotoInfoView.vue:16
+#: frontend/src/views/PhotoInfoView.vue:19
 #: templates/configure/tab_metadata.html.jinja:39
 msgid "Ville, Pays"
 msgstr "Stadt, Land"
 
-#: frontend/src/views/PhotoInfoView.vue:16
+#: frontend/src/views/PhotoInfoView.vue:19
 #: templates/configure/tab_metadata.html.jinja:41
 msgid "Ville uniquement"
 msgstr "Nur Stadt"
 
-#: frontend/src/views/PhotoInfoView.vue:16
+#: frontend/src/views/PhotoInfoView.vue:19
 #: templates/configure/tab_metadata.html.jinja:43
 msgid "Pays uniquement"
 msgstr "Nur Land"
 
-#: frontend/src/views/PhotoInfoView.vue:17
+#: frontend/src/views/PhotoInfoView.vue:20
 #: templates/configure/tab_metadata.html.jinja:30
 msgid ""
 "Trouver le nom du lieu pour toutes les photos géolocalisées (Google "
@@ -4516,7 +5058,7 @@ msgstr ""
 "Ortsnamen für alle Fotos mit GPS-Daten ermitteln (Google Drive, "
 "Telefon...)"
 
-#: frontend/src/views/PhotoInfoView.vue:18
+#: frontend/src/views/PhotoInfoView.vue:21
 #: templates/configure/tab_metadata.html.jinja:31
 msgid ""
 "Les coordonnées GPS des photos (jamais les photos) sont envoyées à "
@@ -4527,124 +5069,175 @@ msgstr ""
 "OpenStreetMap gesendet, um den Ort zu ermitteln; jeder Ort wird nur "
 "einmal abgefragt. Ohne diese Option haben nur Immich-Fotos einen Ort."
 
-#: frontend/src/views/PhotoInfoView.vue:20
+#: frontend/src/views/PhotoInfoView.vue:23
 msgid "Drapeau du pays"
 msgstr "Landesflagge"
 
-#: frontend/src/views/PhotoInfoView.vue:21
+#: frontend/src/views/PhotoInfoView.vue:24
 #: templates/configure/tab_metadata.html.jinja:50
 msgid "Afficher le drapeau du pays"
 msgstr "Landesflagge zeigen"
 
-#: frontend/src/views/PhotoInfoView.vue:22
+#: frontend/src/views/PhotoInfoView.vue:25
 msgid "Taille du drapeau"
 msgstr "Flaggengröße"
 
-#: frontend/src/views/PhotoInfoView.vue:24
+#: frontend/src/views/PhotoInfoView.vue:27
 msgid "Opacité du drapeau"
 msgstr "Flaggendeckkraft"
 
-#: frontend/src/views/PhotoInfoView.vue:25
+#: frontend/src/views/PhotoInfoView.vue:28
 #: templates/configure/tab_metadata.html.jinja:74
 msgid "Position du drapeau"
 msgstr "Flaggenposition"
 
-#: frontend/src/views/PhotoInfoView.vue:36
-msgid ""
-"Police, couleurs et position du texte (éditeur de légendes) : interface "
-"classique"
-msgstr ""
-"Schriftart, Farben und Textposition (Bildunterschriften-Editor): "
-"klassische Oberfläche"
+#: frontend/src/views/PhotoInfoView.vue:40
+msgid "Style du texte"
+msgstr "Textstil"
 
-#: frontend/src/views/PlaylistsView.vue:44
+#: frontend/src/views/PhotoInfoView.vue:41
+#: templates/configure/tab_metadata.html.jinja:108
+msgid ""
+"Police, couleurs, fond, contour, position : réglez-les dans l'éditeur de "
+"légendes, avec un aperçu."
+msgstr ""
+"Schriftart, Farben, Hintergrund, Kontur, Position: im Bildunterschriften-"
+"Editor mit Vorschau einstellen."
+
+#: frontend/src/views/PhotoInfoView.vue:42
+#: templates/configure/tab_metadata.html.jinja:110
+msgid "Personnaliser le style"
+msgstr "Stil anpassen"
+
+#: frontend/src/views/PlaylistsView.vue:69
 msgid "Nouveau nom de la playlist :"
 msgstr "Neuer Name der Wiedergabeliste:"
 
-#: frontend/src/views/PlaylistsView.vue:51
+#: frontend/src/views/PlaylistsView.vue:76
 #, python-brace-format
 msgid "Supprimer la playlist « {name} » ?"
 msgstr "Wiedergabeliste „{name}“ löschen?"
 
-#: frontend/src/views/PlaylistsView.vue:52
+#: frontend/src/views/PlaylistsView.vue:77
 msgid "Playlist supprimée."
 msgstr "Wiedergabeliste gelöscht."
 
-#: frontend/src/views/PlaylistsView.vue:80
+#: frontend/src/views/PlaylistsView.vue:105
 msgid "Choisissez au moins une photo."
 msgstr "Wählen Sie mindestens ein Foto."
 
-#: frontend/src/views/PlaylistsView.vue:82
+#: frontend/src/views/PlaylistsView.vue:107
 msgid "Playlist enregistrée."
 msgstr "Wiedergabeliste gespeichert."
 
-#: frontend/src/views/PlaylistsView.vue:85
+#: frontend/src/views/PlaylistsView.vue:110
 #: templates/configure/_playlist_builder.html.jinja:41
 msgid "Donnez un nom à la playlist."
 msgstr "Geben Sie der Playlist einen Namen."
 
-#: frontend/src/views/PlaylistsView.vue:86
+#: frontend/src/views/PlaylistsView.vue:111
 msgid "Playlist créée."
 msgstr "Wiedergabeliste erstellt."
 
-#: frontend/src/views/PlaylistsView.vue:99
+#: frontend/src/views/PlaylistsView.vue:124
 #: templates/configure/tab_playlists.html.jinja:73
 msgid "Vos Playlists"
 msgstr "Vos-Playlists"
 
-#: frontend/src/views/PlaylistsView.vue:101
+#: frontend/src/views/PlaylistsView.vue:126
 #: templates/configure/scripts_status.html.jinja:161
 #: templates/configure/scripts_status.html.jinja:166
 #: templates/configure/tab_playlists.html.jinja:38
 msgid "Retour au diaporama standard"
 msgstr "Kehren Sie zur Standard-Diashow zurück"
 
-#: frontend/src/views/PlaylistsView.vue:102
-#: frontend/src/views/PlaylistsView.vue:133
+#: frontend/src/views/PlaylistsView.vue:127
+#: frontend/src/views/PlaylistsView.vue:178
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/tab_playlists.html.jinja:64
 msgid "Nouvelle playlist"
 msgstr "Neue Playlist"
 
-#: frontend/src/views/PlaylistsView.vue:105
+#: frontend/src/views/PlaylistsView.vue:130
 #: templates/configure/tab_playlists.html.jinja:65
 msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
 msgstr "Wählen Sie Fotos auf einmal aus – nach Quelle, Jahr, Monat oder Favoriten."
 
-#: frontend/src/views/PlaylistsView.vue:106
-msgid "Albums intelligents, musique et disposition : interface classique"
-msgstr "Intelligente Alben, Musik und Layout: klassische Oberfläche"
+#: frontend/src/views/PlaylistsView.vue:132
+#: templates/configure/_smart_albums.html.jinja:3
+msgid "Albums intelligents"
+msgstr "Intelligente Alben"
 
-#: frontend/src/views/PlaylistsView.vue:107
+#: frontend/src/views/PlaylistsView.vue:133
+#: templates/configure/_smart_albums.html.jinja:4
+msgid ""
+"Ils se remplissent tout seuls d'après la date, les personnes ou le lieu "
+"des photos, et accueillent les nouvelles photos dès leur arrivée."
+msgstr ""
+"Sie füllen sich selbst nach Datum, Personen oder Ort der Fotos und nehmen"
+" neue Fotos auf, sobald sie ankommen."
+
+#: frontend/src/views/PlaylistsView.vue:137
+#: templates/configure/_smart_albums.html.jinja:6
+msgid "Créer un album intelligent"
+msgstr "Intelligentes Album erstellen"
+
+#: frontend/src/views/PlaylistsView.vue:140
 #: templates/configure/tab_playlists.html.jinja:74
 msgid "Seulement mes playlists"
 msgstr "Nur meine Playlists"
 
-#: frontend/src/views/PlaylistsView.vue:109
+#: frontend/src/views/PlaylistsView.vue:142
 msgid "Aucune playlist pour l'instant."
 msgstr "Noch keine Wiedergabelisten."
 
-#: frontend/src/views/PlaylistsView.vue:120
+#: frontend/src/views/PlaylistsView.vue:154
+#: templates/configure/scripts_main.html.jinja:336
+msgid "Disposition de la playlist"
+msgstr "Anordnung der Playlist"
+
+#: frontend/src/views/PlaylistsView.vue:155
+#: templates/configure/scripts_main.html.jinja:233
+msgid "Comme le diaporama"
+msgstr "Wie die Diashow"
+
+#: frontend/src/views/PlaylistsView.vue:157
+msgid "Musique de la playlist"
+msgstr "Musik der Playlist"
+
+#: frontend/src/views/PlaylistsView.vue:158
+#: templates/configure/_playlist_builder.html.jinja:10
+#: templates/configure/_playlist_builder.html.jinja:116
+#: templates/configure/scripts_gallery.html.jinja:23
+msgid "Pas de musique"
+msgstr "Keine Musik"
+
+#: frontend/src/views/PlaylistsView.vue:163
 #: templates/configure/scripts_gallery.html.jinja:57
 #: templates/configure/scripts_main.html.jinja:1099
 msgid "Lancer"
 msgstr "Lancer"
 
-#: frontend/src/views/PlaylistsView.vue:121
+#: frontend/src/views/PlaylistsView.vue:164
+#: templates/configure/scripts_main.html.jinja:334
+msgid "Modifier les règles"
+msgstr "Regeln bearbeiten"
+
+#: frontend/src/views/PlaylistsView.vue:165
 msgid "Modifier les photos"
 msgstr "Fotos bearbeiten"
 
-#: frontend/src/views/PlaylistsView.vue:122
+#: frontend/src/views/PlaylistsView.vue:166
 #: frontend/src/views/TripsView.vue:268
 #: templates/configure/tab_carte.html.jinja:34
 msgid "Renommer"
 msgstr "Umbenennen"
 
-#: frontend/src/views/PlaylistsView.vue:137
+#: frontend/src/views/PlaylistsView.vue:182
 msgid "Nom de la playlist"
 msgstr "Name der Wiedergabeliste"
 
-#: frontend/src/views/PlaylistsView.vue:139
+#: frontend/src/views/PlaylistsView.vue:184
 #: frontend/src/views/TripsView.vue:234
 #: templates/configure/_playlist_builder.html.jinja:14
 #: templates/configure/_playlist_builder.html.jinja:107
@@ -4652,17 +5245,17 @@ msgstr "Name der Wiedergabeliste"
 msgid "Toutes les années"
 msgstr "Alle Jahre"
 
-#: frontend/src/views/PlaylistsView.vue:142
+#: frontend/src/views/PlaylistsView.vue:187
 #: templates/configure/_playlist_builder.html.jinja:18
 msgid "Tout sélectionner"
 msgstr "Alle auswählen"
 
-#: frontend/src/views/PlaylistsView.vue:143
+#: frontend/src/views/PlaylistsView.vue:188
 #: templates/configure/_playlist_builder.html.jinja:19
 msgid "Tout désélectionner"
 msgstr "Auswahl aufheben"
 
-#: frontend/src/views/PlaylistsView.vue:154
+#: frontend/src/views/PlaylistsView.vue:199
 #, python-brace-format
 msgid "{n} photos sélectionnées"
 msgstr "{n} Fotos ausgewählt"
@@ -4918,12 +5511,6 @@ msgstr "Telefon koppeln"
 #: templates/configure/tab_son.html.jinja:212
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Sichtbar: Wählen Sie „Cadre photo“ auf dem Telefon"
-
-#: frontend/src/views/SoundView.vue:186
-#: templates/configure/tab_affichage.html.jinja:310
-#: templates/configure/tab_son.html.jinja:212
-msgid "connecté"
-msgstr "verbunden"
 
 #: frontend/src/views/SoundView.vue:187
 #: templates/configure/tab_son.html.jinja:213
@@ -5861,11 +6448,6 @@ msgstr "Dicker Strich"
 msgid "Papier"
 msgstr "Papier"
 
-#: templates/configure/tab_messages.html.jinja:245
-#: templates/upload.html.jinja:213 utils/message_renderer.py:40
-msgid "Ardoise"
-msgstr "Tafel"
-
 #: templates/upload.html.jinja:214
 msgid "Kraft"
 msgstr "Packpapier"
@@ -5929,12 +6511,6 @@ msgstr "noch {n} Min."
 #: templates/configure/_playlist_builder.html.jinja:9
 msgid "Nom de la playlist (ex : Vacances 2024)"
 msgstr "Name der Playlist (z. B. Urlaub 2024)"
-
-#: templates/configure/_playlist_builder.html.jinja:10
-#: templates/configure/_playlist_builder.html.jinja:116
-#: templates/configure/scripts_gallery.html.jinja:23
-msgid "Pas de musique"
-msgstr "Keine Musik"
 
 #: templates/configure/_playlist_builder.html.jinja:14
 msgid "Année"
@@ -6005,85 +6581,6 @@ msgstr "Telefon"
 #: utils/import_progress.py:13
 msgid "E-mail"
 msgstr "E-Mail"
-
-#: templates/configure/_smart_albums.html.jinja:3
-msgid "Albums intelligents"
-msgstr "Intelligente Alben"
-
-#: templates/configure/_smart_albums.html.jinja:4
-msgid ""
-"Ils se remplissent tout seuls d'après la date, les personnes ou le lieu "
-"des photos, et accueillent les nouvelles photos dès leur arrivée."
-msgstr ""
-"Sie füllen sich selbst nach Datum, Personen oder Ort der Fotos und nehmen"
-" neue Fotos auf, sobald sie ankommen."
-
-#: templates/configure/_smart_albums.html.jinja:6
-msgid "Créer un album intelligent"
-msgstr "Intelligentes Album erstellen"
-
-#: templates/configure/_smart_albums.html.jinja:12
-#: templates/configure/scripts_main.html.jinja:334
-msgid "Album intelligent"
-msgstr "Intelligentes Album"
-
-#: templates/configure/_smart_albums.html.jinja:17
-msgid "ex : Les enfants, Été 2025, Noël en famille"
-msgstr "z. B. Die Kinder, Sommer 2025, Weihnachten mit der Familie"
-
-#: templates/configure/_smart_albums.html.jinja:19
-msgid "Période de l'année"
-msgstr "Jahreszeit"
-
-#: templates/configure/_smart_albums.html.jinja:21
-msgid "Toute l'année"
-msgstr "Ganzes Jahr"
-
-#: templates/configure/_smart_albums.html.jinja:22
-#: templates/configure/tab_apercu.html.jinja:6
-msgid "du"
-msgstr "vom"
-
-#: templates/configure/_smart_albums.html.jinja:22
-msgid "(mois-jour)"
-msgstr "(Monat-Tag)"
-
-#: templates/configure/_smart_albums.html.jinja:25
-msgid "Années"
-msgstr "Jahre"
-
-#: templates/configure/_smart_albums.html.jinja:31
-msgid "Toutes ensemble sur la photo (sinon : au moins une)"
-msgstr "Alle zusammen auf dem Foto (sonst: mindestens eine)"
-
-#: templates/configure/_smart_albums.html.jinja:35
-msgid "ex : Biarritz, Italie"
-msgstr "z. B. Biarritz, Italien"
-
-#: templates/configure/_smart_albums.html.jinja:40
-msgid "Autres"
-msgstr "Sonstiges"
-
-#: templates/configure/_smart_albums.html.jinja:42
-msgid "Favoris uniquement"
-msgstr "Nur Favoriten"
-
-#: templates/configure/_smart_albums.html.jinja:45
-#: templates/configure/tab_apercu.html.jinja:10
-msgid "Photos seulement"
-msgstr "Nur Fotos"
-
-#: templates/configure/_smart_albums.html.jinja:56
-msgid "Enregistrer l'album"
-msgstr "Album speichern"
-
-#: templates/configure/_smart_albums.html.jinja:80
-msgid "Dates précises…"
-msgstr "Genaue Daten…"
-
-#: templates/configure/_smart_albums.html.jinja:80
-msgid "Aucune pour l'instant"
-msgstr "Noch keine"
 
 #: templates/configure/_son_spotify.html.jinja:103
 msgid "Copié"
@@ -6213,9 +6710,9 @@ msgid "Enregistrement…"
 msgstr "Wird gespeichert…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:289
-#: web/routes_settings.py:290 web/routes_settings.py:333
-#: web/routes_settings.py:355 web/routes_settings.py:407
-#: web/routes_settings.py:431 web/routes_settings.py:441
+#: web/routes_settings.py:316 web/routes_settings.py:359
+#: web/routes_settings.py:381 web/routes_settings.py:433
+#: web/routes_settings.py:457 web/routes_settings.py:467
 msgid "Enregistré"
 msgstr "Gespeichert"
 
@@ -6447,10 +6944,6 @@ msgstr "Status: Fehler"
 msgid "État de la prise : Injoignable"
 msgstr "Outlet-Status: Nicht erreichbar"
 
-#: templates/configure/scripts_main.html.jinja:233
-msgid "Comme le diaporama"
-msgstr "Wie die Diashow"
-
 #: templates/configure/scripts_main.html.jinja:240
 msgid "Uniquement ce format"
 msgstr "Nur dieses Format"
@@ -6466,14 +6959,6 @@ msgstr "Aus Playlist entfernen"
 #: templates/configure/scripts_main.html.jinja:328
 msgid "Afficher/Cacher les photos"
 msgstr "Fotos ein-/ausblenden"
-
-#: templates/configure/scripts_main.html.jinja:334
-msgid "Modifier les règles"
-msgstr "Regeln bearbeiten"
-
-#: templates/configure/scripts_main.html.jinja:336
-msgid "Disposition de la playlist"
-msgstr "Anordnung der Playlist"
 
 #: templates/configure/scripts_main.html.jinja:992
 msgid "Veuillez entrer un nom pour la playlist."
@@ -6585,10 +7070,6 @@ msgstr "Hochladen"
 #: templates/configure/scripts_main.html.jinja:1835
 msgid "Supprimer le fichier musical"
 msgstr "Musikdatei löschen"
-
-#: templates/configure/scripts_status.html.jinja:59
-msgid "Aucune résolution trouvée."
-msgstr "Keine Auflösung gefunden."
 
 #: templates/configure/scripts_status.html.jinja:63
 msgid "Erreur de chargement."
@@ -6928,125 +7409,14 @@ msgstr "Datei auswählen"
 msgid "Musiques disponibles"
 msgstr "Verfügbare Musik"
 
-#: templates/configure/tab_affichage.html.jinja:13
-msgid "Orientation du cadre"
-msgstr "Rahmenausrichtung"
-
-#: templates/configure/tab_affichage.html.jinja:17
-#: templates/configure/tab_affichage.html.jinja:38
-msgid "Paysage (Horizontal)"
-msgstr "Landschaft (horizontal)"
-
-#: templates/configure/tab_affichage.html.jinja:17
-#: templates/configure/tab_affichage.html.jinja:38
-msgid "Portrait (Vertical)"
-msgstr "Porträt (vertikal)"
-
-#: templates/configure/tab_affichage.html.jinja:18
-#: templates/configure/tab_affichage.html.jinja:39
-msgid "Paysage retourné"
-msgstr "Querformat (gedreht)"
-
-#: templates/configure/tab_affichage.html.jinja:18
-#: templates/configure/tab_affichage.html.jinja:39
-msgid "Portrait retourné"
-msgstr "Hochformat (gedreht)"
-
-#: templates/configure/tab_affichage.html.jinja:19
-msgid "Automatique (capteur d'orientation)"
-msgstr "Automatisch (Lagesensor)"
-
-#: templates/configure/tab_affichage.html.jinja:23
-msgid ""
-"L'écran pivote tout seul et les photos sont repréparées en arrière-plan "
-"aux nouvelles dimensions (le diaporama continue pendant ce temps)."
-msgstr ""
-"Der Bildschirm dreht sich von selbst, und die Fotos werden im Hintergrund"
-" in der neuen Größe neu vorbereitet (die Diashow läuft währenddessen "
-"weiter)."
-
-#: templates/configure/tab_affichage.html.jinja:25
-msgid ""
-"Branchez un petit accéléromètre I2C (MPU-6050, ADXL345 ou LIS3DH) sur le "
-"Raspberry Pi (SDA, SCL, 3,3 V, GND) et activez l'I2C (sudo raspi-config ›"
-" Interface Options › I2C). Fixez-le au dos du cadre, puis mémorisez ses "
-"positions : cadre posé en paysage d'abord, puis en portrait."
-msgstr ""
-"Schließe einen kleinen I2C-Beschleunigungssensor (MPU-6050, ADXL345 oder "
-"LIS3DH) an den Raspberry Pi an (SDA, SCL, 3,3 V, GND) und aktiviere I2C "
-"(sudo raspi-config › Interface Options › I2C). Befestige ihn hinten am "
-"Rahmen und speichere seine Positionen: zuerst Rahmen im Querformat, dann "
-"im Hochformat."
-
-#: templates/configure/tab_affichage.html.jinja:26
-msgid "Capteur :"
-msgstr "Sensor:"
-
-#: templates/configure/tab_affichage.html.jinja:28
-msgid "Le cadre est en paysage"
-msgstr "Der Rahmen steht im Querformat"
-
-#: templates/configure/tab_affichage.html.jinja:29
-msgid "Le cadre est en portrait"
-msgstr "Der Rahmen steht im Hochformat"
-
-#: templates/configure/tab_affichage.html.jinja:30
-msgid "Portrait, mais l'image était à l'envers"
-msgstr "Hochformat, aber das Bild stand auf dem Kopf"
-
-#: templates/configure/tab_affichage.html.jinja:37
-msgid "non détecté"
-msgstr "nicht erkannt"
-
-#: templates/configure/tab_affichage.html.jinja:37
-msgid "position actuelle :"
-msgstr "aktuelle Lage:"
-
-#: templates/configure/tab_affichage.html.jinja:40
-msgid "cadre à plat ou position non mémorisée"
-msgstr "Rahmen liegt flach oder Lage nicht gespeichert"
-
-#: templates/configure/tab_affichage.html.jinja:143
-msgid "Résolution de l'écran"
-msgstr "Bildschirmauflösung"
-
 #: templates/configure/tab_affichage.html.jinja:147
 msgid "Chargement des résolutions..."
 msgstr "Auflösungen werden geladen..."
-
-#: templates/configure/tab_affichage.html.jinja:151
-#: templates/configure/tab_son.html.jinja:17
-msgid "Appliquer"
-msgstr "Anwenden"
-
-#: templates/configure/tab_affichage.html.jinja:154
-msgid ""
-"Force une résolution spécifique. Utile si l'écran n'est pas détecté "
-"correctement au démarrage."
-msgstr ""
-"Erzwingt eine bestimmte Auflösung. Nützlich, wenn der Bildschirm beim "
-"Start nicht richtig erkannt wird."
 
 #: templates/configure/tab_affichage.html.jinja:157
 #, python-format
 msgid "Hauteur utile de l'écran (%% affiché) :"
 msgstr "Nützliche Bildschirmhöhe (%% angezeigt):"
-
-#: templates/configure/tab_affichage.html.jinja:163
-msgid "Largeur d'affichage cible (px) :"
-msgstr "Angestrebte Anzeigebreite (px):"
-
-#: templates/configure/tab_affichage.html.jinja:166
-msgid "Hauteur d'affichage cible (px) :"
-msgstr "Zielanzeigehöhe (px):"
-
-#: templates/configure/tab_affichage.html.jinja:172
-msgid "Détecter la résolution de l'écran actif"
-msgstr "Aktive Bildschirmauflösung erkennen"
-
-#: templates/configure/tab_affichage.html.jinja:172
-msgid "Détecter"
-msgstr "Erkennen"
 
 #: templates/configure/tab_affichage.html.jinja:180
 #, python-format
@@ -7056,108 +7426,6 @@ msgstr "Zoomstärke (z. B. 1.15 für 15%% Zoom):"
 #: templates/configure/tab_affichage.html.jinja:244
 msgid "Composition « Ce jour-là » (une photo par année) toutes les 30 minutes"
 msgstr "Komposition „An diesem Tag“ (ein Foto pro Jahr) alle 30 Minuten"
-
-#: templates/configure/tab_affichage.html.jinja:293
-msgid "Home Assistant (MQTT)"
-msgstr "Home Assistant (MQTT)"
-
-#: templates/configure/tab_affichage.html.jinja:294
-msgid ""
-"Le cadre apparaît tout seul dans Home Assistant : interrupteur du "
-"diaporama (pour l'endormir ou le réveiller), choix de l'ambiance, photo "
-"suivante, et un champ « Alerte » dont le texte s'affiche aussitôt sur le "
-"cadre (ex. « La porte du garage est ouverte »)."
-msgstr ""
-"Der Rahmen erscheint automatisch in Home Assistant: Schalter für die "
-"Diashow (zum Schlafenlegen oder Aufwecken), Stimmungswahl, nächstes Foto "
-"und ein Feld „Alarm“, dessen Text sofort auf dem Rahmen erscheint (z. B. "
-"„Das Garagentor ist offen“)."
-
-#: templates/configure/tab_affichage.html.jinja:297
-msgid "Serveur MQTT"
-msgstr "MQTT-Server"
-
-#: templates/configure/tab_affichage.html.jinja:300
-msgid "Nom du cadre"
-msgstr "Name des Rahmens"
-
-#: templates/configure/tab_affichage.html.jinja:302
-msgid ""
-"Dans Home Assistant : ajoutez l'intégration MQTT (avec le module "
-"Mosquitto), puis utilisez ici le même utilisateur."
-msgstr ""
-"In Home Assistant: MQTT-Integration hinzufügen (mit dem Mosquitto-Add-on)"
-" und hier denselben Benutzer verwenden."
-
-#: templates/configure/tab_affichage.html.jinja:310
-msgid "non connecté"
-msgstr "nicht verbunden"
-
-#: templates/configure/tab_affichage.html.jinja:333
-msgid "Gestion de l'alimentation (Prise Connectée)"
-msgstr "Energieverwaltung (Connected Socket)"
-
-#: templates/configure/tab_affichage.html.jinja:335
-msgid ""
-"Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
-" une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
-"enverra une simple requête HTTP aux URLs que vous spécifiez."
-msgstr ""
-"Wenn Ihr Bildschirm nicht vollständig in den Ruhezustand wechselt, können"
-" Sie ihn über eine angeschlossene Steckdose (WLAN) ausschalten. Pimmich "
-"sendet eine einfache HTTP-Anfrage an die von Ihnen angegebenen URLs."
-
-#: templates/configure/tab_affichage.html.jinja:336
-msgid "Exemples d'URLs :"
-msgstr "Beispiele für URLs:"
-
-#: templates/configure/tab_affichage.html.jinja:347
-msgid "Réveil à l'arrivée d'un membre de la famille"
-msgstr "Aufwachen, wenn ein Familienmitglied nach Hause kommt"
-
-#: templates/configure/tab_affichage.html.jinja:348
-msgid ""
-"Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi "
-"après une absence, le cadre se réveille (30 minutes, même la nuit), "
-"affiche « Bienvenue à la maison » et peut lancer sa playlist."
-msgstr ""
-"Wenn sich das Telefon eines Haushaltsmitglieds nach einer Abwesenheit "
-"wieder mit dem WLAN verbindet, wacht der Rahmen auf (30 Minuten, auch "
-"nachts), zeigt „Willkommen zu Hause“ und kann dessen Playlist starten."
-
-#: templates/configure/tab_affichage.html.jinja:350
-msgid "Ajouter un téléphone vu sur le Wi-Fi"
-msgstr "Ein im WLAN gesehenes Telefon hinzufügen"
-
-#: templates/configure/tab_affichage.html.jinja:351
-msgid ""
-"Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
-"Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
-"sinon l'adresse change."
-msgstr ""
-"WLAN des Telefons einschalten und aktualisieren. Tipp: Auf iPhone und "
-"Android „Private / zufällige MAC-Adresse“ für dieses Netz deaktivieren, "
-"sonst ändert sich die Adresse."
-
-#: templates/configure/tab_affichage.html.jinja:360
-msgid "à la maison"
-msgstr "zu Hause"
-
-#: templates/configure/tab_affichage.html.jinja:360
-msgid "absent"
-msgstr "abwesend"
-
-#: templates/configure/tab_affichage.html.jinja:360
-msgid "Prénom"
-msgstr "Vorname"
-
-#: templates/configure/tab_affichage.html.jinja:361
-msgid "Pas de playlist"
-msgstr "Keine Playlist"
-
-#: templates/configure/tab_affichage.html.jinja:361
-msgid "Aucun appareil détecté."
-msgstr "Kein Gerät erkannt."
 
 #: templates/configure/tab_affichage.html.jinja:417
 msgid ""
@@ -7189,15 +7457,6 @@ msgid ""
 "                                après allumage (secondes) :"
 msgstr "Verzögerung nach dem Einschalten (Sekunden):"
 
-#: templates/configure/tab_affichage.html.jinja:462
-msgid ""
-"Temps d'attente pour que l'écran s'initialise avant de forcer la "
-"résolution. Augmentez si la résolution est toujours incorrecte."
-msgstr ""
-"Warten Sie, bis der Bildschirm initialisiert ist, bevor Sie die Auflösung"
-" erzwingen. Erhöhen Sie den Wert, wenn die Auflösung immer noch falsch "
-"ist."
-
 #: templates/configure/tab_affichage.html.jinja:465
 msgid ""
 "URL\n"
@@ -7208,19 +7467,11 @@ msgstr "Status-URL (optional):"
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "Verwenden Sie für Home Assistant die States-API-URL:"
 
-#: templates/configure/tab_affichage.html.jinja:477
-msgid "Token d'accès Home Assistant (si URL de statut HA) :"
-msgstr "Home Assistant-Zugriffstoken (bei HA-Status-URL):"
-
 #: templates/configure/tab_affichage.html.jinja:485
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "Token anzeigen/verbergen"
-
-#: templates/configure/tab_affichage.html.jinja:490
-msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
-msgstr "Erstellen Sie in Ihrem Home Assistant-Profil ein „Long-Term Access Token“."
 
 #: templates/configure/tab_apercu.html.jinja:3
 msgid "Rechercher dans la bibliothèque"
@@ -7817,80 +8068,6 @@ msgstr "Veröffentlichte Nachrichten"
 msgid "Aucun message publié."
 msgstr "Keine veröffentlichten Nachrichten."
 
-#: templates/configure/tab_messages.html.jinja:216
-msgid ""
-"Chaque jour, une citation ou un proverbe (dans la langue du cadre), ou un"
-" mot de la famille, apparaît dans le diaporama, environ une fois par "
-"tour."
-msgstr ""
-"Jeden Tag erscheint ein Zitat oder Sprichwort (in der Sprache des "
-"Rahmens) oder ein Familienspruch in der Diashow, etwa einmal pro "
-"Durchlauf."
-
-#: templates/configure/tab_messages.html.jinja:217
-msgid "Afficher une citation du jour"
-msgstr "Zitat des Tages anzeigen"
-
-#: templates/configure/tab_messages.html.jinja:220
-msgid "Citations :"
-msgstr "Zitate:"
-
-#: templates/configure/tab_messages.html.jinja:222
-msgid "Célèbres et mots de la famille"
-msgstr "Berühmte Zitate und Familiensprüche"
-
-#: templates/configure/tab_messages.html.jinja:223
-msgid "Citations et proverbes célèbres"
-msgstr "Berühmte Zitate und Sprichwörter"
-
-#: templates/configure/tab_messages.html.jinja:224
-msgid "Seulement les mots de la famille"
-msgstr "Nur Familiensprüche"
-
-#: templates/configure/tab_messages.html.jinja:228
-msgid "Présentation :"
-msgstr "Darstellung:"
-
-#: templates/configure/tab_messages.html.jinja:229
-msgid "Une différente chaque jour"
-msgstr "Jeden Tag eine andere"
-
-#: templates/configure/tab_messages.html.jinja:232
-msgid "Les mots de la famille"
-msgstr "Familiensprüche"
-
-#: templates/configure/tab_messages.html.jinja:233
-msgid ""
-"Les phrases cultes de la maison, une par ligne. Ajoutez l'auteur après un"
-" tiret : « On n'est pas aux pièces ! — Papi »."
-msgstr ""
-"Die Kultsprüche des Hauses, einer pro Zeile. Füge den Autor nach einem "
-"Gedankenstrich hinzu: „Wir sind doch nicht auf der Flucht! — Opa“."
-
-#: templates/configure/tab_messages.html.jinja:239
-msgid "Aujourd'hui :"
-msgstr "Heute:"
-
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:34
-msgid "Carte postale"
-msgstr "Postkarte"
-
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:30
-msgid "Nuit"
-msgstr "Nacht"
-
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:48
-msgid "Pastel"
-msgstr "Pastell"
-
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:52
-msgid "Minimal"
-msgstr "Minimal"
-
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:44
-msgid "Lettre"
-msgstr "Brief"
-
 #: templates/configure/tab_metadata.html.jinja:4
 msgid "Affichage des métadonnées des photos"
 msgstr "Foto-Metadaten anzeigen"
@@ -7943,18 +8120,6 @@ msgstr ""
 #: templates/configure/tab_metadata.html.jinja:107
 msgid "Style et Positionnement"
 msgstr "Stil und Positionierung"
-
-#: templates/configure/tab_metadata.html.jinja:108
-msgid ""
-"Police, couleurs, fond, contour, position : réglez-les dans l'éditeur de "
-"légendes, avec un aperçu."
-msgstr ""
-"Schriftart, Farben, Hintergrund, Kontur, Position: im Bildunterschriften-"
-"Editor mit Vorschau einstellen."
-
-#: templates/configure/tab_metadata.html.jinja:110
-msgid "Personnaliser le style"
-msgstr "Stil anpassen"
 
 #: templates/configure/tab_network.html.jinja:25
 msgid ""
@@ -9334,13 +9499,13 @@ msgstr ""
 "Der Wert für das Immich-Fotolimit ist ungültig. Der bisherige Wert bleibt"
 " erhalten."
 
-#: web/routes_config.py:254 web/routes_settings.py:440
+#: web/routes_config.py:254 web/routes_settings.py:466
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive-Schlüssel nicht gespeichert: %(error)s"
 
-#: web/routes_config.py:282 web/routes_settings.py:288
-#: web/routes_settings.py:331 web/routes_settings.py:405
+#: web/routes_config.py:282 web/routes_settings.py:311
+#: web/routes_settings.py:357 web/routes_settings.py:431
 msgid "Réglages modifiés"
 msgstr "Einstellungen geändert"
 
@@ -9352,8 +9517,8 @@ msgstr ""
 "Konfiguration gespeichert. Die Diashow wurde neu gestartet, um die "
 "Änderungen zu übernehmen."
 
-#: web/routes_family.py:26 web/routes_settings.py:320
-#: web/routes_settings.py:425
+#: web/routes_family.py:26 web/routes_settings.py:346
+#: web/routes_settings.py:451
 msgid "Liste invalide."
 msgstr "Ungültige Liste."
 
@@ -9831,6 +9996,31 @@ msgstr "API-Guthaben aufgebraucht oder ungeeigneter Tarif."
 msgid "Trop de requêtes. Veuillez réessayer plus tard."
 msgstr "Zu viele Anfragen. Bitte später erneut versuchen."
 
+#: web/routes_integrations.py:87
+msgid "L'URL est requise (http:// ou https://)."
+msgstr "Die URL ist erforderlich (http:// oder https://)."
+
+#: web/routes_integrations.py:93
+#, python-format
+msgid "Succès ! La prise a répondu avec le code %(code)s."
+msgstr "Erfolg! Die Steckdose antwortete mit Code %(code)s."
+
+#: web/routes_integrations.py:95
+#, python-format
+msgid "Échec. La prise a répondu avec une erreur : %(code)s."
+msgstr "Fehlgeschlagen. Die Steckdose antwortete mit einem Fehler: %(code)s."
+
+#: web/routes_integrations.py:97
+msgid "Échec. La requête a expiré (timeout). Vérifiez l'adresse IP de la prise."
+msgstr ""
+"Fehlgeschlagen. Zeitüberschreitung der Anfrage. Prüfen Sie die IP-Adresse"
+" der Steckdose."
+
+#: web/routes_integrations.py:99
+#, python-format
+msgid "Échec. Erreur de connexion : %(error)s"
+msgstr "Fehlgeschlagen. Verbindungsfehler: %(error)s"
+
 #: web/routes_integrations.py:110
 msgid "Le token du bot est requis."
 msgstr "Der Bot-Token ist erforderlich."
@@ -9865,6 +10055,25 @@ msgstr "Gezeitendaten aktualisiert!"
 #: web/routes_integrations.py:175
 msgid "Quota API StormGlass dépassé."
 msgstr "StormGlass-API-Kontingent überschritten."
+
+#: web/routes_integrations.py:219
+msgid "Le statut de la prise n'est pas configuré."
+msgstr "Der Steckdosenstatus ist nicht eingerichtet."
+
+#: web/routes_integrations.py:236
+#, python-format
+msgid "État de la prise : %(state)s"
+msgstr "Steckdosenstatus: %(state)s"
+
+#: web/routes_integrations.py:239
+msgid "Timeout lors de la connexion à la prise."
+msgstr "Zeitüberschreitung bei der Verbindung zur Steckdose."
+
+#: web/routes_integrations.py:243
+msgid "Erreur 401 : non autorisé. Vérifiez votre token d'accès Home Assistant."
+msgstr ""
+"Fehler 401: nicht autorisiert. Prüfen Sie Ihr Home-Assistant-"
+"Zugriffstoken."
 
 #: web/routes_integrations.py:256
 msgid ""
@@ -10192,29 +10401,29 @@ msgstr "Playlist nicht gefunden."
 msgid "Citation du jour enregistrée."
 msgstr "Zitat des Tages gespeichert."
 
-#: web/routes_settings.py:270
+#: web/routes_settings.py:286
 msgid "Aucun réglage à enregistrer."
 msgstr "Keine Einstellung zu speichern."
 
-#: web/routes_settings.py:274
+#: web/routes_settings.py:290
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unbekannte Einstellung: %(key)s"
 
-#: web/routes_settings.py:278
+#: web/routes_settings.py:294
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Ungültiger Wert für „%(key)s“."
 
-#: web/routes_settings.py:350
+#: web/routes_settings.py:376
 msgid "Valeur invalide."
 msgstr "Ungültiger Wert."
 
-#: web/routes_settings.py:355
+#: web/routes_settings.py:381
 msgid "Supprimé."
 msgstr "Gelöscht."
 
-#: web/routes_settings.py:398 web/routes_storage.py:114
+#: web/routes_settings.py:424 web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Unbekannte Quelle."
 

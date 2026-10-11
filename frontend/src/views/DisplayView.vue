@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import HomeAssistantCard from "../components/HomeAssistantCard.vue";
+import PresenceCard from "../components/PresenceCard.vue";
+import ScreenCard from "../components/ScreenCard.vue";
 import SettingsPage from "../components/SettingsPage.vue";
+import SmartPlugCard from "../components/SmartPlugCard.vue";
+import { boot } from "../boot";
 import { t } from "../i18n";
 import type { Section } from "../settings";
 
+const plug = (v: Record<string, unknown>) => !!v.smart_plug_enabled;
 const transitions = () => [
   ["fade", t("Fondu enchaîné")], ["fade_black", t("Fondu au noir")], ["zoom", t("Zoom en fondu")],
   ["slide_left", t("Glisser depuis la gauche")], ["slide_right", t("Glisser depuis la droite")],
@@ -14,6 +20,17 @@ const transitions = () => [
 const sections: Section[] = [
   { title: () => t("Paramètres d'affichage"), icon: "fa-desktop", fields: [
     { key: "display_duration", label: () => t("Durée d'affichage (en secondes) :"), type: "number", min: 3, max: 3600 },
+  ] },
+  { title: () => t("Écran"), icon: "fa-sync-alt", fields: [
+    { key: "screen_orientation", label: () => t("Orientation du cadre"), type: "select",
+      help: () => t("L'écran pivote tout seul et les photos sont repréparées en arrière-plan aux nouvelles dimensions (le diaporama continue pendant ce temps)."),
+      options: () => [{ value: "landscape", label: t("Paysage (Horizontal)") }, { value: "portrait", label: t("Portrait (Vertical)") },
+        { value: "landscape_flipped", label: t("Paysage retourné") }, { value: "portrait_flipped", label: t("Portrait retourné") },
+        { value: "auto", label: t("Automatique (capteur d'orientation)") }] },
+    { key: "display_width", label: () => t("Largeur d'affichage cible (px) :"), type: "number", min: 240, max: 7680 },
+    { key: "display_height", label: () => t("Hauteur d'affichage cible (px) :"), type: "number", min: 240, max: 7680 },
+    { key: "screen_height_percent", label: () => t("Hauteur utile de l'écran"), type: "range", min: 10, max: 100, step: 1, unit: " %",
+      help: () => t("Pour un écran dont le bas est caché par le cadre : les photos n'occupent que cette partie de la hauteur.") },
   ] },
   { title: () => t("Horaires Semaine (Lun-Ven)"), icon: "fa-calendar-week", fields: [
     { key: "active_start_weekday", label: () => t("Allumage :"), type: "time" },
@@ -76,10 +93,32 @@ const sections: Section[] = [
     { key: "cec_enabled", label: () => t("Piloter la télévision par HDMI-CEC"), type: "toggle",
       help: () => t("Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en veille avec lui. Activez aussi « HDMI-CEC » (Anynet+, Bravia Sync, SimpLink...) dans les réglages de la TV.") },
   ] },
+  { title: () => t("Gestion de l'alimentation (Prise Connectée)"), icon: "fa-plug",
+    intro: () => t("Si votre écran ne se met pas complètement en veille, vous pouvez utiliser une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra une simple requête HTTP aux URLs que vous spécifiez."),
+    fields: [
+    { key: "smart_plug_enabled", label: () => t("Activer le contrôle par prise connectée"), type: "toggle" },
+    { key: "smart_plug_on_url", label: () => t("URL pour ALLUMER la prise :"), type: "text", placeholder: "http://…", showIf: plug },
+    { key: "smart_plug_off_url", label: () => t("URL pour ÉTEINDRE la prise :"), type: "text", placeholder: "http://…", showIf: plug },
+    { key: "smart_plug_on_delay", label: () => t("Délai après allumage (secondes) :"), type: "number", min: 0, max: 30, showIf: plug,
+      help: () => t("Temps d'attente pour que l'écran s'initialise avant de forcer la résolution. Augmentez si la résolution est toujours incorrecte.") },
+    { key: "smart_plug_status_url", label: () => t("URL de Statut (Optionnel) :"), type: "text", placeholder: "http://…", showIf: plug },
+    { key: "home_assistant_token", label: () => t("Token d'accès Home Assistant (si URL de statut HA) :"), type: "secret", showIf: plug,
+      help: () => t("Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant.") },
+  ] },
 ];
 </script>
 
 <template>
-  <SettingsPage :sections="sections" classic-tab="tab-affichage"
-                :classic-hint="() => t('Orientation, résolution, Home Assistant, prise connectée et réveil à l\'arrivée : interface classique')" />
+  <SettingsPage :sections="sections">
+    <div class="extra">
+      <ScreenCard />
+      <SmartPlugCard />
+      <PresenceCard />
+      <HomeAssistantCard v-if="boot.admin" />
+    </div>
+  </SettingsPage>
 </template>
+
+<style scoped>
+.extra { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr)); gap: 0 1rem; align-items: start; }
+</style>

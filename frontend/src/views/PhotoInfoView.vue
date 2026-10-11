@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import CaptionEditor from "../components/CaptionEditor.vue";
 import SettingsPage from "../components/SettingsPage.vue";
 import { t } from "../i18n";
 import type { Section } from "../settings";
 
 const flag = (v: Record<string, unknown>) => !!v.show_country_flag;
+const editing = ref(false);
 const sections: Section[] = [
   { title: () => t("Date de prise de vue"), icon: "fa-calendar", fields: [
     { key: "show_photo_date", label: () => t("Afficher la date de prise de vue"), type: "toggle" },
@@ -32,6 +35,16 @@ const sections: Section[] = [
 </script>
 
 <template>
-  <SettingsPage :sections="sections" classic-tab="tab-metadata"
-                :classic-hint="() => t('Police, couleurs et position du texte (éditeur de légendes) : interface classique')" />
+  <SettingsPage :sections="sections">
+    <section class="card style">
+      <div class="card-head"><h2><i class="fas fa-palette"></i>{{ t("Style du texte") }}</h2></div>
+      <p class="small muted">{{ t("Police, couleurs, fond, contour, position : réglez-les dans l'éditeur de légendes, avec un aperçu.") }}</p>
+      <button class="btn primary" type="button" @click="editing = true"><i class="fas fa-palette"></i>{{ t("Personnaliser le style") }}</button>
+    </section>
+  </SettingsPage>
+  <CaptionEditor v-if="editing" scope="metadata" @close="editing = false" />
 </template>
+
+<style scoped>
+.style { margin-top: 1rem; }
+</style>

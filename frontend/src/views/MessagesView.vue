@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { ApiError, get, post } from "../api";
-import { classicUrl } from "../boot";
+import QuoteCard from "../components/QuoteCard.vue";
 import { currentLang, t } from "../i18n";
 import { notify, run } from "../toast";
 
@@ -138,9 +138,6 @@ onUnmounted(() => { if (preview.value) URL.revokeObjectURL(preview.value); });
       <div class="card-head"><h2><i class="fas fa-tv"></i>{{ t("Aperçu à l'écran") }}</h2></div>
       <img v-if="preview" :src="preview" :alt="t('Aperçu du message')" class="preview">
       <p v-else class="muted">{{ t("Cliquez sur « Aperçu » pour voir le rendu.") }}</p>
-      <p class="small muted links">
-        <a :href="classicUrl('tab-messages')"><i class="fas fa-quote-right"></i> {{ t("Citation du jour") }}</a>
-      </p>
     </section>
   </div>
 
@@ -169,6 +166,7 @@ onUnmounted(() => { if (preview.value) URL.revokeObjectURL(preview.value); });
       </article>
     </div>
   </section>
+  <QuoteCard />
 </template>
 
 <style scoped>

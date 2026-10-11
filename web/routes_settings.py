@@ -11,6 +11,7 @@ from web.core import _
 from web.routes_config import schedule_slideshow_restart
 
 TIME = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")
+URL = re.compile(r"^https?://[^\s\x00-\x1f]+$")
 COLOR = re.compile(r"^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$")
 TRANSITIONS = ["fade", "fade_black", "zoom", "slide_left", "slide_right", "slide_up", "slide_down", "push_left", "push_up",
                "wipe", "blinds", "iris", "random"]
@@ -56,8 +57,18 @@ SETTINGS = {
     "video_audio_output": ("choice", ["auto", "hdmi", "jack"], "auto"),
     "video_audio_volume": ("int", (0, 100), 100),
     "music_duck_videos": ("bool", None, True),
-    # Télévision
+    # Écran : orientation et dimensions (les photos sont repréparées si la taille change)
+    "screen_orientation": ("choice", ["landscape", "portrait", "landscape_flipped", "portrait_flipped", "auto"], "landscape"),
+    "display_width": ("int", (240, 7680), 1920),
+    "display_height": ("int", (240, 7680), 1080),
+    "screen_height_percent": ("int", (10, 100), 100),
+    # Télévision et prise connectée
     "cec_enabled": ("bool", None, False),
+    "smart_plug_enabled": ("bool", None, False),
+    "smart_plug_on_url": ("url", 500, ""),
+    "smart_plug_off_url": ("url", 500, ""),
+    "smart_plug_status_url": ("url", 500, ""),
+    "smart_plug_on_delay": ("int", (0, 30), 5),
     # Dispositions
     "compositions_every": ("int", (0, 100), 5),
     "compositions_full_photos": ("bool", None, True),
@@ -189,6 +200,11 @@ def clean(key, value):
         if len(text) > options or any(c in text for c in "\r\n\t\x00"):
             raise ValueError
         return text.strip()
+    if kind == "url":  # adresse http(s) appelée par le cadre, ou "" (non renseignée)
+        text = str(value).strip()
+        if text and (len(text) > options or not URL.match(text)):
+            raise ValueError
+        return text
     if kind == "coord":  # latitude ou longitude en degrés décimaux, ou "" (non renseignée)
         text = str(value).strip().replace(",", ".")
         if not text:
@@ -283,9 +299,19 @@ def settings_save_api():
         limits["immich"] = cleaned.pop("immich_max_photos")
         cleaned["max_photos_to_download"] = limits
     config = dict(config, **cleaned)
+    resized = False
+    if {"screen_orientation", "display_width", "display_height"} & set(cleaned):
+        # Dimensions dans l'orientation en vigueur (paysage, portrait ou automatique), comme l'interface classique
+        from utils import screen_rotation
+        config["display_width"], config["display_height"] = screen_rotation.sized(
+            config, int(config.get("display_width") or 1920), int(config.get("display_height") or 1080))
+        resized = (config["display_width"], config["display_height"]) != (previous.get("display_width"), previous.get("display_height"))
     save_config(config)
     from web.routes_history import log
     log("settings", _("Réglages modifiés"), {"type": "restore_config", "data": previous}, merge=True)
+    if resized:  # les photos sont repréparées aux nouvelles dimensions, le diaporama continue pendant ce temps
+        from web.workers import reprepare_all_sources
+        threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
     schedule_slideshow_restart()
     return jsonify({"success": True, "message": _("Enregistré"), "values": current_values(config)})
 

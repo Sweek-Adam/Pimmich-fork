@@ -80,23 +80,23 @@ def test_stormglass_api():
 @login_required
 def test_smart_plug():
     """Teste une URL de prise connectée."""
-    data = request.get_json()
-    url = data.get("url")
+    data = request.get_json(silent=True) or {}
+    url = str(data.get("url") or "").strip()
 
-    if not url:
-        return jsonify({"success": False, "message": "L'URL est requise."})
+    if not url.startswith(("http://", "https://")):
+        return jsonify({"success": False, "message": _("L'URL est requise (http:// ou https://).")})
 
     try:
         # Utiliser un timeout court pour ne pas bloquer l'interface
         response = requests.post(url, timeout=5)
         if 200 <= response.status_code < 300:
-            return jsonify({"success": True, "message": f"Succès ! La prise a répondu avec le code {response.status_code}."})
+            return jsonify({"success": True, "message": _("Succès ! La prise a répondu avec le code %(code)s.", code=response.status_code)})
         else:
-            return jsonify({"success": False, "message": f"Échec. La prise a répondu avec une erreur : {response.status_code}."})
+            return jsonify({"success": False, "message": _("Échec. La prise a répondu avec une erreur : %(code)s.", code=response.status_code)})
     except requests.exceptions.Timeout:
-        return jsonify({"success": False, "message": "Échec. La requête a expiré (timeout). Vérifiez l'adresse IP de la prise."})
+        return jsonify({"success": False, "message": _("Échec. La requête a expiré (timeout). Vérifiez l'adresse IP de la prise.")})
     except requests.exceptions.RequestException as e:
-        return jsonify({"success": False, "message": f"Échec. Erreur de connexion : {e}"})
+        return jsonify({"success": False, "message": _("Échec. Erreur de connexion : %(error)s", error=str(e))})
 
 
 @app.route('/test-telegram', methods=['POST'])
@@ -216,7 +216,7 @@ def get_smart_plug_status():
     """
     config = load_config()
     if not config.get("smart_plug_enabled") or not config.get("smart_plug_status_url"):
-        return jsonify({"status": "disabled", "message": "Le statut de la prise n'est pas configuré."})
+        return jsonify({"status": "disabled", "message": _("Le statut de la prise n'est pas configuré.")})
 
     status_url = config.get("smart_plug_status_url")
     token = config.get("home_assistant_token") # Le nom de la clé dans la config est 'home_assistant_token'
@@ -233,14 +233,14 @@ def get_smart_plug_status():
         # Pour Home Assistant, l'état est dans la clé 'state'
         plug_state = data.get('state', 'unknown').lower()
 
-        return jsonify({"status": plug_state, "message": f"État de la prise : {plug_state}"})
+        return jsonify({"status": plug_state, "message": _("État de la prise : %(state)s", state=plug_state)})
 
     except requests.exceptions.Timeout:
-        return jsonify({"status": "unreachable", "message": "Timeout lors de la connexion à la prise."})
+        return jsonify({"status": "unreachable", "message": _("Timeout lors de la connexion à la prise.")})
     except requests.exceptions.HTTPError as e:
         # Gérer spécifiquement les erreurs d'authentification pour un meilleur feedback
         if e.response.status_code == 401:
-            return jsonify({"status": "error", "message": "Erreur 401: Non autorisé. Vérifiez votre token d'accès Home Assistant."})
+            return jsonify({"status": "error", "message": _("Erreur 401 : non autorisé. Vérifiez votre token d'accès Home Assistant.")})
         return jsonify({"status": "error", "message": f"Erreur HTTP: {str(e)}"})
     except requests.exceptions.RequestException as e:
         # Renvoyer une erreur plus explicite
