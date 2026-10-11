@@ -4,6 +4,9 @@ souvenir « il y a un an », récapitulatif des voyages d'une année (pays visit
 Projection de Mercator, fond Natural Earth (utils/world.py) ; rendu en double résolution puis réduit (bords lisses).
 """
 import math
+from functools import lru_cache
+
+import numpy as np
 
 from PIL import Image, ImageDraw, ImageFilter, ImageOps
 
@@ -54,6 +57,24 @@ def view_for(points, width, height, padding=0.35, min_span_deg=7.0, region=(0.0,
     return left, top, left + total_w, top + total_h
 
 
+@lru_cache(maxsize=1)
+def _projected():
+    """Contours des pays en coordonnées de Mercator, calculés une fois : [(iso, [(x0, y0, x1, y1, [anneaux numpy])])]."""
+    found = []
+    for country in world.countries():
+        polygons = []
+        for polygon in country["polygons"]:
+            rings = []
+            for ring in polygon:
+                arr = np.asarray(ring, dtype=np.float64)
+                lat = np.radians(np.clip(arr[:, 1], -MAX_LAT, MAX_LAT))
+                rings.append(np.column_stack(((arr[:, 0] + 180) / 360, 0.5 - np.log(np.tan(np.pi / 4 + lat / 2)) / (2 * np.pi))))
+            outer = rings[0]
+            polygons.append((outer[:, 0].min(), outer[:, 1].min(), outer[:, 0].max(), outer[:, 1].max(), rings))
+        found.append((country["iso"], polygons))
+    return found
+
+
 def draw_base(width, height, view, highlight=()):
     """Fond de carte : mers, terres, pays mis en valeur (codes ISO), frontières."""
     W, H = width * SCALE, height * SCALE
@@ -62,21 +83,18 @@ def draw_base(width, height, view, highlight=()):
     image = Image.new("RGB", (W, H), OCEAN)
     draw = ImageDraw.Draw(image)
     border = max(1, int(SCALE * width / 1400))
+    min_size = 1.5 / sx  # plus petit qu'un pixel et demi : invisible
     for offset in (-1, 0, 1):  # la carte peut déborder de l'antiméridien
-        for country in world.countries():
-            bx0, by0, bx1, by1 = country["bbox"]
-            px0, py1 = _project(by0, bx0)
-            px1, py0 = _project(by1, bx1)
-            if px1 + offset < x0 or px0 + offset > x1 or py1 < y0 or py0 > y1:
-                continue
-            fill = VISITED if country["iso"] in highlight else LAND
-            for polygon in country["polygons"]:
-                for i, ring in enumerate(polygon):
-                    pts = []
-                    for lon, lat in ring:
-                        px, py = _project(lat, lon)
-                        pts.append(((px + offset - x0) * sx, (py - y0) * sy))
-                    if len(pts) >= 3:
+        for iso, polygons in _projected():
+            fill = VISITED if iso in highlight else LAND
+            for px0, py0, px1, py1, rings in polygons:
+                if px1 + offset < x0 or px0 + offset > x1 or py1 < y0 or py0 > y1:
+                    continue
+                if px1 - px0 < min_size and py1 - py0 < min_size:
+                    continue
+                for i, ring in enumerate(rings):
+                    pts = ((ring + (offset - x0, -y0)) * (sx, sy)).ravel().tolist()
+                    if len(pts) >= 6:
                         draw.polygon(pts, fill=OCEAN if i else fill, outline=BORDER, width=border)
     return image
 
@@ -87,12 +105,12 @@ def _to_px(view, width, height, lat, lon):
     return (px - x0) / (x1 - x0) * width * SCALE, (py - y0) / (y1 - y0) * height * SCALE
 
 
-def draw_route(image, view, width, height, route, home=None):
+def draw_route(image, view, width, height, route, home=None, lines=True):
     """Trajet (pointillés entre les étapes, dans l'ordre) et épingles ; la maison en bleu si elle est visible."""
     draw = ImageDraw.Draw(image)
     s = SCALE * width / 1920
     points = [_to_px(view, width, height, lat, lon) for lat, lon in route]
-    for (ax, ay), (bx, by) in zip(points, points[1:]):
+    for (ax, ay), (bx, by) in zip(points, points[1:]) if lines else ():
         length = math.hypot(bx - ax, by - ay)
         steps = max(1, int(length / (22 * s)))
         for k in range(steps):
@@ -105,16 +123,18 @@ def draw_route(image, view, width, height, route, home=None):
         if 0 <= hx <= image.width and 0 <= hy <= image.height:
             r = 11 * s
             draw.ellipse([hx - r, hy - r, hx + r, hy + r], fill=HOME, outline=(255, 255, 255), width=max(2, int(4 * s)))
-    # Épingles : ombre douce, cercle blanc, centre coloré ; la première et la dernière un peu plus grandes
-    shadow = Image.new("L", image.size, 0)
-    sdraw = ImageDraw.Draw(shadow)
+    # Épingles : ombre douce (floutée autour de chaque épingle seulement), cercle blanc, centre coloré ;
+    # la première et la dernière un peu plus grandes
     for i, (x, y) in enumerate(points):
-        r = (22 if i in (0, len(points) - 1) else 15) * s
-        sdraw.ellipse([x - r, y - r + 5 * s, x + r, y + r + 5 * s], fill=110)
-    image.paste((0, 0, 0), mask=shadow.filter(ImageFilter.GaussianBlur(8 * s)))
+        r = (22 if lines and i in (0, len(points) - 1) else 18 if not lines else 15) * s
+        blur = 8 * s
+        pad = int(r + blur * 3)
+        shadow = Image.new("L", (pad * 2, pad * 2), 0)
+        ImageDraw.Draw(shadow).ellipse([pad - r, pad - r + 5 * s, pad + r, pad + r + 5 * s], fill=110)
+        image.paste((0, 0, 0), (int(x) - pad, int(y) - pad), shadow.filter(ImageFilter.GaussianBlur(blur)))
     draw = ImageDraw.Draw(image)
     for i, (x, y) in enumerate(points):
-        r = (22 if i in (0, len(points) - 1) else 15) * s
+        r = (22 if lines and i in (0, len(points) - 1) else 18 if not lines else 15) * s
         draw.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255))
         draw.ellipse([x - r * 0.62, y - r * 0.62, x + r * 0.62, y + r * 0.62], fill=PIN)
     return image
@@ -174,10 +194,8 @@ def year_card(width, height, trips, title="", lines=(), home=None):
                     region=(0.03, 0.04, 0.97, 0.72))
     isos = {c["iso"] for t in trips for c in t.get("countries") or []}
     image = draw_base(width, height, view, isos)
-    route = sorted(((t["start"], (t["lat"], t["lon"])) for t in trips if t.get("lat") is not None))
-    image = draw_route(image, view, width, height, [], home)
-    for _start, spot in route:  # une épingle par voyage, sans trajet entre eux
-        image = draw_route(image, view, width, height, [spot])
+    spots = [(t["lat"], t["lon"]) for t in sorted(trips, key=lambda t: t["start"]) if t.get("lat") is not None]
+    image = draw_route(image, view, width, height, spots, home, lines=False)  # une épingle par voyage, sans trajet
     image = image.resize((width, height), Image.LANCZOS).convert("RGBA")
     _caption(image, title, lines, "", width, height)
     return image.convert("RGB")
