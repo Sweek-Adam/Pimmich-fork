@@ -78,6 +78,114 @@
                 <p class="text-sm text-gray-600">{{ _("Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont jamais supprimés.") }}</p>
             </fieldset>
 
+            <fieldset class="mt-6" id="storage-box">
+                <legend><h3><i class="fas fa-hdd mr-2"></i>{{ _("Stockage des photos") }}</h3></legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Les photos peuvent vivre ailleurs que sur la carte SD : un disque ou une clé USB branché au cadre, ou un partage réseau (NAS). Choisissez l'emplacement de chaque source ; le cadre copie les photos, vérifie la copie, puis libère la place. Moins d'écritures sur la carte SD, c'est aussi une carte qui dure plus longtemps.") }}</p>
+                <div id="st-supports" class="st-supports"></div>
+                {% if is_admin %}
+                <div class="mt-3 p-3 rounded-lg bg-gray-50">
+                    <p class="font-semibold mb-2">{{ _("Ajouter un support") }}</p>
+                    <div id="st-disks" class="flex flex-wrap gap-2"></div>
+                    <p id="st-nodisk" class="text-sm text-gray-600 hidden">{{ _("Aucun disque USB détecté : branchez-le puis rouvrez cet onglet.") }}</p>
+                    <details class="mt-2">
+                        <summary class="cursor-pointer text-sm font-semibold">{{ _("Partage réseau (NAS, ordinateur)") }}</summary>
+                        <div class="grid gap-2 mt-2 st-grid">
+                            <label for="st-share">{{ _("Adresse") }}</label><input type="text" id="st-share" placeholder="//nas.local/photos">
+                            <label for="st-user">{{ _("Utilisateur") }}</label><input type="text" id="st-user" autocomplete="off">
+                            <label for="st-pass">{{ _("Mot de passe") }}</label><input type="password" id="st-pass" autocomplete="new-password">
+                        </div>
+                        <button type="button" id="st-add-smb" class="btn-secondary mt-2">{{ _("Ajouter le partage") }}</button>
+                    </details>
+                </div>
+                {% endif %}
+                <h4 class="font-semibold mt-4 mb-2">{{ _("Emplacement de chaque source") }}</h4>
+                <div id="st-sources" class="st-sources"></div>
+                <div id="st-move" class="hidden mt-2"><div class="progress-container"><div class="progress-bar" id="st-move-bar"></div></div><p id="st-move-text" class="text-sm"></p></div>
+                <p id="st-status" class="text-sm mt-2"></p>
+            </fieldset>
+            <style>
+                .st-supports { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; }
+                .st-support { border: 1px solid var(--border, #e5e7eb); border-radius: .75rem; padding: .75rem; }
+                .st-support .st-bar { height: 8px; border-radius: 4px; background: #e5e7eb; overflow: hidden; margin: .4rem 0; }
+                .st-support .st-bar span { display: block; height: 100%; background: #6366f1; }
+                .st-support.off { border-color: #fca5a5; background: #fef2f2; }
+                .st-sources { display: grid; grid-template-columns: 1fr auto auto; gap: .4rem .8rem; align-items: center; }
+                .st-grid { grid-template-columns: max-content 1fr; align-items: center; }
+                @media (max-width: 640px) { .st-sources { grid-template-columns: 1fr auto; } .st-sources .st-size { display: none; } .st-grid { grid-template-columns: 1fr; } }
+            </style>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const ADMIN = {{ (is_admin|default(false))|tojson }};
+                    const T = { sd: {{ _("Carte SD")|tojson }}, free: {{ _("libres sur")|tojson }}, off: {{ _("Débranché")|tojson }},
+                                remove: {{ _("Retirer")|tojson }}, add: {{ _("Utiliser ce disque")|tojson }}, moving: {{ _("Déplacement de « {source} » : {done} / {total} fichiers")|tojson }},
+                                files: {{ _("fichiers")|tojson }}, offline: {{ _("support débranché")|tojson }}, confirm: {{ _("Déplacer les photos de « {source} » vers « {target} » ?")|tojson }},
+                                erase: {{ _("Le contenu actuel du disque est conservé : Pimmich range ses photos dans un dossier « pimmich ».")|tojson }} };
+                    const say = (t, ok) => { $("st-status").textContent = t || ""; $("st-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                    const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                    const gb = (b) => (b / 1e9).toLocaleString(undefined, { maximumFractionDigits: b < 1e10 ? 1 : 0 }) + " Go";
+                    const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+                    let timer = null;
+                    function support(name, usage, off, id) {
+                        const card = el("div", "st-support" + (off ? " off" : ""));
+                        card.append(el("strong", "", name));
+                        if (usage) {
+                            const bar = el("div", "st-bar"); const fill = el("span"); fill.style.width = `${usage.percent}%`; bar.append(fill);
+                            card.append(bar, el("small", "", `${gb(usage.free)} ${T.free} ${gb(usage.total)}`));
+                        } else if (off) card.append(el("div", "text-sm text-red-700", T.off));
+                        if (id && ADMIN) {
+                            const b = el("button", "link text-sm block mt-1", T.remove); b.type = "button";
+                            b.addEventListener("click", async () => { const r = await post("/api/storage/remove", { id }); say(r.message, r.success); load(); });
+                            card.append(b);
+                        }
+                        return card;
+                    }
+                    async function load() {
+                        if (!$("storage-box").offsetParent) return;
+                        const d = await (await fetch("/api/storage")).json();
+                        $("st-supports").innerHTML = "";
+                        $("st-supports").append(support(T.sd, d.sd, false, null));
+                        d.storages.forEach(s => $("st-supports").append(support(s.label, s.usage, !s.mounted, s.id)));
+                        if ($("st-disks")) {
+                            $("st-disks").innerHTML = "";
+                            d.disks.forEach(disk => {
+                                const b = el("button", "btn-secondary text-sm", `${T.add} : ${disk.label} (${gb(disk.size)}, ${disk.fstype})`); b.type = "button";
+                                b.title = T.erase;
+                                b.addEventListener("click", async () => { const r = await post("/api/storage/add", { kind: "disk", uuid: disk.uuid }); say(r.message, r.success); load(); });
+                                $("st-disks").append(b);
+                            });
+                            $("st-nodisk").classList.toggle("hidden", d.disks.length > 0);
+                        }
+                        $("st-sources").innerHTML = "";
+                        const targets = [["sd", T.sd]].concat(d.storages.map(s => [s.id, s.label]));
+                        Object.entries(d.sources).forEach(([name, info]) => {
+                            $("st-sources").append(el("span", "", name), el("span", "st-size text-sm text-gray-600", info.online ? `${gb(info.bytes)} · ${info.files} ${T.files}` : T.offline));
+                            const select = el("select");
+                            targets.forEach(([value, label]) => select.add(new Option(label, value)));
+                            select.value = info.location; select.disabled = !ADMIN || d.move.running || d.storages.length === 0;
+                            select.addEventListener("change", async () => {
+                                const label = targets.find(t => t[0] === select.value)[1];
+                                if (!confirm(T.confirm.replace("{source}", name).replace("{target}", label))) { select.value = info.location; return; }
+                                const r = await post("/api/storage/move", { source: name, to: select.value }); say(r.message, r.success); load();
+                            });
+                            $("st-sources").append(select);
+                        });
+                        $("st-move").classList.toggle("hidden", !d.move.running);
+                        if (d.move.running) {
+                            $("st-move-bar").style.width = d.move.total ? `${Math.round(d.move.done / d.move.total * 100)}%` : "5%";
+                            $("st-move-text").textContent = T.moving.replace("{source}", d.move.source).replace("{done}", d.move.done).replace("{total}", d.move.total || "…");
+                        } else if (d.move.message) say(d.move.message, d.move.ok);
+                        clearTimeout(timer);
+                        if (d.move.running) timer = setTimeout(load, 2000);
+                    }
+                    if ($("st-add-smb")) $("st-add-smb").addEventListener("click", async () => {
+                        const r = await post("/api/storage/add", { kind: "smb", share: $("st-share").value.trim(), username: $("st-user").value.trim(), password: $("st-pass").value });
+                        say(r.message, r.success); if (r.success) { $("st-pass").value = ""; load(); }
+                    });
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-maintenance'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                    load();
+                });
+            </script>
             <fieldset class="mt-6">
                 <legend>
                     <h3>{{ _("Sauvegarde automatique sur Google Drive") }}</h3>

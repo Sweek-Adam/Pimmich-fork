@@ -193,9 +193,8 @@ def import_smartphone():
             yield stream_event({"type": "progress", "stage": "UPLOADING", "percent": 5, "message": "Réception des fichiers..."})
 
             # Vider le dossier de destination pour éviter les mélanges
-            if source_dir.exists():
-                shutil.rmtree(source_dir)
-            source_dir.mkdir(parents=True, exist_ok=True)
+            from utils.storage import empty_dir  # vider sans supprimer : le dossier peut être sur un autre support
+            empty_dir(source_dir)
 
             uploaded_files = request.files.getlist('photos')
             if not uploaded_files or not uploaded_files[0].filename:
@@ -203,7 +202,7 @@ def import_smartphone():
                 return
 
             for file in uploaded_files:
-                file.save(source_dir / file.filename)
+                file.save(source_dir / (secure_filename(file.filename) or f"photo_{secrets.token_hex(3)}.jpg"))
 
             yield stream_event({"type": "progress", "stage": "PREPARING", "percent": 80, "message": f"{len(uploaded_files)} photos reçues, préparation en cours..."})
 

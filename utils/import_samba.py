@@ -45,12 +45,9 @@ def import_samba_photos(config):
         
         # Vider les dossiers de destination (source et préparé) avant l'import pour éviter les mélanges.
         prepared_samba_dir = Path("static/prepared/samba")
-        if TARGET_DIR.exists():
-            shutil.rmtree(TARGET_DIR)
-        TARGET_DIR.mkdir(parents=True, exist_ok=True)
-        if prepared_samba_dir.exists():
-            shutil.rmtree(prepared_samba_dir)
-        prepared_samba_dir.mkdir(parents=True, exist_ok=True)
+        from utils.storage import empty_dir  # vider sans supprimer : le dossier peut être sur un autre support
+        empty_dir(TARGET_DIR)
+        empty_dir(prepared_samba_dir)
 
         # Récupérer les fichiers distants avec leur date de modification
         remote_files = {}

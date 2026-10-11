@@ -80,12 +80,9 @@ def import_usb_photos():
 
         # Vider les dossiers de destination (source et préparé) avant l'import pour éviter les mélanges.
         prepared_usb_dir = Path("static/prepared/usb")
-        if TARGET_DIR.exists():
-            shutil.rmtree(TARGET_DIR)
-        TARGET_DIR.mkdir(parents=True, exist_ok=True)
-        if prepared_usb_dir.exists():
-            shutil.rmtree(prepared_usb_dir)
-        prepared_usb_dir.mkdir(parents=True, exist_ok=True)
+        from utils.storage import empty_dir  # vider sans supprimer : le dossier peut être sur un autre support
+        empty_dir(TARGET_DIR)
+        empty_dir(prepared_usb_dir)
 
         yield {"type": "progress", "stage": "SCANNING", "percent": 15, "message": "Analyse des images sur la clé USB..."}
         

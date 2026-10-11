@@ -98,6 +98,15 @@ def checks(config, slideshow_running, is_admin, proxy_host_ok=True, worker_messa
     for worker, message in (worker_messages or {}).items():
         if message and ("erreur" in message.lower() or "error" in message.lower()):
             add("error", N_("Problème de synchronisation"), f"{worker} : {message}", "tab-sources")
+    for storage in config.get("storages") or []:
+        try:
+            from utils import storage as storage_module
+            if not storage_module.is_mounted(storage):
+                add("error", N_("Support de stockage débranché"),
+                    N_("« %(name)s » est inaccessible : les photos qui y sont rangées ne s'affichent plus. Rebranchez-le (ou rallumez le NAS)."),
+                    "tab-maintenance", name=storage.get("label", storage.get("id")))
+        except Exception:
+            pass
     pending = _pending_guest_photos()
     if pending:
         add("info", N_("Photos d'invités à valider"), N_("%(count)s photo(s) attendent votre validation.") , "tab-validation", count=pending)

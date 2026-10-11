@@ -813,3 +813,18 @@ def rotation_worker():
                 restart_slideshow_process()
             threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
         time.sleep(1)
+
+
+def storage_worker():
+    """Supports de stockage : montés au démarrage, puis remontés s'ils reviennent (disque rebranché, NAS rallumé)."""
+    from utils import storage
+    while True:
+        config = load_config()
+        if config.get("storages"):
+            try:
+                for storage_id, (ok, message) in storage.mount_all(config).items():
+                    if not ok:
+                        logger.warning(f"[Stockage] Support {storage_id} indisponible : {message}")
+            except Exception as e:
+                logger.warning(f"[Stockage] {e}")
+        time.sleep(300)

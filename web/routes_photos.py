@@ -65,8 +65,9 @@ def delete_source_photos(source_name):
 
     try:
         if prepared_dir.is_dir():
-            shutil.rmtree(prepared_dir)
-            logger.info(f"Dossier préparé supprimé : {prepared_dir}")
+            from utils.storage import empty_dir  # vider sans supprimer : le dossier peut être sur un autre support
+            empty_dir(prepared_dir)
+            logger.info(f"Dossier préparé vidé : {prepared_dir}")
         
         if backup_dir.is_dir():
             shutil.rmtree(backup_dir)
