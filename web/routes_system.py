@@ -111,6 +111,13 @@ def switch_to_desktop():
         logger.error(f"Erreur lors du passage au bureau Raspberry Pi OS : {e}")
         return jsonify({"success": False, "message": str(e)}), 500
 
+    # Raccourci « Revenir au cadre Pimmich » dans le menu et sur le bureau, pour revenir facilement
+    try:
+        from utils import desktop_launcher
+        desktop_launcher.install()
+    except OSError as e:
+        logger.warning(f"Raccourci de retour au cadre non créé : {e}")
+
     # 3. Redémarrer en arrière-plan pour que la réponse HTTP puisse être envoyée
     def delayed_reboot():
         time.sleep(2)
@@ -118,6 +125,27 @@ def switch_to_desktop():
     threading.Thread(target=delayed_reboot, daemon=True).start()
 
     return jsonify({"success": True, "message": _("Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera plus automatiquement.")})
+
+
+@app.route('/api/display_mode', methods=['GET'])
+@login_required
+def display_mode_api():
+    """Mode du Raspberry Pi : cadre photo (Pimmich plein écran) ou bureau Raspberry Pi OS (administration seule)."""
+    from utils.slideshow_manager import desktop_mode
+    return jsonify({"success": True, "desktop": desktop_mode()})
+
+
+@app.route('/api/switch_to_pimmich', methods=['POST'])
+@admin_required
+def switch_to_pimmich():
+    """Repasse du bureau Raspberry Pi OS au mode cadre photo (script du dépôt utils/switch_to_pimmich.sh), puis redémarre."""
+    script = Path(app.root_path) / 'utils' / 'switch_to_pimmich.sh'
+
+    def run():
+        time.sleep(2)  # la réponse HTTP part d'abord
+        subprocess.run(['/bin/bash', str(script), '--yes'], capture_output=True, timeout=120)
+    threading.Thread(target=run, daemon=True).start()
+    return jsonify({"success": True, "message": _("Le Raspberry Pi redémarre en mode cadre photo Pimmich.")})
 
 
 @app.route('/api/ping', methods=['GET'])

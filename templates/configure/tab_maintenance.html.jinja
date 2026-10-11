@@ -508,10 +508,21 @@
                     class="system-button bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded mt-3">
                     <i class="fab fa-raspberry-pi mr-1"></i> {{ _("Repasser sur Raspberry Pi OS (bureau)") }}
                 </button>
+                <button type="button" id="switch-pimmich-btn"
+                    class="system-button bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-3">
+                    <i class="fas fa-images mr-1"></i> {{ _("Repasser sur Pimmich (cadre photo)") }}
+                </button>
                 <div id="switch-desktop-status" class="status-messages mt-2"></div>
                 <script>
+                    document.getElementById("switch-pimmich-btn").addEventListener("click", async () => {
+                        if (!confirm({{ _("Le Raspberry Pi va redémarrer en mode cadre photo Pimmich (le bureau ne s'affichera plus). Continuer ?")|tojson }})) return;
+                        const r = await (await fetch('/api/switch_to_pimmich', { method: 'POST' })).json();
+                        document.getElementById("switch-desktop-status").textContent = r.message;
+                    });
+                </script>
+                <script>
                     document.getElementById("switch-desktop-btn").addEventListener("click", () => {
-                        if (!confirm("{{ _('Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se lancera plus automatiquement. Pour revenir au mode cadre photo, relancez setup.sh. Continuer ?') }}")) {
+                        if (!confirm({{ _('Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se lancera plus automatiquement. Pour revenir au mode cadre photo, utilisez le raccourci « Revenir au cadre Pimmich » sur le bureau ou dans le menu. Continuer ?')|tojson }})) {
                             return;
                         }
                         const btn = document.getElementById("switch-desktop-btn");

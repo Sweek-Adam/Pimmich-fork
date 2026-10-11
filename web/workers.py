@@ -22,6 +22,10 @@ def schedule_worker():
     en fonction des heures d'activité configurées.
     """
     logger.debug("📅️🔄 Démarrage du worker de planification du diaporama")
+    from utils.slideshow_manager import desktop_mode
+    if desktop_mode():
+        logger.info("📅 Mode bureau Raspberry Pi OS : pas de planification du diaporama (administration seule).")
+        return
     
     # --- Séquence de démarrage unique ---
     # Cette partie ne s'exécute qu'une seule fois au lancement de l'application.

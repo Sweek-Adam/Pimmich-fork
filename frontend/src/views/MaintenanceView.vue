@@ -141,12 +141,18 @@ const licences = [
 
 // --- Système ---
 async function switchDesktop() {
-  if (!window.confirm(t("Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se lancera plus automatiquement. Pour revenir au mode cadre photo, relancez setup.sh. Continuer ?"))) return;
+  if (!window.confirm(t("Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se lancera plus automatiquement. Pour revenir au mode cadre photo, utilisez le raccourci « Revenir au cadre Pimmich » sur le bureau ou dans le menu. Continuer ?"))) return;
   await run(() => post("/api/switch_to_desktop"));
 }
+async function switchPimmich() {
+  if (!window.confirm(t("Le Raspberry Pi va redémarrer en mode cadre photo Pimmich (le bureau ne s'affichera plus). Continuer ?"))) return;
+  await run(() => post("/api/switch_to_pimmich"));
+}
+const desktop = ref<boolean | null>(null);
 const confirmSubmit = (text: string) => (event: Event) => { if (!window.confirm(text)) event.preventDefault(); };
 
 onMounted(() => {
+  get<{ desktop: boolean }>("/api/display_mode").then((d) => (desktop.value = d.desktop)).catch(() => {});
   get<Hardware>("/api/hardware").then((d) => (hw.value = d)).catch(() => {});
   get<Update>("/api/update/check").then((d) => (update.value = d)).catch((e) => (update.value = { success: false, changes: [], ...(e as ApiError).data }));
   loadMaintenance().catch(() => {});
@@ -200,7 +206,9 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
           <label class="check small"><input type="checkbox" name="delete_logs">{{ t("Supprimer les logs") }}</label></form>
         <form method="POST" action="/shutdown" @submit="confirmSubmit(t('Êtes-vous sûr de vouloir ÉTEINDRE le système ?'))($event)">
           <button class="btn danger" type="submit"><i class="fas fa-power-off"></i>{{ t("Éteindre le système") }}</button></form>
-        <button class="btn" type="button" @click="switchDesktop"><i class="fas fa-desktop"></i>{{ t("Repasser sur Raspberry Pi OS (bureau)") }}</button>
+        <p v-if="desktop !== null" class="small muted">{{ t("Mode actuel :") }} <strong>{{ desktop ? t("bureau Raspberry Pi OS (administration seule, sans diaporama)") : t("cadre photo Pimmich") }}</strong></p>
+        <button class="btn" type="button" :disabled="desktop === true" @click="switchDesktop"><i class="fas fa-desktop"></i>{{ t("Repasser sur Raspberry Pi OS (bureau)") }}</button>
+        <button class="btn" type="button" :disabled="desktop === false" @click="switchPimmich"><i class="fas fa-images"></i>{{ t("Repasser sur Pimmich (cadre photo)") }}</button>
       </div>
     </section>
   </div>

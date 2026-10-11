@@ -93,6 +93,10 @@ if grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null && ! pip show rpi-
     pip install rpi-lgpio >> logs/update_pip.log 2>&1 || true
 fi
 
+# Raccourci « Revenir au cadre Pimmich » sur le bureau Raspberry Pi OS (pointe vers utils/switch_to_pimmich.sh du dépôt)
+chmod +x utils/switch_to_pimmich.sh 2>/dev/null
+python utils/desktop_launcher.py > /dev/null 2>&1 || true
+
 echo "--- Réapplication des règles Sway pour mpv et python3 ---"
 SWAY_CONFIG_DIR="$HOME/.config/sway"
 SWAY_CONFIG_FILE="$SWAY_CONFIG_DIR/config"

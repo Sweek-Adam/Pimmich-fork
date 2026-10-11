@@ -443,7 +443,7 @@ Pimmich n'a pas de service systemd : il est lancé par Sway via `start_pimmich.s
 
 - **« Trop de tentatives de connexion »** : après plusieurs mots de passe erronés, la connexion est bloquée quelques minutes. Patientez, puis réessayez.
 - **Mauvaise heure** : corrigez le fuseau horaire, par exemple `sudo timedatectl set-timezone Europe/Paris`.
-- **Revenir au bureau Raspberry Pi OS** : `Système > Maintenance > Repasser sur Raspberry Pi OS (bureau)`. Pour revenir ensuite au mode cadre photo, relancez `sudo ./setup.sh`.
+- **Revenir au bureau Raspberry Pi OS** : `Système > Maintenance > Repasser sur Raspberry Pi OS (bureau)`. Pour revenir ensuite au mode cadre photo, double-cliquez sur le raccourci **« Revenir au cadre Pimmich »** (sur le bureau ou dans le menu des applications) : il demande confirmation puis redémarre le Pi en mode cadre. En SSH : `~/pimmich/utils/switch_to_pimmich.sh --yes`. Pendant que le bureau est affiché, l'interface d'administration reste accessible (sans diaporama) : `Système > Maintenance` indique le mode actuel et propose aussi « Repasser sur Pimmich (cadre photo) ».
 
 ---
 

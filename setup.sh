@@ -294,6 +294,10 @@ else
     echo "✅ Sway déjà configuré pour se lancer automatiquement"
 fi
 
+# Raccourci « Revenir au cadre Pimmich » (menu et bureau), utile après « Repasser sur le bureau »
+chmod +x utils/switch_to_pimmich.sh
+sudo -u "$REAL_USER" HOME="$USER_HOME" venv/bin/python utils/desktop_launcher.py || echo "⚠️ Raccourci de retour au cadre non créé."
+
 echo "=== [11/12] Configuration du lancement automatique de Pimmich dans Sway ==="
 SWAY_CONFIG_DIR="$USER_HOME/.config/sway"
 SWAY_CONFIG_FILE="$SWAY_CONFIG_DIR/config"

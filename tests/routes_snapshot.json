@@ -241,6 +241,12 @@
   ]
  ],
  [
+  "/api/display_mode",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/display_sources",
   [
    "GET"
@@ -1314,6 +1320,12 @@
  ],
  [
   "/api/switch_to_desktop",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/switch_to_pimmich",
   [
    "POST"
   ]

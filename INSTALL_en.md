@@ -443,7 +443,7 @@ Pimmich has no systemd service: Sway starts it through `start_pimmich.sh`, which
 
 - **"Too many login attempts"**: after several wrong passwords, login is blocked for a few minutes. Wait, then try again.
 - **Wrong time**: fix the time zone, for example `sudo timedatectl set-timezone Europe/Paris`.
-- **Back to the Raspberry Pi OS desktop**: `System > Maintenance > Switch back to Raspberry Pi OS (desktop)`. To return to photo frame mode afterwards, run `sudo ./setup.sh` again.
+- **Back to the Raspberry Pi OS desktop**: `System > Maintenance > Switch back to Raspberry Pi OS (desktop)`. To return to photo frame mode afterwards, double-click the **"Revenir au cadre Pimmich"** ("Back to the Pimmich frame") shortcut on the desktop or in the applications menu: it asks for confirmation, then restarts the Pi in frame mode. Over SSH: `~/pimmich/utils/switch_to_pimmich.sh --yes`. While the desktop is shown, the admin interface stays reachable (without the slideshow): `System > Maintenance` shows the current mode and also offers "Switch back to Pimmich (photo frame)".
 
 ---
 

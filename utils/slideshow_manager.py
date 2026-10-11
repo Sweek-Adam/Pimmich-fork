@@ -96,9 +96,17 @@ def is_slideshow_running():
         logger.error(f"Erreur vérification slideshow: {e}")
         return False
 
+def desktop_mode():
+    """Pimmich lancé depuis le bureau Raspberry Pi OS : l'administration seule, sans diaporama par-dessus le bureau."""
+    return os.environ.get("PIMMICH_DESKTOP") == "1"
+
+
 def start_slideshow():
     """Démarre le processus du diaporama de manière robuste."""
     logger.debug("📟 ✅ Start Slideshow")
+    if desktop_mode():
+        logger.info("📟 Mode bureau Raspberry Pi OS : pas de diaporama (administration seule).")
+        return
 
     # ✅ ÉTAPE 1 : Nettoyer les processus zombies AVANT de vérifier le PID
     logger.debug("📟 Nettoyage préventif des zombies local_slideshow.py")
