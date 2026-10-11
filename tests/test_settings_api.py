@@ -2,7 +2,7 @@
 import pytest
 
 H = {"Sec-Fetch-Site": "same-origin"}
-KEYS = ("display_duration", "dim_start", "transition_type", "night_mode", "pan_zoom_factor", "dim_enabled")
+KEYS = ("display_duration", "dim_start", "transition_type", "night_mode", "pan_zoom_factor", "dim_enabled", "clock_color", "weather_city")
 
 
 @pytest.fixture
@@ -33,9 +33,12 @@ def test_settings_save_and_validate(admin_client, saved_config):
     config = saved_config.load_config()
     assert config["transition_type"] == "iris" and config["pan_zoom_factor"] == 1.3
     for bad in ({"display_duration": 1}, {"display_duration": "abc"}, {"dim_enabled": "yes"}, {"transition_type": "boum"},
-                {"dim_start": "25:00"}, {"secret_key": "x"}, {"immich_token": "x"}, {}):
+                {"dim_start": "25:00"}, {"secret_key": "x"}, {"immich_token": "x"}, {}, {"clock_color": "red"},
+                {"clock_color": "#12345"}, {"weather_city": "x" * 81}, {"weather_city": "Paris\nLyon"}, {"weather_api_key": "k"}):
         assert admin_client.post("/api/settings", json=bad, headers=H).status_code == 400, bad
     assert saved_config.load_config()["display_duration"] == 25  # rien n'a changé après les refus
+    data = admin_client.post("/api/settings", json={"clock_color": "#00000080", "weather_city": " Lyon "}, headers=H).get_json()
+    assert data["values"]["clock_color"] == "#00000080" and data["values"]["weather_city"] == "Lyon"
 
 
 def test_settings_undo(admin_client, saved_config):

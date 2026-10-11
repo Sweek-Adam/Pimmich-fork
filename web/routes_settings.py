@@ -11,6 +11,7 @@ from web.core import _
 from web.routes_config import schedule_slideshow_restart
 
 TIME = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")
+COLOR = re.compile(r"^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$")
 TRANSITIONS = ["fade", "fade_black", "zoom", "slide_left", "slide_right", "slide_up", "slide_down", "push_left", "push_up",
                "wipe", "blinds", "iris", "random"]
 
@@ -53,6 +54,37 @@ SETTINGS = {
     "music_duck_videos": ("bool", None, True),
     # Télévision
     "cec_enabled": ("bool", None, False),
+    # Horloge et date
+    "show_clock": ("bool", None, False),
+    "clock_position": ("choice", ["left", "center", "right"], "center"),
+    "clock_font_size": ("int", (12, 400), 48),
+    "clock_offset_x": ("int", (-2000, 2000), 30),
+    "clock_offset_y": ("int", (-2000, 2000), 30),
+    "clock_color": ("color", None, "#FFFFFF"),
+    "clock_outline_color": ("color", None, "#000000"),
+    "clock_background_enabled": ("bool", None, False),
+    "clock_background_color": ("color", None, "#00000080"),
+    "show_date": ("bool", None, False),
+    "date_format": ("text", 60, "%A %d %B %Y"),
+    # Météo
+    "show_weather": ("bool", None, False),
+    "show_sun_moon": ("bool", None, False),
+    "weather_animation": ("choice", ["start", "always", "off"], "start"),
+    "weather_city": ("text", 80, ""),
+    "weather_units": ("choice", ["metric", "imperial"], "metric"),
+    "weather_update_interval_minutes": ("int", (10, 1440), 30),
+    # Infos des photos
+    "show_photo_date": ("bool", None, False),
+    "photo_date_format": ("text", 60, "%d %B %Y"),
+    "show_photo_location": ("bool", None, False),
+    "geocode_enabled": ("bool", None, False),
+    "photo_location_format": ("choice", ["city_country", "city", "country"], "city_country"),
+    "show_country_flag": ("bool", None, False),
+    "country_flag_size": ("choice", ["128x96", "192x144", "256x192"], "128x96"),
+    "country_flag_opacity": ("float", (0.0, 1.0), 1.0),
+    "country_flag_position": ("choice", ["top_right", "top_left", "bottom_right", "bottom_left"], "top_right"),
+    "country_flag_offset_x": ("int", (-2000, 2000), 15),
+    "country_flag_offset_y": ("int", (-2000, 2000), 15),
 }
 
 
@@ -79,6 +111,15 @@ def clean(key, value):
         if not TIME.match(str(value)):
             raise ValueError
         return str(value)
+    if kind == "color":
+        if not COLOR.match(str(value)):
+            raise ValueError
+        return str(value)
+    if kind == "text":
+        text = str(value)
+        if len(text) > options or any(c in text for c in "\r\n\t\x00"):
+            raise ValueError
+        return text.strip()
     if kind == "time_or_sunset":
         if value != "sunset" and not TIME.match(str(value)):
             raise ValueError

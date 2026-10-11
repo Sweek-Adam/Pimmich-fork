@@ -44,7 +44,8 @@ async function flush(): Promise<void> {
 export interface Field {
   key: string;
   label: () => string;
-  type: "toggle" | "number" | "range" | "select" | "time" | "timeOrSunset";
+  type: "toggle" | "number" | "range" | "select" | "time" | "timeOrSunset" | "color" | "text";
+  placeholder?: string;
   options?: () => { value: string; label: string }[];
   min?: number;
   max?: number;

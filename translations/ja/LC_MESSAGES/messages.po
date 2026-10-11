@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:34+0200\n"
+"POT-Creation-Date: 2026-10-11 12:37+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -325,6 +325,162 @@ msgstr "変更は自動的に保存されます。"
 #: frontend/src/components/SettingsPage.vue:26
 msgid "Autres réglages : interface classique"
 msgstr "その他の設定：従来の画面"
+
+#: frontend/src/views/ClockView.vue:8
+#: templates/configure/tab_heure.html.jinja:71
+msgid "Affichage de l'heure"
+msgstr "時刻表示"
+
+#: frontend/src/views/ClockView.vue:9
+#: templates/configure/tab_heure.html.jinja:76
+msgid "Afficher l'heure"
+msgstr "ショータイム"
+
+#: frontend/src/views/ClockView.vue:10
+#: templates/configure/tab_heure.html.jinja:110
+msgid "Position de l'heure :"
+msgstr "時間位置:"
+
+#: frontend/src/views/ClockView.vue:11
+#: templates/configure/tab_heure.html.jinja:113
+msgid "Gauche"
+msgstr "ゴーシュ"
+
+#: frontend/src/views/ClockView.vue:11
+#: templates/configure/tab_heure.html.jinja:115
+msgid "Centre"
+msgstr "中心"
+
+#: frontend/src/views/ClockView.vue:11
+#: templates/configure/tab_heure.html.jinja:117
+msgid "Droite"
+msgstr "右"
+
+#: frontend/src/views/ClockView.vue:12
+#: templates/configure/tab_heure.html.jinja:81
+msgid "Taille de la police :"
+msgstr "フォントサイズ:"
+
+#: frontend/src/views/ClockView.vue:13 frontend/src/views/PhotoInfoView.vue:28
+#: templates/configure/tab_metadata.html.jinja:90
+msgid "Décalage horizontal (px)"
+msgstr "水平オフセット (px)"
+
+#: frontend/src/views/ClockView.vue:14 frontend/src/views/PhotoInfoView.vue:29
+#: templates/configure/tab_metadata.html.jinja:97
+msgid "Décalage vertical (px)"
+msgstr "垂直オフセット (px)"
+
+#: frontend/src/views/ClockView.vue:15
+#: templates/configure/tab_heure.html.jinja:98
+msgid "Couleur du texte (hex) :"
+msgstr "テキストの色 (16 進数):"
+
+#: frontend/src/views/ClockView.vue:16
+#: templates/configure/tab_heure.html.jinja:103
+msgid "Couleur du contour (hex) :"
+msgstr "アウトラインの色 (16 進数):"
+
+#: frontend/src/views/ClockView.vue:17
+#: templates/configure/tab_heure.html.jinja:137
+msgid "Afficher un fond derrière l'heure/date/météo"
+msgstr "時刻/日付/天気の背景を表示します"
+
+#: frontend/src/views/ClockView.vue:18
+msgid "Couleur du fond"
+msgstr "背景色"
+
+#: frontend/src/views/ClockView.vue:20
+#: templates/configure/tab_heure.html.jinja:149
+msgid "Affichage de la date"
+msgstr "日付表示"
+
+#: frontend/src/views/ClockView.vue:21
+#: templates/configure/tab_heure.html.jinja:152
+msgid "Afficher la date (sous l'heure)"
+msgstr "日付を表示 (時間の下)"
+
+#: frontend/src/views/ClockView.vue:22 frontend/src/views/PhotoInfoView.vue:10
+#: templates/configure/tab_heure.html.jinja:156
+msgid "Format de la date :"
+msgstr "日付形式:"
+
+#: frontend/src/views/ClockView.vue:23 frontend/src/views/PhotoInfoView.vue:11
+#, python-format
+msgid "%A : jour, %d : jour du mois, %B : mois, %Y : année."
+msgstr "%A：曜日、%d：日、%B：月、%Y：年"
+
+#: frontend/src/views/ClockView.vue:25
+#: templates/configure/tab_heure.html.jinja:162
+msgid "Affichage de la météo (OpenWeatherMap)"
+msgstr "天気表示（OpenWeatherMap）"
+
+#: frontend/src/views/ClockView.vue:26
+#: templates/configure/tab_heure.html.jinja:166
+msgid "Afficher la météo"
+msgstr "天気を表示"
+
+#: frontend/src/views/ClockView.vue:27
+#: templates/configure/tab_heure.html.jinja:186
+msgid "Ville :"
+msgstr "ヴィル :"
+
+#: frontend/src/views/ClockView.vue:28
+#: templates/configure/tab_heure.html.jinja:214
+msgid "Unités :"
+msgstr "単位:"
+
+#: frontend/src/views/ClockView.vue:29
+#: templates/configure/tab_heure.html.jinja:217
+msgid "Celsius"
+msgstr "摂氏"
+
+#: frontend/src/views/ClockView.vue:29
+#: templates/configure/tab_heure.html.jinja:219
+msgid "Fahrenheit"
+msgstr "華氏"
+
+#: frontend/src/views/ClockView.vue:30
+msgid "Mise à jour de la météo (minutes)"
+msgstr "天気の更新間隔（分）"
+
+#: frontend/src/views/ClockView.vue:31
+#: templates/configure/tab_heure.html.jinja:171
+msgid "Afficher le lever et le coucher du soleil, et la lune"
+msgstr "日の出・日の入りと月を表示"
+
+#: frontend/src/views/ClockView.vue:32
+#: templates/configure/tab_heure.html.jinja:175
+msgid "Pluie et neige animées :"
+msgstr "雨と雪のアニメーション："
+
+#: frontend/src/views/ClockView.vue:33
+#: templates/configure/tab_heure.html.jinja:183
+msgid ""
+"Quand il pleut, neige ou fait de l'orage dehors, quelques gouttes, "
+"flocons ou éclairs passent sur la photo."
+msgstr "外が雨・雪・雷のとき、写真の上に雨粒や雪、稲妻が流れます。"
+
+#: frontend/src/views/ClockView.vue:34
+#: templates/configure/tab_heure.html.jinja:178
+msgid "Au début de chaque photo (8 s)"
+msgstr "各写真の最初（8秒）"
+
+#: frontend/src/views/ClockView.vue:34
+#: templates/configure/tab_heure.html.jinja:179
+msgid "Pendant toute la photo"
+msgstr "写真の表示中ずっと"
+
+#: frontend/src/views/ClockView.vue:34
+#: templates/configure/tab_heure.html.jinja:180
+msgid "Jamais"
+msgstr "表示しない"
+
+#: frontend/src/views/ClockView.vue:41
+msgid ""
+"Clé API météo, police, marées, agenda et comptes à rebours : interface "
+"classique"
+msgstr "天気APIキー・フォント・潮汐・予定・カウントダウン：従来の画面"
 
 #: frontend/src/views/DisplayView.vue:7
 #: templates/configure/tab_affichage.html.jinja:198
@@ -1153,6 +1309,117 @@ msgstr "まだありません。"
 #: templates/configure/tab_validation.html.jinja:33
 msgid "Retirer la confiance"
 msgstr "信頼を解除"
+
+#: frontend/src/views/PhotoInfoView.vue:8
+msgid "Date de prise de vue"
+msgstr "撮影日"
+
+#: frontend/src/views/PhotoInfoView.vue:9
+#: templates/configure/tab_metadata.html.jinja:12
+msgid "Afficher la date de prise de vue"
+msgstr "撮影日を表示"
+
+#: frontend/src/views/PhotoInfoView.vue:13
+#: templates/configure/_smart_albums.html.jinja:34
+msgid "Lieu"
+msgstr "場所"
+
+#: frontend/src/views/PhotoInfoView.vue:14
+#: templates/configure/tab_metadata.html.jinja:26
+msgid "Afficher la localisation (ville/pays)"
+msgstr "撮影場所（市区町村/国）を表示"
+
+#: frontend/src/views/PhotoInfoView.vue:15
+msgid "Format du lieu"
+msgstr "場所の表示形式"
+
+#: frontend/src/views/PhotoInfoView.vue:16
+#: templates/configure/tab_metadata.html.jinja:39
+msgid "Ville, Pays"
+msgstr "都市、国"
+
+#: frontend/src/views/PhotoInfoView.vue:16
+#: templates/configure/tab_metadata.html.jinja:41
+msgid "Ville uniquement"
+msgstr "市内のみ"
+
+#: frontend/src/views/PhotoInfoView.vue:16
+#: templates/configure/tab_metadata.html.jinja:43
+msgid "Pays uniquement"
+msgstr "国のみ"
+
+#: frontend/src/views/PhotoInfoView.vue:17
+#: templates/configure/tab_metadata.html.jinja:30
+msgid ""
+"Trouver le nom du lieu pour toutes les photos géolocalisées (Google "
+"Drive, téléphone...)"
+msgstr "位置情報付きのすべての写真の地名を取得（Google Drive、スマートフォンなど）"
+
+#: frontend/src/views/PhotoInfoView.vue:18
+#: templates/configure/tab_metadata.html.jinja:31
+msgid ""
+"Les coordonnées GPS des photos (jamais les photos) sont envoyées à "
+"OpenStreetMap pour connaître la ville ; chaque lieu n'est demandé qu'une "
+"fois. Sans cette option, seules les photos Immich ont un lieu."
+msgstr ""
+"町名を調べるため、写真の GPS 座標（写真そのものは送りません）を OpenStreetMap に送信します。各地点の問い合わせは 1 "
+"回だけです。このオプションがない場合、地名が付くのは Immich の写真だけです。"
+
+#: frontend/src/views/PhotoInfoView.vue:20
+msgid "Drapeau du pays"
+msgstr "国旗"
+
+#: frontend/src/views/PhotoInfoView.vue:21
+#: templates/configure/tab_metadata.html.jinja:50
+msgid "Afficher le drapeau du pays"
+msgstr "国旗を表示"
+
+#: frontend/src/views/PhotoInfoView.vue:22
+msgid "Taille du drapeau"
+msgstr "国旗の大きさ"
+
+#: frontend/src/views/PhotoInfoView.vue:24
+msgid "Opacité du drapeau"
+msgstr "国旗の不透明度"
+
+#: frontend/src/views/PhotoInfoView.vue:25
+#: templates/configure/tab_metadata.html.jinja:74
+msgid "Position du drapeau"
+msgstr "旗の位置"
+
+#: frontend/src/views/PhotoInfoView.vue:26
+#: templates/configure/tab_invites.html.jinja:124
+#: templates/configure/tab_metadata.html.jinja:78
+#: templates/configure/tab_son.html.jinja:117
+msgid "En haut à droite"
+msgstr "右上"
+
+#: frontend/src/views/PhotoInfoView.vue:26
+#: templates/configure/tab_invites.html.jinja:125
+#: templates/configure/tab_metadata.html.jinja:80
+#: templates/configure/tab_son.html.jinja:116
+msgid "En haut à gauche"
+msgstr "左上"
+
+#: frontend/src/views/PhotoInfoView.vue:27
+#: templates/configure/tab_invites.html.jinja:122
+#: templates/configure/tab_metadata.html.jinja:82
+#: templates/configure/tab_son.html.jinja:115
+msgid "En bas à droite"
+msgstr "右下"
+
+#: frontend/src/views/PhotoInfoView.vue:27
+#: templates/configure/tab_invites.html.jinja:123
+#: templates/configure/tab_metadata.html.jinja:84
+#: templates/configure/tab_son.html.jinja:114
+msgid "En bas à gauche"
+msgstr "左下"
+
+#: frontend/src/views/PhotoInfoView.vue:36
+msgid ""
+"Police, couleurs et position du texte (éditeur de légendes) : interface "
+"classique"
+msgstr "フォント・色・文字の位置（キャプション編集）：従来の画面"
 
 #: frontend/src/views/PlaylistsView.vue:44
 msgid "Nouveau nom de la playlist :"
@@ -2123,10 +2390,6 @@ msgstr "年"
 msgid "Toutes ensemble sur la photo (sinon : au moins une)"
 msgstr "全員が一緒に写っている（オフ：少なくとも1人）"
 
-#: templates/configure/_smart_albums.html.jinja:34
-msgid "Lieu"
-msgstr "場所"
-
 #: templates/configure/_smart_albums.html.jinja:35
 msgid "ex : Biarritz, Italie"
 msgstr "例：ビアリッツ、イタリア"
@@ -2536,7 +2799,7 @@ msgid "Enregistrement…"
 msgstr "保存中…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:289
-#: web/routes_settings.py:129
+#: web/routes_settings.py:170
 msgid "Enregistré"
 msgstr "保存しました"
 
@@ -4201,18 +4464,6 @@ msgstr "例：休暇、ジュリーの結婚式、クリスマス"
 msgid "Aucun événement dans les 7 prochains jours."
 msgstr "今後 7 日間の予定はありません。"
 
-#: templates/configure/tab_heure.html.jinja:71
-msgid "Affichage de l'heure"
-msgstr "時刻表示"
-
-#: templates/configure/tab_heure.html.jinja:76
-msgid "Afficher l'heure"
-msgstr "ショータイム"
-
-#: templates/configure/tab_heure.html.jinja:81
-msgid "Taille de la police :"
-msgstr "フォントサイズ:"
-
 #: templates/configure/tab_heure.html.jinja:86
 #: templates/configure/tab_heure.html.jinja:277
 msgid "Décalage horizontal (px) :"
@@ -4223,37 +4474,9 @@ msgstr "水平オフセット (ピクセル):"
 msgid "Décalage vertical (px) :"
 msgstr "垂直オフセット (ピクセル):"
 
-#: templates/configure/tab_heure.html.jinja:98
-msgid "Couleur du texte (hex) :"
-msgstr "テキストの色 (16 進数):"
-
-#: templates/configure/tab_heure.html.jinja:103
-msgid "Couleur du contour (hex) :"
-msgstr "アウトラインの色 (16 進数):"
-
-#: templates/configure/tab_heure.html.jinja:110
-msgid "Position de l'heure :"
-msgstr "時間位置:"
-
-#: templates/configure/tab_heure.html.jinja:113
-msgid "Gauche"
-msgstr "ゴーシュ"
-
-#: templates/configure/tab_heure.html.jinja:115
-msgid "Centre"
-msgstr "中心"
-
-#: templates/configure/tab_heure.html.jinja:117
-msgid "Droite"
-msgstr "右"
-
 #: templates/configure/tab_heure.html.jinja:122
 msgid "Police :"
 msgstr "警察 ："
-
-#: templates/configure/tab_heure.html.jinja:137
-msgid "Afficher un fond derrière l'heure/date/météo"
-msgstr "時刻/日付/天気の背景を表示します"
 
 #: templates/configure/tab_heure.html.jinja:141
 msgid ""
@@ -4262,56 +4485,6 @@ msgid ""
 msgstr ""
 "背景色（16進RGBA）\n"
 "                            :"
-
-#: templates/configure/tab_heure.html.jinja:149
-msgid "Affichage de la date"
-msgstr "日付表示"
-
-#: templates/configure/tab_heure.html.jinja:152
-msgid "Afficher la date (sous l'heure)"
-msgstr "日付を表示 (時間の下)"
-
-#: templates/configure/tab_heure.html.jinja:156
-msgid "Format de la date :"
-msgstr "日付形式:"
-
-#: templates/configure/tab_heure.html.jinja:162
-msgid "Affichage de la météo (OpenWeatherMap)"
-msgstr "天気表示（OpenWeatherMap）"
-
-#: templates/configure/tab_heure.html.jinja:166
-msgid "Afficher la météo"
-msgstr "天気を表示"
-
-#: templates/configure/tab_heure.html.jinja:171
-msgid "Afficher le lever et le coucher du soleil, et la lune"
-msgstr "日の出・日の入りと月を表示"
-
-#: templates/configure/tab_heure.html.jinja:175
-msgid "Pluie et neige animées :"
-msgstr "雨と雪のアニメーション："
-
-#: templates/configure/tab_heure.html.jinja:178
-msgid "Au début de chaque photo (8 s)"
-msgstr "各写真の最初（8秒）"
-
-#: templates/configure/tab_heure.html.jinja:179
-msgid "Pendant toute la photo"
-msgstr "写真の表示中ずっと"
-
-#: templates/configure/tab_heure.html.jinja:180
-msgid "Jamais"
-msgstr "表示しない"
-
-#: templates/configure/tab_heure.html.jinja:183
-msgid ""
-"Quand il pleut, neige ou fait de l'orage dehors, quelques gouttes, "
-"flocons ou éclairs passent sur la photo."
-msgstr "外が雨・雪・雷のとき、写真の上に雨粒や雪、稲妻が流れます。"
-
-#: templates/configure/tab_heure.html.jinja:186
-msgid "Ville :"
-msgstr "ヴィル :"
 
 #: templates/configure/tab_heure.html.jinja:192
 msgid "Clé API :"
@@ -4325,18 +4498,6 @@ msgstr "API キーを表示/非表示"
 #: templates/configure/tab_heure.html.jinja:209
 msgid "Tester la clé API et la ville"
 msgstr "API キーと都市をテストする"
-
-#: templates/configure/tab_heure.html.jinja:214
-msgid "Unités :"
-msgstr "単位:"
-
-#: templates/configure/tab_heure.html.jinja:217
-msgid "Celsius"
-msgstr "摂氏"
-
-#: templates/configure/tab_heure.html.jinja:219
-msgid "Fahrenheit"
-msgstr "華氏"
 
 #: templates/configure/tab_heure.html.jinja:224
 msgid ""
@@ -4589,30 +4750,6 @@ msgstr "QRコードを表示"
 #: templates/configure/tab_invites.html.jinja:119
 msgid "Position :"
 msgstr "位置："
-
-#: templates/configure/tab_invites.html.jinja:122
-#: templates/configure/tab_metadata.html.jinja:82
-#: templates/configure/tab_son.html.jinja:115
-msgid "En bas à droite"
-msgstr "右下"
-
-#: templates/configure/tab_invites.html.jinja:123
-#: templates/configure/tab_metadata.html.jinja:84
-#: templates/configure/tab_son.html.jinja:114
-msgid "En bas à gauche"
-msgstr "左下"
-
-#: templates/configure/tab_invites.html.jinja:124
-#: templates/configure/tab_metadata.html.jinja:78
-#: templates/configure/tab_son.html.jinja:117
-msgid "En haut à droite"
-msgstr "右上"
-
-#: templates/configure/tab_invites.html.jinja:125
-#: templates/configure/tab_metadata.html.jinja:80
-#: templates/configure/tab_son.html.jinja:116
-msgid "En haut à gauche"
-msgstr "左上"
 
 #: templates/configure/tab_invites.html.jinja:129
 msgid "Autoriser les invités à écrire des messages"
@@ -5567,10 +5704,6 @@ msgstr ""
 "ここで情報の表示を設定します (日付、場所)\n"
 "                        あなたの写真からイミッチから抜粋しました。"
 
-#: templates/configure/tab_metadata.html.jinja:12
-msgid "Afficher la date de prise de vue"
-msgstr "撮影日を表示"
-
 #: templates/configure/tab_metadata.html.jinja:15
 msgid ""
 "Format de\n"
@@ -5584,25 +5717,6 @@ msgstr ""
 msgid "Utilise les codes de formatage Python (ex: %%d/%%m/%%Y, %%B %%Y)."
 msgstr "Python の書式コードを使用します（例：%%d/%%m/%%Y、%%B %%Y）。"
 
-#: templates/configure/tab_metadata.html.jinja:26
-msgid "Afficher la localisation (ville/pays)"
-msgstr "撮影場所（市区町村/国）を表示"
-
-#: templates/configure/tab_metadata.html.jinja:30
-msgid ""
-"Trouver le nom du lieu pour toutes les photos géolocalisées (Google "
-"Drive, téléphone...)"
-msgstr "位置情報付きのすべての写真の地名を取得（Google Drive、スマートフォンなど）"
-
-#: templates/configure/tab_metadata.html.jinja:31
-msgid ""
-"Les coordonnées GPS des photos (jamais les photos) sont envoyées à "
-"OpenStreetMap pour connaître la ville ; chaque lieu n'est demandé qu'une "
-"fois. Sans cette option, seules les photos Immich ont un lieu."
-msgstr ""
-"町名を調べるため、写真の GPS 座標（写真そのものは送りません）を OpenStreetMap に送信します。各地点の問い合わせは 1 "
-"回だけです。このオプションがない場合、地名が付くのは Immich の写真だけです。"
-
 #: templates/configure/tab_metadata.html.jinja:34
 msgid ""
 "Format\n"
@@ -5610,22 +5724,6 @@ msgid ""
 msgstr ""
 "フォーマット\n"
 "                            場所の"
-
-#: templates/configure/tab_metadata.html.jinja:39
-msgid "Ville, Pays"
-msgstr "都市、国"
-
-#: templates/configure/tab_metadata.html.jinja:41
-msgid "Ville uniquement"
-msgstr "市内のみ"
-
-#: templates/configure/tab_metadata.html.jinja:43
-msgid "Pays uniquement"
-msgstr "国のみ"
-
-#: templates/configure/tab_metadata.html.jinja:50
-msgid "Afficher le drapeau du pays"
-msgstr "国旗を表示"
 
 #: templates/configure/tab_metadata.html.jinja:53
 msgid ""
@@ -5642,18 +5740,6 @@ msgid ""
 msgstr ""
 "不透明度\n"
 "                            フラグの値 (0.1 ～ 1.0)"
-
-#: templates/configure/tab_metadata.html.jinja:74
-msgid "Position du drapeau"
-msgstr "旗の位置"
-
-#: templates/configure/tab_metadata.html.jinja:90
-msgid "Décalage horizontal (px)"
-msgstr "水平オフセット (px)"
-
-#: templates/configure/tab_metadata.html.jinja:97
-msgid "Décalage vertical (px)"
-msgstr "垂直オフセット (px)"
 
 #: templates/configure/tab_metadata.html.jinja:107
 msgid "Style et Positionnement"
@@ -7796,7 +7882,7 @@ msgstr "イミッチ写真制限の値が無効です。以前の値が保持さ
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive のキーが保存されませんでした：%(error)s"
 
-#: web/routes_config.py:282 web/routes_settings.py:127
+#: web/routes_config.py:282 web/routes_settings.py:168
 msgid "Réglages modifiés"
 msgstr "設定を変更"
 
@@ -8575,16 +8661,16 @@ msgstr "プレイリストが見つかりません。"
 msgid "Citation du jour enregistrée."
 msgstr "今日の言葉を保存しました。"
 
-#: web/routes_settings.py:113
+#: web/routes_settings.py:154
 msgid "Aucun réglage à enregistrer."
 msgstr "保存する設定がありません。"
 
-#: web/routes_settings.py:117
+#: web/routes_settings.py:158
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "不明な設定：%(key)s"
 
-#: web/routes_settings.py:121
+#: web/routes_settings.py:162
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "「%(key)s」の値が無効です。"

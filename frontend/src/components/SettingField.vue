@@ -46,6 +46,13 @@ function update(raw: string | boolean) {
           <input v-if="value !== 'sunset'" type="time" :value="value" @change="update(($event.target as HTMLInputElement).value)">
         </template>
         <input v-else-if="field.type === 'time'" :id="id" type="time" :value="value" @change="update(($event.target as HTMLInputElement).value)">
+        <template v-else-if="field.type === 'color'">
+          <input type="color" :value="String(value || '#000000').slice(0, 7)" :aria-label="field.label()"
+                 @change="update(($event.target as HTMLInputElement).value + String(value || '').slice(7))">
+          <input :id="id" type="text" class="hex" :value="value" maxlength="9" @change="update(($event.target as HTMLInputElement).value.trim())">
+        </template>
+        <input v-else-if="field.type === 'text'" :id="id" type="text" class="text-input" :value="value" :placeholder="field.placeholder"
+               @change="update(($event.target as HTMLInputElement).value)">
         <template v-else>
           <input :id="id" type="number" :min="field.min" :max="field.max" :step="field.step || 1" :value="value"
                  @change="update(($event.target as HTMLInputElement).value)">
@@ -68,6 +75,10 @@ function update(raw: string | boolean) {
   font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .4rem .6rem;
 }
 .control input[type="number"] { width: 7rem; }
+.control input[type="text"] { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .4rem .6rem; }
+.control .hex { width: 8rem; font-family: ui-monospace, monospace; }
+.control .text-input { flex: 1; max-width: 360px; }
+.control input[type="color"] { width: 2.6rem; height: 2.2rem; padding: 0; border: 1px solid var(--border); border-radius: 8px; background: none; cursor: pointer; }
 .control select { max-width: 100%; }
 .control input[type="range"] { flex: 1; max-width: 360px; accent-color: var(--accent); }
 output { min-width: 3.5rem; font-weight: 600; }

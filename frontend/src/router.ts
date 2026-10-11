@@ -12,6 +12,8 @@ export const router = createRouter({
     { path: "/messages", component: () => import("./views/MessagesView.vue") },
     { path: "/playlists", component: () => import("./views/PlaylistsView.vue") },
     { path: "/affichage", component: () => import("./views/DisplayView.vue") },
+    { path: "/horloge-meteo", component: () => import("./views/ClockView.vue") },
+    { path: "/infos-photos", component: () => import("./views/PhotoInfoView.vue") },
     { path: "/favoris", component: () => import("./views/LibraryView.vue"), props: { favorites: true } },
     { path: "/:rest(.*)*", redirect: "/" },
   ],
