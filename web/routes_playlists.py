@@ -276,8 +276,8 @@ def _valid_photo_list(photos):
 @login_required
 def library_api():
     """Toutes les photos et vidéos préparées, avec leur date (index des photos), pour composer une playlist."""
-    from utils import photo_index
-    index, favorites = photo_index.load(), set(load_favorites())
+    from utils import people, photo_index
+    index, favorites, who = photo_index.load(), set(load_favorites()), people.by_photo()
     items = []
     base = PREPARED_DIR
     for source in sorted(base.iterdir()) if base.exists() else []:
@@ -292,7 +292,8 @@ def library_api():
             rel = f"{source.name}/{f.name}"
             thumb = f"{source.name}/{f.stem}_thumbnail.jpg" if is_video else rel
             items.append({"path": rel, "thumb": url_for("static", filename=f"prepared/{thumb}"), "source": source.name,
-                          "date": (index.get(rel) or {}).get("date"), "video": is_video, "favorite": rel in favorites})
+                          "date": (index.get(rel) or {}).get("date"), "video": is_video, "favorite": rel in favorites,
+                          "people": who.get(rel, [])})
     dated = sorted((i for i in items if i["date"]), key=lambda i: i["date"], reverse=True)  # les plus récentes d'abord
     items = dated + [i for i in items if not i["date"]]  # les photos sans date à la fin
     return jsonify({"success": True, "items": items})

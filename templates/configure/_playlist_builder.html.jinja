@@ -13,6 +13,7 @@
             <div class="chips" id="pl-sources"></div>
             <select id="pl-year" aria-label="{{ _('Année') }}"><option value="">{{ _('Toutes les années') }}</option></select>
             <select id="pl-month" aria-label="{{ _('Mois') }}"><option value="">{{ _('Tous les mois') }}</option></select>
+            <select id="pl-person" class="hidden" aria-label="{{ _('Personne') }}"><option value="">{{ _('Tout le monde') }}</option></select>
             <label class="pl-fav"><input type="checkbox" id="pl-fav"> <i class="fas fa-star text-yellow-500"></i> {{ _("Favoris") }}</label>
             <button type="button" id="pl-select-all" class="link">{{ _("Tout sélectionner") }}</button>
             <button type="button" id="pl-select-none" class="link">{{ _("Tout désélectionner") }}</button>
@@ -41,12 +42,12 @@
                     months: {{ [_("janvier"), _("février"), _("mars"), _("avril"), _("mai"), _("juin"), _("juillet"), _("août"), _("septembre"), _("octobre"), _("novembre"), _("décembre")]|tojson }},
                     sources: { gdrive: "Google Drive", immich: "Immich", samba: {{ _("Partage réseau")|tojson }}, usb: {{ _("Clé USB")|tojson }},
                                smartphone: {{ _("Téléphone")|tojson }}, "invités": {{ _("Invités")|tojson }}, telegram: "Telegram",
-                               cloud: "Cloud", icloud: "iCloud", whatsapp: "WhatsApp" } };
+                               cloud: "Cloud", icloud: "iCloud", whatsapp: "WhatsApp", email: {{ _("E-mail")|tojson }}, personnes: {{ _("Personnes")|tojson }} } };
         let library = [], byPath = new Map(), selected = [], editing = null, source = "", lastClicked = null, shown = [];
 
         const visible = () => {
-            const y = $("pl-year").value, m = $("pl-month").value, fav = $("pl-fav").checked;
-            return library.filter(i => (!source || i.source === source) && (!fav || i.favorite)
+            const y = $("pl-year").value, m = $("pl-month").value, fav = $("pl-fav").checked, who = $("pl-person").value;
+            return library.filter(i => (!source || i.source === source) && (!fav || i.favorite) && (!who || (i.people || []).includes(who))
                 && (!y || (i.date && i.date.slice(0, 4) === y)) && (!m || (i.date && Number(i.date.slice(5, 7)) === Number(m))));
         };
         function renderGrid() {
@@ -87,7 +88,7 @@
             if (li) { toggle(li.dataset.path, false); renderGrid(); renderTray(); }
         });
         if (window.Sortable) Sortable.create($("pl-selected"), { animation: 150, onEnd: () => { selected = [...$("pl-selected").children].map(li => li.dataset.path); } });
-        ["pl-year", "pl-month", "pl-fav"].forEach(id => $(id).addEventListener("change", () => { lastClicked = null; renderGrid(); }));
+        ["pl-year", "pl-month", "pl-fav", "pl-person"].forEach(id => $(id).addEventListener("change", () => { lastClicked = null; renderGrid(); }));
         $("pl-select-all").addEventListener("click", () => { shown.forEach(i => toggle(i.path, true)); renderGrid(); renderTray(); });
         $("pl-select-none").addEventListener("click", () => { shown.forEach(i => toggle(i.path, false)); renderGrid(); renderTray(); });
 
@@ -105,6 +106,10 @@
             const years = [...new Set(library.filter(i => i.date).map(i => i.date.slice(0, 4)))].sort().reverse();
             $("pl-year").innerHTML = `<option value="">{{ _("Toutes les années") }}</option>` + years.map(y => `<option>${y}</option>`).join("");
             $("pl-month").innerHTML = `<option value="">{{ _("Tous les mois") }}</option>` + T.months.map((m, k) => `<option value="${k + 1}">${m}</option>`).join("");
+            const names = [...new Set(library.flatMap(i => i.people || []))].sort((a, b) => a.localeCompare(b));
+            $("pl-person").innerHTML = `<option value="">{{ _("Tout le monde") }}</option>`;
+            names.forEach(n => $("pl-person").add(new Option(n, n)));
+            $("pl-person").classList.toggle("hidden", !names.length);
         }
         async function loadMusic() {
             const data = await (await fetch("/api/music_files")).json();

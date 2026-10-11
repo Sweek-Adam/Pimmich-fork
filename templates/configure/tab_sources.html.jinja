@@ -62,6 +62,59 @@
 
                 </fieldset>
 
+                <fieldset class="mt-4" id="people-box">
+                    <legend><h3><i class="fas fa-user-friends mr-2"></i>{{ _("Personnes") }}</h3></legend>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Le cadre reprend les visages que vous avez nommés dans Immich. Touchez une personne pour afficher ses photos ; « Suivre » importe aussi toutes ses photos depuis Immich, même hors de l'album choisi. Sa playlist « Photos de … » peut être lancée à son arrivée (Écran › Affichage › Réveil à l'arrivée).") }}</p>
+                    <div id="pp-list" class="pp-list"></div>
+                    <p id="pp-empty" class="text-sm hidden"></p>
+                    <button type="button" id="pp-refresh" class="btn-secondary mt-2"><i class="fas fa-sync-alt mr-1"></i>{{ _("Mettre à jour depuis Immich") }}</button>
+                    <p id="pp-status" class="text-sm mt-2"></p>
+                </fieldset>
+                <style>
+                    .pp-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .75rem; }
+                    .pp-card { border: 1px solid var(--border, #e5e7eb); border-radius: .75rem; padding: .6rem; text-align: center; background: var(--card, #fff); }
+                    .pp-card img, .pp-card .pp-face { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto .4rem; background: #e5e7eb; display: block; }
+                    .pp-card strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+                    .pp-card small { display: block; color: #6b7280; }
+                    .pp-card .pp-actions { display: flex; flex-direction: column; gap: .3rem; margin-top: .4rem; }
+                </style>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { show: {{ _("Afficher ses photos")|tojson }}, follow: {{ _("Suivre")|tojson }}, followed: {{ _("Suivie ✓")|tojson }},
+                                    playlist: {{ _("Créer sa playlist")|tojson }}, onFrame: {{ _("{n} sur le cadre / {total} dans Immich")|tojson }},
+                                    notConfigured: {{ _("Configurez Immich ci-dessus pour retrouver les personnes.")|tojson }},
+                                    none: {{ _("Aucune personne nommée pour l'instant : nommez les visages dans Immich, puis mettez à jour.")|tojson }},
+                                    loading: {{ _("Mise à jour…")|tojson }} };
+                        const say = (t, ok) => { $("pp-status").textContent = t || ""; $("pp-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                        const button = (text, cls, handler) => { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.textContent = text; b.addEventListener("click", handler); return b; };
+                        async function load() {
+                            const d = await (await fetch("/api/people")).json();
+                            $("pp-list").innerHTML = "";
+                            $("pp-refresh").classList.toggle("hidden", !d.configured);
+                            $("pp-empty").classList.toggle("hidden", d.configured && d.people.length > 0);
+                            $("pp-empty").textContent = d.configured ? T.none : T.notConfigured;
+                            d.people.forEach(p => {
+                                const card = document.createElement("div"); card.className = "pp-card";
+                                const img = document.createElement("img"); img.src = p.thumb; img.alt = ""; img.loading = "lazy";
+                                img.onerror = () => { const face = document.createElement("div"); face.className = "pp-face"; img.replaceWith(face); };
+                                const name = document.createElement("strong"); name.textContent = p.name;
+                                const count = document.createElement("small"); count.textContent = T.onFrame.replace("{n}", p.on_frame).replace("{total}", p.count);
+                                const actions = document.createElement("div"); actions.className = "pp-actions";
+                                actions.append(
+                                    button(T.show, "btn-primary text-sm", async () => { const r = await post(`/api/people/${p.id}/play`); say(r.message, r.success); }),
+                                    button(p.followed ? T.followed : T.follow, "btn-secondary text-sm", async () => { const r = await post(`/api/people/${p.id}/follow`, { follow: !p.followed }); say(r.message, r.success); load(); }));
+                                if (!p.playlist) actions.append(button(T.playlist, "link text-sm", async () => { const r = await post(`/api/people/${p.id}/play`, { create_only: true }); say(r.message, r.success); load(); }));
+                                card.append(img, name, count, actions);
+                                $("pp-list").appendChild(card);
+                            });
+                        }
+                        $("pp-refresh").addEventListener("click", async () => { say(T.loading, true); const r = await post("/api/people/refresh"); say(r.message, r.success); load(); });
+                        load();
+                    });
+                </script>
+
                 <fieldset class="mt-4">
                     <legend>
                         <h3>{{ _("Sources à afficher dans le diaporama") }}</h3>
@@ -112,6 +165,10 @@
                     <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_email" name="display_sources" value="email" {% if 'email' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_email">{{ _("Photos reçues par e-mail") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_personnes" name="display_sources" value="personnes" {% if 'personnes' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_personnes">{{ _("Photos des personnes suivies (Immich)") }}</label>
                     </div>
                     <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>

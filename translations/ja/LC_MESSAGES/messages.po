@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 07:55+0200\n"
+"POT-Creation-Date: 2026-10-11 08:00+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -32,73 +32,73 @@ msgstr "%(num)d 年前"
 msgid "Il y a %(num)d ans"
 msgstr "%(num)d 年前"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "1月"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "2月"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "3月"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "4月"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "5月"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "6月"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "7月"
 
-#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1410 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "8月"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "9月"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "10月"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "11月"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:41
+#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
@@ -222,13 +222,13 @@ msgid "Playlists"
 msgstr "プレイリスト"
 
 #: templates/configure.html.jinja:122
-#: templates/configure/_playlist_builder.html.jinja:16
+#: templates/configure/_playlist_builder.html.jinja:17
 msgid "Favoris"
 msgstr "お気に入り"
 
 #: templates/configure.html.jinja:123
 #: templates/configure/tab_apercu.html.jinja:14
-#: templates/configure/tab_sources.html.jinja:118
+#: templates/configure/tab_sources.html.jinja:175
 msgid "Messages"
 msgstr "メッセージ"
 
@@ -258,7 +258,7 @@ msgid "Son"
 msgstr "サウンド"
 
 #: templates/configure.html.jinja:138
-#: templates/configure/_playlist_builder.html.jinja:43
+#: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr "ゲスト"
@@ -335,7 +335,7 @@ msgstr "パスワード"
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:205 templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:262 templates/login.html.jinja:69
 msgid "Afficher/Cacher le mot de passe"
 msgstr "パスワードの表示/非表示"
 
@@ -532,7 +532,7 @@ msgid "Nom de la playlist (ex : Vacances 2024)"
 msgstr "プレイリスト名（例：2024 年の休暇）"
 
 #: templates/configure/_playlist_builder.html.jinja:10
-#: templates/configure/_playlist_builder.html.jinja:111
+#: templates/configure/_playlist_builder.html.jinja:116
 #: templates/configure/scripts_gallery.html.jinja:23
 msgid "Pas de musique"
 msgstr "音楽なし"
@@ -542,7 +542,7 @@ msgid "Année"
 msgstr "年"
 
 #: templates/configure/_playlist_builder.html.jinja:14
-#: templates/configure/_playlist_builder.html.jinja:106
+#: templates/configure/_playlist_builder.html.jinja:107
 msgid "Toutes les années"
 msgstr "すべての年"
 
@@ -551,87 +551,106 @@ msgid "Mois"
 msgstr "月"
 
 #: templates/configure/_playlist_builder.html.jinja:15
-#: templates/configure/_playlist_builder.html.jinja:107
+#: templates/configure/_playlist_builder.html.jinja:108
 msgid "Tous les mois"
 msgstr "すべての月"
 
-#: templates/configure/_playlist_builder.html.jinja:17
+#: templates/configure/_playlist_builder.html.jinja:16
+msgid "Personne"
+msgstr "人物"
+
+#: templates/configure/_playlist_builder.html.jinja:16
+#: templates/configure/_playlist_builder.html.jinja:110
+msgid "Tout le monde"
+msgstr "全員"
+
+#: templates/configure/_playlist_builder.html.jinja:18
 msgid "Tout sélectionner"
 msgstr "すべて選択"
 
-#: templates/configure/_playlist_builder.html.jinja:18
+#: templates/configure/_playlist_builder.html.jinja:19
 msgid "Tout désélectionner"
 msgstr "すべて選択解除"
 
-#: templates/configure/_playlist_builder.html.jinja:20
+#: templates/configure/_playlist_builder.html.jinja:21
 msgid ""
 "Touchez les photos pour les choisir. Maj + clic : sélectionner toute une "
 "série."
 msgstr "写真をタップして選びます。Shift + クリックで範囲をまとめて選択できます。"
 
-#: templates/configure/_playlist_builder.html.jinja:25
+#: templates/configure/_playlist_builder.html.jinja:26
 msgid "Glissez pour changer l'ordre"
 msgstr "ドラッグして順番を変更"
 
-#: templates/configure/_playlist_builder.html.jinja:38
+#: templates/configure/_playlist_builder.html.jinja:39
 msgid "Créer la playlist"
 msgstr "プレイリストを作成"
 
-#: templates/configure/_playlist_builder.html.jinja:38
+#: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
 #: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_sources.html.jinja:480
+#: templates/configure/tab_sources.html.jinja:537
 msgid "Enregistrer"
 msgstr "保存"
 
-#: templates/configure/_playlist_builder.html.jinja:38
+#: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/tab_playlists.html.jinja:64
 msgid "Nouvelle playlist"
 msgstr "新しいプレイリスト"
 
-#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_playlist_builder.html.jinja:40
 #: templates/configure/scripts_main.html.jinja:325
 msgid "Choisir les photos"
 msgstr "写真を選ぶ"
 
-#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_playlist_builder.html.jinja:40
 msgid "photo(s) choisie(s)"
 msgstr "枚を選択"
 
-#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_playlist_builder.html.jinja:40
 msgid "photo(s) affichée(s)"
 msgstr "枚を表示"
 
-#: templates/configure/_playlist_builder.html.jinja:40
+#: templates/configure/_playlist_builder.html.jinja:41
 msgid "Donnez un nom à la playlist."
 msgstr "プレイリストに名前を付けてください。"
 
-#: templates/configure/_playlist_builder.html.jinja:40
+#: templates/configure/_playlist_builder.html.jinja:41
 msgid "Toutes"
 msgstr "すべて"
 
-#: templates/configure/_playlist_builder.html.jinja:40
+#: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:212
 #: templates/configure/tab_heure.html.jinja:26
-#: templates/configure/tab_sources.html.jinja:432
+#: templates/configure/tab_sources.html.jinja:489
 msgid "Retirer"
 msgstr "外す"
 
-#: templates/configure/_playlist_builder.html.jinja:42
+#: templates/configure/_playlist_builder.html.jinja:43
 #: utils/import_progress.py:13
 msgid "Partage réseau"
 msgstr "ネットワーク共有"
 
-#: templates/configure/_playlist_builder.html.jinja:42
+#: templates/configure/_playlist_builder.html.jinja:43
 #: utils/import_progress.py:13
 msgid "Clé USB"
 msgstr "USB メモリ"
 
-#: templates/configure/_playlist_builder.html.jinja:43
+#: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Téléphone"
 msgstr "スマートフォン"
+
+#: templates/configure/_playlist_builder.html.jinja:45
+#: utils/import_progress.py:13
+msgid "E-mail"
+msgstr "メール"
+
+#: templates/configure/_playlist_builder.html.jinja:45
+#: templates/configure/tab_sources.html.jinja:66 utils/import_progress.py:13
+msgid "Personnes"
+msgstr "人物"
 
 #: templates/configure/_son_radio.html.jinja:2
 msgid "Radios et podcasts"
@@ -864,7 +883,7 @@ msgid "Aucune playlist trouvée."
 msgstr "プレイリストが見つかりません。"
 
 #: templates/configure/_son_spotify.html.jinja:103
-#: templates/configure/tab_sources.html.jinja:334
+#: templates/configure/tab_sources.html.jinja:391
 msgid "Compte :"
 msgstr "アカウント："
 
@@ -2778,7 +2797,7 @@ msgid "Clé API StormGlass :"
 msgstr "Clé API StormGlass:"
 
 #: templates/configure/tab_heure.html.jinja:277
-#: templates/configure/tab_sources.html.jinja:481
+#: templates/configure/tab_sources.html.jinja:538
 msgid "Tester la connexion"
 msgstr "接続をテストする"
 
@@ -4195,39 +4214,89 @@ msgid "Mise à jour automatique (Immich)"
 msgstr "自動更新 (イミッチ)"
 
 #: templates/configure/tab_sources.html.jinja:47
-#: templates/configure/tab_sources.html.jinja:222
-#: templates/configure/tab_sources.html.jinja:314
+#: templates/configure/tab_sources.html.jinja:279
+#: templates/configure/tab_sources.html.jinja:371
 msgid "Activer la mise à jour automatique"
 msgstr "自動更新を有効にする"
 
 #: templates/configure/tab_sources.html.jinja:49
-#: templates/configure/tab_sources.html.jinja:224
+#: templates/configure/tab_sources.html.jinja:281
 msgid "Intervalle de mise à jour (heures):"
 msgstr "更新間隔 (時間):"
 
 #: templates/configure/tab_sources.html.jinja:54
-#: templates/configure/tab_sources.html.jinja:229
-#: templates/configure/tab_sources.html.jinja:322
+#: templates/configure/tab_sources.html.jinja:286
+#: templates/configure/tab_sources.html.jinja:379
 msgid "État du service :"
 msgstr "サービスステータス:"
 
 #: templates/configure/tab_sources.html.jinja:56
-#: templates/configure/tab_sources.html.jinja:231
-#: templates/configure/tab_sources.html.jinja:324
+#: templates/configure/tab_sources.html.jinja:288
+#: templates/configure/tab_sources.html.jinja:381
 msgid "Dernière mise à jour :"
 msgstr "最終更新:"
 
 #: templates/configure/tab_sources.html.jinja:58
-#: templates/configure/tab_sources.html.jinja:233
-#: templates/configure/tab_sources.html.jinja:326
+#: templates/configure/tab_sources.html.jinja:290
+#: templates/configure/tab_sources.html.jinja:383
 msgid "Prochaine mise à jour :"
 msgstr "次回の更新:"
 
 #: templates/configure/tab_sources.html.jinja:67
+msgid ""
+"Le cadre reprend les visages que vous avez nommés dans Immich. Touchez "
+"une personne pour afficher ses photos ; « Suivre » importe aussi toutes "
+"ses photos depuis Immich, même hors de l'album choisi. Sa playlist « "
+"Photos de … » peut être lancée à son arrivée (Écran › Affichage › Réveil "
+"à l'arrivée)."
+msgstr ""
+"フレームはImmichで名前を付けた顔を使います。人物をタップするとその人の写真を表示します。「フォロー」すると、選んだアルバム以外も含めその人の写真をすべてImmichからインポートします。「〇〇の写真」プレイリストは帰宅時に自動再生できます（画面"
+" › 表示 › 帰宅時に起動）。"
+
+#: templates/configure/tab_sources.html.jinja:70
+msgid "Mettre à jour depuis Immich"
+msgstr "Immichから更新"
+
+#: templates/configure/tab_sources.html.jinja:84
+msgid "Afficher ses photos"
+msgstr "写真を表示"
+
+#: templates/configure/tab_sources.html.jinja:84
+msgid "Suivre"
+msgstr "フォロー"
+
+#: templates/configure/tab_sources.html.jinja:84
+msgid "Suivie ✓"
+msgstr "フォロー中 ✓"
+
+#: templates/configure/tab_sources.html.jinja:85
+msgid "Créer sa playlist"
+msgstr "プレイリストを作成"
+
+#: templates/configure/tab_sources.html.jinja:85
+#, python-brace-format
+msgid "{n} sur le cadre / {total} dans Immich"
+msgstr "フレーム{n}枚 / Immich {total}枚"
+
+#: templates/configure/tab_sources.html.jinja:86
+msgid "Configurez Immich ci-dessus pour retrouver les personnes."
+msgstr "人物を見つけるには、上でImmichを設定してください。"
+
+#: templates/configure/tab_sources.html.jinja:87
+msgid ""
+"Aucune personne nommée pour l'instant : nommez les visages dans Immich, "
+"puis mettez à jour."
+msgstr "名前の付いた人物はまだいません。Immichで顔に名前を付けてから更新してください。"
+
+#: templates/configure/tab_sources.html.jinja:88
+msgid "Mise à jour…"
+msgstr "更新中…"
+
+#: templates/configure/tab_sources.html.jinja:120
 msgid "Sources à afficher dans le diaporama"
 msgstr "スライドショーで表示するソース"
 
-#: templates/configure/tab_sources.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:122
 msgid ""
 "Sélectionnez les sources de photos à inclure dans le diaporama.\n"
 "                        Les photos seront mélangées entre les sources "
@@ -4236,56 +4305,60 @@ msgstr ""
 "スライドショーに含める写真ソースを選択します。\n"
 "                        写真は選択したソース間で混合されます。"
 
-#: templates/configure/tab_sources.html.jinja:74
+#: templates/configure/tab_sources.html.jinja:127
 msgid "Photos Immich"
 msgstr "写真 イミッチ"
 
-#: templates/configure/tab_sources.html.jinja:78
+#: templates/configure/tab_sources.html.jinja:131
 msgid "Photos USB"
 msgstr "写真USB"
 
-#: templates/configure/tab_sources.html.jinja:82
+#: templates/configure/tab_sources.html.jinja:135
 msgid "Photos Samba"
 msgstr "写真 サンバ"
 
-#: templates/configure/tab_sources.html.jinja:86
+#: templates/configure/tab_sources.html.jinja:139
 msgid "Photos Google Drive"
 msgstr "Google Drive の写真"
 
-#: templates/configure/tab_sources.html.jinja:90
+#: templates/configure/tab_sources.html.jinja:143
 msgid "Photos Smartphone"
 msgstr "写真 スマートフォン"
 
-#: templates/configure/tab_sources.html.jinja:94
+#: templates/configure/tab_sources.html.jinja:147
 msgid "Photos reçues par Telegram"
 msgstr "テレグラムで受け取った写真"
 
-#: templates/configure/tab_sources.html.jinja:98
+#: templates/configure/tab_sources.html.jinja:151
 msgid "Photos des invités (validées)"
 msgstr "ゲストの写真（承認済み）"
 
-#: templates/configure/tab_sources.html.jinja:102
+#: templates/configure/tab_sources.html.jinja:155
 msgid "Autres clouds (Dropbox, OneDrive...)"
 msgstr "その他のクラウド（Dropbox、OneDrive など）"
 
-#: templates/configure/tab_sources.html.jinja:106
-#: templates/configure/tab_sources.html.jinja:418
+#: templates/configure/tab_sources.html.jinja:159
+#: templates/configure/tab_sources.html.jinja:475
 msgid "Albums partagés iCloud"
 msgstr "iCloud共有アルバム"
 
-#: templates/configure/tab_sources.html.jinja:110
+#: templates/configure/tab_sources.html.jinja:163
 msgid "WhatsApp et partages depuis le téléphone"
 msgstr "WhatsAppとスマホからの共有"
 
-#: templates/configure/tab_sources.html.jinja:114
+#: templates/configure/tab_sources.html.jinja:167
 msgid "Photos reçues par e-mail"
 msgstr "メールで受信した写真"
 
-#: templates/configure/tab_sources.html.jinja:123
+#: templates/configure/tab_sources.html.jinja:171
+msgid "Photos des personnes suivies (Immich)"
+msgstr "フォロー中の人物の写真（Immich）"
+
+#: templates/configure/tab_sources.html.jinja:180
 msgid "Masquer les photos en double entre les sources"
 msgstr "ソース間で重複する写真を非表示"
 
-#: templates/configure/tab_sources.html.jinja:125
+#: templates/configure/tab_sources.html.jinja:182
 msgid ""
 "Une même photo reçue par plusieurs sources (ex. Google Drive et Telegram)"
 " n'est affichée qu'une fois, de préférence celle mise en favori."
@@ -4293,101 +4366,101 @@ msgstr ""
 "複数のソース（例：Google Drive と Telegram）から届いた同じ写真は 1 "
 "回だけ表示され、お気に入りに登録されたものが優先されます。"
 
-#: templates/configure/tab_sources.html.jinja:128
+#: templates/configure/tab_sources.html.jinja:185
 msgid "Tri automatique"
 msgstr "自動選別"
 
-#: templates/configure/tab_sources.html.jinja:129
+#: templates/configure/tab_sources.html.jinja:186
 msgid ""
 "Écarte du diaporama les photos ratées. Rien n'est supprimé : vous pouvez "
 "remettre chaque photo d'un clic."
 msgstr "失敗した写真をスライドショーから外します。削除はされず、ワンクリックで戻せます。"
 
-#: templates/configure/tab_sources.html.jinja:130
+#: templates/configure/tab_sources.html.jinja:187
 msgid "Activer le tri automatique"
 msgstr "自動選別を有効にする"
 
-#: templates/configure/tab_sources.html.jinja:132
+#: templates/configure/tab_sources.html.jinja:189
 msgid "Photos floues"
 msgstr "ぼやけた写真"
 
-#: templates/configure/tab_sources.html.jinja:133
+#: templates/configure/tab_sources.html.jinja:190
 msgid "Photos très sombres"
 msgstr "とても暗い写真"
 
-#: templates/configure/tab_sources.html.jinja:134
+#: templates/configure/tab_sources.html.jinja:191
 msgid "Captures d'écran"
 msgstr "スクリーンショット"
 
-#: templates/configure/tab_sources.html.jinja:135
+#: templates/configure/tab_sources.html.jinja:192
 msgid "Rafales : seule la plus nette est gardée"
 msgstr "連写：最もシャープな 1 枚だけを残す"
 
-#: templates/configure/tab_sources.html.jinja:144
+#: templates/configure/tab_sources.html.jinja:201
 msgid "Voir les photos écartées"
 msgstr "除外した写真を見る"
 
-#: templates/configure/tab_sources.html.jinja:144
+#: templates/configure/tab_sources.html.jinja:201
 msgid "Aucune photo écartée."
 msgstr "除外された写真はありません。"
 
-#: templates/configure/tab_sources.html.jinja:144
+#: templates/configure/tab_sources.html.jinja:201
 msgid "Remettre"
 msgstr "戻す"
 
-#: templates/configure/tab_sources.html.jinja:145
+#: templates/configure/tab_sources.html.jinja:202
 msgid "floue"
 msgstr "ぼやけ"
 
-#: templates/configure/tab_sources.html.jinja:145
+#: templates/configure/tab_sources.html.jinja:202
 msgid "très sombre"
 msgstr "とても暗い"
 
-#: templates/configure/tab_sources.html.jinja:145
+#: templates/configure/tab_sources.html.jinja:202
 msgid "capture d'écran"
 msgstr "スクリーンショット"
 
-#: templates/configure/tab_sources.html.jinja:145
+#: templates/configure/tab_sources.html.jinja:202
 msgid "rafale"
 msgstr "連写"
 
-#: templates/configure/tab_sources.html.jinja:181
+#: templates/configure/tab_sources.html.jinja:238
 msgid "Configuration du partage Samba (Windows)"
 msgstr "Samba 共有のセットアップ (Windows)"
 
-#: templates/configure/tab_sources.html.jinja:183
+#: templates/configure/tab_sources.html.jinja:240
 msgid "Serveur :"
 msgstr "サーバー:"
 
-#: templates/configure/tab_sources.html.jinja:185
+#: templates/configure/tab_sources.html.jinja:242
 msgid "ex: 192.168.1.50 ou MON-NAS"
 msgstr "例: 192.168.1.50 または MON-NAS"
 
-#: templates/configure/tab_sources.html.jinja:187
+#: templates/configure/tab_sources.html.jinja:244
 msgid "Nom du partage :"
 msgstr "共有名:"
 
-#: templates/configure/tab_sources.html.jinja:189
+#: templates/configure/tab_sources.html.jinja:246
 msgid "ex: Photos"
 msgstr "例: 写真"
 
-#: templates/configure/tab_sources.html.jinja:191
+#: templates/configure/tab_sources.html.jinja:248
 msgid "Chemin dans le partage (optionnel) :"
 msgstr "共有のパス (オプション):"
 
-#: templates/configure/tab_sources.html.jinja:193
+#: templates/configure/tab_sources.html.jinja:250
 msgid "ex: Famille/2024"
 msgstr "例: 家族/2024"
 
-#: templates/configure/tab_sources.html.jinja:195
+#: templates/configure/tab_sources.html.jinja:252
 msgid "Nom d'utilisateur (optionnel) :"
 msgstr "ユーザー名 (オプション):"
 
-#: templates/configure/tab_sources.html.jinja:198
+#: templates/configure/tab_sources.html.jinja:255
 msgid "Mot de passe (optionnel) :"
 msgstr "パスワード (オプション):"
 
-#: templates/configure/tab_sources.html.jinja:213
+#: templates/configure/tab_sources.html.jinja:270
 msgid ""
 "Tester la\n"
 "                            connexion"
@@ -4395,35 +4468,35 @@ msgstr ""
 "テストしてください\n"
 "                            接続"
 
-#: templates/configure/tab_sources.html.jinja:219
+#: templates/configure/tab_sources.html.jinja:276
 msgid "Mise à jour automatique (Samba)"
 msgstr "自動アップデート（Samba）"
 
-#: templates/configure/tab_sources.html.jinja:241
+#: templates/configure/tab_sources.html.jinja:298
 msgid "Configuration Google Drive"
 msgstr "Google Drive の設定"
 
-#: templates/configure/tab_sources.html.jinja:244
+#: templates/configure/tab_sources.html.jinja:301
 msgid "Méthode de connexion :"
 msgstr "接続方式："
 
-#: templates/configure/tab_sources.html.jinja:246
+#: templates/configure/tab_sources.html.jinja:303
 msgid "Automatique (rclone si configuré, sinon compte de service)"
 msgstr "自動（設定済みなら rclone、それ以外はサービスアカウント）"
 
-#: templates/configure/tab_sources.html.jinja:247
+#: templates/configure/tab_sources.html.jinja:304
 msgid "rclone (compte Google déjà configuré sur le Raspberry Pi)"
 msgstr "rclone（Raspberry Pi で設定済みの Google アカウント）"
 
-#: templates/configure/tab_sources.html.jinja:248
+#: templates/configure/tab_sources.html.jinja:305
 msgid "Compte de service Google"
 msgstr "Google サービスアカウント"
 
-#: templates/configure/tab_sources.html.jinja:253
+#: templates/configure/tab_sources.html.jinja:310
 msgid "Remote rclone :"
 msgstr "rclone リモート："
 
-#: templates/configure/tab_sources.html.jinja:260
+#: templates/configure/tab_sources.html.jinja:317
 msgid ""
 "Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « "
 "rclone config » sur le Raspberry Pi."
@@ -4431,7 +4504,7 @@ msgstr ""
 "Google Drive の rclone リモートが見つかりません。作成するには、Raspberry Pi で「rclone "
 "config」を実行してください。"
 
-#: templates/configure/tab_sources.html.jinja:265
+#: templates/configure/tab_sources.html.jinja:322
 msgid ""
 "Créez un compte de service dans la console Google Cloud (API Google Drive"
 " activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez "
@@ -4441,46 +4514,46 @@ msgstr ""
 "Google Cloud コンソールでサービスアカウントを作成し（Google Drive API を有効化）、JSON "
 "キーをダウンロードして下に貼り付けてください。その後、写真フォルダーをサービスアカウントのメールアドレスと共有してください。"
 
-#: templates/configure/tab_sources.html.jinja:268
+#: templates/configure/tab_sources.html.jinja:325
 msgid "Compte de service configuré :"
 msgstr "設定済みのサービスアカウント："
 
-#: templates/configure/tab_sources.html.jinja:270
+#: templates/configure/tab_sources.html.jinja:327
 msgid "Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
 msgstr "Google Drive のフォルダーをこのアドレスと共有してください（閲覧のみ）。"
 
-#: templates/configure/tab_sources.html.jinja:273
+#: templates/configure/tab_sources.html.jinja:330
 msgid "Clé JSON du compte de service :"
 msgstr "サービスアカウントの JSON キー："
 
-#: templates/configure/tab_sources.html.jinja:276
+#: templates/configure/tab_sources.html.jinja:333
 msgid "Laisser vide pour conserver la clé actuelle"
 msgstr "現在のキーを保持する場合は空欄のままにしてください"
 
-#: templates/configure/tab_sources.html.jinja:282
+#: templates/configure/tab_sources.html.jinja:339
 msgid "Afficher mes dossiers Google Drive"
 msgstr "Google Drive のフォルダーを表示"
 
-#: templates/configure/tab_sources.html.jinja:286
+#: templates/configure/tab_sources.html.jinja:343
 msgid "Dossiers à afficher dans le diaporama :"
 msgstr "スライドショーに表示するフォルダー："
 
-#: templates/configure/tab_sources.html.jinja:295
+#: templates/configure/tab_sources.html.jinja:352
 msgid ""
 "Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google "
 "Drive »."
 msgstr "フォルダーが選択されていません。「Google Drive のフォルダーを表示」をクリックしてください。"
 
-#: templates/configure/tab_sources.html.jinja:301
-#: templates/configure/tab_sources.html.jinja:353
+#: templates/configure/tab_sources.html.jinja:358
+#: templates/configure/tab_sources.html.jinja:410
 msgid "Inclure les sous-dossiers"
 msgstr "サブフォルダーを含める"
 
-#: templates/configure/tab_sources.html.jinja:305
+#: templates/configure/tab_sources.html.jinja:362
 msgid "Mettre les fichiers à la corbeille Google Drive après import"
 msgstr "インポート後にファイルを Google Drive のゴミ箱に移動"
 
-#: templates/configure/tab_sources.html.jinja:307
+#: templates/configure/tab_sources.html.jinja:364
 msgid ""
 "Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
 "importée part dans la corbeille du Drive (récupérable 30 jours) et reste "
@@ -4490,92 +4563,92 @@ msgstr ""
 "フォルダーは「送信ボックス」として機能します。インポートされた写真や動画は Drive のゴミ箱に移動し（30 "
 "日間復元可能）、「プレビュー」タブで削除するまでフォトフレームに残ります。rclone 接続の場合のみ利用できます。"
 
-#: templates/configure/tab_sources.html.jinja:308
+#: templates/configure/tab_sources.html.jinja:365
 msgid ""
 "Pensez à enregistrer la configuration après avoir choisi les dossiers, "
 "puis lancez l'import depuis l'onglet « Actions »."
 msgstr "フォルダーを選択したら設定を保存し、「アクション」タブからインポートを開始してください。"
 
-#: templates/configure/tab_sources.html.jinja:311
+#: templates/configure/tab_sources.html.jinja:368
 msgid "Mise à jour automatique (Google Drive)"
 msgstr "自動更新（Google Drive）"
 
-#: templates/configure/tab_sources.html.jinja:316
+#: templates/configure/tab_sources.html.jinja:373
 msgid "Vérifier les nouveautés toutes les (minutes) :"
 msgstr "新着の確認間隔（分）："
 
-#: templates/configure/tab_sources.html.jinja:319
+#: templates/configure/tab_sources.html.jinja:376
 msgid ""
 "Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées "
 "ou supprimées."
 msgstr "写真や動画が追加または削除された場合にのみ、スライドショーが再起動されます。"
 
-#: templates/configure/tab_sources.html.jinja:332
+#: templates/configure/tab_sources.html.jinja:389
 msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
 msgstr "その他のクラウド：Dropbox、OneDrive、pCloud など"
 
-#: templates/configure/tab_sources.html.jinja:336
+#: templates/configure/tab_sources.html.jinja:393
 msgid "Ajouter un compte"
 msgstr "アカウントを追加"
 
-#: templates/configure/tab_sources.html.jinja:341
+#: templates/configure/tab_sources.html.jinja:398
 msgid "Choisissez le service :"
 msgstr "サービスを選択："
 
-#: templates/configure/tab_sources.html.jinja:341
+#: templates/configure/tab_sources.html.jinja:398
 msgid "et un nom court :"
 msgstr "短い名前："
 
-#: templates/configure/tab_sources.html.jinja:342
+#: templates/configure/tab_sources.html.jinja:399
 msgid ""
 "Sur un ordinateur (avec un navigateur), installez rclone "
 "(rclone.org/downloads) puis lancez :"
 msgstr "ブラウザのあるパソコンに rclone（rclone.org/downloads）をインストールし、次を実行します："
 
-#: templates/configure/tab_sources.html.jinja:344
+#: templates/configure/tab_sources.html.jinja:401
 #, python-brace-format
 msgid ""
 "Connectez-vous dans la page qui s'ouvre, puis copiez le texte affiché "
 "entre accolades { ... }."
 msgstr "開いたページでログインし、波かっこ { ... } の間に表示されたテキストをコピーします。"
 
-#: templates/configure/tab_sources.html.jinja:345
+#: templates/configure/tab_sources.html.jinja:402
 msgid "Collez-le ici :"
 msgstr "ここに貼り付けます："
 
-#: templates/configure/tab_sources.html.jinja:346
+#: templates/configure/tab_sources.html.jinja:403
 msgid "Ajouter le compte"
 msgstr "アカウントを追加"
 
-#: templates/configure/tab_sources.html.jinja:351
+#: templates/configure/tab_sources.html.jinja:408
 msgid "Dossiers à afficher"
 msgstr "表示するフォルダ"
 
-#: templates/configure/tab_sources.html.jinja:354
+#: templates/configure/tab_sources.html.jinja:411
 msgid ""
 "Retirer les photos du cloud une fois importées (elles restent dans sa "
 "corbeille 30 jours)"
 msgstr "インポート後に写真をクラウドから削除（ゴミ箱に 30 日間残ります）"
 
-#: templates/configure/tab_sources.html.jinja:355
-#: templates/configure/tab_sources.html.jinja:425
+#: templates/configure/tab_sources.html.jinja:412
+#: templates/configure/tab_sources.html.jinja:482
 msgid "Synchroniser automatiquement (toutes les heures)"
 msgstr "自動で同期（1 時間ごと）"
 
-#: templates/configure/tab_sources.html.jinja:356
-#: templates/configure/tab_sources.html.jinja:426
+#: templates/configure/tab_sources.html.jinja:413
+#: templates/configure/tab_sources.html.jinja:483
 msgid "Synchroniser maintenant"
 msgstr "今すぐ同期"
 
-#: templates/configure/tab_sources.html.jinja:363
+#: templates/configure/tab_sources.html.jinja:420
 msgid "Aucun compte"
 msgstr "アカウントなし"
 
-#: templates/configure/tab_sources.html.jinja:363
+#: templates/configure/tab_sources.html.jinja:420
 msgid "Lecture des dossiers…"
 msgstr "フォルダを読み込み中…"
 
-#: templates/configure/tab_sources.html.jinja:419
+#: templates/configure/tab_sources.html.jinja:476
 msgid ""
 "Sur l'iPhone : app Photos › album partagé › bouton Personnes › activez « "
 "Site web public », puis « Partager le lien ». Collez ce lien ici : aucun "
@@ -4586,50 +4659,50 @@ msgstr ""
 "「公開Webサイト」をオンにして「リンクを共有」。そのリンクをここに貼り付けてください。Apple "
 "IDは不要です。アルバムのキャプションは引き継がれ、アルバムから削除した写真はフレームからも消えます。"
 
-#: templates/configure/tab_sources.html.jinja:422
+#: templates/configure/tab_sources.html.jinja:479
 msgid "Ajouter l'album"
 msgstr "アルバムを追加"
 
-#: templates/configure/tab_sources.html.jinja:432
+#: templates/configure/tab_sources.html.jinja:489
 msgid "éléments"
 msgstr "件"
 
-#: templates/configure/tab_sources.html.jinja:432
+#: templates/configure/tab_sources.html.jinja:489
 msgid "Lecture de l'album…"
 msgstr "アルバムを読み込み中…"
 
-#: templates/configure/tab_sources.html.jinja:461
+#: templates/configure/tab_sources.html.jinja:518
 msgid "Photos par e-mail"
 msgstr "メールで写真を送る"
 
-#: templates/configure/tab_sources.html.jinja:462
+#: templates/configure/tab_sources.html.jinja:519
 msgid ""
 "Donnez au cadre sa propre adresse e-mail (par exemple une adresse Gmail "
 "créée pour lui) : la famille y envoie ses photos en pièce jointe et elles"
 " s'affichent toutes seules. L'objet du message devient la légende."
 msgstr "フレーム専用のメールアドレス（例：フレーム用に作ったGmail）を用意すると、家族が写真を添付して送るだけで自動的に表示されます。件名がキャプションになります。"
 
-#: templates/configure/tab_sources.html.jinja:464
+#: templates/configure/tab_sources.html.jinja:521
 msgid "Relever la boîte mail (toutes les 5 minutes)"
 msgstr "メールボックスを確認（5分ごと）"
 
-#: templates/configure/tab_sources.html.jinja:466
+#: templates/configure/tab_sources.html.jinja:523
 msgid "Adresse du cadre"
 msgstr "フレームのアドレス"
 
-#: templates/configure/tab_sources.html.jinja:467
+#: templates/configure/tab_sources.html.jinja:524
 msgid "Mot de passe d'application"
 msgstr "アプリパスワード"
 
-#: templates/configure/tab_sources.html.jinja:468
+#: templates/configure/tab_sources.html.jinja:525
 msgid "Serveur IMAP"
 msgstr "IMAPサーバー"
 
-#: templates/configure/tab_sources.html.jinja:469
+#: templates/configure/tab_sources.html.jinja:526
 msgid "Dossier"
 msgstr "フォルダー"
 
-#: templates/configure/tab_sources.html.jinja:471
+#: templates/configure/tab_sources.html.jinja:528
 msgid ""
 "Gmail : activez la validation en deux étapes, puis créez un mot de passe "
 "d'application sur myaccount.google.com/apppasswords. Votre mot de passe "
@@ -4638,43 +4711,43 @@ msgstr ""
 "Gmail：2段階認証を有効にしてから、myaccount.google.com/apppasswords "
 "でアプリパスワードを作成してください。通常のパスワードでは接続できません。"
 
-#: templates/configure/tab_sources.html.jinja:472
+#: templates/configure/tab_sources.html.jinja:529
 msgid "Expéditeurs de confiance (affichés directement)"
 msgstr "信頼できる送信者（そのまま表示）"
 
-#: templates/configure/tab_sources.html.jinja:474
+#: templates/configure/tab_sources.html.jinja:531
 msgid "Photos des autres expéditeurs :"
 msgstr "その他の送信者の写真："
 
-#: templates/configure/tab_sources.html.jinja:476
+#: templates/configure/tab_sources.html.jinja:533
 msgid "À valider (comme les photos d'invités)"
 msgstr "承認待ち（ゲストの写真と同様）"
 
-#: templates/configure/tab_sources.html.jinja:477
+#: templates/configure/tab_sources.html.jinja:534
 msgid "Ignorées"
 msgstr "無視する"
 
-#: templates/configure/tab_sources.html.jinja:482
+#: templates/configure/tab_sources.html.jinja:539
 msgid "Relever maintenant"
 msgstr "今すぐ確認"
 
-#: templates/configure/tab_sources.html.jinja:485
+#: templates/configure/tab_sources.html.jinja:542
 msgid "Seul un administrateur peut configurer la boîte mail du cadre."
 msgstr "フレームのメールボックスを設定できるのは管理者のみです。"
 
-#: templates/configure/tab_sources.html.jinja:497
+#: templates/configure/tab_sources.html.jinja:554
 msgid "Mot de passe enregistré (laisser vide pour le garder)"
 msgstr "パスワード保存済み（変更しない場合は空欄のまま）"
 
-#: templates/configure/tab_sources.html.jinja:497
+#: templates/configure/tab_sources.html.jinja:554
 msgid "Connexion…"
 msgstr "接続中…"
 
-#: templates/configure/tab_sources.html.jinja:529
+#: templates/configure/tab_sources.html.jinja:586
 msgid "Photos que le cadre ne peut pas retirer du Drive"
 msgstr "フォトフレームが Drive から削除できない写真"
 
-#: templates/configure/tab_sources.html.jinja:531
+#: templates/configure/tab_sources.html.jinja:588
 msgid ""
 "Ces photos ont été déposées dans le dossier par un autre compte Google : "
 "seul leur propriétaire peut les mettre à la corbeille. Elles restent "
@@ -4686,27 +4759,27 @@ msgstr ""
 "アカウントがフォルダに追加したもので、ゴミ箱に移動できるのは所有者だけです。写真はフォトフレームに表示されたままです。Drive "
 "から自分で削除する（権限がある場合）か所有者に依頼してから、「再試行」をクリックしてください。"
 
-#: templates/configure/tab_sources.html.jinja:533
+#: templates/configure/tab_sources.html.jinja:590
 msgid "Réessayer à la prochaine synchronisation"
 msgstr "次回の同期で再試行"
 
-#: templates/configure/tab_sources.html.jinja:539
+#: templates/configure/tab_sources.html.jinja:596
 msgid "Ouvrir dans Drive"
 msgstr "Drive で開く"
 
-#: templates/configure/tab_sources.html.jinja:539
+#: templates/configure/tab_sources.html.jinja:596
 msgid "(plus sur le cadre)"
 msgstr "（フォトフレームにはありません）"
 
-#: templates/configure/tab_sources.html.jinja:570
+#: templates/configure/tab_sources.html.jinja:627
 msgid "Options de démarrage"
 msgstr "ブートオプション"
 
-#: templates/configure/tab_sources.html.jinja:574
+#: templates/configure/tab_sources.html.jinja:631
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr "起動時の最初の自動インポートをスキップする"
 
-#: templates/configure/tab_sources.html.jinja:576
+#: templates/configure/tab_sources.html.jinja:633
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -5329,10 +5402,6 @@ msgstr "家族を招待（QR code、Telegram）"
 #: utils/health.py:149
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr "接続を保護（HTTPS）"
-
-#: utils/import_progress.py:13
-msgid "E-mail"
-msgstr "メール"
 
 #: utils/layout_engine.py:35
 msgid "Selon les réglages"
@@ -6250,6 +6319,47 @@ msgstr "エピソードが見つかりません。"
 msgid "Dernier épisode lancé : %(title)s"
 msgstr "最新エピソードを再生中：%(title)s"
 
+#: web/routes_people.py:52
+#, python-format
+msgid "Photos de %(name)s"
+msgstr "%(name)sの写真"
+
+#: web/routes_people.py:87
+msgid "Configurez d'abord Immich (adresse et clé API)."
+msgstr "まずImmich（アドレスとAPIキー）を設定してください。"
+
+#: web/routes_people.py:93
+#, python-format
+msgid "Immich ne répond pas : %(error)s"
+msgstr "Immichが応答しません：%(error)s"
+
+#: web/routes_people.py:94
+#, python-format
+msgid "%(count)s personne(s) trouvée(s) dans Immich."
+msgstr "Immichで%(count)s人見つかりました。"
+
+#: web/routes_people.py:101 web/routes_people.py:119
+msgid "Personne inconnue."
+msgstr "不明な人物です。"
+
+#: web/routes_people.py:108
+msgid "Import de toutes ses photos depuis Immich lancé."
+msgstr "Immichからこの人物の写真をすべてインポートしています。"
+
+#: web/routes_people.py:109
+msgid "Ses photos importées seront retirées du cadre."
+msgstr "インポートした写真はフレームから削除されます。"
+
+#: web/routes_people.py:121
+msgid "Playlist créée : elle se met à jour toute seule."
+msgstr "プレイリストを作成しました：自動で更新されます。"
+
+#: web/routes_people.py:124
+msgid ""
+"Aucune photo de cette personne sur le cadre pour l'instant : suivez-la "
+"pour importer ses photos."
+msgstr "この人物の写真はまだフレームにありません。フォローすると写真をインポートします。"
+
 #: web/routes_photos.py:272
 msgid "Tri automatique enregistré : appliqué au prochain tour du diaporama."
 msgstr "自動選別を保存しました。スライドショーの次の周回から適用されます。"
@@ -6275,7 +6385,7 @@ msgstr "写真リストが無効です。"
 msgid "Photo introuvable : %(name)s"
 msgstr "写真が見つかりません：%(name)s"
 
-#: web/routes_playlists.py:314
+#: web/routes_playlists.py:315
 msgid "Playlist non trouvée."
 msgstr "プレイリストが見つかりません。"
 

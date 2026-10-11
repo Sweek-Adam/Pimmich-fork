@@ -717,3 +717,17 @@ def email_worker():
             logger.warning(f"[E-mail] Relève : {e}")
             notify_sync_error("E-mail", str(e))
         time.sleep(max(1, int(config.get("email_check_minutes", 5))) * 60)
+
+
+def people_worker():
+    """Personnes d'Immich : mise à jour toutes les 6 heures (nouveaux visages nommés, nouvelles photos)."""
+    from web.routes_people import run_people_refresh
+    time.sleep(240)
+    while True:
+        config = load_config()
+        try:
+            if config.get("immich_url") and config.get("immich_token"):
+                run_people_refresh(config)
+        except Exception as e:
+            logger.warning(f"[Personnes] Mise à jour : {e}")
+        time.sleep(6 * 3600)

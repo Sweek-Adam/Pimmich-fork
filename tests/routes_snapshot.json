@@ -450,6 +450,36 @@
   ]
  ],
  [
+  "/api/people",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/people/<person_id>/follow",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/people/<person_id>/play",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/people/<person_id>/thumbnail",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/people/refresh",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/ping",
   [
    "GET"
