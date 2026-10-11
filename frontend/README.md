@@ -13,4 +13,4 @@ les API JSON du serveur Flask. L'ancienne interface (`/configure?ui=classic`) re
 - textes : écrits en français avec `t("…")` (paramètres `{n}`), traduits par les catalogues du projet (voir
   `procedure_trad.md`) et servis par `/api/i18n`.
 
-Toutes les pages de l'administration sont refaites.
+Toutes les pages de l'administration sont refaites ; quelques réglages ne sont encore que dans l'interface classique (un lien y mène depuis la page concernée).

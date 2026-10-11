@@ -2,21 +2,24 @@
 
 Here is a list of frequently asked questions to help you use and troubleshoot Pimmich.
 
+> This repository is a **personal fork** of [Pimmich](https://github.com/gotenash/pimmich) (purely personal use). The paths
+> below (e.g. `Screen > Display`) are those of the new admin interface menu.
+
 ---
 
 ### General Questions
 
 **Q: What is Pimmich?**
 
-**A:** Pimmich is software that turns a Raspberry Pi into a smart digital photo frame. It can display photos from an [Immich](https://immich.app/) server, a USB stick, a network share (Samba/Windows), a smartphone, or even via the Telegram messaging app.
+**A:** Pimmich is software that turns a Raspberry Pi into a smart digital photo frame. It can display photos and videos from an [Immich](https://immich.app/) server, Google Drive, Dropbox, OneDrive, an iCloud shared album, a USB drive, a network share (Samba/Windows), a smartphone, WhatsApp, or even through the Telegram messaging app.
 
 **Q: What do I need to use Pimmich?**
 
 **A:** You will need:
-- A Raspberry Pi (model 3, 4, or 5 recommended) with its power supply.
-- An SD card with Raspberry Pi OS (64-bit) installed.
+- A Raspberry Pi (model 3B+, 4, or 5 recommended) with its power supply.
+- An SD card with Raspberry Pi OS Trixie (64-bit) installed.
 - A screen.
-- An internet connection (Wi-Fi or Ethernet).
+- An Internet connection (Wi-Fi or Ethernet).
 
 ---
 
@@ -26,28 +29,41 @@ Here is a list of frequently asked questions to help you use and troubleshoot Pi
 
 **A:** The installation is designed to be simple:
 1. Clone the GitHub repository: `git clone https://github.com/Sweek-Adam/Pimmich-fork.git pimmich`
-2. Go into the directory: `cd pimmich`
+2. Go into the folder: `cd pimmich`
 3. Make the installation script executable: `chmod +x setup.sh`
 4. Run the script with administrator rights: `sudo ./setup.sh`
+5. Reboot: `sudo reboot`
+
 The script takes care of installing all dependencies and configuring the system for automatic startup.
 
-**Q: How do I access the configuration interface?**
+**Q: How do I access the admin interface?**
 
-**A:** Once the Raspberry Pi has started, open a web browser on another device (computer, smartphone) connected to the same network and simply type in your Raspberry Pi's IP address. For example: `http://192.168.1.25`. If you don't know the IP, it is often displayed on the frame's screen on the first boot or if no photos are found.
+**A:** Once the Raspberry Pi has started, open a web browser on another device (computer, smartphone) connected to the same network and type your Raspberry Pi's IP address, for example `http://192.168.1.25`: you are redirected to `https://`. The certificate is self-signed, so the browser shows a warning the first time. If you don't know the IP, it is shown on the frame's screen at first boot or when no photos are found.
+
+**Q: There are two interfaces: which one should I use?**
+
+**A:** After logging in, the new interface opens (`/app`): it works well on phones and has a dark mode, a search and a guided tour. The old interface is still reachable through the "Classic interface" link at the bottom of the menu; Pimmich remembers your choice. A few settings still only exist in the classic interface: a link on the relevant page leads straight to them.
 
 **Q: I forgot my password for the web interface. How can I reset it?**
 
-**A:** The initial password is stored in the `/boot/firmware/credentials.json` file. You can connect to your Raspberry Pi via SSH to read this file. If you changed it through the interface and forgot it, you will need to delete this file and reboot the Pi for it to generate a new one (warning: this will reset the user).
+**A:** If there is another administrator account, it can reset your password in `System > Accounts`. Otherwise, the easiest way is to re-run part of the installation script:
+1. Connect to your Raspberry Pi via SSH.
+2. Delete the old credentials file with the command: `sudo rm /boot/firmware/credentials.json`
+3. Go to the project folder: `cd pimmich`
+4. Re-run the installation script: `sudo ./setup.sh`
+
+The script is designed to be re-run safely. It will detect that the credentials file is missing and create a new one. The new password will be displayed directly in the terminal at the end of the process. Make sure to write it down!
 
 **Q: How do I get an Immich API Token?**
 
 **A:**
 1. Log in to your Immich web interface.
 2. Go to "Account Settings" (via your profile icon).
-3. In the "API Keys" section, click "Generate New API Key".
+3. In the "API Keys" section, click "Generate new API Key".
 4. Give it a name (e.g., "Pimmich") and copy the generated key.
+5. Paste it in `Photos > Sources`, Immich card.
 
-*Tip:* For better security, create a dedicated Immich user for the frame with limited access to a single shared album.
+*Tip:* For better security, create a dedicated Immich user for the frame with access limited to a single shared album.
 
 ---
 
@@ -57,17 +73,33 @@ The script takes care of installing all dependencies and configuring the system 
 
 **A:** It allows you and your guests to send photos directly to the frame.
 1.  **Create a bot** on Telegram by talking to `@BotFather`. It will give you a **Token**.
-2.  **Get your user ID** on Telegram by talking to a bot like `@userinfobot`.
-3.  Enter both pieces of information in the "Telegram" tab in Pimmich.
-4.  You can then create secure, temporary invitation links for your loved ones.
+2.  **Get your Telegram User ID** by talking to a bot like `@userinfobot`.
+3.  Enter these two pieces of information in `Sharing > Telegram`.
+4.  You can then create secure, temporary invitation links for your friends and family.
 
-**Q: What is the "Favorites" tab for?**
+**Q: How can friends and family send photos, messages or drawings?**
 
-**A:** By marking a photo as a favorite (using the star icon <i class="fas fa-star"></i> in the "Preview" tab), you increase its display frequency in the slideshow. You can adjust the "boost factor" in the "Display" tab to make them appear more or less often.
+**A:** Enable the guest page in `Sharing > Guests`. From the home Wi-Fi, they can send photos, write a message, draw with stickers, record a voice message or react to the photo on screen. A QR code can be shown on the frame to open it. For access from outside the home, a guest link goes through Tailscale (once: `~/pimmich/utils/enable_remote_guests.sh` on the Raspberry Pi). Guest photos go through `Sharing > To review`, except for trusted guests; messages and drawings are then kept in the guestbook.
+
+**Q: What is the "Favorites" section for?**
+
+**A:** By marking a photo as a favorite (using the star icon <i class="fas fa-star"></i> in `Photos > Library`), you increase how often it appears in the slideshow. You can adjust the "boost factor" in `Screen > Display` to make them appear more or less often.
 
 **Q: What is the "Postcard" effect?**
 
-**A:** It's a filter that adds a white border and a space for a caption (if you add one via the interface) to your photos, giving them a postcard look. Photos sent via Telegram use this effect by default for a more personal and warm touch.
+**A:** It's a filter that adds a white border and a space for a caption (if you add one through the interface) to your photos, giving them a postcard look. Photos sent via Telegram use this effect by default for a more personal and warm feel.
+
+**Q: Can the frame show only videos?**
+
+**A:** Yes: on the `Home` page, choose "Videos only". The frame then plays all videos one after another, without photos or special cards; switch back to "Photos and videos" for the usual slideshow.
+
+**Q: How do I show the time, weather, tides or calendar?**
+
+**A:** Everything is in `Screen > Clock & weather`: time and date (font, size, colours, background), weather (OpenWeatherMap key), tides (StormGlass key and harbour coordinates), Google calendar (secret iCal address) and countdowns. Time and weather stay visible on layouts (mosaic, wall...).
+
+**Q: Which voice commands are available?**
+
+**A:** Enable them in `System > Voice control`, then start every command with your wake word, for example: *"next photo"*, *"previous photo"*, *"pause"*, *"play"*, *"duration 15 seconds"*, *"play Vacation"*, *"show postcards"*, *"enable source USB"*, *"sleep mode"*, *"wake up the frame"*, *"shut down the frame"*, *"return to main slideshow"*.
 
 ---
 
@@ -75,22 +107,32 @@ The script takes care of installing all dependencies and configuring the system 
 
 **Q: I have a problem, where can I find help?**
 
-**A:** The **System** tab is the best place to start. It contains a **Logs** section.
-- `app.py` contains the logs for the web server (configuration interface).
-- `local_slideshow_stdout` and `local_slideshow_stderr` contain the logs for the slideshow itself. Errors will most often appear in `stderr`.
+**A:** `System > Logs` is the best place to start: each service (web server, slideshow, voice control...) has its own log, with an "Errors only" filter and a "Follow live" mode. `System > Maintenance` also shows the hardware status (temperature, power supply, SD card).
+
+**Q: My screen doesn't turn off completely, the backlight stays on. What can I do?**
+
+**A:** Some screens don't respond properly to the software sleep command (DPMS). First try HDMI-CEC (`Screen > Display`, if your TV supports it). Otherwise, the most reliable solution is a Wi-Fi smart plug that physically cuts the screen's power: enable the "Smart Plug" option in the `Display` tab of the classic interface and enter the URLs to turn your plug on and off. Many plugs (Tasmota, Shelly, Kasa, etc.) can be controlled with simple HTTP requests.
 
 **Q: Videos are not smooth or don't display. What should I do?**
 
-**A:** In the **Display** tab, try enabling the "**Enable hardware video decoding**" option. It is much more performant, especially on a Raspberry Pi. If it causes issues (black/blue screen after a video), disable it.
+**A:** In `Screen > Display`, try enabling "**Enable hardware video decoding**". It is much more efficient, especially on a Raspberry Pi. If it causes problems (black/blue screen after a video), disable it.
 
 **Q: The Wi-Fi won't connect, but Ethernet (cable) works. Why?**
 
-**A:** Sometimes, if an Ethernet cable is plugged in, the system gives it priority. In the **System** tab, you can try to temporarily disable the "**Wired Interface (eth0)**" to force the system to use Wi-Fi exclusively.
+**A:** Sometimes, if an Ethernet cable is plugged in, the system gives it priority. In `System > Network`, you can try temporarily disabling the "**Wired Interface (eth0)**" to force the system to use Wi-Fi only.
 
 **Q: How do I update Pimmich?**
 
-**A:** Go to the **System** tab and click the "**Check for updates**" button. Pimmich will download the latest version from GitHub and restart automatically.
+**A:** Go to `System > Maintenance` and click "**Start the update**". Pimmich downloads the latest version from GitHub and restarts; if the new version doesn't start, it automatically goes back to the previous one. A button also lets you go back to the previous version manually.
 
 **Q: I changed a setting, but nothing changes on the slideshow.**
 
-**A:** Some changes, especially those related to display (font, weather, etc.), require the slideshow to be restarted to take effect. You can do this from the **Actions** tab by clicking "Stop" and then "Start Slideshow". For more significant changes, a restart of the web application or the system (from the **System** tab) may be necessary.
+**A:** In the new interface, settings are saved automatically and the slideshow restarts by itself a few seconds after a series of changes (except during an import, so as not to interrupt it). If nothing changes, check `System > Logs`; as a last resort, restart the frame from `System > Maintenance`. A setting changed by mistake can be undone from the `Home` page ("Latest actions").
+
+**Q: How do I protect the SD card and back up the frame?**
+
+**A:** `System > Maintenance` creates a full, restorable backup (settings, accounts, messages...) and shows whether wear protection is active. To enable it, run once on the Raspberry Pi `sudo ~/pimmich/utils/enable_sd_protection.sh` then reboot: logs are then written to RAM (log2ram). Add `--zram` to also put swap in compressed memory.
+
+**Q: I flashed the image on a bigger SD card: how do I use all the space?**
+
+**A:** `System > Maintenance`, "SD card file system" card: it shows the partition and card sizes. If some space is unused, the "Extend file system" button prepares the resize, which completes at the next reboot (no data is deleted).

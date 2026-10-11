@@ -12,28 +12,21 @@ Pimmich is a Python application designed to turn a Raspberry Pi into a smart and
 
 <img src="static/pimmich_logo.png" alt="Pimmich Logo" width="300">
 
-<p align="center">
-  <a href="https://ko-fi.com/pimmich">
-    <img src="https://img.shields.io/badge/Support%20on%20Ko--fi-F16061?logo=kofi&logoColor=white" alt="Support Pimmich on Ko-fi">
-  </a>
-</p>
-
 ---
 
 ## 📖 Table of Contents
 
-- 🍴 What this fork adds
-- ✨ Main Features
-- 🧰 Technologies Used
-- 🚀 Installation
-- 🔧 Configuration
-- 🗣️ Voice Control
-- ❓ Troubleshooting (FAQ)
-- 🛣️ Roadmap
-  - June 2025
-  - July 2025
-  - August 2025
-- 💖 Credits
+- [🍴 What this fork adds](#-what-this-fork-adds)
+- [✨ Main Features](#-main-features)
+- [🧰 Technologies Used](#-technologies-used)
+- [🚀 Installation](#-installation)
+- [🔧 Configuration](#-configuration)
+- [🗣️ Voice Control](#️-voice-control)
+- [❓ Troubleshooting (FAQ)](#-troubleshooting-faq)
+- [🔑 Get your Immich API token](#-get-your-immich-api-token)
+- [🕰️ Original project history](#️-original-project-history)
+- [📜 Licenses](#-licenses)
+- [💖 Credits](#-credits)
 
 ---
 
@@ -87,7 +80,7 @@ Pimmich is packed with features to provide a complete and customizable experienc
 - **Format Handling:** Smart support for portrait photos (blurred background) and videos (with sound and optional hardware acceleration).
 
 #### ⚙️ **Interface & Control**
-- **Comprehensive Web Interface:** A local configuration page, password-protected and organized into thematic groups and tabs for an intuitive navigation.
+- **Comprehensive Web Interface:** A local, password-protected admin interface with a menu by section (Home, Photos, Screen, Sharing, System), also usable on a phone.
 - **Voice Control:** Control your frame with voice commands like *"Magic Frame, next photo"* or *"Magic Frame, play Vacation playlist"*.
 - **Content Management:**
     - **Playlists:** Create virtual albums, reorder photos with drag-and-drop, and launch themed slideshows with a dynamic title screen (photo jumble on a corkboard background).
@@ -110,11 +103,15 @@ Pimmich is packed with features to provide a complete and customizable experienc
 ## 🧰 Technologies Used
 
 - **Backend:** Python, Flask
-- **Frontend:** HTML, TailwindCSS, JavaScript
-- **Slideshow:** Pygame
-- **Image Processing:** Pillow
+- **Admin interface:** Vue 3, Vite, TypeScript (built into `static/app/`: the Raspberry Pi does not need Node); the classic interface (Jinja, TailwindCSS) is still available
+- **Slideshow:** Pygame (pygame-ce)
+- **Videos, music and voice messages:** mpv, PipeWire
+- **Image Processing:** Pillow, NumPy, OpenCV (YuNet face detection)
+- **Cloud sync:** rclone (Google Drive, Dropbox, OneDrive)
+- **Remote access:** Tailscale (guest link, HTTPS)
 - **Voice Control:** Picovoice Porcupine (wake word) & Vosk (recognition)
-- **Web Server:** NGINX (as a reverse proxy)
+- **Web Server:** NGINX (as a reverse proxy, HTTPS)
+- **Tests:** pytest, Playwright, GitHub Actions continuous integration
 
 ---
 
@@ -124,7 +121,7 @@ Pimmich is packed with features to provide a complete and customizable experienc
 
 #### ✅ Prerequisites
 
-- A Raspberry Pi (model 3B+, 4, or 5 recommended) with Raspberry Pi OS Desktop (64-bit).
+- A Raspberry Pi (model 3B+, 4, or 5 recommended) with **Raspberry Pi OS Trixie (Debian 13)** Desktop (64-bit) — **recommended version**.
 - An SD card, a power supply, a screen.
 - An Internet connection.
 
@@ -138,55 +135,115 @@ Pimmich is packed with features to provide a complete and customizable experienc
     ```
 
 2.  **Run the installation script**
-    This script installs all dependencies, configures the environment, and prepares for automatic startup.
-```bash
-chmod +x setup.sh
-sudo ./setup.sh
-```
+    This script installs all system and Python dependencies, configures the environment, and sets up automatic startup.
+    ```bash
+    chmod +x setup.sh
+    sudo ./setup.sh
+    ```
 
-This script installs system and Python dependencies, sets up the environment, and configures auto-start of the slideshow.
+3.  **Reboot**
+    Once the script is done, reboot so that all services start properly.
+    ```bash
+    sudo reboot
+    ```
 
 ---
 
-### 🔑 Get Your Immich API Token
+## 🔧 Configuration
 
-1. Log into your Immich web interface  
-2. Go to **Account Settings**
+### 1. First Login
 
-Click your profile icon (top-right), then choose **Account Settings**.
+- After rebooting, the frame shows a QR code and the Raspberry Pi's IP address.
+- Scan the QR code or open a browser on another device on the same network and type the IP address (e.g. `http://192.168.1.XX`): you are redirected to `https://`. The certificate is self-signed, so the browser shows a warning the first time (for an address without a warning, see `System > Maintenance > HTTPS without warnings (Tailscale)`).
+- The initial password is randomly generated during installation and stored in `/boot/firmware/credentials.json`. It is strongly recommended to change it in the interface (`System > Accounts`).
+- After logging in, the new interface opens (`/app`). The classic one is still reachable from the menu ("Classic interface") and the choice is remembered.
 
-3. Generate a new API key  
-In the **API Key** section, click **Generate new API Key** and give it a name (e.g., `PimmichFrame`).
+### 2. Sources
 
-⚠️ Once the token is shown, **copy it immediately** — you won’t be able to see it again. If lost, you’ll need to generate a new one.
+Everything happens in `Photos > Sources`:
+- **Immich:** you need your **server URL** (e.g. `http://192.168.1.YY:2283`), an **API token** (see [Get your Immich API token](#-get-your-immich-api-token)) and the **album name**.
+- **Google Drive, Dropbox, OneDrive, iCloud:** follow each card's wizard.
+- **Samba / Windows share:** fill in your network share details.
+- **USB, smartphone, WhatsApp:** use `Photos > Import`.
+
+### 3. Customization
+
+Explore the menu sections to customize your frame:
+- **Screen > Display:** durations, active hours, transitions, effects, videos-only mode...
+- **Screen > Clock & weather:** clock, date, weather, tides, calendar and countdowns.
+- **Screen > Layouts:** layouts (mosaic, wall, magazine...) and how often they appear.
+- **Photos > Sources:** tick the sources you want in the slideshow.
+- **Sharing > Guests:** open the guest page (photos, messages, drawings, voice messages, guestbook).
+
+---
+
+## 🗣️ Voice Control
+
+Pimmich supports voice control in **French** and **English**.
+
+To use a custom wake word ("Magic Frame"...), a manual step is required:
+1.  Create a free account on the Picovoice Console.
+2.  In the "Porcupine" section, create your custom wake word.
+3.  Download the model for the **Raspberry Pi** platform.
+4.  Rename the downloaded `.ppn` file (e.g. `magic-frame_raspberry-pi_en.ppn`).
+5.  Put this file in the `voice_models` folder at the root of the Pimmich project.
+6.  In Pimmich, go to `System > Voice control`, choose the language, enter your Picovoice "Access Key" and enable the service.
+
+### Available Commands
+
+Start every command with the wake word, then say for example:
+- *"next photo"*, *"previous photo"*, *"pause"*, *"play"*
+- *"duration 15 seconds"*
+- *"play Vacation"* (starts a playlist), *"show postcards"*
+- *"enable source USB"*, *"disable source Samba"*
+- *"sleep mode"*, *"wake up the frame"*, *"shut down the frame"*, *"return to main slideshow"*
+
+---
+
+## ❓ Troubleshooting (FAQ)
+
+For questions or problems, see the **Frequently Asked Questions ([FAQ_en.md](FAQ_en.md))**: solutions to common issues (Wi-Fi, display, etc.) and tips to get the most out of Pimmich.
+
+---
+
+## 🔑 Get your Immich API token
+
+1. Log into your Immich web interface.
+2. Click your profile icon (top-right), then choose **Account Settings**.
+3. In the **API Keys** section, click **Generate new API Key** and give it a name (e.g., `PimmichFrame`).
+
+⚠️ Once the token is shown, **copy it immediately** — you won't be able to see it again. If lost, you'll need to generate a new one. Never share it publicly: it gives full access to your Immich albums.
 
 🔒 We recommend creating a dedicated Immich account for the photo frame, with access to a single shared album.
 
 ---
 
-### Connect to Pimmich
+## 🕰️ Original project history
 
-From a web browser on another device, access:
-
-```
-http://<your-raspberry-ip>:5000
-```
+The version history of the original [Pimmich](https://github.com/gotenash/pimmich) project (Gadgetaulab), before this fork, is kept in the French [README.md](README.md#️-historique-du-projet-dorigine). What this fork adds is described in [🍴 What this fork adds](#-what-this-fork-adds).
 
 ---
 
-## ⚙️ Configuration Interface
+## 📜 Licenses
 
-### Slideshow Settings
-
-Here, you can set the display time per photo (minimum ~10s, due to background blur processing for portrait images) and define active hours for the slideshow.
-
-### Photo Import Settings
-
-Choose between importing from an Immich album or a USB stick, and manage downloaded files.
+- **Pimmich** is released under the **MIT** license (see [LICENSE](LICENSE)): © 2025 gotenash for the original project, © 2026 Sweek-Adam for this fork's changes. The original license notice is kept.
+- Third-party components shipped with the project keep their own license, whose text is provided next to each of them:
+    - Font Awesome Free (icons CC BY 4.0, fonts SIL OFL 1.1, code MIT): `static/vendor/fontawesome/LICENSE.txt`
+    - Leaflet (BSD-2-Clause), Chart.js, GLightbox, SortableJS, Tailwind CSS (MIT): `static/vendor/*/LICENSE*`
+    - Vue and Vue Router (MIT): notices kept in the built files of `static/app/`
+    - Caveat and Patrick Hand fonts (SIL OFL 1.1), Permanent Marker and Special Elite (Apache 2.0): `static/fonts/LICENSE-*.txt`
+    - Natural Earth country outlines (public domain) and OpenCV Zoo's YuNet face detector (MIT): see `resources/README.md`
+- The `System > Maintenance > About` page of the interface shows these credits and licenses.
 
 ---
 
 ## 💖 Credits
 
-- Original project: [Pimmich](https://github.com/gotenash/pimmich) by **Gadgetaulab** — many thanks for this great project! To support it, use [Ko-fi](https://ko-fi.com/pimmich).
+- Original project: [Pimmich](https://github.com/gotenash/pimmich) by **Gotenash** and **Shenron**, made at the [Gadgetaulab](https://www.gadgetaulab.fr) — many thanks for this great project!
 - This fork: additions and changes for personal use.
+
+<p align="center">
+  <a href="https://ko-fi.com/pimmich">
+    <img src="https://img.shields.io/badge/Support%20on%20Ko--fi-F16061?logo=kofi&logoColor=white" alt="Support Pimmich (original project) on Ko-fi">
+  </a>
+</p>

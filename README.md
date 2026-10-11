@@ -12,12 +12,6 @@ Pimmich est une application Python conçue pour transformer un Raspberry Pi en u
 
 <img src="static/pimmich_logo.png" alt="Pimmich Logo" width="300" style="display: block; margin: auto;">
 
-<p align="center">
-  <a href="https://ko-fi.com/pimmich">
-    <img src="https://img.shields.io/badge/Support%20on%20Ko--fi-F16061?logo=kofi&logoColor=white" alt="Support Pimmich on Ko-fi">
-  </a>
-</p>
-
 ---
 
 ## 📖 Table des matières
@@ -29,10 +23,9 @@ Pimmich est une application Python conçue pour transformer un Raspberry Pi en u
 - [🔧 Configuration](#-configuration)
 - [🗣️ Contrôle Vocal](#️-contrôle-vocal)
 - [❓ Dépannage (FAQ)](#-dépannage-faq)
-- [🛣️ Feuille de Route](#️-feuille-de-route)
-  - [Juin 2025](#-juin-2025-)
-  - [Juillet 2025](#-juillet-2025---version-actuelle)
-  - [Août 2025](#️-août-2025----sortie-prévue-le-15-aoüt)
+- [🔑 Récupérer le token Immich](#-récupérer-le-token-immich)
+- [🕰️ Historique du projet d'origine](#️-historique-du-projet-dorigine)
+- [📜 Licences](#-licences)
 - [💖 Crédits](#-crédits)
 
 ---
@@ -87,7 +80,7 @@ Pimmich est riche en fonctionnalités pour offrir une expérience complète et p
 - **Gestion des formats :** Prise en charge intelligente des photos portraits (fond flou) et des vidéos (avec son et accélération matérielle optionnelle).
 
 #### ⚙️ **Interface & Contrôle**
-- **Interface Web complète :** Une page de configuration locale, sécurisée par mot de passe et organisée en groupes et onglets thématiques pour une navigation intuitive.
+- **Interface Web complète :** Une interface d'administration locale, protégée par mot de passe, avec un menu par rubriques (Accueil, Photos, Écran, Partage, Système), utilisable aussi sur téléphone.
 - **Contrôle Vocal :** Pilotez votre cadre avec des commandes vocales comme *"Cadre Magique, photo suivante"* ou *"Cadre Magique, lance la playlist Vacances"*.
 - **Gestion de contenu :**
     - **Playlists :** Créez des albums virtuels, réorganisez les photos par glisser-déposer et lancez des diaporamas thématiques avec un écran de titre dynamique (pêle-mêle de photos sur fond en liège).
@@ -110,11 +103,15 @@ Pimmich est riche en fonctionnalités pour offrir une expérience complète et p
 ## 🧰 Technologies utilisées
 
 - **Backend :** Python, Flask
-- **Frontend :** HTML, TailwindCSS, JavaScript
-- **Diaporama :** Pygame
-- **Traitement d'image :** Pillow
+- **Interface d'administration :** Vue 3, Vite, TypeScript (compilée dans `static/app/` : le Raspberry Pi n'a pas besoin de Node) ; l'ancienne interface (Jinja, TailwindCSS) reste disponible
+- **Diaporama :** Pygame (pygame-ce)
+- **Vidéos, musique et messages vocaux :** mpv, PipeWire
+- **Traitement d'image :** Pillow, NumPy, OpenCV (détection de visages YuNet)
+- **Synchronisation cloud :** rclone (Google Drive, Dropbox, OneDrive)
+- **Accès à distance :** Tailscale (lien invité, HTTPS)
 - **Contrôle Vocal :** Picovoice Porcupine (mot-clé) & Vosk (reconnaissance)
-- **Serveur Web :** NGINX (en tant que reverse proxy)
+- **Serveur Web :** NGINX (en tant que reverse proxy, HTTPS)
+- **Tests :** pytest, Playwright, intégration continue GitHub Actions
 
 ---
 
@@ -157,24 +154,29 @@ Pimmich est riche en fonctionnalités pour offrir une expérience complète et p
 ### 1. Première Connexion
 
 - Au redémarrage, le cadre affichera un QR Code et l'adresse IP du Raspberry Pi.
-- Scannez le QR Code ou ouvrez un navigateur sur un autre appareil (PC, smartphone) sur le même réseau et entrez l'adresse IP (ex: `http://192.168.1.XX`).
-- Le mot de passe initial est généré aléatoirement lors de l'installation et est stocké dans le fichier `/boot/firmware/credentials.json`. Il est fortement recommandé de le changer via l'interface (onglet `Système` > `Sécurité`).
+- Scannez le QR Code ou ouvrez un navigateur sur un autre appareil (PC, smartphone) sur le même réseau et entrez l'adresse IP (ex: `http://192.168.1.XX`) : vous êtes redirigé vers `https://`. Le certificat est auto-signé, le navigateur affiche donc un avertissement la première fois (pour une adresse sans avertissement, voir `Système > Maintenance > HTTPS sans avertissement (Tailscale)`).
+- Le mot de passe initial est généré aléatoirement lors de l'installation et est stocké dans le fichier `/boot/firmware/credentials.json`. Il est fortement recommandé de le changer via l'interface (`Système > Comptes`).
+- Après la connexion, la nouvelle interface s'ouvre (`/app`). L'ancienne reste accessible depuis le menu (« Interface classique ») et le choix est mémorisé.
 
 ### 2. Configuration des Sources
 
+Tout se passe dans `Photos > Sources` :
 - **Immich :** Pour connecter votre serveur Immich, vous aurez besoin de :
     1.  **L'URL de votre serveur** (ex: `http://192.168.1.YY:2283`).
-    2.  **Un Token API :** Dans Immich, allez dans `Paramètres du compte` > `Clés API` > `Générer une nouvelle clé`.
-    3.  **Le nom technique de l'album** que vous souhaitez afficher.
+    2.  **Un Token API** (voir [Récupérer le token Immich](#-récupérer-le-token-immich)).
+    3.  **Le nom de l'album** que vous souhaitez afficher.
+- **Google Drive, Dropbox, OneDrive, iCloud :** Suivez l'assistant de chaque carte.
 - **Samba / Partage Windows :** Renseignez les informations de votre partage réseau.
-- **USB :** Branchez une clé USB et utilisez le bouton d'import dans l'onglet `Actions`.
+- **USB, smartphone, WhatsApp :** Utilisez `Photos > Importer`.
 
 ### 3. Personnalisation
 
-Explorez les différents onglets pour personnaliser votre cadre :
-- **Diaporama > Affichage :** Réglez les durées, les transitions, les effets...
-- **Diaporama > Horloge & Infos :** Activez et configurez l'affichage de l'heure, de la météo ou des marées.
-- **Contenu > Sources :** Cochez les sources que vous souhaitez voir dans le diaporama.
+Explorez les rubriques du menu pour personnaliser votre cadre :
+- **Écran > Affichage :** Réglez les durées, les heures d'activité, les transitions, les effets, le mode vidéos uniquement...
+- **Écran > Horloge & météo :** Activez et configurez l'heure, la date, la météo, les marées, l'agenda et les comptes à rebours.
+- **Écran > Dispositions :** Choisissez les mises en page (mosaïque, mur, magazine...) et leur fréquence.
+- **Photos > Sources :** Cochez les sources que vous souhaitez voir dans le diaporama.
+- **Partage > Invités :** Ouvrez la page invités (photos, messages, dessins, messages vocaux, livre d'or).
 
 ---
 
@@ -188,7 +190,7 @@ Pour utiliser un mot-clé personnalisé ("Cadre Magique", "Magic Frame"...), une
 3.  Téléchargez le modèle pour la plateforme **Raspberry Pi**.
 4.  Renommez le fichier `.ppn` téléchargé en `cadre-magique_raspberry-pi.ppn` (pour le français) ou `magic-frame_raspberry-pi_en.ppn` (pour l'anglais, exemple).
 5.  Placez ce fichier dans le dossier `voice_models` à la racine du projet Pimmich.
-6.  Dans l'interface Pimmich, allez dans l'onglet `Vocal`, sélectionnez la langue, entrez votre "Access Key" Picovoice et activez le service.
+6.  Dans l'interface Pimmich, allez dans `Système > Commande vocale`, sélectionnez la langue, entrez votre "Access Key" Picovoice et activez le service.
 
 ### Commandes Disponibles
 
@@ -223,30 +225,13 @@ Pour toute question ou problème, consultez notre **Foire Aux Questions (FAQ.md)
 
 ---
 
-## 🛣️ Feuille de Route
+## 🕰️ Historique du projet d'origine
 
-#*
-- **Projet du :** Gadgetaulab
-
-
-> 🎂 **SORTIE IMMINENTE : Version Anniversaire - 27 Mai**
-> Cette mise à jour majeure marque une étape clé dans le développement de Pimmich :
-> - 🚀 **Mise à jour fiabilisée :** Le moteur de mise à jour via l'interface est désormais 100% opérationnel et sécurisé.
-> - 📅 **Boost Anniversaire :** Revivez vos souvenirs avec une priorité d'affichage pour les photos prises à la même date les années passées.
-> - 🌍 **Métadonnées & Drapeaux :** Affichage personnalisable du lieu, de la date et du drapeau du pays d'origine.
-> - 📊 **Monitoring Avancé :** Nouveaux graphiques temps réel pour surveiller la santé de votre Raspberry Pi.
-> - 🔌 **Domotique :** Support des prises connectées pour une extinction totale de l'écran.
-> - 🖱️ **Playlists UX :** Organisation des albums par glisser-déposer.
-> - ⚡ **Hardware Accel :** Lecture vidéo optimisée pour Pi 4 et Pi 5.
-> - 🔘 **Bouton Physique :** Support GPIO pour le contrôle matériel de la veille.
-
----
-
-### 🗓️ Historique des versions
+Les versions ci-dessous sont celles du projet [Pimmich](https://github.com/gotenash/pimmich) d'origine (Gadgetaulab), avant ce fork. Les ajouts du fork sont décrits dans [🍴 Ajouts de ce fork](#-ajouts-de-ce-fork).
 
 > 🗓️ À partir de juin 2025 — Une version majeure chaque mois
 
-## ✅ Août 2026 - Mises à jour de Stabilité, Performance & Compatibilité Pi 2/3/4/5
+### ✅ Août 2026 - Mises à jour de Stabilité, Performance & Compatibilité Pi 2/3/4/5
 - 🚀 **Mise à jour asynchrone & Keep-Alives (anti-timeout) :** Toutes les tâches lourdes (Samba, Immich, photo/video prep) s'exécutent en arrière-plan avec pings réseau toutes les 10s pour éviter toute déconnexion de l'interface d'administration.
 - 🔁 **Synchronisation intelligente incrémentale :** Seuls les nouveaux médias et les suppressions sont synchronisés, préservant la bande passante, le CPU et l'usure de la carte SD.
 - ⚡ **Optimisation de la mémoire GPU (CMA) :** Technique innovante de réduction de fenêtre 1x1 masquée (`pygame.HIDDEN`) pour libérer 100% de la mémoire GPU lors de la lecture vidéo `mpv`, résolvant les crashs et lenteurs sous Wayland/Sway.
@@ -258,29 +243,36 @@ Pour toute question ou problème, consultez notre **Foire Aux Questions (FAQ.md)
 - 📦 **Dépendances optionnelles :** Support HEIF/HEIC et commandes vocales optionnels pour garantir le succès de l'installation sur toutes les architectures système, géré à la volée dans `setup.sh`.
 - 🇫🇷 **Langue française native :** Configuration et génération automatique de la locale `fr_FR.UTF-8` lors de l'installation pour des dates affichées en français natif.
 
-## ✅ Mai 2026
+### ✅ Mai 2026 – Version Anniversaire (27 mai)
+- 🚀 **Mise à jour fiabilisée :** Le moteur de mise à jour via l'interface est désormais 100% opérationnel et sécurisé.
+- 📅 **Boost Anniversaire :** Revivez vos souvenirs avec une priorité d'affichage pour les photos prises à la même date les années passées.
+- 🌍 **Métadonnées & Drapeaux :** Affichage personnalisable du lieu, de la date et du drapeau du pays d'origine.
+- 📊 **Monitoring Avancé :** Nouveaux graphiques temps réel pour surveiller la santé de votre Raspberry Pi.
+- 🔌 **Domotique :** Support des prises connectées pour une extinction totale de l'écran.
+- 🖱️ **Playlists UX :** Organisation des albums par glisser-déposer.
+- ⚡ **Hardware Accel :** Lecture vidéo optimisée pour Pi 4 et Pi 5.
+- 🔘 **Bouton Physique :** Support GPIO pour le contrôle matériel de la veille.
 - 🚀 **Compatibilité Debian Trixie (Debian 13) :**
     - ✅ Migration complète vers **Python 3.13**.
     - ✅ Optimisation du rendu vidéo pour **Sway/Wayland** (DMABUF et V4L2-copy).
     - ✅ Support natif du Raspberry Pi 3 sur les nouveaux noyaux Linux.
     - ✅ Sécurisation non-interactive des commandes `sudo` via règles ciblées.
 
-## ✅ Septembre 2025 - (Sortie prévue le 15 septembre)
+### ✅ Septembre 2025
 - 🎨 **Refonte de l'Interface :** Nouvelle navigation par groupes et onglets pour une expérience plus claire et intuitive.
 - 🎵 **Gestion de Playlists Améliorée :**
     - ✅ Nouvel écran de lancement dynamique avec un pêle-mêle de photos sur un fond en liège.
     - ✅ Créez des albums virtuels, visualisez leur contenu, renommez-les et lancez des diaporamas thématiques.
 - 🔘 **Bouton Physique :**
     - ✅ Ajout du support pour un bouton physique (via GPIO) pour mettre en veille et réveiller le cadre.
-- �️ **Contrôle Vocal :**
+- 🗣️ **Contrôle Vocal :**
     - ✅ Ajout de la commande vocale ("Cadre Magique") et intégration profonde avec le système.
 - 🚀 **Optimisations et Stabilité :**
     - ✅ Amélioration de la réactivité de l'onglet "Système" grâce à une lecture optimisée des logs.
     - ✅ Fiabilisation du script de mise à jour pour éviter les blocages.
     - ✅ Nombreuses corrections de bugs pour une meilleure stabilité générale.
 
-## 🛠️✅ Août 2025  - (Version précédente)
-�
+### ✅ Août 2025
 - ✅ Gestion des vidéos
 -  Ajout d'une vignette lors de lecture de la vidéo (onglet Actions)
 - ✅ Ajout de la fonction "Carte Postle" par telegram
@@ -297,8 +289,7 @@ Pour toute question ou problème, consultez notre **Foire Aux Questions (FAQ.md)
     - ✅ Heure début d'affichage
     - ✅ Effacement des logs dans l'onglet système sans problème de container
 
-
-## ✅ Juillet 2025  - Version actuelle
+### ✅ Juillet 2025
 
 - ✅ 🧭 Ajout de la configuration Wi-Fi depuis l’interface Web  
 - ✅ 🗂️ Réorganisation de la page de configuration en onglets  
@@ -318,27 +309,25 @@ Pour toute question ou problème, consultez notre **Foire Aux Questions (FAQ.md)
 - ✅ Ajout des logs dans l'onglet Système
 - ✅ Ajout des stats du Raspberry (température, stockage Ram, charge processeur)
 
-## ✅ Juin 2025 –
+### ✅ Juin 2025
 
 - ✅ Aperçus des photos avec suppression possible  
 - ✅ Véritable mise en veille de l’écran (gestion via `wlr-randr`)  
 - ✅ Paramètre de hauteur utile de l’écran (% d’écran utilisé)  
 - ✅ Correction de l’orientation via EXIF et préparation des images  
 
-
-
  
-## 💡 Idées pour les versions suivantes
+### 💡 Idées du projet d'origine pour la suite
 
 - 📱 Création d’une APK Android pour contrôler le cadre 
 - Pimmich télécomande
 - Pimmich Android TV
 - Import Google Photos
-- Import PhotoPrism    
+- Import PhotoPrism
 
+---
 
-
-### Récupérer la Clef API (Token Immich)
+## 🔑 Récupérer le token Immich
 
 🧭 1. Se connecter à l'interface web d’Immich
 
@@ -380,28 +369,28 @@ Ne partage jamais ce token publiquement. Il donne un accès total à tes albums 
 
 Le mieux est de créer un compte Immich réservé au cadre photo avec accès à un seul album que tu pourras alimenter à partir d'un autre compte.
 
-### Se connecter à Pimmich
+---
 
-Dans un navigateur taper l'adresse ip du raspberry : http://xxx.xxx.xxx.xxx:5000
+## 📜 Licences
 
-![Menu Clef API](https://drive.google.com/uc?id=1VynC6umiYqPaln_kAb_DDd990YUkbT88)
-
-
-### Page de configuration
-
-## configuration du diaporama
-
-Dans ce cadre vous pourrez régler le temps d'affichage de chaque photo (pour l'instant on ne peut descendre en dessous de 10 secondes surement du temps de traitement des photos porttrait pour générer le fond flou). Vous pouvez aussi défoinir les heures où le diaporama fonctionnera.
-
-![Menu Clef API](https://drive.google.com/uc?id=1t_7MCKNNfHfTi5Pjc7_hDxbDzU18UvO7)
-
-## configuration de l'import des photos
-
-![Menu Clef API](https://drive.google.com/uc?id=1AwUgYbzGcdskt99q32VlaOc7jM303Tbd)
+- **Pimmich** est distribué sous licence **MIT** (voir [LICENSE](LICENSE)) : © 2025 gotenash pour le projet d'origine, © 2026 Sweek-Adam pour les modifications de ce fork. La notice de licence d'origine est conservée.
+- Les composants tiers livrés avec le projet gardent leur propre licence, dont le texte est fourni à côté de chacun :
+    - Font Awesome Free (icônes CC BY 4.0, polices SIL OFL 1.1, code MIT) : `static/vendor/fontawesome/LICENSE.txt`
+    - Leaflet (BSD-2-Clause), Chart.js, GLightbox, SortableJS, Tailwind CSS (MIT) : `static/vendor/*/LICENSE*`
+    - Vue et Vue Router (MIT) : notices conservées dans les fichiers compilés de `static/app/`
+    - Polices Caveat et Patrick Hand (SIL OFL 1.1), Permanent Marker et Special Elite (Apache 2.0) : `static/fonts/LICENSE-*.txt`
+    - Contours des pays Natural Earth (domaine public) et détecteur de visages YuNet d'OpenCV Zoo (MIT) : voir `resources/README.md`
+- La page `Système > Maintenance > À propos` de l'interface reprend ces crédits et licences.
 
 ---
 
 ## 💖 Crédits
 
-- Projet d'origine : [Pimmich](https://github.com/gotenash/pimmich) par **Gadgetaulab** — un grand merci pour ce super projet ! Pour le soutenir, c'est par [Ko-fi](https://ko-fi.com/pimmich).
+- Projet d'origine : [Pimmich](https://github.com/gotenash/pimmich) par **Gotenash** et **Shenron**, réalisé dans le cadre du [Gadgetaulab](https://www.gadgetaulab.fr) — un grand merci pour ce super projet !
 - Ce fork : ajouts et modifications pour un usage personnel.
+
+<p align="center">
+  <a href="https://ko-fi.com/pimmich">
+    <img src="https://img.shields.io/badge/Support%20on%20Ko--fi-F16061?logo=kofi&logoColor=white" alt="Soutenir Pimmich (projet d'origine) sur Ko-fi">
+  </a>
+</p>
