@@ -230,10 +230,11 @@
         @media (max-width: 380px) { .dr-mode span { display: none; } }
         .dr-actions { display: flex; gap: .3rem; }
         .dr-icon { width: 36px; height: 36px; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; font-size: 1.15rem; color: #111827; }
-        .dr-panel { margin-top: .5rem; display: flex; align-items: center; gap: .6rem; }
+        .dr-panel { margin-top: .5rem; display: flex; align-items: center; gap: .6rem; min-width: 0; max-width: 100%; }
         .dr-panel[hidden], .dr-hint[hidden] { display: none; }
-        .dr-scroll { display: flex; gap: .4rem; overflow-x: auto; padding: 4px 2px; flex: 1; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-        .dr-scroll::-webkit-scrollbar { display: none; }
+        .dr-scroll { display: flex; gap: .4rem; overflow-x: auto; padding: 4px 2px; flex: 1 1 0; min-width: 0; scrollbar-width: thin; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+        .dr-scroll::-webkit-scrollbar { height: 4px; }
+        .dr-scroll::-webkit-scrollbar-thumb { background: #c7c9d6; border-radius: 4px; }
         .dr-color { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #d1d5db; }
         .dr-color.on { box-shadow: 0 0 0 3px #2563eb; }
         .dr-sizes { display: flex; gap: .3rem; flex: none; }

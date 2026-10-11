@@ -51,6 +51,7 @@ p { margin: 0; }
 .brand { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
 .brand img { height: 56px; width: auto; }
 .brand h1 { font-size: 1.6rem; font-weight: 800; }
+.page > *, .card > * { min-width: 0; }  /* une rangée qui défile ne doit jamais élargir la carte */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); padding: 20px; display: grid; gap: 12px; }
 .card-title { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 700; }
 .card-title .emoji { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; font-size: 1.3rem; flex: none; }
