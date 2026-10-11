@@ -160,7 +160,7 @@ else
     fi
 
     echo "Installation des bibliothèques pour le contrôle vocal..."
-    if ! pip install vosk sounddevice numpy thefuzz python-Levenshtein pygame num2words; then
+    if ! pip install vosk sounddevice numpy thefuzz python-Levenshtein num2words; then
         echo "❌ Échec de l'installation des bibliothèques de contrôle vocal !"
         exit 1
     fi
@@ -244,7 +244,8 @@ echo "✅ Arborescence des dossiers créée."
 
 # Corriger les permissions même si script lancé avec sudo
 REAL_USER=$(logname)
-sudo chown -R "$REAL_USER:$REAL_USER" static logs cache config
+# venv compris : les mises à jour depuis l'interface (lancées par l'utilisateur) y installent les nouvelles dépendances
+sudo chown -R "$REAL_USER:$REAL_USER" static logs cache config venv
 chmod -R u+rwX static logs cache config
 
 echo "=== [8/12] Création du fichier d'identification sécurisé ==="

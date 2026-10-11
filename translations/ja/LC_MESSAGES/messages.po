@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 19:36+0200\n"
+"POT-Creation-Date: 2026-10-11 20:22+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -5337,6 +5337,10 @@ msgstr "ペアリング済みのスマートフォンはありません。"
 #: templates/configure/tab_son.html.jinja:157
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "これらの機能を有効にするには、Raspberry Pi で一度だけ次を実行してください："
+
+#: frontend/src/views/SoundView.vue:194
+msgid "(sans sudo : il demande le mot de passe quand il en a besoin)"
+msgstr "（sudo なしで。必要なときにパスワードを尋ねます）"
 
 #: frontend/src/views/SourcesView.vue:18
 #: templates/configure/tab_sources.html.jinja:4

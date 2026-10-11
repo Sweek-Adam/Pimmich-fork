@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 19:36+0200\n"
+"POT-Creation-Date: 2026-10-11 20:22+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -5280,6 +5280,10 @@ msgstr ""
 #: frontend/src/views/SoundView.vue:194
 #: templates/configure/tab_son.html.jinja:157
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
+msgstr ""
+
+#: frontend/src/views/SoundView.vue:194
+msgid "(sans sudo : il demande le mot de passe quand il en a besoin)"
 msgstr ""
 
 #: frontend/src/views/SourcesView.vue:18

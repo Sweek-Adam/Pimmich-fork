@@ -77,8 +77,10 @@ source venv/bin/activate
 # Rediriger la sortie de pip vers un fichier de log pour le débogage
 # et vérifier le code de retour manuellement pour ne pas bloquer le redémarrage.
 # pygame remplacé par pygame-ce (même « import pygame ») : les deux ne peuvent pas coexister
+# (ils partagent le dossier « pygame » : après avoir retiré l'ancien, pygame-ce est réinstallé pour retrouver ses fichiers)
 if grep -q "^pygame-ce" requirements.txt && pip show pygame > /dev/null 2>&1; then
     pip uninstall -y pygame >> logs/update_pip.log 2>&1 || true
+    pip install --force-reinstall --no-deps pygame-ce >> logs/update_pip.log 2>&1 || true
 fi
 if ! pip install --timeout 60 -r requirements.txt > logs/update_pip.log 2>&1; then
     echo "STEP:WARNING:--- AVERTISSEMENT: La mise à jour des dépendances a échoué. ---"

@@ -191,7 +191,7 @@ onUnmounted(() => window.clearInterval(timer));
       </div>
     </div>
     <p v-if="sound && !(sound.receivers.spotify && sound.receivers.airplay && sound.receivers.bluetooth)" class="small muted">
-      {{ t("Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :") }} <code>sudo ~/pimmich/utils/enable_music_receivers.sh</code></p>
+      {{ t("Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :") }} <code>~/pimmich/utils/enable_music_receivers.sh</code> {{ t("(sans sudo : il demande le mot de passe quand il en a besoin)") }}</p>
   </section>
 </template>
 
