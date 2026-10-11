@@ -1,6 +1,7 @@
 """Dessins d'invités (à main levée, avec autocollants) : envoi, rendu plein écran, nettoyage."""
 import io
 
+import pytest
 from PIL import Image, ImageDraw
 
 from utils import messages_manager as mm
@@ -12,6 +13,15 @@ def drawing_png(size=(1280, 720)):
     buffer = io.BytesIO()
     image.save(buffer, "PNG")
     return buffer.getvalue()
+
+
+@pytest.fixture(autouse=True)
+def guest_messages_on():
+    from utils.config_manager import load_config, save_config
+    original = dict(load_config())
+    save_config(dict(original, guest_messages_enabled=True))
+    yield
+    save_config(original)
 
 
 def test_guest_drawing_is_shown_like_a_message(client, sandbox, monkeypatch, tmp_path):
