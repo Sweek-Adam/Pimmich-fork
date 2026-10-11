@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 21:35+0200\n"
+"POT-Creation-Date: 2026-10-11 21:39+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -3973,7 +3973,7 @@ msgstr "Communication error with the server."
 #: frontend/src/views/MaintenanceView.vue:95
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
 #: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:825
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:835
 msgid "Aucun fichier sélectionné."
 msgstr "No files selected."
 
@@ -9881,7 +9881,7 @@ msgstr ""
 "First allow Funnel on your Tailscale account (“Enable” button on the page"
 " that opens), then turn “Away from home” on again."
 
-#: web/routes_guests.py:558 web/routes_system.py:922
+#: web/routes_guests.py:558 web/routes_system.py:932
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale refused to publish: %(detail)s"
@@ -9942,7 +9942,7 @@ msgstr "Music not found."
 msgid "Volume invalide."
 msgstr "Invalid volume."
 
-#: web/routes_home.py:210 web/routes_system.py:723
+#: web/routes_home.py:210 web/routes_system.py:733
 msgid "Réglage invalide."
 msgstr "Invalid setting."
 
@@ -10677,7 +10677,7 @@ msgstr "Invalid share address (e.g. //nas.local/photos)."
 msgid "Type de support inconnu."
 msgstr "Unknown storage type."
 
-#: web/routes_storage.py:57 web/routes_system.py:854
+#: web/routes_storage.py:57 web/routes_system.py:864
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "Cannot use this storage: %(error)s"
@@ -10691,7 +10691,7 @@ msgstr "Storage “%(name)s” added."
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "Photos are still on this storage: move them first."
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:849
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:859
 msgid "Support inconnu."
 msgstr "Unknown storage."
 
@@ -10712,7 +10712,7 @@ msgstr "A move is already in progress."
 msgid "Déplacement lancé : les photos restent affichées pendant la copie."
 msgstr "Move started: photos stay on screen during the copy."
 
-#: web/routes_system.py:84
+#: web/routes_system.py:93
 msgid ""
 "Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération"
 " annulée."
@@ -10720,7 +10720,12 @@ msgstr ""
 "No desktop environment detected (Raspberry Pi OS Lite?). Operation "
 "cancelled."
 
-#: web/routes_system.py:127
+#: web/routes_system.py:122
+#, python-format
+msgid "Passage au bureau impossible : %(error)s"
+msgstr "Could not switch to the desktop: %(error)s"
+
+#: web/routes_system.py:137
 msgid ""
 "Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera"
 " plus automatiquement."
@@ -10728,11 +10733,11 @@ msgstr ""
 "The system is rebooting to the Raspberry Pi OS desktop. Pimmich will no "
 "longer start automatically."
 
-#: web/routes_system.py:148
+#: web/routes_system.py:158
 msgid "Le Raspberry Pi redémarre en mode cadre photo Pimmich."
 msgstr "The Raspberry Pi is restarting in Pimmich photo frame mode."
 
-#: web/routes_system.py:182
+#: web/routes_system.py:192
 msgid ""
 "L'application web redémarre... La page sera inaccessible pendant quelques"
 " instants."
@@ -10740,16 +10745,16 @@ msgstr ""
 "The web application is rebooting... the page will be inaccessible for a "
 "few seconds."
 
-#: web/routes_system.py:203
+#: web/routes_system.py:213
 msgid "Le SSID et le pays Wi-Fi sont obligatoires."
 msgstr "SSID and Wi-Fi country are mandatory."
 
-#: web/routes_system.py:212
+#: web/routes_system.py:222
 #, python-format
 msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
 msgstr "Error applying Wi-Fi settings: %(error)s"
 
-#: web/routes_system.py:213
+#: web/routes_system.py:223
 msgid ""
 "Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
 " la connexion. Veuillez patienter une minute et vérifier le statut."
@@ -10757,15 +10762,15 @@ msgstr ""
 "Wi-Fi settings applied. The network service has been restarted to force "
 "connection. Please wait a minute and check the status."
 
-#: web/routes_system.py:295
+#: web/routes_system.py:305
 msgid "Le fichier de configuration n'a pas été trouvé."
 msgstr "The configuration file was not found."
 
-#: web/routes_system.py:304 web/routes_system.py:309
+#: web/routes_system.py:314 web/routes_system.py:319
 msgid "Aucun fichier de sauvegarde sélectionné."
 msgstr "No backup file selected."
 
-#: web/routes_system.py:319
+#: web/routes_system.py:329
 msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
@@ -10773,106 +10778,106 @@ msgstr ""
 "Configuration successfully restored! The slideshow will restart to apply "
 "the changes."
 
-#: web/routes_system.py:321
+#: web/routes_system.py:331
 msgid ""
 "Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
 "valide."
 msgstr "Invalid or corrupted backup file. This is not a valid JSON file."
 
-#: web/routes_system.py:323
+#: web/routes_system.py:333
 #, python-format
 msgid "Erreur lors de la restauration : %(error)s"
 msgstr "Restore error: %(error)s"
 
-#: web/routes_system.py:402
+#: web/routes_system.py:412
 msgid "name_key"
 msgstr "name_key"
 
-#: web/routes_system.py:538
+#: web/routes_system.py:548
 msgid "Aucune version précédente connue."
 msgstr "No previous version known."
 
-#: web/routes_system.py:546
+#: web/routes_system.py:556
 msgid ""
 "Retour à la version précédente en cours : Pimmich redémarre dans quelques"
 " minutes."
 msgstr "Going back to the previous version: Pimmich will restart in a few minutes."
 
-#: web/routes_system.py:614
+#: web/routes_system.py:624
 msgid "La carte SD est déjà utilisée en entier : rien à agrandir."
 msgstr "The SD card is already fully used: nothing to extend."
 
-#: web/routes_system.py:621
+#: web/routes_system.py:631
 msgid "L'agrandissement n'a pas pu être programmé."
 msgstr "The resize could not be scheduled."
 
-#: web/routes_system.py:622
+#: web/routes_system.py:632
 msgid ""
 "C'est programmé : la partition sera agrandie au prochain redémarrage du "
 "cadre."
 msgstr "Scheduled: the partition will be extended at the frame's next reboot."
 
-#: web/routes_system.py:725
+#: web/routes_system.py:735
 msgid "Réglages enregistrés."
 msgstr "Settings saved."
 
-#: web/routes_system.py:734
+#: web/routes_system.py:744
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr "Backup failed: %(error)s"
 
-#: web/routes_system.py:735
+#: web/routes_system.py:745
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr "Backup uploaded to Google Drive: %(name)s"
 
-#: web/routes_system.py:744
+#: web/routes_system.py:754
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr "Restore failed: %(error)s"
 
-#: web/routes_system.py:748
+#: web/routes_system.py:758
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr "Backup %(name)s restored (%(count)s files). Reload the page."
 
-#: web/routes_system.py:775
+#: web/routes_system.py:785
 msgid "Orientation inconnue."
 msgstr "Unknown orientation."
 
-#: web/routes_system.py:780
+#: web/routes_system.py:790
 msgid ""
 "Aucune mesure du capteur : vérifiez son branchement, et que le cadre est "
 "debout."
 msgstr "No sensor reading: check its wiring, and that the frame is standing up."
 
-#: web/routes_system.py:788
+#: web/routes_system.py:798
 msgid "Position mémorisée."
 msgstr "Position recorded."
 
-#: web/routes_system.py:835 web/routes_system.py:895
+#: web/routes_system.py:845 web/routes_system.py:905
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr "%(count)s files restored. The frame resumes with the backup."
 
-#: web/routes_system.py:851
+#: web/routes_system.py:861
 msgid "Une sauvegarde est déjà en cours."
 msgstr "A backup is already running."
 
-#: web/routes_system.py:862
+#: web/routes_system.py:872
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr "Backup complete: %(count)s files."
 
-#: web/routes_system.py:872
+#: web/routes_system.py:882
 msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
 msgstr "Backup started: it can take a while with many photos."
 
-#: web/routes_system.py:883 web/routes_system.py:886
+#: web/routes_system.py:893 web/routes_system.py:896
 msgid "Sauvegarde introuvable."
 msgstr "Backup not found."
 
-#: web/routes_system.py:921
+#: web/routes_system.py:931
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
@@ -10880,7 +10885,7 @@ msgstr ""
 "First allow HTTPS certificates on your Tailscale account (page that "
 "opens), then try again."
 
-#: web/routes_system.py:923
+#: web/routes_system.py:933
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
@@ -10888,7 +10893,7 @@ msgstr ""
 "The admin is reachable over HTTPS, without warnings, from your Tailscale "
 "devices."
 
-#: web/routes_system.py:924
+#: web/routes_system.py:934
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr "HTTPS access via Tailscale removed."
 

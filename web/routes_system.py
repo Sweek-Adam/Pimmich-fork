@@ -71,6 +71,15 @@ def trigger_reboot():
         return jsonify({"success": False, "message": str(e)}), 500
 
 
+def _write_home_file(path, text):
+    """Réécrit un fichier du dossier personnel, même s'il appartient à root (créé par « sudo ./setup.sh ») :
+    fichier temporaire puis remplacement, permis dans un dossier qui nous appartient."""
+    tmp = f"{path}.pimmich-tmp"
+    with open(tmp, 'w') as f:
+        f.write(text)
+    os.replace(tmp, path)
+
+
 @app.route('/api/switch_to_desktop', methods=['POST'])
 @admin_required
 def switch_to_desktop():
@@ -94,9 +103,8 @@ def switch_to_desktop():
                 r'if \[\[ -z \$DISPLAY \]\] && \[\[ \$\(tty\) = /dev/tty1 \]\]; then\s*\n\s*exec sway\s*\n\s*fi\s*\n?',
                 '', original_profile)
             if new_profile != original_profile:
-                shutil.copy2(bash_profile, bash_profile + '.pimmich.bak')
-                with open(bash_profile, 'w') as f:
-                    f.write(new_profile)
+                _write_home_file(bash_profile + '.pimmich.bak', original_profile)
+                _write_home_file(bash_profile, new_profile)
 
         # 2. Démarrage en mode bureau avec auto-login (B4)
         result = subprocess.run(['sudo', '-n', 'raspi-config', 'nonint', 'do_boot_behaviour', 'B4'],
@@ -106,10 +114,12 @@ def switch_to_desktop():
     except Exception as e:
         # Restaurer le .bash_profile pour ne pas laisser le système dans un état intermédiaire
         if original_profile is not None:
-            with open(bash_profile, 'w') as f:
-                f.write(original_profile)
+            try:
+                _write_home_file(bash_profile, original_profile)
+            except OSError as restore_error:
+                logger.error(f"Restauration de {bash_profile} impossible : {restore_error}")
         logger.error(f"Erreur lors du passage au bureau Raspberry Pi OS : {e}")
-        return jsonify({"success": False, "message": str(e)}), 500
+        return jsonify({"success": False, "message": _("Passage au bureau impossible : %(error)s", error=str(e))}), 500
 
     # Raccourci « Revenir au cadre Pimmich » dans le menu et sur le bureau, pour revenir facilement
     try:

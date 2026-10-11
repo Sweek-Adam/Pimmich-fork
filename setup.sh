@@ -298,6 +298,8 @@ fi
 chmod +x utils/switch_to_pimmich.sh
 sudo -u "$REAL_USER" HOME="$USER_HOME" venv/bin/python utils/desktop_launcher.py || echo "⚠️ Raccourci de retour au cadre non créé."
 
+chown "$REAL_USER:$REAL_USER" "$BASH_PROFILE"  # créé avec sudo : rendu à l'utilisateur (le passage au bureau le modifie)
+
 echo "=== [11/12] Configuration du lancement automatique de Pimmich dans Sway ==="
 SWAY_CONFIG_DIR="$USER_HOME/.config/sway"
 SWAY_CONFIG_FILE="$SWAY_CONFIG_DIR/config"
@@ -323,6 +325,8 @@ if ! grep -q 'app_id="mpv"' "$SWAY_CONFIG_FILE" 2>/dev/null; then
     echo 'for_window [app_id="mpv"] floating enable, border none, fullscreen enable' >> "$SWAY_CONFIG_FILE"
     echo 'for_window [class="python3"] floating enable, border none, fullscreen enable' >> "$SWAY_CONFIG_FILE"
 fi
+
+chown -R "$REAL_USER:$REAL_USER" "$SWAY_CONFIG_DIR"  # créé avec sudo : rendu à l'utilisateur (mises à jour)
 
 echo "=== [12/12] Installation terminée ==="
 echo "✅ Installation terminée. Redémarrez pour lancer automatiquement Sway + Pimmich."

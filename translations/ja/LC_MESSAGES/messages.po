@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 21:35+0200\n"
+"POT-Creation-Date: 2026-10-11 21:39+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -3873,7 +3873,7 @@ msgstr "サーバーとの通信エラー。"
 #: frontend/src/views/MaintenanceView.vue:95
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
 #: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:825
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:835
 msgid "Aucun fichier sélectionné."
 msgstr "ファイルが選択されていません。"
 
@@ -9590,7 +9590,7 @@ msgid ""
 "sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
 msgstr "まずTailscaleアカウントでFunnelを許可し（開いたページの「Enable」ボタン）、「外出先から」をもう一度オンにしてください。"
 
-#: web/routes_guests.py:558 web/routes_system.py:922
+#: web/routes_guests.py:558 web/routes_system.py:932
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale が公開を拒否しました：%(detail)s"
@@ -9651,7 +9651,7 @@ msgstr "音楽が見つかりません。"
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:210 web/routes_system.py:723
+#: web/routes_home.py:210 web/routes_system.py:733
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
@@ -10374,7 +10374,7 @@ msgstr "共有アドレスが無効です（例：//nas.local/photos）。"
 msgid "Type de support inconnu."
 msgstr "不明な保存先の種類です。"
 
-#: web/routes_storage.py:57 web/routes_system.py:854
+#: web/routes_storage.py:57 web/routes_system.py:864
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "この保存先は使えません：%(error)s"
@@ -10388,7 +10388,7 @@ msgstr "保存先「%(name)s」を追加しました。"
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "この保存先にまだ写真があります。先に移動してください。"
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:849
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:859
 msgid "Support inconnu."
 msgstr "不明な保存先です。"
 
@@ -10409,169 +10409,174 @@ msgstr "すでに移動中です。"
 msgid "Déplacement lancé : les photos restent affichées pendant la copie."
 msgstr "移動を開始しました。コピー中も写真は表示され続けます。"
 
-#: web/routes_system.py:84
+#: web/routes_system.py:93
 msgid ""
 "Aucun environnement de bureau détecté (Raspberry Pi OS Lite ?). Opération"
 " annulée."
 msgstr "デスクトップ環境が検出されません（Raspberry Pi OS Lite?）。操作を中止しました。"
 
-#: web/routes_system.py:127
+#: web/routes_system.py:122
+#, python-format
+msgid "Passage au bureau impossible : %(error)s"
+msgstr "デスクトップに切り替えられませんでした：%(error)s"
+
+#: web/routes_system.py:137
 msgid ""
 "Le système redémarre sur le bureau Raspberry Pi OS. Pimmich ne se lancera"
 " plus automatiquement."
 msgstr "システムを Raspberry Pi OS のデスクトップで再起動します。Pimmich は自動起動しなくなります。"
 
-#: web/routes_system.py:148
+#: web/routes_system.py:158
 msgid "Le Raspberry Pi redémarre en mode cadre photo Pimmich."
 msgstr "Raspberry Pi を Pimmich フォトフレームモードで再起動しています。"
 
-#: web/routes_system.py:182
+#: web/routes_system.py:192
 msgid ""
 "L'application web redémarre... La page sera inaccessible pendant quelques"
 " instants."
 msgstr "Web アプリケーションが再起動します...ページはしばらくの間アクセスできなくなります。"
 
-#: web/routes_system.py:203
+#: web/routes_system.py:213
 msgid "Le SSID et le pays Wi-Fi sont obligatoires."
 msgstr "SSIDとWi-Fiの国は必須です。"
 
-#: web/routes_system.py:212
+#: web/routes_system.py:222
 #, python-format
 msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
 msgstr "Wi-Fi 設定の適用中にエラーが発生しました: %(error)s"
 
-#: web/routes_system.py:213
+#: web/routes_system.py:223
 msgid ""
 "Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
 " la connexion. Veuillez patienter une minute et vérifier le statut."
 msgstr "Wi-Fi設定が適用されました。接続を強制するためにネットワーク サービスが再起動されました。しばらく待ってからステータスを確認してください。"
 
-#: web/routes_system.py:295
+#: web/routes_system.py:305
 msgid "Le fichier de configuration n'a pas été trouvé."
 msgstr "設定ファイルが見つかりませんでした。"
 
-#: web/routes_system.py:304 web/routes_system.py:309
+#: web/routes_system.py:314 web/routes_system.py:319
 msgid "Aucun fichier de sauvegarde sélectionné."
 msgstr "保存ファイルが選択されていません。"
 
-#: web/routes_system.py:319
+#: web/routes_system.py:329
 msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
 msgstr "設定が正常に復元されました。変更を適用するためにスライドショーが再開されます。"
 
-#: web/routes_system.py:321
+#: web/routes_system.py:331
 msgid ""
 "Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
 "valide."
 msgstr "保存ファイルが無効または破損しています。これは有効な JSON ファイルではありません。"
 
-#: web/routes_system.py:323
+#: web/routes_system.py:333
 #, python-format
 msgid "Erreur lors de la restauration : %(error)s"
 msgstr "復元中のエラー: %(error)s"
 
-#: web/routes_system.py:402
+#: web/routes_system.py:412
 msgid "name_key"
 msgstr "名前キー"
 
-#: web/routes_system.py:538
+#: web/routes_system.py:548
 msgid "Aucune version précédente connue."
 msgstr "前のバージョンが見つかりません。"
 
-#: web/routes_system.py:546
+#: web/routes_system.py:556
 msgid ""
 "Retour à la version précédente en cours : Pimmich redémarre dans quelques"
 " minutes."
 msgstr "前のバージョンに戻しています。数分後に Pimmich が再起動します。"
 
-#: web/routes_system.py:614
+#: web/routes_system.py:624
 msgid "La carte SD est déjà utilisée en entier : rien à agrandir."
 msgstr "SD カードはすでにすべて使われています。拡張の必要はありません。"
 
-#: web/routes_system.py:621
+#: web/routes_system.py:631
 msgid "L'agrandissement n'a pas pu être programmé."
 msgstr "拡張を予約できませんでした。"
 
-#: web/routes_system.py:622
+#: web/routes_system.py:632
 msgid ""
 "C'est programmé : la partition sera agrandie au prochain redémarrage du "
 "cadre."
 msgstr "予約しました。次回フォトフレームを再起動するとパーティションが拡張されます。"
 
-#: web/routes_system.py:725
+#: web/routes_system.py:735
 msgid "Réglages enregistrés."
 msgstr "設定を保存しました。"
 
-#: web/routes_system.py:734
+#: web/routes_system.py:744
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr "バックアップできません：%(error)s"
 
-#: web/routes_system.py:735
+#: web/routes_system.py:745
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr "バックアップを Google Drive に送信しました：%(name)s"
 
-#: web/routes_system.py:744
+#: web/routes_system.py:754
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr "復元できません：%(error)s"
 
-#: web/routes_system.py:748
+#: web/routes_system.py:758
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr "バックアップ %(name)s を復元しました（%(count)s 個のファイル）。ページを再読み込みしてください。"
 
-#: web/routes_system.py:775
+#: web/routes_system.py:785
 msgid "Orientation inconnue."
 msgstr "不明な向きです。"
 
-#: web/routes_system.py:780
+#: web/routes_system.py:790
 msgid ""
 "Aucune mesure du capteur : vérifiez son branchement, et que le cadre est "
 "debout."
 msgstr "センサーの測定値がありません。配線と、フレームが立っているかを確認してください。"
 
-#: web/routes_system.py:788
+#: web/routes_system.py:798
 msgid "Position mémorisée."
 msgstr "向きを記憶しました。"
 
-#: web/routes_system.py:835 web/routes_system.py:895
+#: web/routes_system.py:845 web/routes_system.py:905
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr "%(count)s 個のファイルを復元しました。フレームはバックアップの内容で再開します。"
 
-#: web/routes_system.py:851
+#: web/routes_system.py:861
 msgid "Une sauvegarde est déjà en cours."
 msgstr "バックアップはすでに実行中です。"
 
-#: web/routes_system.py:862
+#: web/routes_system.py:872
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr "バックアップ完了：%(count)s ファイル。"
 
-#: web/routes_system.py:872
+#: web/routes_system.py:882
 msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
 msgstr "バックアップを開始しました。写真が多いと時間がかかります。"
 
-#: web/routes_system.py:883 web/routes_system.py:886
+#: web/routes_system.py:893 web/routes_system.py:896
 msgid "Sauvegarde introuvable."
 msgstr "バックアップが見つかりません。"
 
-#: web/routes_system.py:921
+#: web/routes_system.py:931
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
 msgstr "まず Tailscale アカウントで HTTPS 証明書を許可し（開いたページ）、もう一度お試しください。"
 
-#: web/routes_system.py:923
+#: web/routes_system.py:933
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
 msgstr "Tailscale の端末から、警告なしで HTTPS で管理画面にアクセスできます。"
 
-#: web/routes_system.py:924
+#: web/routes_system.py:934
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr "Tailscale 経由の HTTPS アクセスを解除しました。"
 

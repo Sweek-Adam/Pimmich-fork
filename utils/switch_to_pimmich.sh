@@ -29,11 +29,13 @@ ask "$1" || exit 0
 # 1. Lancement automatique de Sway sur la console tty1 (comme setup.sh, étape 10)
 PROFILE="$HOME/.bash_profile"
 if ! grep -q 'exec sway' "$PROFILE" 2> /dev/null; then
-    {
-        echo 'if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then'
-        echo '  exec sway'
-        echo 'fi'
-    } >> "$PROFILE"
+    # copie puis remplacement : fonctionne même si le fichier appartient à root (créé par « sudo ./setup.sh »)
+    TMP="$PROFILE.pimmich-tmp"
+    { cat "$PROFILE" 2> /dev/null
+      echo 'if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then'
+      echo '  exec sway'
+      echo 'fi'
+    } > "$TMP" && mv -f "$TMP" "$PROFILE" || fail "Impossible de modifier $PROFILE."
 fi
 
 # 2. Démarrage en console avec connexion automatique (setup.sh, étape 9)
