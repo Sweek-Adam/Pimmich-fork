@@ -64,6 +64,98 @@
                 </div>
             </fieldset>
 
+            <fieldset class="mt-6" id="full-backup">
+                <legend><h3><i class="fas fa-archive mr-2"></i>{{ _("Sauvegarde complète") }}</h3></legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, dessins et vocaux, livre d'or, légendes, réactions, musique et historique. Restaurable en un clic, sur ce cadre ou sur une nouvelle installation.") }}</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 border rounded-lg bg-gray-50/50">
+                        <h4 class="font-semibold text-gray-800 mb-2">{{ _("Sans les photos") }}</h4>
+                        <a href="/api/backup/full" class="system-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center mb-3">
+                            <i class="fas fa-download mr-2"></i>{{ _("Télécharger") }}</a>
+                        <input type="file" id="full-backup-file" accept=".zip"
+                            class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none mb-2">
+                        <button type="button" id="full-backup-upload" class="system-button bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                            <i class="fas fa-upload mr-2"></i>{{ _("Restaurer ce fichier") }}</button>
+                    </div>
+                    <div class="p-4 border rounded-lg bg-gray-50/50">
+                        <h4 class="font-semibold text-gray-800 mb-2">{{ _("Avec les photos, sur un disque USB ou un NAS") }}</h4>
+                        <p id="full-backup-nostorage" class="text-sm text-gray-600 hidden">{{ _("Ajoutez d'abord un support dans « Stockage des photos » ci-dessous.") }}</p>
+                        <div id="full-backup-storage-row" class="flex flex-wrap gap-2 items-center">
+                            <select id="full-backup-storage" class="border rounded px-2 py-1"></select>
+                            <button type="button" id="full-backup-start" class="system-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                <i class="fas fa-save mr-2"></i>{{ _("Sauvegarder maintenant") }}</button>
+                        </div>
+                        <p id="full-backup-progress" class="text-sm mt-2"></p>
+                    </div>
+                </div>
+                <div id="full-backup-list" class="mt-3 text-sm"></div>
+                <p id="full-backup-status" class="mt-2 text-sm"></p>
+                <script>
+                    (() => {
+                        const $ = id => document.getElementById(id);
+                        const say = (text, ok) => { $("full-backup-status").textContent = text || ""; $("full-backup-status").className = "mt-2 text-sm " + (ok === false ? "text-red-600" : "text-green-700"); };
+                        const size = n => n > 1e9 ? (n / 1e9).toFixed(1) + " Go" : Math.max(1, Math.round(n / 1e6)) + " Mo";
+                        let timer = null;
+                        async function refresh() {
+                            let data;
+                            try { data = await (await fetch("/api/backup/full/storage")).json(); } catch (e) { return; }
+                            const select = $("full-backup-storage"), current = select.value;
+                            select.innerHTML = "";
+                            (data.storages || []).forEach(s => select.add(new Option(s.label, s.id)));
+                            if (current) select.value = current;
+                            const none = !(data.storages || []).length;
+                            $("full-backup-nostorage").classList.toggle("hidden", !none);
+                            $("full-backup-storage-row").classList.toggle("hidden", none);
+                            const st = data.status || {};
+                            $("full-backup-start").disabled = !!st.running;
+                            $("full-backup-progress").textContent = st.running
+                                ? "{{ _('Sauvegarde en cours : {done} / {total} fichiers') }}".replace("{done}", st.done || 0).replace("{total}", st.total || "…")
+                                : (st.message || "");
+                            $("full-backup-progress").className = "text-sm mt-2 " + (st.ok === false ? "text-red-600" : "");
+                            const list = $("full-backup-list");
+                            list.innerHTML = "";
+                            (data.backups || []).forEach(b => {
+                                const row = document.createElement("div");
+                                row.className = "flex flex-wrap items-center gap-2 py-1 border-b";
+                                const label = document.createElement("span");
+                                label.className = "flex-1";
+                                label.textContent = `${b.storage_label} · ${(b.created || b.name).replace("T", " ")} · ${size(b.size)}` + (b.photos ? " · {{ _('avec photos') }}" : "");
+                                const btn = document.createElement("button");
+                                btn.type = "button";
+                                btn.className = "system-button bg-orange-500 hover:bg-orange-600 text-white py-1 px-3 rounded";
+                                btn.textContent = "{{ _('Restaurer') }}";
+                                btn.onclick = () => restore("/api/backup/full/storage/restore", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({storage: b.storage, name: b.name})});
+                                row.append(label, btn);
+                                list.append(row);
+                            });
+                            clearTimeout(timer);
+                            if (st.running) timer = setTimeout(refresh, 3000);
+                        }
+                        async function restore(url, options) {
+                            if (!confirm("{{ _('Remplacer les réglages, comptes, messages et playlists actuels par cette sauvegarde ?') }}")) return;
+                            say("{{ _('Restauration en cours...') }}");
+                            try {
+                                const data = await (await fetch(url, options)).json();
+                                say(data.message, !!data.success);
+                            } catch (e) { say("{{ _('Erreur de communication avec le serveur.') }}", false); }
+                        }
+                        $("full-backup-upload").addEventListener("click", () => {
+                            const file = $("full-backup-file").files[0];
+                            if (!file) { say("{{ _('Aucun fichier sélectionné.') }}", false); return; }
+                            const form = new FormData();
+                            form.append("backup", file);
+                            restore("/api/backup/full/restore", {method: "POST", body: form});
+                        });
+                        $("full-backup-start").addEventListener("click", async () => {
+                            const data = await (await fetch("/api/backup/full/storage", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({storage: $("full-backup-storage").value})})).json();
+                            say(data.message, !!data.success);
+                            refresh();
+                        });
+                        refresh();
+                    })();
+                </script>
+            </fieldset>
+
             <fieldset class="mt-6">
                 <legend>
                     <h3>{{ _("Espace disque") }}</h3>

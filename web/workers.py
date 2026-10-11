@@ -924,3 +924,30 @@ def stats_worker():
             stats.collect()
         except Exception as e:
             logger.debug(f"[Stats] {e}")
+
+
+def reliability_worker():
+    """Surveillance : relance le diaporama s'il se fige ; fait tourner les journaux une fois par heure."""
+    from utils import reliability
+    restarts, last_rotation = [], 0
+    time.sleep(240)
+    while True:
+        config = load_config()
+        try:
+            if is_slideshow_running() and reliability.frozen(config.get("display_duration", 10), started=reliability.slideshow_started()):
+                logger.warning("[Surveillance] Le diaporama ne répond plus : relance.")
+                restarts = [t for t in restarts if time.time() - t < 3600] + [time.time()]
+                reliability.beat(force=True)  # nouveau délai avant la prochaine vérification
+                restart_slideshow_process()
+                if len(restarts) >= 3:
+                    from utils import notify
+                    notify.send(config, "health", _("Diaporama instable"), _("Il a dû être relancé %(count)s fois en une heure.", count=len(restarts)),
+                                key="watchdog", repeat_after=3600)
+            if time.time() - last_rotation > 3600:
+                last_rotation = time.time()
+                rotated = reliability.rotate_logs(BASE_DIR / "logs")
+                if rotated:
+                    logger.info(f"[Journaux] Rotation : {', '.join(rotated)}")
+        except Exception as e:
+            logger.warning(f"[Surveillance] {e}")
+        time.sleep(60)

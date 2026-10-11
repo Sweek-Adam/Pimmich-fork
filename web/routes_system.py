@@ -716,3 +716,110 @@ def orientation_calibrate_api():
     state.update(calibration=calibration, orientation=position)
     screen_rotation.save_state(state)
     return jsonify({"success": True, "message": _("Position mémorisée.")})
+
+
+# --- Sauvegarde complète (restaurable en un clic) ---
+
+_full_backup = {"running": False}
+
+
+def _backups_on_storages():
+    from utils import full_backup, storage
+    found = []
+    for item in load_config().get("storages") or []:
+        folder = storage.mountpoint(item) / "pimmich" / "sauvegardes"
+        for path in sorted(folder.glob("pimmich-complet-*.zip"), reverse=True) if folder.is_dir() else []:
+            meta = full_backup.info(path) or {}
+            found.append({"storage": item["id"], "storage_label": item.get("label", item["id"]), "name": path.name,
+                          "created": meta.get("created"), "photos": meta.get("photos"), "size": path.stat().st_size})
+    return found
+
+
+@app.route('/api/backup/full', methods=['GET'])
+@admin_required
+def full_backup_download_api():
+    """Sauvegarde complète sans les photos, à télécharger."""
+    from utils import full_backup
+    target = BASE_DIR / "cache" / "pimmich-complet.zip"
+    full_backup.build(target)
+    name = f"pimmich-complet-{datetime.now():%Y-%m-%d}.zip"
+    return send_from_directory(str(target.parent), target.name, as_attachment=True, download_name=name, max_age=0)
+
+
+@app.route('/api/backup/full/restore', methods=['POST'])
+@admin_required
+def full_backup_restore_api():
+    from utils import full_backup
+    file = request.files.get("backup")
+    if not file:
+        return jsonify({"success": False, "message": _("Aucun fichier sélectionné.")}), 400
+    target = BASE_DIR / "cache" / "restauration.zip"
+    file.save(target)
+    try:
+        count = full_backup.restore(target)
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    finally:
+        target.unlink(missing_ok=True)
+    restart_slideshow_process()
+    return jsonify({"success": True, "message": _("%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde.", count=count)})
+
+
+@app.route('/api/backup/full/storage', methods=['GET', 'POST'])
+@admin_required
+def full_backup_storage_api():
+    """Sauvegarde complète AVEC les photos, enregistrée sur un disque USB ou un NAS (et liste de ces sauvegardes)."""
+    from utils import full_backup, storage
+    if request.method == 'GET':
+        return jsonify({"success": True, "backups": _backups_on_storages(), "status": dict(_full_backup),
+                        "storages": [{"id": s["id"], "label": s.get("label", s["id"])} for s in load_config().get("storages") or []]})
+    storage_id = (request.get_json(silent=True) or {}).get("storage")
+    item = next((s for s in load_config().get("storages") or [] if s.get("id") == storage_id), None)
+    if item is None:
+        return jsonify({"success": False, "message": _("Support inconnu.")}), 404
+    if _full_backup.get("running"):
+        return jsonify({"success": False, "message": _("Une sauvegarde est déjà en cours.")}), 409
+    ok, message = storage.mount(item)
+    if not ok:
+        return jsonify({"success": False, "message": _("Impossible d'utiliser ce support : %(error)s", error=message)}), 400
+    target = storage.mountpoint(item) / "pimmich" / "sauvegardes" / f"pimmich-complet-{datetime.now():%Y-%m-%d-%H%M}.zip"
+    _full_backup.clear()
+    _full_backup.update(running=True, done=0, total=0)
+
+    def run():
+        try:
+            count, size = full_backup.build(target, with_photos=True, progress=lambda d, t: _full_backup.update(done=d, total=t))
+            _full_backup.update(message=_("Sauvegarde terminée : %(count)s fichiers.", count=count), ok=True)
+        except Exception as e:
+            _full_backup.update(message=str(e)[:300], ok=False)
+        finally:
+            _full_backup["running"] = False
+
+    def run_in_context():
+        with app.app_context():
+            run()
+    threading.Thread(target=run_in_context, daemon=True, name="full-backup").start()
+    return jsonify({"success": True, "message": _("Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos.")})
+
+
+@app.route('/api/backup/full/storage/restore', methods=['POST'])
+@admin_required
+def full_backup_storage_restore_api():
+    from utils import full_backup, storage
+    data = request.get_json(silent=True) or {}
+    item = next((s for s in load_config().get("storages") or [] if s.get("id") == data.get("storage")), None)
+    name = str(data.get("name") or "")
+    if item is None or Path(name).name != name or not name.startswith("pimmich-complet-"):
+        return jsonify({"success": False, "message": _("Sauvegarde introuvable.")}), 404
+    path = storage.mountpoint(item) / "pimmich" / "sauvegardes" / name
+    if not path.is_file():
+        return jsonify({"success": False, "message": _("Sauvegarde introuvable.")}), 404
+    try:
+        count = full_backup.restore(path)
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    if (full_backup.info(path) or {}).get("photos"):  # photos d'origine restaurées : on refait les photos préparées
+        from web.workers import reprepare_all_sources
+        threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
+    restart_slideshow_process()
+    return jsonify({"success": True, "message": _("%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde.", count=count)})

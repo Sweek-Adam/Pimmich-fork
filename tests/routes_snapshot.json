@@ -48,6 +48,31 @@
   ]
  ],
  [
+  "/api/backup/full",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/backup/full/restore",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/backup/full/storage",
+  [
+   "GET",
+   "POST"
+  ]
+ ],
+ [
+  "/api/backup/full/storage/restore",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/backup_settings",
   [
    "GET"

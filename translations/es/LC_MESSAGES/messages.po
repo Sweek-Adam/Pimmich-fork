@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 11:04+0200\n"
+"POT-Creation-Date: 2026-10-11 11:10+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1472
+#: local_slideshow.py:1483
 msgid "Photos & messages"
 msgstr "Fotos y mensajes"
 
-#: local_slideshow.py:1682
+#: local_slideshow.py:1693
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "Hace %(num)d año"
 
-#: local_slideshow.py:1682
+#: local_slideshow.py:1693
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "Hace %(num)d años"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "enero"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "febrero"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "marzo"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "abril"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "mayo"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "junio"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "julio"
 
-#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1694 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "agosto"
 
-#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1695 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "septiembre"
 
-#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1695 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "octubre"
 
-#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1695 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "noviembre"
 
-#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1695 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "diciembre"
 
-#: local_slideshow.py:1927
+#: local_slideshow.py:1938
 msgid "Données de marée non disponibles"
 msgstr "Datos de mareas no disponibles"
 
-#: local_slideshow.py:2010
+#: local_slideshow.py:2021
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Aniversario) Hace %(num)d año"
 
-#: local_slideshow.py:2010
+#: local_slideshow.py:2021
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:3195
+#: local_slideshow.py:3207
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:3196
+#: local_slideshow.py:3208
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:3197
+#: local_slideshow.py:3209
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:3198
+#: local_slideshow.py:3210
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3199
+#: local_slideshow.py:3211
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:3225
+#: local_slideshow.py:3237
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -377,7 +377,7 @@ msgstr "Un invitado"
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_invites.html.jinja:186
-#: templates/configure/tab_maintenance.html.jinja:121
+#: templates/configure/tab_maintenance.html.jinja:213
 #: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:495
 #: templates/guestbook.html.jinja:27
@@ -396,14 +396,14 @@ msgstr "Conexión"
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
 #: templates/configure/tab_comptes.html.jinja:118
-#: templates/configure/tab_maintenance.html.jinja:94
+#: templates/configure/tab_maintenance.html.jinja:186
 #: templates/login.html.jinja:56
 msgid "Utilisateur"
 msgstr "Usuario"
 
 #: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
-#: templates/configure/tab_maintenance.html.jinja:95
+#: templates/configure/tab_maintenance.html.jinja:187
 #: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
 msgid "Mot de passe"
 msgstr "Contraseña"
@@ -1534,6 +1534,7 @@ msgstr "Prueba en progreso..."
 #: templates/configure/scripts_main.html.jinja:1673
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
+#: templates/configure/tab_maintenance.html.jinja:140
 msgid "Erreur de communication avec le serveur."
 msgstr "Error de comunicación con el servidor."
 
@@ -4008,7 +4009,7 @@ msgstr ""
 "https://192.168.1.30) y ese código."
 
 #: templates/configure/tab_invites.html.jinja:159
-#: templates/configure/tab_maintenance.html.jinja:93
+#: templates/configure/tab_maintenance.html.jinja:185
 msgid "Adresse"
 msgstr "Dirección"
 
@@ -4347,7 +4348,7 @@ msgid "Alimentation"
 msgstr "Alimentación"
 
 #: templates/configure/tab_maintenance.html.jinja:10
-#: templates/configure/tab_maintenance.html.jinja:120
+#: templates/configure/tab_maintenance.html.jinja:212
 msgid "Carte SD"
 msgstr "Tarjeta SD"
 
@@ -4414,22 +4415,90 @@ msgstr ""
 "del archivo de copia de seguridad."
 
 #: templates/configure/tab_maintenance.html.jinja:61
+#: templates/configure/tab_maintenance.html.jinja:126
 msgid "Restaurer"
 msgstr "Restaurar"
 
+#: templates/configure/tab_maintenance.html.jinja:68
+msgid "Sauvegarde complète"
+msgstr "Copia de seguridad completa"
+
 #: templates/configure/tab_maintenance.html.jinja:69
+msgid ""
+"Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, "
+"dessins et vocaux, livre d'or, légendes, réactions, musique et "
+"historique. Restaurable en un clic, sur ce cadre ou sur une nouvelle "
+"installation."
+msgstr ""
+"Todo lo que hace tu marco: ajustes, cuentas, listas, mensajes, dibujos y "
+"notas de voz, libro de visitas, leyendas, reacciones, música e historial."
+" Se restaura con un clic, en este marco o en una instalación nueva."
+
+#: templates/configure/tab_maintenance.html.jinja:72
+msgid "Sans les photos"
+msgstr "Sin las fotos"
+
+#: templates/configure/tab_maintenance.html.jinja:74
+msgid "Télécharger"
+msgstr "Descargar"
+
+#: templates/configure/tab_maintenance.html.jinja:78
+msgid "Restaurer ce fichier"
+msgstr "Restaurar este archivo"
+
+#: templates/configure/tab_maintenance.html.jinja:81
+msgid "Avec les photos, sur un disque USB ou un NAS"
+msgstr "Con las fotos, en un disco USB o un NAS"
+
+#: templates/configure/tab_maintenance.html.jinja:82
+msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
+msgstr "Primero añade un soporte en «Almacenamiento de fotos» más abajo."
+
+#: templates/configure/tab_maintenance.html.jinja:86
+#: templates/configure/tab_maintenance.html.jinja:303
+msgid "Sauvegarder maintenant"
+msgstr "Hacer copia de seguridad ahora"
+
+#: templates/configure/tab_maintenance.html.jinja:112
+#, python-brace-format
+msgid "Sauvegarde en cours : {done} / {total} fichiers"
+msgstr "Copia en curso: {done} / {total} archivos"
+
+#: templates/configure/tab_maintenance.html.jinja:122
+msgid "avec photos"
+msgstr "con fotos"
+
+#: templates/configure/tab_maintenance.html.jinja:135
+msgid ""
+"Remplacer les réglages, comptes, messages et playlists actuels par cette "
+"sauvegarde ?"
+msgstr ""
+"¿Reemplazar los ajustes, cuentas, mensajes y listas actuales por esta "
+"copia?"
+
+#: templates/configure/tab_maintenance.html.jinja:136
+msgid "Restauration en cours..."
+msgstr "Restaurando..."
+
+#: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
+#: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:755
+msgid "Aucun fichier sélectionné."
+msgstr "No hay archivos seleccionados."
+
+#: templates/configure/tab_maintenance.html.jinja:161
 msgid "Espace disque"
 msgstr "Espacio en disco"
 
-#: templates/configure/tab_maintenance.html.jinja:72
+#: templates/configure/tab_maintenance.html.jinja:164
 msgid "Alerter sous (Go libres) :"
 msgstr "Avisar por debajo de (GB libres):"
 
-#: templates/configure/tab_maintenance.html.jinja:76
+#: templates/configure/tab_maintenance.html.jinja:168
 msgid "Libérer de la place automatiquement"
 msgstr "Liberar espacio automáticamente"
 
-#: templates/configure/tab_maintenance.html.jinja:78
+#: templates/configure/tab_maintenance.html.jinja:170
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
 "sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont"
@@ -4439,11 +4508,11 @@ msgstr ""
 "del Drive se borran del marco, empezando por los más antiguos. Los "
 "favoritos nunca se eliminan."
 
-#: templates/configure/tab_maintenance.html.jinja:82
+#: templates/configure/tab_maintenance.html.jinja:174
 msgid "Stockage des photos"
 msgstr "Almacenamiento de fotos"
 
-#: templates/configure/tab_maintenance.html.jinja:83
+#: templates/configure/tab_maintenance.html.jinja:175
 msgid ""
 "Les photos peuvent vivre ailleurs que sur la carte SD : un disque ou une "
 "clé USB branché au cadre, ou un partage réseau (NAS). Choisissez "
@@ -4456,57 +4525,57 @@ msgstr ""
 "fuente; el marco copia las fotos, comprueba la copia y libera el espacio."
 " Menos escrituras en la tarjeta SD también significa que dura más."
 
-#: templates/configure/tab_maintenance.html.jinja:87
+#: templates/configure/tab_maintenance.html.jinja:179
 msgid "Ajouter un support"
 msgstr "Añadir un soporte"
 
-#: templates/configure/tab_maintenance.html.jinja:89
+#: templates/configure/tab_maintenance.html.jinja:181
 msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
 msgstr "No se detecta ningún disco USB: conéctalo y vuelve a abrir esta pestaña."
 
-#: templates/configure/tab_maintenance.html.jinja:91
+#: templates/configure/tab_maintenance.html.jinja:183
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "Carpeta de red (NAS, ordenador)"
 
-#: templates/configure/tab_maintenance.html.jinja:97
+#: templates/configure/tab_maintenance.html.jinja:189
 msgid "Ajouter le partage"
 msgstr "Añadir la carpeta"
 
-#: templates/configure/tab_maintenance.html.jinja:101
+#: templates/configure/tab_maintenance.html.jinja:193
 msgid "Emplacement de chaque source"
 msgstr "Ubicación de cada fuente"
 
-#: templates/configure/tab_maintenance.html.jinja:120
+#: templates/configure/tab_maintenance.html.jinja:212
 msgid "libres sur"
 msgstr "libres de"
 
-#: templates/configure/tab_maintenance.html.jinja:120
+#: templates/configure/tab_maintenance.html.jinja:212
 msgid "Débranché"
 msgstr "Desconectado"
 
-#: templates/configure/tab_maintenance.html.jinja:121
+#: templates/configure/tab_maintenance.html.jinja:213
 msgid "Utiliser ce disque"
 msgstr "Usar este disco"
 
-#: templates/configure/tab_maintenance.html.jinja:121
+#: templates/configure/tab_maintenance.html.jinja:213
 #, python-brace-format
 msgid "Déplacement de « {source} » : {done} / {total} fichiers"
 msgstr "Moviendo «{source}»: {done} / {total} archivos"
 
-#: templates/configure/tab_maintenance.html.jinja:122
+#: templates/configure/tab_maintenance.html.jinja:214
 msgid "fichiers"
 msgstr "archivos"
 
-#: templates/configure/tab_maintenance.html.jinja:122
+#: templates/configure/tab_maintenance.html.jinja:214
 msgid "support débranché"
 msgstr "soporte desconectado"
 
-#: templates/configure/tab_maintenance.html.jinja:122
+#: templates/configure/tab_maintenance.html.jinja:214
 #, python-brace-format
 msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "¿Mover las fotos de «{source}» a «{target}»?"
 
-#: templates/configure/tab_maintenance.html.jinja:123
+#: templates/configure/tab_maintenance.html.jinja:215
 msgid ""
 "Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
 "un dossier « pimmich »."
@@ -4514,11 +4583,11 @@ msgstr ""
 "Se conserva el contenido actual del disco: Pimmich guarda sus fotos en "
 "una carpeta «pimmich»."
 
-#: templates/configure/tab_maintenance.html.jinja:191
+#: templates/configure/tab_maintenance.html.jinja:283
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr "Copia de seguridad automática en Google Drive"
 
-#: templates/configure/tab_maintenance.html.jinja:193
+#: templates/configure/tab_maintenance.html.jinja:285
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
 "messages dans un dossier de votre Google Drive (connexion rclone). Les "
@@ -4528,73 +4597,69 @@ msgstr ""
 "invitaciones y mensajes en una carpeta de su Google Drive (conexión "
 "rclone). Las fotos no se incluyen."
 
-#: templates/configure/tab_maintenance.html.jinja:196 utils/health.py:159
+#: templates/configure/tab_maintenance.html.jinja:288 utils/health.py:159
 msgid "Activer la sauvegarde automatique"
 msgstr "Activar la copia de seguridad automática"
 
-#: templates/configure/tab_maintenance.html.jinja:199
+#: templates/configure/tab_maintenance.html.jinja:291
 msgid "Dossier Google Drive :"
 msgstr "Carpeta de Google Drive:"
 
-#: templates/configure/tab_maintenance.html.jinja:201
+#: templates/configure/tab_maintenance.html.jinja:293
 msgid "Toutes les (heures) :"
 msgstr "Cada (horas):"
 
-#: templates/configure/tab_maintenance.html.jinja:203
+#: templates/configure/tab_maintenance.html.jinja:295
 msgid "Sauvegardes conservées :"
 msgstr "Copias de seguridad conservadas:"
 
-#: templates/configure/tab_maintenance.html.jinja:209
+#: templates/configure/tab_maintenance.html.jinja:301
 msgid "Enregistrer ces réglages"
 msgstr "Guardar esta configuración"
 
-#: templates/configure/tab_maintenance.html.jinja:211
-msgid "Sauvegarder maintenant"
-msgstr "Hacer copia de seguridad ahora"
-
-#: templates/configure/tab_maintenance.html.jinja:213
+#: templates/configure/tab_maintenance.html.jinja:305
 msgid "Restaurer la dernière sauvegarde"
 msgstr "Restaurar la última copia de seguridad"
 
-#: templates/configure/tab_maintenance.html.jinja:225
+#: templates/configure/tab_maintenance.html.jinja:317
 msgid "Go libres sur"
 msgstr "GB libres de"
 
-#: templates/configure/tab_maintenance.html.jinja:225
+#: templates/configure/tab_maintenance.html.jinja:317
 msgid "utilisés"
 msgstr "usados"
 
-#: templates/configure/tab_maintenance.html.jinja:226
+#: templates/configure/tab_maintenance.html.jinja:318
 msgid "espace faible"
 msgstr "poco espacio"
 
-#: templates/configure/tab_maintenance.html.jinja:227
+#: templates/configure/tab_maintenance.html.jinja:319
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr "medio(s) de Google Drive podrían eliminarse automáticamente."
 
-#: templates/configure/tab_maintenance.html.jinja:234
+#: templates/configure/tab_maintenance.html.jinja:326
 msgid "Dernière sauvegarde réussie :"
 msgstr "Última copia de seguridad correcta:"
 
-#: templates/configure/tab_maintenance.html.jinja:235
+#: templates/configure/tab_maintenance.html.jinja:327
 msgid "Dernier échec :"
 msgstr "Último error:"
 
-#: templates/configure/tab_maintenance.html.jinja:248
+#: templates/configure/tab_maintenance.html.jinja:340
 msgid "Sauvegarde en cours..."
 msgstr "Copia de seguridad en curso..."
 
-#: templates/configure/tab_maintenance.html.jinja:250
+#: templates/configure/tab_maintenance.html.jinja:342
 msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
 msgstr ""
 "¿Reemplazar la configuración actual por la última copia de seguridad del "
 "Drive?"
 
-#: templates/configure/tab_maintenance.html.jinja:259
+#: templates/configure/tab_maintenance.html.jinja:351
 msgid "Mise à jour de l'application"
 msgstr "Actualización de la aplicación"
 
-#: templates/configure/tab_maintenance.html.jinja:261
+#: templates/configure/tab_maintenance.html.jinja:353
 msgid ""
 "Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
 "version ne démarre pas, le cadre revient tout seul à la version "
@@ -4603,55 +4668,55 @@ msgstr ""
 "Pimmich se actualiza desde GitHub y luego se reinicia. Si la nueva "
 "versión no arranca, el marco vuelve solo a la versión anterior."
 
-#: templates/configure/tab_maintenance.html.jinja:263
+#: templates/configure/tab_maintenance.html.jinja:355
 msgid "Version installée :"
 msgstr "Versión instalada:"
 
-#: templates/configure/tab_maintenance.html.jinja:270
+#: templates/configure/tab_maintenance.html.jinja:362
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "¿Iniciar la actualización? Serás redirigido a la página de seguimiento."
 
-#: templates/configure/tab_maintenance.html.jinja:271
+#: templates/configure/tab_maintenance.html.jinja:363
 msgid "Lancer la mise à jour"
 msgstr "Iniciar la actualización"
 
-#: templates/configure/tab_maintenance.html.jinja:273
+#: templates/configure/tab_maintenance.html.jinja:365
 msgid "Revenir à la version précédente"
 msgstr "Volver a la versión anterior"
 
-#: templates/configure/tab_maintenance.html.jinja:277
+#: templates/configure/tab_maintenance.html.jinja:369
 msgid "Pimmich est à jour."
 msgstr "Pimmich está actualizado."
 
-#: templates/configure/tab_maintenance.html.jinja:277
+#: templates/configure/tab_maintenance.html.jinja:369
 msgid "Mise à jour disponible :"
 msgstr "Actualización disponible:"
 
-#: templates/configure/tab_maintenance.html.jinja:277
+#: templates/configure/tab_maintenance.html.jinja:369
 msgid "changement(s)"
 msgstr "cambio(s)"
 
-#: templates/configure/tab_maintenance.html.jinja:278
+#: templates/configure/tab_maintenance.html.jinja:370
 msgid "Impossible de joindre GitHub (connexion internet ?)."
 msgstr "No se puede contactar con GitHub (¿conexión a internet?)."
 
-#: templates/configure/tab_maintenance.html.jinja:279
+#: templates/configure/tab_maintenance.html.jinja:371
 msgid "Dernière mise à jour en cours de validation (redémarrage)."
 msgstr "Última actualización en validación (reinicio)."
 
-#: templates/configure/tab_maintenance.html.jinja:280
+#: templates/configure/tab_maintenance.html.jinja:372
 msgid "Le cadre est revenu à une version précédente."
 msgstr "El marco ha vuelto a una versión anterior."
 
-#: templates/configure/tab_maintenance.html.jinja:281
+#: templates/configure/tab_maintenance.html.jinja:373
 msgid "Revenir à la version précédente ? Pimmich va redémarrer."
 msgstr "¿Volver a la versión anterior? Pimmich se reiniciará."
 
-#: templates/configure/tab_maintenance.html.jinja:311
+#: templates/configure/tab_maintenance.html.jinja:403
 msgid "Système de Fichiers de la Carte SD"
 msgstr "Sistema de archivos de tarjeta SD"
 
-#: templates/configure/tab_maintenance.html.jinja:313
+#: templates/configure/tab_maintenance.html.jinja:405
 msgid ""
 "Si vous avez flashé Pimmich sur une carte SD plus grande que\n"
 "                    l'image, utilisez cette option pour étendre la "
@@ -4664,11 +4729,11 @@ msgstr ""
 "disponible. Será necesario reiniciar el sistema para completar la "
 "operación."
 
-#: templates/configure/tab_maintenance.html.jinja:317
+#: templates/configure/tab_maintenance.html.jinja:409
 msgid "Note :"
 msgstr "Nota :"
 
-#: templates/configure/tab_maintenance.html.jinja:317
+#: templates/configure/tab_maintenance.html.jinja:409
 msgid ""
 "Cette opération est sûre et ne supprime aucune donnée.\n"
 "                        Elle prépare simplement le système à s'étendre au"
@@ -4677,15 +4742,15 @@ msgstr ""
 "Esta operación es segura y no elimina ningún dato. Simplemente prepara el"
 " sistema para ampliarse en el próximo arranque."
 
-#: templates/configure/tab_maintenance.html.jinja:322
+#: templates/configure/tab_maintenance.html.jinja:414
 msgid "Étendre le système de fichiers"
 msgstr "Ampliar el sistema de archivos"
 
-#: templates/configure/tab_maintenance.html.jinja:329
+#: templates/configure/tab_maintenance.html.jinja:421
 msgid "Contrôle du système"
 msgstr "Control del sistema"
 
-#: templates/configure/tab_maintenance.html.jinja:332
+#: templates/configure/tab_maintenance.html.jinja:424
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
@@ -4693,31 +4758,31 @@ msgstr ""
 "¿Está seguro de que desea reiniciar SOLO la aplicación web? El sistema "
 "operativo no se reiniciará."
 
-#: templates/configure/tab_maintenance.html.jinja:335
+#: templates/configure/tab_maintenance.html.jinja:427
 msgid "Redémarrer l'application web"
 msgstr "Reiniciar la aplicación web"
 
-#: templates/configure/tab_maintenance.html.jinja:344
+#: templates/configure/tab_maintenance.html.jinja:436
 msgid "Redémarrer le système"
 msgstr "Reiniciar el sistema"
 
-#: templates/configure/tab_maintenance.html.jinja:352
+#: templates/configure/tab_maintenance.html.jinja:444
 msgid "Supprimer les logs"
 msgstr "Eliminar registros"
 
-#: templates/configure/tab_maintenance.html.jinja:357
+#: templates/configure/tab_maintenance.html.jinja:449
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "¿Está seguro que desea apagar el sistema?"
 
-#: templates/configure/tab_maintenance.html.jinja:360
+#: templates/configure/tab_maintenance.html.jinja:452
 msgid "Éteindre le système"
 msgstr "Apague el sistema"
 
-#: templates/configure/tab_maintenance.html.jinja:365
+#: templates/configure/tab_maintenance.html.jinja:457
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Volver a Raspberry Pi OS (escritorio)"
 
-#: templates/configure/tab_maintenance.html.jinja:370
+#: templates/configure/tab_maintenance.html.jinja:462
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
 " lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
@@ -7439,11 +7504,6 @@ msgstr "Otro marco"
 msgid "Action inconnue."
 msgstr "Acción desconocida."
 
-#: web/routes_frames.py:119 web/routes_frames.py:265 web/routes_guests.py:87
-#: web/routes_guests.py:92 web/routes_imports.py:653 web/routes_imports.py:691
-msgid "Aucun fichier sélectionné."
-msgstr "No hay archivos seleccionados."
-
 #: web/routes_frames.py:138
 #, python-format
 msgid "%(count)s photo(s) reçue(s)."
@@ -8299,7 +8359,7 @@ msgstr "Dirección de carpeta no válida (ej.: //nas.local/photos)."
 msgid "Type de support inconnu."
 msgstr "Tipo de soporte desconocido."
 
-#: web/routes_storage.py:57
+#: web/routes_storage.py:57 web/routes_system.py:784
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "No se puede usar este soporte: %(error)s"
@@ -8313,7 +8373,7 @@ msgstr "Soporte «%(name)s» añadido."
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "Aún hay fotos en este soporte: muévelas primero."
 
-#: web/routes_storage.py:73 web/routes_storage.py:116
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:779
 msgid "Support inconnu."
 msgstr "Soporte desconocido."
 
@@ -8462,6 +8522,28 @@ msgstr "Sin medición del sensor: comprueba la conexión y que el marco esté de
 msgid "Position mémorisée."
 msgstr "Posición memorizada."
 
+#: web/routes_system.py:765 web/routes_system.py:825
+#, python-format
+msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
+msgstr "%(count)s archivos restaurados. El marco continúa con la copia."
+
+#: web/routes_system.py:781
+msgid "Une sauvegarde est déjà en cours."
+msgstr "Ya hay una copia en curso."
+
+#: web/routes_system.py:792
+#, python-format
+msgid "Sauvegarde terminée : %(count)s fichiers."
+msgstr "Copia terminada: %(count)s archivos."
+
+#: web/routes_system.py:802
+msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
+msgstr "Copia iniciada: puede tardar con muchas fotos."
+
+#: web/routes_system.py:813 web/routes_system.py:816
+msgid "Sauvegarde introuvable."
+msgstr "Copia no encontrada."
+
 #: web/routes_voice.py:32
 msgid "Le service est arrêté."
 msgstr "El servicio está parado."
@@ -8553,4 +8635,13 @@ msgstr "¡Bienvenido a casa, %(name)s!"
 #, python-format
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr "%(count)s foto(s) añadida(s) desde %(source)s."
+
+#: web/workers.py:944
+msgid "Diaporama instable"
+msgstr "Presentación inestable"
+
+#: web/workers.py:944
+#, python-format
+msgid "Il a dû être relancé %(count)s fois en une heure."
+msgstr "Tuvo que reiniciarse %(count)s veces en una hora."
 

@@ -176,6 +176,7 @@ def signal_handler_pause_toggle(signum, frame):
 # NOUVELLE FONCTION POUR GERER LES EVENEMENTS (QUIT, TACTILE)
 def handle_slideshow_events(screen_width):
     """Gère les événements Pygame comme QUIT et les clics de souris pour le contrôle tactile."""
+    _heartbeat()
     global paused, next_photo_requested, previous_photo_requested
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -384,12 +385,22 @@ def parse_color(hex_color):
         return (255, 255, 255) # Default to white if invalid
 
 # New function to perform a transition between two images
+def _heartbeat(grace=0):
+    """Le diaporama est vivant (surveillance : il est relancé s'il se fige)."""
+    try:
+        from utils import reliability
+        reliability.beat(grace)
+    except Exception:
+        pass
+
+
 # --- Luminosité du soir : les photos sont assombries au moment de l'affichage (tous écrans HDMI) ---
 _DIM = {"level": 1.0, "surface": None}
 _raw_flip = pygame.display.flip
 
 
 def _dimmed_flip(*args):
+    _heartbeat()
     level = _DIM["level"]
     screen = pygame.display.get_surface()
     if level >= 0.99 or screen is None:
@@ -2665,6 +2676,7 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
     elif audio_enabled:
         if pygame.mixer.get_init(): pygame.mixer.quit()
 
+    _heartbeat(grace=900)  # la vidéo bloque le diaporama le temps du film : la surveillance patiente
     ducked = None
     if audio_enabled and config.get("music_duck_videos", True):  # le son de la vidéo passe devant la musique
         ducked = duck_music(True, config)

@@ -25,4 +25,6 @@ import app as app_module  # noqa: E402
 for module in list(sys.modules.values()):  # ne jamais toucher au vrai diaporama
     if getattr(module, "restart_slideshow_process", None) is not None and module.__name__ != "utils.slideshow_manager":
         module.restart_slideshow_process = lambda: None
+from web.core import load_config, save_config  # noqa: E402  (visite guidée déjà vue : elle masquerait les captures)
+save_config(dict(load_config(), tour_seen_users=[conftest.ADMIN_USERNAME]))
 app_module.app.run(host="127.0.0.1", port=5055, debug=False, use_reloader=False)
