@@ -93,9 +93,11 @@ def draw_base(width, height, view, highlight=()):
                 if px1 - px0 < min_size and py1 - py0 < min_size:
                     continue
                 for i, ring in enumerate(rings):
-                    pts = ((ring + (offset - x0, -y0)) * (sx, sy)).ravel().tolist()
-                    if len(pts) >= 6:
-                        draw.polygon(pts, fill=OCEAN if i else fill, outline=BORDER, width=border)
+                    scaled = (ring + (offset - x0, -y0)) * (sx, sy)
+                    if len(scaled) >= 3:
+                        draw.polygon(scaled.ravel().tolist(), fill=OCEAN if i else fill, outline=BORDER)
+                        for shift in range(1, border):  # trait épais : contours d'un pixel décalés (bien plus rapide)
+                            draw.polygon((scaled + shift).ravel().tolist(), outline=BORDER)
     return image
 
 
