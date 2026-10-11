@@ -13,7 +13,7 @@ from utils.message_renderer import N_
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PREPARED_DIR = BASE_DIR / "static" / "prepared"
-SKIP_SOURCES = {"messages", "compositions"}
+SKIP_SOURCES = {"messages", "compositions", "citation"}
 VIDEO_EXT = (".mp4", ".mov", ".avi", ".mkv")
 PREFIX = "smart-"
 MIN_SUGGESTED = 8

@@ -173,4 +173,62 @@
                     loadMessages();
                 })();
             </script>
+
+            <fieldset class="mt-6" id="quote-box">
+                <legend><h3><i class="fas fa-quote-left mr-2"></i>{{ _("Citation du jour") }}</h3></legend>
+                <p class="text-sm text-gray-600 mb-2">{{ _("Chaque jour, une citation ou un proverbe (dans la langue du cadre), ou un mot de la famille, apparaît dans le diaporama, environ une fois par tour.") }}</p>
+                <label class="flex items-center gap-2 font-semibold"><input type="checkbox" id="qt-enabled"> {{ _("Afficher une citation du jour") }}</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                    <div>
+                        <label for="qt-mode" class="block text-sm">{{ _("Citations :") }}</label>
+                        <select id="qt-mode" class="w-full">
+                            <option value="all">{{ _("Célèbres et mots de la famille") }}</option>
+                            <option value="builtin">{{ _("Citations et proverbes célèbres") }}</option>
+                            <option value="family">{{ _("Seulement les mots de la famille") }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="qt-style" class="block text-sm">{{ _("Présentation :") }}</label>
+                        <select id="qt-style" class="w-full"><option value="auto">{{ _("Une différente chaque jour") }}</option></select>
+                    </div>
+                </div>
+                <p class="font-semibold mt-3 mb-1">{{ _("Les mots de la famille") }}</p>
+                <p class="text-xs text-gray-500 mb-1">{{ _("Les phrases cultes de la maison, une par ligne. Ajoutez l'auteur après un tiret : « On n'est pas aux pièces ! — Papi ».") }}</p>
+                <textarea id="qt-family" rows="4" class="w-full"></textarea>
+                <div class="flex flex-wrap gap-2 mt-2 items-center">
+                    <button type="button" id="qt-save" class="btn-primary">{{ _("Enregistrer") }}</button>
+                    <span id="qt-status" class="text-sm"></span>
+                </div>
+                <p class="text-sm mt-3"><strong>{{ _("Aujourd'hui :") }}</strong> <span id="qt-today"></span></p>
+                <img id="qt-preview" alt="" class="mt-2 rounded-lg shadow hidden" style="max-width: 100%; width: 480px;">
+            </fieldset>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const STYLE_LABELS = {{ {"carte": _("Carte postale"), "nuit": _("Nuit"), "pastel": _("Pastel"), "ardoise": _("Ardoise"), "minimal": _("Minimal"), "lettre": _("Lettre")}|tojson }};
+                    const say = (t, ok) => { $("qt-status").textContent = t || ""; $("qt-status").className = "text-sm " + (ok ? "text-green-700" : "text-red-600"); };
+                    const parse = () => $("qt-family").value.split("\n").map(l => l.trim()).filter(Boolean).map(line => {
+                        const at = line.lastIndexOf(" — ") >= 0 ? line.lastIndexOf(" — ") : line.lastIndexOf(" - ");
+                        return at > 0 ? { text: line.slice(0, at).trim(), author: line.slice(at + 3).trim() } : { text: line, author: "" };
+                    });
+                    async function load() {
+                        const d = await (await fetch("/api/quotes")).json();
+                        $("qt-enabled").checked = d.enabled; $("qt-mode").value = d.mode;
+                        if ($("qt-style").options.length === 1) d.styles.forEach(s => $("qt-style").add(new Option(STYLE_LABELS[s] || s, s)));
+                        $("qt-style").value = d.style;
+                        $("qt-family").value = d.family.map(q => q.author ? `${q.text} — ${q.author}` : q.text).join("\n");
+                        $("qt-today").textContent = d.today ? `${d.today.text}${d.today.author ? " — " + d.today.author : ""}` : "—";
+                        $("qt-preview").src = `/api/quotes/preview?t=${Date.now()}`; $("qt-preview").classList.toggle("hidden", !d.today);
+                    }
+                    async function save() {
+                        const r = await (await fetch("/api/quotes", { method: "POST", headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ enabled: $("qt-enabled").checked, mode: $("qt-mode").value, style: $("qt-style").value, family: parse() }) })).json();
+                        say(r.message, r.success); load();
+                    }
+                    $("qt-save").addEventListener("click", save);
+                    ["qt-enabled", "qt-mode", "qt-style"].forEach(id => $(id).addEventListener("change", save));
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-messages'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                    if ($("quote-box").offsetParent !== null) load();
+                });
+            </script>
         </div>

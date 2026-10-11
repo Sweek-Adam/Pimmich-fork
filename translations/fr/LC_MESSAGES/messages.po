@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:36+0200\n"
+"POT-Creation-Date: 2026-10-11 08:42+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -118,29 +118,29 @@ msgstr ""
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:2910
+#: local_slideshow.py:2911
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:2911
+#: local_slideshow.py:2912
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:2912
+#: local_slideshow.py:2913
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:2913
+#: local_slideshow.py:2914
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:2914
+#: local_slideshow.py:2915
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:2940
+#: local_slideshow.py:2941
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -592,6 +592,7 @@ msgstr ""
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
 #: templates/configure/tab_legendes.html.jinja:123
+#: templates/configure/tab_messages.html.jinja:199
 #: templates/configure/tab_sources.html.jinja:537
 msgid "Enregistrer"
 msgstr ""
@@ -1088,7 +1089,7 @@ msgstr ""
 msgid "Enregistrement…"
 msgstr ""
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:271
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:273
 msgid "Enregistré"
 msgstr ""
 
@@ -3959,6 +3960,83 @@ msgstr ""
 msgid "Supprimer ce message ?"
 msgstr ""
 
+#: templates/configure/tab_messages.html.jinja:178 utils/quotes.py:19
+msgid "Citation du jour"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:179
+msgid ""
+"Chaque jour, une citation ou un proverbe (dans la langue du cadre), ou un"
+" mot de la famille, apparaît dans le diaporama, environ une fois par "
+"tour."
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:180
+msgid "Afficher une citation du jour"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:183
+msgid "Citations :"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:185
+msgid "Célèbres et mots de la famille"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:186
+msgid "Citations et proverbes célèbres"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:187
+msgid "Seulement les mots de la famille"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:191
+msgid "Présentation :"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:192
+msgid "Une différente chaque jour"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:195
+msgid "Les mots de la famille"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:196
+msgid ""
+"Les phrases cultes de la maison, une par ligne. Ajoutez l'auteur après un"
+" tiret : « On n'est pas aux pièces ! — Papi »."
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:202
+msgid "Aujourd'hui :"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:34
+msgid "Carte postale"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:30
+msgid "Nuit"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:48
+msgid "Pastel"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:40
+msgid "Ardoise"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:52
+msgid "Minimal"
+msgstr ""
+
+#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:44
+msgid "Lettre"
+msgstr ""
+
 #: templates/configure/tab_metadata.html.jinja:4
 msgid "Affichage des métadonnées des photos"
 msgstr ""
@@ -5623,16 +5701,8 @@ msgstr ""
 msgid "Ce nom existe déjà."
 msgstr ""
 
-#: utils/message_renderer.py:30
-msgid "Nuit"
-msgstr ""
-
 #: utils/message_renderer.py:32
 msgid "Clair"
-msgstr ""
-
-#: utils/message_renderer.py:34
-msgid "Carte postale"
 msgstr ""
 
 #: utils/message_renderer.py:36
@@ -5643,28 +5713,12 @@ msgstr ""
 msgid "Post-it"
 msgstr ""
 
-#: utils/message_renderer.py:40
-msgid "Ardoise"
-msgstr ""
-
-#: utils/message_renderer.py:44
-msgid "Lettre"
-msgstr ""
-
 #: utils/message_renderer.py:46
 msgid "Machine à écrire"
 msgstr ""
 
-#: utils/message_renderer.py:48
-msgid "Pastel"
-msgstr ""
-
 #: utils/message_renderer.py:50
 msgid "Bulle de BD"
-msgstr ""
-
-#: utils/message_renderer.py:52
-msgid "Minimal"
 msgstr ""
 
 #: utils/notify.py:19
@@ -5681,6 +5735,14 @@ msgstr ""
 
 #: utils/notify.py:22
 msgid "Imports terminés"
+msgstr ""
+
+#: utils/quotes.py:19
+msgid "Le mot de la famille"
+msgstr ""
+
+#: utils/quotes.py:20
+msgid "Proverbe"
 msgstr ""
 
 #: utils/smart_albums.py:24
@@ -6028,12 +6090,12 @@ msgid ""
 "précédente est conservée."
 msgstr ""
 
-#: web/routes_config.py:238
+#: web/routes_config.py:240
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr ""
 
-#: web/routes_config.py:273
+#: web/routes_config.py:275
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -6591,6 +6653,10 @@ msgstr ""
 
 #: web/routes_playlists.py:315
 msgid "Playlist non trouvée."
+msgstr ""
+
+#: web/routes_quotes.py:52
+msgid "Citation du jour enregistrée."
 msgstr ""
 
 #: web/routes_slideshow.py:384

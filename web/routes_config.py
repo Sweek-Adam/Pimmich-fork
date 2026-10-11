@@ -176,6 +176,8 @@ def configure():
         # Gérer la clé display_sources (checkboxes)
         # request.form.getlist() retourne une liste vide si aucune checkbox avec ce nom n'est cochée.
         config['display_sources'] = request.form.getlist('display_sources')
+        if config.get('quote_enabled') and 'citation' not in config['display_sources']:
+            config['display_sources'].append('citation')  # source gérée par la citation du jour (pas de case à cocher)
         config["pan_zoom_enabled"] = 'pan_zoom_enabled' in request.form # New checkbox handling
         config["button_enabled"] = 'button_enabled' in request.form
         config["smart_plug_enabled"] = 'smart_plug_enabled' in request.form

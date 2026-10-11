@@ -2113,9 +2113,10 @@ def draw_weather_frame(screen, background, particles):
         for _kind, center, radius in particles.shapes():
             pygame.draw.circle(screen, (250, 250, 255), center, radius)
     else:
-        color = (200, 210, 230)
+        color = (205, 215, 235)
+        width = max(1, round(screen.get_height() / 700))  # 2 px en 1080p : visible sans masquer la photo
         for _kind, start, end in particles.shapes():
-            pygame.draw.line(screen, color, start, end, 1)
+            pygame.draw.line(screen, color, start, end, width)
         if particles.flash > 0.6:
             flash = pygame.Surface(screen.get_size())
             flash.fill((255, 255, 255))

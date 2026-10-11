@@ -831,3 +831,21 @@ def storage_worker():
             except Exception as e:
                 logger.warning(f"[Stockage] {e}")
         time.sleep(300)
+
+
+def quote_worker():
+    """Citation du jour : nouvelle image chaque jour (et après un changement de réglage ou de taille d'écran)."""
+    from web.routes_quotes import refresh_quote
+    shown = None
+    time.sleep(60)
+    while True:
+        config = load_config()
+        key = (datetime.now().date().isoformat(), config.get("quote_enabled"), config.get("display_width"), config.get("display_height"),
+               config.get("language"), config.get("quote_mode"), config.get("quote_style"), json.dumps(config.get("quotes_family") or []))
+        if key != shown:
+            try:
+                refresh_quote(config)
+                shown = key
+            except Exception as e:
+                logger.warning(f"[Citation] {e}")
+        time.sleep(600)

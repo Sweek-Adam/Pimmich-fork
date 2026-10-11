@@ -21,7 +21,7 @@ ORIGINALS_DIR = BASE_DIR / "static" / "photos"
 INDEX_FILE = BASE_DIR / "cache" / "photo_index.json"
 IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
 VARIANT = re.compile(r"_(polaroid|postcard|thumbnail)$")
-SKIP_SOURCES = {"messages", "compositions"}  # pas des photos
+SKIP_SOURCES = {"messages", "compositions", "citation"}  # pas des photos
 logger = logging.getLogger(__name__)
 _lock = threading.Lock()
 

@@ -16,7 +16,7 @@ from pathlib import Path
 import pytest
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
-COPIED = ["app.py", "web", "utils", "templates", "translations", "babel.cfg", "voice_control.py", "local_slideshow.py"]
+COPIED = ["app.py", "web", "utils", "templates", "translations", "babel.cfg", "voice_control.py", "local_slideshow.py", "resources"]
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin-test-pass"
 

@@ -69,7 +69,23 @@ def soft_blur(image, radius):
     return small.filter(ImageFilter.GaussianBlur(radius / factor)).resize((w, h), Image.BILINEAR)
 
 
+CJK_FONTS = ("/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf", "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+             "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc", "/System/Library/Fonts/Hiragino Sans GB.ttc")
+
+
+def _cjk_font():
+    """Police pour le japonais, le chinois et le coréen (DejaVu n'a pas ces caractères), si le système en a une."""
+    return next((path for path in CJK_FONTS if Path(path).exists()), None)
+
+
+def _has_cjk(*texts):
+    return any(0x2E80 <= ord(char) <= 0x9FFF or 0xAC00 <= ord(char) <= 0xD7AF or 0xFF00 <= ord(char) <= 0xFFEF
+               for text in texts for char in text or "")
+
+
 def _font(name, size):
+    if name and Path(name).is_absolute() and Path(name).exists():
+        return ImageFont.truetype(name, size)
     for directory in FONT_DIRS:
         path = directory / name
         if path.exists():
@@ -237,7 +253,7 @@ def _layout(draw, style, title, body, signature, size, max_width):
         f = _font(sign_font, int(size * 0.85))
         if blocks:
             blocks[-1] = blocks[-1][:3] + (int(size * 0.9),) + blocks[-1][4:]
-        blocks += [(l, f, style["accent"], int(size * 0.2), "signature") for l in _wrap(draw, f"— {signature}", f, max_width)]
+        blocks += [(l, f, style["accent"], int(size * 0.2), "signature") for l in _wrap(draw, f"{style.get('dash', '—')} {signature}", f, max_width)]
     return blocks
 
 
@@ -361,6 +377,8 @@ def render_message(title, body, signature="", style_name=DEFAULT_STYLE, width=19
     """Crée l'image du message aux dimensions de l'écran."""
     style = STYLES.get(style_name, STYLES[DEFAULT_STYLE])
     title, body, signature = (title or "").strip(), (body or "").strip(), (signature or "").strip()
+    if _has_cjk(title, body, signature) and _cjk_font():
+        style = dict(style, fonts=(_cjk_font(),) * 3, dash="－")  # japonais, chinois, coréen : police qui a ces caractères
     rng = random.Random(seed if seed is not None else f"{title}|{body}|{signature}|{style_name}")
     image = _background(style, width, height, rng)
 
