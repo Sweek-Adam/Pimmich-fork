@@ -20,8 +20,9 @@ def _refresh_slideshow():
 @login_required
 def list_messages_api():
     messages = [dict(m, on_air=messages_manager.on_air(m)) for m in messages_manager.list_messages()]
+    translate = _  # libellés marqués N_() dans message_renderer (alias : pybabel ne doit pas extraire « label »)
     return jsonify({"success": True, "messages": messages,
-                    "styles": {k: v["label"] for k, v in messages_manager.STYLES.items()}})
+                    "styles": {k: translate(v["label"]) for k, v in messages_manager.STYLES.items()}})
 
 
 @app.route('/api/messages/preview', methods=['POST'])

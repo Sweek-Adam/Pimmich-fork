@@ -29,7 +29,7 @@ export const groups: NavGroup[] = [
     { label: () => t("Playlists"), icon: "fa-list-ul", tab: "tab-playlists" },
     { label: () => t("Favoris"), icon: "fa-star", tab: "tab-favoris", route: "/favoris" },
     { label: () => t("Carte"), icon: "fa-globe-europe", tab: "tab-carte", route: "/carte" },
-    { label: () => t("Messages"), icon: "fa-comment-alt", tab: "tab-messages" },
+    { label: () => t("Messages"), icon: "fa-comment-alt", tab: "tab-messages", route: "/messages" },
   ] },
   { key: "ecran", label: () => t("Écran"), icon: "fa-desktop", items: [
     { label: () => t("Dispositions"), icon: "fa-th-large", tab: "tab-dispositions" },
