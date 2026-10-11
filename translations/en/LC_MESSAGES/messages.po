@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 18:08+0200\n"
+"POT-Creation-Date: 2026-10-11 18:10+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -379,6 +379,7 @@ msgstr "every year"
 #: frontend/src/components/AgendaCard.vue:58
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/views/GuestsView.vue:185 frontend/src/views/GuestsView.vue:207
+#: frontend/src/views/MaintenanceView.vue:218
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
@@ -1133,6 +1134,7 @@ msgstr "Administrator"
 #: frontend/src/views/AccountsView.vue:69
 #: frontend/src/views/AccountsView.vue:71
 #: frontend/src/views/AccountsView.vue:86
+#: frontend/src/views/MaintenanceView.vue:229
 #: templates/configure/tab_affichage.html.jinja:298
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
@@ -1161,7 +1163,9 @@ msgstr "Add an account"
 msgid "Nom d'utilisateur"
 msgstr "Username"
 
-#: frontend/src/views/AccountsView.vue:84 frontend/src/views/NetworkView.vue:96
+#: frontend/src/views/AccountsView.vue:84
+#: frontend/src/views/MaintenanceView.vue:230
+#: frontend/src/views/NetworkView.vue:96
 #: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
 #: templates/configure/tab_maintenance.html.jinja:228
@@ -2180,6 +2184,7 @@ msgstr ""
 "https://192.168.1.30) and that code."
 
 #: frontend/src/views/GuestsView.vue:196
+#: frontend/src/views/MaintenanceView.vue:228
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
@@ -2741,6 +2746,586 @@ msgstr "Refresh"
 #, python-brace-format
 msgid "{n} lignes affichées (les 500 dernières du fichier)"
 msgstr "{n} lines shown (the last 500 of the file)"
+
+#: frontend/src/views/MaintenanceView.vue:17
+#: templates/configure/tab_maintenance.html.jinja:414
+msgid "Revenir à la version précédente ? Pimmich va redémarrer."
+msgstr "Go back to the previous version? Pimmich will restart."
+
+#: frontend/src/views/MaintenanceView.vue:35
+#: templates/configure/tab_maintenance.html.jinja:381
+msgid "Sauvegarde en cours..."
+msgstr "Backup in progress..."
+
+#: frontend/src/views/MaintenanceView.vue:37
+#: templates/configure/tab_maintenance.html.jinja:383
+msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
+msgstr "Replace the current settings with the latest backup from the Drive?"
+
+#: frontend/src/views/MaintenanceView.vue:52
+#: frontend/src/views/MaintenanceView.vue:145
+#: frontend/src/views/MaintenanceView.vue:213
+#: templates/configure/tab_maintenance.html.jinja:10
+#: templates/configure/tab_maintenance.html.jinja:253
+msgid "Carte SD"
+msgstr "SD card"
+
+#: frontend/src/views/MaintenanceView.vue:61
+#: templates/configure/tab_maintenance.html.jinja:255
+#, python-brace-format
+msgid "Déplacer les photos de « {source} » vers « {target} » ?"
+msgstr "Move the photos of “{source}” to “{target}”?"
+
+#: frontend/src/views/MaintenanceView.vue:86
+#: templates/configure/tab_maintenance.html.jinja:135
+msgid ""
+"Remplacer les réglages, comptes, messages et playlists actuels par cette "
+"sauvegarde ?"
+msgstr ""
+"Replace the current settings, accounts, messages and playlists with this "
+"backup?"
+
+#: frontend/src/views/MaintenanceView.vue:87
+#: templates/configure/tab_maintenance.html.jinja:136
+msgid "Restauration en cours..."
+msgstr "Restoring..."
+
+#: frontend/src/views/MaintenanceView.vue:92
+#: templates/configure/scripts_gallery.html.jinja:35
+#: templates/configure/scripts_gallery.html.jinja:130
+#: templates/configure/scripts_gallery.html.jinja:281
+#: templates/configure/scripts_main.html.jinja:1408
+#: templates/configure/scripts_main.html.jinja:1442
+#: templates/configure/scripts_main.html.jinja:1675
+#: templates/configure/scripts_status.html.jinja:111
+#: templates/configure/scripts_status.html.jinja:269
+#: templates/configure/tab_carte.html.jinja:101
+#: templates/configure/tab_maintenance.html.jinja:140
+#: templates/configure/tab_maintenance.html.jinja:184
+msgid "Erreur de communication avec le serveur."
+msgstr "Communication error with the server."
+
+#: frontend/src/views/MaintenanceView.vue:96
+#: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
+#: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:772
+msgid "Aucun fichier sélectionné."
+msgstr "No files selected."
+
+#: frontend/src/views/MaintenanceView.vue:120
+#: templates/configure/tab_maintenance.html.jinja:514
+msgid ""
+"Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
+" lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
+" setup.sh. Continuer ?"
+msgstr ""
+"The Raspberry Pi will reboot to the Raspberry Pi OS desktop and Pimmich "
+"will no longer start automatically. To return to photo frame mode, run "
+"setup.sh again. Continue?"
+
+#: frontend/src/views/MaintenanceView.vue:139
+#: templates/configure/tab_maintenance.html.jinja:4
+msgid "Matériel"
+msgstr "Hardware"
+
+#: frontend/src/views/MaintenanceView.vue:141
+#: templates/configure/tab_maintenance.html.jinja:7
+msgid "Modèle"
+msgstr "Model"
+
+#: frontend/src/views/MaintenanceView.vue:141
+#: frontend/src/views/MaintenanceView.vue:142
+#: frontend/src/views/MaintenanceView.vue:144
+#: frontend/src/views/MaintenanceView.vue:145
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "Inconnu"
+msgstr "Unknown"
+
+#: frontend/src/views/MaintenanceView.vue:142
+#: templates/configure/tab_maintenance.html.jinja:8
+msgid "Température"
+msgstr "Temperature"
+
+#: frontend/src/views/MaintenanceView.vue:143
+#: templates/configure/tab_maintenance.html.jinja:9
+msgid "Alimentation"
+msgstr "Power supply"
+
+#: frontend/src/views/MaintenanceView.vue:144
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "Insuffisante en ce moment"
+msgstr "Too weak right now"
+
+#: frontend/src/views/MaintenanceView.vue:144
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "A faibli depuis le démarrage"
+msgstr "Dropped since startup"
+
+#: frontend/src/views/MaintenanceView.vue:144
+#: templates/configure/tab_maintenance.html.jinja:17
+msgid "Correcte"
+msgstr "OK"
+
+#: frontend/src/views/MaintenanceView.vue:145
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "erreur(s)"
+msgstr "error(s)"
+
+#: frontend/src/views/MaintenanceView.vue:145
+#: templates/configure/tab_maintenance.html.jinja:18
+msgid "Aucune erreur"
+msgstr "No errors"
+
+#: frontend/src/views/MaintenanceView.vue:147
+#: templates/configure/tab_maintenance.html.jinja:19
+msgid "Alimentation conseillée pour ce modèle :"
+msgstr "Recommended power supply for this model:"
+
+#: frontend/src/views/MaintenanceView.vue:152
+#: templates/configure/tab_maintenance.html.jinja:392
+msgid "Mise à jour de l'application"
+msgstr "Application update"
+
+#: frontend/src/views/MaintenanceView.vue:153
+#: templates/configure/tab_maintenance.html.jinja:394
+msgid ""
+"Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
+"version ne démarre pas, le cadre revient tout seul à la version "
+"précédente."
+msgstr ""
+"Pimmich updates itself from GitHub and then restarts. If the new version "
+"fails to start, the frame automatically goes back to the previous "
+"version."
+
+#: frontend/src/views/MaintenanceView.vue:155
+#: templates/configure/tab_maintenance.html.jinja:396
+msgid "Version installée :"
+msgstr "Installed version:"
+
+#: frontend/src/views/MaintenanceView.vue:156
+#: templates/configure/tab_maintenance.html.jinja:411
+msgid "Impossible de joindre GitHub (connexion internet ?)."
+msgstr "Can't reach GitHub (internet connection?)."
+
+#: frontend/src/views/MaintenanceView.vue:157
+#: templates/configure/tab_maintenance.html.jinja:410
+msgid "Mise à jour disponible :"
+msgstr "Update available:"
+
+#: frontend/src/views/MaintenanceView.vue:157
+#: templates/configure/tab_maintenance.html.jinja:410
+msgid "changement(s)"
+msgstr "change(s)"
+
+#: frontend/src/views/MaintenanceView.vue:157
+#: templates/configure/tab_maintenance.html.jinja:410
+msgid "Pimmich est à jour."
+msgstr "Pimmich is up to date."
+
+#: frontend/src/views/MaintenanceView.vue:159
+#: templates/configure/tab_maintenance.html.jinja:412
+msgid "Dernière mise à jour en cours de validation (redémarrage)."
+msgstr "Latest update being validated (restarting)."
+
+#: frontend/src/views/MaintenanceView.vue:160
+#: templates/configure/tab_maintenance.html.jinja:413
+msgid "Le cadre est revenu à une version précédente."
+msgstr "The frame went back to a previous version."
+
+#: frontend/src/views/MaintenanceView.vue:163
+#: templates/configure/tab_maintenance.html.jinja:403
+msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
+msgstr "Start the update? You will be redirected to the tracking page."
+
+#: frontend/src/views/MaintenanceView.vue:163
+#: templates/configure/tab_maintenance.html.jinja:404
+msgid "Lancer la mise à jour"
+msgstr "Start the update"
+
+#: frontend/src/views/MaintenanceView.vue:164
+#: templates/configure/tab_maintenance.html.jinja:406
+msgid "Revenir à la version précédente"
+msgstr "Go back to the previous version"
+
+#: frontend/src/views/MaintenanceView.vue:169
+#: templates/configure/tab_maintenance.html.jinja:473
+msgid "Contrôle du système"
+msgstr "System control"
+
+#: frontend/src/views/MaintenanceView.vue:171
+#: templates/configure/tab_maintenance.html.jinja:476
+msgid ""
+"Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
+"système d'exploitation ne sera pas redémarré."
+msgstr ""
+"Are you sure you want to restart ONLY the web application? The operating "
+"system will not be restarted."
+
+#: frontend/src/views/MaintenanceView.vue:172
+#: templates/configure/tab_maintenance.html.jinja:479
+msgid "Redémarrer l'application web"
+msgstr "Reboot Application Web"
+
+#: frontend/src/views/MaintenanceView.vue:173
+msgid "Redémarrer le système maintenant ?"
+msgstr "Restart the system now?"
+
+#: frontend/src/views/MaintenanceView.vue:174
+#: templates/configure/tab_maintenance.html.jinja:488
+msgid "Redémarrer le système"
+msgstr "Restart the system"
+
+#: frontend/src/views/MaintenanceView.vue:175
+#: templates/configure/tab_maintenance.html.jinja:496
+msgid "Supprimer les logs"
+msgstr "Delete logs"
+
+#: frontend/src/views/MaintenanceView.vue:176
+#: templates/configure/tab_maintenance.html.jinja:501
+msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
+msgstr "Are you sure you want to turn OFF the system?"
+
+#: frontend/src/views/MaintenanceView.vue:177
+#: templates/configure/tab_maintenance.html.jinja:504
+msgid "Éteindre le système"
+msgstr "Shut down the system"
+
+#: frontend/src/views/MaintenanceView.vue:178
+#: templates/configure/tab_maintenance.html.jinja:509
+msgid "Repasser sur Raspberry Pi OS (bureau)"
+msgstr "Switch back to Raspberry Pi OS (desktop)"
+
+#: frontend/src/views/MaintenanceView.vue:184
+#: templates/configure/tab_maintenance.html.jinja:202
+msgid "Espace disque"
+msgstr "Disk space"
+
+#: frontend/src/views/MaintenanceView.vue:185
+#: templates/configure/tab_maintenance.html.jinja:358
+msgid "Go libres sur"
+msgstr "GB free of"
+
+#: frontend/src/views/MaintenanceView.vue:185
+#: templates/configure/tab_maintenance.html.jinja:358
+msgid "utilisés"
+msgstr "used"
+
+#: frontend/src/views/MaintenanceView.vue:186
+#: templates/configure/tab_maintenance.html.jinja:359
+msgid "espace faible"
+msgstr "low space"
+
+#: frontend/src/views/MaintenanceView.vue:187
+#: templates/configure/tab_maintenance.html.jinja:360
+msgid "média(s) Google Drive pourraient être supprimés automatiquement."
+msgstr "Google Drive media item(s) may be deleted automatically."
+
+#: frontend/src/views/MaintenanceView.vue:189
+#: templates/configure/tab_maintenance.html.jinja:205
+msgid "Alerter sous (Go libres) :"
+msgstr "Alert below (GB free):"
+
+#: frontend/src/views/MaintenanceView.vue:190
+#: templates/configure/tab_maintenance.html.jinja:209
+msgid "Libérer de la place automatiquement"
+msgstr "Free up space automatically"
+
+#: frontend/src/views/MaintenanceView.vue:192
+#: templates/configure/tab_maintenance.html.jinja:211
+msgid ""
+"Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
+"sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont"
+" jamais supprimés."
+msgstr ""
+"Below the threshold, Google Drive photos and videos already removed from "
+"the Drive are deleted from the frame, oldest first. Favorites are never "
+"deleted."
+
+#: frontend/src/views/MaintenanceView.vue:193
+#: templates/configure/tab_maintenance.html.jinja:324
+msgid "Sauvegarde automatique sur Google Drive"
+msgstr "Automatic backup to Google Drive"
+
+#: frontend/src/views/MaintenanceView.vue:194
+#: templates/configure/tab_maintenance.html.jinja:326
+msgid ""
+"Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
+"messages dans un dossier de votre Google Drive (connexion rclone). Les "
+"photos ne sont pas incluses."
+msgstr ""
+"Backs up settings, accounts, playlists, favorites, invitations and "
+"messages to a folder in your Google Drive (rclone connection). Photos are"
+" not included."
+
+#: frontend/src/views/MaintenanceView.vue:196
+#: templates/configure/tab_maintenance.html.jinja:329 utils/health.py:159
+msgid "Activer la sauvegarde automatique"
+msgstr "Enable automatic backup"
+
+#: frontend/src/views/MaintenanceView.vue:197
+#: templates/configure/tab_maintenance.html.jinja:332
+msgid "Dossier Google Drive :"
+msgstr "Google Drive folder:"
+
+#: frontend/src/views/MaintenanceView.vue:198
+#: templates/configure/tab_maintenance.html.jinja:334
+msgid "Toutes les (heures) :"
+msgstr "Every (hours):"
+
+#: frontend/src/views/MaintenanceView.vue:199
+#: templates/configure/tab_maintenance.html.jinja:336
+msgid "Sauvegardes conservées :"
+msgstr "Backups kept:"
+
+#: frontend/src/views/MaintenanceView.vue:201
+#: templates/configure/tab_maintenance.html.jinja:367
+msgid "Dernière sauvegarde réussie :"
+msgstr "Last successful backup:"
+
+#: frontend/src/views/MaintenanceView.vue:202
+#: templates/configure/tab_maintenance.html.jinja:368
+msgid "Dernier échec :"
+msgstr "Last failure:"
+
+#: frontend/src/views/MaintenanceView.vue:204
+#: templates/configure/tab_maintenance.html.jinja:342
+msgid "Enregistrer ces réglages"
+msgstr "Save these settings"
+
+#: frontend/src/views/MaintenanceView.vue:205
+#: frontend/src/views/MaintenanceView.vue:264
+#: templates/configure/tab_maintenance.html.jinja:86
+#: templates/configure/tab_maintenance.html.jinja:344
+msgid "Sauvegarder maintenant"
+msgstr "Back up now"
+
+#: frontend/src/views/MaintenanceView.vue:206
+#: templates/configure/tab_maintenance.html.jinja:346
+msgid "Restaurer la dernière sauvegarde"
+msgstr "Restore the latest backup"
+
+#: frontend/src/views/MaintenanceView.vue:211
+#: templates/configure/tab_maintenance.html.jinja:215
+msgid "Stockage des photos"
+msgstr "Photo storage"
+
+#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:216
+#: templates/configure/tab_maintenance.html.jinja:253
+msgid "libres sur"
+msgstr "free of"
+
+#: frontend/src/views/MaintenanceView.vue:217
+#: templates/configure/tab_maintenance.html.jinja:253
+msgid "Débranché"
+msgstr "Unplugged"
+
+#: frontend/src/views/MaintenanceView.vue:220
+#: templates/configure/tab_maintenance.html.jinja:220
+msgid "Ajouter un support"
+msgstr "Add a storage device"
+
+#: frontend/src/views/MaintenanceView.vue:222
+#: templates/configure/tab_maintenance.html.jinja:256
+msgid ""
+"Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
+"un dossier « pimmich »."
+msgstr ""
+"The disk's current content is kept: Pimmich stores its photos in a "
+"“pimmich” folder."
+
+#: frontend/src/views/MaintenanceView.vue:223
+#: templates/configure/tab_maintenance.html.jinja:254
+msgid "Utiliser ce disque"
+msgstr "Use this disk"
+
+#: frontend/src/views/MaintenanceView.vue:224
+#: templates/configure/tab_maintenance.html.jinja:222
+msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
+msgstr "No USB disk detected: plug it in, then reopen this tab."
+
+#: frontend/src/views/MaintenanceView.vue:226
+#: templates/configure/tab_maintenance.html.jinja:224
+msgid "Partage réseau (NAS, ordinateur)"
+msgstr "Network share (NAS, computer)"
+
+#: frontend/src/views/MaintenanceView.vue:232
+#: templates/configure/tab_maintenance.html.jinja:230
+msgid "Ajouter le partage"
+msgstr "Add share"
+
+#: frontend/src/views/MaintenanceView.vue:234
+#: templates/configure/tab_maintenance.html.jinja:234
+msgid "Emplacement de chaque source"
+msgstr "Location of each source"
+
+#: frontend/src/views/MaintenanceView.vue:238
+#: templates/configure/tab_maintenance.html.jinja:255
+msgid "fichiers"
+msgstr "files"
+
+#: frontend/src/views/MaintenanceView.vue:238
+#: templates/configure/tab_maintenance.html.jinja:255
+msgid "support débranché"
+msgstr "storage unplugged"
+
+#: frontend/src/views/MaintenanceView.vue:245
+#: templates/configure/tab_maintenance.html.jinja:254
+#, python-brace-format
+msgid "Déplacement de « {source} » : {done} / {total} fichiers"
+msgstr "Moving “{source}”: {done} / {total} files"
+
+#: frontend/src/views/MaintenanceView.vue:250
+#: templates/configure/tab_maintenance.html.jinja:68
+msgid "Sauvegarde complète"
+msgstr "Full backup"
+
+#: frontend/src/views/MaintenanceView.vue:251
+#: templates/configure/tab_maintenance.html.jinja:69
+msgid ""
+"Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, "
+"dessins et vocaux, livre d'or, légendes, réactions, musique et "
+"historique. Restaurable en un clic, sur ce cadre ou sur une nouvelle "
+"installation."
+msgstr ""
+"Everything that makes your frame: settings, accounts, playlists, "
+"messages, drawings and voice notes, guestbook, captions, reactions, music"
+" and history. Restorable in one click, on this frame or on a new "
+"installation."
+
+#: frontend/src/views/MaintenanceView.vue:254
+#: templates/configure/tab_maintenance.html.jinja:72
+msgid "Sans les photos"
+msgstr "Without photos"
+
+#: frontend/src/views/MaintenanceView.vue:255
+#: templates/configure/tab_maintenance.html.jinja:74
+msgid "Télécharger"
+msgstr "Download"
+
+#: frontend/src/views/MaintenanceView.vue:257
+#: templates/configure/tab_maintenance.html.jinja:78
+msgid "Restaurer ce fichier"
+msgstr "Restore this file"
+
+#: frontend/src/views/MaintenanceView.vue:260
+#: templates/configure/tab_maintenance.html.jinja:81
+msgid "Avec les photos, sur un disque USB ou un NAS"
+msgstr "With photos, on a USB drive or NAS"
+
+#: frontend/src/views/MaintenanceView.vue:261
+#: templates/configure/tab_maintenance.html.jinja:82
+msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
+msgstr "First add a storage device in “Photo storage” below."
+
+#: frontend/src/views/MaintenanceView.vue:266
+#: templates/configure/tab_maintenance.html.jinja:112
+#, python-brace-format
+msgid "Sauvegarde en cours : {done} / {total} fichiers"
+msgstr "Backup in progress: {done} / {total} files"
+
+#: frontend/src/views/MaintenanceView.vue:272
+#: templates/configure/tab_maintenance.html.jinja:122
+msgid "avec photos"
+msgstr "with photos"
+
+#: frontend/src/views/MaintenanceView.vue:273
+#: templates/configure/tab_maintenance.html.jinja:61
+#: templates/configure/tab_maintenance.html.jinja:126
+msgid "Restaurer"
+msgstr "Restore"
+
+#: frontend/src/views/MaintenanceView.vue:276
+#: templates/configure/tab_maintenance.html.jinja:38
+msgid "Sauvegarde et Restauration"
+msgstr "Backup and Restore"
+
+#: frontend/src/views/MaintenanceView.vue:278
+#: templates/configure/tab_maintenance.html.jinja:49
+msgid "Télécharger la sauvegarde"
+msgstr "Download backup"
+
+#: frontend/src/views/MaintenanceView.vue:279
+#: templates/configure/tab_maintenance.html.jinja:56
+msgid ""
+"Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
+"fichier de sauvegarde."
+msgstr ""
+"Are you sure? The current configuration will be overwritten by the "
+"contents of the backup file."
+
+#: frontend/src/views/MaintenanceView.vue:281
+#: templates/configure/tab_maintenance.html.jinja:54
+msgid "Restaurer une configuration"
+msgstr "Restore a configuration"
+
+#: frontend/src/views/MaintenanceView.vue:288
+#: templates/configure/tab_maintenance.html.jinja:160
+msgid "HTTPS sans avertissement (Tailscale)"
+msgstr "HTTPS without warnings (Tailscale)"
+
+#: frontend/src/views/MaintenanceView.vue:289
+#: templates/configure/tab_maintenance.html.jinja:161
+msgid ""
+"Ouvre l'administration à une adresse sécurisée par un vrai certificat, "
+"depuis vos appareils connectés à Tailscale (à la maison comme ailleurs). "
+"Elle n'est jamais publiée sur internet."
+msgstr ""
+"Opens the admin at an address secured by a real certificate, from your "
+"devices connected to Tailscale (at home or elsewhere). It is never "
+"published on the internet."
+
+#: frontend/src/views/MaintenanceView.vue:290
+#: templates/configure/tab_maintenance.html.jinja:162
+msgid "Activer l'accès HTTPS par Tailscale"
+msgstr "Enable HTTPS access via Tailscale"
+
+#: frontend/src/views/MaintenanceView.vue:291
+#: templates/configure/tab_maintenance.html.jinja:174
+msgid "Tailscale n'est pas installé sur ce cadre."
+msgstr "Tailscale is not installed on this frame."
+
+#: frontend/src/views/MaintenanceView.vue:292
+#: templates/configure/tab_maintenance.html.jinja:175
+msgid "Tailscale n'est pas connecté."
+msgstr "Tailscale is not connected."
+
+#: frontend/src/views/MaintenanceView.vue:293
+#: templates/configure/tab_maintenance.html.jinja:190
+msgid "Autoriser sur Tailscale"
+msgstr "Allow on Tailscale"
+
+#: frontend/src/views/MaintenanceView.vue:297
+#: templates/configure/tab_maintenance.html.jinja:444
+msgid "Système de Fichiers de la Carte SD"
+msgstr "SD card file system"
+
+#: frontend/src/views/MaintenanceView.vue:298
+#: templates/configure/tab_maintenance.html.jinja:458
+msgid "Protection contre l'usure"
+msgstr "Wear protection"
+
+#: frontend/src/views/MaintenanceView.vue:299
+#: templates/configure/tab_maintenance.html.jinja:465
+msgid ""
+"Active : les journaux sont écrits en mémoire vive et recopiés sur la "
+"carte une fois par jour."
+msgstr "Active: logs are written to RAM and copied to the card once a day."
+
+#: frontend/src/views/MaintenanceView.vue:299
+#: templates/configure/tab_maintenance.html.jinja:466
+msgid ""
+"Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur"
+" le Raspberry Pi : sudo ~/pimmich/utils/enable_sd_protection.sh puis "
+"redémarrez."
+msgstr ""
+"Inactive. To reduce writes to the SD card, run once on the Raspberry Pi: "
+"sudo ~/pimmich/utils/enable_sd_protection.sh then reboot."
+
+#: frontend/src/views/MaintenanceView.vue:300
+#: templates/configure/tab_maintenance.html.jinja:455
+msgid "Étendre le système de fichiers"
+msgstr "Extend file system"
 
 #: frontend/src/views/MessagesView.vue:22
 #: templates/configure/tab_messages.html.jinja:132
@@ -4898,20 +5483,6 @@ msgstr "Error retrieving system information"
 msgid "Test en cours..."
 msgstr "Test in progress..."
 
-#: templates/configure/scripts_gallery.html.jinja:35
-#: templates/configure/scripts_gallery.html.jinja:130
-#: templates/configure/scripts_gallery.html.jinja:281
-#: templates/configure/scripts_main.html.jinja:1408
-#: templates/configure/scripts_main.html.jinja:1442
-#: templates/configure/scripts_main.html.jinja:1675
-#: templates/configure/scripts_status.html.jinja:111
-#: templates/configure/scripts_status.html.jinja:269
-#: templates/configure/tab_carte.html.jinja:101
-#: templates/configure/tab_maintenance.html.jinja:140
-#: templates/configure/tab_maintenance.html.jinja:184
-msgid "Erreur de communication avec le serveur."
-msgstr "Communication error with the server."
-
 #: templates/configure/scripts_gallery.html.jinja:38
 msgid "Utilisé par"
 msgstr "Used by"
@@ -6363,59 +6934,6 @@ msgstr "Authors: Gotenash and Shenron"
 msgid "Projet réalisé dans le cadre du Gadgetaulab"
 msgstr "Project carried out as part of the Gadgetaulab"
 
-#: templates/configure/tab_maintenance.html.jinja:4
-msgid "Matériel"
-msgstr "Hardware"
-
-#: templates/configure/tab_maintenance.html.jinja:7
-msgid "Modèle"
-msgstr "Model"
-
-#: templates/configure/tab_maintenance.html.jinja:8
-msgid "Température"
-msgstr "Temperature"
-
-#: templates/configure/tab_maintenance.html.jinja:9
-msgid "Alimentation"
-msgstr "Power supply"
-
-#: templates/configure/tab_maintenance.html.jinja:10
-#: templates/configure/tab_maintenance.html.jinja:253
-msgid "Carte SD"
-msgstr "SD card"
-
-#: templates/configure/tab_maintenance.html.jinja:17
-msgid "Correcte"
-msgstr "OK"
-
-#: templates/configure/tab_maintenance.html.jinja:17
-msgid "Insuffisante en ce moment"
-msgstr "Too weak right now"
-
-#: templates/configure/tab_maintenance.html.jinja:17
-msgid "A faibli depuis le démarrage"
-msgstr "Dropped since startup"
-
-#: templates/configure/tab_maintenance.html.jinja:18
-msgid "Aucune erreur"
-msgstr "No errors"
-
-#: templates/configure/tab_maintenance.html.jinja:18
-msgid "erreur(s)"
-msgstr "error(s)"
-
-#: templates/configure/tab_maintenance.html.jinja:18
-msgid "Inconnu"
-msgstr "Unknown"
-
-#: templates/configure/tab_maintenance.html.jinja:19
-msgid "Alimentation conseillée pour ce modèle :"
-msgstr "Recommended power supply for this model:"
-
-#: templates/configure/tab_maintenance.html.jinja:38
-msgid "Sauvegarde et Restauration"
-msgstr "Backup and Restore"
-
 #: templates/configure/tab_maintenance.html.jinja:40
 msgid ""
 "Sauvegardez votre configuration (API, partages,\n"
@@ -6430,154 +6948,9 @@ msgstr ""
 msgid "Sauvegarder la configuration"
 msgstr "Save configuration"
 
-#: templates/configure/tab_maintenance.html.jinja:49
-msgid "Télécharger la sauvegarde"
-msgstr "Download backup"
-
-#: templates/configure/tab_maintenance.html.jinja:54
-msgid "Restaurer une configuration"
-msgstr "Restore a configuration"
-
-#: templates/configure/tab_maintenance.html.jinja:56
-msgid ""
-"Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
-"fichier de sauvegarde."
-msgstr ""
-"Are you sure? The current configuration will be overwritten by the "
-"contents of the backup file."
-
-#: templates/configure/tab_maintenance.html.jinja:61
-#: templates/configure/tab_maintenance.html.jinja:126
-msgid "Restaurer"
-msgstr "Restore"
-
-#: templates/configure/tab_maintenance.html.jinja:68
-msgid "Sauvegarde complète"
-msgstr "Full backup"
-
-#: templates/configure/tab_maintenance.html.jinja:69
-msgid ""
-"Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, "
-"dessins et vocaux, livre d'or, légendes, réactions, musique et "
-"historique. Restaurable en un clic, sur ce cadre ou sur une nouvelle "
-"installation."
-msgstr ""
-"Everything that makes your frame: settings, accounts, playlists, "
-"messages, drawings and voice notes, guestbook, captions, reactions, music"
-" and history. Restorable in one click, on this frame or on a new "
-"installation."
-
-#: templates/configure/tab_maintenance.html.jinja:72
-msgid "Sans les photos"
-msgstr "Without photos"
-
-#: templates/configure/tab_maintenance.html.jinja:74
-msgid "Télécharger"
-msgstr "Download"
-
-#: templates/configure/tab_maintenance.html.jinja:78
-msgid "Restaurer ce fichier"
-msgstr "Restore this file"
-
-#: templates/configure/tab_maintenance.html.jinja:81
-msgid "Avec les photos, sur un disque USB ou un NAS"
-msgstr "With photos, on a USB drive or NAS"
-
-#: templates/configure/tab_maintenance.html.jinja:82
-msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
-msgstr "First add a storage device in “Photo storage” below."
-
-#: templates/configure/tab_maintenance.html.jinja:86
-#: templates/configure/tab_maintenance.html.jinja:344
-msgid "Sauvegarder maintenant"
-msgstr "Back up now"
-
-#: templates/configure/tab_maintenance.html.jinja:112
-#, python-brace-format
-msgid "Sauvegarde en cours : {done} / {total} fichiers"
-msgstr "Backup in progress: {done} / {total} files"
-
-#: templates/configure/tab_maintenance.html.jinja:122
-msgid "avec photos"
-msgstr "with photos"
-
-#: templates/configure/tab_maintenance.html.jinja:135
-msgid ""
-"Remplacer les réglages, comptes, messages et playlists actuels par cette "
-"sauvegarde ?"
-msgstr ""
-"Replace the current settings, accounts, messages and playlists with this "
-"backup?"
-
-#: templates/configure/tab_maintenance.html.jinja:136
-msgid "Restauration en cours..."
-msgstr "Restoring..."
-
-#: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
-#: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:772
-msgid "Aucun fichier sélectionné."
-msgstr "No files selected."
-
-#: templates/configure/tab_maintenance.html.jinja:160
-msgid "HTTPS sans avertissement (Tailscale)"
-msgstr "HTTPS without warnings (Tailscale)"
-
-#: templates/configure/tab_maintenance.html.jinja:161
-msgid ""
-"Ouvre l'administration à une adresse sécurisée par un vrai certificat, "
-"depuis vos appareils connectés à Tailscale (à la maison comme ailleurs). "
-"Elle n'est jamais publiée sur internet."
-msgstr ""
-"Opens the admin at an address secured by a real certificate, from your "
-"devices connected to Tailscale (at home or elsewhere). It is never "
-"published on the internet."
-
-#: templates/configure/tab_maintenance.html.jinja:162
-msgid "Activer l'accès HTTPS par Tailscale"
-msgstr "Enable HTTPS access via Tailscale"
-
-#: templates/configure/tab_maintenance.html.jinja:174
-msgid "Tailscale n'est pas installé sur ce cadre."
-msgstr "Tailscale is not installed on this frame."
-
-#: templates/configure/tab_maintenance.html.jinja:175
-msgid "Tailscale n'est pas connecté."
-msgstr "Tailscale is not connected."
-
 #: templates/configure/tab_maintenance.html.jinja:180
 msgid "Un instant..."
 msgstr "One moment..."
-
-#: templates/configure/tab_maintenance.html.jinja:190
-msgid "Autoriser sur Tailscale"
-msgstr "Allow on Tailscale"
-
-#: templates/configure/tab_maintenance.html.jinja:202
-msgid "Espace disque"
-msgstr "Disk space"
-
-#: templates/configure/tab_maintenance.html.jinja:205
-msgid "Alerter sous (Go libres) :"
-msgstr "Alert below (GB free):"
-
-#: templates/configure/tab_maintenance.html.jinja:209
-msgid "Libérer de la place automatiquement"
-msgstr "Free up space automatically"
-
-#: templates/configure/tab_maintenance.html.jinja:211
-msgid ""
-"Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
-"sont supprimées du cadre, les plus anciennes d'abord. Les favoris ne sont"
-" jamais supprimés."
-msgstr ""
-"Below the threshold, Google Drive photos and videos already removed from "
-"the Drive are deleted from the frame, oldest first. Favorites are never "
-"deleted."
-
-#: templates/configure/tab_maintenance.html.jinja:215
-msgid "Stockage des photos"
-msgstr "Photo storage"
 
 #: templates/configure/tab_maintenance.html.jinja:216
 msgid ""
@@ -6591,196 +6964,6 @@ msgstr ""
 "plugged into the frame, or a network share (NAS). Choose where each "
 "source goes; the frame copies the photos, checks the copy, then frees the"
 " space. Fewer writes to the SD card also means a card that lasts longer."
-
-#: templates/configure/tab_maintenance.html.jinja:220
-msgid "Ajouter un support"
-msgstr "Add a storage device"
-
-#: templates/configure/tab_maintenance.html.jinja:222
-msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
-msgstr "No USB disk detected: plug it in, then reopen this tab."
-
-#: templates/configure/tab_maintenance.html.jinja:224
-msgid "Partage réseau (NAS, ordinateur)"
-msgstr "Network share (NAS, computer)"
-
-#: templates/configure/tab_maintenance.html.jinja:230
-msgid "Ajouter le partage"
-msgstr "Add share"
-
-#: templates/configure/tab_maintenance.html.jinja:234
-msgid "Emplacement de chaque source"
-msgstr "Location of each source"
-
-#: templates/configure/tab_maintenance.html.jinja:253
-msgid "libres sur"
-msgstr "free of"
-
-#: templates/configure/tab_maintenance.html.jinja:253
-msgid "Débranché"
-msgstr "Unplugged"
-
-#: templates/configure/tab_maintenance.html.jinja:254
-msgid "Utiliser ce disque"
-msgstr "Use this disk"
-
-#: templates/configure/tab_maintenance.html.jinja:254
-#, python-brace-format
-msgid "Déplacement de « {source} » : {done} / {total} fichiers"
-msgstr "Moving “{source}”: {done} / {total} files"
-
-#: templates/configure/tab_maintenance.html.jinja:255
-msgid "fichiers"
-msgstr "files"
-
-#: templates/configure/tab_maintenance.html.jinja:255
-msgid "support débranché"
-msgstr "storage unplugged"
-
-#: templates/configure/tab_maintenance.html.jinja:255
-#, python-brace-format
-msgid "Déplacer les photos de « {source} » vers « {target} » ?"
-msgstr "Move the photos of “{source}” to “{target}”?"
-
-#: templates/configure/tab_maintenance.html.jinja:256
-msgid ""
-"Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
-"un dossier « pimmich »."
-msgstr ""
-"The disk's current content is kept: Pimmich stores its photos in a "
-"“pimmich” folder."
-
-#: templates/configure/tab_maintenance.html.jinja:324
-msgid "Sauvegarde automatique sur Google Drive"
-msgstr "Automatic backup to Google Drive"
-
-#: templates/configure/tab_maintenance.html.jinja:326
-msgid ""
-"Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
-"messages dans un dossier de votre Google Drive (connexion rclone). Les "
-"photos ne sont pas incluses."
-msgstr ""
-"Backs up settings, accounts, playlists, favorites, invitations and "
-"messages to a folder in your Google Drive (rclone connection). Photos are"
-" not included."
-
-#: templates/configure/tab_maintenance.html.jinja:329 utils/health.py:159
-msgid "Activer la sauvegarde automatique"
-msgstr "Enable automatic backup"
-
-#: templates/configure/tab_maintenance.html.jinja:332
-msgid "Dossier Google Drive :"
-msgstr "Google Drive folder:"
-
-#: templates/configure/tab_maintenance.html.jinja:334
-msgid "Toutes les (heures) :"
-msgstr "Every (hours):"
-
-#: templates/configure/tab_maintenance.html.jinja:336
-msgid "Sauvegardes conservées :"
-msgstr "Backups kept:"
-
-#: templates/configure/tab_maintenance.html.jinja:342
-msgid "Enregistrer ces réglages"
-msgstr "Save these settings"
-
-#: templates/configure/tab_maintenance.html.jinja:346
-msgid "Restaurer la dernière sauvegarde"
-msgstr "Restore the latest backup"
-
-#: templates/configure/tab_maintenance.html.jinja:358
-msgid "Go libres sur"
-msgstr "GB free of"
-
-#: templates/configure/tab_maintenance.html.jinja:358
-msgid "utilisés"
-msgstr "used"
-
-#: templates/configure/tab_maintenance.html.jinja:359
-msgid "espace faible"
-msgstr "low space"
-
-#: templates/configure/tab_maintenance.html.jinja:360
-msgid "média(s) Google Drive pourraient être supprimés automatiquement."
-msgstr "Google Drive media item(s) may be deleted automatically."
-
-#: templates/configure/tab_maintenance.html.jinja:367
-msgid "Dernière sauvegarde réussie :"
-msgstr "Last successful backup:"
-
-#: templates/configure/tab_maintenance.html.jinja:368
-msgid "Dernier échec :"
-msgstr "Last failure:"
-
-#: templates/configure/tab_maintenance.html.jinja:381
-msgid "Sauvegarde en cours..."
-msgstr "Backup in progress..."
-
-#: templates/configure/tab_maintenance.html.jinja:383
-msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
-msgstr "Replace the current settings with the latest backup from the Drive?"
-
-#: templates/configure/tab_maintenance.html.jinja:392
-msgid "Mise à jour de l'application"
-msgstr "Application update"
-
-#: templates/configure/tab_maintenance.html.jinja:394
-msgid ""
-"Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
-"version ne démarre pas, le cadre revient tout seul à la version "
-"précédente."
-msgstr ""
-"Pimmich updates itself from GitHub and then restarts. If the new version "
-"fails to start, the frame automatically goes back to the previous "
-"version."
-
-#: templates/configure/tab_maintenance.html.jinja:396
-msgid "Version installée :"
-msgstr "Installed version:"
-
-#: templates/configure/tab_maintenance.html.jinja:403
-msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
-msgstr "Start the update? You will be redirected to the tracking page."
-
-#: templates/configure/tab_maintenance.html.jinja:404
-msgid "Lancer la mise à jour"
-msgstr "Start the update"
-
-#: templates/configure/tab_maintenance.html.jinja:406
-msgid "Revenir à la version précédente"
-msgstr "Go back to the previous version"
-
-#: templates/configure/tab_maintenance.html.jinja:410
-msgid "Pimmich est à jour."
-msgstr "Pimmich is up to date."
-
-#: templates/configure/tab_maintenance.html.jinja:410
-msgid "Mise à jour disponible :"
-msgstr "Update available:"
-
-#: templates/configure/tab_maintenance.html.jinja:410
-msgid "changement(s)"
-msgstr "change(s)"
-
-#: templates/configure/tab_maintenance.html.jinja:411
-msgid "Impossible de joindre GitHub (connexion internet ?)."
-msgstr "Can't reach GitHub (internet connection?)."
-
-#: templates/configure/tab_maintenance.html.jinja:412
-msgid "Dernière mise à jour en cours de validation (redémarrage)."
-msgstr "Latest update being validated (restarting)."
-
-#: templates/configure/tab_maintenance.html.jinja:413
-msgid "Le cadre est revenu à une version précédente."
-msgstr "The frame went back to a previous version."
-
-#: templates/configure/tab_maintenance.html.jinja:414
-msgid "Revenir à la version précédente ? Pimmich va redémarrer."
-msgstr "Go back to the previous version? Pimmich will restart."
-
-#: templates/configure/tab_maintenance.html.jinja:444
-msgid "Système de Fichiers de la Carte SD"
-msgstr "SD card file system"
 
 #: templates/configure/tab_maintenance.html.jinja:446
 msgid ""
@@ -6806,75 +6989,6 @@ msgid ""
 msgstr ""
 "This operation is safe and does not delete any data. It simply prepares "
 "the system to expand on the next boot."
-
-#: templates/configure/tab_maintenance.html.jinja:455
-msgid "Étendre le système de fichiers"
-msgstr "Extend file system"
-
-#: templates/configure/tab_maintenance.html.jinja:458
-msgid "Protection contre l'usure"
-msgstr "Wear protection"
-
-#: templates/configure/tab_maintenance.html.jinja:465
-msgid ""
-"Active : les journaux sont écrits en mémoire vive et recopiés sur la "
-"carte une fois par jour."
-msgstr "Active: logs are written to RAM and copied to the card once a day."
-
-#: templates/configure/tab_maintenance.html.jinja:466
-msgid ""
-"Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur"
-" le Raspberry Pi : sudo ~/pimmich/utils/enable_sd_protection.sh puis "
-"redémarrez."
-msgstr ""
-"Inactive. To reduce writes to the SD card, run once on the Raspberry Pi: "
-"sudo ~/pimmich/utils/enable_sd_protection.sh then reboot."
-
-#: templates/configure/tab_maintenance.html.jinja:473
-msgid "Contrôle du système"
-msgstr "System control"
-
-#: templates/configure/tab_maintenance.html.jinja:476
-msgid ""
-"Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
-"système d'exploitation ne sera pas redémarré."
-msgstr ""
-"Are you sure you want to restart ONLY the web application? The operating "
-"system will not be restarted."
-
-#: templates/configure/tab_maintenance.html.jinja:479
-msgid "Redémarrer l'application web"
-msgstr "Reboot Application Web"
-
-#: templates/configure/tab_maintenance.html.jinja:488
-msgid "Redémarrer le système"
-msgstr "Restart the system"
-
-#: templates/configure/tab_maintenance.html.jinja:496
-msgid "Supprimer les logs"
-msgstr "Delete logs"
-
-#: templates/configure/tab_maintenance.html.jinja:501
-msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
-msgstr "Are you sure you want to turn OFF the system?"
-
-#: templates/configure/tab_maintenance.html.jinja:504
-msgid "Éteindre le système"
-msgstr "Shut down the system"
-
-#: templates/configure/tab_maintenance.html.jinja:509
-msgid "Repasser sur Raspberry Pi OS (bureau)"
-msgstr "Switch back to Raspberry Pi OS (desktop)"
-
-#: templates/configure/tab_maintenance.html.jinja:514
-msgid ""
-"Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
-" lancera plus automatiquement. Pour revenir au mode cadre photo, relancez"
-" setup.sh. Continuer ?"
-msgstr ""
-"The Raspberry Pi will reboot to the Raspberry Pi OS desktop and Pimmich "
-"will no longer start automatically. To return to photo frame mode, run "
-"setup.sh again. Continue?"
 
 #: templates/configure/tab_messages.html.jinja:83
 msgid "Messages publiés"

@@ -25,6 +25,7 @@ export const router = createRouter({
     { path: "/invites", component: () => import("./views/GuestsView.vue") },
     { path: "/legendes", component: () => import("./views/CaptionsView.vue") },
     { path: "/son", component: () => import("./views/SoundView.vue") },
+    { path: "/maintenance", component: () => import("./views/MaintenanceView.vue") },
     { path: "/favoris", component: () => import("./views/LibraryView.vue"), props: { favorites: true } },
     { path: "/:rest(.*)*", redirect: "/" },
   ],
