@@ -12,6 +12,11 @@ const route = useRoute();
 const status = ref<{ running: boolean; paused: boolean } | null>(null);
 const sheet = ref<NavGroup | null>(null);
 const pendingCount = ref(0);
+interface ImportItem { source: string; label: string; phase: string; active: boolean; download: { percent: number }; prepare: { percent: number } }
+const imports = ref<ImportItem[]>([]);
+async function refreshImports() {
+  try { imports.value = (await get<{ imports: ImportItem[] }>("/api/imports/progress")).imports; } catch { imports.value = []; }
+}
 let timer: number | undefined;
 
 const visibleGroups = computed(() =>
@@ -64,7 +69,8 @@ function openGroup(group: NavGroup) {
 onMounted(() => {
   refreshStatus();
   refreshPending();
-  timer = window.setInterval(() => { refreshStatus(); refreshPending(); }, 15000);
+  refreshImports();
+  timer = window.setInterval(() => { refreshStatus(); refreshPending(); refreshImports(); }, 15000);
   document.addEventListener("pimmich:status", refreshStatus);
   document.addEventListener("pimmich:pending", refreshPending);
 });
@@ -132,6 +138,13 @@ onUnmounted(() => {
       </div>
     </div>
 
+    <div v-if="imports.length" class="imports">
+      <div v-for="item in imports" :key="item.source" class="import-item">
+        <i class="fas" :class="item.active ? 'fa-sync-alt fa-spin' : 'fa-check-circle'"></i>
+        <span class="spacer">{{ item.label }} · {{ item.phase === "prepare" ? t("préparation") : t("téléchargement") }}</span>
+        <strong>{{ item.phase === "prepare" ? item.prepare.percent : item.download.percent }}%</strong>
+      </div>
+    </div>
     <div v-if="toast.text" class="toast" :class="{ error: toast.error }" role="status">{{ toast.text }}</div>
   </div>
 </template>
@@ -169,6 +182,10 @@ nav h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; co
 .content { padding: 1.3rem 1.5rem 2.5rem; max-width: 1200px; }
 
 .bottom-nav { display: none; }
+.imports { position: fixed; right: 1rem; bottom: 1rem; z-index: 30; display: grid; gap: .4rem; width: min(320px, calc(100vw - 2rem)); }
+.import-item { display: flex; align-items: center; gap: .6rem; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: 12px; padding: .55rem .8rem; font-size: .88rem; }
+.import-item i { color: var(--accent); }
+@media (max-width: 760px) { .imports { bottom: calc(4.6rem + env(safe-area-inset-bottom)); right: .5rem; } }
 .sheet-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, .35); z-index: 40; display: flex; align-items: flex-end; }
 .sheet {
   width: 100%; background: var(--surface); border-radius: 20px 20px 0 0; padding: 1rem 1rem calc(5rem + env(safe-area-inset-bottom));

@@ -22,7 +22,7 @@ export const groups: NavGroup[] = [
     { label: () => t("Accueil"), icon: "fa-home", tab: "tab-accueil", route: "/" },
   ] },
   { key: "photos", label: () => t("Photos"), icon: "fa-images", items: [
-    { label: () => t("Importer"), icon: "fa-file-import", tab: "tab-actions" },
+    { label: () => t("Importer"), icon: "fa-file-import", tab: "tab-actions", route: "/importer" },
     { label: () => t("Sources"), icon: "fa-folder-open", tab: "tab-sources" },
     { label: () => t("Bibliothèque"), icon: "fa-th", tab: "tab-apercu", route: "/bibliotheque" },
     { label: () => t("À suivre"), icon: "fa-stream", tab: "tab-queue", route: "/a-suivre" },
@@ -40,7 +40,7 @@ export const groups: NavGroup[] = [
     { label: () => t("Son"), icon: "fa-music", tab: "tab-son" },
   ] },
   { key: "partage", label: () => t("Partage"), icon: "fa-user-friends", items: [
-    { label: () => t("Invités"), icon: "fa-qrcode", tab: "tab-invites" },
+    { label: () => t("Invités"), icon: "fa-qrcode", tab: "tab-invites", route: "/invites" },
     { label: () => t("À valider"), icon: "fa-check-circle", tab: "tab-validation", route: "/a-valider" },
     { label: () => t("Telegram"), icon: "fa-paper-plane", tab: "tab-telegram", route: "/telegram" },
   ] },

@@ -21,6 +21,8 @@ export const router = createRouter({
     { path: "/telegram", component: () => import("./views/TelegramView.vue") },
     { path: "/reseau", component: () => import("./views/NetworkView.vue") },
     { path: "/commande-vocale", component: () => import("./views/VoiceView.vue") },
+    { path: "/importer", component: () => import("./views/ImportView.vue") },
+    { path: "/invites", component: () => import("./views/GuestsView.vue") },
     { path: "/favoris", component: () => import("./views/LibraryView.vue"), props: { favorites: true } },
     { path: "/:rest(.*)*", redirect: "/" },
   ],

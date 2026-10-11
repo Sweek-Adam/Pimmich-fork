@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 17:46+0200\n"
+"POT-Creation-Date: 2026-10-11 17:51+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -144,33 +144,41 @@ msgstr "Retrying in 60 seconds..."
 msgid "Scannez pour configurer"
 msgstr "Scan to configure"
 
-#: frontend/src/App.vue:89
+#: frontend/src/App.vue:95
 msgid "Ouvre l'interface classique"
 msgstr "Opens the classic interface"
 
-#: frontend/src/App.vue:95 frontend/src/App.vue:131
+#: frontend/src/App.vue:101 frontend/src/App.vue:137
 msgid "Interface classique"
 msgstr "Classic interface"
 
-#: frontend/src/App.vue:101 templates/configure.html.jinja:132
+#: frontend/src/App.vue:107 templates/configure.html.jinja:132
 msgid "Nouvelle interface (essai)"
 msgstr "New interface (preview)"
 
-#: frontend/src/App.vue:104
+#: frontend/src/App.vue:110
 msgid "En pause"
 msgstr "Paused"
 
-#: frontend/src/App.vue:104 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:110 templates/configure/scripts_app.html.jinja:64
 msgid "En marche"
 msgstr "Running"
 
-#: frontend/src/App.vue:104 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:110 templates/configure/scripts_app.html.jinja:64
 msgid "Arrêté"
 msgstr "Stopped"
 
-#: frontend/src/App.vue:106 templates/configure.html.jinja:120
+#: frontend/src/App.vue:112 templates/configure.html.jinja:120
 msgid "Thème"
 msgstr "Theme"
+
+#: frontend/src/App.vue:144
+msgid "préparation"
+msgstr "preparing"
+
+#: frontend/src/App.vue:144
+msgid "téléchargement"
+msgstr "downloading"
 
 #: frontend/src/i18n.ts:2 frontend/src/views/PlaylistsView.vue:118
 #: frontend/src/views/QueueView.vue:102 frontend/src/views/TripsView.vue:258
@@ -193,7 +201,8 @@ msgstr "Home"
 msgid "Photos"
 msgstr "Photos"
 
-#: frontend/src/nav.ts:25 templates/configure.html.jinja:144
+#: frontend/src/nav.ts:25 frontend/src/views/ImportView.vue:183
+#: templates/configure.html.jinja:144
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr "Import"
@@ -986,6 +995,409 @@ msgstr ""
 "Orientation, resolution, Home Assistant, smart plug and wake on arrival: "
 "classic interface"
 
+#: frontend/src/views/GuestsView.vue:14
+#: templates/configure/tab_invites.html.jinja:112
+msgid "QR code pour les invités"
+msgstr "QR code for guests"
+
+#: frontend/src/views/GuestsView.vue:15
+#: templates/configure/tab_invites.html.jinja:114
+msgid ""
+"Affiche en permanence sur le diaporama un QR code vers la page invités, "
+"pour envoyer des photos ou écrire un message depuis un téléphone connecté"
+" au même Wi-Fi."
+msgstr ""
+"Permanently shows a QR code on the slideshow linking to the guest page, "
+"to send photos or write a message from a phone on the same Wi-Fi."
+
+#: frontend/src/views/GuestsView.vue:17
+#: templates/configure/tab_invites.html.jinja:117
+msgid "Afficher le QR code"
+msgstr "Show the QR code"
+
+#: frontend/src/views/GuestsView.vue:18
+#: templates/configure/tab_invites.html.jinja:119
+msgid "Position :"
+msgstr "Position:"
+
+#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:27
+#: templates/configure/tab_invites.html.jinja:122
+#: templates/configure/tab_metadata.html.jinja:82
+#: templates/configure/tab_son.html.jinja:115
+msgid "En bas à droite"
+msgstr "Bottom right"
+
+#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:27
+#: templates/configure/tab_invites.html.jinja:123
+#: templates/configure/tab_metadata.html.jinja:84
+#: templates/configure/tab_son.html.jinja:114
+msgid "En bas à gauche"
+msgstr "Bottom left"
+
+#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:26
+#: templates/configure/tab_invites.html.jinja:124
+#: templates/configure/tab_metadata.html.jinja:78
+#: templates/configure/tab_son.html.jinja:117
+msgid "En haut à droite"
+msgstr "Top right"
+
+#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:26
+#: templates/configure/tab_invites.html.jinja:125
+#: templates/configure/tab_metadata.html.jinja:80
+#: templates/configure/tab_son.html.jinja:116
+msgid "En haut à gauche"
+msgstr "Top left"
+
+#: frontend/src/views/GuestsView.vue:22
+msgid "Messages et réactions"
+msgstr "Messages and reactions"
+
+#: frontend/src/views/GuestsView.vue:23
+#: templates/configure/tab_invites.html.jinja:129
+msgid "Autoriser les invités à écrire des messages"
+msgstr "Allow guests to write messages"
+
+#: frontend/src/views/GuestsView.vue:24
+#: templates/configure/tab_invites.html.jinja:131
+msgid ""
+"Les messages des invités s'affichent directement (5 par heure et par "
+"appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
+" supprimer dans Contenu > Messages."
+msgstr ""
+"Guest messages are shown immediately (at most 5 per hour per device) and "
+"disappear after 7 days. You can delete them in Content > Messages."
+
+#: frontend/src/views/GuestsView.vue:25
+#: templates/configure/tab_invites.html.jinja:134
+msgid ""
+"Lire les messages vocaux quand leur carte s'affiche (au plus une fois par"
+" heure)"
+msgstr "Play voice messages when their card is shown (at most once an hour)"
+
+#: frontend/src/views/GuestsView.vue:26
+#: templates/configure/tab_invites.html.jinja:137
+msgid "Volume des messages vocaux :"
+msgstr "Voice message volume:"
+
+#: frontend/src/views/GuestsView.vue:27
+#: templates/configure/tab_invites.html.jinja:142
+msgid ""
+"Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
+"😂 😮 👏)"
+msgstr "Reactions: guests see the photo on screen and can react to it (❤️ 😂 😮 👏)"
+
+#: frontend/src/views/GuestsView.vue:28
+#: templates/configure/tab_invites.html.jinja:144
+msgid ""
+"Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
+"invités restent ensuite dans le livre d'or :"
+msgstr ""
+"Only from the home Wi-Fi. Guests' messages and drawings are then kept in "
+"the guestbook:"
+
+#: frontend/src/views/GuestsView.vue:34
+#: templates/configure/tab_invites.html.jinja:32
+#: templates/configure/tab_invites.html.jinja:99
+msgid "Notre cadre photo"
+msgstr "Our photo frame"
+
+#: frontend/src/views/GuestsView.vue:35
+#: templates/configure/tab_invites.html.jinja:35
+#: templates/configure/tab_invites.html.jinja:70
+msgid "Lien copié : collez-le dans un message à la famille."
+msgstr "Link copied: paste it into a message to the family."
+
+#: frontend/src/views/GuestsView.vue:47
+#: templates/configure/tab_invites.html.jinja:67
+msgid ""
+"Tailscale n'est pas installé sur le cadre : "
+"https://tailscale.com/download/linux"
+msgstr ""
+"Tailscale is not installed on the frame: "
+"https://tailscale.com/download/linux"
+
+#: frontend/src/views/GuestsView.vue:48
+#: templates/configure/tab_invites.html.jinja:68
+msgid ""
+"Tailscale est installé mais pas connecté : lancez « sudo tailscale up » "
+"sur le cadre."
+msgstr ""
+"Tailscale is installed but not connected: run “sudo tailscale up” on the "
+"frame."
+
+#: frontend/src/views/GuestsView.vue:49
+#: templates/configure/tab_invites.html.jinja:69
+msgid ""
+"Une seule fois, lancez sur le Raspberry Pi : "
+"~/pimmich/utils/enable_remote_guests.sh"
+msgstr "Once, run on the Raspberry Pi: ~/pimmich/utils/enable_remote_guests.sh"
+
+#: frontend/src/views/GuestsView.vue:90
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Votre message :"
+msgstr "Your message:"
+
+#: frontend/src/views/GuestsView.vue:108
+msgid "Retirer ce cadre ?"
+msgstr "Remove this frame?"
+
+#: frontend/src/views/GuestsView.vue:130
+#: templates/configure/tab_invites.html.jinja:7
+msgid "QR code de la page invités"
+msgstr "Guest page QR code"
+
+#: frontend/src/views/GuestsView.vue:132
+#: templates/configure/tab_invites.html.jinja:4
+msgid "Inviter la famille et les amis"
+msgstr "Invite family and friends"
+
+#: frontend/src/views/GuestsView.vue:133
+#: templates/configure/tab_invites.html.jinja:9
+msgid ""
+"Les personnes connectées à votre Wi-Fi scannent ce QR code (ou ouvrent "
+"l'adresse ci-dessous) pour envoyer des photos et écrire des messages sur "
+"le cadre."
+msgstr ""
+"People connected to your Wi-Fi scan this QR code (or open the address "
+"below) to send photos and write messages on the frame."
+
+#: frontend/src/views/GuestsView.vue:136
+#: templates/configure/tab_invites.html.jinja:32
+msgid ""
+"Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi"
+" de la maison) :"
+msgstr "Send your photos and messages to our photo frame (from the home Wi-Fi):"
+
+#: frontend/src/views/GuestsView.vue:137 frontend/src/views/GuestsView.vue:158
+#: templates/configure/tab_invites.html.jinja:12
+#: templates/configure/tab_invites.html.jinja:55
+msgid "Partager le lien"
+msgstr "Share the link"
+
+#: frontend/src/views/GuestsView.vue:138
+#: templates/configure/tab_invites.html.jinja:13
+msgid "Ouvrir la page invités"
+msgstr "Open the guest page"
+
+#: frontend/src/views/GuestsView.vue:139
+#: templates/configure/tab_invites.html.jinja:144
+msgid "ouvrir le livre d'or"
+msgstr "open the guestbook"
+
+#: frontend/src/views/GuestsView.vue:141
+#: templates/configure/tab_invites.html.jinja:17
+msgid "Les photos des invités passent par « À valider » avant d'être affichées."
+msgstr "Guest photos go through “To review” before being shown."
+
+#: frontend/src/views/GuestsView.vue:146
+#: templates/configure/tab_invites.html.jinja:45
+msgid "Hors de la maison"
+msgstr "Away from home"
+
+#: frontend/src/views/GuestsView.vue:147
+#: templates/configure/tab_invites.html.jinja:47
+msgid ""
+"La famille peut aussi envoyer photos et messages depuis chez elle, avec "
+"un lien secret. Seule la page d'envoi est publiée (via Tailscale) : "
+"l'administration et vos photos ne sont jamais accessibles depuis "
+"internet. Les photos passent toujours par « À valider »."
+msgstr ""
+"Family can also send photos and messages from their own homes with a "
+"secret link. Only the upload page is published (via Tailscale): the admin"
+" pages and your photos are never reachable from the internet. Photos "
+"still go through “To approve”."
+
+#: frontend/src/views/GuestsView.vue:150
+#: templates/configure/tab_invites.html.jinja:49
+msgid "Autoriser les envois depuis l'extérieur"
+msgstr "Allow uploads from outside"
+
+#: frontend/src/views/GuestsView.vue:151
+#: templates/configure/tab_invites.html.jinja:90
+msgid "Autoriser Funnel sur Tailscale"
+msgstr "Allow Funnel on Tailscale"
+
+#: frontend/src/views/GuestsView.vue:153
+#: templates/configure/tab_invites.html.jinja:51
+msgid "QR code du lien secret"
+msgstr "QR code for the secret link"
+
+#: frontend/src/views/GuestsView.vue:157
+#: templates/configure/tab_invites.html.jinja:71
+msgid ""
+"Envoyez vos photos et vos messages sur notre cadre photo, où que vous "
+"soyez :"
+msgstr "Send your photos and messages to our photo frame, wherever you are:"
+
+#: frontend/src/views/GuestsView.vue:159
+#: templates/configure/tab_invites.html.jinja:56
+msgid "Changer le lien"
+msgstr "Change the link"
+
+#: frontend/src/views/GuestsView.vue:161
+#: templates/configure/tab_invites.html.jinja:58
+msgid ""
+"« Changer le lien » rend l'ancien inutilisable (par exemple s'il a "
+"circulé trop largement)."
+msgstr ""
+"“Change the link” makes the old one unusable (for example if it has been "
+"shared too widely)."
+
+#: frontend/src/views/GuestsView.vue:169
+#: templates/configure/tab_invites.html.jinja:149
+msgid "Cadres de la famille"
+msgstr "Family frames"
+
+#: frontend/src/views/GuestsView.vue:170
+#: templates/configure/tab_invites.html.jinja:150
+msgid ""
+"Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au "
+"chalet…) : voir la photo affichée, les allumer, leur envoyer des photos "
+"ou un message. Ils doivent être joignables : même réseau, ou Tailscale "
+"sur les deux cadres."
+msgstr ""
+"Control the family's other Pimmich frames from here (at Grandma's, at the"
+" cabin…): see the photo on screen, turn them on, send them photos or a "
+"message. They must be reachable: same network, or Tailscale on both "
+"frames."
+
+#: frontend/src/views/GuestsView.vue:171
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Aucun autre cadre pour l'instant."
+msgstr "No other frame yet."
+
+#: frontend/src/views/GuestsView.vue:178
+#: templates/configure/tab_invites.html.jinja:186
+msgid "injoignable"
+msgstr "unreachable"
+
+#: frontend/src/views/GuestsView.vue:178
+#: templates/configure/tab_invites.html.jinja:187
+msgid "code refusé"
+msgstr "code refused"
+
+#: frontend/src/views/GuestsView.vue:178
+#: templates/configure/tab_invites.html.jinja:187
+msgid "diaporama en cours"
+msgstr "slideshow running"
+
+#: frontend/src/views/GuestsView.vue:178
+#: templates/configure/tab_invites.html.jinja:187
+msgid "en veille"
+msgstr "asleep"
+
+#: frontend/src/views/GuestsView.vue:180
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Endormir"
+msgstr "Put to sleep"
+
+#: frontend/src/views/GuestsView.vue:180
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Allumer"
+msgstr "Turn on"
+
+#: frontend/src/views/GuestsView.vue:181 frontend/src/views/HomeView.vue:145
+#: templates/configure/tab_accueil.html.jinja:24
+#: templates/configure/tab_actions.html.jinja:37
+#: templates/configure/tab_invites.html.jinja:185
+#: templates/configure/tab_playlists.html.jinja:28
+msgid "Photo suivante"
+msgstr "Next photo"
+
+#: frontend/src/views/GuestsView.vue:182
+#: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:7
+msgid "Envoyer des photos"
+msgstr "Send photos"
+
+#: frontend/src/views/GuestsView.vue:183
+#: templates/configure/tab_invites.html.jinja:186
+msgid "Envoyer un message"
+msgstr "Send a message"
+
+#: frontend/src/views/GuestsView.vue:185 frontend/src/views/GuestsView.vue:207
+#: templates/configure/_playlist_builder.html.jinja:41
+#: templates/configure/_son_radio.html.jinja:27
+#: templates/configure/tab_affichage.html.jinja:361
+#: templates/configure/tab_dispositions.html.jinja:146
+#: templates/configure/tab_heure.html.jinja:26
+#: templates/configure/tab_invites.html.jinja:186
+#: templates/configure/tab_maintenance.html.jinja:254
+#: templates/configure/tab_son.html.jinja:46
+#: templates/configure/tab_sources.html.jinja:495
+#: templates/guestbook.html.jinja:27
+msgid "Retirer"
+msgstr "Remove"
+
+#: frontend/src/views/GuestsView.vue:190
+#: templates/configure/tab_invites.html.jinja:153
+msgid "Ajouter un cadre"
+msgstr "Add a frame"
+
+#: frontend/src/views/GuestsView.vue:192
+#: templates/configure/tab_invites.html.jinja:155
+msgid ""
+"Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
+"dessous), puis « Créer un code »."
+msgstr ""
+"On the other frame: Sharing › Guests › “Pairing code” (below), then "
+"“Create a code”."
+
+#: frontend/src/views/GuestsView.vue:193
+#: templates/configure/tab_invites.html.jinja:156
+msgid ""
+"Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
+"https://192.168.1.30) et ce code."
+msgstr ""
+"Here: its address (e.g. https://100.101.102.103 with Tailscale, or "
+"https://192.168.1.30) and that code."
+
+#: frontend/src/views/GuestsView.vue:196
+#: templates/configure/tab_invites.html.jinja:159
+#: templates/configure/tab_maintenance.html.jinja:226
+msgid "Adresse"
+msgstr "Address"
+
+#: frontend/src/views/GuestsView.vue:197
+#: templates/configure/tab_invites.html.jinja:160
+msgid "Code"
+msgstr "Code"
+
+#: frontend/src/views/GuestsView.vue:198
+#: templates/configure/_smart_albums.html.jinja:16
+#: templates/configure/tab_comptes.html.jinja:58
+#: templates/configure/tab_invites.html.jinja:161
+msgid "Nom"
+msgstr "Name"
+
+#: frontend/src/views/GuestsView.vue:198
+#: templates/configure/tab_invites.html.jinja:161
+msgid "ex : Chez Mamie"
+msgstr "e.g. Grandma's"
+
+#: frontend/src/views/GuestsView.vue:199
+#: templates/configure/tab_invites.html.jinja:163
+msgid "Ajouter le cadre"
+msgstr "Add frame"
+
+#: frontend/src/views/GuestsView.vue:203
+#: templates/configure/tab_invites.html.jinja:166
+msgid "Code d'association de ce cadre"
+msgstr "This frame's pairing code"
+
+#: frontend/src/views/GuestsView.vue:204
+#: templates/configure/tab_invites.html.jinja:167
+msgid ""
+"À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
+"l'accès."
+msgstr ""
+"Enter it on the frame that will control this one. Remove a code to cut "
+"access."
+
+#: frontend/src/views/GuestsView.vue:209
+#: templates/configure/tab_invites.html.jinja:169
+msgid "Créer un code"
+msgstr "Create a code"
+
 #: frontend/src/views/HomeView.vue:138
 msgid "Le cadre est en veille"
 msgstr "The frame is asleep"
@@ -1004,14 +1416,6 @@ msgstr "Resume"
 #: frontend/src/views/HomeView.vue:143
 msgid "Pause"
 msgstr "Pause"
-
-#: frontend/src/views/HomeView.vue:145
-#: templates/configure/tab_accueil.html.jinja:24
-#: templates/configure/tab_actions.html.jinja:37
-#: templates/configure/tab_invites.html.jinja:185
-#: templates/configure/tab_playlists.html.jinja:28
-msgid "Photo suivante"
-msgstr "Next photo"
 
 #: frontend/src/views/HomeView.vue:149
 msgid "Mettre en veille"
@@ -1086,6 +1490,189 @@ msgstr "Cancel"
 msgid "Rien pour l'instant."
 msgstr "Nothing yet."
 
+#: frontend/src/views/ImportView.vue:11
+#: templates/configure/tab_actions.html.jinja:74
+msgid "Importer depuis Google Drive"
+msgstr "Import from Google Drive"
+
+#: frontend/src/views/ImportView.vue:12
+#: templates/configure/tab_actions.html.jinja:56
+msgid "Importer depuis Immich"
+msgstr "Import from Immich"
+
+#: frontend/src/views/ImportView.vue:13
+#: templates/configure/tab_actions.html.jinja:65
+msgid "Importer depuis Samba"
+msgstr "Import from Samba"
+
+#: frontend/src/views/ImportView.vue:14
+#: templates/configure/tab_actions.html.jinja:47
+msgid "Importer depuis la clé USB"
+msgstr "Import from USB drive"
+
+#: frontend/src/views/ImportView.vue:30
+#: templates/configure/scripts_app.html.jinja:22
+#: templates/configure/scripts_gallery.html.jinja:9
+msgid "Erreur"
+msgstr "Error"
+
+#: frontend/src/views/ImportView.vue:32
+#: templates/configure/scripts_main.html.jinja:1608
+msgid "Erreur de connexion au serveur."
+msgstr "Server connection error."
+
+#: frontend/src/views/ImportView.vue:40
+#: templates/configure/scripts_main.html.jinja:1232
+msgid "Préparation terminée ! Redémarrage du diaporama..."
+msgstr "Preparation complete! Restarting the slideshow..."
+
+#: frontend/src/views/ImportView.vue:43
+#: templates/configure/scripts_main.html.jinja:1223
+msgid "Préparation :"
+msgstr "Preparation :"
+
+#: frontend/src/views/ImportView.vue:44
+#: templates/configure/scripts_main.html.jinja:1268
+msgid "Importation :"
+msgstr "Importation :"
+
+#: frontend/src/views/ImportView.vue:53
+#: templates/configure/scripts_main.html.jinja:1702
+msgid "Veuillez sélectionner au moins un fichier."
+msgstr "Please select at least one file."
+
+#: frontend/src/views/ImportView.vue:80
+msgid "Importation réussie !"
+msgstr "Import successful!"
+
+#: frontend/src/views/ImportView.vue:83
+#: templates/configure/scripts_main.html.jinja:1775
+msgid "Erreur de communication :"
+msgstr "Communication error:"
+
+#: frontend/src/views/ImportView.vue:95
+#: templates/configure/tab_actions.html.jinja:138
+msgid "Retirer cette photo du cadre ?"
+msgstr "Remove this photo from the frame?"
+
+#: frontend/src/views/ImportView.vue:116 frontend/src/views/ImportView.vue:117
+#: frontend/src/views/ImportView.vue:121
+#: templates/configure/tab_actions.html.jinja:178
+msgid "Envoi impossible."
+msgstr "Upload failed."
+
+#: frontend/src/views/ImportView.vue:139
+#: templates/configure/tab_actions.html.jinja:44
+msgid "Importation des photos"
+msgstr "Importing photos"
+
+#: frontend/src/views/ImportView.vue:147
+#: templates/configure/tab_actions.html.jinja:85
+msgid "Photo en cours de préparation"
+msgstr "Photo being prepared"
+
+#: frontend/src/views/ImportView.vue:149
+msgid ""
+"L'import depuis Telegram se fait automatiquement à la réception des "
+"photos."
+msgstr "Telegram photos are imported automatically when they arrive."
+
+#: frontend/src/views/ImportView.vue:154
+#: templates/configure/tab_actions.html.jinja:98
+msgid "Importer depuis un Smartphone"
+msgstr "Import from Smartphone"
+
+#: frontend/src/views/ImportView.vue:155
+msgid "Envoyez des photos directement depuis votre téléphone via le navigateur."
+msgstr "Send photos directly from your phone through the browser."
+
+#: frontend/src/views/ImportView.vue:158
+#: templates/configure/scripts_main.html.jinja:1744
+#: templates/configure/scripts_main.html.jinja:1777
+#: templates/configure/tab_actions.html.jinja:106
+msgid "Envoyer les photos"
+msgstr "Send photos"
+
+#: frontend/src/views/ImportView.vue:167
+#: templates/configure/tab_actions.html.jinja:152
+msgid "Importer une discussion WhatsApp"
+msgstr "Import a WhatsApp chat"
+
+#: frontend/src/views/ImportView.vue:168
+#: templates/configure/tab_actions.html.jinja:153
+msgid ""
+"Dans WhatsApp : ouvrez la discussion (ou le groupe familial) › nom en "
+"haut › « Exporter la discussion » › « Joindre les médias ». Envoyez le "
+"fichier .zip obtenu ici. Sur Android, avec Pimmich installé sur l'écran "
+"d'accueil, vous pouvez aussi choisir directement « Pimmich » dans le menu"
+" de partage."
+msgstr ""
+"In WhatsApp: open the chat (or the family group) › name at the top › "
+"“Export chat” › “Attach media”. Upload the resulting .zip file here. On "
+"Android, with Pimmich installed on the home screen, you can also pick "
+"“Pimmich” directly in the share menu."
+
+#: frontend/src/views/ImportView.vue:172
+#: templates/configure/tab_actions.html.jinja:177
+#, python-brace-format
+msgid "{photos} photos et {videos} vidéos, du {first} au {last}"
+msgstr "{photos} photos and {videos} videos, from {first} to {last}"
+
+#: frontend/src/views/ImportView.vue:173
+#: templates/configure/tab_actions.html.jinja:159
+msgid "Expéditeurs à importer :"
+msgstr "Senders to import:"
+
+#: frontend/src/views/ImportView.vue:176
+#: templates/configure/tab_actions.html.jinja:161
+msgid "Légende des photos :"
+msgstr "Photo caption:"
+
+#: frontend/src/views/ImportView.vue:178
+#: templates/configure/tab_actions.html.jinja:163
+msgid "Le message qui accompagne la photo"
+msgstr "The message sent with the photo"
+
+#: frontend/src/views/ImportView.vue:179
+#: templates/configure/tab_actions.html.jinja:164
+msgid "Le prénom de l'expéditeur et son message"
+msgstr "The sender's first name and message"
+
+#: frontend/src/views/ImportView.vue:180
+#: templates/configure/tab_actions.html.jinja:165
+msgid "Le prénom de l'expéditeur"
+msgstr "The sender's first name"
+
+#: frontend/src/views/ImportView.vue:181 frontend/src/views/TripsView.vue:300
+#: templates/configure/scripts_gallery.html.jinja:18
+#: templates/configure/tab_actions.html.jinja:166
+#: templates/configure/tab_carte.html.jinja:51
+msgid "Aucune"
+msgstr "None"
+
+#: frontend/src/views/ImportView.vue:189
+#: templates/configure/tab_actions.html.jinja:115
+msgid "Mes envois"
+msgstr "My uploads"
+
+#: frontend/src/views/ImportView.vue:190
+msgid ""
+"Les photos envoyées depuis ce compte s'ajoutent à votre source "
+"personnelle. Touchez la croix pour en retirer une."
+msgstr ""
+"Photos sent from this account go to your personal source. Tap the cross "
+"to remove one."
+
+#: frontend/src/views/ImportView.vue:191
+#: templates/configure/tab_actions.html.jinja:118
+msgid "Aucun envoi pour l'instant."
+msgstr "No uploads yet."
+
+#: frontend/src/views/ImportView.vue:194
+#: templates/configure/tab_actions.html.jinja:136
+msgid "Retirer du cadre"
+msgstr "Remove from the frame"
+
 #: frontend/src/views/LayoutsView.vue:25 frontend/src/views/LayoutsView.vue:131
 #: templates/configure/tab_accueil.html.jinja:89
 #: templates/configure/tab_dispositions.html.jinja:108
@@ -1145,7 +1732,7 @@ msgid ""
 "moment-là)"
 msgstr "Seasonal themes only during their period (and more frequent at that time)"
 
-#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:238
+#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:245
 msgid "Gardez au moins une disposition."
 msgstr "Keep at least one layout."
 
@@ -1941,34 +2528,6 @@ msgstr "Flag opacity"
 msgid "Position du drapeau"
 msgstr "Flag position"
 
-#: frontend/src/views/PhotoInfoView.vue:26
-#: templates/configure/tab_invites.html.jinja:124
-#: templates/configure/tab_metadata.html.jinja:78
-#: templates/configure/tab_son.html.jinja:117
-msgid "En haut à droite"
-msgstr "Top right"
-
-#: frontend/src/views/PhotoInfoView.vue:26
-#: templates/configure/tab_invites.html.jinja:125
-#: templates/configure/tab_metadata.html.jinja:80
-#: templates/configure/tab_son.html.jinja:116
-msgid "En haut à gauche"
-msgstr "Top left"
-
-#: frontend/src/views/PhotoInfoView.vue:27
-#: templates/configure/tab_invites.html.jinja:122
-#: templates/configure/tab_metadata.html.jinja:82
-#: templates/configure/tab_son.html.jinja:115
-msgid "En bas à droite"
-msgstr "Bottom right"
-
-#: frontend/src/views/PhotoInfoView.vue:27
-#: templates/configure/tab_invites.html.jinja:123
-#: templates/configure/tab_metadata.html.jinja:84
-#: templates/configure/tab_son.html.jinja:114
-msgid "En bas à gauche"
-msgstr "Bottom left"
-
 #: frontend/src/views/PhotoInfoView.vue:36
 msgid ""
 "Police, couleurs et position du texte (éditeur de légendes) : interface "
@@ -2459,13 +3018,6 @@ msgstr "On the frame"
 msgid "Cartes dans le diaporama"
 msgstr "Maps in the slideshow"
 
-#: frontend/src/views/TripsView.vue:300
-#: templates/configure/scripts_gallery.html.jinja:18
-#: templates/configure/tab_actions.html.jinja:166
-#: templates/configure/tab_carte.html.jinja:51
-msgid "Aucune"
-msgstr "None"
-
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/tab_carte.html.jinja:52
 msgid "Souvenirs du jour (« il y a un an, nous étions… »)"
@@ -2669,19 +3221,6 @@ msgstr "Drawing"
 msgid "Un invité"
 msgstr "A guest"
 
-#: templates/configure/_playlist_builder.html.jinja:41
-#: templates/configure/_son_radio.html.jinja:27
-#: templates/configure/tab_affichage.html.jinja:361
-#: templates/configure/tab_dispositions.html.jinja:146
-#: templates/configure/tab_heure.html.jinja:26
-#: templates/configure/tab_invites.html.jinja:186
-#: templates/configure/tab_maintenance.html.jinja:254
-#: templates/configure/tab_son.html.jinja:46
-#: templates/configure/tab_sources.html.jinja:495
-#: templates/guestbook.html.jinja:27
-msgid "Retirer"
-msgstr "Remove"
-
 #: templates/guestbook.html.jinja:36
 msgid "Retirer cette page du livre d'or ?"
 msgstr "Remove this page from the guestbook?"
@@ -2768,10 +3307,6 @@ msgstr "System ready (Scheduled sleep mode). Redirection..."
 #: templates/update.html.jinja:157
 msgid "Initialisation du diaporama..."
 msgstr "Initializing the slideshow..."
-
-#: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:7
-msgid "Envoyer des photos"
-msgstr "Send photos"
 
 #: templates/upload.html.jinja:58
 msgid "Envoyer des photos pour le cadre"
@@ -3109,12 +3644,6 @@ msgstr "Create a smart album"
 #: templates/configure/scripts_main.html.jinja:334
 msgid "Album intelligent"
 msgstr "Smart album"
-
-#: templates/configure/_smart_albums.html.jinja:16
-#: templates/configure/tab_comptes.html.jinja:58
-#: templates/configure/tab_invites.html.jinja:161
-msgid "Nom"
-msgstr "Name"
 
 #: templates/configure/_smart_albums.html.jinja:17
 msgid "ex : Les enfants, Été 2025, Noël en famille"
@@ -3538,11 +4067,6 @@ msgstr "photos prepared"
 msgid "Import terminé"
 msgstr "Import finished"
 
-#: templates/configure/scripts_app.html.jinja:22
-#: templates/configure/scripts_gallery.html.jinja:9
-msgid "Erreur"
-msgstr "Error"
-
 #: templates/configure/scripts_app.html.jinja:23
 msgid "en attente"
 msgstr "waiting"
@@ -3560,8 +4084,8 @@ msgid "Enregistrement…"
 msgstr "Saving…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:289
-#: web/routes_settings.py:205 web/routes_settings.py:248
-#: web/routes_settings.py:270
+#: web/routes_settings.py:212 web/routes_settings.py:255
+#: web/routes_settings.py:277
 msgid "Enregistré"
 msgstr "Saved"
 
@@ -3869,14 +4393,6 @@ msgstr "No playlist"
 msgid "Import en cours..."
 msgstr "Import in progress..."
 
-#: templates/configure/scripts_main.html.jinja:1223
-msgid "Préparation :"
-msgstr "Preparation :"
-
-#: templates/configure/scripts_main.html.jinja:1232
-msgid "Préparation terminée ! Redémarrage du diaporama..."
-msgstr "Preparation complete! Restarting the slideshow..."
-
 #: templates/configure/scripts_main.html.jinja:1239
 msgid "Diaporama redémarré. Rechargement de la page..."
 msgstr "Slideshow restarted. Reloading the page..."
@@ -3888,10 +4404,6 @@ msgstr "Invalid staging data received from server."
 #: templates/configure/scripts_main.html.jinja:1256
 msgid "Erreur de connexion au serveur pour la préparation des photos."
 msgstr "Error connecting to the server for preparing photos."
-
-#: templates/configure/scripts_main.html.jinja:1268
-msgid "Importation :"
-msgstr "Importation :"
 
 #: templates/configure/scripts_main.html.jinja:1278
 msgid "Données d'import invalides reçues du serveur."
@@ -3929,17 +4441,9 @@ msgstr "No tide data to display."
 msgid "Impossible de charger les données."
 msgstr "Unable to load data."
 
-#: templates/configure/scripts_main.html.jinja:1608
-msgid "Erreur de connexion au serveur."
-msgstr "Server connection error."
-
 #: templates/configure/scripts_main.html.jinja:1657
 msgid "Mise à jour en cours..."
 msgstr "Update in progress..."
-
-#: templates/configure/scripts_main.html.jinja:1702
-msgid "Veuillez sélectionner au moins un fichier."
-msgstr "Please select at least one file."
 
 #: templates/configure/scripts_main.html.jinja:1711
 msgid "Envoi en cours..."
@@ -3949,19 +4453,9 @@ msgstr "Sending in progress..."
 msgid "Importation réussie ! Rechargement de la page..."
 msgstr "Import successful! Reloading the page..."
 
-#: templates/configure/scripts_main.html.jinja:1744
-#: templates/configure/scripts_main.html.jinja:1777
-#: templates/configure/tab_actions.html.jinja:106
-msgid "Envoyer les photos"
-msgstr "Send photos"
-
 #: templates/configure/scripts_main.html.jinja:1764
 msgid "Données invalides reçues du serveur."
 msgstr "Datas received from the server are invalid."
-
-#: templates/configure/scripts_main.html.jinja:1775
-msgid "Erreur de communication :"
-msgstr "Communication error:"
 
 #: templates/configure/scripts_main.html.jinja:1806
 msgid "Envoi..."
@@ -4284,33 +4778,9 @@ msgstr "Stop slideshow"
 msgid "Démarrer le diaporama"
 msgstr "Start slideshow"
 
-#: templates/configure/tab_actions.html.jinja:44
-msgid "Importation des photos"
-msgstr "Importing photos"
-
-#: templates/configure/tab_actions.html.jinja:47
-msgid "Importer depuis la clé USB"
-msgstr "Import from USB drive"
-
-#: templates/configure/tab_actions.html.jinja:56
-msgid "Importer depuis Immich"
-msgstr "Import from Immich"
-
-#: templates/configure/tab_actions.html.jinja:65
-msgid "Importer depuis Samba"
-msgstr "Import from Samba"
-
-#: templates/configure/tab_actions.html.jinja:74
-msgid "Importer depuis Google Drive"
-msgstr "Import from Google Drive"
-
 #: templates/configure/tab_actions.html.jinja:84
 msgid "Préparation en cours..."
 msgstr "Preparation in progress..."
-
-#: templates/configure/tab_actions.html.jinja:85
-msgid "Photo en cours de préparation"
-msgstr "Photo being prepared"
 
 #: templates/configure/tab_actions.html.jinja:90
 msgid ""
@@ -4321,19 +4791,11 @@ msgstr ""
 "Telegram import happens automatically when photos are received. Enable "
 "the source in the \"Sources\" tab to see them."
 
-#: templates/configure/tab_actions.html.jinja:98
-msgid "Importer depuis un Smartphone"
-msgstr "Import from Smartphone"
-
 #: templates/configure/tab_actions.html.jinja:99
 msgid ""
 "Envoyez des photos directement depuis votre\n"
 "                            téléphone via le navigateur."
 msgstr "Send photos directly from your phone via the browser."
-
-#: templates/configure/tab_actions.html.jinja:115
-msgid "Mes envois"
-msgstr "My uploads"
 
 #: templates/configure/tab_actions.html.jinja:116
 #, python-format
@@ -4344,67 +4806,9 @@ msgstr ""
 "Photos sent from this account are added to your “Uploads from %(name)s” "
 "source. Tap the cross to remove one."
 
-#: templates/configure/tab_actions.html.jinja:118
-msgid "Aucun envoi pour l'instant."
-msgstr "No uploads yet."
-
-#: templates/configure/tab_actions.html.jinja:136
-msgid "Retirer du cadre"
-msgstr "Remove from the frame"
-
-#: templates/configure/tab_actions.html.jinja:138
-msgid "Retirer cette photo du cadre ?"
-msgstr "Remove this photo from the frame?"
-
-#: templates/configure/tab_actions.html.jinja:152
-msgid "Importer une discussion WhatsApp"
-msgstr "Import a WhatsApp chat"
-
-#: templates/configure/tab_actions.html.jinja:153
-msgid ""
-"Dans WhatsApp : ouvrez la discussion (ou le groupe familial) › nom en "
-"haut › « Exporter la discussion » › « Joindre les médias ». Envoyez le "
-"fichier .zip obtenu ici. Sur Android, avec Pimmich installé sur l'écran "
-"d'accueil, vous pouvez aussi choisir directement « Pimmich » dans le menu"
-" de partage."
-msgstr ""
-"In WhatsApp: open the chat (or the family group) › name at the top › "
-"“Export chat” › “Attach media”. Upload the resulting .zip file here. On "
-"Android, with Pimmich installed on the home screen, you can also pick "
-"“Pimmich” directly in the share menu."
-
-#: templates/configure/tab_actions.html.jinja:159
-msgid "Expéditeurs à importer :"
-msgstr "Senders to import:"
-
-#: templates/configure/tab_actions.html.jinja:161
-msgid "Légende des photos :"
-msgstr "Photo caption:"
-
-#: templates/configure/tab_actions.html.jinja:163
-msgid "Le message qui accompagne la photo"
-msgstr "The message sent with the photo"
-
-#: templates/configure/tab_actions.html.jinja:164
-msgid "Le prénom de l'expéditeur et son message"
-msgstr "The sender's first name and message"
-
-#: templates/configure/tab_actions.html.jinja:165
-msgid "Le prénom de l'expéditeur"
-msgstr "The sender's first name"
-
-#: templates/configure/tab_actions.html.jinja:177
-#, python-brace-format
-msgid "{photos} photos et {videos} vidéos, du {first} au {last}"
-msgstr "{photos} photos and {videos} videos, from {first} to {last}"
-
 #: templates/configure/tab_actions.html.jinja:178
 msgid "Envoi de l'export…"
 msgstr "Uploading export…"
-
-#: templates/configure/tab_actions.html.jinja:178
-msgid "Envoi impossible."
-msgstr "Upload failed."
 
 #: templates/configure/tab_actions.html.jinja:220
 msgid "Importation de musique"
@@ -5268,290 +5672,9 @@ msgstr ""
 "The time zone has been configured automatically\n"
 "                            during installation."
 
-#: templates/configure/tab_invites.html.jinja:4
-msgid "Inviter la famille et les amis"
-msgstr "Invite family and friends"
-
-#: templates/configure/tab_invites.html.jinja:7
-msgid "QR code de la page invités"
-msgstr "Guest page QR code"
-
-#: templates/configure/tab_invites.html.jinja:9
-msgid ""
-"Les personnes connectées à votre Wi-Fi scannent ce QR code (ou ouvrent "
-"l'adresse ci-dessous) pour envoyer des photos et écrire des messages sur "
-"le cadre."
-msgstr ""
-"People connected to your Wi-Fi scan this QR code (or open the address "
-"below) to send photos and write messages on the frame."
-
-#: templates/configure/tab_invites.html.jinja:12
-#: templates/configure/tab_invites.html.jinja:55
-msgid "Partager le lien"
-msgstr "Share the link"
-
-#: templates/configure/tab_invites.html.jinja:13
-msgid "Ouvrir la page invités"
-msgstr "Open the guest page"
-
 #: templates/configure/tab_invites.html.jinja:14
 msgid "Imprimer le QR code"
 msgstr "Print the QR code"
-
-#: templates/configure/tab_invites.html.jinja:17
-msgid "Les photos des invités passent par « À valider » avant d'être affichées."
-msgstr "Guest photos go through “To review” before being shown."
-
-#: templates/configure/tab_invites.html.jinja:32
-#: templates/configure/tab_invites.html.jinja:99
-msgid "Notre cadre photo"
-msgstr "Our photo frame"
-
-#: templates/configure/tab_invites.html.jinja:32
-msgid ""
-"Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi"
-" de la maison) :"
-msgstr "Send your photos and messages to our photo frame (from the home Wi-Fi):"
-
-#: templates/configure/tab_invites.html.jinja:35
-#: templates/configure/tab_invites.html.jinja:70
-msgid "Lien copié : collez-le dans un message à la famille."
-msgstr "Link copied: paste it into a message to the family."
-
-#: templates/configure/tab_invites.html.jinja:45
-msgid "Hors de la maison"
-msgstr "Away from home"
-
-#: templates/configure/tab_invites.html.jinja:47
-msgid ""
-"La famille peut aussi envoyer photos et messages depuis chez elle, avec "
-"un lien secret. Seule la page d'envoi est publiée (via Tailscale) : "
-"l'administration et vos photos ne sont jamais accessibles depuis "
-"internet. Les photos passent toujours par « À valider »."
-msgstr ""
-"Family can also send photos and messages from their own homes with a "
-"secret link. Only the upload page is published (via Tailscale): the admin"
-" pages and your photos are never reachable from the internet. Photos "
-"still go through “To approve”."
-
-#: templates/configure/tab_invites.html.jinja:49
-msgid "Autoriser les envois depuis l'extérieur"
-msgstr "Allow uploads from outside"
-
-#: templates/configure/tab_invites.html.jinja:51
-msgid "QR code du lien secret"
-msgstr "QR code for the secret link"
-
-#: templates/configure/tab_invites.html.jinja:56
-msgid "Changer le lien"
-msgstr "Change the link"
-
-#: templates/configure/tab_invites.html.jinja:58
-msgid ""
-"« Changer le lien » rend l'ancien inutilisable (par exemple s'il a "
-"circulé trop largement)."
-msgstr ""
-"“Change the link” makes the old one unusable (for example if it has been "
-"shared too widely)."
-
-#: templates/configure/tab_invites.html.jinja:67
-msgid ""
-"Tailscale n'est pas installé sur le cadre : "
-"https://tailscale.com/download/linux"
-msgstr ""
-"Tailscale is not installed on the frame: "
-"https://tailscale.com/download/linux"
-
-#: templates/configure/tab_invites.html.jinja:68
-msgid ""
-"Tailscale est installé mais pas connecté : lancez « sudo tailscale up » "
-"sur le cadre."
-msgstr ""
-"Tailscale is installed but not connected: run “sudo tailscale up” on the "
-"frame."
-
-#: templates/configure/tab_invites.html.jinja:69
-msgid ""
-"Une seule fois, lancez sur le Raspberry Pi : "
-"~/pimmich/utils/enable_remote_guests.sh"
-msgstr "Once, run on the Raspberry Pi: ~/pimmich/utils/enable_remote_guests.sh"
-
-#: templates/configure/tab_invites.html.jinja:71
-msgid ""
-"Envoyez vos photos et vos messages sur notre cadre photo, où que vous "
-"soyez :"
-msgstr "Send your photos and messages to our photo frame, wherever you are:"
-
-#: templates/configure/tab_invites.html.jinja:90
-msgid "Autoriser Funnel sur Tailscale"
-msgstr "Allow Funnel on Tailscale"
-
-#: templates/configure/tab_invites.html.jinja:112
-msgid "QR code pour les invités"
-msgstr "QR code for guests"
-
-#: templates/configure/tab_invites.html.jinja:114
-msgid ""
-"Affiche en permanence sur le diaporama un QR code vers la page invités, "
-"pour envoyer des photos ou écrire un message depuis un téléphone connecté"
-" au même Wi-Fi."
-msgstr ""
-"Permanently shows a QR code on the slideshow linking to the guest page, "
-"to send photos or write a message from a phone on the same Wi-Fi."
-
-#: templates/configure/tab_invites.html.jinja:117
-msgid "Afficher le QR code"
-msgstr "Show the QR code"
-
-#: templates/configure/tab_invites.html.jinja:119
-msgid "Position :"
-msgstr "Position:"
-
-#: templates/configure/tab_invites.html.jinja:129
-msgid "Autoriser les invités à écrire des messages"
-msgstr "Allow guests to write messages"
-
-#: templates/configure/tab_invites.html.jinja:131
-msgid ""
-"Les messages des invités s'affichent directement (5 par heure et par "
-"appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
-" supprimer dans Contenu > Messages."
-msgstr ""
-"Guest messages are shown immediately (at most 5 per hour per device) and "
-"disappear after 7 days. You can delete them in Content > Messages."
-
-#: templates/configure/tab_invites.html.jinja:134
-msgid ""
-"Lire les messages vocaux quand leur carte s'affiche (au plus une fois par"
-" heure)"
-msgstr "Play voice messages when their card is shown (at most once an hour)"
-
-#: templates/configure/tab_invites.html.jinja:137
-msgid "Volume des messages vocaux :"
-msgstr "Voice message volume:"
-
-#: templates/configure/tab_invites.html.jinja:142
-msgid ""
-"Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
-"😂 😮 👏)"
-msgstr "Reactions: guests see the photo on screen and can react to it (❤️ 😂 😮 👏)"
-
-#: templates/configure/tab_invites.html.jinja:144
-msgid ""
-"Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
-"invités restent ensuite dans le livre d'or :"
-msgstr ""
-"Only from the home Wi-Fi. Guests' messages and drawings are then kept in "
-"the guestbook:"
-
-#: templates/configure/tab_invites.html.jinja:144
-msgid "ouvrir le livre d'or"
-msgstr "open the guestbook"
-
-#: templates/configure/tab_invites.html.jinja:149
-msgid "Cadres de la famille"
-msgstr "Family frames"
-
-#: templates/configure/tab_invites.html.jinja:150
-msgid ""
-"Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au "
-"chalet…) : voir la photo affichée, les allumer, leur envoyer des photos "
-"ou un message. Ils doivent être joignables : même réseau, ou Tailscale "
-"sur les deux cadres."
-msgstr ""
-"Control the family's other Pimmich frames from here (at Grandma's, at the"
-" cabin…): see the photo on screen, turn them on, send them photos or a "
-"message. They must be reachable: same network, or Tailscale on both "
-"frames."
-
-#: templates/configure/tab_invites.html.jinja:153
-msgid "Ajouter un cadre"
-msgstr "Add a frame"
-
-#: templates/configure/tab_invites.html.jinja:155
-msgid ""
-"Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
-"dessous), puis « Créer un code »."
-msgstr ""
-"On the other frame: Sharing › Guests › “Pairing code” (below), then "
-"“Create a code”."
-
-#: templates/configure/tab_invites.html.jinja:156
-msgid ""
-"Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
-"https://192.168.1.30) et ce code."
-msgstr ""
-"Here: its address (e.g. https://100.101.102.103 with Tailscale, or "
-"https://192.168.1.30) and that code."
-
-#: templates/configure/tab_invites.html.jinja:159
-#: templates/configure/tab_maintenance.html.jinja:226
-msgid "Adresse"
-msgstr "Address"
-
-#: templates/configure/tab_invites.html.jinja:160
-msgid "Code"
-msgstr "Code"
-
-#: templates/configure/tab_invites.html.jinja:161
-msgid "ex : Chez Mamie"
-msgstr "e.g. Grandma's"
-
-#: templates/configure/tab_invites.html.jinja:163
-msgid "Ajouter le cadre"
-msgstr "Add frame"
-
-#: templates/configure/tab_invites.html.jinja:166
-msgid "Code d'association de ce cadre"
-msgstr "This frame's pairing code"
-
-#: templates/configure/tab_invites.html.jinja:167
-msgid ""
-"À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
-"l'accès."
-msgstr ""
-"Enter it on the frame that will control this one. Remove a code to cut "
-"access."
-
-#: templates/configure/tab_invites.html.jinja:169
-msgid "Créer un code"
-msgstr "Create a code"
-
-#: templates/configure/tab_invites.html.jinja:185
-msgid "Allumer"
-msgstr "Turn on"
-
-#: templates/configure/tab_invites.html.jinja:185
-msgid "Endormir"
-msgstr "Put to sleep"
-
-#: templates/configure/tab_invites.html.jinja:186
-msgid "Envoyer un message"
-msgstr "Send a message"
-
-#: templates/configure/tab_invites.html.jinja:186
-msgid "injoignable"
-msgstr "unreachable"
-
-#: templates/configure/tab_invites.html.jinja:187
-msgid "code refusé"
-msgstr "code refused"
-
-#: templates/configure/tab_invites.html.jinja:187
-msgid "diaporama en cours"
-msgstr "slideshow running"
-
-#: templates/configure/tab_invites.html.jinja:187
-msgid "en veille"
-msgstr "asleep"
-
-#: templates/configure/tab_invites.html.jinja:188
-msgid "Votre message :"
-msgstr "Your message:"
-
-#: templates/configure/tab_invites.html.jinja:188
-msgid "Aucun autre cadre pour l'instant."
-msgstr "No other frame yet."
 
 #: templates/configure/tab_legendes.html.jinja:3
 msgid "Style des légendes"
@@ -8427,8 +8550,8 @@ msgstr ""
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:282 web/routes_settings.py:203
-#: web/routes_settings.py:246
+#: web/routes_config.py:282 web/routes_settings.py:210
+#: web/routes_settings.py:253
 msgid "Réglages modifiés"
 msgstr "Settings changed"
 
@@ -8438,7 +8561,7 @@ msgid ""
 "changements."
 msgstr "Configuration saved. The slideshow was restarted to apply the changes."
 
-#: web/routes_family.py:26 web/routes_settings.py:235
+#: web/routes_family.py:26 web/routes_settings.py:242
 msgid "Liste invalide."
 msgstr "Invalid list."
 
@@ -9223,25 +9346,25 @@ msgstr "Playlist not found."
 msgid "Citation du jour enregistrée."
 msgstr "Quote of the day saved."
 
-#: web/routes_settings.py:189
+#: web/routes_settings.py:196
 msgid "Aucun réglage à enregistrer."
 msgstr "No setting to save."
 
-#: web/routes_settings.py:193
+#: web/routes_settings.py:200
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unknown setting: %(key)s"
 
-#: web/routes_settings.py:197
+#: web/routes_settings.py:204
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Invalid value for “%(key)s”."
 
-#: web/routes_settings.py:265
+#: web/routes_settings.py:272
 msgid "Valeur invalide."
 msgstr "Invalid value."
 
-#: web/routes_settings.py:270
+#: web/routes_settings.py:277
 msgid "Supprimé."
 msgstr "Deleted."
 

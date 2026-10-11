@@ -73,6 +73,13 @@ SETTINGS = {
     "voice_control_language": ("choice", ["fr", "en"], "fr"),
     "voice_control_device_index": ("device", None, ""),
     "notification_sound_volume": ("int", (0, 100), 80),
+    # Invités
+    "show_guest_qr": ("bool", None, True),
+    "guest_qr_position": ("choice", ["bottom_right", "bottom_left", "top_right", "top_left"], "bottom_right"),
+    "guest_messages_enabled": ("bool", None, True),
+    "voice_messages_enabled": ("bool", None, True),
+    "voice_volume": ("int", (10, 100), 100),
+    "guest_reactions_enabled": ("bool", None, True),
     # Horloge et date
     "show_clock": ("bool", None, False),
     "clock_position": ("choice", ["left", "center", "right"], "center"),
