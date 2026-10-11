@@ -37,7 +37,7 @@ export const groups: NavGroup[] = [
     { label: () => t("Horloge & météo"), icon: "fa-clock", tab: "tab-heure", route: "/horloge-meteo" },
     { label: () => t("Infos des photos"), icon: "fa-info-circle", tab: "tab-metadata", route: "/infos-photos" },
     { label: () => t("Légendes"), icon: "fa-closed-captioning", tab: "tab-legendes", route: "/legendes" },
-    { label: () => t("Son"), icon: "fa-music", tab: "tab-son" },
+    { label: () => t("Son"), icon: "fa-music", tab: "tab-son", route: "/son" },
   ] },
   { key: "partage", label: () => t("Partage"), icon: "fa-user-friends", items: [
     { label: () => t("Invités"), icon: "fa-qrcode", tab: "tab-invites", route: "/invites" },

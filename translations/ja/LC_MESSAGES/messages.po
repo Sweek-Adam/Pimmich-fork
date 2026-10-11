@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 18:01+0200\n"
+"POT-Creation-Date: 2026-10-11 18:08+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -222,7 +222,8 @@ msgstr "ライブラリ"
 msgid "À suivre"
 msgstr "次に表示"
 
-#: frontend/src/nav.ts:29 templates/configure.html.jinja:148
+#: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:29
+#: templates/configure.html.jinja:148
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr "プレイリスト"
@@ -374,7 +375,9 @@ msgid "chaque année"
 msgstr "毎年"
 
 #: frontend/src/components/AgendaCard.vue:58
+#: frontend/src/components/RadioCard.vue:66
 #: frontend/src/views/GuestsView.vue:185 frontend/src/views/GuestsView.vue:207
+#: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:361
@@ -394,6 +397,7 @@ msgid "Ex : Vacances, Mariage de Julie, Noël"
 msgstr "例：休暇、ジュリーの結婚式、クリスマス"
 
 #: frontend/src/components/AgendaCard.vue:65
+#: frontend/src/components/RadioCard.vue:71
 #: templates/configure/_son_radio.html.jinja:20
 #: templates/configure/tab_affichage.html.jinja:360
 #: templates/configure/tab_heure.html.jinja:19
@@ -617,6 +621,7 @@ msgid "Largeur maximale"
 msgstr "最大幅"
 
 #: frontend/src/components/CaptionEditor.vue:174
+#: frontend/src/views/SoundView.vue:134
 #: templates/configure/tab_legendes.html.jinja:109
 #: templates/configure/tab_son.html.jinja:112
 msgid "Position"
@@ -658,7 +663,9 @@ msgstr "キャンセル"
 
 #: frontend/src/components/CaptionEditor.vue:189
 #: frontend/src/components/SettingField.vue:63
+#: frontend/src/components/SpotifyCard.vue:136
 #: frontend/src/views/PlaylistsView.vue:157
+#: frontend/src/views/SoundView.vue:166
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
 #: templates/configure/tab_affichage.html.jinja:303
@@ -670,6 +677,69 @@ msgstr "キャンセル"
 #: templates/upload.html.jinja:144
 msgid "Enregistrer"
 msgstr "保存"
+
+#: frontend/src/components/RadioCard.vue:46
+#: templates/configure/_son_radio.html.jinja:2
+msgid "Radios et podcasts"
+msgstr "ラジオとポッドキャスト"
+
+#: frontend/src/components/RadioCard.vue:48
+#: templates/configure/_son_radio.html.jinja:5 templates/upload.html.jinja:179
+msgid "Arrêter"
+msgstr "停止"
+
+#: frontend/src/components/RadioCard.vue:49
+#: templates/configure/_son_radio.html.jinja:10
+msgid "Mes radios"
+msgstr "お気に入りのラジオ"
+
+#: frontend/src/components/RadioCard.vue:49
+#: templates/configure/_son_radio.html.jinja:7
+msgid "Radios"
+msgstr "ラジオ"
+
+#: frontend/src/components/RadioCard.vue:49
+#: frontend/src/components/RadioCard.vue:50
+#: frontend/src/components/RadioCard.vue:51
+#: frontend/src/components/RadioCard.vue:52
+#: templates/configure/_son_radio.html.jinja:13
+msgid "Trouver une radio"
+msgstr "ラジオを探す"
+
+#: frontend/src/components/RadioCard.vue:51
+#: templates/configure/_son_radio.html.jinja:14
+msgid "Nom de la radio (ex : RTL, Chérie FM, BBC...)"
+msgstr "ラジオ名（例：NHK、J-WAVE、BBC など）"
+
+#: frontend/src/components/RadioCard.vue:52
+#: templates/configure/_son_radio.html.jinja:28
+msgid "Aucune radio trouvée."
+msgstr "ラジオが見つかりません。"
+
+#: frontend/src/components/RadioCard.vue:57
+#: templates/configure/_son_radio.html.jinja:27
+msgid "Retirer de mes radios"
+msgstr "お気に入りから外す"
+
+#: frontend/src/components/RadioCard.vue:57
+#: templates/configure/_son_radio.html.jinja:27
+msgid "Ajouter à mes radios"
+msgstr "お気に入りに追加"
+
+#: frontend/src/components/RadioCard.vue:62
+#: templates/configure/_son_radio.html.jinja:16
+msgid "Podcasts"
+msgstr "ポッドキャスト"
+
+#: frontend/src/components/RadioCard.vue:65
+#: templates/configure/_son_radio.html.jinja:28
+msgid "Écouter le dernier épisode"
+msgstr "最新エピソードを再生"
+
+#: frontend/src/components/RadioCard.vue:70
+#: templates/configure/_son_radio.html.jinja:19
+msgid "Adresse du flux RSS du podcast"
+msgstr "ポッドキャストの RSS フィードのアドレス"
 
 #: frontend/src/components/SettingField.vue:62
 #: frontend/src/views/NetworkView.vue:97
@@ -693,6 +763,302 @@ msgstr "変更は自動的に保存されます。"
 #: frontend/src/components/SettingsPage.vue:30
 msgid "Autres réglages : interface classique"
 msgstr "その他の設定：従来の画面"
+
+#: frontend/src/components/SpotifyCard.vue:36
+#: frontend/src/views/HomeView.vue:206
+#: templates/configure/_son_spotify.html.jinja:100
+#: templates/configure/tab_accueil.html.jinja:73
+msgid "Ambiance"
+msgstr "ムード"
+
+#: frontend/src/components/SpotifyCard.vue:37
+#: templates/configure/_son_spotify.html.jinja:100
+msgid "Playlist de photos"
+msgstr "写真プレイリスト"
+
+#: frontend/src/components/SpotifyCard.vue:83
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Titres"
+msgstr "曲"
+
+#: frontend/src/components/SpotifyCard.vue:83
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Artistes"
+msgstr "アーティスト"
+
+#: frontend/src/components/SpotifyCard.vue:83
+#: templates/configure/_son_spotify.html.jinja:112
+msgid "Albums"
+msgstr "アルバム"
+
+#: frontend/src/components/SpotifyCard.vue:88
+#: templates/configure/_son_spotify.html.jinja:281
+msgid "Demande de code à Spotify…"
+msgstr "Spotify にコードをリクエスト中…"
+
+#: frontend/src/components/SpotifyCard.vue:97
+#: frontend/src/views/NotificationsView.vue:26
+#: frontend/src/views/TelegramView.vue:73
+msgid "Copié."
+msgstr "コピーしました。"
+
+#: frontend/src/components/SpotifyCard.vue:111
+#: templates/configure/_son_spotify.html.jinja:5
+msgid "Associer le cadre à votre compte"
+msgstr "フォトフレームをアカウントにリンク"
+
+#: frontend/src/components/SpotifyCard.vue:112
+#: templates/configure/_son_spotify.html.jinja:6
+msgid ""
+"Le cadre apparaît alors dans vos appareils Spotify, même quand vous "
+"n'êtes pas à la maison. Compte Premium nécessaire."
+msgstr "フォトフレームが Spotify のデバイス一覧に表示されます（外出中でも表示されます）。Premium アカウントが必要です。"
+
+#: frontend/src/components/SpotifyCard.vue:114
+#: templates/configure/_son_spotify.html.jinja:8
+msgid "Associé"
+msgstr "リンク済み"
+
+#: frontend/src/components/SpotifyCard.vue:115
+#: templates/configure/_son_spotify.html.jinja:103
+#: templates/configure/tab_sources.html.jinja:397
+msgid "Compte :"
+msgstr "アカウント："
+
+#: frontend/src/components/SpotifyCard.vue:116
+#: templates/configure/_son_spotify.html.jinja:10
+msgid "Dissocier"
+msgstr "リンク解除"
+
+#: frontend/src/components/SpotifyCard.vue:119
+#: templates/configure/_son_spotify.html.jinja:16
+msgid ""
+"Ouvrez ce lien sur votre téléphone ou votre ordinateur, connectez-vous à "
+"Spotify et validez :"
+msgstr "スマートフォンまたはパソコンでこのリンクを開き、Spotify にログインして承認してください："
+
+#: frontend/src/components/SpotifyCard.vue:121
+#: templates/configure/_son_spotify.html.jinja:18
+msgid "Code :"
+msgstr "コード："
+
+#: frontend/src/components/SpotifyCard.vue:122
+#: templates/configure/_son_spotify.html.jinja:19
+msgid "Cette page se met à jour toute seule une fois l'association validée."
+msgstr "リンクが承認されると、このページは自動的に更新されます。"
+
+#: frontend/src/components/SpotifyCard.vue:124
+#: templates/configure/_son_spotify.html.jinja:13
+msgid "Associer mon compte"
+msgstr "アカウントをリンク"
+
+#: frontend/src/components/SpotifyCard.vue:126
+#: templates/configure/_son_spotify.html.jinja:24
+msgid "Choisir la musique depuis cette page"
+msgstr "このページから音楽を選ぶ"
+
+#: frontend/src/components/SpotifyCard.vue:128
+#: templates/configure/_son_spotify.html.jinja:26
+msgid ""
+"Une seule fois : Spotify demande de créer une « application » personnelle"
+" (gratuit, 5 minutes)."
+msgstr "初回のみ：Spotify で個人用の「アプリ」を作成する必要があります（無料・約5分）。"
+
+#: frontend/src/components/SpotifyCard.vue:130
+#: templates/configure/_son_spotify.html.jinja:28
+msgid "Ouvrez"
+msgstr "ブラウザで"
+
+#: frontend/src/components/SpotifyCard.vue:130
+#: templates/configure/_son_spotify.html.jinja:28
+msgid "et cliquez sur « Create app »."
+msgstr "を開き、「Create app」をクリックします。"
+
+#: frontend/src/components/SpotifyCard.vue:131
+#: templates/configure/_son_spotify.html.jinja:29
+msgid "Nom : Pimmich. Dans « Redirect URIs », collez cette adresse :"
+msgstr "名前：Pimmich。「Redirect URIs」に次のアドレスを貼り付けます："
+
+#: frontend/src/components/SpotifyCard.vue:132
+#: frontend/src/views/NotificationsView.vue:53
+#: frontend/src/views/TelegramView.vue:109
+#: templates/configure/_son_spotify.html.jinja:30
+#: templates/configure/tab_notifications.html.jinja:11
+msgid "Copier"
+msgstr "コピー"
+
+#: frontend/src/components/SpotifyCard.vue:133
+#: templates/configure/_son_spotify.html.jinja:31
+msgid "Cochez « Web API », acceptez les conditions et enregistrez."
+msgstr "「Web API」にチェックを入れ、利用規約に同意して保存します。"
+
+#: frontend/src/components/SpotifyCard.vue:134
+#: templates/configure/_son_spotify.html.jinja:32
+msgid "Copiez le « Client ID » de l'application ici :"
+msgstr "アプリの「Client ID」をここに貼り付けます："
+
+#: frontend/src/components/SpotifyCard.vue:138
+#: templates/configure/_son_spotify.html.jinja:36
+msgid ""
+"Ouvrez toujours l'interface avec la même adresse que celle déclarée ci-"
+"dessus (même adresse IP ou même nom)."
+msgstr "この画面は、必ず上記で登録したものと同じアドレス（同じ IP アドレスまたは同じ名前）で開いてください。"
+
+#: frontend/src/components/SpotifyCard.vue:141
+#: templates/configure/_son_spotify.html.jinja:39
+msgid "Se connecter à Spotify"
+msgstr "Spotify に接続"
+
+#: frontend/src/components/SpotifyCard.vue:142
+#: templates/configure/_son_spotify.html.jinja:40
+msgid "Changer d'application"
+msgstr "アプリを変更"
+
+#: frontend/src/components/SpotifyCard.vue:145
+#: frontend/src/views/NetworkView.vue:75
+#: templates/configure/_son_spotify.html.jinja:43
+msgid "Connecté"
+msgstr "接続済み"
+
+#: frontend/src/components/SpotifyCard.vue:146
+#: templates/configure/_son_spotify.html.jinja:44
+msgid "Déconnecter"
+msgstr "接続解除"
+
+#: frontend/src/components/SpotifyCard.vue:150
+#: templates/configure/_son_spotify.html.jinja:50
+msgid "Lecture en cours"
+msgstr "再生中"
+
+#: frontend/src/components/SpotifyCard.vue:151
+#: templates/configure/_son_spotify.html.jinja:51
+msgid ""
+"Rien ne joue sur votre compte Spotify pour le moment : lancez une "
+"playlist ci-dessous ou recherchez un titre."
+msgstr "Spotify アカウントでは現在何も再生されていません。下のプレイリストを再生するか、曲を検索してください。"
+
+#: frontend/src/components/SpotifyCard.vue:157
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "sur"
+msgstr "再生先："
+
+#: frontend/src/components/SpotifyCard.vue:158
+#: templates/configure/_son_spotify.html.jinja:58
+msgid "Écouter sur le cadre"
+msgstr "フォトフレームで聴く"
+
+#: frontend/src/components/SpotifyCard.vue:161
+#: templates/configure/_son_spotify.html.jinja:59
+msgid "Avancement"
+msgstr "再生位置"
+
+#: frontend/src/components/SpotifyCard.vue:164
+#: templates/configure/_son_spotify.html.jinja:61
+msgid "Lecture aléatoire"
+msgstr "シャッフル"
+
+#: frontend/src/components/SpotifyCard.vue:165
+#: templates/configure/_music_remote.html.jinja:11
+#: templates/configure/_son_spotify.html.jinja:62
+#: templates/configure/_tour.html.jinja:10
+msgid "Précédent"
+msgstr "前へ"
+
+#: frontend/src/components/SpotifyCard.vue:166
+#: templates/configure/_music_remote.html.jinja:12
+#: templates/configure/_son_spotify.html.jinja:63
+msgid "Lecture / pause"
+msgstr "再生 / 一時停止"
+
+#: frontend/src/components/SpotifyCard.vue:167
+#: templates/configure/_music_remote.html.jinja:13
+#: templates/configure/_son_spotify.html.jinja:64
+#: templates/configure/_tour.html.jinja:40
+msgid "Suivant"
+msgstr "次へ"
+
+#: frontend/src/components/SpotifyCard.vue:168
+#: frontend/src/views/MessagesView.vue:113
+#: templates/configure/_son_spotify.html.jinja:65
+#: templates/configure/tab_messages.html.jinja:38
+msgid "Répéter"
+msgstr "リピート"
+
+#: frontend/src/components/SpotifyCard.vue:172
+#: templates/configure/_son_spotify.html.jinja:67
+msgid "Volume Spotify"
+msgstr "Spotify の音量"
+
+#: frontend/src/components/SpotifyCard.vue:177
+#: templates/configure/_son_spotify.html.jinja:71
+msgid "À suivre sur Spotify"
+msgstr "Spotify の次の曲"
+
+#: frontend/src/components/SpotifyCard.vue:181
+#: templates/configure/_son_spotify.html.jinja:76
+msgid "Rechercher"
+msgstr "検索"
+
+#: frontend/src/components/SpotifyCard.vue:182
+#: templates/configure/_son_spotify.html.jinja:77
+msgid "Titre, artiste, album, playlist…"
+msgstr "曲、アーティスト、アルバム、プレイリスト…"
+
+#: frontend/src/components/SpotifyCard.vue:189
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "Écouter maintenant sur le cadre"
+msgstr "今すぐフォトフレームで再生"
+
+#: frontend/src/components/SpotifyCard.vue:190
+#: templates/configure/_son_spotify.html.jinja:110
+msgid "Ajouter à la file"
+msgstr "キューに追加"
+
+#: frontend/src/components/SpotifyCard.vue:191
+#: templates/configure/_son_spotify.html.jinja:111
+msgid "Ajouté à la file d'attente."
+msgstr "キューに追加しました。"
+
+#: frontend/src/components/SpotifyCard.vue:197
+#: frontend/src/components/SpotifyCard.vue:201
+#: templates/configure/_son_spotify.html.jinja:81
+#: templates/configure/_son_spotify.html.jinja:101
+msgid "Lire sur le cadre"
+msgstr "フォトフレームで再生"
+
+#: frontend/src/components/SpotifyCard.vue:198
+#: templates/configure/_son_spotify.html.jinja:83
+msgid "Rechercher une playlist…"
+msgstr "プレイリストを検索…"
+
+#: frontend/src/components/SpotifyCard.vue:199
+#: templates/configure/_son_spotify.html.jinja:102
+msgid "Aucune playlist trouvée."
+msgstr "プレイリストが見つかりません。"
+
+#: frontend/src/components/SpotifyCard.vue:203
+#: templates/configure/_son_spotify.html.jinja:102
+msgid "titres"
+msgstr "曲"
+
+#: frontend/src/components/SpotifyCard.vue:207
+#: templates/configure/_son_spotify.html.jinja:88
+msgid "Musiques associées"
+msgstr "関連付けた音楽"
+
+#: frontend/src/components/SpotifyCard.vue:208
+#: templates/configure/_son_spotify.html.jinja:89
+msgid ""
+"Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou "
+"la playlist de photos."
+msgstr "アンビエンスまたは写真プレイリストを選ぶと、フォトフレームで自動的に再生されます。"
+
+#: frontend/src/components/SpotifyCard.vue:212
+#: frontend/src/views/SoundView.vue:92
+#: templates/configure/_son_spotify.html.jinja:101
+#: templates/configure/tab_son.html.jinja:8
+msgid "Aucune musique"
+msgstr "音楽なし"
 
 #: frontend/src/views/AccountsView.vue:34
 #, python-brace-format
@@ -1465,6 +1831,7 @@ msgid "Position :"
 msgstr "位置："
 
 #: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:27
+#: frontend/src/views/SoundView.vue:137
 #: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
 #: templates/configure/tab_son.html.jinja:115
@@ -1472,6 +1839,7 @@ msgid "En bas à droite"
 msgstr "右下"
 
 #: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:27
+#: frontend/src/views/SoundView.vue:136
 #: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
 #: templates/configure/tab_son.html.jinja:114
@@ -1479,6 +1847,7 @@ msgid "En bas à gauche"
 msgstr "左下"
 
 #: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:26
+#: frontend/src/views/SoundView.vue:139
 #: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
 #: templates/configure/tab_son.html.jinja:117
@@ -1486,6 +1855,7 @@ msgid "En haut à droite"
 msgstr "右上"
 
 #: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:26
+#: frontend/src/views/SoundView.vue:138
 #: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
 #: templates/configure/tab_son.html.jinja:116
@@ -1858,12 +2228,6 @@ msgstr "はじめに"
 #: templates/configure/tab_accueil.html.jinja:6
 msgid "Masquer"
 msgstr "非表示"
-
-#: frontend/src/views/HomeView.vue:206
-#: templates/configure/_son_spotify.html.jinja:100
-#: templates/configure/tab_accueil.html.jinja:73
-msgid "Ambiance"
-msgstr "ムード"
 
 #: frontend/src/views/HomeView.vue:221 web/routes_trips.py:114
 msgid "Il y a un an"
@@ -2401,12 +2765,6 @@ msgstr "予約（例：毎年3月12日8時）"
 msgid "À partir du"
 msgstr "開始日時"
 
-#: frontend/src/views/MessagesView.vue:113
-#: templates/configure/_son_spotify.html.jinja:65
-#: templates/configure/tab_messages.html.jinja:38
-msgid "Répéter"
-msgstr "リピート"
-
 #: frontend/src/views/MessagesView.vue:115
 #: templates/configure/tab_messages.html.jinja:40
 msgid "Une seule fois"
@@ -2610,11 +2968,6 @@ msgid "État:"
 msgstr "エタ:"
 
 #: frontend/src/views/NetworkView.vue:75
-#: templates/configure/_son_spotify.html.jinja:43
-msgid "Connecté"
-msgstr "接続済み"
-
-#: frontend/src/views/NetworkView.vue:75
 msgid "Non connecté"
 msgstr "未接続"
 
@@ -2676,11 +3029,6 @@ msgstr "スキャンを開始する"
 msgid "Choisir"
 msgstr "選択"
 
-#: frontend/src/views/NotificationsView.vue:26
-#: frontend/src/views/TelegramView.vue:73
-msgid "Copié."
-msgstr "コピーしました。"
-
 #: frontend/src/views/NotificationsView.vue:33
 #: frontend/src/views/NotificationsView.vue:68
 #: templates/configure/tab_notifications.html.jinja:24
@@ -2720,13 +3068,6 @@ msgid ""
 "Dans ntfy, touchez « + » puis collez l'adresse ci-dessous (ou ouvrez le "
 "lien sur le téléphone) :"
 msgstr "ntfy で「+」をタップし、下のアドレスを貼り付けます（またはスマートフォンでリンクを開きます）："
-
-#: frontend/src/views/NotificationsView.vue:53
-#: frontend/src/views/TelegramView.vue:109
-#: templates/configure/_son_spotify.html.jinja:30
-#: templates/configure/tab_notifications.html.jinja:11
-msgid "Copier"
-msgstr "コピー"
 
 #: frontend/src/views/NotificationsView.vue:54
 #: templates/configure/tab_notifications.html.jinja:12
@@ -3036,6 +3377,239 @@ msgstr "下へ"
 #: templates/configure/tab_queue.html.jinja:101
 msgid "Afficher maintenant"
 msgstr "今すぐ表示"
+
+#: frontend/src/views/SoundView.vue:24
+#: templates/configure/tab_son.html.jinja:45
+msgid "Radio"
+msgstr "ラジオ"
+
+#: frontend/src/views/SoundView.vue:24
+#: templates/configure/tab_son.html.jinja:45
+msgid "Musique du cadre"
+msgstr "フレームの音楽"
+
+#: frontend/src/views/SoundView.vue:87 templates/configure/tab_son.html.jinja:3
+#: web/routes_home.py:224
+msgid "Musique du diaporama"
+msgstr "スライドショーの音楽"
+
+#: frontend/src/views/SoundView.vue:88 templates/configure/tab_son.html.jinja:4
+msgid ""
+"Jouée en boucle pendant le diaporama. Chaque playlist peut avoir sa "
+"propre musique (rubrique Playlists)."
+msgstr "スライドショー中にループ再生されます。プレイリストごとに音楽を設定できます（「プレイリスト」セクション）。"
+
+#: frontend/src/views/SoundView.vue:90
+#: templates/configure/tab_accueil.html.jinja:49
+#: templates/configure/tab_son.html.jinja:7
+msgid "Musique"
+msgstr "音楽"
+
+#: frontend/src/views/SoundView.vue:96
+#: templates/configure/tab_son.html.jinja:11
+msgid "Volume"
+msgstr "音量"
+
+#: frontend/src/views/SoundView.vue:98
+#: templates/configure/tab_son.html.jinja:18
+msgid "Ajouter une musique (MP3, WAV)"
+msgstr "音楽を追加（MP3、WAV）"
+
+#: frontend/src/views/SoundView.vue:104
+#: templates/configure/tab_son.html.jinja:100
+msgid "Musique en cours"
+msgstr "再生中の音楽"
+
+#: frontend/src/views/SoundView.vue:117 web/routes_music.py:279
+msgid "Aucune musique en cours."
+msgstr "再生中の音楽はありません。"
+
+#: frontend/src/views/SoundView.vue:118
+#: templates/configure/_music_remote.html.jinja:22
+#: templates/configure/_music_remote.html.jinja:23
+msgid "Minuteur de sommeil"
+msgstr "スリープタイマー"
+
+#: frontend/src/views/SoundView.vue:120
+#: templates/configure/_music_remote.html.jinja:24
+#: templates/configure/_music_remote.html.jinja:83
+msgid "Arrêter la musique…"
+msgstr "音楽を止める…"
+
+#: frontend/src/views/SoundView.vue:121
+#: templates/configure/_music_remote.html.jinja:25
+msgid "dans 15 min"
+msgstr "15分後"
+
+#: frontend/src/views/SoundView.vue:122
+#: templates/configure/_music_remote.html.jinja:26
+msgid "dans 30 min"
+msgstr "30分後"
+
+#: frontend/src/views/SoundView.vue:123
+#: templates/configure/_music_remote.html.jinja:27
+msgid "dans 1 h"
+msgstr "1時間後"
+
+#: frontend/src/views/SoundView.vue:124
+#: templates/configure/_music_remote.html.jinja:28
+msgid "dans 1 h 30"
+msgstr "1時間30分後"
+
+#: frontend/src/views/SoundView.vue:126
+#, python-brace-format
+msgid "Arrêt dans {n} min"
+msgstr "{n} 分後に停止"
+
+#: frontend/src/views/SoundView.vue:128
+#: templates/configure/tab_son.html.jinja:104
+msgid "Afficher le morceau sur le cadre"
+msgstr "フォトフレームに曲を表示"
+
+#: frontend/src/views/SoundView.vue:130
+#: templates/configure/tab_son.html.jinja:106
+msgid "Quelques secondes à chaque nouveau morceau"
+msgstr "新しい曲ごとに数秒間"
+
+#: frontend/src/views/SoundView.vue:131
+#: templates/configure/tab_son.html.jinja:107
+msgid "En permanence pendant la lecture"
+msgstr "再生中は常に表示"
+
+#: frontend/src/views/SoundView.vue:132
+#: templates/configure/tab_son.html.jinja:108
+msgid "Ne pas afficher"
+msgstr "表示しない"
+
+#: frontend/src/views/SoundView.vue:141
+#: templates/configure/tab_son.html.jinja:122
+msgid "Pendant Spotify, AirPlay, Bluetooth ou la radio :"
+msgstr "Spotify・AirPlay・Bluetooth・ラジオの再生中："
+
+#: frontend/src/views/SoundView.vue:143
+#: templates/configure/tab_son.html.jinja:124
+msgid "Les photos continuent"
+msgstr "写真の表示を続ける"
+
+#: frontend/src/views/SoundView.vue:144
+#: templates/configure/tab_son.html.jinja:125
+msgid "Jukebox : la pochette en grand à l'écran"
+msgstr "ジュークボックス：ジャケットを大きく表示"
+
+#: frontend/src/views/SoundView.vue:145
+#: templates/configure/tab_son.html.jinja:126
+msgid "Karaoké : les paroles défilent en rythme (Spotify)"
+msgstr "カラオケ：歌詞がリズムに合わせて流れる（Spotify）"
+
+#: frontend/src/views/SoundView.vue:152
+#: templates/configure/tab_son.html.jinja:27
+msgid "Musique selon l'heure"
+msgstr "時間帯ごとの音楽"
+
+#: frontend/src/views/SoundView.vue:153
+#: templates/configure/tab_son.html.jinja:28
+msgid ""
+"Une ambiance par moment de la journée : calme le matin, festive le soir… "
+"Au début de chaque plage, le cadre lance sa musique ; il ne coupe jamais "
+"une musique lancée à la main."
+msgstr "時間帯ごとの雰囲気：朝は穏やかに、夜はにぎやかに… 各時間帯の始まりにフレームが音楽を流します。手動で再生した音楽は止めません。"
+
+#: frontend/src/views/SoundView.vue:154
+#: templates/configure/tab_son.html.jinja:29
+msgid "Activer la musique selon l'heure"
+msgstr "時間帯ごとの音楽を有効にする"
+
+#: frontend/src/views/SoundView.vue:159
+msgid "Choisir…"
+msgstr "選択…"
+
+#: frontend/src/views/SoundView.vue:159
+#: templates/configure/tab_son.html.jinja:46
+msgid "Connectez Spotify (plus bas) pour choisir une playlist."
+msgstr "プレイリストを選ぶには、下でSpotifyを接続してください。"
+
+#: frontend/src/views/SoundView.vue:165
+#: templates/configure/tab_son.html.jinja:31
+msgid "Ajouter une plage"
+msgstr "時間帯を追加"
+
+#: frontend/src/views/SoundView.vue:174
+#: templates/configure/tab_son.html.jinja:136
+msgid "Le cadre comme enceinte"
+msgstr "フォトフレームをスピーカーとして使う"
+
+#: frontend/src/views/SoundView.vue:176 frontend/src/views/SoundView.vue:178
+#: frontend/src/views/SoundView.vue:180
+#: templates/configure/tab_son.html.jinja:166
+msgid "Actif"
+msgstr "有効"
+
+#: frontend/src/views/SoundView.vue:176 frontend/src/views/SoundView.vue:178
+#: frontend/src/views/SoundView.vue:180
+#: templates/configure/tab_son.html.jinja:166
+msgid "Non installé"
+msgstr "未インストール"
+
+#: frontend/src/views/SoundView.vue:177
+#: templates/configure/tab_son.html.jinja:140
+msgid ""
+"Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
+"la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
+msgstr ""
+"Spotify アプリでデバイスとして「Cadre photo」を選ぶと、フォトフレームの画面から音楽が流れます。Spotify Premium "
+"アカウントが必要です。"
+
+#: frontend/src/views/SoundView.vue:179
+#: templates/configure/tab_son.html.jinja:144
+msgid ""
+"Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
+"application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
+msgstr ""
+"iPhone、iPad、Mac から、任意のアプリ（Deezer、Apple Music、YouTube など）の音声を「Cadre "
+"photo」に送信できます。"
+
+#: frontend/src/views/SoundView.vue:181
+#: templates/configure/tab_son.html.jinja:149
+msgid ""
+"Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
+"fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
+" un nouvel appareil que pendant 3 minutes après un appui sur « Associer "
+"un téléphone »."
+msgstr ""
+"Android スマートフォン向け（Deezer、YouTube Music "
+"など）：一度ペアリングすれば、次からは自動で再接続されます。新しい機器を受け付けるのは「スマートフォンをペアリング」を押してから 3 "
+"分間だけです。"
+
+#: frontend/src/views/SoundView.vue:183
+#: templates/configure/tab_son.html.jinja:151
+msgid "Associer un téléphone"
+msgstr "スマートフォンをペアリング"
+
+#: frontend/src/views/SoundView.vue:184
+#: templates/configure/tab_son.html.jinja:212
+msgid "Visible : choisissez « Cadre photo » sur le téléphone"
+msgstr "検出可能：スマートフォンで「Cadre photo」を選んでください"
+
+#: frontend/src/views/SoundView.vue:186
+#: templates/configure/tab_affichage.html.jinja:310
+#: templates/configure/tab_son.html.jinja:212
+msgid "connecté"
+msgstr "接続中"
+
+#: frontend/src/views/SoundView.vue:187
+#: templates/configure/tab_son.html.jinja:213
+msgid "Oublier"
+msgstr "削除"
+
+#: frontend/src/views/SoundView.vue:188
+#: templates/configure/tab_son.html.jinja:213
+msgid "Aucun téléphone associé."
+msgstr "ペアリング済みのスマートフォンはありません。"
+
+#: frontend/src/views/SoundView.vue:194
+#: templates/configure/tab_son.html.jinja:157
+msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
+msgstr "これらの機能を有効にするには、Raspberry Pi で一度だけ次を実行してください："
 
 #: frontend/src/views/StatsView.vue:46
 #: templates/configure/tab_stats.html.jinja:5
@@ -3720,10 +4294,6 @@ msgstr "ボイスメッセージを送る"
 msgid "Recommencer"
 msgstr "録り直す"
 
-#: templates/configure/_son_radio.html.jinja:5 templates/upload.html.jinja:179
-msgid "Arrêter"
-msgstr "停止"
-
 #: templates/configure/tab_accueil.html.jinja:335
 #: templates/upload.html.jinja:197 templates/upload.html.jinja:329
 #: templates/upload.html.jinja:394 templates/upload.html.jinja:431
@@ -3821,53 +4391,10 @@ msgstr "送信サイズが大きすぎます。一度に送信するファイル
 msgid "Aucune musique en cours de lecture."
 msgstr "再生中の音楽はありません。"
 
-#: templates/configure/_music_remote.html.jinja:11
-#: templates/configure/_son_spotify.html.jinja:62
-#: templates/configure/_tour.html.jinja:10
-msgid "Précédent"
-msgstr "前へ"
-
-#: templates/configure/_music_remote.html.jinja:12
-#: templates/configure/_son_spotify.html.jinja:63
-msgid "Lecture / pause"
-msgstr "再生 / 一時停止"
-
-#: templates/configure/_music_remote.html.jinja:13
-#: templates/configure/_son_spotify.html.jinja:64
-#: templates/configure/_tour.html.jinja:40
-msgid "Suivant"
-msgstr "次へ"
-
 #: templates/configure/_music_remote.html.jinja:16
 #: templates/configure/_music_remote.html.jinja:18
 msgid "Volume du cadre"
 msgstr "フォトフレームの音量"
-
-#: templates/configure/_music_remote.html.jinja:22
-#: templates/configure/_music_remote.html.jinja:23
-msgid "Minuteur de sommeil"
-msgstr "スリープタイマー"
-
-#: templates/configure/_music_remote.html.jinja:24
-#: templates/configure/_music_remote.html.jinja:83
-msgid "Arrêter la musique…"
-msgstr "音楽を止める…"
-
-#: templates/configure/_music_remote.html.jinja:25
-msgid "dans 15 min"
-msgstr "15分後"
-
-#: templates/configure/_music_remote.html.jinja:26
-msgid "dans 30 min"
-msgstr "30分後"
-
-#: templates/configure/_music_remote.html.jinja:27
-msgid "dans 1 h"
-msgstr "1時間後"
-
-#: templates/configure/_music_remote.html.jinja:28
-msgid "dans 1 h 30"
-msgstr "1時間30分後"
 
 #: templates/configure/_music_remote.html.jinja:79
 msgid "Annuler le minuteur"
@@ -4039,252 +4566,13 @@ msgstr "日付を指定…"
 msgid "Aucune pour l'instant"
 msgstr "まだありません"
 
-#: templates/configure/_son_radio.html.jinja:2
-msgid "Radios et podcasts"
-msgstr "ラジオとポッドキャスト"
-
-#: templates/configure/_son_radio.html.jinja:7
-msgid "Radios"
-msgstr "ラジオ"
-
-#: templates/configure/_son_radio.html.jinja:10
-msgid "Mes radios"
-msgstr "お気に入りのラジオ"
-
-#: templates/configure/_son_radio.html.jinja:13
-msgid "Trouver une radio"
-msgstr "ラジオを探す"
-
-#: templates/configure/_son_radio.html.jinja:14
-msgid "Nom de la radio (ex : RTL, Chérie FM, BBC...)"
-msgstr "ラジオ名（例：NHK、J-WAVE、BBC など）"
-
-#: templates/configure/_son_radio.html.jinja:16
-msgid "Podcasts"
-msgstr "ポッドキャスト"
-
-#: templates/configure/_son_radio.html.jinja:19
-msgid "Adresse du flux RSS du podcast"
-msgstr "ポッドキャストの RSS フィードのアドレス"
-
-#: templates/configure/_son_radio.html.jinja:27
-msgid "Ajouter à mes radios"
-msgstr "お気に入りに追加"
-
-#: templates/configure/_son_radio.html.jinja:27
-msgid "Retirer de mes radios"
-msgstr "お気に入りから外す"
-
-#: templates/configure/_son_radio.html.jinja:28
-msgid "Aucune radio trouvée."
-msgstr "ラジオが見つかりません。"
-
-#: templates/configure/_son_radio.html.jinja:28
-msgid "Écouter le dernier épisode"
-msgstr "最新エピソードを再生"
-
-#: templates/configure/_son_spotify.html.jinja:5
-msgid "Associer le cadre à votre compte"
-msgstr "フォトフレームをアカウントにリンク"
-
-#: templates/configure/_son_spotify.html.jinja:6
-msgid ""
-"Le cadre apparaît alors dans vos appareils Spotify, même quand vous "
-"n'êtes pas à la maison. Compte Premium nécessaire."
-msgstr "フォトフレームが Spotify のデバイス一覧に表示されます（外出中でも表示されます）。Premium アカウントが必要です。"
-
-#: templates/configure/_son_spotify.html.jinja:8
-msgid "Associé"
-msgstr "リンク済み"
-
-#: templates/configure/_son_spotify.html.jinja:10
-msgid "Dissocier"
-msgstr "リンク解除"
-
-#: templates/configure/_son_spotify.html.jinja:13
-msgid "Associer mon compte"
-msgstr "アカウントをリンク"
-
-#: templates/configure/_son_spotify.html.jinja:16
-msgid ""
-"Ouvrez ce lien sur votre téléphone ou votre ordinateur, connectez-vous à "
-"Spotify et validez :"
-msgstr "スマートフォンまたはパソコンでこのリンクを開き、Spotify にログインして承認してください："
-
-#: templates/configure/_son_spotify.html.jinja:18
-msgid "Code :"
-msgstr "コード："
-
-#: templates/configure/_son_spotify.html.jinja:19
-msgid "Cette page se met à jour toute seule une fois l'association validée."
-msgstr "リンクが承認されると、このページは自動的に更新されます。"
-
-#: templates/configure/_son_spotify.html.jinja:24
-msgid "Choisir la musique depuis cette page"
-msgstr "このページから音楽を選ぶ"
-
-#: templates/configure/_son_spotify.html.jinja:26
-msgid ""
-"Une seule fois : Spotify demande de créer une « application » personnelle"
-" (gratuit, 5 minutes)."
-msgstr "初回のみ：Spotify で個人用の「アプリ」を作成する必要があります（無料・約5分）。"
-
-#: templates/configure/_son_spotify.html.jinja:28
-msgid "Ouvrez"
-msgstr "ブラウザで"
-
-#: templates/configure/_son_spotify.html.jinja:28
-msgid "et cliquez sur « Create app »."
-msgstr "を開き、「Create app」をクリックします。"
-
-#: templates/configure/_son_spotify.html.jinja:29
-msgid "Nom : Pimmich. Dans « Redirect URIs », collez cette adresse :"
-msgstr "名前：Pimmich。「Redirect URIs」に次のアドレスを貼り付けます："
-
-#: templates/configure/_son_spotify.html.jinja:31
-msgid "Cochez « Web API », acceptez les conditions et enregistrez."
-msgstr "「Web API」にチェックを入れ、利用規約に同意して保存します。"
-
-#: templates/configure/_son_spotify.html.jinja:32
-msgid "Copiez le « Client ID » de l'application ici :"
-msgstr "アプリの「Client ID」をここに貼り付けます："
-
-#: templates/configure/_son_spotify.html.jinja:36
-msgid ""
-"Ouvrez toujours l'interface avec la même adresse que celle déclarée ci-"
-"dessus (même adresse IP ou même nom)."
-msgstr "この画面は、必ず上記で登録したものと同じアドレス（同じ IP アドレスまたは同じ名前）で開いてください。"
-
-#: templates/configure/_son_spotify.html.jinja:39
-msgid "Se connecter à Spotify"
-msgstr "Spotify に接続"
-
-#: templates/configure/_son_spotify.html.jinja:40
-msgid "Changer d'application"
-msgstr "アプリを変更"
-
-#: templates/configure/_son_spotify.html.jinja:44
-msgid "Déconnecter"
-msgstr "接続解除"
-
-#: templates/configure/_son_spotify.html.jinja:50
-msgid "Lecture en cours"
-msgstr "再生中"
-
-#: templates/configure/_son_spotify.html.jinja:51
-msgid ""
-"Rien ne joue sur votre compte Spotify pour le moment : lancez une "
-"playlist ci-dessous ou recherchez un titre."
-msgstr "Spotify アカウントでは現在何も再生されていません。下のプレイリストを再生するか、曲を検索してください。"
-
-#: templates/configure/_son_spotify.html.jinja:58
-msgid "Écouter sur le cadre"
-msgstr "フォトフレームで聴く"
-
-#: templates/configure/_son_spotify.html.jinja:59
-msgid "Avancement"
-msgstr "再生位置"
-
-#: templates/configure/_son_spotify.html.jinja:61
-msgid "Lecture aléatoire"
-msgstr "シャッフル"
-
-#: templates/configure/_son_spotify.html.jinja:67
-msgid "Volume Spotify"
-msgstr "Spotify の音量"
-
-#: templates/configure/_son_spotify.html.jinja:71
-msgid "À suivre sur Spotify"
-msgstr "Spotify の次の曲"
-
-#: templates/configure/_son_spotify.html.jinja:76
-msgid "Rechercher"
-msgstr "検索"
-
-#: templates/configure/_son_spotify.html.jinja:77
-msgid "Titre, artiste, album, playlist…"
-msgstr "曲、アーティスト、アルバム、プレイリスト…"
-
-#: templates/configure/_son_spotify.html.jinja:81
-#: templates/configure/_son_spotify.html.jinja:101
-msgid "Lire sur le cadre"
-msgstr "フォトフレームで再生"
-
-#: templates/configure/_son_spotify.html.jinja:83
-msgid "Rechercher une playlist…"
-msgstr "プレイリストを検索…"
-
-#: templates/configure/_son_spotify.html.jinja:88
-msgid "Musiques associées"
-msgstr "関連付けた音楽"
-
-#: templates/configure/_son_spotify.html.jinja:89
-msgid ""
-"Lancées automatiquement sur le cadre quand vous choisissez l'ambiance ou "
-"la playlist de photos."
-msgstr "アンビエンスまたは写真プレイリストを選ぶと、フォトフレームで自動的に再生されます。"
-
-#: templates/configure/_son_spotify.html.jinja:100
-msgid "Playlist de photos"
-msgstr "写真プレイリスト"
-
-#: templates/configure/_son_spotify.html.jinja:101
-#: templates/configure/tab_son.html.jinja:8
-msgid "Aucune musique"
-msgstr "音楽なし"
-
-#: templates/configure/_son_spotify.html.jinja:102
-msgid "titres"
-msgstr "曲"
-
-#: templates/configure/_son_spotify.html.jinja:102
-msgid "Aucune playlist trouvée."
-msgstr "プレイリストが見つかりません。"
-
-#: templates/configure/_son_spotify.html.jinja:103
-#: templates/configure/tab_sources.html.jinja:397
-msgid "Compte :"
-msgstr "アカウント："
-
 #: templates/configure/_son_spotify.html.jinja:103
 msgid "Copié"
 msgstr "コピーしました"
 
-#: templates/configure/_son_spotify.html.jinja:110
-msgid "sur"
-msgstr "再生先："
-
-#: templates/configure/_son_spotify.html.jinja:110
-msgid "Ajouter à la file"
-msgstr "キューに追加"
-
-#: templates/configure/_son_spotify.html.jinja:110
-msgid "Écouter maintenant sur le cadre"
-msgstr "今すぐフォトフレームで再生"
-
-#: templates/configure/_son_spotify.html.jinja:111
-msgid "Ajouté à la file d'attente."
-msgstr "キューに追加しました。"
-
 #: templates/configure/_son_spotify.html.jinja:111
 msgid "Aucun résultat."
 msgstr "結果がありません。"
-
-#: templates/configure/_son_spotify.html.jinja:112
-msgid "Titres"
-msgstr "曲"
-
-#: templates/configure/_son_spotify.html.jinja:112
-msgid "Artistes"
-msgstr "アーティスト"
-
-#: templates/configure/_son_spotify.html.jinja:112
-msgid "Albums"
-msgstr "アルバム"
-
-#: templates/configure/_son_spotify.html.jinja:281
-msgid "Demande de code à Spotify…"
-msgstr "Spotify にコードをリクエスト中…"
 
 #: templates/configure/_tour.html.jinja:9
 msgid "Passer"
@@ -4949,11 +5237,6 @@ msgstr "プレイリストを再生"
 msgid "Inviter des proches"
 msgstr "家族や友人を招待"
 
-#: templates/configure/tab_accueil.html.jinja:49
-#: templates/configure/tab_son.html.jinja:7
-msgid "Musique"
-msgstr "音楽"
-
 #: templates/configure/tab_accueil.html.jinja:50
 msgid "Mes photos"
 msgstr "マイ写真"
@@ -5268,11 +5551,6 @@ msgid ""
 "Dans Home Assistant : ajoutez l'intégration MQTT (avec le module "
 "Mosquitto), puis utilisez ici le même utilisateur."
 msgstr "Home AssistantでMQTT統合（Mosquittoアドオン）を追加し、ここで同じユーザーを使ってください。"
-
-#: templates/configure/tab_affichage.html.jinja:310
-#: templates/configure/tab_son.html.jinja:212
-msgid "connecté"
-msgstr "接続中"
 
 #: templates/configure/tab_affichage.html.jinja:310
 msgid "non connecté"
@@ -6666,24 +6944,6 @@ msgstr "スライドショーは実行されていません。"
 msgid "Affichée en ce moment"
 msgstr "現在表示中"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:224
-msgid "Musique du diaporama"
-msgstr "スライドショーの音楽"
-
-#: templates/configure/tab_son.html.jinja:4
-msgid ""
-"Jouée en boucle pendant le diaporama. Chaque playlist peut avoir sa "
-"propre musique (rubrique Playlists)."
-msgstr "スライドショー中にループ再生されます。プレイリストごとに音楽を設定できます（「プレイリスト」セクション）。"
-
-#: templates/configure/tab_son.html.jinja:11
-msgid "Volume"
-msgstr "音量"
-
-#: templates/configure/tab_son.html.jinja:18
-msgid "Ajouter une musique (MP3, WAV)"
-msgstr "音楽を追加（MP3、WAV）"
-
 #: templates/configure/tab_son.html.jinja:22
 msgid ""
 "Le son des vidéos (activé ou non, sortie HDMI ou jack, volume) se règle "
@@ -6694,57 +6954,6 @@ msgstr "動画の音声（オン／オフ、HDMI またはイヤホン端子出�
 msgid "Y aller"
 msgstr "移動"
 
-#: templates/configure/tab_son.html.jinja:27
-msgid "Musique selon l'heure"
-msgstr "時間帯ごとの音楽"
-
-#: templates/configure/tab_son.html.jinja:28
-msgid ""
-"Une ambiance par moment de la journée : calme le matin, festive le soir… "
-"Au début de chaque plage, le cadre lance sa musique ; il ne coupe jamais "
-"une musique lancée à la main."
-msgstr "時間帯ごとの雰囲気：朝は穏やかに、夜はにぎやかに… 各時間帯の始まりにフレームが音楽を流します。手動で再生した音楽は止めません。"
-
-#: templates/configure/tab_son.html.jinja:29
-msgid "Activer la musique selon l'heure"
-msgstr "時間帯ごとの音楽を有効にする"
-
-#: templates/configure/tab_son.html.jinja:31
-msgid "Ajouter une plage"
-msgstr "時間帯を追加"
-
-#: templates/configure/tab_son.html.jinja:45
-msgid "Radio"
-msgstr "ラジオ"
-
-#: templates/configure/tab_son.html.jinja:45
-msgid "Musique du cadre"
-msgstr "フレームの音楽"
-
-#: templates/configure/tab_son.html.jinja:46
-msgid "Connectez Spotify (plus bas) pour choisir une playlist."
-msgstr "プレイリストを選ぶには、下でSpotifyを接続してください。"
-
-#: templates/configure/tab_son.html.jinja:100
-msgid "Musique en cours"
-msgstr "再生中の音楽"
-
-#: templates/configure/tab_son.html.jinja:104
-msgid "Afficher le morceau sur le cadre"
-msgstr "フォトフレームに曲を表示"
-
-#: templates/configure/tab_son.html.jinja:106
-msgid "Quelques secondes à chaque nouveau morceau"
-msgstr "新しい曲ごとに数秒間"
-
-#: templates/configure/tab_son.html.jinja:107
-msgid "En permanence pendant la lecture"
-msgstr "再生中は常に表示"
-
-#: templates/configure/tab_son.html.jinja:108
-msgid "Ne pas afficher"
-msgstr "表示しない"
-
 #: templates/configure/tab_son.html.jinja:121
 msgid ""
 "Un petit encart discret (pochette, titre, artiste) pour la musique du "
@@ -6754,87 +6963,12 @@ msgstr ""
 "スライドショーの音楽、Spotify、AirPlay 用の小さく控えめな表示（ジャケット、曲名、アーティスト）。Spotify または "
 "AirPlay の再生中は、スライドショーの音楽が一時停止します。"
 
-#: templates/configure/tab_son.html.jinja:122
-msgid "Pendant Spotify, AirPlay, Bluetooth ou la radio :"
-msgstr "Spotify・AirPlay・Bluetooth・ラジオの再生中："
-
-#: templates/configure/tab_son.html.jinja:124
-msgid "Les photos continuent"
-msgstr "写真の表示を続ける"
-
-#: templates/configure/tab_son.html.jinja:125
-msgid "Jukebox : la pochette en grand à l'écran"
-msgstr "ジュークボックス：ジャケットを大きく表示"
-
-#: templates/configure/tab_son.html.jinja:126
-msgid "Karaoké : les paroles défilent en rythme (Spotify)"
-msgstr "カラオケ：歌詞がリズムに合わせて流れる（Spotify）"
-
 #: templates/configure/tab_son.html.jinja:128
 msgid ""
 "Paroles synchronisées fournies par LRCLIB (le titre et l'artiste du "
 "morceau lui sont envoyés). « Photo suivante » revient aux photos jusqu'au"
 " morceau suivant."
 msgstr "同期歌詞はLRCLIBから取得します（曲名とアーティスト名を送信）。「次の写真」で次の曲まで写真に戻ります。"
-
-#: templates/configure/tab_son.html.jinja:136
-msgid "Le cadre comme enceinte"
-msgstr "フォトフレームをスピーカーとして使う"
-
-#: templates/configure/tab_son.html.jinja:140
-msgid ""
-"Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
-"la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
-msgstr ""
-"Spotify アプリでデバイスとして「Cadre photo」を選ぶと、フォトフレームの画面から音楽が流れます。Spotify Premium "
-"アカウントが必要です。"
-
-#: templates/configure/tab_son.html.jinja:144
-msgid ""
-"Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
-"application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
-msgstr ""
-"iPhone、iPad、Mac から、任意のアプリ（Deezer、Apple Music、YouTube など）の音声を「Cadre "
-"photo」に送信できます。"
-
-#: templates/configure/tab_son.html.jinja:149
-msgid ""
-"Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
-"fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
-" un nouvel appareil que pendant 3 minutes après un appui sur « Associer "
-"un téléphone »."
-msgstr ""
-"Android スマートフォン向け（Deezer、YouTube Music "
-"など）：一度ペアリングすれば、次からは自動で再接続されます。新しい機器を受け付けるのは「スマートフォンをペアリング」を押してから 3 "
-"分間だけです。"
-
-#: templates/configure/tab_son.html.jinja:151
-msgid "Associer un téléphone"
-msgstr "スマートフォンをペアリング"
-
-#: templates/configure/tab_son.html.jinja:157
-msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
-msgstr "これらの機能を有効にするには、Raspberry Pi で一度だけ次を実行してください："
-
-#: templates/configure/tab_son.html.jinja:166
-msgid "Actif"
-msgstr "有効"
-
-#: templates/configure/tab_son.html.jinja:166
-msgid "Non installé"
-msgstr "未インストール"
-
-#: templates/configure/tab_son.html.jinja:212
-msgid "Visible : choisissez « Cadre photo » sur le téléphone"
-msgstr "検出可能：スマートフォンで「Cadre photo」を選んでください"
-
-#: templates/configure/tab_son.html.jinja:213
-msgid "Oublier"
-msgstr "削除"
-
-#: templates/configure/tab_son.html.jinja:213
-msgid "Aucun téléphone associé."
-msgstr "ペアリング済みのスマートフォンはありません。"
 
 #: templates/configure/tab_sources.html.jinja:4
 msgid "Configuration de l'album photo Immich"
@@ -9067,10 +9201,6 @@ msgstr "ここから Spotify を操作するには、接続してください（
 #: web/routes_music.py:269
 msgid "Commandez la lecture depuis le téléphone."
 msgstr "再生はスマートフォンから操作してください。"
-
-#: web/routes_music.py:279
-msgid "Aucune musique en cours."
-msgstr "再生中の音楽はありません。"
 
 #: web/routes_music.py:296
 msgid "Durée invalide."
