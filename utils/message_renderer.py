@@ -10,7 +10,7 @@ import math
 import random
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 FONT_DIRS = [PROJECT_DIR / "static" / "fonts", Path("/usr/share/fonts/truetype/dejavu"), Path("/usr/share/fonts/truetype/liberation")]
@@ -413,6 +413,8 @@ def render_note(message, width, height, kind="postit", seed=None):
     « postit » (papier jaune) ou « fiche » (bristol blanc ligné).
     """
     rng = random.Random(seed)
+    if message.get("kind") == "drawing":
+        return _drawing_note(message, width, height)
     if kind == "fiche":
         style = dict(STYLES["lettre"], card={"color": ((255, 255, 252), (246, 244, 236)), "size": (1, 1)}, align="center")
     else:
@@ -423,4 +425,24 @@ def render_note(message, width, height, kind="postit", seed=None):
     if kind == "fiche":
         draw = ImageDraw.Draw(card)
         draw.line([(0, height // 7), (width, height // 7)], fill=(226, 120, 120, 255), width=max(2, height // 120))
+    return card
+
+
+def _drawing_note(message, width, height):
+    """Dessin d'invité dans une composition : le dessin sur une carte blanche, avec la signature dessous."""
+    card = Image.new("RGBA", (width, height), (255, 255, 252, 255))
+    path = PROJECT_DIR / "cache" / "drawings" / f"{message.get('id')}.png"
+    signature = (message.get("signature") or "").strip()
+    margin = max(4, int(min(width, height) * 0.05))
+    bottom = int(height * 0.16) if signature else margin
+    try:
+        with Image.open(path) as drawing:
+            drawing = ImageOps.contain(drawing.convert("RGB"), (width - 2 * margin, height - margin - bottom))
+        card.paste(drawing, ((width - drawing.width) // 2, margin + (height - margin - bottom - drawing.height) // 2))
+    except OSError:
+        pass
+    if signature:
+        draw = ImageDraw.Draw(card)
+        font = _font(HAND2, max(12, int(bottom * 0.6)))
+        draw.text((width / 2, height - bottom / 2), f"— {signature}", font=font, fill=(60, 60, 70), anchor="mm")
     return card

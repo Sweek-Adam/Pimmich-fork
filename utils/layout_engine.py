@@ -245,7 +245,14 @@ def render_chunk(style, chunk, messages_by_id, width, height, include_messages=T
     slots = MESSAGE_SLOTS.get(style, 1)
     notes, photos, used = [], [], 0
     for path in chunk:
-        note = message_for_path(path, messages_by_id) if include_messages and accepts_message else None
+        message = message_for_path(path, messages_by_id)
+        if message is not None and message.get("kind") == "voice":
+            if not photos and not notes:
+                return None, 0  # message vocal : affiché seul, en plein écran (c'est là que le cadre le lit)
+            break  # la composition s'arrête juste avant
+        note = message if include_messages and accepts_message else None
+        if note is not None and note.get("kind") == "drawing" and slots > 1:
+            note = None  # les fantômes n'écrivent que du texte : le dessin est posé comme une photo
         if note is not None:
             if len(notes) >= slots:
                 break  # message en trop : il ira dans la composition suivante
