@@ -33,4 +33,5 @@ Pimmich utilise les codes d'icônes de l'API OpenWeatherMap. Vous devez téléch
 *   `50d.png` & `50n.png` (brouillard)
 
 Téléchargez au minimum celles que vous rencontrez le plus souvent dans votre région. Si une icône est manquante, seul le texte s'affichera.
+
 > Ce dossier fait partie d'un fork personnel de [Pimmich](https://github.com/gotenash/pimmich) (usage purement perso).
