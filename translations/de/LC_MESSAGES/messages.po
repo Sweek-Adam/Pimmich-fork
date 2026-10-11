@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 21:07+0200\n"
+"POT-Creation-Date: 2026-10-11 21:29+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -164,7 +164,7 @@ msgstr "Läuft"
 msgid "Arrêté"
 msgstr "Gestoppt"
 
-#: frontend/src/App.vue:165 templates/configure.html.jinja:120
+#: frontend/src/App.vue:165 templates/configure.html.jinja:121
 msgid "Thème"
 msgstr "Design"
 
@@ -189,143 +189,143 @@ msgstr "{n} Fotos"
 
 #: frontend/src/nav.ts:21 frontend/src/nav.ts:22
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:109
-#: templates/configure.html.jinja:140 templates/configure.html.jinja:245
+#: templates/configure.html.jinja:141 templates/configure.html.jinja:246
 msgid "Accueil"
 msgstr "Start"
 
 #: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:115
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:245
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:42
 msgid "Photos"
 msgstr "Fotos"
 
 #: frontend/src/nav.ts:25 frontend/src/views/ImportView.vue:183
-#: templates/configure.html.jinja:144
+#: templates/configure.html.jinja:145
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr "Importieren"
 
 #: frontend/src/components/SmartAlbumEditor.vue:107 frontend/src/nav.ts:26
-#: templates/configure.html.jinja:145
+#: templates/configure.html.jinja:146
 #: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr "Quellen"
 
-#: frontend/src/nav.ts:27 templates/configure.html.jinja:146
+#: frontend/src/nav.ts:27 templates/configure.html.jinja:147
 msgid "Bibliothèque"
 msgstr "Bibliothek"
 
 #: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:158
-#: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:147
+#: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:148
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "Als Nächstes"
 
 #: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:29
-#: templates/configure.html.jinja:148
+#: templates/configure.html.jinja:149
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
 #: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:120
-#: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:149
+#: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr "Favoriten"
 
-#: frontend/src/nav.ts:31 templates/configure.html.jinja:150
+#: frontend/src/nav.ts:31 templates/configure.html.jinja:151
 msgid "Carte"
 msgstr "Karte"
 
 #: frontend/src/nav.ts:32 frontend/src/views/MessagesView.vue:145
-#: templates/configure.html.jinja:151
+#: templates/configure.html.jinja:152
 #: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "Nachrichten"
 
 #: frontend/src/nav.ts:34 frontend/src/views/DisplayView.vue:25
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:245
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:33
 msgid "Écran"
 msgstr "Bildschirm"
 
-#: frontend/src/nav.ts:35 templates/configure.html.jinja:156
+#: frontend/src/nav.ts:35 templates/configure.html.jinja:157
 msgid "Dispositions"
 msgstr "Anordnungen"
 
-#: frontend/src/nav.ts:36 templates/configure.html.jinja:157
+#: frontend/src/nav.ts:36 templates/configure.html.jinja:158
 msgid "Affichage"
 msgstr "Anzeige"
 
-#: frontend/src/nav.ts:37 templates/configure.html.jinja:158
+#: frontend/src/nav.ts:37 templates/configure.html.jinja:159
 msgid "Horloge & météo"
 msgstr "Uhr & Wetter"
 
 #: frontend/src/nav.ts:38 frontend/src/views/CaptionsView.vue:12
-#: templates/configure.html.jinja:159
+#: templates/configure.html.jinja:160
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "Foto-Infos"
 
-#: frontend/src/nav.ts:39 templates/configure.html.jinja:160
+#: frontend/src/nav.ts:39 templates/configure.html.jinja:161
 msgid "Légendes"
 msgstr "Bildunterschriften"
 
-#: frontend/src/nav.ts:40 templates/configure.html.jinja:161
+#: frontend/src/nav.ts:40 templates/configure.html.jinja:162
 msgid "Son"
 msgstr "Ton"
 
 #: frontend/src/nav.ts:42 templates/configure.html.jinja:96
-#: templates/configure.html.jinja:245 templates/configure/_tour.html.jinja:34
+#: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:34
 msgid "Partage"
 msgstr "Teilen"
 
-#: frontend/src/nav.ts:43 templates/configure.html.jinja:166
+#: frontend/src/nav.ts:43 templates/configure.html.jinja:167
 #: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr "Gäste"
 
-#: frontend/src/nav.ts:44 templates/configure.html.jinja:167
+#: frontend/src/nav.ts:44 templates/configure.html.jinja:168
 msgid "À valider"
 msgstr "Zu prüfen"
 
-#: frontend/src/nav.ts:45 templates/configure.html.jinja:168
+#: frontend/src/nav.ts:45 templates/configure.html.jinja:169
 msgid "Telegram"
 msgstr "Telegramm"
 
 #: frontend/src/nav.ts:47 templates/configure.html.jinja:96
-#: templates/configure.html.jinja:245 templates/configure/_tour.html.jinja:35
+#: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:35
 msgid "Système"
 msgstr "System"
 
-#: frontend/src/nav.ts:48 templates/configure.html.jinja:173
+#: frontend/src/nav.ts:48 templates/configure.html.jinja:174
 msgid "Comptes"
 msgstr "Konten"
 
-#: frontend/src/nav.ts:49 templates/configure.html.jinja:175
+#: frontend/src/nav.ts:49 templates/configure.html.jinja:176
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: frontend/src/nav.ts:50 templates/configure.html.jinja:176
+#: frontend/src/nav.ts:50 templates/configure.html.jinja:177
 msgid "Maintenance"
 msgstr "Wartung"
 
-#: frontend/src/nav.ts:51 templates/configure.html.jinja:177
+#: frontend/src/nav.ts:51 templates/configure.html.jinja:178
 msgid "Réseau"
 msgstr "Netzwerk"
 
-#: frontend/src/nav.ts:52 templates/configure.html.jinja:179
+#: frontend/src/nav.ts:52 templates/configure.html.jinja:180
 msgid "Commande vocale"
 msgstr "Sprachsteuerung"
 
-#: frontend/src/nav.ts:53 templates/configure.html.jinja:181
+#: frontend/src/nav.ts:53 templates/configure.html.jinja:182
 msgid "Statistiques"
 msgstr "Statistiken"
 
-#: frontend/src/nav.ts:54 templates/configure.html.jinja:182
+#: frontend/src/nav.ts:54 templates/configure.html.jinja:183
 msgid "Journaux"
 msgstr "Protokolle"
 
@@ -2187,7 +2187,7 @@ msgstr "Neues Passwort für „{name}“:"
 msgid "Supprimer le compte « {name} » ?"
 msgstr "Konto „{name}“ löschen?"
 
-#: frontend/src/views/AccountsView.vue:52 templates/configure.html.jinja:130
+#: frontend/src/views/AccountsView.vue:52 templates/configure.html.jinja:131
 msgid "Mon compte"
 msgstr "Mein Konto"
 
@@ -6216,43 +6216,51 @@ msgstr "Pimmich von"
 msgid "Rechercher un réglage…"
 msgstr "Einstellung suchen…"
 
-#: templates/configure.html.jinja:115 templates/configure/_tour.html.jinja:37
+#: templates/configure.html.jinja:115
+msgid "Passer sur la nouvelle interface"
+msgstr "Zur neuen Oberfläche wechseln"
+
+#: templates/configure.html.jinja:115
+msgid "Nouvel affichage"
+msgstr "Neue Oberfläche"
+
+#: templates/configure.html.jinja:116 templates/configure/_tour.html.jinja:37
 msgid "État du diaporama"
 msgstr "Diashow-Status"
 
-#: templates/configure.html.jinja:119
+#: templates/configure.html.jinja:120
 msgid "Compte utilisateur"
 msgstr "Benutzerkonto"
 
-#: templates/configure.html.jinja:122
+#: templates/configure.html.jinja:123
 msgid "Auto"
 msgstr "Auto"
 
-#: templates/configure.html.jinja:123 utils/message_renderer.py:32
+#: templates/configure.html.jinja:124 utils/message_renderer.py:32
 msgid "Clair"
 msgstr "Hell"
 
-#: templates/configure.html.jinja:124
+#: templates/configure.html.jinja:125
 msgid "Sombre"
 msgstr "Dunkel"
 
-#: templates/configure.html.jinja:126
+#: templates/configure.html.jinja:127
 msgid "Langue"
 msgstr "Sprache"
 
-#: templates/configure.html.jinja:131
+#: templates/configure.html.jinja:132
 msgid "Visite guidée"
 msgstr "Geführte Tour"
 
-#: templates/configure.html.jinja:132
+#: templates/configure.html.jinja:133
 msgid "Nouvelle interface"
 msgstr "Neue Oberfläche"
 
-#: templates/configure.html.jinja:133
+#: templates/configure.html.jinja:134
 msgid "Se déconnecter"
 msgstr "Abmelden"
 
-#: templates/configure.html.jinja:208
+#: templates/configure.html.jinja:209
 msgid "Enregistrer les modifications"
 msgstr "Änderungen speichern"
 

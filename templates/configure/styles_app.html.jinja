@@ -28,6 +28,10 @@
         .app-credits a { color: var(--accent); }
 
         #app-content { margin-left: var(--sidebar); min-height: 100vh; }
+        .new-ui-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: .9rem;
+            background: var(--accent, #4f50c9); color: #fff !important; text-decoration: none !important; white-space: nowrap; box-shadow: 0 2px 8px rgba(79, 80, 201, .3); }
+        .new-ui-btn:hover { filter: brightness(1.08); }
+        @media (max-width: 640px) { .new-ui-btn span { display: none; } .new-ui-btn { padding: 8px 10px; } }
         #app-topbar { position: sticky; top: 0; z-index: 20; height: var(--topbar); display: flex; align-items: center; gap: 16px; padding: 0 28px;
             background: var(--topbar-bg); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
         #app-section-title { font-size: 1.35rem; font-weight: 700; margin: 0; white-space: nowrap; }
