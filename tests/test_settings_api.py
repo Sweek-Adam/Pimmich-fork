@@ -97,3 +97,46 @@ def test_media_mode(admin_client, app_module, sandbox, monkeypatch):
         routes_slideshow.save_config(config)
         import shutil
         shutil.rmtree(folder)
+
+
+def test_secrets_are_write_only(admin_client, user_client, app_module):
+    from web import routes_settings
+    before = routes_settings.load_config().get("weather_api_key")
+    try:
+        assert admin_client.post("/api/secrets", json={"key": "weather_api_key", "value": "abc123"}, headers=H).get_json()["success"]
+        data = admin_client.get("/api/secrets").get_json()
+        assert data["secrets"]["weather_api_key"] is True and "abc123" not in str(data)
+        assert "abc123" not in admin_client.get("/api/settings").get_data(as_text=True)
+        assert admin_client.post("/api/secrets", json={"key": "secret_key", "value": "x"}, headers=H).status_code == 400
+        assert admin_client.post("/api/secrets", json={"key": "weather_api_key", "value": "a\nb"}, headers=H).status_code == 400
+        assert user_client.get("/api/secrets").status_code in (302, 403)
+        assert "telegram_authorized_users" not in user_client.get("/api/settings").get_json()["values"]
+        assert user_client.post("/api/settings", json={"telegram_authorized_users": "1"}, headers=H).status_code == 400
+    finally:
+        config = dict(routes_settings.load_config())
+        config["weather_api_key"] = before or ""
+        routes_settings.save_config(config)
+
+
+def test_wifi_api(admin_client, user_client, app_module, monkeypatch):
+    from web import routes_system
+    applied = []
+    monkeypatch.setattr(routes_system, "set_wifi_config", lambda *a: applied.append(a))  # jamais le vrai Wi-Fi
+    config = routes_system.load_config()
+    saved = {k: config.get(k) for k in ("wifi_ssid", "wifi_password", "wifi_country")}
+    try:
+        assert admin_client.post("/api/wifi", json={"ssid": "", "country": "FR"}, headers=H).status_code == 400
+        assert admin_client.post("/api/wifi", json={"ssid": "Maison", "password": "motdepasse", "country": "FR"}, headers=H).get_json()["success"]
+        data = admin_client.get("/api/wifi").get_json()
+        assert data["ssid"] == "Maison" and data["has_password"] and "motdepasse" not in str(data)
+        admin_client.post("/api/wifi", json={"ssid": "Maison", "country": "BE"}, headers=H)
+        assert applied[-1] == ("Maison", "motdepasse", "BE")  # mot de passe gardé
+        assert user_client.get("/api/wifi").status_code in (302, 403)
+    finally:
+        config = dict(routes_system.load_config())
+        for key, value in saved.items():
+            if value is None:
+                config.pop(key, None)
+            else:
+                config[key] = value
+        routes_system.save_config(config)

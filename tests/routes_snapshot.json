@@ -941,6 +941,18 @@
   ]
  ],
  [
+  "/api/secrets",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/secrets",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/set_image_text",
   [
    "POST"
@@ -1418,6 +1430,18 @@
  ],
  [
   "/api/whatsapp/upload",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/wifi",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/wifi",
   [
    "POST"
   ]

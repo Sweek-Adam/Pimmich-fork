@@ -169,31 +169,48 @@ def system_shutdown():
     return jsonify({"success": True, "message": "Arrêt en cours."})
 
 
-@app.route('/save_wifi_settings', methods=['POST'])
-@admin_required
-def save_wifi_settings():
-    ssid = request.form.get('wifi_ssid')
-    password = request.form.get('wifi_password')
-    country = request.form.get('wifi_country') # Get the country code
-
-    if not ssid or not country: # Country is now required
-        flash(_("Le SSID et le pays Wi-Fi sont obligatoires."), "danger")
-        return redirect(url_for('configure'))
-
+def _apply_wifi(ssid, password, country):
+    """Enregistre et applique les réglages Wi-Fi : (succès, message)."""
+    if not ssid or not country:  # le pays est obligatoire
+        return False, _("Le SSID et le pays Wi-Fi sont obligatoires.")
     try:
-        # Sauvegarder les paramètres dans la config.json
         config = load_config()
         config['wifi_ssid'] = ssid
         config['wifi_password'] = password
-        config['wifi_country'] = country # Save country to config
+        config['wifi_country'] = country
         save_config(config)
-
-        # Appliquer les paramètres Wi-Fi au système
-        set_wifi_config(ssid, password, country) # Pass country to the function
-        flash(_("Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer la connexion. Veuillez patienter une minute et vérifier le statut."), "success")
+        set_wifi_config(ssid, password, country)
     except Exception as e:
-        flash(_("Erreur lors de l'application des paramètres Wi-Fi : %(error)s", error=e), "danger")
+        return False, _("Erreur lors de l'application des paramètres Wi-Fi : %(error)s", error=e)
+    return True, _("Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer la connexion. Veuillez patienter une minute et vérifier le statut.")
+
+
+@app.route('/save_wifi_settings', methods=['POST'])
+@admin_required
+def save_wifi_settings():
+    ok, message = _apply_wifi(request.form.get('wifi_ssid'), request.form.get('wifi_password'), request.form.get('wifi_country'))
+    flash(message, "success" if ok else "danger")
     return redirect(url_for('configure'))
+
+
+@app.route('/api/wifi', methods=['GET'])
+@admin_required
+def wifi_settings_api():
+    """Réseau enregistré (le mot de passe n'est jamais renvoyé)."""
+    config = load_config()
+    return jsonify({"success": True, "ssid": config.get("wifi_ssid", ""), "country": config.get("wifi_country", "FR"),
+                    "has_password": bool(config.get("wifi_password"))})
+
+
+@app.route('/api/wifi', methods=['POST'])
+@admin_required
+def wifi_apply_api():
+    data = request.get_json(silent=True) or {}
+    password = data.get('password')
+    if password is None:  # champ laissé vide : on garde le mot de passe enregistré
+        password = load_config().get('wifi_password', '')
+    ok, message = _apply_wifi(str(data.get('ssid') or '').strip(), password, str(data.get('country') or '').strip())
+    return jsonify({"success": ok, "message": message}), (200 if ok else 400)
 
 
 @app.route('/api/wifi_status')

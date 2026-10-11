@@ -42,14 +42,14 @@ export const groups: NavGroup[] = [
   { key: "partage", label: () => t("Partage"), icon: "fa-user-friends", items: [
     { label: () => t("Invités"), icon: "fa-qrcode", tab: "tab-invites" },
     { label: () => t("À valider"), icon: "fa-check-circle", tab: "tab-validation", route: "/a-valider" },
-    { label: () => t("Telegram"), icon: "fa-paper-plane", tab: "tab-telegram" },
+    { label: () => t("Telegram"), icon: "fa-paper-plane", tab: "tab-telegram", route: "/telegram" },
   ] },
   { key: "systeme", label: () => t("Système"), icon: "fa-cog", items: [
     { label: () => t("Comptes"), icon: "fa-users", tab: "tab-comptes", route: "/comptes" },
-    { label: () => t("Notifications"), icon: "fa-bell", tab: "tab-notifications", admin: true },
+    { label: () => t("Notifications"), icon: "fa-bell", tab: "tab-notifications", admin: true, route: "/notifications" },
     { label: () => t("Maintenance"), icon: "fa-tools", tab: "tab-maintenance", admin: true },
-    { label: () => t("Réseau"), icon: "fa-wifi", tab: "tab-network", admin: true },
-    { label: () => t("Commande vocale"), icon: "fa-microphone-alt", tab: "tab-vocal" },
+    { label: () => t("Réseau"), icon: "fa-wifi", tab: "tab-network", admin: true, route: "/reseau" },
+    { label: () => t("Commande vocale"), icon: "fa-microphone-alt", tab: "tab-vocal", route: "/commande-vocale" },
     { label: () => t("Statistiques"), icon: "fa-chart-bar", tab: "tab-stats", admin: true, route: "/statistiques" },
     { label: () => t("Journaux"), icon: "fa-file-alt", tab: "tab-logs", admin: true, route: "/journaux" },
   ] },

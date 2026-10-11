@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { setValue, values, type Field } from "../settings";
+import { computed, ref } from "vue";
+import { t } from "../i18n";
+import { saveSecret, secrets, setValue, values, type Field } from "../settings";
 
 
 const props = defineProps<{ field: Field }>();
 const value = computed(() => values[props.field.key]);
 const visible = computed(() => !props.field.showIf || props.field.showIf(values));
 const id = computed(() => `setting-${props.field.key}`);
+const secret = ref("");
+
+async function storeSecret(value: string) {
+  if (await saveSecret(props.field.key, value)) secret.value = "";
+}
 
 function update(raw: string | boolean) {
   const f = props.field;
@@ -51,6 +57,13 @@ function update(raw: string | boolean) {
                  @change="update(($event.target as HTMLInputElement).value + String(value || '').slice(7))">
           <input :id="id" type="text" class="hex" :value="value" maxlength="9" @change="update(($event.target as HTMLInputElement).value.trim())">
         </template>
+        <template v-else-if="field.type === 'secret'">
+          <input :id="id" v-model="secret" type="password" class="text-input" autocomplete="off"
+                 :placeholder="secrets[field.key] ? t('Enregistré (laisser vide pour garder)') : t('Non défini')">
+          <button class="btn small" type="button" :disabled="!secret.trim()" @click="storeSecret(secret)">{{ t("Enregistrer") }}</button>
+          <button v-if="secrets[field.key]" class="btn small danger" type="button" @click="storeSecret('')">{{ t("Effacer") }}</button>
+          <span v-if="secrets[field.key]" class="pill ok"><i class="fas fa-lock"></i></span>
+        </template>
         <input v-else-if="field.type === 'text'" :id="id" type="text" class="text-input" :value="value" :placeholder="field.placeholder"
                @change="update(($event.target as HTMLInputElement).value)">
         <template v-else>
@@ -75,7 +88,8 @@ function update(raw: string | boolean) {
   font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .4rem .6rem;
 }
 .control input[type="number"] { width: 7rem; }
-.control input[type="text"] { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .4rem .6rem; }
+.control input[type="text"], .control input[type="password"] { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .4rem .6rem; }
+.btn.small { padding: .3rem .8rem; font-size: .85rem; }
 .control .hex { width: 8rem; font-family: ui-monospace, monospace; }
 .control .text-input { flex: 1; max-width: 360px; }
 .control input[type="color"] { width: 2.6rem; height: 2.2rem; padding: 0; border: 1px solid var(--border); border-radius: 8px; background: none; cursor: pointer; }

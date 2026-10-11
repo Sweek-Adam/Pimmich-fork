@@ -61,6 +61,18 @@ SETTINGS = {
     "smart_crop": ("bool", None, True),
     "compositions_include_messages": ("bool", None, True),
     "compositions_seasonal": ("bool", None, True),
+    # Telegram
+    "telegram_bot_enabled": ("bool", None, False),
+    "telegram_authorized_users": ("text", 200, ""),
+    "telegram_boost_enabled": ("bool", None, True),
+    "telegram_boost_duration_days": ("int", (1, 365), 7),
+    "telegram_boost_factor": ("int", (0, 20), 4),
+    # Commande vocale
+    "voice_control_enabled": ("bool", None, False),
+    "voice_control_engine": ("choice", ["porcupine", "vosk"], "porcupine"),
+    "voice_control_language": ("choice", ["fr", "en"], "fr"),
+    "voice_control_device_index": ("device", None, ""),
+    "notification_sound_volume": ("int", (0, 100), 80),
     # Horloge et date
     "show_clock": ("bool", None, False),
     "clock_position": ("choice", ["left", "center", "right"], "center"),
@@ -95,6 +107,14 @@ SETTINGS = {
 }
 
 
+# Réglages visibles et modifiables seulement par un administrateur (comme dans l'interface classique)
+ADMIN_ONLY = {"telegram_authorized_users"}
+
+# Secrets : jamais renvoyés au navigateur ; on sait seulement s'ils sont définis, et on peut les remplacer
+SECRETS = ("immich_token", "smb_password", "weather_api_key", "stormglass_api_key", "telegram_bot_token",
+           "porcupine_access_key", "home_assistant_token", "email_password", "mqtt_password")
+
+
 def clean(key, value):
     """Valeur vérifiée et convertie ; ValueError si elle ne convient pas."""
     kind, options, _default = SETTINGS[key]
@@ -127,6 +147,11 @@ def clean(key, value):
         if len(text) > options or any(c in text for c in "\r\n\t\x00"):
             raise ValueError
         return text.strip()
+    if kind == "device":  # index d'un périphérique audio, ou "" (par défaut)
+        text = str(value)
+        if text and not text.isdigit():
+            raise ValueError
+        return text
     if kind == "time_or_sunset":
         if value != "sunset" and not TIME.match(str(value)):
             raise ValueError
@@ -137,7 +162,10 @@ def clean(key, value):
 def current_values(config=None):
     config = config or load_config()
     values = {}
+    admin = is_admin()
     for key, (kind, _options, default) in SETTINGS.items():
+        if key in ADMIN_ONLY and not admin:
+            continue
         value = config.get(key, default)
         if key.startswith("active_") and key not in config:  # anciens réglages (mêmes heures toute la semaine)
             value = config.get("active_start" if "start" in key else "active_end", default)
@@ -161,7 +189,7 @@ def settings_save_api():
         return jsonify({"success": False, "message": _("Aucun réglage à enregistrer.")}), 400
     cleaned = {}
     for key, value in changes.items():
-        if key not in SETTINGS:
+        if key not in SETTINGS or (key in ADMIN_ONLY and not is_admin()):
             return jsonify({"success": False, "message": _("Réglage inconnu : %(key)s", key=str(key)[:60])}), 400
         try:
             cleaned[key] = clean(key, value)
@@ -218,3 +246,25 @@ def compositions_save_api():
     log("settings", _("Réglages modifiés"), {"type": "restore_config", "data": previous}, merge=True)
     schedule_slideshow_restart()
     return jsonify({"success": True, "message": _("Enregistré")})
+
+
+@app.route('/api/secrets', methods=['GET'])
+@admin_required
+def secrets_api():
+    """Quels secrets sont définis (jamais leur valeur)."""
+    config = load_config()
+    return jsonify({"success": True, "secrets": {key: bool(config.get(key)) for key in SECRETS}})
+
+
+@app.route('/api/secrets', methods=['POST'])
+@admin_required
+def secrets_save_api():
+    data = request.get_json(silent=True) or {}
+    key, value = data.get("key"), data.get("value")
+    if key not in SECRETS or not isinstance(value, str) or len(value) > 500 or any(c in value for c in "\r\n\x00"):
+        return jsonify({"success": False, "message": _("Valeur invalide.")}), 400
+    config = dict(load_config())
+    config[key] = value.strip()
+    save_config(config)  # pas d'annulation : l'ancien secret ne doit pas être gardé dans l'historique
+    schedule_slideshow_restart()
+    return jsonify({"success": True, "message": _("Enregistré") if value.strip() else _("Supprimé.")})

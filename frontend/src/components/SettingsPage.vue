@@ -2,13 +2,16 @@
 import { onMounted } from "vue";
 import { classicUrl } from "../boot";
 import { t } from "../i18n";
-import { loadSettings, loaded, type Section } from "../settings";
+import { loadSecrets, loadSettings, loaded, type Section } from "../settings";
 import { notify } from "../toast";
 import SettingField from "./SettingField.vue";
 
-defineProps<{ sections: Section[]; classicTab: string; classicHint?: () => string }>();
+const props = defineProps<{ sections: Section[]; classicTab?: string; classicHint?: () => string }>();
 
-onMounted(() => loadSettings().catch((e) => notify((e as Error).message, true)));
+onMounted(() => {
+  loadSettings().catch((e) => notify((e as Error).message, true));
+  if (props.sections.some((s) => s.fields.some((f) => f.type === "secret"))) loadSecrets();
+});
 </script>
 
 <template>
@@ -22,7 +25,8 @@ onMounted(() => loadSettings().catch((e) => notify((e as Error).message, true)))
         <SettingField v-for="field in section.fields" :key="field.key" :field="field" />
       </section>
     </div>
-    <p class="small muted classic">
+    <slot />
+    <p v-if="classicTab" class="small muted classic">
       <a :href="classicUrl(classicTab)"><i class="fas fa-external-link-alt"></i> {{ classicHint ? classicHint() : t("Autres réglages : interface classique") }}</a>
     </p>
   </template>

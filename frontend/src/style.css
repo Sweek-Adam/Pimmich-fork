@@ -148,3 +148,8 @@ input[type="text"], input[type="search"], select {
 
 .skeleton { background: linear-gradient(90deg, var(--surface-2), var(--border), var(--surface-2)); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 10px; }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+.switch { appearance: none; width: 2.7rem; height: 1.55rem; border-radius: 999px; background: var(--border); position: relative; cursor: pointer; flex: none; transition: background .15s; margin: 0; }
+.switch::after { content: ""; position: absolute; top: .18rem; left: .18rem; width: 1.2rem; height: 1.2rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .3); transition: transform .15s; }
+.switch:checked { background: var(--accent); }
+.switch:checked::after { transform: translateX(1.15rem); }

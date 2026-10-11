@@ -102,8 +102,8 @@ def test_smart_plug():
 @login_required
 def test_telegram():
     """Teste si le token du bot Telegram est valide en appelant la méthode getMe."""
-    data = request.get_json()
-    token = data.get("token")
+    data = request.get_json(silent=True) or {}
+    token = data.get("token") or (load_config().get("telegram_bot_token") if is_admin() else None)  # jeton enregistré
 
     if not token:
         return jsonify({"success": False, "message": _("Le token du bot est requis.")})

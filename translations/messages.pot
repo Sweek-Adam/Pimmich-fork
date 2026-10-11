@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 17:38+0200\n"
+"POT-Creation-Date: 2026-10-11 17:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -317,11 +317,40 @@ msgstr ""
 msgid "Journaux"
 msgstr ""
 
-#: frontend/src/components/SettingsPage.vue:17
+#: frontend/src/components/SettingField.vue:62
+#: frontend/src/views/NetworkView.vue:97
+msgid "Enregistré (laisser vide pour garder)"
+msgstr ""
+
+#: frontend/src/components/SettingField.vue:62
+#: templates/configure/tab_heure.html.jinja:319
+msgid "Non défini"
+msgstr ""
+
+#: frontend/src/components/SettingField.vue:63
+#: frontend/src/views/PlaylistsView.vue:157
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:303
+#: templates/configure/tab_dispositions.html.jinja:132
+#: templates/configure/tab_legendes.html.jinja:123
+#: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_son.html.jinja:33
+#: templates/configure/tab_sources.html.jinja:543
+#: templates/upload.html.jinja:144
+msgid "Enregistrer"
+msgstr ""
+
+#: frontend/src/components/SettingField.vue:64
+#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
+msgid "Effacer"
+msgstr ""
+
+#: frontend/src/components/SettingsPage.vue:20
 msgid "Les changements sont enregistrés automatiquement."
 msgstr ""
 
-#: frontend/src/components/SettingsPage.vue:26
+#: frontend/src/components/SettingsPage.vue:30
 msgid "Autres réglages : interface classique"
 msgstr ""
 
@@ -396,6 +425,7 @@ msgstr ""
 #: frontend/src/views/AccountsView.vue:75
 #: frontend/src/views/LayoutsView.vue:117
 #: frontend/src/views/PlaylistsView.vue:123
+#: frontend/src/views/TelegramView.vue:111
 #: templates/configure/tab_comptes.html.jinja:95
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "Supprimer"
@@ -411,7 +441,7 @@ msgstr ""
 msgid "Nom d'utilisateur"
 msgstr ""
 
-#: frontend/src/views/AccountsView.vue:84
+#: frontend/src/views/AccountsView.vue:84 frontend/src/views/NetworkView.vue:96
 #: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
 #: templates/configure/tab_maintenance.html.jinja:228
@@ -897,7 +927,7 @@ msgstr ""
 msgid "Jack 3.5mm (Casque)"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:63
+#: frontend/src/views/DisplayView.vue:63 frontend/src/views/VoiceView.vue:32
 #: templates/configure/tab_affichage.html.jinja:276
 msgid "Volume :"
 msgstr ""
@@ -1096,7 +1126,7 @@ msgid ""
 "moment-là)"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:210
+#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:238
 msgid "Gardez au moins une disposition."
 msgstr ""
 
@@ -1144,7 +1174,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:115
+#: frontend/src/views/LayoutsView.vue:115 frontend/src/views/NetworkView.vue:87
 #: templates/configure/tab_affichage.html.jinja:295
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Activer"
@@ -1221,10 +1251,6 @@ msgstr ""
 msgid "au"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
-msgid "Effacer"
-msgstr ""
-
 #: frontend/src/views/LibraryView.vue:114
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
@@ -1288,8 +1314,8 @@ msgstr ""
 msgid "Suivre en direct"
 msgstr ""
 
-#: frontend/src/views/LogsView.vue:63 frontend/src/views/PendingView.vue:51
-#: frontend/src/views/QueueView.vue:87
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/NetworkView.vue:73
+#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
@@ -1534,6 +1560,221 @@ msgstr ""
 #: frontend/src/views/MessagesView.vue:167
 #: templates/configure/tab_messages.html.jinja:180
 msgid "Supprimer ce message"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:19
+#: templates/configure/tab_network.html.jinja:33
+#: utils/themed_compositions.py:633
+msgid "France"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:19
+#: templates/configure/tab_network.html.jinja:33
+msgid "États-Unis"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:19
+#: templates/configure/tab_network.html.jinja:33
+msgid "Royaume-Uni"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:19
+#: templates/configure/tab_network.html.jinja:34
+msgid "Allemagne"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:20
+#: templates/configure/tab_network.html.jinja:34
+msgid "Espagne"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:20
+#: templates/configure/tab_network.html.jinja:34
+msgid "Canada"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:20
+#: templates/configure/tab_network.html.jinja:34
+msgid "Belgique"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:20
+#: templates/configure/tab_network.html.jinja:35
+msgid "Suisse"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:30
+msgid ""
+"Appliquer ces paramètres Wi-Fi ? La connexion au cadre peut être coupée "
+"une minute."
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:51
+msgid ""
+"Couper le réseau filaire ? Si le cadre n'a pas de Wi-Fi, il ne sera plus "
+"joignable."
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:72
+#: templates/configure/tab_network.html.jinja:4
+msgid "État de la connexion Wi-Fi"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:75 frontend/src/views/NetworkView.vue:83
+#: templates/configure/tab_network.html.jinja:8
+#: templates/configure/tab_network.html.jinja:89
+msgid "État:"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:75
+#: templates/configure/_son_spotify.html.jinja:43
+msgid "Connecté"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:75
+msgid "Non connecté"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:76
+#: templates/configure/tab_network.html.jinja:12
+msgid "Réseau (SSID):"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:77 frontend/src/views/NetworkView.vue:84
+#: templates/configure/tab_network.html.jinja:16
+#: templates/configure/tab_network.html.jinja:91
+msgid "Adresse IP:"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:81
+#: templates/configure/tab_network.html.jinja:88
+msgid "Interface Filaire (eth0)"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:87
+msgid "Désactiver"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:92
+#: templates/configure/tab_network.html.jinja:23
+msgid "Configuration Wi-Fi"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:94
+msgid "Pays"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:95
+msgid "SSID (Nom du réseau)"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:98
+#: templates/configure/tab_network.html.jinja:64
+msgid "Laissez vide si le réseau est ouvert."
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:99
+#: templates/configure/tab_network.html.jinja:68
+msgid "Appliquer les paramètres Wi-Fi"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:104
+#: templates/configure/tab_network.html.jinja:103
+msgid "Réseaux Wi-Fi à proximité"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:105
+#: templates/configure/scripts_gallery.html.jinja:12
+#: templates/configure/tab_network.html.jinja:109
+msgid "Lancer le scan"
+msgstr ""
+
+#: frontend/src/views/NetworkView.vue:110
+msgid "Choisir"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:26
+#: frontend/src/views/TelegramView.vue:73
+msgid "Copié."
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:33
+#: frontend/src/views/NotificationsView.vue:68
+#: templates/configure/tab_notifications.html.jinja:24
+msgid "Changer de canal (les téléphones abonnés devront s'abonner de nouveau)"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:44
+#: templates/configure/tab_notifications.html.jinja:3
+msgid "Notifications sur votre téléphone"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:45
+#: templates/configure/tab_notifications.html.jinja:4
+msgid ""
+"Le cadre vous prévient sur votre téléphone (photo d'invité à valider, "
+"problème...). Gratuit et sans compte, avec l'application ntfy."
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:46
+#: templates/configure/tab_notifications.html.jinja:5
+msgid "Activer les notifications"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:48
+#: templates/configure/tab_notifications.html.jinja:7
+msgid "QR code du canal de notifications"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:50
+#: templates/configure/tab_notifications.html.jinja:9
+msgid "Installez l'application « ntfy » (App Store ou Google Play)."
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:51
+#: templates/configure/tab_notifications.html.jinja:10
+msgid ""
+"Dans ntfy, touchez « + » puis collez l'adresse ci-dessous (ou ouvrez le "
+"lien sur le téléphone) :"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:53
+#: frontend/src/views/TelegramView.vue:109
+#: templates/configure/_son_spotify.html.jinja:30
+#: templates/configure/tab_notifications.html.jinja:11
+msgid "Copier"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:54
+#: templates/configure/tab_notifications.html.jinja:12
+msgid "Ouvrir dans ntfy"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:55
+#: templates/configure/tab_notifications.html.jinja:13
+msgid "Envoyez une notification de test pour vérifier."
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:56
+#: templates/configure/tab_affichage.html.jinja:440
+#: templates/configure/tab_affichage.html.jinja:453
+#: templates/configure/tab_notifications.html.jinja:14
+msgid "Tester"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:60
+#: templates/configure/tab_notifications.html.jinja:18
+msgid "Me prévenir pour"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:65
+#: templates/configure/tab_notifications.html.jinja:21
+msgid "Options avancées"
+msgstr ""
+
+#: frontend/src/views/NotificationsView.vue:66
+#: templates/configure/tab_notifications.html.jinja:22
+msgid "Serveur ntfy (si vous hébergez le vôtre)"
 msgstr ""
 
 #: frontend/src/views/PendingView.vue:48
@@ -1806,19 +2047,6 @@ msgstr ""
 msgid "{n} photos sélectionnées"
 msgstr ""
 
-#: frontend/src/views/PlaylistsView.vue:157
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/_son_spotify.html.jinja:34
-#: templates/configure/tab_affichage.html.jinja:303
-#: templates/configure/tab_dispositions.html.jinja:132
-#: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_messages.html.jinja:236
-#: templates/configure/tab_son.html.jinja:33
-#: templates/configure/tab_sources.html.jinja:543
-#: templates/upload.html.jinja:144
-msgid "Enregistrer"
-msgstr ""
-
 #: frontend/src/views/QueueView.vue:73
 msgid "Le diaporama est arrêté : la file d'attente apparaîtra quand il tournera."
 msgstr ""
@@ -1903,6 +2131,145 @@ msgstr ""
 msgid ""
 "Les affichages sont comptés depuis la mise en place de cette fonction ; "
 "ils sont mis à jour toutes les 30 minutes."
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:20
+#: templates/configure/tab_telegram.html.jinja:4
+msgid "Réception de photos par Telegram"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:21
+msgid ""
+"Pour créer un bot et obtenir un token, parlez à @BotFather sur Telegram. "
+"L'ID de l'administrateur est votre propre ID utilisateur Telegram (obtenu"
+" via @userinfobot par exemple)."
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:23
+#: templates/configure/tab_telegram.html.jinja:17
+msgid "Activer le bot de réception Telegram"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:25
+#: templates/configure/tab_telegram.html.jinja:22
+msgid "Token du Bot Telegram :"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:26
+msgid "ID de l'administrateur"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:26
+#: templates/configure/tab_telegram.html.jinja:42
+msgid "Votre ID numérique Telegram"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:29
+#: templates/configure/tab_telegram.html.jinja:105
+msgid "Fréquence des Cartes Postales"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:31
+#: templates/configure/tab_telegram.html.jinja:113
+msgid "Activer le boost pour les cartes postales récentes"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:32
+msgid "Durée du boost (jours)"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:33
+#: templates/configure/tab_telegram.html.jinja:123
+msgid "Facteur de boost :"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:34
+#: templates/configure/tab_telegram.html.jinja:127
+msgid "(Ex: 4 = 5x plus de chances d'apparaître)"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:55
+msgid "Le nom de l'invité est requis."
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:56
+msgid "Invitation créée."
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:62
+msgid "Supprimer cette invitation ?"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:86
+#: templates/configure/tab_telegram.html.jinja:52
+msgid "État du bot :"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:87
+#: templates/configure/tab_telegram.html.jinja:48
+msgid "Tester le Token du Bot"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:91
+#: templates/configure/tab_telegram.html.jinja:59
+msgid "Gestion des invitations pour les invités"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:92
+msgid ""
+"Créez des codes d'invitation uniques pour permettre à vos amis et votre "
+"famille d'envoyer des photos au cadre. Ils devront envoyer ce code à "
+"votre bot Telegram pour être autorisés."
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:94
+#: templates/configure/tab_telegram.html.jinja:72
+msgid "Nom de l'invité (ex: Mamie)"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:96
+#: templates/configure/tab_telegram.html.jinja:74
+msgid "Valide 7 jours"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:97
+#: templates/configure/tab_telegram.html.jinja:75
+msgid "Valide 30 jours"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:98
+#: templates/configure/tab_telegram.html.jinja:76
+msgid "Valide 90 jours"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:100
+#: templates/configure/tab_comptes.html.jinja:124
+#: templates/configure/tab_telegram.html.jinja:80
+msgid "Créer"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:102
+#: templates/configure/tab_telegram.html.jinja:87
+msgid "Invitations actives"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:103
+#: templates/configure/scripts_gallery.html.jinja:37
+msgid "Aucune invitation active."
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:107
+#, python-brace-format
+msgid "jusqu'au {date}"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:108
+#, python-brace-format
+msgid "Utilisée par {name}"
+msgstr ""
+
+#: frontend/src/views/TelegramView.vue:110
+msgid "Révoquer"
 msgstr ""
 
 #: frontend/src/views/TripsView.vue:51
@@ -2076,6 +2443,86 @@ msgid ""
 "La recherche de villes utilise OpenStreetMap quand « Trouver le nom du "
 "lieu » est activé dans Infos des photos ; sinon, seuls les pays sont "
 "proposés, et vous pouvez toujours cliquer sur la carte."
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:17
+#: templates/configure/tab_vocal.html.jinja:4
+msgid "Contrôle Vocal"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:18
+#: templates/configure/tab_vocal.html.jinja:7
+msgid "Contrôlez votre diaporama à la voix avec le mot-clé \"Cadre Magique\"."
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:20
+msgid "Moteur de reconnaissance"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:21
+#: templates/configure/tab_vocal.html.jinja:23
+msgid "Picovoice Porcupine (Recommandé, nécessite une clé API)"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:22
+#: templates/configure/tab_vocal.html.jinja:25
+msgid "Vosk (Totalement local, sans clé API, plus gourmand)"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:23
+msgid "Langue de reconnaissance"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:24
+#: templates/configure/tab_vocal.html.jinja:42
+msgid "Français"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:24
+#: templates/configure/tab_vocal.html.jinja:44
+msgid "Anglais"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:25
+msgid "Clé d'accès Picovoice"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:27
+#: templates/configure/tab_vocal.html.jinja:73
+msgid "Périphérique d'entrée audio (Microphone)"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:28
+#: templates/configure/scripts_status.html.jinja:974
+#: templates/configure/tab_vocal.html.jinja:77
+msgid "Périphérique par défaut"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:31
+#: templates/configure/tab_vocal.html.jinja:96
+msgid "Volume des Notifications Sonores"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:60
+#: templates/configure/tab_vocal.html.jinja:33
+msgid "Activer le contrôle vocal (action immédiate)"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:66
+#: templates/configure/tab_vocal.html.jinja:116
+msgid "Diagnostic Audio"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:67
+#: templates/configure/scripts_gallery.html.jinja:66
+#: templates/configure/tab_vocal.html.jinja:124
+msgid "Lancer le diagnostic"
+msgstr ""
+
+#: frontend/src/views/VoiceView.vue:71
+msgid ""
+"Le mot-clé « Cadre Magique » avec Porcupine demande un modèle à placer "
+"dans voice_models (voir l'interface classique)."
 msgstr ""
 
 #: templates/configure.html.jinja:8
@@ -2772,11 +3219,6 @@ msgstr ""
 msgid "Nom : Pimmich. Dans « Redirect URIs », collez cette adresse :"
 msgstr ""
 
-#: templates/configure/_son_spotify.html.jinja:30
-#: templates/configure/tab_notifications.html.jinja:11
-msgid "Copier"
-msgstr ""
-
 #: templates/configure/_son_spotify.html.jinja:31
 msgid "Cochez « Web API », acceptez les conditions et enregistrez."
 msgstr ""
@@ -2797,10 +3239,6 @@ msgstr ""
 
 #: templates/configure/_son_spotify.html.jinja:40
 msgid "Changer d'application"
-msgstr ""
-
-#: templates/configure/_son_spotify.html.jinja:43
-msgid "Connecté"
 msgstr ""
 
 #: templates/configure/_son_spotify.html.jinja:44
@@ -3039,7 +3477,8 @@ msgid "Enregistrement…"
 msgstr ""
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:289
-#: web/routes_settings.py:177 web/routes_settings.py:220
+#: web/routes_settings.py:205 web/routes_settings.py:248
+#: web/routes_settings.py:270
 msgid "Enregistré"
 msgstr ""
 
@@ -3072,11 +3511,6 @@ msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:11
 msgid "Scan en cours..."
-msgstr ""
-
-#: templates/configure/scripts_gallery.html.jinja:12
-#: templates/configure/tab_network.html.jinja:109
-msgid "Lancer le scan"
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:13
@@ -3163,10 +3597,6 @@ msgstr ""
 #: templates/configure/tab_maintenance.html.jinja:140
 #: templates/configure/tab_maintenance.html.jinja:184
 msgid "Erreur de communication avec le serveur."
-msgstr ""
-
-#: templates/configure/scripts_gallery.html.jinja:37
-msgid "Aucune invitation active."
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:38
@@ -3262,11 +3692,6 @@ msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:63
 msgid "Ordre sauvegardé !"
-msgstr ""
-
-#: templates/configure/scripts_gallery.html.jinja:66
-#: templates/configure/tab_vocal.html.jinja:124
-msgid "Lancer le diagnostic"
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:67
@@ -3571,11 +3996,6 @@ msgstr ""
 
 #: templates/configure/scripts_status.html.jinja:967
 msgid "Chargement des périphériques..."
-msgstr ""
-
-#: templates/configure/scripts_status.html.jinja:974
-#: templates/configure/tab_vocal.html.jinja:77
-msgid "Périphérique par défaut"
 msgstr ""
 
 #: templates/configure/scripts_status.html.jinja:977
@@ -4133,12 +4553,6 @@ msgid ""
 "                                pour ALLUMER la prise :"
 msgstr ""
 
-#: templates/configure/tab_affichage.html.jinja:440
-#: templates/configure/tab_affichage.html.jinja:453
-#: templates/configure/tab_notifications.html.jinja:14
-msgid "Tester"
-msgstr ""
-
 #: templates/configure/tab_affichage.html.jinja:444
 msgid ""
 "URL\n"
@@ -4382,11 +4796,6 @@ msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:109
 msgid "2 à 32 caractères : lettres, chiffres, . _ -"
-msgstr ""
-
-#: templates/configure/tab_comptes.html.jinja:124
-#: templates/configure/tab_telegram.html.jinja:80
-msgid "Créer"
 msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:130
@@ -4646,10 +5055,6 @@ msgstr ""
 
 #: templates/configure/tab_heure.html.jinja:318
 msgid "Fuseau horaire actuel du système :"
-msgstr ""
-
-#: templates/configure/tab_heure.html.jinja:319
-msgid "Non défini"
 msgstr ""
 
 #: templates/configure/tab_heure.html.jinja:323
@@ -5325,7 +5730,7 @@ msgstr ""
 
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
 #: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:755
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:772
 msgid "Aucun fichier sélectionné."
 msgstr ""
 
@@ -5786,28 +6191,6 @@ msgstr ""
 msgid "Personnaliser le style"
 msgstr ""
 
-#: templates/configure/tab_network.html.jinja:4
-msgid "État de la connexion Wi-Fi"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:8
-#: templates/configure/tab_network.html.jinja:89
-msgid "État:"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:12
-msgid "Réseau (SSID):"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:16
-#: templates/configure/tab_network.html.jinja:91
-msgid "Adresse IP:"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:23
-msgid "Configuration Wi-Fi"
-msgstr ""
-
 #: templates/configure/tab_network.html.jinja:25
 msgid ""
 "La sélection du pays est obligatoire pour activer\n"
@@ -5821,51 +6204,10 @@ msgid ""
 "                            réglementation Wi-Fi)"
 msgstr ""
 
-#: templates/configure/tab_network.html.jinja:33
-#: utils/themed_compositions.py:633
-msgid "France"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:33
-msgid "États-Unis"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:33
-msgid "Royaume-Uni"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:34
-msgid "Allemagne"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:34
-msgid "Espagne"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:34
-msgid "Canada"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:34
-msgid "Belgique"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:35
-msgid "Suisse"
-msgstr ""
-
 #: templates/configure/tab_network.html.jinja:43
 msgid ""
 "SSID (Nom du\n"
 "                            réseau)"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:64
-msgid "Laissez vide si le réseau est ouvert."
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:68
-msgid "Appliquer les paramètres Wi-Fi"
 msgstr ""
 
 #: templates/configure/tab_network.html.jinja:71
@@ -5890,71 +6232,11 @@ msgid ""
 "action redémarre le service réseau."
 msgstr ""
 
-#: templates/configure/tab_network.html.jinja:88
-msgid "Interface Filaire (eth0)"
-msgstr ""
-
-#: templates/configure/tab_network.html.jinja:103
-msgid "Réseaux Wi-Fi à proximité"
-msgstr ""
-
 #: templates/configure/tab_network.html.jinja:104
 msgid ""
 "Cliquez sur le bouton pour rechercher les réseaux Wi-Fi disponibles.\n"
 "                    Cliquer sur un réseau dans la liste remplira "
 "automatiquement le champ SSID ci-dessus."
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:3
-msgid "Notifications sur votre téléphone"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:4
-msgid ""
-"Le cadre vous prévient sur votre téléphone (photo d'invité à valider, "
-"problème...). Gratuit et sans compte, avec l'application ntfy."
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:5
-msgid "Activer les notifications"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:7
-msgid "QR code du canal de notifications"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:9
-msgid "Installez l'application « ntfy » (App Store ou Google Play)."
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:10
-msgid ""
-"Dans ntfy, touchez « + » puis collez l'adresse ci-dessous (ou ouvrez le "
-"lien sur le téléphone) :"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:12
-msgid "Ouvrir dans ntfy"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:13
-msgid "Envoyez une notification de test pour vérifier."
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:18
-msgid "Me prévenir pour"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:21
-msgid "Options avancées"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:22
-msgid "Serveur ntfy (si vous hébergez le vôtre)"
-msgstr ""
-
-#: templates/configure/tab_notifications.html.jinja:24
-msgid "Changer de canal (les téléphones abonnés devront s'abonner de nouveau)"
 msgstr ""
 
 #: templates/configure/tab_playlists.html.jinja:4
@@ -6800,10 +7082,6 @@ msgstr ""
 msgid "Historique Utilisation Disque (10 min)"
 msgstr ""
 
-#: templates/configure/tab_telegram.html.jinja:4
-msgid "Réception de photos par Telegram"
-msgstr ""
-
 #: templates/configure/tab_telegram.html.jinja:7
 msgid ""
 "Activez cette fonction pour permettre à des utilisateurs autorisés "
@@ -6822,34 +7100,10 @@ msgid ""
 "                        exemple)."
 msgstr ""
 
-#: templates/configure/tab_telegram.html.jinja:17
-msgid "Activer le bot de réception Telegram"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:22
-msgid "Token du Bot Telegram :"
-msgstr ""
-
 #: templates/configure/tab_telegram.html.jinja:38
 msgid ""
 "ID de l'administrateur\n"
 "                            :"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:42
-msgid "Votre ID numérique Telegram"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:48
-msgid "Tester le Token du Bot"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:52
-msgid "État du bot :"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:59
-msgid "Gestion des invitations pour les invités"
 msgstr ""
 
 #: templates/configure/tab_telegram.html.jinja:62
@@ -6862,26 +7116,6 @@ msgstr ""
 
 #: templates/configure/tab_telegram.html.jinja:68
 msgid "Créer une nouvelle invitation"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:72
-msgid "Nom de l'invité (ex: Mamie)"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:74
-msgid "Valide 7 jours"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:75
-msgid "Valide 30 jours"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:76
-msgid "Valide 90 jours"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:87
-msgid "Invitations actives"
 msgstr ""
 
 #: templates/configure/tab_telegram.html.jinja:90
@@ -6899,10 +7133,6 @@ msgid ""
 "apparaissent dans le diaporama."
 msgstr ""
 
-#: templates/configure/tab_telegram.html.jinja:105
-msgid "Fréquence des Cartes Postales"
-msgstr ""
-
 #: templates/configure/tab_telegram.html.jinja:107
 msgid ""
 "Augmentez temporairement la fréquence d'affichage des\n"
@@ -6910,22 +7140,10 @@ msgid ""
 "apparaissent plus souvent."
 msgstr ""
 
-#: templates/configure/tab_telegram.html.jinja:113
-msgid "Activer le boost pour les cartes postales récentes"
-msgstr ""
-
 #: templates/configure/tab_telegram.html.jinja:117
 msgid ""
 "Durée du boost (jours)\n"
 "                            :"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:123
-msgid "Facteur de boost :"
-msgstr ""
-
-#: templates/configure/tab_telegram.html.jinja:127
-msgid "(Ex: 4 = 5x plus de chances d'apparaître)"
 msgstr ""
 
 #: templates/configure/tab_telegram.html.jinja:132
@@ -6940,14 +7158,6 @@ msgstr ""
 msgid ""
 "Approuvez ou rejetez les photos envoyées. Les photos approuvées\n"
 "                        seront ajoutées à la source \"Invités\"."
-msgstr ""
-
-#: templates/configure/tab_vocal.html.jinja:4
-msgid "Contrôle Vocal"
-msgstr ""
-
-#: templates/configure/tab_vocal.html.jinja:7
-msgid "Contrôlez votre diaporama à la voix avec le mot-clé \"Cadre Magique\"."
 msgstr ""
 
 #: templates/configure/tab_vocal.html.jinja:11
@@ -6970,36 +7180,16 @@ msgid ""
 "                            de mot-clé"
 msgstr ""
 
-#: templates/configure/tab_vocal.html.jinja:23
-msgid "Picovoice Porcupine (Recommandé, nécessite une clé API)"
-msgstr ""
-
-#: templates/configure/tab_vocal.html.jinja:25
-msgid "Vosk (Totalement local, sans clé API, plus gourmand)"
-msgstr ""
-
 #: templates/configure/tab_vocal.html.jinja:27
 msgid ""
 "Choisissez 'Vosk' si vous ne souhaitez pas créer de\n"
 "                            compte Picovoice."
 msgstr ""
 
-#: templates/configure/tab_vocal.html.jinja:33
-msgid "Activer le contrôle vocal (action immédiate)"
-msgstr ""
-
 #: templates/configure/tab_vocal.html.jinja:37
 msgid ""
 "Langue\n"
 "                            du contrôle vocal"
-msgstr ""
-
-#: templates/configure/tab_vocal.html.jinja:42
-msgid "Français"
-msgstr ""
-
-#: templates/configure/tab_vocal.html.jinja:44
-msgid "Anglais"
 msgstr ""
 
 #: templates/configure/tab_vocal.html.jinja:46
@@ -7029,20 +7219,12 @@ msgid ""
 "                            sur la"
 msgstr ""
 
-#: templates/configure/tab_vocal.html.jinja:73
-msgid "Périphérique d'entrée audio (Microphone)"
-msgstr ""
-
 #: templates/configure/tab_vocal.html.jinja:82
 msgid "Actualiser la liste"
 msgstr ""
 
 #: templates/configure/tab_vocal.html.jinja:87
 msgid "État du service vocal :"
-msgstr ""
-
-#: templates/configure/tab_vocal.html.jinja:96
-msgid "Volume des Notifications Sonores"
 msgstr ""
 
 #: templates/configure/tab_vocal.html.jinja:99
@@ -7056,10 +7238,6 @@ msgstr ""
 msgid ""
 "Volume des notifications\n"
 "                            :"
-msgstr ""
-
-#: templates/configure/tab_vocal.html.jinja:116
-msgid "Diagnostic Audio"
 msgstr ""
 
 #: templates/configure/tab_vocal.html.jinja:119
@@ -7826,8 +8004,8 @@ msgstr ""
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr ""
 
-#: web/routes_config.py:282 web/routes_settings.py:175
-#: web/routes_settings.py:218
+#: web/routes_config.py:282 web/routes_settings.py:203
+#: web/routes_settings.py:246
 msgid "Réglages modifiés"
 msgstr ""
 
@@ -7837,7 +8015,7 @@ msgid ""
 "changements."
 msgstr ""
 
-#: web/routes_family.py:26 web/routes_settings.py:207
+#: web/routes_family.py:26 web/routes_settings.py:235
 msgid "Liste invalide."
 msgstr ""
 
@@ -8042,7 +8220,7 @@ msgid ""
 "sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
 msgstr ""
 
-#: web/routes_guests.py:558 web/routes_system.py:852
+#: web/routes_guests.py:558 web/routes_system.py:869
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr ""
@@ -8103,7 +8281,7 @@ msgstr ""
 msgid "Volume invalide."
 msgstr ""
 
-#: web/routes_home.py:210 web/routes_system.py:653
+#: web/routes_home.py:210 web/routes_system.py:670
 msgid "Réglage invalide."
 msgstr ""
 
@@ -8606,18 +8784,26 @@ msgstr ""
 msgid "Citation du jour enregistrée."
 msgstr ""
 
-#: web/routes_settings.py:161
+#: web/routes_settings.py:189
 msgid "Aucun réglage à enregistrer."
 msgstr ""
 
-#: web/routes_settings.py:165
+#: web/routes_settings.py:193
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr ""
 
-#: web/routes_settings.py:169
+#: web/routes_settings.py:197
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
+msgstr ""
+
+#: web/routes_settings.py:265
+msgid "Valeur invalide."
+msgstr ""
+
+#: web/routes_settings.py:270
+msgid "Supprimé."
 msgstr ""
 
 #: web/routes_slideshow.py:384
@@ -8709,7 +8895,7 @@ msgstr ""
 msgid "Type de support inconnu."
 msgstr ""
 
-#: web/routes_storage.py:57 web/routes_system.py:784
+#: web/routes_storage.py:57 web/routes_system.py:801
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr ""
@@ -8723,7 +8909,7 @@ msgstr ""
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr ""
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:779
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:796
 msgid "Support inconnu."
 msgstr ""
 
@@ -8766,133 +8952,133 @@ msgid ""
 " instants."
 msgstr ""
 
-#: web/routes_system.py:180
+#: web/routes_system.py:175
 msgid "Le SSID et le pays Wi-Fi sont obligatoires."
 msgstr ""
 
-#: web/routes_system.py:193
+#: web/routes_system.py:184
+#, python-format
+msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
+msgstr ""
+
+#: web/routes_system.py:185
 msgid ""
 "Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
 " la connexion. Veuillez patienter une minute et vérifier le statut."
 msgstr ""
 
-#: web/routes_system.py:195
-#, python-format
-msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
-msgstr ""
-
-#: web/routes_system.py:250
+#: web/routes_system.py:267
 msgid "Le fichier de configuration n'a pas été trouvé."
 msgstr ""
 
-#: web/routes_system.py:259 web/routes_system.py:264
+#: web/routes_system.py:276 web/routes_system.py:281
 msgid "Aucun fichier de sauvegarde sélectionné."
 msgstr ""
 
-#: web/routes_system.py:274
+#: web/routes_system.py:291
 msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
 msgstr ""
 
-#: web/routes_system.py:276
+#: web/routes_system.py:293
 msgid ""
 "Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
 "valide."
 msgstr ""
 
-#: web/routes_system.py:278
+#: web/routes_system.py:295
 #, python-format
 msgid "Erreur lors de la restauration : %(error)s"
 msgstr ""
 
-#: web/routes_system.py:357
+#: web/routes_system.py:374
 msgid "name_key"
 msgstr ""
 
-#: web/routes_system.py:493
+#: web/routes_system.py:510
 msgid "Aucune version précédente connue."
 msgstr ""
 
-#: web/routes_system.py:501
+#: web/routes_system.py:518
 msgid ""
 "Retour à la version précédente en cours : Pimmich redémarre dans quelques"
 " minutes."
 msgstr ""
 
-#: web/routes_system.py:655
+#: web/routes_system.py:672
 msgid "Réglages enregistrés."
 msgstr ""
 
-#: web/routes_system.py:664
+#: web/routes_system.py:681
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr ""
 
-#: web/routes_system.py:665
+#: web/routes_system.py:682
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr ""
 
-#: web/routes_system.py:674
+#: web/routes_system.py:691
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr ""
 
-#: web/routes_system.py:678
+#: web/routes_system.py:695
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr ""
 
-#: web/routes_system.py:705
+#: web/routes_system.py:722
 msgid "Orientation inconnue."
 msgstr ""
 
-#: web/routes_system.py:710
+#: web/routes_system.py:727
 msgid ""
 "Aucune mesure du capteur : vérifiez son branchement, et que le cadre est "
 "debout."
 msgstr ""
 
-#: web/routes_system.py:718
+#: web/routes_system.py:735
 msgid "Position mémorisée."
 msgstr ""
 
-#: web/routes_system.py:765 web/routes_system.py:825
+#: web/routes_system.py:782 web/routes_system.py:842
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr ""
 
-#: web/routes_system.py:781
+#: web/routes_system.py:798
 msgid "Une sauvegarde est déjà en cours."
 msgstr ""
 
-#: web/routes_system.py:792
+#: web/routes_system.py:809
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr ""
 
-#: web/routes_system.py:802
+#: web/routes_system.py:819
 msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
 msgstr ""
 
-#: web/routes_system.py:813 web/routes_system.py:816
+#: web/routes_system.py:830 web/routes_system.py:833
 msgid "Sauvegarde introuvable."
 msgstr ""
 
-#: web/routes_system.py:851
+#: web/routes_system.py:868
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
 msgstr ""
 
-#: web/routes_system.py:853
+#: web/routes_system.py:870
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
 msgstr ""
 
-#: web/routes_system.py:854
+#: web/routes_system.py:871
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr ""
 

@@ -11,6 +11,28 @@ export const saving = ref(false);
 const pending: Record<string, Value> = {};
 let timer: number | undefined;
 
+export const secrets = reactive<Record<string, boolean>>({});
+
+export async function loadSecrets(): Promise<void> {
+  try {
+    Object.assign(secrets, (await get<{ secrets: Record<string, boolean> }>("/api/secrets")).secrets);
+  } catch {
+    // pas administrateur : les secrets ne sont pas modifiables ici
+  }
+}
+
+export async function saveSecret(key: string, value: string): Promise<boolean> {
+  try {
+    const d = await post<{ message: string }>("/api/secrets", { key, value });
+    secrets[key] = !!value.trim();
+    notify(d.message);
+    return true;
+  } catch (e) {
+    notify((e as Error).message, true);
+    return false;
+  }
+}
+
 export async function loadSettings(): Promise<void> {
   const d = await get<{ values: Record<string, Value> }>("/api/settings");
   Object.assign(values, d.values);
@@ -44,7 +66,7 @@ async function flush(): Promise<void> {
 export interface Field {
   key: string;
   label: () => string;
-  type: "toggle" | "number" | "range" | "select" | "time" | "timeOrSunset" | "color" | "text";
+  type: "toggle" | "number" | "range" | "select" | "time" | "timeOrSunset" | "color" | "text" | "secret";
   placeholder?: string;
   options?: () => { value: string; label: string }[];
   min?: number;
