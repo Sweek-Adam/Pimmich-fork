@@ -33,7 +33,7 @@ export const groups: NavGroup[] = [
   ] },
   { key: "ecran", label: () => t("Écran"), icon: "fa-desktop", items: [
     { label: () => t("Dispositions"), icon: "fa-th-large", tab: "tab-dispositions" },
-    { label: () => t("Affichage"), icon: "fa-desktop", tab: "tab-affichage" },
+    { label: () => t("Affichage"), icon: "fa-desktop", tab: "tab-affichage", route: "/affichage" },
     { label: () => t("Horloge & météo"), icon: "fa-clock", tab: "tab-heure" },
     { label: () => t("Infos des photos"), icon: "fa-info-circle", tab: "tab-metadata" },
     { label: () => t("Légendes"), icon: "fa-closed-captioning", tab: "tab-legendes" },

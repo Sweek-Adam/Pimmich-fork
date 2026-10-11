@@ -11,6 +11,7 @@ export const router = createRouter({
     { path: "/a-suivre", component: () => import("./views/QueueView.vue") },
     { path: "/messages", component: () => import("./views/MessagesView.vue") },
     { path: "/playlists", component: () => import("./views/PlaylistsView.vue") },
+    { path: "/affichage", component: () => import("./views/DisplayView.vue") },
     { path: "/favoris", component: () => import("./views/LibraryView.vue"), props: { favorites: true } },
     { path: "/:rest(.*)*", redirect: "/" },
   ],
