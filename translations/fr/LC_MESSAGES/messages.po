@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 18:30+0200\n"
+"POT-Creation-Date: 2026-10-11 18:55+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1495
+#: local_slideshow.py:1496
 msgid "Photos & messages"
 msgstr ""
 
-#: local_slideshow.py:1705
+#: local_slideshow.py:1706
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr ""
 
-#: local_slideshow.py:1705
+#: local_slideshow.py:1706
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr ""
 
-#: local_slideshow.py:1706 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr ""
 
-#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1708 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr ""
 
-#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1708 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr ""
 
-#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1708 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr ""
 
-#: local_slideshow.py:1707 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1708 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr ""
 
-#: local_slideshow.py:2006
+#: local_slideshow.py:2007
 msgid "Données de marée non disponibles"
 msgstr ""
 
-#: local_slideshow.py:2089
+#: local_slideshow.py:2090
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr ""
 
-#: local_slideshow.py:2089
+#: local_slideshow.py:2090
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:3305
+#: local_slideshow.py:3306
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:3306
+#: local_slideshow.py:3307
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:3307
+#: local_slideshow.py:3308
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:3308
+#: local_slideshow.py:3309
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:3309
+#: local_slideshow.py:3310
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:3335
+#: local_slideshow.py:3336
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 
 #: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:115
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:245
-#: templates/configure/_tour.html.jinja:32
+#: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:42
 msgid "Photos"
 msgstr ""
 
@@ -385,7 +385,7 @@ msgstr ""
 #: templates/configure/tab_maintenance.html.jinja:254
 #: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:495
-#: templates/guestbook.html.jinja:27
+#: templates/guestbook.html.jinja:49
 msgid "Retirer"
 msgstr ""
 
@@ -584,7 +584,7 @@ msgstr ""
 
 #: frontend/src/components/CaptionEditor.vue:147
 #: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:231
+#: templates/upload.html.jinja:211
 msgid "Fond"
 msgstr ""
 
@@ -655,7 +655,7 @@ msgstr ""
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:218
+#: templates/upload.html.jinja:198
 msgid "Annuler"
 msgstr ""
 
@@ -674,7 +674,7 @@ msgstr ""
 #: templates/configure/tab_messages.html.jinja:236
 #: templates/configure/tab_son.html.jinja:33
 #: templates/configure/tab_sources.html.jinja:543
-#: templates/upload.html.jinja:144
+#: templates/upload.html.jinja:124
 msgid "Enregistrer"
 msgstr ""
 
@@ -684,7 +684,7 @@ msgid "Radios et podcasts"
 msgstr ""
 
 #: frontend/src/components/RadioCard.vue:48
-#: templates/configure/_son_radio.html.jinja:5 templates/upload.html.jinja:179
+#: templates/configure/_son_radio.html.jinja:5 templates/upload.html.jinja:159
 msgid "Arrêter"
 msgstr ""
 
@@ -1576,7 +1576,7 @@ msgstr ""
 #: templates/configure/tab_comptes.html.jinja:79
 #: templates/configure/tab_comptes.html.jinja:118
 #: templates/configure/tab_maintenance.html.jinja:227
-#: templates/login.html.jinja:56
+#: templates/login.html.jinja:37
 msgid "Utilisateur"
 msgstr ""
 
@@ -1600,7 +1600,7 @@ msgstr ""
 #: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
 #: templates/configure/tab_maintenance.html.jinja:228
-#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
+#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:39
 msgid "Mot de passe"
 msgstr ""
 
@@ -2542,7 +2542,7 @@ msgid "Photo suivante"
 msgstr ""
 
 #: frontend/src/views/GuestsView.vue:182
-#: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:7
+#: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:6
 msgid "Envoyer des photos"
 msgstr ""
 
@@ -3703,7 +3703,7 @@ msgstr ""
 
 #: frontend/src/views/MessagesView.vue:102
 #: templates/configure/tab_messages.html.jinja:9
-#: templates/upload.html.jinja:122
+#: templates/upload.html.jinja:105
 msgid "Titre (optionnel)"
 msgstr ""
 
@@ -3714,6 +3714,7 @@ msgstr ""
 
 #: frontend/src/views/MessagesView.vue:103
 #: templates/configure/tab_messages.html.jinja:12
+#: templates/upload.html.jinja:44
 msgid "Message"
 msgstr ""
 
@@ -3734,6 +3735,7 @@ msgstr ""
 
 #: frontend/src/views/MessagesView.vue:106
 #: templates/configure/tab_messages.html.jinja:20
+#: templates/upload.html.jinja:108
 msgid "Style"
 msgstr ""
 
@@ -3814,7 +3816,7 @@ msgstr ""
 
 #: frontend/src/views/MessagesView.vue:132
 #: templates/configure/tab_messages.html.jinja:64
-#: templates/upload.html.jinja:132
+#: templates/upload.html.jinja:112
 msgid "Aperçu"
 msgstr ""
 
@@ -3830,7 +3832,7 @@ msgstr ""
 
 #: frontend/src/views/MessagesView.vue:139
 #: templates/configure/tab_messages.html.jinja:74
-#: templates/upload.html.jinja:136
+#: templates/upload.html.jinja:116
 msgid "Aperçu du message"
 msgstr ""
 
@@ -5189,8 +5191,7 @@ msgstr ""
 msgid "Sombre"
 msgstr ""
 
-#: templates/configure.html.jinja:126 templates/login.html.jinja:89
-#: templates/upload.html.jinja:398
+#: templates/configure.html.jinja:126
 msgid "Langue"
 msgstr ""
 
@@ -5224,52 +5225,64 @@ msgid ""
 "lien à la personne qui vous a invité."
 msgstr ""
 
-#: templates/guestbook.html.jinja:6 templates/guestbook.html.jinja:18
-#: templates/upload.html.jinja:66
+#: templates/guestbook.html.jinja:6 templates/guestbook.html.jinja:28
+#: templates/login.html.jinja:48 templates/upload.html.jinja:48
 msgid "Livre d'or"
 msgstr ""
 
-#: templates/guestbook.html.jinja:19
+#: templates/guestbook.html.jinja:29
 msgid "Tous les messages et dessins laissés sur le cadre."
 msgstr ""
 
-#: templates/guestbook.html.jinja:19
+#: templates/guestbook.html.jinja:31
 msgid "Laisser un mot"
 msgstr ""
 
-#: templates/guestbook.html.jinja:20
+#: templates/guestbook.html.jinja:32
+msgid "Administration"
+msgstr ""
+
+#: templates/guestbook.html.jinja:37
 msgid "Le livre d'or est encore vide : soyez le premier à écrire !"
 msgstr ""
 
-#: templates/guestbook.html.jinja:24
+#: templates/guestbook.html.jinja:44 templates/upload.html.jinja:46
 msgid "Dessin"
 msgstr ""
 
-#: templates/guestbook.html.jinja:26 web/routes_guests.py:388
+#: templates/guestbook.html.jinja:48 web/routes_guests.py:388
 #: web/routes_guests.py:419 web/routes_guests.py:449
 msgid "Un invité"
 msgstr ""
 
-#: templates/guestbook.html.jinja:36
+#: templates/guestbook.html.jinja:68
 msgid "Retirer cette page du livre d'or ?"
 msgstr ""
 
-#: templates/login.html.jinja:7
+#: templates/login.html.jinja:6
 msgid "Connexion"
+msgstr ""
+
+#: templates/login.html.jinja:34
+msgid "Votre cadre photo de famille"
 msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:268 templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:268 templates/login.html.jinja:42
 msgid "Afficher/Cacher le mot de passe"
 msgstr ""
 
-#: templates/login.html.jinja:79
+#: templates/login.html.jinja:44
 msgid "Se connecter"
 msgstr ""
 
-#: templates/login.html.jinja:86
+#: templates/login.html.jinja:46
+msgid "ou"
+msgstr ""
+
+#: templates/login.html.jinja:47
 msgid "Envoyer des photos (Invité)"
 msgstr ""
 
@@ -5337,165 +5350,177 @@ msgstr ""
 msgid "Initialisation du diaporama..."
 msgstr ""
 
-#: templates/upload.html.jinja:58
-msgid "Envoyer des photos pour le cadre"
+#: templates/upload.html.jinja:37
+msgid "Partager avec le cadre"
 msgstr ""
 
-#: templates/upload.html.jinja:59
-msgid "Les photos seront soumises à validation avant d'être affichées."
+#: templates/upload.html.jinja:38
+msgid ""
+"Photos, messages, vocaux et dessins : ils apparaîtront sur le cadre photo"
+" de la famille."
 msgstr ""
 
-#: templates/upload.html.jinja:63
+#: templates/upload.html.jinja:45
+msgid "Vocal"
+msgstr ""
+
+#: templates/upload.html.jinja:52
 msgid "En ce moment sur le cadre"
 msgstr ""
 
-#: templates/upload.html.jinja:64
+#: templates/upload.html.jinja:53
 msgid "Photo affichée sur le cadre"
 msgstr ""
 
-#: templates/upload.html.jinja:104 templates/upload.html.jinja:126
-#: templates/upload.html.jinja:152 templates/upload.html.jinja:236
+#: templates/upload.html.jinja:89
+msgid "Envoyer des photos pour le cadre"
+msgstr ""
+
+#: templates/upload.html.jinja:90
+msgid "Les photos seront soumises à validation avant d'être affichées."
+msgstr ""
+
+#: templates/upload.html.jinja:93 templates/upload.html.jinja:107
+#: templates/upload.html.jinja:132 templates/upload.html.jinja:216
 msgid "Votre prénom (optionnel)"
 msgstr ""
 
-#: templates/upload.html.jinja:115
+#: templates/upload.html.jinja:98
 msgid "Envoyer"
 msgstr ""
 
-#: templates/upload.html.jinja:121
+#: templates/upload.html.jinja:104
 msgid "Écrire un message sur le cadre"
 msgstr ""
 
-#: templates/upload.html.jinja:124
+#: templates/upload.html.jinja:106
 msgid "Votre message…"
 msgstr ""
 
-#: templates/upload.html.jinja:133
+#: templates/upload.html.jinja:113
 msgid "Afficher sur le cadre"
 msgstr ""
 
-#: templates/upload.html.jinja:137
+#: templates/upload.html.jinja:117
 msgid "Le message reste affiché 7 jours."
 msgstr ""
 
-#: templates/upload.html.jinja:141
+#: templates/upload.html.jinja:121
 msgid "Laisser un message vocal"
 msgstr ""
 
-#: templates/upload.html.jinja:142
+#: templates/upload.html.jinja:122
 msgid ""
 "Le cadre le lira à voix haute quand votre message passera (90 secondes au"
 " plus)."
 msgstr ""
 
-#: templates/upload.html.jinja:148
+#: templates/upload.html.jinja:128
 msgid ""
 "Enregistrez-vous avec l'application Dictaphone du téléphone, puis "
 "choisissez le fichier :"
 msgstr ""
 
-#: templates/upload.html.jinja:153
+#: templates/upload.html.jinja:133
 msgid "Envoyer le message vocal"
 msgstr ""
 
-#: templates/upload.html.jinja:174
+#: templates/upload.html.jinja:154
 msgid "Recommencer"
 msgstr ""
 
 #: templates/configure/tab_accueil.html.jinja:335
-#: templates/upload.html.jinja:197 templates/upload.html.jinja:376
-#: templates/upload.html.jinja:441 templates/upload.html.jinja:478
+#: templates/upload.html.jinja:177 templates/upload.html.jinja:356
+#: templates/upload.html.jinja:407 templates/upload.html.jinja:444
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr ""
 
-#: templates/upload.html.jinja:205
+#: templates/upload.html.jinja:185
 msgid "Faire un dessin pour le cadre"
 msgstr ""
 
-#: templates/upload.html.jinja:206
+#: templates/upload.html.jinja:186
 msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
 msgstr ""
 
-#: templates/upload.html.jinja:209
+#: templates/upload.html.jinja:189
 msgid "Touchez le dessin pour poser l'autocollant"
 msgstr ""
 
-#: templates/upload.html.jinja:213
+#: templates/upload.html.jinja:193
 msgid "Crayon"
 msgstr ""
 
-#: templates/upload.html.jinja:214
+#: templates/upload.html.jinja:194
 msgid "Autocollants"
 msgstr ""
 
-#: templates/upload.html.jinja:215
+#: templates/upload.html.jinja:195
 msgid "Gomme"
 msgstr ""
 
-#: templates/upload.html.jinja:219
+#: templates/upload.html.jinja:199
 msgid "Tout effacer"
 msgstr ""
 
-#: templates/upload.html.jinja:225
+#: templates/upload.html.jinja:205
 msgid "Trait fin"
 msgstr ""
 
-#: templates/upload.html.jinja:226
+#: templates/upload.html.jinja:206
 msgid "Trait moyen"
 msgstr ""
 
-#: templates/upload.html.jinja:227
+#: templates/upload.html.jinja:207
 msgid "Trait épais"
 msgstr ""
 
-#: templates/upload.html.jinja:232
+#: templates/upload.html.jinja:212
 msgid "Papier"
 msgstr ""
 
 #: templates/configure/tab_messages.html.jinja:245
-#: templates/upload.html.jinja:233 utils/message_renderer.py:40
+#: templates/upload.html.jinja:213 utils/message_renderer.py:40
 msgid "Ardoise"
 msgstr ""
 
-#: templates/upload.html.jinja:234
+#: templates/upload.html.jinja:214
 msgid "Kraft"
 msgstr ""
 
-#: templates/upload.html.jinja:237
+#: templates/upload.html.jinja:217
 msgid "Envoyer le dessin"
 msgstr ""
 
-#: templates/upload.html.jinja:365
+#: templates/upload.html.jinja:345
 msgid "Faites d'abord un dessin."
 msgstr ""
 
-#: templates/upload.html.jinja:386
+#: templates/upload.html.jinja:368
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr ""
 
-#: templates/upload.html.jinja:388
+#: templates/upload.html.jinja:370
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr ""
 
-#: templates/upload.html.jinja:389
+#: templates/upload.html.jinja:371
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr ""
 
-#: templates/upload.html.jinja:391
+#: templates/upload.html.jinja:373
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr ""
 
-#: templates/upload.html.jinja:394
-msgid ""
-"Retour à la connexion\n"
-"          administrateur"
+#: templates/upload.html.jinja:378
+msgid "Connexion administrateur"
 msgstr ""
 
-#: templates/upload.html.jinja:461
+#: templates/upload.html.jinja:427
 msgid "fichier(s) en cours d'envoi..."
 msgstr ""
 
-#: templates/upload.html.jinja:472
+#: templates/upload.html.jinja:438
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr ""
 
@@ -7984,39 +8009,39 @@ msgstr ""
 msgid "Action réservée aux administrateurs."
 msgstr ""
 
-#: utils/compositions.py:433
+#: utils/compositions.py:439
 msgid "Tableau en liège"
 msgstr ""
 
-#: utils/compositions.py:434
+#: utils/compositions.py:440
 msgid "Polaroïds éparpillés"
 msgstr ""
 
-#: utils/compositions.py:435
+#: utils/compositions.py:441
 msgid "Mosaïque"
 msgstr ""
 
-#: utils/compositions.py:436
+#: utils/compositions.py:442
 msgid "Pellicule"
 msgstr ""
 
-#: utils/compositions.py:437
+#: utils/compositions.py:443
 msgid "Mur de cadres"
 msgstr ""
 
-#: utils/compositions.py:438
+#: utils/compositions.py:444
 msgid "Duo / Triptyque"
 msgstr ""
 
-#: utils/compositions.py:439
+#: utils/compositions.py:445
 msgid "Magazine"
 msgstr ""
 
-#: utils/compositions.py:440
+#: utils/compositions.py:446
 msgid "Scrapbook"
 msgstr ""
 
-#: utils/compositions.py:441
+#: utils/compositions.py:447
 msgid "Photomaton"
 msgstr ""
 

@@ -4,32 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ _("Livre d'or") }} - Pimmich</title>
-  <link href="{{ url_for('static', filename='vendor/tailwind/tailwind.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='guest.css') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <style>
-    body { background: #f7f3ea; }
-    .gb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
-    .gb-page { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
-    .gb-page img { width: 100%; display: block; }
+    .book { columns: 280px; column-gap: 16px; }
+    .entry { break-inside: avoid; margin: 0 0 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
+    .entry button.open { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+    .entry img { width: 100%; display: block; }
+    .entry .meta { display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: .9rem; }
+    .entry .who { font-weight: 700; }
+    .kind { font-size: 1rem; }
+    .remove { margin-left: auto; border: 1px solid var(--border); background: var(--surface); color: var(--danger); border-radius: 999px; padding: 4px 10px; font: inherit; font-size: .8rem; cursor: pointer; }
+    .empty { text-align: center; padding: 40px 16px; }
+    .empty .big { font-size: 3rem; }
+    .viewer { position: fixed; inset: 0; z-index: 60; background: rgba(8, 9, 12, .92); display: grid; place-items: center; padding: 16px; cursor: zoom-out; }
+    .viewer img { max-width: 100%; max-height: 100%; border-radius: 12px; }
   </style>
 </head>
-<body class="min-h-screen p-4">
-  <div class="max-w-5xl mx-auto">
-    <h1 class="text-3xl font-bold text-center mt-4 mb-1">📖 {{ _("Livre d'or") }}</h1>
-    <p class="text-center text-gray-600 mb-6">{{ _("Tous les messages et dessins laissés sur le cadre.") }} · <a class="text-blue-600 underline" href="{{ url_for('upload_page') }}">{{ _("Laisser un mot") }}</a></p>
-    {% if not entries %}<p class="text-center text-gray-500">{{ _("Le livre d'or est encore vide : soyez le premier à écrire !") }}</p>{% endif %}
-    <div class="gb-grid">
-      {% for entry in entries %}
-      <div class="gb-page" id="gb-{{ entry.id }}">
-        <img src="{{ url_for('static', filename='guestbook/' ~ entry.id ~ '.jpg') }}" alt="{{ entry.title or entry.body or _('Dessin') }}" loading="lazy">
-        <div class="p-3 text-sm text-gray-600 flex items-center gap-2">
-          <span>{{ entry.signature or _("Un invité") }} · {{ entry.created[:10] }}</span>
-          {% if session.get('logged_in') %}<button type="button" class="ml-auto text-red-600 gb-delete" data-id="{{ entry.id }}">{{ _("Retirer") }}</button>{% endif %}
-        </div>
+<body>
+  <main class="page wide">
+    <header class="brand">
+      <div style="font-size:2.6rem">📖</div>
+      <h1>{{ _("Livre d'or") }}</h1>
+      <p class="muted">{{ _("Tous les messages et dessins laissés sur le cadre.") }}</p>
+      <div class="chips" style="margin-top:6px">
+        <a class="chip on" href="{{ url_for('upload_page') }}">✍️ {{ _("Laisser un mot") }}</a>
+        {% if session.get('logged_in') %}<a class="chip" href="/app">⚙️ {{ _("Administration") }}</a>{% endif %}
       </div>
+    </header>
+
+    {% if not entries %}
+    <div class="card empty"><div class="big">🕊️</div><p class="muted">{{ _("Le livre d'or est encore vide : soyez le premier à écrire !") }}</p></div>
+    {% endif %}
+
+    <div class="book">
+      {% for entry in entries %}
+      <article class="entry" id="gb-{{ entry.id }}">
+        <button type="button" class="open" data-src="{{ url_for('static', filename='guestbook/' ~ entry.id ~ '.jpg') }}">
+          <img src="{{ url_for('static', filename='guestbook/' ~ entry.id ~ '.jpg') }}" alt="{{ entry.title or entry.body or _('Dessin') }}" loading="lazy">
+        </button>
+        <div class="meta">
+          <span class="kind">{{ '🎨' if entry.kind == 'drawing' else ('🎤' if entry.kind == 'voice' else '✉️') }}</span>
+          <span><span class="who">{{ entry.signature or _("Un invité") }}</span> <span class="muted">· {{ entry.created[:10] }}</span></span>
+          {% if session.get('logged_in') %}<button type="button" class="remove gb-delete" data-id="{{ entry.id }}">{{ _("Retirer") }}</button>{% endif %}
+        </div>
+      </article>
       {% endfor %}
     </div>
-  </div>
+  </main>
+
+  <div id="viewer" class="viewer hidden"><img alt=""></div>
+  <script>
+    const viewer = document.getElementById("viewer");
+    document.querySelectorAll(".entry .open").forEach(b => b.addEventListener("click", () => {
+      viewer.querySelector("img").src = b.dataset.src; viewer.classList.remove("hidden");
+    }));
+    viewer.addEventListener("click", () => viewer.classList.add("hidden"));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") viewer.classList.add("hidden"); });
+  </script>
   {% if session.get('logged_in') %}
   <script>
     document.querySelectorAll(".gb-delete").forEach(b => b.addEventListener("click", async () => {

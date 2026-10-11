@@ -1,158 +1,138 @@
 <!DOCTYPE html>
 <html lang="{{ get_locale() }}">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ _('Envoyer des photos') }} - Pimmich</title>
-  <link href="{{ url_for('static', filename='vendor/tailwind/tailwind.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='guest.css') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <!-- Installation sur l'écran d'accueil du téléphone -->
   <link rel="manifest" href="{{ url_for('static', filename='pwa/manifest.json') }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='pwa/apple-touch-icon.png') }}">
-  <meta name="theme-color" content="#3b82f6">
+  <meta name="theme-color" content="#4f50c9">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Pimmich">
+  <style>
+    .jump { position: sticky; top: 0; z-index: 10; padding: 10px 0; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .now img { width: 100%; border-radius: 14px; display: block; }
+    .reactions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .reaction { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 1.1rem; cursor: pointer; }
+    .reaction:hover { border-color: var(--accent); }
+    section[id] { scroll-margin-top: 64px; }
+    .record { display: grid; justify-items: center; gap: 6px; }
+  </style>
 </head>
-
-<body class="relative min-h-screen">
-
-  <!-- Messages flash -->
+<body>
   {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
-  <div id="flash-container" class="absolute top-0 mt-4 max-w-xs w-full z-20">
-    {% for category, message in messages %}
-    <div class="
-          flash-message
-          px-4 py-3 rounded-md text-white shadow-md transition-opacity duration-700 ease-in-out
-          {% if category == 'success' %}
-            bg-green-500
-          {% elif category == 'error' %}
-            bg-red-500
-          {% else %}
-            bg-gray-500
-          {% endif %}
-        ">
-      {{ message }}
-    </div>
-    {% endfor %}
-  </div>
-  <script>
-    // Disparition automatique après 4 secondes
-    setTimeout(() => {
-      const messages = document.querySelectorAll('.flash-message');
-      messages.forEach(msg => {
-        msg.classList.add('opacity-0');
-        setTimeout(() => msg.remove(), 700); // attendre que l'effet se termine
-      });
-    }, 4000);
-  </script>
+  <div class="flash" id="flash">{% for category, message in messages %}<div class="{{ category }}">{{ message }}</div>{% endfor %}</div>
+  <script>setTimeout(() => document.querySelectorAll("#flash div").forEach(d => { d.style.opacity = 0; setTimeout(() => d.remove(), 600); }), 4000);</script>
   {% endif %}
   {% endwith %}
 
-  <div class="flex items-center justify-center min-h-screen">
-    <div class="w-11/12 max-w-lg p-6 md:p-8 bg-white bg-opacity-90 backdrop-blur-md rounded-2xl shadow-xl">
-      <img src="{{ url_for('static', filename='pimmich_logo.png') }}" alt="Logo Pimmich" class="w-40 mx-auto mb-8">
-      <h2 class="text-center text-2xl font-semibold mb-4">{{ _('Envoyer des photos pour le cadre') }}</h2>
-      <p class="text-center text-gray-600 mb-6">{{ _('Les photos seront soumises à validation avant d\'être affichées.')
-        }}</p>
+  <main class="page">
+    <header class="brand">
+      <img src="{{ url_for('static', filename='pimmich_logo.png') }}" alt="">
+      <h1>{{ _('Partager avec le cadre') }}</h1>
+      <p class="muted small">{{ _('Photos, messages, vocaux et dessins : ils apparaîtront sur le cadre photo de la famille.') }}</p>
+    </header>
 
-      <div id="now-box" class="hidden mb-6 text-center">
-        <h2 class="text-xl font-semibold mb-2">{{ _('En ce moment sur le cadre') }}</h2>
-        <img id="now-photo" class="w-full rounded-lg shadow" alt="{{ _('Photo affichée sur le cadre') }}">
-        <div id="now-reactions" class="flex justify-center gap-2 mt-3"></div>
-        <a href="{{ url_for('guest_book_page') }}" class="inline-block mt-3 text-blue-600 underline text-sm">📖 {{ _("Livre d'or") }}</a>
-      </div>
-      <script>
-        (() => {
-          const $ = (id) => document.getElementById(id);
-          let shown = null;
-          async function refresh() {
-            let d;
-            try { d = await (await fetch("{{ url_for('guest_now_showing') }}")).json(); } catch (e) { return; }
-            $("now-box").classList.toggle("hidden", !d.photo);
-            if (!d.photo) return;
-            if (d.photo !== shown) { $("now-photo").src = d.url; shown = d.photo; }
-            render(d.kinds, d.counts);
-          }
-          function render(kinds, counts) {
-            $("now-reactions").innerHTML = "";
-            Object.entries(kinds).forEach(([kind, emoji]) => {
-              const b = document.createElement("button"); b.type = "button";
-              b.className = "px-3 py-2 rounded-full border bg-white text-lg";
-              b.textContent = `${emoji} ${counts[kind] || ""}`.trim();
-              b.addEventListener("click", async () => {
-                b.disabled = true;
-                const r = await (await fetch("{{ url_for('guest_react') }}", { method: "POST", headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ photo: shown, kind }) })).json();
-                b.disabled = false;
-                if (r.success) { render(kinds, r.counts); b.animate([{ transform: "scale(1.4)" }, { transform: "scale(1)" }], 300); }
-              });
-              $("now-reactions").appendChild(b);
-            });
-          }
-          refresh(); setInterval(refresh, 8000);
-        })();
-      </script>
-      <form id="upload-form" method="POST" action="{{ url_for('handle_upload') }}" enctype="multipart/form-data">
-        <div class="mb-4">
-          <input type="file" name="photos" multiple required accept="image/*,video/*"
-            class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none">
-        </div>
-        <input type="text" name="name" maxlength="60" placeholder="{{ _('Votre prénom (optionnel)') }}" class="block w-full mt-3 p-2 border border-gray-300 rounded">
-        <div id="upload-progress" class="hidden mt-4">
-          <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-            <div id="upload-progress-bar" class="bg-blue-500 h-4 text-xs text-white text-center leading-4" style="width: 0%">0%</div>
-          </div>
-          <p id="upload-progress-text" class="text-center text-sm text-gray-600 mt-2"></p>
-        </div>
-
-        <div class="flex items-center justify-center mt-8">
-          <button type="submit"
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out w-full">
-            {{ _('Envoyer') }}
-          </button>
-        </div>
-      </form>
+    <nav class="chips jump">
+      <a class="chip" href="#photos-box">📷 {{ _('Photos') }}</a>
       {% if guest_messages_enabled %}
-      <div class="mt-8 pt-6 border-t border-gray-300">
-        <h2 class="text-center text-2xl font-semibold mb-4">{{ _('Écrire un message sur le cadre') }}</h2>
-        <input type="text" id="gm-title" maxlength="120" placeholder="{{ _('Titre (optionnel)') }}"
-          class="block w-full mb-3 p-2 border border-gray-300 rounded">
-        <textarea id="gm-body" rows="4" maxlength="1000" placeholder="{{ _('Votre message…') }}"
-          class="block w-full mb-3 p-2 border border-gray-300 rounded"></textarea>
-        <input type="text" id="gm-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}"
-          class="block w-full mb-3 p-2 border border-gray-300 rounded">
-        <select id="gm-style" class="block w-full mb-3 p-2 border border-gray-300 rounded">
-          {% for key, label in message_styles %}<option value="{{ key }}">{{ _(label) }}</option>{% endfor %}
-        </select>
-        <div class="flex gap-2">
-          <button type="button" id="gm-preview" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">{{ _('Aperçu') }}</button>
-          <button type="button" id="gm-publish" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">{{ _('Afficher sur le cadre') }}</button>
-        </div>
-        <p id="gm-status" class="text-center text-sm mt-3"></p>
-        <img id="gm-preview-img" class="hidden mt-3 w-full rounded border" alt="{{ _('Aperçu du message') }}">
-        <p class="text-center text-xs text-gray-500 mt-2">{{ _('Le message reste affiché 7 jours.') }}</p>
-      </div>
+      <a class="chip" href="#message-box">✉️ {{ _('Message') }}</a>
+      <a class="chip" href="#voice-box">🎤 {{ _('Vocal') }}</a>
+      <a class="chip" href="#drawing-box">🎨 {{ _('Dessin') }}</a>
+      {% endif %}
+      <a class="chip" href="{{ url_for('guest_book_page') }}">📖 {{ _("Livre d'or") }}</a>
+    </nav>
 
-      <div class="mt-8 pt-6 border-t border-gray-300" id="voice-box">
-        <h2 class="text-center text-2xl font-semibold mb-2">{{ _('Laisser un message vocal') }}</h2>
-        <p class="text-center text-sm text-gray-600 mb-3">{{ _('Le cadre le lira à voix haute quand votre message passera (90 secondes au plus).') }}</p>
-        <div id="vc-recorder" class="hidden text-center">
-          <button type="button" id="vc-record" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full">🎤 {{ _('Enregistrer') }}</button>
-          <p id="vc-timer" class="text-sm text-gray-600 mt-2"></p>
+    <section id="now-box" class="card now hidden">
+      <div class="card-title"><span class="emoji">🖼️</span>{{ _('En ce moment sur le cadre') }}</div>
+      <img id="now-photo" alt="{{ _('Photo affichée sur le cadre') }}">
+      <div id="now-reactions" class="reactions"></div>
+    </section>
+    <script>
+      (() => {
+        const $ = (id) => document.getElementById(id);
+        let shown = null;
+        async function refresh() {
+          let d;
+          try { d = await (await fetch("{{ url_for('guest_now_showing') }}")).json(); } catch (e) { return; }
+          $("now-box").classList.toggle("hidden", !d.photo);
+          if (!d.photo) return;
+          if (d.photo !== shown) { $("now-photo").src = d.url; shown = d.photo; }
+          render(d.kinds, d.counts);
+        }
+        function render(kinds, counts) {
+          $("now-reactions").innerHTML = "";
+          Object.entries(kinds).forEach(([kind, emoji]) => {
+            const b = document.createElement("button"); b.type = "button";
+            b.className = "reaction";
+            b.textContent = `${emoji} ${counts[kind] || ""}`.trim();
+            b.addEventListener("click", async () => {
+              b.disabled = true;
+              const r = await (await fetch("{{ url_for('guest_react') }}", { method: "POST", headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ photo: shown, kind }) })).json();
+              b.disabled = false;
+              if (r.success) { render(kinds, r.counts); b.animate([{ transform: "scale(1.4)" }, { transform: "scale(1)" }], 300); }
+            });
+            $("now-reactions").appendChild(b);
+          });
+        }
+        refresh(); setInterval(refresh, 8000);
+      })();
+    </script>
+
+    <section class="card" id="photos-box">
+      <div class="card-title"><span class="emoji">📷</span>{{ _('Envoyer des photos pour le cadre') }}</div>
+      <p class="muted small">{{ _("Les photos seront soumises à validation avant d'être affichées.") }}</p>
+      <form id="upload-form" method="POST" action="{{ url_for('handle_upload') }}" enctype="multipart/form-data" style="display:grid; gap:12px">
+        <input type="file" name="photos" multiple required accept="image/*,video/*">
+        <input type="text" name="name" maxlength="60" placeholder="{{ _('Votre prénom (optionnel)') }}">
+        <div id="upload-progress" class="hidden" style="display:grid; gap:6px">
+          <div class="progress"><div id="upload-progress-bar"></div></div>
+          <p id="upload-progress-text" class="status muted"></p>
         </div>
-        <div id="vc-file" class="hidden">
-          <label class="block text-sm text-gray-600 mb-1" for="vc-input">{{ _("Enregistrez-vous avec l'application Dictaphone du téléphone, puis choisissez le fichier :") }}</label>
-          <input type="file" id="vc-input" accept="audio/*" capture class="block w-full text-sm">
-        </div>
-        <audio id="vc-preview" controls class="w-full mt-3 hidden"></audio>
-        <input type="text" id="vc-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}" class="block w-full mt-3 p-2 border border-gray-300 rounded">
-        <button type="button" id="vc-send" class="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" disabled>{{ _('Envoyer le message vocal') }}</button>
-        <p id="vc-status" class="text-center text-sm mt-3"></p>
+        <button type="submit" class="btn">⬆️ {{ _('Envoyer') }}</button>
+      </form>
+    </section>
+
+    {% if guest_messages_enabled %}
+    <section class="card" id="message-box">
+      <div class="card-title"><span class="emoji">✉️</span>{{ _('Écrire un message sur le cadre') }}</div>
+      <input type="text" id="gm-title" maxlength="120" placeholder="{{ _('Titre (optionnel)') }}">
+      <textarea id="gm-body" rows="4" maxlength="1000" placeholder="{{ _('Votre message…') }}"></textarea>
+      <input type="text" id="gm-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}">
+      <select id="gm-style" aria-label="{{ _('Style') }}">
+        {% for key, label in message_styles %}<option value="{{ key }}">{{ _(label) }}</option>{% endfor %}
+      </select>
+      <div class="row">
+        <button type="button" id="gm-preview" class="btn ghost">👁 {{ _('Aperçu') }}</button>
+        <button type="button" id="gm-publish" class="btn green">{{ _('Afficher sur le cadre') }}</button>
       </div>
+      <p id="gm-status" class="status"></p>
+      <img id="gm-preview-img" class="hidden" style="width:100%; border-radius:12px" alt="{{ _('Aperçu du message') }}">
+      <p class="center muted small">{{ _('Le message reste affiché 7 jours.') }}</p>
+    </section>
+
+    <section class="card" id="voice-box">
+      <div class="card-title"><span class="emoji">🎤</span>{{ _('Laisser un message vocal') }}</div>
+      <p class="muted small">{{ _('Le cadre le lira à voix haute quand votre message passera (90 secondes au plus).') }}</p>
+      <div id="vc-recorder" class="hidden record">
+        <button type="button" id="vc-record" class="btn red round">🎤 {{ _('Enregistrer') }}</button>
+        <p id="vc-timer" class="muted small"></p>
+      </div>
+      <div id="vc-file" class="hidden">
+        <label class="field" for="vc-input">{{ _("Enregistrez-vous avec l'application Dictaphone du téléphone, puis choisissez le fichier :") }}</label>
+        <input type="file" id="vc-input" accept="audio/*" capture>
+      </div>
+      <audio id="vc-preview" controls class="hidden" style="width:100%"></audio>
+      <input type="text" id="vc-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}">
+      <button type="button" id="vc-send" class="btn green" disabled>{{ _('Envoyer le message vocal') }}</button>
+      <p id="vc-status" class="status"></p>
+    </section>
       <script>
         (() => {
           const $ = (id) => document.getElementById(id);
@@ -191,19 +171,19 @@
             form.append("signature", $("vc-signature").value.trim());
             try {
               const r = await (await fetch("{{ url_for('guest_voice_publish') }}", { method: "POST", body: form })).json();
-              $("vc-status").textContent = r.message; $("vc-status").className = "text-center text-sm mt-3 " + (r.success ? "text-green-700" : "text-red-600");
+              $("vc-status").textContent = r.message; $("vc-status").className = "status " + (r.success ? "ok" : "err");
               if (r.success) { blob = null; $("vc-preview").classList.add("hidden"); $("vc-input").value = ""; return; }
             } catch (e) {
-              $("vc-status").textContent = {{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }};
+              $("vc-status").textContent = {{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }}; $("vc-status").className = "status err";
             }
             $("vc-send").disabled = false;
           });
         })();
       </script>
 
-      <div class="mt-8 pt-6 border-t border-gray-300" id="drawing-box">
-        <h2 class="text-center text-2xl font-semibold mb-2">{{ _('Faire un dessin pour le cadre') }}</h2>
-        <p class="text-center text-sm text-gray-600 mb-3">{{ _('Dessinez avec le doigt, ajoutez des autocollants, puis envoyez.') }}</p>
+    <section class="card" id="drawing-box">
+      <div class="card-title"><span class="emoji">🎨</span>{{ _('Faire un dessin pour le cadre') }}</div>
+      <p class="muted small">{{ _('Dessinez avec le doigt, ajoutez des autocollants, puis envoyez.') }}</p>
         <div class="dr-stage">
           <canvas id="dr-canvas" class="dr-canvas"></canvas>
           <p id="dr-hint" class="dr-hint" hidden>{{ _("Touchez le dessin pour poser l'autocollant") }}</p>
@@ -233,10 +213,10 @@
           <button type="button" class="dr-bgbtn" data-bg="slate"><i style="background:#2f3b33"></i>{{ _('Ardoise') }}</button>
           <button type="button" class="dr-bgbtn" data-bg="kraft"><i style="background:#d9b98c"></i>{{ _('Kraft') }}</button>
         </div>
-        <input type="text" id="dr-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}" class="block w-full mt-3 p-2 border border-gray-300 rounded">
-        <button type="button" id="dr-send" class="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">{{ _('Envoyer le dessin') }}</button>
-        <p id="dr-status" class="text-center text-sm mt-3"></p>
-      </div>
+        <input type="text" id="dr-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}">
+        <button type="button" id="dr-send" class="btn green">🎨 {{ _('Envoyer le dessin') }}</button>
+        <p id="dr-status" class="status"></p>
+    </section>
       <style>
         .dr-stage { position: relative; }
         .dr-canvas { width: 100%; border-radius: 14px; border: 1px solid #d1d5db; touch-action: none; background: #fffdf6; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
@@ -360,7 +340,7 @@
           refresh();
           redraw();
           $("dr-send").addEventListener("click", () => {
-            const status = (t, ok) => { $("dr-status").textContent = t; $("dr-status").className = "text-center text-sm mt-3 " + (ok ? "text-green-700" : "text-red-600"); };
+            const status = (t, ok) => { $("dr-status").textContent = t; $("dr-status").className = "status " + (ok ? "ok" : "err"); };
             const visible = ops.some(op => op.type === "sticker" || (!op.erase && op.color !== BACKGROUNDS[background]));
             if (!visible) { status({{ _("Faites d'abord un dessin.")|tojson }}, false); return; }
             $("dr-send").disabled = true;
@@ -381,45 +361,31 @@
           });
         })();
       </script>
-      {% endif %}
-      <details id="install-help" class="mt-6 text-sm text-gray-700">
-        <summary class="cursor-pointer text-blue-600">{{ _("Ajouter cette page à l'écran d'accueil du téléphone") }}</summary>
-        <ul class="list-disc ml-5 mt-2 space-y-1">
+    {% endif %}
+
+    <section class="card">
+      <details id="install-help">
+        <summary>📱 {{ _("Ajouter cette page à l'écran d'accueil du téléphone") }}</summary>
+        <ul class="small">
           <li><strong>iPhone / iPad</strong> : {{ _("dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil ».") }}</li>
           <li><strong>Android</strong> : {{ _("dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil ».") }}</li>
         </ul>
-        <p class="mt-2">{{ _("Pimmich s'ouvrira alors comme une application, directement sur cette page.") }}</p>
+        <p class="small">{{ _("Pimmich s'ouvrira alors comme une application, directement sur cette page.") }}</p>
       </details>
-      <div class="mt-6 pt-6 border-t border-gray-300 text-center">
-        <a href="{{ url_for('login') }}" class="text-blue-600 hover:underline">{{ _('Retour à la connexion
-          administrateur') }}</a>
-      </div>
-      <div class="text-center mt-6 text-sm">
-        <span class="font-semibold">{{ _('Langue') }}:</span>
-        {% set current_lang = get_locale() %}
-        <a href="?lang=fr"
-          class="{% if current_lang == 'fr' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">FR</a>
-        |
-        <a href="?lang=en"
-          class="{% if current_lang == 'en' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">EN</a>
-        |
-        <a href="?lang=es"
-          class="{% if current_lang == 'es' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">ES</a>
-        |
-        <a href="?lang=de"
-          class="{% if current_lang == 'de' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">DE</a>
-        |
-        <a href="?lang=ja"
-          class="{% if current_lang == 'ja' %}font-bold text-indigo-600{% else %}text-blue-600 hover:underline{% endif %}">JA</a>
-      </div>
-    </div>
-  </div>
+    </section>
+
+    <footer class="center small" style="display:grid; gap:10px">
+      <a href="{{ url_for('login') }}">{{ _('Connexion administrateur') }}</a>
+      {% set current_lang = get_locale()|string %}
+      <nav class="langs">{% for code in ['fr', 'en', 'es', 'de', 'ja'] %}<a href="?lang={{ code }}" class="{% if current_lang == code %}on{% endif %}">{{ code|upper }}</a>{% endfor %}</nav>
+    </footer>
+  </main>
 
   {% if guest_messages_enabled %}
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
-      const status = (text, ok) => { $("gm-status").textContent = text; $("gm-status").className = "text-center text-sm mt-3 " + (ok ? "text-green-600" : "text-red-600"); };
+      const status = (text, ok) => { $("gm-status").textContent = text; $("gm-status").className = "status " + (ok ? "ok" : "err"); };
       const data = () => ({ title: $("gm-title").value, body: $("gm-body").value, signature: $("gm-signature").value, style: $("gm-style").value });
       $("gm-preview").addEventListener("click", async () => {
         const resp = await fetch("{{ url_for('guest_message_preview') }}", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data()) });
@@ -465,7 +431,7 @@
         if (!e.lengthComputable) return;
         const percent = Math.round(100 * e.loaded / e.total);
         bar.style.width = percent + "%";
-        bar.textContent = percent + "%";
+        text.textContent = percent + " %";
       };
       xhr.onload = () => {
         if (xhr.status === 413) {
@@ -480,5 +446,4 @@
     });
   </script>
 </body>
-
 </html>

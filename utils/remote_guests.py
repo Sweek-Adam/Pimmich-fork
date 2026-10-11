@@ -16,7 +16,7 @@ REMOTE_PORT = 8088
 REMOTE_HEADER = "X-Pimmich-Remote"
 # Points d'entrée autorisés depuis internet (noms des routes Flask) et fichiers statiques de la page invités
 ALLOWED_ENDPOINTS = {"upload_page", "handle_upload", "guest_message_preview", "guest_message_publish", "guest_drawing_publish", "guest_voice_publish"}
-ALLOWED_STATIC = ("vendor/tailwind/", "styles.css", "pimmich_logo.png", "favicon.ico", "pwa/")
+ALLOWED_STATIC = ("vendor/tailwind/", "styles.css", "guest.css", "guestbook/", "pimmich_logo.png", "favicon.ico", "pwa/")
 
 
 def new_token():

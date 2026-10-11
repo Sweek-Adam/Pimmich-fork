@@ -32,6 +32,9 @@ for name in COPIED:
 shutil.copytree(PROJECT_DIR / "static" / "pwa", _SANDBOX / "static" / "pwa")
 shutil.copytree(PROJECT_DIR / "static" / "fonts", _SANDBOX / "static" / "fonts")
 (_SANDBOX / "static" / "app").symlink_to(PROJECT_DIR / "static" / "app")  # nouvelle interface compilée (lecture seule)
+for _name in ("guest.css", "styles.css", "pimmich_logo.png", "favicon.ico"):  # pages publiques (connexion, invités, livre d'or)
+    if (PROJECT_DIR / "static" / _name).exists():
+        (_SANDBOX / "static" / _name).symlink_to(PROJECT_DIR / "static" / _name)
 (_SANDBOX / "frontend").mkdir()
 (_SANDBOX / "frontend" / "src").symlink_to(PROJECT_DIR / "frontend" / "src")  # ses textes à traduire
 (_SANDBOX / "config").mkdir()
