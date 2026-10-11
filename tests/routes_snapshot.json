@@ -452,6 +452,18 @@
   ]
  ],
  [
+  "/api/my_uploads",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/my_uploads/<name>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
   "/api/notify",
   [
    "GET"

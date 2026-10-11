@@ -269,7 +269,9 @@
                     }
 
                     window.__playlists = playlists;
-                    playlists.forEach(playlist => {
+                    const mineOnly = document.getElementById('playlists-mine-only');
+                    const me = {{ (current_username or '')|tojson }};
+                    playlists.filter(p => !(mineOnly && mineOnly.checked) || p.owner === me).forEach(playlist => {
                         const photoCount = playlist.photos.length;
                         const coverHtml = playlist.photos.slice(0, 4).map(p => {
                             const thumb = /\.(mp4|mov|avi|mkv)$/i.test(p) ? p.substring(0, p.lastIndexOf('.')) + '_thumbnail.jpg' : p;
@@ -324,7 +326,7 @@
                 <div class="flex flex-wrap justify-between items-center gap-3">
                     <div class="playlist-cover${photoCount ? '' : ' empty'}">${coverHtml || '<i class="fas fa-images"></i>'}</div>
                     <div class="flex-grow cursor-pointer playlist-title-toggle" title="{{ _('Afficher/Cacher les photos') }}">
-                        <h5 class="text-lg font-semibold text-gray-900">${playlist.name}</h5>
+                        <h5 class="text-lg font-semibold text-gray-900">${playlist.name}${playlist.owner && playlist.owner !== me ? ` <span class="text-xs font-normal text-gray-500">· ${playlist.owner.replace(/[<>&"]/g, "")}</span>` : ""}</h5>
                         <p class="text-sm text-gray-500" id="photo-count-${playlist.id}">${photoCountText}</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-3">
@@ -1726,6 +1728,7 @@
                             function processStream() {
                                 reader.read().then(({ done, value }) => {
                                     if (done) { // Stream finished
+                                        if (window.refreshMyUploads) window.refreshMyUploads();  // mes envois à jour
                                         if (!hasErrorOccurred) {
                                             displayMessage(statusDiv, "{{ _('Importation réussie ! Rechargement de la page...') }}", 'success');
                                             setTimeout(() => { location.reload(); }, 2000);

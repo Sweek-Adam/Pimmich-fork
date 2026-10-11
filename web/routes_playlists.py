@@ -6,6 +6,20 @@ from web.core import _
 
 # --- API pour la gestion des Playlists ---
 
+def playlist_owner_required(view):
+    """Un compte (non administrateur) ne modifie que ses propres playlists ; celles sans propriétaire restent communes."""
+    from functools import wraps
+
+    @wraps(view)
+    def wrapper(playlist_id, *args, **kwargs):
+        playlist = next((p for p in load_playlists() if p.get("id") == playlist_id), None)
+        owner = (playlist or {}).get("owner")
+        if owner and not is_admin() and owner != session.get("username"):
+            return jsonify({"success": False, "message": _("Cette playlist appartient à %(owner)s.", owner=owner)}), 403
+        return view(playlist_id, *args, **kwargs)
+    return wrapper
+
+
 @app.route('/api/playlists', methods=['GET'])
 @login_or_internal_required
 def get_playlists():
@@ -37,7 +51,8 @@ def create_playlist():
         "id": secrets.token_hex(8),
         "name": name.strip(),
         "photos": photos,
-        "music_file": music_file
+        "music_file": music_file,
+        "owner": session.get("username"),  # un compte par membre : chacun ses playlists
     }
     playlists.append(new_playlist)
     save_playlists(playlists)
@@ -46,6 +61,7 @@ def create_playlist():
 
 @app.route('/api/playlists/<playlist_id>/update_music', methods=['POST'])
 @login_required
+@playlist_owner_required
 def update_playlist_music(playlist_id):
     """Met à jour le fichier musical d'une playlist existante."""
     data = request.get_json()
@@ -68,6 +84,7 @@ def update_playlist_music(playlist_id):
 
 @app.route('/api/playlists/<playlist_id>/layout', methods=['POST'])
 @login_or_internal_required
+@playlist_owner_required
 def update_playlist_layout(playlist_id):
     """Disposition propre à une playlist (« auto » : comme le diaporama)."""
     layout = (request.get_json(silent=True) or {}).get('layout', layout_engine.AUTO)
@@ -140,6 +157,7 @@ def upload_music():
 
 @app.route('/api/playlists/<playlist_id>', methods=['DELETE'])
 @login_or_internal_required
+@playlist_owner_required
 def delete_playlist(playlist_id):
     """Supprime une playlist."""
     playlists = load_playlists()
@@ -150,6 +168,7 @@ def delete_playlist(playlist_id):
 
 @app.route('/api/playlists/<playlist_id>/rename', methods=['POST'])
 @login_or_internal_required
+@playlist_owner_required
 def rename_playlist(playlist_id):
     """Renomme une playlist."""
     data = request.get_json()
@@ -175,6 +194,7 @@ def rename_playlist(playlist_id):
 
 @app.route('/api/playlists/<playlist_id>/photos', methods=['POST'])
 @login_or_internal_required
+@playlist_owner_required
 def add_photo_to_playlist(playlist_id):
     """Ajoute une photo à une playlist."""
     data = request.get_json()
@@ -194,6 +214,7 @@ def add_photo_to_playlist(playlist_id):
 
 @app.route('/api/playlists/<playlist_id>/photos/<path:photo_path>', methods=['DELETE'])
 @login_or_internal_required
+@playlist_owner_required
 def remove_photo_from_playlist(playlist_id, photo_path):
     """Retire une photo d'une playlist."""
     playlists = load_playlists()
@@ -208,6 +229,7 @@ def remove_photo_from_playlist(playlist_id, photo_path):
 
 @app.route('/api/playlists/<playlist_id>/reorder', methods=['POST'])
 @login_or_internal_required
+@playlist_owner_required
 def reorder_playlist(playlist_id):
     """
     Réorganise les photos d'une playlist spécifique.
@@ -301,6 +323,7 @@ def library_api():
 
 @app.route('/api/playlists/<playlist_id>/photos', methods=['PUT'])
 @login_required
+@playlist_owner_required
 def set_playlist_photos(playlist_id):
     """Enregistre en une fois les photos (et leur ordre) d'une playlist."""
     photos, error = _valid_photo_list((request.get_json(silent=True) or {}).get("photos"))

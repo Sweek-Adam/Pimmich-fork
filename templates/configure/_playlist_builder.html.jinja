@@ -97,7 +97,7 @@
             library = data.items; byPath = new Map(library.map(i => [i.path, i]));
             const sources = [...new Set(library.map(i => i.source))];
             $("pl-sources").innerHTML = [`<button type="button" class="chip active" data-source="">${T.all}</button>`]
-                .concat(sources.map(s => `<button type="button" class="chip" data-source="${s}">${T.sources[s] || s}</button>`)).join("");
+                .concat(sources.map(s => `<button type="button" class="chip" data-source="${s}">${T.sources[s] || (s.startsWith("compte_") ? s.slice(7).replace(/_/g, " ") : s)}</button>`)).join("");
             $("pl-sources").querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => {
                 source = c.dataset.source; lastClicked = null;
                 $("pl-sources").querySelectorAll(".chip").forEach(o => o.classList.toggle("active", o === c));

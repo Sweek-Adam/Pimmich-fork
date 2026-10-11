@@ -170,6 +170,12 @@
                         <input class="form-check-input" type="checkbox" id="display_source_personnes" name="display_sources" value="personnes" {% if 'personnes' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_personnes">{{ _("Photos des personnes suivies (Immich)") }}</label>
                     </div>
+                    {% for source, name in member_sources %}
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_{{ source }}" name="display_sources" value="{{ source }}" {% if source in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_{{ source }}">{{ _("Envois de %(name)s", name=name) }}</label>
+                    </div>
+                    {% endfor %}
                     <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_messages">{{ _('Messages') }}</label>

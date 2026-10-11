@@ -111,6 +111,43 @@
                     </div>
                     <div id="smartphone-import-status" class="status-messages"></div>
 
+                    <div id="my-uploads-box" class="mt-4 pt-4 border-t border-gray-200">
+                        <h5 class="text-lg font-semibold mb-2 flex items-center gap-2"><i class="fas fa-user"></i> {{ _("Mes envois") }}</h5>
+                        <p class="text-sm text-gray-600 mb-2">{{ _("Les photos envoyées depuis ce compte s'ajoutent à votre source « Envois de %(name)s ». Touchez la croix pour en retirer une.", name=current_username or "") }}</p>
+                        <div id="my-uploads" class="my-uploads"></div>
+                        <p id="my-uploads-empty" class="text-sm text-gray-500">{{ _("Aucun envoi pour l'instant.") }}</p>
+                    </div>
+                    <style>
+                        .my-uploads { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: .4rem; }
+                        .my-uploads div { position: relative; }
+                        .my-uploads img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
+                        .my-uploads button { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,.6); color: #fff; }
+                    </style>
+                    <script>
+                        window.addEventListener("DOMContentLoaded", () => {
+                            const $ = (id) => document.getElementById(id);
+                            async function load() {
+                                const d = await (await fetch("/api/my_uploads")).json();
+                                $("my-uploads").innerHTML = "";
+                                $("my-uploads-empty").classList.toggle("hidden", d.items.length > 0);
+                                d.items.slice(0, 120).forEach(item => {
+                                    const box = document.createElement("div");
+                                    const img = document.createElement("img"); img.src = item.thumb; img.loading = "lazy"; img.alt = "";
+                                    const b = document.createElement("button"); b.type = "button"; b.textContent = "×"; b.title = {{ _("Retirer du cadre")|tojson }};
+                                    b.addEventListener("click", async () => {
+                                        if (!confirm({{ _("Retirer cette photo du cadre ?")|tojson }})) return;
+                                        const r = await (await fetch(`/api/my_uploads/${encodeURIComponent(item.name)}`, { method: "DELETE" })).json();
+                                        if (r.success) box.remove();
+                                    });
+                                    box.append(img, b); $("my-uploads").appendChild(box);
+                                });
+                            }
+                            document.querySelectorAll(".tablink[onclick*=\"'tab-actions'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                            if ($("my-uploads-box").offsetParent !== null) load();
+                            window.refreshMyUploads = load;
+                        });
+                    </script>
+
                     <div id="whatsapp-box" class="mt-4 pt-4 border-t border-gray-200">
                         <h5 class="text-lg font-semibold mb-2 flex items-center gap-2"><i class="fab fa-whatsapp"></i> {{ _("Importer une discussion WhatsApp") }}</h5>
                         <p class="text-sm text-gray-600 mb-3">{{ _("Dans WhatsApp : ouvrez la discussion (ou le groupe familial) › nom en haut › « Exporter la discussion » › « Joindre les médias ». Envoyez le fichier .zip obtenu ici. Sur Android, avec Pimmich installé sur l'écran d'accueil, vous pouvez aussi choisir directement « Pimmich » dans le menu de partage.") }}</p>

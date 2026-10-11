@@ -362,7 +362,10 @@ def inject_instance_id():
 @app.context_processor
 def inject_current_user():
     """Injecte le compte connecté et son rôle dans les templates."""
-    return dict(current_username=session.get('username'), is_admin=is_admin())
+    from utils import members
+    names = [u["username"] for u in user_manager.list_users()] + [session.get('username') or ""]
+    return dict(current_username=session.get('username'), is_admin=is_admin(),
+                member_sources=[(s, members.label(s, names)) for s in members.sources()])
 
 @app.context_processor
 def inject_styles_and_formats():

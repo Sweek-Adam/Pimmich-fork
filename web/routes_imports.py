@@ -184,34 +184,39 @@ def import_smartphone():
         def stream_event(data):
             return f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
 
+        from utils import members
         config = load_config()
         screen_width, screen_height = config.get("display_width", 1920), config.get("display_height", 1080)
-        source_dir = BASE_DIR / "static" / "photos" / "smartphone"
+        source = members.source_for(session.get("username"))  # chaque compte a ses envois
+        source_dir = BASE_DIR / "static" / "photos" / source
 
         try:
             # --- Étape 1: Réception et sauvegarde des fichiers ---
             yield stream_event({"type": "progress", "stage": "UPLOADING", "percent": 5, "message": "Réception des fichiers..."})
-
-            # Vider le dossier de destination pour éviter les mélanges
-            from utils.storage import empty_dir  # vider sans supprimer : le dossier peut être sur un autre support
-            empty_dir(source_dir)
+            source_dir.mkdir(parents=True, exist_ok=True)
 
             uploaded_files = request.files.getlist('photos')
             if not uploaded_files or not uploaded_files[0].filename:
                 yield stream_event({"type": "error", "message": "Aucun fichier sélectionné."})
                 return
 
-            for file in uploaded_files:
-                file.save(source_dir / (secure_filename(file.filename) or f"photo_{secrets.token_hex(3)}.jpg"))
+            for file in uploaded_files:  # les envois s'accumulent (jamais d'écrasement)
+                file.save(members.unique_name(source_dir, secure_filename(file.filename) or f"photo_{secrets.token_hex(3)}.jpg"))
+
+            config = load_config()
+            if source not in config.get("display_sources", []):
+                save_config(dict(config, display_sources=list(config.get("display_sources", [])) + [source]))
 
             yield stream_event({"type": "progress", "stage": "PREPARING", "percent": 80, "message": f"{len(uploaded_files)} photos reçues, préparation en cours..."})
 
             # --- Étape 2: Préparation des photos ---
-            for update in import_progress.tracked("smartphone", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, source_type="smartphone")):
+            for update in import_progress.tracked(source, "prepare", prepare_all_photos_with_progress(screen_width, screen_height, source_type=source)):
                 # Ajouter l'URL d'aperçu
                 if update.get("current_photo_path"):
-                    update["current_photo_url"] = url_for('static', filename=f"prepared/smartphone/{update['current_photo_path']}")
+                    update["current_photo_url"] = url_for('static', filename=f"prepared/{source}/{update['current_photo_path']}")
                 yield stream_event(update)
+            if is_slideshow_running():
+                restart_slideshow_for_update()
 
         except Exception as e:
             logger.info(f"[Import Smartphone] Erreur : {e}")
@@ -811,3 +816,40 @@ def email_check_api():
         return jsonify({"success": False, "message": str(e)[:300]}), 502
     return jsonify({"success": True, "message": _("%(accepted)s photo(s) ajoutée(s), %(pending)s à valider, %(ignored)s ignorée(s).",
                                                   accepted=result["accepted"], pending=result["pending"], ignored=result["ignored"])})
+
+
+# --- Mes envois (un compte par membre de la famille) ---
+
+@app.route('/api/my_uploads', methods=['GET'])
+@login_required
+def my_uploads_api():
+    from utils import members
+    source = members.source_for(session.get("username"))
+    folder = PREPARED_DIR / source
+    items = []
+    for f in sorted(folder.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True) if folder.is_dir() else []:
+        if f.suffix.lower() in (".jpg", ".mp4") and not f.stem.endswith(("_polaroid", "_postcard", "_thumbnail")):
+            thumb = f.with_name(f"{f.stem}_thumbnail.jpg").name if f.suffix.lower() == ".mp4" else f.name
+            items.append({"name": f.name, "thumb": url_for("static", filename=f"prepared/{source}/{thumb}")})
+    return jsonify({"success": True, "source": source, "items": items})
+
+
+@app.route('/api/my_uploads/<name>', methods=['DELETE'])
+@login_required
+def my_uploads_delete_api(name):
+    from utils import members
+    source = members.source_for(session.get("username"))
+    if Path(name).name != name or name.startswith("."):
+        return jsonify({"success": False, "message": _("Photo introuvable.")}), 404
+    stem = Path(name).stem
+    removed = 0
+    for folder in (PREPARED_DIR / source, BASE_DIR / "static" / "photos" / source, BASE_DIR / "static" / ".backups" / source):
+        for f in folder.glob(f"{stem}*") if folder.is_dir() else []:
+            if re.sub(r"(_polaroid|_postcard|_thumbnail)$", "", f.stem) == stem:
+                f.unlink()
+                removed += 1
+    if not removed:
+        return jsonify({"success": False, "message": _("Photo introuvable.")}), 404
+    if is_slideshow_running():
+        restart_slideshow_for_update()
+    return jsonify({"success": True, "message": _("Photo supprimée du cadre.")})

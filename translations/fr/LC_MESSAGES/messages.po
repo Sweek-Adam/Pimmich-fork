@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:27+0200\n"
+"POT-Creation-Date: 2026-10-11 10:31+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -199,7 +199,7 @@ msgid "Se déconnecter"
 msgstr ""
 
 #: templates/configure.html.jinja:117
-#: templates/configure/tab_actions.html.jinja:132
+#: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr ""
 
@@ -229,7 +229,7 @@ msgstr ""
 
 #: templates/configure.html.jinja:123
 #: templates/configure/tab_apercu.html.jinja:14
-#: templates/configure/tab_sources.html.jinja:175
+#: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
 #: templates/configure/tab_son.html.jinja:46
-#: templates/configure/tab_sources.html.jinja:489
+#: templates/configure/tab_sources.html.jinja:495
 #: templates/guestbook.html.jinja:27
 msgid "Retirer"
 msgstr ""
@@ -383,7 +383,7 @@ msgstr ""
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:262 templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:268 templates/login.html.jinja:69
 msgid "Afficher/Cacher le mot de passe"
 msgstr ""
 
@@ -536,7 +536,7 @@ msgstr ""
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:236
 #: templates/configure/tab_son.html.jinja:33
-#: templates/configure/tab_sources.html.jinja:537
+#: templates/configure/tab_sources.html.jinja:543
 #: templates/upload.html.jinja:144
 msgid "Enregistrer"
 msgstr ""
@@ -790,7 +790,7 @@ msgid "Nouvelle playlist"
 msgstr ""
 
 #: templates/configure/_playlist_builder.html.jinja:40
-#: templates/configure/scripts_main.html.jinja:333
+#: templates/configure/scripts_main.html.jinja:335
 msgid "Choisir les photos"
 msgstr ""
 
@@ -851,7 +851,7 @@ msgid "Créer un album intelligent"
 msgstr ""
 
 #: templates/configure/_smart_albums.html.jinja:12
-#: templates/configure/scripts_main.html.jinja:332
+#: templates/configure/scripts_main.html.jinja:334
 msgid "Album intelligent"
 msgstr ""
 
@@ -1166,7 +1166,7 @@ msgid "Aucune playlist trouvée."
 msgstr ""
 
 #: templates/configure/_son_spotify.html.jinja:103
-#: templates/configure/tab_sources.html.jinja:391
+#: templates/configure/tab_sources.html.jinja:397
 msgid "Compte :"
 msgstr ""
 
@@ -1274,7 +1274,7 @@ msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:8
 #: templates/configure/scripts_gallery.html.jinja:36
-#: templates/configure/scripts_main.html.jinja:1316
+#: templates/configure/scripts_main.html.jinja:1318
 #: templates/configure/scripts_status.html.jinja:745
 #: templates/configure/tab_heure.html.jinja:307
 #: templates/configure/tab_heure.html.jinja:310
@@ -1326,7 +1326,7 @@ msgid "Signal"
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:18
-#: templates/configure/tab_actions.html.jinja:129
+#: templates/configure/tab_actions.html.jinja:166
 msgid "Aucune"
 msgstr ""
 
@@ -1376,17 +1376,17 @@ msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:34
 #: templates/configure/scripts_gallery.html.jinja:116
-#: templates/configure/scripts_main.html.jinja:1379
-#: templates/configure/scripts_main.html.jinja:1421
+#: templates/configure/scripts_main.html.jinja:1381
+#: templates/configure/scripts_main.html.jinja:1423
 msgid "Test en cours..."
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:35
 #: templates/configure/scripts_gallery.html.jinja:130
 #: templates/configure/scripts_gallery.html.jinja:281
-#: templates/configure/scripts_main.html.jinja:1404
-#: templates/configure/scripts_main.html.jinja:1438
-#: templates/configure/scripts_main.html.jinja:1671
+#: templates/configure/scripts_main.html.jinja:1406
+#: templates/configure/scripts_main.html.jinja:1440
+#: templates/configure/scripts_main.html.jinja:1673
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
 msgid "Erreur de communication avec le serveur."
@@ -1422,7 +1422,7 @@ msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:44
 #: templates/configure/scripts_gallery.html.jinja:277
-#: templates/configure/scripts_main.html.jinja:1002
+#: templates/configure/scripts_main.html.jinja:1004
 #: templates/configure/scripts_status.html.jinja:159
 msgid "Erreur :"
 msgstr ""
@@ -1476,7 +1476,7 @@ msgid "Erreur lors du chargement des playlists."
 msgstr ""
 
 #: templates/configure/scripts_gallery.html.jinja:57
-#: templates/configure/scripts_main.html.jinja:1095
+#: templates/configure/scripts_main.html.jinja:1097
 msgid "Lancer"
 msgstr ""
 
@@ -1557,156 +1557,156 @@ msgstr ""
 msgid "Uniquement ce thème"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:315
+#: templates/configure/scripts_main.html.jinja:317
 msgid "Retirer de la playlist"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:326
+#: templates/configure/scripts_main.html.jinja:328
 msgid "Afficher/Cacher les photos"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:332
+#: templates/configure/scripts_main.html.jinja:334
 msgid "Modifier les règles"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:334
+#: templates/configure/scripts_main.html.jinja:336
 msgid "Disposition de la playlist"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:988
+#: templates/configure/scripts_main.html.jinja:990
 msgid "Veuillez entrer un nom pour la playlist."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1004
-#: templates/configure/scripts_main.html.jinja:1090
-#: templates/configure/scripts_main.html.jinja:1813
+#: templates/configure/scripts_main.html.jinja:1006
+#: templates/configure/scripts_main.html.jinja:1092
+#: templates/configure/scripts_main.html.jinja:1816
 #: templates/configure/scripts_status.html.jinja:92
 #: templates/configure/scripts_status.html.jinja:164
 msgid "Erreur de communication."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1018
+#: templates/configure/scripts_main.html.jinja:1020
 msgid ""
 "Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront "
 "pas supprimées."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1074
+#: templates/configure/scripts_main.html.jinja:1076
 msgid "Erreur lors de la suppression de la photo."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1080
+#: templates/configure/scripts_main.html.jinja:1082
 msgid "Lancement..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1150
+#: templates/configure/scripts_main.html.jinja:1152
 msgid "Aucune playlist"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1190
+#: templates/configure/scripts_main.html.jinja:1192
 msgid "Import en cours..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1219
+#: templates/configure/scripts_main.html.jinja:1221
 msgid "Préparation :"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1228
+#: templates/configure/scripts_main.html.jinja:1230
 msgid "Préparation terminée ! Redémarrage du diaporama..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1235
+#: templates/configure/scripts_main.html.jinja:1237
 msgid "Diaporama redémarré. Rechargement de la page..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1244
+#: templates/configure/scripts_main.html.jinja:1246
 msgid "Données de préparation invalides reçues du serveur."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1252
+#: templates/configure/scripts_main.html.jinja:1254
 msgid "Erreur de connexion au serveur pour la préparation des photos."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1264
+#: templates/configure/scripts_main.html.jinja:1266
 msgid "Importation :"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1274
+#: templates/configure/scripts_main.html.jinja:1276
 msgid "Données d'import invalides reçues du serveur."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1282
+#: templates/configure/scripts_main.html.jinja:1284
 msgid "Erreur de connexion au serveur pour l'import"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1304
+#: templates/configure/scripts_main.html.jinja:1306
 msgid ""
 "Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » "
 "pour choisir à nouveau les dossiers."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1337
+#: templates/configure/scripts_main.html.jinja:1339
 msgid ""
 "Aucun dossier trouvé. Avez-vous partagé vos dossiers avec l'adresse du "
 "compte de service ?"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1356
+#: templates/configure/scripts_main.html.jinja:1358
 msgid "dossier(s) trouvé(s)"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1596
+#: templates/configure/scripts_main.html.jinja:1598
 msgid "Aucune donnée de marée à afficher."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1599
+#: templates/configure/scripts_main.html.jinja:1601
 msgid "Impossible de charger les données."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1604
+#: templates/configure/scripts_main.html.jinja:1606
 msgid "Erreur de connexion au serveur."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1653
+#: templates/configure/scripts_main.html.jinja:1655
 msgid "Mise à jour en cours..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1698
+#: templates/configure/scripts_main.html.jinja:1700
 msgid "Veuillez sélectionner au moins un fichier."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1707
+#: templates/configure/scripts_main.html.jinja:1709
 msgid "Envoi en cours..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1730
+#: templates/configure/scripts_main.html.jinja:1733
 msgid "Importation réussie ! Rechargement de la page..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1739
-#: templates/configure/scripts_main.html.jinja:1772
+#: templates/configure/scripts_main.html.jinja:1742
+#: templates/configure/scripts_main.html.jinja:1775
 #: templates/configure/tab_actions.html.jinja:106
 msgid "Envoyer les photos"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1759
+#: templates/configure/scripts_main.html.jinja:1762
 msgid "Données invalides reçues du serveur."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1770
+#: templates/configure/scripts_main.html.jinja:1773
 msgid "Erreur de communication :"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1801
+#: templates/configure/scripts_main.html.jinja:1804
 msgid "Envoi..."
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1816
-#: templates/configure/tab_actions.html.jinja:192
+#: templates/configure/scripts_main.html.jinja:1819
+#: templates/configure/tab_actions.html.jinja:229
 msgid "Uploader"
 msgstr ""
 
-#: templates/configure/scripts_main.html.jinja:1830
+#: templates/configure/scripts_main.html.jinja:1833
 msgid "Supprimer le fichier musical"
 msgstr ""
 
@@ -2091,10 +2091,33 @@ msgid ""
 msgstr ""
 
 #: templates/configure/tab_actions.html.jinja:115
-msgid "Importer une discussion WhatsApp"
+msgid "Mes envois"
 msgstr ""
 
 #: templates/configure/tab_actions.html.jinja:116
+#, python-format
+msgid ""
+"Les photos envoyées depuis ce compte s'ajoutent à votre source « Envois "
+"de %(name)s ». Touchez la croix pour en retirer une."
+msgstr ""
+
+#: templates/configure/tab_actions.html.jinja:118
+msgid "Aucun envoi pour l'instant."
+msgstr ""
+
+#: templates/configure/tab_actions.html.jinja:136
+msgid "Retirer du cadre"
+msgstr ""
+
+#: templates/configure/tab_actions.html.jinja:138
+msgid "Retirer cette photo du cadre ?"
+msgstr ""
+
+#: templates/configure/tab_actions.html.jinja:152
+msgid "Importer une discussion WhatsApp"
+msgstr ""
+
+#: templates/configure/tab_actions.html.jinja:153
 msgid ""
 "Dans WhatsApp : ouvrez la discussion (ou le groupe familial) › nom en "
 "haut › « Exporter la discussion » › « Joindre les médias ». Envoyez le "
@@ -2103,54 +2126,54 @@ msgid ""
 " de partage."
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:122
+#: templates/configure/tab_actions.html.jinja:159
 msgid "Expéditeurs à importer :"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:124
+#: templates/configure/tab_actions.html.jinja:161
 msgid "Légende des photos :"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:126
+#: templates/configure/tab_actions.html.jinja:163
 msgid "Le message qui accompagne la photo"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:127
+#: templates/configure/tab_actions.html.jinja:164
 msgid "Le prénom de l'expéditeur et son message"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:128
+#: templates/configure/tab_actions.html.jinja:165
 msgid "Le prénom de l'expéditeur"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:140
+#: templates/configure/tab_actions.html.jinja:177
 #, python-brace-format
 msgid "{photos} photos et {videos} vidéos, du {first} au {last}"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:141
+#: templates/configure/tab_actions.html.jinja:178
 msgid "Envoi de l'export…"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:141
+#: templates/configure/tab_actions.html.jinja:178
 msgid "Envoi impossible."
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:183
+#: templates/configure/tab_actions.html.jinja:220
 msgid "Importation de musique"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:184
+#: templates/configure/tab_actions.html.jinja:221
 msgid ""
 "Téléchargez vos propres fichiers MP3 ou WAV pour accompagner vos "
 "playlists."
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:188
+#: templates/configure/tab_actions.html.jinja:225
 msgid "Sélectionner un fichier"
 msgstr ""
 
-#: templates/configure/tab_actions.html.jinja:198
+#: templates/configure/tab_actions.html.jinja:235
 msgid "Musiques disponibles"
 msgstr ""
 
@@ -2559,7 +2582,7 @@ msgid "non connecté"
 msgstr ""
 
 #: templates/configure/tab_affichage.html.jinja:310
-#: templates/configure/tab_sources.html.jinja:554
+#: templates/configure/tab_sources.html.jinja:560
 msgid "Mot de passe enregistré (laisser vide pour le garder)"
 msgstr ""
 
@@ -3344,7 +3367,7 @@ msgid "Clé API StormGlass :"
 msgstr ""
 
 #: templates/configure/tab_heure.html.jinja:292
-#: templates/configure/tab_sources.html.jinja:538
+#: templates/configure/tab_sources.html.jinja:544
 msgid "Tester la connexion"
 msgstr ""
 
@@ -4755,8 +4778,12 @@ msgstr ""
 msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
 msgstr ""
 
-#: templates/configure/tab_playlists.html.jinja:72
+#: templates/configure/tab_playlists.html.jinja:73
 msgid "Vos Playlists"
+msgstr ""
+
+#: templates/configure/tab_playlists.html.jinja:74
+msgid "Seulement mes playlists"
 msgstr ""
 
 #: templates/configure/tab_queue.html.jinja:4
@@ -4984,31 +5011,31 @@ msgid "Mise à jour automatique (Immich)"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:47
-#: templates/configure/tab_sources.html.jinja:279
-#: templates/configure/tab_sources.html.jinja:371
+#: templates/configure/tab_sources.html.jinja:285
+#: templates/configure/tab_sources.html.jinja:377
 msgid "Activer la mise à jour automatique"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:49
-#: templates/configure/tab_sources.html.jinja:281
+#: templates/configure/tab_sources.html.jinja:287
 msgid "Intervalle de mise à jour (heures):"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:54
-#: templates/configure/tab_sources.html.jinja:286
-#: templates/configure/tab_sources.html.jinja:379
+#: templates/configure/tab_sources.html.jinja:292
+#: templates/configure/tab_sources.html.jinja:385
 msgid "État du service :"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:56
-#: templates/configure/tab_sources.html.jinja:288
-#: templates/configure/tab_sources.html.jinja:381
+#: templates/configure/tab_sources.html.jinja:294
+#: templates/configure/tab_sources.html.jinja:387
 msgid "Dernière mise à jour :"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:58
-#: templates/configure/tab_sources.html.jinja:290
-#: templates/configure/tab_sources.html.jinja:383
+#: templates/configure/tab_sources.html.jinja:296
+#: templates/configure/tab_sources.html.jinja:389
 msgid "Prochaine mise à jour :"
 msgstr ""
 
@@ -5104,7 +5131,7 @@ msgid "Autres clouds (Dropbox, OneDrive...)"
 msgstr ""
 
 #: templates/configure/tab_sources.html.jinja:159
-#: templates/configure/tab_sources.html.jinja:475
+#: templates/configure/tab_sources.html.jinja:481
 msgid "Albums partagés iCloud"
 msgstr ""
 
@@ -5120,151 +5147,156 @@ msgstr ""
 msgid "Photos des personnes suivies (Immich)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:180
+#: templates/configure/tab_sources.html.jinja:176
+#, python-format
+msgid "Envois de %(name)s"
+msgstr ""
+
+#: templates/configure/tab_sources.html.jinja:186
 msgid "Masquer les photos en double entre les sources"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:182
+#: templates/configure/tab_sources.html.jinja:188
 msgid ""
 "Une même photo reçue par plusieurs sources (ex. Google Drive et Telegram)"
 " n'est affichée qu'une fois, de préférence celle mise en favori."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:185
+#: templates/configure/tab_sources.html.jinja:191
 msgid "Tri automatique"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:186
+#: templates/configure/tab_sources.html.jinja:192
 msgid ""
 "Écarte du diaporama les photos ratées. Rien n'est supprimé : vous pouvez "
 "remettre chaque photo d'un clic."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:187
+#: templates/configure/tab_sources.html.jinja:193
 msgid "Activer le tri automatique"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:189
+#: templates/configure/tab_sources.html.jinja:195
 msgid "Photos floues"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:190
+#: templates/configure/tab_sources.html.jinja:196
 msgid "Photos très sombres"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:191
+#: templates/configure/tab_sources.html.jinja:197
 msgid "Captures d'écran"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:192
+#: templates/configure/tab_sources.html.jinja:198
 msgid "Rafales : seule la plus nette est gardée"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:201
+#: templates/configure/tab_sources.html.jinja:207
 msgid "Voir les photos écartées"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:201
+#: templates/configure/tab_sources.html.jinja:207
 msgid "Aucune photo écartée."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:201
+#: templates/configure/tab_sources.html.jinja:207
 msgid "Remettre"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:202
+#: templates/configure/tab_sources.html.jinja:208
 msgid "floue"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:202
+#: templates/configure/tab_sources.html.jinja:208
 msgid "très sombre"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:202
+#: templates/configure/tab_sources.html.jinja:208
 msgid "capture d'écran"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:202
+#: templates/configure/tab_sources.html.jinja:208
 msgid "rafale"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:238
+#: templates/configure/tab_sources.html.jinja:244
 msgid "Configuration du partage Samba (Windows)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:240
+#: templates/configure/tab_sources.html.jinja:246
 msgid "Serveur :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:242
+#: templates/configure/tab_sources.html.jinja:248
 msgid "ex: 192.168.1.50 ou MON-NAS"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:244
+#: templates/configure/tab_sources.html.jinja:250
 msgid "Nom du partage :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:246
+#: templates/configure/tab_sources.html.jinja:252
 msgid "ex: Photos"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:248
+#: templates/configure/tab_sources.html.jinja:254
 msgid "Chemin dans le partage (optionnel) :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:250
+#: templates/configure/tab_sources.html.jinja:256
 msgid "ex: Famille/2024"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:252
+#: templates/configure/tab_sources.html.jinja:258
 msgid "Nom d'utilisateur (optionnel) :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:255
+#: templates/configure/tab_sources.html.jinja:261
 msgid "Mot de passe (optionnel) :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:270
+#: templates/configure/tab_sources.html.jinja:276
 msgid ""
 "Tester la\n"
 "                            connexion"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:276
+#: templates/configure/tab_sources.html.jinja:282
 msgid "Mise à jour automatique (Samba)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:298
+#: templates/configure/tab_sources.html.jinja:304
 msgid "Configuration Google Drive"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:301
+#: templates/configure/tab_sources.html.jinja:307
 msgid "Méthode de connexion :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:303
+#: templates/configure/tab_sources.html.jinja:309
 msgid "Automatique (rclone si configuré, sinon compte de service)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:304
+#: templates/configure/tab_sources.html.jinja:310
 msgid "rclone (compte Google déjà configuré sur le Raspberry Pi)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:305
+#: templates/configure/tab_sources.html.jinja:311
 msgid "Compte de service Google"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:310
+#: templates/configure/tab_sources.html.jinja:316
 msgid "Remote rclone :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:317
+#: templates/configure/tab_sources.html.jinja:323
 msgid ""
 "Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « "
 "rclone config » sur le Raspberry Pi."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:322
+#: templates/configure/tab_sources.html.jinja:328
 msgid ""
 "Créez un compte de service dans la console Google Cloud (API Google Drive"
 " activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez "
@@ -5272,46 +5304,46 @@ msgid ""
 "service."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:325
+#: templates/configure/tab_sources.html.jinja:331
 msgid "Compte de service configuré :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:327
+#: templates/configure/tab_sources.html.jinja:333
 msgid "Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:330
+#: templates/configure/tab_sources.html.jinja:336
 msgid "Clé JSON du compte de service :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:333
+#: templates/configure/tab_sources.html.jinja:339
 msgid "Laisser vide pour conserver la clé actuelle"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:339
+#: templates/configure/tab_sources.html.jinja:345
 msgid "Afficher mes dossiers Google Drive"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:343
+#: templates/configure/tab_sources.html.jinja:349
 msgid "Dossiers à afficher dans le diaporama :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:352
+#: templates/configure/tab_sources.html.jinja:358
 msgid ""
 "Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google "
 "Drive »."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:358
-#: templates/configure/tab_sources.html.jinja:410
+#: templates/configure/tab_sources.html.jinja:364
+#: templates/configure/tab_sources.html.jinja:416
 msgid "Inclure les sous-dossiers"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:362
+#: templates/configure/tab_sources.html.jinja:368
 msgid "Mettre les fichiers à la corbeille Google Drive après import"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:364
+#: templates/configure/tab_sources.html.jinja:370
 msgid ""
 "Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
 "importée part dans la corbeille du Drive (récupérable 30 jours) et reste "
@@ -5319,92 +5351,92 @@ msgid ""
 "Uniquement avec la connexion rclone."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:365
+#: templates/configure/tab_sources.html.jinja:371
 msgid ""
 "Pensez à enregistrer la configuration après avoir choisi les dossiers, "
 "puis lancez l'import depuis l'onglet « Actions »."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:368
+#: templates/configure/tab_sources.html.jinja:374
 msgid "Mise à jour automatique (Google Drive)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:373
+#: templates/configure/tab_sources.html.jinja:379
 msgid "Vérifier les nouveautés toutes les (minutes) :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:376
+#: templates/configure/tab_sources.html.jinja:382
 msgid ""
 "Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées "
 "ou supprimées."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:389
+#: templates/configure/tab_sources.html.jinja:395
 msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:393
+#: templates/configure/tab_sources.html.jinja:399
 msgid "Ajouter un compte"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:398
+#: templates/configure/tab_sources.html.jinja:404
 msgid "Choisissez le service :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:398
+#: templates/configure/tab_sources.html.jinja:404
 msgid "et un nom court :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:399
+#: templates/configure/tab_sources.html.jinja:405
 msgid ""
 "Sur un ordinateur (avec un navigateur), installez rclone "
 "(rclone.org/downloads) puis lancez :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:401
+#: templates/configure/tab_sources.html.jinja:407
 #, python-brace-format
 msgid ""
 "Connectez-vous dans la page qui s'ouvre, puis copiez le texte affiché "
 "entre accolades { ... }."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:402
+#: templates/configure/tab_sources.html.jinja:408
 msgid "Collez-le ici :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:403
+#: templates/configure/tab_sources.html.jinja:409
 msgid "Ajouter le compte"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:408
+#: templates/configure/tab_sources.html.jinja:414
 msgid "Dossiers à afficher"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:411
+#: templates/configure/tab_sources.html.jinja:417
 msgid ""
 "Retirer les photos du cloud une fois importées (elles restent dans sa "
 "corbeille 30 jours)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:412
-#: templates/configure/tab_sources.html.jinja:482
+#: templates/configure/tab_sources.html.jinja:418
+#: templates/configure/tab_sources.html.jinja:488
 msgid "Synchroniser automatiquement (toutes les heures)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:413
-#: templates/configure/tab_sources.html.jinja:483
+#: templates/configure/tab_sources.html.jinja:419
+#: templates/configure/tab_sources.html.jinja:489
 msgid "Synchroniser maintenant"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:420
+#: templates/configure/tab_sources.html.jinja:426
 msgid "Aucun compte"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:420
+#: templates/configure/tab_sources.html.jinja:426
 msgid "Lecture des dossiers…"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:476
+#: templates/configure/tab_sources.html.jinja:482
 msgid ""
 "Sur l'iPhone : app Photos › album partagé › bouton Personnes › activez « "
 "Site web public », puis « Partager le lien ». Collez ce lien ici : aucun "
@@ -5412,89 +5444,89 @@ msgid ""
 "et une photo retirée de l'album disparaît du cadre."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:479
+#: templates/configure/tab_sources.html.jinja:485
 msgid "Ajouter l'album"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:489
+#: templates/configure/tab_sources.html.jinja:495
 msgid "éléments"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:489
+#: templates/configure/tab_sources.html.jinja:495
 msgid "Lecture de l'album…"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:518
+#: templates/configure/tab_sources.html.jinja:524
 msgid "Photos par e-mail"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:519
+#: templates/configure/tab_sources.html.jinja:525
 msgid ""
 "Donnez au cadre sa propre adresse e-mail (par exemple une adresse Gmail "
 "créée pour lui) : la famille y envoie ses photos en pièce jointe et elles"
 " s'affichent toutes seules. L'objet du message devient la légende."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:521
+#: templates/configure/tab_sources.html.jinja:527
 msgid "Relever la boîte mail (toutes les 5 minutes)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:523
+#: templates/configure/tab_sources.html.jinja:529
 msgid "Adresse du cadre"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:524
+#: templates/configure/tab_sources.html.jinja:530
 msgid "Mot de passe d'application"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:525
+#: templates/configure/tab_sources.html.jinja:531
 msgid "Serveur IMAP"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:526
+#: templates/configure/tab_sources.html.jinja:532
 msgid "Dossier"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:528
+#: templates/configure/tab_sources.html.jinja:534
 msgid ""
 "Gmail : activez la validation en deux étapes, puis créez un mot de passe "
 "d'application sur myaccount.google.com/apppasswords. Votre mot de passe "
 "habituel ne fonctionnera pas."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:529
+#: templates/configure/tab_sources.html.jinja:535
 msgid "Expéditeurs de confiance (affichés directement)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:531
+#: templates/configure/tab_sources.html.jinja:537
 msgid "Photos des autres expéditeurs :"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:533
+#: templates/configure/tab_sources.html.jinja:539
 msgid "À valider (comme les photos d'invités)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:534
+#: templates/configure/tab_sources.html.jinja:540
 msgid "Ignorées"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:539
+#: templates/configure/tab_sources.html.jinja:545
 msgid "Relever maintenant"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:542
+#: templates/configure/tab_sources.html.jinja:548
 msgid "Seul un administrateur peut configurer la boîte mail du cadre."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:554
+#: templates/configure/tab_sources.html.jinja:560
 msgid "Connexion…"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:586
+#: templates/configure/tab_sources.html.jinja:592
 msgid "Photos que le cadre ne peut pas retirer du Drive"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:588
+#: templates/configure/tab_sources.html.jinja:594
 msgid ""
 "Ces photos ont été déposées dans le dossier par un autre compte Google : "
 "seul leur propriétaire peut les mettre à la corbeille. Elles restent "
@@ -5503,27 +5535,27 @@ msgid ""
 "Réessayer »."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:590
+#: templates/configure/tab_sources.html.jinja:596
 msgid "Réessayer à la prochaine synchronisation"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:596
+#: templates/configure/tab_sources.html.jinja:602
 msgid "Ouvrir dans Drive"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:596
+#: templates/configure/tab_sources.html.jinja:602
 msgid "(plus sur le cadre)"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:627
+#: templates/configure/tab_sources.html.jinja:633
 msgid "Options de démarrage"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:631
+#: templates/configure/tab_sources.html.jinja:637
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:633
+#: templates/configure/tab_sources.html.jinja:639
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -6481,23 +6513,23 @@ msgstr ""
 msgid "Fête des pères"
 msgstr ""
 
-#: web/core.py:937
+#: web/core.py:940
 msgid "Code d'invitation invalide."
 msgstr ""
 
-#: web/core.py:943
+#: web/core.py:946
 msgid "Ce code d'invitation a expiré."
 msgstr ""
 
-#: web/core.py:949
+#: web/core.py:952
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr ""
 
-#: web/core.py:951
+#: web/core.py:954
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr ""
 
-#: web/core.py:962
+#: web/core.py:965
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
@@ -6598,7 +6630,8 @@ msgstr ""
 msgid "Style enregistré : visible dès la photo suivante."
 msgstr ""
 
-#: web/routes_captions.py:112 web/routes_guests.py:484 web/routes_photos.py:284
+#: web/routes_captions.py:112 web/routes_guests.py:484
+#: web/routes_imports.py:843 web/routes_imports.py:852 web/routes_photos.py:284
 msgid "Photo introuvable."
 msgstr ""
 
@@ -6641,8 +6674,8 @@ msgstr ""
 msgid "L'accès pour l'invité '%(name)s' a été révoqué."
 msgstr ""
 
-#: web/routes_guests.py:87 web/routes_guests.py:92 web/routes_imports.py:646
-#: web/routes_imports.py:684
+#: web/routes_guests.py:87 web/routes_guests.py:92 web/routes_imports.py:651
+#: web/routes_imports.py:689
 msgid "Aucun fichier sélectionné."
 msgstr ""
 
@@ -6651,11 +6684,11 @@ msgstr ""
 msgid "Merci ! %(count)s photo(s) envoyée(s) : elles arrivent sur le cadre."
 msgstr ""
 
-#: web/routes_guests.py:126 web/routes_imports.py:730
+#: web/routes_guests.py:126 web/routes_imports.py:735
 msgid "Nouvelle photo d'invité"
 msgstr ""
 
-#: web/routes_guests.py:126 web/routes_imports.py:730
+#: web/routes_guests.py:126 web/routes_imports.py:735
 #, python-format
 msgid "%(count)s photo(s) à valider sur le cadre."
 msgstr ""
@@ -6800,7 +6833,7 @@ msgstr ""
 msgid "Ambiance « %(name)s » appliquée."
 msgstr ""
 
-#: web/routes_home.py:125 web/routes_playlists.py:75
+#: web/routes_home.py:125 web/routes_playlists.py:92
 #: web/routes_slideshow.py:514
 msgid "Disposition inconnue."
 msgstr ""
@@ -6877,7 +6910,7 @@ msgstr ""
 msgid "Alerte de la maison"
 msgstr ""
 
-#: web/routes_homeassistant.py:100 web/routes_imports.py:778
+#: web/routes_homeassistant.py:100 web/routes_imports.py:783
 msgid "Port invalide."
 msgstr ""
 
@@ -6889,97 +6922,101 @@ msgstr ""
 msgid "Home Assistant désactivé."
 msgstr ""
 
-#: web/routes_imports.py:423
+#: web/routes_imports.py:428
 #, python-format
 msgid ""
 "%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
 "prochaine synchronisation."
 msgstr ""
 
-#: web/routes_imports.py:481
+#: web/routes_imports.py:486
 msgid "Compte ajouté : choisissez maintenant les dossiers."
 msgstr ""
 
-#: web/routes_imports.py:502
+#: web/routes_imports.py:507
 msgid "Compte inconnu."
 msgstr ""
 
-#: web/routes_imports.py:513
+#: web/routes_imports.py:518
 msgid "Réglages du cloud enregistrés."
 msgstr ""
 
-#: web/routes_imports.py:521
+#: web/routes_imports.py:526
 msgid "Choisissez d'abord un compte et des dossiers."
 msgstr ""
 
-#: web/routes_imports.py:523 web/routes_imports.py:602
+#: web/routes_imports.py:528 web/routes_imports.py:607
 msgid "Synchronisation lancée : suivez-la dans la notification en bas de l'écran."
 msgstr ""
 
-#: web/routes_imports.py:566
+#: web/routes_imports.py:571
 #, python-format
 msgid "iCloud ne répond pas : %(error)s"
 msgstr ""
 
-#: web/routes_imports.py:576
+#: web/routes_imports.py:581
 #, python-format
 msgid "Album « %(name)s » ajouté (%(count)s éléments) : import lancé."
 msgstr ""
 
-#: web/routes_imports.py:592
+#: web/routes_imports.py:597
 msgid "Réglages iCloud enregistrés."
 msgstr ""
 
-#: web/routes_imports.py:600
+#: web/routes_imports.py:605
 msgid "Ajoutez d'abord un album partagé."
 msgstr ""
 
-#: web/routes_imports.py:652
+#: web/routes_imports.py:657
 msgid "Ce fichier n'est pas un export WhatsApp (.zip)."
 msgstr ""
 
-#: web/routes_imports.py:655
+#: web/routes_imports.py:660
 msgid ""
 "Aucune photo ni vidéo dans cet export : choisissez « Joindre les médias »"
 " en l'exportant."
 msgstr ""
 
-#: web/routes_imports.py:665
+#: web/routes_imports.py:670
 msgid "Envoyez d'abord l'export de la discussion."
 msgstr ""
 
-#: web/routes_imports.py:672
+#: web/routes_imports.py:677
 msgid "Import lancé : suivez-le dans la notification en bas de l'écran."
 msgstr ""
 
-#: web/routes_imports.py:704
+#: web/routes_imports.py:709
 #, python-format
 msgid "%(count)s fichier(s) reçu(s) : ils arrivent sur le cadre."
 msgstr ""
 
-#: web/routes_imports.py:786
+#: web/routes_imports.py:791
 msgid "Réglages de l'e-mail enregistrés."
 msgstr ""
 
-#: web/routes_imports.py:798
+#: web/routes_imports.py:803
 #, python-format
 msgid "Connexion impossible : %(error)s"
 msgstr ""
 
-#: web/routes_imports.py:799
+#: web/routes_imports.py:804
 #, python-format
 msgid "Connexion réussie : %(count)s messages dans la boîte."
 msgstr ""
 
-#: web/routes_imports.py:807
+#: web/routes_imports.py:812
 msgid "Activez d'abord la réception par e-mail."
 msgstr ""
 
-#: web/routes_imports.py:812
+#: web/routes_imports.py:817
 #, python-format
 msgid ""
 "%(accepted)s photo(s) ajoutée(s), %(pending)s à valider, %(ignored)s "
 "ignorée(s)."
+msgstr ""
+
+#: web/routes_imports.py:855
+msgid "Photo supprimée du cadre."
 msgstr ""
 
 #: web/routes_integrations.py:109
@@ -7269,20 +7306,25 @@ msgstr ""
 msgid "Photo de nouveau écartée."
 msgstr ""
 
-#: web/routes_playlists.py:81
+#: web/routes_playlists.py:18 web/routes_smart_albums.py:73
+#, python-format
+msgid "Cette playlist appartient à %(owner)s."
+msgstr ""
+
+#: web/routes_playlists.py:98
 msgid "Disposition de la playlist enregistrée."
 msgstr ""
 
-#: web/routes_playlists.py:261
+#: web/routes_playlists.py:283
 msgid "Liste de photos invalide."
 msgstr ""
 
-#: web/routes_playlists.py:269
+#: web/routes_playlists.py:291
 #, python-format
 msgid "Photo introuvable : %(name)s"
 msgstr ""
 
-#: web/routes_playlists.py:315
+#: web/routes_playlists.py:338
 msgid "Playlist non trouvée."
 msgstr ""
 
@@ -7346,7 +7388,7 @@ msgstr ""
 msgid "Une playlist porte déjà ce nom."
 msgstr ""
 
-#: web/routes_smart_albums.py:78
+#: web/routes_smart_albums.py:80
 #, python-format
 msgid "Album « %(name)s » : %(count)s photos, mis à jour automatiquement."
 msgstr ""

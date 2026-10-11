@@ -69,7 +69,10 @@
 
                 <!-- Liste des playlists -->
                 <div>
-                    <h4 class="font-semibold text-gray-800 mb-2">{{ _("Vos Playlists") }}</h4>
+                    <div class="flex flex-wrap items-center gap-3 mb-2">
+                        <h4 class="font-semibold text-gray-800">{{ _("Vos Playlists") }}</h4>
+                        <label class="text-sm flex items-center gap-1"><input type="checkbox" id="playlists-mine-only" onchange="window.refreshPlaylists && window.refreshPlaylists()"> {{ _("Seulement mes playlists") }}</label>
+                    </div>
                     <div id="playlists-list-container" class="space-y-4">
                         <!-- Les playlists seront chargées ici par JavaScript -->
                     </div>

@@ -69,8 +69,10 @@ def smart_albums_save_api():
     album = next((p for p in playlists if p.get("id") == album_id and isinstance(p.get("smart"), dict)), None) if album_id else None
     if any(p.get("name", "").lower() == name.lower() and p is not album for p in playlists):
         return jsonify({"success": False, "message": _("Une playlist porte déjà ce nom.")}), 409
+    if album is not None and album.get("owner") and not is_admin() and album["owner"] != session.get("username"):
+        return jsonify({"success": False, "message": _("Cette playlist appartient à %(owner)s.", owner=album["owner"])}), 403
     if album is None:
-        album = {"id": f"{smart_albums.PREFIX}{secrets.token_hex(6)}", "music_file": None}
+        album = {"id": f"{smart_albums.PREFIX}{secrets.token_hex(6)}", "music_file": None, "owner": session.get("username")}
         playlists.append(album)
     album.update(name=name, smart=rules, photos=smart_albums.select(smart_albums.library(load_favorites()), rules))
     save_playlists(playlists)
