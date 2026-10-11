@@ -328,6 +328,89 @@ def parse_color(hex_color):
         return (255, 255, 255) # Default to white if invalid
 
 # New function to perform a transition between two images
+# --- Luminosité du soir : les photos sont assombries au moment de l'affichage (tous écrans HDMI) ---
+_DIM = {"level": 1.0, "surface": None}
+_raw_flip = pygame.display.flip
+
+
+def _dimmed_flip(*args):
+    level = _DIM["level"]
+    screen = pygame.display.get_surface()
+    if level >= 0.99 or screen is None:
+        return _raw_flip()
+    surface = _DIM["surface"]
+    if surface is None or surface.get_size() != screen.get_size() or surface.get_alpha() != int(255 * (1 - level)):
+        surface = pygame.Surface(screen.get_size())
+        surface.fill((0, 0, 0))
+        surface.set_alpha(int(255 * (1 - level)))
+        _DIM["surface"] = surface
+    backup = screen.copy()  # l'image n'est assombrie qu'à l'écran : les dessins suivants partent de l'original
+    screen.blit(surface, (0, 0))
+    _raw_flip()
+    screen.blit(backup, (0, 0))
+
+
+pygame.display.flip = _dimmed_flip
+
+
+def update_brightness(config):
+    """Luminosité du moment (baisse du soir), d'après l'heure ou le coucher du soleil."""
+    try:
+        from utils import night, sky
+        sunset = sky.today(config).get("sunset") if config.get("dim_start") == "sunset" else None
+        _DIM["level"] = night.brightness(config, sunset=sunset)
+    except Exception as e:
+        logger.debug(f"Luminosité du soir : {e}")
+        _DIM["level"] = 1.0
+    return _DIM["level"]
+
+
+def _long_date(now, config):
+    """« dimanche 11 octobre » dans la langue du cadre."""
+    try:
+        from babel.dates import format_date
+        return format_date(now, "EEEE d MMMM", locale=config.get("language", "fr") or "fr")
+    except Exception:
+        return now.strftime("%d/%m/%Y")
+
+
+def run_night_clock(screen, screen_width, screen_height, config):
+    """Horloge de nuit : l'heure seule, en grand et en couleur douce, jusqu'au retour des heures d'affichage."""
+    from utils import night
+    global next_photo_requested, previous_photo_requested
+    _DIM["level"] = 1.0  # l'horloge a sa propre luminosité
+    font_path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
+    size = int(screen_height * 0.28)
+    try:
+        big = pygame.font.Font(str(font_path), size) if font_path.exists() else pygame.font.SysFont("dejavusans", size)
+        small = pygame.font.Font(str(font_path), size // 6) if font_path.exists() else pygame.font.SysFont("dejavusans", size // 6)
+    except Exception:
+        big, small = pygame.font.Font(None, size), pygame.font.Font(None, size // 6)
+    logger.info("🌙 Horloge de nuit.")
+    shown = None
+    while True:
+        config = load_config()
+        if is_within_active_hours(config) or not night.clock_at_night(config):
+            return
+        handle_slideshow_events(screen_width)
+        next_photo_requested = previous_photo_requested = False
+        now = datetime.now()
+        stamp = now.strftime("%H:%M")
+        if stamp != shown:
+            color = night.clock_color(config)
+            text = big.render(stamp, True, color)
+            date_text = small.render(_long_date(now, config), True, color) if config.get("night_show_date", True) else None
+            box_h = text.get_height() + (date_text.get_height() if date_text else 0)
+            x, y = night.drift(now, screen_width, screen_height, text.get_width(), box_h)
+            screen.fill((0, 0, 0))
+            screen.blit(text, (x, y))
+            if date_text:
+                screen.blit(date_text, (x + (text.get_width() - date_text.get_width()) // 2, y + text.get_height()))
+            _raw_flip()
+            shown = stamp
+        time.sleep(1)
+
+
 def fit_to_screen(pil_image, screen_width, screen_height):
     """Photo préparée pour une autre taille d'écran (ex. avant le changement d'orientation) : centrée sur fond noir."""
     if pil_image.size == (screen_width, screen_height):
@@ -551,6 +634,12 @@ def get_weather_and_forecast(config):
             })
         
         _weather_and_forecast_data = {'current': current_weather, 'forecast': processed_forecast}
+        try:
+            from utils import sky
+            coord = (api_data.get('city') or {}).get('coord') or {}
+            sky.remember_location(coord.get('lat'), coord.get('lon'))  # lever / coucher du soleil, lune
+        except Exception:
+            pass
         logger.info(f"[Weather] Météo et prévisions mises à jour pour {city}.")
         return _weather_and_forecast_data
 
@@ -2252,6 +2341,8 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
                 subtitle_args = [f'--sub-file={subtitle_file}', f'--sub-fonts-dir={os.path.join(BASE_DIR, "static", "fonts")}']
         except Exception as e:
             logger.info(f"[Video Playback] Légende ignorée : {e}")
+        if _DIM["level"] < 0.99:  # baisse du soir : la vidéo aussi (là où le rendu de mpv le permet)
+            subtitle_args.append(f'--brightness={-int((1 - _DIM["level"]) * 60)}')
         command.extend(subtitle_args)
         command.append(video_path)
 
@@ -2521,6 +2612,15 @@ def start_slideshow():
 
         while True:
             config = load_config() # Recharger la config à chaque itération
+
+            # Nuit : horloge discrète (si choisie) au lieu des photos ; soir : luminosité réduite
+            if not is_within_active_hours(config):
+                from utils import night
+                if night.clock_at_night(config) and config.get("manual_override") != "start":
+                    run_night_clock(screen, SCREEN_WIDTH, SCREEN_HEIGHT, config)
+                    previous_photo_surface = None
+                    continue
+            update_brightness(config)
 
             # --- CORRECTION: Charger les paramètres de transition ici pour qu'ils soient toujours définis ---
             # Auparavant, ils n'étaient définis que si aucune playlist personnalisée n'était utilisée.

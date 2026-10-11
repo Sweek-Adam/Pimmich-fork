@@ -106,12 +106,14 @@ def schedule_worker():
             manual_override = config.get('manual_override')
             slideshow_is_running = is_slideshow_running()
 
+            from utils import night
+            night_clock = night.clock_at_night(config)  # la nuit, le diaporama affiche une horloge au lieu de s'arrêter
             # Arrêt auto : uniquement si pas d'override "start"
-            if not in_schedule and slideshow_is_running and manual_override != "start":
+            if not in_schedule and slideshow_is_running and manual_override != "start" and not night_clock:
                 logger.info("📅 Heure inactive détectée et diaporama en cours. Arrêt...")
                 stop_slideshow()
             # Démarrage auto : uniquement si pas d'override "stop"
-            elif in_schedule and not slideshow_is_running and manual_override != "stop":
+            elif (in_schedule or night_clock) and not slideshow_is_running and manual_override != "stop":
                 logger.info("📅 Heure active mais le diaporama est arrêté. Séquence de démarrage...")
                 # 1. On s'assure que l'écran est allumé (via DPMS si pas de prise)
                 set_display_power(on=True)
@@ -121,8 +123,9 @@ def schedule_worker():
                 # --- FIX: Forcer la résolution au réveil comme au démarrage ---
                 output_name = get_display_output_name()
                 if output_name:
-                    width = config.get('display_width', 1920)
-                    height = config.get('display_height', 1080)
+                    # Mode de l'écran toujours en largeur × hauteur « paysage » (le pivotement est appliqué à part)
+                    width = max(config.get('display_width', 1920), config.get('display_height', 1080))
+                    height = min(config.get('display_width', 1920), config.get('display_height', 1080))
                     logger.info(f"📅 Forçage de la résolution {width}x{height} sur l'écran '{output_name}' au réveil.")
                     try:
                         subprocess.run(

@@ -181,6 +181,18 @@ def configure():
         config["smart_plug_enabled"] = 'smart_plug_enabled' in request.form
         config["cec_enabled"] = 'cec_enabled' in request.form
         config["transition_enabled"] = 'transition_enabled' in request.form # New checkbox handling
+        if 'night_form' in request.form:  # le soir et la nuit
+            config["dim_enabled"] = 'dim_enabled' in request.form
+            config["night_show_date"] = 'night_show_date' in request.form
+            start = request.form.get('dim_start', '21:00')
+            config["dim_start"] = start if start == 'sunset' or re.match(r'^\d{2}:\d{2}$', start) else '21:00'
+            config["night_mode"] = 'clock' if request.form.get('night_mode') == 'clock' else 'off'
+            config["night_color"] = request.form.get('night_color') if request.form.get('night_color') in ('amber', 'red', 'white', 'blue') else 'amber'
+            for key, low, high, default in (('dim_level', 10, 90, 40), ('night_brightness', 5, 100, 25)):
+                try:
+                    config[key] = max(low, min(high, int(request.form.get(key, default))))
+                except (TypeError, ValueError):
+                    config[key] = default
         config["clock_background_enabled"] = 'clock_background_enabled' in request.form
         config["slideshow_video_enabled"] = 'slideshow_video_enabled' in request.form
         config["video_audio_enabled"] = 'video_audio_enabled' in request.form

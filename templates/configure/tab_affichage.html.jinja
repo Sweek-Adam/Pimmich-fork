@@ -76,6 +76,68 @@
                         </div>
                     </div>
 
+                    <div class="mt-4 p-3 bg-gray-50 rounded border" id="night-box">
+                        <input type="hidden" name="night_form" value="1">
+                        <h4 class="font-semibold text-sm mb-2"><i class="fas fa-moon mr-2"></i>{{ _("Le soir et la nuit") }}</h4>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="dim_enabled" id="dim_enabled" {% if config.get('dim_enabled') %}checked{% endif %}>
+                            {{ _("Baisser la luminosité le soir") }}</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                            <div>
+                                <label for="dim_start" class="block text-xs text-gray-600 mb-1">{{ _("À partir de :") }}</label>
+                                {% set dim_start = config.get('dim_start', '21:00') %}
+                                <select id="dim_start_mode" class="w-full mb-1">
+                                    <option value="time" {% if dim_start != 'sunset' %}selected{% endif %}>{{ _("Une heure précise") }}</option>
+                                    <option value="sunset" {% if dim_start == 'sunset' %}selected{% endif %}>{{ _("Le coucher du soleil") }}</option>
+                                </select>
+                                <input type="time" id="dim_start_time" value="{{ dim_start if dim_start != 'sunset' else '21:00' }}" class="w-full {% if dim_start == 'sunset' %}hidden{% endif %}">
+                                <input type="hidden" name="dim_start" id="dim_start" value="{{ dim_start }}">
+                            </div>
+                            <div>
+                                <label for="dim_level" class="block text-xs text-gray-600 mb-1">{{ _("Luminosité du soir :") }} <span id="dim_level_value">{{ config.get('dim_level', 40) }}</span> %</label>
+                                <input type="range" id="dim_level" name="dim_level" min="10" max="90" step="5" value="{{ config.get('dim_level', 40) }}" class="w-full">
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">{{ _("La baisse se fait en douceur (45 minutes) et dure jusqu'au matin.") }}</p>
+                        <label for="night_mode" class="block text-sm font-medium mt-3">{{ _("En dehors des heures d'affichage :") }}</label>
+                        {% set night_mode = config.get('night_mode', 'off') %}
+                        <select id="night_mode" name="night_mode" class="w-full">
+                            <option value="off" {% if night_mode != 'clock' %}selected{% endif %}>{{ _("Écran éteint") }}</option>
+                            <option value="clock" {% if night_mode == 'clock' %}selected{% endif %}>{{ _("Horloge de nuit (l'heure seule, en couleur douce)") }}</option>
+                        </select>
+                        <div id="night-clock-options" class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2 {% if night_mode != 'clock' %}hidden{% endif %}">
+                            <div>
+                                <label for="night_brightness" class="block text-xs text-gray-600 mb-1">{{ _("Luminosité :") }} <span id="night_brightness_value">{{ config.get('night_brightness', 25) }}</span> %</label>
+                                <input type="range" id="night_brightness" name="night_brightness" min="5" max="100" step="5" value="{{ config.get('night_brightness', 25) }}" class="w-full">
+                            </div>
+                            <div>
+                                <label for="night_color" class="block text-xs text-gray-600 mb-1">{{ _("Couleur :") }}</label>
+                                {% set night_color = config.get('night_color', 'amber') %}
+                                <select id="night_color" name="night_color" class="w-full">
+                                    {% for value, label in [('amber', _("Ambre")), ('red', _("Rouge")), ('white', _("Blanc")), ('blue', _("Bleu"))] %}
+                                    <option value="{{ value }}" {% if night_color == value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="night_show_date" {% if config.get('night_show_date', True) %}checked{% endif %}> {{ _("Afficher la date") }}</label>
+                        </div>
+                        <script>
+                            window.addEventListener("DOMContentLoaded", () => {
+                                const $ = (id) => document.getElementById(id);
+                                const syncStart = () => {
+                                    const sunset = $("dim_start_mode").value === "sunset";
+                                    $("dim_start_time").classList.toggle("hidden", sunset);
+                                    $("dim_start").value = sunset ? "sunset" : $("dim_start_time").value;
+                                    $("dim_start").dispatchEvent(new Event("change", { bubbles: true }));
+                                };
+                                $("dim_start_mode").addEventListener("change", syncStart);
+                                $("dim_start_time").addEventListener("change", syncStart);
+                                [["dim_level", "dim_level_value"], ["night_brightness", "night_brightness_value"]].forEach(([id, out]) =>
+                                    $(id).addEventListener("input", () => { $(out).textContent = $(id).value; }));
+                                $("night_mode").addEventListener("change", () => $("night-clock-options").classList.toggle("hidden", $("night_mode").value !== "clock"));
+                            });
+                        </script>
+                    </div>
+
                     <div class="mt-4 pt-4 border-t">
                         <label for="resolution-selector" class="block text-sm font-medium text-gray-700">{{
                             _("Résolution de l'écran") }}</label>
