@@ -10,6 +10,8 @@
                 </div>
                 <div id="tm-memory" class="tm-memory hidden"></div>
                 <div id="tm-years" class="tm-years"></div>
+                {% if is_admin %}<p id="tm-nohome" class="tm-memory hidden mt-2"></p>
+                <button type="button" id="tm-home-btn" class="system-button bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded mt-2"><i class="fas fa-home mr-2"></i>{{ _("Placer la maison") }}</button>{% endif %}
                 <div id="tm-placing" class="tm-placing hidden">
                     <p><i class="fas fa-map-pin mr-2"></i><span id="tm-placing-text"></span></p>
                     <div class="flex flex-wrap gap-2 mt-2">
@@ -97,7 +99,8 @@
                         memory1: {{ _("Il y a un an : {title}")|tojson }}, memoryN: {{ _("Il y a {n} ans : {title}")|tojson }},
                         noresult: {{ _("Aucun lieu trouvé.")|tojson }}, empty: {{ _("Aucune photo datée pour l'instant : les voyages apparaîtront avec les photos.")|tojson }},
                         error: {{ _("Erreur de communication avec le serveur.")|tojson }}, km: {{ _("à {n} km de la maison")|tojson }},
-                        home: {{ _("Maison")|tojson }}
+                        home: {{ _("Maison")|tojson }}, homePlacing: {{ _("Cliquez sur la carte à l'endroit de la maison, ou cherchez votre ville.")|tojson }},
+                        nohome: {{ _("Où est la maison ? Placez-la pour distinguer les voyages des sorties.")|tojson }}
                     };
                     const $ = id => document.getElementById(id);
                     const post = async (url, body, method) => {
@@ -181,6 +184,7 @@
                             b.onclick = () => { year = y; render(); };
                             $("tm-years").append(b);
                         });
+                        if ($("tm-nohome")) { $("tm-nohome").classList.toggle("hidden", !!data.home); $("tm-nohome").textContent = T.nohome; }
                         drawMap();
                         drawList();
                     }
@@ -288,6 +292,13 @@
                     async function placeAt(lat, lon, suggested) {
                         const target = placing;
                         if (!target) return;
+                        if (target.home) {
+                            stopPlacing();
+                            const res = await post("/api/trips/home", {lat, lon});
+                            say(res.message, res.success);
+                            await reload(true);
+                            return;
+                        }
                         const name = target.name || suggested || prompt(T.name, "") || "";
                         stopPlacing();
                         const res = await post(`/api/trips/${encodeURIComponent(target.id)}/place`, {lat, lon, name});
@@ -313,6 +324,14 @@
                         });
                     }
 
+                    if ($("tm-home-btn")) $("tm-home-btn").addEventListener("click", () => {
+                        placing = {home: true, name: ""};
+                        $("tm-placing").classList.remove("hidden");
+                        $("tm-placing-text").textContent = T.homePlacing;
+                        $("tm-results").innerHTML = ""; $("tm-search").value = "";
+                        $("tm-map").scrollIntoView({behavior: "smooth", block: "center"});
+                        $("tm-map").style.cursor = "crosshair";
+                    });
                     $("tm-search-btn").addEventListener("click", search);
                     $("tm-search").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); search(); } });
                     $("tm-placing-cancel").addEventListener("click", stopPlacing);

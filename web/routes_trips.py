@@ -294,3 +294,18 @@ def world_map_api():
     response.headers["Cache-Control"] = "private, max-age=86400"
     response.headers["Vary"] = "Accept-Encoding"
     return response
+
+
+@app.route('/api/trips/home', methods=['POST'])
+@admin_required
+def trips_home_api():
+    """Position de la maison (= du cadre) : sépare voyages et sorties, et sert aussi au lever et coucher du soleil."""
+    data = request.get_json(silent=True) or {}
+    try:
+        lat, lon = round(float(data["lat"]), 3), round(float(data["lon"]), 3)
+        if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+            raise ValueError
+    except (KeyError, TypeError, ValueError):
+        return jsonify({"success": False, "message": _("Choisissez un endroit sur la carte.")}), 400
+    save_config(dict(load_config(), latitude=lat, longitude=lon))
+    return jsonify({"success": True, "message": _("Maison placée : voyages et sorties sont recalculés.")})

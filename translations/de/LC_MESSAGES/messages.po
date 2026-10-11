@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 11:46+0200\n"
+"POT-Creation-Date: 2026-10-11 11:52+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -623,7 +623,7 @@ msgstr "Dicker Strich"
 msgid "Gomme"
 msgstr "Radiergummi"
 
-#: templates/configure/tab_carte.html.jinja:18
+#: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
 #: templates/upload.html.jinja:214
 msgid "Annuler"
@@ -785,7 +785,7 @@ msgstr "Jahr"
 
 #: templates/configure/_playlist_builder.html.jinja:14
 #: templates/configure/_playlist_builder.html.jinja:107
-#: templates/configure/tab_carte.html.jinja:89
+#: templates/configure/tab_carte.html.jinja:95
 msgid "Toutes les années"
 msgstr "Alle Jahre"
 
@@ -982,7 +982,7 @@ msgid "Enregistrer l'album"
 msgstr "Album speichern"
 
 #: templates/configure/_smart_albums.html.jinja:80
-#: templates/configure/tab_carte.html.jinja:89
+#: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
 msgid "{n} photos"
 msgstr "{n} Fotos"
@@ -1483,7 +1483,7 @@ msgstr "Signal"
 
 #: templates/configure/scripts_gallery.html.jinja:18
 #: templates/configure/tab_actions.html.jinja:166
-#: templates/configure/tab_carte.html.jinja:49
+#: templates/configure/tab_carte.html.jinja:51
 msgid "Aucune"
 msgstr "Keiner"
 
@@ -1546,7 +1546,7 @@ msgstr "Test läuft..."
 #: templates/configure/scripts_main.html.jinja:1673
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
-#: templates/configure/tab_carte.html.jinja:95
+#: templates/configure/tab_carte.html.jinja:101
 #: templates/configure/tab_maintenance.html.jinja:140
 #: templates/configure/tab_maintenance.html.jinja:184
 msgid "Erreur de communication avec le serveur."
@@ -3150,43 +3150,47 @@ msgstr "besuchte Länder"
 msgid "moments à placer"
 msgstr "Momente zum Platzieren"
 
-#: templates/configure/tab_carte.html.jinja:16
+#: templates/configure/tab_carte.html.jinja:14
+msgid "Placer la maison"
+msgstr "Zuhause platzieren"
+
+#: templates/configure/tab_carte.html.jinja:18
 msgid "Chercher un lieu (ville, pays)…"
 msgstr "Ort suchen (Stadt, Land)…"
 
-#: templates/configure/tab_carte.html.jinja:30
+#: templates/configure/tab_carte.html.jinja:32
 msgid "Raconter sur le cadre"
 msgstr "Auf dem Rahmen erzählen"
 
-#: templates/configure/tab_carte.html.jinja:32
+#: templates/configure/tab_carte.html.jinja:34
 msgid "Renommer"
 msgstr "Umbenennen"
 
-#: templates/configure/tab_carte.html.jinja:33
+#: templates/configure/tab_carte.html.jinja:35
 msgid "Oublier la position donnée"
 msgstr "Angegebenen Ort vergessen"
 
-#: templates/configure/tab_carte.html.jinja:40
+#: templates/configure/tab_carte.html.jinja:42
 msgid "Chronologie"
 msgstr "Zeitleiste"
 
-#: templates/configure/tab_carte.html.jinja:46
+#: templates/configure/tab_carte.html.jinja:48
 msgid "Sur le cadre"
 msgstr "Auf dem Rahmen"
 
-#: templates/configure/tab_carte.html.jinja:47
+#: templates/configure/tab_carte.html.jinja:49
 msgid "Cartes dans le diaporama"
 msgstr "Karten in der Diashow"
 
-#: templates/configure/tab_carte.html.jinja:50
+#: templates/configure/tab_carte.html.jinja:52
 msgid "Souvenirs du jour (« il y a un an, nous étions… »)"
 msgstr "Erinnerungen des Tages („vor einem Jahr waren wir…“)"
 
-#: templates/configure/tab_carte.html.jinja:51
+#: templates/configure/tab_carte.html.jinja:53
 msgid "Tous les voyages, les souvenirs et le récapitulatif de chaque année"
 msgstr "Alle Reisen, Erinnerungen und ein Jahresrückblick"
 
-#: templates/configure/tab_carte.html.jinja:53
+#: templates/configure/tab_carte.html.jinja:55
 msgid ""
 "Fond de carte détaillé OpenStreetMap dans cette page (les images de la "
 "carte viennent d'openstreetmap.org)"
@@ -3194,7 +3198,7 @@ msgstr ""
 "Detaillierte OpenStreetMap-Karte auf dieser Seite (Kartenbilder kommen "
 "von openstreetmap.org)"
 
-#: templates/configure/tab_carte.html.jinja:54
+#: templates/configure/tab_carte.html.jinja:56
 msgid ""
 "La recherche de villes utilise OpenStreetMap quand « Trouver le nom du "
 "lieu » est activé dans Infos des photos ; sinon, seuls les pays sont "
@@ -3204,69 +3208,79 @@ msgstr ""
 "Fotoinfos aktiviert ist; sonst werden nur Länder vorgeschlagen, und Sie "
 "können immer auf die Karte klicken."
 
-#: templates/configure/tab_carte.html.jinja:88 utils/ambiances.py:42
+#: templates/configure/tab_carte.html.jinja:94 utils/ambiances.py:42
 msgid "Voyage"
 msgstr "Reise"
 
-#: templates/configure/tab_carte.html.jinja:88 web/routes_trips.py:69
+#: templates/configure/tab_carte.html.jinja:94 web/routes_trips.py:69
 msgid "Sortie"
 msgstr "Ausflug"
 
-#: templates/configure/tab_carte.html.jinja:88
+#: templates/configure/tab_carte.html.jinja:94
 msgid "À placer"
 msgstr "Zu platzieren"
 
-#: templates/configure/tab_carte.html.jinja:90
+#: templates/configure/tab_carte.html.jinja:96
 msgid "Placer sur la carte"
 msgstr "Auf der Karte platzieren"
 
-#: templates/configure/tab_carte.html.jinja:90
+#: templates/configure/tab_carte.html.jinja:96
 msgid "Déplacer"
 msgstr "Verschieben"
 
-#: templates/configure/tab_carte.html.jinja:91
+#: templates/configure/tab_carte.html.jinja:97
 #, python-brace-format
 msgid "Cliquez sur la carte à l'endroit de « {title} », ou cherchez un lieu."
 msgstr ""
 "Klicken Sie auf der Karte auf den Ort von „{title}“ oder suchen Sie einen"
 " Ort."
 
-#: templates/configure/tab_carte.html.jinja:92
+#: templates/configure/tab_carte.html.jinja:98
 msgid "Nom de ce voyage :"
 msgstr "Name dieser Reise:"
 
-#: templates/configure/tab_carte.html.jinja:92
+#: templates/configure/tab_carte.html.jinja:98
 msgid "Nom de cet endroit (facultatif) :"
 msgstr "Name dieses Ortes (optional):"
 
-#: templates/configure/tab_carte.html.jinja:93
+#: templates/configure/tab_carte.html.jinja:99
 #, python-brace-format
 msgid "Il y a un an : {title}"
 msgstr "Vor einem Jahr: {title}"
 
-#: templates/configure/tab_carte.html.jinja:93
+#: templates/configure/tab_carte.html.jinja:99
 #, python-brace-format
 msgid "Il y a {n} ans : {title}"
 msgstr "Vor {n} Jahren: {title}"
 
-#: templates/configure/tab_carte.html.jinja:94
+#: templates/configure/tab_carte.html.jinja:100
 msgid "Aucun lieu trouvé."
 msgstr "Kein Ort gefunden."
 
-#: templates/configure/tab_carte.html.jinja:94
+#: templates/configure/tab_carte.html.jinja:100
 msgid ""
 "Aucune photo datée pour l'instant : les voyages apparaîtront avec les "
 "photos."
 msgstr "Noch keine datierten Fotos: Reisen erscheinen mit den Fotos."
 
-#: templates/configure/tab_carte.html.jinja:95
+#: templates/configure/tab_carte.html.jinja:101
 #, python-brace-format
 msgid "à {n} km de la maison"
 msgstr "{n} km von zu Hause"
 
-#: templates/configure/tab_carte.html.jinja:96
+#: templates/configure/tab_carte.html.jinja:102
 msgid "Maison"
 msgstr "Zuhause"
+
+#: templates/configure/tab_carte.html.jinja:102
+msgid "Cliquez sur la carte à l'endroit de la maison, ou cherchez votre ville."
+msgstr "Klicken Sie auf der Karte auf Ihr Zuhause oder suchen Sie Ihre Stadt."
+
+#: templates/configure/tab_carte.html.jinja:103
+msgid "Où est la maison ? Placez-la pour distinguer les voyages des sorties."
+msgstr ""
+"Wo ist Ihr Zuhause? Platzieren Sie es, um Reisen von Ausflügen zu "
+"unterscheiden."
 
 #: templates/configure/tab_comptes.html.jinja:7
 msgid "Changer mon mot de passe"
@@ -8853,7 +8867,7 @@ msgstr "Reise nicht gefunden."
 msgid "Position retirée."
 msgstr "Ort entfernt."
 
-#: web/routes_trips.py:204
+#: web/routes_trips.py:204 web/routes_trips.py:309
 msgid "Choisissez un endroit sur la carte."
 msgstr "Wählen Sie einen Ort auf der Karte."
 
@@ -8873,6 +8887,10 @@ msgstr "Die Geschichte der Reise beginnt auf dem Rahmen."
 #: web/routes_trips.py:257
 msgid "Réglages de la carte enregistrés."
 msgstr "Karteneinstellungen gespeichert."
+
+#: web/routes_trips.py:311
+msgid "Maison placée : voyages et sorties sont recalculés."
+msgstr "Zuhause platziert: Reisen und Ausflüge werden neu berechnet."
 
 #: web/routes_voice.py:32
 msgid "Le service est arrêté."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 11:46+0200\n"
+"POT-Creation-Date: 2026-10-11 11:52+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -619,7 +619,7 @@ msgstr "太い線"
 msgid "Gomme"
 msgstr "消しゴム"
 
-#: templates/configure/tab_carte.html.jinja:18
+#: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
 #: templates/upload.html.jinja:214
 msgid "Annuler"
@@ -777,7 +777,7 @@ msgstr "年"
 
 #: templates/configure/_playlist_builder.html.jinja:14
 #: templates/configure/_playlist_builder.html.jinja:107
-#: templates/configure/tab_carte.html.jinja:89
+#: templates/configure/tab_carte.html.jinja:95
 msgid "Toutes les années"
 msgstr "すべての年"
 
@@ -970,7 +970,7 @@ msgid "Enregistrer l'album"
 msgstr "アルバムを保存"
 
 #: templates/configure/_smart_albums.html.jinja:80
-#: templates/configure/tab_carte.html.jinja:89
+#: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
 msgid "{n} photos"
 msgstr "{n}枚"
@@ -1443,7 +1443,7 @@ msgstr "信号"
 
 #: templates/configure/scripts_gallery.html.jinja:18
 #: templates/configure/tab_actions.html.jinja:166
-#: templates/configure/tab_carte.html.jinja:49
+#: templates/configure/tab_carte.html.jinja:51
 msgid "Aucune"
 msgstr "なし"
 
@@ -1506,7 +1506,7 @@ msgstr "テスト中..."
 #: templates/configure/scripts_main.html.jinja:1673
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
-#: templates/configure/tab_carte.html.jinja:95
+#: templates/configure/tab_carte.html.jinja:101
 #: templates/configure/tab_maintenance.html.jinja:140
 #: templates/configure/tab_maintenance.html.jinja:184
 msgid "Erreur de communication avec le serveur."
@@ -3060,49 +3060,53 @@ msgstr "訪れた国"
 msgid "moments à placer"
 msgstr "未配置の思い出"
 
-#: templates/configure/tab_carte.html.jinja:16
+#: templates/configure/tab_carte.html.jinja:14
+msgid "Placer la maison"
+msgstr "自宅を設定"
+
+#: templates/configure/tab_carte.html.jinja:18
 msgid "Chercher un lieu (ville, pays)…"
 msgstr "場所を検索（都市、国）…"
 
-#: templates/configure/tab_carte.html.jinja:30
+#: templates/configure/tab_carte.html.jinja:32
 msgid "Raconter sur le cadre"
 msgstr "フレームで物語を再生"
 
-#: templates/configure/tab_carte.html.jinja:32
+#: templates/configure/tab_carte.html.jinja:34
 msgid "Renommer"
 msgstr "名前を変更"
 
-#: templates/configure/tab_carte.html.jinja:33
+#: templates/configure/tab_carte.html.jinja:35
 msgid "Oublier la position donnée"
 msgstr "指定した位置を消去"
 
-#: templates/configure/tab_carte.html.jinja:40
+#: templates/configure/tab_carte.html.jinja:42
 msgid "Chronologie"
 msgstr "年表"
 
-#: templates/configure/tab_carte.html.jinja:46
+#: templates/configure/tab_carte.html.jinja:48
 msgid "Sur le cadre"
 msgstr "フレーム上"
 
-#: templates/configure/tab_carte.html.jinja:47
+#: templates/configure/tab_carte.html.jinja:49
 msgid "Cartes dans le diaporama"
 msgstr "スライドショーの地図"
 
-#: templates/configure/tab_carte.html.jinja:50
+#: templates/configure/tab_carte.html.jinja:52
 msgid "Souvenirs du jour (« il y a un an, nous étions… »)"
 msgstr "今日の思い出（「1年前、私たちは…」）"
 
-#: templates/configure/tab_carte.html.jinja:51
+#: templates/configure/tab_carte.html.jinja:53
 msgid "Tous les voyages, les souvenirs et le récapitulatif de chaque année"
 msgstr "すべての旅行、思い出、各年のまとめ"
 
-#: templates/configure/tab_carte.html.jinja:53
+#: templates/configure/tab_carte.html.jinja:55
 msgid ""
 "Fond de carte détaillé OpenStreetMap dans cette page (les images de la "
 "carte viennent d'openstreetmap.org)"
 msgstr "このページで詳細な OpenStreetMap 地図を使う（地図画像は openstreetmap.org から取得）"
 
-#: templates/configure/tab_carte.html.jinja:54
+#: templates/configure/tab_carte.html.jinja:56
 msgid ""
 "La recherche de villes utilise OpenStreetMap quand « Trouver le nom du "
 "lieu » est activé dans Infos des photos ; sinon, seuls les pays sont "
@@ -3111,67 +3115,75 @@ msgstr ""
 "「写真情報」で「場所の名前を調べる」を有効にすると、都市検索に OpenStreetMap "
 "を使います。無効の場合は国のみ表示されますが、地図をクリックして指定することもできます。"
 
-#: templates/configure/tab_carte.html.jinja:88 utils/ambiances.py:42
+#: templates/configure/tab_carte.html.jinja:94 utils/ambiances.py:42
 msgid "Voyage"
 msgstr "旅行"
 
-#: templates/configure/tab_carte.html.jinja:88 web/routes_trips.py:69
+#: templates/configure/tab_carte.html.jinja:94 web/routes_trips.py:69
 msgid "Sortie"
 msgstr "お出かけ"
 
-#: templates/configure/tab_carte.html.jinja:88
+#: templates/configure/tab_carte.html.jinja:94
 msgid "À placer"
 msgstr "未配置"
 
-#: templates/configure/tab_carte.html.jinja:90
+#: templates/configure/tab_carte.html.jinja:96
 msgid "Placer sur la carte"
 msgstr "地図に置く"
 
-#: templates/configure/tab_carte.html.jinja:90
+#: templates/configure/tab_carte.html.jinja:96
 msgid "Déplacer"
 msgstr "移動"
 
-#: templates/configure/tab_carte.html.jinja:91
+#: templates/configure/tab_carte.html.jinja:97
 #, python-brace-format
 msgid "Cliquez sur la carte à l'endroit de « {title} », ou cherchez un lieu."
 msgstr "「{title}」の場所を地図上でクリックするか、場所を検索してください。"
 
-#: templates/configure/tab_carte.html.jinja:92
+#: templates/configure/tab_carte.html.jinja:98
 msgid "Nom de ce voyage :"
 msgstr "この旅行の名前："
 
-#: templates/configure/tab_carte.html.jinja:92
+#: templates/configure/tab_carte.html.jinja:98
 msgid "Nom de cet endroit (facultatif) :"
 msgstr "この場所の名前（任意）："
 
-#: templates/configure/tab_carte.html.jinja:93
+#: templates/configure/tab_carte.html.jinja:99
 #, python-brace-format
 msgid "Il y a un an : {title}"
 msgstr "1年前：{title}"
 
-#: templates/configure/tab_carte.html.jinja:93
+#: templates/configure/tab_carte.html.jinja:99
 #, python-brace-format
 msgid "Il y a {n} ans : {title}"
 msgstr "{n}年前：{title}"
 
-#: templates/configure/tab_carte.html.jinja:94
+#: templates/configure/tab_carte.html.jinja:100
 msgid "Aucun lieu trouvé."
 msgstr "場所が見つかりません。"
 
-#: templates/configure/tab_carte.html.jinja:94
+#: templates/configure/tab_carte.html.jinja:100
 msgid ""
 "Aucune photo datée pour l'instant : les voyages apparaîtront avec les "
 "photos."
 msgstr "日付のある写真がまだありません。写真が増えると旅行が表示されます。"
 
-#: templates/configure/tab_carte.html.jinja:95
+#: templates/configure/tab_carte.html.jinja:101
 #, python-brace-format
 msgid "à {n} km de la maison"
 msgstr "自宅から {n} km"
 
-#: templates/configure/tab_carte.html.jinja:96
+#: templates/configure/tab_carte.html.jinja:102
 msgid "Maison"
 msgstr "自宅"
+
+#: templates/configure/tab_carte.html.jinja:102
+msgid "Cliquez sur la carte à l'endroit de la maison, ou cherchez votre ville."
+msgstr "地図上で自宅の場所をクリックするか、都市を検索してください。"
+
+#: templates/configure/tab_carte.html.jinja:103
+msgid "Où est la maison ? Placez-la pour distinguer les voyages des sorties."
+msgstr "自宅はどこですか？設定すると旅行とお出かけを区別できます。"
 
 #: templates/configure/tab_comptes.html.jinja:7
 msgid "Changer mon mot de passe"
@@ -8452,7 +8464,7 @@ msgstr "旅行が見つかりません。"
 msgid "Position retirée."
 msgstr "位置を削除しました。"
 
-#: web/routes_trips.py:204
+#: web/routes_trips.py:204 web/routes_trips.py:309
 msgid "Choisissez un endroit sur la carte."
 msgstr "地図上で場所を選んでください。"
 
@@ -8472,6 +8484,10 @@ msgstr "フレームで旅の物語が始まります。"
 #: web/routes_trips.py:257
 msgid "Réglages de la carte enregistrés."
 msgstr "地図の設定を保存しました。"
+
+#: web/routes_trips.py:311
+msgid "Maison placée : voyages et sorties sont recalculés."
+msgstr "自宅を設定しました。旅行とお出かけを再計算します。"
 
 #: web/routes_voice.py:32
 msgid "Le service est arrêté."

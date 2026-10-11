@@ -175,3 +175,14 @@ def test_trips_settings_admin_only(user_client, admin_client, trips_env, monkeyp
     config = routes_trips.load_config()
     assert config["trip_cards"] == "memories" and config["map_osm_tiles"] is True
     routes_trips.save_config(dict(config, map_osm_tiles=False))
+
+
+def test_trips_home(admin_client, user_client, trips_env):
+    routes_trips, _prepared = trips_env
+    assert admin_client.post("/api/trips/home", json={"lat": "x"}, headers=HEADERS).status_code == 400
+    assert user_client.post("/api/trips/home", json={"lat": 1, "lon": 2}, headers=HEADERS).status_code in (302, 403)
+    assert admin_client.post("/api/trips/home", json={"lat": 38.7223, "lon": -9.1393}, headers=HEADERS).get_json()["success"]
+    config = routes_trips.load_config()
+    assert (config["latitude"], config["longitude"]) == (38.722, -9.139)
+    data = admin_client.get("/api/trips").get_json()
+    assert data["home"] == [38.722, -9.139] and "PT" not in data["visited"]  # Lisbonne, c'est la maison maintenant

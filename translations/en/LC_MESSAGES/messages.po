@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 11:46+0200\n"
+"POT-Creation-Date: 2026-10-11 11:52+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -623,7 +623,7 @@ msgstr "Thick line"
 msgid "Gomme"
 msgstr "Eraser"
 
-#: templates/configure/tab_carte.html.jinja:18
+#: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
 #: templates/upload.html.jinja:214
 msgid "Annuler"
@@ -783,7 +783,7 @@ msgstr "Year"
 
 #: templates/configure/_playlist_builder.html.jinja:14
 #: templates/configure/_playlist_builder.html.jinja:107
-#: templates/configure/tab_carte.html.jinja:89
+#: templates/configure/tab_carte.html.jinja:95
 msgid "Toutes les années"
 msgstr "All years"
 
@@ -978,7 +978,7 @@ msgid "Enregistrer l'album"
 msgstr "Save album"
 
 #: templates/configure/_smart_albums.html.jinja:80
-#: templates/configure/tab_carte.html.jinja:89
+#: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
 msgid "{n} photos"
 msgstr "{n} photos"
@@ -1471,7 +1471,7 @@ msgstr "Signal"
 
 #: templates/configure/scripts_gallery.html.jinja:18
 #: templates/configure/tab_actions.html.jinja:166
-#: templates/configure/tab_carte.html.jinja:49
+#: templates/configure/tab_carte.html.jinja:51
 msgid "Aucune"
 msgstr "None"
 
@@ -1534,7 +1534,7 @@ msgstr "Test in progress..."
 #: templates/configure/scripts_main.html.jinja:1673
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
-#: templates/configure/tab_carte.html.jinja:95
+#: templates/configure/tab_carte.html.jinja:101
 #: templates/configure/tab_maintenance.html.jinja:140
 #: templates/configure/tab_maintenance.html.jinja:184
 msgid "Erreur de communication avec le serveur."
@@ -3126,43 +3126,47 @@ msgstr "countries visited"
 msgid "moments à placer"
 msgstr "moments to place"
 
-#: templates/configure/tab_carte.html.jinja:16
+#: templates/configure/tab_carte.html.jinja:14
+msgid "Placer la maison"
+msgstr "Place home"
+
+#: templates/configure/tab_carte.html.jinja:18
 msgid "Chercher un lieu (ville, pays)…"
 msgstr "Search for a place (city, country)…"
 
-#: templates/configure/tab_carte.html.jinja:30
+#: templates/configure/tab_carte.html.jinja:32
 msgid "Raconter sur le cadre"
 msgstr "Tell the story on the frame"
 
-#: templates/configure/tab_carte.html.jinja:32
+#: templates/configure/tab_carte.html.jinja:34
 msgid "Renommer"
 msgstr "Rename"
 
-#: templates/configure/tab_carte.html.jinja:33
+#: templates/configure/tab_carte.html.jinja:35
 msgid "Oublier la position donnée"
 msgstr "Forget the given location"
 
-#: templates/configure/tab_carte.html.jinja:40
+#: templates/configure/tab_carte.html.jinja:42
 msgid "Chronologie"
 msgstr "Timeline"
 
-#: templates/configure/tab_carte.html.jinja:46
+#: templates/configure/tab_carte.html.jinja:48
 msgid "Sur le cadre"
 msgstr "On the frame"
 
-#: templates/configure/tab_carte.html.jinja:47
+#: templates/configure/tab_carte.html.jinja:49
 msgid "Cartes dans le diaporama"
 msgstr "Maps in the slideshow"
 
-#: templates/configure/tab_carte.html.jinja:50
+#: templates/configure/tab_carte.html.jinja:52
 msgid "Souvenirs du jour (« il y a un an, nous étions… »)"
 msgstr "Today's memories (“a year ago, we were…”)"
 
-#: templates/configure/tab_carte.html.jinja:51
+#: templates/configure/tab_carte.html.jinja:53
 msgid "Tous les voyages, les souvenirs et le récapitulatif de chaque année"
 msgstr "All trips, memories and a recap of each year"
 
-#: templates/configure/tab_carte.html.jinja:53
+#: templates/configure/tab_carte.html.jinja:55
 msgid ""
 "Fond de carte détaillé OpenStreetMap dans cette page (les images de la "
 "carte viennent d'openstreetmap.org)"
@@ -3170,7 +3174,7 @@ msgstr ""
 "Detailed OpenStreetMap background on this page (map images come from "
 "openstreetmap.org)"
 
-#: templates/configure/tab_carte.html.jinja:54
+#: templates/configure/tab_carte.html.jinja:56
 msgid ""
 "La recherche de villes utilise OpenStreetMap quand « Trouver le nom du "
 "lieu » est activé dans Infos des photos ; sinon, seuls les pays sont "
@@ -3180,67 +3184,75 @@ msgstr ""
 "Photo info; otherwise only countries are offered, and you can always "
 "click on the map."
 
-#: templates/configure/tab_carte.html.jinja:88 utils/ambiances.py:42
+#: templates/configure/tab_carte.html.jinja:94 utils/ambiances.py:42
 msgid "Voyage"
 msgstr "Travel"
 
-#: templates/configure/tab_carte.html.jinja:88 web/routes_trips.py:69
+#: templates/configure/tab_carte.html.jinja:94 web/routes_trips.py:69
 msgid "Sortie"
 msgstr "Outing"
 
-#: templates/configure/tab_carte.html.jinja:88
+#: templates/configure/tab_carte.html.jinja:94
 msgid "À placer"
 msgstr "To place"
 
-#: templates/configure/tab_carte.html.jinja:90
+#: templates/configure/tab_carte.html.jinja:96
 msgid "Placer sur la carte"
 msgstr "Place on the map"
 
-#: templates/configure/tab_carte.html.jinja:90
+#: templates/configure/tab_carte.html.jinja:96
 msgid "Déplacer"
 msgstr "Move"
 
-#: templates/configure/tab_carte.html.jinja:91
+#: templates/configure/tab_carte.html.jinja:97
 #, python-brace-format
 msgid "Cliquez sur la carte à l'endroit de « {title} », ou cherchez un lieu."
 msgstr "Click on the map where “{title}” happened, or search for a place."
 
-#: templates/configure/tab_carte.html.jinja:92
+#: templates/configure/tab_carte.html.jinja:98
 msgid "Nom de ce voyage :"
 msgstr "Name of this trip:"
 
-#: templates/configure/tab_carte.html.jinja:92
+#: templates/configure/tab_carte.html.jinja:98
 msgid "Nom de cet endroit (facultatif) :"
 msgstr "Name of this place (optional):"
 
-#: templates/configure/tab_carte.html.jinja:93
+#: templates/configure/tab_carte.html.jinja:99
 #, python-brace-format
 msgid "Il y a un an : {title}"
 msgstr "A year ago: {title}"
 
-#: templates/configure/tab_carte.html.jinja:93
+#: templates/configure/tab_carte.html.jinja:99
 #, python-brace-format
 msgid "Il y a {n} ans : {title}"
 msgstr "{n} years ago: {title}"
 
-#: templates/configure/tab_carte.html.jinja:94
+#: templates/configure/tab_carte.html.jinja:100
 msgid "Aucun lieu trouvé."
 msgstr "No place found."
 
-#: templates/configure/tab_carte.html.jinja:94
+#: templates/configure/tab_carte.html.jinja:100
 msgid ""
 "Aucune photo datée pour l'instant : les voyages apparaîtront avec les "
 "photos."
 msgstr "No dated photos yet: trips will appear along with photos."
 
-#: templates/configure/tab_carte.html.jinja:95
+#: templates/configure/tab_carte.html.jinja:101
 #, python-brace-format
 msgid "à {n} km de la maison"
 msgstr "{n} km from home"
 
-#: templates/configure/tab_carte.html.jinja:96
+#: templates/configure/tab_carte.html.jinja:102
 msgid "Maison"
 msgstr "Home"
+
+#: templates/configure/tab_carte.html.jinja:102
+msgid "Cliquez sur la carte à l'endroit de la maison, ou cherchez votre ville."
+msgstr "Click on the map where home is, or search for your city."
+
+#: templates/configure/tab_carte.html.jinja:103
+msgid "Où est la maison ? Placez-la pour distinguer les voyages des sorties."
+msgstr "Where is home? Place it to tell trips from outings."
 
 #: templates/configure/tab_comptes.html.jinja:7
 msgid "Changer mon mot de passe"
@@ -8729,7 +8741,7 @@ msgstr "Trip not found."
 msgid "Position retirée."
 msgstr "Location removed."
 
-#: web/routes_trips.py:204
+#: web/routes_trips.py:204 web/routes_trips.py:309
 msgid "Choisissez un endroit sur la carte."
 msgstr "Choose a place on the map."
 
@@ -8749,6 +8761,10 @@ msgstr "The trip's story is starting on the frame."
 #: web/routes_trips.py:257
 msgid "Réglages de la carte enregistrés."
 msgstr "Map settings saved."
+
+#: web/routes_trips.py:311
+msgid "Maison placée : voyages et sorties sont recalculés."
+msgstr "Home placed: trips and outings are recalculated."
 
 #: web/routes_voice.py:32
 msgid "Le service est arrêté."
