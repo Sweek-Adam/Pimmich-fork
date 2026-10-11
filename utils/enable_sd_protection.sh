@@ -44,15 +44,22 @@ journalctl --vacuum-size=40M >/dev/null 2>&1 || true
 
 # --- Option : mémoire d'échange compressée en RAM au lieu d'un fichier sur la carte ---
 if [ "${1:-}" = "--zram" ]; then
-    DEBIAN_FRONTEND=noninteractive apt-get install -y -qq zram-tools
-    sed -i -E "s|^#?ALGO=.*|ALGO=zstd|; s|^#?PERCENT=.*|PERCENT=50|" /etc/default/zramswap
-    systemctl enable zramswap >/dev/null 2>&1 || true
+    if dpkg -s rpi-swap >/dev/null 2>&1; then
+        # Raspberry Pi OS récent : rpi-swap gère déjà la zram ; on lui demande la zram seule (pas de fichier sur la carte)
+        mkdir -p /etc/rpi/swap.conf.d
+        printf '# Généré par utils/enable_sd_protection.sh : zram seule, aucun fichier d'\''échange sur la carte\n[Main]\nMechanism=zram\n' \
+            > /etc/rpi/swap.conf.d/pimmich.conf
+    else
+        DEBIAN_FRONTEND=noninteractive apt-get install -y -qq zram-tools
+        sed -i -E "s|^#?ALGO=.*|ALGO=zstd|; s|^#?PERCENT=.*|PERCENT=50|" /etc/default/zramswap
+        systemctl enable zramswap >/dev/null 2>&1 || true
+        systemctl disable --now dphys-swapfile >/dev/null 2>&1 || true
+    fi
     # Fichiers d'échange déclarés dans /etc/fstab : désactivés (mis en commentaire, sauvegarde dans fstab.bak)
     if grep -qE '^[^#].*[[:space:]]swap[[:space:]]' /etc/fstab; then
         cp /etc/fstab /etc/fstab.bak
         sed -i -E 's|^([^#].*[[:space:]]swap[[:space:]].*)$|# (désactivé par Pimmich, remplacé par zram) \1|' /etc/fstab
     fi
-    systemctl disable --now dphys-swapfile >/dev/null 2>&1 || true
 fi
 
 echo "✅ Protection de la carte SD configurée. Redémarrez le cadre pour l'activer : sudo reboot"
