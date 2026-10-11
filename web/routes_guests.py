@@ -71,9 +71,13 @@ def get_telegram_bot_info():
 @app.route('/upload', methods=['GET'])
 def upload_page():
     """Affiche la page publique pour envoyer des photos."""
+    from utils import trusted_guests
     config = load_config()
-    return render_template('upload.html.jinja', guest_messages_enabled=config.get("guest_messages_enabled", True),
-                           frame_width=int(config.get("display_width", 1920)), frame_height=int(config.get("display_height", 1080)))
+    response = app.make_response(render_template('upload.html.jinja', guest_messages_enabled=config.get("guest_messages_enabled", True),
+                                                 frame_width=int(config.get("display_width", 1920)), frame_height=int(config.get("display_height", 1080))))
+    if not trusted_guests.valid(request.cookies.get(trusted_guests.COOKIE)):  # identifiant de l'appareil (invités de confiance)
+        response.set_cookie(trusted_guests.COOKIE, trusted_guests.new_device(), max_age=5 * 365 * 86400, httponly=True, samesite="Lax")
+    return response
 
 
 @app.route('/handle_upload', methods=['POST'])
@@ -89,7 +93,11 @@ def handle_upload():
         return redirect(url_for('upload_page'))
 
     PENDING_UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
-    
+    from utils import trusted_guests
+    device = request.cookies.get(trusted_guests.COOKIE, "")
+    guest_name = (request.form.get("name") or "").strip()
+    saved = []
+
     count = 0
     for file in files:
         if file:
@@ -100,8 +108,16 @@ def handle_upload():
             unique_suffix = f"{int(time.time())}_{secrets.token_hex(2)}"
             final_path = PENDING_UPLOADS_DIR / f"{base}_{unique_suffix}{ext}"
             file.save(final_path)
+            trusted_guests.remember(final_path.name, device, guest_name)
+            saved.append(final_path)
             logger.info(f"[Upload] Nouveau fichier reçu de l'invité et en attente : {final_path.name}")
             count += 1
+
+    if count and trusted_guests.is_trusted(load_config(), device):
+        # Invité de confiance : ses photos sont validées d'office (préparées en arrière-plan)
+        threading.Thread(target=lambda: [approve_pending(p) for p in saved], daemon=True, name="guest-trusted").start()
+        flash(_('Merci ! %(count)s photo(s) envoyée(s) : elles arrivent sur le cadre.', count=count), "success")
+        return redirect(url_for('upload_page'))
 
     if count:
         from utils import notify
@@ -111,6 +127,53 @@ def handle_upload():
                     key="guest_photo", click=f"{base}/configure#tab-validation" if base else None, repeat_after=60)
     flash(_('%(count)s photo(s) envoyée(s) pour validation avec succès !', count=count), "success")
     return redirect(url_for('upload_page'))
+
+
+def approve_pending(pending_path):
+    """Valide une photo d'invité : préparée dans la source « invités », puis retirée de l'attente. Renvoie (succès, message)."""
+    from utils import trusted_guests
+    pending_path = Path(pending_path)
+    target_source = "invités"
+    source_dir = BASE_DIR / "static" / "photos" / target_source
+    source_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy(str(pending_path), str(source_dir / pending_path.name))  # copie : l'original reste en attente en cas d'échec
+    config = load_config()
+    screen_width, screen_height = config.get("display_width", 1920), config.get("display_height", 1080)
+    try:
+        preparation_successful = False
+        for update in import_progress.tracked(target_source, "prepare", prepare_all_photos_with_progress(screen_width, screen_height, source_type=target_source)):
+            if update.get("type") == "done":
+                preparation_successful = True
+        if not preparation_successful:
+            return False, _("La préparation de la photo a échoué. La photo reste en attente.")
+        pending_path.unlink(missing_ok=True)
+        trusted_guests.forget(pending_path.name)
+        config = load_config()
+        if 'invités' not in config.get('display_sources', []):  # la photo validée doit être diffusée
+            config = dict(config, display_sources=list(config.get('display_sources', [])) + ['invités'])
+            save_config(config)
+        if is_slideshow_running():
+            restart_slideshow_for_update()
+        return True, _("Photo approuvée et préparée. Le diaporama a été mis à jour.")
+    except Exception as e:
+        return False, f"Erreur lors de la préparation: {e}"
+
+
+@app.route('/api/trusted_guests', methods=['GET'])
+@login_required
+def trusted_guests_api():
+    return jsonify({"success": True, "trusted": [{"device": t["device"][:6] + "…", "id": t["device"], "label": t.get("label", ""), "since": t.get("since", "")}
+                                                 for t in load_config().get("trusted_guests") or []]})
+
+
+@app.route('/api/trusted_guests/<device>', methods=['DELETE'])
+@login_required
+def trusted_guests_remove_api(device):
+    config = dict(load_config())
+    before = config.get("trusted_guests") or []
+    config["trusted_guests"] = [t for t in before if t.get("device") != device]
+    save_config(config)
+    return jsonify({"success": len(before) != len(config["trusted_guests"]), "message": _("Cet appareil devra de nouveau être validé.")})
 
 
 @app.route('/api/get_pending_photos')
@@ -140,7 +203,9 @@ def get_pending_photos():
         logger.debug(f"Found {len(pending_files)} pending photos.")
 
         # Retourner une réponse structurée et ajouter des en-têtes anti-cache.
-        response = jsonify({"success": True, "photos": pending_files})
+        from utils import trusted_guests
+        response = jsonify({"success": True, "photos": pending_files,
+                            "meta": {f: {"name": trusted_guests.info(f).get("name", ""), "device": bool(trusted_guests.info(f).get("device"))} for f in pending_files}})
         response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         response.headers["Pragma"] = "no-cache"
         response.headers["Expires"] = "0"
@@ -159,7 +224,7 @@ def manage_pending_photo():
     filename = data.get('filename')
     action = data.get('action')
 
-    if not filename or not action in ['approve', 'reject']:
+    if not filename or action not in ['approve', 'reject', 'trust']:
         return jsonify({"success": False, "message": "Données invalides."}), 400
 
     pending_path = PENDING_UPLOADS_DIR / secure_filename(filename)
@@ -170,54 +235,25 @@ def manage_pending_photo():
     if action == 'reject':
         try:
             pending_path.unlink()
+            from utils import trusted_guests
+            trusted_guests.forget(pending_path.name)
             return jsonify({"success": True, "message": _("Photo rejetée.")})
         except Exception as e:
             return jsonify({"success": False, "message": f"Erreur: {e}"}), 500
 
-    if action == 'approve':
-        # Processus d'approbation rendu plus robuste :
-        # 1. Copier la photo vers le dossier de transit (au lieu de la déplacer).
-        # 2. Lancer la préparation.
-        # 3. Si la préparation réussit, supprimer la photo du dossier d'attente.
-        # Utiliser un dossier spécifique 'invités' pour éviter de mélanger ou supprimer d'autres photos
-        target_source = "invités"
-        source_dir = BASE_DIR / "static" / "photos" / target_source
-        source_dir.mkdir(parents=True, exist_ok=True)
-
-        # Copier la photo pour la traiter
-        shutil.copy(str(pending_path), str(source_dir / pending_path.name))
-
-        # Lancer la préparation
-        config = load_config()
-        screen_width, screen_height = config.get("display_width", 1920), config.get("display_height", 1080)
-        try:
-            preparation_successful = False
-            # Utiliser la fonction importée correcte et la source 'guests'
-            for update in import_progress.tracked(target_source, "prepare", prepare_all_photos_with_progress(screen_width, screen_height, source_type=target_source)):
-                # On vérifie si la préparation s'est terminée avec succès en lisant le flux d'événements
-                if update.get("type") == "done":
-                    preparation_successful = True
-            
-            if preparation_successful:
-                pending_path.unlink() # Supprimer l'original seulement si tout s'est bien passé
-
-                # --- NOUVEAU: Activer automatiquement la source 'invites' si elle ne l'est pas ---
-                # Cela garantit que la photo validée sera bien diffusée par le diaporama.
-                current_sources = config.get('display_sources', [])
-                if 'invités' not in current_sources:
-                    current_sources.append('invités')
-                    config['display_sources'] = current_sources
-                    save_config(config)
-
-                # Redémarrer le diaporama pour inclure la nouvelle photo immédiatement
-                if is_slideshow_running():
-                    restart_slideshow_for_update()
-
-                return jsonify({"success": True, "message": _("Photo approuvée et préparée. Le diaporama a été mis à jour.")})
-            else:
-                return jsonify({"success": False, "message": _("La préparation de la photo a échoué. La photo reste en attente.")}), 500
-        except Exception as e:
-            return jsonify({"success": False, "message": f"Erreur lors de la préparation: {e}"}), 500
+    if action in ('approve', 'trust'):
+        if action == 'trust':
+            from utils import trusted_guests
+            meta = trusted_guests.info(pending_path.name)
+            if not trusted_guests.valid(meta.get("device")):
+                return jsonify({"success": False, "message": _("Appareil inconnu pour cette photo (envoyée avant cette fonction).")}), 400
+            config = dict(load_config())
+            config["trusted_guests"] = trusted_guests.trust(config, meta["device"], meta.get("name"))
+            save_config(config)
+        ok, message = approve_pending(pending_path)
+        if ok:
+            return jsonify({"success": True, "message": _("Photo approuvée : cet appareil est désormais de confiance.") if action == 'trust' else message})
+        return jsonify({"success": False, "message": message}), 500
 
     return jsonify({"success": False, "message": _("Action inconnue.")}), 400
 

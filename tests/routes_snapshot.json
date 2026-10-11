@@ -1051,6 +1051,18 @@
   ]
  ],
  [
+  "/api/trusted_guests",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/trusted_guests/<device>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
   "/api/update/check",
   [
    "GET"

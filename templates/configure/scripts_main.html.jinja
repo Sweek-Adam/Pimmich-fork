@@ -1853,9 +1853,12 @@
                     grid.addEventListener('click', function (event) {
                         const approveBtn = event.target.closest('.approve-btn');
                         const rejectBtn = event.target.closest('.reject-btn');
+                        const trustBtn = event.target.closest('.trust-btn');
                         const filename = event.target.closest('.photo-tile')?.dataset.filename;
 
-                        if (approveBtn && filename) {
+                        if (trustBtn && filename) {
+                            handlePendingAction(filename, 'trust');
+                        } else if (approveBtn && filename) {
                             handlePendingAction(filename, 'approve');
                         } else if (rejectBtn && filename) {
                             handlePendingAction(filename, 'reject');

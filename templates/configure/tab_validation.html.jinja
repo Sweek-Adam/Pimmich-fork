@@ -13,5 +13,30 @@
                 <div id="pending-photos-grid" class="photo-grid">
                     <!-- Les photos en attente seront chargées ici par JavaScript -->
                 </div>
+                <p class="text-sm text-gray-600 mt-3"><i class="fas fa-handshake text-blue-500"></i> {{ _("« Approuver et toujours accepter cet appareil » : les photos suivantes envoyées depuis ce téléphone s'afficheront sans attendre.") }}</p>
             </fieldset>
+            <fieldset class="mt-6" id="trusted-box">
+                <legend><h3><i class="fas fa-handshake mr-2"></i>{{ _("Appareils de confiance") }}</h3></legend>
+                <ul id="trusted-list" class="denied-list"></ul>
+                <p id="trusted-empty" class="text-sm text-gray-500">{{ _("Aucun pour l'instant.") }}</p>
+            </fieldset>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    async function load() {
+                        const d = await (await fetch("/api/trusted_guests")).json();
+                        $("trusted-list").innerHTML = "";
+                        $("trusted-empty").classList.toggle("hidden", d.trusted.length > 0);
+                        d.trusted.forEach(t => {
+                            const li = document.createElement("li");
+                            const text = document.createElement("span"); text.textContent = `${t.label} · ${t.since}`;
+                            const b = document.createElement("button"); b.type = "button"; b.className = "link ml-2"; b.textContent = {{ _("Retirer la confiance")|tojson }};
+                            b.addEventListener("click", async () => { await fetch(`/api/trusted_guests/${encodeURIComponent(t.id)}`, { method: "DELETE" }); load(); });
+                            li.append(text, b); $("trusted-list").appendChild(li);
+                        });
+                    }
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-validation'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                    load();
+                });
+            </script>
         </div>

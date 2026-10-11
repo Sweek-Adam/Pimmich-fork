@@ -223,6 +223,7 @@
                                 tile.dataset.filename = filename;
                                 const imgSrc = `/static/pending_uploads/${filename}`;
                                 const isVideo = /\.(mp4|mov|avi|mkv)$/i.test(filename);
+                                const meta = (data.meta || {})[filename] || {};
 
                                 let contentHtml;
                                 if (isVideo) {
@@ -245,7 +246,10 @@
                           <div class="photo-actions mt-1 flex items-center justify-around w-full gap-x-2">
                               <button class="approve-btn bg-green-500 hover:bg-green-600 text-white text-xs rounded py-1 px-2" title="{{ _('Approuver') }}"><i class="fas fa-check"></i></button>
                               <button class="reject-btn bg-red-500 hover:bg-red-600 text-white text-xs rounded py-1 px-2" title="{{ _('Rejeter') }}"><i class="fas fa-times"></i></button>
-                          </div>`;
+                              ${meta.device ? `<button class="trust-btn bg-blue-500 hover:bg-blue-600 text-white text-xs rounded py-1 px-2" title="{{ _('Approuver et toujours accepter cet appareil') }}"><i class="fas fa-handshake"></i></button>` : ""}
+                          </div>
+                          ${meta.name ? `<div class="text-xs text-gray-600 mt-1 truncate w-32"></div>` : ""}`;
+                                if (meta.name) tile.querySelector(".truncate").textContent = meta.name;
                                 grid.appendChild(tile);
                             });
                             if (typeof GLightbox === 'function') {
