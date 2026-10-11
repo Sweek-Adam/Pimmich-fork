@@ -2717,6 +2717,9 @@ def draw_loading_banner(screen, text, width, height, font):
     except Exception as e:
         logger.warning(f"Erreur lors du dessin du bandeau : {e}")
 
+VIDEO_HANDOVER_SECONDS = 0.4  # le temps que Wayland passe l'écran du diaporama à mpv (et inversement)
+
+
 def display_video(screen, video_path, screen_width, screen_height, config, main_font, previous_surface, clock):
     """Affiche une vidéo en plein écran en utilisant le lecteur externe mpv."""
     global _current_background_music
@@ -2727,10 +2730,7 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
     hwdec_enabled = config.get("video_hwdec_enabled", True)
     pi_model = get_pi_model()
 
-    # 1. Afficher un bandeau de chargement avant le lancement (avec symbole sablier unicode supporté par la police)
-    if main_font:
-        draw_loading_banner(screen, "⌛ Chargement de la vidéo...", screen_width, screen_height, main_font)
-        time.sleep(0.5)
+    # Pas de bandeau « Chargement » : l'image précédente reste affichée jusqu'au lancement de la vidéo
 
     # Pour éviter les conflits de surface graphique (CMA et Wayland scanout) entre Pygame et mpv,
     # on ferme proprement Pygame avant le lancement de mpv sur TOUS les modèles de Raspberry Pi (1/2/3/4/5).
@@ -2740,7 +2740,7 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
     if pi_model in [1, 2, 3, 4, 5]:
         logger.info(f"📸 [Pi {pi_model}] Closing Pygame to release graphics overlay context for mpv.")
         pygame.display.quit()  # l'affichage seulement : la musique de fond continue pendant la vidéo
-        time.sleep(0.8)
+        time.sleep(VIDEO_HANDOVER_SECONDS)
     elif audio_enabled:
         if pygame.mixer.get_init(): pygame.mixer.quit()
 
@@ -3424,8 +3424,7 @@ def start_slideshow():
                     # Si Pygame a été fermé pour la vidéo (sur tous les Raspberry Pi), on ré-initialise l'affichage.
                     # On laisse 0.8 seconde de pause pour laisser Wayland détruire la surface mpv avant de relancer Pygame.
                     if pi_model in [1, 2, 3, 4, 5]:
-                        logger.info("📸 Attente de 0.8s de stabilisation avant réinitialisation d'affichage...")
-                        time.sleep(0.8)
+                        time.sleep(VIDEO_HANDOVER_SECONDS)  # Wayland libère la surface de mpv
                         screen, SCREEN_WIDTH, SCREEN_HEIGHT = reinit_pygame()
                         # Recharger la police car pygame.quit() l'a invalidée
                         font_path_config = config.get("clock_font_path", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
@@ -3442,10 +3441,8 @@ def start_slideshow():
                         screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
                         pygame.mouse.set_visible(False)
                         
-                    # Afficher le bandeau de reprise après la lecture de la vidéo (avec symbole flèche circulaire unicode supportée)
-                    if main_font_loaded:
-                        draw_loading_banner(screen, "↻ Reprise du diaporama...", SCREEN_WIDTH, SCREEN_HEIGHT, main_font_loaded)
-                        time.sleep(0.5)
+                    # Pas de bandeau « Reprise » : le média suivant s'affiche directement (sans transition depuis une image périmée)
+                    previous_photo_surface = None
                 else: # C'est une image
                     current_pil_image = None # Initialize to None to ensure it's always defined
                     try:
