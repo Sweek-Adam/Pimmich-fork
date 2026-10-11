@@ -849,3 +849,17 @@ def quote_worker():
             except Exception as e:
                 logger.warning(f"[Citation] {e}")
         time.sleep(600)
+
+
+def message_schedule_worker():
+    """Messages programmés : ils entrent dans le diaporama à l'heure prévue (et en sortent à la fin de leur plage)."""
+    while True:
+        try:
+            shown = messages_manager.refresh_schedule()
+            if shown:
+                logger.info(f"[Messages] {len(shown)} message(s) programmé(s) affiché(s).")
+                if is_slideshow_running():
+                    restart_slideshow_for_update()
+        except Exception as e:
+            logger.warning(f"[Messages] Programmation : {e}")
+        time.sleep(30)

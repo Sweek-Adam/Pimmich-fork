@@ -43,8 +43,86 @@ def image_path(message_id, hidden=False):
     return (HIDDEN_DIR if hidden else PREPARED_DIR) / f"{message_id}.jpg"
 
 
-def _path(message):
-    return image_path(message["id"], message.get("hidden", False))
+def _path(message, now=None):
+    """Image du message : dans le diaporama, ou de côté s'il est masqué (à la main, ou hors de sa plage programmée)."""
+    return image_path(message["id"], message.get("hidden", False) or not on_air(message, now))
+
+
+# --- Messages programmés (« le 12 mars à 8 h : Joyeux anniversaire Mamie »), éventuellement répétés ---
+
+REPEATS = ("none", "daily", "weekly", "monthly", "yearly")
+DURATIONS = (1, 2, 3, 6, 12, 24, 48, 72, 168)  # heures d'affichage à chaque fois
+
+
+def validate_schedule(starts, repeat, duration_hours):
+    """Programmation normalisée (début, répétition, durée en heures) ; None si le message n'est pas programmé."""
+    if not starts:
+        return None
+    try:
+        start = datetime.fromisoformat(str(starts)[:16])
+    except ValueError:
+        raise ValueError("Date de début invalide.")
+    repeat = repeat if repeat in REPEATS else "none"
+    try:
+        duration = int(duration_hours or 24)
+    except (TypeError, ValueError):
+        duration = 24
+    duration = duration if duration in DURATIONS else 24
+    if repeat == "none" and start + timedelta(hours=duration) < datetime.now():
+        raise ValueError("Cette programmation est déjà passée.")
+    return {"starts": start.strftime("%Y-%m-%dT%H:%M"), "repeat": repeat, "duration_hours": duration}
+
+
+def _occurrence(start, repeat, now):
+    """Dernier passage (début) avant `now`, ou None si le message n'a pas encore commencé."""
+    if now < start:
+        return None
+    if repeat == "daily":
+        return start + timedelta(days=(now - start).days)
+    if repeat == "weekly":
+        return start + timedelta(weeks=(now - start).days // 7)
+    if repeat in ("monthly", "yearly"):
+        step = 1 if repeat == "monthly" else 12
+        months = (now.year - start.year) * 12 + now.month - start.month
+        months -= months % step
+        for back in (0, step):
+            total = start.month - 1 + months - back
+            year, month = start.year + total // 12, total % 12 + 1
+            day = min(start.day, [31, 29 if year % 4 == 0 and (year % 100 or year % 400 == 0) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1])
+            candidate = start.replace(year=year, month=month, day=day)
+            if candidate <= now:
+                return candidate
+        return None
+    return start
+
+
+def on_air(message, now=None):
+    """Le message doit-il être dans le diaporama en ce moment ? (toujours, s'il n'est pas programmé)"""
+    schedule = message.get("schedule")
+    if not schedule:
+        return True
+    now = now or datetime.now()
+    start = datetime.fromisoformat(schedule["starts"])
+    last = _occurrence(start, schedule.get("repeat", "none"), now)
+    return last is not None and now < last + timedelta(hours=int(schedule.get("duration_hours", 24)))
+
+
+def refresh_schedule(now=None):
+    """Fait entrer et sortir les messages programmés du diaporama ; renvoie ceux qui viennent d'apparaître."""
+    shown = []
+    for message in list_messages():
+        if not message.get("schedule"):
+            continue
+        visible_path, hidden_path = image_path(message["id"]), image_path(message["id"], True)
+        target = _path(message, now)
+        source = hidden_path if target == visible_path else visible_path
+        if source.exists() and not target.exists():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            source.replace(target)
+            if target == visible_path:
+                push_priority(visible_path)  # à l'heure dite : affiché tout de suite
+                shown.append(message)
+    return shown
 
 
 def _unlink_images(message_id):
@@ -113,7 +191,7 @@ def list_messages():
 GUEST_MAX_DAYS = 7  # durée d'affichage maximale d'un message d'invité
 
 
-def create_message(title, body, signature, style, expires, author, width, height, guest=False):
+def create_message(title, body, signature, style, expires, author, width, height, guest=False, schedule=None):
     title, body, signature, style, expires = validate(title, body, signature, style, expires)
     if guest:
         # Les messages des invités s'affichent sans validation : ils expirent toujours au bout de GUEST_MAX_DAYS jours
@@ -124,13 +202,19 @@ def create_message(title, body, signature, style, expires, author, width, height
         "title": title, "body": body, "signature": signature, "style": style, "expires": expires,
         "author": author or "", "guest": guest, "created": datetime.now().strftime("%Y-%m-%d %H:%M"),
     }
-    PREPARED_DIR.mkdir(parents=True, exist_ok=True)
-    render_message(title, body, signature, style, width, height).save(image_path(message["id"]), "JPEG", quality=90)
+    if schedule:
+        message["schedule"] = schedule
+        if schedule["repeat"] == "none" and not expires:  # message unique : retiré une fois passé
+            message["expires"] = (datetime.fromisoformat(schedule["starts"]) + timedelta(hours=schedule["duration_hours"])).date().isoformat()
+    path = _path(message)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    render_message(title, body, signature, style, width, height).save(path, "JPEG", quality=90)
     with _lock:
         messages = _load()
         messages.append(message)
         _save(messages)
-    push_priority(image_path(message["id"]))
+    if on_air(message):
+        push_priority(path)
     return message
 
 
@@ -160,12 +244,12 @@ def set_expires(message_id, expires):
 
 def set_hidden(message_id, hidden):
     """Masque ou réaffiche un message dans le diaporama sans le supprimer."""
-    hidden = bool(hidden)
-    source, target = image_path(message_id, not hidden), image_path(message_id, hidden)
-    message = _update(message_id, hidden=hidden)
-    if source.exists():
-        target.parent.mkdir(parents=True, exist_ok=True)
-        source.replace(target)
+    message = _update(message_id, hidden=bool(hidden))
+    target = _path(message)  # un message programmé réaffiché attend sa plage horaire
+    for source in (image_path(message_id), image_path(message_id, True)):
+        if source != target and source.exists():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            source.replace(target)
     return message
 
 

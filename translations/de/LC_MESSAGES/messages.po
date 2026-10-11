@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:55+0200\n"
+"POT-Creation-Date: 2026-10-11 09:00+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -449,7 +449,7 @@ msgstr "Ihre Nachricht…"
 msgid "Votre prénom (optionnel)"
 msgstr "Ihr Vorname (optional)"
 
-#: templates/configure/tab_messages.html.jinja:34
+#: templates/configure/tab_messages.html.jinja:64
 #: templates/upload.html.jinja:94
 msgid "Aperçu"
 msgstr "Vorschau"
@@ -458,7 +458,7 @@ msgstr "Vorschau"
 msgid "Afficher sur le cadre"
 msgstr "Auf dem Bilderrahmen anzeigen"
 
-#: templates/configure/tab_messages.html.jinja:44
+#: templates/configure/tab_messages.html.jinja:74
 #: templates/upload.html.jinja:98
 msgid "Aperçu du message"
 msgstr "Nachrichtenvorschau"
@@ -601,7 +601,7 @@ msgstr "Playlist erstellen"
 #: templates/configure/_son_spotify.html.jinja:34
 #: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_messages.html.jinja:199
+#: templates/configure/tab_messages.html.jinja:236
 #: templates/configure/tab_sources.html.jinja:537
 msgid "Enregistrer"
 msgstr "Speichern"
@@ -956,6 +956,7 @@ msgid "Lecture aléatoire"
 msgstr "Zufallswiedergabe"
 
 #: templates/configure/_son_spotify.html.jinja:65
+#: templates/configure/tab_messages.html.jinja:38
 msgid "Répéter"
 msgstr "Wiederholen"
 
@@ -3064,6 +3065,7 @@ msgstr "Z. B. Urlaub, Julias Hochzeit, Weihnachten"
 
 #: templates/configure/tab_heure.html.jinja:18
 #: templates/configure/tab_heure.html.jinja:26
+#: templates/configure/tab_messages.html.jinja:132
 msgid "chaque année"
 msgstr "jedes Jahr"
 
@@ -4216,67 +4218,135 @@ msgstr "Stil"
 msgid "Afficher jusqu'au (optionnel)"
 msgstr "Anzeigen bis (optional)"
 
-#: templates/configure/tab_messages.html.jinja:37
+#: templates/configure/tab_messages.html.jinja:31
+msgid "Programmer (ex : le 12 mars à 8 h, chaque année)"
+msgstr "Planen (z. B. am 12. März um 8 Uhr, jedes Jahr)"
+
+#: templates/configure/tab_messages.html.jinja:34
+msgid "À partir du"
+msgstr "Ab"
+
+#: templates/configure/tab_messages.html.jinja:40
+msgid "Une seule fois"
+msgstr "Einmal"
+
+#: templates/configure/tab_messages.html.jinja:41
+msgid "Chaque jour"
+msgstr "Jeden Tag"
+
+#: templates/configure/tab_messages.html.jinja:42
+msgid "Chaque semaine"
+msgstr "Jede Woche"
+
+#: templates/configure/tab_messages.html.jinja:43
+msgid "Chaque mois"
+msgstr "Jeden Monat"
+
+#: templates/configure/tab_messages.html.jinja:44
+msgid "Chaque année"
+msgstr "Jedes Jahr"
+
+#: templates/configure/tab_messages.html.jinja:48
+msgid "Affiché pendant"
+msgstr "Angezeigt für"
+
+#: templates/configure/tab_messages.html.jinja:50
+msgid "1 heure"
+msgstr "1 Stunde"
+
+#: templates/configure/tab_messages.html.jinja:51
+msgid "3 heures"
+msgstr "3 Stunden"
+
+#: templates/configure/tab_messages.html.jinja:52
+msgid "12 heures"
+msgstr "12 Stunden"
+
+#: templates/configure/tab_messages.html.jinja:53
+msgid "1 jour"
+msgstr "1 Tag"
+
+#: templates/configure/tab_messages.html.jinja:54
+msgid "3 jours"
+msgstr "3 Tage"
+
+#: templates/configure/tab_messages.html.jinja:55
+msgid "1 semaine"
+msgstr "1 Woche"
+
+#: templates/configure/tab_messages.html.jinja:67
 msgid "Publier"
 msgstr "Veröffentlichen"
 
-#: templates/configure/tab_messages.html.jinja:42
+#: templates/configure/tab_messages.html.jinja:72
 msgid "Aperçu à l'écran"
 msgstr "Vorschau auf dem Bildschirm"
 
-#: templates/configure/tab_messages.html.jinja:45
+#: templates/configure/tab_messages.html.jinja:75
 msgid "Cliquez sur « Aperçu » pour voir le rendu."
 msgstr "Klicken Sie auf „Vorschau“, um das Ergebnis zu sehen."
 
-#: templates/configure/tab_messages.html.jinja:53
+#: templates/configure/tab_messages.html.jinja:83
 msgid "Messages publiés"
 msgstr "Veröffentlichte Nachrichten"
 
-#: templates/configure/tab_messages.html.jinja:56
+#: templates/configure/tab_messages.html.jinja:86
 msgid "Aucun message publié."
 msgstr "Keine veröffentlichten Nachrichten."
 
-#: templates/configure/tab_messages.html.jinja:98 web/routes_guests.py:335
+#: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:335
 msgid "Invité"
 msgstr "Gast"
 
-#: templates/configure/tab_messages.html.jinja:99
+#: templates/configure/tab_messages.html.jinja:130
 msgid "Masqué"
 msgstr "Ausgeblendet"
 
-#: templates/configure/tab_messages.html.jinja:107
+#: templates/configure/tab_messages.html.jinja:132
+msgid "chaque jour"
+msgstr "jeden Tag"
+
+#: templates/configure/tab_messages.html.jinja:132
+msgid "chaque semaine"
+msgstr "jede Woche"
+
+#: templates/configure/tab_messages.html.jinja:132
+msgid "chaque mois"
+msgstr "jeden Monat"
+
+#: templates/configure/tab_messages.html.jinja:144
 msgid "Jusqu'au :"
 msgstr "Bis:"
 
-#: templates/configure/tab_messages.html.jinja:112
+#: templates/configure/tab_messages.html.jinja:149
 msgid "Laisser vide pour afficher sans limite"
 msgstr "Leer lassen, um ohne Enddatum anzuzeigen"
 
-#: templates/configure/tab_messages.html.jinja:117
+#: templates/configure/tab_messages.html.jinja:154
 msgid "Enregistrer la date de fin"
 msgstr "Enddatum speichern"
 
-#: templates/configure/tab_messages.html.jinja:132
+#: templates/configure/tab_messages.html.jinja:169
 msgid "Afficher de nouveau dans le diaporama"
 msgstr "Wieder in der Diashow anzeigen"
 
-#: templates/configure/tab_messages.html.jinja:132
+#: templates/configure/tab_messages.html.jinja:169
 msgid "Masquer du diaporama sans supprimer"
 msgstr "In der Diashow ausblenden, ohne zu löschen"
 
-#: templates/configure/tab_messages.html.jinja:143
+#: templates/configure/tab_messages.html.jinja:180
 msgid "Supprimer ce message"
 msgstr "Diese Nachricht löschen"
 
-#: templates/configure/tab_messages.html.jinja:145
+#: templates/configure/tab_messages.html.jinja:182
 msgid "Supprimer ce message ?"
 msgstr "Diese Nachricht löschen?"
 
-#: templates/configure/tab_messages.html.jinja:178 utils/quotes.py:19
+#: templates/configure/tab_messages.html.jinja:215 utils/quotes.py:19
 msgid "Citation du jour"
 msgstr "Zitat des Tages"
 
-#: templates/configure/tab_messages.html.jinja:179
+#: templates/configure/tab_messages.html.jinja:216
 msgid ""
 "Chaque jour, une citation ou un proverbe (dans la langue du cadre), ou un"
 " mot de la famille, apparaît dans le diaporama, environ une fois par "
@@ -4286,39 +4356,39 @@ msgstr ""
 "Rahmens) oder ein Familienspruch in der Diashow, etwa einmal pro "
 "Durchlauf."
 
-#: templates/configure/tab_messages.html.jinja:180
+#: templates/configure/tab_messages.html.jinja:217
 msgid "Afficher une citation du jour"
 msgstr "Zitat des Tages anzeigen"
 
-#: templates/configure/tab_messages.html.jinja:183
+#: templates/configure/tab_messages.html.jinja:220
 msgid "Citations :"
 msgstr "Zitate:"
 
-#: templates/configure/tab_messages.html.jinja:185
+#: templates/configure/tab_messages.html.jinja:222
 msgid "Célèbres et mots de la famille"
 msgstr "Berühmte Zitate und Familiensprüche"
 
-#: templates/configure/tab_messages.html.jinja:186
+#: templates/configure/tab_messages.html.jinja:223
 msgid "Citations et proverbes célèbres"
 msgstr "Berühmte Zitate und Sprichwörter"
 
-#: templates/configure/tab_messages.html.jinja:187
+#: templates/configure/tab_messages.html.jinja:224
 msgid "Seulement les mots de la famille"
 msgstr "Nur Familiensprüche"
 
-#: templates/configure/tab_messages.html.jinja:191
+#: templates/configure/tab_messages.html.jinja:228
 msgid "Présentation :"
 msgstr "Darstellung:"
 
-#: templates/configure/tab_messages.html.jinja:192
+#: templates/configure/tab_messages.html.jinja:229
 msgid "Une différente chaque jour"
 msgstr "Jeden Tag eine andere"
 
-#: templates/configure/tab_messages.html.jinja:195
+#: templates/configure/tab_messages.html.jinja:232
 msgid "Les mots de la famille"
 msgstr "Familiensprüche"
 
-#: templates/configure/tab_messages.html.jinja:196
+#: templates/configure/tab_messages.html.jinja:233
 msgid ""
 "Les phrases cultes de la maison, une par ligne. Ajoutez l'auteur après un"
 " tiret : « On n'est pas aux pièces ! — Papi »."
@@ -4326,31 +4396,31 @@ msgstr ""
 "Die Kultsprüche des Hauses, einer pro Zeile. Füge den Autor nach einem "
 "Gedankenstrich hinzu: „Wir sind doch nicht auf der Flucht! — Opa“."
 
-#: templates/configure/tab_messages.html.jinja:202
+#: templates/configure/tab_messages.html.jinja:239
 msgid "Aujourd'hui :"
 msgstr "Heute:"
 
-#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:34
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:34
 msgid "Carte postale"
 msgstr "Postkarte"
 
-#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:30
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:30
 msgid "Nuit"
 msgstr "Nacht"
 
-#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:48
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:48
 msgid "Pastel"
 msgstr "Pastell"
 
-#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:40
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:40
 msgid "Ardoise"
 msgstr "Tafel"
 
-#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:52
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:52
 msgid "Minimal"
 msgstr "Minimal"
 
-#: templates/configure/tab_messages.html.jinja:208 utils/message_renderer.py:44
+#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:44
 msgid "Lettre"
 msgstr "Brief"
 
@@ -6996,27 +7066,31 @@ msgstr "Senden fehlgeschlagen: %(error)s"
 msgid "Erreur de connexion : %(error)s"
 msgstr "Verbindungsfehler: %(error)s"
 
-#: web/routes_messages.py:57
+#: web/routes_messages.py:60
+msgid "Message programmé : il apparaîtra à l'heure prévue."
+msgstr "Nachricht geplant: Sie erscheint zur festgelegten Zeit."
+
+#: web/routes_messages.py:61
 msgid "Message publié : il apparaîtra dans le diaporama."
 msgstr "Nachricht veröffentlicht: Sie wird in der Diashow erscheinen."
 
-#: web/routes_messages.py:64
+#: web/routes_messages.py:68
 msgid "Message introuvable."
 msgstr "Nachricht nicht gefunden."
 
-#: web/routes_messages.py:66
+#: web/routes_messages.py:70
 msgid "Message supprimé."
 msgstr "Nachricht gelöscht."
 
-#: web/routes_messages.py:77
+#: web/routes_messages.py:81
 msgid "Date de fin enregistrée."
 msgstr "Enddatum gespeichert."
 
-#: web/routes_messages.py:89
+#: web/routes_messages.py:93
 msgid "Message masqué : il n'est plus affiché."
 msgstr "Nachricht ausgeblendet: Sie wird nicht mehr angezeigt."
 
-#: web/routes_messages.py:89
+#: web/routes_messages.py:93
 msgid "Message de nouveau affiché."
 msgstr "Nachricht wird wieder angezeigt."
 

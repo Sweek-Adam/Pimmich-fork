@@ -27,6 +27,36 @@
                                 <input type="date" id="message-expires">
                             </div>
                         </div>
+                        <details class="mt-3" id="message-schedule">
+                            <summary class="cursor-pointer font-semibold text-sm"><i class="far fa-clock mr-1"></i>{{ _("Programmer (ex : le 12 mars à 8 h, chaque année)") }}</summary>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                <div>
+                                    <label for="message-starts">{{ _("À partir du") }}</label>
+                                    <input type="datetime-local" id="message-starts">
+                                </div>
+                                <div>
+                                    <label for="message-repeat">{{ _("Répéter") }}</label>
+                                    <select id="message-repeat">
+                                        <option value="none">{{ _("Une seule fois") }}</option>
+                                        <option value="daily">{{ _("Chaque jour") }}</option>
+                                        <option value="weekly">{{ _("Chaque semaine") }}</option>
+                                        <option value="monthly">{{ _("Chaque mois") }}</option>
+                                        <option value="yearly">{{ _("Chaque année") }}</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="message-duration">{{ _("Affiché pendant") }}</label>
+                                    <select id="message-duration">
+                                        <option value="1">{{ _("1 heure") }}</option>
+                                        <option value="3">{{ _("3 heures") }}</option>
+                                        <option value="12">{{ _("12 heures") }}</option>
+                                        <option value="24" selected>{{ _("1 jour") }}</option>
+                                        <option value="72">{{ _("3 jours") }}</option>
+                                        <option value="168">{{ _("1 semaine") }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
 
                         <div class="mt-4 flex gap-2">
                             <button type="button" id="message-preview-btn"
@@ -63,6 +93,7 @@
                     const formData = () => ({
                         title: $("message-title").value, body: $("message-body").value, signature: $("message-signature").value,
                         style: $("message-style").value, expires: $("message-expires").value || null,
+                        starts: $("message-starts").value || null, repeat: $("message-repeat").value, duration_hours: Number($("message-duration").value),
                     });
 
                     async function showPreview() {
@@ -86,7 +117,7 @@
                             const card = document.createElement("div");
                             card.className = "border rounded-lg overflow-hidden bg-white shadow-sm" + (m.hidden ? " opacity-60" : "");
                             const img = document.createElement("img");
-                            img.src = `/static/${m.hidden ? 'messages_hidden' : 'prepared/messages'}/${m.id}.jpg?v=${encodeURIComponent(m.created)}`;
+                            img.src = `/static/${m.hidden || m.on_air === false ? 'messages_hidden' : 'prepared/messages'}/${m.id}.jpg?v=${encodeURIComponent(m.created)}`;
                             img.className = "w-full";
                             img.alt = m.title || m.body;
 
@@ -97,6 +128,12 @@
                             const badge = (text, cls) => { const b = document.createElement("span"); b.className = `px-2 py-0.5 rounded-full ${cls}`; b.textContent = text; return b; };
                             if (m.guest) meta.appendChild(badge({{ _("Invité")|tojson }}, "bg-blue-100 text-blue-800"));
                             if (m.hidden) meta.appendChild(badge({{ _("Masqué")|tojson }}, "bg-gray-200 text-gray-700"));
+                            if (m.schedule) {
+                                const REPEAT = {{ {"none": "", "daily": _("chaque jour"), "weekly": _("chaque semaine"), "monthly": _("chaque mois"), "yearly": _("chaque année")}|tojson }};
+                                const start = new Date(m.schedule.starts);
+                                const text = `⏰ ${start.toLocaleDateString(undefined, { day: "numeric", month: "short" })} ${start.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" })}${REPEAT[m.schedule.repeat] ? " · " + REPEAT[m.schedule.repeat] : ""}`;
+                                meta.appendChild(badge(text, "bg-yellow-100 text-yellow-800"));
+                            }
                             const when = document.createElement("span");
                             when.textContent = `${m.created}${m.author ? ' · ' + m.author : ''}`;
                             meta.appendChild(when);
@@ -163,7 +200,7 @@
                             const data = await resp.json();
                             status(data.message, data.success);
                             if (data.success) {
-                                ["message-title", "message-body", "message-signature", "message-expires"].forEach(id => $(id).value = "");
+                                ["message-title", "message-body", "message-signature", "message-expires", "message-starts"].forEach(id => $(id).value = "");
                                 loadMessages();
                             }
                         } finally {

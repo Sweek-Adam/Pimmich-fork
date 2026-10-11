@@ -19,7 +19,8 @@ def _refresh_slideshow():
 @app.route('/api/messages', methods=['GET'])
 @login_required
 def list_messages_api():
-    return jsonify({"success": True, "messages": messages_manager.list_messages(),
+    messages = [dict(m, on_air=messages_manager.on_air(m)) for m in messages_manager.list_messages()]
+    return jsonify({"success": True, "messages": messages,
                     "styles": {k: v["label"] for k, v in messages_manager.STYLES.items()}})
 
 
@@ -42,8 +43,9 @@ def preview_message_api():
 def create_message_api():
     data = request.get_json(silent=True) or {}
     try:
+        schedule = messages_manager.validate_schedule(data.get("starts"), data.get("repeat"), data.get("duration_hours"))
         message = messages_manager.create_message(data.get("title"), data.get("body"), data.get("signature"), data.get("style"),
-                                                  data.get("expires"), session.get("username"), *_screen_size())
+                                                  data.get("expires"), session.get("username"), *_screen_size(), schedule=schedule)
     except ValueError as e:
         return jsonify({"success": False, "message": str(e)}), 400
 
@@ -54,6 +56,8 @@ def create_message_api():
         save_config(config)
     logger.info(f"[Messages] Message {message['id']} publié par {message['author'] or '?'}")
     _refresh_slideshow()
+    if message.get("schedule") and not messages_manager.on_air(message):
+        return jsonify({"success": True, "message": _("Message programmé : il apparaîtra à l'heure prévue."), "item": message})
     return jsonify({"success": True, "message": _("Message publié : il apparaîtra dans le diaporama."), "item": message})
 
 
