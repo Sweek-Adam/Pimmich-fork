@@ -1,7 +1,7 @@
 """
 Génère les aperçus des formats de compositions (static/composition_previews/<format>.jpg)
 à partir d'images d'exemple dessinées par programme (aucune photo personnelle).
-Usage : venv/bin/python utils/make_composition_previews.py
+Usage : venv/bin/python utils/make_composition_previews.py [format ...]   (sans argument : tous les formats)
 """
 import random
 import sys
@@ -48,9 +48,11 @@ def main():
             sample_photo(i, portrait=i % 3 == 0).save(path, quality=90)
             paths.append(str(path))
         # « Photo unique » : une photo plein écran
-        compositions.cover(sample_photo(1), 480, 270).save(OUT / "unique.jpg", quality=82, optimize=True)
+        keys = sys.argv[1:] or list(compositions.FORMATS)
+        if not sys.argv[1:]:
+            compositions.cover(sample_photo(1), 480, 270).save(OUT / "unique.jpg", quality=82, optimize=True)
         message = {"title": "Coucou !", "body": "Bisous de Lyon", "signature": "Léa", "style": "pastel"}
-        for key in compositions.FORMATS:
+        for key in keys:
             image = None
             for seed in range(10):
                 image = compositions.compose(key, paths, [message], 1920, 1080, random.Random(seed))

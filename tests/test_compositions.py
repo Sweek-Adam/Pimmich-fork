@@ -33,7 +33,10 @@ def test_every_format_renders_at_screen_size(photos, style, with_message):
         image = comp.compose(style, photos, [MESSAGE] if with_message else [], W, H, random.Random(seed))
         if image is not None:
             break
-    assert image is not None and image.size == (W, H)
+    if style in comp.MESSAGE_FORMATS and not with_message:
+        assert image is None  # construite autour d'un message : impossible sans
+    else:
+        assert image is not None and image.size == (W, H)
 
 
 def test_not_enough_photos_returns_none(photos):

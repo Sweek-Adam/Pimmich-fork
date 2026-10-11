@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 20:35+0200\n"
+"POT-Creation-Date: 2026-10-11 21:07+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -766,7 +766,7 @@ msgstr ""
 
 #: frontend/src/components/HomeAssistantCard.vue:31
 #: frontend/src/components/PresenceCard.vue:52
-#: frontend/src/views/LayoutsView.vue:115 frontend/src/views/NetworkView.vue:87
+#: frontend/src/views/LayoutsView.vue:117 frontend/src/views/NetworkView.vue:87
 #: templates/configure/tab_affichage.html.jinja:295
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Activer"
@@ -2175,7 +2175,7 @@ msgid "Administrateur"
 msgstr "管理者"
 
 #: frontend/src/views/AccountsView.vue:75
-#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/LayoutsView.vue:119
 #: frontend/src/views/PlaylistsView.vue:167
 #: frontend/src/views/TelegramView.vue:111
 #: templates/configure/tab_comptes.html.jinja:95
@@ -3569,24 +3569,28 @@ msgstr "まだ送信はありません。"
 msgid "Retirer du cadre"
 msgstr "フレームから削除"
 
-#: frontend/src/views/LayoutsView.vue:25 frontend/src/views/LayoutsView.vue:131
+#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:133
 #: templates/configure/tab_accueil.html.jinja:89
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Formats"
 msgstr "レイアウト"
 
-#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:131
+#: frontend/src/views/LayoutsView.vue:27 frontend/src/views/LayoutsView.vue:133
 #: templates/configure/tab_accueil.html.jinja:90
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Thèmes"
 msgstr "テーマ"
 
-#: frontend/src/views/LayoutsView.vue:30
+#: frontend/src/views/LayoutsView.vue:28 frontend/src/views/LayoutsView.vue:134
+msgid "Avec un message"
+msgstr "メッセージ付き"
+
+#: frontend/src/views/LayoutsView.vue:32
 #: templates/configure/tab_dispositions.html.jinja:85
 msgid "Une composition toutes les (photos) :"
 msgstr "コラージュの頻度（写真○枚ごと）："
 
-#: frontend/src/views/LayoutsView.vue:31
+#: frontend/src/views/LayoutsView.vue:33
 #: templates/configure/tab_dispositions.html.jinja:88
 msgid ""
 "0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
@@ -3596,54 +3600,54 @@ msgstr ""
 "0：コラージュを続けて表示し、間に単独の写真を挟みません。コラージュは写真 1 枚につき 2.5 "
 "秒以上表示されます（必要に応じて表示時間を延長します）。"
 
-#: frontend/src/views/LayoutsView.vue:32
+#: frontend/src/views/LayoutsView.vue:34
 #: templates/configure/tab_dispositions.html.jinja:91
 msgid "Photos entières (sans recadrage)"
 msgstr "写真全体を表示（トリミングなし）"
 
-#: frontend/src/views/LayoutsView.vue:33
+#: frontend/src/views/LayoutsView.vue:35
 #: templates/configure/tab_dispositions.html.jinja:95
 msgid "Recadrage intelligent : garder les visages entiers"
 msgstr "スマートクロップ：顔を切らずに残す"
 
-#: frontend/src/views/LayoutsView.vue:34
+#: frontend/src/views/LayoutsView.vue:36
 #: templates/configure/tab_dispositions.html.jinja:96
 msgid ""
 "Quand une photo doit être coupée (cases des compositions, photos très "
 "larges), le cadre garde les visages au lieu du centre de l'image."
 msgstr "写真を切り取る必要があるとき（コラージュの枠、横長の写真）、画像の中央ではなく顔を残します。"
 
-#: frontend/src/views/LayoutsView.vue:35
+#: frontend/src/views/LayoutsView.vue:37
 #: templates/configure/tab_dispositions.html.jinja:100
 msgid "Inclure les messages dans les compositions"
 msgstr "コラージュにメッセージを含める"
 
-#: frontend/src/views/LayoutsView.vue:36
+#: frontend/src/views/LayoutsView.vue:38
 #: templates/configure/tab_dispositions.html.jinja:104
 msgid ""
 "Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
 "moment-là)"
 msgstr "季節のテーマは期間中のみ表示（その期間はより頻繁に表示）"
 
-#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:363
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:363
 msgid "Gardez au moins une disposition."
 msgstr "レイアウトを少なくとも1つ残してください。"
 
-#: frontend/src/views/LayoutsView.vue:71
+#: frontend/src/views/LayoutsView.vue:73
 msgid "Donnez un nom à cette configuration."
 msgstr "この設定に名前を付けてください。"
 
-#: frontend/src/views/LayoutsView.vue:82
+#: frontend/src/views/LayoutsView.vue:84
 #: templates/configure/tab_dispositions.html.jinja:31
 msgid "Supprimer cette configuration ?"
 msgstr "この設定を削除しますか？"
 
-#: frontend/src/views/LayoutsView.vue:97
+#: frontend/src/views/LayoutsView.vue:99
 #: templates/configure/tab_dispositions.html.jinja:4
 msgid "Disposition du moment"
 msgstr "現在のレイアウト"
 
-#: frontend/src/views/LayoutsView.vue:98
+#: frontend/src/views/LayoutsView.vue:100
 #: templates/configure/tab_dispositions.html.jinja:6
 msgid ""
 "Choisissez une disposition à afficher une seule fois tout de suite, ou à "
@@ -3651,59 +3655,65 @@ msgid ""
 "dispositions cochées ci-dessous."
 msgstr "今すぐ1回だけ表示するか、次に変更するまで使用するレイアウトを選んでください。「自分の設定どおり」では、下でチェックしたレイアウトを使用します。"
 
-#: frontend/src/views/LayoutsView.vue:109
+#: frontend/src/views/LayoutsView.vue:111
 #: templates/configure/tab_dispositions.html.jinja:16
 msgid "Mes configurations"
 msgstr "マイ設定"
 
-#: frontend/src/views/LayoutsView.vue:110
+#: frontend/src/views/LayoutsView.vue:112
 #: templates/configure/tab_dispositions.html.jinja:18
 msgid ""
 "Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
 " l'autre d'un clic."
 msgstr "レイアウトの組み合わせに名前を付けて保存し、ワンクリックで切り替えられます。"
 
-#: frontend/src/views/LayoutsView.vue:113
+#: frontend/src/views/LayoutsView.vue:115
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "disposition(s)"
 msgstr "レイアウト"
 
-#: frontend/src/views/LayoutsView.vue:114
+#: frontend/src/views/LayoutsView.vue:116
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Active"
 msgstr "有効"
 
-#: frontend/src/views/LayoutsView.vue:116
+#: frontend/src/views/LayoutsView.vue:118
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
 msgstr "選択内容で置き換える"
 
-#: frontend/src/views/LayoutsView.vue:120
+#: frontend/src/views/LayoutsView.vue:122
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "Aucune configuration enregistrée."
 msgstr "保存された設定はありません。"
 
-#: frontend/src/views/LayoutsView.vue:122
+#: frontend/src/views/LayoutsView.vue:124
 #: templates/configure/tab_dispositions.html.jinja:21
 msgid "Nom (ex : Soirée, Calme, Noël en famille)"
 msgstr "名前（例：パーティー、落ち着き、家族のクリスマス）"
 
-#: frontend/src/views/LayoutsView.vue:123
+#: frontend/src/views/LayoutsView.vue:125
 #: templates/configure/tab_dispositions.html.jinja:22
 msgid "Enregistrer la sélection ci-dessous"
 msgstr "下の選択を保存"
 
-#: frontend/src/views/LayoutsView.vue:129
+#: frontend/src/views/LayoutsView.vue:131
 #: templates/configure/tab_dispositions.html.jinja:81
 msgid "Dispositions utilisées"
 msgstr "使用するレイアウト"
 
-#: frontend/src/views/LayoutsView.vue:138
+#: frontend/src/views/LayoutsView.vue:134
+msgid ""
+"Construites autour d'un message ou d'un dessin d'invité : elles "
+"n'apparaissent que lorsqu'un message est à afficher."
+msgstr "メッセージやゲストの絵を中心にしたレイアウトです。表示するメッセージがあるときだけ使われます。"
+
+#: frontend/src/views/LayoutsView.vue:142
 #: templates/configure/tab_dispositions.html.jinja:117
 msgid "Thème de saison"
 msgstr "季節のテーマ"
 
-#: frontend/src/views/LayoutsView.vue:139
+#: frontend/src/views/LayoutsView.vue:143
 #: templates/configure/tab_accueil.html.jinja:104
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid "Affiche les messages"
@@ -4481,7 +4491,8 @@ msgstr "例：お誕生日おめでとう！"
 
 #: frontend/src/views/MessagesView.vue:103
 #: templates/configure/tab_messages.html.jinja:12
-#: templates/upload.html.jinja:44 web/routes_messages.py:79
+#: templates/upload.html.jinja:44 utils/message_compositions.py:387
+#: web/routes_messages.py:79
 msgid "Message"
 msgstr "メッセージ"
 
@@ -8742,6 +8753,151 @@ msgstr "設定が見つかりません。"
 msgid "Ce nom existe déjà."
 msgstr "この名前はすでに使われています。"
 
+#: utils/message_compositions.py:194
+msgid "La Gazette de la famille"
+msgstr "家族新聞"
+
+#: utils/message_compositions.py:229
+msgid "TÉLÉGRAMME"
+msgstr "電報"
+
+#: utils/message_compositions.py:806
+msgid "Lettre sur le bureau"
+msgstr "机の上の手紙"
+
+#: utils/message_compositions.py:807
+msgid "Ardoise de cuisine"
+msgstr "キッチンの黒板"
+
+#: utils/message_compositions.py:808
+msgid "Porte du frigo"
+msgstr "冷蔵庫のドア"
+
+#: utils/message_compositions.py:809
+msgid "Dos de carte postale"
+msgstr "絵はがきの裏"
+
+#: utils/message_compositions.py:810
+msgid "Lettre dans l'enveloppe"
+msgstr "封筒の手紙"
+
+#: utils/message_compositions.py:811
+msgid "À la une du journal"
+msgstr "新聞の一面"
+
+#: utils/message_compositions.py:812
+msgid "Télégramme"
+msgstr "電報"
+
+#: utils/message_compositions.py:813
+msgid "Néon sur briques"
+msgstr "レンガの上のネオン"
+
+#: utils/message_compositions.py:814 utils/themed_compositions_extra.py:455
+#: utils/themed_compositions_extra.py:630
+msgid "Carnet de voyage"
+msgstr "旅の手帳"
+
+#: utils/message_compositions.py:815
+msgid "Message encadré d'or"
+msgstr "金の額縁のメッセージ"
+
+#: utils/message_compositions.py:816
+msgid "Bulle de bande dessinée"
+msgstr "マンガの吹き出し"
+
+#: utils/message_compositions.py:817
+msgid "Fil à linge"
+msgstr "物干しロープ"
+
+#: utils/message_compositions.py:818
+msgid "Cœurs"
+msgstr "ハート"
+
+#: utils/message_compositions.py:819
+msgid "Mur de post-it"
+msgstr "付箋の壁"
+
+#: utils/message_compositions.py:820
+msgid "Conversation sur téléphone"
+msgstr "スマホの会話"
+
+#: utils/message_compositions.py:821
+msgid "Carte pliée"
+msgstr "二つ折りカード"
+
+#: utils/message_compositions.py:822
+msgid "Polaroïd géant"
+msgstr "特大ポラロイド"
+
+#: utils/message_compositions.py:823
+msgid "Livre ouvert"
+msgstr "開いた本"
+
+#: utils/message_compositions.py:824
+msgid "Affiche de cinéma"
+msgstr "映画のポスター"
+
+#: utils/message_compositions.py:825
+msgid "Par avion"
+msgstr "エアメール"
+
+#: utils/message_compositions.py:826
+msgid "Épuré"
+msgstr "シンプル"
+
+#: utils/message_compositions.py:827
+msgid "Triptyque avec message"
+msgstr "メッセージ付き三連"
+
+#: utils/message_compositions.py:828
+msgid "Nuit étoilée"
+msgstr "星空"
+
+#: utils/message_compositions.py:829
+msgid "Aquarelle"
+msgstr "水彩"
+
+#: utils/message_compositions.py:830
+msgid "Jeu de cartes"
+msgstr "トランプ"
+
+#: utils/message_compositions.py:831
+msgid "Musée"
+msgstr "美術館"
+
+#: utils/message_compositions.py:832
+msgid "Stories"
+msgstr "ストーリーズ"
+
+#: utils/message_compositions.py:833 utils/message_renderer.py:46
+msgid "Machine à écrire"
+msgstr "タイプライター"
+
+#: utils/message_compositions.py:834
+msgid "Ruban"
+msgstr "リボン"
+
+#: utils/message_compositions.py:835
+msgid "Billets souvenirs"
+msgstr "記念チケット"
+
+#: utils/message_compositions.py:836
+msgid "Photo dédicacée"
+msgstr "サイン入り写真"
+
+#: utils/message_compositions.py:837
+msgid "Diagonale"
+msgstr "斜め分割"
+
+#: utils/message_compositions.py:838
+msgid "Papier quadrillé"
+msgstr "方眼紙"
+
+#: utils/message_compositions.py:839
+msgid "Buée sur la fenêtre"
+msgstr "曇った窓"
+
 #: utils/message_renderer.py:36
 msgid "Festif"
 msgstr "フェスティブ"
@@ -8749,10 +8905,6 @@ msgstr "フェスティブ"
 #: utils/message_renderer.py:38
 msgid "Post-it"
 msgstr "付箋"
-
-#: utils/message_renderer.py:46
-msgid "Machine à écrire"
-msgstr "タイプライター"
 
 #: utils/message_renderer.py:50
 msgid "Bulle de BD"
@@ -8904,11 +9056,6 @@ msgstr "上映中"
 #: utils/themed_compositions_extra.py:414
 msgid "WOUAH !"
 msgstr "ワオ！"
-
-#: utils/themed_compositions_extra.py:455
-#: utils/themed_compositions_extra.py:630
-msgid "Carnet de voyage"
-msgstr "旅の手帳"
 
 #: utils/themed_compositions_extra.py:480
 msgid "Souvenir"

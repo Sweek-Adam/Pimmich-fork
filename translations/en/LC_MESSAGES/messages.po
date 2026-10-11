@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 20:35+0200\n"
+"POT-Creation-Date: 2026-10-11 21:07+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -773,7 +773,7 @@ msgstr ""
 
 #: frontend/src/components/HomeAssistantCard.vue:31
 #: frontend/src/components/PresenceCard.vue:52
-#: frontend/src/views/LayoutsView.vue:115 frontend/src/views/NetworkView.vue:87
+#: frontend/src/views/LayoutsView.vue:117 frontend/src/views/NetworkView.vue:87
 #: templates/configure/tab_affichage.html.jinja:295
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Activer"
@@ -2218,7 +2218,7 @@ msgid "Administrateur"
 msgstr "Administrator"
 
 #: frontend/src/views/AccountsView.vue:75
-#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/LayoutsView.vue:119
 #: frontend/src/views/PlaylistsView.vue:167
 #: frontend/src/views/TelegramView.vue:111
 #: templates/configure/tab_comptes.html.jinja:95
@@ -3658,24 +3658,28 @@ msgstr "No uploads yet."
 msgid "Retirer du cadre"
 msgstr "Remove from the frame"
 
-#: frontend/src/views/LayoutsView.vue:25 frontend/src/views/LayoutsView.vue:131
+#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:133
 #: templates/configure/tab_accueil.html.jinja:89
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Formats"
 msgstr "Layouts"
 
-#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:131
+#: frontend/src/views/LayoutsView.vue:27 frontend/src/views/LayoutsView.vue:133
 #: templates/configure/tab_accueil.html.jinja:90
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Thèmes"
 msgstr "Themes"
 
-#: frontend/src/views/LayoutsView.vue:30
+#: frontend/src/views/LayoutsView.vue:28 frontend/src/views/LayoutsView.vue:134
+msgid "Avec un message"
+msgstr "With a message"
+
+#: frontend/src/views/LayoutsView.vue:32
 #: templates/configure/tab_dispositions.html.jinja:85
 msgid "Une composition toutes les (photos) :"
 msgstr "One composition every (photos):"
 
-#: frontend/src/views/LayoutsView.vue:31
+#: frontend/src/views/LayoutsView.vue:33
 #: templates/configure/tab_dispositions.html.jinja:88
 msgid ""
 "0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
@@ -3686,17 +3690,17 @@ msgstr ""
 "composition stays on screen at least 2.5 seconds per photo (the slideshow"
 " duration is extended if needed)."
 
-#: frontend/src/views/LayoutsView.vue:32
+#: frontend/src/views/LayoutsView.vue:34
 #: templates/configure/tab_dispositions.html.jinja:91
 msgid "Photos entières (sans recadrage)"
 msgstr "Whole photos (no cropping)"
 
-#: frontend/src/views/LayoutsView.vue:33
+#: frontend/src/views/LayoutsView.vue:35
 #: templates/configure/tab_dispositions.html.jinja:95
 msgid "Recadrage intelligent : garder les visages entiers"
 msgstr "Smart crop: keep faces whole"
 
-#: frontend/src/views/LayoutsView.vue:34
+#: frontend/src/views/LayoutsView.vue:36
 #: templates/configure/tab_dispositions.html.jinja:96
 msgid ""
 "Quand une photo doit être coupée (cases des compositions, photos très "
@@ -3705,37 +3709,37 @@ msgstr ""
 "When a photo has to be cropped (collage cells, very wide photos), the "
 "frame keeps the faces instead of the centre of the image."
 
-#: frontend/src/views/LayoutsView.vue:35
+#: frontend/src/views/LayoutsView.vue:37
 #: templates/configure/tab_dispositions.html.jinja:100
 msgid "Inclure les messages dans les compositions"
 msgstr "Include messages in compositions"
 
-#: frontend/src/views/LayoutsView.vue:36
+#: frontend/src/views/LayoutsView.vue:38
 #: templates/configure/tab_dispositions.html.jinja:104
 msgid ""
 "Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
 "moment-là)"
 msgstr "Seasonal themes only during their period (and more frequent at that time)"
 
-#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:363
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:363
 msgid "Gardez au moins une disposition."
 msgstr "Keep at least one layout."
 
-#: frontend/src/views/LayoutsView.vue:71
+#: frontend/src/views/LayoutsView.vue:73
 msgid "Donnez un nom à cette configuration."
 msgstr "Give this configuration a name."
 
-#: frontend/src/views/LayoutsView.vue:82
+#: frontend/src/views/LayoutsView.vue:84
 #: templates/configure/tab_dispositions.html.jinja:31
 msgid "Supprimer cette configuration ?"
 msgstr "Delete this setup?"
 
-#: frontend/src/views/LayoutsView.vue:97
+#: frontend/src/views/LayoutsView.vue:99
 #: templates/configure/tab_dispositions.html.jinja:4
 msgid "Disposition du moment"
 msgstr "Current layout"
 
-#: frontend/src/views/LayoutsView.vue:98
+#: frontend/src/views/LayoutsView.vue:100
 #: templates/configure/tab_dispositions.html.jinja:6
 msgid ""
 "Choisissez une disposition à afficher une seule fois tout de suite, ou à "
@@ -3745,12 +3749,12 @@ msgstr ""
 "Choose a layout to show once right now, or to use until further notice. "
 "“Per my settings” uses the layouts checked below."
 
-#: frontend/src/views/LayoutsView.vue:109
+#: frontend/src/views/LayoutsView.vue:111
 #: templates/configure/tab_dispositions.html.jinja:16
 msgid "Mes configurations"
 msgstr "My setups"
 
-#: frontend/src/views/LayoutsView.vue:110
+#: frontend/src/views/LayoutsView.vue:112
 #: templates/configure/tab_dispositions.html.jinja:18
 msgid ""
 "Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
@@ -3759,47 +3763,55 @@ msgstr ""
 "Save your layout choices under a name, then switch between them in one "
 "click."
 
-#: frontend/src/views/LayoutsView.vue:113
+#: frontend/src/views/LayoutsView.vue:115
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "disposition(s)"
 msgstr "layout(s)"
 
-#: frontend/src/views/LayoutsView.vue:114
+#: frontend/src/views/LayoutsView.vue:116
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Active"
 msgstr "Active"
 
-#: frontend/src/views/LayoutsView.vue:116
+#: frontend/src/views/LayoutsView.vue:118
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
 msgstr "Replace with selection"
 
-#: frontend/src/views/LayoutsView.vue:120
+#: frontend/src/views/LayoutsView.vue:122
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "Aucune configuration enregistrée."
 msgstr "No saved setup."
 
-#: frontend/src/views/LayoutsView.vue:122
+#: frontend/src/views/LayoutsView.vue:124
 #: templates/configure/tab_dispositions.html.jinja:21
 msgid "Nom (ex : Soirée, Calme, Noël en famille)"
 msgstr "Name (e.g. Party, Calm, Family Christmas)"
 
-#: frontend/src/views/LayoutsView.vue:123
+#: frontend/src/views/LayoutsView.vue:125
 #: templates/configure/tab_dispositions.html.jinja:22
 msgid "Enregistrer la sélection ci-dessous"
 msgstr "Save the selection below"
 
-#: frontend/src/views/LayoutsView.vue:129
+#: frontend/src/views/LayoutsView.vue:131
 #: templates/configure/tab_dispositions.html.jinja:81
 msgid "Dispositions utilisées"
 msgstr "Layouts in use"
 
-#: frontend/src/views/LayoutsView.vue:138
+#: frontend/src/views/LayoutsView.vue:134
+msgid ""
+"Construites autour d'un message ou d'un dessin d'invité : elles "
+"n'apparaissent que lorsqu'un message est à afficher."
+msgstr ""
+"Built around a message or a guest drawing: they only appear when there is"
+" a message to show."
+
+#: frontend/src/views/LayoutsView.vue:142
 #: templates/configure/tab_dispositions.html.jinja:117
 msgid "Thème de saison"
 msgstr "Seasonal theme"
 
-#: frontend/src/views/LayoutsView.vue:139
+#: frontend/src/views/LayoutsView.vue:143
 #: templates/configure/tab_accueil.html.jinja:104
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid "Affiche les messages"
@@ -4606,7 +4618,8 @@ msgstr "e.g. Happy birthday!"
 
 #: frontend/src/views/MessagesView.vue:103
 #: templates/configure/tab_messages.html.jinja:12
-#: templates/upload.html.jinja:44 web/routes_messages.py:79
+#: templates/upload.html.jinja:44 utils/message_compositions.py:387
+#: web/routes_messages.py:79
 msgid "Message"
 msgstr "Message"
 
@@ -9019,6 +9032,151 @@ msgstr "Setup not found."
 msgid "Ce nom existe déjà."
 msgstr "This name already exists."
 
+#: utils/message_compositions.py:194
+msgid "La Gazette de la famille"
+msgstr "The Family Gazette"
+
+#: utils/message_compositions.py:229
+msgid "TÉLÉGRAMME"
+msgstr "TELEGRAM"
+
+#: utils/message_compositions.py:806
+msgid "Lettre sur le bureau"
+msgstr "Letter on the desk"
+
+#: utils/message_compositions.py:807
+msgid "Ardoise de cuisine"
+msgstr "Kitchen chalkboard"
+
+#: utils/message_compositions.py:808
+msgid "Porte du frigo"
+msgstr "Fridge door"
+
+#: utils/message_compositions.py:809
+msgid "Dos de carte postale"
+msgstr "Back of a postcard"
+
+#: utils/message_compositions.py:810
+msgid "Lettre dans l'enveloppe"
+msgstr "Letter in the envelope"
+
+#: utils/message_compositions.py:811
+msgid "À la une du journal"
+msgstr "Front page news"
+
+#: utils/message_compositions.py:812
+msgid "Télégramme"
+msgstr "Telegram"
+
+#: utils/message_compositions.py:813
+msgid "Néon sur briques"
+msgstr "Neon on bricks"
+
+#: utils/message_compositions.py:814 utils/themed_compositions_extra.py:455
+#: utils/themed_compositions_extra.py:630
+msgid "Carnet de voyage"
+msgstr "Travel journal"
+
+#: utils/message_compositions.py:815
+msgid "Message encadré d'or"
+msgstr "Gold-framed message"
+
+#: utils/message_compositions.py:816
+msgid "Bulle de bande dessinée"
+msgstr "Comic speech bubble"
+
+#: utils/message_compositions.py:817
+msgid "Fil à linge"
+msgstr "Clothesline"
+
+#: utils/message_compositions.py:818
+msgid "Cœurs"
+msgstr "Hearts"
+
+#: utils/message_compositions.py:819
+msgid "Mur de post-it"
+msgstr "Sticky note wall"
+
+#: utils/message_compositions.py:820
+msgid "Conversation sur téléphone"
+msgstr "Phone conversation"
+
+#: utils/message_compositions.py:821
+msgid "Carte pliée"
+msgstr "Folded card"
+
+#: utils/message_compositions.py:822
+msgid "Polaroïd géant"
+msgstr "Giant Polaroid"
+
+#: utils/message_compositions.py:823
+msgid "Livre ouvert"
+msgstr "Open book"
+
+#: utils/message_compositions.py:824
+msgid "Affiche de cinéma"
+msgstr "Movie poster"
+
+#: utils/message_compositions.py:825
+msgid "Par avion"
+msgstr "Airmail"
+
+#: utils/message_compositions.py:826
+msgid "Épuré"
+msgstr "Minimal"
+
+#: utils/message_compositions.py:827
+msgid "Triptyque avec message"
+msgstr "Triptych with message"
+
+#: utils/message_compositions.py:828
+msgid "Nuit étoilée"
+msgstr "Starry night"
+
+#: utils/message_compositions.py:829
+msgid "Aquarelle"
+msgstr "Watercolour"
+
+#: utils/message_compositions.py:830
+msgid "Jeu de cartes"
+msgstr "Deck of cards"
+
+#: utils/message_compositions.py:831
+msgid "Musée"
+msgstr "Museum"
+
+#: utils/message_compositions.py:832
+msgid "Stories"
+msgstr "Stories"
+
+#: utils/message_compositions.py:833 utils/message_renderer.py:46
+msgid "Machine à écrire"
+msgstr "Typewriter"
+
+#: utils/message_compositions.py:834
+msgid "Ruban"
+msgstr "Ribbon"
+
+#: utils/message_compositions.py:835
+msgid "Billets souvenirs"
+msgstr "Souvenir tickets"
+
+#: utils/message_compositions.py:836
+msgid "Photo dédicacée"
+msgstr "Signed photo"
+
+#: utils/message_compositions.py:837
+msgid "Diagonale"
+msgstr "Diagonal"
+
+#: utils/message_compositions.py:838
+msgid "Papier quadrillé"
+msgstr "Graph paper"
+
+#: utils/message_compositions.py:839
+msgid "Buée sur la fenêtre"
+msgstr "Misty window"
+
 #: utils/message_renderer.py:36
 msgid "Festif"
 msgstr "Festive"
@@ -9026,10 +9184,6 @@ msgstr "Festive"
 #: utils/message_renderer.py:38
 msgid "Post-it"
 msgstr "Sticky note"
-
-#: utils/message_renderer.py:46
-msgid "Machine à écrire"
-msgstr "Typewriter"
 
 #: utils/message_renderer.py:50
 msgid "Bulle de BD"
@@ -9181,11 +9335,6 @@ msgstr "Now showing"
 #: utils/themed_compositions_extra.py:414
 msgid "WOUAH !"
 msgstr "WOW!"
-
-#: utils/themed_compositions_extra.py:455
-#: utils/themed_compositions_extra.py:630
-msgid "Carnet de voyage"
-msgstr "Travel journal"
 
 #: utils/themed_compositions_extra.py:480
 msgid "Souvenir"

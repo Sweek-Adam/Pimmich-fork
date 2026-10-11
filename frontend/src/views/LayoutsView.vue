@@ -6,7 +6,7 @@ import { t } from "../i18n";
 import { loadSettings, loaded, values, type Field } from "../settings";
 import { notify, run } from "../toast";
 
-interface Format { key: string; label: string; theme: boolean; seasonal: boolean; messages: boolean; preview: string }
+interface Format { key: string; label: string; theme: boolean; seasonal: boolean; messages: boolean; message_only: boolean; preview: string }
 interface Choice { value: string; label: string; group: string | null }
 interface Preset { id: string; name: string; active: boolean; count: number }
 
@@ -18,12 +18,14 @@ const presets = ref<Preset[]>([]);
 const presetName = ref("");
 let timer: number | undefined;
 
-const basic = computed(() => formats.value.filter((f) => !f.theme));
+const basic = computed(() => formats.value.filter((f) => !f.theme && !f.message_only));
+const withMessage = computed(() => formats.value.filter((f) => f.message_only));
 const themes = computed(() => formats.value.filter((f) => f.theme));
 const choiceGroups = computed(() => [
   { label: "", items: choices.value.filter((c) => !c.group) },
   { label: t("Formats"), items: choices.value.filter((c) => c.group === "format") },
   { label: t("Thèmes"), items: choices.value.filter((c) => c.group === "theme") },
+  { label: t("Avec un message"), items: choices.value.filter((c) => c.group === "message") },
 ]);
 
 const fields: Field[] = [
@@ -128,8 +130,10 @@ onMounted(() => {
   <section class="card">
     <div class="card-head"><h2><i class="fas fa-th-large"></i>{{ t("Dispositions utilisées") }}</h2></div>
     <div v-if="loaded" class="options"><SettingField v-for="field in fields" :key="field.key" :field="field" /></div>
-    <template v-for="group in [{ title: t('Formats'), items: basic }, { title: t('Thèmes'), items: themes }]" :key="group.title">
+    <template v-for="group in [{ title: t('Formats'), items: basic }, { title: t('Thèmes'), items: themes },
+                               { title: t('Avec un message'), items: withMessage, hint: t('Construites autour d\'un message ou d\'un dessin d\'invité : elles n\'apparaissent que lorsqu\'un message est à afficher.') }]" :key="group.title">
       <h3 class="group-title">{{ group.title }}</h3>
+      <p v-if="group.hint" class="small muted">{{ group.hint }}</p>
       <div class="formats">
         <button v-for="f in group.items" :key="f.key" type="button" class="format" :class="{ on: enabled.has(f.key) }" @click="toggle(f.key)">
           <img :src="f.preview" :alt="f.label" loading="lazy">

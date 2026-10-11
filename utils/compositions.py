@@ -456,7 +456,13 @@ def compose(style, photo_paths, messages, width, height, rng=None, include_messa
     """
     rng = rng or random.Random()
     label, min_n, max_n, accepts_message, render = FORMATS[style]
-    message = rng.choice(messages) if (accepts_message and include_message and messages and rng.random() < 0.6) else None
+    if style in MESSAGE_FORMATS:  # disposition construite autour d'un message : impossible sans
+        usable = [m for m in messages or [] if m.get("kind") != "voice"]
+        if not (include_message and usable):
+            return None
+        message = rng.choice(usable)
+    else:
+        message = rng.choice(messages) if (accepts_message and include_message and messages and rng.random() < 0.6) else None
     takes_slot = message is not None and style in LIMITS  # le message occupe une case de la mise en page
     if style == "photomaton":
         wanted = 12 if len(photo_paths) >= 12 and width > height else 8
@@ -541,3 +547,6 @@ FORMATS.update(_THEMES)
 FORMATS.update(_THEMES_EXTRA)
 FORMATS.update(_THEMES_FAMILY)
 THEME_KEYS = list(_THEMES) + list(_THEMES_EXTRA) + list(_THEMES_FAMILY)
+from utils.message_compositions import FORMATS as _MESSAGE_FORMATS  # noqa: E402
+FORMATS.update(_MESSAGE_FORMATS)
+MESSAGE_FORMATS = set(_MESSAGE_FORMATS)  # construites autour d'un message : seulement quand un message est à afficher

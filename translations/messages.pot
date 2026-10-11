@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 20:35+0200\n"
+"POT-Creation-Date: 2026-10-11 21:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -761,7 +761,7 @@ msgstr ""
 
 #: frontend/src/components/HomeAssistantCard.vue:31
 #: frontend/src/components/PresenceCard.vue:52
-#: frontend/src/views/LayoutsView.vue:115 frontend/src/views/NetworkView.vue:87
+#: frontend/src/views/LayoutsView.vue:117 frontend/src/views/NetworkView.vue:87
 #: templates/configure/tab_affichage.html.jinja:295
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Activer"
@@ -2155,7 +2155,7 @@ msgid "Administrateur"
 msgstr ""
 
 #: frontend/src/views/AccountsView.vue:75
-#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/LayoutsView.vue:119
 #: frontend/src/views/PlaylistsView.vue:167
 #: frontend/src/views/TelegramView.vue:111
 #: templates/configure/tab_comptes.html.jinja:95
@@ -3531,24 +3531,28 @@ msgstr ""
 msgid "Retirer du cadre"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:25 frontend/src/views/LayoutsView.vue:131
+#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:133
 #: templates/configure/tab_accueil.html.jinja:89
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Formats"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:131
+#: frontend/src/views/LayoutsView.vue:27 frontend/src/views/LayoutsView.vue:133
 #: templates/configure/tab_accueil.html.jinja:90
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Thèmes"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:30
+#: frontend/src/views/LayoutsView.vue:28 frontend/src/views/LayoutsView.vue:134
+msgid "Avec un message"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:32
 #: templates/configure/tab_dispositions.html.jinja:85
 msgid "Une composition toutes les (photos) :"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:31
+#: frontend/src/views/LayoutsView.vue:33
 #: templates/configure/tab_dispositions.html.jinja:88
 msgid ""
 "0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
@@ -3556,54 +3560,54 @@ msgid ""
 "diaporama est allongée si besoin)."
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:32
+#: frontend/src/views/LayoutsView.vue:34
 #: templates/configure/tab_dispositions.html.jinja:91
 msgid "Photos entières (sans recadrage)"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:33
+#: frontend/src/views/LayoutsView.vue:35
 #: templates/configure/tab_dispositions.html.jinja:95
 msgid "Recadrage intelligent : garder les visages entiers"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:34
+#: frontend/src/views/LayoutsView.vue:36
 #: templates/configure/tab_dispositions.html.jinja:96
 msgid ""
 "Quand une photo doit être coupée (cases des compositions, photos très "
 "larges), le cadre garde les visages au lieu du centre de l'image."
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:35
+#: frontend/src/views/LayoutsView.vue:37
 #: templates/configure/tab_dispositions.html.jinja:100
 msgid "Inclure les messages dans les compositions"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:36
+#: frontend/src/views/LayoutsView.vue:38
 #: templates/configure/tab_dispositions.html.jinja:104
 msgid ""
 "Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
 "moment-là)"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:363
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:363
 msgid "Gardez au moins une disposition."
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:71
+#: frontend/src/views/LayoutsView.vue:73
 msgid "Donnez un nom à cette configuration."
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:82
+#: frontend/src/views/LayoutsView.vue:84
 #: templates/configure/tab_dispositions.html.jinja:31
 msgid "Supprimer cette configuration ?"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:97
+#: frontend/src/views/LayoutsView.vue:99
 #: templates/configure/tab_dispositions.html.jinja:4
 msgid "Disposition du moment"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:98
+#: frontend/src/views/LayoutsView.vue:100
 #: templates/configure/tab_dispositions.html.jinja:6
 msgid ""
 "Choisissez une disposition à afficher une seule fois tout de suite, ou à "
@@ -3611,59 +3615,65 @@ msgid ""
 "dispositions cochées ci-dessous."
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:109
+#: frontend/src/views/LayoutsView.vue:111
 #: templates/configure/tab_dispositions.html.jinja:16
 msgid "Mes configurations"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:110
+#: frontend/src/views/LayoutsView.vue:112
 #: templates/configure/tab_dispositions.html.jinja:18
 msgid ""
 "Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
 " l'autre d'un clic."
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:113
+#: frontend/src/views/LayoutsView.vue:115
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "disposition(s)"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:114
+#: frontend/src/views/LayoutsView.vue:116
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Active"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:116
+#: frontend/src/views/LayoutsView.vue:118
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:120
+#: frontend/src/views/LayoutsView.vue:122
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "Aucune configuration enregistrée."
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:122
+#: frontend/src/views/LayoutsView.vue:124
 #: templates/configure/tab_dispositions.html.jinja:21
 msgid "Nom (ex : Soirée, Calme, Noël en famille)"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:123
+#: frontend/src/views/LayoutsView.vue:125
 #: templates/configure/tab_dispositions.html.jinja:22
 msgid "Enregistrer la sélection ci-dessous"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:129
+#: frontend/src/views/LayoutsView.vue:131
 #: templates/configure/tab_dispositions.html.jinja:81
 msgid "Dispositions utilisées"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:138
+#: frontend/src/views/LayoutsView.vue:134
+msgid ""
+"Construites autour d'un message ou d'un dessin d'invité : elles "
+"n'apparaissent que lorsqu'un message est à afficher."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:142
 #: templates/configure/tab_dispositions.html.jinja:117
 msgid "Thème de saison"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:139
+#: frontend/src/views/LayoutsView.vue:143
 #: templates/configure/tab_accueil.html.jinja:104
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid "Affiche les messages"
@@ -4431,7 +4441,8 @@ msgstr ""
 
 #: frontend/src/views/MessagesView.vue:103
 #: templates/configure/tab_messages.html.jinja:12
-#: templates/upload.html.jinja:44 web/routes_messages.py:79
+#: templates/upload.html.jinja:44 utils/message_compositions.py:387
+#: web/routes_messages.py:79
 msgid "Message"
 msgstr ""
 
@@ -8572,16 +8583,157 @@ msgstr ""
 msgid "Ce nom existe déjà."
 msgstr ""
 
+#: utils/message_compositions.py:194
+msgid "La Gazette de la famille"
+msgstr ""
+
+#: utils/message_compositions.py:229
+msgid "TÉLÉGRAMME"
+msgstr ""
+
+#: utils/message_compositions.py:806
+msgid "Lettre sur le bureau"
+msgstr ""
+
+#: utils/message_compositions.py:807
+msgid "Ardoise de cuisine"
+msgstr ""
+
+#: utils/message_compositions.py:808
+msgid "Porte du frigo"
+msgstr ""
+
+#: utils/message_compositions.py:809
+msgid "Dos de carte postale"
+msgstr ""
+
+#: utils/message_compositions.py:810
+msgid "Lettre dans l'enveloppe"
+msgstr ""
+
+#: utils/message_compositions.py:811
+msgid "À la une du journal"
+msgstr ""
+
+#: utils/message_compositions.py:812
+msgid "Télégramme"
+msgstr ""
+
+#: utils/message_compositions.py:813
+msgid "Néon sur briques"
+msgstr ""
+
+#: utils/message_compositions.py:814 utils/themed_compositions_extra.py:455
+#: utils/themed_compositions_extra.py:630
+msgid "Carnet de voyage"
+msgstr ""
+
+#: utils/message_compositions.py:815
+msgid "Message encadré d'or"
+msgstr ""
+
+#: utils/message_compositions.py:816
+msgid "Bulle de bande dessinée"
+msgstr ""
+
+#: utils/message_compositions.py:817
+msgid "Fil à linge"
+msgstr ""
+
+#: utils/message_compositions.py:818
+msgid "Cœurs"
+msgstr ""
+
+#: utils/message_compositions.py:819
+msgid "Mur de post-it"
+msgstr ""
+
+#: utils/message_compositions.py:820
+msgid "Conversation sur téléphone"
+msgstr ""
+
+#: utils/message_compositions.py:821
+msgid "Carte pliée"
+msgstr ""
+
+#: utils/message_compositions.py:822
+msgid "Polaroïd géant"
+msgstr ""
+
+#: utils/message_compositions.py:823
+msgid "Livre ouvert"
+msgstr ""
+
+#: utils/message_compositions.py:824
+msgid "Affiche de cinéma"
+msgstr ""
+
+#: utils/message_compositions.py:825
+msgid "Par avion"
+msgstr ""
+
+#: utils/message_compositions.py:826
+msgid "Épuré"
+msgstr ""
+
+#: utils/message_compositions.py:827
+msgid "Triptyque avec message"
+msgstr ""
+
+#: utils/message_compositions.py:828
+msgid "Nuit étoilée"
+msgstr ""
+
+#: utils/message_compositions.py:829
+msgid "Aquarelle"
+msgstr ""
+
+#: utils/message_compositions.py:830
+msgid "Jeu de cartes"
+msgstr ""
+
+#: utils/message_compositions.py:831
+msgid "Musée"
+msgstr ""
+
+#: utils/message_compositions.py:832
+msgid "Stories"
+msgstr ""
+
+#: utils/message_compositions.py:833 utils/message_renderer.py:46
+msgid "Machine à écrire"
+msgstr ""
+
+#: utils/message_compositions.py:834
+msgid "Ruban"
+msgstr ""
+
+#: utils/message_compositions.py:835
+msgid "Billets souvenirs"
+msgstr ""
+
+#: utils/message_compositions.py:836
+msgid "Photo dédicacée"
+msgstr ""
+
+#: utils/message_compositions.py:837
+msgid "Diagonale"
+msgstr ""
+
+#: utils/message_compositions.py:838
+msgid "Papier quadrillé"
+msgstr ""
+
+#: utils/message_compositions.py:839
+msgid "Buée sur la fenêtre"
+msgstr ""
+
 #: utils/message_renderer.py:36
 msgid "Festif"
 msgstr ""
 
 #: utils/message_renderer.py:38
 msgid "Post-it"
-msgstr ""
-
-#: utils/message_renderer.py:46
-msgid "Machine à écrire"
 msgstr ""
 
 #: utils/message_renderer.py:50
@@ -8733,11 +8885,6 @@ msgstr ""
 
 #: utils/themed_compositions_extra.py:414
 msgid "WOUAH !"
-msgstr ""
-
-#: utils/themed_compositions_extra.py:455
-#: utils/themed_compositions_extra.py:630
-msgid "Carnet de voyage"
 msgstr ""
 
 #: utils/themed_compositions_extra.py:480

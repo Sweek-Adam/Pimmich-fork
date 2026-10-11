@@ -335,15 +335,15 @@ def gpio_button_api():
 @app.route('/api/compositions', methods=['GET'])
 @login_required
 def compositions_api():
-    from utils.compositions import FORMATS, SEASONAL, THEME_KEYS, enabled_formats
+    from utils.compositions import FORMATS, MESSAGE_FORMATS, SEASONAL, THEME_KEYS, enabled_formats
     from utils.layout_engine import choice_options
     config = load_config()
     translate = _  # libellés marqués N_() dans les modules de compositions
     formats = [{"key": "unique", "label": translate("Photo unique"), "theme": False, "seasonal": False, "messages": True,
-                "preview": url_for("static", filename="composition_previews/unique.jpg")}]
+                "message_only": False, "preview": url_for("static", filename="composition_previews/unique.jpg")}]
     for key, value in FORMATS.items():
         formats.append({"key": key, "label": translate(value[0]), "theme": key in THEME_KEYS, "seasonal": key in SEASONAL,
-                        "messages": bool(value[3]), "preview": url_for("static", filename=f"composition_previews/{key}.jpg")})
+                        "messages": bool(value[3]), "message_only": key in MESSAGE_FORMATS, "preview": url_for("static", filename=f"composition_previews/{key}.jpg")})
     enabled = enabled_formats(config) + (["unique"] if config.get("unique_enabled", True) else [])
     choices = [{"value": value, "label": translate(label), "group": group} for value, label, group in choice_options()]
     return jsonify({"success": True, "formats": formats, "enabled": enabled, "layout": config.get("layout_override", "auto"),

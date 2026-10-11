@@ -35,7 +35,8 @@ def choice_options():
     options = [(AUTO, N_("Selon les réglages"), None), (UNIQUE, N_("Photo unique"), None),
                (COMPOSITIONS, N_("Compositions uniquement (au hasard)"), None)]
     for key, (label, *_rest) in compositions.FORMATS.items():
-        options.append((key, label, "theme" if key in compositions.THEME_KEYS else "format"))
+        group = "message" if key in compositions.MESSAGE_FORMATS else ("theme" if key in compositions.THEME_KEYS else "format")
+        options.append((key, label, group))
     return options
 
 
@@ -155,7 +156,13 @@ def plan_for_slide(plan, path, counter, include_messages=True):
         formats = [f for f in plan.formats if accepts_messages(f)]
         if formats:
             return True, replace(plan, formats=formats)
-    return wants_composition(plan, counter), plan
+    return wants_composition(plan, counter), without_message_only(plan)
+
+
+def without_message_only(plan):
+    """Sans message à afficher : pas de disposition construite autour d'un message (sauf s'il n'y a que celles-là)."""
+    formats = [f for f in plan.formats if f not in compositions.MESSAGE_FORMATS]
+    return replace(plan, formats=formats) if formats and len(formats) != len(plan.formats) else plan
 
 
 def spread_messages(playlist, plan, include_messages=True):
@@ -276,6 +283,6 @@ def render_chunk(style, chunk, messages_by_id, width, height, include_messages=T
         keep = (len(photos) // 4) * 4
         used -= len(photos) - keep
         photos = photos[:keep]
-    if len(photos) < max(1, min_n - takes_slot):
+    if len(photos) < max(1, min_n - takes_slot) or (style in compositions.MESSAGE_FORMATS and not notes):
         return None, 0
     return render(photos, message, width, height, rng), max(1, used)
