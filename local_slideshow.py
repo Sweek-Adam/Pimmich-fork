@@ -3316,6 +3316,11 @@ def start_slideshow():
                         # Convertir le chemin absolu en chemin relatif au dossier 'static'
                         relative_path = path_to_write.relative_to(Path(BASE_DIR) / 'static')
                         f.write(str(relative_path))
+                    try:
+                        from utils import history
+                        history.displayed(Path(CURRENT_PHOTO_FILE).read_text().strip())  # en mémoire vive : pas d'écriture SD
+                    except Exception:
+                        pass
                 except Exception as e:
                     logger.info(f"Erreur écriture fichier photo actuelle : {e}")
 

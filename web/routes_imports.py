@@ -206,6 +206,8 @@ def import_smartphone():
             config = load_config()
             if source not in config.get("display_sources", []):
                 save_config(dict(config, display_sources=list(config.get("display_sources", [])) + [source]))
+            from web.routes_history import log
+            log("upload", _("%(count)s photo(s) envoyée(s)", count=len(uploaded_files)))
 
             yield stream_event({"type": "progress", "stage": "PREPARING", "percent": 80, "message": f"{len(uploaded_files)} photos reçues, préparation en cours..."})
 

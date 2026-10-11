@@ -120,6 +120,8 @@ def handle_upload():
         return redirect(url_for('upload_page'))
 
     if count:
+        from web.routes_history import log
+        log("guest", _("%(count)s photo(s) d'invité", count=count), who=guest_name or _("Invité"))
         from utils import notify
         config = load_config()
         base = notify.base_url(config)
@@ -378,6 +380,8 @@ def guest_message_publish():
         config = dict(config)
         config["display_sources"] = config.get("display_sources", []) + [messages_manager.SOURCE_NAME]
         save_config(config)
+    from web.routes_history import log
+    log("message", _("Message d'invité"), {"type": "delete_message", "data": message["id"]}, who=message.get("signature") or _("Invité"))
     logger.info(f"[Messages] Message invité {message['id']} publié ({message['author']}, jusqu'au {message['expires']})")
     from utils import notify
     text = " — ".join(t for t in (message.get("title"), message.get("body")) if t)[:160]
@@ -408,6 +412,8 @@ def guest_drawing_publish():
         config = dict(config)
         config["display_sources"] = config.get("display_sources", []) + [messages_manager.SOURCE_NAME]
         save_config(config)
+    from web.routes_history import log
+    log("drawing", _("Dessin d'invité"), {"type": "delete_message", "data": message["id"]}, who=message.get("signature") or _("Invité"))
     logger.info(f"[Messages] Dessin d'invité {message['id']} publié ({message['author']})")
     from utils import notify
     notify.send(config, "guest", _("Nouveau dessin d'invité"), _("%(name)s a fait un dessin pour le cadre.", name=name or _("Un invité")),
@@ -437,6 +443,8 @@ def guest_voice_publish():
     if messages_manager.SOURCE_NAME not in config.get("display_sources", []):
         config = dict(config, display_sources=config.get("display_sources", []) + [messages_manager.SOURCE_NAME])
         save_config(config)
+    from web.routes_history import log
+    log("voice", _("Message vocal d'invité"), {"type": "delete_message", "data": message["id"]}, who=name or _("Invité"))
     from utils import notify
     notify.send(config, "guest", _("Nouveau message vocal"), _("%(name)s a laissé un message vocal.", name=name or _("Un invité")),
                 key=f"guest_message:{message['id']}")

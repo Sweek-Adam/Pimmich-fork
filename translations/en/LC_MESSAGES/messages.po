@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:53+0200\n"
+"POT-Creation-Date: 2026-10-11 10:55+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -357,8 +357,8 @@ msgstr "The guestbook is still empty: be the first to write!"
 msgid "Dessin"
 msgstr "Drawing"
 
-#: templates/guestbook.html.jinja:26 web/routes_guests.py:384
-#: web/routes_guests.py:413 web/routes_guests.py:441
+#: templates/guestbook.html.jinja:26 web/routes_guests.py:388
+#: web/routes_guests.py:419 web/routes_guests.py:449
 msgid "Un invité"
 msgstr "A guest"
 
@@ -1302,7 +1302,7 @@ msgstr "No settings found."
 msgid "Enregistrement…"
 msgstr "Saving…"
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:283
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:287
 msgid "Enregistré"
 msgstr "Saved"
 
@@ -2076,6 +2076,23 @@ msgstr "1 year ago"
 #, python-format
 msgid "il y a %(num)s ans"
 msgstr "%(num)s years ago"
+
+#: templates/configure/tab_accueil.html.jinja:257
+msgid "Historique"
+msgstr "History"
+
+#: templates/configure/tab_accueil.html.jinja:261
+msgid "Affiché récemment"
+msgstr "Recently shown"
+
+#: templates/configure/tab_accueil.html.jinja:277
+#, python-brace-format
+msgid "Annuler : {action}"
+msgstr "Undo: {action}"
+
+#: templates/configure/tab_accueil.html.jinja:277
+msgid "Rien pour l'instant."
+msgstr "Nothing yet."
 
 #: templates/configure/tab_actions.html.jinja:4
 #: templates/configure/tab_comptes.html.jinja:60
@@ -4653,8 +4670,9 @@ msgstr "Published messages"
 msgid "Aucun message publié."
 msgstr "No published messages."
 
-#: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:373
-#: web/routes_guests.py:403 web/routes_guests.py:433
+#: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:124
+#: web/routes_guests.py:375 web/routes_guests.py:384 web/routes_guests.py:407
+#: web/routes_guests.py:416 web/routes_guests.py:439 web/routes_guests.py:447
 msgid "Invité"
 msgstr "Guest"
 
@@ -5161,7 +5179,7 @@ msgstr ""
 " frames group photos from the same composition: they move together."
 
 #: templates/configure/tab_queue.html.jinja:8 web/routes_frames.py:98
-#: web/routes_home.py:127
+#: web/routes_home.py:130
 msgid "Le diaporama n'est pas en cours."
 msgstr "The slideshow is not running."
 
@@ -5177,7 +5195,7 @@ msgstr "Composition (starts here, being prepared)"
 msgid "Afficher maintenant"
 msgstr "Show now"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:221
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:224
 msgid "Musique du diaporama"
 msgstr "Slideshow music"
 
@@ -7111,8 +7129,8 @@ msgstr "Style saved: existing captions are being redrawn in the background."
 msgid "Style enregistré : visible dès la photo suivante."
 msgstr "Style saved: visible from the next photo."
 
-#: web/routes_captions.py:112 web/routes_guests.py:484
-#: web/routes_imports.py:843 web/routes_imports.py:852 web/routes_photos.py:284
+#: web/routes_captions.py:112 web/routes_guests.py:492
+#: web/routes_imports.py:845 web/routes_imports.py:854 web/routes_photos.py:284
 msgid "Photo introuvable."
 msgstr "Photo not found."
 
@@ -7124,7 +7142,7 @@ msgstr "Style of this caption saved."
 msgid "Cette légende reprend le style général."
 msgstr "This caption now uses the general style."
 
-#: web/routes_config.py:68
+#: web/routes_config.py:70
 msgid ""
 "La valeur pour la limite de photos Immich est invalide. La valeur "
 "précédente est conservée."
@@ -7132,12 +7150,16 @@ msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
 
-#: web/routes_config.py:250
+#: web/routes_config.py:252
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:285
+#: web/routes_config.py:280
+msgid "Réglages modifiés"
+msgstr "Settings changed"
+
+#: web/routes_config.py:289
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -7156,12 +7178,12 @@ msgstr "%(count)s date(s) saved."
 msgid "Autre cadre"
 msgstr "Other frame"
 
-#: web/routes_frames.py:108 web/routes_frames.py:270 web/routes_guests.py:258
+#: web/routes_frames.py:108 web/routes_frames.py:270 web/routes_guests.py:260
 msgid "Action inconnue."
 msgstr "Unknown action."
 
 #: web/routes_frames.py:119 web/routes_frames.py:265 web/routes_guests.py:87
-#: web/routes_guests.py:92 web/routes_imports.py:651 web/routes_imports.py:689
+#: web/routes_guests.py:92 web/routes_imports.py:653 web/routes_imports.py:691
 msgid "Aucun fichier sélectionné."
 msgstr "No files selected."
 
@@ -7170,7 +7192,7 @@ msgstr "No files selected."
 msgid "%(count)s photo(s) reçue(s)."
 msgstr "%(count)s photo(s) received."
 
-#: web/routes_frames.py:155 web/routes_messages.py:61
+#: web/routes_frames.py:155 web/routes_messages.py:63
 msgid "Message publié : il apparaîtra dans le diaporama."
 msgstr "Message published: it will appear in the slideshow."
 
@@ -7223,112 +7245,129 @@ msgstr " the invitation for '%(name)s' has been revoked."
 msgid "Merci ! %(count)s photo(s) envoyée(s) : elles arrivent sur le cadre."
 msgstr "Thank you! %(count)s photo(s) sent: they are on their way to the frame."
 
-#: web/routes_guests.py:126 web/routes_imports.py:735
+#: web/routes_guests.py:124
+#, python-format
+msgid "%(count)s photo(s) d'invité"
+msgstr "%(count)s guest photo(s)"
+
+#: web/routes_guests.py:128 web/routes_imports.py:737
 msgid "Nouvelle photo d'invité"
 msgstr "New guest photo"
 
-#: web/routes_guests.py:126 web/routes_imports.py:735
+#: web/routes_guests.py:128 web/routes_imports.py:737
 #, python-format
 msgid "%(count)s photo(s) à valider sur le cadre."
 msgstr "%(count)s photo(s) to approve on the frame."
 
-#: web/routes_guests.py:128
+#: web/routes_guests.py:130
 #, python-format
 msgid "%(count)s photo(s) envoyée(s) pour validation avec succès !"
 msgstr "%(count)s photo(s) sent for validation successfully!"
 
-#: web/routes_guests.py:148
+#: web/routes_guests.py:150
 msgid "La préparation de la photo a échoué. La photo reste en attente."
 msgstr "Photo preparation failed. The photo remains pending."
 
-#: web/routes_guests.py:157
+#: web/routes_guests.py:159
 msgid "Photo approuvée et préparée. Le diaporama a été mis à jour."
 msgstr "Photo approved and prepared. The slideshow has been updated."
 
-#: web/routes_guests.py:176
+#: web/routes_guests.py:178
 msgid "Cet appareil devra de nouveau être validé."
 msgstr "This device will need approval again."
 
-#: web/routes_guests.py:240
+#: web/routes_guests.py:242
 msgid "Photo rejetée."
 msgstr "Photo rejected."
 
-#: web/routes_guests.py:249
+#: web/routes_guests.py:251
 msgid "Appareil inconnu pour cette photo (envoyée avant cette fonction)."
 msgstr "Unknown device for this photo (sent before this feature existed)."
 
-#: web/routes_guests.py:255
+#: web/routes_guests.py:257
 msgid "Photo approuvée : cet appareil est désormais de confiance."
 msgstr "Photo approved: this device is now trusted."
 
-#: web/routes_guests.py:334
+#: web/routes_guests.py:336
 msgid "Les messages des invités sont désactivés."
 msgstr "Guest messages are disabled."
 
-#: web/routes_guests.py:345
+#: web/routes_guests.py:347
 msgid "Trop d'aperçus, réessayez plus tard."
 msgstr "Too many previews, please try again later."
 
-#: web/routes_guests.py:367 web/routes_guests.py:398 web/routes_guests.py:428
+#: web/routes_guests.py:369 web/routes_guests.py:402 web/routes_guests.py:434
 msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr "You have already sent several messages: please try again in an hour."
 
 #: web/routes_guests.py:384
+msgid "Message d'invité"
+msgstr "Guest message"
+
+#: web/routes_guests.py:388
 msgid "Nouveau message d'invité"
 msgstr "New guest message"
 
-#: web/routes_guests.py:387
+#: web/routes_guests.py:391
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "Thank you! Your message will appear on the frame (until %(date)s)."
 
-#: web/routes_guests.py:413
+#: web/routes_guests.py:416
+msgid "Dessin d'invité"
+msgstr "Guest drawing"
+
+#: web/routes_guests.py:419
 msgid "Nouveau dessin d'invité"
 msgstr "New guest drawing"
 
-#: web/routes_guests.py:413
+#: web/routes_guests.py:419
 #, python-format
 msgid "%(name)s a fait un dessin pour le cadre."
 msgstr "%(name)s made a drawing for the frame."
 
-#: web/routes_guests.py:417
+#: web/routes_guests.py:423
 #, python-format
 msgid "Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "Thank you! Your drawing will appear on the frame (until %(date)s)."
 
-#: web/routes_guests.py:441
+#: web/routes_guests.py:447
+msgid "Message vocal d'invité"
+msgstr "Guest voice message"
+
+#: web/routes_guests.py:449
 msgid "Nouveau message vocal"
 msgstr "New voice message"
 
-#: web/routes_guests.py:441
+#: web/routes_guests.py:449
 #, python-format
 msgid "%(name)s a laissé un message vocal."
 msgstr "%(name)s left a voice message."
 
-#: web/routes_guests.py:445
+#: web/routes_guests.py:453
 #, python-format
 msgid "Merci ! Votre message vocal sera lu par le cadre (jusqu'au %(date)s)."
 msgstr ""
 "Thank you! Your voice message will be played by the frame (until "
 "%(date)s)."
 
-#: web/routes_guests.py:475
+#: web/routes_guests.py:483
 msgid "Les réactions sont désactivées."
 msgstr "Reactions are turned off."
 
-#: web/routes_guests.py:479
+#: web/routes_guests.py:487
 msgid "Doucement ! Réessayez dans un moment."
 msgstr "Easy there! Try again in a moment."
 
-#: web/routes_guests.py:503
+#: web/routes_guests.py:511
 msgid "Page introuvable."
 msgstr "Page not found."
 
-#: web/routes_guests.py:504
+#: web/routes_guests.py:512
 msgid "Page retirée du livre d'or."
 msgstr "Page removed from the guestbook."
 
-#: web/routes_guests.py:543
+#: web/routes_guests.py:551
 msgid ""
 "Lancez d'abord une fois sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
@@ -7336,7 +7375,7 @@ msgstr ""
 "First run once on the Raspberry Pi: "
 "~/pimmich/utils/enable_remote_guests.sh"
 
-#: web/routes_guests.py:549
+#: web/routes_guests.py:557
 msgid ""
 "Autorisez d'abord Funnel sur votre compte Tailscale (bouton « Enable » "
 "sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
@@ -7344,106 +7383,120 @@ msgstr ""
 "First allow Funnel on your Tailscale account (“Enable” button on the page"
 " that opens), then turn “Away from home” on again."
 
-#: web/routes_guests.py:550
+#: web/routes_guests.py:558
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale refused to publish: %(detail)s"
 
-#: web/routes_guests.py:556
+#: web/routes_guests.py:564
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr "Guests can now send from anywhere, using the link."
 
-#: web/routes_guests.py:557
+#: web/routes_guests.py:565
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr "The guest page is no longer reachable from the internet."
 
-#: web/routes_guests.py:567
+#: web/routes_guests.py:575
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr "New link created: the old one no longer works."
+
+#: web/routes_history.py:78
+msgid "Rien à annuler."
+msgstr "Nothing to undo."
+
+#: web/routes_history.py:79
+#, python-format
+msgid "Annulé : %(action)s"
+msgstr "Undone: %(action)s"
 
 #: web/routes_home.py:87
 msgid "Étape inconnue."
 msgstr "Unknown step."
 
-#: web/routes_home.py:115
+#: web/routes_home.py:116
 msgid "Mes réglages"
 msgstr "My settings"
 
-#: web/routes_home.py:116
+#: web/routes_home.py:118
+#, python-format
+msgid "Ambiance « %(name)s »"
+msgstr "Mood “%(name)s”"
+
+#: web/routes_home.py:119
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "“%(name)s” mood applied."
 
-#: web/routes_home.py:125 web/routes_playlists.py:92
+#: web/routes_home.py:128 web/routes_playlists.py:94
 #: web/routes_slideshow.py:514
 msgid "Disposition inconnue."
 msgstr "Unknown layout."
 
-#: web/routes_home.py:130
+#: web/routes_home.py:133
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Preparing the layout... it will appear in a few seconds."
 
-#: web/routes_home.py:199
+#: web/routes_home.py:202
 msgid "Musique introuvable."
 msgstr "Music not found."
 
-#: web/routes_home.py:203 web/routes_music.py:331
+#: web/routes_home.py:206 web/routes_music.py:331
 msgid "Volume invalide."
 msgstr "Invalid volume."
 
-#: web/routes_home.py:207 web/routes_system.py:653
+#: web/routes_home.py:210 web/routes_system.py:653
 msgid "Réglage invalide."
 msgstr "Invalid setting."
 
-#: web/routes_home.py:216
+#: web/routes_home.py:219
 msgid "Réglages du son enregistrés."
 msgstr "Sound settings saved."
 
-#: web/routes_home.py:273
+#: web/routes_home.py:276
 msgid "Adresse d'appareil invalide."
 msgstr "Invalid device address."
 
-#: web/routes_home.py:279
+#: web/routes_home.py:282
 msgid "Réglages de présence enregistrés."
 msgstr "Presence settings saved."
 
-#: web/routes_home.py:305
+#: web/routes_home.py:308
 msgid "Adresse du serveur ntfy invalide."
 msgstr "Invalid ntfy server address."
 
-#: web/routes_home.py:316
+#: web/routes_home.py:319
 msgid "Notifications enregistrées."
 msgstr "Notifications saved."
 
-#: web/routes_home.py:324
+#: web/routes_home.py:327
 msgid "Pimmich"
 msgstr "Pimmich"
 
-#: web/routes_home.py:324
+#: web/routes_home.py:327
 msgid "Ceci est une notification de test du cadre photo."
 msgstr "This is a test notification from the photo frame."
 
-#: web/routes_home.py:325
+#: web/routes_home.py:328
 msgid "Activez d'abord les notifications."
 msgstr "Enable notifications first."
 
-#: web/routes_home.py:326
+#: web/routes_home.py:329
 msgid "Notification de test envoyée."
 msgstr "Test notification sent."
 
-#: web/routes_home.py:336
+#: web/routes_home.py:339
 msgid "Nouveau canal créé : abonnez de nouveau vos téléphones."
 msgstr "New channel created: subscribe your phones again."
 
-#: web/routes_home.py:376
+#: web/routes_home.py:379
 msgid "Adresse d'agenda invalide (elle commence par https:// ou webcal://)."
 msgstr "Invalid calendar address (it starts with https:// or webcal://)."
 
-#: web/routes_home.py:386
+#: web/routes_home.py:389
 msgid "Date invalide."
 msgstr "Invalid date."
 
-#: web/routes_home.py:392
+#: web/routes_home.py:395
 msgid "Agenda enregistré."
 msgstr "Calendar saved."
 
@@ -7451,7 +7504,7 @@ msgstr "Calendar saved."
 msgid "Alerte de la maison"
 msgstr "Home alert"
 
-#: web/routes_homeassistant.py:100 web/routes_imports.py:783
+#: web/routes_homeassistant.py:100 web/routes_imports.py:785
 msgid "Port invalide."
 msgstr "Invalid port."
 
@@ -7463,100 +7516,105 @@ msgstr "Connecting to Home Assistant."
 msgid "Home Assistant désactivé."
 msgstr "Home Assistant turned off."
 
-#: web/routes_imports.py:428
+#: web/routes_imports.py:210
+#, python-format
+msgid "%(count)s photo(s) envoyée(s)"
+msgstr "%(count)s photo(s) uploaded"
+
+#: web/routes_imports.py:430
 #, python-format
 msgid ""
 "%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
 "prochaine synchronisation."
 msgstr "%(count)s photo(s) will be offered to the trash again at the next sync."
 
-#: web/routes_imports.py:486
+#: web/routes_imports.py:488
 msgid "Compte ajouté : choisissez maintenant les dossiers."
 msgstr "Account added: now choose the folders."
 
-#: web/routes_imports.py:507
+#: web/routes_imports.py:509
 msgid "Compte inconnu."
 msgstr "Unknown account."
 
-#: web/routes_imports.py:518
+#: web/routes_imports.py:520
 msgid "Réglages du cloud enregistrés."
 msgstr "Cloud settings saved."
 
-#: web/routes_imports.py:526
+#: web/routes_imports.py:528
 msgid "Choisissez d'abord un compte et des dossiers."
 msgstr "First choose an account and folders."
 
-#: web/routes_imports.py:528 web/routes_imports.py:607
+#: web/routes_imports.py:530 web/routes_imports.py:609
 msgid "Synchronisation lancée : suivez-la dans la notification en bas de l'écran."
 msgstr "Sync started: follow it in the notification at the bottom of the screen."
 
-#: web/routes_imports.py:571
+#: web/routes_imports.py:573
 #, python-format
 msgid "iCloud ne répond pas : %(error)s"
 msgstr "iCloud is not responding: %(error)s"
 
-#: web/routes_imports.py:581
+#: web/routes_imports.py:583
 #, python-format
 msgid "Album « %(name)s » ajouté (%(count)s éléments) : import lancé."
 msgstr "Album “%(name)s” added (%(count)s items): import started."
 
-#: web/routes_imports.py:597
+#: web/routes_imports.py:599
 msgid "Réglages iCloud enregistrés."
 msgstr "iCloud settings saved."
 
-#: web/routes_imports.py:605
+#: web/routes_imports.py:607
 msgid "Ajoutez d'abord un album partagé."
 msgstr "Add a shared album first."
 
-#: web/routes_imports.py:657
+#: web/routes_imports.py:659
 msgid "Ce fichier n'est pas un export WhatsApp (.zip)."
 msgstr "This file is not a WhatsApp export (.zip)."
 
-#: web/routes_imports.py:660
+#: web/routes_imports.py:662
 msgid ""
 "Aucune photo ni vidéo dans cet export : choisissez « Joindre les médias »"
 " en l'exportant."
 msgstr "No photos or videos in this export: choose “Attach media” when exporting."
 
-#: web/routes_imports.py:670
+#: web/routes_imports.py:672
 msgid "Envoyez d'abord l'export de la discussion."
 msgstr "Upload the chat export first."
 
-#: web/routes_imports.py:677
+#: web/routes_imports.py:679
 msgid "Import lancé : suivez-le dans la notification en bas de l'écran."
 msgstr "Import started: follow it in the notification at the bottom of the screen."
 
-#: web/routes_imports.py:709
+#: web/routes_imports.py:711
 #, python-format
 msgid "%(count)s fichier(s) reçu(s) : ils arrivent sur le cadre."
 msgstr "%(count)s file(s) received: they are on their way to the frame."
 
-#: web/routes_imports.py:791
+#: web/routes_imports.py:793
 msgid "Réglages de l'e-mail enregistrés."
 msgstr "Email settings saved."
 
-#: web/routes_imports.py:803
+#: web/routes_imports.py:805
 #, python-format
 msgid "Connexion impossible : %(error)s"
 msgstr "Could not connect: %(error)s"
 
-#: web/routes_imports.py:804
+#: web/routes_imports.py:806
 #, python-format
 msgid "Connexion réussie : %(count)s messages dans la boîte."
 msgstr "Connected: %(count)s messages in the mailbox."
 
-#: web/routes_imports.py:812
+#: web/routes_imports.py:814
 msgid "Activez d'abord la réception par e-mail."
 msgstr "Turn on email reception first."
 
-#: web/routes_imports.py:817
+#: web/routes_imports.py:819
 #, python-format
 msgid ""
 "%(accepted)s photo(s) ajoutée(s), %(pending)s à valider, %(ignored)s "
 "ignorée(s)."
 msgstr "%(accepted)s photo(s) added, %(pending)s to approve, %(ignored)s ignored."
 
-#: web/routes_imports.py:855
+#: web/routes_imports.py:857
 msgid "Photo supprimée du cadre."
 msgstr "Photo removed from the frame."
 
@@ -7579,27 +7637,37 @@ msgstr "Echec of sending: %(error)s"
 msgid "Erreur de connexion : %(error)s"
 msgstr "Connection error: %(error)s"
 
-#: web/routes_messages.py:60
+#: web/routes_messages.py:59
+#, python-format
+msgid "Message « %(text)s »"
+msgstr "Message “%(text)s”"
+
+#: web/routes_messages.py:62
 msgid "Message programmé : il apparaîtra à l'heure prévue."
 msgstr "Message scheduled: it will appear at the set time."
 
-#: web/routes_messages.py:68
+#: web/routes_messages.py:71
 msgid "Message introuvable."
 msgstr "Message not found."
 
-#: web/routes_messages.py:70
+#: web/routes_messages.py:73
+#, python-format
+msgid "Message supprimé : « %(text)s »"
+msgstr "Message deleted: “%(text)s”"
+
+#: web/routes_messages.py:76
 msgid "Message supprimé."
 msgstr "Message deleted."
 
-#: web/routes_messages.py:81
+#: web/routes_messages.py:87
 msgid "Date de fin enregistrée."
 msgstr "End date saved."
 
-#: web/routes_messages.py:93
+#: web/routes_messages.py:99
 msgid "Message masqué : il n'est plus affiché."
 msgstr "Message hidden: it is no longer shown."
 
-#: web/routes_messages.py:93
+#: web/routes_messages.py:99
 msgid "Message de nouveau affiché."
 msgstr "Message shown again."
 
@@ -7856,20 +7924,30 @@ msgstr "Photo set aside again."
 msgid "Cette playlist appartient à %(owner)s."
 msgstr "This playlist belongs to %(owner)s."
 
-#: web/routes_playlists.py:98
+#: web/routes_playlists.py:60
+#, python-format
+msgid "Playlist « %(name)s » créée"
+msgstr "Playlist “%(name)s” created"
+
+#: web/routes_playlists.py:100
 msgid "Disposition de la playlist enregistrée."
 msgstr "Playlist layout saved."
 
-#: web/routes_playlists.py:283
+#: web/routes_playlists.py:169
+#, python-format
+msgid "Playlist « %(name)s » supprimée"
+msgstr "Playlist “%(name)s” deleted"
+
+#: web/routes_playlists.py:289
 msgid "Liste de photos invalide."
 msgstr "Invalid photo list."
 
-#: web/routes_playlists.py:291
+#: web/routes_playlists.py:297
 #, python-format
 msgid "Photo introuvable : %(name)s"
 msgstr "Photo not found: %(name)s"
 
-#: web/routes_playlists.py:338
+#: web/routes_playlists.py:344
 msgid "Playlist non trouvée."
 msgstr "Playlist not found."
 

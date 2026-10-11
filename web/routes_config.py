@@ -34,6 +34,8 @@ def configure():
     config = load_config()
     saved_secrets = {key: config.get(key) for key in SECRET_CONFIG_KEYS}
     previous_size = (config.get('display_width'), config.get('display_height'))
+    import copy
+    previous_config = copy.deepcopy(config)  # pour « annuler la dernière action »
     invitations = load_invitations()
 
     # Récupérer la liste des photos en attente pour le template
@@ -274,6 +276,8 @@ def configure():
             # Les comptes non administrateurs ne voient pas les secrets et ne peuvent pas les modifier
             config.update(saved_secrets)
         save_config(config)
+        from web.routes_history import log
+        log("settings", _("Réglages modifiés"), {"type": "restore_config", "data": previous_config}, merge=True)
         if (config['display_width'], config['display_height']) != previous_size:
             from web.workers import reprepare_all_sources
             threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()

@@ -56,6 +56,8 @@ def create_playlist():
     }
     playlists.append(new_playlist)
     save_playlists(playlists)
+    from web.routes_history import log
+    log("playlist", _("Playlist « %(name)s » créée", name=new_playlist["name"]), {"type": "delete_playlist", "data": new_playlist["id"]})
     return jsonify({"success": True, "playlist": new_playlist}), 201
 
 
@@ -161,6 +163,10 @@ def upload_music():
 def delete_playlist(playlist_id):
     """Supprime une playlist."""
     playlists = load_playlists()
+    removed = next((p for p in playlists if p.get('id') == playlist_id), None)
+    if removed:
+        from web.routes_history import log
+        log("playlist", _("Playlist « %(name)s » supprimée", name=removed.get("name", "")), {"type": "restore_playlist", "data": removed})
     playlists = [p for p in playlists if p.get('id') != playlist_id]
     save_playlists(playlists)
     return jsonify({"success": True})

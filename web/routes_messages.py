@@ -55,6 +55,8 @@ def create_message_api():
         config["display_sources"] = config.get("display_sources", []) + [messages_manager.SOURCE_NAME]
         save_config(config)
     logger.info(f"[Messages] Message {message['id']} publié par {message['author'] or '?'}")
+    from web.routes_history import log
+    log("message", _("Message « %(text)s »", text=(message.get("title") or message.get("body") or "")[:60]), {"type": "delete_message", "data": message["id"]})
     _refresh_slideshow()
     if message.get("schedule") and not messages_manager.on_air(message):
         return jsonify({"success": True, "message": _("Message programmé : il apparaîtra à l'heure prévue."), "item": message})
@@ -64,8 +66,12 @@ def create_message_api():
 @app.route('/api/messages/<message_id>', methods=['DELETE'])
 @login_required
 def delete_message_api(message_id):
+    removed = next((m for m in messages_manager.list_messages() if m["id"] == message_id), None)
     if not re.fullmatch(r"[0-9a-f]{12}", message_id) or not messages_manager.delete_message(message_id):
         return jsonify({"success": False, "message": _("Message introuvable.")}), 404
+    from web.routes_history import log
+    log("message", _("Message supprimé : « %(text)s »", text=((removed or {}).get("title") or (removed or {}).get("body") or "")[:60]),
+        {"type": "restore_message", "data": removed} if removed and removed.get("kind") not in ("drawing", "voice") else None)
     _refresh_slideshow()
     return jsonify({"success": True, "message": _("Message supprimé.")})
 

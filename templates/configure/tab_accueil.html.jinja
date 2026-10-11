@@ -251,4 +251,54 @@
                         setInterval(() => { if ($("tab-accueil").offsetParent) { loadQueue(); loadHealth(); } }, 15000);
                     });
                 </script>
+            
+                <section class="card" id="home-history">
+                    <div class="flex flex-wrap items-center gap-3 mb-2">
+                        <h2 class="card-title" style="margin:0"><i class="fas fa-history text-indigo-500 mr-2"></i>{{ _("Historique") }}</h2>
+                        <button type="button" id="hist-undo" class="btn-secondary text-sm ml-auto hidden"><i class="fas fa-undo mr-1"></i><span></span></button>
+                    </div>
+                    <ul id="hist-events" class="hist-events"></ul>
+                    <p class="font-semibold text-sm mt-3 mb-1">{{ _("Affiché récemment") }}</p>
+                    <div id="hist-shown" class="hist-shown"></div>
+                    <p id="hist-status" class="text-sm mt-2"></p>
+                </section>
+                <style>
+                    .hist-events { max-height: 260px; overflow-y: auto; display: grid; gap: 2px; font-size: .9rem; }
+                    .hist-events li { display: flex; gap: .6rem; padding: 4px 0; border-bottom: 1px solid var(--border); }
+                    .hist-events time { color: var(--muted); white-space: nowrap; min-width: 6.5rem; }
+                    .hist-events .who { color: var(--muted); }
+                    .hist-events li.undone span.text { text-decoration: line-through; color: var(--muted); }
+                    .hist-shown { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+                    .hist-shown img { width: 96px; height: 54px; object-fit: cover; border-radius: 6px; flex: none; }
+                </style>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { undo: {{ _("Annuler : {action}")|tojson }}, none: {{ _("Rien pour l'instant.")|tojson }} };
+                        const when = (ts) => new Date(ts * 1000).toLocaleString(undefined, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+                        async function load() {
+                            if (!$("home-history").offsetParent) return;
+                            const d = await (await fetch("/api/history")).json();
+                            $("hist-events").innerHTML = d.events.length ? "" : `<li>${T.none}</li>`;
+                            d.events.forEach(e => {
+                                const li = document.createElement("li"); if (e.undone) li.className = "undone";
+                                const time = document.createElement("time"); time.textContent = when(e.at);
+                                const text = document.createElement("span"); text.className = "text"; text.textContent = e.text;
+                                const who = document.createElement("span"); who.className = "who"; who.textContent = e.who ? `· ${e.who}` : "";
+                                li.append(time, text, who); $("hist-events").appendChild(li);
+                            });
+                            $("hist-shown").innerHTML = "";
+                            d.displayed.forEach(p => { const img = document.createElement("img"); img.src = p.thumb; img.loading = "lazy"; img.title = when(p.at); $("hist-shown").appendChild(img); });
+                            $("hist-undo").classList.toggle("hidden", !d.undo);
+                            if (d.undo) $("hist-undo").querySelector("span").textContent = T.undo.replace("{action}", d.undo);
+                        }
+                        $("hist-undo").addEventListener("click", async () => {
+                            const r = await (await fetch("/api/history/undo", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })).json();
+                            $("hist-status").textContent = r.message; $("hist-status").className = "text-sm mt-2 " + (r.success ? "text-green-700" : "text-red-600");
+                            load();
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-accueil'\"], .main-nav-link").forEach(b => b.addEventListener("click", () => setTimeout(load, 80)));
+                        load(); setInterval(load, 30000);
+                    });
+                </script>
             </div>

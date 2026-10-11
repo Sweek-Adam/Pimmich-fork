@@ -105,6 +105,7 @@ def ambiances_api():
 @login_required
 def apply_ambiance_api():
     key = (request.get_json(silent=True) or {}).get("ambiance")
+    previous_config = dict(load_config())
     try:
         config = ambiances.apply(load_config(), key)
     except ValueError as e:
@@ -113,6 +114,8 @@ def apply_ambiance_api():
     restart_slideshow_process()
     spotify.play_linked_in_background((config.get("spotify_links") or {}).get(f"ambiance:{key}"), logger)  # musique associée
     label = _("Mes réglages") if key == ambiances.MINE else _tr(ambiances.AMBIANCES[key]["label"])
+    from web.routes_history import log
+    log("ambiance", _("Ambiance « %(name)s »", name=label), {"type": "restore_config", "data": previous_config})
     return jsonify({"success": True, "message": _("Ambiance « %(name)s » appliquée.", name=label)})
 
 
