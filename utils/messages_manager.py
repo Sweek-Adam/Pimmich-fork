@@ -4,6 +4,7 @@ Messages texte affichés comme des photos dans le diaporama (source « messages 
 Chaque message est enregistré dans config/messages.json et rendu en image dans static/prepared/messages/<id>.jpg,
 à la résolution de l'écran. Un message peut avoir une date de fin : il est retiré automatiquement après ce jour.
 """
+import io
 import json
 import secrets
 import threading
@@ -125,9 +126,14 @@ def refresh_schedule(now=None):
     return shown
 
 
+def _unlink_drawing(message_id):
+    (PROJECT_DIR / "cache" / "drawings" / f"{message_id}.png").unlink(missing_ok=True)
+
+
 def _unlink_images(message_id):
     image_path(message_id).unlink(missing_ok=True)
     image_path(message_id, hidden=True).unlink(missing_ok=True)
+    _unlink_drawing(message_id)
 
 
 # --- File prioritaire : un nouveau message passe avant les autres (dernier arrivé, premier affiché) ---
@@ -285,7 +291,67 @@ def purge_expired(today=None):
 
 def _render_to_file(m, width, height):
     _path(m).parent.mkdir(parents=True, exist_ok=True)
+    if m.get("kind") == "drawing":
+        render_drawing(m["id"], m.get("signature", ""), width, height).save(_path(m), "JPEG", quality=90)
+        return
     render_message(m["title"], m["body"], m["signature"], m["style"], width, height).save(_path(m), "JPEG", quality=90)
+
+
+# --- Dessins (à main levée, avec autocollants) envoyés depuis un téléphone ---
+
+DRAWINGS_DIR = PROJECT_DIR / "cache" / "drawings"
+MAX_DRAWING_BYTES = 6 * 1024 * 1024
+
+
+def render_drawing(message_id, signature, width, height):
+    """Le dessin sur l'écran entier : posé sur un fond doux, avec la signature de l'invité."""
+    from PIL import Image, ImageDraw, ImageFilter, ImageOps
+    from utils.message_renderer import _font, SERIF_ITALIC
+    with Image.open(DRAWINGS_DIR / f"{message_id}.png") as drawing:
+        drawing = drawing.convert("RGB")
+    background = ImageOps.fit(drawing, (max(1, width // 8), max(1, height // 8))).filter(ImageFilter.GaussianBlur(3)).resize((width, height))
+    background = Image.blend(background, Image.new("RGB", (width, height), (245, 240, 230)), 0.55)
+    margin = int(min(width, height) * 0.06)
+    fitted = ImageOps.contain(drawing, (width - 2 * margin, height - 2 * margin - (int(height * 0.06) if signature else 0)))
+    x, y = (width - fitted.width) // 2, margin
+    shadow = Image.new("RGBA", (fitted.width + 40, fitted.height + 40), (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rectangle([20, 24, fitted.width + 20, fitted.height + 24], fill=(0, 0, 0, 90))
+    background.paste(shadow.filter(ImageFilter.GaussianBlur(12)), (x - 20, y - 20), shadow.filter(ImageFilter.GaussianBlur(12)))
+    background.paste(fitted, (x, y))
+    if signature:
+        font = _font(SERIF_ITALIC, int(height * 0.045))
+        ImageDraw.Draw(background).text((x + fitted.width, y + fitted.height + int(height * 0.012)), f"— {signature}",
+                                        font=font, fill=(70, 60, 50), anchor="ra")
+    return background
+
+
+def create_drawing(data, signature, author, width, height, guest=True):
+    """Enregistre un dessin (PNG ou JPEG envoyé par le téléphone) et l'ajoute au diaporama comme un message."""
+    from PIL import Image
+    if not data or len(data) > MAX_DRAWING_BYTES:
+        raise ValueError("Dessin vide ou trop lourd.")
+    try:
+        with Image.open(io.BytesIO(data)) as image:
+            image.verify()
+        with Image.open(io.BytesIO(data)) as image:
+            if image.width < 50 or image.height < 50 or image.width > 4096 or image.height > 4096:
+                raise ValueError("Taille de dessin inattendue.")
+            drawing = image.convert("RGB")
+    except (OSError, SyntaxError):
+        raise ValueError("Ce fichier n'est pas une image.")
+    signature = (signature or "").strip()[:MAX_SIGNATURE]
+    message = {"id": secrets.token_hex(6), "kind": "drawing", "title": "", "body": "", "signature": signature, "style": DEFAULT_STYLE,
+               "expires": (date.today() + timedelta(days=GUEST_MAX_DAYS)).isoformat() if guest else None,
+               "author": author or "", "guest": guest, "created": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    DRAWINGS_DIR.mkdir(parents=True, exist_ok=True)
+    drawing.save(DRAWINGS_DIR / f"{message['id']}.png")
+    _render_to_file(message, width, height)
+    with _lock:
+        messages = _load()
+        messages.append(message)
+        _save(messages)
+    push_priority(_path(message))
+    return message
 
 
 def rerender_all(width, height):

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:00+0200\n"
+"POT-Creation-Date: 2026-10-11 09:05+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -186,7 +186,7 @@ msgid "Compte utilisateur"
 msgstr "User account"
 
 #: templates/configure.html.jinja:101 templates/login.html.jinja:89
-#: templates/upload.html.jinja:115
+#: templates/upload.html.jinja:249
 msgid "Langue"
 msgstr "Language"
 
@@ -445,7 +445,7 @@ msgstr "Title (optional)"
 msgid "Votre message…"
 msgstr "Your message…"
 
-#: templates/upload.html.jinja:88
+#: templates/upload.html.jinja:88 templates/upload.html.jinja:124
 msgid "Votre prénom (optionnel)"
 msgstr "Your first name (optional)"
 
@@ -468,22 +468,94 @@ msgid "Le message reste affiché 7 jours."
 msgstr "The message stays on screen for 7 days."
 
 #: templates/upload.html.jinja:103
+msgid "Faire un dessin pour le cadre"
+msgstr "Draw something for the frame"
+
+#: templates/upload.html.jinja:104
+msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
+msgstr "Draw with your finger, add stickers, then send."
+
+#: templates/upload.html.jinja:108
+msgid "Trait fin"
+msgstr "Thin line"
+
+#: templates/upload.html.jinja:109
+msgid "Trait moyen"
+msgstr "Medium line"
+
+#: templates/upload.html.jinja:110
+msgid "Trait épais"
+msgstr "Thick line"
+
+#: templates/upload.html.jinja:111
+msgid "Gomme"
+msgstr "Eraser"
+
+#: templates/configure/tab_legendes.html.jinja:122
+#: templates/upload.html.jinja:112
+msgid "Annuler"
+msgstr "Cancel"
+
+#: templates/upload.html.jinja:113
+msgid "Tout effacer"
+msgstr "Clear all"
+
+#: templates/configure/tab_legendes.html.jinja:75
+#: templates/upload.html.jinja:114
+msgid "Fond"
+msgstr "Background"
+
+#: templates/upload.html.jinja:115
+msgid "Papier"
+msgstr "Paper"
+
+#: templates/configure/tab_messages.html.jinja:245
+#: templates/upload.html.jinja:116 utils/message_renderer.py:40
+msgid "Ardoise"
+msgstr "Chalkboard"
+
+#: templates/upload.html.jinja:117
+msgid "Kraft"
+msgstr "Kraft paper"
+
+#: templates/upload.html.jinja:121
+msgid ""
+"Touchez le dessin pour poser l'autocollant (touchez-le à nouveau dans la "
+"liste pour revenir au crayon)."
+msgstr ""
+"Tap the drawing to place the sticker (tap it again in the list to go back"
+" to the pencil)."
+
+#: templates/upload.html.jinja:125
+msgid "Envoyer le dessin"
+msgstr "Send drawing"
+
+#: templates/upload.html.jinja:216
+msgid "Faites d'abord un dessin."
+msgstr "Draw something first."
+
+#: templates/upload.html.jinja:227 templates/upload.html.jinja:292
+#: templates/upload.html.jinja:329
+msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
+msgstr "Upload failed. Check the connection to the frame."
+
+#: templates/upload.html.jinja:237
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "Add this page to your phone's home screen"
 
-#: templates/upload.html.jinja:105
+#: templates/upload.html.jinja:239
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr "in Safari, tap the Share button, then « Add to Home Screen »."
 
-#: templates/upload.html.jinja:106
+#: templates/upload.html.jinja:240
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "in Chrome, open the ⋮ menu, then « Add to Home screen »."
 
-#: templates/upload.html.jinja:108
+#: templates/upload.html.jinja:242
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich will then open like an app, directly on this page."
 
-#: templates/upload.html.jinja:111
+#: templates/upload.html.jinja:245
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
@@ -491,15 +563,11 @@ msgstr ""
 "Return to login\n"
 "          administrator"
 
-#: templates/upload.html.jinja:158 templates/upload.html.jinja:195
-msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
-msgstr "Upload failed. Check the connection to the frame."
-
-#: templates/upload.html.jinja:178
+#: templates/upload.html.jinja:312
 msgid "fichier(s) en cours d'envoi..."
 msgstr "file(s) uploading..."
 
-#: templates/upload.html.jinja:189
+#: templates/upload.html.jinja:323
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Upload too large: send fewer files at a time."
 
@@ -3624,10 +3692,6 @@ msgstr "Align right"
 msgid "Couleur du texte"
 msgstr "Text colour"
 
-#: templates/configure/tab_legendes.html.jinja:75
-msgid "Fond"
-msgstr "Background"
-
 #: templates/configure/tab_legendes.html.jinja:77
 #: templates/configure/tab_legendes.html.jinja:95
 msgid "Aucun"
@@ -3689,10 +3753,6 @@ msgstr "Default style"
 #: templates/configure/tab_legendes.html.jinja:119
 msgid "Reprendre le style général"
 msgstr "Use the general style"
-
-#: templates/configure/tab_legendes.html.jinja:122
-msgid "Annuler"
-msgstr "Cancel"
 
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Légendes des photos et vidéos"
@@ -4253,7 +4313,8 @@ msgstr "Published messages"
 msgid "Aucun message publié."
 msgstr "No published messages."
 
-#: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:335
+#: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:337
+#: web/routes_guests.py:367
 msgid "Invité"
 msgstr "Guest"
 
@@ -4369,10 +4430,6 @@ msgstr "Night"
 #: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:48
 msgid "Pastel"
 msgstr "Pastel"
-
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:40
-msgid "Ardoise"
-msgstr "Chalkboard"
 
 #: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:52
 msgid "Minimal"
@@ -6682,67 +6739,81 @@ msgstr "%(count)s date(s) saved."
 msgid "L'accès pour l'invité '%(name)s' a été révoqué."
 msgstr " the invitation for '%(name)s' has been revoked."
 
-#: web/routes_guests.py:81 web/routes_guests.py:86 web/routes_imports.py:646
+#: web/routes_guests.py:83 web/routes_guests.py:88 web/routes_imports.py:646
 #: web/routes_imports.py:684
 msgid "Aucun fichier sélectionné."
 msgstr "No files selected."
 
-#: web/routes_guests.py:108 web/routes_imports.py:730
+#: web/routes_guests.py:110 web/routes_imports.py:730
 msgid "Nouvelle photo d'invité"
 msgstr "New guest photo"
 
-#: web/routes_guests.py:108 web/routes_imports.py:730
+#: web/routes_guests.py:110 web/routes_imports.py:730
 #, python-format
 msgid "%(count)s photo(s) à valider sur le cadre."
 msgstr "%(count)s photo(s) to approve on the frame."
 
-#: web/routes_guests.py:110
+#: web/routes_guests.py:112
 #, python-format
 msgid "%(count)s photo(s) envoyée(s) pour validation avec succès !"
 msgstr "%(count)s photo(s) sent for validation successfully!"
 
-#: web/routes_guests.py:171
+#: web/routes_guests.py:173
 msgid "Photo rejetée."
 msgstr "Photo rejected."
 
-#: web/routes_guests.py:214
+#: web/routes_guests.py:216
 msgid "Photo approuvée et préparée. Le diaporama a été mis à jour."
 msgstr "Photo approved and prepared. The slideshow has been updated."
 
-#: web/routes_guests.py:216
+#: web/routes_guests.py:218
 msgid "La préparation de la photo a échoué. La photo reste en attente."
 msgstr "Photo preparation failed. The photo remains pending."
 
-#: web/routes_guests.py:220
+#: web/routes_guests.py:222
 msgid "Action inconnue."
 msgstr "Unknown action."
 
-#: web/routes_guests.py:296
+#: web/routes_guests.py:298
 msgid "Les messages des invités sont désactivés."
 msgstr "Guest messages are disabled."
 
-#: web/routes_guests.py:307
+#: web/routes_guests.py:309
 msgid "Trop d'aperçus, réessayez plus tard."
 msgstr "Too many previews, please try again later."
 
-#: web/routes_guests.py:329
+#: web/routes_guests.py:331 web/routes_guests.py:362
 msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr "You have already sent several messages: please try again in an hour."
 
-#: web/routes_guests.py:346
+#: web/routes_guests.py:348
 msgid "Nouveau message d'invité"
 msgstr "New guest message"
 
-#: web/routes_guests.py:346
+#: web/routes_guests.py:348 web/routes_guests.py:377
 msgid "Un invité"
 msgstr "A guest"
 
-#: web/routes_guests.py:349
+#: web/routes_guests.py:351
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "Thank you! Your message will appear on the frame (until %(date)s)."
 
+#: web/routes_guests.py:377
+msgid "Nouveau dessin d'invité"
+msgstr "New guest drawing"
+
+#: web/routes_guests.py:377
+#, python-format
+msgid "%(name)s a fait un dessin pour le cadre."
+msgstr "%(name)s made a drawing for the frame."
+
 #: web/routes_guests.py:381
+#, python-format
+msgid "Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s)."
+msgstr "Thank you! Your drawing will appear on the frame (until %(date)s)."
+
+#: web/routes_guests.py:413
 msgid ""
 "Lancez d'abord une fois sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
@@ -6750,20 +6821,20 @@ msgstr ""
 "First run once on the Raspberry Pi: "
 "~/pimmich/utils/enable_remote_guests.sh"
 
-#: web/routes_guests.py:384
+#: web/routes_guests.py:416
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale refused to publish: %(detail)s"
 
-#: web/routes_guests.py:390
+#: web/routes_guests.py:422
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr "Guests can now send from anywhere, using the link."
 
-#: web/routes_guests.py:391
+#: web/routes_guests.py:423
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr "The guest page is no longer reachable from the internet."
 
-#: web/routes_guests.py:401
+#: web/routes_guests.py:433
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr "New link created: the old one no longer works."
 

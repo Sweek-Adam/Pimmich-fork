@@ -98,6 +98,140 @@
         <img id="gm-preview-img" class="hidden mt-3 w-full rounded border" alt="{{ _('Aperçu du message') }}">
         <p class="text-center text-xs text-gray-500 mt-2">{{ _('Le message reste affiché 7 jours.') }}</p>
       </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-300" id="drawing-box">
+        <h2 class="text-center text-2xl font-semibold mb-2">{{ _('Faire un dessin pour le cadre') }}</h2>
+        <p class="text-center text-sm text-gray-600 mb-3">{{ _('Dessinez avec le doigt, ajoutez des autocollants, puis envoyez.') }}</p>
+        <div class="dr-tools">
+          <div class="dr-row" id="dr-colors"></div>
+          <div class="dr-row">
+            <button type="button" class="dr-btn dr-size" data-size="4" aria-label="{{ _('Trait fin') }}"><span style="width:6px;height:6px"></span></button>
+            <button type="button" class="dr-btn dr-size on" data-size="10" aria-label="{{ _('Trait moyen') }}"><span style="width:12px;height:12px"></span></button>
+            <button type="button" class="dr-btn dr-size" data-size="24" aria-label="{{ _('Trait épais') }}"><span style="width:20px;height:20px"></span></button>
+            <button type="button" class="dr-btn" id="dr-eraser" title="{{ _('Gomme') }}">🧽</button>
+            <button type="button" class="dr-btn" id="dr-undo" title="{{ _('Annuler') }}">↶</button>
+            <button type="button" class="dr-btn" id="dr-clear" title="{{ _('Tout effacer') }}">🗑</button>
+            <select id="dr-bg" class="dr-select" aria-label="{{ _('Fond') }}">
+              <option value="paper">{{ _('Papier') }}</option>
+              <option value="slate">{{ _('Ardoise') }}</option>
+              <option value="kraft">{{ _('Kraft') }}</option>
+            </select>
+          </div>
+          <div class="dr-row" id="dr-stickers"></div>
+          <p id="dr-hint" class="text-xs text-gray-500 text-center" style="visibility: hidden">{{ _("Touchez le dessin pour poser l'autocollant (touchez-le à nouveau dans la liste pour revenir au crayon).") }}</p>
+        </div>
+        <canvas id="dr-canvas" class="dr-canvas"></canvas>
+        <input type="text" id="dr-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}" class="block w-full mt-3 p-2 border border-gray-300 rounded">
+        <button type="button" id="dr-send" class="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">{{ _('Envoyer le dessin') }}</button>
+        <p id="dr-status" class="text-center text-sm mt-3"></p>
+      </div>
+      <style>
+        .dr-tools { display: grid; gap: .5rem; margin-bottom: .5rem; }
+        .dr-row { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; align-items: center; }
+        .dr-btn { min-width: 38px; height: 38px; border-radius: 10px; border: 2px solid #e5e7eb; background: #fff; font-size: 1.2rem; display: inline-flex; align-items: center; justify-content: center; }
+        .dr-btn.on { border-color: #2563eb; box-shadow: 0 0 0 2px #bfdbfe; }
+        .dr-btn span { display: block; border-radius: 50%; background: #333; }
+        .dr-color { width: 34px; height: 34px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #d1d5db; }
+        .dr-color.on { box-shadow: 0 0 0 3px #2563eb; }
+        .dr-select { height: 38px; border: 2px solid #e5e7eb; border-radius: 10px; padding: 0 .5rem; background: #fff; }
+        .dr-canvas { width: 100%; border-radius: 12px; border: 1px solid #d1d5db; touch-action: none; background: #fffdf6; display: block; }
+      </style>
+      <script>
+        (() => {
+          const $ = (id) => document.getElementById(id);
+          const canvas = $("dr-canvas"), ctx = canvas.getContext("2d");
+          canvas.width = 1280;
+          canvas.height = Math.round(1280 * {{ frame_height }} / {{ frame_width }});
+          const BACKGROUNDS = { paper: "#fffdf6", slate: "#2f3b33", kraft: "#d9b98c" };
+          const COLORS = ["#222222", "#e53935", "#fb8c00", "#fdd835", "#43a047", "#1e88e5", "#8e24aa", "#ffffff"];
+          const STICKERS = ["❤️", "😘", "😂", "🥰", "🎉", "🎂", "🎈", "🌞", "🌈", "⭐", "🌸", "🍀", "🐶", "🐱", "🦄", "👍", "🏖️", "⛄", "🎄", "🎃"];
+          let color = COLORS[0], size = 10, eraser = false, sticker = null, current = null;
+          const ops = [];
+          const point = (e) => { const r = canvas.getBoundingClientRect(); return [(e.clientX - r.left) * canvas.width / r.width, (e.clientY - r.top) * canvas.height / r.height]; };
+          function stroke(op, from) {
+            ctx.lineCap = ctx.lineJoin = "round";
+            ctx.strokeStyle = op.erase ? BACKGROUNDS[$("dr-bg").value] : op.color;
+            ctx.lineWidth = op.size;
+            ctx.beginPath();
+            const pts = op.points;
+            const start = Math.max(0, from || 0);
+            ctx.moveTo(pts[start][0], pts[start][1]);
+            if (pts.length === 1) ctx.lineTo(pts[0][0] + 0.1, pts[0][1]);
+            for (let i = start + 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+            ctx.stroke();
+          }
+          function draw(op) {
+            if (op.type === "stroke") return stroke(op);
+            ctx.font = `${op.size}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+            ctx.textAlign = "center"; ctx.textBaseline = "middle";
+            ctx.fillText(op.emoji, op.x, op.y);
+          }
+          function redraw() {
+            ctx.fillStyle = BACKGROUNDS[$("dr-bg").value];
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ops.forEach(draw);
+          }
+          COLORS.forEach((c, i) => {
+            const b = document.createElement("button"); b.type = "button"; b.className = "dr-color" + (i ? "" : " on"); b.style.background = c;
+            b.setAttribute("aria-label", c);
+            b.addEventListener("click", () => { color = c; eraser = false; sticker = null; refreshTools(); document.querySelectorAll(".dr-color").forEach(o => o.classList.toggle("on", o === b)); });
+            $("dr-colors").appendChild(b);
+          });
+          STICKERS.forEach(emoji => {
+            const b = document.createElement("button"); b.type = "button"; b.className = "dr-btn dr-sticker"; b.textContent = emoji;
+            b.addEventListener("click", () => { sticker = sticker === emoji ? null : emoji; eraser = false; refreshTools(); });
+            $("dr-stickers").appendChild(b);
+          });
+          function refreshTools() {
+            document.querySelectorAll(".dr-sticker").forEach(b => b.classList.toggle("on", b.textContent === sticker));
+            $("dr-eraser").classList.toggle("on", eraser);
+            $("dr-hint").style.visibility = sticker ? "visible" : "hidden";  // place réservée : l'ardoise ne bouge pas
+          }
+          document.querySelectorAll(".dr-size").forEach(b => b.addEventListener("click", () => {
+            size = Number(b.dataset.size); document.querySelectorAll(".dr-size").forEach(o => o.classList.toggle("on", o === b));
+          }));
+          $("dr-eraser").addEventListener("click", () => { eraser = !eraser; sticker = null; refreshTools(); });
+          $("dr-undo").addEventListener("click", () => { ops.pop(); redraw(); });
+          $("dr-clear").addEventListener("click", () => { ops.length = 0; redraw(); });
+          $("dr-bg").addEventListener("change", redraw);
+          canvas.addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            const [x, y] = point(e);
+            if (sticker) { ops.push({ type: "sticker", emoji: sticker, x, y, size: canvas.width * 0.09 }); redraw(); return; }
+            current = { type: "stroke", color, size: eraser ? size * 3 : size, erase: eraser, points: [[x, y]] };
+            canvas.setPointerCapture(e.pointerId);
+            stroke(current);
+          });
+          canvas.addEventListener("pointermove", (e) => {
+            if (!current) return;
+            current.points.push(point(e));
+            stroke(current, current.points.length - 2);
+          });
+          const finish = () => { if (current) { ops.push(current); current = null; } };
+          canvas.addEventListener("pointerup", finish);
+          canvas.addEventListener("pointercancel", finish);
+          redraw();
+          $("dr-send").addEventListener("click", () => {
+            const status = (t, ok) => { $("dr-status").textContent = t; $("dr-status").className = "text-center text-sm mt-3 " + (ok ? "text-green-700" : "text-red-600"); };
+            if (!ops.length) { status({{ _("Faites d'abord un dessin.")|tojson }}, false); return; }
+            $("dr-send").disabled = true;
+            canvas.toBlob(async (blob) => {
+              const form = new FormData();
+              form.append("drawing", blob, "dessin.png");
+              form.append("signature", $("dr-signature").value.trim());
+              try {
+                const r = await (await fetch("{{ url_for('guest_drawing_publish') }}", { method: "POST", body: form })).json();
+                status(r.message, r.success);
+                if (r.success) { ops.length = 0; redraw(); }
+              } catch (err) {
+                status({{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }}, false);
+              } finally {
+                $("dr-send").disabled = false;
+              }
+            }, "image/png");
+          });
+        })();
+      </script>
       {% endif %}
       <details id="install-help" class="mt-6 text-sm text-gray-700">
         <summary class="cursor-pointer text-blue-600">{{ _("Ajouter cette page à l'écran d'accueil du téléphone") }}</summary>

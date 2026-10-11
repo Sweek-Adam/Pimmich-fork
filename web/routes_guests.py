@@ -71,7 +71,9 @@ def get_telegram_bot_info():
 @app.route('/upload', methods=['GET'])
 def upload_page():
     """Affiche la page publique pour envoyer des photos."""
-    return render_template('upload.html.jinja', guest_messages_enabled=load_config().get("guest_messages_enabled", True))
+    config = load_config()
+    return render_template('upload.html.jinja', guest_messages_enabled=config.get("guest_messages_enabled", True),
+                           frame_width=int(config.get("display_width", 1920)), frame_height=int(config.get("display_height", 1080)))
 
 
 @app.route('/handle_upload', methods=['POST'])
@@ -347,6 +349,36 @@ def guest_message_publish():
     if is_slideshow_running():
         restart_slideshow_for_update()
     return jsonify({"success": True, "message": _("Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s).", date=message["expires"])})
+
+
+@app.route('/upload/drawing', methods=['POST'])
+def guest_drawing_publish():
+    """Dessin à main levée (et autocollants) fait sur le téléphone d'un invité : affiché comme un message."""
+    disabled = _guest_messages_disabled()
+    if disabled:
+        return disabled
+    key, limit = _guest_key()
+    if not rate_limit.allow(("message", key), limit, 3600):
+        return jsonify({"success": False, "message": _("Vous avez déjà envoyé plusieurs messages : réessayez dans une heure.")}), 429
+    file = request.files.get("drawing")
+    name = (request.form.get("signature") or "").strip()
+    config = load_config()
+    try:
+        message = messages_manager.create_drawing(file.read() if file else b"", name, f"{_('Invité')}{' : ' + name if name else ''}",
+                                                  int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    if messages_manager.SOURCE_NAME not in config.get("display_sources", []):
+        config = dict(config)
+        config["display_sources"] = config.get("display_sources", []) + [messages_manager.SOURCE_NAME]
+        save_config(config)
+    logger.info(f"[Messages] Dessin d'invité {message['id']} publié ({message['author']})")
+    from utils import notify
+    notify.send(config, "guest", _("Nouveau dessin d'invité"), _("%(name)s a fait un dessin pour le cadre.", name=name or _("Un invité")),
+                key=f"guest_message:{message['id']}")
+    if is_slideshow_running():
+        restart_slideshow_for_update()
+    return jsonify({"success": True, "message": _("Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s).", date=message["expires"])})
 
 
 # --- Invités hors de la maison (Tailscale Funnel) ---

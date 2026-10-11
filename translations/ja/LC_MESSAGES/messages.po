@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:00+0200\n"
+"POT-Creation-Date: 2026-10-11 09:05+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -186,7 +186,7 @@ msgid "Compte utilisateur"
 msgstr "ユーザーアカウント"
 
 #: templates/configure.html.jinja:101 templates/login.html.jinja:89
-#: templates/upload.html.jinja:115
+#: templates/upload.html.jinja:249
 msgid "Langue"
 msgstr "言語"
 
@@ -443,7 +443,7 @@ msgstr "タイトル（任意）"
 msgid "Votre message…"
 msgstr "メッセージ…"
 
-#: templates/upload.html.jinja:88
+#: templates/upload.html.jinja:88 templates/upload.html.jinja:124
 msgid "Votre prénom (optionnel)"
 msgstr "お名前（任意）"
 
@@ -466,22 +466,92 @@ msgid "Le message reste affiché 7 jours."
 msgstr "メッセージは7日間表示されます。"
 
 #: templates/upload.html.jinja:103
+msgid "Faire un dessin pour le cadre"
+msgstr "フレームに絵を描く"
+
+#: templates/upload.html.jinja:104
+msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
+msgstr "指で描いてスタンプを貼り、送信してください。"
+
+#: templates/upload.html.jinja:108
+msgid "Trait fin"
+msgstr "細い線"
+
+#: templates/upload.html.jinja:109
+msgid "Trait moyen"
+msgstr "普通の線"
+
+#: templates/upload.html.jinja:110
+msgid "Trait épais"
+msgstr "太い線"
+
+#: templates/upload.html.jinja:111
+msgid "Gomme"
+msgstr "消しゴム"
+
+#: templates/configure/tab_legendes.html.jinja:122
+#: templates/upload.html.jinja:112
+msgid "Annuler"
+msgstr "キャンセル"
+
+#: templates/upload.html.jinja:113
+msgid "Tout effacer"
+msgstr "すべて消す"
+
+#: templates/configure/tab_legendes.html.jinja:75
+#: templates/upload.html.jinja:114
+msgid "Fond"
+msgstr "背景"
+
+#: templates/upload.html.jinja:115
+msgid "Papier"
+msgstr "紙"
+
+#: templates/configure/tab_messages.html.jinja:245
+#: templates/upload.html.jinja:116 utils/message_renderer.py:40
+msgid "Ardoise"
+msgstr "黒板"
+
+#: templates/upload.html.jinja:117
+msgid "Kraft"
+msgstr "クラフト紙"
+
+#: templates/upload.html.jinja:121
+msgid ""
+"Touchez le dessin pour poser l'autocollant (touchez-le à nouveau dans la "
+"liste pour revenir au crayon)."
+msgstr "絵をタップしてスタンプを貼ります（一覧のスタンプをもう一度タップするとペンに戻ります）。"
+
+#: templates/upload.html.jinja:125
+msgid "Envoyer le dessin"
+msgstr "絵を送る"
+
+#: templates/upload.html.jinja:216
+msgid "Faites d'abord un dessin."
+msgstr "まず絵を描いてください。"
+
+#: templates/upload.html.jinja:227 templates/upload.html.jinja:292
+#: templates/upload.html.jinja:329
+msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
+msgstr "送信に失敗しました。フォトフレームへの接続を確認してください。"
+
+#: templates/upload.html.jinja:237
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "このページをスマートフォンのホーム画面に追加"
 
-#: templates/upload.html.jinja:105
+#: templates/upload.html.jinja:239
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr "Safari で共有ボタンをタップし、「ホーム画面に追加」を選択します。"
 
-#: templates/upload.html.jinja:106
+#: templates/upload.html.jinja:240
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "Chrome でメニュー ⋮ を開き、「ホーム画面に追加」を選択します。"
 
-#: templates/upload.html.jinja:108
+#: templates/upload.html.jinja:242
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich がアプリとして、このページから直接開くようになります。"
 
-#: templates/upload.html.jinja:111
+#: templates/upload.html.jinja:245
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
@@ -489,15 +559,11 @@ msgstr ""
 "ログインに戻る\n"
 "          管理者"
 
-#: templates/upload.html.jinja:158 templates/upload.html.jinja:195
-msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
-msgstr "送信に失敗しました。フォトフレームへの接続を確認してください。"
-
-#: templates/upload.html.jinja:178
+#: templates/upload.html.jinja:312
 msgid "fichier(s) en cours d'envoi..."
 msgstr "件のファイルを送信中..."
 
-#: templates/upload.html.jinja:189
+#: templates/upload.html.jinja:323
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "送信サイズが大きすぎます。一度に送信するファイル数を減らしてください。"
 
@@ -3529,10 +3595,6 @@ msgstr "右揃え"
 msgid "Couleur du texte"
 msgstr "文字色"
 
-#: templates/configure/tab_legendes.html.jinja:75
-msgid "Fond"
-msgstr "背景"
-
 #: templates/configure/tab_legendes.html.jinja:77
 #: templates/configure/tab_legendes.html.jinja:95
 msgid "Aucun"
@@ -3594,10 +3656,6 @@ msgstr "デフォルトのスタイル"
 #: templates/configure/tab_legendes.html.jinja:119
 msgid "Reprendre le style général"
 msgstr "全体のスタイルに戻す"
-
-#: templates/configure/tab_legendes.html.jinja:122
-msgid "Annuler"
-msgstr "キャンセル"
 
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Légendes des photos et vidéos"
@@ -4135,7 +4193,8 @@ msgstr "公開済みメッセージ"
 msgid "Aucun message publié."
 msgstr "公開済みのメッセージはありません。"
 
-#: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:335
+#: templates/configure/tab_messages.html.jinja:129 web/routes_guests.py:337
+#: web/routes_guests.py:367
 msgid "Invité"
 msgstr "ゲスト"
 
@@ -4247,10 +4306,6 @@ msgstr "ナイト"
 #: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:48
 msgid "Pastel"
 msgstr "パステル"
-
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:40
-msgid "Ardoise"
-msgstr "黒板"
 
 #: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:52
 msgid "Minimal"
@@ -6492,86 +6547,100 @@ msgstr "%(count)s件の日付を保存しました。"
 msgid "L'accès pour l'invité '%(name)s' a été révoqué."
 msgstr "ゲスト '%(name)s' のアクセスが取り消されました。"
 
-#: web/routes_guests.py:81 web/routes_guests.py:86 web/routes_imports.py:646
+#: web/routes_guests.py:83 web/routes_guests.py:88 web/routes_imports.py:646
 #: web/routes_imports.py:684
 msgid "Aucun fichier sélectionné."
 msgstr "ファイルが選択されていません。"
 
-#: web/routes_guests.py:108 web/routes_imports.py:730
+#: web/routes_guests.py:110 web/routes_imports.py:730
 msgid "Nouvelle photo d'invité"
 msgstr "ゲストの新しい写真"
 
-#: web/routes_guests.py:108 web/routes_imports.py:730
+#: web/routes_guests.py:110 web/routes_imports.py:730
 #, python-format
 msgid "%(count)s photo(s) à valider sur le cadre."
 msgstr "フォトフレームで承認待ちの写真が %(count)s 枚あります。"
 
-#: web/routes_guests.py:110
+#: web/routes_guests.py:112
 #, python-format
 msgid "%(count)s photo(s) envoyée(s) pour validation avec succès !"
 msgstr "%(count)s 枚の写真が検証のために正常に送信されました。"
 
-#: web/routes_guests.py:171
+#: web/routes_guests.py:173
 msgid "Photo rejetée."
 msgstr "写真は拒否されました。"
 
-#: web/routes_guests.py:214
+#: web/routes_guests.py:216
 msgid "Photo approuvée et préparée. Le diaporama a été mis à jour."
 msgstr "写真は承認され、準備されました。スライドショーが更新されました。"
 
-#: web/routes_guests.py:216
+#: web/routes_guests.py:218
 msgid "La préparation de la photo a échoué. La photo reste en attente."
 msgstr "写真の準備に失敗しました。写真は保留中のままです。"
 
-#: web/routes_guests.py:220
+#: web/routes_guests.py:222
 msgid "Action inconnue."
 msgstr "アクションは不明。"
 
-#: web/routes_guests.py:296
+#: web/routes_guests.py:298
 msgid "Les messages des invités sont désactivés."
 msgstr "ゲストのメッセージは無効になっています。"
 
-#: web/routes_guests.py:307
+#: web/routes_guests.py:309
 msgid "Trop d'aperçus, réessayez plus tard."
 msgstr "プレビューが多すぎます。しばらくしてからもう一度お試しください。"
 
-#: web/routes_guests.py:329
+#: web/routes_guests.py:331 web/routes_guests.py:362
 msgid "Vous avez déjà envoyé plusieurs messages : réessayez dans une heure."
 msgstr "すでに複数のメッセージを送信しています。1時間後にもう一度お試しください。"
 
-#: web/routes_guests.py:346
+#: web/routes_guests.py:348
 msgid "Nouveau message d'invité"
 msgstr "ゲストの新しいメッセージ"
 
-#: web/routes_guests.py:346
+#: web/routes_guests.py:348 web/routes_guests.py:377
 msgid "Un invité"
 msgstr "ゲスト"
 
-#: web/routes_guests.py:349
+#: web/routes_guests.py:351
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "ありがとうございます！メッセージはフォトフレームに表示されます（%(date)s まで）。"
 
+#: web/routes_guests.py:377
+msgid "Nouveau dessin d'invité"
+msgstr "ゲストの新しい絵"
+
+#: web/routes_guests.py:377
+#, python-format
+msgid "%(name)s a fait un dessin pour le cadre."
+msgstr "%(name)sさんがフレームに絵を描きました。"
+
 #: web/routes_guests.py:381
+#, python-format
+msgid "Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s)."
+msgstr "ありがとうございます！絵はフレームに表示されます（%(date)sまで）。"
+
+#: web/routes_guests.py:413
 msgid ""
 "Lancez d'abord une fois sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
 msgstr "まず Raspberry Pi で一度実行してください：~/pimmich/utils/enable_remote_guests.sh"
 
-#: web/routes_guests.py:384
+#: web/routes_guests.py:416
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale が公開を拒否しました：%(detail)s"
 
-#: web/routes_guests.py:390
+#: web/routes_guests.py:422
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr "ゲストはリンクを使ってどこからでも送信できるようになりました。"
 
-#: web/routes_guests.py:391
+#: web/routes_guests.py:423
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr "ゲストページはインターネットからアクセスできなくなりました。"
 
-#: web/routes_guests.py:401
+#: web/routes_guests.py:433
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr "新しいリンクを作成しました。古いリンクは使えません。"
 
