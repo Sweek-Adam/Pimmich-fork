@@ -351,13 +351,16 @@ def library_search_api():
     from utils import library_search
     args = request.args
     date = lambda v: v if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v or "") else None
-    items, total = library_search.search(load_favorites(), args.get("q", "")[:120], date(args.get("from")), date(args.get("to")),
+    favorites = load_favorites()
+    favorite_set = set(favorites)
+    items, total = library_search.search(favorites, args.get("q", "")[:120], date(args.get("from")), date(args.get("to")),
                                          args.get("source", ""), args.get("person", ""), args.get("fav") == "1", args.get("media", ""))
     results = []
     for item in items:
         thumb = item["path"].rsplit(".", 1)[0] + "_thumbnail.jpg" if item["video"] else item["path"]
         results.append({"path": item["path"], "date": item["date"], "place": item.get("place"), "people": item["people"], "caption": item["caption"],
-                        "video": item["video"], "thumb": url_for("static", filename=f"prepared/{thumb}"),
+                        "video": item["video"], "favorite": item["path"] in favorite_set, "source": item["path"].split("/", 1)[0],
+                        "thumb": url_for("static", filename=f"prepared/{thumb}"),
                         "url": url_for("static", filename=f"prepared/{item['path']}")})
     return jsonify({"success": True, "total": total, "items": results})
 

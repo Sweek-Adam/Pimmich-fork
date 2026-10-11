@@ -1,0 +1,180 @@
+<script setup lang="ts">
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from "vue";
+import { get, post } from "../api";
+import { currentLang, t } from "../i18n";
+import { notify } from "../toast";
+
+const props = defineProps<{ favorites?: boolean }>();
+
+interface Item {
+  path: string; thumb: string; url: string; date: string | null; place?: string | null; people: string[];
+  caption?: string | null; video: boolean; favorite: boolean; source: string;
+}
+
+const filters = reactive({ q: "", source: "", person: "", media: "", from: "", to: "", fav: !!props.favorites });
+const items = ref<Item[]>([]);
+const total = ref(0);
+const loading = ref(true);
+const sources = ref<string[]>([]);
+const people = ref<{ id: string; name: string }[]>([]);
+const open = ref<number | null>(null);
+let debounce: number | undefined;
+
+const current = computed(() => (open.value === null ? null : items.value[open.value]));
+const sourceLabel = (s: string) => (s.startsWith("compte_") ? s.slice(7) : s);
+const dateLabel = (d: string | null) =>
+  d ? new Date(d).toLocaleDateString(currentLang(), { day: "numeric", month: "long", year: "numeric" }) : "";
+
+async function search() {
+  loading.value = true;
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(filters)) {
+    if (key === "fav") { if (value) params.set("fav", "1"); }
+    else if (value) params.set(key, String(value));
+  }
+  try {
+    const d = await get<{ items: Item[]; total: number }>(`/api/library/search?${params}`);
+    items.value = d.items;
+    total.value = d.total;
+  } catch (e) {
+    notify((e as Error).message, true);
+  }
+  loading.value = false;
+}
+
+watch(filters, () => {
+  window.clearTimeout(debounce);
+  debounce = window.setTimeout(search, 300);
+});
+
+async function toggleFavorite(item: Item) {
+  try {
+    const d = await post<{ success: boolean; is_favorite: boolean }>("/api/toggle_favorite", { photo: item.path });
+    item.favorite = d.is_favorite;
+    notify(d.is_favorite ? t("Ajoutée aux favoris.") : t("Retirée des favoris."));
+    if (filters.fav && !d.is_favorite) {
+      items.value = items.value.filter((i) => i !== item);
+      total.value -= 1;
+      if (open.value !== null && open.value >= items.value.length) open.value = items.value.length ? items.value.length - 1 : null;
+    }
+  } catch (e) {
+    notify((e as Error).message, true);
+  }
+}
+
+function step(delta: number) {
+  if (open.value === null || !items.value.length) return;
+  open.value = (open.value + delta + items.value.length) % items.value.length;
+}
+
+function onKey(event: KeyboardEvent) {
+  if (open.value === null) return;
+  if (event.key === "ArrowRight") step(1);
+  else if (event.key === "ArrowLeft") step(-1);
+  else if (event.key === "Escape") open.value = null;
+}
+
+function reset() {
+  Object.assign(filters, { q: "", source: "", person: "", media: "", from: "", to: "", fav: !!props.favorites });
+}
+
+onMounted(async () => {
+  search();
+  window.addEventListener("keydown", onKey);
+  get<{ sources: Record<string, unknown> }>("/api/stats/photos").then((d) => (sources.value = Object.keys(d.sources).sort())).catch(() => {});
+  get<{ people: { id: string; name: string }[] }>("/api/people").then((d) => (people.value = d.people)).catch(() => {});
+});
+onUnmounted(() => window.removeEventListener("keydown", onKey));
+</script>
+
+<template>
+  <section class="card">
+    <form class="filters" @submit.prevent="search">
+      <label class="search"><i class="fas fa-search"></i>
+        <input v-model="filters.q" type="search" :placeholder="t('Rechercher (lieu, légende, nom de fichier…)')"></label>
+      <select v-model="filters.source">
+        <option value="">{{ t("Toutes les sources") }}</option>
+        <option v-for="s in sources" :key="s" :value="s">{{ sourceLabel(s) }}</option>
+      </select>
+      <select v-if="people.length" v-model="filters.person">
+        <option value="">{{ t("Tout le monde") }}</option>
+        <option v-for="p in people" :key="p.id" :value="p.name">{{ p.name }}</option>
+      </select>
+      <select v-model="filters.media">
+        <option value="">{{ t("Photos et vidéos") }}</option>
+        <option value="photos">{{ t("Photos") }}</option>
+        <option value="videos">{{ t("Vidéos") }}</option>
+      </select>
+      <label class="date">{{ t("Du") }} <input v-model="filters.from" type="date"></label>
+      <label class="date">{{ t("au") }} <input v-model="filters.to" type="date"></label>
+      <label class="fav"><input v-model="filters.fav" type="checkbox"><i class="fas fa-star"></i>{{ t("Favoris") }}</label>
+      <button class="btn" type="button" @click="reset">{{ t("Effacer") }}</button>
+    </form>
+    <p class="small muted count">
+      {{ total > items.length ? t("{n} résultats ({shown} affichés)", { n: total, shown: items.length }) : t("{n} résultats", { n: total }) }}
+    </p>
+  </section>
+
+  <section class="card">
+    <div v-if="loading && !items.length" class="grid-photos"><div v-for="i in 12" :key="i" class="skeleton cell"></div></div>
+    <p v-else-if="!items.length" class="muted">{{ filters.fav ? t("Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour l'ajouter.") : t("Aucune photo ne correspond.") }}</p>
+    <div v-else class="grid-photos">
+      <figure v-for="(item, index) in items" :key="item.path" class="cell">
+        <button type="button" class="open" @click="open = index"><img :src="item.thumb" alt="" loading="lazy"></button>
+        <i v-if="item.video" class="fas fa-play-circle badge-video"></i>
+        <button type="button" class="star" :class="{ on: item.favorite }" :title="t('Favori')" @click="toggleFavorite(item)">
+          <i :class="item.favorite ? 'fas fa-star' : 'far fa-star'"></i></button>
+      </figure>
+    </div>
+  </section>
+
+  <div v-if="current" class="viewer" @click.self="open = null">
+    <button class="nav prev" type="button" :title="t('Précédente')" @click="step(-1)"><i class="fas fa-chevron-left"></i></button>
+    <div class="stage" @click.self="open = null">
+      <video v-if="current.video" :key="current.url" :src="current.url" controls autoplay></video>
+      <img v-else :key="current.url" :src="current.url" alt="">
+      <div class="info">
+        <div class="spacer">
+          <strong v-if="current.date">{{ dateLabel(current.date) }}</strong>
+          <span v-if="current.place"> · {{ current.place }}</span>
+          <p v-if="current.people.length" class="small">{{ current.people.join(", ") }}</p>
+          <p v-if="current.caption" class="small">« {{ current.caption }} »</p>
+          <p class="small dim">{{ sourceLabel(current.source) }} · {{ current.path.split("/").pop() }}</p>
+        </div>
+        <button class="btn" type="button" @click="toggleFavorite(current)">
+          <i :class="current.favorite ? 'fas fa-star' : 'far fa-star'"></i>{{ current.favorite ? t("Favori") : t("Ajouter aux favoris") }}</button>
+        <button class="btn icon" type="button" :title="t('Fermer')" @click="open = null"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <button class="nav next" type="button" :title="t('Suivante')" @click="step(1)"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</template>
+
+<style scoped>
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.search { flex: 1 1 260px; display: flex; align-items: center; gap: .5rem; border: 1px solid var(--border); border-radius: 10px; padding: 0 .7rem; background: var(--surface); }
+.search i { color: var(--muted); }
+.search input { border: 0; flex: 1; padding: .5rem 0; outline: none; }
+.date { display: flex; align-items: center; gap: .3rem; font-size: .9rem; color: var(--muted); }
+.date input { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .35rem .5rem; }
+.fav { display: flex; align-items: center; gap: .35rem; font-weight: 600; }
+.fav i { color: #e0a100; }
+.count { margin-top: .7rem; }
+.grid-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .45rem; }
+.cell { margin: 0; position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+.open { border: 0; padding: 0; width: 100%; height: 100%; cursor: zoom-in; background: none; }
+.open img { width: 100%; height: 100%; object-fit: cover; }
+.badge-video { position: absolute; left: 6px; bottom: 6px; color: #fff; text-shadow: 0 1px 4px rgba(0, 0, 0, .6); pointer-events: none; }
+.star { position: absolute; top: 4px; right: 4px; border: 0; background: rgba(0, 0, 0, .35); color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; opacity: 0; transition: opacity .15s; }
+.cell:hover .star, .star.on { opacity: 1; }
+.star.on { color: #ffc93c; }
+@media (hover: none) { .star { opacity: 1; } }
+.viewer { position: fixed; inset: 0; z-index: 60; background: rgba(8, 9, 12, .94); display: flex; align-items: center; color: #fff; }
+.stage { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; gap: .8rem; min-width: 0; }
+.stage img, .stage video { max-width: 100%; max-height: calc(100vh - 9rem); border-radius: 8px; object-fit: contain; }
+.info { display: flex; gap: .6rem; align-items: center; width: min(900px, 100%); }
+.info .btn { background: rgba(255, 255, 255, .1); color: #fff; border-color: rgba(255, 255, 255, .2); }
+.dim { opacity: .6; }
+.nav { border: 0; background: rgba(255, 255, 255, .08); color: #fff; width: 3rem; height: 3rem; border-radius: 50%; margin: 0 .5rem; cursor: pointer; flex: none; }
+@media (max-width: 760px) { .nav { position: absolute; bottom: 1rem; z-index: 2; } .prev { left: 1rem; } .next { right: 1rem; } .info { flex-wrap: wrap; padding-bottom: 3.5rem; } }
+</style>

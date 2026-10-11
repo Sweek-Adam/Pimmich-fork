@@ -106,7 +106,7 @@ onUnmounted(() => {
         <button class="btn icon" type="button" :title="t('Thème')" @click="cycleTheme"><i class="fas" :class="themeIcon"></i></button>
       </header>
       <main class="content">
-        <router-view />
+        <router-view :key="route.path" />
       </main>
     </div>
 

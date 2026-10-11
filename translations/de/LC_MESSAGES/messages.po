@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:18+0200\n"
+"POT-Creation-Date: 2026-10-11 12:21+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -186,8 +186,9 @@ msgstr "{n} Fotos"
 msgid "Accueil"
 msgstr "Start"
 
-#: frontend/src/nav.ts:24 templates/configure.html.jinja:96
-#: templates/configure.html.jinja:245 templates/configure/_tour.html.jinja:32
+#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:105
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:245
+#: templates/configure/_tour.html.jinja:32
 msgid "Photos"
 msgstr "Fotos"
 
@@ -216,7 +217,8 @@ msgstr "Als Nächstes"
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
-#: frontend/src/nav.ts:30 templates/configure.html.jinja:149
+#: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:110
+#: templates/configure.html.jinja:149
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
@@ -406,6 +408,102 @@ msgstr "Abbrechen"
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "Noch nichts."
+
+#: frontend/src/views/LibraryView.vue:54
+msgid "Ajoutée aux favoris."
+msgstr "Zu den Favoriten hinzugefügt."
+
+#: frontend/src/views/LibraryView.vue:54
+msgid "Retirée des favoris."
+msgstr "Aus den Favoriten entfernt."
+
+#: frontend/src/views/LibraryView.vue:94
+msgid "Rechercher (lieu, légende, nom de fichier…)"
+msgstr "Suchen (Ort, Bildunterschrift, Dateiname…)"
+
+#: frontend/src/views/LibraryView.vue:96
+#: templates/configure/tab_apercu.html.jinja:8
+msgid "Toutes les sources"
+msgstr "Alle Quellen"
+
+#: frontend/src/views/LibraryView.vue:100
+#: templates/configure/_playlist_builder.html.jinja:16
+#: templates/configure/_playlist_builder.html.jinja:110
+#: templates/configure/tab_apercu.html.jinja:9
+msgid "Tout le monde"
+msgstr "Alle"
+
+#: frontend/src/views/LibraryView.vue:104
+#: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
+#: templates/configure/tab_legendes.html.jinja:7
+msgid "Photos et vidéos"
+msgstr "Fotos und Videos"
+
+#: frontend/src/views/LibraryView.vue:106
+msgid "Vidéos"
+msgstr "Videos"
+
+#: frontend/src/views/LibraryView.vue:108
+msgid "Du"
+msgstr "Vom"
+
+#: frontend/src/views/LibraryView.vue:109
+#: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:7
+msgid "au"
+msgstr "bis"
+
+#: frontend/src/views/LibraryView.vue:111
+msgid "Effacer"
+msgstr "Zurücksetzen"
+
+#: frontend/src/views/LibraryView.vue:114
+#, python-brace-format
+msgid "{n} résultats ({shown} affichés)"
+msgstr "{n} Ergebnisse ({shown} angezeigt)"
+
+#: frontend/src/views/LibraryView.vue:114
+#, python-brace-format
+msgid "{n} résultats"
+msgstr "{n} Ergebnisse"
+
+#: frontend/src/views/LibraryView.vue:120
+msgid ""
+"Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
+"l'ajouter."
+msgstr ""
+"Noch keine Lieblingsfotos: Tippen Sie auf den Stern eines Fotos, um es "
+"hinzuzufügen."
+
+#: frontend/src/views/LibraryView.vue:120
+msgid "Aucune photo ne correspond."
+msgstr "Kein Foto passt."
+
+#: frontend/src/views/LibraryView.vue:125
+#: frontend/src/views/LibraryView.vue:145
+msgid "Favori"
+msgstr "Favorit"
+
+#: frontend/src/views/LibraryView.vue:132
+msgid "Précédente"
+msgstr "Vorherige"
+
+#: frontend/src/views/LibraryView.vue:145
+msgid "Ajouter aux favoris"
+msgstr "Zu Favoriten hinzufügen"
+
+#: frontend/src/views/LibraryView.vue:146 frontend/src/views/TripsView.vue:263
+#: templates/configure/_playlist_builder.html.jinja:6
+#: templates/configure/_smart_albums.html.jinja:13
+#: templates/configure/tab_accueil.html.jinja:84
+#: templates/configure/tab_legendes.html.jinja:27
+msgid "Fermer"
+msgstr "Schließen"
+
+#: frontend/src/views/LibraryView.vue:149
+msgid "Suivante"
+msgstr "Nächste"
 
 #: frontend/src/views/PendingView.vue:48
 #: templates/configure/tab_validation.html.jinja:4
@@ -631,14 +729,6 @@ msgstr "Kein Ort gefunden."
 #, python-brace-format
 msgid "à {n} km de la maison"
 msgstr "{n} km von zu Hause"
-
-#: frontend/src/views/TripsView.vue:263
-#: templates/configure/_playlist_builder.html.jinja:6
-#: templates/configure/_smart_albums.html.jinja:13
-#: templates/configure/tab_accueil.html.jinja:84
-#: templates/configure/tab_legendes.html.jinja:27
-msgid "Fermer"
-msgstr "Schließen"
 
 #: frontend/src/views/TripsView.vue:266
 #: templates/configure/tab_carte.html.jinja:32
@@ -1227,12 +1317,6 @@ msgstr "Alle Monate"
 msgid "Personne"
 msgstr "Person"
 
-#: templates/configure/_playlist_builder.html.jinja:16
-#: templates/configure/_playlist_builder.html.jinja:110
-#: templates/configure/tab_apercu.html.jinja:9
-msgid "Tout le monde"
-msgstr "Alle"
-
 #: templates/configure/_playlist_builder.html.jinja:18
 msgid "Tout sélectionner"
 msgstr "Alle auswählen"
@@ -1354,11 +1438,6 @@ msgid "du"
 msgstr "vom"
 
 #: templates/configure/_smart_albums.html.jinja:22
-#: templates/configure/tab_apercu.html.jinja:7
-msgid "au"
-msgstr "bis"
-
-#: templates/configure/_smart_albums.html.jinja:22
 msgid "(mois-jour)"
 msgstr "(Monat-Tag)"
 
@@ -1385,12 +1464,6 @@ msgstr "Sonstiges"
 #: templates/configure/_smart_albums.html.jinja:42
 msgid "Favoris uniquement"
 msgstr "Nur Favoriten"
-
-#: templates/configure/_smart_albums.html.jinja:44
-#: templates/configure/tab_apercu.html.jinja:10
-#: templates/configure/tab_legendes.html.jinja:7
-msgid "Photos et vidéos"
-msgstr "Fotos und Videos"
 
 #: templates/configure/_smart_albums.html.jinja:45
 #: templates/configure/tab_apercu.html.jinja:10
@@ -3332,10 +3405,6 @@ msgstr "In der Bibliothek suchen"
 #: templates/configure/tab_apercu.html.jinja:5
 msgid "Lieu, légende, nom… ex : Biarritz, anniversaire"
 msgstr "Ort, Bildunterschrift, Name… z. B. Biarritz, Geburtstag"
-
-#: templates/configure/tab_apercu.html.jinja:8
-msgid "Toutes les sources"
-msgstr "Alle Quellen"
 
 #: templates/configure/tab_apercu.html.jinja:26
 #, python-brace-format

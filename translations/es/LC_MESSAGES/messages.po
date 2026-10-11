@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:18+0200\n"
+"POT-Creation-Date: 2026-10-11 12:21+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -186,8 +186,9 @@ msgstr "{n} fotos"
 msgid "Accueil"
 msgstr "Inicio"
 
-#: frontend/src/nav.ts:24 templates/configure.html.jinja:96
-#: templates/configure.html.jinja:245 templates/configure/_tour.html.jinja:32
+#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:105
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:245
+#: templates/configure/_tour.html.jinja:32
 msgid "Photos"
 msgstr "Fotos"
 
@@ -216,7 +217,8 @@ msgstr "A continuación"
 msgid "Playlists"
 msgstr "Listas de reproducción"
 
-#: frontend/src/nav.ts:30 templates/configure.html.jinja:149
+#: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:110
+#: templates/configure.html.jinja:149
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
@@ -406,6 +408,100 @@ msgstr "Cancelar"
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "Nada por ahora."
+
+#: frontend/src/views/LibraryView.vue:54
+msgid "Ajoutée aux favoris."
+msgstr "Añadida a favoritos."
+
+#: frontend/src/views/LibraryView.vue:54
+msgid "Retirée des favoris."
+msgstr "Quitada de favoritos."
+
+#: frontend/src/views/LibraryView.vue:94
+msgid "Rechercher (lieu, légende, nom de fichier…)"
+msgstr "Buscar (lugar, leyenda, nombre de archivo…)"
+
+#: frontend/src/views/LibraryView.vue:96
+#: templates/configure/tab_apercu.html.jinja:8
+msgid "Toutes les sources"
+msgstr "Todas las fuentes"
+
+#: frontend/src/views/LibraryView.vue:100
+#: templates/configure/_playlist_builder.html.jinja:16
+#: templates/configure/_playlist_builder.html.jinja:110
+#: templates/configure/tab_apercu.html.jinja:9
+msgid "Tout le monde"
+msgstr "Todos"
+
+#: frontend/src/views/LibraryView.vue:104
+#: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
+#: templates/configure/tab_legendes.html.jinja:7
+msgid "Photos et vidéos"
+msgstr "Fotos y vídeos"
+
+#: frontend/src/views/LibraryView.vue:106
+msgid "Vidéos"
+msgstr "Vídeos"
+
+#: frontend/src/views/LibraryView.vue:108
+msgid "Du"
+msgstr "Del"
+
+#: frontend/src/views/LibraryView.vue:109
+#: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:7
+msgid "au"
+msgstr "al"
+
+#: frontend/src/views/LibraryView.vue:111
+msgid "Effacer"
+msgstr "Borrar"
+
+#: frontend/src/views/LibraryView.vue:114
+#, python-brace-format
+msgid "{n} résultats ({shown} affichés)"
+msgstr "{n} resultados ({shown} mostrados)"
+
+#: frontend/src/views/LibraryView.vue:114
+#, python-brace-format
+msgid "{n} résultats"
+msgstr "{n} resultados"
+
+#: frontend/src/views/LibraryView.vue:120
+msgid ""
+"Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
+"l'ajouter."
+msgstr "Aún no hay fotos favoritas: toca la estrella de una foto para añadirla."
+
+#: frontend/src/views/LibraryView.vue:120
+msgid "Aucune photo ne correspond."
+msgstr "Ninguna foto coincide."
+
+#: frontend/src/views/LibraryView.vue:125
+#: frontend/src/views/LibraryView.vue:145
+msgid "Favori"
+msgstr "Favorito"
+
+#: frontend/src/views/LibraryView.vue:132
+msgid "Précédente"
+msgstr "Anterior"
+
+#: frontend/src/views/LibraryView.vue:145
+msgid "Ajouter aux favoris"
+msgstr "Añadir a favoritos"
+
+#: frontend/src/views/LibraryView.vue:146 frontend/src/views/TripsView.vue:263
+#: templates/configure/_playlist_builder.html.jinja:6
+#: templates/configure/_smart_albums.html.jinja:13
+#: templates/configure/tab_accueil.html.jinja:84
+#: templates/configure/tab_legendes.html.jinja:27
+msgid "Fermer"
+msgstr "Cerrar"
+
+#: frontend/src/views/LibraryView.vue:149
+msgid "Suivante"
+msgstr "Siguiente"
 
 #: frontend/src/views/PendingView.vue:48
 #: templates/configure/tab_validation.html.jinja:4
@@ -627,14 +723,6 @@ msgstr "No se encontró ningún lugar."
 #, python-brace-format
 msgid "à {n} km de la maison"
 msgstr "a {n} km de casa"
-
-#: frontend/src/views/TripsView.vue:263
-#: templates/configure/_playlist_builder.html.jinja:6
-#: templates/configure/_smart_albums.html.jinja:13
-#: templates/configure/tab_accueil.html.jinja:84
-#: templates/configure/tab_legendes.html.jinja:27
-msgid "Fermer"
-msgstr "Cerrar"
 
 #: frontend/src/views/TripsView.vue:266
 #: templates/configure/tab_carte.html.jinja:32
@@ -1225,12 +1313,6 @@ msgstr "Todos los meses"
 msgid "Personne"
 msgstr "Persona"
 
-#: templates/configure/_playlist_builder.html.jinja:16
-#: templates/configure/_playlist_builder.html.jinja:110
-#: templates/configure/tab_apercu.html.jinja:9
-msgid "Tout le monde"
-msgstr "Todos"
-
 #: templates/configure/_playlist_builder.html.jinja:18
 msgid "Tout sélectionner"
 msgstr "Seleccionar todo"
@@ -1350,11 +1432,6 @@ msgid "du"
 msgstr "del"
 
 #: templates/configure/_smart_albums.html.jinja:22
-#: templates/configure/tab_apercu.html.jinja:7
-msgid "au"
-msgstr "al"
-
-#: templates/configure/_smart_albums.html.jinja:22
 msgid "(mois-jour)"
 msgstr "(mes-día)"
 
@@ -1381,12 +1458,6 @@ msgstr "Otros"
 #: templates/configure/_smart_albums.html.jinja:42
 msgid "Favoris uniquement"
 msgstr "Solo favoritos"
-
-#: templates/configure/_smart_albums.html.jinja:44
-#: templates/configure/tab_apercu.html.jinja:10
-#: templates/configure/tab_legendes.html.jinja:7
-msgid "Photos et vidéos"
-msgstr "Fotos y vídeos"
 
 #: templates/configure/_smart_albums.html.jinja:45
 #: templates/configure/tab_apercu.html.jinja:10
@@ -3319,10 +3390,6 @@ msgstr "Buscar en la biblioteca"
 #: templates/configure/tab_apercu.html.jinja:5
 msgid "Lieu, légende, nom… ex : Biarritz, anniversaire"
 msgstr "Lugar, pie de foto, nombre… ej.: Biarritz, cumpleaños"
-
-#: templates/configure/tab_apercu.html.jinja:8
-msgid "Toutes les sources"
-msgstr "Todas las fuentes"
 
 #: templates/configure/tab_apercu.html.jinja:26
 #, python-brace-format

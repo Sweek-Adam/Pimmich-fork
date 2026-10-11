@@ -24,10 +24,10 @@ export const groups: NavGroup[] = [
   { key: "photos", label: () => t("Photos"), icon: "fa-images", items: [
     { label: () => t("Importer"), icon: "fa-file-import", tab: "tab-actions" },
     { label: () => t("Sources"), icon: "fa-folder-open", tab: "tab-sources" },
-    { label: () => t("Bibliothèque"), icon: "fa-th", tab: "tab-apercu" },
+    { label: () => t("Bibliothèque"), icon: "fa-th", tab: "tab-apercu", route: "/bibliotheque" },
     { label: () => t("À suivre"), icon: "fa-stream", tab: "tab-queue" },
     { label: () => t("Playlists"), icon: "fa-list-ul", tab: "tab-playlists" },
-    { label: () => t("Favoris"), icon: "fa-star", tab: "tab-favoris" },
+    { label: () => t("Favoris"), icon: "fa-star", tab: "tab-favoris", route: "/favoris" },
     { label: () => t("Carte"), icon: "fa-globe-europe", tab: "tab-carte", route: "/carte" },
     { label: () => t("Messages"), icon: "fa-comment-alt", tab: "tab-messages" },
   ] },
