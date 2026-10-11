@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:39+0200\n"
+"POT-Creation-Date: 2026-10-11 12:41+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -924,6 +924,159 @@ msgstr "キャンセル"
 msgid "Rien pour l'instant."
 msgstr "まだありません。"
 
+#: frontend/src/views/LayoutsView.vue:25 frontend/src/views/LayoutsView.vue:131
+#: templates/configure/tab_accueil.html.jinja:89
+#: templates/configure/tab_dispositions.html.jinja:108
+msgid "Formats"
+msgstr "レイアウト"
+
+#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:131
+#: templates/configure/tab_accueil.html.jinja:90
+#: templates/configure/tab_dispositions.html.jinja:108
+msgid "Thèmes"
+msgstr "テーマ"
+
+#: frontend/src/views/LayoutsView.vue:30
+#: templates/configure/tab_dispositions.html.jinja:85
+msgid "Une composition toutes les (photos) :"
+msgstr "コラージュの頻度（写真○枚ごと）："
+
+#: frontend/src/views/LayoutsView.vue:31
+#: templates/configure/tab_dispositions.html.jinja:88
+msgid ""
+"0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
+"composition reste affichée au moins 2,5 secondes par photo (la durée du "
+"diaporama est allongée si besoin)."
+msgstr ""
+"0：コラージュを続けて表示し、間に単独の写真を挟みません。コラージュは写真 1 枚につき 2.5 "
+"秒以上表示されます（必要に応じて表示時間を延長します）。"
+
+#: frontend/src/views/LayoutsView.vue:32
+#: templates/configure/tab_dispositions.html.jinja:91
+msgid "Photos entières (sans recadrage)"
+msgstr "写真全体を表示（トリミングなし）"
+
+#: frontend/src/views/LayoutsView.vue:33
+#: templates/configure/tab_dispositions.html.jinja:95
+msgid "Recadrage intelligent : garder les visages entiers"
+msgstr "スマートクロップ：顔を切らずに残す"
+
+#: frontend/src/views/LayoutsView.vue:34
+#: templates/configure/tab_dispositions.html.jinja:96
+msgid ""
+"Quand une photo doit être coupée (cases des compositions, photos très "
+"larges), le cadre garde les visages au lieu du centre de l'image."
+msgstr "写真を切り取る必要があるとき（コラージュの枠、横長の写真）、画像の中央ではなく顔を残します。"
+
+#: frontend/src/views/LayoutsView.vue:35
+#: templates/configure/tab_dispositions.html.jinja:100
+msgid "Inclure les messages dans les compositions"
+msgstr "コラージュにメッセージを含める"
+
+#: frontend/src/views/LayoutsView.vue:36
+#: templates/configure/tab_dispositions.html.jinja:104
+msgid ""
+"Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
+"moment-là)"
+msgstr "季節のテーマは期間中のみ表示（その期間はより頻繁に表示）"
+
+#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:209
+msgid "Gardez au moins une disposition."
+msgstr "レイアウトを少なくとも1つ残してください。"
+
+#: frontend/src/views/LayoutsView.vue:71
+msgid "Donnez un nom à cette configuration."
+msgstr "この設定に名前を付けてください。"
+
+#: frontend/src/views/LayoutsView.vue:82
+#: templates/configure/tab_dispositions.html.jinja:31
+msgid "Supprimer cette configuration ?"
+msgstr "この設定を削除しますか？"
+
+#: frontend/src/views/LayoutsView.vue:97
+#: templates/configure/tab_dispositions.html.jinja:4
+msgid "Disposition du moment"
+msgstr "現在のレイアウト"
+
+#: frontend/src/views/LayoutsView.vue:98
+#: templates/configure/tab_dispositions.html.jinja:6
+msgid ""
+"Choisissez une disposition à afficher une seule fois tout de suite, ou à "
+"utiliser jusqu'à nouvel ordre. « Selon mes réglages » utilise les "
+"dispositions cochées ci-dessous."
+msgstr "今すぐ1回だけ表示するか、次に変更するまで使用するレイアウトを選んでください。「自分の設定どおり」では、下でチェックしたレイアウトを使用します。"
+
+#: frontend/src/views/LayoutsView.vue:109
+#: templates/configure/tab_dispositions.html.jinja:16
+msgid "Mes configurations"
+msgstr "マイ設定"
+
+#: frontend/src/views/LayoutsView.vue:110
+#: templates/configure/tab_dispositions.html.jinja:18
+msgid ""
+"Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
+" l'autre d'un clic."
+msgstr "レイアウトの組み合わせに名前を付けて保存し、ワンクリックで切り替えられます。"
+
+#: frontend/src/views/LayoutsView.vue:113
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "disposition(s)"
+msgstr "レイアウト"
+
+#: frontend/src/views/LayoutsView.vue:114
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Active"
+msgstr "有効"
+
+#: frontend/src/views/LayoutsView.vue:115
+#: templates/configure/tab_affichage.html.jinja:295
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Activer"
+msgstr "有効にする"
+
+#: frontend/src/views/LayoutsView.vue:116
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Remplacer par la sélection"
+msgstr "選択内容で置き換える"
+
+#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr "削除"
+
+#: frontend/src/views/LayoutsView.vue:120
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Aucune configuration enregistrée."
+msgstr "保存された設定はありません。"
+
+#: frontend/src/views/LayoutsView.vue:122
+#: templates/configure/tab_dispositions.html.jinja:21
+msgid "Nom (ex : Soirée, Calme, Noël en famille)"
+msgstr "名前（例：パーティー、落ち着き、家族のクリスマス）"
+
+#: frontend/src/views/LayoutsView.vue:123
+#: templates/configure/tab_dispositions.html.jinja:22
+msgid "Enregistrer la sélection ci-dessous"
+msgstr "下の選択を保存"
+
+#: frontend/src/views/LayoutsView.vue:129
+#: templates/configure/tab_dispositions.html.jinja:81
+msgid "Dispositions utilisées"
+msgstr "使用するレイアウト"
+
+#: frontend/src/views/LayoutsView.vue:138
+#: templates/configure/tab_dispositions.html.jinja:117
+msgid "Thème de saison"
+msgstr "季節のテーマ"
+
+#: frontend/src/views/LayoutsView.vue:139
+#: templates/configure/tab_accueil.html.jinja:104
+#: templates/configure/tab_dispositions.html.jinja:118
+msgid "Affiche les messages"
+msgstr "メッセージを表示"
+
 #: frontend/src/views/LibraryView.vue:54
 msgid "Ajoutée aux favoris."
 msgstr "お気に入りに追加しました。"
@@ -1525,12 +1678,6 @@ msgstr "写真を編集"
 #: templates/configure/tab_carte.html.jinja:34
 msgid "Renommer"
 msgstr "名前を変更"
-
-#: frontend/src/views/PlaylistsView.vue:123
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
-msgstr "削除"
 
 #: frontend/src/views/PlaylistsView.vue:137
 msgid "Nom de la playlist"
@@ -2821,7 +2968,7 @@ msgid "Enregistrement…"
 msgstr "保存中…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:289
-#: web/routes_settings.py:170
+#: web/routes_settings.py:176 web/routes_settings.py:219
 msgid "Enregistré"
 msgstr "保存しました"
 
@@ -3454,16 +3601,6 @@ msgstr "レイアウトを選択"
 msgid "Tout"
 msgstr "すべて"
 
-#: templates/configure/tab_accueil.html.jinja:89
-#: templates/configure/tab_dispositions.html.jinja:108
-msgid "Formats"
-msgstr "レイアウト"
-
-#: templates/configure/tab_accueil.html.jinja:90
-#: templates/configure/tab_dispositions.html.jinja:108
-msgid "Thèmes"
-msgstr "テーマ"
-
 #: templates/configure/tab_accueil.html.jinja:91
 msgid "Avec messages"
 msgstr "メッセージ付き"
@@ -3481,11 +3618,6 @@ msgstr "自分の設定どおり"
 #: templates/configure/tab_accueil.html.jinja:128
 msgid "Compositions au hasard"
 msgstr "ランダムな組み写真"
-
-#: templates/configure/tab_accueil.html.jinja:104
-#: templates/configure/tab_dispositions.html.jinja:118
-msgid "Affiche les messages"
-msgstr "メッセージを表示"
 
 #: templates/configure/tab_accueil.html.jinja:111
 msgid "Afficher maintenant (une fois)"
@@ -3833,11 +3965,6 @@ msgid ""
 msgstr ""
 "フレームはHome "
 "Assistantに自動で表示されます：スライドショーのスイッチ（スリープ／起動）、雰囲気の選択、次の写真、そして入力した文字がすぐフレームに表示される「アラート」欄（例：「ガレージのドアが開いています」）。"
-
-#: templates/configure/tab_affichage.html.jinja:295
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Activer"
-msgstr "有効にする"
 
 #: templates/configure/tab_affichage.html.jinja:297
 msgid "Serveur MQTT"
@@ -4243,59 +4370,6 @@ msgid ""
 " réservés aux administrateurs."
 msgstr "ユーザーアカウントでログインしています。アカウント管理、ネットワーク、メンテナンス、保存されたパスワードやトークンは管理者専用です。"
 
-#: templates/configure/tab_dispositions.html.jinja:4
-msgid "Disposition du moment"
-msgstr "現在のレイアウト"
-
-#: templates/configure/tab_dispositions.html.jinja:6
-msgid ""
-"Choisissez une disposition à afficher une seule fois tout de suite, ou à "
-"utiliser jusqu'à nouvel ordre. « Selon mes réglages » utilise les "
-"dispositions cochées ci-dessous."
-msgstr "今すぐ1回だけ表示するか、次に変更するまで使用するレイアウトを選んでください。「自分の設定どおり」では、下でチェックしたレイアウトを使用します。"
-
-#: templates/configure/tab_dispositions.html.jinja:16
-msgid "Mes configurations"
-msgstr "マイ設定"
-
-#: templates/configure/tab_dispositions.html.jinja:18
-msgid ""
-"Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
-" l'autre d'un clic."
-msgstr "レイアウトの組み合わせに名前を付けて保存し、ワンクリックで切り替えられます。"
-
-#: templates/configure/tab_dispositions.html.jinja:21
-msgid "Nom (ex : Soirée, Calme, Noël en famille)"
-msgstr "名前（例：パーティー、落ち着き、家族のクリスマス）"
-
-#: templates/configure/tab_dispositions.html.jinja:22
-msgid "Enregistrer la sélection ci-dessous"
-msgstr "下の選択を保存"
-
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Active"
-msgstr "有効"
-
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Remplacer par la sélection"
-msgstr "選択内容で置き換える"
-
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "disposition(s)"
-msgstr "レイアウト"
-
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Aucune configuration enregistrée."
-msgstr "保存された設定はありません。"
-
-#: templates/configure/tab_dispositions.html.jinja:31
-msgid "Supprimer cette configuration ?"
-msgstr "この設定を削除しますか？"
-
-#: templates/configure/tab_dispositions.html.jinja:81
-msgid "Dispositions utilisées"
-msgstr "使用するレイアウト"
-
 #: templates/configure/tab_dispositions.html.jinja:83
 msgid ""
 "Cochez les dispositions du diaporama. Avec « Photo unique » et des "
@@ -4304,43 +4378,6 @@ msgid ""
 "suivent dans le diaporama ou la playlist, dans leur ordre ; un message "
 "qui en fait partie devient une note."
 msgstr "スライドショーのレイアウトをチェックしてください。「1枚表示」とコラージュを選ぶと、N枚ごとにコラージュを1回表示します。「1枚表示」なしではコラージュのみになります。コラージュはスライドショーやプレイリストの次の写真を順番どおりにまとめ、その中のメッセージはメモになります。"
-
-#: templates/configure/tab_dispositions.html.jinja:85
-msgid "Une composition toutes les (photos) :"
-msgstr "コラージュの頻度（写真○枚ごと）："
-
-#: templates/configure/tab_dispositions.html.jinja:88
-msgid ""
-"0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
-"composition reste affichée au moins 2,5 secondes par photo (la durée du "
-"diaporama est allongée si besoin)."
-msgstr ""
-"0：コラージュを続けて表示し、間に単独の写真を挟みません。コラージュは写真 1 枚につき 2.5 "
-"秒以上表示されます（必要に応じて表示時間を延長します）。"
-
-#: templates/configure/tab_dispositions.html.jinja:91
-msgid "Photos entières (sans recadrage)"
-msgstr "写真全体を表示（トリミングなし）"
-
-#: templates/configure/tab_dispositions.html.jinja:95
-msgid "Recadrage intelligent : garder les visages entiers"
-msgstr "スマートクロップ：顔を切らずに残す"
-
-#: templates/configure/tab_dispositions.html.jinja:96
-msgid ""
-"Quand une photo doit être coupée (cases des compositions, photos très "
-"larges), le cadre garde les visages au lieu du centre de l'image."
-msgstr "写真を切り取る必要があるとき（コラージュの枠、横長の写真）、画像の中央ではなく顔を残します。"
-
-#: templates/configure/tab_dispositions.html.jinja:100
-msgid "Inclure les messages dans les compositions"
-msgstr "コラージュにメッセージを含める"
-
-#: templates/configure/tab_dispositions.html.jinja:104
-msgid ""
-"Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
-"moment-là)"
-msgstr "季節のテーマは期間中のみ表示（その期間はより頻繁に表示）"
 
 #: templates/configure/tab_dispositions.html.jinja:106
 msgid ""
@@ -4364,10 +4401,6 @@ msgid ""
 "Moments de famille et fêtes (anniversaire, mariage, naissance, rentrée, "
 "Saint-Valentin, fêtes des mères et des pères) : seulement à leur date."
 msgstr "家族の記念日と行事（誕生日、結婚記念日、誕生、新学期、バレンタイン、母の日・父の日）：その日だけ表示。"
-
-#: templates/configure/tab_dispositions.html.jinja:117
-msgid "Thème de saison"
-msgstr "季節のテーマ"
 
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid " (jusqu’à 3, dans des fantômes)"
@@ -7904,7 +7937,8 @@ msgstr "イミッチ写真制限の値が無効です。以前の値が保持さ
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive のキーが保存されませんでした：%(error)s"
 
-#: web/routes_config.py:282 web/routes_settings.py:168
+#: web/routes_config.py:282 web/routes_settings.py:174
+#: web/routes_settings.py:217
 msgid "Réglages modifiés"
 msgstr "設定を変更"
 
@@ -7914,7 +7948,7 @@ msgid ""
 "changements."
 msgstr "設定が保存されました。変更を適用するためにスライドショーが再開されました。"
 
-#: web/routes_family.py:26
+#: web/routes_family.py:26 web/routes_settings.py:206
 msgid "Liste invalide."
 msgstr "リストが無効です。"
 
@@ -8683,16 +8717,16 @@ msgstr "プレイリストが見つかりません。"
 msgid "Citation du jour enregistrée."
 msgstr "今日の言葉を保存しました。"
 
-#: web/routes_settings.py:154
+#: web/routes_settings.py:160
 msgid "Aucun réglage à enregistrer."
 msgstr "保存する設定がありません。"
 
-#: web/routes_settings.py:158
+#: web/routes_settings.py:164
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "不明な設定：%(key)s"
 
-#: web/routes_settings.py:162
+#: web/routes_settings.py:168
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "「%(key)s」の値が無効です。"

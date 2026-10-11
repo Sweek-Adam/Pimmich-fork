@@ -49,3 +49,27 @@ def test_settings_undo(admin_client, saved_config):
 
 def test_settings_requires_login(client):
     assert client.get("/api/settings").status_code in (302, 401)
+
+
+def test_compositions_api(admin_client, app_module):
+    from web import routes_settings
+    config = routes_settings.load_config()
+    saved = {k: config.get(k) for k in ("compositions_disabled", "unique_enabled", "compositions_enabled")}
+    try:
+        data = admin_client.get("/api/compositions").get_json()
+        keys = [f["key"] for f in data["formats"]]
+        assert keys[0] == "unique" and len(keys) > 10 and any(f["theme"] for f in data["formats"])
+        assert any(c["value"] == "auto" for c in data["choices"])
+        chosen = ["unique", keys[1]]
+        assert admin_client.post("/api/compositions", json={"enabled": chosen}, headers=H).get_json()["success"]
+        assert sorted(admin_client.get("/api/compositions").get_json()["enabled"]) == sorted(chosen)
+        assert admin_client.post("/api/compositions", json={"enabled": []}, headers=H).status_code == 400
+        assert admin_client.post("/api/compositions", json={"enabled": "x"}, headers=H).status_code == 400
+    finally:
+        config = dict(routes_settings.load_config())
+        for key, value in saved.items():
+            if value is None:
+                config.pop(key, None)
+            else:
+                config[key] = value
+        routes_settings.save_config(config)

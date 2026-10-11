@@ -32,7 +32,7 @@ export const groups: NavGroup[] = [
     { label: () => t("Messages"), icon: "fa-comment-alt", tab: "tab-messages", route: "/messages" },
   ] },
   { key: "ecran", label: () => t("Écran"), icon: "fa-desktop", items: [
-    { label: () => t("Dispositions"), icon: "fa-th-large", tab: "tab-dispositions" },
+    { label: () => t("Dispositions"), icon: "fa-th-large", tab: "tab-dispositions", route: "/dispositions" },
     { label: () => t("Affichage"), icon: "fa-desktop", tab: "tab-affichage", route: "/affichage" },
     { label: () => t("Horloge & météo"), icon: "fa-clock", tab: "tab-heure", route: "/horloge-meteo" },
     { label: () => t("Infos des photos"), icon: "fa-info-circle", tab: "tab-metadata", route: "/infos-photos" },

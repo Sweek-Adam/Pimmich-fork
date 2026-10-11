@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:39+0200\n"
+"POT-Creation-Date: 2026-10-11 12:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -919,6 +919,157 @@ msgstr ""
 msgid "Rien pour l'instant."
 msgstr ""
 
+#: frontend/src/views/LayoutsView.vue:25 frontend/src/views/LayoutsView.vue:131
+#: templates/configure/tab_accueil.html.jinja:89
+#: templates/configure/tab_dispositions.html.jinja:108
+msgid "Formats"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:131
+#: templates/configure/tab_accueil.html.jinja:90
+#: templates/configure/tab_dispositions.html.jinja:108
+msgid "Thèmes"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:30
+#: templates/configure/tab_dispositions.html.jinja:85
+msgid "Une composition toutes les (photos) :"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:31
+#: templates/configure/tab_dispositions.html.jinja:88
+msgid ""
+"0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
+"composition reste affichée au moins 2,5 secondes par photo (la durée du "
+"diaporama est allongée si besoin)."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:32
+#: templates/configure/tab_dispositions.html.jinja:91
+msgid "Photos entières (sans recadrage)"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:33
+#: templates/configure/tab_dispositions.html.jinja:95
+msgid "Recadrage intelligent : garder les visages entiers"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:34
+#: templates/configure/tab_dispositions.html.jinja:96
+msgid ""
+"Quand une photo doit être coupée (cases des compositions, photos très "
+"larges), le cadre garde les visages au lieu du centre de l'image."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:35
+#: templates/configure/tab_dispositions.html.jinja:100
+msgid "Inclure les messages dans les compositions"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:36
+#: templates/configure/tab_dispositions.html.jinja:104
+msgid ""
+"Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
+"moment-là)"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:54 web/routes_settings.py:209
+msgid "Gardez au moins une disposition."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:71
+msgid "Donnez un nom à cette configuration."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:82
+#: templates/configure/tab_dispositions.html.jinja:31
+msgid "Supprimer cette configuration ?"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:97
+#: templates/configure/tab_dispositions.html.jinja:4
+msgid "Disposition du moment"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:98
+#: templates/configure/tab_dispositions.html.jinja:6
+msgid ""
+"Choisissez une disposition à afficher une seule fois tout de suite, ou à "
+"utiliser jusqu'à nouvel ordre. « Selon mes réglages » utilise les "
+"dispositions cochées ci-dessous."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:109
+#: templates/configure/tab_dispositions.html.jinja:16
+msgid "Mes configurations"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:110
+#: templates/configure/tab_dispositions.html.jinja:18
+msgid ""
+"Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
+" l'autre d'un clic."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:113
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "disposition(s)"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:114
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Active"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:115
+#: templates/configure/tab_affichage.html.jinja:295
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Activer"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:116
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Remplacer par la sélection"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:120
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Aucune configuration enregistrée."
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:122
+#: templates/configure/tab_dispositions.html.jinja:21
+msgid "Nom (ex : Soirée, Calme, Noël en famille)"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:123
+#: templates/configure/tab_dispositions.html.jinja:22
+msgid "Enregistrer la sélection ci-dessous"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:129
+#: templates/configure/tab_dispositions.html.jinja:81
+msgid "Dispositions utilisées"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:138
+#: templates/configure/tab_dispositions.html.jinja:117
+msgid "Thème de saison"
+msgstr ""
+
+#: frontend/src/views/LayoutsView.vue:139
+#: templates/configure/tab_accueil.html.jinja:104
+#: templates/configure/tab_dispositions.html.jinja:118
+msgid "Affiche les messages"
+msgstr ""
+
 #: frontend/src/views/LibraryView.vue:54
 msgid "Ajoutée aux favoris."
 msgstr ""
@@ -1517,12 +1668,6 @@ msgstr ""
 #: frontend/src/views/TripsView.vue:268
 #: templates/configure/tab_carte.html.jinja:34
 msgid "Renommer"
-msgstr ""
-
-#: frontend/src/views/PlaylistsView.vue:123
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
 msgstr ""
 
 #: frontend/src/views/PlaylistsView.vue:137
@@ -2810,7 +2955,7 @@ msgid "Enregistrement…"
 msgstr ""
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:289
-#: web/routes_settings.py:170
+#: web/routes_settings.py:176 web/routes_settings.py:219
 msgid "Enregistré"
 msgstr ""
 
@@ -3443,16 +3588,6 @@ msgstr ""
 msgid "Tout"
 msgstr ""
 
-#: templates/configure/tab_accueil.html.jinja:89
-#: templates/configure/tab_dispositions.html.jinja:108
-msgid "Formats"
-msgstr ""
-
-#: templates/configure/tab_accueil.html.jinja:90
-#: templates/configure/tab_dispositions.html.jinja:108
-msgid "Thèmes"
-msgstr ""
-
 #: templates/configure/tab_accueil.html.jinja:91
 msgid "Avec messages"
 msgstr ""
@@ -3469,11 +3604,6 @@ msgstr ""
 #: templates/configure/tab_accueil.html.jinja:98
 #: templates/configure/tab_accueil.html.jinja:128
 msgid "Compositions au hasard"
-msgstr ""
-
-#: templates/configure/tab_accueil.html.jinja:104
-#: templates/configure/tab_dispositions.html.jinja:118
-msgid "Affiche les messages"
 msgstr ""
 
 #: templates/configure/tab_accueil.html.jinja:111
@@ -3814,11 +3944,6 @@ msgid ""
 "diaporama (pour l'endormir ou le réveiller), choix de l'ambiance, photo "
 "suivante, et un champ « Alerte » dont le texte s'affiche aussitôt sur le "
 "cadre (ex. « La porte du garage est ouverte »)."
-msgstr ""
-
-#: templates/configure/tab_affichage.html.jinja:295
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Activer"
 msgstr ""
 
 #: templates/configure/tab_affichage.html.jinja:297
@@ -4214,59 +4339,6 @@ msgid ""
 " réservés aux administrateurs."
 msgstr ""
 
-#: templates/configure/tab_dispositions.html.jinja:4
-msgid "Disposition du moment"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:6
-msgid ""
-"Choisissez une disposition à afficher une seule fois tout de suite, ou à "
-"utiliser jusqu'à nouvel ordre. « Selon mes réglages » utilise les "
-"dispositions cochées ci-dessous."
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:16
-msgid "Mes configurations"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:18
-msgid ""
-"Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
-" l'autre d'un clic."
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:21
-msgid "Nom (ex : Soirée, Calme, Noël en famille)"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:22
-msgid "Enregistrer la sélection ci-dessous"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Active"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Remplacer par la sélection"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "disposition(s)"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Aucune configuration enregistrée."
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:31
-msgid "Supprimer cette configuration ?"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:81
-msgid "Dispositions utilisées"
-msgstr ""
-
 #: templates/configure/tab_dispositions.html.jinja:83
 msgid ""
 "Cochez les dispositions du diaporama. Avec « Photo unique » et des "
@@ -4274,41 +4346,6 @@ msgid ""
 " : uniquement des compositions. Une composition regroupe les photos qui "
 "suivent dans le diaporama ou la playlist, dans leur ordre ; un message "
 "qui en fait partie devient une note."
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:85
-msgid "Une composition toutes les (photos) :"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:88
-msgid ""
-"0 : les compositions s'enchaînent, sans photo seule entre elles. Une "
-"composition reste affichée au moins 2,5 secondes par photo (la durée du "
-"diaporama est allongée si besoin)."
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:91
-msgid "Photos entières (sans recadrage)"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:95
-msgid "Recadrage intelligent : garder les visages entiers"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:96
-msgid ""
-"Quand une photo doit être coupée (cases des compositions, photos très "
-"larges), le cadre garde les visages au lieu du centre de l'image."
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:100
-msgid "Inclure les messages dans les compositions"
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:104
-msgid ""
-"Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
-"moment-là)"
 msgstr ""
 
 #: templates/configure/tab_dispositions.html.jinja:106
@@ -4332,10 +4369,6 @@ msgstr ""
 msgid ""
 "Moments de famille et fêtes (anniversaire, mariage, naissance, rentrée, "
 "Saint-Valentin, fêtes des mères et des pères) : seulement à leur date."
-msgstr ""
-
-#: templates/configure/tab_dispositions.html.jinja:117
-msgid "Thème de saison"
 msgstr ""
 
 #: templates/configure/tab_dispositions.html.jinja:118
@@ -7740,7 +7773,8 @@ msgstr ""
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr ""
 
-#: web/routes_config.py:282 web/routes_settings.py:168
+#: web/routes_config.py:282 web/routes_settings.py:174
+#: web/routes_settings.py:217
 msgid "Réglages modifiés"
 msgstr ""
 
@@ -7750,7 +7784,7 @@ msgid ""
 "changements."
 msgstr ""
 
-#: web/routes_family.py:26
+#: web/routes_family.py:26 web/routes_settings.py:206
 msgid "Liste invalide."
 msgstr ""
 
@@ -8519,16 +8553,16 @@ msgstr ""
 msgid "Citation du jour enregistrée."
 msgstr ""
 
-#: web/routes_settings.py:154
+#: web/routes_settings.py:160
 msgid "Aucun réglage à enregistrer."
 msgstr ""
 
-#: web/routes_settings.py:158
+#: web/routes_settings.py:164
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr ""
 
-#: web/routes_settings.py:162
+#: web/routes_settings.py:168
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr ""

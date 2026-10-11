@@ -54,6 +54,12 @@ SETTINGS = {
     "music_duck_videos": ("bool", None, True),
     # Télévision
     "cec_enabled": ("bool", None, False),
+    # Dispositions
+    "compositions_every": ("int", (0, 100), 5),
+    "compositions_full_photos": ("bool", None, True),
+    "smart_crop": ("bool", None, True),
+    "compositions_include_messages": ("bool", None, True),
+    "compositions_seasonal": ("bool", None, True),
     # Horloge et date
     "show_clock": ("bool", None, False),
     "clock_position": ("choice", ["left", "center", "right"], "center"),
@@ -168,3 +174,46 @@ def settings_save_api():
     log("settings", _("Réglages modifiés"), {"type": "restore_config", "data": previous}, merge=True)
     schedule_slideshow_restart()
     return jsonify({"success": True, "message": _("Enregistré"), "values": current_values(config)})
+
+
+# --- Dispositions : formats et thèmes de compositions activés, disposition du moment ---
+
+@app.route('/api/compositions', methods=['GET'])
+@login_required
+def compositions_api():
+    from utils.compositions import FORMATS, SEASONAL, THEME_KEYS, enabled_formats
+    from utils.layout_engine import choice_options
+    config = load_config()
+    translate = _  # libellés marqués N_() dans les modules de compositions
+    formats = [{"key": "unique", "label": translate("Photo unique"), "theme": False, "seasonal": False, "messages": True,
+                "preview": url_for("static", filename="composition_previews/unique.jpg")}]
+    for key, value in FORMATS.items():
+        formats.append({"key": key, "label": translate(value[0]), "theme": key in THEME_KEYS, "seasonal": key in SEASONAL,
+                        "messages": bool(value[3]), "preview": url_for("static", filename=f"composition_previews/{key}.jpg")})
+    enabled = enabled_formats(config) + (["unique"] if config.get("unique_enabled", True) else [])
+    choices = [{"value": value, "label": translate(label), "group": group} for value, label, group in choice_options()]
+    return jsonify({"success": True, "formats": formats, "enabled": enabled, "layout": config.get("layout_override", "auto"),
+                    "choices": choices})
+
+
+@app.route('/api/compositions', methods=['POST'])
+@login_required
+def compositions_save_api():
+    from utils.compositions import FORMATS
+    data = request.get_json(silent=True) or {}
+    enabled = data.get("enabled")
+    if not isinstance(enabled, list) or not all(isinstance(k, str) for k in enabled):
+        return jsonify({"success": False, "message": _("Liste invalide.")}), 400
+    chosen = set(enabled)
+    if not chosen & (set(FORMATS) | {"unique"}):
+        return jsonify({"success": False, "message": _("Gardez au moins une disposition.")}), 400
+    config = load_config()
+    previous = copy.deepcopy(config)
+    config = dict(config, compositions_disabled=[k for k in FORMATS if k not in chosen], unique_enabled="unique" in chosen,
+                  compositions_enabled=True)
+    config.pop("compositions_styles", None)
+    save_config(config)
+    from web.routes_history import log
+    log("settings", _("Réglages modifiés"), {"type": "restore_config", "data": previous}, merge=True)
+    schedule_slideshow_restart()
+    return jsonify({"success": True, "message": _("Enregistré")})

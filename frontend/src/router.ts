@@ -15,6 +15,7 @@ export const router = createRouter({
     { path: "/horloge-meteo", component: () => import("./views/ClockView.vue") },
     { path: "/infos-photos", component: () => import("./views/PhotoInfoView.vue") },
     { path: "/journaux", component: () => import("./views/LogsView.vue") },
+    { path: "/dispositions", component: () => import("./views/LayoutsView.vue") },
     { path: "/favoris", component: () => import("./views/LibraryView.vue"), props: { favorites: true } },
     { path: "/:rest(.*)*", redirect: "/" },
   ],
