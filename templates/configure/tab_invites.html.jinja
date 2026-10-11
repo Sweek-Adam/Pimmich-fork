@@ -143,4 +143,101 @@
                     </div>
                     <p class="text-sm text-gray-600">{{ _("Seulement depuis le Wi-Fi de la maison. Les messages et dessins des invités restent ensuite dans le livre d'or :") }} <a class="link" href="{{ url_for('guest_book_page') }}" target="_blank">{{ _("ouvrir le livre d'or") }}</a></p>
                 </fieldset>
-            </div>
+            
+            {% if is_admin %}
+            <fieldset class="mt-6" id="frames-box">
+                <legend><h3><i class="fas fa-th-large mr-2"></i>{{ _("Cadres de la famille") }}</h3></legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au chalet…) : voir la photo affichée, les allumer, leur envoyer des photos ou un message. Ils doivent être joignables : même réseau, ou Tailscale sur les deux cadres.") }}</p>
+                <div id="fr-list" class="fr-list"></div>
+                <details class="mt-3">
+                    <summary class="cursor-pointer font-semibold text-sm">{{ _("Ajouter un cadre") }}</summary>
+                    <ol class="text-sm text-gray-600 list-decimal ml-5 my-2">
+                        <li>{{ _("Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-dessous), puis « Créer un code ».") }}</li>
+                        <li>{{ _("Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou https://192.168.1.30) et ce code.") }}</li>
+                    </ol>
+                    <div class="grid gap-2 em-grid">
+                        <label for="fr-url">{{ _("Adresse") }}</label><input type="url" id="fr-url" placeholder="https://100.101.102.103">
+                        <label for="fr-token">{{ _("Code") }}</label><input type="text" id="fr-token" autocomplete="off">
+                        <label for="fr-name">{{ _("Nom") }}</label><input type="text" id="fr-name" placeholder="{{ _('ex : Chez Mamie') }}">
+                    </div>
+                    <button type="button" id="fr-add" class="btn-primary mt-2">{{ _("Ajouter le cadre") }}</button>
+                </details>
+                <details class="mt-3">
+                    <summary class="cursor-pointer font-semibold text-sm">{{ _("Code d'association de ce cadre") }}</summary>
+                    <p class="text-sm text-gray-600 my-2">{{ _("À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper l'accès.") }}</p>
+                    <ul id="fr-codes" class="denied-list"></ul>
+                    <button type="button" id="fr-new-code" class="btn-secondary mt-2">{{ _("Créer un code") }}</button>
+                </details>
+                <p id="fr-status" class="text-sm mt-2"></p>
+            </fieldset>
+            <style>
+                .fr-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .75rem; }
+                .fr-card { border: 1px solid var(--border, #e5e7eb); border-radius: .75rem; overflow: hidden; background: var(--card, #fff); }
+                .fr-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #111; display: block; }
+                .fr-card .fr-body { padding: .6rem; display: grid; gap: .4rem; }
+                .fr-card .fr-actions { display: flex; flex-wrap: wrap; gap: .3rem; }
+                .em-grid { grid-template-columns: max-content 1fr; align-items: center; }
+                @media (max-width: 640px) { .em-grid { grid-template-columns: 1fr; } }
+            </style>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const T = { on: {{ _("Allumer")|tojson }}, off: {{ _("Endormir")|tojson }}, next: {{ _("Photo suivante")|tojson }}, send: {{ _("Envoyer des photos")|tojson }},
+                                message: {{ _("Envoyer un message")|tojson }}, remove: {{ _("Retirer")|tojson }}, offline: {{ _("injoignable")|tojson }},
+                                refused: {{ _("code refusé")|tojson }}, running: {{ _("diaporama en cours")|tojson }}, stopped: {{ _("en veille")|tojson }},
+                                ask: {{ _("Votre message :")|tojson }}, none: {{ _("Aucun autre cadre pour l'instant.")|tojson }} };
+                    const say = (t, ok) => { $("fr-status").textContent = t || ""; $("fr-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                    const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                    const button = (text, cls, fn) => { const b = document.createElement("button"); b.type = "button"; b.className = cls; b.textContent = text; b.addEventListener("click", fn); return b; };
+                    async function load() {
+                        const d = await (await fetch("/api/frames")).json();
+                        $("fr-list").innerHTML = d.frames.length ? "" : `<p class="text-sm text-gray-500">${T.none}</p>`;
+                        d.frames.forEach(f => {
+                            const card = document.createElement("div"); card.className = "fr-card";
+                            const img = document.createElement("img"); img.alt = ""; if (f.has_photo) img.src = `/api/frames/${f.id}/current.jpg?t=${Date.now()}`;
+                            const body = document.createElement("div"); body.className = "fr-body";
+                            const title = document.createElement("strong"); title.textContent = f.name;
+                            const state = document.createElement("small"); state.className = "text-gray-500";
+                            state.textContent = !f.online ? T.offline : f.unauthorized ? T.refused : (f.running ? T.running : T.stopped) + (f.photos ? ` · ${f.photos} photos` : "");
+                            const actions = document.createElement("div"); actions.className = "fr-actions";
+                            const act = async (action) => { const r = await post(`/api/frames/${f.id}/${action}`); say(r.message, r.success); setTimeout(load, 1500); };
+                            const file = document.createElement("input"); file.type = "file"; file.multiple = true; file.accept = "image/*,video/*"; file.className = "hidden";
+                            file.addEventListener("change", async () => {
+                                const form = new FormData(); [...file.files].forEach(x => form.append("photos", x));
+                                const r = await (await fetch(`/api/frames/${f.id}/photos`, { method: "POST", body: form })).json(); say(r.message, r.success); file.value = "";
+                            });
+                            actions.append(button(f.running ? T.off : T.on, "btn-secondary text-sm", () => act(f.running ? "off" : "on")),
+                                           button(T.next, "btn-secondary text-sm", () => act("next")),
+                                           button(T.send, "btn-secondary text-sm", () => file.click()),
+                                           button(T.message, "btn-secondary text-sm", async () => {
+                                               const text = prompt(T.ask); if (!text) return;
+                                               const r = await post(`/api/frames/${f.id}/message`, { title: "", body: text, style: "pastel" }); say(r.message, r.success);
+                                           }),
+                                           button(T.remove, "link text-sm", async () => { await fetch(`/api/frames/${f.id}`, { method: "DELETE" }); load(); }), file);
+                            body.append(title, state, actions); card.append(img, body); $("fr-list").appendChild(card);
+                        });
+                    }
+                    async function loadCodes(codes) {
+                        codes = codes || (await (await fetch("/api/frame/pairing")).json()).codes;
+                        $("fr-codes").innerHTML = "";
+                        codes.forEach(c => {
+                            const li = document.createElement("li");
+                            const code = document.createElement("code"); code.textContent = c.token;
+                            const b = button(T.remove, "link ml-2", async () => {
+                                const r = await (await fetch("/api/frame/pairing", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: c.token }) })).json();
+                                loadCodes(r.codes);
+                            });
+                            li.append(document.createTextNode(c.label + " : "), code, b); $("fr-codes").appendChild(li);
+                        });
+                    }
+                    $("fr-new-code").addEventListener("click", async () => loadCodes((await post("/api/frame/pairing", {})).codes));
+                    $("fr-add").addEventListener("click", async () => {
+                        const r = await post("/api/frames", { url: $("fr-url").value, token: $("fr-token").value, name: $("fr-name").value });
+                        say(r.message, r.success); if (r.success) { $("fr-token").value = ""; load(); }
+                    });
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-invites'\"]").forEach(b => b.addEventListener("click", () => setTimeout(() => { load(); loadCodes(); }, 50)));
+                    if ($("frames-box").offsetParent !== null) { load(); loadCodes(); }
+                });
+            </script>
+            {% endif %}
+        </div>

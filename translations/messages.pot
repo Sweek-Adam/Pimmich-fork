@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:31+0200\n"
+"POT-Creation-Date: 2026-10-11 10:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -348,6 +348,7 @@ msgstr ""
 #: templates/configure/tab_affichage.html.jinja:361
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
+#: templates/configure/tab_invites.html.jinja:186
 #: templates/configure/tab_maintenance.html.jinja:121
 #: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:495
@@ -458,7 +459,7 @@ msgstr ""
 msgid "Initialisation du diaporama..."
 msgstr ""
 
-#: templates/upload.html.jinja:7
+#: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:7
 msgid "Envoyer des photos"
 msgstr ""
 
@@ -856,6 +857,7 @@ msgstr ""
 
 #: templates/configure/_smart_albums.html.jinja:16
 #: templates/configure/tab_comptes.html.jinja:58
+#: templates/configure/tab_invites.html.jinja:161
 msgid "Nom"
 msgstr ""
 
@@ -1886,6 +1888,7 @@ msgstr ""
 
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
+#: templates/configure/tab_invites.html.jinja:185
 #: templates/configure/tab_playlists.html.jinja:28
 msgid "Photo suivante"
 msgstr ""
@@ -3615,6 +3618,101 @@ msgstr ""
 msgid "ouvrir le livre d'or"
 msgstr ""
 
+#: templates/configure/tab_invites.html.jinja:149
+msgid "Cadres de la famille"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:150
+msgid ""
+"Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au "
+"chalet…) : voir la photo affichée, les allumer, leur envoyer des photos "
+"ou un message. Ils doivent être joignables : même réseau, ou Tailscale "
+"sur les deux cadres."
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:153
+msgid "Ajouter un cadre"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:155
+msgid ""
+"Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
+"dessous), puis « Créer un code »."
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:156
+msgid ""
+"Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
+"https://192.168.1.30) et ce code."
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:159
+#: templates/configure/tab_maintenance.html.jinja:93
+msgid "Adresse"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:160
+msgid "Code"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:161
+msgid "ex : Chez Mamie"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:163
+msgid "Ajouter le cadre"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:166
+msgid "Code d'association de ce cadre"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:167
+msgid ""
+"À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
+"l'accès."
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:169
+msgid "Créer un code"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Allumer"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Endormir"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:186
+msgid "Envoyer un message"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:186
+msgid "injoignable"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "code refusé"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "diaporama en cours"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "en veille"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Votre message :"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Aucun autre cadre pour l'instant."
+msgstr ""
+
 #: templates/configure/tab_legendes.html.jinja:3
 msgid "Style des légendes"
 msgstr ""
@@ -3985,10 +4083,6 @@ msgstr ""
 
 #: templates/configure/tab_maintenance.html.jinja:91
 msgid "Partage réseau (NAS, ordinateur)"
-msgstr ""
-
-#: templates/configure/tab_maintenance.html.jinja:93
-msgid "Adresse"
 msgstr ""
 
 #: templates/configure/tab_maintenance.html.jinja:97
@@ -4797,7 +4891,8 @@ msgid ""
 "composition : elles se déplacent ensemble."
 msgstr ""
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:127
+#: templates/configure/tab_queue.html.jinja:8 web/routes_frames.py:98
+#: web/routes_home.py:127
 msgid "Le diaporama n'est pas en cours."
 msgstr ""
 
@@ -6668,14 +6763,68 @@ msgstr ""
 msgid "%(count)s date(s) enregistrée(s)."
 msgstr ""
 
+#: web/routes_frames.py:47
+msgid "Autre cadre"
+msgstr ""
+
+#: web/routes_frames.py:108 web/routes_frames.py:270 web/routes_guests.py:258
+msgid "Action inconnue."
+msgstr ""
+
+#: web/routes_frames.py:119 web/routes_frames.py:265 web/routes_guests.py:87
+#: web/routes_guests.py:92 web/routes_imports.py:651 web/routes_imports.py:689
+msgid "Aucun fichier sélectionné."
+msgstr ""
+
+#: web/routes_frames.py:138
+#, python-format
+msgid "%(count)s photo(s) reçue(s)."
+msgstr ""
+
+#: web/routes_frames.py:155 web/routes_messages.py:61
+msgid "Message publié : il apparaîtra dans le diaporama."
+msgstr ""
+
+#: web/routes_frames.py:209
+msgid "Adresse ou code invalide."
+msgstr ""
+
+#: web/routes_frames.py:214
+msgid "Ce cadre ne répond pas : vérifiez son adresse (réseau local ou Tailscale)."
+msgstr ""
+
+#: web/routes_frames.py:216
+msgid "Le code d'association est refusé par ce cadre."
+msgstr ""
+
+#: web/routes_frames.py:221
+#, python-format
+msgid "Cadre « %(name)s » ajouté."
+msgstr ""
+
+#: web/routes_frames.py:230
+msgid "Cadre retiré."
+msgstr ""
+
+#: web/routes_frames.py:257
+msgid "Cadre inconnu."
+msgstr ""
+
+#: web/routes_frames.py:272
+msgid "Ce cadre ne répond pas."
+msgstr ""
+
+#: web/routes_frames.py:277
+msgid "C'est fait."
+msgstr ""
+
+#: web/routes_frames.py:277
+msgid "Ce cadre a refusé la demande."
+msgstr ""
+
 #: web/routes_guests.py:36
 #, python-format
 msgid "L'accès pour l'invité '%(name)s' a été révoqué."
-msgstr ""
-
-#: web/routes_guests.py:87 web/routes_guests.py:92 web/routes_imports.py:651
-#: web/routes_imports.py:689
-msgid "Aucun fichier sélectionné."
 msgstr ""
 
 #: web/routes_guests.py:119
@@ -6719,10 +6868,6 @@ msgstr ""
 
 #: web/routes_guests.py:255
 msgid "Photo approuvée : cet appareil est désormais de confiance."
-msgstr ""
-
-#: web/routes_guests.py:258
-msgid "Action inconnue."
 msgstr ""
 
 #: web/routes_guests.py:334
@@ -7039,10 +7184,6 @@ msgstr ""
 
 #: web/routes_messages.py:60
 msgid "Message programmé : il apparaîtra à l'heure prévue."
-msgstr ""
-
-#: web/routes_messages.py:61
-msgid "Message publié : il apparaîtra dans le diaporama."
 msgstr ""
 
 #: web/routes_messages.py:68

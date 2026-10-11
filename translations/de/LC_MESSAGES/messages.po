@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:31+0200\n"
+"POT-Creation-Date: 2026-10-11 10:34+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -351,6 +351,7 @@ msgstr "Ein Gast"
 #: templates/configure/tab_affichage.html.jinja:361
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
+#: templates/configure/tab_invites.html.jinja:186
 #: templates/configure/tab_maintenance.html.jinja:121
 #: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:495
@@ -461,7 +462,7 @@ msgstr "System bereit (geplanter Ruhemodus). Weiterleitung..."
 msgid "Initialisation du diaporama..."
 msgstr "Die Diashow wird initialisiert..."
 
-#: templates/upload.html.jinja:7
+#: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:7
 msgid "Envoyer des photos"
 msgstr "Senden Sie Fotos"
 
@@ -871,6 +872,7 @@ msgstr "Intelligentes Album"
 
 #: templates/configure/_smart_albums.html.jinja:16
 #: templates/configure/tab_comptes.html.jinja:58
+#: templates/configure/tab_invites.html.jinja:161
 msgid "Nom"
 msgstr "Name"
 
@@ -1931,6 +1933,7 @@ msgstr "Pause/Vortrag"
 
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
+#: templates/configure/tab_invites.html.jinja:185
 #: templates/configure/tab_playlists.html.jinja:28
 msgid "Photo suivante"
 msgstr "Nächstes Foto"
@@ -3807,6 +3810,111 @@ msgstr ""
 msgid "ouvrir le livre d'or"
 msgstr "Gästebuch öffnen"
 
+#: templates/configure/tab_invites.html.jinja:149
+msgid "Cadres de la famille"
+msgstr "Rahmen der Familie"
+
+#: templates/configure/tab_invites.html.jinja:150
+msgid ""
+"Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au "
+"chalet…) : voir la photo affichée, les allumer, leur envoyer des photos "
+"ou un message. Ils doivent être joignables : même réseau, ou Tailscale "
+"sur les deux cadres."
+msgstr ""
+"Steuere von hier die anderen Pimmich-Rahmen der Familie (bei Oma, in der "
+"Hütte…): angezeigtes Foto sehen, einschalten, Fotos oder eine Nachricht "
+"senden. Sie müssen erreichbar sein: gleiches Netzwerk oder Tailscale auf "
+"beiden Rahmen."
+
+#: templates/configure/tab_invites.html.jinja:153
+msgid "Ajouter un cadre"
+msgstr "Rahmen hinzufügen"
+
+#: templates/configure/tab_invites.html.jinja:155
+msgid ""
+"Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
+"dessous), puis « Créer un code »."
+msgstr ""
+"Auf dem anderen Rahmen: Teilen › Gäste › „Kopplungscode“ (unten), dann "
+"„Code erstellen“."
+
+#: templates/configure/tab_invites.html.jinja:156
+msgid ""
+"Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
+"https://192.168.1.30) et ce code."
+msgstr ""
+"Hier: seine Adresse (z. B. https://100.101.102.103 mit Tailscale oder "
+"https://192.168.1.30) und diesen Code."
+
+#: templates/configure/tab_invites.html.jinja:159
+#: templates/configure/tab_maintenance.html.jinja:93
+msgid "Adresse"
+msgstr "Adresse"
+
+#: templates/configure/tab_invites.html.jinja:160
+msgid "Code"
+msgstr "Code"
+
+#: templates/configure/tab_invites.html.jinja:161
+msgid "ex : Chez Mamie"
+msgstr "z. B. Bei Oma"
+
+#: templates/configure/tab_invites.html.jinja:163
+msgid "Ajouter le cadre"
+msgstr "Rahmen hinzufügen"
+
+#: templates/configure/tab_invites.html.jinja:166
+msgid "Code d'association de ce cadre"
+msgstr "Kopplungscode dieses Rahmens"
+
+#: templates/configure/tab_invites.html.jinja:167
+msgid ""
+"À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
+"l'accès."
+msgstr ""
+"Auf dem Rahmen eingeben, der diesen steuern soll. Entferne einen Code, um"
+" den Zugriff zu sperren."
+
+#: templates/configure/tab_invites.html.jinja:169
+msgid "Créer un code"
+msgstr "Code erstellen"
+
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Allumer"
+msgstr "Einschalten"
+
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Endormir"
+msgstr "Schlafen legen"
+
+#: templates/configure/tab_invites.html.jinja:186
+msgid "Envoyer un message"
+msgstr "Nachricht senden"
+
+#: templates/configure/tab_invites.html.jinja:186
+msgid "injoignable"
+msgstr "nicht erreichbar"
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "code refusé"
+msgstr "Code abgelehnt"
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "diaporama en cours"
+msgstr "Diashow läuft"
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "en veille"
+msgstr "im Ruhemodus"
+
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Votre message :"
+msgstr "Deine Nachricht:"
+
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Aucun autre cadre pour l'instant."
+msgstr "Noch kein anderer Rahmen."
+
 #: templates/configure/tab_legendes.html.jinja:3
 msgid "Style des légendes"
 msgstr "Stil der Bildunterschriften"
@@ -4203,10 +4311,6 @@ msgstr "Keine USB-Festplatte erkannt: Schließe sie an und öffne diesen Tab ern
 #: templates/configure/tab_maintenance.html.jinja:91
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "Netzwerkfreigabe (NAS, Computer)"
-
-#: templates/configure/tab_maintenance.html.jinja:93
-msgid "Adresse"
-msgstr "Adresse"
 
 #: templates/configure/tab_maintenance.html.jinja:97
 msgid "Ajouter le partage"
@@ -5092,7 +5196,8 @@ msgstr ""
 "sofort an. Violette Rahmen fassen Fotos derselben Komposition zusammen: "
 "Sie werden gemeinsam verschoben."
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:127
+#: templates/configure/tab_queue.html.jinja:8 web/routes_frames.py:98
+#: web/routes_home.py:127
 msgid "Le diaporama n'est pas en cours."
 msgstr "Die Diashow läuft nicht."
 
@@ -7125,15 +7230,71 @@ msgstr "Ungültige Liste."
 msgid "%(count)s date(s) enregistrée(s)."
 msgstr "%(count)s Datum/Daten gespeichert."
 
+#: web/routes_frames.py:47
+msgid "Autre cadre"
+msgstr "Anderer Rahmen"
+
+#: web/routes_frames.py:108 web/routes_frames.py:270 web/routes_guests.py:258
+msgid "Action inconnue."
+msgstr "Unbekannte Aktion."
+
+#: web/routes_frames.py:119 web/routes_frames.py:265 web/routes_guests.py:87
+#: web/routes_guests.py:92 web/routes_imports.py:651 web/routes_imports.py:689
+msgid "Aucun fichier sélectionné."
+msgstr "Keine Dateien ausgewählt."
+
+#: web/routes_frames.py:138
+#, python-format
+msgid "%(count)s photo(s) reçue(s)."
+msgstr "%(count)s Foto(s) empfangen."
+
+#: web/routes_frames.py:155 web/routes_messages.py:61
+msgid "Message publié : il apparaîtra dans le diaporama."
+msgstr "Nachricht veröffentlicht: Sie wird in der Diashow erscheinen."
+
+#: web/routes_frames.py:209
+msgid "Adresse ou code invalide."
+msgstr "Ungültige Adresse oder ungültiger Code."
+
+#: web/routes_frames.py:214
+msgid "Ce cadre ne répond pas : vérifiez son adresse (réseau local ou Tailscale)."
+msgstr ""
+"Dieser Rahmen antwortet nicht: Prüfe seine Adresse (lokales Netzwerk oder"
+" Tailscale)."
+
+#: web/routes_frames.py:216
+msgid "Le code d'association est refusé par ce cadre."
+msgstr "Dieser Rahmen lehnt den Kopplungscode ab."
+
+#: web/routes_frames.py:221
+#, python-format
+msgid "Cadre « %(name)s » ajouté."
+msgstr "Rahmen „%(name)s“ hinzugefügt."
+
+#: web/routes_frames.py:230
+msgid "Cadre retiré."
+msgstr "Rahmen entfernt."
+
+#: web/routes_frames.py:257
+msgid "Cadre inconnu."
+msgstr "Unbekannter Rahmen."
+
+#: web/routes_frames.py:272
+msgid "Ce cadre ne répond pas."
+msgstr "Dieser Rahmen antwortet nicht."
+
+#: web/routes_frames.py:277
+msgid "C'est fait."
+msgstr "Erledigt."
+
+#: web/routes_frames.py:277
+msgid "Ce cadre a refusé la demande."
+msgstr "Dieser Rahmen hat die Anfrage abgelehnt."
+
 #: web/routes_guests.py:36
 #, python-format
 msgid "L'accès pour l'invité '%(name)s' a été révoqué."
 msgstr "Der Zugriff für Gast „%(name)s“ wurde widerrufen."
-
-#: web/routes_guests.py:87 web/routes_guests.py:92 web/routes_imports.py:651
-#: web/routes_imports.py:689
-msgid "Aucun fichier sélectionné."
-msgstr "Keine Dateien ausgewählt."
 
 #: web/routes_guests.py:119
 #, python-format
@@ -7177,10 +7338,6 @@ msgstr "Unbekanntes Gerät für dieses Foto (vor dieser Funktion gesendet)."
 #: web/routes_guests.py:255
 msgid "Photo approuvée : cet appareil est désormais de confiance."
 msgstr "Foto freigegeben: Dieses Gerät ist jetzt vertrauenswürdig."
-
-#: web/routes_guests.py:258
-msgid "Action inconnue."
-msgstr "Unbekannte Aktion."
 
 #: web/routes_guests.py:334
 msgid "Les messages des invités sont désactivés."
@@ -7513,10 +7670,6 @@ msgstr "Verbindungsfehler: %(error)s"
 #: web/routes_messages.py:60
 msgid "Message programmé : il apparaîtra à l'heure prévue."
 msgstr "Nachricht geplant: Sie erscheint zur festgelegten Zeit."
-
-#: web/routes_messages.py:61
-msgid "Message publié : il apparaîtra dans le diaporama."
-msgstr "Nachricht veröffentlicht: Sie wird in der Diashow erscheinen."
 
 #: web/routes_messages.py:68
 msgid "Message introuvable."

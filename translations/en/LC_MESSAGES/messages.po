@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:31+0200\n"
+"POT-Creation-Date: 2026-10-11 10:34+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -351,6 +351,7 @@ msgstr "A guest"
 #: templates/configure/tab_affichage.html.jinja:361
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
+#: templates/configure/tab_invites.html.jinja:186
 #: templates/configure/tab_maintenance.html.jinja:121
 #: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:495
@@ -461,7 +462,7 @@ msgstr "System ready (Scheduled sleep mode). Redirection..."
 msgid "Initialisation du diaporama..."
 msgstr "Initializing the slideshow..."
 
-#: templates/upload.html.jinja:7
+#: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:7
 msgid "Envoyer des photos"
 msgstr "Send photos"
 
@@ -867,6 +868,7 @@ msgstr "Smart album"
 
 #: templates/configure/_smart_albums.html.jinja:16
 #: templates/configure/tab_comptes.html.jinja:58
+#: templates/configure/tab_invites.html.jinja:161
 msgid "Nom"
 msgstr "Name"
 
@@ -1917,6 +1919,7 @@ msgstr "Pause/Reading"
 
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
+#: templates/configure/tab_invites.html.jinja:185
 #: templates/configure/tab_playlists.html.jinja:28
 msgid "Photo suivante"
 msgstr "Next photo"
@@ -3769,6 +3772,111 @@ msgstr ""
 msgid "ouvrir le livre d'or"
 msgstr "open the guestbook"
 
+#: templates/configure/tab_invites.html.jinja:149
+msgid "Cadres de la famille"
+msgstr "Family frames"
+
+#: templates/configure/tab_invites.html.jinja:150
+msgid ""
+"Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au "
+"chalet…) : voir la photo affichée, les allumer, leur envoyer des photos "
+"ou un message. Ils doivent être joignables : même réseau, ou Tailscale "
+"sur les deux cadres."
+msgstr ""
+"Control the family's other Pimmich frames from here (at Grandma's, at the"
+" cabin…): see the photo on screen, turn them on, send them photos or a "
+"message. They must be reachable: same network, or Tailscale on both "
+"frames."
+
+#: templates/configure/tab_invites.html.jinja:153
+msgid "Ajouter un cadre"
+msgstr "Add a frame"
+
+#: templates/configure/tab_invites.html.jinja:155
+msgid ""
+"Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
+"dessous), puis « Créer un code »."
+msgstr ""
+"On the other frame: Sharing › Guests › “Pairing code” (below), then "
+"“Create a code”."
+
+#: templates/configure/tab_invites.html.jinja:156
+msgid ""
+"Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
+"https://192.168.1.30) et ce code."
+msgstr ""
+"Here: its address (e.g. https://100.101.102.103 with Tailscale, or "
+"https://192.168.1.30) and that code."
+
+#: templates/configure/tab_invites.html.jinja:159
+#: templates/configure/tab_maintenance.html.jinja:93
+msgid "Adresse"
+msgstr "Address"
+
+#: templates/configure/tab_invites.html.jinja:160
+msgid "Code"
+msgstr "Code"
+
+#: templates/configure/tab_invites.html.jinja:161
+msgid "ex : Chez Mamie"
+msgstr "e.g. Grandma's"
+
+#: templates/configure/tab_invites.html.jinja:163
+msgid "Ajouter le cadre"
+msgstr "Add frame"
+
+#: templates/configure/tab_invites.html.jinja:166
+msgid "Code d'association de ce cadre"
+msgstr "This frame's pairing code"
+
+#: templates/configure/tab_invites.html.jinja:167
+msgid ""
+"À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
+"l'accès."
+msgstr ""
+"Enter it on the frame that will control this one. Remove a code to cut "
+"access."
+
+#: templates/configure/tab_invites.html.jinja:169
+msgid "Créer un code"
+msgstr "Create a code"
+
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Allumer"
+msgstr "Turn on"
+
+#: templates/configure/tab_invites.html.jinja:185
+msgid "Endormir"
+msgstr "Put to sleep"
+
+#: templates/configure/tab_invites.html.jinja:186
+msgid "Envoyer un message"
+msgstr "Send a message"
+
+#: templates/configure/tab_invites.html.jinja:186
+msgid "injoignable"
+msgstr "unreachable"
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "code refusé"
+msgstr "code refused"
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "diaporama en cours"
+msgstr "slideshow running"
+
+#: templates/configure/tab_invites.html.jinja:187
+msgid "en veille"
+msgstr "asleep"
+
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Votre message :"
+msgstr "Your message:"
+
+#: templates/configure/tab_invites.html.jinja:188
+msgid "Aucun autre cadre pour l'instant."
+msgstr "No other frame yet."
+
 #: templates/configure/tab_legendes.html.jinja:3
 msgid "Style des légendes"
 msgstr "Caption style"
@@ -4159,10 +4267,6 @@ msgstr "No USB disk detected: plug it in, then reopen this tab."
 #: templates/configure/tab_maintenance.html.jinja:91
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "Network share (NAS, computer)"
-
-#: templates/configure/tab_maintenance.html.jinja:93
-msgid "Adresse"
-msgstr "Address"
 
 #: templates/configure/tab_maintenance.html.jinja:97
 msgid "Ajouter le partage"
@@ -5040,7 +5144,8 @@ msgstr ""
 " right after the current photo. The ▶ button shows it immediately. Purple"
 " frames group photos from the same composition: they move together."
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_home.py:127
+#: templates/configure/tab_queue.html.jinja:8 web/routes_frames.py:98
+#: web/routes_home.py:127
 msgid "Le diaporama n'est pas en cours."
 msgstr "The slideshow is not running."
 
@@ -7035,15 +7140,71 @@ msgstr "Invalid list."
 msgid "%(count)s date(s) enregistrée(s)."
 msgstr "%(count)s date(s) saved."
 
+#: web/routes_frames.py:47
+msgid "Autre cadre"
+msgstr "Other frame"
+
+#: web/routes_frames.py:108 web/routes_frames.py:270 web/routes_guests.py:258
+msgid "Action inconnue."
+msgstr "Unknown action."
+
+#: web/routes_frames.py:119 web/routes_frames.py:265 web/routes_guests.py:87
+#: web/routes_guests.py:92 web/routes_imports.py:651 web/routes_imports.py:689
+msgid "Aucun fichier sélectionné."
+msgstr "No files selected."
+
+#: web/routes_frames.py:138
+#, python-format
+msgid "%(count)s photo(s) reçue(s)."
+msgstr "%(count)s photo(s) received."
+
+#: web/routes_frames.py:155 web/routes_messages.py:61
+msgid "Message publié : il apparaîtra dans le diaporama."
+msgstr "Message published: it will appear in the slideshow."
+
+#: web/routes_frames.py:209
+msgid "Adresse ou code invalide."
+msgstr "Invalid address or code."
+
+#: web/routes_frames.py:214
+msgid "Ce cadre ne répond pas : vérifiez son adresse (réseau local ou Tailscale)."
+msgstr ""
+"This frame doesn't respond: check its address (local network or "
+"Tailscale)."
+
+#: web/routes_frames.py:216
+msgid "Le code d'association est refusé par ce cadre."
+msgstr "The pairing code is refused by this frame."
+
+#: web/routes_frames.py:221
+#, python-format
+msgid "Cadre « %(name)s » ajouté."
+msgstr "Frame “%(name)s” added."
+
+#: web/routes_frames.py:230
+msgid "Cadre retiré."
+msgstr "Frame removed."
+
+#: web/routes_frames.py:257
+msgid "Cadre inconnu."
+msgstr "Unknown frame."
+
+#: web/routes_frames.py:272
+msgid "Ce cadre ne répond pas."
+msgstr "This frame doesn't respond."
+
+#: web/routes_frames.py:277
+msgid "C'est fait."
+msgstr "Done."
+
+#: web/routes_frames.py:277
+msgid "Ce cadre a refusé la demande."
+msgstr "This frame refused the request."
+
 #: web/routes_guests.py:36
 #, python-format
 msgid "L'accès pour l'invité '%(name)s' a été révoqué."
 msgstr " the invitation for '%(name)s' has been revoked."
-
-#: web/routes_guests.py:87 web/routes_guests.py:92 web/routes_imports.py:651
-#: web/routes_imports.py:689
-msgid "Aucun fichier sélectionné."
-msgstr "No files selected."
 
 #: web/routes_guests.py:119
 #, python-format
@@ -7087,10 +7248,6 @@ msgstr "Unknown device for this photo (sent before this feature existed)."
 #: web/routes_guests.py:255
 msgid "Photo approuvée : cet appareil est désormais de confiance."
 msgstr "Photo approved: this device is now trusted."
-
-#: web/routes_guests.py:258
-msgid "Action inconnue."
-msgstr "Unknown action."
 
 #: web/routes_guests.py:334
 msgid "Les messages des invités sont désactivés."
@@ -7413,10 +7570,6 @@ msgstr "Connection error: %(error)s"
 #: web/routes_messages.py:60
 msgid "Message programmé : il apparaîtra à l'heure prévue."
 msgstr "Message scheduled: it will appear at the set time."
-
-#: web/routes_messages.py:61
-msgid "Message publié : il apparaîtra dans le diaporama."
-msgstr "Message published: it will appear in the slideshow."
 
 #: web/routes_messages.py:68
 msgid "Message introuvable."

@@ -204,6 +204,74 @@
   ]
  ],
  [
+  "/api/frame/command",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/frame/current.jpg",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/frame/message",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/frame/pairing",
+  [
+   "DELETE",
+   "GET",
+   "POST"
+  ]
+ ],
+ [
+  "/api/frame/photos",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/frame/status",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/frames",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/frames",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/frames/<frame_id>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
+  "/api/frames/<frame_id>/<action>",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/frames/<frame_id>/current.jpg",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/gdrive/denied",
   [
    "GET"
