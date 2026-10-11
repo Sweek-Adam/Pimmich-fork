@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:37+0200\n"
+"POT-Creation-Date: 2026-10-11 12:39+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -966,7 +966,7 @@ msgstr "開始"
 msgid "au"
 msgstr "終了"
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "クリア"
 
@@ -1016,6 +1016,35 @@ msgstr "閉じる"
 #: frontend/src/views/LibraryView.vue:149
 msgid "Suivante"
 msgstr "次へ"
+
+#: frontend/src/views/LogsView.vue:36
+msgid "Effacer ce journal ?"
+msgstr "このログを消去しますか？"
+
+#: frontend/src/views/LogsView.vue:60
+msgid "Filtrer…"
+msgstr "絞り込み…"
+
+#: frontend/src/views/LogsView.vue:61
+msgid "Erreurs seulement"
+msgstr "エラーのみ"
+
+#: frontend/src/views/LogsView.vue:62
+msgid "Suivre en direct"
+msgstr "リアルタイム表示"
+
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/PendingView.vue:51
+#: frontend/src/views/QueueView.vue:87
+#: templates/configure/tab_affichage.html.jinja:353
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr "リフレッシュ"
+
+#: frontend/src/views/LogsView.vue:66
+#, python-brace-format
+msgid "{n} lignes affichées (les 500 dernières du fichier)"
+msgstr "{n} 行を表示（ファイルの最後の500行）"
 
 #: frontend/src/views/MessagesView.vue:22
 #: templates/configure/tab_messages.html.jinja:132
@@ -1260,13 +1289,6 @@ msgstr "検証待ちの写真"
 #: frontend/src/views/PendingView.vue:50
 msgid "Tout approuver"
 msgstr "すべて承認"
-
-#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
-#: templates/configure/tab_affichage.html.jinja:353
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
-msgstr "リフレッシュ"
 
 #: frontend/src/views/PendingView.vue:55
 #: templates/configure/scripts_gallery.html.jinja:217

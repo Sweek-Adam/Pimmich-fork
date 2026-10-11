@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:37+0200\n"
+"POT-Creation-Date: 2026-10-11 12:39+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -978,7 +978,7 @@ msgstr "Vom"
 msgid "au"
 msgstr "bis"
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "Zurücksetzen"
 
@@ -1030,6 +1030,35 @@ msgstr "Schließen"
 #: frontend/src/views/LibraryView.vue:149
 msgid "Suivante"
 msgstr "Nächste"
+
+#: frontend/src/views/LogsView.vue:36
+msgid "Effacer ce journal ?"
+msgstr "Dieses Protokoll löschen?"
+
+#: frontend/src/views/LogsView.vue:60
+msgid "Filtrer…"
+msgstr "Filtern…"
+
+#: frontend/src/views/LogsView.vue:61
+msgid "Erreurs seulement"
+msgstr "Nur Fehler"
+
+#: frontend/src/views/LogsView.vue:62
+msgid "Suivre en direct"
+msgstr "Live verfolgen"
+
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/PendingView.vue:51
+#: frontend/src/views/QueueView.vue:87
+#: templates/configure/tab_affichage.html.jinja:353
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr "Aktualisieren"
+
+#: frontend/src/views/LogsView.vue:66
+#, python-brace-format
+msgid "{n} lignes affichées (les 500 dernières du fichier)"
+msgstr "{n} Zeilen angezeigt (die letzten 500 der Datei)"
 
 #: frontend/src/views/MessagesView.vue:22
 #: templates/configure/tab_messages.html.jinja:132
@@ -1276,13 +1305,6 @@ msgstr "Fotos warten auf Validierung"
 #: frontend/src/views/PendingView.vue:50
 msgid "Tout approuver"
 msgstr "Alle genehmigen"
-
-#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
-#: templates/configure/tab_affichage.html.jinja:353
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
-msgstr "Aktualisieren"
 
 #: frontend/src/views/PendingView.vue:55
 #: templates/configure/scripts_gallery.html.jinja:217

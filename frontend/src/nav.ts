@@ -51,7 +51,7 @@ export const groups: NavGroup[] = [
     { label: () => t("Réseau"), icon: "fa-wifi", tab: "tab-network", admin: true },
     { label: () => t("Commande vocale"), icon: "fa-microphone-alt", tab: "tab-vocal" },
     { label: () => t("Statistiques"), icon: "fa-chart-bar", tab: "tab-stats", admin: true, route: "/statistiques" },
-    { label: () => t("Journaux"), icon: "fa-file-alt", tab: "tab-logs", admin: true },
+    { label: () => t("Journaux"), icon: "fa-file-alt", tab: "tab-logs", admin: true, route: "/journaux" },
   ] },
 ];
 

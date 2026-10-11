@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:37+0200\n"
+"POT-Creation-Date: 2026-10-11 12:39+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -962,7 +962,7 @@ msgstr ""
 msgid "au"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr ""
 
@@ -1011,6 +1011,35 @@ msgstr ""
 
 #: frontend/src/views/LibraryView.vue:149
 msgid "Suivante"
+msgstr ""
+
+#: frontend/src/views/LogsView.vue:36
+msgid "Effacer ce journal ?"
+msgstr ""
+
+#: frontend/src/views/LogsView.vue:60
+msgid "Filtrer…"
+msgstr ""
+
+#: frontend/src/views/LogsView.vue:61
+msgid "Erreurs seulement"
+msgstr ""
+
+#: frontend/src/views/LogsView.vue:62
+msgid "Suivre en direct"
+msgstr ""
+
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/PendingView.vue:51
+#: frontend/src/views/QueueView.vue:87
+#: templates/configure/tab_affichage.html.jinja:353
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr ""
+
+#: frontend/src/views/LogsView.vue:66
+#, python-brace-format
+msgid "{n} lignes affichées (les 500 dernières du fichier)"
 msgstr ""
 
 #: frontend/src/views/MessagesView.vue:22
@@ -1255,13 +1284,6 @@ msgstr ""
 
 #: frontend/src/views/PendingView.vue:50
 msgid "Tout approuver"
-msgstr ""
-
-#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
-#: templates/configure/tab_affichage.html.jinja:353
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
 msgstr ""
 
 #: frontend/src/views/PendingView.vue:55

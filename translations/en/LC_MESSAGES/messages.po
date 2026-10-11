@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:37+0200\n"
+"POT-Creation-Date: 2026-10-11 12:39+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -973,7 +973,7 @@ msgstr "From"
 msgid "au"
 msgstr "to"
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "Clear"
 
@@ -1023,6 +1023,35 @@ msgstr "Close"
 #: frontend/src/views/LibraryView.vue:149
 msgid "Suivante"
 msgstr "Next"
+
+#: frontend/src/views/LogsView.vue:36
+msgid "Effacer ce journal ?"
+msgstr "Clear this log?"
+
+#: frontend/src/views/LogsView.vue:60
+msgid "Filtrer…"
+msgstr "Filter…"
+
+#: frontend/src/views/LogsView.vue:61
+msgid "Erreurs seulement"
+msgstr "Errors only"
+
+#: frontend/src/views/LogsView.vue:62
+msgid "Suivre en direct"
+msgstr "Follow live"
+
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/PendingView.vue:51
+#: frontend/src/views/QueueView.vue:87
+#: templates/configure/tab_affichage.html.jinja:353
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr "Refresh"
+
+#: frontend/src/views/LogsView.vue:66
+#, python-brace-format
+msgid "{n} lignes affichées (les 500 dernières du fichier)"
+msgstr "{n} lines shown (the last 500 of the file)"
 
 #: frontend/src/views/MessagesView.vue:22
 #: templates/configure/tab_messages.html.jinja:132
@@ -1269,13 +1298,6 @@ msgstr "Photos awaiting validation"
 #: frontend/src/views/PendingView.vue:50
 msgid "Tout approuver"
 msgstr "Approve all"
-
-#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
-#: templates/configure/tab_affichage.html.jinja:353
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
-msgstr "Refresh"
 
 #: frontend/src/views/PendingView.vue:55
 #: templates/configure/scripts_gallery.html.jinja:217
