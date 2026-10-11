@@ -252,11 +252,14 @@ console_formatter = CleanWerkzeugFormatter(
 console_handler.setFormatter(console_formatter)
 
 
-# Ajouter les handlers au logger racine
+# Ajouter les handlers au logger racine (en repartant de zéro : un module importé avant a pu en ajouter un).
+# La console seulement en mode interactif : lancé par start_pimmich.sh, la sortie va déjà dans pimmich.log
+# (sinon chaque ligne y serait écrite deux fois).
+for _handler in list(root_logger.handlers):
+    root_logger.removeHandler(_handler)
 root_logger.addHandler(file_handler)
-
-
-root_logger.addHandler(console_handler)
+if sys.stderr is not None and sys.stderr.isatty():
+    root_logger.addHandler(console_handler)
 
 
 # Logger spécifique pour app.py

@@ -6,12 +6,7 @@ from telegram import constants
 import asyncio
 import re
 
-# Configure logging
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)  # journal configuré par l'application (pas de basicConfig : doublons)
 
 class PimmichBot:
     """

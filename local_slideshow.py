@@ -112,7 +112,8 @@ file_handler.setFormatter(file_formatter)
 
 logging.basicConfig(
     level=level,  # niveau global
-    handlers=[file_handler, logging.StreamHandler()],
+    # La console seulement en mode interactif : lancé par Pimmich, la sortie va déjà dans pimmich.log (pas de doublons)
+    handlers=[file_handler] + ([logging.StreamHandler()] if sys.stderr is not None and sys.stderr.isatty() else []),
     force=True
 )
 
