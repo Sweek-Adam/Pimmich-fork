@@ -8,14 +8,14 @@ from web.core import _
 @admin_required
 def shutdown():
     subprocess.run(['sudo', '-n', 'shutdown', 'now'], check=False)
-    return redirect(url_for('configure'))
+    return back_to_interface("/maintenance", "tab-maintenance")
 
 
 @app.route('/reboot', methods=['POST'])
 @admin_required
 def reboot():
     subprocess.run(['sudo', '-n', 'reboot'], check=False)
-    return redirect(url_for('configure'))
+    return back_to_interface("/maintenance", "tab-maintenance")
 
 
 @app.route('/system_reboot', methods=['POST'])
@@ -152,7 +152,7 @@ def restart_app():
     restart_thread.start()
     
     flash(_("L'application web redémarre... La page sera inaccessible pendant quelques instants."), "success")
-    return redirect(url_for('configure'))
+    return back_to_interface("/maintenance", "tab-maintenance")
 
 
 # --- NOUVELLES ROUTES POUR LE CONTRÔLE VOCAL AVANCÉ ---
@@ -274,12 +274,12 @@ def restore_settings_api():
     """Restaure la configuration à partir d'un fichier de sauvegarde."""
     if 'backup_file' not in request.files:
         flash(_("Aucun fichier de sauvegarde sélectionné."), "warning")
-        return redirect(url_for('configure'))
+        return back_to_interface("/maintenance", "tab-maintenance")
 
     file = request.files['backup_file']
     if file.filename == '':
         flash(_("Aucun fichier de sauvegarde sélectionné."), "warning")
-        return redirect(url_for('configure'))
+        return back_to_interface("/maintenance", "tab-maintenance")
 
     try:
         # Lire et valider le contenu JSON
@@ -294,7 +294,7 @@ def restore_settings_api():
     except Exception as e:
         flash(_("Erreur lors de la restauration : %(error)s", error=e), "danger")
     
-    return redirect(url_for('configure'))
+    return back_to_interface("/maintenance", "tab-maintenance")
 
 
 @app.route('/api/system_info')

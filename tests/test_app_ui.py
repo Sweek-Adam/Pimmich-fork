@@ -52,3 +52,15 @@ def test_i18n_api(admin_client):
     assert data["lang"] == "en" and data["messages"]["Interface classique"] == "Classic interface"
     assert set(data["messages"]) <= babel_frontend.frontend_msgids()
     assert admin_client.get("/api/i18n?lang=fr").get_json()["messages"] == {}
+
+
+def test_new_interface_is_default(client, app_module):
+    r = client.post("/login", data={"username": "admin", "password": "admin-test-pass"}, headers={"Sec-Fetch-Site": "same-origin"})
+    assert r.headers["Location"].endswith("/app")
+    assert client.get("/").headers["Location"].endswith("/app")
+    r = client.get("/configure?ui=classic")
+    assert r.status_code == 200 and "pimmich_ui=classic" in r.headers.get("Set-Cookie", "")
+    assert client.get("/").headers["Location"].endswith("/configure")  # interface classique retenue
+    r = client.get("/app")
+    assert "pimmich_ui=;" in r.headers.get("Set-Cookie", "")  # retour à la nouvelle interface
+    assert client.get("/").headers["Location"].endswith("/app")

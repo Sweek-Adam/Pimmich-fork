@@ -6,7 +6,7 @@ from web.core import _
 
 @app.route('/')
 def home():
-    return redirect(url_for('login'))
+    return redirect(home_url() if session.get('logged_in') else url_for('login'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -29,7 +29,7 @@ def login():
             session['username'] = username
             session['role'] = role
             flash(_("Connexion réussie"), "success")
-            return redirect(url_for('configure'))
+            return redirect(home_url())
         else:
             login_throttle.register_failure(username, ip)
             logger.warning(f"[Sécurité] Échec de connexion pour '{username}' depuis {ip}")
@@ -105,7 +105,7 @@ def _set_role(username, role):
 def _flash_back(result, error_category="error"):
     ok, message = result
     flash(message, "success" if ok else error_category)
-    return redirect(url_for('configure'))
+    return back_to_interface("/comptes", "tab-comptes")
 
 
 @app.route('/change_password', methods=['POST'])

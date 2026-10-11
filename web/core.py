@@ -402,6 +402,23 @@ def inject_disk_alert():
 
 
 # Réglages contenant des secrets : masqués et non modifiables pour les comptes non administrateurs
+UI_COOKIE = "pimmich_ui"  # interface choisie dans ce navigateur : « classic » ou la nouvelle (par défaut)
+
+
+def home_url(app_route=""):
+    """Page d'accueil de l'interface choisie (nouvelle interface par défaut)."""
+    if request.cookies.get(UI_COOKIE) == "classic":
+        return url_for('configure')
+    return "/app" + (f"#{app_route}" if app_route else "")
+
+
+def back_to_interface(app_route="", classic_tab=""):
+    """Retour après un formulaire : vers l'interface d'où il vient."""
+    if "/app" in (request.referrer or ""):
+        return redirect("/app" + (f"#{app_route}" if app_route else ""))
+    return redirect(url_for('configure') + (f"#{classic_tab}" if classic_tab else ""))
+
+
 SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormglass_api_key', 'telegram_bot_token',
                       'telegram_authorized_users', 'porcupine_access_key', 'home_assistant_token', 'wifi_ssid', 'wifi_password',
                       'email_password', 'mqtt_password', 'frame_link_tokens', 'family_frames']

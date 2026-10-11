@@ -104,7 +104,6 @@ onUnmounted(() => {
     <div class="main">
       <header class="topbar">
         <h1>{{ current ? current.label() : "Pimmich" }}</h1>
-        <span class="beta">{{ t("Nouvelle interface (essai)") }}</span>
         <span class="spacer"></span>
         <span v-if="status" class="pill" :class="status.running ? (status.paused ? 'warn' : 'ok') : 'off'">
           <span class="dot"></span>{{ status.running ? (status.paused ? t("En pause") : t("En marche")) : t("Arrêté") }}

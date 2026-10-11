@@ -116,7 +116,7 @@ def spotify_login():
     client_id = load_config().get("spotify_client_id", "")
     if not spotify.CLIENT_ID.match(client_id):
         flash(_("Saisissez d'abord l'identifiant client de votre application Spotify."), "error")
-        return redirect(url_for("configure") + "#tab-son")
+        return redirect(home_url("/son") if request.cookies.get(UI_COOKIE) != "classic" else url_for("configure") + "#tab-son")
     verifier, challenge = spotify.pkce_pair()
     state = secrets.token_urlsafe(24)
     session["spotify_oauth"] = {"state": state, "verifier": verifier, "redirect_uri": _redirect_uri()}
@@ -138,7 +138,7 @@ def spotify_callback():
         except (spotify.SpotifyError, requests.RequestException) as e:
             logger.warning(f"[Spotify] Connexion impossible : {e}")
             flash(_("Connexion Spotify impossible : vérifiez l'identifiant client et l'adresse de retour."), "error")
-    return redirect(url_for("configure") + "#tab-son")
+    return redirect(home_url("/son") if request.cookies.get(UI_COOKIE) != "classic" else url_for("configure") + "#tab-son")
 
 
 @app.route('/api/spotify/disconnect', methods=['POST'])

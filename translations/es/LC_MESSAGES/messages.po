@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 18:21+0200\n"
+"POT-Creation-Date: 2026-10-11 18:23+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -148,35 +148,31 @@ msgstr "Escanea para configurar"
 msgid "Ouvre l'interface classique"
 msgstr "Abre la interfaz clásica"
 
-#: frontend/src/App.vue:101 frontend/src/App.vue:137
+#: frontend/src/App.vue:101 frontend/src/App.vue:136
 msgid "Interface classique"
 msgstr "Interfaz clásica"
 
-#: frontend/src/App.vue:107 templates/configure.html.jinja:132
-msgid "Nouvelle interface (essai)"
-msgstr "Nueva interfaz (prueba)"
-
-#: frontend/src/App.vue:110
+#: frontend/src/App.vue:109
 msgid "En pause"
 msgstr "En pausa"
 
-#: frontend/src/App.vue:110 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:109 templates/configure/scripts_app.html.jinja:64
 msgid "En marche"
 msgstr "En marcha"
 
-#: frontend/src/App.vue:110 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:109 templates/configure/scripts_app.html.jinja:64
 msgid "Arrêté"
 msgstr "Detenido"
 
-#: frontend/src/App.vue:112 templates/configure.html.jinja:120
+#: frontend/src/App.vue:111 templates/configure.html.jinja:120
 msgid "Thème"
 msgstr "Tema"
 
-#: frontend/src/App.vue:144
+#: frontend/src/App.vue:143
 msgid "préparation"
 msgstr "preparación"
 
-#: frontend/src/App.vue:144
+#: frontend/src/App.vue:143
 msgid "téléchargement"
 msgstr "descarga"
 
@@ -5423,6 +5419,10 @@ msgstr "Idioma"
 msgid "Visite guidée"
 msgstr "Visita guiada"
 
+#: templates/configure.html.jinja:132
+msgid "Nouvelle interface"
+msgstr "Nueva interfaz"
+
 #: templates/configure.html.jinja:133
 msgid "Se déconnecter"
 msgstr "Finalizar la sesión"
@@ -9016,23 +9016,23 @@ msgstr "Día de la madre"
 msgid "Fête des pères"
 msgstr "Día del padre"
 
-#: web/core.py:945
+#: web/core.py:962
 msgid "Code d'invitation invalide."
 msgstr "Código de invitación no válido."
 
-#: web/core.py:951
+#: web/core.py:968
 msgid "Ce code d'invitation a expiré."
 msgstr "Este código de invitación ha caducado."
 
-#: web/core.py:957
+#: web/core.py:974
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "Ya estás autorizado. ¡Envíame una foto!"
 
-#: web/core.py:959
+#: web/core.py:976
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "Este código de invitación ya se ha utilizado."
 
-#: web/core.py:970
+#: web/core.py:987
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "

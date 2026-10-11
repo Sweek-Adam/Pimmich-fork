@@ -27,6 +27,15 @@ def new_interface():
     script = "<script>window.PIMMICH = " + json.dumps(boot, ensure_ascii=False).replace("</", "<\\/") + ";</script>"
     response = make_response(page.replace("<!--PIMMICH_BOOT-->", script, 1))
     response.headers["Cache-Control"] = "no-store"
+    response.delete_cookie(UI_COOKIE)  # retour à la nouvelle interface : elle redevient celle par défaut
+    return response
+
+
+@app.after_request
+def remember_classic_interface(response):
+    """« Interface classique » choisie depuis la nouvelle : retenue dans ce navigateur."""
+    if request.path == url_for('configure') and request.args.get("ui") == "classic":
+        response.set_cookie(UI_COOKIE, "classic", max_age=365 * 24 * 3600, samesite="Lax", httponly=True)
     return response
 
 

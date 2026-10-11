@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 18:21+0200\n"
+"POT-Creation-Date: 2026-10-11 18:23+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -148,35 +148,31 @@ msgstr "スキャンして設定する"
 msgid "Ouvre l'interface classique"
 msgstr "従来の画面を開きます"
 
-#: frontend/src/App.vue:101 frontend/src/App.vue:137
+#: frontend/src/App.vue:101 frontend/src/App.vue:136
 msgid "Interface classique"
 msgstr "従来の画面"
 
-#: frontend/src/App.vue:107 templates/configure.html.jinja:132
-msgid "Nouvelle interface (essai)"
-msgstr "新しい画面（試用版）"
-
-#: frontend/src/App.vue:110
+#: frontend/src/App.vue:109
 msgid "En pause"
 msgstr "一時停止中"
 
-#: frontend/src/App.vue:110 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:109 templates/configure/scripts_app.html.jinja:64
 msgid "En marche"
 msgstr "実行中"
 
-#: frontend/src/App.vue:110 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:109 templates/configure/scripts_app.html.jinja:64
 msgid "Arrêté"
 msgstr "停止中"
 
-#: frontend/src/App.vue:112 templates/configure.html.jinja:120
+#: frontend/src/App.vue:111 templates/configure.html.jinja:120
 msgid "Thème"
 msgstr "テーマ"
 
-#: frontend/src/App.vue:144
+#: frontend/src/App.vue:143
 msgid "préparation"
 msgstr "準備中"
 
-#: frontend/src/App.vue:144
+#: frontend/src/App.vue:143
 msgid "téléchargement"
 msgstr "ダウンロード中"
 
@@ -5251,6 +5247,10 @@ msgstr "言語"
 msgid "Visite guidée"
 msgstr "ガイドツアー"
 
+#: templates/configure.html.jinja:132
+msgid "Nouvelle interface"
+msgstr "新しい画面"
+
 #: templates/configure.html.jinja:133
 msgid "Se déconnecter"
 msgstr "ログアウト"
@@ -8680,23 +8680,23 @@ msgstr "母の日"
 msgid "Fête des pères"
 msgstr "父の日"
 
-#: web/core.py:945
+#: web/core.py:962
 msgid "Code d'invitation invalide."
 msgstr "招待コードが無効です。"
 
-#: web/core.py:951
+#: web/core.py:968
 msgid "Ce code d'invitation a expiré."
 msgstr "この招待コードの有効期限は切れています。"
 
-#: web/core.py:957
+#: web/core.py:974
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "あなたはすでに認可されています。写真を送ってください！"
 
-#: web/core.py:959
+#: web/core.py:976
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "この招待コードはすでに使用されています。"
 
-#: web/core.py:970
+#: web/core.py:987
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
