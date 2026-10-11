@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:59+0200\n"
+"POT-Creation-Date: 2026-10-11 11:02+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -1340,10 +1340,10 @@ msgstr "Speichern fehlgeschlagen: Prüfe die Verbindung zum Rahmen."
 #: templates/configure/tab_network.html.jinja:90
 #: templates/configure/tab_network.html.jinja:92
 #: templates/configure/tab_network.html.jinja:96
-#: templates/configure/tab_stats.html.jinja:8
-#: templates/configure/tab_stats.html.jinja:11
-#: templates/configure/tab_stats.html.jinja:15
-#: templates/configure/tab_stats.html.jinja:18
+#: templates/configure/tab_stats.html.jinja:73
+#: templates/configure/tab_stats.html.jinja:76
+#: templates/configure/tab_stats.html.jinja:80
+#: templates/configure/tab_stats.html.jinja:83
 msgid "Chargement..."
 msgstr "Laden..."
 
@@ -6122,39 +6122,88 @@ msgstr ""
 "Samba) nicht sofort nach einem Neustart des Frameworks gestartet, sondern"
 " warten auf den nächsten geplanten Zyklus."
 
-#: templates/configure/tab_stats.html.jinja:4
+#: templates/configure/tab_stats.html.jinja:3
+msgid "Les photos"
+msgstr "Die Fotos"
+
+#: templates/configure/tab_stats.html.jinja:5
+msgid "photos et vidéos"
+msgstr "Fotos und Videos"
+
+#: templates/configure/tab_stats.html.jinja:6
+msgid "affichages comptés"
+msgstr "gezählte Anzeigen"
+
+#: templates/configure/tab_stats.html.jinja:7
+msgid "photos déjà vues"
+msgstr "bereits gezeigte Fotos"
+
+#: templates/configure/tab_stats.html.jinja:10
+msgid "Répartition par source"
+msgstr "Verteilung nach Quelle"
+
+#: templates/configure/tab_stats.html.jinja:11
+msgid "Affichages par jour (14 jours)"
+msgstr "Anzeigen pro Tag (14 Tage)"
+
+#: templates/configure/tab_stats.html.jinja:13
+msgid "Les plus vues"
+msgstr "Am häufigsten gezeigt"
+
+#: templates/configure/tab_stats.html.jinja:15
+msgid "Les plus aimées par les invités"
+msgstr "Lieblinge der Gäste"
+
+#: templates/configure/tab_stats.html.jinja:17
+msgid ""
+"Les affichages sont comptés depuis la mise en place de cette fonction ; "
+"ils sont mis à jour toutes les 30 minutes."
+msgstr ""
+"Anzeigen werden seit Einführung dieser Funktion gezählt und alle 30 "
+"Minuten aktualisiert."
+
+#: templates/configure/tab_stats.html.jinja:32
+#, python-brace-format
+msgid "{n} fois"
+msgstr "{n}×"
+
+#: templates/configure/tab_stats.html.jinja:32
+msgid "Pas encore de données."
+msgstr "Noch keine Daten."
+
+#: templates/configure/tab_stats.html.jinja:69
 msgid "Informations Système"
 msgstr "Systeminformationen"
 
-#: templates/configure/tab_stats.html.jinja:8
+#: templates/configure/tab_stats.html.jinja:73
 msgid "Température CPU:"
 msgstr "CPU-Temperatur:"
 
-#: templates/configure/tab_stats.html.jinja:11
+#: templates/configure/tab_stats.html.jinja:76
 msgid "Utilisation CPU:"
 msgstr "CPU-Auslastung:"
 
-#: templates/configure/tab_stats.html.jinja:15
+#: templates/configure/tab_stats.html.jinja:80
 msgid "RAM:"
 msgstr "RAM:"
 
-#: templates/configure/tab_stats.html.jinja:18
+#: templates/configure/tab_stats.html.jinja:83
 msgid "Stockage:"
 msgstr "Lagerung:"
 
-#: templates/configure/tab_stats.html.jinja:23
+#: templates/configure/tab_stats.html.jinja:88
 msgid "Historique Température CPU (10 min)"
 msgstr "CPU-Temperaturverlauf (10 Min.)"
 
-#: templates/configure/tab_stats.html.jinja:27
+#: templates/configure/tab_stats.html.jinja:92
 msgid "Historique Utilisation CPU (10 min)"
 msgstr "CPU-Nutzungsverlauf (10 Min.)"
 
-#: templates/configure/tab_stats.html.jinja:31
+#: templates/configure/tab_stats.html.jinja:96
 msgid "Historique Utilisation RAM (10 min)"
 msgstr "Verlauf der RAM-Nutzung (10 Min.)"
 
-#: templates/configure/tab_stats.html.jinja:35
+#: templates/configure/tab_stats.html.jinja:100
 msgid "Historique Utilisation Disque (10 min)"
 msgstr "Verlauf der Festplattennutzung (10 Min.)"
 

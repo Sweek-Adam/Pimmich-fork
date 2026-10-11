@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:59+0200\n"
+"POT-Creation-Date: 2026-10-11 11:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1309,10 +1309,10 @@ msgstr ""
 #: templates/configure/tab_network.html.jinja:90
 #: templates/configure/tab_network.html.jinja:92
 #: templates/configure/tab_network.html.jinja:96
-#: templates/configure/tab_stats.html.jinja:8
-#: templates/configure/tab_stats.html.jinja:11
-#: templates/configure/tab_stats.html.jinja:15
-#: templates/configure/tab_stats.html.jinja:18
+#: templates/configure/tab_stats.html.jinja:73
+#: templates/configure/tab_stats.html.jinja:76
+#: templates/configure/tab_stats.html.jinja:80
+#: templates/configure/tab_stats.html.jinja:83
 msgid "Chargement..."
 msgstr ""
 
@@ -5736,39 +5736,86 @@ msgid ""
 "attendront le prochain cycle programmé."
 msgstr ""
 
-#: templates/configure/tab_stats.html.jinja:4
-msgid "Informations Système"
+#: templates/configure/tab_stats.html.jinja:3
+msgid "Les photos"
 msgstr ""
 
-#: templates/configure/tab_stats.html.jinja:8
-msgid "Température CPU:"
+#: templates/configure/tab_stats.html.jinja:5
+msgid "photos et vidéos"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:6
+msgid "affichages comptés"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:7
+msgid "photos déjà vues"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:10
+msgid "Répartition par source"
 msgstr ""
 
 #: templates/configure/tab_stats.html.jinja:11
-msgid "Utilisation CPU:"
+msgid "Affichages par jour (14 jours)"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:13
+msgid "Les plus vues"
 msgstr ""
 
 #: templates/configure/tab_stats.html.jinja:15
+msgid "Les plus aimées par les invités"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:17
+msgid ""
+"Les affichages sont comptés depuis la mise en place de cette fonction ; "
+"ils sont mis à jour toutes les 30 minutes."
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:32
+#, python-brace-format
+msgid "{n} fois"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:32
+msgid "Pas encore de données."
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:69
+msgid "Informations Système"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:73
+msgid "Température CPU:"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:76
+msgid "Utilisation CPU:"
+msgstr ""
+
+#: templates/configure/tab_stats.html.jinja:80
 msgid "RAM:"
 msgstr ""
 
-#: templates/configure/tab_stats.html.jinja:18
+#: templates/configure/tab_stats.html.jinja:83
 msgid "Stockage:"
 msgstr ""
 
-#: templates/configure/tab_stats.html.jinja:23
+#: templates/configure/tab_stats.html.jinja:88
 msgid "Historique Température CPU (10 min)"
 msgstr ""
 
-#: templates/configure/tab_stats.html.jinja:27
+#: templates/configure/tab_stats.html.jinja:92
 msgid "Historique Utilisation CPU (10 min)"
 msgstr ""
 
-#: templates/configure/tab_stats.html.jinja:31
+#: templates/configure/tab_stats.html.jinja:96
 msgid "Historique Utilisation RAM (10 min)"
 msgstr ""
 
-#: templates/configure/tab_stats.html.jinja:35
+#: templates/configure/tab_stats.html.jinja:100
 msgid "Historique Utilisation Disque (10 min)"
 msgstr ""
 

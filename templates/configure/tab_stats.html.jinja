@@ -1,4 +1,69 @@
         <div id="tab-stats" class="tabcontent">
+            <fieldset id="photo-stats" class="mb-4">
+                <legend><h3><i class="fas fa-chart-pie mr-2"></i>{{ _("Les photos") }}</h3></legend>
+                <div class="ps-totals">
+                    <div><strong id="ps-photos">…</strong><small>{{ _("photos et vidéos") }}</small></div>
+                    <div><strong id="ps-views">…</strong><small>{{ _("affichages comptés") }}</small></div>
+                    <div><strong id="ps-viewed">…</strong><small>{{ _("photos déjà vues") }}</small></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div><h4 class="font-semibold mb-2">{{ _("Répartition par source") }}</h4><div class="relative h-56"><canvas id="ps-sources"></canvas></div></div>
+                    <div><h4 class="font-semibold mb-2">{{ _("Affichages par jour (14 jours)") }}</h4><div class="relative h-56"><canvas id="ps-days"></canvas></div></div>
+                </div>
+                <h4 class="font-semibold mt-4 mb-2">{{ _("Les plus vues") }}</h4>
+                <div id="ps-top" class="ps-grid"></div>
+                <h4 class="font-semibold mt-4 mb-2">{{ _("Les plus aimées par les invités") }}</h4>
+                <div id="ps-loved" class="ps-grid"></div>
+                <p class="text-xs text-gray-500 mt-3">{{ _("Les affichages sont comptés depuis la mise en place de cette fonction ; ils sont mis à jour toutes les 30 minutes.") }}</p>
+            </fieldset>
+            <style>
+                .ps-totals { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+                .ps-totals div { border: 1px solid var(--border); border-radius: 12px; padding: .7rem; text-align: center; }
+                .ps-totals strong { display: block; font-size: 1.5rem; }
+                .ps-totals small { color: var(--muted); }
+                .ps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .5rem; }
+                .ps-grid figure { margin: 0; position: relative; }
+                .ps-grid img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; }
+                .ps-grid figcaption { position: absolute; right: 4px; bottom: 4px; background: rgba(0,0,0,.65); color: #fff; font-size: .72rem; padding: 1px 6px; border-radius: 999px; }
+            </style>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const T = { views: {{ _("{n} fois")|tojson }}, none: {{ _("Pas encore de données.")|tojson }} };
+                    let charts = [];
+                    const grid = (box, items, label) => {
+                        box.innerHTML = items.length ? "" : `<p class="text-sm text-gray-500">${T.none}</p>`;
+                        items.forEach(i => {
+                            const fig = document.createElement("figure");
+                            const img = document.createElement("img"); img.src = i.thumb; img.loading = "lazy"; img.alt = "";
+                            const cap = document.createElement("figcaption"); cap.textContent = label(i);
+                            fig.append(img, cap); box.appendChild(fig);
+                        });
+                    };
+                    async function load() {
+                        if (!$("photo-stats").offsetParent) return;
+                        const d = await (await fetch("/api/stats/photos")).json();
+                        const sources = Object.entries(d.sources);
+                        $("ps-photos").textContent = sources.reduce((n, [, s]) => n + s.photos + s.videos, 0);
+                        $("ps-views").textContent = d.total_views; $("ps-viewed").textContent = d.viewed;
+                        grid($("ps-top"), d.top, i => T.views.replace("{n}", i.views));
+                        grid($("ps-loved"), d.loved, i => `❤ ${i.reactions}`);
+                        if (typeof Chart !== "function") return;
+                        charts.forEach(c => c.destroy());
+                        const color = getComputedStyle(document.documentElement).getPropertyValue("--text").trim() || "#333";
+                        charts = [
+                            new Chart($("ps-sources"), { type: "doughnut", data: { labels: sources.map(([k]) => k.startsWith("compte_") ? k.slice(7) : k),
+                                datasets: [{ data: sources.map(([, s]) => s.photos + s.videos), backgroundColor: ["#6366f1", "#22c55e", "#f59e0b", "#ef4444", "#06b6d4", "#a855f7", "#ec4899", "#84cc16", "#14b8a6", "#f97316"] }] },
+                                options: { maintainAspectRatio: false, plugins: { legend: { position: "right", labels: { color } } } } }),
+                            new Chart($("ps-days"), { type: "bar", data: { labels: d.per_day.map(x => new Date(x.day).toLocaleDateString(undefined, { day: "numeric", month: "short" })),
+                                datasets: [{ data: d.per_day.map(x => x.views), backgroundColor: "#6366f1" }] },
+                                options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color } }, y: { ticks: { color }, beginAtZero: true } } } }),
+                        ];
+                    }
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-stats'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 80)));
+                    load();
+                });
+            </script>
             <fieldset>
                 <legend>
                     <h3>{{ _("Informations Système") }}</h3>

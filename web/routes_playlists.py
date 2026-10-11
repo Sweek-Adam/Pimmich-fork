@@ -360,3 +360,17 @@ def library_search_api():
                         "video": item["video"], "thumb": url_for("static", filename=f"prepared/{thumb}"),
                         "url": url_for("static", filename=f"prepared/{item['path']}")})
     return jsonify({"success": True, "total": total, "items": results})
+
+
+@app.route('/api/stats/photos', methods=['GET'])
+@login_required
+def photo_stats_api():
+    """Photos les plus vues et les plus aimées, répartition par source, affichages par jour."""
+    from utils import reactions, stats
+    stats.collect()
+    data = stats.summary()
+    thumb = lambda rel: url_for("static", filename="prepared/" + (rel.rsplit(".", 1)[0] + "_thumbnail.jpg" if rel.lower().endswith(".mp4") else rel))
+    data["top"] = [{"path": p, "views": n, "thumb": thumb(p)} for p, n in data["top"]]
+    loved = [(p[len("prepared/"):], n) for p, n in reactions.most_loved(12) if p.startswith("prepared/")]
+    data["loved"] = [{"path": p, "reactions": n, "thumb": thumb(p)} for p, n in loved if (PREPARED_DIR / p).exists()]
+    return jsonify(dict(data, success=True))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:59+0200\n"
+"POT-Creation-Date: 2026-10-11 11:02+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -1312,10 +1312,10 @@ msgstr "保存に失敗しました：フォトフレームとの接続を確認
 #: templates/configure/tab_network.html.jinja:90
 #: templates/configure/tab_network.html.jinja:92
 #: templates/configure/tab_network.html.jinja:96
-#: templates/configure/tab_stats.html.jinja:8
-#: templates/configure/tab_stats.html.jinja:11
-#: templates/configure/tab_stats.html.jinja:15
-#: templates/configure/tab_stats.html.jinja:18
+#: templates/configure/tab_stats.html.jinja:73
+#: templates/configure/tab_stats.html.jinja:76
+#: templates/configure/tab_stats.html.jinja:80
+#: templates/configure/tab_stats.html.jinja:83
 msgid "Chargement..."
 msgstr "読み込み中..."
 
@@ -5862,39 +5862,86 @@ msgstr ""
 "このオプションがチェックされている場合、自動更新 (Immich、Samba) "
 "はフレームワークの再起動直後には起動されず、次にスケジュールされたサイクルまで待機します。"
 
-#: templates/configure/tab_stats.html.jinja:4
+#: templates/configure/tab_stats.html.jinja:3
+msgid "Les photos"
+msgstr "写真"
+
+#: templates/configure/tab_stats.html.jinja:5
+msgid "photos et vidéos"
+msgstr "写真と動画"
+
+#: templates/configure/tab_stats.html.jinja:6
+msgid "affichages comptés"
+msgstr "表示回数"
+
+#: templates/configure/tab_stats.html.jinja:7
+msgid "photos déjà vues"
+msgstr "表示済みの写真"
+
+#: templates/configure/tab_stats.html.jinja:10
+msgid "Répartition par source"
+msgstr "ソース別"
+
+#: templates/configure/tab_stats.html.jinja:11
+msgid "Affichages par jour (14 jours)"
+msgstr "1日あたりの表示（14日間）"
+
+#: templates/configure/tab_stats.html.jinja:13
+msgid "Les plus vues"
+msgstr "よく表示された写真"
+
+#: templates/configure/tab_stats.html.jinja:15
+msgid "Les plus aimées par les invités"
+msgstr "ゲストに人気の写真"
+
+#: templates/configure/tab_stats.html.jinja:17
+msgid ""
+"Les affichages sont comptés depuis la mise en place de cette fonction ; "
+"ils sont mis à jour toutes les 30 minutes."
+msgstr "表示回数はこの機能の導入以降を数え、30分ごとに更新されます。"
+
+#: templates/configure/tab_stats.html.jinja:32
+#, python-brace-format
+msgid "{n} fois"
+msgstr "{n}回"
+
+#: templates/configure/tab_stats.html.jinja:32
+msgid "Pas encore de données."
+msgstr "まだデータがありません。"
+
+#: templates/configure/tab_stats.html.jinja:69
 msgid "Informations Système"
 msgstr "システム情報"
 
-#: templates/configure/tab_stats.html.jinja:8
+#: templates/configure/tab_stats.html.jinja:73
 msgid "Température CPU:"
 msgstr "CPU温度:"
 
-#: templates/configure/tab_stats.html.jinja:11
+#: templates/configure/tab_stats.html.jinja:76
 msgid "Utilisation CPU:"
 msgstr "CPU使用率:"
 
-#: templates/configure/tab_stats.html.jinja:15
+#: templates/configure/tab_stats.html.jinja:80
 msgid "RAM:"
 msgstr "ラム："
 
-#: templates/configure/tab_stats.html.jinja:18
+#: templates/configure/tab_stats.html.jinja:83
 msgid "Stockage:"
 msgstr "ストレージ："
 
-#: templates/configure/tab_stats.html.jinja:23
+#: templates/configure/tab_stats.html.jinja:88
 msgid "Historique Température CPU (10 min)"
 msgstr "CPU 温度履歴 (10 分)"
 
-#: templates/configure/tab_stats.html.jinja:27
+#: templates/configure/tab_stats.html.jinja:92
 msgid "Historique Utilisation CPU (10 min)"
 msgstr "CPU使用率履歴(10分)"
 
-#: templates/configure/tab_stats.html.jinja:31
+#: templates/configure/tab_stats.html.jinja:96
 msgid "Historique Utilisation RAM (10 min)"
 msgstr "RAM 使用量の履歴 (10 分)"
 
-#: templates/configure/tab_stats.html.jinja:35
+#: templates/configure/tab_stats.html.jinja:100
 msgid "Historique Utilisation Disque (10 min)"
 msgstr "ディスク使用履歴 (10 分)"
 

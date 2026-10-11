@@ -913,3 +913,14 @@ def music_schedule_worker():
         except Exception as e:
             logger.warning(f"[Musique] Selon l'heure : {e}")
         time.sleep(60)
+
+
+def stats_worker():
+    """Additionne les photos affichées (notées en mémoire vive) toutes les 30 minutes."""
+    from utils import stats
+    while True:
+        time.sleep(1800)
+        try:
+            stats.collect()
+        except Exception as e:
+            logger.debug(f"[Stats] {e}")
