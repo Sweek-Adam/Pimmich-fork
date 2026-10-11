@@ -6,6 +6,7 @@ export const router = createRouter({
     { path: "/", component: () => import("./views/HomeView.vue") },
     { path: "/carte", component: () => import("./views/TripsView.vue") },
     { path: "/statistiques", component: () => import("./views/StatsView.vue") },
+    { path: "/a-valider", component: () => import("./views/PendingView.vue") },
     { path: "/:rest(.*)*", redirect: "/" },
   ],
   scrollBehavior: () => ({ top: 0 }),

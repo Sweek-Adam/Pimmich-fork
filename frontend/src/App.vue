@@ -11,6 +11,7 @@ import { toast } from "./toast";
 const route = useRoute();
 const status = ref<{ running: boolean; paused: boolean } | null>(null);
 const sheet = ref<NavGroup | null>(null);
+const pendingCount = ref(0);
 let timer: number | undefined;
 
 const visibleGroups = computed(() =>
@@ -35,6 +36,20 @@ async function refreshStatus() {
   }
 }
 
+async function refreshPending() {
+  try {
+    pendingCount.value = (await get<{ photos: string[] }>(`/api/get_pending_photos?_=${Date.now()}`)).photos.length;
+  } catch {
+    pendingCount.value = 0;
+  }
+}
+
+/** Pastille d'une rubrique (photos des invités à valider). */
+function badge(item: NavItem): number {
+  return item.tab === "tab-validation" ? pendingCount.value : 0;
+}
+const groupBadge = (group: NavGroup) => group.items.reduce((n, i) => n + badge(i), 0);
+
 const themes: Theme[] = ["auto", "light", "dark"];
 const themeIcon = computed(() => ({ auto: "fa-adjust", light: "fa-sun", dark: "fa-moon" })[theme.value]);
 function cycleTheme() {
@@ -48,12 +63,15 @@ function openGroup(group: NavGroup) {
 
 onMounted(() => {
   refreshStatus();
-  timer = window.setInterval(refreshStatus, 15000);
+  refreshPending();
+  timer = window.setInterval(() => { refreshStatus(); refreshPending(); }, 15000);
   document.addEventListener("pimmich:status", refreshStatus);
+  document.addEventListener("pimmich:pending", refreshPending);
 });
 onUnmounted(() => {
   window.clearInterval(timer);
   document.removeEventListener("pimmich:status", refreshStatus);
+  document.removeEventListener("pimmich:pending", refreshPending);
 });
 </script>
 
@@ -66,7 +84,7 @@ onUnmounted(() => {
           <h4>{{ group.label() }}</h4>
           <template v-for="item in group.items" :key="item.tab">
             <router-link v-if="item.route" :to="item.route" class="nav-item" :class="{ active: route.path === item.route }">
-              <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}
+              <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}<span v-if="badge(item)" class="badge">{{ badge(item) }}</span>
             </router-link>
             <a v-else :href="classicUrl(item.tab)" class="nav-item classic" :title="t('Ouvre l\'interface classique')">
               <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}<i class="fas fa-external-link-alt ext"></i>
@@ -95,7 +113,7 @@ onUnmounted(() => {
     <nav class="bottom-nav">
       <button v-for="group in visibleGroups" :key="group.key" type="button" :class="{ active: currentGroup === group.key }"
               @click="group.items.length === 1 && group.items[0].route ? $router.push(group.items[0].route) : openGroup(group)">
-        <i class="fas" :class="group.icon"></i><span>{{ group.label() }}</span>
+        <i class="fas" :class="group.icon"></i><span>{{ group.label() }}</span><b v-if="groupBadge(group)" class="dot-badge">{{ groupBadge(group) }}</b>
       </button>
     </nav>
 
@@ -104,7 +122,7 @@ onUnmounted(() => {
         <h3>{{ sheet.label() }}</h3>
         <template v-for="item in sheet.items" :key="item.tab">
           <router-link v-if="item.route" :to="item.route" class="nav-item" @click="sheet = null">
-            <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}
+            <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}<span v-if="badge(item)" class="badge">{{ badge(item) }}</span>
           </router-link>
           <a v-else :href="classicUrl(item.tab)" class="nav-item classic">
             <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}<i class="fas fa-external-link-alt ext"></i>
@@ -137,6 +155,7 @@ nav h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; co
 .nav-item i:first-child { color: var(--muted); }
 .nav-item.active i:first-child { color: var(--accent); }
 .nav-item.classic { color: var(--muted); }
+.badge { margin-left: auto; background: var(--danger); color: #fff; font-size: .7rem; font-weight: 700; border-radius: 999px; padding: 0 .45rem; }
 .ext { margin-left: auto; font-size: .65rem; opacity: .6; }
 .back-classic { margin-top: auto; padding: .6rem; color: var(--muted); font-size: .9rem; display: flex; gap: .5rem; align-items: center; }
 
@@ -174,5 +193,7 @@ nav h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; co
   }
   .bottom-nav button i { font-size: 1.1rem; }
   .bottom-nav button.active { color: var(--accent); }
+  .bottom-nav button { position: relative; }
+  .dot-badge { position: absolute; top: .3rem; left: calc(50% + .4rem); background: var(--danger); color: #fff; font-size: .62rem; border-radius: 999px; padding: 0 .35rem; }
 }
 </style>

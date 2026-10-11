@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:12+0200\n"
+"POT-Creation-Date: 2026-10-11 12:18+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -144,31 +144,31 @@ msgstr "Neuer Versuch in 60 Sekunden..."
 msgid "Scannez pour configurer"
 msgstr "Zum Konfigurieren scannen"
 
-#: frontend/src/App.vue:71
+#: frontend/src/App.vue:89
 msgid "Ouvre l'interface classique"
 msgstr "Öffnet die klassische Oberfläche"
 
-#: frontend/src/App.vue:77 frontend/src/App.vue:113
+#: frontend/src/App.vue:95 frontend/src/App.vue:131
 msgid "Interface classique"
 msgstr "Klassische Oberfläche"
 
-#: frontend/src/App.vue:83 templates/configure.html.jinja:132
+#: frontend/src/App.vue:101 templates/configure.html.jinja:132
 msgid "Nouvelle interface (essai)"
 msgstr "Neue Oberfläche (Test)"
 
-#: frontend/src/App.vue:86
+#: frontend/src/App.vue:104
 msgid "En pause"
 msgstr "Pausiert"
 
-#: frontend/src/App.vue:86 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:104 templates/configure/scripts_app.html.jinja:64
 msgid "En marche"
 msgstr "Läuft"
 
-#: frontend/src/App.vue:86 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:104 templates/configure/scripts_app.html.jinja:64
 msgid "Arrêté"
 msgstr "Gestoppt"
 
-#: frontend/src/App.vue:88 templates/configure.html.jinja:120
+#: frontend/src/App.vue:106 templates/configure.html.jinja:120
 msgid "Thème"
 msgstr "Design"
 
@@ -406,6 +406,66 @@ msgstr "Abbrechen"
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "Noch nichts."
+
+#: frontend/src/views/PendingView.vue:48
+#: templates/configure/tab_validation.html.jinja:4
+msgid "Photos en attente de validation"
+msgstr "Fotos warten auf Validierung"
+
+#: frontend/src/views/PendingView.vue:50
+msgid "Tout approuver"
+msgstr "Alle genehmigen"
+
+#: frontend/src/views/PendingView.vue:51
+#: templates/configure/tab_affichage.html.jinja:353
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr "Aktualisieren"
+
+#: frontend/src/views/PendingView.vue:55
+#: templates/configure/scripts_gallery.html.jinja:217
+msgid "Aucune photo en attente de validation."
+msgstr "Keine Fotos warten auf Validierung."
+
+#: frontend/src/views/PendingView.vue:65
+#: templates/configure/scripts_gallery.html.jinja:247
+msgid "Approuver"
+msgstr "Genehmigen"
+
+#: frontend/src/views/PendingView.vue:66
+#: templates/configure/scripts_gallery.html.jinja:248
+msgid "Rejeter"
+msgstr "Zurückweisen"
+
+#: frontend/src/views/PendingView.vue:67
+#: templates/configure/scripts_gallery.html.jinja:249
+msgid "Approuver et toujours accepter cet appareil"
+msgstr "Freigeben und dieses Gerät immer akzeptieren"
+
+#: frontend/src/views/PendingView.vue:71
+#: templates/configure/tab_validation.html.jinja:16
+msgid ""
+"« Approuver et toujours accepter cet appareil » : les photos suivantes "
+"envoyées depuis ce téléphone s'afficheront sans attendre."
+msgstr ""
+"„Freigeben und dieses Gerät immer akzeptieren“: Die nächsten Fotos von "
+"diesem Handy werden ohne Wartezeit angezeigt."
+
+#: frontend/src/views/PendingView.vue:75
+#: templates/configure/tab_validation.html.jinja:19
+msgid "Appareils de confiance"
+msgstr "Vertrauenswürdige Geräte"
+
+#: frontend/src/views/PendingView.vue:76
+#: templates/configure/tab_validation.html.jinja:21
+msgid "Aucun pour l'instant."
+msgstr "Noch keine."
+
+#: frontend/src/views/PendingView.vue:80
+#: templates/configure/tab_validation.html.jinja:33
+msgid "Retirer la confiance"
+msgstr "Vertrauen entziehen"
 
 #: frontend/src/views/StatsView.vue:46
 #: templates/configure/tab_stats.html.jinja:5
@@ -2026,22 +2086,6 @@ msgstr "Status: Fehler"
 msgid "État de la prise : Injoignable"
 msgstr "Outlet-Status: Nicht erreichbar"
 
-#: templates/configure/scripts_gallery.html.jinja:217
-msgid "Aucune photo en attente de validation."
-msgstr "Keine Fotos warten auf Validierung."
-
-#: templates/configure/scripts_gallery.html.jinja:247
-msgid "Approuver"
-msgstr "Genehmigen"
-
-#: templates/configure/scripts_gallery.html.jinja:248
-msgid "Rejeter"
-msgstr "Zurückweisen"
-
-#: templates/configure/scripts_gallery.html.jinja:249
-msgid "Approuver et toujours accepter cet appareil"
-msgstr "Freigeben und dieses Gerät immer akzeptieren"
-
 #: templates/configure/scripts_main.html.jinja:233
 msgid "Comme le diaporama"
 msgstr "Wie die Diashow"
@@ -3177,12 +3221,6 @@ msgstr ""
 "WLAN des Telefons einschalten und aktualisieren. Tipp: Auf iPhone und "
 "Android „Private / zufällige MAC-Adresse“ für dieses Netz deaktivieren, "
 "sonst ändert sich die Adresse."
-
-#: templates/configure/tab_affichage.html.jinja:353
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
-msgstr "Aktualisieren"
 
 #: templates/configure/tab_affichage.html.jinja:360
 msgid "à la maison"
@@ -6862,10 +6900,6 @@ msgstr "Overlay-Optionen"
 msgid "Activer l'icône de nouvelle carte postale dans l'overlay"
 msgstr "Neues Postkartensymbol im Overlay aktivieren"
 
-#: templates/configure/tab_validation.html.jinja:4
-msgid "Photos en attente de validation"
-msgstr "Fotos warten auf Validierung"
-
 #: templates/configure/tab_validation.html.jinja:7
 msgid ""
 "Approuvez ou rejetez les photos envoyées. Les photos approuvées\n"
@@ -6873,26 +6907,6 @@ msgid ""
 msgstr ""
 "Genehmigen oder lehnen Sie die gesendeten Fotos ab. Genehmigte Fotos "
 "werden der Quelle \"Gäste\" hinzugefügt."
-
-#: templates/configure/tab_validation.html.jinja:16
-msgid ""
-"« Approuver et toujours accepter cet appareil » : les photos suivantes "
-"envoyées depuis ce téléphone s'afficheront sans attendre."
-msgstr ""
-"„Freigeben und dieses Gerät immer akzeptieren“: Die nächsten Fotos von "
-"diesem Handy werden ohne Wartezeit angezeigt."
-
-#: templates/configure/tab_validation.html.jinja:19
-msgid "Appareils de confiance"
-msgstr "Vertrauenswürdige Geräte"
-
-#: templates/configure/tab_validation.html.jinja:21
-msgid "Aucun pour l'instant."
-msgstr "Noch keine."
-
-#: templates/configure/tab_validation.html.jinja:33
-msgid "Retirer la confiance"
-msgstr "Vertrauen entziehen"
 
 #: templates/configure/tab_vocal.html.jinja:4
 msgid "Contrôle Vocal"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:12+0200\n"
+"POT-Creation-Date: 2026-10-11 12:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,31 +143,31 @@ msgstr ""
 msgid "Scannez pour configurer"
 msgstr ""
 
-#: frontend/src/App.vue:71
+#: frontend/src/App.vue:89
 msgid "Ouvre l'interface classique"
 msgstr ""
 
-#: frontend/src/App.vue:77 frontend/src/App.vue:113
+#: frontend/src/App.vue:95 frontend/src/App.vue:131
 msgid "Interface classique"
 msgstr ""
 
-#: frontend/src/App.vue:83 templates/configure.html.jinja:132
+#: frontend/src/App.vue:101 templates/configure.html.jinja:132
 msgid "Nouvelle interface (essai)"
 msgstr ""
 
-#: frontend/src/App.vue:86
+#: frontend/src/App.vue:104
 msgid "En pause"
 msgstr ""
 
-#: frontend/src/App.vue:86 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:104 templates/configure/scripts_app.html.jinja:64
 msgid "En marche"
 msgstr ""
 
-#: frontend/src/App.vue:86 templates/configure/scripts_app.html.jinja:64
+#: frontend/src/App.vue:104 templates/configure/scripts_app.html.jinja:64
 msgid "Arrêté"
 msgstr ""
 
-#: frontend/src/App.vue:88 templates/configure.html.jinja:120
+#: frontend/src/App.vue:106 templates/configure.html.jinja:120
 msgid "Thème"
 msgstr ""
 
@@ -404,6 +404,64 @@ msgstr ""
 #: frontend/src/views/HomeView.vue:215
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:48
+#: templates/configure/tab_validation.html.jinja:4
+msgid "Photos en attente de validation"
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:50
+msgid "Tout approuver"
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:51
+#: templates/configure/tab_affichage.html.jinja:353
+#: templates/configure/tab_logs.html.jinja:13
+#: templates/configure/tab_validation.html.jinja:11
+msgid "Actualiser"
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:55
+#: templates/configure/scripts_gallery.html.jinja:217
+msgid "Aucune photo en attente de validation."
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:65
+#: templates/configure/scripts_gallery.html.jinja:247
+msgid "Approuver"
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:66
+#: templates/configure/scripts_gallery.html.jinja:248
+msgid "Rejeter"
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:67
+#: templates/configure/scripts_gallery.html.jinja:249
+msgid "Approuver et toujours accepter cet appareil"
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:71
+#: templates/configure/tab_validation.html.jinja:16
+msgid ""
+"« Approuver et toujours accepter cet appareil » : les photos suivantes "
+"envoyées depuis ce téléphone s'afficheront sans attendre."
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:75
+#: templates/configure/tab_validation.html.jinja:19
+msgid "Appareils de confiance"
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:76
+#: templates/configure/tab_validation.html.jinja:21
+msgid "Aucun pour l'instant."
+msgstr ""
+
+#: frontend/src/views/PendingView.vue:80
+#: templates/configure/tab_validation.html.jinja:33
+msgid "Retirer la confiance"
 msgstr ""
 
 #: frontend/src/views/StatsView.vue:46
@@ -1970,22 +2028,6 @@ msgstr ""
 msgid "État de la prise : Injoignable"
 msgstr ""
 
-#: templates/configure/scripts_gallery.html.jinja:217
-msgid "Aucune photo en attente de validation."
-msgstr ""
-
-#: templates/configure/scripts_gallery.html.jinja:247
-msgid "Approuver"
-msgstr ""
-
-#: templates/configure/scripts_gallery.html.jinja:248
-msgid "Rejeter"
-msgstr ""
-
-#: templates/configure/scripts_gallery.html.jinja:249
-msgid "Approuver et toujours accepter cet appareil"
-msgstr ""
-
 #: templates/configure/scripts_main.html.jinja:233
 msgid "Comme le diaporama"
 msgstr ""
@@ -3066,12 +3108,6 @@ msgid ""
 "Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
 "Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
 "sinon l'adresse change."
-msgstr ""
-
-#: templates/configure/tab_affichage.html.jinja:353
-#: templates/configure/tab_logs.html.jinja:13
-#: templates/configure/tab_validation.html.jinja:11
-msgid "Actualiser"
 msgstr ""
 
 #: templates/configure/tab_affichage.html.jinja:360
@@ -6415,32 +6451,10 @@ msgstr ""
 msgid "Activer l'icône de nouvelle carte postale dans l'overlay"
 msgstr ""
 
-#: templates/configure/tab_validation.html.jinja:4
-msgid "Photos en attente de validation"
-msgstr ""
-
 #: templates/configure/tab_validation.html.jinja:7
 msgid ""
 "Approuvez ou rejetez les photos envoyées. Les photos approuvées\n"
 "                        seront ajoutées à la source \"Invités\"."
-msgstr ""
-
-#: templates/configure/tab_validation.html.jinja:16
-msgid ""
-"« Approuver et toujours accepter cet appareil » : les photos suivantes "
-"envoyées depuis ce téléphone s'afficheront sans attendre."
-msgstr ""
-
-#: templates/configure/tab_validation.html.jinja:19
-msgid "Appareils de confiance"
-msgstr ""
-
-#: templates/configure/tab_validation.html.jinja:21
-msgid "Aucun pour l'instant."
-msgstr ""
-
-#: templates/configure/tab_validation.html.jinja:33
-msgid "Retirer la confiance"
 msgstr ""
 
 #: templates/configure/tab_vocal.html.jinja:4

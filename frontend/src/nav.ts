@@ -41,7 +41,7 @@ export const groups: NavGroup[] = [
   ] },
   { key: "partage", label: () => t("Partage"), icon: "fa-user-friends", items: [
     { label: () => t("Invités"), icon: "fa-qrcode", tab: "tab-invites" },
-    { label: () => t("À valider"), icon: "fa-check-circle", tab: "tab-validation" },
+    { label: () => t("À valider"), icon: "fa-check-circle", tab: "tab-validation", route: "/a-valider" },
     { label: () => t("Telegram"), icon: "fa-paper-plane", tab: "tab-telegram" },
   ] },
   { key: "systeme", label: () => t("Système"), icon: "fa-cog", items: [
