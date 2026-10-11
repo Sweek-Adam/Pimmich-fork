@@ -4,6 +4,12 @@
 
 Pimmich est une application Python conçue pour transformer un Raspberry Pi en un cadre photo numérique intelligent et personnalisable. Il peut afficher des photos depuis de multiples sources, être contrôlé à la voix, et bien plus encore.
 
+> [!NOTE]
+> **Ce dépôt est un fork personnel** de [Pimmich](https://github.com/gotenash/pimmich), le projet d'origine créé par Gadgetaulab.
+> Je l'ai repris pour mon propre cadre photo et j'y ai ajouté **plein de fonctionnalités** (liste ci-dessous).
+> C'est un **usage purement personnel** : le fork évolue de son côté, n'est plus fusionné avec le dépôt d'origine
+> et n'est pas maintenu pour d'autres installations. Pour la version officielle, rendez-vous sur le dépôt d'origine 🙂
+
 <img src="static/pimmich_logo.png" alt="Pimmich Logo" width="300" style="display: block; margin: auto;">
 
 <p align="center">
@@ -16,6 +22,7 @@ Pimmich est une application Python conçue pour transformer un Raspberry Pi en u
 
 ## 📖 Table des matières
 
+- [🍴 Ajouts de ce fork](#-ajouts-de-ce-fork)
 - [✨ Fonctionnalités Principales](#-fonctionnalités-principales)
 - [🧰 Technologies utilisées](#-technologies-utilisées)
 - [🚀 Installation](#-installation)
@@ -27,6 +34,45 @@ Pimmich est une application Python conçue pour transformer un Raspberry Pi en u
   - [Juillet 2025](#-juillet-2025---version-actuelle)
   - [Août 2025](#️-août-2025----sortie-prévue-le-15-aoüt)
 - [💖 Crédits](#-crédits)
+
+---
+
+## 🍴 Ajouts de ce fork
+
+En plus de tout ce que propose Pimmich d'origine, ce fork ajoute notamment :
+
+#### 🖥️ Nouvelle interface d'administration
+- Interface entièrement refaite (Vue 3), adaptée au téléphone, **mode sombre**, recherche, raccourcis vers chaque rubrique, visite guidée.
+- Historique des réglages avec annulation, glisser-déposer sur l'accueil, statistiques, bibliothèque avec recherche (date, source, personne).
+- Comptes par membre de la famille (envois et playlists personnels), administration de plusieurs cadres.
+
+#### 📸 Photos & sources
+- Google Drive, Dropbox, OneDrive (rclone), albums partagés iCloud, import WhatsApp, partage direct depuis Android.
+- Tri automatique (photos floues, sombres, doublons, captures d'écran), personnes reconnues via Immich, recadrage qui garde les visages.
+- Albums intelligents, « Ce jour-là », légendes de lieu automatiques, légendes façon Snapchat sur photos et vidéos.
+- Plusieurs emplacements de stockage (disque USB, NAS) et rotation automatique de l'écran.
+- **Carte du monde des voyages** : regroupement des photos par lieu et par période, récits de voyage affichés sur le cadre.
+
+#### 🖼️ Affichage
+- Dispositions (mosaïque, mur, magazine…) préparées à l'avance, mises en page familiales (anniversaires avec prénom et âge, fêtes…).
+- Mode **vidéos uniquement**, enchaînement sans écran de chargement.
+- Horloge entièrement personnalisable (police, taille, couleurs, fond), météo animée, soleil et lune, citation du jour.
+- Agenda familial (Google Agenda), comptes à rebours, fréquences d'affichage réglables, baisse de luminosité le soir et horloge de nuit.
+- Nouvelles transitions, synchronisées sur le rythme de la musique, et ambiances saisonnières (Halloween, Noël, Pâques…).
+
+#### 💌 Messages & invités
+- Messages programmés ou récurrents, **dessins** avec autocollants, **messages vocaux**, réactions et **livre d'or**.
+- Lien invité accessible depuis l'extérieur (Tailscale) et invités de confiance validés automatiquement.
+
+#### 🎵 Musique
+- Spotify (lecteur, juke-box avec grande pochette, **karaoké** avec paroles synchronisées), radios internet et podcasts.
+- Bluetooth, AirPlay, minuterie de sommeil, musique selon l'heure, volume baissé pendant les vidéos et les messages vocaux.
+
+#### 🏠 Maison connectée & fiabilité
+- Home Assistant (MQTT), HDMI-CEC, détection de présence par Wi-Fi, notifications (ntfy).
+- Mise à jour en un clic avec retour arrière, surveillance qui relance le diaporama s'il se fige, rotation des journaux.
+- Protection de la carte SD (log2ram, zram), sauvegarde complète restaurable, accès HTTPS via Tailscale.
+- Tests automatisés et intégration continue.
 
 ---
 
@@ -352,3 +398,10 @@ Dans ce cadre vous pourrez régler le temps d'affichage de chaque photo (pour l'
 ## configuration de l'import des photos
 
 ![Menu Clef API](https://drive.google.com/uc?id=1AwUgYbzGcdskt99q32VlaOc7jM303Tbd)
+
+---
+
+## 💖 Crédits
+
+- Projet d'origine : [Pimmich](https://github.com/gotenash/pimmich) par **Gadgetaulab** — un grand merci pour ce super projet ! Pour le soutenir, c'est par [Ko-fi](https://ko-fi.com/pimmich).
+- Ce fork : ajouts et modifications pour un usage personnel.

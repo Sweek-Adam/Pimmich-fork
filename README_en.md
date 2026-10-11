@@ -4,6 +4,12 @@
 
 Pimmich is a Python application designed to turn a Raspberry Pi into a smart and customizable digital photo frame. It can display photos from multiple sources, be controlled by voice, and much more.
 
+> [!NOTE]
+> **This repository is a personal fork** of [Pimmich](https://github.com/gotenash/pimmich), the original project created by Gadgetaulab.
+> I took it over for my own photo frame and added **lots of features** (see the list below).
+> It is for **purely personal use**: the fork lives its own life, is no longer merged with the original repository
+> and is not maintained for other setups. For the official version, head over to the original repository 🙂
+
 <img src="static/pimmich_logo.png" alt="Pimmich Logo" width="300">
 
 <p align="center">
@@ -16,6 +22,7 @@ Pimmich is a Python application designed to turn a Raspberry Pi into a smart and
 
 ## 📖 Table of Contents
 
+- 🍴 What this fork adds
 - ✨ Main Features
 - 🧰 Technologies Used
 - 🚀 Installation
@@ -27,6 +34,45 @@ Pimmich is a Python application designed to turn a Raspberry Pi into a smart and
   - July 2025
   - August 2025
 - 💖 Credits
+
+---
+
+## 🍴 What this fork adds
+
+On top of everything the original Pimmich offers, this fork adds in particular:
+
+#### 🖥️ New admin interface
+- Fully rebuilt interface (Vue 3), phone-friendly, **dark mode**, search, shortcuts to every section, guided tour.
+- Settings history with undo, drag and drop on the home page, statistics, searchable library (date, source, person).
+- Per-family-member accounts (own uploads and playlists), multi-frame administration.
+
+#### 📸 Photos & sources
+- Google Drive, Dropbox, OneDrive (rclone), iCloud shared albums, WhatsApp import, direct sharing from Android.
+- Automatic filtering (blurry, dark, duplicate photos, screenshots), people recognised via Immich, face-aware cropping.
+- Smart albums, "On this day", automatic place captions, Snapchat-style captions on photos and videos.
+- Several storage locations (USB disk, NAS) and automatic screen rotation.
+- **World travel map**: photos grouped by place and period, trip stories shown on the frame.
+
+#### 🖼️ Display
+- Layouts (mosaic, wall, magazine…) prepared ahead of time, family layouts (birthdays with name and age, holidays…).
+- **Videos only** mode, chaining without a loading screen.
+- Fully customisable clock (font, size, colours, background), animated weather, sun and moon, quote of the day.
+- Family calendar (Google Calendar), countdowns, adjustable display frequencies, evening dimming and night clock.
+- New transitions, synced to the music beat, and seasonal moods (Halloween, Christmas, Easter…).
+
+#### 💌 Messages & guests
+- Scheduled or recurring messages, **drawings** with stickers, **voice messages**, reactions and a **guestbook**.
+- Guest link reachable from outside (Tailscale) and automatically approved trusted guests.
+
+#### 🎵 Music
+- Spotify (player, jukebox with big cover, **karaoke** with synced lyrics), internet radios and podcasts.
+- Bluetooth, AirPlay, sleep timer, music by time of day, volume lowered during videos and voice messages.
+
+#### 🏠 Smart home & reliability
+- Home Assistant (MQTT), HDMI-CEC, Wi-Fi presence detection, notifications (ntfy).
+- One-click update with rollback, watchdog that restarts a frozen slideshow, log rotation.
+- SD card protection (log2ram, zram), full restorable backup, HTTPS access via Tailscale.
+- Automated tests and continuous integration.
 
 ---
 
@@ -137,3 +183,10 @@ Here, you can set the display time per photo (minimum ~10s, due to background bl
 ### Photo Import Settings
 
 Choose between importing from an Immich album or a USB stick, and manage downloaded files.
+
+---
+
+## 💖 Credits
+
+- Original project: [Pimmich](https://github.com/gotenash/pimmich) by **Gadgetaulab** — many thanks for this great project! To support it, use [Ko-fi](https://ko-fi.com/pimmich).
+- This fork: additions and changes for personal use.

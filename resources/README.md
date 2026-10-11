@@ -9,3 +9,5 @@
 - `world_countries.json` : contours des pays, Natural Earth 1:50m (domaine public, https://www.naturalearthdata.com/),
   coordonnées arrondies à 0,01° et noms des pays en fr/en/es/de/ja. Fond de carte hors ligne de la carte des voyages
   (administration) et des cartes dessinées sur le cadre (`utils/trips.py`, `utils/trip_map.py`).
+
+> Ce dossier fait partie d'un fork personnel de [Pimmich](https://github.com/gotenash/pimmich) (usage purement perso).
