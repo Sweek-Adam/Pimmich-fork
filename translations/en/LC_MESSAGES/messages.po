@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:48+0200\n"
+"POT-Creation-Date: 2026-10-11 08:55+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -595,6 +595,7 @@ msgstr "Create playlist"
 
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:199
 #: templates/configure/tab_sources.html.jinja:537
@@ -630,6 +631,7 @@ msgstr "All"
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
 #: templates/configure/tab_sources.html.jinja:489
@@ -2902,6 +2904,14 @@ msgstr ""
 "Easter: 2 weeks around Easter · Spring, Autumn, Winter: according to the "
 "season."
 
+#: templates/configure/tab_dispositions.html.jinja:107
+msgid ""
+"Moments de famille et fêtes (anniversaire, mariage, naissance, rentrée, "
+"Saint-Valentin, fêtes des mères et des pères) : seulement à leur date."
+msgstr ""
+"Family moments and holidays (birthday, wedding, birth, back to school, "
+"Valentine's Day, Mother's and Father's Day): only on their date."
+
 #: templates/configure/tab_dispositions.html.jinja:117
 msgid "Thème de saison"
 msgstr "Seasonal theme"
@@ -2913,6 +2923,59 @@ msgstr " (up to 3, in ghosts)"
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid "Les messages sont affichés seuls, en plein écran"
 msgstr "Messages are shown on their own, full screen"
+
+#: templates/configure/tab_dispositions.html.jinja:127
+msgid "Dates de la famille"
+msgstr "Family dates"
+
+#: templates/configure/tab_dispositions.html.jinja:128
+msgid ""
+"Anniversaires, mariages et naissances : le jour venu, le cadre montre une"
+" disposition « Joyeux anniversaire Léo ! » avec son âge, « 25 ans de "
+"mariage » ou « Bienvenue Emma ! ». La rentrée, la Saint-Valentin et les "
+"fêtes des mères et des pères (à la date de votre pays) arrivent toutes "
+"seules."
+msgstr ""
+"Birthdays, weddings and births: on the day, the frame shows a “Happy "
+"birthday Leo!” layout with their age, “25 years of marriage” or “Welcome "
+"Emma!”. Back to school, Valentine's Day and Mother's and Father's Day (on"
+" your country's date) come by themselves."
+
+#: templates/configure/tab_dispositions.html.jinja:130
+msgid "Ajouter une date"
+msgstr "Add a date"
+
+#: templates/configure/tab_dispositions.html.jinja:135
+msgid "Bientôt :"
+msgstr "Coming up:"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_extra.py:627
+msgid "Anniversaire"
+msgstr "Birthday"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_family.py:189
+msgid "Mariage"
+msgstr "Wedding"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_family.py:190
+msgid "Naissance"
+msgstr "Birth"
+
+#: templates/configure/tab_dispositions.html.jinja:146
+msgid "Prénom (ou « Claire & Paul »)"
+msgstr "First name (or “Claire & Paul”)"
+
+#: templates/configure/tab_dispositions.html.jinja:146
+msgid "rien dans les deux mois"
+msgstr "nothing in the next two months"
+
+#: templates/configure/tab_dispositions.html.jinja:147
+#, python-brace-format
+msgid "{n} ans"
+msgstr "{n} years"
 
 #: templates/configure/tab_favoris.html.jinja:4
 msgid "Vos photos favorites"
@@ -4406,7 +4469,7 @@ msgstr ""
 "                            Wi-Fi regulations)"
 
 #: templates/configure/tab_network.html.jinja:33
-#: utils/themed_compositions.py:632
+#: utils/themed_compositions.py:633
 msgid "France"
 msgstr "France"
 
@@ -5789,7 +5852,7 @@ msgid "Une photo à la fois, lente, avec un léger mouvement."
 msgstr "One photo at a time, slow, with gentle motion."
 
 #: utils/ambiances.py:57 utils/smart_albums.py:29
-#: utils/themed_compositions.py:627
+#: utils/themed_compositions.py:628
 msgid "Halloween"
 msgstr "Halloween"
 
@@ -5800,7 +5863,7 @@ msgid ""
 msgstr "Pumpkins and bats; messages appear inside little ghosts."
 
 #: utils/ambiances.py:65 utils/smart_albums.py:28
-#: utils/themed_compositions.py:626
+#: utils/themed_compositions.py:627
 msgid "Noël"
 msgstr "Christmas"
 
@@ -5822,7 +5885,7 @@ msgid ""
 "fête."
 msgstr "Fireworks and confetti to wish a happy new year; party pace."
 
-#: utils/ambiances.py:81 utils/themed_compositions.py:628
+#: utils/ambiances.py:81 utils/themed_compositions.py:629
 msgid "Pâques"
 msgstr "Easter"
 
@@ -6134,63 +6197,63 @@ msgstr "Winter"
 msgid "Printemps"
 msgstr "Spring"
 
-#: utils/smart_albums.py:30
+#: utils/smart_albums.py:30 utils/themed_compositions_family.py:192
 msgid "Saint-Valentin"
 msgstr "Valentine's Day"
 
-#: utils/themed_compositions.py:224
+#: utils/themed_compositions.py:225
 msgid "Joyeux Noël"
 msgstr "Merry Christmas"
 
-#: utils/themed_compositions.py:274
+#: utils/themed_compositions.py:275
 msgid "Joyeux Halloween"
 msgstr "Happy Halloween"
 
-#: utils/themed_compositions.py:405
+#: utils/themed_compositions.py:406
 msgid "Joyeuses Pâques"
 msgstr "Happy Easter"
 
-#: utils/themed_compositions.py:444
+#: utils/themed_compositions.py:445
 msgid "Bonnes vacances !"
 msgstr "Happy holidays!"
 
-#: utils/themed_compositions.py:464 utils/themed_compositions.py:630
+#: utils/themed_compositions.py:465 utils/themed_compositions.py:631
 msgid "Islande"
 msgstr "Iceland"
 
-#: utils/themed_compositions.py:499 utils/themed_compositions.py:631
+#: utils/themed_compositions.py:500 utils/themed_compositions.py:632
 msgid "Japon"
 msgstr "Japan"
 
-#: utils/themed_compositions.py:538
+#: utils/themed_compositions.py:539
 msgid "Vive la France"
 msgstr "Vive la France"
 
-#: utils/themed_compositions.py:560
+#: utils/themed_compositions.py:561
 msgid "La montagne"
 msgstr "The mountains"
 
-#: utils/themed_compositions.py:591
+#: utils/themed_compositions.py:592
 msgid "La mer"
 msgstr "The sea"
 
-#: utils/themed_compositions.py:619
+#: utils/themed_compositions.py:620
 msgid "Vive la plage !"
 msgstr "Beach life!"
 
-#: utils/themed_compositions.py:629
+#: utils/themed_compositions.py:630
 msgid "Vacances"
 msgstr "Holidays"
 
-#: utils/themed_compositions.py:633
+#: utils/themed_compositions.py:634
 msgid "Montagne"
 msgstr "Mountains"
 
-#: utils/themed_compositions.py:634
+#: utils/themed_compositions.py:635
 msgid "Mer"
 msgstr "Sea"
 
-#: utils/themed_compositions.py:635
+#: utils/themed_compositions.py:636
 msgid "Plage"
 msgstr "Beach"
 
@@ -6312,10 +6375,6 @@ msgstr "Hokusai – The Great Wave"
 msgid "Espace"
 msgstr "Space"
 
-#: utils/themed_compositions_extra.py:627
-msgid "Anniversaire"
-msgstr "Birthday"
-
 #: utils/themed_compositions_extra.py:628
 msgid "Cinéma"
 msgstr "Cinema"
@@ -6327,6 +6386,69 @@ msgstr "Comic book"
 #: utils/themed_compositions_extra.py:631
 msgid "Album ancien"
 msgstr "Old album"
+
+#: utils/themed_compositions_family.py:40
+#, python-format
+msgid "Joyeux anniversaire %(name)s !"
+msgstr "Happy birthday %(name)s!"
+
+#: utils/themed_compositions_family.py:43
+msgid "ans"
+msgstr "years"
+
+#: utils/themed_compositions_family.py:68
+msgid "Joyeux anniversaire de mariage"
+msgstr "Happy anniversary"
+
+#: utils/themed_compositions_family.py:68
+msgid "Vive les mariés !"
+msgstr "Just married!"
+
+#: utils/themed_compositions_family.py:70
+#, python-format
+msgid "%(years)s ans"
+msgstr "%(years)s years"
+
+#: utils/themed_compositions_family.py:96
+#, python-format
+msgid "Bienvenue %(name)s !"
+msgstr "Welcome %(name)s!"
+
+#: utils/themed_compositions_family.py:96
+msgid "Bienvenue bébé !"
+msgstr "Welcome, baby!"
+
+#: utils/themed_compositions_family.py:120
+msgid "C'est la rentrée !"
+msgstr "Back to school!"
+
+#: utils/themed_compositions_family.py:146
+msgid "Joyeuse Saint-Valentin"
+msgstr "Happy Valentine's Day"
+
+#: utils/themed_compositions_family.py:162
+msgid "Bonne fête Maman !"
+msgstr "Happy Mother's Day!"
+
+#: utils/themed_compositions_family.py:182
+msgid "Bonne fête Papa !"
+msgstr "Happy Father's Day!"
+
+#: utils/themed_compositions_family.py:188
+msgid "Anniversaire au prénom"
+msgstr "Personal birthday"
+
+#: utils/themed_compositions_family.py:191
+msgid "Rentrée"
+msgstr "Back to school"
+
+#: utils/themed_compositions_family.py:193
+msgid "Fête des mères"
+msgstr "Mother's Day"
+
+#: utils/themed_compositions_family.py:194
+msgid "Fête des pères"
+msgstr "Father's Day"
 
 #: web/core.py:936
 msgid "Code d'invitation invalide."
@@ -6475,6 +6597,15 @@ msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
 msgstr "Configuration saved. The slideshow was restarted to apply the changes."
+
+#: web/routes_family.py:26
+msgid "Liste invalide."
+msgstr "Invalid list."
+
+#: web/routes_family.py:31
+#, python-format
+msgid "%(count)s date(s) enregistrée(s)."
+msgstr "%(count)s date(s) saved."
 
 #: web/routes_guests.py:36
 #, python-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:48+0200\n"
+"POT-Creation-Date: 2026-10-11 08:55+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -593,6 +593,7 @@ msgstr "プレイリストを作成"
 
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:199
 #: templates/configure/tab_sources.html.jinja:537
@@ -628,6 +629,7 @@ msgstr "すべて"
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
 #: templates/configure/tab_sources.html.jinja:489
@@ -2836,6 +2838,12 @@ msgid ""
 "la saison."
 msgstr "クリスマス：12月1日～1月6日 · ハロウィン：10月15日～11月2日 · イースター：イースター前後2週間 · 春・秋・冬：季節に応じて"
 
+#: templates/configure/tab_dispositions.html.jinja:107
+msgid ""
+"Moments de famille et fêtes (anniversaire, mariage, naissance, rentrée, "
+"Saint-Valentin, fêtes des mères et des pères) : seulement à leur date."
+msgstr "家族の記念日と行事（誕生日、結婚記念日、誕生、新学期、バレンタイン、母の日・父の日）：その日だけ表示。"
+
 #: templates/configure/tab_dispositions.html.jinja:117
 msgid "Thème de saison"
 msgstr "季節のテーマ"
@@ -2847,6 +2855,55 @@ msgstr "（最大 3 件、おばけの中に）"
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid "Les messages sont affichés seuls, en plein écran"
 msgstr "メッセージは単独で全画面表示されます"
+
+#: templates/configure/tab_dispositions.html.jinja:127
+msgid "Dates de la famille"
+msgstr "家族の記念日"
+
+#: templates/configure/tab_dispositions.html.jinja:128
+msgid ""
+"Anniversaires, mariages et naissances : le jour venu, le cadre montre une"
+" disposition « Joyeux anniversaire Léo ! » avec son âge, « 25 ans de "
+"mariage » ou « Bienvenue Emma ! ». La rentrée, la Saint-Valentin et les "
+"fêtes des mères et des pères (à la date de votre pays) arrivent toutes "
+"seules."
+msgstr "誕生日・結婚記念日・誕生：その日になると、年齢入りの「レオ、お誕生日おめでとう！」や「結婚25周年」「ようこそエマ！」のレイアウトを表示します。新学期、バレンタイン、母の日・父の日（お住まいの国の日付）は自動で表示されます。"
+
+#: templates/configure/tab_dispositions.html.jinja:130
+msgid "Ajouter une date"
+msgstr "日付を追加"
+
+#: templates/configure/tab_dispositions.html.jinja:135
+msgid "Bientôt :"
+msgstr "まもなく："
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_extra.py:627
+msgid "Anniversaire"
+msgstr "誕生日"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_family.py:189
+msgid "Mariage"
+msgstr "結婚記念日"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_family.py:190
+msgid "Naissance"
+msgstr "誕生"
+
+#: templates/configure/tab_dispositions.html.jinja:146
+msgid "Prénom (ou « Claire & Paul »)"
+msgstr "名前（または「クレア＆ポール」）"
+
+#: templates/configure/tab_dispositions.html.jinja:146
+msgid "rien dans les deux mois"
+msgstr "2か月以内の予定はありません"
+
+#: templates/configure/tab_dispositions.html.jinja:147
+#, python-brace-format
+msgid "{n} ans"
+msgstr "{n}年"
 
 #: templates/configure/tab_favoris.html.jinja:4
 msgid "Vos photos favorites"
@@ -4285,7 +4342,7 @@ msgstr ""
 "                            Wi-Fi規制）"
 
 #: templates/configure/tab_network.html.jinja:33
-#: utils/themed_compositions.py:632
+#: utils/themed_compositions.py:633
 msgid "France"
 msgstr "フランス"
 
@@ -5619,7 +5676,7 @@ msgid "Une photo à la fois, lente, avec un léger mouvement."
 msgstr "1枚ずつ、ゆっくりと、かすかな動きを添えて。"
 
 #: utils/ambiances.py:57 utils/smart_albums.py:29
-#: utils/themed_compositions.py:627
+#: utils/themed_compositions.py:628
 msgid "Halloween"
 msgstr "ハロウィン"
 
@@ -5630,7 +5687,7 @@ msgid ""
 msgstr "かぼちゃとコウモリ。メッセージは小さなおばけの中に表示されます。"
 
 #: utils/ambiances.py:65 utils/smart_albums.py:28
-#: utils/themed_compositions.py:626
+#: utils/themed_compositions.py:627
 msgid "Noël"
 msgstr "クリスマス"
 
@@ -5650,7 +5707,7 @@ msgid ""
 "fête."
 msgstr "花火と紙吹雪で新年をお祝い。パーティーのテンポで。"
 
-#: utils/ambiances.py:81 utils/themed_compositions.py:628
+#: utils/ambiances.py:81 utils/themed_compositions.py:629
 msgid "Pâques"
 msgstr "イースター"
 
@@ -5952,63 +6009,63 @@ msgstr "冬"
 msgid "Printemps"
 msgstr "春"
 
-#: utils/smart_albums.py:30
+#: utils/smart_albums.py:30 utils/themed_compositions_family.py:192
 msgid "Saint-Valentin"
 msgstr "バレンタイン"
 
-#: utils/themed_compositions.py:224
+#: utils/themed_compositions.py:225
 msgid "Joyeux Noël"
 msgstr "メリークリスマス"
 
-#: utils/themed_compositions.py:274
+#: utils/themed_compositions.py:275
 msgid "Joyeux Halloween"
 msgstr "ハッピーハロウィン"
 
-#: utils/themed_compositions.py:405
+#: utils/themed_compositions.py:406
 msgid "Joyeuses Pâques"
 msgstr "ハッピーイースター"
 
-#: utils/themed_compositions.py:444
+#: utils/themed_compositions.py:445
 msgid "Bonnes vacances !"
 msgstr "楽しい休暇を！"
 
-#: utils/themed_compositions.py:464 utils/themed_compositions.py:630
+#: utils/themed_compositions.py:465 utils/themed_compositions.py:631
 msgid "Islande"
 msgstr "アイスランド"
 
-#: utils/themed_compositions.py:499 utils/themed_compositions.py:631
+#: utils/themed_compositions.py:500 utils/themed_compositions.py:632
 msgid "Japon"
 msgstr "日本"
 
-#: utils/themed_compositions.py:538
+#: utils/themed_compositions.py:539
 msgid "Vive la France"
 msgstr "フランス万歳"
 
-#: utils/themed_compositions.py:560
+#: utils/themed_compositions.py:561
 msgid "La montagne"
 msgstr "山"
 
-#: utils/themed_compositions.py:591
+#: utils/themed_compositions.py:592
 msgid "La mer"
 msgstr "海"
 
-#: utils/themed_compositions.py:619
+#: utils/themed_compositions.py:620
 msgid "Vive la plage !"
 msgstr "ビーチ最高！"
 
-#: utils/themed_compositions.py:629
+#: utils/themed_compositions.py:630
 msgid "Vacances"
 msgstr "休暇"
 
-#: utils/themed_compositions.py:633
+#: utils/themed_compositions.py:634
 msgid "Montagne"
 msgstr "山"
 
-#: utils/themed_compositions.py:634
+#: utils/themed_compositions.py:635
 msgid "Mer"
 msgstr "海"
 
-#: utils/themed_compositions.py:635
+#: utils/themed_compositions.py:636
 msgid "Plage"
 msgstr "ビーチ"
 
@@ -6130,10 +6187,6 @@ msgstr "北斎 – 神奈川沖浪裏"
 msgid "Espace"
 msgstr "宇宙"
 
-#: utils/themed_compositions_extra.py:627
-msgid "Anniversaire"
-msgstr "誕生日"
-
 #: utils/themed_compositions_extra.py:628
 msgid "Cinéma"
 msgstr "映画"
@@ -6145,6 +6198,69 @@ msgstr "コミック"
 #: utils/themed_compositions_extra.py:631
 msgid "Album ancien"
 msgstr "古いアルバム"
+
+#: utils/themed_compositions_family.py:40
+#, python-format
+msgid "Joyeux anniversaire %(name)s !"
+msgstr "%(name)s、お誕生日おめでとう！"
+
+#: utils/themed_compositions_family.py:43
+msgid "ans"
+msgstr "歳"
+
+#: utils/themed_compositions_family.py:68
+msgid "Joyeux anniversaire de mariage"
+msgstr "結婚記念日おめでとう"
+
+#: utils/themed_compositions_family.py:68
+msgid "Vive les mariés !"
+msgstr "ご結婚おめでとう！"
+
+#: utils/themed_compositions_family.py:70
+#, python-format
+msgid "%(years)s ans"
+msgstr "%(years)s周年"
+
+#: utils/themed_compositions_family.py:96
+#, python-format
+msgid "Bienvenue %(name)s !"
+msgstr "ようこそ、%(name)s！"
+
+#: utils/themed_compositions_family.py:96
+msgid "Bienvenue bébé !"
+msgstr "ようこそ、赤ちゃん！"
+
+#: utils/themed_compositions_family.py:120
+msgid "C'est la rentrée !"
+msgstr "新学期スタート！"
+
+#: utils/themed_compositions_family.py:146
+msgid "Joyeuse Saint-Valentin"
+msgstr "ハッピーバレンタイン"
+
+#: utils/themed_compositions_family.py:162
+msgid "Bonne fête Maman !"
+msgstr "お母さん、いつもありがとう！"
+
+#: utils/themed_compositions_family.py:182
+msgid "Bonne fête Papa !"
+msgstr "お父さん、いつもありがとう！"
+
+#: utils/themed_compositions_family.py:188
+msgid "Anniversaire au prénom"
+msgstr "名前入り誕生日"
+
+#: utils/themed_compositions_family.py:191
+msgid "Rentrée"
+msgstr "新学期"
+
+#: utils/themed_compositions_family.py:193
+msgid "Fête des mères"
+msgstr "母の日"
+
+#: utils/themed_compositions_family.py:194
+msgid "Fête des pères"
+msgstr "父の日"
 
 #: web/core.py:936
 msgid "Code d'invitation invalide."
@@ -6291,6 +6407,15 @@ msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
 msgstr "設定が保存されました。変更を適用するためにスライドショーが再開されました。"
+
+#: web/routes_family.py:26
+msgid "Liste invalide."
+msgstr "リストが無効です。"
+
+#: web/routes_family.py:31
+#, python-format
+msgid "%(count)s date(s) enregistrée(s)."
+msgstr "%(count)s件の日付を保存しました。"
 
 #: web/routes_guests.py:36
 #, python-format

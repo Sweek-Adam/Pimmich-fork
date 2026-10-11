@@ -104,7 +104,7 @@
                         <label class="form-check-label ml-2" for="compositions_seasonal">{{ _("Thèmes de saison seulement pendant leur période (et plus fréquents à ce moment-là)") }}</label>
                     </div>
                     <p class="text-sm text-gray-600 mb-2"><i class="fas fa-comment-dots msg-ok"></i> {{ _("affiche les messages dans la composition (un message à afficher déclenche l'une de ces dispositions)") }} · <i class="fas fa-comment-slash msg-no"></i> {{ _("messages affichés seuls") }}</p>
-                    <p class="text-sm text-gray-600 mb-2">{{ _("Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon la saison.") }}</p>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Noël : 1er décembre – 6 janvier · Halloween : 15 octobre – 2 novembre · Pâques : 2 semaines autour de Pâques · Printemps, Automne, Hiver : selon la saison.") }} {{ _("Moments de famille et fêtes (anniversaire, mariage, naissance, rentrée, Saint-Valentin, fêtes des mères et des pères) : seulement à leur date.") }}</p>
                     {% for title, items in [(_("Formats"), composition_formats), (_("Thèmes"), composition_themes)] %}
                     <h4 class="text-md font-semibold mt-4 mb-2">{{ title }}</h4>
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -122,4 +122,60 @@
                     </div>
                     {% endfor %}
                 </fieldset>
+
+                <fieldset class="mt-6" id="family-dates-box">
+                    <legend><h3><i class="fas fa-birthday-cake mr-2"></i>{{ _("Dates de la famille") }}</h3></legend>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Anniversaires, mariages et naissances : le jour venu, le cadre montre une disposition « Joyeux anniversaire Léo ! » avec son âge, « 25 ans de mariage » ou « Bienvenue Emma ! ». La rentrée, la Saint-Valentin et les fêtes des mères et des pères (à la date de votre pays) arrivent toutes seules.") }}</p>
+                    <div id="fd-list" class="fd-list"></div>
+                    <button type="button" id="fd-add" class="link mt-2"><i class="fas fa-plus mr-1"></i>{{ _("Ajouter une date") }}</button>
+                    <div class="flex flex-wrap gap-2 mt-3 items-center">
+                        <button type="button" id="fd-save" class="btn-primary">{{ _("Enregistrer") }}</button>
+                        <span id="fd-status" class="text-sm"></span>
+                    </div>
+                    <p class="text-sm mt-3"><strong>{{ _("Bientôt :") }}</strong> <span id="fd-upcoming"></span></p>
+                </fieldset>
+                <style>
+                    .fd-list { display: grid; gap: .5rem; }
+                    .fd-row { display: grid; grid-template-columns: 11rem 1fr 11rem auto; gap: .5rem; align-items: center; }
+                    @media (max-width: 640px) { .fd-row { grid-template-columns: 1fr 1fr; } }
+                </style>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const KINDS = { birthday: {{ _("Anniversaire")|tojson }}, wedding: {{ _("Mariage")|tojson }}, birth: {{ _("Naissance")|tojson }} };
+                        const T = { name: {{ _("Prénom (ou « Claire & Paul »)")|tojson }}, remove: {{ _("Retirer")|tojson }}, none: {{ _("rien dans les deux mois")|tojson }},
+                                    years: {{ _("{n} ans")|tojson }} };
+                        function row(item) {
+                            const div = document.createElement("div"); div.className = "fd-row";
+                            const kind = document.createElement("select");
+                            Object.entries(KINDS).forEach(([k, v]) => kind.add(new Option(v, k)));
+                            kind.value = item.kind || "birthday";
+                            const name = document.createElement("input"); name.type = "text"; name.maxLength = 60; name.placeholder = T.name; name.value = item.name || "";
+                            const when = document.createElement("input"); when.type = "date"; when.value = item.date || "";
+                            const remove = document.createElement("button"); remove.type = "button"; remove.className = "link"; remove.textContent = T.remove;
+                            remove.addEventListener("click", () => div.remove());
+                            div.append(kind, name, when, remove);
+                            $("fd-list").appendChild(div);
+                        }
+                        async function load() {
+                            const d = await (await fetch("/api/family_dates")).json();
+                            $("fd-list").innerHTML = "";
+                            d.dates.forEach(row);
+                            if (!d.dates.length) row({});
+                            $("fd-upcoming").textContent = d.upcoming.length ? d.upcoming.map(u => `${KINDS[u.kind]} ${u.name} — ${new Date(u.date).toLocaleDateString()}${u.years ? " (" + T.years.replace("{n}", u.years) + ")" : ""}`).join(" · ") : T.none;
+                        }
+                        $("fd-add").addEventListener("click", () => row({}));
+                        $("fd-save").addEventListener("click", async () => {
+                            const dates = [...document.querySelectorAll("#fd-list .fd-row")].map(r => {
+                                const [kind, name, when] = r.querySelectorAll("select, input");
+                                return { kind: kind.value, name: name.value.trim(), date: when.value };
+                            }).filter(d => d.name && d.date);
+                            const r = await (await fetch("/api/family_dates", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ dates }) })).json();
+                            $("fd-status").textContent = r.message; $("fd-status").className = "text-sm " + (r.success ? "text-green-700" : "text-red-600");
+                            load();
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-dispositions'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        if ($("family-dates-box").offsetParent !== null) load();
+                    });
+                </script>
             </div>

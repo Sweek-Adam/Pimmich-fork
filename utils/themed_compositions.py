@@ -24,19 +24,7 @@ def set_translator(function):
 
 # --- Saisons ---
 
-def easter(year):
-    """Date de Pâques (algorithme de Meeus/Jones/Butcher, calendrier grégorien)."""
-    a, b, c = year % 19, year // 100, year % 100
-    d, e = b // 4, b % 4
-    f = (b + 8) // 25
-    g = (b - f + 1) // 3
-    h = (19 * a + b - d - g + 15) % 30
-    i, k = c // 4, c % 4
-    l = (32 + 2 * e + 2 * i - h - k) % 7
-    m = (a + 11 * h + 22 * l) // 451
-    month = (h + l - 7 * m + 114) // 31
-    day = (h + l - 7 * m + 114) % 31 + 1
-    return date(year, month, day)
+from utils.occasions import easter  # noqa: E402,F401 (date de Pâques, utilisée aussi par les fêtes du calendrier)
 
 
 def in_season(theme, today=None):
@@ -47,6 +35,9 @@ def in_season(theme, today=None):
         return (today.month == 10 and today.day >= 15) or (today.month == 11 and today.day <= 2)
     if theme == "paques":
         return abs((today - easter(today.year)).days) <= 14
+    if theme in OCCASION_THEMES:  # moments de famille et fêtes du calendrier
+        from utils import occasions
+        return occasions.in_season(theme, today)
     if theme == "nouvel_an":
         return (today.month == 12 and today.day >= 26) or (today.month == 1 and today.day <= 7)
     md = (today.month, today.day)
@@ -59,7 +50,8 @@ def in_season(theme, today=None):
     return True
 
 
-SEASONAL = {"noel", "halloween", "paques", "printemps", "automne", "hiver", "nouvel_an"}
+OCCASION_THEMES = {"anniversaire_perso", "mariage", "naissance", "rentree", "saint_valentin", "fete_meres", "fete_peres"}
+SEASONAL = {"noel", "halloween", "paques", "printemps", "automne", "hiver", "nouvel_an"} | OCCASION_THEMES
 
 
 # --- Outils de dessin ---
@@ -86,7 +78,15 @@ def _shape_mask(w, h, shape):
     """Masque d'une forme (cercle, œuf), dessiné en double résolution pour des bords lisses."""
     mask = Image.new("L", (w * 2, h * 2), 0)
     draw = ImageDraw.Draw(mask)
-    if shape == "egg":
+    if shape == "heart":
+        points = []
+        for i in range(160):
+            t = 2 * math.pi * i / 160
+            x = 16 * math.sin(t) ** 3
+            y = 13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)
+            points.append((w * (1 + x / 16.5), h * (0.9 - y / 15.5)))
+        draw.polygon(points, fill=255)
+    elif shape == "egg":
         points = []
         for i in range(120):
             t = 2 * math.pi * i / 120
@@ -105,7 +105,8 @@ def _fill_shape(photo, w, h, shape):
     if not base.FULL_PHOTOS:
         return base.cover(photo, w, h)
     content = base.blurred_fill(photo, w, h)
-    a, b = w / 2 * (0.9 if shape == "egg" else 0.97), h / 2 * (0.9 if shape == "egg" else 0.97)
+    shrink = {"egg": 0.9, "heart": 0.62}.get(shape, 0.97)
+    a, b = w / 2 * shrink, h / 2 * shrink
     r = photo.width / photo.height
     half_h = 1 / math.sqrt((r / a) ** 2 + (1 / b) ** 2)  # rectangle de proportions r inscrit dans l'ellipse
     fitted = photo.resize((max(1, int(2 * half_h * r)), max(1, int(2 * half_h))), Image.LANCZOS, reducing_gap=2.0)

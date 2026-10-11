@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:48+0200\n"
+"POT-Creation-Date: 2026-10-11 08:55+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -599,6 +599,7 @@ msgstr "Crear la playlist"
 
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:199
 #: templates/configure/tab_sources.html.jinja:537
@@ -634,6 +635,7 @@ msgstr "Todas"
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
 #: templates/configure/tab_sources.html.jinja:489
@@ -2918,6 +2920,14 @@ msgstr ""
 "noviembre · Pascua: 2 semanas alrededor de Pascua · Primavera, Otoño, "
 "Invierno: según la estación."
 
+#: templates/configure/tab_dispositions.html.jinja:107
+msgid ""
+"Moments de famille et fêtes (anniversaire, mariage, naissance, rentrée, "
+"Saint-Valentin, fêtes des mères et des pères) : seulement à leur date."
+msgstr ""
+"Momentos familiares y fiestas (cumpleaños, boda, nacimiento, vuelta al "
+"cole, San Valentín, día de la madre y del padre): solo en su fecha."
+
 #: templates/configure/tab_dispositions.html.jinja:117
 msgid "Thème de saison"
 msgstr "Tema de temporada"
@@ -2929,6 +2939,59 @@ msgstr " (hasta 3, en fantasmas)"
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid "Les messages sont affichés seuls, en plein écran"
 msgstr "Los mensajes se muestran solos, a pantalla completa"
+
+#: templates/configure/tab_dispositions.html.jinja:127
+msgid "Dates de la famille"
+msgstr "Fechas de la familia"
+
+#: templates/configure/tab_dispositions.html.jinja:128
+msgid ""
+"Anniversaires, mariages et naissances : le jour venu, le cadre montre une"
+" disposition « Joyeux anniversaire Léo ! » avec son âge, « 25 ans de "
+"mariage » ou « Bienvenue Emma ! ». La rentrée, la Saint-Valentin et les "
+"fêtes des mères et des pères (à la date de votre pays) arrivent toutes "
+"seules."
+msgstr ""
+"Cumpleaños, bodas y nacimientos: llegado el día, el marco muestra un "
+"diseño «¡Feliz cumpleaños, Leo!» con su edad, «25 años de casados» o "
+"«¡Bienvenida, Emma!». La vuelta al cole, San Valentín y los días de la "
+"madre y del padre (en la fecha de tu país) llegan solos."
+
+#: templates/configure/tab_dispositions.html.jinja:130
+msgid "Ajouter une date"
+msgstr "Añadir una fecha"
+
+#: templates/configure/tab_dispositions.html.jinja:135
+msgid "Bientôt :"
+msgstr "Próximamente:"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_extra.py:627
+msgid "Anniversaire"
+msgstr "Cumpleaños"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_family.py:189
+msgid "Mariage"
+msgstr "Boda"
+
+#: templates/configure/tab_dispositions.html.jinja:145
+#: utils/themed_compositions_family.py:190
+msgid "Naissance"
+msgstr "Nacimiento"
+
+#: templates/configure/tab_dispositions.html.jinja:146
+msgid "Prénom (ou « Claire & Paul »)"
+msgstr "Nombre (o «Claire y Paul»)"
+
+#: templates/configure/tab_dispositions.html.jinja:146
+msgid "rien dans les deux mois"
+msgstr "nada en los próximos dos meses"
+
+#: templates/configure/tab_dispositions.html.jinja:147
+#, python-brace-format
+msgid "{n} ans"
+msgstr "{n} años"
 
 #: templates/configure/tab_favoris.html.jinja:4
 msgid "Vos photos favorites"
@@ -4435,7 +4498,7 @@ msgstr ""
 "                            Regulaciones de Wi-Fi)"
 
 #: templates/configure/tab_network.html.jinja:33
-#: utils/themed_compositions.py:632
+#: utils/themed_compositions.py:633
 msgid "France"
 msgstr "Francia"
 
@@ -5840,7 +5903,7 @@ msgid "Une photo à la fois, lente, avec un léger mouvement."
 msgstr "Una foto a la vez, lenta, con un ligero movimiento."
 
 #: utils/ambiances.py:57 utils/smart_albums.py:29
-#: utils/themed_compositions.py:627
+#: utils/themed_compositions.py:628
 msgid "Halloween"
 msgstr "Halloween"
 
@@ -5853,7 +5916,7 @@ msgstr ""
 "fantasmas."
 
 #: utils/ambiances.py:65 utils/smart_albums.py:28
-#: utils/themed_compositions.py:626
+#: utils/themed_compositions.py:627
 msgid "Noël"
 msgstr "Navidad"
 
@@ -5877,7 +5940,7 @@ msgstr ""
 "Fuegos artificiales y confeti para desear feliz año nuevo; ritmo de "
 "fiesta."
 
-#: utils/ambiances.py:81 utils/themed_compositions.py:628
+#: utils/ambiances.py:81 utils/themed_compositions.py:629
 msgid "Pâques"
 msgstr "Pascua"
 
@@ -6189,63 +6252,63 @@ msgstr "Invierno"
 msgid "Printemps"
 msgstr "Primavera"
 
-#: utils/smart_albums.py:30
+#: utils/smart_albums.py:30 utils/themed_compositions_family.py:192
 msgid "Saint-Valentin"
 msgstr "San Valentín"
 
-#: utils/themed_compositions.py:224
+#: utils/themed_compositions.py:225
 msgid "Joyeux Noël"
 msgstr "Feliz Navidad"
 
-#: utils/themed_compositions.py:274
+#: utils/themed_compositions.py:275
 msgid "Joyeux Halloween"
 msgstr "Feliz Halloween"
 
-#: utils/themed_compositions.py:405
+#: utils/themed_compositions.py:406
 msgid "Joyeuses Pâques"
 msgstr "Felices Pascuas"
 
-#: utils/themed_compositions.py:444
+#: utils/themed_compositions.py:445
 msgid "Bonnes vacances !"
 msgstr "¡Felices vacaciones!"
 
-#: utils/themed_compositions.py:464 utils/themed_compositions.py:630
+#: utils/themed_compositions.py:465 utils/themed_compositions.py:631
 msgid "Islande"
 msgstr "Islandia"
 
-#: utils/themed_compositions.py:499 utils/themed_compositions.py:631
+#: utils/themed_compositions.py:500 utils/themed_compositions.py:632
 msgid "Japon"
 msgstr "Japón"
 
-#: utils/themed_compositions.py:538
+#: utils/themed_compositions.py:539
 msgid "Vive la France"
 msgstr "Viva Francia"
 
-#: utils/themed_compositions.py:560
+#: utils/themed_compositions.py:561
 msgid "La montagne"
 msgstr "La montaña"
 
-#: utils/themed_compositions.py:591
+#: utils/themed_compositions.py:592
 msgid "La mer"
 msgstr "El mar"
 
-#: utils/themed_compositions.py:619
+#: utils/themed_compositions.py:620
 msgid "Vive la plage !"
 msgstr "¡Viva la playa!"
 
-#: utils/themed_compositions.py:629
+#: utils/themed_compositions.py:630
 msgid "Vacances"
 msgstr "Vacaciones"
 
-#: utils/themed_compositions.py:633
+#: utils/themed_compositions.py:634
 msgid "Montagne"
 msgstr "Montaña"
 
-#: utils/themed_compositions.py:634
+#: utils/themed_compositions.py:635
 msgid "Mer"
 msgstr "Mar"
 
-#: utils/themed_compositions.py:635
+#: utils/themed_compositions.py:636
 msgid "Plage"
 msgstr "Playa"
 
@@ -6367,10 +6430,6 @@ msgstr "Hokusai – La Gran Ola"
 msgid "Espace"
 msgstr "Espacio"
 
-#: utils/themed_compositions_extra.py:627
-msgid "Anniversaire"
-msgstr "Cumpleaños"
-
 #: utils/themed_compositions_extra.py:628
 msgid "Cinéma"
 msgstr "Cine"
@@ -6382,6 +6441,69 @@ msgstr "Cómic"
 #: utils/themed_compositions_extra.py:631
 msgid "Album ancien"
 msgstr "Álbum antiguo"
+
+#: utils/themed_compositions_family.py:40
+#, python-format
+msgid "Joyeux anniversaire %(name)s !"
+msgstr "¡Feliz cumpleaños, %(name)s!"
+
+#: utils/themed_compositions_family.py:43
+msgid "ans"
+msgstr "años"
+
+#: utils/themed_compositions_family.py:68
+msgid "Joyeux anniversaire de mariage"
+msgstr "Feliz aniversario de boda"
+
+#: utils/themed_compositions_family.py:68
+msgid "Vive les mariés !"
+msgstr "¡Vivan los novios!"
+
+#: utils/themed_compositions_family.py:70
+#, python-format
+msgid "%(years)s ans"
+msgstr "%(years)s años"
+
+#: utils/themed_compositions_family.py:96
+#, python-format
+msgid "Bienvenue %(name)s !"
+msgstr "¡Bienvenido/a, %(name)s!"
+
+#: utils/themed_compositions_family.py:96
+msgid "Bienvenue bébé !"
+msgstr "¡Bienvenido, bebé!"
+
+#: utils/themed_compositions_family.py:120
+msgid "C'est la rentrée !"
+msgstr "¡Vuelta al cole!"
+
+#: utils/themed_compositions_family.py:146
+msgid "Joyeuse Saint-Valentin"
+msgstr "Feliz San Valentín"
+
+#: utils/themed_compositions_family.py:162
+msgid "Bonne fête Maman !"
+msgstr "¡Feliz día, mamá!"
+
+#: utils/themed_compositions_family.py:182
+msgid "Bonne fête Papa !"
+msgstr "¡Feliz día, papá!"
+
+#: utils/themed_compositions_family.py:188
+msgid "Anniversaire au prénom"
+msgstr "Cumpleaños con nombre"
+
+#: utils/themed_compositions_family.py:191
+msgid "Rentrée"
+msgstr "Vuelta al cole"
+
+#: utils/themed_compositions_family.py:193
+msgid "Fête des mères"
+msgstr "Día de la madre"
+
+#: utils/themed_compositions_family.py:194
+msgid "Fête des pères"
+msgstr "Día del padre"
 
 #: web/core.py:936
 msgid "Code d'invitation invalide."
@@ -6540,6 +6662,15 @@ msgid ""
 msgstr ""
 "Configuración guardada. La presentación de diapositivas se reinició para "
 "aplicar los cambios."
+
+#: web/routes_family.py:26
+msgid "Liste invalide."
+msgstr "Lista no válida."
+
+#: web/routes_family.py:31
+#, python-format
+msgid "%(count)s date(s) enregistrée(s)."
+msgstr "%(count)s fecha(s) guardada(s)."
 
 #: web/routes_guests.py:36
 #, python-format

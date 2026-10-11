@@ -57,8 +57,8 @@ def resolve(config, choice=None, today=None):
     enabled = compositions.enabled_formats(config)
     if seasonal:
         in_season = [k for k in enabled if k not in compositions.SEASONAL or compositions.in_season(k, today)]
-    else:
-        in_season = enabled
+    else:  # les moments de famille (anniversaire, fête des mères...) n'ont de sens qu'à leur date
+        in_season = [k for k in enabled if k not in compositions.OCCASION_THEMES or compositions.in_season(k, today)]
 
     if choice == UNIQUE:
         return LayoutPlan(True, [], every, seasonal)

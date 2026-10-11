@@ -331,7 +331,7 @@ def winter(photos, message, W, H, rng):
     return canvas.convert("RGB")
 
 
-def birthday(photos, message, W, H, rng):
+def birthday(photos, message, W, H, rng, title=None):
     canvas = _textured(_gradient(W, H, (255, 250, 240), (250, 236, 250)), rng, 6).convert("RGBA")
     draw = ImageDraw.Draw(canvas)
     for _ in range(140):  # confettis
@@ -350,7 +350,7 @@ def birthday(photos, message, W, H, rng):
     size = _photo_size(W, H, len(photos), 0.85)
     elements = [base.framed(base.print_photo(p, size, size), max(8, size // 20), (255, 255, 255), bottom=max(8, size // 20) * 4) for p in photos]
     _place_row(canvas, elements, H * 0.56, rng, 0.7, 0.05, 8)
-    _title(canvas, _t(N_("Joyeux anniversaire !")), MARKER, int(H * 0.08), (230, 60, 110), (W / 2, H * 0.12), shadow=False, max_width=W * 0.7)
+    _title(canvas, title or _t(N_("Joyeux anniversaire !")), MARKER, int(H * 0.08), (230, 60, 110), (W / 2, H * 0.12), shadow=False, max_width=W * 0.7)
     _message_note(canvas, message, rng, "postit", (0.5, 0.88), 0.15)
     return canvas.convert("RGB")
 

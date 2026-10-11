@@ -528,8 +528,10 @@ def compose_random(enabled_styles, photo_paths, messages, width, height, include
 
 # Formats à thème (enregistrés ici : ces modules réutilisent les outils ci-dessus)
 BASIC_FORMATS = list(FORMATS)
-from utils.themed_compositions import THEMES as _THEMES, in_season, SEASONAL  # noqa: E402
+from utils.themed_compositions import THEMES as _THEMES, in_season, SEASONAL, OCCASION_THEMES  # noqa: E402
 from utils.themed_compositions_extra import THEMES as _THEMES_EXTRA  # noqa: E402
+from utils.themed_compositions_family import THEMES as _THEMES_FAMILY  # noqa: E402
 FORMATS.update(_THEMES)
 FORMATS.update(_THEMES_EXTRA)
-THEME_KEYS = list(_THEMES) + list(_THEMES_EXTRA)
+FORMATS.update(_THEMES_FAMILY)
+THEME_KEYS = list(_THEMES) + list(_THEMES_EXTRA) + list(_THEMES_FAMILY)
