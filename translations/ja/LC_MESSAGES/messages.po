@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 11:02+0200\n"
+"POT-Creation-Date: 2026-10-11 11:04+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -149,23 +149,27 @@ msgid "Configuration"
 msgstr "構成"
 
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:109
-#: templates/configure.html.jinja:138 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:139 templates/configure.html.jinja:242
 msgid "Accueil"
 msgstr "ホーム"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:32
 msgid "Photos"
 msgstr "写真"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:33
 msgid "Écran"
 msgstr "ディスプレイ"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:34
 msgid "Partage"
 msgstr "共有"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:35
 msgid "Système"
 msgstr "システム"
 
@@ -177,7 +181,7 @@ msgstr "Pimmich 作成:"
 msgid "Rechercher un réglage…"
 msgstr "設定を検索…"
 
-#: templates/configure.html.jinja:115
+#: templates/configure.html.jinja:115 templates/configure/_tour.html.jinja:37
 msgid "État du diaporama"
 msgstr "スライドショーの状態"
 
@@ -211,113 +215,117 @@ msgid "Mon compte"
 msgstr "マイアカウント"
 
 #: templates/configure.html.jinja:131
+msgid "Visite guidée"
+msgstr "ガイドツアー"
+
+#: templates/configure.html.jinja:132
 msgid "Se déconnecter"
 msgstr "ログアウト"
 
-#: templates/configure.html.jinja:142
+#: templates/configure.html.jinja:143
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr "インポート"
 
-#: templates/configure.html.jinja:143
+#: templates/configure.html.jinja:144
 #: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr "情報源"
 
-#: templates/configure.html.jinja:144
+#: templates/configure.html.jinja:145
 msgid "Bibliothèque"
 msgstr "ライブラリ"
 
-#: templates/configure.html.jinja:145
+#: templates/configure.html.jinja:146
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "次に表示"
 
-#: templates/configure.html.jinja:146
+#: templates/configure.html.jinja:147
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: templates/configure.html.jinja:147
+#: templates/configure.html.jinja:148
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr "お気に入り"
 
-#: templates/configure.html.jinja:148
+#: templates/configure.html.jinja:149
 #: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "メッセージ"
 
-#: templates/configure.html.jinja:153
+#: templates/configure.html.jinja:154
 msgid "Dispositions"
 msgstr "レイアウト"
 
-#: templates/configure.html.jinja:154
+#: templates/configure.html.jinja:155
 msgid "Affichage"
 msgstr "画面"
 
-#: templates/configure.html.jinja:155
+#: templates/configure.html.jinja:156
 msgid "Horloge & météo"
 msgstr "時計と天気"
 
-#: templates/configure.html.jinja:156
+#: templates/configure.html.jinja:157
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "写真の情報"
 
-#: templates/configure.html.jinja:157
+#: templates/configure.html.jinja:158
 msgid "Légendes"
 msgstr "キャプション"
 
-#: templates/configure.html.jinja:158
+#: templates/configure.html.jinja:159
 msgid "Son"
 msgstr "サウンド"
 
-#: templates/configure.html.jinja:163
+#: templates/configure.html.jinja:164
 #: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr "ゲスト"
 
-#: templates/configure.html.jinja:164
+#: templates/configure.html.jinja:165
 msgid "À valider"
 msgstr "承認待ち"
 
-#: templates/configure.html.jinja:165
+#: templates/configure.html.jinja:166
 msgid "Telegram"
 msgstr "電報"
 
-#: templates/configure.html.jinja:170
+#: templates/configure.html.jinja:171
 msgid "Comptes"
 msgstr "アカウント"
 
-#: templates/configure.html.jinja:172
+#: templates/configure.html.jinja:173
 msgid "Notifications"
 msgstr "通知"
 
-#: templates/configure.html.jinja:173
+#: templates/configure.html.jinja:174
 msgid "Maintenance"
 msgstr "メンテナンス"
 
-#: templates/configure.html.jinja:174
+#: templates/configure.html.jinja:175
 msgid "Réseau"
 msgstr "ネットワーク"
 
-#: templates/configure.html.jinja:176
+#: templates/configure.html.jinja:177
 msgid "Commande vocale"
 msgstr "音声操作"
 
-#: templates/configure.html.jinja:178
+#: templates/configure.html.jinja:179
 msgid "Statistiques"
 msgstr "統計"
 
-#: templates/configure.html.jinja:179
+#: templates/configure.html.jinja:180
 msgid "Journaux"
 msgstr "ログ"
 
-#: templates/configure.html.jinja:205
+#: templates/configure.html.jinja:206
 msgid "Enregistrer les modifications"
 msgstr "変更を保存する"
 
@@ -686,6 +694,7 @@ msgstr "再生中の音楽はありません。"
 
 #: templates/configure/_music_remote.html.jinja:11
 #: templates/configure/_son_spotify.html.jinja:62
+#: templates/configure/_tour.html.jinja:10
 msgid "Précédent"
 msgstr "前へ"
 
@@ -696,6 +705,7 @@ msgstr "再生 / 一時停止"
 
 #: templates/configure/_music_remote.html.jinja:13
 #: templates/configure/_son_spotify.html.jinja:64
+#: templates/configure/_tour.html.jinja:40
 msgid "Suivant"
 msgstr "次へ"
 
@@ -1237,6 +1247,77 @@ msgstr "アルバム"
 #: templates/configure/_son_spotify.html.jinja:281
 msgid "Demande de code à Spotify…"
 msgstr "Spotify にコードをリクエスト中…"
+
+#: templates/configure/_tour.html.jinja:9
+msgid "Passer"
+msgstr "スキップ"
+
+#: templates/configure/_tour.html.jinja:31
+msgid "Bienvenue dans Pimmich !"
+msgstr "Pimmichへようこそ！"
+
+#: templates/configure/_tour.html.jinja:31
+msgid ""
+"Votre cadre photo se règle d'ici, depuis un ordinateur ou un téléphone. "
+"Petite visite en une minute."
+msgstr "フォトフレームはここから、パソコンやスマホで設定できます。1分で終わる簡単なツアーです。"
+
+#: templates/configure/_tour.html.jinja:32
+msgid ""
+"Ajoutez vos photos (Google Drive, iCloud, WhatsApp, clé USB…), créez des "
+"playlists et des albums intelligents."
+msgstr "写真を追加（Googleドライブ、iCloud、WhatsApp、USBメモリ…）し、プレイリストやスマートアルバムを作成。"
+
+#: templates/configure/_tour.html.jinja:33
+msgid ""
+"Dispositions, horaires, horloge et météo, légendes, musique : tout ce que"
+" le cadre affiche."
+msgstr "レイアウト、時間帯、時計と天気、キャプション、音楽：フレームに表示するすべて。"
+
+#: templates/configure/_tour.html.jinja:34
+msgid ""
+"Invitez la famille : un QR code suffit pour envoyer des photos, des "
+"messages, des dessins ou des messages vocaux."
+msgstr "家族を招待：QRコードだけで写真・メッセージ・絵・ボイスメッセージを送れます。"
+
+#: templates/configure/_tour.html.jinja:35
+msgid ""
+"Santé du cadre, sauvegardes, mises à jour, stockage et comptes de la "
+"famille."
+msgstr "フレームの状態、バックアップ、アップデート、保存先、家族のアカウント。"
+
+#: templates/configure/_tour.html.jinja:36
+msgid "Rechercher un réglage"
+msgstr "設定を検索"
+
+#: templates/configure/_tour.html.jinja:36
+msgid ""
+"Tapez quelques mots (« musique », « nuit »…) pour aller droit au bon "
+"réglage."
+msgstr "言葉を入力（「音楽」「夜」など）すると、その設定にすぐ移動できます。"
+
+#: templates/configure/_tour.html.jinja:37
+msgid "En un coup d'œil : le cadre affiche-t-il ses photos ?"
+msgstr "ひと目で：フレームは写真を表示中？"
+
+#: templates/configure/_tour.html.jinja:38
+msgid "Astuce"
+msgstr "ヒント"
+
+#: templates/configure/_tour.html.jinja:38
+msgid ""
+"Glissez des photos n'importe où sur cette page pour les envoyer au cadre."
+" Bonne découverte !"
+msgstr "このページのどこにでも写真をドラッグするとフレームに送れます。お楽しみください！"
+
+#: templates/configure/_tour.html.jinja:40
+msgid "C'est parti !"
+msgstr "はじめよう！"
+
+#: templates/configure/_tour.html.jinja:40
+#, python-brace-format
+msgid "Étape {n} sur {total}"
+msgstr "{total}ステップ中{n}"
 
 #: templates/configure/scripts_app.html.jinja:21
 msgid "Import"
@@ -6888,23 +6969,23 @@ msgstr "母の日"
 msgid "Fête des pères"
 msgstr "父の日"
 
-#: web/core.py:940
+#: web/core.py:942
 msgid "Code d'invitation invalide."
 msgstr "招待コードが無効です。"
 
-#: web/core.py:946
+#: web/core.py:948
 msgid "Ce code d'invitation a expiré."
 msgstr "この招待コードの有効期限は切れています。"
 
-#: web/core.py:952
+#: web/core.py:954
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "あなたはすでに認可されています。写真を送ってください！"
 
-#: web/core.py:954
+#: web/core.py:956
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "この招待コードはすでに使用されています。"
 
-#: web/core.py:965
+#: web/core.py:967
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "

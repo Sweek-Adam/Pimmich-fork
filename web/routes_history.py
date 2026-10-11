@@ -77,3 +77,15 @@ def history_undo_api():
     if event is None:
         return jsonify({"success": False, "message": _("Rien à annuler.")}), 404
     return jsonify({"success": True, "message": _("Annulé : %(action)s", action=event["text"])})
+
+
+@app.route('/api/tour/done', methods=['POST'])
+@login_required
+def tour_done_api():
+    """La visite guidée ne se relance plus d'elle-même pour ce compte (elle reste dans le menu du compte)."""
+    config = dict(load_config())
+    seen = list(config.get("tour_seen_users") or [])
+    if (session.get("username") or "") not in seen:
+        config["tour_seen_users"] = (seen + [session.get("username") or ""])[-50:]
+        save_config(config)
+    return jsonify({"success": True})

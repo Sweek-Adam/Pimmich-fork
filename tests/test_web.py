@@ -190,3 +190,16 @@ def test_dark_mode_is_available(admin_client):
 def test_drag_and_drop_upload_is_wired(admin_client):
     html = admin_client.get("/configure").get_data(as_text=True)
     assert 'id="drop-overlay"' in html and 'fetch("/import-smartphone"' in html
+
+
+def test_guided_tour_runs_once_per_account(admin_client):
+    from utils.config_manager import load_config, save_config
+    original = dict(load_config())
+    try:
+        save_config(dict(original, tour_seen_users=[]))
+        assert "setTimeout(window.startTour" in admin_client.get("/configure").get_data(as_text=True)
+        admin_client.post("/api/tour/done", json={}, headers={"Sec-Fetch-Site": "same-origin"})
+        html = admin_client.get("/configure").get_data(as_text=True)
+        assert "setTimeout(window.startTour" not in html and "startTour()" in html  # toujours dans le menu du compte
+    finally:
+        save_config(original)

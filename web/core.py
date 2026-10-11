@@ -364,8 +364,10 @@ def inject_current_user():
     """Injecte le compte connecté et son rôle dans les templates."""
     from utils import members
     names = [u["username"] for u in user_manager.list_users()] + [session.get('username') or ""]
+    seen = load_config().get("tour_seen_users") or []
     return dict(current_username=session.get('username'), is_admin=is_admin(),
-                member_sources=[(s, members.label(s, names)) for s in members.sources()])
+                member_sources=[(s, members.label(s, names)) for s in members.sources()],
+                tour_pending=bool(session.get('logged_in')) and (session.get('username') or "") not in seen)
 
 @app.context_processor
 def inject_styles_and_formats():

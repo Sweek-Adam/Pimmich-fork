@@ -128,6 +128,7 @@
                             {% for code in ['fr', 'en', 'es', 'de', 'ja'] %}<a href="?lang={{ code }}" class="lang {% if current_lang == code %}active{% endif %}">{{ code|upper }}</a>{% endfor %}
                         </div>
                         <a href="#" onclick="goToTab('tab-comptes'); this.closest('details').open = false; return false;"><i class="fas fa-key fa-fw"></i> {{ _('Mon compte') }}</a>
+                        <a href="#" onclick="this.closest('details').open = false; window.startTour && startTour(); return false;"><i class="fas fa-route fa-fw"></i> {{ _('Visite guidée') }}</a>
                         <a href="/logout"><i class="fas fa-sign-out-alt fa-fw"></i> {{ _('Se déconnecter') }}</a>
                     </div>
                 </details>
@@ -251,5 +252,6 @@
 
 {% include 'configure/scripts_status.html.jinja' %}
 {% include 'configure/scripts_app.html.jinja' %}
+{% include 'configure/_tour.html.jinja' %}
 </body>
 </html>

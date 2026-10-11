@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 11:02+0200\n"
+"POT-Creation-Date: 2026-10-11 11:04+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -149,23 +149,27 @@ msgid "Configuration"
 msgstr "Konfiguration"
 
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:109
-#: templates/configure.html.jinja:138 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:139 templates/configure.html.jinja:242
 msgid "Accueil"
 msgstr "Start"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:32
 msgid "Photos"
 msgstr "Fotos"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:33
 msgid "Écran"
 msgstr "Bildschirm"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:34
 msgid "Partage"
 msgstr "Teilen"
 
-#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:242
+#: templates/configure/_tour.html.jinja:35
 msgid "Système"
 msgstr "System"
 
@@ -177,7 +181,7 @@ msgstr "Pimmich von"
 msgid "Rechercher un réglage…"
 msgstr "Einstellung suchen…"
 
-#: templates/configure.html.jinja:115
+#: templates/configure.html.jinja:115 templates/configure/_tour.html.jinja:37
 msgid "État du diaporama"
 msgstr "Diashow-Status"
 
@@ -211,113 +215,117 @@ msgid "Mon compte"
 msgstr "Mein Konto"
 
 #: templates/configure.html.jinja:131
+msgid "Visite guidée"
+msgstr "Geführte Tour"
+
+#: templates/configure.html.jinja:132
 msgid "Se déconnecter"
 msgstr "Abmelden"
 
-#: templates/configure.html.jinja:142
+#: templates/configure.html.jinja:143
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr "Importieren"
 
-#: templates/configure.html.jinja:143
+#: templates/configure.html.jinja:144
 #: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr "Quellen"
 
-#: templates/configure.html.jinja:144
+#: templates/configure.html.jinja:145
 msgid "Bibliothèque"
 msgstr "Bibliothek"
 
-#: templates/configure.html.jinja:145
+#: templates/configure.html.jinja:146
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "Als Nächstes"
 
-#: templates/configure.html.jinja:146
+#: templates/configure.html.jinja:147
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
-#: templates/configure.html.jinja:147
+#: templates/configure.html.jinja:148
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr "Favoriten"
 
-#: templates/configure.html.jinja:148
+#: templates/configure.html.jinja:149
 #: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "Nachrichten"
 
-#: templates/configure.html.jinja:153
+#: templates/configure.html.jinja:154
 msgid "Dispositions"
 msgstr "Anordnungen"
 
-#: templates/configure.html.jinja:154
+#: templates/configure.html.jinja:155
 msgid "Affichage"
 msgstr "Anzeige"
 
-#: templates/configure.html.jinja:155
+#: templates/configure.html.jinja:156
 msgid "Horloge & météo"
 msgstr "Uhr & Wetter"
 
-#: templates/configure.html.jinja:156
+#: templates/configure.html.jinja:157
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "Foto-Infos"
 
-#: templates/configure.html.jinja:157
+#: templates/configure.html.jinja:158
 msgid "Légendes"
 msgstr "Bildunterschriften"
 
-#: templates/configure.html.jinja:158
+#: templates/configure.html.jinja:159
 msgid "Son"
 msgstr "Ton"
 
-#: templates/configure.html.jinja:163
+#: templates/configure.html.jinja:164
 #: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr "Gäste"
 
-#: templates/configure.html.jinja:164
+#: templates/configure.html.jinja:165
 msgid "À valider"
 msgstr "Zu prüfen"
 
-#: templates/configure.html.jinja:165
+#: templates/configure.html.jinja:166
 msgid "Telegram"
 msgstr "Telegramm"
 
-#: templates/configure.html.jinja:170
+#: templates/configure.html.jinja:171
 msgid "Comptes"
 msgstr "Konten"
 
-#: templates/configure.html.jinja:172
+#: templates/configure.html.jinja:173
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: templates/configure.html.jinja:173
+#: templates/configure.html.jinja:174
 msgid "Maintenance"
 msgstr "Wartung"
 
-#: templates/configure.html.jinja:174
+#: templates/configure.html.jinja:175
 msgid "Réseau"
 msgstr "Netzwerk"
 
-#: templates/configure.html.jinja:176
+#: templates/configure.html.jinja:177
 msgid "Commande vocale"
 msgstr "Sprachsteuerung"
 
-#: templates/configure.html.jinja:178
+#: templates/configure.html.jinja:179
 msgid "Statistiques"
 msgstr "Statistiken"
 
-#: templates/configure.html.jinja:179
+#: templates/configure.html.jinja:180
 msgid "Journaux"
 msgstr "Protokolle"
 
-#: templates/configure.html.jinja:205
+#: templates/configure.html.jinja:206
 msgid "Enregistrer les modifications"
 msgstr "Änderungen speichern"
 
@@ -694,6 +702,7 @@ msgstr "Es wird keine Musik abgespielt."
 
 #: templates/configure/_music_remote.html.jinja:11
 #: templates/configure/_son_spotify.html.jinja:62
+#: templates/configure/_tour.html.jinja:10
 msgid "Précédent"
 msgstr "Zurück"
 
@@ -704,6 +713,7 @@ msgstr "Wiedergabe / Pause"
 
 #: templates/configure/_music_remote.html.jinja:13
 #: templates/configure/_son_spotify.html.jinja:64
+#: templates/configure/_tour.html.jinja:40
 msgid "Suivant"
 msgstr "Weiter"
 
@@ -1265,6 +1275,89 @@ msgstr "Alben"
 #: templates/configure/_son_spotify.html.jinja:281
 msgid "Demande de code à Spotify…"
 msgstr "Code wird bei Spotify angefordert…"
+
+#: templates/configure/_tour.html.jinja:9
+msgid "Passer"
+msgstr "Überspringen"
+
+#: templates/configure/_tour.html.jinja:31
+msgid "Bienvenue dans Pimmich !"
+msgstr "Willkommen bei Pimmich!"
+
+#: templates/configure/_tour.html.jinja:31
+msgid ""
+"Votre cadre photo se règle d'ici, depuis un ordinateur ou un téléphone. "
+"Petite visite en une minute."
+msgstr ""
+"Dein Bilderrahmen wird hier eingestellt, am Computer oder Handy. Eine "
+"kurze Tour in einer Minute."
+
+#: templates/configure/_tour.html.jinja:32
+msgid ""
+"Ajoutez vos photos (Google Drive, iCloud, WhatsApp, clé USB…), créez des "
+"playlists et des albums intelligents."
+msgstr ""
+"Füge deine Fotos hinzu (Google Drive, iCloud, WhatsApp, USB-Stick…), "
+"erstelle Playlists und intelligente Alben."
+
+#: templates/configure/_tour.html.jinja:33
+msgid ""
+"Dispositions, horaires, horloge et météo, légendes, musique : tout ce que"
+" le cadre affiche."
+msgstr ""
+"Layouts, Zeiten, Uhr und Wetter, Bildunterschriften, Musik: alles, was "
+"der Rahmen zeigt."
+
+#: templates/configure/_tour.html.jinja:34
+msgid ""
+"Invitez la famille : un QR code suffit pour envoyer des photos, des "
+"messages, des dessins ou des messages vocaux."
+msgstr ""
+"Lade die Familie ein: Ein QR-Code genügt, um Fotos, Nachrichten, Bilder "
+"oder Sprachnachrichten zu senden."
+
+#: templates/configure/_tour.html.jinja:35
+msgid ""
+"Santé du cadre, sauvegardes, mises à jour, stockage et comptes de la "
+"famille."
+msgstr "Zustand des Rahmens, Sicherungen, Updates, Speicher und Familienkonten."
+
+#: templates/configure/_tour.html.jinja:36
+msgid "Rechercher un réglage"
+msgstr "Einstellung suchen"
+
+#: templates/configure/_tour.html.jinja:36
+msgid ""
+"Tapez quelques mots (« musique », « nuit »…) pour aller droit au bon "
+"réglage."
+msgstr ""
+"Tippe ein paar Wörter („Musik“, „Nacht“…), um direkt zur richtigen "
+"Einstellung zu gelangen."
+
+#: templates/configure/_tour.html.jinja:37
+msgid "En un coup d'œil : le cadre affiche-t-il ses photos ?"
+msgstr "Auf einen Blick: Zeigt der Rahmen gerade Fotos?"
+
+#: templates/configure/_tour.html.jinja:38
+msgid "Astuce"
+msgstr "Tipp"
+
+#: templates/configure/_tour.html.jinja:38
+msgid ""
+"Glissez des photos n'importe où sur cette page pour les envoyer au cadre."
+" Bonne découverte !"
+msgstr ""
+"Ziehe Fotos irgendwo auf diese Seite, um sie an den Rahmen zu senden. "
+"Viel Spaß!"
+
+#: templates/configure/_tour.html.jinja:40
+msgid "C'est parti !"
+msgstr "Los geht's!"
+
+#: templates/configure/_tour.html.jinja:40
+#, python-brace-format
+msgid "Étape {n} sur {total}"
+msgstr "Schritt {n} von {total}"
 
 #: templates/configure/scripts_app.html.jinja:21
 msgid "Import"
@@ -7187,23 +7280,23 @@ msgstr "Muttertag"
 msgid "Fête des pères"
 msgstr "Vatertag"
 
-#: web/core.py:940
+#: web/core.py:942
 msgid "Code d'invitation invalide."
 msgstr "Ungültiger Einladungscode."
 
-#: web/core.py:946
+#: web/core.py:948
 msgid "Ce code d'invitation a expiré."
 msgstr "Dieser Einladungscode ist abgelaufen."
 
-#: web/core.py:952
+#: web/core.py:954
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "Sie sind bereits berechtigt. Senden Sie mir ein Foto!"
 
-#: web/core.py:954
+#: web/core.py:956
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "Dieser Einladungscode wurde bereits verwendet."
 
-#: web/core.py:965
+#: web/core.py:967
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "

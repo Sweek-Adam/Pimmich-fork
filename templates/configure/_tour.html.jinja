@@ -1,0 +1,83 @@
+{#- Visite guidée : au premier lancement de chaque compte (puis depuis le menu du compte). -#}
+<div id="tour" class="tour hidden" role="dialog" aria-modal="true" aria-labelledby="tour-title">
+    <div class="tour-spot"></div>
+    <div class="tour-card">
+        <p class="tour-step"></p>
+        <h3 id="tour-title"></h3>
+        <p class="tour-text"></p>
+        <div class="tour-buttons">
+            <button type="button" class="link tour-skip">{{ _("Passer") }}</button>
+            <button type="button" class="btn-secondary tour-prev">{{ _("Précédent") }}</button>
+            <button type="button" class="btn-primary tour-next"></button>
+        </div>
+    </div>
+</div>
+<style>
+    .tour { position: fixed; inset: 0; z-index: 90; }
+    .tour.hidden { display: none; }
+    .tour-spot { position: fixed; border-radius: 14px; box-shadow: 0 0 0 9999px rgba(10, 12, 25, .62); transition: all .25s ease; pointer-events: none; }
+    .tour-spot.center { left: 50%; top: 45%; width: 0; height: 0; }
+    .tour-card { position: fixed; width: min(360px, calc(100vw - 32px)); background: var(--card); color: var(--text); border-radius: 16px;
+                 padding: 18px; box-shadow: 0 20px 50px rgba(0, 0, 0, .35); transition: all .25s ease; }
+    .tour-card h3 { font-size: 1.15rem; font-weight: 700; margin: 2px 0 6px; }
+    .tour-step { font-size: .75rem; color: var(--muted); margin: 0; }
+    .tour-text { font-size: .92rem; line-height: 1.45; margin: 0 0 14px; }
+    .tour-buttons { display: flex; gap: 8px; align-items: center; }
+    .tour-buttons .tour-skip { margin-right: auto; }
+</style>
+<script>
+    (() => {
+        const STEPS = [
+            { title: {{ _("Bienvenue dans Pimmich !")|tojson }}, text: {{ _("Votre cadre photo se règle d'ici, depuis un ordinateur ou un téléphone. Petite visite en une minute.")|tojson }} },
+            { target: '.main-nav-link[data-group="group-photos"]', title: {{ _("Photos")|tojson }}, text: {{ _("Ajoutez vos photos (Google Drive, iCloud, WhatsApp, clé USB…), créez des playlists et des albums intelligents.")|tojson }} },
+            { target: '.main-nav-link[data-group="group-ecran"]', title: {{ _("Écran")|tojson }}, text: {{ _("Dispositions, horaires, horloge et météo, légendes, musique : tout ce que le cadre affiche.")|tojson }} },
+            { target: '.main-nav-link[data-group="group-partage"]', title: {{ _("Partage")|tojson }}, text: {{ _("Invitez la famille : un QR code suffit pour envoyer des photos, des messages, des dessins ou des messages vocaux.")|tojson }} },
+            { target: '.main-nav-link[data-group="group-systeme"]', title: {{ _("Système")|tojson }}, text: {{ _("Santé du cadre, sauvegardes, mises à jour, stockage et comptes de la famille.")|tojson }} },
+            { target: '.app-search', title: {{ _("Rechercher un réglage")|tojson }}, text: {{ _("Tapez quelques mots (« musique », « nuit »…) pour aller droit au bon réglage.")|tojson }} },
+            { target: '#app-status-pill', title: {{ _("État du diaporama")|tojson }}, text: {{ _("En un coup d'œil : le cadre affiche-t-il ses photos ?")|tojson }} },
+            { title: {{ _("Astuce")|tojson }}, text: {{ _("Glissez des photos n'importe où sur cette page pour les envoyer au cadre. Bonne découverte !")|tojson }} },
+        ];
+        const NEXT = {{ _("Suivant")|tojson }}, DONE = {{ _("C'est parti !")|tojson }}, OF = {{ _("Étape {n} sur {total}")|tojson }};
+        let index = 0;
+        const tour = () => document.getElementById("tour");
+        const visible = (selector) => [...document.querySelectorAll(selector)].find(el => el.offsetParent !== null && el.getBoundingClientRect().width > 0);
+
+        function show() {
+            const step = STEPS[index], root = tour(), spot = root.querySelector(".tour-spot"), card = root.querySelector(".tour-card");
+            root.querySelector(".tour-step").textContent = OF.replace("{n}", index + 1).replace("{total}", STEPS.length);
+            root.querySelector("#tour-title").textContent = step.title;
+            root.querySelector(".tour-text").textContent = step.text;
+            root.querySelector(".tour-next").textContent = index === STEPS.length - 1 ? DONE : NEXT;
+            root.querySelector(".tour-prev").style.visibility = index ? "visible" : "hidden";
+            const el = step.target && visible(step.target);
+            const W = window.innerWidth, H = window.innerHeight;
+            if (!el) {
+                spot.className = "tour-spot center"; spot.style.cssText = "";
+                card.style.left = `${(W - card.offsetWidth) / 2}px`; card.style.top = `${Math.max(16, H * 0.3)}px`;
+                return;
+            }
+            const r = el.getBoundingClientRect(), pad = 6;
+            spot.className = "tour-spot";
+            spot.style.cssText = `left:${r.left - pad}px;top:${r.top - pad}px;width:${r.width + 2 * pad}px;height:${r.height + 2 * pad}px`;
+            const below = r.bottom + 14 + card.offsetHeight < H;
+            let left = Math.min(Math.max(16, r.left), W - card.offsetWidth - 16);
+            if (r.right + card.offsetWidth + 24 < W && r.width < W / 3) left = r.right + 18;  // menu latéral : la carte à droite
+            card.style.left = `${left}px`;
+            card.style.top = `${r.right + card.offsetWidth + 24 < W && r.width < W / 3 ? Math.max(16, Math.min(r.top, H - card.offsetHeight - 16)) : (below ? r.bottom + 14 : Math.max(16, r.top - card.offsetHeight - 14))}px`;
+        }
+        function close() {
+            tour().classList.add("hidden");
+            fetch("/api/tour/done", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).catch(() => {});
+        }
+        window.startTour = () => { index = 0; tour().classList.remove("hidden"); show(); };
+        window.addEventListener("DOMContentLoaded", () => {
+            const root = tour();
+            root.querySelector(".tour-next").addEventListener("click", () => { if (index === STEPS.length - 1) close(); else { index++; show(); } });
+            root.querySelector(".tour-prev").addEventListener("click", () => { index = Math.max(0, index - 1); show(); });
+            root.querySelector(".tour-skip").addEventListener("click", close);
+            window.addEventListener("resize", () => { if (!root.classList.contains("hidden")) show(); });
+            document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !root.classList.contains("hidden")) close(); });
+            {% if tour_pending %}setTimeout(window.startTour, 800);{% endif %}
+        });
+    })();
+</script>
