@@ -45,7 +45,7 @@ export const groups: NavGroup[] = [
     { label: () => t("Telegram"), icon: "fa-paper-plane", tab: "tab-telegram" },
   ] },
   { key: "systeme", label: () => t("Système"), icon: "fa-cog", items: [
-    { label: () => t("Comptes"), icon: "fa-users", tab: "tab-comptes" },
+    { label: () => t("Comptes"), icon: "fa-users", tab: "tab-comptes", route: "/comptes" },
     { label: () => t("Notifications"), icon: "fa-bell", tab: "tab-notifications", admin: true },
     { label: () => t("Maintenance"), icon: "fa-tools", tab: "tab-maintenance", admin: true },
     { label: () => t("Réseau"), icon: "fa-wifi", tab: "tab-network", admin: true },

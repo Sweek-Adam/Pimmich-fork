@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:41+0200\n"
+"POT-Creation-Date: 2026-10-11 12:44+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -325,6 +325,118 @@ msgstr "Los cambios se guardan automáticamente."
 #: frontend/src/components/SettingsPage.vue:26
 msgid "Autres réglages : interface classique"
 msgstr "Otros ajustes: interfaz clásica"
+
+#: frontend/src/views/AccountsView.vue:34
+#, python-brace-format
+msgid "Nouveau mot de passe pour « {name} » :"
+msgstr "Nueva contraseña para «{name}»:"
+
+#: frontend/src/views/AccountsView.vue:40
+#, python-brace-format
+msgid "Supprimer le compte « {name} » ?"
+msgstr "¿Eliminar la cuenta «{name}»?"
+
+#: frontend/src/views/AccountsView.vue:52 templates/configure.html.jinja:130
+msgid "Mon compte"
+msgstr "Mi cuenta"
+
+#: frontend/src/views/AccountsView.vue:54
+#: templates/configure/tab_comptes.html.jinja:87
+msgid "Nouveau mot de passe"
+msgstr "Nueva contraseña"
+
+#: frontend/src/views/AccountsView.vue:55
+msgid "Confirmer le mot de passe"
+msgstr "Confirmar la contraseña"
+
+#: frontend/src/views/AccountsView.vue:56
+#: frontend/src/views/AccountsView.vue:74
+#: templates/configure/tab_comptes.html.jinja:43
+msgid "Changer le mot de passe"
+msgstr "Cambiar la contraseña"
+
+#: frontend/src/views/AccountsView.vue:62
+msgid "Comptes de la famille"
+msgstr "Cuentas de la familia"
+
+#: frontend/src/views/AccountsView.vue:63
+#, python-brace-format
+msgid "Administrateur principal : {name}"
+msgstr "Administrador principal: {name}"
+
+#: frontend/src/views/AccountsView.vue:64
+msgid "Aucun autre compte pour l'instant."
+msgstr "Aún no hay otras cuentas."
+
+#: frontend/src/views/AccountsView.vue:68
+#: templates/configure/tab_comptes.html.jinja:72
+msgid "créé le"
+msgstr "creada el"
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:72
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:80
+#: templates/configure/tab_comptes.html.jinja:119
+msgid "Administrateur"
+msgstr "Administrador"
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:71
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_affichage.html.jinja:298
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:79
+#: templates/configure/tab_comptes.html.jinja:118
+#: templates/configure/tab_maintenance.html.jinja:227
+#: templates/login.html.jinja:56
+msgid "Utilisateur"
+msgstr "Usuario"
+
+#: frontend/src/views/AccountsView.vue:75
+#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr "Eliminar"
+
+#: frontend/src/views/AccountsView.vue:81
+#: templates/configure/tab_sources.html.jinja:399
+msgid "Ajouter un compte"
+msgstr "Añadir una cuenta"
+
+#: frontend/src/views/AccountsView.vue:83
+#: templates/configure/tab_comptes.html.jinja:107
+msgid "Nom d'utilisateur"
+msgstr "Nombre de usuario"
+
+#: frontend/src/views/AccountsView.vue:84
+#: templates/configure/tab_affichage.html.jinja:299
+#: templates/configure/tab_comptes.html.jinja:112
+#: templates/configure/tab_maintenance.html.jinja:228
+#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
+msgid "Mot de passe"
+msgstr "Contraseña"
+
+#: frontend/src/views/AccountsView.vue:85
+#: templates/configure/tab_comptes.html.jinja:59
+#: templates/configure/tab_comptes.html.jinja:116
+msgid "Rôle"
+msgstr "Rol"
+
+#: frontend/src/views/AccountsView.vue:87
+msgid "Créer le compte"
+msgstr "Crear la cuenta"
+
+#: frontend/src/views/AccountsView.vue:89
+msgid ""
+"Chaque compte a ses propres envois et ses playlists ; un utilisateur ne "
+"voit pas les réglages sensibles."
+msgstr ""
+"Cada cuenta tiene sus propios envíos y listas; un usuario no ve los "
+"ajustes sensibles."
 
 #: frontend/src/views/ClockView.vue:8
 #: templates/configure/tab_heure.html.jinja:71
@@ -1059,13 +1171,6 @@ msgstr "Activar"
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
 msgstr "Reemplazar por la selección"
-
-#: frontend/src/views/LayoutsView.vue:117
-#: frontend/src/views/PlaylistsView.vue:123
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
-msgstr "Eliminar"
 
 #: frontend/src/views/LayoutsView.vue:120
 #: templates/configure/tab_dispositions.html.jinja:30
@@ -2054,10 +2159,6 @@ msgstr "Oscuro"
 msgid "Langue"
 msgstr "Idioma"
 
-#: templates/configure.html.jinja:130
-msgid "Mon compte"
-msgstr "Mi cuenta"
-
 #: templates/configure.html.jinja:131
 msgid "Visite guidée"
 msgstr "Visita guiada"
@@ -2132,22 +2233,6 @@ msgstr "¿Quitar esta página del libro de visitas?"
 #: templates/login.html.jinja:7
 msgid "Connexion"
 msgstr "Conexión"
-
-#: templates/configure/tab_affichage.html.jinja:298
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:79
-#: templates/configure/tab_comptes.html.jinja:118
-#: templates/configure/tab_maintenance.html.jinja:227
-#: templates/login.html.jinja:56
-msgid "Utilisateur"
-msgstr "Usuario"
-
-#: templates/configure/tab_affichage.html.jinja:299
-#: templates/configure/tab_comptes.html.jinja:112
-#: templates/configure/tab_maintenance.html.jinja:228
-#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
-msgid "Mot de passe"
-msgstr "Contraseña"
 
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
@@ -4406,10 +4491,6 @@ msgstr ""
 "Las contraseñas no\n"
 "                            no coincida."
 
-#: templates/configure/tab_comptes.html.jinja:43
-msgid "Changer le mot de passe"
-msgstr "Cambiar la contraseña"
-
 #: templates/configure/tab_comptes.html.jinja:51
 msgid "Comptes utilisateurs"
 msgstr "Cuentas de usuario"
@@ -4426,11 +4507,6 @@ msgstr ""
 " cuentas, la red ni el mantenimiento, y no ven las contraseñas ni los "
 "tokens guardados."
 
-#: templates/configure/tab_comptes.html.jinja:59
-#: templates/configure/tab_comptes.html.jinja:116
-msgid "Rôle"
-msgstr "Rol"
-
 #: templates/configure/tab_comptes.html.jinja:66
 msgid "Administrateur principal"
 msgstr "Administrador principal"
@@ -4438,20 +4514,6 @@ msgstr "Administrador principal"
 #: templates/configure/tab_comptes.html.jinja:67
 msgid "Compte créé à l'installation (non supprimable)"
 msgstr "Cuenta creada durante la instalación (no se puede eliminar)"
-
-#: templates/configure/tab_comptes.html.jinja:72
-msgid "créé le"
-msgstr "creada el"
-
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:80
-#: templates/configure/tab_comptes.html.jinja:119
-msgid "Administrateur"
-msgstr "Administrador"
-
-#: templates/configure/tab_comptes.html.jinja:87
-msgid "Nouveau mot de passe"
-msgstr "Nueva contraseña"
 
 #: templates/configure/tab_comptes.html.jinja:89
 msgid "Changer"
@@ -4464,10 +4526,6 @@ msgstr "¿Eliminar esta cuenta?"
 #: templates/configure/tab_comptes.html.jinja:104
 msgid "Créer un compte"
 msgstr "Crear una cuenta"
-
-#: templates/configure/tab_comptes.html.jinja:107
-msgid "Nom d'utilisateur"
-msgstr "Nombre de usuario"
 
 #: templates/configure/tab_comptes.html.jinja:109
 msgid "2 à 32 caractères : lettres, chiffres, . _ -"
@@ -6909,10 +6967,6 @@ msgstr ""
 msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
 msgstr "Otras nubes: Dropbox, OneDrive, pCloud..."
 
-#: templates/configure/tab_sources.html.jinja:399
-msgid "Ajouter un compte"
-msgstr "Añadir una cuenta"
-
 #: templates/configure/tab_sources.html.jinja:404
 msgid "Choisissez le service :"
 msgstr "Elige el servicio:"
@@ -8150,21 +8204,26 @@ msgstr "Credenciales no válidas"
 msgid "Déconnexion réussie"
 msgstr "Cerrar sesión exitosamente"
 
-#: web/routes_auth.py:57
+#: web/routes_auth.py:53
 msgid "Les deux champs de mot de passe sont requis."
 msgstr "Ambos campos de contraseña son obligatorios."
 
-#: web/routes_auth.py:61
+#: web/routes_auth.py:55
 msgid "Les mots de passe ne correspondent pas."
 msgstr "Las contraseñas no coinciden."
 
-#: web/routes_auth.py:65
+#: web/routes_auth.py:57
 msgid "Le mot de passe doit contenir au moins 6 caractères."
 msgstr ""
 "Contraseñas nLa contraseña debe contener al menos 6 caracteres.e no "
 "coinciden."
 
-#: web/routes_auth.py:74
+#: web/routes_auth.py:65
+#, python-format
+msgid "Erreur lors du changement de mot de passe : %(error)s"
+msgstr "Error al cambiar contraseña: %(error)s"
+
+#: web/routes_auth.py:66
 msgid ""
 "Mot de passe mis à jour avec succès. Il sera nécessaire pour votre "
 "prochaine connexion."
@@ -8172,35 +8231,30 @@ msgstr ""
 "Contraseña actualizada correctamente. La necesitarás para tu próximo "
 "inicio de sesión."
 
-#: web/routes_auth.py:76
-#, python-format
-msgid "Erreur lors du changement de mot de passe : %(error)s"
-msgstr "Error al cambiar contraseña: %(error)s"
-
-#: web/routes_auth.py:88
+#: web/routes_auth.py:74
 #, python-format
 msgid "Compte « %(name)s » créé."
 msgstr "Cuenta «%(name)s» creada."
 
-#: web/routes_auth.py:98
+#: web/routes_auth.py:79
 msgid "Vous ne pouvez pas supprimer votre propre compte."
 msgstr "No puedes eliminar tu propia cuenta."
 
-#: web/routes_auth.py:102
+#: web/routes_auth.py:84
 #, python-format
 msgid "Compte « %(name)s » supprimé."
 msgstr "Cuenta «%(name)s» eliminada."
 
-#: web/routes_auth.py:113
+#: web/routes_auth.py:92
 #, python-format
 msgid "Mot de passe de « %(name)s » modifié."
 msgstr "Contraseña de «%(name)s» modificada."
 
-#: web/routes_auth.py:123
+#: web/routes_auth.py:97
 msgid "Vous ne pouvez pas modifier votre propre rôle."
 msgstr "No puedes modificar tu propio rol."
 
-#: web/routes_auth.py:127
+#: web/routes_auth.py:102
 #, python-format
 msgid "Rôle de « %(name)s » modifié."
 msgstr "Rol de «%(name)s» modificado."

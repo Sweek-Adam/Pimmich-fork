@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:41+0200\n"
+"POT-Creation-Date: 2026-10-11 12:44+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -325,6 +325,116 @@ msgstr "変更は自動的に保存されます。"
 #: frontend/src/components/SettingsPage.vue:26
 msgid "Autres réglages : interface classique"
 msgstr "その他の設定：従来の画面"
+
+#: frontend/src/views/AccountsView.vue:34
+#, python-brace-format
+msgid "Nouveau mot de passe pour « {name} » :"
+msgstr "「{name}」の新しいパスワード："
+
+#: frontend/src/views/AccountsView.vue:40
+#, python-brace-format
+msgid "Supprimer le compte « {name} » ?"
+msgstr "アカウント「{name}」を削除しますか？"
+
+#: frontend/src/views/AccountsView.vue:52 templates/configure.html.jinja:130
+msgid "Mon compte"
+msgstr "マイアカウント"
+
+#: frontend/src/views/AccountsView.vue:54
+#: templates/configure/tab_comptes.html.jinja:87
+msgid "Nouveau mot de passe"
+msgstr "新しいパスワード"
+
+#: frontend/src/views/AccountsView.vue:55
+msgid "Confirmer le mot de passe"
+msgstr "パスワードの確認"
+
+#: frontend/src/views/AccountsView.vue:56
+#: frontend/src/views/AccountsView.vue:74
+#: templates/configure/tab_comptes.html.jinja:43
+msgid "Changer le mot de passe"
+msgstr "パスワードを変更する"
+
+#: frontend/src/views/AccountsView.vue:62
+msgid "Comptes de la famille"
+msgstr "家族のアカウント"
+
+#: frontend/src/views/AccountsView.vue:63
+#, python-brace-format
+msgid "Administrateur principal : {name}"
+msgstr "メイン管理者：{name}"
+
+#: frontend/src/views/AccountsView.vue:64
+msgid "Aucun autre compte pour l'instant."
+msgstr "ほかのアカウントはまだありません。"
+
+#: frontend/src/views/AccountsView.vue:68
+#: templates/configure/tab_comptes.html.jinja:72
+msgid "créé le"
+msgstr "作成日"
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:72
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:80
+#: templates/configure/tab_comptes.html.jinja:119
+msgid "Administrateur"
+msgstr "管理者"
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:71
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_affichage.html.jinja:298
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:79
+#: templates/configure/tab_comptes.html.jinja:118
+#: templates/configure/tab_maintenance.html.jinja:227
+#: templates/login.html.jinja:56
+msgid "Utilisateur"
+msgstr "ユーザー"
+
+#: frontend/src/views/AccountsView.vue:75
+#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr "削除"
+
+#: frontend/src/views/AccountsView.vue:81
+#: templates/configure/tab_sources.html.jinja:399
+msgid "Ajouter un compte"
+msgstr "アカウントを追加"
+
+#: frontend/src/views/AccountsView.vue:83
+#: templates/configure/tab_comptes.html.jinja:107
+msgid "Nom d'utilisateur"
+msgstr "ユーザー名"
+
+#: frontend/src/views/AccountsView.vue:84
+#: templates/configure/tab_affichage.html.jinja:299
+#: templates/configure/tab_comptes.html.jinja:112
+#: templates/configure/tab_maintenance.html.jinja:228
+#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
+msgid "Mot de passe"
+msgstr "パスワード"
+
+#: frontend/src/views/AccountsView.vue:85
+#: templates/configure/tab_comptes.html.jinja:59
+#: templates/configure/tab_comptes.html.jinja:116
+msgid "Rôle"
+msgstr "役割"
+
+#: frontend/src/views/AccountsView.vue:87
+msgid "Créer le compte"
+msgstr "アカウントを作成"
+
+#: frontend/src/views/AccountsView.vue:89
+msgid ""
+"Chaque compte a ses propres envois et ses playlists ; un utilisateur ne "
+"voit pas les réglages sensibles."
+msgstr "各アカウントは自分の写真とプレイリストを持ちます。一般ユーザーには重要な設定は表示されません。"
 
 #: frontend/src/views/ClockView.vue:8
 #: templates/configure/tab_heure.html.jinja:71
@@ -1038,13 +1148,6 @@ msgstr "有効にする"
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
 msgstr "選択内容で置き換える"
-
-#: frontend/src/views/LayoutsView.vue:117
-#: frontend/src/views/PlaylistsView.vue:123
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
-msgstr "削除"
 
 #: frontend/src/views/LayoutsView.vue:120
 #: templates/configure/tab_dispositions.html.jinja:30
@@ -2017,10 +2120,6 @@ msgstr "ダーク"
 msgid "Langue"
 msgstr "言語"
 
-#: templates/configure.html.jinja:130
-msgid "Mon compte"
-msgstr "マイアカウント"
-
 #: templates/configure.html.jinja:131
 msgid "Visite guidée"
 msgstr "ガイドツアー"
@@ -2093,22 +2192,6 @@ msgstr "このページをゲストブックから削除しますか？"
 #: templates/login.html.jinja:7
 msgid "Connexion"
 msgstr "接続"
-
-#: templates/configure/tab_affichage.html.jinja:298
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:79
-#: templates/configure/tab_comptes.html.jinja:118
-#: templates/configure/tab_maintenance.html.jinja:227
-#: templates/login.html.jinja:56
-msgid "Utilisateur"
-msgstr "ユーザー"
-
-#: templates/configure/tab_affichage.html.jinja:299
-#: templates/configure/tab_comptes.html.jinja:112
-#: templates/configure/tab_maintenance.html.jinja:228
-#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
-msgid "Mot de passe"
-msgstr "パスワード"
 
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
@@ -4295,10 +4378,6 @@ msgstr ""
 "パスワードは無効です\n"
 "                            一致しません。"
 
-#: templates/configure/tab_comptes.html.jinja:43
-msgid "Changer le mot de passe"
-msgstr "パスワードを変更する"
-
 #: templates/configure/tab_comptes.html.jinja:51
 msgid "Comptes utilisateurs"
 msgstr "ユーザーアカウント"
@@ -4311,11 +4390,6 @@ msgid ""
 " jetons enregistrés."
 msgstr "管理者はすべての機能を利用できます。ユーザーはスライドショーの設定や写真のインポート・管理ができますが、アカウント、ネットワーク、メンテナンスにはアクセスできず、保存されたパスワードやトークンも表示されません。"
 
-#: templates/configure/tab_comptes.html.jinja:59
-#: templates/configure/tab_comptes.html.jinja:116
-msgid "Rôle"
-msgstr "役割"
-
 #: templates/configure/tab_comptes.html.jinja:66
 msgid "Administrateur principal"
 msgstr "メイン管理者"
@@ -4323,20 +4397,6 @@ msgstr "メイン管理者"
 #: templates/configure/tab_comptes.html.jinja:67
 msgid "Compte créé à l'installation (non supprimable)"
 msgstr "インストール時に作成されたアカウント（削除不可）"
-
-#: templates/configure/tab_comptes.html.jinja:72
-msgid "créé le"
-msgstr "作成日"
-
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:80
-#: templates/configure/tab_comptes.html.jinja:119
-msgid "Administrateur"
-msgstr "管理者"
-
-#: templates/configure/tab_comptes.html.jinja:87
-msgid "Nouveau mot de passe"
-msgstr "新しいパスワード"
 
 #: templates/configure/tab_comptes.html.jinja:89
 msgid "Changer"
@@ -4349,10 +4409,6 @@ msgstr "このアカウントを削除しますか？"
 #: templates/configure/tab_comptes.html.jinja:104
 msgid "Créer un compte"
 msgstr "アカウントを作成"
-
-#: templates/configure/tab_comptes.html.jinja:107
-msgid "Nom d'utilisateur"
-msgstr "ユーザー名"
 
 #: templates/configure/tab_comptes.html.jinja:109
 msgid "2 à 32 caractères : lettres, chiffres, . _ -"
@@ -6642,10 +6698,6 @@ msgstr "写真や動画が追加または削除された場合にのみ、スラ
 msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
 msgstr "その他のクラウド：Dropbox、OneDrive、pCloud など"
 
-#: templates/configure/tab_sources.html.jinja:399
-msgid "Ajouter un compte"
-msgstr "アカウントを追加"
-
 #: templates/configure/tab_sources.html.jinja:404
 msgid "Choisissez le service :"
 msgstr "サービスを選択："
@@ -7836,53 +7888,53 @@ msgstr "無効な識別子"
 msgid "Déconnexion réussie"
 msgstr "ログアウト成功"
 
-#: web/routes_auth.py:57
+#: web/routes_auth.py:53
 msgid "Les deux champs de mot de passe sont requis."
 msgstr "両方のパスワードフィールドは必須です。"
 
-#: web/routes_auth.py:61
+#: web/routes_auth.py:55
 msgid "Les mots de passe ne correspondent pas."
 msgstr "パスワードが一致しません。"
 
-#: web/routes_auth.py:65
+#: web/routes_auth.py:57
 msgid "Le mot de passe doit contenir au moins 6 caractères."
 msgstr "パスワードには少なくとも 6 文字を含める必要があります。"
 
-#: web/routes_auth.py:74
+#: web/routes_auth.py:65
+#, python-format
+msgid "Erreur lors du changement de mot de passe : %(error)s"
+msgstr "パスワード変更エラー: %(error)s"
+
+#: web/routes_auth.py:66
 msgid ""
 "Mot de passe mis à jour avec succès. Il sera nécessaire pour votre "
 "prochaine connexion."
 msgstr "パスワードが正常に更新されました。次回の接続に必要になります。"
 
-#: web/routes_auth.py:76
-#, python-format
-msgid "Erreur lors du changement de mot de passe : %(error)s"
-msgstr "パスワード変更エラー: %(error)s"
-
-#: web/routes_auth.py:88
+#: web/routes_auth.py:74
 #, python-format
 msgid "Compte « %(name)s » créé."
 msgstr "アカウント「%(name)s」を作成しました。"
 
-#: web/routes_auth.py:98
+#: web/routes_auth.py:79
 msgid "Vous ne pouvez pas supprimer votre propre compte."
 msgstr "自分のアカウントは削除できません。"
 
-#: web/routes_auth.py:102
+#: web/routes_auth.py:84
 #, python-format
 msgid "Compte « %(name)s » supprimé."
 msgstr "アカウント「%(name)s」を削除しました。"
 
-#: web/routes_auth.py:113
+#: web/routes_auth.py:92
 #, python-format
 msgid "Mot de passe de « %(name)s » modifié."
 msgstr "「%(name)s」のパスワードを変更しました。"
 
-#: web/routes_auth.py:123
+#: web/routes_auth.py:97
 msgid "Vous ne pouvez pas modifier votre propre rôle."
 msgstr "自分の役割は変更できません。"
 
-#: web/routes_auth.py:127
+#: web/routes_auth.py:102
 #, python-format
 msgid "Rôle de « %(name)s » modifié."
 msgstr "「%(name)s」の役割を変更しました。"

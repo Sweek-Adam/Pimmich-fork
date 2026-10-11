@@ -6,6 +6,42 @@
   ]
  ],
  [
+  "/api/accounts",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/accounts",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/accounts/<username>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
+  "/api/accounts/<username>/password",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/accounts/<username>/role",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/accounts/password",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/admin_https",
   [
    "GET"

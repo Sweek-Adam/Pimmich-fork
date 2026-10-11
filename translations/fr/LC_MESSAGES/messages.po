@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:41+0200\n"
+"POT-Creation-Date: 2026-10-11 12:44+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -324,6 +324,116 @@ msgstr ""
 
 #: frontend/src/components/SettingsPage.vue:26
 msgid "Autres réglages : interface classique"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:34
+#, python-brace-format
+msgid "Nouveau mot de passe pour « {name} » :"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:40
+#, python-brace-format
+msgid "Supprimer le compte « {name} » ?"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:52 templates/configure.html.jinja:130
+msgid "Mon compte"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:54
+#: templates/configure/tab_comptes.html.jinja:87
+msgid "Nouveau mot de passe"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:55
+msgid "Confirmer le mot de passe"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:56
+#: frontend/src/views/AccountsView.vue:74
+#: templates/configure/tab_comptes.html.jinja:43
+msgid "Changer le mot de passe"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:62
+msgid "Comptes de la famille"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:63
+#, python-brace-format
+msgid "Administrateur principal : {name}"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:64
+msgid "Aucun autre compte pour l'instant."
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:68
+#: templates/configure/tab_comptes.html.jinja:72
+msgid "créé le"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:72
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:80
+#: templates/configure/tab_comptes.html.jinja:119
+msgid "Administrateur"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:71
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_affichage.html.jinja:298
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:79
+#: templates/configure/tab_comptes.html.jinja:118
+#: templates/configure/tab_maintenance.html.jinja:227
+#: templates/login.html.jinja:56
+msgid "Utilisateur"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:75
+#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:81
+#: templates/configure/tab_sources.html.jinja:399
+msgid "Ajouter un compte"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:83
+#: templates/configure/tab_comptes.html.jinja:107
+msgid "Nom d'utilisateur"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:84
+#: templates/configure/tab_affichage.html.jinja:299
+#: templates/configure/tab_comptes.html.jinja:112
+#: templates/configure/tab_maintenance.html.jinja:228
+#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
+msgid "Mot de passe"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:85
+#: templates/configure/tab_comptes.html.jinja:59
+#: templates/configure/tab_comptes.html.jinja:116
+msgid "Rôle"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:87
+msgid "Créer le compte"
+msgstr ""
+
+#: frontend/src/views/AccountsView.vue:89
+msgid ""
+"Chaque compte a ses propres envois et ses playlists ; un utilisateur ne "
+"voit pas les réglages sensibles."
 msgstr ""
 
 #: frontend/src/views/ClockView.vue:8
@@ -1031,13 +1141,6 @@ msgstr ""
 #: frontend/src/views/LayoutsView.vue:116
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
-msgstr ""
-
-#: frontend/src/views/LayoutsView.vue:117
-#: frontend/src/views/PlaylistsView.vue:123
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
 msgstr ""
 
 #: frontend/src/views/LayoutsView.vue:120
@@ -2007,10 +2110,6 @@ msgstr ""
 msgid "Langue"
 msgstr ""
 
-#: templates/configure.html.jinja:130
-msgid "Mon compte"
-msgstr ""
-
 #: templates/configure.html.jinja:131
 msgid "Visite guidée"
 msgstr ""
@@ -2082,22 +2181,6 @@ msgstr ""
 
 #: templates/login.html.jinja:7
 msgid "Connexion"
-msgstr ""
-
-#: templates/configure/tab_affichage.html.jinja:298
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:79
-#: templates/configure/tab_comptes.html.jinja:118
-#: templates/configure/tab_maintenance.html.jinja:227
-#: templates/login.html.jinja:56
-msgid "Utilisateur"
-msgstr ""
-
-#: templates/configure/tab_affichage.html.jinja:299
-#: templates/configure/tab_comptes.html.jinja:112
-#: templates/configure/tab_maintenance.html.jinja:228
-#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
-msgid "Mot de passe"
 msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:18
@@ -4265,10 +4348,6 @@ msgid ""
 "                            correspondent pas."
 msgstr ""
 
-#: templates/configure/tab_comptes.html.jinja:43
-msgid "Changer le mot de passe"
-msgstr ""
-
 #: templates/configure/tab_comptes.html.jinja:51
 msgid "Comptes utilisateurs"
 msgstr ""
@@ -4281,31 +4360,12 @@ msgid ""
 " jetons enregistrés."
 msgstr ""
 
-#: templates/configure/tab_comptes.html.jinja:59
-#: templates/configure/tab_comptes.html.jinja:116
-msgid "Rôle"
-msgstr ""
-
 #: templates/configure/tab_comptes.html.jinja:66
 msgid "Administrateur principal"
 msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:67
 msgid "Compte créé à l'installation (non supprimable)"
-msgstr ""
-
-#: templates/configure/tab_comptes.html.jinja:72
-msgid "créé le"
-msgstr ""
-
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:80
-#: templates/configure/tab_comptes.html.jinja:119
-msgid "Administrateur"
-msgstr ""
-
-#: templates/configure/tab_comptes.html.jinja:87
-msgid "Nouveau mot de passe"
 msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:89
@@ -4318,10 +4378,6 @@ msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:104
 msgid "Créer un compte"
-msgstr ""
-
-#: templates/configure/tab_comptes.html.jinja:107
-msgid "Nom d'utilisateur"
 msgstr ""
 
 #: templates/configure/tab_comptes.html.jinja:109
@@ -6521,10 +6577,6 @@ msgstr ""
 msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
 msgstr ""
 
-#: templates/configure/tab_sources.html.jinja:399
-msgid "Ajouter un compte"
-msgstr ""
-
 #: templates/configure/tab_sources.html.jinja:404
 msgid "Choisissez le service :"
 msgstr ""
@@ -7673,53 +7725,53 @@ msgstr ""
 msgid "Déconnexion réussie"
 msgstr ""
 
-#: web/routes_auth.py:57
+#: web/routes_auth.py:53
 msgid "Les deux champs de mot de passe sont requis."
 msgstr ""
 
-#: web/routes_auth.py:61
+#: web/routes_auth.py:55
 msgid "Les mots de passe ne correspondent pas."
 msgstr ""
 
-#: web/routes_auth.py:65
+#: web/routes_auth.py:57
 msgid "Le mot de passe doit contenir au moins 6 caractères."
 msgstr ""
 
-#: web/routes_auth.py:74
+#: web/routes_auth.py:65
+#, python-format
+msgid "Erreur lors du changement de mot de passe : %(error)s"
+msgstr ""
+
+#: web/routes_auth.py:66
 msgid ""
 "Mot de passe mis à jour avec succès. Il sera nécessaire pour votre "
 "prochaine connexion."
 msgstr ""
 
-#: web/routes_auth.py:76
-#, python-format
-msgid "Erreur lors du changement de mot de passe : %(error)s"
-msgstr ""
-
-#: web/routes_auth.py:88
+#: web/routes_auth.py:74
 #, python-format
 msgid "Compte « %(name)s » créé."
 msgstr ""
 
-#: web/routes_auth.py:98
+#: web/routes_auth.py:79
 msgid "Vous ne pouvez pas supprimer votre propre compte."
 msgstr ""
 
-#: web/routes_auth.py:102
+#: web/routes_auth.py:84
 #, python-format
 msgid "Compte « %(name)s » supprimé."
 msgstr ""
 
-#: web/routes_auth.py:113
+#: web/routes_auth.py:92
 #, python-format
 msgid "Mot de passe de « %(name)s » modifié."
 msgstr ""
 
-#: web/routes_auth.py:123
+#: web/routes_auth.py:97
 msgid "Vous ne pouvez pas modifier votre propre rôle."
 msgstr ""
 
-#: web/routes_auth.py:127
+#: web/routes_auth.py:102
 #, python-format
 msgid "Rôle de « %(name)s » modifié."
 msgstr ""

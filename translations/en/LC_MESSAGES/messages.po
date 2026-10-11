@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:41+0200\n"
+"POT-Creation-Date: 2026-10-11 12:44+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -325,6 +325,118 @@ msgstr "Changes are saved automatically."
 #: frontend/src/components/SettingsPage.vue:26
 msgid "Autres réglages : interface classique"
 msgstr "Other settings: classic interface"
+
+#: frontend/src/views/AccountsView.vue:34
+#, python-brace-format
+msgid "Nouveau mot de passe pour « {name} » :"
+msgstr "New password for “{name}”:"
+
+#: frontend/src/views/AccountsView.vue:40
+#, python-brace-format
+msgid "Supprimer le compte « {name} » ?"
+msgstr "Delete the account “{name}”?"
+
+#: frontend/src/views/AccountsView.vue:52 templates/configure.html.jinja:130
+msgid "Mon compte"
+msgstr "My account"
+
+#: frontend/src/views/AccountsView.vue:54
+#: templates/configure/tab_comptes.html.jinja:87
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+#: frontend/src/views/AccountsView.vue:55
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+#: frontend/src/views/AccountsView.vue:56
+#: frontend/src/views/AccountsView.vue:74
+#: templates/configure/tab_comptes.html.jinja:43
+msgid "Changer le mot de passe"
+msgstr "Change password"
+
+#: frontend/src/views/AccountsView.vue:62
+msgid "Comptes de la famille"
+msgstr "Family accounts"
+
+#: frontend/src/views/AccountsView.vue:63
+#, python-brace-format
+msgid "Administrateur principal : {name}"
+msgstr "Main administrator: {name}"
+
+#: frontend/src/views/AccountsView.vue:64
+msgid "Aucun autre compte pour l'instant."
+msgstr "No other accounts yet."
+
+#: frontend/src/views/AccountsView.vue:68
+#: templates/configure/tab_comptes.html.jinja:72
+msgid "créé le"
+msgstr "created on"
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:72
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:80
+#: templates/configure/tab_comptes.html.jinja:119
+msgid "Administrateur"
+msgstr "Administrator"
+
+#: frontend/src/views/AccountsView.vue:69
+#: frontend/src/views/AccountsView.vue:71
+#: frontend/src/views/AccountsView.vue:86
+#: templates/configure/tab_affichage.html.jinja:298
+#: templates/configure/tab_comptes.html.jinja:75
+#: templates/configure/tab_comptes.html.jinja:79
+#: templates/configure/tab_comptes.html.jinja:118
+#: templates/configure/tab_maintenance.html.jinja:227
+#: templates/login.html.jinja:56
+msgid "Utilisateur"
+msgstr "User"
+
+#: frontend/src/views/AccountsView.vue:75
+#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr "Delete"
+
+#: frontend/src/views/AccountsView.vue:81
+#: templates/configure/tab_sources.html.jinja:399
+msgid "Ajouter un compte"
+msgstr "Add an account"
+
+#: frontend/src/views/AccountsView.vue:83
+#: templates/configure/tab_comptes.html.jinja:107
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+#: frontend/src/views/AccountsView.vue:84
+#: templates/configure/tab_affichage.html.jinja:299
+#: templates/configure/tab_comptes.html.jinja:112
+#: templates/configure/tab_maintenance.html.jinja:228
+#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
+msgid "Mot de passe"
+msgstr "Password"
+
+#: frontend/src/views/AccountsView.vue:85
+#: templates/configure/tab_comptes.html.jinja:59
+#: templates/configure/tab_comptes.html.jinja:116
+msgid "Rôle"
+msgstr "Role"
+
+#: frontend/src/views/AccountsView.vue:87
+msgid "Créer le compte"
+msgstr "Create account"
+
+#: frontend/src/views/AccountsView.vue:89
+msgid ""
+"Chaque compte a ses propres envois et ses playlists ; un utilisateur ne "
+"voit pas les réglages sensibles."
+msgstr ""
+"Each account has its own uploads and playlists; a user does not see "
+"sensitive settings."
 
 #: frontend/src/views/ClockView.vue:8
 #: templates/configure/tab_heure.html.jinja:71
@@ -1052,13 +1164,6 @@ msgstr "Activate"
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
 msgstr "Replace with selection"
-
-#: frontend/src/views/LayoutsView.vue:117
-#: frontend/src/views/PlaylistsView.vue:123
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
-msgstr "Delete"
 
 #: frontend/src/views/LayoutsView.vue:120
 #: templates/configure/tab_dispositions.html.jinja:30
@@ -2041,10 +2146,6 @@ msgstr "Dark"
 msgid "Langue"
 msgstr "Language"
 
-#: templates/configure.html.jinja:130
-msgid "Mon compte"
-msgstr "My account"
-
 #: templates/configure.html.jinja:131
 msgid "Visite guidée"
 msgstr "Guided tour"
@@ -2119,22 +2220,6 @@ msgstr "Remove this page from the guestbook?"
 #: templates/login.html.jinja:7
 msgid "Connexion"
 msgstr "Connection"
-
-#: templates/configure/tab_affichage.html.jinja:298
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:79
-#: templates/configure/tab_comptes.html.jinja:118
-#: templates/configure/tab_maintenance.html.jinja:227
-#: templates/login.html.jinja:56
-msgid "Utilisateur"
-msgstr "User"
-
-#: templates/configure/tab_affichage.html.jinja:299
-#: templates/configure/tab_comptes.html.jinja:112
-#: templates/configure/tab_maintenance.html.jinja:228
-#: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
-msgid "Mot de passe"
-msgstr "Password"
 
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
@@ -4382,10 +4467,6 @@ msgstr ""
 "Passwords do not\n"
 "                            do not match."
 
-#: templates/configure/tab_comptes.html.jinja:43
-msgid "Changer le mot de passe"
-msgstr "Change password"
-
 #: templates/configure/tab_comptes.html.jinja:51
 msgid "Comptes utilisateurs"
 msgstr "User accounts"
@@ -4401,11 +4482,6 @@ msgstr ""
 "and manage photos, but have no access to accounts, network or "
 "maintenance, and cannot see saved passwords and tokens."
 
-#: templates/configure/tab_comptes.html.jinja:59
-#: templates/configure/tab_comptes.html.jinja:116
-msgid "Rôle"
-msgstr "Role"
-
 #: templates/configure/tab_comptes.html.jinja:66
 msgid "Administrateur principal"
 msgstr "Main administrator"
@@ -4413,20 +4489,6 @@ msgstr "Main administrator"
 #: templates/configure/tab_comptes.html.jinja:67
 msgid "Compte créé à l'installation (non supprimable)"
 msgstr "Account created during installation (cannot be deleted)"
-
-#: templates/configure/tab_comptes.html.jinja:72
-msgid "créé le"
-msgstr "created on"
-
-#: templates/configure/tab_comptes.html.jinja:75
-#: templates/configure/tab_comptes.html.jinja:80
-#: templates/configure/tab_comptes.html.jinja:119
-msgid "Administrateur"
-msgstr "Administrator"
-
-#: templates/configure/tab_comptes.html.jinja:87
-msgid "Nouveau mot de passe"
-msgstr "New password"
 
 #: templates/configure/tab_comptes.html.jinja:89
 msgid "Changer"
@@ -4439,10 +4501,6 @@ msgstr "Delete this account?"
 #: templates/configure/tab_comptes.html.jinja:104
 msgid "Créer un compte"
 msgstr "Create an account"
-
-#: templates/configure/tab_comptes.html.jinja:107
-msgid "Nom d'utilisateur"
-msgstr "Username"
 
 #: templates/configure/tab_comptes.html.jinja:109
 msgid "2 à 32 caractères : lettres, chiffres, . _ -"
@@ -6850,10 +6908,6 @@ msgstr "The slideshow is only restarted if photos or videos were added or remove
 msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
 msgstr "Other clouds: Dropbox, OneDrive, pCloud..."
 
-#: templates/configure/tab_sources.html.jinja:399
-msgid "Ajouter un compte"
-msgstr "Add an account"
-
 #: templates/configure/tab_sources.html.jinja:404
 msgid "Choisissez le service :"
 msgstr "Choose the service:"
@@ -8079,53 +8133,53 @@ msgstr "Invalid identifiers"
 msgid "Déconnexion réussie"
 msgstr "Successful disconnection"
 
-#: web/routes_auth.py:57
+#: web/routes_auth.py:53
 msgid "Les deux champs de mot de passe sont requis."
 msgstr "Both password fields are required."
 
-#: web/routes_auth.py:61
+#: web/routes_auth.py:55
 msgid "Les mots de passe ne correspondent pas."
 msgstr "The passwords do not match."
 
-#: web/routes_auth.py:65
+#: web/routes_auth.py:57
 msgid "Le mot de passe doit contenir au moins 6 caractères."
 msgstr "Password must contain at least 6 characters."
 
-#: web/routes_auth.py:74
+#: web/routes_auth.py:65
+#, python-format
+msgid "Erreur lors du changement de mot de passe : %(error)s"
+msgstr "Error changing password:%(error)s"
+
+#: web/routes_auth.py:66
 msgid ""
 "Mot de passe mis à jour avec succès. Il sera nécessaire pour votre "
 "prochaine connexion."
 msgstr "Password successfully updated. It will be required for your next login."
 
-#: web/routes_auth.py:76
-#, python-format
-msgid "Erreur lors du changement de mot de passe : %(error)s"
-msgstr "Error changing password:%(error)s"
-
-#: web/routes_auth.py:88
+#: web/routes_auth.py:74
 #, python-format
 msgid "Compte « %(name)s » créé."
 msgstr "Account “%(name)s” created."
 
-#: web/routes_auth.py:98
+#: web/routes_auth.py:79
 msgid "Vous ne pouvez pas supprimer votre propre compte."
 msgstr "You cannot delete your own account."
 
-#: web/routes_auth.py:102
+#: web/routes_auth.py:84
 #, python-format
 msgid "Compte « %(name)s » supprimé."
 msgstr "Account “%(name)s” deleted."
 
-#: web/routes_auth.py:113
+#: web/routes_auth.py:92
 #, python-format
 msgid "Mot de passe de « %(name)s » modifié."
 msgstr "Password for “%(name)s” changed."
 
-#: web/routes_auth.py:123
+#: web/routes_auth.py:97
 msgid "Vous ne pouvez pas modifier votre propre rôle."
 msgstr "You cannot change your own role."
 
-#: web/routes_auth.py:127
+#: web/routes_auth.py:102
 #, python-format
 msgid "Rôle de « %(name)s » modifié."
 msgstr "Role of “%(name)s” changed."
