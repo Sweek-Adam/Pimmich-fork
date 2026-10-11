@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import AgendaCard from "../components/AgendaCard.vue";
 import SettingsPage from "../components/SettingsPage.vue";
+import TidesCard from "../components/TidesCard.vue";
 import { get } from "../api";
 import { t } from "../i18n";
 import type { Section } from "../settings";
@@ -10,6 +11,7 @@ const fonts = ref<{ value: string; label: string }[]>([]);
 onMounted(() => get<{ fonts: { value: string; label: string }[] }>("/api/settings/fonts").then((d) => (fonts.value = d.fonts)).catch(() => {}));
 
 const clock = (v: Record<string, unknown>) => !!v.show_clock;
+const tides = (v: Record<string, unknown>) => !!v.show_tides;
 const sections: Section[] = [
   { title: () => t("Affichage de l'heure"), icon: "fa-clock", fields: [
     { key: "show_clock", label: () => t("Afficher l'heure"), type: "toggle" },
@@ -51,11 +53,22 @@ const sections: Section[] = [
       help: () => t("Quand il pleut, neige ou fait de l'orage dehors, quelques gouttes, flocons ou éclairs passent sur la photo."),
       options: () => [{ value: "start", label: t("Au début de chaque photo (8 s)") }, { value: "always", label: t("Pendant toute la photo") }, { value: "off", label: t("Jamais") }] },
   ] },
+  { title: () => t("Affichage des marées (StormGlass Tide API)"), icon: "fa-water",
+    intro: () => t("Les heures de pleine et basse mer s'affichent en bas de l'écran. Il faut une clé API StormGlass (gratuite sur stormglass.io) et les coordonnées du port, par exemple trouvées sur latlong.net."),
+    fields: [
+    { key: "show_tides", label: () => t("Afficher les informations de marée"), type: "toggle" },
+    { key: "tide_latitude", label: () => t("Latitude (ex: 48.3904) :"), type: "text", placeholder: "48.3904" },
+    { key: "tide_longitude", label: () => t("Longitude (ex: -4.4861) :"), type: "text", placeholder: "-4.4861" },
+    { key: "stormglass_api_key", label: () => t("Clé API StormGlass :"), type: "secret" },
+    { key: "tide_offset_x", label: () => t("Décalage horizontal (px)"), type: "number", min: -2000, max: 2000, showIf: tides },
+    { key: "tide_offset_y", label: () => t("Décalage vertical (px)"), type: "number", min: -2000, max: 2000, showIf: tides },
+  ] },
 ];
 </script>
 
 <template>
-  <SettingsPage :sections="sections" classic-tab="tab-heure" :classic-hint="() => t('Marées : interface classique')">
+  <SettingsPage :sections="sections">
     <AgendaCard />
+    <TidesCard />
   </SettingsPage>
 </template>

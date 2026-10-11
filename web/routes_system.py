@@ -569,6 +569,31 @@ def expand_filesystem():
     return Response(generate(), mimetype='text/event-stream', headers={"Cache-Control": "no-cache", "Connection": "keep-alive"})
 
 
+@app.route('/api/filesystem', methods=['GET'])
+@admin_required
+def filesystem_api():
+    """Taille de la partition système et place encore inutilisée sur la carte SD."""
+    from utils import reliability
+    return jsonify({"success": True, **reliability.rootfs_space()})
+
+
+@app.route('/api/filesystem/expand', methods=['POST'])
+@admin_required
+def filesystem_expand_api():
+    """Agrandit la partition système au prochain démarrage (seulement s'il reste de la place inutilisée)."""
+    from utils import reliability
+    if not reliability.rootfs_space().get("expandable"):
+        return jsonify({"success": False, "message": _("La carte SD est déjà utilisée en entier : rien à agrandir.")}), 400
+    script_path = Path(app.root_path) / 'utils' / 'expand_filesystem.sh'
+    try:
+        result = subprocess.run(['/bin/bash', str(script_path)], capture_output=True, text=True, timeout=180)
+    except (OSError, subprocess.SubprocessError) as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+    if result.returncode != 0:
+        return jsonify({"success": False, "message": _("L'agrandissement n'a pas pu être programmé.")}), 500
+    return jsonify({"success": True, "message": _("C'est programmé : la partition sera agrandie au prochain redémarrage du cadre.")})
+
+
 @app.route('/api/scan_wifi', methods=['GET'])
 @admin_required
 def scan_wifi():

@@ -38,13 +38,14 @@ def test_weather_api():
 @login_required
 def test_stormglass_api():
     """Teste la connexion à l'API StormGlass."""
-    data = request.get_json()
-    api_key = data.get("api_key")
-    lat = data.get("lat")
-    lon = data.get("lon")
+    data = request.get_json(silent=True) or {}
+    stored = load_config()
+    api_key = data.get("api_key") or (stored.get("stormglass_api_key") if is_admin() else None)  # clé enregistrée
+    lat = data.get("lat") or stored.get("tide_latitude")
+    lon = data.get("lon") or stored.get("tide_longitude")
 
     if not all([api_key, lat, lon]):
-        return jsonify({"success": False, "message": "La clé API, la latitude et la longitude sont requises."})
+        return jsonify({"success": False, "message": _("La clé API, la latitude et la longitude sont requises.")})
 
     try:
         # Test avec une très courte fenêtre de temps pour minimiser l'utilisation des données
@@ -57,13 +58,13 @@ def test_stormglass_api():
         response = requests.get('https://api.stormglass.io/v2/tide/extremes/point', params=params, headers=headers, timeout=10)
 
         if response.status_code == 200:
-            return jsonify({"success": True, "message": "Connexion à StormGlass réussie !"})
+            return jsonify({"success": True, "message": _("Connexion à StormGlass réussie !")})
         elif response.status_code == 401:
-            return jsonify({"success": False, "message": "Clé API invalide."})
+            return jsonify({"success": False, "message": _("Clé API invalide.")})
         elif response.status_code == 402:
-            return jsonify({"success": False, "message": "Crédits API épuisés ou plan inadapté."})
+            return jsonify({"success": False, "message": _("Crédits API épuisés ou plan inadapté.")})
         elif response.status_code == 429:
-            return jsonify({"success": False, "message": "Trop de requêtes. Veuillez réessayer plus tard."})
+            return jsonify({"success": False, "message": _("Trop de requêtes. Veuillez réessayer plus tard.")})
         else:
             try:
                 error_details = response.json().get('errors', {})
@@ -135,7 +136,7 @@ def force_tide_update():
     tide_cache_path = Path('cache/tides.json')
 
     if not all([api_key, lat, lon]):
-        return jsonify({"success": False, "message": "Configuration StormGlass incomplète."})
+        return jsonify({"success": False, "message": _("Configuration StormGlass incomplète.")})
 
     try:
         start_time_utc = datetime.utcnow()
@@ -153,7 +154,7 @@ def force_tide_update():
         future_extremes = [e for e in extremes_data if datetime.fromisoformat(e['time'].replace('Z', '+00:00')).replace(tzinfo=None) > now_utc]
 
         if not future_extremes:
-            return jsonify({"success": False, "message": "Aucune marée future trouvée par l'API."})
+            return jsonify({"success": False, "message": _("Aucune marée future trouvée par l'API.")})
 
         # --- CORRECTION: Sauvegarder la liste complète des marées futures, pas juste les deux prochaines ---
         data_to_cache = {'data': future_extremes, 'timestamp': datetime.now().isoformat()}
@@ -162,7 +163,7 @@ def force_tide_update():
         with open(tide_cache_path, 'w') as f:
             json.dump(data_to_cache, f, indent=2)
 
-        return jsonify({"success": True, "message": "Données de marée mises à jour avec succès !"})
+        return jsonify({"success": True, "message": _("Données de marée mises à jour avec succès !")})
 
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 402:
@@ -171,7 +172,7 @@ def force_tide_update():
             try:
                 with open(tide_cache_path, 'w') as f: json.dump(cooldown_data, f, indent=2)
             except Exception: pass
-            return jsonify({"success": False, "message": "Quota API StormGlass dépassé."})
+            return jsonify({"success": False, "message": _("Quota API StormGlass dépassé.")})
         return jsonify({"success": False, "message": f"Erreur API ({e.response.status_code})."})
     except Exception as e:
         return jsonify({"success": False, "message": f"Erreur inattendue : {e}"})
@@ -252,7 +253,7 @@ def get_tide_info_api():
     """Retourne les informations de marée depuis le fichier cache."""
     tide_cache_path = Path('cache/tides.json')
     if not tide_cache_path.exists():
-        return jsonify({"success": False, "message": "Cache des marées non trouvé. Le diaporama doit tourner au moins une fois."})
+        return jsonify({"success": False, "message": _("Pas encore de données de marée : le diaporama les récupère, ou utilisez « Forcer la mise à jour »."), "empty": True})
 
     try:
         with open(tide_cache_path, 'r') as f:
@@ -291,9 +292,11 @@ def get_tide_info_api():
                 formatted_tides.append({
                     "type": "Pleine Mer" if tide['type'] == 'high' else "Basse Mer",
                     "time": f"{day_str} à {tide_dt.strftime('%H:%M')}",
-                    "height": f"{tide['height']:.2f}m"
+                    "height": f"{tide['height']:.2f}m",
+                    "high": tide['type'] == 'high', "iso": tide_dt.isoformat(), "meters": round(float(tide['height']), 2),
                 })
 
-        return jsonify({"success": True, "last_update": last_update_str, "tides": formatted_tides, "api_status": api_status})
+        return jsonify({"success": True, "last_update": last_update_str, "updated": last_update_iso, "tides": formatted_tides,
+                        "api_status": api_status, "cooldown": bool(cache_data.get('cooldown'))})
     except (json.JSONDecodeError, KeyError, Exception) as e:
         return jsonify({"success": False, "message": f"Erreur lecture du cache: {str(e)}"})

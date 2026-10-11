@@ -21,7 +21,7 @@ const sections: Section[] = [
     ] },
   { title: () => t("Messages et réactions"), icon: "fa-comments", fields: [
     { key: "guest_messages_enabled", label: () => t("Autoriser les invités à écrire des messages"), type: "toggle",
-      help: () => t("Les messages des invités s'affichent directement (5 par heure et par appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les supprimer dans Contenu > Messages.") },
+      help: () => t("Les messages des invités s'affichent directement (5 par heure et par appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les supprimer dans Photos > Messages.") },
     { key: "voice_messages_enabled", label: () => t("Lire les messages vocaux quand leur carte s'affiche (au plus toutes les 20 minutes)"), type: "toggle" },
     { key: "voice_volume", label: () => t("Volume des messages vocaux :"), type: "range", min: 10, max: 100, step: 5, unit: " %", showIf: (v) => !!v.voice_messages_enabled },
     { key: "guest_reactions_enabled", label: () => t("Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ 😂 😮 👏)"), type: "toggle",

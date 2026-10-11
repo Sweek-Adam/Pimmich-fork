@@ -79,3 +79,23 @@ def sd_protection(mounts="/proc/mounts", journald_conf="/etc/systemd/journald.co
     except OSError:
         log2ram = False
     return {"log2ram": log2ram, "journald_limited": Path(journald_conf).is_file()}
+
+
+def rootfs_space(lsblk_output=None):
+    """Taille de la partition système et place laissée inutilisée sur sa carte (ou son disque)."""
+    import subprocess
+    try:
+        if lsblk_output is None:
+            lsblk_output = subprocess.run(["lsblk", "-b", "-J", "-l", "-o", "NAME,SIZE,TYPE,MOUNTPOINT,PKNAME"],
+                                          capture_output=True, text=True, timeout=10, check=True).stdout
+        devices = json.loads(lsblk_output).get("blockdevices", [])
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return {"known": False, "expandable": False}
+    root = next((d for d in devices if d.get("mountpoint") == "/" and d.get("type") == "part"), None)
+    disk = next((d for d in devices if root and d.get("name") == root.get("pkname")), None)
+    if not root or not disk:
+        return {"known": False, "expandable": False}
+    used = sum(int(d.get("size") or 0) for d in devices if d.get("type") == "part" and d.get("pkname") == disk["name"])
+    unallocated = max(0, int(disk["size"]) - used)
+    return {"known": True, "partition": int(root["size"]), "disk": int(disk["size"]), "unallocated": unallocated,
+            "expandable": unallocated > 256 * 1024 * 1024}

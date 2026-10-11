@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { ApiError, get, post } from "../api";
-import { classicUrl } from "../boot";
 import { currentLang, t } from "../i18n";
 import { notify, run } from "../toast";
 
@@ -103,6 +102,13 @@ function restoreUpload() {
 const https = ref<{ installed: boolean; connected: boolean; enabled: boolean; link: string | null } | null>(null);
 const activation = ref("");
 const sd = ref<{ log2ram: boolean } | null>(null);
+const fs = ref<{ known: boolean; partition?: number; disk?: number; unallocated?: number; expandable: boolean } | null>(null);
+async function loadFs() { try { fs.value = await get("/api/filesystem"); } catch { fs.value = null; } }
+async function expandFs() {
+  if (!window.confirm(t("Cette opération va préparer le système à étendre la partition au prochain redémarrage. Voulez-vous continuer ?"))) return;
+  await run(() => post("/api/filesystem/expand"));
+  loadFs();
+}
 async function loadHttps() { try { https.value = await get("/api/admin_https"); } catch { https.value = null; } }
 async function toggleHttps(enabled: boolean) {
   activation.value = "";
@@ -114,6 +120,24 @@ async function toggleHttps(enabled: boolean) {
   }
   loadHttps();
 }
+
+// --- À propos : licences des composants tiers (fichiers livrés avec Pimmich quand ils existent) ---
+const licences = [
+  { name: "Pimmich", licence: "MIT", url: "https://github.com/Sweek-Adam/Pimmich-fork/blob/main/LICENSE" },
+  { name: "Vue, Vue Router", licence: "MIT", url: "https://github.com/vuejs/core/blob/main/LICENSE" },
+  { name: "Font Awesome", licence: "CC BY 4.0 · SIL OFL 1.1 · MIT", url: "/static/vendor/fontawesome/LICENSE.txt" },
+  { name: "Leaflet", licence: "BSD-2-Clause", url: "/static/vendor/leaflet/LICENSE" },
+  { name: "Chart.js", licence: "MIT", url: "/static/vendor/chartjs/LICENSE.md" },
+  { name: "GLightbox", licence: "MIT", url: "/static/vendor/glightbox/LICENSE.md" },
+  { name: "SortableJS", licence: "MIT", url: "/static/vendor/sortable/LICENSE" },
+  { name: "Tailwind CSS", licence: "MIT", url: "/static/vendor/tailwind/LICENSE" },
+  { name: "Caveat", licence: "SIL OFL 1.1", url: "/static/fonts/LICENSE-caveat.txt" },
+  { name: "Patrick Hand", licence: "SIL OFL 1.1", url: "/static/fonts/LICENSE-patrickhand.txt" },
+  { name: "Permanent Marker", licence: "Apache 2.0", url: "/static/fonts/LICENSE-permanentmarker.txt" },
+  { name: "Special Elite", licence: "Apache 2.0", url: "/static/fonts/LICENSE-specialelite.txt" },
+  { name: "Natural Earth", licence: t("domaine public"), url: "https://www.naturalearthdata.com/about/terms-of-use/" },
+  { name: "YuNet (OpenCV Zoo)", licence: "MIT", url: "https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet" },
+];
 
 // --- Système ---
 async function switchDesktop() {
@@ -129,6 +153,7 @@ onMounted(() => {
   loadStorage().catch(() => {});
   loadFull().catch(() => {});
   loadHttps();
+  loadFs();
   get<{ log2ram: boolean }>("/api/sd_protection").then((d) => (sd.value = d)).catch(() => {});
 });
 onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullTimer); });
@@ -297,9 +322,48 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
       <div class="card-head"><h2><i class="fas fa-sd-card"></i>{{ t("Système de Fichiers de la Carte SD") }}</h2></div>
       <h3>{{ t("Protection contre l'usure") }}</h3>
       <p v-if="sd" class="small" :class="sd.log2ram ? 'ok' : ''">{{ sd.log2ram ? t("Active : les journaux sont écrits en mémoire vive et recopiés sur la carte une fois par jour.") : t("Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur le Raspberry Pi : sudo ~/pimmich/utils/enable_sd_protection.sh puis redémarrez.") }}</p>
-      <p class="small"><a :href="classicUrl('tab-maintenance')">{{ t("Étendre le système de fichiers") }}</a></p>
+      <h3>{{ t("Taille de la partition") }}</h3>
+      <template v-if="fs?.known">
+        <p class="small">{{ t("Partition système :") }} <strong>{{ gb(fs.partition || 0) }}</strong> · {{ t("carte SD :") }} {{ gb(fs.disk || 0) }}</p>
+        <p v-if="!fs.expandable" class="small ok">{{ t("Toute la carte SD est déjà utilisée : rien à agrandir.") }}</p>
+        <template v-else>
+          <p class="small warn">{{ gb(fs.unallocated || 0) }} {{ t("ne sont pas utilisés sur la carte SD. L'opération ne supprime aucune donnée ; l'agrandissement se termine au prochain redémarrage.") }}</p>
+          <button class="btn" type="button" @click="expandFs"><i class="fas fa-expand-arrows-alt"></i>{{ t("Étendre le système de fichiers") }}</button>
+        </template>
+      </template>
+      <p v-else class="small muted">{{ t("Taille de la carte SD inconnue.") }}</p>
     </section>
   </div>
+
+  <section class="card about">
+    <div class="card-head"><h2><i class="fas fa-info-circle"></i>{{ t("À propos") }}</h2></div>
+    <div class="about-grid">
+      <div class="box">
+        <h3>{{ t("Pimmich, le projet d'origine") }}</h3>
+        <p class="small">{{ t("Créé par Gotenash et Shenron, dans le cadre du Gadgetaulab. Merci à eux !") }}</p>
+        <p class="small links">
+          <a href="https://github.com/gotenash/pimmich" target="_blank" rel="noopener"><i class="fab fa-github"></i> gotenash/pimmich</a>
+          <a href="https://www.gadgetaulab.fr" target="_blank" rel="noopener"><i class="fas fa-flask"></i> Gadgetaulab</a>
+          <a href="https://ko-fi.com/pimmich" target="_blank" rel="noopener"><i class="fas fa-mug-hot"></i> Ko-fi</a>
+        </p>
+      </div>
+      <div class="box">
+        <h3>{{ t("Ce cadre") }}</h3>
+        <p class="small">{{ t("Fork personnel de Pimmich, avec de nombreuses fonctionnalités ajoutées, pour un usage purement perso.") }}</p>
+        <p class="small links">
+          <a href="https://github.com/Sweek-Adam/Pimmich-fork" target="_blank" rel="noopener"><i class="fab fa-github"></i> Sweek-Adam/Pimmich-fork</a>
+          <span v-if="update?.current?.sha">{{ t("Version installée :") }} <code>{{ update.current.sha }}</code></span>
+        </p>
+      </div>
+      <div class="box">
+        <h3>{{ t("Licences") }}</h3>
+        <p class="small">{{ t("Pimmich est distribué sous licence MIT. Les composants tiers gardent leur propre licence :") }}</p>
+        <ul class="licences small">
+          <li v-for="item in licences" :key="item.name"><a :href="item.url" target="_blank" rel="noopener">{{ item.name }}</a> <span class="muted">· {{ item.licence }}</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
@@ -336,5 +400,9 @@ summary { cursor: pointer; color: var(--accent); font-weight: 600; }
 .list li { display: flex; gap: .5rem; align-items: center; padding: .4rem 0; border-bottom: 1px solid var(--border); }
 .btn.small { padding: .3rem .8rem; font-size: .85rem; }
 .link { word-break: break-all; }
+.about { margin-top: 1rem; }
+.about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: .8rem; }
+.links { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; }
+.licences { margin: 0; padding-left: 1.1rem; display: grid; gap: .2rem; }
 code { background: var(--surface-2); padding: .1rem .4rem; border-radius: 6px; }
 </style>

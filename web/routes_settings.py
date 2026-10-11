@@ -128,6 +128,12 @@ SETTINGS = {
     "weather_city": ("text", 80, ""),
     "weather_units": ("choice", ["metric", "imperial"], "metric"),
     "weather_update_interval_minutes": ("int", (10, 1440), 30),
+    # Marées
+    "show_tides": ("bool", None, False),
+    "tide_latitude": ("coord", (-90, 90), ""),
+    "tide_longitude": ("coord", (-180, 180), ""),
+    "tide_offset_x": ("int", (-2000, 2000), 0),
+    "tide_offset_y": ("int", (-2000, 2000), 0),
     # Infos des photos
     "show_photo_date": ("bool", None, False),
     "photo_date_format": ("text", 60, "%d %B %Y"),
@@ -183,6 +189,15 @@ def clean(key, value):
         if len(text) > options or any(c in text for c in "\r\n\t\x00"):
             raise ValueError
         return text.strip()
+    if kind == "coord":  # latitude ou longitude en degrés décimaux, ou "" (non renseignée)
+        text = str(value).strip().replace(",", ".")
+        if not text:
+            return ""
+        number = float(text)
+        low, high = options
+        if not low <= number <= high:
+            raise ValueError
+        return text
     if kind == "font":  # uniquement une police présente sur le cadre
         if str(value) not in {path for path, _label in clock_fonts()}:
             raise ValueError
