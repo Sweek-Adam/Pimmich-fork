@@ -328,6 +328,16 @@ def parse_color(hex_color):
         return (255, 255, 255) # Default to white if invalid
 
 # New function to perform a transition between two images
+def fit_to_screen(pil_image, screen_width, screen_height):
+    """Photo préparée pour une autre taille d'écran (ex. avant le changement d'orientation) : centrée sur fond noir."""
+    if pil_image.size == (screen_width, screen_height):
+        return pil_image
+    fitted = ImageOps.contain(pil_image, (screen_width, screen_height))
+    canvas = Image.new("RGB", (screen_width, screen_height), (0, 0, 0))
+    canvas.paste(fitted, ((screen_width - fitted.width) // 2, (screen_height - fitted.height) // 2))
+    return canvas
+
+
 def perform_transition(screen, old_image_surface, new_image_path, duration, screen_width, screen_height, main_font, config, transition_type):
     clock = pygame.time.Clock()
     fps_config = config.get("transition_fps", "auto")
@@ -349,6 +359,7 @@ def perform_transition(screen, old_image_surface, new_image_path, duration, scre
         return None # Retourner None pour signaler l'échec
     if new_pil_image.mode != 'RGB': # type: ignore
         new_pil_image = new_pil_image.convert('RGB')
+    new_pil_image = fit_to_screen(new_pil_image, screen_width, screen_height)
 
     # Scale new image to fit the screen (maintain aspect ratio, center)
     # This is the base image for the transition, not the pan/zoom scaled one
@@ -2371,6 +2382,14 @@ def start_slideshow():
         time.sleep(2)
         logger.debug(f"📸 Attente de 2s pour stabilisation ")
         
+        # Orientation de l'écran (paysage, portrait...) : l'affichage pivote avant la création de la fenêtre
+        try:
+            from utils import screen_rotation
+            if not screen_rotation.apply(screen_rotation.current(load_config())):
+                logger.warning("😒 Impossible de faire pivoter l'écran (wlr-randr/swaymsg).")
+        except Exception as e:
+            logger.warning(f"😒 Orientation de l'écran : {e}")
+
         # ✅ NOUVEAU : Initialiser uniquement les modules d'affichage et de police pour économiser du CPU (éviter d'init le mixer)
         pygame.display.init()
         pygame.font.init()
@@ -2857,6 +2876,7 @@ def start_slideshow():
                             # For the first image or no transition, just load and blit it directly
                             current_pil_image = Image.open(photo_path)
                             if current_pil_image.mode != 'RGB': current_pil_image = current_pil_image.convert('RGB')
+                            current_pil_image = fit_to_screen(current_pil_image, SCREEN_WIDTH, SCREEN_HEIGHT)
                             # For the first image, we need to blit it directly before pan/zoom takes over
                             # This blit is only for the initial display, not part of pan/zoom animation
                             screen.blit(pygame.image.frombytes(current_pil_image.tobytes(), current_pil_image.size, current_pil_image.mode), (0,0)) # type: ignore

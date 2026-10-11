@@ -11,14 +11,52 @@
                     <div class="mt-4">
                         <label for="screen_orientation" class="block text-sm font-medium text-gray-700">{{
                             _("Orientation du cadre") }}</label>
+                        {% set orientation = config.get('screen_orientation', 'landscape') %}
                         <select id="screen_orientation" name="screen_orientation"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                            <option value="landscape" {% if config.get('screen_orientation', 'landscape' )=='landscape'
-                                %}selected{% endif %}>{{ _("Paysage (Horizontal)") }}</option>
-                            <option value="portrait" {% if config.get('screen_orientation')=='portrait' %}selected{%
-                                endif %}>{{ _("Portrait (Vertical)") }}</option>
+                            {% for value, label in [('landscape', _("Paysage (Horizontal)")), ('portrait', _("Portrait (Vertical)")),
+                                                    ('landscape_flipped', _("Paysage retourné")), ('portrait_flipped', _("Portrait retourné")),
+                                                    ('auto', _("Automatique (capteur d'orientation)"))] %}
+                            <option value="{{ value }}" {% if orientation == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
                         </select>
-                        <p class="text-xs text-gray-500 mt-1">{{ _("Si vous changez l'orientation, pensez à relancer une préparation des photos (onglet Actions) pour adapter le contenu.") }}</p>
+                        <p class="text-xs text-gray-500 mt-1">{{ _("L'écran pivote tout seul et les photos sont repréparées en arrière-plan aux nouvelles dimensions (le diaporama continue pendant ce temps).") }}</p>
+                        <div id="orientation-auto" class="mt-2 p-3 rounded-lg bg-gray-50 {% if orientation != 'auto' %}hidden{% endif %}">
+                            <p class="text-sm">{{ _("Branchez un petit accéléromètre I2C (MPU-6050, ADXL345 ou LIS3DH) sur le Raspberry Pi (SDA, SCL, 3,3 V, GND) et activez l'I2C (sudo raspi-config › Interface Options › I2C). Fixez-le au dos du cadre, puis mémorisez ses positions : cadre posé en paysage d'abord, puis en portrait.") }}</p>
+                            <p class="text-sm mt-2"><strong>{{ _("Capteur :") }}</strong> <span id="or-sensor">…</span></p>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <button type="button" class="btn-secondary text-sm or-cal" data-as="landscape">{{ _("Le cadre est en paysage") }}</button>
+                                <button type="button" class="btn-secondary text-sm or-cal" data-as="portrait">{{ _("Le cadre est en portrait") }}</button>
+                                <button type="button" class="btn-secondary text-sm or-cal" data-as="portrait_flipped">{{ _("Portrait, mais l'image était à l'envers") }}</button>
+                            </div>
+                            <p id="or-status" class="text-sm mt-2"></p>
+                        </div>
+                        <script>
+                            window.addEventListener("DOMContentLoaded", () => {
+                                const $ = (id) => document.getElementById(id);
+                                const T = { none: {{ _("non détecté")|tojson }}, seen: {{ _("position actuelle :")|tojson }},
+                                            names: { landscape: {{ _("Paysage (Horizontal)")|tojson }}, portrait: {{ _("Portrait (Vertical)")|tojson }},
+                                                     landscape_flipped: {{ _("Paysage retourné")|tojson }}, portrait_flipped: {{ _("Portrait retourné")|tojson }} },
+                                            flat: {{ _("cadre à plat ou position non mémorisée")|tojson }} };
+                                let timer = null;
+                                async function poll() {
+                                    if ($("orientation-auto").classList.contains("hidden")) return;
+                                    try {
+                                        const d = await (await fetch("/api/orientation")).json();
+                                        $("or-sensor").textContent = d.sensor ? `${d.sensor} — ${T.seen} ${T.names[d.seen] || T.flat}` : T.none;
+                                    } catch (e) { /* hors ligne */ }
+                                }
+                                $("screen_orientation").addEventListener("change", () => {
+                                    $("orientation-auto").classList.toggle("hidden", $("screen_orientation").value !== "auto"); poll();
+                                });
+                                document.querySelectorAll(".or-cal").forEach(b => b.addEventListener("click", async () => {
+                                    const r = await (await fetch("/api/orientation/calibrate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ as: b.dataset.as }) })).json();
+                                    $("or-status").textContent = r.message; $("or-status").className = "text-sm mt-2 " + (r.success ? "text-green-700" : "text-red-600");
+                                    poll();
+                                }));
+                                poll(); timer = setInterval(poll, 3000);
+                            });
+                        </script>
                     </div>
 
                     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">

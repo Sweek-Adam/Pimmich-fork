@@ -33,6 +33,7 @@ def configure():
 
     config = load_config()
     saved_secrets = {key: config.get(key) for key in SECRET_CONFIG_KEYS}
+    previous_size = (config.get('display_width'), config.get('display_height'))
     invitations = load_invitations()
 
     # Récupérer la liste des photos en attente pour le template
@@ -165,19 +166,11 @@ def configure():
             config['display_width'] = detected_width
             config['display_height'] = detected_height
 
-        # --- Gestion de l'orientation ---
-        # Si l'utilisateur force une orientation, on s'assure que width/height correspondent
-        target_orientation = config.get('screen_orientation', 'landscape')
-        if target_orientation == 'portrait':
-            # Si on est en portrait mais que la largeur est plus grande que la hauteur, on inverse
-            if config['display_width'] > config['display_height']:
-                config['display_width'], config['display_height'] = config['display_height'], config['display_width']
-                logger.info(f"Orientation Portrait forcée : dimensions inversées à {config['display_width']}x{config['display_height']}")
-        else: # landscape
-            # Si on est en paysage mais que la hauteur est plus grande que la largeur, on inverse
-            if config['display_height'] > config['display_width']:
-                config['display_width'], config['display_height'] = config['display_height'], config['display_width']
-                logger.info(f"Orientation Paysage forcée : dimensions inversées à {config['display_width']}x{config['display_height']}")
+        # --- Orientation : dimensions de l'écran dans l'orientation en vigueur (paysage, portrait, automatique) ---
+        from utils import screen_rotation
+        if config.get('screen_orientation') not in screen_rotation.MODES:
+            config['screen_orientation'] = 'landscape'
+        config['display_width'], config['display_height'] = screen_rotation.sized(config, config['display_width'], config['display_height'])
 
         logger.info(f"Résolution d'écran configurée : {config['display_width']}x{config['display_height']}. Sauvegarde dans la configuration.")
         # Gérer la clé display_sources (checkboxes)
@@ -254,6 +247,9 @@ def configure():
             # Les comptes non administrateurs ne voient pas les secrets et ne peuvent pas les modifier
             config.update(saved_secrets)
         save_config(config)
+        if (config['display_width'], config['display_height']) != previous_size:
+            from web.workers import reprepare_all_sources
+            threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
         if request.headers.get("X-Autosave"):
             # Enregistrement automatique : le diaporama est relancé une seule fois après une série de modifications
             schedule_slideshow_restart()

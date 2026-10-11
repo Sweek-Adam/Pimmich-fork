@@ -676,3 +676,43 @@ def backup_drive_restore():
     messages_manager.ensure_images(int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
     restart_slideshow_process()
     return jsonify({"success": True, "message": _("Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page.", name=name, count=len(restored))})
+
+
+# --- Orientation de l'écran (capteur et calibrage) ---
+
+@app.route('/api/orientation', methods=['GET'])
+@login_required
+def orientation_api():
+    from utils import screen_rotation
+    config = load_config()
+    live = dict(screen_rotation.LIVE)
+    fresh = live.get("at", 0) > time.time() - 10
+    state = screen_rotation.load_state()
+    vector = live.get("vector") if fresh else None
+    return jsonify({"success": True, "mode": config.get("screen_orientation", "landscape"), "current": screen_rotation.current(config),
+                    "sensor": live.get("sensor") if fresh else None, "angle": screen_rotation.angle(vector) if vector else None,
+                    "seen": screen_rotation.orientation_from(vector, state.get("calibration")) if vector else None,
+                    "calibrated": sorted((state.get("calibration") or {}).keys())})
+
+
+@app.route('/api/orientation/calibrate', methods=['POST'])
+@login_required
+def orientation_calibrate_api():
+    """Mémorise la position actuelle du capteur pour l'orientation indiquée (cadre posé ainsi en ce moment)."""
+    from utils import screen_rotation
+    position = (request.get_json(silent=True) or {}).get("as")
+    if position not in screen_rotation.TRANSFORMS:
+        return jsonify({"success": False, "message": _("Orientation inconnue.")}), 400
+    live = dict(screen_rotation.LIVE)
+    vector = live.get("vector") if live.get("at", 0) > time.time() - 10 else None
+    tilt = screen_rotation.angle(vector) if vector else None
+    if tilt is None:
+        return jsonify({"success": False, "message": _("Aucune mesure du capteur : vérifiez son branchement, et que le cadre est debout.")}), 400
+    state = screen_rotation.load_state()
+    calibration = dict(state.get("calibration") or {})
+    if position == "landscape":
+        calibration = {}  # nouveau montage : on repart de zéro
+    calibration[position] = round(tilt, 1)
+    state.update(calibration=calibration, orientation=position)
+    screen_rotation.save_state(state)
+    return jsonify({"success": True, "message": _("Position mémorisée.")})

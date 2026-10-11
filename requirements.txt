@@ -10,6 +10,7 @@ piexif
 qrcode[pil]
 numpy
 opencv-python-headless  # détection des visages (recadrage intelligent)
+smbus2  # capteur d'orientation I2C (rotation automatique de l'écran)
 thefuzz
 python-Levenshtein
 deep-translator

@@ -438,6 +438,11 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
             # 3. Il est plus récent ou égal à la photo source téléchargée
             try:
                 if prep_path.is_file() and prep_path.stat().st_size > 0:
+                    if ext == ".jpg":
+                        # Préparée pour une autre taille d'écran (changement d'orientation) : à refaire
+                        with Image.open(prep_path) as prepared:
+                            if prepared.size != (actual_output_width, actual_output_height):
+                                continue
                     prepared_basenames.add(basename)
             except Exception:
                 pass  # En cas d'erreur de lecture des stats, on considère non préparé par sécurité

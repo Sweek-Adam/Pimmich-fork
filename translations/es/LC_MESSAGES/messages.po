@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:05+0200\n"
+"POT-Creation-Date: 2026-10-11 08:13+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1200
+#: local_slideshow.py:1211
 msgid "Photos & messages"
 msgstr "Fotos y mensajes"
 
-#: local_slideshow.py:1410
+#: local_slideshow.py:1421
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "Hace %(num)d año"
 
-#: local_slideshow.py:1410
+#: local_slideshow.py:1421
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "Hace %(num)d años"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "enero"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "febrero"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "marzo"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "abril"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "mayo"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "junio"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "julio"
 
-#: local_slideshow.py:1411 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1422 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "agosto"
 
-#: local_slideshow.py:1412 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1423 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "septiembre"
 
-#: local_slideshow.py:1412 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1423 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "octubre"
 
-#: local_slideshow.py:1412 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1423 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "noviembre"
 
-#: local_slideshow.py:1412 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1423 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "diciembre"
 
-#: local_slideshow.py:1608
+#: local_slideshow.py:1619
 msgid "Données de marée non disponibles"
 msgstr "Datos de mareas no disponibles"
 
-#: local_slideshow.py:1691
+#: local_slideshow.py:1702
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Aniversario) Hace %(num)d año"
 
-#: local_slideshow.py:1691
+#: local_slideshow.py:1702
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:2690
+#: local_slideshow.py:2709
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:2691
+#: local_slideshow.py:2710
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:2692
+#: local_slideshow.py:2711
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:2693
+#: local_slideshow.py:2712
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:2694
+#: local_slideshow.py:2713
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:2720
+#: local_slideshow.py:2739
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -627,7 +627,7 @@ msgstr "Todas"
 
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
-#: templates/configure/tab_affichage.html.jinja:212
+#: templates/configure/tab_affichage.html.jinja:250
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_sources.html.jinja:489
 msgid "Retirer"
@@ -691,7 +691,7 @@ msgid "Adresse du flux RSS du podcast"
 msgstr "Dirección del feed RSS del pódcast"
 
 #: templates/configure/_son_radio.html.jinja:20
-#: templates/configure/tab_affichage.html.jinja:211
+#: templates/configure/tab_affichage.html.jinja:249
 #: templates/configure/tab_heure.html.jinja:19
 msgid "Ajouter"
 msgstr "Añadir"
@@ -999,7 +999,7 @@ msgstr "No se encontró ningún ajuste."
 msgid "Enregistrement…"
 msgstr "Guardando…"
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:260
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:256
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -1683,7 +1683,7 @@ msgid "Réorganiser"
 msgstr "Reordenar"
 
 #: templates/configure/tab_accueil.html.jinja:66
-#: templates/configure/tab_affichage.html.jinja:135
+#: templates/configure/tab_affichage.html.jinja:173
 #: utils/themed_compositions_extra.py:558
 msgid "Ce jour-là"
 msgstr "Tal día como hoy"
@@ -1912,53 +1912,110 @@ msgid "Orientation du cadre"
 msgstr "Orientación del marco"
 
 #: templates/configure/tab_affichage.html.jinja:17
+#: templates/configure/tab_affichage.html.jinja:38
 msgid "Paysage (Horizontal)"
 msgstr "Paisaje (horizontal)"
 
-#: templates/configure/tab_affichage.html.jinja:19
+#: templates/configure/tab_affichage.html.jinja:17
+#: templates/configure/tab_affichage.html.jinja:38
 msgid "Portrait (Vertical)"
 msgstr "Retrato (vertical)"
 
-#: templates/configure/tab_affichage.html.jinja:21
+#: templates/configure/tab_affichage.html.jinja:18
+#: templates/configure/tab_affichage.html.jinja:39
+msgid "Paysage retourné"
+msgstr "Horizontal invertido"
+
+#: templates/configure/tab_affichage.html.jinja:18
+#: templates/configure/tab_affichage.html.jinja:39
+msgid "Portrait retourné"
+msgstr "Vertical invertido"
+
+#: templates/configure/tab_affichage.html.jinja:19
+msgid "Automatique (capteur d'orientation)"
+msgstr "Automática (sensor de orientación)"
+
+#: templates/configure/tab_affichage.html.jinja:23
 msgid ""
-"Si vous changez l'orientation, pensez à relancer une préparation des "
-"photos (onglet Actions) pour adapter le contenu."
+"L'écran pivote tout seul et les photos sont repréparées en arrière-plan "
+"aux nouvelles dimensions (le diaporama continue pendant ce temps)."
 msgstr ""
-"Si cambias la orientación, recuerda reiniciar la preparación de la foto "
-"(pestaña Acciones) para adaptar el contenido."
+"La pantalla gira sola y las fotos se vuelven a preparar en segundo plano "
+"con las nuevas dimensiones (el pase de diapositivas sigue mientras "
+"tanto)."
+
+#: templates/configure/tab_affichage.html.jinja:25
+msgid ""
+"Branchez un petit accéléromètre I2C (MPU-6050, ADXL345 ou LIS3DH) sur le "
+"Raspberry Pi (SDA, SCL, 3,3 V, GND) et activez l'I2C (sudo raspi-config ›"
+" Interface Options › I2C). Fixez-le au dos du cadre, puis mémorisez ses "
+"positions : cadre posé en paysage d'abord, puis en portrait."
+msgstr ""
+"Conecta un pequeño acelerómetro I2C (MPU-6050, ADXL345 o LIS3DH) a la "
+"Raspberry Pi (SDA, SCL, 3,3 V, GND) y activa el I2C (sudo raspi-config › "
+"Interface Options › I2C). Fíjalo detrás del marco y memoriza sus "
+"posiciones: primero con el marco en horizontal y luego en vertical."
 
 #: templates/configure/tab_affichage.html.jinja:26
+msgid "Capteur :"
+msgstr "Sensor:"
+
+#: templates/configure/tab_affichage.html.jinja:28
+msgid "Le cadre est en paysage"
+msgstr "El marco está en horizontal"
+
+#: templates/configure/tab_affichage.html.jinja:29
+msgid "Le cadre est en portrait"
+msgstr "El marco está en vertical"
+
+#: templates/configure/tab_affichage.html.jinja:30
+msgid "Portrait, mais l'image était à l'envers"
+msgstr "Vertical, pero la imagen estaba al revés"
+
+#: templates/configure/tab_affichage.html.jinja:37
+msgid "non détecté"
+msgstr "no detectado"
+
+#: templates/configure/tab_affichage.html.jinja:37
+msgid "position actuelle :"
+msgstr "posición actual:"
+
+#: templates/configure/tab_affichage.html.jinja:40
+msgid "cadre à plat ou position non mémorisée"
+msgstr "marco tumbado o posición no memorizada"
+
+#: templates/configure/tab_affichage.html.jinja:64
 msgid "Horaires Semaine (Lun-Ven)"
 msgstr "Horario semanal (lunes a viernes)"
 
-#: templates/configure/tab_affichage.html.jinja:27
-#: templates/configure/tab_affichage.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:65
+#: templates/configure/tab_affichage.html.jinja:72
 msgid "Allumage :"
 msgstr "Encendido:"
 
-#: templates/configure/tab_affichage.html.jinja:29
-#: templates/configure/tab_affichage.html.jinja:36
+#: templates/configure/tab_affichage.html.jinja:67
+#: templates/configure/tab_affichage.html.jinja:74
 msgid "Extinction :"
 msgstr "Extinción:"
 
-#: templates/configure/tab_affichage.html.jinja:33
+#: templates/configure/tab_affichage.html.jinja:71
 msgid "Horaires Weekend (Sam-Dim)"
 msgstr "Horario de fin de semana (sábado-domingo)"
 
-#: templates/configure/tab_affichage.html.jinja:43
+#: templates/configure/tab_affichage.html.jinja:81
 msgid "Résolution de l'écran"
 msgstr "Resolución de pantalla"
 
-#: templates/configure/tab_affichage.html.jinja:47
+#: templates/configure/tab_affichage.html.jinja:85
 msgid "Chargement des résolutions..."
 msgstr "Cargando resoluciones..."
 
-#: templates/configure/tab_affichage.html.jinja:51
+#: templates/configure/tab_affichage.html.jinja:89
 #: templates/configure/tab_son.html.jinja:17
 msgid "Appliquer"
 msgstr "Aplicar"
 
-#: templates/configure/tab_affichage.html.jinja:54
+#: templates/configure/tab_affichage.html.jinja:92
 msgid ""
 "Force une résolution spécifique. Utile si l'écran n'est pas détecté "
 "correctement au démarrage."
@@ -1966,77 +2023,77 @@ msgstr ""
 "Fuerza una resolución específica. Útil si la pantalla no se detecta "
 "correctamente al inicio."
 
-#: templates/configure/tab_affichage.html.jinja:57
+#: templates/configure/tab_affichage.html.jinja:95
 #, python-format
 msgid "Hauteur utile de l'écran (%% affiché) :"
 msgstr "Altura de pantalla útil (%% mostrado):"
 
-#: templates/configure/tab_affichage.html.jinja:63
+#: templates/configure/tab_affichage.html.jinja:101
 msgid "Largeur d'affichage cible (px) :"
 msgstr "Ancho de visualización de destino (px):"
 
-#: templates/configure/tab_affichage.html.jinja:66
+#: templates/configure/tab_affichage.html.jinja:104
 msgid "Hauteur d'affichage cible (px) :"
 msgstr "Altura de visualización de destino (px):"
 
-#: templates/configure/tab_affichage.html.jinja:72
+#: templates/configure/tab_affichage.html.jinja:110
 msgid "Détecter la résolution de l'écran actif"
 msgstr "Detectar la resolución de la pantalla activa"
 
-#: templates/configure/tab_affichage.html.jinja:72
+#: templates/configure/tab_affichage.html.jinja:110
 msgid "Détecter"
 msgstr "Detectar"
 
-#: templates/configure/tab_affichage.html.jinja:76
+#: templates/configure/tab_affichage.html.jinja:114
 msgid "Activer l'effet Pan/Zoom sur les photos"
 msgstr "Habilitar el efecto Pan/Zoom en las fotos"
 
-#: templates/configure/tab_affichage.html.jinja:80
+#: templates/configure/tab_affichage.html.jinja:118
 #, python-format
 msgid "Amplitude du zoom (ex: 1.15 pour 15%% de zoom) :"
 msgstr "Amplitud del zoom (ej.: 1.15 para un 15%% de zoom):"
 
-#: templates/configure/tab_affichage.html.jinja:86
+#: templates/configure/tab_affichage.html.jinja:124
 msgid "Activer l'effet de transition entre les photos"
 msgstr "Habilitar el efecto de transición entre fotos"
 
-#: templates/configure/tab_affichage.html.jinja:90
+#: templates/configure/tab_affichage.html.jinja:128
 msgid "Durée de transition (secondes) :"
 msgstr "Duración de la transición (segundos):"
 
-#: templates/configure/tab_affichage.html.jinja:95
+#: templates/configure/tab_affichage.html.jinja:133
 msgid "Type de transition :"
 msgstr "Tipo de transición:"
 
-#: templates/configure/tab_affichage.html.jinja:98
+#: templates/configure/tab_affichage.html.jinja:136
 msgid "Fondu enchaîné"
 msgstr "Fundido cruzado"
 
-#: templates/configure/tab_affichage.html.jinja:100
+#: templates/configure/tab_affichage.html.jinja:138
 msgid "Glisser depuis la gauche"
 msgstr "Deslizar desde la izquierda"
 
-#: templates/configure/tab_affichage.html.jinja:102
+#: templates/configure/tab_affichage.html.jinja:140
 msgid "Glisser depuis la droite"
 msgstr "Desliza desde la derecha"
 
-#: templates/configure/tab_affichage.html.jinja:104
+#: templates/configure/tab_affichage.html.jinja:142
 msgid "Glisser depuis le bas"
 msgstr "Deslice desde abajo"
 
-#: templates/configure/tab_affichage.html.jinja:106
+#: templates/configure/tab_affichage.html.jinja:144
 msgid "Glisser depuis le haut"
 msgstr "Desliza desde arriba"
 
-#: templates/configure/tab_affichage.html.jinja:110
+#: templates/configure/tab_affichage.html.jinja:148
 msgid "Fréquence d'images (FPS) :"
 msgstr "Fotogramas por segundo (FPS):"
 
-#: templates/configure/tab_affichage.html.jinja:112
+#: templates/configure/tab_affichage.html.jinja:150
 msgid "Automatique (30 FPS sur Pi 3, 60 FPS sinon)"
 msgstr "Automático (30 FPS en Pi 3, 60 FPS en los demás)"
 
-#: templates/configure/tab_affichage.html.jinja:118
+#: templates/configure/tab_affichage.html.jinja:156
 msgid ""
 "Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
 "lecture) :"
@@ -2044,19 +2101,19 @@ msgstr ""
 "Frecuencia de favoritos (número de adiciones adicionales a la lista de "
 "reproducción):"
 
-#: templates/configure/tab_affichage.html.jinja:121
+#: templates/configure/tab_affichage.html.jinja:159
 msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "Ej: 0 = sin impulso, 2 = 3 veces más posibilidades de aparecer."
 
-#: templates/configure/tab_affichage.html.jinja:127
+#: templates/configure/tab_affichage.html.jinja:165
 msgid "Activer le boost pour les photos à leur date anniversaire de prise de vue"
 msgstr "Habilite el impulso para las fotos en el aniversario de su toma."
 
-#: templates/configure/tab_affichage.html.jinja:131
+#: templates/configure/tab_affichage.html.jinja:169
 msgid "Facteur de boost anniversaire :"
 msgstr "Factor de impulso de cumpleaños:"
 
-#: templates/configure/tab_affichage.html.jinja:136
+#: templates/configure/tab_affichage.html.jinja:174
 msgid ""
 "Les photos prises un jour comme aujourd'hui, les années précédentes "
 "(toutes les sources : date de l'appareil photo, ou du nom du fichier pour"
@@ -2065,29 +2122,29 @@ msgstr ""
 "Fotos tomadas un día como hoy en años anteriores (todas las fuentes: "
 "fecha de la cámara o del nombre del archivo para WhatsApp y teléfonos)."
 
-#: templates/configure/tab_affichage.html.jinja:138
+#: templates/configure/tab_affichage.html.jinja:176
 msgid "Ruban « Il y a 5 ans » sur ces photos"
 msgstr "Cinta «Hace 5 años» en estas fotos"
 
-#: templates/configure/tab_affichage.html.jinja:140
+#: templates/configure/tab_affichage.html.jinja:178
 msgid "Composition « Ce jour-là » (une photo par année) toutes les 30 minutes"
 msgstr "Composición «Tal día como hoy» (una foto por año) cada 30 minutos"
 
-#: templates/configure/tab_affichage.html.jinja:144
+#: templates/configure/tab_affichage.html.jinja:182
 msgid "Afficher les vidéos dans le diaporama"
 msgstr "Mostrar vídeos en presentación de diapositivas"
 
-#: templates/configure/tab_affichage.html.jinja:149
+#: templates/configure/tab_affichage.html.jinja:187
 msgid "Activer le son pour les vidéos"
 msgstr "Habilitar sonido para videos"
 
-#: templates/configure/tab_affichage.html.jinja:154
+#: templates/configure/tab_affichage.html.jinja:192
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr ""
 "Habilitar la decodificación de vídeo por hardware (más fluido, pero puede"
 " ser inestable)"
 
-#: templates/configure/tab_affichage.html.jinja:156
+#: templates/configure/tab_affichage.html.jinja:194
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
 "Décochez si vous rencontrez des écrans bleus/noirs après les vidéos."
@@ -2095,31 +2152,31 @@ msgstr ""
 "Marque esta casilla para una reproducción más fluida en Raspberry Pis. "
 "Desmarque si experimenta pantallas azules/negras después de los videos."
 
-#: templates/configure/tab_affichage.html.jinja:160
+#: templates/configure/tab_affichage.html.jinja:198
 msgid "Sortie audio :"
 msgstr "Salida de audio:"
 
-#: templates/configure/tab_affichage.html.jinja:163
+#: templates/configure/tab_affichage.html.jinja:201
 msgid "Automatique"
 msgstr "Automático"
 
-#: templates/configure/tab_affichage.html.jinja:165
+#: templates/configure/tab_affichage.html.jinja:203
 msgid "HDMI"
 msgstr "HDMI"
 
-#: templates/configure/tab_affichage.html.jinja:167
+#: templates/configure/tab_affichage.html.jinja:205
 msgid "Jack 3.5mm (Casque)"
 msgstr "Conector de 3,5 mm (auriculares)"
 
-#: templates/configure/tab_affichage.html.jinja:172
+#: templates/configure/tab_affichage.html.jinja:210
 msgid "Volume :"
 msgstr "Volumen :"
 
-#: templates/configure/tab_affichage.html.jinja:184
+#: templates/configure/tab_affichage.html.jinja:222
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Gestión de energía (enchufe conectado)"
 
-#: templates/configure/tab_affichage.html.jinja:186
+#: templates/configure/tab_affichage.html.jinja:224
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
 " une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
@@ -2129,15 +2186,15 @@ msgstr ""
 "conectado (Wi-Fi) para apagarla. Pimmich enviará una solicitud HTTP "
 "simple a las URL que especifique."
 
-#: templates/configure/tab_affichage.html.jinja:187
+#: templates/configure/tab_affichage.html.jinja:225
 msgid "Exemples d'URLs :"
 msgstr "Exemples d'URLs :"
 
-#: templates/configure/tab_affichage.html.jinja:198
+#: templates/configure/tab_affichage.html.jinja:236
 msgid "Réveil à l'arrivée d'un membre de la famille"
 msgstr "Despertar cuando llega un miembro de la familia"
 
-#: templates/configure/tab_affichage.html.jinja:199
+#: templates/configure/tab_affichage.html.jinja:237
 msgid ""
 "Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi "
 "après une absence, le cadre se réveille (30 minutes, même la nuit), "
@@ -2147,11 +2204,11 @@ msgstr ""
 "tras una ausencia, el marco se despierta (30 minutos, incluso de noche), "
 "muestra «Bienvenido a casa» y puede iniciar su playlist."
 
-#: templates/configure/tab_affichage.html.jinja:201
+#: templates/configure/tab_affichage.html.jinja:239
 msgid "Ajouter un téléphone vu sur le Wi-Fi"
 msgstr "Añadir un teléfono visto en el Wi-Fi"
 
-#: templates/configure/tab_affichage.html.jinja:202
+#: templates/configure/tab_affichage.html.jinja:240
 msgid ""
 "Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
 "Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
@@ -2161,37 +2218,37 @@ msgstr ""
 "desactiva «dirección privada / MAC aleatoria» para esta red; si no, la "
 "dirección cambia."
 
-#: templates/configure/tab_affichage.html.jinja:204
+#: templates/configure/tab_affichage.html.jinja:242
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
 msgid "Actualiser"
 msgstr "Refrescar"
 
-#: templates/configure/tab_affichage.html.jinja:211
+#: templates/configure/tab_affichage.html.jinja:249
 msgid "à la maison"
 msgstr "en casa"
 
-#: templates/configure/tab_affichage.html.jinja:211
+#: templates/configure/tab_affichage.html.jinja:249
 msgid "absent"
 msgstr "fuera"
 
-#: templates/configure/tab_affichage.html.jinja:211
+#: templates/configure/tab_affichage.html.jinja:249
 msgid "Prénom"
 msgstr "Nombre"
 
-#: templates/configure/tab_affichage.html.jinja:212
+#: templates/configure/tab_affichage.html.jinja:250
 msgid "Pas de playlist"
 msgstr "Sin playlist"
 
-#: templates/configure/tab_affichage.html.jinja:212
+#: templates/configure/tab_affichage.html.jinja:250
 msgid "Aucun appareil détecté."
 msgstr "No se ha detectado ningún dispositivo."
 
-#: templates/configure/tab_affichage.html.jinja:262
+#: templates/configure/tab_affichage.html.jinja:300
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Controlar la televisión por HDMI-CEC"
 
-#: templates/configure/tab_affichage.html.jinja:263
+#: templates/configure/tab_affichage.html.jinja:301
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
 "veille avec lui. Activez aussi « HDMI-CEC » (Anynet+, Bravia Sync, "
@@ -2201,43 +2258,43 @@ msgstr ""
 "entra en reposo con él. Activa también «HDMI-CEC» (Anynet+, Bravia Sync, "
 "SimpLink...) en los ajustes del televisor."
 
-#: templates/configure/tab_affichage.html.jinja:268
+#: templates/configure/tab_affichage.html.jinja:306
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr "Activar el control mediante enchufe inteligente"
 
-#: templates/configure/tab_affichage.html.jinja:275
+#: templates/configure/tab_affichage.html.jinja:313
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr "Estado del enchufe: Desconocido"
 
-#: templates/configure/tab_affichage.html.jinja:282
+#: templates/configure/tab_affichage.html.jinja:320
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr "URL para ENCENDER el enchufe:"
 
-#: templates/configure/tab_affichage.html.jinja:291
-#: templates/configure/tab_affichage.html.jinja:304
+#: templates/configure/tab_affichage.html.jinja:329
+#: templates/configure/tab_affichage.html.jinja:342
 #: templates/configure/tab_notifications.html.jinja:14
 msgid "Tester"
 msgstr "Ensayador"
 
-#: templates/configure/tab_affichage.html.jinja:295
+#: templates/configure/tab_affichage.html.jinja:333
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr "URL para APAGAR el enchufe:"
 
-#: templates/configure/tab_affichage.html.jinja:308
+#: templates/configure/tab_affichage.html.jinja:346
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr "Retardo tras el encendido (segundos):"
 
-#: templates/configure/tab_affichage.html.jinja:313
+#: templates/configure/tab_affichage.html.jinja:351
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
@@ -2245,27 +2302,27 @@ msgstr ""
 "Es hora de esperar a que la pantalla se inicialice antes de forzar la "
 "resolución. Aumente si la resolución aún es incorrecta."
 
-#: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_affichage.html.jinja:354
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr "URL de estado (opcional):"
 
-#: templates/configure/tab_affichage.html.jinja:322
+#: templates/configure/tab_affichage.html.jinja:360
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "Para Home Assistant, utilice la URL de la API de Estados:"
 
-#: templates/configure/tab_affichage.html.jinja:328
+#: templates/configure/tab_affichage.html.jinja:366
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Token de acceso de Home Assistant (si es la URL de estado HA):"
 
-#: templates/configure/tab_affichage.html.jinja:336
+#: templates/configure/tab_affichage.html.jinja:374
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "Mostrar/Ocultar el token"
 
-#: templates/configure/tab_affichage.html.jinja:341
+#: templates/configure/tab_affichage.html.jinja:379
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Cree un \"Token de acceso a largo plazo\" en su perfil de Home Assistant."
 
@@ -6054,7 +6111,7 @@ msgstr "Estilo de esta leyenda guardado."
 msgid "Cette légende reprend le style général."
 msgstr "Esta leyenda vuelve al estilo general."
 
-#: web/routes_config.py:67
+#: web/routes_config.py:68
 msgid ""
 "La valeur pour la limite de photos Immich est invalide. La valeur "
 "précédente est conservée."
@@ -6062,12 +6119,12 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el"
 " valor anterior."
 
-#: web/routes_config.py:233
+#: web/routes_config.py:226
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:262
+#: web/routes_config.py:258
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -6802,6 +6859,20 @@ msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr ""
 "Copia de seguridad %(name)s restaurada (%(count)s archivos). Recargue la "
 "página."
+
+#: web/routes_system.py:705
+msgid "Orientation inconnue."
+msgstr "Orientación desconocida."
+
+#: web/routes_system.py:710
+msgid ""
+"Aucune mesure du capteur : vérifiez son branchement, et que le cadre est "
+"debout."
+msgstr "Sin medición del sensor: comprueba la conexión y que el marco esté de pie."
+
+#: web/routes_system.py:718
+msgid "Position mémorisée."
+msgstr "Posición memorizada."
 
 #: web/routes_voice.py:32
 msgid "Le service est arrêté."

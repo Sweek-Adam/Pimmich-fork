@@ -731,3 +731,85 @@ def people_worker():
         except Exception as e:
             logger.warning(f"[Personnes] Mise à jour : {e}")
         time.sleep(6 * 3600)
+
+
+_reprepare_lock = threading.Lock()
+
+
+def _caption_maps():
+    """Légendes des sources qui en fournissent (pour qu'une photo repréparée garde la sienne)."""
+    from utils import import_email, import_icloud, import_whatsapp
+    maps = {"icloud": import_icloud.captions, "whatsapp": import_whatsapp.captions, "email": import_email.captions}
+    try:
+        immich = json.loads((BASE_DIR / "cache" / "immich_description_map.json").read_text(encoding="utf-8"))
+        maps["immich"] = lambda: immich
+    except (OSError, ValueError):
+        pass
+    return maps
+
+
+def reprepare_all_sources():
+    """Nouvelle taille d'écran (orientation changée) : toutes les photos sont repréparées, en arrière-plan."""
+    if not _reprepare_lock.acquire(blocking=False):
+        return
+    try:
+        config = load_config()
+        maps = _caption_maps()
+        photos = BASE_DIR / "static" / "photos"
+        for source in sorted(photos.iterdir()) if photos.is_dir() else []:
+            if not source.is_dir() or source.name.startswith("."):
+                continue
+            loader = maps.get(source.name)
+            for _update in import_progress.tracked(source.name, "prepare", prepare_all_photos_with_progress(
+                    config.get("display_width", 1920), config.get("display_height", 1080), source_type=source.name,
+                    description_map=loader() if loader else None)):
+                pass
+        if is_slideshow_running():
+            restart_slideshow_for_update()
+    except Exception as e:
+        logger.warning(f"[Orientation] Nouvelle préparation des photos : {e}")
+    finally:
+        _reprepare_lock.release()
+
+
+def rotation_worker():
+    """Mode « automatique » : le capteur d'orientation fait pivoter l'écran quand on tourne le cadre."""
+    from utils import screen_rotation
+    sensor, follower, missing_since = None, None, 0
+    while True:
+        config = load_config()
+        if config.get("screen_orientation") != "auto":
+            sensor, follower = None, None
+            time.sleep(10)
+            continue
+        if sensor is None:
+            if time.time() - missing_since < 60:
+                time.sleep(5)
+                continue
+            sensor = screen_rotation.open_sensor()
+            if sensor is None:
+                missing_since = time.time()
+                continue
+            logger.info(f"[Orientation] Capteur {sensor.kind} trouvé.")
+            follower = screen_rotation.Follower(screen_rotation.current(config))
+        try:
+            vector = sensor.read()
+        except OSError:
+            sensor = None
+            continue
+        screen_rotation.LIVE.update(vector=[round(v, 3) for v in vector], sensor=sensor.kind, at=time.time())  # en mémoire : pas d'écriture
+        state = screen_rotation.load_state()
+        changed = follower.update(screen_rotation.orientation_from(vector, state.get("calibration")))
+        if changed:
+            state["orientation"] = changed
+            screen_rotation.save_state(state)
+            config = dict(load_config())
+            config["display_width"], config["display_height"] = screen_rotation.sized(
+                config, config.get("display_width", 1920), config.get("display_height", 1080))
+            save_config(config)
+            logger.info(f"[Orientation] Cadre tourné : {changed}.")
+            screen_rotation.apply(changed)
+            if is_slideshow_running():
+                restart_slideshow_process()
+            threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
+        time.sleep(1)
