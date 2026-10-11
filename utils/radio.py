@@ -108,6 +108,20 @@ def play(url, name, kind="radio", volume=80, mpv="mpv"):
     return proc.pid
 
 
+def play_file(path, name, volume=80, mpv="mpv"):
+    """Joue en boucle une musique du cadre (static/music), par exemple pour la musique selon l'heure."""
+    path = Path(path)
+    if not path.is_file():
+        raise ValueError("Musique introuvable.")
+    stop()
+    proc = subprocess.Popen([mpv, "--no-video", "--no-terminal", "--really-quiet", f"--volume={int(volume)}", "--loop-file=inf",
+                             f"--input-ipc-server={SOCKET}", str(path)],
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    STATE_FILE.write_text(json.dumps({"pid": proc.pid, "url": str(path), "name": name[:80], "kind": "file", "started": time.time()}))
+    now_playing.update("radio", state="playing", title=name[:80], artist="", album="", cover=None, changed=time.time())
+    return proc.pid
+
+
 def set_paused(paused):
     return _ipc("set_property", "pause", bool(paused)) is not None or playing() is not None
 

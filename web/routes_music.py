@@ -303,6 +303,25 @@ def music_sleep_api():
     return jsonify({"success": True, "remaining": sleep_timer.remaining()})
 
 
+@app.route('/api/music/schedule', methods=['GET', 'POST'])
+@login_required
+def music_schedule_api():
+    """Musique selon l'heure : {enabled, slots: [{start, end, kind: radio|spotify|file, value, label}]}."""
+    from utils import music_schedule, radio
+    config = load_config()
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or {}
+        config = dict(config)
+        config["music_schedule"] = {"enabled": bool(data.get("enabled")), "slots": music_schedule.clean_slots(data.get("slots"))}
+        save_config(config)
+        return jsonify({"success": True, "message": _("Musique selon l'heure enregistrée."), **config["music_schedule"]})
+    schedule = config.get("music_schedule") or {}
+    return jsonify({"success": True, "enabled": bool(schedule.get("enabled")), "slots": music_schedule.clean_slots(schedule.get("slots")),
+                    "stations": radio.STATIONS + _radio_favorites(config),
+                    "files": sorted(p.name for p in music_schedule.MUSIC_DIR.glob("*") if p.suffix.lower() in (".mp3", ".wav", ".ogg")),
+                    "spotify": spotify.connected()})
+
+
 @app.route('/api/music/volume', methods=['POST'])
 @login_required
 def music_volume_api():

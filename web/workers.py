@@ -878,3 +878,38 @@ def hdmi_audio_worker():
         except Exception as e:
             logger.warning(f"[Son] Réparation HDMI : {e}")
         time.sleep(300)
+
+
+def music_schedule_worker():
+    """Musique selon l'heure : la plage en cours lance sa musique (sans couper ce qui a été lancé à la main)."""
+    from utils import music_schedule, now_playing, radio, spotify
+    conductor = music_schedule.Conductor()
+    time.sleep(90)
+    while True:
+        config = load_config()
+        try:
+            playing = now_playing.current(())
+            playing = {"source": playing.get("source"), "title": playing.get("title")} if playing else None
+            decision = conductor.tick(config, playing) if is_active_hours(config) else None
+            if decision and decision[0] == "start":
+                slot = decision[1]
+                label = slot.get("label") or slot["value"]
+                if slot["kind"] == "radio":
+                    radio.play(slot["value"], label)
+                    conductor.mark_started(slot, "radio", label[:80])
+                elif slot["kind"] == "file":
+                    radio.play_file(music_schedule.MUSIC_DIR / slot["value"], label)
+                    conductor.mark_started(slot, "radio", label[:80])
+                elif slot["kind"] == "spotify" and spotify.connected():
+                    spotify.play_on_frame(slot["value"])
+                    conductor.mark_started(slot, "spotify", None)
+                logger.info(f"[Musique] Plage {slot['start']}-{slot['end']} : {label}")
+            elif decision and decision[0] == "stop":
+                if decision[1] == "radio":
+                    radio.stop()
+                elif decision[1] == "spotify":
+                    spotify.control("pause")
+                logger.info("[Musique] Fin de la plage horaire.")
+        except Exception as e:
+            logger.warning(f"[Musique] Selon l'heure : {e}")
+        time.sleep(60)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:01+0200\n"
+"POT-Creation-Date: 2026-10-11 10:20+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -352,6 +352,7 @@ msgstr "Ein Gast"
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
+#: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:489
 #: templates/guestbook.html.jinja:27
 msgid "Retirer"
@@ -535,6 +536,7 @@ msgstr ""
 #: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_son.html.jinja:33
 #: templates/configure/tab_sources.html.jinja:537
 #: templates/upload.html.jinja:144
 msgid "Enregistrer"
@@ -3662,25 +3664,25 @@ msgstr "Position:"
 
 #: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
-#: templates/configure/tab_son.html.jinja:42
+#: templates/configure/tab_son.html.jinja:115
 msgid "En bas à droite"
 msgstr "Unten rechts"
 
 #: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
-#: templates/configure/tab_son.html.jinja:41
+#: templates/configure/tab_son.html.jinja:114
 msgid "En bas à gauche"
 msgstr "Unten links"
 
 #: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
-#: templates/configure/tab_son.html.jinja:44
+#: templates/configure/tab_son.html.jinja:117
 msgid "En haut à droite"
 msgstr "Oben rechts"
 
 #: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
-#: templates/configure/tab_son.html.jinja:43
+#: templates/configure/tab_son.html.jinja:116
 msgid "En haut à gauche"
 msgstr "Oben links"
 
@@ -3915,7 +3917,7 @@ msgid "Largeur maximale"
 msgstr "Maximale Breite"
 
 #: templates/configure/tab_legendes.html.jinja:109
-#: templates/configure/tab_son.html.jinja:39
+#: templates/configure/tab_son.html.jinja:112
 msgid "Position"
 msgstr "Position"
 
@@ -5060,26 +5062,60 @@ msgid "Y aller"
 msgstr "Hin"
 
 #: templates/configure/tab_son.html.jinja:27
+msgid "Musique selon l'heure"
+msgstr "Musik nach Tageszeit"
+
+#: templates/configure/tab_son.html.jinja:28
+msgid ""
+"Une ambiance par moment de la journée : calme le matin, festive le soir… "
+"Au début de chaque plage, le cadre lance sa musique ; il ne coupe jamais "
+"une musique lancée à la main."
+msgstr ""
+"Eine Stimmung für jede Tageszeit: ruhig am Morgen, festlich am Abend… Zu "
+"Beginn jedes Zeitfensters startet der Rahmen seine Musik; von Hand "
+"gestartete Musik unterbricht er nie."
+
+#: templates/configure/tab_son.html.jinja:29
+msgid "Activer la musique selon l'heure"
+msgstr "Musik nach Tageszeit aktivieren"
+
+#: templates/configure/tab_son.html.jinja:31
+msgid "Ajouter une plage"
+msgstr "Zeitfenster hinzufügen"
+
+#: templates/configure/tab_son.html.jinja:45
+msgid "Radio"
+msgstr "Radio"
+
+#: templates/configure/tab_son.html.jinja:45
+msgid "Musique du cadre"
+msgstr "Musik des Rahmens"
+
+#: templates/configure/tab_son.html.jinja:46
+msgid "Connectez Spotify (plus bas) pour choisir une playlist."
+msgstr "Verbinde Spotify (weiter unten), um eine Playlist zu wählen."
+
+#: templates/configure/tab_son.html.jinja:100
 msgid "Musique en cours"
 msgstr "Aktuelle Musik"
 
-#: templates/configure/tab_son.html.jinja:31
+#: templates/configure/tab_son.html.jinja:104
 msgid "Afficher le morceau sur le cadre"
 msgstr "Titel auf dem Rahmen anzeigen"
 
-#: templates/configure/tab_son.html.jinja:33
+#: templates/configure/tab_son.html.jinja:106
 msgid "Quelques secondes à chaque nouveau morceau"
 msgstr "Einige Sekunden bei jedem neuen Titel"
 
-#: templates/configure/tab_son.html.jinja:34
+#: templates/configure/tab_son.html.jinja:107
 msgid "En permanence pendant la lecture"
 msgstr "Dauerhaft während der Wiedergabe"
 
-#: templates/configure/tab_son.html.jinja:35
+#: templates/configure/tab_son.html.jinja:108
 msgid "Ne pas afficher"
 msgstr "Nicht anzeigen"
 
-#: templates/configure/tab_son.html.jinja:48
+#: templates/configure/tab_son.html.jinja:121
 msgid ""
 "Un petit encart discret (pochette, titre, artiste) pour la musique du "
 "diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la "
@@ -5089,11 +5125,11 @@ msgstr ""
 "Musik, Spotify und AirPlay. Während Spotify oder AirPlay spielt, pausiert"
 " die Diashow-Musik."
 
-#: templates/configure/tab_son.html.jinja:56
+#: templates/configure/tab_son.html.jinja:129
 msgid "Le cadre comme enceinte"
 msgstr "Der Rahmen als Lautsprecher"
 
-#: templates/configure/tab_son.html.jinja:60
+#: templates/configure/tab_son.html.jinja:133
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -5101,7 +5137,7 @@ msgstr ""
 "Wähle in der Spotify-App „Cadre photo“ als Gerät: Die Musik kommt aus dem"
 " Bildschirm des Rahmens. Spotify-Premium-Konto erforderlich."
 
-#: templates/configure/tab_son.html.jinja:64
+#: templates/configure/tab_son.html.jinja:137
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -5109,7 +5145,7 @@ msgstr ""
 "Sende von einem iPhone, iPad oder Mac den Ton jeder beliebigen App "
 "(Deezer, Apple Music, YouTube...) an „Cadre photo“."
 
-#: templates/configure/tab_son.html.jinja:69
+#: templates/configure/tab_son.html.jinja:142
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -5120,35 +5156,35 @@ msgstr ""
 "einmal, danach verbindet es sich von selbst. Der Rahmen akzeptiert ein "
 "neues Gerät nur 3 Minuten lang nach einem Tippen auf „Telefon koppeln“."
 
-#: templates/configure/tab_son.html.jinja:71
+#: templates/configure/tab_son.html.jinja:144
 msgid "Associer un téléphone"
 msgstr "Telefon koppeln"
 
-#: templates/configure/tab_son.html.jinja:77
+#: templates/configure/tab_son.html.jinja:150
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "Um diese Funktionen zu aktivieren, führe einmal auf dem Raspberry Pi aus:"
 
-#: templates/configure/tab_son.html.jinja:86
+#: templates/configure/tab_son.html.jinja:159
 msgid "Actif"
 msgstr "Aktiv"
 
-#: templates/configure/tab_son.html.jinja:86
+#: templates/configure/tab_son.html.jinja:159
 msgid "Non installé"
 msgstr "Nicht installiert"
 
-#: templates/configure/tab_son.html.jinja:130
+#: templates/configure/tab_son.html.jinja:203
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Sichtbar: Wählen Sie „Cadre photo“ auf dem Telefon"
 
-#: templates/configure/tab_son.html.jinja:130
+#: templates/configure/tab_son.html.jinja:203
 msgid "connecté"
 msgstr "verbunden"
 
-#: templates/configure/tab_son.html.jinja:131
+#: templates/configure/tab_son.html.jinja:204
 msgid "Oublier"
 msgstr "Entfernen"
 
-#: templates/configure/tab_son.html.jinja:131
+#: templates/configure/tab_son.html.jinja:204
 msgid "Aucun téléphone associé."
 msgstr "Kein Telefon gekoppelt."
 
@@ -7169,7 +7205,7 @@ msgstr "Layout wird vorbereitet... es erscheint in wenigen Sekunden."
 msgid "Musique introuvable."
 msgstr "Musik nicht gefunden."
 
-#: web/routes_home.py:202 web/routes_music.py:312
+#: web/routes_home.py:202 web/routes_music.py:331
 msgid "Volume invalide."
 msgstr "Ungültige Lautstärke."
 
@@ -7533,43 +7569,47 @@ msgstr "Timer abgebrochen."
 msgid "La musique s'arrêtera dans %(minutes)s min."
 msgstr "Die Musik stoppt in %(minutes)s Min."
 
-#: web/routes_music.py:314
+#: web/routes_music.py:317
+msgid "Musique selon l'heure enregistrée."
+msgstr "Musik nach Tageszeit gespeichert."
+
+#: web/routes_music.py:333
 msgid "Le son du cadre ne répond pas."
 msgstr "Der Ton des Rahmens antwortet nicht."
 
-#: web/routes_music.py:340
+#: web/routes_music.py:359
 msgid "L'annuaire des radios ne répond pas."
 msgstr "Das Radioverzeichnis antwortet nicht."
 
-#: web/routes_music.py:351 web/routes_music.py:373
+#: web/routes_music.py:370 web/routes_music.py:392
 msgid "Adresse de radio invalide."
 msgstr "Ungültige Radioadresse."
 
-#: web/routes_music.py:353
+#: web/routes_music.py:372
 msgid "Lecteur audio (mpv) introuvable sur le cadre."
 msgstr "Audioplayer (mpv) auf dem Rahmen nicht gefunden."
 
-#: web/routes_music.py:354
+#: web/routes_music.py:373
 msgid "Radio lancée sur le cadre."
 msgstr "Radio läuft auf dem Rahmen."
 
-#: web/routes_music.py:362
+#: web/routes_music.py:381
 msgid "Radio arrêtée."
 msgstr "Radio gestoppt."
 
-#: web/routes_music.py:396
+#: web/routes_music.py:415
 msgid "Flux de podcast introuvable ou invalide."
 msgstr "Podcast-Feed nicht gefunden oder ungültig."
 
-#: web/routes_music.py:410
+#: web/routes_music.py:429
 msgid "Podcast inconnu."
 msgstr "Unbekannter Podcast."
 
-#: web/routes_music.py:415
+#: web/routes_music.py:434
 msgid "Épisode introuvable."
 msgstr "Folge nicht gefunden."
 
-#: web/routes_music.py:416
+#: web/routes_music.py:435
 #, python-format
 msgid "Dernier épisode lancé : %(title)s"
 msgstr "Neueste Folge läuft: %(title)s"

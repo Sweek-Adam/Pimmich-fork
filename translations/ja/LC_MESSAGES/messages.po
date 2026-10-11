@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:01+0200\n"
+"POT-Creation-Date: 2026-10-11 10:20+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -350,6 +350,7 @@ msgstr "ゲスト"
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
+#: templates/configure/tab_son.html.jinja:46
 #: templates/configure/tab_sources.html.jinja:489
 #: templates/guestbook.html.jinja:27
 msgid "Retirer"
@@ -531,6 +532,7 @@ msgstr "メッセージが表示されるとフレームが再生します（最
 #: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_son.html.jinja:33
 #: templates/configure/tab_sources.html.jinja:537
 #: templates/upload.html.jinja:144
 msgid "Enregistrer"
@@ -3538,25 +3540,25 @@ msgstr "位置："
 
 #: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
-#: templates/configure/tab_son.html.jinja:42
+#: templates/configure/tab_son.html.jinja:115
 msgid "En bas à droite"
 msgstr "右下"
 
 #: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
-#: templates/configure/tab_son.html.jinja:41
+#: templates/configure/tab_son.html.jinja:114
 msgid "En bas à gauche"
 msgstr "左下"
 
 #: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
-#: templates/configure/tab_son.html.jinja:44
+#: templates/configure/tab_son.html.jinja:117
 msgid "En haut à droite"
 msgstr "右上"
 
 #: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
-#: templates/configure/tab_son.html.jinja:43
+#: templates/configure/tab_son.html.jinja:116
 msgid "En haut à gauche"
 msgstr "左上"
 
@@ -3772,7 +3774,7 @@ msgid "Largeur maximale"
 msgstr "最大幅"
 
 #: templates/configure/tab_legendes.html.jinja:109
-#: templates/configure/tab_son.html.jinja:39
+#: templates/configure/tab_son.html.jinja:112
 msgid "Position"
 msgstr "位置"
 
@@ -4858,26 +4860,57 @@ msgid "Y aller"
 msgstr "移動"
 
 #: templates/configure/tab_son.html.jinja:27
+msgid "Musique selon l'heure"
+msgstr "時間帯ごとの音楽"
+
+#: templates/configure/tab_son.html.jinja:28
+msgid ""
+"Une ambiance par moment de la journée : calme le matin, festive le soir… "
+"Au début de chaque plage, le cadre lance sa musique ; il ne coupe jamais "
+"une musique lancée à la main."
+msgstr "時間帯ごとの雰囲気：朝は穏やかに、夜はにぎやかに… 各時間帯の始まりにフレームが音楽を流します。手動で再生した音楽は止めません。"
+
+#: templates/configure/tab_son.html.jinja:29
+msgid "Activer la musique selon l'heure"
+msgstr "時間帯ごとの音楽を有効にする"
+
+#: templates/configure/tab_son.html.jinja:31
+msgid "Ajouter une plage"
+msgstr "時間帯を追加"
+
+#: templates/configure/tab_son.html.jinja:45
+msgid "Radio"
+msgstr "ラジオ"
+
+#: templates/configure/tab_son.html.jinja:45
+msgid "Musique du cadre"
+msgstr "フレームの音楽"
+
+#: templates/configure/tab_son.html.jinja:46
+msgid "Connectez Spotify (plus bas) pour choisir une playlist."
+msgstr "プレイリストを選ぶには、下でSpotifyを接続してください。"
+
+#: templates/configure/tab_son.html.jinja:100
 msgid "Musique en cours"
 msgstr "再生中の音楽"
 
-#: templates/configure/tab_son.html.jinja:31
+#: templates/configure/tab_son.html.jinja:104
 msgid "Afficher le morceau sur le cadre"
 msgstr "フォトフレームに曲を表示"
 
-#: templates/configure/tab_son.html.jinja:33
+#: templates/configure/tab_son.html.jinja:106
 msgid "Quelques secondes à chaque nouveau morceau"
 msgstr "新しい曲ごとに数秒間"
 
-#: templates/configure/tab_son.html.jinja:34
+#: templates/configure/tab_son.html.jinja:107
 msgid "En permanence pendant la lecture"
 msgstr "再生中は常に表示"
 
-#: templates/configure/tab_son.html.jinja:35
+#: templates/configure/tab_son.html.jinja:108
 msgid "Ne pas afficher"
 msgstr "表示しない"
 
-#: templates/configure/tab_son.html.jinja:48
+#: templates/configure/tab_son.html.jinja:121
 msgid ""
 "Un petit encart discret (pochette, titre, artiste) pour la musique du "
 "diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la "
@@ -4886,11 +4919,11 @@ msgstr ""
 "スライドショーの音楽、Spotify、AirPlay 用の小さく控えめな表示（ジャケット、曲名、アーティスト）。Spotify または "
 "AirPlay の再生中は、スライドショーの音楽が一時停止します。"
 
-#: templates/configure/tab_son.html.jinja:56
+#: templates/configure/tab_son.html.jinja:129
 msgid "Le cadre comme enceinte"
 msgstr "フォトフレームをスピーカーとして使う"
 
-#: templates/configure/tab_son.html.jinja:60
+#: templates/configure/tab_son.html.jinja:133
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -4898,7 +4931,7 @@ msgstr ""
 "Spotify アプリでデバイスとして「Cadre photo」を選ぶと、フォトフレームの画面から音楽が流れます。Spotify Premium "
 "アカウントが必要です。"
 
-#: templates/configure/tab_son.html.jinja:64
+#: templates/configure/tab_son.html.jinja:137
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -4906,7 +4939,7 @@ msgstr ""
 "iPhone、iPad、Mac から、任意のアプリ（Deezer、Apple Music、YouTube など）の音声を「Cadre "
 "photo」に送信できます。"
 
-#: templates/configure/tab_son.html.jinja:69
+#: templates/configure/tab_son.html.jinja:142
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -4917,35 +4950,35 @@ msgstr ""
 "など）：一度ペアリングすれば、次からは自動で再接続されます。新しい機器を受け付けるのは「スマートフォンをペアリング」を押してから 3 "
 "分間だけです。"
 
-#: templates/configure/tab_son.html.jinja:71
+#: templates/configure/tab_son.html.jinja:144
 msgid "Associer un téléphone"
 msgstr "スマートフォンをペアリング"
 
-#: templates/configure/tab_son.html.jinja:77
+#: templates/configure/tab_son.html.jinja:150
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "これらの機能を有効にするには、Raspberry Pi で一度だけ次を実行してください："
 
-#: templates/configure/tab_son.html.jinja:86
+#: templates/configure/tab_son.html.jinja:159
 msgid "Actif"
 msgstr "有効"
 
-#: templates/configure/tab_son.html.jinja:86
+#: templates/configure/tab_son.html.jinja:159
 msgid "Non installé"
 msgstr "未インストール"
 
-#: templates/configure/tab_son.html.jinja:130
+#: templates/configure/tab_son.html.jinja:203
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "検出可能：スマートフォンで「Cadre photo」を選んでください"
 
-#: templates/configure/tab_son.html.jinja:130
+#: templates/configure/tab_son.html.jinja:203
 msgid "connecté"
 msgstr "接続中"
 
-#: templates/configure/tab_son.html.jinja:131
+#: templates/configure/tab_son.html.jinja:204
 msgid "Oublier"
 msgstr "削除"
 
-#: templates/configure/tab_son.html.jinja:131
+#: templates/configure/tab_son.html.jinja:204
 msgid "Aucun téléphone associé."
 msgstr "ペアリング済みのスマートフォンはありません。"
 
@@ -6876,7 +6909,7 @@ msgstr "レイアウトを準備中です… 数秒で表示されます。"
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
-#: web/routes_home.py:202 web/routes_music.py:312
+#: web/routes_home.py:202 web/routes_music.py:331
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
@@ -7222,43 +7255,47 @@ msgstr "タイマーを取り消しました。"
 msgid "La musique s'arrêtera dans %(minutes)s min."
 msgstr "%(minutes)s分後に音楽を止めます。"
 
-#: web/routes_music.py:314
+#: web/routes_music.py:317
+msgid "Musique selon l'heure enregistrée."
+msgstr "時間帯ごとの音楽を保存しました。"
+
+#: web/routes_music.py:333
 msgid "Le son du cadre ne répond pas."
 msgstr "フォトフレームの音声が応答しません。"
 
-#: web/routes_music.py:340
+#: web/routes_music.py:359
 msgid "L'annuaire des radios ne répond pas."
 msgstr "ラジオのディレクトリが応答しません。"
 
-#: web/routes_music.py:351 web/routes_music.py:373
+#: web/routes_music.py:370 web/routes_music.py:392
 msgid "Adresse de radio invalide."
 msgstr "ラジオのアドレスが無効です。"
 
-#: web/routes_music.py:353
+#: web/routes_music.py:372
 msgid "Lecteur audio (mpv) introuvable sur le cadre."
 msgstr "フォトフレームに音声プレーヤー（mpv）が見つかりません。"
 
-#: web/routes_music.py:354
+#: web/routes_music.py:373
 msgid "Radio lancée sur le cadre."
 msgstr "フォトフレームでラジオを再生しました。"
 
-#: web/routes_music.py:362
+#: web/routes_music.py:381
 msgid "Radio arrêtée."
 msgstr "ラジオを停止しました。"
 
-#: web/routes_music.py:396
+#: web/routes_music.py:415
 msgid "Flux de podcast introuvable ou invalide."
 msgstr "ポッドキャストのフィードが見つからないか無効です。"
 
-#: web/routes_music.py:410
+#: web/routes_music.py:429
 msgid "Podcast inconnu."
 msgstr "不明なポッドキャストです。"
 
-#: web/routes_music.py:415
+#: web/routes_music.py:434
 msgid "Épisode introuvable."
 msgstr "エピソードが見つかりません。"
 
-#: web/routes_music.py:416
+#: web/routes_music.py:435
 #, python-format
 msgid "Dernier épisode lancé : %(title)s"
 msgstr "最新エピソードを再生中：%(title)s"

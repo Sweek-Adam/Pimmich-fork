@@ -23,6 +23,79 @@
                         <button type="button" class="link" onclick="goToTab('tab-affichage')">{{ _("Y aller") }}</button></p>
                 </section>
 
+                <section class="card" id="music-schedule">
+                    <h2 class="card-title"><i class="far fa-clock text-indigo-500 mr-2"></i>{{ _("Musique selon l'heure") }}</h2>
+                    <p class="text-sm text-gray-600 mb-3">{{ _("Une ambiance par moment de la journée : calme le matin, festive le soir… Au début de chaque plage, le cadre lance sa musique ; il ne coupe jamais une musique lancée à la main.") }}</p>
+                    <label class="flex items-center gap-2 font-semibold"><input type="checkbox" id="ms-enabled"> {{ _("Activer la musique selon l'heure") }}</label>
+                    <div id="ms-slots" class="ms-slots mt-3"></div>
+                    <button type="button" id="ms-add" class="link mt-2"><i class="fas fa-plus mr-1"></i>{{ _("Ajouter une plage") }}</button>
+                    <div class="flex flex-wrap items-center gap-3 mt-3">
+                        <button type="button" id="ms-save" class="btn-primary"><i class="fas fa-check mr-1"></i>{{ _("Enregistrer") }}</button>
+                        <span id="ms-status" class="text-sm"></span>
+                    </div>
+                </section>
+                <style>
+                    .ms-slots { display: grid; gap: .5rem; }
+                    .ms-row { display: grid; grid-template-columns: 7rem 7rem 9rem 1fr auto; gap: .5rem; align-items: center; }
+                    @media (max-width: 720px) { .ms-row { grid-template-columns: 1fr 1fr; } }
+                </style>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const KINDS = { radio: {{ _("Radio")|tojson }}, file: {{ _("Musique du cadre")|tojson }}, spotify: "Spotify" };
+                        const T = { remove: {{ _("Retirer")|tojson }}, spotifyHint: {{ _("Connectez Spotify (plus bas) pour choisir une playlist.")|tojson }} };
+                        let meta = null, playlists = [];
+                        function options(kind) {
+                            if (kind === "radio") return meta.stations.map(s => [s.url, s.name]);
+                            if (kind === "file") return meta.files.map(f => [f, f]);
+                            return playlists.map(p => [p.uri, p.name]);
+                        }
+                        function row(slot) {
+                            const div = document.createElement("div"); div.className = "ms-row";
+                            const start = document.createElement("input"); start.type = "time"; start.value = slot.start || "07:00";
+                            const end = document.createElement("input"); end.type = "time"; end.value = slot.end || "10:00";
+                            const kind = document.createElement("select");
+                            Object.entries(KINDS).forEach(([k, v]) => kind.add(new Option(v, k)));
+                            kind.value = slot.kind || "radio";
+                            const value = document.createElement("select");
+                            const fill = () => {
+                                value.innerHTML = "";
+                                const opts = options(kind.value);
+                                if (!opts.length) value.add(new Option(kind.value === "spotify" ? T.spotifyHint : "—", ""));
+                                opts.forEach(([v, label]) => value.add(new Option(label, v)));
+                                if (slot.value && kind.value === slot.kind) value.value = slot.value;
+                            };
+                            kind.addEventListener("change", fill); fill();
+                            const remove = document.createElement("button"); remove.type = "button"; remove.className = "link"; remove.textContent = T.remove;
+                            remove.addEventListener("click", () => div.remove());
+                            div.append(start, end, kind, value, remove);
+                            $("ms-slots").appendChild(div);
+                        }
+                        async function load() {
+                            meta = await (await fetch("/api/music/schedule")).json();
+                            if (meta.spotify) {
+                                try { playlists = ((await (await fetch("/api/spotify/playlists")).json()).playlists || []); } catch (e) { playlists = []; }
+                            }
+                            $("ms-enabled").checked = meta.enabled;
+                            $("ms-slots").innerHTML = "";
+                            (meta.slots.length ? meta.slots : [{ start: "07:00", end: "10:00", kind: "radio" }, { start: "18:00", end: "21:00", kind: "radio" }]).forEach(row);
+                        }
+                        $("ms-add").addEventListener("click", () => row({}));
+                        $("ms-save").addEventListener("click", async () => {
+                            const slots = [...document.querySelectorAll("#ms-slots .ms-row")].map(r => {
+                                const [start, end] = r.querySelectorAll("input");
+                                const [kind, value] = r.querySelectorAll("select");
+                                return { start: start.value, end: end.value, kind: kind.value, value: value.value, label: value.selectedOptions[0] ? value.selectedOptions[0].textContent : "" };
+                            }).filter(s => s.value);
+                            const r = await (await fetch("/api/music/schedule", { method: "POST", headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ enabled: $("ms-enabled").checked, slots }) })).json();
+                            $("ms-status").textContent = r.message; $("ms-status").className = "text-sm " + (r.success ? "text-green-700" : "text-red-600");
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-son'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        if ($("music-schedule").offsetParent !== null) load();
+                    });
+                </script>
+
                 <section class="card">
                     <h2 class="card-title"><i class="fas fa-compact-disc text-indigo-500 mr-2"></i>{{ _("Musique en cours") }}</h2>
                     {% set remote_show_idle = true %}{% include 'configure/_music_remote.html.jinja' %}
