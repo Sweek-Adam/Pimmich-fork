@@ -117,6 +117,8 @@ Pimmich est riche en fonctionnalités pour offrir une expérience complète et p
 
 ## 🚀 Installation
 
+> 📘 **Guide complet pas à pas** (carte SD, SSH, ce que fait `setup.sh`, options, mises à jour, dépannage) : [INSTALL.md](INSTALL.md).
+
 ### Installation depuis le dépôt Git
 
 #### ✅ Pré-requis
@@ -155,7 +157,7 @@ Pimmich est riche en fonctionnalités pour offrir une expérience complète et p
 
 - Au redémarrage, le cadre affichera un QR Code et l'adresse IP du Raspberry Pi.
 - Scannez le QR Code ou ouvrez un navigateur sur un autre appareil (PC, smartphone) sur le même réseau et entrez l'adresse IP (ex: `http://192.168.1.XX`) : vous êtes redirigé vers `https://`. Le certificat est auto-signé, le navigateur affiche donc un avertissement la première fois (pour une adresse sans avertissement, voir `Système > Maintenance > HTTPS sans avertissement (Tailscale)`).
-- Le mot de passe initial est généré aléatoirement lors de l'installation et est stocké dans le fichier `/boot/firmware/credentials.json`. Il est fortement recommandé de le changer via l'interface (`Système > Comptes`).
+- L'utilisateur est `admin` ; le mot de passe initial est généré aléatoirement et **affiché une seule fois** dans le terminal pendant `setup.sh` (étape 8/12) : notez-le. Le fichier `/boot/firmware/credentials.json` n'en garde qu'une version hachée, illisible. Il est fortement recommandé de le changer via l'interface (`Système > Comptes`). Mot de passe perdu : voir le [guide d'installation](INSTALL.md#-première-connexion).
 - Après la connexion, la nouvelle interface s'ouvre (`/app`). L'ancienne reste accessible depuis le menu (« Interface classique ») et le choix est mémorisé.
 
 ### 2. Configuration des Sources
