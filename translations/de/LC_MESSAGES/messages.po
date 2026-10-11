@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 17:51+0200\n"
+"POT-Creation-Date: 2026-10-11 17:55+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -195,7 +195,7 @@ msgstr "{n} Fotos"
 msgid "Accueil"
 msgstr "Start"
 
-#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:105
+#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:115
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:245
 #: templates/configure/_tour.html.jinja:32
 msgid "Photos"
@@ -227,7 +227,7 @@ msgstr "Als Nächstes"
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
-#: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:110
+#: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:120
 #: frontend/src/views/PlaylistsView.vue:140 templates/configure.html.jinja:149
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -262,7 +262,8 @@ msgstr "Anzeige"
 msgid "Horloge & météo"
 msgstr "Uhr & Wetter"
 
-#: frontend/src/nav.ts:38 templates/configure.html.jinja:159
+#: frontend/src/nav.ts:38 frontend/src/views/CaptionsView.vue:12
+#: templates/configure.html.jinja:159
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "Foto-Infos"
@@ -327,16 +328,265 @@ msgstr "Statistiken"
 msgid "Journaux"
 msgstr "Protokolle"
 
-#: frontend/src/components/SettingField.vue:62
-#: frontend/src/views/NetworkView.vue:97
-msgid "Enregistré (laisser vide pour garder)"
-msgstr "Gespeichert (leer lassen zum Behalten)"
+#: frontend/src/components/CaptionEditor.vue:30
+#: frontend/src/views/LibraryView.vue:154
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Style de cette légende"
+msgstr "Stil dieser Bildunterschrift"
 
-#: frontend/src/components/SettingField.vue:62
-#: templates/configure/tab_heure.html.jinja:319
-msgid "Non défini"
-msgstr "Undefiniert"
+#: frontend/src/components/CaptionEditor.vue:31
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Légendes des photos et vidéos"
+msgstr "Bildunterschriften von Fotos und Videos"
 
+#: frontend/src/components/CaptionEditor.vue:31
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Texte des polaroïds"
+msgstr "Polaroid-Text"
+
+#: frontend/src/components/CaptionEditor.vue:31
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Infos des photos (date, lieu)"
+msgstr "Fotoinfos (Datum, Ort)"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43 utils/ambiances.py:22
+msgid "Classique"
+msgstr "Klassisch"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43
+msgid "Grand texte"
+msgstr "Großer Text"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: frontend/src/components/CaptionEditor.vue:35
+#: templates/configure/tab_legendes.html.jinja:43
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Bulle"
+msgstr "Blase"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: frontend/src/components/CaptionEditor.vue:35
+#: templates/configure/tab_legendes.html.jinja:43
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Étiquette"
+msgstr "Etikett"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43
+msgid "Manuscrit"
+msgstr "Handschrift"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43 utils/message_renderer.py:42
+msgid "Néon"
+msgstr "Neon"
+
+#: frontend/src/components/CaptionEditor.vue:34
+#: templates/configure/tab_legendes.html.jinja:50
+msgid "Moderne"
+msgstr "Modern"
+
+#: frontend/src/components/CaptionEditor.vue:34
+#: templates/configure/tab_legendes.html.jinja:50
+msgid "Classique (empattements)"
+msgstr "Klassisch (Serifen)"
+
+#: frontend/src/components/CaptionEditor.vue:35
+#: frontend/src/components/CaptionEditor.vue:36
+#: templates/configure/tab_legendes.html.jinja:77
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Aucun"
+msgstr "Keiner"
+
+#: frontend/src/components/CaptionEditor.vue:35
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Bandeau"
+msgstr "Balken"
+
+#: frontend/src/components/CaptionEditor.vue:36
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Ombre"
+msgstr "Schatten"
+
+#: frontend/src/components/CaptionEditor.vue:36
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Halo lumineux"
+msgstr "Leuchten"
+
+#: frontend/src/components/CaptionEditor.vue:115
+#: frontend/src/views/LibraryView.vue:160
+#: frontend/src/views/PlaylistsView.vue:134
+#: frontend/src/views/TripsView.vue:263
+#: templates/configure/_playlist_builder.html.jinja:6
+#: templates/configure/_smart_albums.html.jinja:13
+#: templates/configure/tab_accueil.html.jinja:84
+#: templates/configure/tab_legendes.html.jinja:27
+msgid "Fermer"
+msgstr "Schließen"
+
+#: frontend/src/components/CaptionEditor.vue:119
+#: templates/configure/tab_legendes.html.jinja:32
+msgid "Aperçu de la légende"
+msgstr "Vorschau der Bildunterschrift"
+
+#: frontend/src/components/CaptionEditor.vue:123
+#: templates/configure/tab_legendes.html.jinja:36
+msgid ""
+"Touchez ou faites glisser sur l'image pour placer la légende. L'aperçu "
+"est dessiné par le cadre lui-même."
+msgstr ""
+"Tippen oder ziehen Sie auf dem Bild, um die Bildunterschrift zu "
+"platzieren. Die Vorschau wird vom Rahmen selbst gezeichnet."
+
+#: frontend/src/components/CaptionEditor.vue:124
+#: templates/configure/tab_legendes.html.jinja:37
+msgid "Texte d'essai"
+msgstr "Probetext"
+
+#: frontend/src/components/CaptionEditor.vue:127
+#: templates/configure/tab_legendes.html.jinja:41
+msgid "Modèles"
+msgstr "Vorlagen"
+
+#: frontend/src/components/CaptionEditor.vue:129
+#: templates/configure/tab_legendes.html.jinja:48
+msgid "Police"
+msgstr "Polizei"
+
+#: frontend/src/components/CaptionEditor.vue:131
+#: templates/configure/tab_legendes.html.jinja:56
+msgid "Taille"
+msgstr "Größe"
+
+#: frontend/src/components/CaptionEditor.vue:133
+#: templates/configure/tab_legendes.html.jinja:60
+msgid "Mise en forme"
+msgstr "Formatierung"
+
+#: frontend/src/components/CaptionEditor.vue:135
+#: templates/configure/tab_legendes.html.jinja:62
+msgid "Gras"
+msgstr "Fett"
+
+#: frontend/src/components/CaptionEditor.vue:136
+#: templates/configure/tab_legendes.html.jinja:63
+msgid "Italique"
+msgstr "Kursiv"
+
+#: frontend/src/components/CaptionEditor.vue:137
+#: templates/configure/tab_legendes.html.jinja:64
+msgid "Souligné"
+msgstr "Unterstrichen"
+
+#: frontend/src/components/CaptionEditor.vue:138
+#: templates/configure/tab_legendes.html.jinja:65
+msgid "Majuscules"
+msgstr "Großbuchstaben"
+
+#: frontend/src/components/CaptionEditor.vue:140
+#: templates/configure/tab_legendes.html.jinja:67
+msgid "Aligné à gauche"
+msgstr "Linksbündig"
+
+#: frontend/src/components/CaptionEditor.vue:140
+#: templates/configure/tab_legendes.html.jinja:68
+msgid "Centré"
+msgstr "Zentriert"
+
+#: frontend/src/components/CaptionEditor.vue:140
+#: templates/configure/tab_legendes.html.jinja:69
+msgid "Aligné à droite"
+msgstr "Rechtsbündig"
+
+#: frontend/src/components/CaptionEditor.vue:142
+#: templates/configure/tab_legendes.html.jinja:72
+msgid "Couleur du texte"
+msgstr "Textfarbe"
+
+#: frontend/src/components/CaptionEditor.vue:145
+#: templates/configure/tab_legendes.html.jinja:206
+msgid "Autre couleur"
+msgstr "Andere Farbe"
+
+#: frontend/src/components/CaptionEditor.vue:147
+#: templates/configure/tab_legendes.html.jinja:75
+#: templates/upload.html.jinja:216
+msgid "Fond"
+msgstr "Hintergrund"
+
+#: frontend/src/components/CaptionEditor.vue:154
+#: templates/configure/tab_legendes.html.jinja:83
+msgid "Opacité du fond"
+msgstr "Deckkraft des Hintergrunds"
+
+#: frontend/src/components/CaptionEditor.vue:157
+#: templates/configure/tab_legendes.html.jinja:88
+msgid "Contour"
+msgstr "Kontur"
+
+#: frontend/src/components/CaptionEditor.vue:157
+#: templates/configure/tab_legendes.html.jinja:218
+msgid "aucun"
+msgstr "keiner"
+
+#: frontend/src/components/CaptionEditor.vue:163
+#: templates/configure/tab_legendes.html.jinja:93
+msgid "Effet"
+msgstr "Effekt"
+
+#: frontend/src/components/CaptionEditor.vue:169
+#: templates/configure/tab_legendes.html.jinja:102
+msgid "Inclinaison"
+msgstr "Neigung"
+
+#: frontend/src/components/CaptionEditor.vue:171
+#: templates/configure/tab_legendes.html.jinja:106
+msgid "Largeur maximale"
+msgstr "Maximale Breite"
+
+#: frontend/src/components/CaptionEditor.vue:174
+#: templates/configure/tab_legendes.html.jinja:109
+#: templates/configure/tab_son.html.jinja:112
+msgid "Position"
+msgstr "Position"
+
+#: frontend/src/components/CaptionEditor.vue:176
+#: templates/configure/tab_legendes.html.jinja:111
+msgid "En haut"
+msgstr "Oben"
+
+#: frontend/src/components/CaptionEditor.vue:177
+#: templates/configure/tab_legendes.html.jinja:112
+msgid "Au milieu"
+msgstr "Mitte"
+
+#: frontend/src/components/CaptionEditor.vue:178
+#: templates/configure/tab_legendes.html.jinja:113
+msgid "En bas"
+msgstr "Unten"
+
+#: frontend/src/components/CaptionEditor.vue:185
+#: templates/configure/tab_legendes.html.jinja:118
+msgid "Style par défaut"
+msgstr "Standardstil"
+
+#: frontend/src/components/CaptionEditor.vue:186
+#: templates/configure/tab_legendes.html.jinja:119
+msgid "Reprendre le style général"
+msgstr "Allgemeinen Stil verwenden"
+
+#: frontend/src/components/CaptionEditor.vue:188
+#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:156
+#: frontend/src/views/TripsView.vue:245
+#: templates/configure/tab_carte.html.jinja:20
+#: templates/configure/tab_legendes.html.jinja:122
+#: templates/upload.html.jinja:214
+msgid "Annuler"
+msgstr "Abbrechen"
+
+#: frontend/src/components/CaptionEditor.vue:189
 #: frontend/src/components/SettingField.vue:63
 #: frontend/src/views/PlaylistsView.vue:157
 #: templates/configure/_playlist_builder.html.jinja:39
@@ -351,8 +601,18 @@ msgstr "Undefiniert"
 msgid "Enregistrer"
 msgstr "Speichern"
 
+#: frontend/src/components/SettingField.vue:62
+#: frontend/src/views/NetworkView.vue:97
+msgid "Enregistré (laisser vide pour garder)"
+msgstr "Gespeichert (leer lassen zum Behalten)"
+
+#: frontend/src/components/SettingField.vue:62
+#: templates/configure/tab_heure.html.jinja:319
+msgid "Non défini"
+msgstr "Undefiniert"
+
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:121 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "Zurücksetzen"
 
@@ -476,6 +736,67 @@ msgid ""
 msgstr ""
 "Jedes Konto hat eigene Uploads und Wiedergabelisten; ein Benutzer sieht "
 "keine sensiblen Einstellungen."
+
+#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:153
+#: frontend/src/views/LibraryView.vue:114
+#: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
+#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:603
+msgid "Photos et vidéos"
+msgstr "Fotos und Videos"
+
+#: frontend/src/views/CaptionsView.vue:10
+#: templates/configure/tab_legendes.html.jinja:7
+msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
+msgstr ""
+"Unter jedem Foto oder Video eingegebene Bildunterschrift (auch auf "
+"Postkarten)."
+
+#: frontend/src/views/CaptionsView.vue:11
+#: templates/configure/tab_legendes.html.jinja:8
+msgid "Polaroïds"
+msgstr "Polaroids"
+
+#: frontend/src/views/CaptionsView.vue:11
+#: templates/configure/tab_legendes.html.jinja:8
+msgid "Texte écrit dans la marge blanche des polaroïds."
+msgstr "Text im weißen Rand der Polaroids."
+
+#: frontend/src/views/CaptionsView.vue:12
+#: templates/configure/tab_legendes.html.jinja:9
+msgid "Date et lieu affichés par le diaporama."
+msgstr "Von der Diashow angezeigtes Datum und Ort."
+
+#: frontend/src/views/CaptionsView.vue:34
+#: templates/configure/tab_legendes.html.jinja:3
+msgid "Style des légendes"
+msgstr "Stil der Bildunterschriften"
+
+#: frontend/src/views/CaptionsView.vue:35
+msgid ""
+"Choisissez l'apparence de chaque type de légende : police, taille, "
+"couleurs, fond, contour, ombre, position et inclinaison. Une photo ou une"
+" vidéo peut aussi avoir son propre style (depuis la bibliothèque)."
+msgstr ""
+"Wählen Sie das Aussehen jeder Art von Bildunterschrift: Schrift, Größe, "
+"Farben, Hintergrund, Kontur, Schatten, Position und Neigung. Ein Foto "
+"oder Video kann auch einen eigenen Stil haben (aus der Bibliothek)."
+
+#: frontend/src/views/CaptionsView.vue:43
+#: templates/configure/tab_legendes.html.jinja:14
+msgid "Personnaliser"
+msgstr "Anpassen"
+
+#: frontend/src/views/CaptionsView.vue:47
+#: templates/configure/tab_legendes.html.jinja:19
+msgid ""
+"Les légendes déjà posées sur les photos sont redessinées automatiquement "
+"avec le nouveau style. Les vidéos affichent leur légende en sous-titre "
+"pendant la lecture."
+msgstr ""
+"Bereits auf Fotos gesetzte Bildunterschriften werden automatisch im neuen"
+" Stil neu gezeichnet. Videos zeigen ihre Bildunterschrift während der "
+"Wiedergabe als Untertitel."
 
 #: frontend/src/views/ClockView.vue:8
 #: templates/configure/tab_heure.html.jinja:71
@@ -911,7 +1232,7 @@ msgstr "Häufigkeit der Favoriten (Anzahl zusätzlicher Ergänzungen zur Playlis
 msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "Beispiel: 0 = kein Boost, 2 = 3x höhere Chance auf Erscheinen."
 
-#: frontend/src/views/DisplayView.vue:58 frontend/src/views/LibraryView.vue:106
+#: frontend/src/views/DisplayView.vue:58 frontend/src/views/LibraryView.vue:116
 msgid "Vidéos"
 msgstr "Videos"
 
@@ -1442,13 +1763,6 @@ msgstr "Ruhezustand"
 msgid "Allumer le cadre"
 msgstr "Rahmen einschalten"
 
-#: frontend/src/views/HomeView.vue:153 frontend/src/views/LibraryView.vue:104
-#: templates/configure/_smart_albums.html.jinja:44
-#: templates/configure/tab_apercu.html.jinja:10
-#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:603
-msgid "Photos et vidéos"
-msgstr "Fotos und Videos"
-
 #: frontend/src/views/HomeView.vue:155
 #: templates/configure/_smart_albums.html.jinja:46
 #: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:603
@@ -1493,14 +1807,6 @@ msgstr "Vor {n} Jahren"
 #: frontend/src/views/HomeView.vue:228
 msgid "Dernières actions"
 msgstr "Letzte Aktionen"
-
-#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:156
-#: frontend/src/views/TripsView.vue:245
-#: templates/configure/tab_carte.html.jinja:20
-#: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:214
-msgid "Annuler"
-msgstr "Abbrechen"
 
 #: frontend/src/views/HomeView.vue:231
 #: templates/configure/tab_accueil.html.jinja:277
@@ -1844,52 +2150,56 @@ msgstr "Saisonthema"
 msgid "Affiche les messages"
 msgstr "Zeigt Nachrichten an"
 
-#: frontend/src/views/LibraryView.vue:54
+#: frontend/src/views/LibraryView.vue:57
 msgid "Ajoutée aux favoris."
 msgstr "Zu den Favoriten hinzugefügt."
 
-#: frontend/src/views/LibraryView.vue:54
+#: frontend/src/views/LibraryView.vue:57
 msgid "Retirée des favoris."
 msgstr "Aus den Favoriten entfernt."
 
-#: frontend/src/views/LibraryView.vue:94
+#: frontend/src/views/LibraryView.vue:71
+msgid "Légende enregistrée."
+msgstr "Bildunterschrift gespeichert."
+
+#: frontend/src/views/LibraryView.vue:104
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "Suchen (Ort, Bildunterschrift, Dateiname…)"
 
-#: frontend/src/views/LibraryView.vue:96
+#: frontend/src/views/LibraryView.vue:106
 #: frontend/src/views/PlaylistsView.vue:138
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "Alle Quellen"
 
-#: frontend/src/views/LibraryView.vue:100
+#: frontend/src/views/LibraryView.vue:110
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "Alle"
 
-#: frontend/src/views/LibraryView.vue:108
+#: frontend/src/views/LibraryView.vue:118
 msgid "Du"
 msgstr "Vom"
 
-#: frontend/src/views/LibraryView.vue:109
+#: frontend/src/views/LibraryView.vue:119
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
 msgstr "bis"
 
-#: frontend/src/views/LibraryView.vue:114
+#: frontend/src/views/LibraryView.vue:124
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} Ergebnisse ({shown} angezeigt)"
 
-#: frontend/src/views/LibraryView.vue:114
+#: frontend/src/views/LibraryView.vue:124
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} Ergebnisse"
 
-#: frontend/src/views/LibraryView.vue:120
+#: frontend/src/views/LibraryView.vue:130
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
@@ -1897,34 +2207,28 @@ msgstr ""
 "Noch keine Lieblingsfotos: Tippen Sie auf den Stern eines Fotos, um es "
 "hinzuzufügen."
 
-#: frontend/src/views/LibraryView.vue:120
+#: frontend/src/views/LibraryView.vue:130
 msgid "Aucune photo ne correspond."
 msgstr "Kein Foto passt."
 
-#: frontend/src/views/LibraryView.vue:125
-#: frontend/src/views/LibraryView.vue:145
+#: frontend/src/views/LibraryView.vue:135
+#: frontend/src/views/LibraryView.vue:159
 msgid "Favori"
 msgstr "Favorit"
 
-#: frontend/src/views/LibraryView.vue:132
+#: frontend/src/views/LibraryView.vue:142
 msgid "Précédente"
 msgstr "Vorherige"
 
-#: frontend/src/views/LibraryView.vue:145
+#: frontend/src/views/LibraryView.vue:152
+msgid "Ajouter une légende…"
+msgstr "Bildunterschrift hinzufügen…"
+
+#: frontend/src/views/LibraryView.vue:159
 msgid "Ajouter aux favoris"
 msgstr "Zu Favoriten hinzufügen"
 
-#: frontend/src/views/LibraryView.vue:146
-#: frontend/src/views/PlaylistsView.vue:134
-#: frontend/src/views/TripsView.vue:263
-#: templates/configure/_playlist_builder.html.jinja:6
-#: templates/configure/_smart_albums.html.jinja:13
-#: templates/configure/tab_accueil.html.jinja:84
-#: templates/configure/tab_legendes.html.jinja:27
-msgid "Fermer"
-msgstr "Schließen"
-
-#: frontend/src/views/LibraryView.vue:149
+#: frontend/src/views/LibraryView.vue:163
 msgid "Suivante"
 msgstr "Nächste"
 
@@ -3440,11 +3744,6 @@ msgstr "Radiergummi"
 #: templates/upload.html.jinja:215
 msgid "Tout effacer"
 msgstr "Alles löschen"
-
-#: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:216
-msgid "Fond"
-msgstr "Hintergrund"
 
 #: templates/upload.html.jinja:217
 msgid "Papier"
@@ -5728,10 +6027,6 @@ msgstr ""
 msgid "Imprimer le QR code"
 msgstr "QR code drucken"
 
-#: templates/configure/tab_legendes.html.jinja:3
-msgid "Style des légendes"
-msgstr "Stil der Bildunterschriften"
-
 #: templates/configure/tab_legendes.html.jinja:4
 msgid ""
 "Choisissez l'apparence de chaque type de légende, comme sur Snapchat : "
@@ -5744,222 +6039,6 @@ msgstr ""
 "Kontur, Schatten, Position und Neigung. Ein Foto oder Video kann auch "
 "einen eigenen Stil haben (Palettensymbol unter seiner Bildunterschrift, "
 "im Tab Vorschau)."
-
-#: templates/configure/tab_legendes.html.jinja:7
-msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
-msgstr ""
-"Unter jedem Foto oder Video eingegebene Bildunterschrift (auch auf "
-"Postkarten)."
-
-#: templates/configure/tab_legendes.html.jinja:8
-msgid "Polaroïds"
-msgstr "Polaroids"
-
-#: templates/configure/tab_legendes.html.jinja:8
-msgid "Texte écrit dans la marge blanche des polaroïds."
-msgstr "Text im weißen Rand der Polaroids."
-
-#: templates/configure/tab_legendes.html.jinja:9
-msgid "Date et lieu affichés par le diaporama."
-msgstr "Von der Diashow angezeigtes Datum und Ort."
-
-#: templates/configure/tab_legendes.html.jinja:14
-msgid "Personnaliser"
-msgstr "Anpassen"
-
-#: templates/configure/tab_legendes.html.jinja:19
-msgid ""
-"Les légendes déjà posées sur les photos sont redessinées automatiquement "
-"avec le nouveau style. Les vidéos affichent leur légende en sous-titre "
-"pendant la lecture."
-msgstr ""
-"Bereits auf Fotos gesetzte Bildunterschriften werden automatisch im neuen"
-" Stil neu gezeichnet. Videos zeigen ihre Bildunterschrift während der "
-"Wiedergabe als Untertitel."
-
-#: templates/configure/tab_legendes.html.jinja:32
-msgid "Aperçu de la légende"
-msgstr "Vorschau der Bildunterschrift"
-
-#: templates/configure/tab_legendes.html.jinja:36
-msgid ""
-"Touchez ou faites glisser sur l'image pour placer la légende. L'aperçu "
-"est dessiné par le cadre lui-même."
-msgstr ""
-"Tippen oder ziehen Sie auf dem Bild, um die Bildunterschrift zu "
-"platzieren. Die Vorschau wird vom Rahmen selbst gezeichnet."
-
-#: templates/configure/tab_legendes.html.jinja:37
-msgid "Texte d'essai"
-msgstr "Probetext"
-
-#: templates/configure/tab_legendes.html.jinja:41
-msgid "Modèles"
-msgstr "Vorlagen"
-
-#: templates/configure/tab_legendes.html.jinja:43 utils/ambiances.py:22
-msgid "Classique"
-msgstr "Klassisch"
-
-#: templates/configure/tab_legendes.html.jinja:43
-msgid "Grand texte"
-msgstr "Großer Text"
-
-#: templates/configure/tab_legendes.html.jinja:43
-#: templates/configure/tab_legendes.html.jinja:77
-msgid "Bulle"
-msgstr "Blase"
-
-#: templates/configure/tab_legendes.html.jinja:43
-#: templates/configure/tab_legendes.html.jinja:77
-msgid "Étiquette"
-msgstr "Etikett"
-
-#: templates/configure/tab_legendes.html.jinja:43
-msgid "Manuscrit"
-msgstr "Handschrift"
-
-#: templates/configure/tab_legendes.html.jinja:43 utils/message_renderer.py:42
-msgid "Néon"
-msgstr "Neon"
-
-#: templates/configure/tab_legendes.html.jinja:48
-msgid "Police"
-msgstr "Polizei"
-
-#: templates/configure/tab_legendes.html.jinja:50
-msgid "Moderne"
-msgstr "Modern"
-
-#: templates/configure/tab_legendes.html.jinja:50
-msgid "Classique (empattements)"
-msgstr "Klassisch (Serifen)"
-
-#: templates/configure/tab_legendes.html.jinja:56
-msgid "Taille"
-msgstr "Größe"
-
-#: templates/configure/tab_legendes.html.jinja:60
-msgid "Mise en forme"
-msgstr "Formatierung"
-
-#: templates/configure/tab_legendes.html.jinja:62
-msgid "Gras"
-msgstr "Fett"
-
-#: templates/configure/tab_legendes.html.jinja:63
-msgid "Italique"
-msgstr "Kursiv"
-
-#: templates/configure/tab_legendes.html.jinja:64
-msgid "Souligné"
-msgstr "Unterstrichen"
-
-#: templates/configure/tab_legendes.html.jinja:65
-msgid "Majuscules"
-msgstr "Großbuchstaben"
-
-#: templates/configure/tab_legendes.html.jinja:67
-msgid "Aligné à gauche"
-msgstr "Linksbündig"
-
-#: templates/configure/tab_legendes.html.jinja:68
-msgid "Centré"
-msgstr "Zentriert"
-
-#: templates/configure/tab_legendes.html.jinja:69
-msgid "Aligné à droite"
-msgstr "Rechtsbündig"
-
-#: templates/configure/tab_legendes.html.jinja:72
-msgid "Couleur du texte"
-msgstr "Textfarbe"
-
-#: templates/configure/tab_legendes.html.jinja:77
-#: templates/configure/tab_legendes.html.jinja:95
-msgid "Aucun"
-msgstr "Keiner"
-
-#: templates/configure/tab_legendes.html.jinja:77
-msgid "Bandeau"
-msgstr "Balken"
-
-#: templates/configure/tab_legendes.html.jinja:83
-msgid "Opacité du fond"
-msgstr "Deckkraft des Hintergrunds"
-
-#: templates/configure/tab_legendes.html.jinja:88
-msgid "Contour"
-msgstr "Kontur"
-
-#: templates/configure/tab_legendes.html.jinja:93
-msgid "Effet"
-msgstr "Effekt"
-
-#: templates/configure/tab_legendes.html.jinja:95
-msgid "Ombre"
-msgstr "Schatten"
-
-#: templates/configure/tab_legendes.html.jinja:95
-msgid "Halo lumineux"
-msgstr "Leuchten"
-
-#: templates/configure/tab_legendes.html.jinja:102
-msgid "Inclinaison"
-msgstr "Neigung"
-
-#: templates/configure/tab_legendes.html.jinja:106
-msgid "Largeur maximale"
-msgstr "Maximale Breite"
-
-#: templates/configure/tab_legendes.html.jinja:109
-#: templates/configure/tab_son.html.jinja:112
-msgid "Position"
-msgstr "Position"
-
-#: templates/configure/tab_legendes.html.jinja:111
-msgid "En haut"
-msgstr "Oben"
-
-#: templates/configure/tab_legendes.html.jinja:112
-msgid "Au milieu"
-msgstr "Mitte"
-
-#: templates/configure/tab_legendes.html.jinja:113
-msgid "En bas"
-msgstr "Unten"
-
-#: templates/configure/tab_legendes.html.jinja:118
-msgid "Style par défaut"
-msgstr "Standardstil"
-
-#: templates/configure/tab_legendes.html.jinja:119
-msgid "Reprendre le style général"
-msgstr "Allgemeinen Stil verwenden"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Légendes des photos et vidéos"
-msgstr "Bildunterschriften von Fotos und Videos"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Texte des polaroïds"
-msgstr "Polaroid-Text"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Infos des photos (date, lieu)"
-msgstr "Fotoinfos (Datum, Ort)"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Style de cette légende"
-msgstr "Stil dieser Bildunterschrift"
-
-#: templates/configure/tab_legendes.html.jinja:206
-msgid "Autre couleur"
-msgstr "Andere Farbe"
-
-#: templates/configure/tab_legendes.html.jinja:218
-msgid "aucun"
-msgstr "keiner"
 
 #: templates/configure/tab_logs.html.jinja:4
 msgid "Logs Système"

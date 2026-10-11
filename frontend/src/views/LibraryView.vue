@@ -2,7 +2,8 @@
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from "vue";
 import { get, post } from "../api";
 import { currentLang, t } from "../i18n";
-import { notify } from "../toast";
+import { notify, run } from "../toast";
+import CaptionEditor from "../components/CaptionEditor.vue";
 
 const props = defineProps<{ favorites?: boolean }>();
 
@@ -18,6 +19,8 @@ const loading = ref(true);
 const sources = ref<string[]>([]);
 const people = ref<{ id: string; name: string }[]>([]);
 const open = ref<number | null>(null);
+const captionText = ref("");
+const styling = ref(false);
 let debounce: number | undefined;
 
 const current = computed(() => (open.value === null ? null : items.value[open.value]));
@@ -62,13 +65,20 @@ async function toggleFavorite(item: Item) {
   }
 }
 
+watch(open, () => { captionText.value = current.value?.caption || ""; });
+
+async function saveCaption(item: Item) {
+  const done = await run(() => post<{ message?: string }>("/api/set_image_text", { photo: item.path, text: captionText.value }), t("Légende enregistrée."));
+  if (done) { item.caption = captionText.value; item.url = item.url.split("?")[0] + `?v=${Date.now()}`; item.thumb = item.thumb.split("?")[0] + `?v=${Date.now()}`; }
+}
+
 function step(delta: number) {
   if (open.value === null || !items.value.length) return;
   open.value = (open.value + delta + items.value.length) % items.value.length;
 }
 
 function onKey(event: KeyboardEvent) {
-  if (open.value === null) return;
+  if (open.value === null || styling.value || (event.target as HTMLElement).tagName === "INPUT") return;
   if (event.key === "ArrowRight") step(1);
   else if (event.key === "ArrowLeft") step(-1);
   else if (event.key === "Escape") open.value = null;
@@ -138,7 +148,11 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
           <strong v-if="current.date">{{ dateLabel(current.date) }}</strong>
           <span v-if="current.place"> · {{ current.place }}</span>
           <p v-if="current.people.length" class="small">{{ current.people.join(", ") }}</p>
-          <p v-if="current.caption" class="small">« {{ current.caption }} »</p>
+          <form class="caption" @submit.prevent="saveCaption(current)">
+            <input v-model="captionText" type="text" maxlength="300" :placeholder="t('Ajouter une légende…')">
+            <button class="btn" type="submit" :disabled="captionText === (current.caption || '')"><i class="fas fa-check"></i></button>
+            <button class="btn" type="button" :title="t('Style de cette légende')" @click="styling = true"><i class="fas fa-palette"></i></button>
+          </form>
           <p class="small dim">{{ sourceLabel(current.source) }} · {{ current.path.split("/").pop() }}</p>
         </div>
         <button class="btn" type="button" @click="toggleFavorite(current)">
@@ -148,6 +162,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
     </div>
     <button class="nav next" type="button" :title="t('Suivante')" @click="step(1)"><i class="fas fa-chevron-right"></i></button>
   </div>
+  <CaptionEditor v-if="styling && current" scope="photo" :photo="current.path" :text="captionText" @close="styling = false" />
 </template>
 
 <style scoped>
@@ -175,6 +190,8 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
 .info { display: flex; gap: .6rem; align-items: center; width: min(900px, 100%); }
 .info .btn { background: rgba(255, 255, 255, .1); color: #fff; border-color: rgba(255, 255, 255, .2); }
 .dim { opacity: .6; }
+.caption { display: flex; gap: .4rem; margin: .4rem 0; }
+.caption input { flex: 1; min-width: 0; font: inherit; color: #fff; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .25); border-radius: 10px; padding: .4rem .6rem; }
 .nav { border: 0; background: rgba(255, 255, 255, .08); color: #fff; width: 3rem; height: 3rem; border-radius: 50%; margin: 0 .5rem; cursor: pointer; flex: none; }
 @media (max-width: 760px) { .nav { position: absolute; bottom: 1rem; z-index: 2; } .prev { left: 1rem; } .next { right: 1rem; } .info { flex-wrap: wrap; padding-bottom: 3.5rem; } }
 </style>

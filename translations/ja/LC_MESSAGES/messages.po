@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 17:51+0200\n"
+"POT-Creation-Date: 2026-10-11 17:55+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -195,7 +195,7 @@ msgstr "{n}枚"
 msgid "Accueil"
 msgstr "ホーム"
 
-#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:105
+#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:115
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:245
 #: templates/configure/_tour.html.jinja:32
 msgid "Photos"
@@ -227,7 +227,7 @@ msgstr "次に表示"
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:110
+#: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:120
 #: frontend/src/views/PlaylistsView.vue:140 templates/configure.html.jinja:149
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -262,7 +262,8 @@ msgstr "画面"
 msgid "Horloge & météo"
 msgstr "時計と天気"
 
-#: frontend/src/nav.ts:38 templates/configure.html.jinja:159
+#: frontend/src/nav.ts:38 frontend/src/views/CaptionsView.vue:12
+#: templates/configure.html.jinja:159
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "写真の情報"
@@ -327,16 +328,263 @@ msgstr "統計"
 msgid "Journaux"
 msgstr "ログ"
 
-#: frontend/src/components/SettingField.vue:62
-#: frontend/src/views/NetworkView.vue:97
-msgid "Enregistré (laisser vide pour garder)"
-msgstr "保存済み（変更しない場合は空欄）"
+#: frontend/src/components/CaptionEditor.vue:30
+#: frontend/src/views/LibraryView.vue:154
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Style de cette légende"
+msgstr "このキャプションのスタイル"
 
-#: frontend/src/components/SettingField.vue:62
-#: templates/configure/tab_heure.html.jinja:319
-msgid "Non défini"
-msgstr "未定義"
+#: frontend/src/components/CaptionEditor.vue:31
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Légendes des photos et vidéos"
+msgstr "写真と動画のキャプション"
 
+#: frontend/src/components/CaptionEditor.vue:31
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Texte des polaroïds"
+msgstr "ポラロイドの文字"
+
+#: frontend/src/components/CaptionEditor.vue:31
+#: templates/configure/tab_legendes.html.jinja:177
+msgid "Infos des photos (date, lieu)"
+msgstr "写真の情報（日付、場所）"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43 utils/ambiances.py:22
+msgid "Classique"
+msgstr "クラシック"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43
+msgid "Grand texte"
+msgstr "大きな文字"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: frontend/src/components/CaptionEditor.vue:35
+#: templates/configure/tab_legendes.html.jinja:43
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Bulle"
+msgstr "吹き出し"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: frontend/src/components/CaptionEditor.vue:35
+#: templates/configure/tab_legendes.html.jinja:43
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Étiquette"
+msgstr "ラベル"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43
+msgid "Manuscrit"
+msgstr "手書き"
+
+#: frontend/src/components/CaptionEditor.vue:33
+#: templates/configure/tab_legendes.html.jinja:43 utils/message_renderer.py:42
+msgid "Néon"
+msgstr "ネオン"
+
+#: frontend/src/components/CaptionEditor.vue:34
+#: templates/configure/tab_legendes.html.jinja:50
+msgid "Moderne"
+msgstr "モダン"
+
+#: frontend/src/components/CaptionEditor.vue:34
+#: templates/configure/tab_legendes.html.jinja:50
+msgid "Classique (empattements)"
+msgstr "クラシック（セリフ）"
+
+#: frontend/src/components/CaptionEditor.vue:35
+#: frontend/src/components/CaptionEditor.vue:36
+#: templates/configure/tab_legendes.html.jinja:77
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Aucun"
+msgstr "なし"
+
+#: frontend/src/components/CaptionEditor.vue:35
+#: templates/configure/tab_legendes.html.jinja:77
+msgid "Bandeau"
+msgstr "帯"
+
+#: frontend/src/components/CaptionEditor.vue:36
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Ombre"
+msgstr "影"
+
+#: frontend/src/components/CaptionEditor.vue:36
+#: templates/configure/tab_legendes.html.jinja:95
+msgid "Halo lumineux"
+msgstr "グロー"
+
+#: frontend/src/components/CaptionEditor.vue:115
+#: frontend/src/views/LibraryView.vue:160
+#: frontend/src/views/PlaylistsView.vue:134
+#: frontend/src/views/TripsView.vue:263
+#: templates/configure/_playlist_builder.html.jinja:6
+#: templates/configure/_smart_albums.html.jinja:13
+#: templates/configure/tab_accueil.html.jinja:84
+#: templates/configure/tab_legendes.html.jinja:27
+msgid "Fermer"
+msgstr "閉じる"
+
+#: frontend/src/components/CaptionEditor.vue:119
+#: templates/configure/tab_legendes.html.jinja:32
+msgid "Aperçu de la légende"
+msgstr "キャプションのプレビュー"
+
+#: frontend/src/components/CaptionEditor.vue:123
+#: templates/configure/tab_legendes.html.jinja:36
+msgid ""
+"Touchez ou faites glisser sur l'image pour placer la légende. L'aperçu "
+"est dessiné par le cadre lui-même."
+msgstr "画像をタップまたはドラッグしてキャプションを配置します。プレビューはフォトフレーム自身が描画します。"
+
+#: frontend/src/components/CaptionEditor.vue:124
+#: templates/configure/tab_legendes.html.jinja:37
+msgid "Texte d'essai"
+msgstr "サンプルテキスト"
+
+#: frontend/src/components/CaptionEditor.vue:127
+#: templates/configure/tab_legendes.html.jinja:41
+msgid "Modèles"
+msgstr "テンプレート"
+
+#: frontend/src/components/CaptionEditor.vue:129
+#: templates/configure/tab_legendes.html.jinja:48
+msgid "Police"
+msgstr "警察"
+
+#: frontend/src/components/CaptionEditor.vue:131
+#: templates/configure/tab_legendes.html.jinja:56
+msgid "Taille"
+msgstr "サイズ"
+
+#: frontend/src/components/CaptionEditor.vue:133
+#: templates/configure/tab_legendes.html.jinja:60
+msgid "Mise en forme"
+msgstr "書式"
+
+#: frontend/src/components/CaptionEditor.vue:135
+#: templates/configure/tab_legendes.html.jinja:62
+msgid "Gras"
+msgstr "太字"
+
+#: frontend/src/components/CaptionEditor.vue:136
+#: templates/configure/tab_legendes.html.jinja:63
+msgid "Italique"
+msgstr "斜体"
+
+#: frontend/src/components/CaptionEditor.vue:137
+#: templates/configure/tab_legendes.html.jinja:64
+msgid "Souligné"
+msgstr "下線"
+
+#: frontend/src/components/CaptionEditor.vue:138
+#: templates/configure/tab_legendes.html.jinja:65
+msgid "Majuscules"
+msgstr "大文字"
+
+#: frontend/src/components/CaptionEditor.vue:140
+#: templates/configure/tab_legendes.html.jinja:67
+msgid "Aligné à gauche"
+msgstr "左揃え"
+
+#: frontend/src/components/CaptionEditor.vue:140
+#: templates/configure/tab_legendes.html.jinja:68
+msgid "Centré"
+msgstr "中央揃え"
+
+#: frontend/src/components/CaptionEditor.vue:140
+#: templates/configure/tab_legendes.html.jinja:69
+msgid "Aligné à droite"
+msgstr "右揃え"
+
+#: frontend/src/components/CaptionEditor.vue:142
+#: templates/configure/tab_legendes.html.jinja:72
+msgid "Couleur du texte"
+msgstr "文字色"
+
+#: frontend/src/components/CaptionEditor.vue:145
+#: templates/configure/tab_legendes.html.jinja:206
+msgid "Autre couleur"
+msgstr "その他の色"
+
+#: frontend/src/components/CaptionEditor.vue:147
+#: templates/configure/tab_legendes.html.jinja:75
+#: templates/upload.html.jinja:216
+msgid "Fond"
+msgstr "背景"
+
+#: frontend/src/components/CaptionEditor.vue:154
+#: templates/configure/tab_legendes.html.jinja:83
+msgid "Opacité du fond"
+msgstr "背景の不透明度"
+
+#: frontend/src/components/CaptionEditor.vue:157
+#: templates/configure/tab_legendes.html.jinja:88
+msgid "Contour"
+msgstr "縁取り"
+
+#: frontend/src/components/CaptionEditor.vue:157
+#: templates/configure/tab_legendes.html.jinja:218
+msgid "aucun"
+msgstr "なし"
+
+#: frontend/src/components/CaptionEditor.vue:163
+#: templates/configure/tab_legendes.html.jinja:93
+msgid "Effet"
+msgstr "効果"
+
+#: frontend/src/components/CaptionEditor.vue:169
+#: templates/configure/tab_legendes.html.jinja:102
+msgid "Inclinaison"
+msgstr "傾き"
+
+#: frontend/src/components/CaptionEditor.vue:171
+#: templates/configure/tab_legendes.html.jinja:106
+msgid "Largeur maximale"
+msgstr "最大幅"
+
+#: frontend/src/components/CaptionEditor.vue:174
+#: templates/configure/tab_legendes.html.jinja:109
+#: templates/configure/tab_son.html.jinja:112
+msgid "Position"
+msgstr "位置"
+
+#: frontend/src/components/CaptionEditor.vue:176
+#: templates/configure/tab_legendes.html.jinja:111
+msgid "En haut"
+msgstr "上"
+
+#: frontend/src/components/CaptionEditor.vue:177
+#: templates/configure/tab_legendes.html.jinja:112
+msgid "Au milieu"
+msgstr "中央"
+
+#: frontend/src/components/CaptionEditor.vue:178
+#: templates/configure/tab_legendes.html.jinja:113
+msgid "En bas"
+msgstr "下"
+
+#: frontend/src/components/CaptionEditor.vue:185
+#: templates/configure/tab_legendes.html.jinja:118
+msgid "Style par défaut"
+msgstr "デフォルトのスタイル"
+
+#: frontend/src/components/CaptionEditor.vue:186
+#: templates/configure/tab_legendes.html.jinja:119
+msgid "Reprendre le style général"
+msgstr "全体のスタイルに戻す"
+
+#: frontend/src/components/CaptionEditor.vue:188
+#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:156
+#: frontend/src/views/TripsView.vue:245
+#: templates/configure/tab_carte.html.jinja:20
+#: templates/configure/tab_legendes.html.jinja:122
+#: templates/upload.html.jinja:214
+msgid "Annuler"
+msgstr "キャンセル"
+
+#: frontend/src/components/CaptionEditor.vue:189
 #: frontend/src/components/SettingField.vue:63
 #: frontend/src/views/PlaylistsView.vue:157
 #: templates/configure/_playlist_builder.html.jinja:39
@@ -351,8 +599,18 @@ msgstr "未定義"
 msgid "Enregistrer"
 msgstr "保存"
 
+#: frontend/src/components/SettingField.vue:62
+#: frontend/src/views/NetworkView.vue:97
+msgid "Enregistré (laisser vide pour garder)"
+msgstr "保存済み（変更しない場合は空欄）"
+
+#: frontend/src/components/SettingField.vue:62
+#: templates/configure/tab_heure.html.jinja:319
+msgid "Non défini"
+msgstr "未定義"
+
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:111 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:121 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "クリア"
 
@@ -474,6 +732,59 @@ msgid ""
 "Chaque compte a ses propres envois et ses playlists ; un utilisateur ne "
 "voit pas les réglages sensibles."
 msgstr "各アカウントは自分の写真とプレイリストを持ちます。一般ユーザーには重要な設定は表示されません。"
+
+#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:153
+#: frontend/src/views/LibraryView.vue:114
+#: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
+#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:603
+msgid "Photos et vidéos"
+msgstr "写真と動画"
+
+#: frontend/src/views/CaptionsView.vue:10
+#: templates/configure/tab_legendes.html.jinja:7
+msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
+msgstr "各写真・動画の下に入力したキャプション（ポストカードにも表示）。"
+
+#: frontend/src/views/CaptionsView.vue:11
+#: templates/configure/tab_legendes.html.jinja:8
+msgid "Polaroïds"
+msgstr "ポラロイド"
+
+#: frontend/src/views/CaptionsView.vue:11
+#: templates/configure/tab_legendes.html.jinja:8
+msgid "Texte écrit dans la marge blanche des polaroïds."
+msgstr "ポラロイドの白い余白に書かれる文字。"
+
+#: frontend/src/views/CaptionsView.vue:12
+#: templates/configure/tab_legendes.html.jinja:9
+msgid "Date et lieu affichés par le diaporama."
+msgstr "スライドショーに表示される日付と場所。"
+
+#: frontend/src/views/CaptionsView.vue:34
+#: templates/configure/tab_legendes.html.jinja:3
+msgid "Style des légendes"
+msgstr "キャプションのスタイル"
+
+#: frontend/src/views/CaptionsView.vue:35
+msgid ""
+"Choisissez l'apparence de chaque type de légende : police, taille, "
+"couleurs, fond, contour, ombre, position et inclinaison. Une photo ou une"
+" vidéo peut aussi avoir son propre style (depuis la bibliothèque)."
+msgstr "キャプションの種類ごとに見た目を選べます：フォント、サイズ、色、背景、縁取り、影、位置、傾き。写真や動画ごとの個別スタイルも（ライブラリから）設定できます。"
+
+#: frontend/src/views/CaptionsView.vue:43
+#: templates/configure/tab_legendes.html.jinja:14
+msgid "Personnaliser"
+msgstr "カスタマイズ"
+
+#: frontend/src/views/CaptionsView.vue:47
+#: templates/configure/tab_legendes.html.jinja:19
+msgid ""
+"Les légendes déjà posées sur les photos sont redessinées automatiquement "
+"avec le nouveau style. Les vidéos affichent leur légende en sous-titre "
+"pendant la lecture."
+msgstr "写真に付いているキャプションは新しいスタイルで自動的に描き直されます。動画では再生中に字幕としてキャプションが表示されます。"
 
 #: frontend/src/views/ClockView.vue:8
 #: templates/configure/tab_heure.html.jinja:71
@@ -903,7 +1214,7 @@ msgstr "お気に入りの頻度 (プレイリストへの追加の数):"
 msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "例: 0 = ブーストなし、2 = 出現確率が 3 倍になります。"
 
-#: frontend/src/views/DisplayView.vue:58 frontend/src/views/LibraryView.vue:106
+#: frontend/src/views/DisplayView.vue:58 frontend/src/views/LibraryView.vue:116
 msgid "Vidéos"
 msgstr "動画"
 
@@ -1394,13 +1705,6 @@ msgstr "スリープにする"
 msgid "Allumer le cadre"
 msgstr "フレームをオンにする"
 
-#: frontend/src/views/HomeView.vue:153 frontend/src/views/LibraryView.vue:104
-#: templates/configure/_smart_albums.html.jinja:44
-#: templates/configure/tab_apercu.html.jinja:10
-#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:603
-msgid "Photos et vidéos"
-msgstr "写真と動画"
-
 #: frontend/src/views/HomeView.vue:155
 #: templates/configure/_smart_albums.html.jinja:46
 #: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:603
@@ -1445,14 +1749,6 @@ msgstr "{n}年前"
 #: frontend/src/views/HomeView.vue:228
 msgid "Dernières actions"
 msgstr "最近の操作"
-
-#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:156
-#: frontend/src/views/TripsView.vue:245
-#: templates/configure/tab_carte.html.jinja:20
-#: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:214
-msgid "Annuler"
-msgstr "キャンセル"
 
 #: frontend/src/views/HomeView.vue:231
 #: templates/configure/tab_accueil.html.jinja:277
@@ -1784,85 +2080,83 @@ msgstr "季節のテーマ"
 msgid "Affiche les messages"
 msgstr "メッセージを表示"
 
-#: frontend/src/views/LibraryView.vue:54
+#: frontend/src/views/LibraryView.vue:57
 msgid "Ajoutée aux favoris."
 msgstr "お気に入りに追加しました。"
 
-#: frontend/src/views/LibraryView.vue:54
+#: frontend/src/views/LibraryView.vue:57
 msgid "Retirée des favoris."
 msgstr "お気に入りから外しました。"
 
-#: frontend/src/views/LibraryView.vue:94
+#: frontend/src/views/LibraryView.vue:71
+msgid "Légende enregistrée."
+msgstr "キャプションを保存しました。"
+
+#: frontend/src/views/LibraryView.vue:104
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "検索（場所、キャプション、ファイル名…）"
 
-#: frontend/src/views/LibraryView.vue:96
+#: frontend/src/views/LibraryView.vue:106
 #: frontend/src/views/PlaylistsView.vue:138
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "すべてのソース"
 
-#: frontend/src/views/LibraryView.vue:100
+#: frontend/src/views/LibraryView.vue:110
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "全員"
 
-#: frontend/src/views/LibraryView.vue:108
+#: frontend/src/views/LibraryView.vue:118
 msgid "Du"
 msgstr "開始"
 
-#: frontend/src/views/LibraryView.vue:109
+#: frontend/src/views/LibraryView.vue:119
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
 msgstr "終了"
 
-#: frontend/src/views/LibraryView.vue:114
+#: frontend/src/views/LibraryView.vue:124
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} 件（{shown} 件を表示）"
 
-#: frontend/src/views/LibraryView.vue:114
+#: frontend/src/views/LibraryView.vue:124
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} 件"
 
-#: frontend/src/views/LibraryView.vue:120
+#: frontend/src/views/LibraryView.vue:130
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "お気に入りの写真はまだありません。写真の星をタップして追加してください。"
 
-#: frontend/src/views/LibraryView.vue:120
+#: frontend/src/views/LibraryView.vue:130
 msgid "Aucune photo ne correspond."
 msgstr "一致する写真はありません。"
 
-#: frontend/src/views/LibraryView.vue:125
-#: frontend/src/views/LibraryView.vue:145
+#: frontend/src/views/LibraryView.vue:135
+#: frontend/src/views/LibraryView.vue:159
 msgid "Favori"
 msgstr "お気に入り"
 
-#: frontend/src/views/LibraryView.vue:132
+#: frontend/src/views/LibraryView.vue:142
 msgid "Précédente"
 msgstr "前へ"
 
-#: frontend/src/views/LibraryView.vue:145
+#: frontend/src/views/LibraryView.vue:152
+msgid "Ajouter une légende…"
+msgstr "キャプションを追加…"
+
+#: frontend/src/views/LibraryView.vue:159
 msgid "Ajouter aux favoris"
 msgstr "お気に入りに追加"
 
-#: frontend/src/views/LibraryView.vue:146
-#: frontend/src/views/PlaylistsView.vue:134
-#: frontend/src/views/TripsView.vue:263
-#: templates/configure/_playlist_builder.html.jinja:6
-#: templates/configure/_smart_albums.html.jinja:13
-#: templates/configure/tab_accueil.html.jinja:84
-#: templates/configure/tab_legendes.html.jinja:27
-msgid "Fermer"
-msgstr "閉じる"
-
-#: frontend/src/views/LibraryView.vue:149
+#: frontend/src/views/LibraryView.vue:163
 msgid "Suivante"
 msgstr "次へ"
 
@@ -3342,11 +3636,6 @@ msgstr "消しゴム"
 #: templates/upload.html.jinja:215
 msgid "Tout effacer"
 msgstr "すべて消す"
-
-#: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:216
-msgid "Fond"
-msgstr "背景"
 
 #: templates/upload.html.jinja:217
 msgid "Papier"
@@ -5523,10 +5812,6 @@ msgstr ""
 msgid "Imprimer le QR code"
 msgstr "QR code を印刷"
 
-#: templates/configure/tab_legendes.html.jinja:3
-msgid "Style des légendes"
-msgstr "キャプションのスタイル"
-
 #: templates/configure/tab_legendes.html.jinja:4
 msgid ""
 "Choisissez l'apparence de chaque type de légende, comme sur Snapchat : "
@@ -5536,215 +5821,6 @@ msgid ""
 msgstr ""
 "Snapchat "
 "のように、キャプションの種類ごとに見た目を選べます：フォント、サイズ、色、背景、太字、斜体、下線、縁取り、影、位置、傾き。写真や動画ごとに独自のスタイルも設定できます（プレビュータブのキャプション下のパレットボタン）。"
-
-#: templates/configure/tab_legendes.html.jinja:7
-msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
-msgstr "各写真・動画の下に入力したキャプション（ポストカードにも表示）。"
-
-#: templates/configure/tab_legendes.html.jinja:8
-msgid "Polaroïds"
-msgstr "ポラロイド"
-
-#: templates/configure/tab_legendes.html.jinja:8
-msgid "Texte écrit dans la marge blanche des polaroïds."
-msgstr "ポラロイドの白い余白に書かれる文字。"
-
-#: templates/configure/tab_legendes.html.jinja:9
-msgid "Date et lieu affichés par le diaporama."
-msgstr "スライドショーに表示される日付と場所。"
-
-#: templates/configure/tab_legendes.html.jinja:14
-msgid "Personnaliser"
-msgstr "カスタマイズ"
-
-#: templates/configure/tab_legendes.html.jinja:19
-msgid ""
-"Les légendes déjà posées sur les photos sont redessinées automatiquement "
-"avec le nouveau style. Les vidéos affichent leur légende en sous-titre "
-"pendant la lecture."
-msgstr "写真に付いているキャプションは新しいスタイルで自動的に描き直されます。動画では再生中に字幕としてキャプションが表示されます。"
-
-#: templates/configure/tab_legendes.html.jinja:32
-msgid "Aperçu de la légende"
-msgstr "キャプションのプレビュー"
-
-#: templates/configure/tab_legendes.html.jinja:36
-msgid ""
-"Touchez ou faites glisser sur l'image pour placer la légende. L'aperçu "
-"est dessiné par le cadre lui-même."
-msgstr "画像をタップまたはドラッグしてキャプションを配置します。プレビューはフォトフレーム自身が描画します。"
-
-#: templates/configure/tab_legendes.html.jinja:37
-msgid "Texte d'essai"
-msgstr "サンプルテキスト"
-
-#: templates/configure/tab_legendes.html.jinja:41
-msgid "Modèles"
-msgstr "テンプレート"
-
-#: templates/configure/tab_legendes.html.jinja:43 utils/ambiances.py:22
-msgid "Classique"
-msgstr "クラシック"
-
-#: templates/configure/tab_legendes.html.jinja:43
-msgid "Grand texte"
-msgstr "大きな文字"
-
-#: templates/configure/tab_legendes.html.jinja:43
-#: templates/configure/tab_legendes.html.jinja:77
-msgid "Bulle"
-msgstr "吹き出し"
-
-#: templates/configure/tab_legendes.html.jinja:43
-#: templates/configure/tab_legendes.html.jinja:77
-msgid "Étiquette"
-msgstr "ラベル"
-
-#: templates/configure/tab_legendes.html.jinja:43
-msgid "Manuscrit"
-msgstr "手書き"
-
-#: templates/configure/tab_legendes.html.jinja:43 utils/message_renderer.py:42
-msgid "Néon"
-msgstr "ネオン"
-
-#: templates/configure/tab_legendes.html.jinja:48
-msgid "Police"
-msgstr "警察"
-
-#: templates/configure/tab_legendes.html.jinja:50
-msgid "Moderne"
-msgstr "モダン"
-
-#: templates/configure/tab_legendes.html.jinja:50
-msgid "Classique (empattements)"
-msgstr "クラシック（セリフ）"
-
-#: templates/configure/tab_legendes.html.jinja:56
-msgid "Taille"
-msgstr "サイズ"
-
-#: templates/configure/tab_legendes.html.jinja:60
-msgid "Mise en forme"
-msgstr "書式"
-
-#: templates/configure/tab_legendes.html.jinja:62
-msgid "Gras"
-msgstr "太字"
-
-#: templates/configure/tab_legendes.html.jinja:63
-msgid "Italique"
-msgstr "斜体"
-
-#: templates/configure/tab_legendes.html.jinja:64
-msgid "Souligné"
-msgstr "下線"
-
-#: templates/configure/tab_legendes.html.jinja:65
-msgid "Majuscules"
-msgstr "大文字"
-
-#: templates/configure/tab_legendes.html.jinja:67
-msgid "Aligné à gauche"
-msgstr "左揃え"
-
-#: templates/configure/tab_legendes.html.jinja:68
-msgid "Centré"
-msgstr "中央揃え"
-
-#: templates/configure/tab_legendes.html.jinja:69
-msgid "Aligné à droite"
-msgstr "右揃え"
-
-#: templates/configure/tab_legendes.html.jinja:72
-msgid "Couleur du texte"
-msgstr "文字色"
-
-#: templates/configure/tab_legendes.html.jinja:77
-#: templates/configure/tab_legendes.html.jinja:95
-msgid "Aucun"
-msgstr "なし"
-
-#: templates/configure/tab_legendes.html.jinja:77
-msgid "Bandeau"
-msgstr "帯"
-
-#: templates/configure/tab_legendes.html.jinja:83
-msgid "Opacité du fond"
-msgstr "背景の不透明度"
-
-#: templates/configure/tab_legendes.html.jinja:88
-msgid "Contour"
-msgstr "縁取り"
-
-#: templates/configure/tab_legendes.html.jinja:93
-msgid "Effet"
-msgstr "効果"
-
-#: templates/configure/tab_legendes.html.jinja:95
-msgid "Ombre"
-msgstr "影"
-
-#: templates/configure/tab_legendes.html.jinja:95
-msgid "Halo lumineux"
-msgstr "グロー"
-
-#: templates/configure/tab_legendes.html.jinja:102
-msgid "Inclinaison"
-msgstr "傾き"
-
-#: templates/configure/tab_legendes.html.jinja:106
-msgid "Largeur maximale"
-msgstr "最大幅"
-
-#: templates/configure/tab_legendes.html.jinja:109
-#: templates/configure/tab_son.html.jinja:112
-msgid "Position"
-msgstr "位置"
-
-#: templates/configure/tab_legendes.html.jinja:111
-msgid "En haut"
-msgstr "上"
-
-#: templates/configure/tab_legendes.html.jinja:112
-msgid "Au milieu"
-msgstr "中央"
-
-#: templates/configure/tab_legendes.html.jinja:113
-msgid "En bas"
-msgstr "下"
-
-#: templates/configure/tab_legendes.html.jinja:118
-msgid "Style par défaut"
-msgstr "デフォルトのスタイル"
-
-#: templates/configure/tab_legendes.html.jinja:119
-msgid "Reprendre le style général"
-msgstr "全体のスタイルに戻す"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Légendes des photos et vidéos"
-msgstr "写真と動画のキャプション"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Texte des polaroïds"
-msgstr "ポラロイドの文字"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Infos des photos (date, lieu)"
-msgstr "写真の情報（日付、場所）"
-
-#: templates/configure/tab_legendes.html.jinja:177
-msgid "Style de cette légende"
-msgstr "このキャプションのスタイル"
-
-#: templates/configure/tab_legendes.html.jinja:206
-msgid "Autre couleur"
-msgstr "その他の色"
-
-#: templates/configure/tab_legendes.html.jinja:218
-msgid "aucun"
-msgstr "なし"
 
 #: templates/configure/tab_logs.html.jinja:4
 msgid "Logs Système"
