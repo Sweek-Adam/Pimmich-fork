@@ -1,4 +1,63 @@
         <div id="tab-apercu" class="tabcontent">
+            <fieldset id="lib-search" class="mb-4">
+                <legend><h3><i class="fas fa-search mr-2"></i>{{ _("Rechercher dans la bibliothèque") }}</h3></legend>
+                <div class="lib-filters">
+                    <input type="search" id="ls-q" placeholder="{{ _('Lieu, légende, nom… ex : Biarritz, anniversaire') }}">
+                    <label>{{ _("du") }} <input type="date" id="ls-from"></label>
+                    <label>{{ _("au") }} <input type="date" id="ls-to"></label>
+                    <select id="ls-source"><option value="">{{ _("Toutes les sources") }}</option></select>
+                    <select id="ls-person" class="hidden"><option value="">{{ _("Tout le monde") }}</option></select>
+                    <select id="ls-media"><option value="">{{ _("Photos et vidéos") }}</option><option value="photos">{{ _("Photos seulement") }}</option><option value="videos">{{ _("Vidéos seulement") }}</option></select>
+                    <label class="flex items-center gap-1"><input type="checkbox" id="ls-fav"> <i class="fas fa-star text-yellow-500"></i> {{ _("Favoris") }}</label>
+                </div>
+                <p id="ls-count" class="text-sm text-gray-600 mt-2"></p>
+                <div id="ls-results" class="photo-grid mt-2"></div>
+            </fieldset>
+            <style>
+                .lib-filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+                .lib-filters input[type=search] { flex: 1 1 260px; }
+                #ls-results a { position: relative; display: block; }
+                #ls-results img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; }
+                #ls-results small { display: block; font-size: .72rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            </style>
+            <script>
+                window.addEventListener("DOMContentLoaded", () => {
+                    const $ = (id) => document.getElementById(id);
+                    const T = { found: {{ _("{n} résultat(s)")|tojson }}, shown: {{ _("(les 300 plus récents affichés)")|tojson }} };
+                    let timer = null, filled = false, box = null;
+                    async function fill() {
+                        if (filled) return;
+                        filled = true;
+                        const lib = await (await fetch("/api/library")).json();
+                        [...new Set(lib.items.map(i => i.source))].sort().forEach(s => $("ls-source").add(new Option(s.startsWith("compte_") ? s.slice(7) : s, s)));
+                        const people = [...new Set(lib.items.flatMap(i => i.people || []))].sort();
+                        people.forEach(p => $("ls-person").add(new Option(p, p)));
+                        $("ls-person").classList.toggle("hidden", !people.length);
+                    }
+                    async function run() {
+                        const q = new URLSearchParams({ q: $("ls-q").value, from: $("ls-from").value, to: $("ls-to").value, source: $("ls-source").value,
+                                                        person: $("ls-person").value, media: $("ls-media").value, fav: $("ls-fav").checked ? "1" : "" });
+                        const active = $("ls-q").value || $("ls-from").value || $("ls-to").value || $("ls-source").value || $("ls-person").value || $("ls-media").value || $("ls-fav").checked;
+                        $("ls-results").innerHTML = ""; $("ls-count").textContent = "";
+                        if (!active) return;
+                        const d = await (await fetch("/api/library/search?" + q)).json();
+                        $("ls-count").textContent = T.found.replace("{n}", d.total) + (d.total > d.items.length ? " " + T.shown : "");
+                        d.items.forEach(item => {
+                            const a = document.createElement("a"); a.href = item.url; a.className = "glightbox"; a.dataset.gallery = "search";
+                            const img = document.createElement("img"); img.src = item.thumb; img.loading = "lazy"; img.alt = item.caption || "";
+                            const info = document.createElement("small");
+                            info.textContent = [item.date ? new Date(item.date).toLocaleDateString() : "", item.place || "", item.caption || ""].filter(Boolean).join(" · ");
+                            a.append(img, info); $("ls-results").appendChild(a);
+                        });
+                        if (typeof GLightbox === "function") { if (box) box.destroy(); box = GLightbox({ selector: "#ls-results .glightbox" }); }
+                    }
+                    ["ls-q", "ls-from", "ls-to"].forEach(id => $(id).addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(run, 350); }));
+                    ["ls-source", "ls-person", "ls-media", "ls-fav"].forEach(id => $(id).addEventListener("change", run));
+                    $("ls-q").addEventListener("focus", fill);
+                    document.querySelectorAll(".tablink[onclick*=\"'tab-apercu'\"]").forEach(b => b.addEventListener("click", () => setTimeout(fill, 50)));
+                    if ($("lib-search").offsetParent !== null) fill();
+                });
+            </script>
             <fieldset>
                 <legend>
                     <h3>{{ _("Aperçu des photos préparées") }}</h3>

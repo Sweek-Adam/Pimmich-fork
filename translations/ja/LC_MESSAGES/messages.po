@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:57+0200\n"
+"POT-Creation-Date: 2026-10-11 10:59+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -240,11 +240,12 @@ msgstr "プレイリスト"
 
 #: templates/configure.html.jinja:147
 #: templates/configure/_playlist_builder.html.jinja:17
+#: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr "お気に入り"
 
 #: templates/configure.html.jinja:148
-#: templates/configure/tab_apercu.html.jinja:14
+#: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "メッセージ"
@@ -779,6 +780,7 @@ msgstr "人物"
 
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
+#: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "全員"
 
@@ -894,10 +896,12 @@ msgid "Toute l'année"
 msgstr "通年"
 
 #: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:6
 msgid "du"
 msgstr "開始"
 
 #: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
 msgstr "終了"
 
@@ -930,15 +934,18 @@ msgid "Favoris uniquement"
 msgstr "お気に入りのみ"
 
 #: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7
 msgid "Photos et vidéos"
 msgstr "写真と動画"
 
 #: templates/configure/_smart_albums.html.jinja:45
+#: templates/configure/tab_apercu.html.jinja:10
 msgid "Photos seulement"
 msgstr "写真のみ"
 
 #: templates/configure/_smart_albums.html.jinja:46
+#: templates/configure/tab_apercu.html.jinja:10
 msgid "Vidéos seulement"
 msgstr "動画のみ"
 
@@ -1352,7 +1359,7 @@ msgid "Aucune"
 msgstr "なし"
 
 #: templates/configure/scripts_gallery.html.jinja:19
-#: templates/configure/tab_apercu.html.jinja:109
+#: templates/configure/tab_apercu.html.jinja:168
 #: templates/configure/tab_favoris.html.jinja:89
 msgid "Mettre en favori"
 msgstr "ブックマーク"
@@ -1366,7 +1373,7 @@ msgid "Cette playlist est vide."
 msgstr "このプレイリストは空です。"
 
 #: templates/configure/scripts_gallery.html.jinja:22
-#: templates/configure/tab_apercu.html.jinja:138
+#: templates/configure/tab_apercu.html.jinja:197
 #: templates/configure/tab_favoris.html.jinja:118
 msgid "Ajouter une légende..."
 msgstr "キャプションを追加..."
@@ -2799,18 +2806,39 @@ msgstr "トークンを表示/非表示"
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "ホーム アシスタント プロファイルに「長期アクセス トークン」を作成します。"
 
-#: templates/configure/tab_apercu.html.jinja:4
+#: templates/configure/tab_apercu.html.jinja:3
+msgid "Rechercher dans la bibliothèque"
+msgstr "ライブラリを検索"
+
+#: templates/configure/tab_apercu.html.jinja:5
+msgid "Lieu, légende, nom… ex : Biarritz, anniversaire"
+msgstr "場所・キャプション・名前… 例：ビアリッツ、誕生日"
+
+#: templates/configure/tab_apercu.html.jinja:8
+msgid "Toutes les sources"
+msgstr "すべてのソース"
+
+#: templates/configure/tab_apercu.html.jinja:26
+#, python-brace-format
+msgid "{n} résultat(s)"
+msgstr "{n}件"
+
+#: templates/configure/tab_apercu.html.jinja:26
+msgid "(les 300 plus récents affichés)"
+msgstr "（新しい300件を表示）"
+
+#: templates/configure/tab_apercu.html.jinja:63
 msgid "Aperçu des photos préparées"
 msgstr "準備した写真をプレビューする"
 
-#: templates/configure/tab_apercu.html.jinja:6
+#: templates/configure/tab_apercu.html.jinja:65
 msgid ""
 "Voici les photos qui sont prêtes à être affichées par le diaporama,\n"
 "                    classées par source. Cliquez sur une photo pour "
 "l'agrandir."
 msgstr "スライドショーで表示できる写真をソース別に表示しています。写真をクリックすると拡大表示されます。"
 
-#: templates/configure/tab_apercu.html.jinja:17
+#: templates/configure/tab_apercu.html.jinja:76
 #, python-format
 msgid "%(num)d photo"
 msgid_plural ""
@@ -2818,94 +2846,94 @@ msgid_plural ""
 "                                photos"
 msgstr[0] "%(num)d 枚の写真"
 
-#: templates/configure/tab_apercu.html.jinja:23
+#: templates/configure/tab_apercu.html.jinja:82
 #, python-format
 msgid "Supprimer toutes les photos de la source '%(source)s'"
 msgstr "ソース「%(source)s」からすべての写真を削除します"
 
-#: templates/configure/tab_apercu.html.jinja:25
+#: templates/configure/tab_apercu.html.jinja:84
 msgid "Tout supprimer"
 msgstr "すべて削除"
 
-#: templates/configure/tab_apercu.html.jinja:62
-#: templates/configure/tab_apercu.html.jinja:65
+#: templates/configure/tab_apercu.html.jinja:121
+#: templates/configure/tab_apercu.html.jinja:124
 #: templates/configure/tab_favoris.html.jinja:43
 #: templates/configure/tab_favoris.html.jinja:46
 #, python-format
 msgid "Aperçu de %(media)s"
 msgstr "%(media)s のプレビュー"
 
-#: templates/configure/tab_apercu.html.jinja:79
+#: templates/configure/tab_apercu.html.jinja:138
 #: templates/configure/tab_favoris.html.jinja:58
 msgid "Filtre..."
 msgstr "フィルタリングされた..."
 
-#: templates/configure/tab_apercu.html.jinja:81
+#: templates/configure/tab_apercu.html.jinja:140
 #: templates/configure/tab_favoris.html.jinja:61
 msgid "Noir & Blanc"
 msgstr "ブラック&ホワイト"
 
-#: templates/configure/tab_apercu.html.jinja:83
+#: templates/configure/tab_apercu.html.jinja:142
 #: templates/configure/tab_favoris.html.jinja:62
 msgid "Sépia"
 msgstr "セピア"
 
-#: templates/configure/tab_apercu.html.jinja:85
+#: templates/configure/tab_apercu.html.jinja:144
 #: templates/configure/tab_favoris.html.jinja:65
 msgid "Vignette"
 msgstr "ビネット"
 
-#: templates/configure/tab_apercu.html.jinja:87
+#: templates/configure/tab_apercu.html.jinja:146
 #: templates/configure/tab_favoris.html.jinja:67
 msgid "Vintage"
 msgstr "ビンテージ"
 
-#: templates/configure/tab_apercu.html.jinja:90
+#: templates/configure/tab_apercu.html.jinja:149
 #: templates/configure/tab_favoris.html.jinja:70
 msgid "Polaroid"
 msgstr "ポラロイド"
 
-#: templates/configure/tab_apercu.html.jinja:94
+#: templates/configure/tab_apercu.html.jinja:153
 #: templates/configure/tab_favoris.html.jinja:74
 msgid "Carte Postale"
 msgstr "ポストカード"
 
-#: templates/configure/tab_apercu.html.jinja:97
+#: templates/configure/tab_apercu.html.jinja:156
 #: templates/configure/tab_favoris.html.jinja:77
 msgid "Polaroid Vintage"
 msgstr "ポラロイド ヴィンテージ"
 
-#: templates/configure/tab_apercu.html.jinja:98
+#: templates/configure/tab_apercu.html.jinja:157
 #: templates/configure/tab_favoris.html.jinja:78
 msgid "Original"
 msgstr "オリジナル"
 
-#: templates/configure/tab_apercu.html.jinja:105
+#: templates/configure/tab_apercu.html.jinja:164
 #: templates/configure/tab_favoris.html.jinja:85
 msgid "Ajouter à une playlist"
 msgstr "プレイリストに追加する"
 
-#: templates/configure/tab_apercu.html.jinja:117
+#: templates/configure/tab_apercu.html.jinja:176
 #: templates/configure/tab_favoris.html.jinja:97
 msgid "Sauvegarder la photo originale"
 msgstr "元の写真を保存する"
 
-#: templates/configure/tab_apercu.html.jinja:122
+#: templates/configure/tab_apercu.html.jinja:181
 #: templates/configure/tab_favoris.html.jinja:102
 msgid "Photo anniversaire !"
 msgstr "誕生日の写真！"
 
-#: templates/configure/tab_apercu.html.jinja:128
+#: templates/configure/tab_apercu.html.jinja:187
 #: templates/configure/tab_favoris.html.jinja:108
 msgid "Supprimer ce média"
 msgstr "このメディアを削除します"
 
-#: templates/configure/tab_apercu.html.jinja:140
+#: templates/configure/tab_apercu.html.jinja:199
 #: templates/configure/tab_favoris.html.jinja:120
 msgid "Style de la légende"
 msgstr "キャプションのスタイル"
 
-#: templates/configure/tab_apercu.html.jinja:150
+#: templates/configure/tab_apercu.html.jinja:209
 msgid ""
 "Aucune photo préparée n'a été trouvée. Veuillez\n"
 "                    en importer depuis l'onglet \"Actions\"."

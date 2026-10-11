@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:57+0200\n"
+"POT-Creation-Date: 2026-10-11 10:59+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -240,11 +240,12 @@ msgstr "Listas de reproducción"
 
 #: templates/configure.html.jinja:147
 #: templates/configure/_playlist_builder.html.jinja:17
+#: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr "Favoritos"
 
 #: templates/configure.html.jinja:148
-#: templates/configure/tab_apercu.html.jinja:14
+#: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "Mensajes"
@@ -789,6 +790,7 @@ msgstr "Persona"
 
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
+#: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "Todos"
 
@@ -906,10 +908,12 @@ msgid "Toute l'année"
 msgstr "Todo el año"
 
 #: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:6
 msgid "du"
 msgstr "del"
 
 #: templates/configure/_smart_albums.html.jinja:22
+#: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
 msgstr "al"
 
@@ -942,15 +946,18 @@ msgid "Favoris uniquement"
 msgstr "Solo favoritos"
 
 #: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7
 msgid "Photos et vidéos"
 msgstr "Fotos y vídeos"
 
 #: templates/configure/_smart_albums.html.jinja:45
+#: templates/configure/tab_apercu.html.jinja:10
 msgid "Photos seulement"
 msgstr "Solo fotos"
 
 #: templates/configure/_smart_albums.html.jinja:46
+#: templates/configure/tab_apercu.html.jinja:10
 msgid "Vidéos seulement"
 msgstr "Solo vídeos"
 
@@ -1376,7 +1383,7 @@ msgid "Aucune"
 msgstr "Ninguno"
 
 #: templates/configure/scripts_gallery.html.jinja:19
-#: templates/configure/tab_apercu.html.jinja:109
+#: templates/configure/tab_apercu.html.jinja:168
 #: templates/configure/tab_favoris.html.jinja:89
 msgid "Mettre en favori"
 msgstr "Marcador"
@@ -1390,7 +1397,7 @@ msgid "Cette playlist est vide."
 msgstr "Esta lista de reproducción está vacía."
 
 #: templates/configure/scripts_gallery.html.jinja:22
-#: templates/configure/tab_apercu.html.jinja:138
+#: templates/configure/tab_apercu.html.jinja:197
 #: templates/configure/tab_favoris.html.jinja:118
 msgid "Ajouter une légende..."
 msgstr "Añadir un título..."
@@ -2863,11 +2870,32 @@ msgstr "Mostrar/Ocultar el token"
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Cree un \"Token de acceso a largo plazo\" en su perfil de Home Assistant."
 
-#: templates/configure/tab_apercu.html.jinja:4
+#: templates/configure/tab_apercu.html.jinja:3
+msgid "Rechercher dans la bibliothèque"
+msgstr "Buscar en la biblioteca"
+
+#: templates/configure/tab_apercu.html.jinja:5
+msgid "Lieu, légende, nom… ex : Biarritz, anniversaire"
+msgstr "Lugar, pie de foto, nombre… ej.: Biarritz, cumpleaños"
+
+#: templates/configure/tab_apercu.html.jinja:8
+msgid "Toutes les sources"
+msgstr "Todas las fuentes"
+
+#: templates/configure/tab_apercu.html.jinja:26
+#, python-brace-format
+msgid "{n} résultat(s)"
+msgstr "{n} resultado(s)"
+
+#: templates/configure/tab_apercu.html.jinja:26
+msgid "(les 300 plus récents affichés)"
+msgstr "(se muestran los 300 más recientes)"
+
+#: templates/configure/tab_apercu.html.jinja:63
 msgid "Aperçu des photos préparées"
 msgstr "Vista previa de fotos preparadas"
 
-#: templates/configure/tab_apercu.html.jinja:6
+#: templates/configure/tab_apercu.html.jinja:65
 msgid ""
 "Voici les photos qui sont prêtes à être affichées par le diaporama,\n"
 "                    classées par source. Cliquez sur une photo pour "
@@ -2876,7 +2904,7 @@ msgstr ""
 "Estas son las fotos listas para mostrarse en la presentación, ordenadas "
 "por fuente. Haz clic en una foto para ampliarla."
 
-#: templates/configure/tab_apercu.html.jinja:17
+#: templates/configure/tab_apercu.html.jinja:76
 #, python-format
 msgid "%(num)d photo"
 msgid_plural ""
@@ -2885,94 +2913,94 @@ msgid_plural ""
 msgstr[0] "%(num)d foto"
 msgstr[1] "%(num)d fotos"
 
-#: templates/configure/tab_apercu.html.jinja:23
+#: templates/configure/tab_apercu.html.jinja:82
 #, python-format
 msgid "Supprimer toutes les photos de la source '%(source)s'"
 msgstr "Eliminar todas las fotos de la fuente '%(source)s'"
 
-#: templates/configure/tab_apercu.html.jinja:25
+#: templates/configure/tab_apercu.html.jinja:84
 msgid "Tout supprimer"
 msgstr "Eiminar todo"
 
-#: templates/configure/tab_apercu.html.jinja:62
-#: templates/configure/tab_apercu.html.jinja:65
+#: templates/configure/tab_apercu.html.jinja:121
+#: templates/configure/tab_apercu.html.jinja:124
 #: templates/configure/tab_favoris.html.jinja:43
 #: templates/configure/tab_favoris.html.jinja:46
 #, python-format
 msgid "Aperçu de %(media)s"
 msgstr "Vista previa de %(media)s"
 
-#: templates/configure/tab_apercu.html.jinja:79
+#: templates/configure/tab_apercu.html.jinja:138
 #: templates/configure/tab_favoris.html.jinja:58
 msgid "Filtre..."
 msgstr "Filtrado..."
 
-#: templates/configure/tab_apercu.html.jinja:81
+#: templates/configure/tab_apercu.html.jinja:140
 #: templates/configure/tab_favoris.html.jinja:61
 msgid "Noir & Blanc"
 msgstr "Blanco y negro"
 
-#: templates/configure/tab_apercu.html.jinja:83
+#: templates/configure/tab_apercu.html.jinja:142
 #: templates/configure/tab_favoris.html.jinja:62
 msgid "Sépia"
 msgstr "Sepia"
 
-#: templates/configure/tab_apercu.html.jinja:85
+#: templates/configure/tab_apercu.html.jinja:144
 #: templates/configure/tab_favoris.html.jinja:65
 msgid "Vignette"
 msgstr "Uña del pulgar"
 
-#: templates/configure/tab_apercu.html.jinja:87
+#: templates/configure/tab_apercu.html.jinja:146
 #: templates/configure/tab_favoris.html.jinja:67
 msgid "Vintage"
 msgstr "Aniguo"
 
-#: templates/configure/tab_apercu.html.jinja:90
+#: templates/configure/tab_apercu.html.jinja:149
 #: templates/configure/tab_favoris.html.jinja:70
 msgid "Polaroid"
 msgstr "Polaroid"
 
-#: templates/configure/tab_apercu.html.jinja:94
+#: templates/configure/tab_apercu.html.jinja:153
 #: templates/configure/tab_favoris.html.jinja:74
 msgid "Carte Postale"
 msgstr "Tarjeta postal"
 
-#: templates/configure/tab_apercu.html.jinja:97
+#: templates/configure/tab_apercu.html.jinja:156
 #: templates/configure/tab_favoris.html.jinja:77
 msgid "Polaroid Vintage"
 msgstr "Polaroid Vintage"
 
-#: templates/configure/tab_apercu.html.jinja:98
+#: templates/configure/tab_apercu.html.jinja:157
 #: templates/configure/tab_favoris.html.jinja:78
 msgid "Original"
 msgstr "Original"
 
-#: templates/configure/tab_apercu.html.jinja:105
+#: templates/configure/tab_apercu.html.jinja:164
 #: templates/configure/tab_favoris.html.jinja:85
 msgid "Ajouter à une playlist"
 msgstr "Agregar a una lista de reproducción"
 
-#: templates/configure/tab_apercu.html.jinja:117
+#: templates/configure/tab_apercu.html.jinja:176
 #: templates/configure/tab_favoris.html.jinja:97
 msgid "Sauvegarder la photo originale"
 msgstr "Guarda la foto original."
 
-#: templates/configure/tab_apercu.html.jinja:122
+#: templates/configure/tab_apercu.html.jinja:181
 #: templates/configure/tab_favoris.html.jinja:102
 msgid "Photo anniversaire !"
 msgstr "Foto de cumpleaños!"
 
-#: templates/configure/tab_apercu.html.jinja:128
+#: templates/configure/tab_apercu.html.jinja:187
 #: templates/configure/tab_favoris.html.jinja:108
 msgid "Supprimer ce média"
 msgstr "Eliminar este medio"
 
-#: templates/configure/tab_apercu.html.jinja:140
+#: templates/configure/tab_apercu.html.jinja:199
 #: templates/configure/tab_favoris.html.jinja:120
 msgid "Style de la légende"
 msgstr "Estilo de la leyenda"
 
-#: templates/configure/tab_apercu.html.jinja:150
+#: templates/configure/tab_apercu.html.jinja:209
 msgid ""
 "Aucune photo préparée n'a été trouvée. Veuillez\n"
 "                    en importer depuis l'onglet \"Actions\"."

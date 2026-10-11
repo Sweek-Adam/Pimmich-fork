@@ -342,3 +342,21 @@ def set_playlist_photos(playlist_id):
             save_playlists(playlists)
             return jsonify({"success": True, "count": len(photos)})
     return jsonify({"success": False, "message": _("Playlist non trouvée.")}), 404
+
+
+@app.route('/api/library/search', methods=['GET'])
+@login_required
+def library_search_api():
+    """Recherche : ?q=texte&from=AAAA-MM-JJ&to=...&source=...&person=...&fav=1&media=photos|videos"""
+    from utils import library_search
+    args = request.args
+    date = lambda v: v if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v or "") else None
+    items, total = library_search.search(load_favorites(), args.get("q", "")[:120], date(args.get("from")), date(args.get("to")),
+                                         args.get("source", ""), args.get("person", ""), args.get("fav") == "1", args.get("media", ""))
+    results = []
+    for item in items:
+        thumb = item["path"].rsplit(".", 1)[0] + "_thumbnail.jpg" if item["video"] else item["path"]
+        results.append({"path": item["path"], "date": item["date"], "place": item.get("place"), "people": item["people"], "caption": item["caption"],
+                        "video": item["video"], "thumb": url_for("static", filename=f"prepared/{thumb}"),
+                        "url": url_for("static", filename=f"prepared/{item['path']}")})
+    return jsonify({"success": True, "total": total, "items": results})
