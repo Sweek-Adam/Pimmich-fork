@@ -353,6 +353,9 @@ def create_drawing(data, signature, author, width, height, guest=True):
             drawing = image.convert("RGB")
     except (OSError, SyntaxError):
         raise ValueError("Ce fichier n'est pas une image.")
+    from PIL import ImageStat
+    if max(ImageStat.Stat(drawing).stddev) < 2:  # une seule couleur : rien de dessiné (ou trait invisible sur le fond)
+        raise ValueError("Le dessin est vide : choisissez une couleur qui se voit sur le fond.")
     signature = (signature or "").strip()[:MAX_SIGNATURE]
     message = {"id": secrets.token_hex(6), "kind": "drawing", "title": "", "body": "", "signature": signature, "style": DEFAULT_STYLE,
                "expires": (date.today() + timedelta(days=GUEST_MAX_DAYS)).isoformat() if guest else None,

@@ -2403,31 +2403,48 @@ def check_reaction(screen, photo_path, since):
 _voice_played = {}
 
 
+VOICE_REPLAY_SECONDS = 20 * 60  # un même message vocal est relu au plus toutes les 20 minutes
+
+
+def _voice_length(path):
+    """Durée d'un message vocal (secondes)."""
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
+                             capture_output=True, text=True, timeout=10).stdout.strip()
+        return float(out)
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return 10.0
+
+
 def play_voice_message(photo_path, config):
-    """Carte d'un message vocal à l'écran : le cadre lit le message (au plus une fois par heure). Renvoie sa durée."""
+    """Carte d'un message vocal à l'écran : le cadre lit le message (mpv, même sortie que les vidéos), toute la musique
+    s'efface derrière la voix puis revient. Renvoie la durée de lecture (la carte reste affichée le temps de l'écouter)."""
     try:
         path = Path(str(photo_path or ""))
         if path.parent.name != "messages" or not config.get("voice_messages_enabled", True):
             return 0
         voice = Path(BASE_DIR) / "cache" / "voice" / f"{path.stem}.ogg"
-        if not voice.exists() or time.time() - _voice_played.get(path.stem, 0) < 3600:
+        if not voice.exists() or time.time() - _voice_played.get(path.stem, 0) < VOICE_REPLAY_SECONDS:
             return 0
-        if not pygame.mixer.get_init():
-            pygame.mixer.init()
-        sound = pygame.mixer.Sound(str(voice))
-        sound.set_volume(max(0.0, min(1.0, int(config.get("voice_volume", 100)) / 100)))
-        music_volume = pygame.mixer.music.get_volume()
-        pygame.mixer.music.set_volume(music_volume * 0.25)  # la musique s'efface derrière la voix
-        channel = sound.play()
         _voice_played[path.stem] = time.time()
-        length = sound.get_length()
+        lead = 0.7  # silence au début : la sortie HDMI se réveille sans manger les premiers mots
+        length = _voice_length(voice) + lead
+        volume = max(0, min(100, int(config.get("voice_volume", 100))))
+        apply_audio_output(config.get("video_audio_output", "auto"))
+        ducked = duck_music(True, config)  # musique du diaporama, radio, Spotify...
+        proc = subprocess.Popen(["mpv", "--no-video", "--no-terminal", "--really-quiet", f"--volume={volume}",
+                                 f"--af=lavfi=[adelay={int(lead * 1000)}:all=1]", str(voice)],
+                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         def restore():
-            time.sleep(length + 0.5)
-            pygame.mixer.music.set_volume(music_volume)
+            try:
+                proc.wait(timeout=length + 30)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+            duck_music(False, config, ducked)
         threading.Thread(target=restore, daemon=True).start()
         logger.info(f"🎤 Message vocal lu ({length:.0f} s).")
-        return length if channel else 0
+        return length
     except Exception as e:
         logger.info(f"🎤 Message vocal illisible : {e}")
         return 0

@@ -59,3 +59,13 @@ def test_render_drawing_with_and_without_signature(monkeypatch, tmp_path):
     for signature in ("", "Papi"):
         image = mm.render_drawing("abc", signature, 1920, 1080)
         assert image.size == (1920, 1080)
+
+
+def test_blank_drawing_is_refused():
+    import pytest
+    from utils import messages_manager
+    image = Image.new("RGB", (1280, 720), (47, 59, 51))  # ardoise avec un trait de la même couleur : rien de visible
+    buffer = io.BytesIO()
+    image.save(buffer, "PNG")
+    with pytest.raises(ValueError):
+        messages_manager.create_drawing(buffer.getvalue(), "Léo", "", 1920, 1080)

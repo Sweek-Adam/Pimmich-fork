@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 18:23+0200\n"
+"POT-Creation-Date: 2026-10-11 18:30+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -118,29 +118,29 @@ msgstr "(Anniversary) %(num)d year ago"
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Anniversary) %(num)d years ago"
 
-#: local_slideshow.py:3288
+#: local_slideshow.py:3305
 msgid "Aucune photo trouvée."
 msgstr "No photos found."
 
-#: local_slideshow.py:3289
+#: local_slideshow.py:3306
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configure at: http://%(ip)s"
 
-#: local_slideshow.py:3290
+#: local_slideshow.py:3307
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credentials in credentials.json at the root of the SD card)"
 
-#: local_slideshow.py:3291
+#: local_slideshow.py:3308
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Screen resolution: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3292
+#: local_slideshow.py:3309
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Retrying in 60 seconds..."
 
-#: local_slideshow.py:3318
+#: local_slideshow.py:3335
 msgid "Scannez pour configurer"
 msgstr "Scan to configure"
 
@@ -588,7 +588,7 @@ msgstr "Other colour"
 
 #: frontend/src/components/CaptionEditor.vue:147
 #: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:216
+#: templates/upload.html.jinja:231
 msgid "Fond"
 msgstr "Background"
 
@@ -659,7 +659,7 @@ msgstr "Use the general style"
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:214
+#: templates/upload.html.jinja:218
 msgid "Annuler"
 msgstr "Cancel"
 
@@ -2382,9 +2382,9 @@ msgstr ""
 #: frontend/src/views/GuestsView.vue:25
 #: templates/configure/tab_invites.html.jinja:134
 msgid ""
-"Lire les messages vocaux quand leur carte s'affiche (au plus une fois par"
-" heure)"
-msgstr "Play voice messages when their card is shown (at most once an hour)"
+"Lire les messages vocaux quand leur carte s'affiche (au plus toutes les "
+"20 minutes)"
+msgstr "Play voice messages when their card is shown (at most every 20 minutes)"
 
 #: frontend/src/views/GuestsView.vue:26
 #: templates/configure/tab_invites.html.jinja:137
@@ -5364,7 +5364,7 @@ msgid "Sombre"
 msgstr "Dark"
 
 #: templates/configure.html.jinja:126 templates/login.html.jinja:89
-#: templates/upload.html.jinja:351
+#: templates/upload.html.jinja:398
 msgid "Langue"
 msgstr "Language"
 
@@ -5530,7 +5530,7 @@ msgid "Photo affichée sur le cadre"
 msgstr "Photo shown on the frame"
 
 #: templates/upload.html.jinja:104 templates/upload.html.jinja:126
-#: templates/upload.html.jinja:152 templates/upload.html.jinja:226
+#: templates/upload.html.jinja:152 templates/upload.html.jinja:236
 msgid "Votre prénom (optionnel)"
 msgstr "Your first name (optional)"
 
@@ -5581,8 +5581,8 @@ msgid "Recommencer"
 msgstr "Record again"
 
 #: templates/configure/tab_accueil.html.jinja:335
-#: templates/upload.html.jinja:197 templates/upload.html.jinja:329
-#: templates/upload.html.jinja:394 templates/upload.html.jinja:431
+#: templates/upload.html.jinja:197 templates/upload.html.jinja:376
+#: templates/upload.html.jinja:441 templates/upload.html.jinja:478
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr "Upload failed. Check the connection to the frame."
 
@@ -5594,72 +5594,76 @@ msgstr "Draw something for the frame"
 msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
 msgstr "Draw with your finger, add stickers, then send."
 
-#: templates/upload.html.jinja:210
-msgid "Trait fin"
-msgstr "Thin line"
-
-#: templates/upload.html.jinja:211
-msgid "Trait moyen"
-msgstr "Medium line"
-
-#: templates/upload.html.jinja:212
-msgid "Trait épais"
-msgstr "Thick line"
+#: templates/upload.html.jinja:209
+msgid "Touchez le dessin pour poser l'autocollant"
+msgstr "Tap the drawing to place the sticker"
 
 #: templates/upload.html.jinja:213
+msgid "Crayon"
+msgstr "Pen"
+
+#: templates/upload.html.jinja:214
+msgid "Autocollants"
+msgstr "Stickers"
+
+#: templates/upload.html.jinja:215
 msgid "Gomme"
 msgstr "Eraser"
 
-#: templates/upload.html.jinja:215
+#: templates/upload.html.jinja:219
 msgid "Tout effacer"
 msgstr "Clear all"
 
-#: templates/upload.html.jinja:217
+#: templates/upload.html.jinja:225
+msgid "Trait fin"
+msgstr "Thin line"
+
+#: templates/upload.html.jinja:226
+msgid "Trait moyen"
+msgstr "Medium line"
+
+#: templates/upload.html.jinja:227
+msgid "Trait épais"
+msgstr "Thick line"
+
+#: templates/upload.html.jinja:232
 msgid "Papier"
 msgstr "Paper"
 
 #: templates/configure/tab_messages.html.jinja:245
-#: templates/upload.html.jinja:218 utils/message_renderer.py:40
+#: templates/upload.html.jinja:233 utils/message_renderer.py:40
 msgid "Ardoise"
 msgstr "Chalkboard"
 
-#: templates/upload.html.jinja:219
+#: templates/upload.html.jinja:234
 msgid "Kraft"
 msgstr "Kraft paper"
 
-#: templates/upload.html.jinja:223
-msgid ""
-"Touchez le dessin pour poser l'autocollant (touchez-le à nouveau dans la "
-"liste pour revenir au crayon)."
-msgstr ""
-"Tap the drawing to place the sticker (tap it again in the list to go back"
-" to the pencil)."
-
-#: templates/upload.html.jinja:227
+#: templates/upload.html.jinja:237
 msgid "Envoyer le dessin"
 msgstr "Send drawing"
 
-#: templates/upload.html.jinja:318
+#: templates/upload.html.jinja:365
 msgid "Faites d'abord un dessin."
 msgstr "Draw something first."
 
-#: templates/upload.html.jinja:339
+#: templates/upload.html.jinja:386
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "Add this page to your phone's home screen"
 
-#: templates/upload.html.jinja:341
+#: templates/upload.html.jinja:388
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr "in Safari, tap the Share button, then « Add to Home Screen »."
 
-#: templates/upload.html.jinja:342
+#: templates/upload.html.jinja:389
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "in Chrome, open the ⋮ menu, then « Add to Home screen »."
 
-#: templates/upload.html.jinja:344
+#: templates/upload.html.jinja:391
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich will then open like an app, directly on this page."
 
-#: templates/upload.html.jinja:347
+#: templates/upload.html.jinja:394
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
@@ -5667,11 +5671,11 @@ msgstr ""
 "Return to login\n"
 "          administrator"
 
-#: templates/upload.html.jinja:414
+#: templates/upload.html.jinja:461
 msgid "fichier(s) en cours d'envoi..."
 msgstr "file(s) uploading..."
 
-#: templates/upload.html.jinja:425
+#: templates/upload.html.jinja:472
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Upload too large: send fewer files at a time."
 

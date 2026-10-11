@@ -204,39 +204,68 @@
       <div class="mt-8 pt-6 border-t border-gray-300" id="drawing-box">
         <h2 class="text-center text-2xl font-semibold mb-2">{{ _('Faire un dessin pour le cadre') }}</h2>
         <p class="text-center text-sm text-gray-600 mb-3">{{ _('Dessinez avec le doigt, ajoutez des autocollants, puis envoyez.') }}</p>
-        <div class="dr-tools">
-          <div class="dr-row" id="dr-colors"></div>
-          <div class="dr-row">
-            <button type="button" class="dr-btn dr-size" data-size="4" aria-label="{{ _('Trait fin') }}"><span style="width:6px;height:6px"></span></button>
-            <button type="button" class="dr-btn dr-size on" data-size="10" aria-label="{{ _('Trait moyen') }}"><span style="width:12px;height:12px"></span></button>
-            <button type="button" class="dr-btn dr-size" data-size="24" aria-label="{{ _('Trait épais') }}"><span style="width:20px;height:20px"></span></button>
-            <button type="button" class="dr-btn" id="dr-eraser" title="{{ _('Gomme') }}">🧽</button>
-            <button type="button" class="dr-btn" id="dr-undo" title="{{ _('Annuler') }}">↶</button>
-            <button type="button" class="dr-btn" id="dr-clear" title="{{ _('Tout effacer') }}">🗑</button>
-            <select id="dr-bg" class="dr-select" aria-label="{{ _('Fond') }}">
-              <option value="paper">{{ _('Papier') }}</option>
-              <option value="slate">{{ _('Ardoise') }}</option>
-              <option value="kraft">{{ _('Kraft') }}</option>
-            </select>
-          </div>
-          <div class="dr-row" id="dr-stickers"></div>
-          <p id="dr-hint" class="text-xs text-gray-500 text-center" style="visibility: hidden">{{ _("Touchez le dessin pour poser l'autocollant (touchez-le à nouveau dans la liste pour revenir au crayon).") }}</p>
+        <div class="dr-stage">
+          <canvas id="dr-canvas" class="dr-canvas"></canvas>
+          <p id="dr-hint" class="dr-hint" hidden>{{ _("Touchez le dessin pour poser l'autocollant") }}</p>
         </div>
-        <canvas id="dr-canvas" class="dr-canvas"></canvas>
+        <div class="dr-bar">
+          <div class="dr-modes" role="tablist">
+            <button type="button" class="dr-mode on" data-mode="pen" aria-label="{{ _('Crayon') }}">✏️<span>{{ _('Crayon') }}</span></button>
+            <button type="button" class="dr-mode" data-mode="sticker" aria-label="{{ _('Autocollants') }}">😀<span>{{ _('Autocollants') }}</span></button>
+            <button type="button" class="dr-mode" data-mode="eraser" aria-label="{{ _('Gomme') }}">🧽<span>{{ _('Gomme') }}</span></button>
+          </div>
+          <div class="dr-actions">
+            <button type="button" class="dr-icon" id="dr-undo" title="{{ _('Annuler') }}" aria-label="{{ _('Annuler') }}">↶</button>
+            <button type="button" class="dr-icon" id="dr-clear" title="{{ _('Tout effacer') }}" aria-label="{{ _('Tout effacer') }}">🗑</button>
+          </div>
+        </div>
+        <div class="dr-panel" id="dr-pen-panel">
+          <div class="dr-scroll" id="dr-colors"></div>
+          <div class="dr-sizes">
+            <button type="button" class="dr-size" data-size="4" aria-label="{{ _('Trait fin') }}"><span style="width:6px;height:6px"></span></button>
+            <button type="button" class="dr-size on" data-size="10" aria-label="{{ _('Trait moyen') }}"><span style="width:12px;height:12px"></span></button>
+            <button type="button" class="dr-size" data-size="24" aria-label="{{ _('Trait épais') }}"><span style="width:20px;height:20px"></span></button>
+          </div>
+        </div>
+        <div class="dr-panel" id="dr-sticker-panel" hidden><div class="dr-scroll" id="dr-stickers"></div></div>
+        <div class="dr-bgs" role="radiogroup" aria-label="{{ _('Fond') }}">
+          <button type="button" class="dr-bgbtn on" data-bg="paper"><i style="background:#fffdf6"></i>{{ _('Papier') }}</button>
+          <button type="button" class="dr-bgbtn" data-bg="slate"><i style="background:#2f3b33"></i>{{ _('Ardoise') }}</button>
+          <button type="button" class="dr-bgbtn" data-bg="kraft"><i style="background:#d9b98c"></i>{{ _('Kraft') }}</button>
+        </div>
         <input type="text" id="dr-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}" class="block w-full mt-3 p-2 border border-gray-300 rounded">
         <button type="button" id="dr-send" class="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">{{ _('Envoyer le dessin') }}</button>
         <p id="dr-status" class="text-center text-sm mt-3"></p>
       </div>
       <style>
-        .dr-tools { display: grid; gap: .5rem; margin-bottom: .5rem; }
-        .dr-row { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; align-items: center; }
-        .dr-btn { min-width: 38px; height: 38px; border-radius: 10px; border: 2px solid #e5e7eb; background: #fff; font-size: 1.2rem; display: inline-flex; align-items: center; justify-content: center; }
-        .dr-btn.on { border-color: #2563eb; box-shadow: 0 0 0 2px #bfdbfe; }
-        .dr-btn span { display: block; border-radius: 50%; background: #333; }
-        .dr-color { width: 34px; height: 34px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #d1d5db; }
+        .dr-stage { position: relative; }
+        .dr-canvas { width: 100%; border-radius: 14px; border: 1px solid #d1d5db; touch-action: none; background: #fffdf6; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+        .dr-hint { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); margin: 0; background: rgba(17,24,39,.75); color: #fff; font-size: .78rem; padding: .25rem .7rem; border-radius: 999px; pointer-events: none; white-space: nowrap; }
+        .dr-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .4rem; margin-top: .6rem; }
+        .dr-modes { display: flex; background: #f3f4f6; border-radius: 12px; padding: 3px; gap: 3px; }
+        .dr-mode { border: 0; background: none; border-radius: 9px; padding: .35rem .45rem; font-size: 1.05rem; display: flex; align-items: center; gap: .3rem; }
+        .dr-mode span { font-size: .78rem; font-weight: 600; color: #4b5563; }
+        .dr-mode.on { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+        .dr-mode.on span { color: #1d4ed8; }
+        @media (max-width: 380px) { .dr-mode span { display: none; } }
+        .dr-actions { display: flex; gap: .3rem; }
+        .dr-icon { width: 36px; height: 36px; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; font-size: 1.15rem; }
+        .dr-panel { margin-top: .5rem; display: flex; align-items: center; gap: .6rem; }
+        .dr-panel[hidden], .dr-hint[hidden] { display: none; }
+        .dr-scroll { display: flex; gap: .4rem; overflow-x: auto; padding: 4px 2px; flex: 1; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .dr-scroll::-webkit-scrollbar { display: none; }
+        .dr-color { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #d1d5db; }
         .dr-color.on { box-shadow: 0 0 0 3px #2563eb; }
-        .dr-select { height: 38px; border: 2px solid #e5e7eb; border-radius: 10px; padding: 0 .5rem; background: #fff; }
-        .dr-canvas { width: 100%; border-radius: 12px; border: 1px solid #d1d5db; touch-action: none; background: #fffdf6; display: block; }
+        .dr-sizes { display: flex; gap: .3rem; flex: none; }
+        .dr-size { width: 36px; height: 36px; border-radius: 10px; border: 2px solid #e5e7eb; background: #fff; display: inline-flex; align-items: center; justify-content: center; }
+        .dr-size.on { border-color: #2563eb; }
+        .dr-size span { display: block; border-radius: 50%; background: #333; }
+        .dr-sticker { flex: none; width: 44px; height: 44px; border-radius: 12px; border: 2px solid transparent; background: #f9fafb; font-size: 1.5rem; line-height: 1; }
+        .dr-sticker.on { border-color: #2563eb; background: #eff6ff; }
+        .dr-bgs { display: flex; justify-content: center; gap: .4rem; margin-top: .6rem; }
+        .dr-bgbtn { display: flex; align-items: center; gap: .35rem; border: 1px solid #e5e7eb; background: #fff; border-radius: 999px; padding: .25rem .7rem; font-size: .82rem; }
+        .dr-bgbtn i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #d1d5db; display: inline-block; }
+        .dr-bgbtn.on { border-color: #2563eb; color: #1d4ed8; font-weight: 600; }
       </style>
       <script>
         (() => {
@@ -245,14 +274,15 @@
           canvas.width = 1280;
           canvas.height = Math.round(1280 * {{ frame_height }} / {{ frame_width }});
           const BACKGROUNDS = { paper: "#fffdf6", slate: "#2f3b33", kraft: "#d9b98c" };
-          const COLORS = ["#222222", "#e53935", "#fb8c00", "#fdd835", "#43a047", "#1e88e5", "#8e24aa", "#ffffff"];
+          const DARK_BG = { slate: true };
+          const COLORS = ["#222222", "#ffffff", "#e53935", "#fb8c00", "#fdd835", "#43a047", "#1e88e5", "#8e24aa", "#ec407a", "#795548"];
           const STICKERS = ["❤️", "😘", "😂", "🥰", "🎉", "🎂", "🎈", "🌞", "🌈", "⭐", "🌸", "🍀", "🐶", "🐱", "🦄", "👍", "🏖️", "⛄", "🎄", "🎃"];
-          let color = COLORS[0], size = 10, eraser = false, sticker = null, current = null;
+          let mode = "pen", background = "paper", color = COLORS[0], size = 10, sticker = STICKERS[0], current = null;
           const ops = [];
           const point = (e) => { const r = canvas.getBoundingClientRect(); return [(e.clientX - r.left) * canvas.width / r.width, (e.clientY - r.top) * canvas.height / r.height]; };
           function stroke(op, from) {
             ctx.lineCap = ctx.lineJoin = "round";
-            ctx.strokeStyle = op.erase ? BACKGROUNDS[$("dr-bg").value] : op.color;
+            ctx.strokeStyle = op.erase ? BACKGROUNDS[background] : op.color;
             ctx.lineWidth = op.size;
             ctx.beginPath();
             const pts = op.points;
@@ -269,38 +299,52 @@
             ctx.fillText(op.emoji, op.x, op.y);
           }
           function redraw() {
-            ctx.fillStyle = BACKGROUNDS[$("dr-bg").value];
+            ctx.fillStyle = BACKGROUNDS[background];
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ops.forEach(draw);
           }
-          COLORS.forEach((c, i) => {
-            const b = document.createElement("button"); b.type = "button"; b.className = "dr-color" + (i ? "" : " on"); b.style.background = c;
+          function selectColor(c) {
+            color = c;
+            document.querySelectorAll(".dr-color").forEach(o => o.classList.toggle("on", o.dataset.color === c));
+          }
+          COLORS.forEach(c => {
+            const b = document.createElement("button"); b.type = "button"; b.className = "dr-color"; b.style.background = c; b.dataset.color = c;
             b.setAttribute("aria-label", c);
-            b.addEventListener("click", () => { color = c; eraser = false; sticker = null; refreshTools(); document.querySelectorAll(".dr-color").forEach(o => o.classList.toggle("on", o === b)); });
+            b.addEventListener("click", () => { selectColor(c); setMode("pen"); });
             $("dr-colors").appendChild(b);
           });
           STICKERS.forEach(emoji => {
-            const b = document.createElement("button"); b.type = "button"; b.className = "dr-btn dr-sticker"; b.textContent = emoji;
-            b.addEventListener("click", () => { sticker = sticker === emoji ? null : emoji; eraser = false; refreshTools(); });
+            const b = document.createElement("button"); b.type = "button"; b.className = "dr-sticker"; b.textContent = emoji;
+            b.addEventListener("click", () => { sticker = emoji; refresh(); });
             $("dr-stickers").appendChild(b);
           });
-          function refreshTools() {
+          function setMode(next) { mode = next; refresh(); }
+          function refresh() {
+            document.querySelectorAll(".dr-mode").forEach(b => b.classList.toggle("on", b.dataset.mode === mode));
             document.querySelectorAll(".dr-sticker").forEach(b => b.classList.toggle("on", b.textContent === sticker));
-            $("dr-eraser").classList.toggle("on", eraser);
-            $("dr-hint").style.visibility = sticker ? "visible" : "hidden";  // place réservée : l'ardoise ne bouge pas
+            $("dr-pen-panel").hidden = mode === "sticker";
+            $("dr-sticker-panel").hidden = mode !== "sticker";
+            $("dr-hint").hidden = mode !== "sticker";
           }
+          document.querySelectorAll(".dr-mode").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
           document.querySelectorAll(".dr-size").forEach(b => b.addEventListener("click", () => {
             size = Number(b.dataset.size); document.querySelectorAll(".dr-size").forEach(o => o.classList.toggle("on", o === b));
           }));
-          $("dr-eraser").addEventListener("click", () => { eraser = !eraser; sticker = null; refreshTools(); });
+          document.querySelectorAll(".dr-bgbtn").forEach(b => b.addEventListener("click", () => {
+            background = b.dataset.bg;
+            document.querySelectorAll(".dr-bgbtn").forEach(o => o.classList.toggle("on", o === b));
+            // Une couleur qui se voit sur le fond choisi (noir sur l'ardoise, blanc sur le papier : invisibles)
+            if (DARK_BG[background] && color === "#222222") selectColor("#ffffff");
+            if (!DARK_BG[background] && color === "#ffffff") selectColor("#222222");
+            redraw();
+          }));
           $("dr-undo").addEventListener("click", () => { ops.pop(); redraw(); });
           $("dr-clear").addEventListener("click", () => { ops.length = 0; redraw(); });
-          $("dr-bg").addEventListener("change", redraw);
           canvas.addEventListener("pointerdown", (e) => {
             e.preventDefault();
             const [x, y] = point(e);
-            if (sticker) { ops.push({ type: "sticker", emoji: sticker, x, y, size: canvas.width * 0.09 }); redraw(); return; }
-            current = { type: "stroke", color, size: eraser ? size * 3 : size, erase: eraser, points: [[x, y]] };
+            if (mode === "sticker") { ops.push({ type: "sticker", emoji: sticker, x, y, size: canvas.width * 0.09 }); redraw(); return; }
+            current = { type: "stroke", color, size: mode === "eraser" ? size * 3 : size, erase: mode === "eraser", points: [[x, y]] };
             canvas.setPointerCapture(e.pointerId);
             stroke(current);
           });
@@ -312,10 +356,13 @@
           const finish = () => { if (current) { ops.push(current); current = null; } };
           canvas.addEventListener("pointerup", finish);
           canvas.addEventListener("pointercancel", finish);
+          selectColor(color);
+          refresh();
           redraw();
           $("dr-send").addEventListener("click", () => {
             const status = (t, ok) => { $("dr-status").textContent = t; $("dr-status").className = "text-center text-sm mt-3 " + (ok ? "text-green-700" : "text-red-600"); };
-            if (!ops.length) { status({{ _("Faites d'abord un dessin.")|tojson }}, false); return; }
+            const visible = ops.some(op => op.type === "sticker" || (!op.erase && op.color !== BACKGROUNDS[background]));
+            if (!visible) { status({{ _("Faites d'abord un dessin.")|tojson }}, false); return; }
             $("dr-send").disabled = true;
             canvas.toBlob(async (blob) => {
               const form = new FormData();
