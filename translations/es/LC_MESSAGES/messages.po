@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:21+0200\n"
+"POT-Creation-Date: 2026-10-11 12:25+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -172,8 +172,8 @@ msgstr "Detenido"
 msgid "Thème"
 msgstr "Tema"
 
-#: frontend/src/i18n.ts:2 frontend/src/views/TripsView.vue:258
-#: frontend/src/views/TripsView.vue:288
+#: frontend/src/i18n.ts:2 frontend/src/views/QueueView.vue:102
+#: frontend/src/views/TripsView.vue:258 frontend/src/views/TripsView.vue:288
 #: templates/configure/_smart_albums.html.jinja:80
 #: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
@@ -207,7 +207,7 @@ msgid "Bibliothèque"
 msgstr "Biblioteca"
 
 #: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:142
-#: templates/configure.html.jinja:147
+#: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:147
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "A continuación"
@@ -512,7 +512,7 @@ msgstr "Fotos en espera de validación"
 msgid "Tout approuver"
 msgstr "Aprobar todo"
 
-#: frontend/src/views/PendingView.vue:51
+#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
@@ -562,6 +562,41 @@ msgstr "Ninguno por ahora."
 #: templates/configure/tab_validation.html.jinja:33
 msgid "Retirer la confiance"
 msgstr "Retirar la confianza"
+
+#: frontend/src/views/QueueView.vue:73
+msgid "Le diaporama est arrêté : la file d'attente apparaîtra quand il tournera."
+msgstr "La presentación está detenida: la cola aparecerá cuando funcione."
+
+#: frontend/src/views/QueueView.vue:79
+#: templates/configure/tab_accueil.html.jinja:15
+msgid "À l'écran"
+msgstr "En pantalla"
+
+#: frontend/src/views/QueueView.vue:89
+msgid ""
+"Glissez les photos pour changer l'ordre, ou utilisez les flèches ; ▶ "
+"l'affiche tout de suite."
+msgstr ""
+"Arrastra las fotos para cambiar el orden, o usa las flechas; ▶ la muestra"
+" enseguida."
+
+#: frontend/src/views/QueueView.vue:101
+#: templates/configure/tab_queue.html.jinja:88
+msgid "Composition (commence ici, en préparation)"
+msgstr "Composición (empieza aquí, en preparación)"
+
+#: frontend/src/views/QueueView.vue:110
+msgid "Monter"
+msgstr "Subir"
+
+#: frontend/src/views/QueueView.vue:111
+msgid "Descendre"
+msgstr "Bajar"
+
+#: frontend/src/views/QueueView.vue:112
+#: templates/configure/tab_queue.html.jinja:101
+msgid "Afficher maintenant"
+msgstr "Mostrar ahora"
 
 #: frontend/src/views/StatsView.vue:46
 #: templates/configure/tab_stats.html.jinja:5
@@ -2473,10 +2508,6 @@ msgstr "Desactivación en curso..."
 #: templates/configure/scripts_status.html.jinja:1075
 msgid "Erreur lors de la récupération des diagnostics."
 msgstr "Error al recuperar el diagnóstico."
-
-#: templates/configure/tab_accueil.html.jinja:15
-msgid "À l'écran"
-msgstr "En pantalla"
 
 #: templates/configure/tab_accueil.html.jinja:19
 #: templates/configure/tab_playlists.html.jinja:56
@@ -5911,14 +5942,6 @@ msgstr "La presentación no está en curso."
 #: templates/configure/tab_queue.html.jinja:14
 msgid "Affichée en ce moment"
 msgstr "Mostrándose ahora"
-
-#: templates/configure/tab_queue.html.jinja:88
-msgid "Composition (commence ici, en préparation)"
-msgstr "Composición (empieza aquí, en preparación)"
-
-#: templates/configure/tab_queue.html.jinja:101
-msgid "Afficher maintenant"
-msgstr "Mostrar ahora"
 
 #: templates/configure/tab_son.html.jinja:3 web/routes_home.py:224
 msgid "Musique du diaporama"

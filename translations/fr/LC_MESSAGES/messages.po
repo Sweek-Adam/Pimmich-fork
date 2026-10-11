@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:21+0200\n"
+"POT-Creation-Date: 2026-10-11 12:25+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -172,8 +172,8 @@ msgstr ""
 msgid "Thème"
 msgstr ""
 
-#: frontend/src/i18n.ts:2 frontend/src/views/TripsView.vue:258
-#: frontend/src/views/TripsView.vue:288
+#: frontend/src/i18n.ts:2 frontend/src/views/QueueView.vue:102
+#: frontend/src/views/TripsView.vue:258 frontend/src/views/TripsView.vue:288
 #: templates/configure/_smart_albums.html.jinja:80
 #: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
@@ -207,7 +207,7 @@ msgid "Bibliothèque"
 msgstr ""
 
 #: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:142
-#: templates/configure.html.jinja:147
+#: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:147
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr ""
@@ -512,7 +512,7 @@ msgstr ""
 msgid "Tout approuver"
 msgstr ""
 
-#: frontend/src/views/PendingView.vue:51
+#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
@@ -559,6 +559,39 @@ msgstr ""
 #: frontend/src/views/PendingView.vue:80
 #: templates/configure/tab_validation.html.jinja:33
 msgid "Retirer la confiance"
+msgstr ""
+
+#: frontend/src/views/QueueView.vue:73
+msgid "Le diaporama est arrêté : la file d'attente apparaîtra quand il tournera."
+msgstr ""
+
+#: frontend/src/views/QueueView.vue:79
+#: templates/configure/tab_accueil.html.jinja:15
+msgid "À l'écran"
+msgstr ""
+
+#: frontend/src/views/QueueView.vue:89
+msgid ""
+"Glissez les photos pour changer l'ordre, ou utilisez les flèches ; ▶ "
+"l'affiche tout de suite."
+msgstr ""
+
+#: frontend/src/views/QueueView.vue:101
+#: templates/configure/tab_queue.html.jinja:88
+msgid "Composition (commence ici, en préparation)"
+msgstr ""
+
+#: frontend/src/views/QueueView.vue:110
+msgid "Monter"
+msgstr ""
+
+#: frontend/src/views/QueueView.vue:111
+msgid "Descendre"
+msgstr ""
+
+#: frontend/src/views/QueueView.vue:112
+#: templates/configure/tab_queue.html.jinja:101
+msgid "Afficher maintenant"
 msgstr ""
 
 #: frontend/src/views/StatsView.vue:46
@@ -2413,10 +2446,6 @@ msgstr ""
 
 #: templates/configure/scripts_status.html.jinja:1075
 msgid "Erreur lors de la récupération des diagnostics."
-msgstr ""
-
-#: templates/configure/tab_accueil.html.jinja:15
-msgid "À l'écran"
 msgstr ""
 
 #: templates/configure/tab_accueil.html.jinja:19
@@ -5585,14 +5614,6 @@ msgstr ""
 
 #: templates/configure/tab_queue.html.jinja:14
 msgid "Affichée en ce moment"
-msgstr ""
-
-#: templates/configure/tab_queue.html.jinja:88
-msgid "Composition (commence ici, en préparation)"
-msgstr ""
-
-#: templates/configure/tab_queue.html.jinja:101
-msgid "Afficher maintenant"
 msgstr ""
 
 #: templates/configure/tab_son.html.jinja:3 web/routes_home.py:224
