@@ -543,6 +543,10 @@ def remote_guests_toggle_api():
         return jsonify({"success": False, "message": _("Lancez d'abord une fois sur le Raspberry Pi : ~/pimmich/utils/enable_remote_guests.sh")}), 409
     ok, output = remote_guests.set_funnel(enabled)
     if not ok and enabled:
+        activation = re.search(r"https://login\.tailscale\.com/\S+", output or "")
+        if activation:  # Funnel pas encore autorisé sur le compte Tailscale
+            return jsonify({"success": False, "activation_url": activation.group(0),
+                            "message": _("Autorisez d'abord Funnel sur votre compte Tailscale (bouton « Enable » sur la page qui s'ouvre), puis réactivez « Hors de la maison ».")}), 409
         return jsonify({"success": False, "message": _("Tailscale refuse la publication : %(detail)s", detail=output[-400:])}), 502
     config = dict(load_config())
     config["remote_guests_enabled"] = enabled

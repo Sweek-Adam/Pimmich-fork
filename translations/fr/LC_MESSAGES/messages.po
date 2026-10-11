@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:57+0200\n"
+"POT-Creation-Date: 2026-10-11 10:01+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -3394,7 +3394,7 @@ msgid "Les photos des invités passent par « À valider » avant d'être affich
 msgstr ""
 
 #: templates/configure/tab_invites.html.jinja:32
-#: templates/configure/tab_invites.html.jinja:93
+#: templates/configure/tab_invites.html.jinja:99
 msgid "Notre cadre photo"
 msgstr ""
 
@@ -3463,83 +3463,87 @@ msgid ""
 "soyez :"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:106
+#: templates/configure/tab_invites.html.jinja:90
+msgid "Autoriser Funnel sur Tailscale"
+msgstr ""
+
+#: templates/configure/tab_invites.html.jinja:112
 msgid "QR code pour les invités"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:108
+#: templates/configure/tab_invites.html.jinja:114
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
 "pour envoyer des photos ou écrire un message depuis un téléphone connecté"
 " au même Wi-Fi."
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:111
+#: templates/configure/tab_invites.html.jinja:117
 msgid "Afficher le QR code"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:113
+#: templates/configure/tab_invites.html.jinja:119
 msgid "Position :"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:116
+#: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:117
+#: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:118
+#: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:119
+#: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:123
+#: templates/configure/tab_invites.html.jinja:129
 msgid "Autoriser les invités à écrire des messages"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:125
+#: templates/configure/tab_invites.html.jinja:131
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
 " supprimer dans Contenu > Messages."
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:128
+#: templates/configure/tab_invites.html.jinja:134
 msgid ""
 "Lire les messages vocaux quand leur carte s'affiche (au plus une fois par"
 " heure)"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:131
+#: templates/configure/tab_invites.html.jinja:137
 msgid "Volume des messages vocaux :"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:136
+#: templates/configure/tab_invites.html.jinja:142
 msgid ""
 "Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
 "😂 😮 👏)"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:138
+#: templates/configure/tab_invites.html.jinja:144
 msgid ""
 "Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
 "invités restent ensuite dans le livre d'or :"
 msgstr ""
 
-#: templates/configure/tab_invites.html.jinja:138
+#: templates/configure/tab_invites.html.jinja:144
 msgid "ouvrir le livre d'or"
 msgstr ""
 
@@ -6668,20 +6672,26 @@ msgid ""
 "~/pimmich/utils/enable_remote_guests.sh"
 msgstr ""
 
-#: web/routes_guests.py:546
+#: web/routes_guests.py:549
+msgid ""
+"Autorisez d'abord Funnel sur votre compte Tailscale (bouton « Enable » "
+"sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
+msgstr ""
+
+#: web/routes_guests.py:550
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr ""
 
-#: web/routes_guests.py:552
+#: web/routes_guests.py:556
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr ""
 
-#: web/routes_guests.py:553
+#: web/routes_guests.py:557
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr ""
 
-#: web/routes_guests.py:563
+#: web/routes_guests.py:567
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr ""
 

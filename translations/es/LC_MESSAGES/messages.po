@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:57+0200\n"
+"POT-Creation-Date: 2026-10-11 10:01+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -3540,7 +3540,7 @@ msgid "Les photos des invités passent par « À valider » avant d'être affich
 msgstr "Las fotos de los invitados pasan por «Por validar» antes de mostrarse."
 
 #: templates/configure/tab_invites.html.jinja:32
-#: templates/configure/tab_invites.html.jinja:93
+#: templates/configure/tab_invites.html.jinja:99
 msgid "Notre cadre photo"
 msgstr "Nuestro marco de fotos"
 
@@ -3623,11 +3623,15 @@ msgid ""
 "soyez :"
 msgstr "Envía tus fotos y mensajes a nuestro marco de fotos, estés donde estés:"
 
-#: templates/configure/tab_invites.html.jinja:106
+#: templates/configure/tab_invites.html.jinja:90
+msgid "Autoriser Funnel sur Tailscale"
+msgstr "Autorizar Funnel en Tailscale"
+
+#: templates/configure/tab_invites.html.jinja:112
 msgid "QR code pour les invités"
 msgstr "Código QR para invitados"
 
-#: templates/configure/tab_invites.html.jinja:108
+#: templates/configure/tab_invites.html.jinja:114
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
 "pour envoyer des photos ou écrire un message depuis un téléphone connecté"
@@ -3637,43 +3641,43 @@ msgstr ""
 "de invitados, para enviar fotos o escribir un mensaje desde un teléfono "
 "conectado a la misma red Wi-Fi."
 
-#: templates/configure/tab_invites.html.jinja:111
+#: templates/configure/tab_invites.html.jinja:117
 msgid "Afficher le QR code"
 msgstr "Mostrar el código QR"
 
-#: templates/configure/tab_invites.html.jinja:113
+#: templates/configure/tab_invites.html.jinja:119
 msgid "Position :"
 msgstr "Posición:"
 
-#: templates/configure/tab_invites.html.jinja:116
+#: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "Abajo a la derecha"
 
-#: templates/configure/tab_invites.html.jinja:117
+#: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "Abajo a la izquierda"
 
-#: templates/configure/tab_invites.html.jinja:118
+#: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "Arriba a la derecha"
 
-#: templates/configure/tab_invites.html.jinja:119
+#: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "Arriba a la izquierda"
 
-#: templates/configure/tab_invites.html.jinja:123
+#: templates/configure/tab_invites.html.jinja:129
 msgid "Autoriser les invités à écrire des messages"
 msgstr "Permitir que los invitados escriban mensajes"
 
-#: templates/configure/tab_invites.html.jinja:125
+#: templates/configure/tab_invites.html.jinja:131
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
@@ -3683,7 +3687,7 @@ msgstr ""
 "dispositivo como máximo) y desaparecen al cabo de 7 días. Puedes "
 "eliminarlos en Contenido > Mensajes."
 
-#: templates/configure/tab_invites.html.jinja:128
+#: templates/configure/tab_invites.html.jinja:134
 msgid ""
 "Lire les messages vocaux quand leur carte s'affiche (au plus une fois par"
 " heure)"
@@ -3691,11 +3695,11 @@ msgstr ""
 "Reproducir los mensajes de voz cuando se muestra su tarjeta (como mucho "
 "una vez por hora)"
 
-#: templates/configure/tab_invites.html.jinja:131
+#: templates/configure/tab_invites.html.jinja:137
 msgid "Volume des messages vocaux :"
 msgstr "Volumen de los mensajes de voz:"
 
-#: templates/configure/tab_invites.html.jinja:136
+#: templates/configure/tab_invites.html.jinja:142
 msgid ""
 "Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
 "😂 😮 👏)"
@@ -3703,7 +3707,7 @@ msgstr ""
 "Reacciones: los invitados ven la foto mostrada y pueden reaccionar (❤️ 😂 "
 "😮 👏)"
 
-#: templates/configure/tab_invites.html.jinja:138
+#: templates/configure/tab_invites.html.jinja:144
 msgid ""
 "Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
 "invités restent ensuite dans le livre d'or :"
@@ -3711,7 +3715,7 @@ msgstr ""
 "Solo desde el Wi-Fi de casa. Los mensajes y dibujos de los invitados se "
 "guardan luego en el libro de visitas:"
 
-#: templates/configure/tab_invites.html.jinja:138
+#: templates/configure/tab_invites.html.jinja:144
 msgid "ouvrir le livre d'or"
 msgstr "abrir el libro de visitas"
 
@@ -7092,20 +7096,28 @@ msgstr ""
 "Primero ejecuta una vez en la Raspberry Pi: "
 "~/pimmich/utils/enable_remote_guests.sh"
 
-#: web/routes_guests.py:546
+#: web/routes_guests.py:549
+msgid ""
+"Autorisez d'abord Funnel sur votre compte Tailscale (bouton « Enable » "
+"sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
+msgstr ""
+"Autoriza primero Funnel en tu cuenta de Tailscale (botón «Enable» en la "
+"página que se abre) y vuelve a activar «Fuera de casa»."
+
+#: web/routes_guests.py:550
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale rechaza la publicación: %(detail)s"
 
-#: web/routes_guests.py:552
+#: web/routes_guests.py:556
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr "Los invitados ya pueden enviar desde cualquier lugar, con el enlace."
 
-#: web/routes_guests.py:553
+#: web/routes_guests.py:557
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr "La página de invitados ya no es accesible desde internet."
 
-#: web/routes_guests.py:563
+#: web/routes_guests.py:567
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr "Nuevo enlace creado: el anterior ya no funciona."
 

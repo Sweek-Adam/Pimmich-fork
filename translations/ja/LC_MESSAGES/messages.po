@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:57+0200\n"
+"POT-Creation-Date: 2026-10-11 10:01+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -3440,7 +3440,7 @@ msgid "Les photos des invités passent par « À valider » avant d'être affich
 msgstr "ゲストの写真は、表示される前に「承認待ち」を経由します。"
 
 #: templates/configure/tab_invites.html.jinja:32
-#: templates/configure/tab_invites.html.jinja:93
+#: templates/configure/tab_invites.html.jinja:99
 msgid "Notre cadre photo"
 msgstr "わが家のフォトフレーム"
 
@@ -3511,11 +3511,15 @@ msgid ""
 "soyez :"
 msgstr "どこからでも、わが家のフォトフレームに写真やメッセージを送ってください："
 
-#: templates/configure/tab_invites.html.jinja:106
+#: templates/configure/tab_invites.html.jinja:90
+msgid "Autoriser Funnel sur Tailscale"
+msgstr "TailscaleでFunnelを許可"
+
+#: templates/configure/tab_invites.html.jinja:112
 msgid "QR code pour les invités"
 msgstr "ゲスト用QRコード"
 
-#: templates/configure/tab_invites.html.jinja:108
+#: templates/configure/tab_invites.html.jinja:114
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
 "pour envoyer des photos ou écrire un message depuis un téléphone connecté"
@@ -3524,72 +3528,72 @@ msgstr ""
 "スライドショーにゲストページへのQRコードを常に表示し、同じWi-"
 "Fiに接続したスマートフォンから写真を送ったりメッセージを書いたりできるようにします。"
 
-#: templates/configure/tab_invites.html.jinja:111
+#: templates/configure/tab_invites.html.jinja:117
 msgid "Afficher le QR code"
 msgstr "QRコードを表示"
 
-#: templates/configure/tab_invites.html.jinja:113
+#: templates/configure/tab_invites.html.jinja:119
 msgid "Position :"
 msgstr "位置："
 
-#: templates/configure/tab_invites.html.jinja:116
+#: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
 #: templates/configure/tab_son.html.jinja:42
 msgid "En bas à droite"
 msgstr "右下"
 
-#: templates/configure/tab_invites.html.jinja:117
+#: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
 #: templates/configure/tab_son.html.jinja:41
 msgid "En bas à gauche"
 msgstr "左下"
 
-#: templates/configure/tab_invites.html.jinja:118
+#: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
 #: templates/configure/tab_son.html.jinja:44
 msgid "En haut à droite"
 msgstr "右上"
 
-#: templates/configure/tab_invites.html.jinja:119
+#: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
 #: templates/configure/tab_son.html.jinja:43
 msgid "En haut à gauche"
 msgstr "左上"
 
-#: templates/configure/tab_invites.html.jinja:123
+#: templates/configure/tab_invites.html.jinja:129
 msgid "Autoriser les invités à écrire des messages"
 msgstr "ゲストのメッセージ投稿を許可"
 
-#: templates/configure/tab_invites.html.jinja:125
+#: templates/configure/tab_invites.html.jinja:131
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
 " supprimer dans Contenu > Messages."
 msgstr "ゲストのメッセージはすぐに表示され（1台あたり1時間に最大5件）、7日後に消えます。コンテンツ > メッセージ から削除できます。"
 
-#: templates/configure/tab_invites.html.jinja:128
+#: templates/configure/tab_invites.html.jinja:134
 msgid ""
 "Lire les messages vocaux quand leur carte s'affiche (au plus une fois par"
 " heure)"
 msgstr "カードが表示されたらボイスメッセージを再生（1時間に1回まで）"
 
-#: templates/configure/tab_invites.html.jinja:131
+#: templates/configure/tab_invites.html.jinja:137
 msgid "Volume des messages vocaux :"
 msgstr "ボイスメッセージの音量："
 
-#: templates/configure/tab_invites.html.jinja:136
+#: templates/configure/tab_invites.html.jinja:142
 msgid ""
 "Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
 "😂 😮 👏)"
 msgstr "リアクション：ゲストは表示中の写真を見てリアクションできます（❤️ 😂 😮 👏）"
 
-#: templates/configure/tab_invites.html.jinja:138
+#: templates/configure/tab_invites.html.jinja:144
 msgid ""
 "Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
 "invités restent ensuite dans le livre d'or :"
 msgstr "自宅のWi-Fiからのみ。ゲストのメッセージと絵はその後ゲストブックに残ります："
 
-#: templates/configure/tab_invites.html.jinja:138
+#: templates/configure/tab_invites.html.jinja:144
 msgid "ouvrir le livre d'or"
 msgstr "ゲストブックを開く"
 
@@ -6823,20 +6827,26 @@ msgid ""
 "~/pimmich/utils/enable_remote_guests.sh"
 msgstr "まず Raspberry Pi で一度実行してください：~/pimmich/utils/enable_remote_guests.sh"
 
-#: web/routes_guests.py:546
+#: web/routes_guests.py:549
+msgid ""
+"Autorisez d'abord Funnel sur votre compte Tailscale (bouton « Enable » "
+"sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
+msgstr "まずTailscaleアカウントでFunnelを許可し（開いたページの「Enable」ボタン）、「外出先から」をもう一度オンにしてください。"
+
+#: web/routes_guests.py:550
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale が公開を拒否しました：%(detail)s"
 
-#: web/routes_guests.py:552
+#: web/routes_guests.py:556
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr "ゲストはリンクを使ってどこからでも送信できるようになりました。"
 
-#: web/routes_guests.py:553
+#: web/routes_guests.py:557
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr "ゲストページはインターネットからアクセスできなくなりました。"
 
-#: web/routes_guests.py:563
+#: web/routes_guests.py:567
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr "新しいリンクを作成しました。古いリンクは使えません。"
 

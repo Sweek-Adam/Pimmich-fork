@@ -54,3 +54,14 @@ def test_admin_controls(admin_client, monkeypatch):
     assert admin_client.get("/api/guest_qr.png?remote=1").status_code == 200
     admin_client.post("/api/remote_guests", json={"enabled": False}, headers=SAME_ORIGIN)
     assert calls == [True, False] and not load_config()["remote_guests_enabled"]
+
+
+def test_funnel_activation_link_is_returned(monkeypatch, tmp_path):
+    """Funnel pas encore autorisé : tailscale affiche une adresse puis attend ; on la renvoie sans attendre."""
+    from utils import remote_guests
+    script = tmp_path / "tailscale"
+    script.write_text("#!/bin/sh\necho 'Funnel is not enabled on your tailnet.'\necho 'https://login.tailscale.com/f/funnel?node=abc'\nsleep 30\n")
+    script.chmod(0o755)
+    monkeypatch.setenv("PATH", f"{tmp_path}:/usr/bin:/bin")
+    ok, output = remote_guests.set_funnel(True, timeout=10)
+    assert not ok and "https://login.tailscale.com/f/funnel?node=abc" in output

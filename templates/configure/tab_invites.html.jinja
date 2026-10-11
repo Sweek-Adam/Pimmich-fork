@@ -84,6 +84,12 @@
                             $("rg-enabled").disabled = true;
                             const r = await post("/api/remote_guests", { enabled: $("rg-enabled").checked });
                             say(r.message, r.success);
+                            if (r.activation_url) {  // Funnel à autoriser une fois dans la console Tailscale
+                                const a = document.createElement("a");
+                                a.href = r.activation_url; a.target = "_blank"; a.rel = "noopener"; a.className = "btn-primary inline-block mt-2";
+                                a.textContent = {{ _("Autoriser Funnel sur Tailscale")|tojson }};
+                                $("rg-status").append(document.createElement("br"), a);
+                            }
                             await load();
                         });
                         $("rg-new").addEventListener("click", async () => { const r = await post("/api/remote_guests/new_link"); say(r.message, r.success); load(); });

@@ -15,7 +15,7 @@ import subprocess
 REMOTE_PORT = 8088
 REMOTE_HEADER = "X-Pimmich-Remote"
 # Points d'entrée autorisés depuis internet (noms des routes Flask) et fichiers statiques de la page invités
-ALLOWED_ENDPOINTS = {"upload_page", "handle_upload", "guest_message_preview", "guest_message_publish"}
+ALLOWED_ENDPOINTS = {"upload_page", "handle_upload", "guest_message_preview", "guest_message_publish", "guest_drawing_publish", "guest_voice_publish"}
 ALLOWED_STATIC = ("vendor/tailwind/", "styles.css", "pimmich_logo.png", "favicon.ico", "pwa/")
 
 
@@ -53,13 +53,40 @@ def tailscale_status():
     return {"installed": True, "connected": data.get("BackendState") == "Running", "dns_name": dns, "funnel": funnel_on}
 
 
-def set_funnel(enabled):
-    """Publie (ou retire) l'entrée invités sur internet. Retourne (ok, message ou adresse d'activation)."""
+def set_funnel(enabled, timeout=40):
+    """Publie (ou retire) l'entrée invités sur internet. Retourne (ok, message ou adresse d'activation).
+
+    Si Funnel n'est pas encore autorisé sur le compte Tailscale, la commande affiche une adresse d'activation puis
+    attend : on renvoie cette adresse sans attendre.
+    """
+    import re
+    import time
     args = ["tailscale", "funnel", "--bg", str(REMOTE_PORT)] if enabled else ["tailscale", "funnel", "reset"]
-    result = _run(*args, timeout=40)
-    if result is None:
+    if not shutil.which("tailscale"):
         return False, "tailscale introuvable"
-    output = (result.stdout + result.stderr).strip()
-    if result.returncode != 0:
-        return False, output  # ex. Funnel à autoriser dans la console Tailscale (l'adresse est dans le message)
-    return True, output
+    try:
+        process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    except OSError as e:
+        return False, str(e)
+    import os
+    import select
+    output, deadline = b"", time.time() + timeout
+    while time.time() < deadline:
+        ready, _w, _x = select.select([process.stdout], [], [], 0.5)
+        if ready:
+            chunk = os.read(process.stdout.fileno(), 4096)  # lecture directe : pas de tampon caché
+            if not chunk:
+                break
+            output += chunk
+            if re.search(rb"https://login\.tailscale\.com/\S+\s", output):  # activation à faire dans la console Tailscale
+                process.kill()
+                return False, output.decode(errors="replace").strip()
+        elif process.poll() is not None:
+            break
+    if process.poll() is None:
+        try:
+            process.wait(timeout=max(0.1, deadline - time.time()))
+        except subprocess.TimeoutExpired:
+            process.kill()
+            return False, output.decode(errors="replace").strip() or "Tailscale ne répond pas."
+    return process.returncode == 0, output.decode(errors="replace").strip()
