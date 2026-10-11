@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:34+0200\n"
+"POT-Creation-Date: 2026-10-11 10:53+0200\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -148,159 +148,175 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:90
-#: templates/configure.html.jinja:113 templates/configure.html.jinja:216
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:109
+#: templates/configure.html.jinja:138 templates/configure.html.jinja:241
 msgid "Accueil"
 msgstr ""
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
 msgid "Photos"
 msgstr ""
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
 msgid "Écran"
 msgstr ""
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
 msgid "Partage"
 msgstr ""
 
-#: templates/configure.html.jinja:77 templates/configure.html.jinja:216
+#: templates/configure.html.jinja:96 templates/configure.html.jinja:241
 msgid "Système"
 msgstr ""
 
-#: templates/configure.html.jinja:82
+#: templates/configure.html.jinja:101
 msgid "Pimmich par"
 msgstr ""
 
-#: templates/configure.html.jinja:93
+#: templates/configure.html.jinja:112
 msgid "Rechercher un réglage…"
 msgstr ""
 
-#: templates/configure.html.jinja:96
+#: templates/configure.html.jinja:115
 msgid "État du diaporama"
 msgstr ""
 
-#: templates/configure.html.jinja:100
+#: templates/configure.html.jinja:119
 msgid "Compte utilisateur"
 msgstr ""
 
-#: templates/configure.html.jinja:101 templates/login.html.jinja:89
+#: templates/configure.html.jinja:120
+msgid "Thème"
+msgstr ""
+
+#: templates/configure.html.jinja:122
+msgid "Auto"
+msgstr ""
+
+#: templates/configure.html.jinja:123 utils/message_renderer.py:32
+msgid "Clair"
+msgstr ""
+
+#: templates/configure.html.jinja:124
+msgid "Sombre"
+msgstr ""
+
+#: templates/configure.html.jinja:126 templates/login.html.jinja:89
 #: templates/upload.html.jinja:351
 msgid "Langue"
 msgstr ""
 
-#: templates/configure.html.jinja:105
+#: templates/configure.html.jinja:130
 msgid "Mon compte"
 msgstr ""
 
-#: templates/configure.html.jinja:106
+#: templates/configure.html.jinja:131
 msgid "Se déconnecter"
 msgstr ""
 
-#: templates/configure.html.jinja:117
+#: templates/configure.html.jinja:142
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr ""
 
-#: templates/configure.html.jinja:118
+#: templates/configure.html.jinja:143
 #: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr ""
 
-#: templates/configure.html.jinja:119
+#: templates/configure.html.jinja:144
 msgid "Bibliothèque"
 msgstr ""
 
-#: templates/configure.html.jinja:120
+#: templates/configure.html.jinja:145
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr ""
 
-#: templates/configure.html.jinja:121
+#: templates/configure.html.jinja:146
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr ""
 
-#: templates/configure.html.jinja:122
+#: templates/configure.html.jinja:147
 #: templates/configure/_playlist_builder.html.jinja:17
 msgid "Favoris"
 msgstr ""
 
-#: templates/configure.html.jinja:123
+#: templates/configure.html.jinja:148
 #: templates/configure/tab_apercu.html.jinja:14
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr ""
 
-#: templates/configure.html.jinja:128
+#: templates/configure.html.jinja:153
 msgid "Dispositions"
 msgstr ""
 
-#: templates/configure.html.jinja:129
+#: templates/configure.html.jinja:154
 msgid "Affichage"
 msgstr ""
 
-#: templates/configure.html.jinja:130
+#: templates/configure.html.jinja:155
 msgid "Horloge & météo"
 msgstr ""
 
-#: templates/configure.html.jinja:131
+#: templates/configure.html.jinja:156
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr ""
 
-#: templates/configure.html.jinja:132
+#: templates/configure.html.jinja:157
 msgid "Légendes"
 msgstr ""
 
-#: templates/configure.html.jinja:133
+#: templates/configure.html.jinja:158
 msgid "Son"
 msgstr ""
 
-#: templates/configure.html.jinja:138
+#: templates/configure.html.jinja:163
 #: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr ""
 
-#: templates/configure.html.jinja:139
+#: templates/configure.html.jinja:164
 msgid "À valider"
 msgstr ""
 
-#: templates/configure.html.jinja:140
+#: templates/configure.html.jinja:165
 msgid "Telegram"
 msgstr ""
 
-#: templates/configure.html.jinja:145
+#: templates/configure.html.jinja:170
 msgid "Comptes"
 msgstr ""
 
-#: templates/configure.html.jinja:147
+#: templates/configure.html.jinja:172
 msgid "Notifications"
 msgstr ""
 
-#: templates/configure.html.jinja:148
+#: templates/configure.html.jinja:173
 msgid "Maintenance"
 msgstr ""
 
-#: templates/configure.html.jinja:149
+#: templates/configure.html.jinja:174
 msgid "Réseau"
 msgstr ""
 
-#: templates/configure.html.jinja:151
+#: templates/configure.html.jinja:176
 msgid "Commande vocale"
 msgstr ""
 
-#: templates/configure.html.jinja:153
+#: templates/configure.html.jinja:178
 msgid "Statistiques"
 msgstr ""
 
-#: templates/configure.html.jinja:154
+#: templates/configure.html.jinja:179
 msgid "Journaux"
 msgstr ""
 
-#: templates/configure.html.jinja:180
+#: templates/configure.html.jinja:205
 msgid "Enregistrer les modifications"
 msgstr ""
 
@@ -6293,10 +6309,6 @@ msgstr ""
 
 #: utils/layout_presets.py:70
 msgid "Ce nom existe déjà."
-msgstr ""
-
-#: utils/message_renderer.py:32
-msgid "Clair"
 msgstr ""
 
 #: utils/message_renderer.py:36

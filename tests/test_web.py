@@ -180,3 +180,8 @@ def test_pages_work_without_internet():
     for path in ("tailwind/tailwind.min.css", "fontawesome/css/all.min.css", "fontawesome/webfonts/fa-solid-900.woff2",
                  "sortable/Sortable.min.js", "glightbox/glightbox.min.js", "chartjs/chart.umd.min.js"):
         assert (root / "static" / "vendor" / path).is_file(), path
+
+
+def test_dark_mode_is_available(admin_client):
+    html = admin_client.get("/configure").get_data(as_text=True)
+    assert 'html[data-theme="dark"]' in html and "setPimmichTheme('dark')" in html and "pimmich-theme" in html
