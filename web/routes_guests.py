@@ -389,7 +389,7 @@ def _now_showing():
         path = Path(CURRENT_PHOTO_FILE).read_text().strip()
     except OSError:
         return None
-    if not path.startswith("prepared/") or "/messages/" in path or not is_slideshow_running():
+    if not path.startswith(("prepared/", "compositions/")) or "/messages/" in path or not is_slideshow_running():
         return None
     return path
 
@@ -416,7 +416,7 @@ def guest_react():
     photo = str(data.get("photo") or "")
     base = (BASE_DIR / "static").resolve()
     full = (base / photo).resolve()
-    if not photo.startswith("prepared/") or base not in full.parents or not full.is_file():
+    if not photo.startswith(("prepared/", "compositions/")) or base not in full.parents or not full.is_file():
         return jsonify({"success": False, "message": _("Photo introuvable.")}), 404
     try:
         counts = reactions.add(photo, data.get("kind"), str(data.get("name") or ""))
