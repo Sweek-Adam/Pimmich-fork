@@ -197,6 +197,42 @@ def handle_slideshow_events(screen_width):
                     paused = not paused
                     update_status_file({"paused": paused})
 
+_beat = {"info": None, "file": None}
+
+
+def _analyse_beat(path, filename):
+    """Tempo de la musique de fond (en arrière-plan, mis en cache) pour caler les changements de photo."""
+    try:
+        from utils import beat
+        info = beat.analyse(path)
+        if _beat["file"] == filename:
+            _beat["info"] = info
+            if info:
+                logger.info(f"🎵 Tempo de « {filename} » : {info['bpm']} BPM")
+    except Exception as e:
+        logger.debug(f"Tempo de la musique : {e}")
+
+
+def beat_sync(config):
+    """Infos de tempo si le rythme doit suivre la musique de fond en ce moment, sinon None."""
+    info = _beat.get("info")
+    if not info or not config.get("beat_sync", True) or _background_music_state.get("paused"):
+        return None
+    try:
+        return info if pygame.mixer.get_init() and pygame.mixer.music.get_busy() else None
+    except pygame.error:
+        return None
+
+
+def wait_for_beat(info):
+    """Attend le prochain temps de la musique (au plus un temps)."""
+    from utils import beat
+    position = pygame.mixer.music.get_pos() / 1000
+    delay = beat.until_next_beat(info, position)
+    if 0 < delay < beat.beat_seconds(info) + 0.01:
+        time.sleep(delay)
+
+
 def play_background_music(filename):
     """Charge et joue une musique de fond en boucle."""
     if not filename: return
@@ -211,6 +247,8 @@ def play_background_music(filename):
                 pass
             pygame.mixer.music.play(-1) # -1 pour boucler à l'infini
             _background_music_state["paused"] = False
+            _beat["info"], _beat["file"] = None, filename
+            threading.Thread(target=_analyse_beat, args=(music_path, filename), daemon=True, name="beat").start()
             now_playing.update("pimmich", state="playing", title=now_playing.pretty_title(filename), artist="", album="", cover=None, changed=time.time())
             logger.info(f"🎵 Musique de fond lancée : {filename}")
         except Exception as e:
@@ -421,6 +459,52 @@ def fit_to_screen(pil_image, screen_width, screen_height):
     return canvas
 
 
+EXTRA_TRANSITIONS = ("push_left", "push_up", "wipe", "blinds", "iris", "fade_black", "zoom")
+RANDOM_TRANSITIONS = ("fade", "slide_left", "slide_up") + EXTRA_TRANSITIONS
+_IRIS_KEY = (255, 0, 255)
+
+
+def draw_extra_transition(target, old, new, kind, t, width, height):
+    """Une image de transition (t de 0 à 1) dessinée sur `target` (l'écran, ou une surface réduite sur Pi 3)."""
+    if kind == "push_left":  # la nouvelle photo pousse l'ancienne
+        target.blit(old, (-int(width * t), 0))
+        target.blit(new, (width - int(width * t), 0))
+    elif kind == "push_up":
+        target.blit(old, (0, -int(height * t)))
+        target.blit(new, (0, height - int(height * t)))
+    elif kind == "wipe":  # rideau qui découvre la nouvelle photo
+        target.blit(old, (0, 0))
+        target.blit(new, (0, 0), pygame.Rect(0, 0, int(width * t), height))
+    elif kind == "blinds":  # stores qui s'ouvrent
+        target.blit(old, (0, 0))
+        stripes = 10
+        stripe = height / stripes
+        for k in range(stripes):
+            top = int(k * stripe)
+            target.blit(new, (0, top), pygame.Rect(0, top, width, math.ceil(stripe * t)))
+    elif kind == "iris":  # un cercle qui s'ouvre au centre
+        target.blit(new, (0, 0))
+        layer = old.copy()
+        layer.set_colorkey(_IRIS_KEY)
+        radius = int(math.hypot(width, height) / 2 * t)
+        if radius > 0:
+            pygame.draw.circle(layer, _IRIS_KEY, (width // 2, height // 2), radius)
+        target.blit(layer, (0, 0))
+    elif kind == "fade_black":  # l'ancienne s'éteint, la nouvelle s'allume
+        target.fill((0, 0, 0))
+        surface, alpha = (old, int(255 * (1 - 2 * t))) if t < 0.5 else (new, int(255 * (2 * t - 1)))
+        surface.set_alpha(alpha)
+        target.blit(surface, (0, 0))
+        surface.set_alpha(None)
+    elif kind == "zoom":  # la nouvelle photo arrive en grandissant légèrement
+        target.blit(old, (0, 0))
+        scale = 0.85 + 0.15 * t
+        size = (max(1, int(width * scale)), max(1, int(height * scale)))
+        grown = pygame.transform.scale(new, size)
+        grown.set_alpha(int(255 * min(1.0, t * 1.4)))
+        target.blit(grown, ((width - size[0]) // 2, (height - size[1]) // 2))
+
+
 def perform_transition(screen, old_image_surface, new_image_path, duration, screen_width, screen_height, main_font, config, transition_type):
     clock = pygame.time.Clock()
     fps_config = config.get("transition_fps", "auto")
@@ -475,10 +559,23 @@ def perform_transition(screen, old_image_surface, new_image_path, duration, scre
         new_surface_small = pygame.transform.scale(new_surface_scaled, (small_width, small_height)).convert()
         temp_surface_small = pygame.Surface((small_width, small_height)).convert()
 
+    if transition_type == "random":  # une transition différente à chaque photo
+        transition_type = random.choice(RANDOM_TRANSITIONS)
+    width, height = screen_width, screen_height
+    if transition_type in ("iris", "zoom") and is_low_end_pi:
+        layer = pygame.Surface((small_width, small_height)).convert()
+
     for i in range(num_frames + 1):
         progress = i / num_frames # 0.0 to 1.0
+        eased = progress * progress * (3 - 2 * progress)  # départ et arrivée en douceur
 
-        if transition_type == "fade":
+        if transition_type in EXTRA_TRANSITIONS:
+            if is_low_end_pi and transition_type in ("iris", "zoom"):
+                draw_extra_transition(layer, old_image_small, new_surface_small, transition_type, eased, small_width, small_height)
+                pygame.transform.scale(layer, (screen_width, screen_height), screen)
+            else:
+                draw_extra_transition(screen, old_image_surface, new_surface_scaled, transition_type, eased, width, height)
+        elif transition_type == "fade":
             alpha = int(255 * progress)
             if is_low_end_pi:
                 new_surface_small.set_alpha(alpha)
@@ -494,16 +591,16 @@ def perform_transition(screen, old_image_surface, new_image_path, duration, scre
             # Determine slide direction
             direction = transition_type.split("_")[1]
             
-            # Calculate offset for the new image
+            # Calculate offset for the new image (mouvement adouci au départ et à l'arrivée)
             offset_x, offset_y = 0, 0
             if direction == "left":
-                offset_x = int(screen_width * (1 - progress)) # New image starts off-screen right, slides left
+                offset_x = int(screen_width * (1 - eased)) # New image starts off-screen right, slides left
             elif direction == "right":
-                offset_x = int(-screen_width * (1 - progress)) # New image starts off-screen left, slides right
+                offset_x = int(-screen_width * (1 - eased)) # New image starts off-screen left, slides right
             elif direction == "up":
-                offset_y = int(screen_height * (1 - progress)) # New image starts off-screen bottom, slides up
+                offset_y = int(screen_height * (1 - eased)) # New image starts off-screen bottom, slides up
             elif direction == "down":
-                offset_y = int(-screen_height * (1 - progress)) # New image starts off-screen top, slides down
+                offset_y = int(-screen_height * (1 - eased)) # New image starts off-screen top, slides down
             
             screen.blit(old_image_surface, (0, 0)) # Draw old image first
             screen.blit(new_surface_scaled, (offset_x, offset_y)) # Draw new image sliding in
@@ -3068,6 +3165,11 @@ def start_slideshow():
                     try:
                         # Perform transition if it's not the first photo and transition is enabled
                         if previous_photo_surface is not None and transition_enabled and transition_duration > 0 and transition_type != "none": # Added transition_type check
+                            rhythm = beat_sync(config)
+                            if rhythm:  # musique de fond : la transition part sur un temps et dure un nombre entier de temps
+                                from utils import beat
+                                transition_duration = beat.transition_seconds(rhythm, transition_duration)
+                                wait_for_beat(rhythm)
                             current_pil_image = perform_transition(screen, previous_photo_surface, photo_path, transition_duration, SCREEN_WIDTH, SCREEN_HEIGHT, main_font_loaded, config, transition_type)
                             # Si la transition a échoué (ex: fichier non trouvé), on passe au suivant
                             if current_pil_image is None:
@@ -3095,6 +3197,10 @@ def start_slideshow():
                         slide_config = config
                         if composition_path:  # plusieurs photos à regarder : durée allongée si besoin
                             slide_config = dict(config, display_duration=layout_engine.composition_seconds(config, composition_used or 4))
+                        rhythm = beat_sync(config)
+                        if rhythm:  # musique de fond : la photo reste un nombre entier de mesures
+                            from utils import beat
+                            slide_config = dict(slide_config, display_duration=beat.snap_duration(rhythm, float(slide_config.get("display_duration", 10))))
                         display_photo_with_pan_zoom(screen, current_pil_image, SCREEN_WIDTH, SCREEN_HEIGHT, slide_config, main_font_loaded, photo_path)
                         previous_photo_surface = screen.copy()
                     else:

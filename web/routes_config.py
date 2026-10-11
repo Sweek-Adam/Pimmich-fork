@@ -183,6 +183,8 @@ def configure():
         config["smart_plug_enabled"] = 'smart_plug_enabled' in request.form
         config["cec_enabled"] = 'cec_enabled' in request.form
         config["transition_enabled"] = 'transition_enabled' in request.form # New checkbox handling
+        if 'beat_sync_form' in request.form:
+            config["beat_sync"] = 'beat_sync' in request.form
         if 'night_form' in request.form:  # le soir et la nuit
             config["dim_enabled"] = 'dim_enabled' in request.form
             config["night_show_date"] = 'night_show_date' in request.form

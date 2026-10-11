@@ -193,19 +193,23 @@
                     </div>
                     <div class="flex items-center mt-2">
                         <label for="transition_type" class="w-52 flex-shrink-0">{{ _("Type de transition :") }}</label>
+                        {% set transition = config.get('transition_type', 'fade') %}
                         <select name="transition_type" id="transition_type">
-                            <option value="fade" {% if config.get('transition_type')=='fade' %}selected{% endif %}>{{
-                                _('Fondu enchaîné') }}</option>
-                            <option value="slide_left" {% if config.get('transition_type')=='slide_left' %}selected{%
-                                endif %}>{{ _('Glisser depuis la gauche') }}</option>
-                            <option value="slide_right" {% if config.get('transition_type')=='slide_right' %}selected{%
-                                endif %}>{{ _('Glisser depuis la droite') }}</option>
-                            <option value="slide_up" {% if config.get('transition_type')=='slide_up' %}selected{% endif
-                                %}>{{ _('Glisser depuis le bas') }}</option>
-                            <option value="slide_down" {% if config.get('transition_type')=='slide_down' %}selected{%
-                                endif %}>{{ _('Glisser depuis le haut') }}</option>
+                            {% for value, label in [('fade', _('Fondu enchaîné')), ('fade_black', _('Fondu au noir')), ('zoom', _('Zoom en fondu')),
+                                                    ('slide_left', _('Glisser depuis la gauche')), ('slide_right', _('Glisser depuis la droite')),
+                                                    ('slide_up', _('Glisser depuis le bas')), ('slide_down', _('Glisser depuis le haut')),
+                                                    ('push_left', _('Pousser vers la gauche')), ('push_up', _('Pousser vers le haut')),
+                                                    ('wipe', _('Rideau')), ('blinds', _('Stores')), ('iris', _("Iris (cercle qui s'ouvre)")),
+                                                    ('random', _('Au hasard (une différente à chaque photo)'))] %}
+                            <option value="{{ value }}" {% if transition == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
                         </select>
                     </div>
+                    <label class="flex items-center gap-2 mt-2">
+                        <input type="checkbox" name="beat_sync" {% if config.get('beat_sync', True) %}checked{% endif %}>
+                        {{ _("Caler le rythme sur la musique de fond (changement de photo sur le temps)") }}
+                    </label>
+                    <input type="hidden" name="beat_sync_form" value="1">
                     <div class="flex items-center mt-2">
                         <label for="transition_fps" class="w-52 flex-shrink-0">{{ _("Fréquence d'images (FPS) :") }}</label>
                         <select name="transition_fps" id="transition_fps">
