@@ -45,9 +45,9 @@ SETTINGS = {
     "anniversary_boost_factor": ("int", (0, 20), 2),
     "memories_banner": ("bool", None, True),
     "memories_composition": ("bool", None, True),
-    "memories_every_minutes": ("int", (5, 1440), 30),
+    "memories_every_minutes": ("int", (1, 1440), 30),
     "agenda_slide": ("bool", None, True),
-    "agenda_every_minutes": ("int", (5, 1440), 30),
+    "agenda_every_minutes": ("int", (1, 1440), 30),
     # Vidéos
     "slideshow_video_enabled": ("bool", None, True),
     "media_mode": ("choice", ["all", "videos"], "all"),

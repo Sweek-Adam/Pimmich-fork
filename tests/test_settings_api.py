@@ -150,7 +150,8 @@ def test_clock_and_interval_settings(admin_client, app_module):
         data = admin_client.post("/api/settings", json={"clock_layout": "stacked", "clock_background_style": "box",
                                                          "agenda_every_minutes": 60, "memories_every_minutes": 15}, headers=H).get_json()
         assert data["success"] and data["values"]["agenda_every_minutes"] == 60
-        assert admin_client.post("/api/settings", json={"agenda_every_minutes": 2}, headers=H).status_code == 400
+        assert admin_client.post("/api/settings", json={"agenda_every_minutes": 0}, headers=H).status_code == 400
+        assert admin_client.post("/api/settings", json={"agenda_every_minutes": 2}, headers=H).get_json()["success"]
         assert admin_client.post("/api/settings", json={"clock_font_path": "/etc/passwd"}, headers=H).status_code == 400
         fonts = admin_client.get("/api/settings/fonts").get_json()["fonts"]
         assert fonts and admin_client.post("/api/settings", json={"clock_font_path": fonts[0]["value"]}, headers=H).get_json()["success"]
@@ -168,7 +169,8 @@ def test_special_slide_interval(app_module):
     import local_slideshow
     assert local_slideshow.special_every({}, "agenda_every_minutes") == 1800
     assert local_slideshow.special_every({"agenda_every_minutes": 60}, "agenda_every_minutes") == 3600
-    assert local_slideshow.special_every({"agenda_every_minutes": 1}, "agenda_every_minutes") == 300
+    assert local_slideshow.special_every({"agenda_every_minutes": 1}, "agenda_every_minutes") == 60
+    assert local_slideshow.special_every({"agenda_every_minutes": 0}, "agenda_every_minutes") == 60
     assert local_slideshow.special_every({"agenda_every_minutes": "x"}, "agenda_every_minutes") == 1800
 
 

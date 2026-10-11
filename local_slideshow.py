@@ -1146,12 +1146,12 @@ def prepare_agenda(config, width, height):
 
 
 def special_every(config, key, default_minutes=30):
-    """Intervalle (secondes) entre deux passages d'une diapositive spéciale, réglable (5 min à 24 h)."""
+    """Intervalle (secondes) entre deux passages d'une diapositive spéciale, réglable (1 min à 24 h)."""
     try:
         minutes = int((config or {}).get(key, default_minutes))
     except (TypeError, ValueError):
         minutes = default_minutes
-    return max(5, min(24 * 60, minutes)) * 60
+    return max(1, min(24 * 60, minutes)) * 60
 
 
 def pop_memories_slide(config=None, width=1920, height=1080):
@@ -1160,7 +1160,8 @@ def pop_memories_slide(config=None, width=1920, height=1080):
     agenda_every = special_every(config, "agenda_every_minutes")
     if _memories["path"] and time.time() - _memories["shown_at"] > memories_every and os.path.exists(_memories["path"]):
         _memories["shown_at"] = time.time()
-        _agenda["shown_at"] = max(_agenda["shown_at"], time.time() - agenda_every + 10 * 60)  # jamais l'une juste après l'autre
+        gap = min(10 * 60, agenda_every / 2)  # jamais l'une juste après l'autre
+        _agenda["shown_at"] = max(_agenda["shown_at"], time.time() - agenda_every + gap)
         return _memories["path"]
     if config is not None:
         prepare_agenda(config, width, height)

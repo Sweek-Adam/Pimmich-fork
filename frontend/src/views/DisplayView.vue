@@ -50,7 +50,7 @@ const sections: Section[] = [
     fields: [
       { key: "memories_banner", label: () => t("Ruban « Il y a 5 ans » sur ces photos"), type: "toggle" },
       { key: "memories_composition", label: () => t("Composition « Ce jour-là » (une photo par année)"), type: "toggle" },
-      { key: "memories_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 5, max: 1440, showIf: (v) => !!v.memories_composition },
+      { key: "memories_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 1, max: 1440, showIf: (v) => !!v.memories_composition },
       { key: "anniversary_boost_enabled", label: () => t("Activer le boost pour les photos à leur date anniversaire de prise de vue"), type: "toggle" },
       { key: "anniversary_boost_factor", label: () => t("Facteur de boost anniversaire :"), type: "number", min: 0, max: 20, showIf: (v) => !!v.anniversary_boost_enabled },
       { key: "favorite_boost_factor", label: () => t("Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de lecture) :"), type: "number", min: 0, max: 20,
@@ -60,7 +60,7 @@ const sections: Section[] = [
     intro: () => t("Les événements des 7 prochains jours et vos comptes à rebours (réglés dans Horloge & météo)."),
     fields: [
       { key: "agenda_slide", label: () => t("Afficher la diapositive « Cette semaine »"), type: "toggle" },
-      { key: "agenda_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 5, max: 1440, showIf: (v) => !!v.agenda_slide },
+      { key: "agenda_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 1, max: 1440, showIf: (v) => !!v.agenda_slide },
     ] },
   { title: () => t("Vidéos"), icon: "fa-video", fields: [
     { key: "slideshow_video_enabled", label: () => t("Afficher les vidéos dans le diaporama"), type: "toggle" },
