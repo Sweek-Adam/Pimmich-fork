@@ -247,6 +247,12 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
             final_img = Image.new('RGB', (output_width, output_height), (0, 0, 0))
             x_offset = (output_width - img_content.width) // 2
             y_offset = (output_height - img_content.height) // 2
+            if img_content.width > output_width and config.get("smart_crop", True):
+                # Photo plus large que l'écran : la partie gardée contient les visages
+                from utils import faces
+                found = faces.for_file(source_path, img)
+                if found:
+                    x_offset = -faces.window(img_content.width, img_content.height, output_width, img_content.height, found)[0]
             final_img.paste(img_content, (x_offset, y_offset))
         
         # Prepare EXIF metadata with content coordinates

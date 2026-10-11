@@ -209,6 +209,7 @@ def configure():
             config.pop("compositions_styles", None)
             config["compositions_seasonal"] = 'compositions_seasonal' in request.form
             config["compositions_full_photos"] = 'compositions_full_photos' in request.form
+            config["smart_crop"] = 'smart_crop' in request.form
             config["unique_enabled"] = 'unique' in checked
             config["compositions_enabled"] = True  # les formats utilisés sont ceux cochés
         config["immich_auto_update"] = 'immich_auto_update' in request.form

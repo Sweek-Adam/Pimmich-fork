@@ -10,6 +10,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageOps, ImageChops
 
+from utils import faces
 from utils.message_renderer import N_, render_message, render_note, _textured, _gradient, _paste_with_shadow, _vignette, soft_blur
 
 logger = logging.getLogger("pimmich.compositions")
@@ -47,19 +48,18 @@ def load_photo(display_path, max_side=1400):
                 image.draft("RGB", (max_side, max_side))
                 image = ImageOps.exif_transpose(image).convert("RGB")
                 image.thumbnail((max_side, max_side), Image.LANCZOS, reducing_gap=2.0)
-                return image
+                return faces.attach(image, faces.for_file(candidate, image))
         except Exception as e:
             logger.debug(f"Photo illisible pour une composition ({candidate}) : {e}")
     return None
 
 
 def cover(image, width, height, focus_y=0.42):
-    """Recadre pour remplir exactement width × height (centre légèrement remonté, souvent les visages)."""
+    """Recadre pour remplir exactement width × height, en gardant les visages entiers (sinon centre légèrement remonté)."""
     width, height = max(1, int(width)), max(1, int(height))
     scale = max(width / image.width, height / image.height)
     resized = image.resize((max(width, round(image.width * scale)), max(height, round(image.height * scale))), Image.LANCZOS, reducing_gap=2.0)
-    left = (resized.width - width) // 2
-    top = int((resized.height - height) * focus_y)
+    left, top = faces.window(resized.width, resized.height, width, height, image.info.get(faces.INFO_KEY) if faces.ENABLED else None, focus_y)
     return resized.crop((left, top, left + width, top + height))
 
 

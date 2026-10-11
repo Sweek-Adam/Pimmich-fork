@@ -43,6 +43,7 @@ def create_default_config():
         "compositions_disabled": [],
         "compositions_seasonal": True,
         "compositions_full_photos": True,
+        "smart_crop": True,
         "unique_enabled": True,
         "background_music": "",
         "music_volume": 80,
