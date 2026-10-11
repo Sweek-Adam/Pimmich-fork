@@ -241,6 +241,18 @@
   ]
  ],
  [
+  "/api/display_sources",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/display_sources",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/email",
   [
    "GET"
@@ -372,6 +384,24 @@
   "/api/gdrive/folders",
   [
    "POST"
+  ]
+ ],
+ [
+  "/api/gdrive/selected_folders",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/gdrive/service_account",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/gdrive/setup",
+  [
+   "GET"
   ]
  ],
  [

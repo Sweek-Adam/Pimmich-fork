@@ -83,6 +83,27 @@ SETTINGS = {
     "voice_messages_enabled": ("bool", None, True),
     "voice_volume": ("int", (10, 100), 100),
     "guest_reactions_enabled": ("bool", None, True),
+    # Sources
+    "album_name": ("text", 200, ""),
+    "immich_url": ("text", 300, ""),
+    "immich_max_photos": ("int", (0, 100000), 10),  # rangé dans max_photos_to_download.immich (0 = sans limite)
+    "random_content_in_album": ("bool", None, True),
+    "immich_auto_update": ("bool", None, False),
+    "immich_update_interval_hours": ("int", (1, 720), 24),
+    "smb_host": ("text", 200, ""),
+    "smb_share": ("text", 200, ""),
+    "smb_path": ("text", 300, ""),
+    "smb_user": ("text", 100, ""),
+    "smb_auto_update": ("bool", None, False),
+    "smb_update_interval_hours": ("int", (1, 720), 24),
+    "gdrive_backend": ("choice", ["auto", "rclone", "service_account"], "auto"),
+    "gdrive_rclone_remote": ("text", 100, ""),
+    "gdrive_recursive": ("bool", None, True),
+    "gdrive_trash_after_import": ("bool", None, False),
+    "gdrive_auto_update": ("bool", None, False),
+    "gdrive_update_interval_minutes": ("int", (5, 10080), 60),
+    "hide_duplicates": ("bool", None, True),
+    "skip_initial_auto_import": ("bool", None, False),
     # Horloge et date
     "show_clock": ("bool", None, False),
     "clock_position": ("choice", ["left", "center", "right"], "center"),
@@ -212,6 +233,8 @@ def current_values(config=None):
         value = config.get(key, default)
         if key.startswith("active_") and key not in config:  # anciens réglages (mêmes heures toute la semaine)
             value = config.get("active_start" if "start" in key else "active_end", default)
+        if key == "immich_max_photos":
+            value = (config.get("max_photos_to_download") or {}).get("immich", default)
         if kind == "choice" and value is not None:
             value = str(value)
         values[key] = value
@@ -240,6 +263,10 @@ def settings_save_api():
             return jsonify({"success": False, "message": _("Valeur invalide pour « %(key)s ».", key=key), "key": key}), 400
     config = load_config()
     previous = copy.deepcopy(config)
+    if "immich_max_photos" in cleaned:  # réglage imbriqué
+        limits = dict(config.get("max_photos_to_download") or {})
+        limits["immich"] = cleaned.pop("immich_max_photos")
+        cleaned["max_photos_to_download"] = limits
     config = dict(config, **cleaned)
     save_config(config)
     from web.routes_history import log
@@ -317,3 +344,83 @@ def secrets_save_api():
 @login_required
 def settings_fonts_api():
     return jsonify({"success": True, "fonts": [{"value": path, "label": label} for path, label in clock_fonts()]})
+
+
+# --- Sources affichées dans le diaporama ---
+
+MANAGED_SOURCES = {"citation", "voyages", "cadres"}  # ajoutées par leurs propres réglages (citation du jour, voyages...)
+
+
+def source_choices():
+    from utils import members
+    translate = _
+    choices = [("immich", translate("Photos Immich")), ("usb", translate("Photos USB")), ("samba", translate("Photos Samba")),
+               ("gdrive", translate("Photos Google Drive")), ("smartphone", translate("Photos Smartphone")),
+               ("telegram", translate("Photos reçues par Telegram")), ("invités", translate("Photos des invités (validées)")),
+               ("cloud", translate("Autres clouds (Dropbox, OneDrive...)")), ("icloud", translate("Albums partagés iCloud")),
+               ("whatsapp", translate("WhatsApp et partages depuis le téléphone")), ("email", translate("Photos reçues par e-mail")),
+               ("personnes", translate("Photos des personnes suivies (Immich)"))]
+    names = [u["username"] for u in user_manager.list_users()] + [session.get("username") or ""]
+    choices += [(source, translate("Envois de %(name)s", name=members.label(source, names))) for source in members.sources()]
+    choices.append(("messages", translate("Messages")))
+    return choices
+
+
+@app.route('/api/display_sources', methods=['GET'])
+@login_required
+def display_sources_api():
+    selected = load_config().get("display_sources") or []
+    return jsonify({"success": True, "selected": [s for s in selected if s not in MANAGED_SOURCES],
+                    "choices": [{"key": k, "label": label} for k, label in source_choices()]})
+
+
+@app.route('/api/display_sources', methods=['POST'])
+@login_required
+def display_sources_save_api():
+    wanted = (request.get_json(silent=True) or {}).get("selected")
+    known = {k for k, _label in source_choices()}
+    if not isinstance(wanted, list) or not all(isinstance(s, str) and s in known for s in wanted):
+        return jsonify({"success": False, "message": _("Source inconnue.")}), 400
+    config = load_config()
+    previous = copy.deepcopy(config)
+    kept = [s for s in config.get("display_sources") or [] if s in MANAGED_SOURCES or s not in known]  # sources gérées ailleurs
+    config = dict(config, display_sources=list(dict.fromkeys(wanted + kept)))
+    save_config(config)
+    from web.routes_history import log
+    log("settings", _("Réglages modifiés"), {"type": "restore_config", "data": previous}, merge=True)
+    schedule_slideshow_restart()
+    return jsonify({"success": True, "message": _("Enregistré")})
+
+
+# --- Google Drive : dossiers choisis, compte de service ---
+
+@app.route('/api/gdrive/setup', methods=['GET'])
+@login_required
+def gdrive_setup_api():
+    config = load_config()
+    return jsonify({"success": True, "remotes": list_rclone_remotes(), "service_email": get_service_account_email(),
+                    "folders": [{"id": f.get("id"), "name": f.get("name")} for f in config.get("gdrive_folders") or []]})
+
+
+@app.route('/api/gdrive/selected_folders', methods=['POST'])
+@login_required
+def gdrive_selected_folders_api():
+    folders = (request.get_json(silent=True) or {}).get("folders")
+    if not isinstance(folders, list):
+        return jsonify({"success": False, "message": _("Liste invalide.")}), 400
+    config = load_config()
+    backend = resolve_backend_name(config)
+    config = dict(config, gdrive_folders=[{"id": str(f.get("id", ""))[:300], "name": str(f.get("name", ""))[:300], "backend": backend}
+                                          for f in folders[:200] if isinstance(f, dict) and f.get("id")])
+    save_config(config)
+    return jsonify({"success": True, "message": _("Enregistré")})
+
+
+@app.route('/api/gdrive/service_account', methods=['POST'])
+@admin_required
+def gdrive_service_account_api():
+    try:
+        save_service_account_key(parse_service_account_key(str((request.get_json(silent=True) or {}).get("key") or "")))
+    except ValueError as e:
+        return jsonify({"success": False, "message": _("Clé Google Drive non enregistrée : %(error)s", error=str(e))}), 400
+    return jsonify({"success": True, "message": _("Enregistré"), "service_email": get_service_account_email()})

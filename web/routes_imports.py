@@ -237,7 +237,7 @@ def test_samba_connection():
     share = data.get("smb_share")
     path_in_share = data.get("smb_path", "").strip("/")
     user = data.get("smb_user")
-    password = data.get("smb_password")
+    password = data.get("smb_password") or (load_config().get("smb_password") if is_admin() else None)  # mot de passe enregistré
     
     if not all([server, share]):
         return jsonify({"success": False, "message": "Le serveur et le nom du partage sont requis."})

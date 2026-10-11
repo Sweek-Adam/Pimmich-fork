@@ -170,3 +170,31 @@ def test_special_slide_interval(app_module):
     assert local_slideshow.special_every({"agenda_every_minutes": 60}, "agenda_every_minutes") == 3600
     assert local_slideshow.special_every({"agenda_every_minutes": 1}, "agenda_every_minutes") == 300
     assert local_slideshow.special_every({"agenda_every_minutes": "x"}, "agenda_every_minutes") == 1800
+
+
+def test_sources_settings(admin_client, app_module, monkeypatch):
+    from web import routes_settings
+    keys = ("display_sources", "max_photos_to_download", "gdrive_folders")
+    before = {k: routes_settings.load_config().get(k) for k in keys}
+    try:
+        routes_settings.save_config(dict(routes_settings.load_config(), display_sources=["gdrive", "citation", "voyages"]))
+        data = admin_client.get("/api/display_sources").get_json()
+        assert data["selected"] == ["gdrive"] and any(c["key"] == "messages" for c in data["choices"])
+        assert admin_client.post("/api/display_sources", json={"selected": ["immich", "messages"]}, headers=H).get_json()["success"]
+        assert routes_settings.load_config()["display_sources"] == ["immich", "messages", "citation", "voyages"]  # sources gérées gardées
+        assert admin_client.post("/api/display_sources", json={"selected": ["../etc"]}, headers=H).status_code == 400
+        assert admin_client.post("/api/settings", json={"immich_max_photos": 50}, headers=H).get_json()["values"]["immich_max_photos"] == 50
+        assert routes_settings.load_config()["max_photos_to_download"]["immich"] == 50
+        assert admin_client.post("/api/gdrive/selected_folders", json={"folders": [{"id": "abc", "name": "Photos"}]}, headers=H).get_json()["success"]
+        assert routes_settings.load_config()["gdrive_folders"][0]["id"] == "abc"
+        monkeypatch.setattr(routes_settings, "list_rclone_remotes", lambda: ["gdrive"])
+        assert admin_client.get("/api/gdrive/setup").get_json()["folders"][0]["name"] == "Photos"
+        assert admin_client.post("/api/gdrive/service_account", json={"key": "pas du json"}, headers=H).status_code == 400
+    finally:
+        config = dict(routes_settings.load_config())
+        for key, value in before.items():
+            if value is None:
+                config.pop(key, None)
+            else:
+                config[key] = value
+        routes_settings.save_config(config)
