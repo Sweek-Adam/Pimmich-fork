@@ -31,6 +31,8 @@ if [ -f "/etc/os-release" ]; then
     if [[ "$ID" == "raspbian" || "$ID" == "debian" ]]; then
         echo "Détection de Raspberry Pi OS (ou Debian). Installation de RPi.GPIO..."
         sudo apt-get install -y python3-rpi.gpio
+        # Bouton physique : rpi-lgpio (installé plus bas dans le venv) se compile avec lgpio
+        sudo apt-get install -y liblgpio-dev swig || echo "⚠️ liblgpio-dev/swig non installés : le bouton physique sera indisponible."
     fi
 fi
 
@@ -100,6 +102,11 @@ echo "Installation des dépendances de requirements.txt..."
 if ! pip install --default-timeout=1000 --retries=10 -r requirements.txt; then
     echo "❌ Échec de l'installation des dépendances Python de base !"
     exit 1
+fi
+
+if grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null; then
+    echo "Installation de rpi-lgpio (bouton physique)..."
+    pip install --default-timeout=1000 --retries=10 rpi-lgpio || echo "⚠️ rpi-lgpio non installé : le bouton physique sera indisponible."
 fi
 
 echo "Installation de la bibliothèque pour les QR codes..."

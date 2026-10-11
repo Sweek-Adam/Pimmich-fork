@@ -69,6 +69,9 @@ SETTINGS = {
     "smart_plug_off_url": ("url", 500, ""),
     "smart_plug_status_url": ("url", 500, ""),
     "smart_plug_on_delay": ("int", (0, 30), 5),
+    # Bouton physique (GPIO, numérotation BCM)
+    "button_enabled": ("bool", None, False),
+    "button_pin": ("int", (2, 27), 23),
     # Dispositions
     "compositions_every": ("int", (0, 100), 5),
     "compositions_full_photos": ("bool", None, True),
@@ -314,6 +317,17 @@ def settings_save_api():
         threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
     schedule_slideshow_restart()
     return jsonify({"success": True, "message": _("Enregistré"), "values": current_values(config)})
+
+
+@app.route('/api/gpio_button', methods=['GET'])
+@login_required
+def gpio_button_api():
+    """État du bouton physique : bibliothèque GPIO présente, broche surveillée, dernier appui."""
+    from utils import gpio_button
+    state = dict(gpio_button.STATE)
+    if state["available"] is None:  # surveillance pas encore lancée
+        state["available"] = gpio_button.load_gpio() is not None
+    return jsonify({"success": True, **state})
 
 
 # --- Dispositions : formats et thèmes de compositions activés, disposition du moment ---

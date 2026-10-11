@@ -880,6 +880,43 @@ def hdmi_audio_worker():
         time.sleep(300)
 
 
+def button_worker():
+    """Bouton physique (GPIO) : un appui met le cadre en veille ou le réveille. Réglages relus toutes les 5 s."""
+    from utils import gpio_button
+    gpio = gpio_button.load_gpio()
+    gpio_button.STATE["available"] = gpio is not None
+    if gpio is None:
+        return
+
+    def pressed():
+        from web.routes_slideshow import toggle_sleep
+        gpio_button.STATE["last_press"] = time.time()
+        logger.info("[Bouton] Appui détecté : bascule de la veille.")
+        threading.Thread(target=toggle_sleep, daemon=True, name="button-sleep").start()
+
+    watcher = gpio_button.Watcher(gpio, pressed)
+    reload_at = 0
+    while True:
+        if time.monotonic() >= reload_at:
+            config = load_config()
+            wanted = (bool(config.get("button_enabled")), int(config.get("button_pin", 23) or 23))
+            try:
+                watcher.configure(*wanted)
+                gpio_button.STATE.update(pin=watcher.pin, error=None)
+            except Exception as e:
+                if gpio_button.STATE.get("error") != str(e):
+                    logger.warning(f"[Bouton] GPIO {wanted[1]} : {e}")
+                gpio_button.STATE.update(pin=None, error=str(e))
+                watcher.pin = None
+            reload_at = time.monotonic() + 5
+        try:
+            watcher.poll()
+        except Exception as e:
+            logger.warning(f"[Bouton] Lecture : {e}")
+            watcher.pin = None
+        time.sleep(gpio_button.POLL if watcher.pin is not None else 1)
+
+
 def music_schedule_worker():
     """Musique selon l'heure : la plage en cours lance sa musique (sans couper ce qui a été lancé à la main)."""
     from utils import music_schedule, now_playing, radio, spotify

@@ -119,16 +119,6 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-def button_callback(channel):
-    """Callback exécuté lors de l'appui sur le bouton."""
-    logger.info(f"Bouton physique pressé (GPIO {channel}). Basculement de la veille...")
-    try:
-        # Appelle l'API de l'application web pour basculer l'état du diaporama
-        requests.post("http://127.0.0.1:5000/api/slideshow/toggle_sleep", headers=internal_headers(), timeout=5)
-    except requests.RequestException as e:
-        logger.error(f"Impossible de contacter l'API pour la mise en veille: {e}")
-
-
 # Messages de démarrage
 logger.debug("----------------Initialisation local_Slideshow  ----------------")
 
@@ -3016,25 +3006,7 @@ def start_slideshow():
         except locale.Error:
             logger.warning(f"Avertissement: locale fr_FR.UTF-8 non disponible. Les dates seront en anglais.")
 
-        # --- Gestion du bouton physique ---
-        button_enabled = config.get("button_enabled", False)
-        button_pin = int(config.get("button_pin", 23)) # GPIO 23 par défaut
-
-        if GPIO_AVAILABLE and button_enabled:
-            try:
-                # Nettoyage d'une éventuelle configuration précédente du pin
-                GPIO.remove_event_detect(button_pin)
-                # Configuration du pin en entrée avec une résistance de pull-up interne.
-                # Le bouton doit connecter le pin au GND.
-                GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-                
-                # Ajout de la détection d'événement sur front descendant (appui sur le bouton)
-                # bouncetime évite les détections multiples pour un seul appui.
-                GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback, bouncetime=500)
-                logger.info(f"✅ Bouton physique activé sur le pin GPIO {button_pin}.")
-            except Exception as e:
-                logger.error(f"❌ Erreur lors de l'initialisation du bouton GPIO {button_pin}: {e}")
-        # --- FIN : Gestion du bouton physique ---
+        # Bouton physique : surveillé par l'application web (utils/gpio_button.py), pour pouvoir aussi réveiller le cadre
 
         logger.debug(f"📸 Entering main slideshow loop.")
         

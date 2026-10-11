@@ -88,6 +88,11 @@ if ! pip install --timeout 60 -r requirements.txt > logs/update_pip.log 2>&1; th
     echo "STEP:WARNING:Consultez le fichier 'logs/update_pip.log' depuis l'onglet Système pour les détails."
 fi
 
+# Bouton physique : rpi-lgpio (seulement sur Raspberry Pi, si lgpio peut être compilé)
+if grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null && ! pip show rpi-lgpio > /dev/null 2>&1; then
+    pip install rpi-lgpio >> logs/update_pip.log 2>&1 || true
+fi
+
 echo "--- Réapplication des règles Sway pour mpv et python3 ---"
 SWAY_CONFIG_DIR="$HOME/.config/sway"
 SWAY_CONFIG_FILE="$SWAY_CONFIG_DIR/config"

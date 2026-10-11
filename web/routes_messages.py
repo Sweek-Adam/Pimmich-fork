@@ -1,6 +1,7 @@
 """Messages texte affichés comme des photos dans le diaporama."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from web.core import _
+from flask_babel import format_datetime
 import io
 from flask import send_file
 from utils import messages_manager
@@ -64,6 +65,26 @@ def create_message_api():
     return jsonify({"success": True, "message": _("Message publié : il apparaîtra dans le diaporama."), "item": message})
 
 
+def deleted_label(message):
+    """Texte de l'historique pour un message supprimé : sa nature (dessin, message vocal, message), son auteur et sa date."""
+    message = message or {}
+    kind = message.get("kind")
+    who = (message.get("signature") or "").strip()
+    if kind == "drawing":
+        what = _("Dessin de %(who)s", who=who) if who else _("Dessin")
+    elif kind == "voice":
+        what = _("Message vocal de %(who)s", who=who) if who else _("Message vocal")
+    else:
+        text = (message.get("title") or message.get("body") or "").strip()
+        what = _("Message « %(text)s »", text=text[:60]) if text else _("Message")
+    created = str(message.get("created") or "")
+    try:
+        when = format_datetime(datetime.strptime(created, "%Y-%m-%d %H:%M"), "short")
+    except ValueError:
+        when = ""
+    return _("%(what)s du %(date)s supprimé", what=what, date=when) if when else _("%(what)s supprimé", what=what)
+
+
 @app.route('/api/messages/<message_id>', methods=['DELETE'])
 @login_required
 def delete_message_api(message_id):
@@ -71,8 +92,7 @@ def delete_message_api(message_id):
     if not re.fullmatch(r"[0-9a-f]{12}", message_id) or not messages_manager.delete_message(message_id):
         return jsonify({"success": False, "message": _("Message introuvable.")}), 404
     from web.routes_history import log
-    log("message", _("Message supprimé : « %(text)s »", text=((removed or {}).get("title") or (removed or {}).get("body") or "")[:60]),
-        {"type": "restore_message", "data": removed} if removed and removed.get("kind") not in ("drawing", "voice") else None)
+    log("message", deleted_label(removed), {"type": "restore_message", "data": removed} if removed and removed.get("kind") not in ("drawing", "voice") else None)
     _refresh_slideshow()
     return jsonify({"success": True, "message": _("Message supprimé.")})
 

@@ -115,22 +115,24 @@ def restart_standard_slideshow():
         return jsonify({"success": False, "message": str(e)}), 500
 
 
+def toggle_sleep():
+    """Met le cadre en veille s'il tourne, le réveille sinon (accueil et bouton physique) : "asleep" ou "awake"."""
+    if is_slideshow_running():
+        logger.info("Veille : diaporama en cours -> arrêt.")
+        stop_slideshow()
+        return "asleep"
+    logger.info("Veille : diaporama arrêté -> démarrage.")
+    start_slideshow()
+    return "awake"
+
+
 @app.route('/api/slideshow/toggle_sleep', methods=['POST'])
 @login_or_internal_required
 def toggle_sleep_api():
-    """Bascule l'état du diaporama (actif/veille). Pour utilisation avec un bouton physique."""
+    """Bascule l'état du diaporama (actif/veille), depuis l'accueil."""
     # Accès contrôlé par @login_or_internal_required (session ou jeton interne)
-    
     try:
-        if is_slideshow_running():
-            logger.info("API toggle_sleep: Diaporama en cours -> Arrêt.")
-            stop_slideshow()
-            message = "Diaporama mis en veille."
-        else:
-            logger.info("API toggle_sleep: Diaporama arrêté -> Démarrage.")
-            start_slideshow()
-            message = "Diaporama réveillé."
-        return jsonify({"success": True, "message": message})
+        return jsonify({"success": True, "message": _("Diaporama mis en veille.") if toggle_sleep() == "asleep" else _("Diaporama réveillé.")})
     except Exception as e:
         logger.error(f"Erreur lors du basculement de la veille via API : {e}", exc_info=True)
         return jsonify({"success": False, "message": str(e)}), 500

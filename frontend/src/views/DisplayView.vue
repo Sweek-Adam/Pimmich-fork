@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ButtonCard from "../components/ButtonCard.vue";
 import HomeAssistantCard from "../components/HomeAssistantCard.vue";
 import PresenceCard from "../components/PresenceCard.vue";
 import ScreenCard from "../components/ScreenCard.vue";
@@ -105,6 +106,12 @@ const sections: Section[] = [
     { key: "home_assistant_token", label: () => t("Token d'accès Home Assistant (si URL de statut HA) :"), type: "secret", showIf: plug,
       help: () => t("Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant.") },
   ] },
+  { title: () => t("Bouton physique"), icon: "fa-dot-circle",
+    intro: () => t("Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, un autre le réveille."),
+    fields: [
+    { key: "button_enabled", label: () => t("Activer le bouton physique"), type: "toggle" },
+    { key: "button_pin", label: () => t("Broche GPIO (numérotation BCM)"), type: "number", min: 2, max: 27, showIf: (v) => !!v.button_enabled },
+  ] },
 ];
 </script>
 
@@ -113,6 +120,7 @@ const sections: Section[] = [
     <div class="extra">
       <ScreenCard />
       <SmartPlugCard />
+      <ButtonCard />
       <PresenceCard />
       <HomeAssistantCard v-if="boot.admin" />
     </div>
