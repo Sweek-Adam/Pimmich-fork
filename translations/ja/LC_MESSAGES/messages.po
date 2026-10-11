@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:55+0200\n"
+"POT-Creation-Date: 2026-10-11 10:57+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -576,6 +576,7 @@ msgstr "録り直す"
 msgid "Arrêter"
 msgstr "停止"
 
+#: templates/configure/tab_accueil.html.jinja:335
 #: templates/upload.html.jinja:197 templates/upload.html.jinja:329
 #: templates/upload.html.jinja:394 templates/upload.html.jinja:431
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
@@ -2065,6 +2066,23 @@ msgstr "取り消す：{action}"
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "まだありません。"
+
+#: templates/configure/tab_accueil.html.jinja:305
+msgid "Déposez vos photos et vidéos : elles partent sur le cadre"
+msgstr "写真や動画をドロップするとフレームに送られます"
+
+#: templates/configure/tab_accueil.html.jinja:326
+msgid "Aucune photo ni vidéo dans ce que vous avez déposé."
+msgstr "ドロップしたものに写真や動画がありません。"
+
+#: templates/configure/tab_accueil.html.jinja:328
+#, python-brace-format
+msgid "Envoi de {n} fichier(s)…"
+msgstr "{n}件のファイルを送信中…"
+
+#: templates/configure/tab_accueil.html.jinja:332
+msgid "Photos envoyées : elles arrivent sur le cadre."
+msgstr "写真を送信しました。まもなくフレームに表示されます。"
 
 #: templates/configure/tab_actions.html.jinja:4
 #: templates/configure/tab_comptes.html.jinja:60

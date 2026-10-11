@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:55+0200\n"
+"POT-Creation-Date: 2026-10-11 10:57+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -580,6 +580,7 @@ msgstr "Volver a grabar"
 msgid "Arrêter"
 msgstr "Detener"
 
+#: templates/configure/tab_accueil.html.jinja:335
 #: templates/upload.html.jinja:197 templates/upload.html.jinja:329
 #: templates/upload.html.jinja:394 templates/upload.html.jinja:431
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
@@ -2101,6 +2102,23 @@ msgstr "Deshacer: {action}"
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "Nada por ahora."
+
+#: templates/configure/tab_accueil.html.jinja:305
+msgid "Déposez vos photos et vidéos : elles partent sur le cadre"
+msgstr "Suelta tus fotos y vídeos: van al marco"
+
+#: templates/configure/tab_accueil.html.jinja:326
+msgid "Aucune photo ni vidéo dans ce que vous avez déposé."
+msgstr "No hay fotos ni vídeos en lo que has soltado."
+
+#: templates/configure/tab_accueil.html.jinja:328
+#, python-brace-format
+msgid "Envoi de {n} fichier(s)…"
+msgstr "Enviando {n} archivo(s)…"
+
+#: templates/configure/tab_accueil.html.jinja:332
+msgid "Photos envoyées : elles arrivent sur le cadre."
+msgstr "Fotos enviadas: llegan al marco."
 
 #: templates/configure/tab_actions.html.jinja:4
 #: templates/configure/tab_comptes.html.jinja:60

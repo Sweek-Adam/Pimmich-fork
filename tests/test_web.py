@@ -185,3 +185,8 @@ def test_pages_work_without_internet():
 def test_dark_mode_is_available(admin_client):
     html = admin_client.get("/configure").get_data(as_text=True)
     assert 'html[data-theme="dark"]' in html and "setPimmichTheme('dark')" in html and "pimmich-theme" in html
+
+
+def test_drag_and_drop_upload_is_wired(admin_client):
+    html = admin_client.get("/configure").get_data(as_text=True)
+    assert 'id="drop-overlay"' in html and 'fetch("/import-smartphone"' in html

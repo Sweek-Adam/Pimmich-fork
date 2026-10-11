@@ -301,4 +301,40 @@
                         load(); setInterval(load, 30000);
                     });
                 </script>
+            
+                <div id="drop-overlay" class="drop-overlay hidden"><div><i class="fas fa-cloud-upload-alt"></i><p>{{ _("Déposez vos photos et vidéos : elles partent sur le cadre") }}</p></div></div>
+                <style>
+                    .drop-overlay { position: fixed; inset: 0; z-index: 80; background: rgba(79, 70, 229, .82); color: #fff; display: flex;
+                                    align-items: center; justify-content: center; text-align: center; font-size: 1.4rem; font-weight: 700; pointer-events: none; }
+                    .drop-overlay i { font-size: 4rem; margin-bottom: 12px; }
+                    .drop-overlay.hidden { display: none; }
+                </style>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        // Glisser-déposer des photos n'importe où sur l'interface : envoi vers « Mes envois »
+                        const overlay = document.getElementById("drop-overlay");
+                        const MEDIA = /\.(jpe?g|png|heic|heif|mp4|mov)$/i;
+                        let depth = 0;
+                        const hasFiles = (e) => e.dataTransfer && [...e.dataTransfer.types].includes("Files");
+                        window.addEventListener("dragenter", (e) => { if (!hasFiles(e)) return; depth++; overlay.classList.remove("hidden"); });
+                        window.addEventListener("dragleave", (e) => { if (!hasFiles(e)) return; depth = Math.max(0, depth - 1); if (!depth) overlay.classList.add("hidden"); });
+                        window.addEventListener("dragover", (e) => { if (hasFiles(e)) e.preventDefault(); });
+                        window.addEventListener("drop", async (e) => {
+                            if (!hasFiles(e)) return;
+                            e.preventDefault(); depth = 0; overlay.classList.add("hidden");
+                            const files = [...e.dataTransfer.files].filter(f => MEDIA.test(f.name));
+                            if (!files.length) { if (window.showToast) showToast({{ _("Aucune photo ni vidéo dans ce que vous avez déposé.")|tojson }}); return; }
+                            const form = new FormData(); files.forEach(f => form.append("photos", f));
+                            if (window.showToast) showToast({{ _("Envoi de {n} fichier(s)…")|tojson }}.replace("{n}", files.length));
+                            try {
+                                const response = await fetch("/import-smartphone", { method: "POST", body: form });
+                                await response.text();  // la préparation se suit dans la notification des imports
+                                if (window.showToast) showToast({{ _("Photos envoyées : elles arrivent sur le cadre.")|tojson }});
+                                if (window.refreshMyUploads) window.refreshMyUploads();
+                            } catch (err) {
+                                if (window.showToast) showToast({{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }});
+                            }
+                        });
+                    });
+                </script>
             </div>

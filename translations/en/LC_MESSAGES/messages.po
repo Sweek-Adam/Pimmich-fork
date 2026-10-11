@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:55+0200\n"
+"POT-Creation-Date: 2026-10-11 10:57+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -580,6 +580,7 @@ msgstr "Record again"
 msgid "Arrêter"
 msgstr "Stop"
 
+#: templates/configure/tab_accueil.html.jinja:335
 #: templates/upload.html.jinja:197 templates/upload.html.jinja:329
 #: templates/upload.html.jinja:394 templates/upload.html.jinja:431
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
@@ -2093,6 +2094,23 @@ msgstr "Undo: {action}"
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "Nothing yet."
+
+#: templates/configure/tab_accueil.html.jinja:305
+msgid "Déposez vos photos et vidéos : elles partent sur le cadre"
+msgstr "Drop your photos and videos: they go to the frame"
+
+#: templates/configure/tab_accueil.html.jinja:326
+msgid "Aucune photo ni vidéo dans ce que vous avez déposé."
+msgstr "No photos or videos in what you dropped."
+
+#: templates/configure/tab_accueil.html.jinja:328
+#, python-brace-format
+msgid "Envoi de {n} fichier(s)…"
+msgstr "Uploading {n} file(s)…"
+
+#: templates/configure/tab_accueil.html.jinja:332
+msgid "Photos envoyées : elles arrivent sur le cadre."
+msgstr "Photos uploaded: they are on their way to the frame."
 
 #: templates/configure/tab_actions.html.jinja:4
 #: templates/configure/tab_comptes.html.jinja:60
