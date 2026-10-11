@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:27+0200\n"
+"POT-Creation-Date: 2026-10-11 12:30+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -172,8 +172,9 @@ msgstr "停止中"
 msgid "Thème"
 msgstr "テーマ"
 
-#: frontend/src/i18n.ts:2 frontend/src/views/QueueView.vue:102
-#: frontend/src/views/TripsView.vue:258 frontend/src/views/TripsView.vue:288
+#: frontend/src/i18n.ts:2 frontend/src/views/PlaylistsView.vue:118
+#: frontend/src/views/QueueView.vue:102 frontend/src/views/TripsView.vue:258
+#: frontend/src/views/TripsView.vue:288
 #: templates/configure/_smart_albums.html.jinja:80
 #: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
@@ -218,7 +219,7 @@ msgid "Playlists"
 msgstr "プレイリスト"
 
 #: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:110
-#: templates/configure.html.jinja:149
+#: frontend/src/views/PlaylistsView.vue:140 templates/configure.html.jinja:149
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
@@ -398,7 +399,8 @@ msgstr "{n}年前"
 msgid "Dernières actions"
 msgstr "最近の操作"
 
-#: frontend/src/views/HomeView.vue:213 frontend/src/views/TripsView.vue:245
+#: frontend/src/views/HomeView.vue:213 frontend/src/views/PlaylistsView.vue:156
+#: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
 #: templates/upload.html.jinja:214
@@ -423,6 +425,7 @@ msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "検索（場所、キャプション、ファイル名…）"
 
 #: frontend/src/views/LibraryView.vue:96
+#: frontend/src/views/PlaylistsView.vue:138
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "すべてのソース"
@@ -492,7 +495,9 @@ msgstr "前へ"
 msgid "Ajouter aux favoris"
 msgstr "お気に入りに追加"
 
-#: frontend/src/views/LibraryView.vue:146 frontend/src/views/TripsView.vue:263
+#: frontend/src/views/LibraryView.vue:146
+#: frontend/src/views/PlaylistsView.vue:134
+#: frontend/src/views/TripsView.vue:263
 #: templates/configure/_playlist_builder.html.jinja:6
 #: templates/configure/_smart_albums.html.jinja:13
 #: templates/configure/tab_accueil.html.jinja:84
@@ -797,6 +802,135 @@ msgstr "まだありません。"
 msgid "Retirer la confiance"
 msgstr "信頼を解除"
 
+#: frontend/src/views/PlaylistsView.vue:44
+msgid "Nouveau nom de la playlist :"
+msgstr "プレイリストの新しい名前："
+
+#: frontend/src/views/PlaylistsView.vue:51
+#, python-brace-format
+msgid "Supprimer la playlist « {name} » ?"
+msgstr "プレイリスト「{name}」を削除しますか？"
+
+#: frontend/src/views/PlaylistsView.vue:52
+msgid "Playlist supprimée."
+msgstr "プレイリストを削除しました。"
+
+#: frontend/src/views/PlaylistsView.vue:80
+msgid "Choisissez au moins une photo."
+msgstr "写真を1枚以上選んでください。"
+
+#: frontend/src/views/PlaylistsView.vue:82
+msgid "Playlist enregistrée."
+msgstr "プレイリストを保存しました。"
+
+#: frontend/src/views/PlaylistsView.vue:85
+#: templates/configure/_playlist_builder.html.jinja:41
+msgid "Donnez un nom à la playlist."
+msgstr "プレイリストに名前を付けてください。"
+
+#: frontend/src/views/PlaylistsView.vue:86
+msgid "Playlist créée."
+msgstr "プレイリストを作成しました。"
+
+#: frontend/src/views/PlaylistsView.vue:99
+#: templates/configure/tab_playlists.html.jinja:73
+msgid "Vos Playlists"
+msgstr "ヴォスのプレイリスト"
+
+#: frontend/src/views/PlaylistsView.vue:101
+#: templates/configure/scripts_status.html.jinja:161
+#: templates/configure/scripts_status.html.jinja:166
+#: templates/configure/tab_playlists.html.jinja:38
+msgid "Retour au diaporama standard"
+msgstr "標準のスライドショーに戻る"
+
+#: frontend/src/views/PlaylistsView.vue:102
+#: frontend/src/views/PlaylistsView.vue:133
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/tab_playlists.html.jinja:64
+msgid "Nouvelle playlist"
+msgstr "新しいプレイリスト"
+
+#: frontend/src/views/PlaylistsView.vue:105
+#: templates/configure/tab_playlists.html.jinja:65
+msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
+msgstr "ソース、年、月、お気に入りで写真をまとめて選べます。"
+
+#: frontend/src/views/PlaylistsView.vue:106
+msgid "Albums intelligents, musique et disposition : interface classique"
+msgstr "スマートアルバム・音楽・レイアウト：従来の画面"
+
+#: frontend/src/views/PlaylistsView.vue:107
+#: templates/configure/tab_playlists.html.jinja:74
+msgid "Seulement mes playlists"
+msgstr "自分のプレイリストのみ"
+
+#: frontend/src/views/PlaylistsView.vue:109
+msgid "Aucune playlist pour l'instant."
+msgstr "プレイリストはまだありません。"
+
+#: frontend/src/views/PlaylistsView.vue:120
+#: templates/configure/scripts_gallery.html.jinja:57
+#: templates/configure/scripts_main.html.jinja:1099
+msgid "Lancer"
+msgstr "ランサー"
+
+#: frontend/src/views/PlaylistsView.vue:121
+msgid "Modifier les photos"
+msgstr "写真を編集"
+
+#: frontend/src/views/PlaylistsView.vue:122
+#: frontend/src/views/TripsView.vue:268
+#: templates/configure/tab_carte.html.jinja:34
+msgid "Renommer"
+msgstr "名前を変更"
+
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr "削除"
+
+#: frontend/src/views/PlaylistsView.vue:137
+msgid "Nom de la playlist"
+msgstr "プレイリスト名"
+
+#: frontend/src/views/PlaylistsView.vue:139
+#: frontend/src/views/TripsView.vue:234
+#: templates/configure/_playlist_builder.html.jinja:14
+#: templates/configure/_playlist_builder.html.jinja:107
+#: templates/configure/tab_carte.html.jinja:95
+msgid "Toutes les années"
+msgstr "すべての年"
+
+#: frontend/src/views/PlaylistsView.vue:142
+#: templates/configure/_playlist_builder.html.jinja:18
+msgid "Tout sélectionner"
+msgstr "すべて選択"
+
+#: frontend/src/views/PlaylistsView.vue:143
+#: templates/configure/_playlist_builder.html.jinja:19
+msgid "Tout désélectionner"
+msgstr "すべて選択解除"
+
+#: frontend/src/views/PlaylistsView.vue:154
+#, python-brace-format
+msgid "{n} photos sélectionnées"
+msgstr "{n} 枚選択中"
+
+#: frontend/src/views/PlaylistsView.vue:157
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:303
+#: templates/configure/tab_dispositions.html.jinja:132
+#: templates/configure/tab_legendes.html.jinja:123
+#: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_son.html.jinja:33
+#: templates/configure/tab_sources.html.jinja:543
+#: templates/upload.html.jinja:144
+msgid "Enregistrer"
+msgstr "保存"
+
 #: frontend/src/views/QueueView.vue:73
 msgid "Le diaporama est arrêté : la file d'attente apparaîtra quand il tournera."
 msgstr "スライドショーは停止中です。動き出すと再生待ちが表示されます。"
@@ -955,13 +1089,6 @@ msgstr "自宅はどこですか？設定すると旅行とお出かけを区別
 msgid "Placer la maison"
 msgstr "自宅を設定"
 
-#: frontend/src/views/TripsView.vue:234
-#: templates/configure/_playlist_builder.html.jinja:14
-#: templates/configure/_playlist_builder.html.jinja:107
-#: templates/configure/tab_carte.html.jinja:95
-msgid "Toutes les années"
-msgstr "すべての年"
-
 #: frontend/src/views/TripsView.vue:241
 #: templates/configure/tab_carte.html.jinja:102
 msgid "Cliquez sur la carte à l'endroit de la maison, ou cherchez votre ville."
@@ -1003,11 +1130,6 @@ msgstr "地図に置く"
 #: templates/configure/tab_carte.html.jinja:96
 msgid "Déplacer"
 msgstr "移動"
-
-#: frontend/src/views/TripsView.vue:268
-#: templates/configure/tab_carte.html.jinja:34
-msgid "Renommer"
-msgstr "名前を変更"
 
 #: frontend/src/views/TripsView.vue:269
 #: templates/configure/tab_carte.html.jinja:35
@@ -1334,18 +1456,6 @@ msgid ""
 " plus)."
 msgstr "メッセージが表示されるとフレームが再生します（最大90秒）。"
 
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/_son_spotify.html.jinja:34
-#: templates/configure/tab_affichage.html.jinja:303
-#: templates/configure/tab_dispositions.html.jinja:132
-#: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_messages.html.jinja:236
-#: templates/configure/tab_son.html.jinja:33
-#: templates/configure/tab_sources.html.jinja:543
-#: templates/upload.html.jinja:144
-msgid "Enregistrer"
-msgstr "保存"
-
 #: templates/upload.html.jinja:148
 msgid ""
 "Enregistrez-vous avec l'application Dictaphone du téléphone, puis "
@@ -1550,14 +1660,6 @@ msgstr "すべての月"
 msgid "Personne"
 msgstr "人物"
 
-#: templates/configure/_playlist_builder.html.jinja:18
-msgid "Tout sélectionner"
-msgstr "すべて選択"
-
-#: templates/configure/_playlist_builder.html.jinja:19
-msgid "Tout désélectionner"
-msgstr "すべて選択解除"
-
 #: templates/configure/_playlist_builder.html.jinja:21
 msgid ""
 "Touchez les photos pour les choisir. Maj + clic : sélectionner toute une "
@@ -1572,11 +1674,6 @@ msgstr "ドラッグして順番を変更"
 msgid "Créer la playlist"
 msgstr "プレイリストを作成"
 
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/tab_playlists.html.jinja:64
-msgid "Nouvelle playlist"
-msgstr "新しいプレイリスト"
-
 #: templates/configure/_playlist_builder.html.jinja:40
 #: templates/configure/scripts_main.html.jinja:335
 msgid "Choisir les photos"
@@ -1589,10 +1686,6 @@ msgstr "枚を選択"
 #: templates/configure/_playlist_builder.html.jinja:40
 msgid "photo(s) affichée(s)"
 msgstr "枚を表示"
-
-#: templates/configure/_playlist_builder.html.jinja:41
-msgid "Donnez un nom à la playlist."
-msgstr "プレイリストに名前を付けてください。"
 
 #: templates/configure/_playlist_builder.html.jinja:41
 msgid "Toutes"
@@ -2299,11 +2392,6 @@ msgstr "プレイリストはまだ作成されていません。"
 msgid "Erreur lors du chargement des playlists."
 msgstr "プレイリストのロード中にエラーが発生しました。"
 
-#: templates/configure/scripts_gallery.html.jinja:57
-#: templates/configure/scripts_main.html.jinja:1099
-msgid "Lancer"
-msgstr "ランサー"
-
 #: templates/configure/scripts_gallery.html.jinja:58
 msgid "Supprimer la playlist"
 msgstr "プレイリストを削除する"
@@ -2545,12 +2633,6 @@ msgstr "リブート..."
 #: templates/configure/scripts_status.html.jinja:155
 msgid "Diaporama standard relancé."
 msgstr "通常のスライドショーが再開されました。"
-
-#: templates/configure/scripts_status.html.jinja:161
-#: templates/configure/scripts_status.html.jinja:166
-#: templates/configure/tab_playlists.html.jinja:38
-msgid "Retour au diaporama standard"
-msgstr "標準のスライドショーに戻る"
 
 #: templates/configure/scripts_status.html.jinja:251
 msgid "Détection..."
@@ -3762,11 +3844,6 @@ msgstr "変更"
 #: templates/configure/tab_comptes.html.jinja:93
 msgid "Supprimer ce compte ?"
 msgstr "このアカウントを削除しますか？"
-
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
-msgstr "削除"
 
 #: templates/configure/tab_comptes.html.jinja:104
 msgid "Créer un compte"
@@ -5725,18 +5802,6 @@ msgid ""
 msgstr ""
 "スライドショーは、\n"
 "                                逮捕された。"
-
-#: templates/configure/tab_playlists.html.jinja:65
-msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
-msgstr "ソース、年、月、お気に入りで写真をまとめて選べます。"
-
-#: templates/configure/tab_playlists.html.jinja:73
-msgid "Vos Playlists"
-msgstr "ヴォスのプレイリスト"
-
-#: templates/configure/tab_playlists.html.jinja:74
-msgid "Seulement mes playlists"
-msgstr "自分のプレイリストのみ"
 
 #: templates/configure/tab_queue.html.jinja:4
 msgid "À suivre dans le diaporama"

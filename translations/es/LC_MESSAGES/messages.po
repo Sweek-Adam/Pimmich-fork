@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 12:27+0200\n"
+"POT-Creation-Date: 2026-10-11 12:30+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -172,8 +172,9 @@ msgstr "Detenido"
 msgid "Thème"
 msgstr "Tema"
 
-#: frontend/src/i18n.ts:2 frontend/src/views/QueueView.vue:102
-#: frontend/src/views/TripsView.vue:258 frontend/src/views/TripsView.vue:288
+#: frontend/src/i18n.ts:2 frontend/src/views/PlaylistsView.vue:118
+#: frontend/src/views/QueueView.vue:102 frontend/src/views/TripsView.vue:258
+#: frontend/src/views/TripsView.vue:288
 #: templates/configure/_smart_albums.html.jinja:80
 #: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
@@ -218,7 +219,7 @@ msgid "Playlists"
 msgstr "Listas de reproducción"
 
 #: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:110
-#: templates/configure.html.jinja:149
+#: frontend/src/views/PlaylistsView.vue:140 templates/configure.html.jinja:149
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
@@ -398,7 +399,8 @@ msgstr "Hace {n} años"
 msgid "Dernières actions"
 msgstr "Últimas acciones"
 
-#: frontend/src/views/HomeView.vue:213 frontend/src/views/TripsView.vue:245
+#: frontend/src/views/HomeView.vue:213 frontend/src/views/PlaylistsView.vue:156
+#: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
 #: templates/upload.html.jinja:214
@@ -423,6 +425,7 @@ msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "Buscar (lugar, leyenda, nombre de archivo…)"
 
 #: frontend/src/views/LibraryView.vue:96
+#: frontend/src/views/PlaylistsView.vue:138
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "Todas las fuentes"
@@ -492,7 +495,9 @@ msgstr "Anterior"
 msgid "Ajouter aux favoris"
 msgstr "Añadir a favoritos"
 
-#: frontend/src/views/LibraryView.vue:146 frontend/src/views/TripsView.vue:263
+#: frontend/src/views/LibraryView.vue:146
+#: frontend/src/views/PlaylistsView.vue:134
+#: frontend/src/views/TripsView.vue:263
 #: templates/configure/_playlist_builder.html.jinja:6
 #: templates/configure/_smart_albums.html.jinja:13
 #: templates/configure/tab_accueil.html.jinja:84
@@ -801,6 +806,135 @@ msgstr "Ninguno por ahora."
 msgid "Retirer la confiance"
 msgstr "Retirar la confianza"
 
+#: frontend/src/views/PlaylistsView.vue:44
+msgid "Nouveau nom de la playlist :"
+msgstr "Nuevo nombre de la lista:"
+
+#: frontend/src/views/PlaylistsView.vue:51
+#, python-brace-format
+msgid "Supprimer la playlist « {name} » ?"
+msgstr "¿Eliminar la lista «{name}»?"
+
+#: frontend/src/views/PlaylistsView.vue:52
+msgid "Playlist supprimée."
+msgstr "Lista eliminada."
+
+#: frontend/src/views/PlaylistsView.vue:80
+msgid "Choisissez au moins une photo."
+msgstr "Elige al menos una foto."
+
+#: frontend/src/views/PlaylistsView.vue:82
+msgid "Playlist enregistrée."
+msgstr "Lista guardada."
+
+#: frontend/src/views/PlaylistsView.vue:85
+#: templates/configure/_playlist_builder.html.jinja:41
+msgid "Donnez un nom à la playlist."
+msgstr "Ponle un nombre a la playlist."
+
+#: frontend/src/views/PlaylistsView.vue:86
+msgid "Playlist créée."
+msgstr "Lista creada."
+
+#: frontend/src/views/PlaylistsView.vue:99
+#: templates/configure/tab_playlists.html.jinja:73
+msgid "Vos Playlists"
+msgstr "Tus listas de reproducción"
+
+#: frontend/src/views/PlaylistsView.vue:101
+#: templates/configure/scripts_status.html.jinja:161
+#: templates/configure/scripts_status.html.jinja:166
+#: templates/configure/tab_playlists.html.jinja:38
+msgid "Retour au diaporama standard"
+msgstr "Volver a la presentación de diapositivas estándar"
+
+#: frontend/src/views/PlaylistsView.vue:102
+#: frontend/src/views/PlaylistsView.vue:133
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/tab_playlists.html.jinja:64
+msgid "Nouvelle playlist"
+msgstr "Nueva playlist"
+
+#: frontend/src/views/PlaylistsView.vue:105
+#: templates/configure/tab_playlists.html.jinja:65
+msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
+msgstr "Elige las fotos de una vez, por fuente, año, mes o favoritos."
+
+#: frontend/src/views/PlaylistsView.vue:106
+msgid "Albums intelligents, musique et disposition : interface classique"
+msgstr "Álbumes inteligentes, música y disposición: interfaz clásica"
+
+#: frontend/src/views/PlaylistsView.vue:107
+#: templates/configure/tab_playlists.html.jinja:74
+msgid "Seulement mes playlists"
+msgstr "Solo mis listas"
+
+#: frontend/src/views/PlaylistsView.vue:109
+msgid "Aucune playlist pour l'instant."
+msgstr "Aún no hay listas."
+
+#: frontend/src/views/PlaylistsView.vue:120
+#: templates/configure/scripts_gallery.html.jinja:57
+#: templates/configure/scripts_main.html.jinja:1099
+msgid "Lancer"
+msgstr "Lancero"
+
+#: frontend/src/views/PlaylistsView.vue:121
+msgid "Modifier les photos"
+msgstr "Editar las fotos"
+
+#: frontend/src/views/PlaylistsView.vue:122
+#: frontend/src/views/TripsView.vue:268
+#: templates/configure/tab_carte.html.jinja:34
+msgid "Renommer"
+msgstr "Renombrar"
+
+#: frontend/src/views/PlaylistsView.vue:123
+#: templates/configure/tab_comptes.html.jinja:95
+#: templates/configure/tab_dispositions.html.jinja:30
+msgid "Supprimer"
+msgstr "Eliminar"
+
+#: frontend/src/views/PlaylistsView.vue:137
+msgid "Nom de la playlist"
+msgstr "Nombre de la lista"
+
+#: frontend/src/views/PlaylistsView.vue:139
+#: frontend/src/views/TripsView.vue:234
+#: templates/configure/_playlist_builder.html.jinja:14
+#: templates/configure/_playlist_builder.html.jinja:107
+#: templates/configure/tab_carte.html.jinja:95
+msgid "Toutes les années"
+msgstr "Todos los años"
+
+#: frontend/src/views/PlaylistsView.vue:142
+#: templates/configure/_playlist_builder.html.jinja:18
+msgid "Tout sélectionner"
+msgstr "Seleccionar todo"
+
+#: frontend/src/views/PlaylistsView.vue:143
+#: templates/configure/_playlist_builder.html.jinja:19
+msgid "Tout désélectionner"
+msgstr "Deseleccionar todo"
+
+#: frontend/src/views/PlaylistsView.vue:154
+#, python-brace-format
+msgid "{n} photos sélectionnées"
+msgstr "{n} fotos seleccionadas"
+
+#: frontend/src/views/PlaylistsView.vue:157
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:303
+#: templates/configure/tab_dispositions.html.jinja:132
+#: templates/configure/tab_legendes.html.jinja:123
+#: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_son.html.jinja:33
+#: templates/configure/tab_sources.html.jinja:543
+#: templates/upload.html.jinja:144
+msgid "Enregistrer"
+msgstr "Guardar"
+
 #: frontend/src/views/QueueView.vue:73
 msgid "Le diaporama est arrêté : la file d'attente apparaîtra quand il tournera."
 msgstr "La presentación está detenida: la cola aparecerá cuando funcione."
@@ -963,13 +1097,6 @@ msgstr "¿Dónde está tu casa? Colócala para distinguir los viajes de las sali
 msgid "Placer la maison"
 msgstr "Colocar la casa"
 
-#: frontend/src/views/TripsView.vue:234
-#: templates/configure/_playlist_builder.html.jinja:14
-#: templates/configure/_playlist_builder.html.jinja:107
-#: templates/configure/tab_carte.html.jinja:95
-msgid "Toutes les années"
-msgstr "Todos los años"
-
 #: frontend/src/views/TripsView.vue:241
 #: templates/configure/tab_carte.html.jinja:102
 msgid "Cliquez sur la carte à l'endroit de la maison, ou cherchez votre ville."
@@ -1011,11 +1138,6 @@ msgstr "Colocar en el mapa"
 #: templates/configure/tab_carte.html.jinja:96
 msgid "Déplacer"
 msgstr "Mover"
-
-#: frontend/src/views/TripsView.vue:268
-#: templates/configure/tab_carte.html.jinja:34
-msgid "Renommer"
-msgstr "Renombrar"
 
 #: frontend/src/views/TripsView.vue:269
 #: templates/configure/tab_carte.html.jinja:35
@@ -1349,18 +1471,6 @@ msgstr ""
 "El marco lo reproducirá cuando aparezca tu mensaje (90 segundos como "
 "máximo)."
 
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/_son_spotify.html.jinja:34
-#: templates/configure/tab_affichage.html.jinja:303
-#: templates/configure/tab_dispositions.html.jinja:132
-#: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_messages.html.jinja:236
-#: templates/configure/tab_son.html.jinja:33
-#: templates/configure/tab_sources.html.jinja:543
-#: templates/upload.html.jinja:144
-msgid "Enregistrer"
-msgstr "Guardar"
-
 #: templates/upload.html.jinja:148
 msgid ""
 "Enregistrez-vous avec l'application Dictaphone du téléphone, puis "
@@ -1571,14 +1681,6 @@ msgstr "Todos los meses"
 msgid "Personne"
 msgstr "Persona"
 
-#: templates/configure/_playlist_builder.html.jinja:18
-msgid "Tout sélectionner"
-msgstr "Seleccionar todo"
-
-#: templates/configure/_playlist_builder.html.jinja:19
-msgid "Tout désélectionner"
-msgstr "Deseleccionar todo"
-
 #: templates/configure/_playlist_builder.html.jinja:21
 msgid ""
 "Touchez les photos pour les choisir. Maj + clic : sélectionner toute une "
@@ -1593,11 +1695,6 @@ msgstr "Arrastra para cambiar el orden"
 msgid "Créer la playlist"
 msgstr "Crear la playlist"
 
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/tab_playlists.html.jinja:64
-msgid "Nouvelle playlist"
-msgstr "Nueva playlist"
-
 #: templates/configure/_playlist_builder.html.jinja:40
 #: templates/configure/scripts_main.html.jinja:335
 msgid "Choisir les photos"
@@ -1610,10 +1707,6 @@ msgstr "foto(s) elegida(s)"
 #: templates/configure/_playlist_builder.html.jinja:40
 msgid "photo(s) affichée(s)"
 msgstr "foto(s) mostrada(s)"
-
-#: templates/configure/_playlist_builder.html.jinja:41
-msgid "Donnez un nom à la playlist."
-msgstr "Ponle un nombre a la playlist."
 
 #: templates/configure/_playlist_builder.html.jinja:41
 msgid "Toutes"
@@ -2348,11 +2441,6 @@ msgstr "Aún no se han creado listas de reproducción."
 msgid "Erreur lors du chargement des playlists."
 msgstr "Error al cargar listas de reproducción."
 
-#: templates/configure/scripts_gallery.html.jinja:57
-#: templates/configure/scripts_main.html.jinja:1099
-msgid "Lancer"
-msgstr "Lancero"
-
 #: templates/configure/scripts_gallery.html.jinja:58
 msgid "Supprimer la playlist"
 msgstr "Eliminar lista de reproducción"
@@ -2600,12 +2688,6 @@ msgstr "Reiniciar..."
 #: templates/configure/scripts_status.html.jinja:155
 msgid "Diaporama standard relancé."
 msgstr "Se reinició la presentación de diapositivas estándar."
-
-#: templates/configure/scripts_status.html.jinja:161
-#: templates/configure/scripts_status.html.jinja:166
-#: templates/configure/tab_playlists.html.jinja:38
-msgid "Retour au diaporama standard"
-msgstr "Volver a la presentación de diapositivas estándar"
 
 #: templates/configure/scripts_status.html.jinja:251
 msgid "Détection..."
@@ -3858,11 +3940,6 @@ msgstr "Cambiar"
 #: templates/configure/tab_comptes.html.jinja:93
 msgid "Supprimer ce compte ?"
 msgstr "¿Eliminar esta cuenta?"
-
-#: templates/configure/tab_comptes.html.jinja:95
-#: templates/configure/tab_dispositions.html.jinja:30
-msgid "Supprimer"
-msgstr "Eliminar"
 
 #: templates/configure/tab_comptes.html.jinja:104
 msgid "Créer un compte"
@@ -5954,18 +6031,6 @@ msgid ""
 msgstr ""
 "La presentación de diapositivas es\n"
 "                                arrestado."
-
-#: templates/configure/tab_playlists.html.jinja:65
-msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
-msgstr "Elige las fotos de una vez, por fuente, año, mes o favoritos."
-
-#: templates/configure/tab_playlists.html.jinja:73
-msgid "Vos Playlists"
-msgstr "Tus listas de reproducción"
-
-#: templates/configure/tab_playlists.html.jinja:74
-msgid "Seulement mes playlists"
-msgstr "Solo mis listas"
 
 #: templates/configure/tab_queue.html.jinja:4
 msgid "À suivre dans le diaporama"
