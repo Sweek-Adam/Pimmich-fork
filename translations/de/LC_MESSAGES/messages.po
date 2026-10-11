@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 00:09+0200\n"
+"POT-Creation-Date: 2026-10-11 07:45+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -227,7 +227,7 @@ msgstr "Favoriten"
 
 #: templates/configure.html.jinja:123
 #: templates/configure/tab_apercu.html.jinja:14
-#: templates/configure/tab_sources.html.jinja:106
+#: templates/configure/tab_sources.html.jinja:110
 msgid "Messages"
 msgstr "Nachrichten"
 
@@ -336,7 +336,7 @@ msgstr "Passwort"
 #: templates/configure/tab_comptes.html.jinja:18
 #: templates/configure/tab_comptes.html.jinja:33
 #: templates/configure/tab_network.html.jinja:59
-#: templates/configure/tab_sources.html.jinja:193 templates/login.html.jinja:69
+#: templates/configure/tab_sources.html.jinja:197 templates/login.html.jinja:69
 msgid "Afficher/Cacher le mot de passe"
 msgstr "Passwort anzeigen/verbergen"
 
@@ -618,6 +618,7 @@ msgstr "Alle"
 #: templates/configure/_son_radio.html.jinja:27
 #: templates/configure/tab_affichage.html.jinja:212
 #: templates/configure/tab_heure.html.jinja:26
+#: templates/configure/tab_sources.html.jinja:424
 msgid "Retirer"
 msgstr "Entfernen"
 
@@ -883,7 +884,7 @@ msgid "Aucune playlist trouvée."
 msgstr "Keine Playlist gefunden."
 
 #: templates/configure/_son_spotify.html.jinja:103
-#: templates/configure/tab_sources.html.jinja:322
+#: templates/configure/tab_sources.html.jinja:326
 msgid "Compte :"
 msgstr "Konto:"
 
@@ -4308,31 +4309,31 @@ msgid "Mise à jour automatique (Immich)"
 msgstr "Automatisches Update (Immich)"
 
 #: templates/configure/tab_sources.html.jinja:47
-#: templates/configure/tab_sources.html.jinja:210
-#: templates/configure/tab_sources.html.jinja:302
+#: templates/configure/tab_sources.html.jinja:214
+#: templates/configure/tab_sources.html.jinja:306
 msgid "Activer la mise à jour automatique"
 msgstr "Aktivieren Sie die automatische Aktualisierung"
 
 #: templates/configure/tab_sources.html.jinja:49
-#: templates/configure/tab_sources.html.jinja:212
+#: templates/configure/tab_sources.html.jinja:216
 msgid "Intervalle de mise à jour (heures):"
 msgstr "Aktualisierungsintervall (Stunden):"
 
 #: templates/configure/tab_sources.html.jinja:54
-#: templates/configure/tab_sources.html.jinja:217
-#: templates/configure/tab_sources.html.jinja:310
+#: templates/configure/tab_sources.html.jinja:221
+#: templates/configure/tab_sources.html.jinja:314
 msgid "État du service :"
 msgstr "Servicestatus:"
 
 #: templates/configure/tab_sources.html.jinja:56
-#: templates/configure/tab_sources.html.jinja:219
-#: templates/configure/tab_sources.html.jinja:312
+#: templates/configure/tab_sources.html.jinja:223
+#: templates/configure/tab_sources.html.jinja:316
 msgid "Dernière mise à jour :"
 msgstr "Letzte Aktualisierung:"
 
 #: templates/configure/tab_sources.html.jinja:58
-#: templates/configure/tab_sources.html.jinja:221
-#: templates/configure/tab_sources.html.jinja:314
+#: templates/configure/tab_sources.html.jinja:225
+#: templates/configure/tab_sources.html.jinja:318
 msgid "Prochaine mise à jour :"
 msgstr "Nächstes Update:"
 
@@ -4382,11 +4383,16 @@ msgstr "Gästefotos (freigegeben)"
 msgid "Autres clouds (Dropbox, OneDrive...)"
 msgstr "Andere Clouds (Dropbox, OneDrive...)"
 
-#: templates/configure/tab_sources.html.jinja:111
+#: templates/configure/tab_sources.html.jinja:106
+#: templates/configure/tab_sources.html.jinja:410
+msgid "Albums partagés iCloud"
+msgstr "Geteilte iCloud-Alben"
+
+#: templates/configure/tab_sources.html.jinja:115
 msgid "Masquer les photos en double entre les sources"
 msgstr "Doppelte Fotos aus verschiedenen Quellen ausblenden"
 
-#: templates/configure/tab_sources.html.jinja:113
+#: templates/configure/tab_sources.html.jinja:117
 msgid ""
 "Une même photo reçue par plusieurs sources (ex. Google Drive et Telegram)"
 " n'est affichée qu'une fois, de préférence celle mise en favori."
@@ -4395,11 +4401,11 @@ msgstr ""
 "und Telegram), wird nur einmal angezeigt – bevorzugt das als Favorit "
 "markierte."
 
-#: templates/configure/tab_sources.html.jinja:116
+#: templates/configure/tab_sources.html.jinja:120
 msgid "Tri automatique"
 msgstr "Automatische Aussortierung"
 
-#: templates/configure/tab_sources.html.jinja:117
+#: templates/configure/tab_sources.html.jinja:121
 msgid ""
 "Écarte du diaporama les photos ratées. Rien n'est supprimé : vous pouvez "
 "remettre chaque photo d'un clic."
@@ -4407,91 +4413,91 @@ msgstr ""
 "Hält misslungene Fotos aus der Diashow fern. Nichts wird gelöscht: Jedes "
 "Foto lässt sich mit einem Klick zurückholen."
 
-#: templates/configure/tab_sources.html.jinja:118
+#: templates/configure/tab_sources.html.jinja:122
 msgid "Activer le tri automatique"
 msgstr "Automatische Aussortierung aktivieren"
 
-#: templates/configure/tab_sources.html.jinja:120
+#: templates/configure/tab_sources.html.jinja:124
 msgid "Photos floues"
 msgstr "Unscharfe Fotos"
 
-#: templates/configure/tab_sources.html.jinja:121
+#: templates/configure/tab_sources.html.jinja:125
 msgid "Photos très sombres"
 msgstr "Sehr dunkle Fotos"
 
-#: templates/configure/tab_sources.html.jinja:122
+#: templates/configure/tab_sources.html.jinja:126
 msgid "Captures d'écran"
 msgstr "Bildschirmfotos"
 
-#: templates/configure/tab_sources.html.jinja:123
+#: templates/configure/tab_sources.html.jinja:127
 msgid "Rafales : seule la plus nette est gardée"
 msgstr "Serienbilder: Nur das schärfste bleibt"
 
-#: templates/configure/tab_sources.html.jinja:132
+#: templates/configure/tab_sources.html.jinja:136
 msgid "Voir les photos écartées"
 msgstr "Aussortierte Fotos ansehen"
 
-#: templates/configure/tab_sources.html.jinja:132
+#: templates/configure/tab_sources.html.jinja:136
 msgid "Aucune photo écartée."
 msgstr "Kein Foto aussortiert."
 
-#: templates/configure/tab_sources.html.jinja:132
+#: templates/configure/tab_sources.html.jinja:136
 msgid "Remettre"
 msgstr "Zurückholen"
 
-#: templates/configure/tab_sources.html.jinja:133
+#: templates/configure/tab_sources.html.jinja:137
 msgid "floue"
 msgstr "unscharf"
 
-#: templates/configure/tab_sources.html.jinja:133
+#: templates/configure/tab_sources.html.jinja:137
 msgid "très sombre"
 msgstr "sehr dunkel"
 
-#: templates/configure/tab_sources.html.jinja:133
+#: templates/configure/tab_sources.html.jinja:137
 msgid "capture d'écran"
 msgstr "Bildschirmfoto"
 
-#: templates/configure/tab_sources.html.jinja:133
+#: templates/configure/tab_sources.html.jinja:137
 msgid "rafale"
 msgstr "Serienbild"
 
-#: templates/configure/tab_sources.html.jinja:169
+#: templates/configure/tab_sources.html.jinja:173
 msgid "Configuration du partage Samba (Windows)"
 msgstr "Samba-Freigabe einrichten (Windows)"
 
-#: templates/configure/tab_sources.html.jinja:171
+#: templates/configure/tab_sources.html.jinja:175
 msgid "Serveur :"
 msgstr "Server:"
 
-#: templates/configure/tab_sources.html.jinja:173
+#: templates/configure/tab_sources.html.jinja:177
 msgid "ex: 192.168.1.50 ou MON-NAS"
 msgstr "Beispiel: 192.168.1.50 oder MON-NAS"
 
-#: templates/configure/tab_sources.html.jinja:175
+#: templates/configure/tab_sources.html.jinja:179
 msgid "Nom du partage :"
 msgstr "Freigabename:"
 
-#: templates/configure/tab_sources.html.jinja:177
+#: templates/configure/tab_sources.html.jinja:181
 msgid "ex: Photos"
 msgstr "Beispiel: Fotos"
 
-#: templates/configure/tab_sources.html.jinja:179
+#: templates/configure/tab_sources.html.jinja:183
 msgid "Chemin dans le partage (optionnel) :"
 msgstr "Pfad beim Teilen (optional):"
 
-#: templates/configure/tab_sources.html.jinja:181
+#: templates/configure/tab_sources.html.jinja:185
 msgid "ex: Famille/2024"
 msgstr "Beispiel: Familie/2024"
 
-#: templates/configure/tab_sources.html.jinja:183
+#: templates/configure/tab_sources.html.jinja:187
 msgid "Nom d'utilisateur (optionnel) :"
 msgstr "Benutzername (optional):"
 
-#: templates/configure/tab_sources.html.jinja:186
+#: templates/configure/tab_sources.html.jinja:190
 msgid "Mot de passe (optionnel) :"
 msgstr "Passwort (optional):"
 
-#: templates/configure/tab_sources.html.jinja:201
+#: templates/configure/tab_sources.html.jinja:205
 msgid ""
 "Tester la\n"
 "                            connexion"
@@ -4499,35 +4505,35 @@ msgstr ""
 "Testen Sie das\n"
 "                            Verbindung"
 
-#: templates/configure/tab_sources.html.jinja:207
+#: templates/configure/tab_sources.html.jinja:211
 msgid "Mise à jour automatique (Samba)"
 msgstr "Automatisches Update (Samba)"
 
-#: templates/configure/tab_sources.html.jinja:229
+#: templates/configure/tab_sources.html.jinja:233
 msgid "Configuration Google Drive"
 msgstr "Google Drive-Konfiguration"
 
-#: templates/configure/tab_sources.html.jinja:232
+#: templates/configure/tab_sources.html.jinja:236
 msgid "Méthode de connexion :"
 msgstr "Verbindungsmethode:"
 
-#: templates/configure/tab_sources.html.jinja:234
+#: templates/configure/tab_sources.html.jinja:238
 msgid "Automatique (rclone si configuré, sinon compte de service)"
 msgstr "Automatisch (rclone, falls konfiguriert, sonst Dienstkonto)"
 
-#: templates/configure/tab_sources.html.jinja:235
+#: templates/configure/tab_sources.html.jinja:239
 msgid "rclone (compte Google déjà configuré sur le Raspberry Pi)"
 msgstr "rclone (Google-Konto bereits auf dem Raspberry Pi konfiguriert)"
 
-#: templates/configure/tab_sources.html.jinja:236
+#: templates/configure/tab_sources.html.jinja:240
 msgid "Compte de service Google"
 msgstr "Google-Dienstkonto"
 
-#: templates/configure/tab_sources.html.jinja:241
+#: templates/configure/tab_sources.html.jinja:245
 msgid "Remote rclone :"
 msgstr "rclone-Remote:"
 
-#: templates/configure/tab_sources.html.jinja:248
+#: templates/configure/tab_sources.html.jinja:252
 msgid ""
 "Aucun remote rclone Google Drive trouvé. Pour en créer un, lancez « "
 "rclone config » sur le Raspberry Pi."
@@ -4535,7 +4541,7 @@ msgstr ""
 "Kein rclone-Remote für Google Drive gefunden. Um eines zu erstellen, "
 "führen Sie „rclone config“ auf dem Raspberry Pi aus."
 
-#: templates/configure/tab_sources.html.jinja:253
+#: templates/configure/tab_sources.html.jinja:257
 msgid ""
 "Créez un compte de service dans la console Google Cloud (API Google Drive"
 " activée), téléchargez sa clé JSON et collez-la ci-dessous. Partagez "
@@ -4547,31 +4553,31 @@ msgstr ""
 "ihn unten ein. Teilen Sie anschließend Ihre Fotoordner mit der E-Mail-"
 "Adresse des Dienstkontos."
 
-#: templates/configure/tab_sources.html.jinja:256
+#: templates/configure/tab_sources.html.jinja:260
 msgid "Compte de service configuré :"
 msgstr "Konfiguriertes Dienstkonto:"
 
-#: templates/configure/tab_sources.html.jinja:258
+#: templates/configure/tab_sources.html.jinja:262
 msgid "Partagez vos dossiers Google Drive avec cette adresse (en lecture seule)."
 msgstr "Teilen Sie Ihre Google Drive-Ordner mit dieser Adresse (nur Lesezugriff)."
 
-#: templates/configure/tab_sources.html.jinja:261
+#: templates/configure/tab_sources.html.jinja:265
 msgid "Clé JSON du compte de service :"
 msgstr "JSON-Schlüssel des Dienstkontos:"
 
-#: templates/configure/tab_sources.html.jinja:264
+#: templates/configure/tab_sources.html.jinja:268
 msgid "Laisser vide pour conserver la clé actuelle"
 msgstr "Leer lassen, um den aktuellen Schlüssel beizubehalten"
 
-#: templates/configure/tab_sources.html.jinja:270
+#: templates/configure/tab_sources.html.jinja:274
 msgid "Afficher mes dossiers Google Drive"
 msgstr "Meine Google Drive-Ordner anzeigen"
 
-#: templates/configure/tab_sources.html.jinja:274
+#: templates/configure/tab_sources.html.jinja:278
 msgid "Dossiers à afficher dans le diaporama :"
 msgstr "In der Diashow anzuzeigende Ordner:"
 
-#: templates/configure/tab_sources.html.jinja:283
+#: templates/configure/tab_sources.html.jinja:287
 msgid ""
 "Aucun dossier sélectionné. Cliquez sur « Afficher mes dossiers Google "
 "Drive »."
@@ -4579,16 +4585,16 @@ msgstr ""
 "Kein Ordner ausgewählt. Klicken Sie auf „Meine Google Drive-Ordner "
 "anzeigen“."
 
-#: templates/configure/tab_sources.html.jinja:289
-#: templates/configure/tab_sources.html.jinja:341
+#: templates/configure/tab_sources.html.jinja:293
+#: templates/configure/tab_sources.html.jinja:345
 msgid "Inclure les sous-dossiers"
 msgstr "Unterordner einbeziehen"
 
-#: templates/configure/tab_sources.html.jinja:293
+#: templates/configure/tab_sources.html.jinja:297
 msgid "Mettre les fichiers à la corbeille Google Drive après import"
 msgstr "Dateien nach dem Import in den Google Drive-Papierkorb verschieben"
 
-#: templates/configure/tab_sources.html.jinja:295
+#: templates/configure/tab_sources.html.jinja:299
 msgid ""
 "Les dossiers servent alors de « boîte d'envoi » : chaque photo ou vidéo "
 "importée part dans la corbeille du Drive (récupérable 30 jours) et reste "
@@ -4600,7 +4606,7 @@ msgstr ""
 "bleibt auf dem Bilderrahmen, bis Sie es im Tab „Vorschau“ löschen. Nur "
 "mit rclone-Verbindung."
 
-#: templates/configure/tab_sources.html.jinja:296
+#: templates/configure/tab_sources.html.jinja:300
 msgid ""
 "Pensez à enregistrer la configuration après avoir choisi les dossiers, "
 "puis lancez l'import depuis l'onglet « Actions »."
@@ -4608,15 +4614,15 @@ msgstr ""
 "Denken Sie daran, die Konfiguration nach der Auswahl der Ordner zu "
 "speichern, und starten Sie dann den Import im Tab „Aktionen“."
 
-#: templates/configure/tab_sources.html.jinja:299
+#: templates/configure/tab_sources.html.jinja:303
 msgid "Mise à jour automatique (Google Drive)"
 msgstr "Automatische Aktualisierung (Google Drive)"
 
-#: templates/configure/tab_sources.html.jinja:304
+#: templates/configure/tab_sources.html.jinja:308
 msgid "Vérifier les nouveautés toutes les (minutes) :"
 msgstr "Auf Neuerungen prüfen alle (Minuten):"
 
-#: templates/configure/tab_sources.html.jinja:307
+#: templates/configure/tab_sources.html.jinja:311
 msgid ""
 "Le diaporama n'est relancé que si des photos ou vidéos ont été ajoutées "
 "ou supprimées."
@@ -4624,23 +4630,23 @@ msgstr ""
 "Die Diashow wird nur neu gestartet, wenn Fotos oder Videos hinzugefügt "
 "oder gelöscht wurden."
 
-#: templates/configure/tab_sources.html.jinja:320
+#: templates/configure/tab_sources.html.jinja:324
 msgid "Autres clouds : Dropbox, OneDrive, pCloud..."
 msgstr "Andere Clouds: Dropbox, OneDrive, pCloud..."
 
-#: templates/configure/tab_sources.html.jinja:324
+#: templates/configure/tab_sources.html.jinja:328
 msgid "Ajouter un compte"
 msgstr "Konto hinzufügen"
 
-#: templates/configure/tab_sources.html.jinja:329
+#: templates/configure/tab_sources.html.jinja:333
 msgid "Choisissez le service :"
 msgstr "Dienst wählen:"
 
-#: templates/configure/tab_sources.html.jinja:329
+#: templates/configure/tab_sources.html.jinja:333
 msgid "et un nom court :"
 msgstr "und einen Kurznamen:"
 
-#: templates/configure/tab_sources.html.jinja:330
+#: templates/configure/tab_sources.html.jinja:334
 msgid ""
 "Sur un ordinateur (avec un navigateur), installez rclone "
 "(rclone.org/downloads) puis lancez :"
@@ -4648,7 +4654,7 @@ msgstr ""
 "Installieren Sie auf einem Computer (mit Browser) rclone "
 "(rclone.org/downloads) und führen Sie aus:"
 
-#: templates/configure/tab_sources.html.jinja:332
+#: templates/configure/tab_sources.html.jinja:336
 #, python-brace-format
 msgid ""
 "Connectez-vous dans la page qui s'ouvre, puis copiez le texte affiché "
@@ -4657,19 +4663,19 @@ msgstr ""
 "Melden Sie sich auf der sich öffnenden Seite an und kopieren Sie den Text"
 " zwischen den geschweiften Klammern { ... }."
 
-#: templates/configure/tab_sources.html.jinja:333
+#: templates/configure/tab_sources.html.jinja:337
 msgid "Collez-le ici :"
 msgstr "Hier einfügen:"
 
-#: templates/configure/tab_sources.html.jinja:334
+#: templates/configure/tab_sources.html.jinja:338
 msgid "Ajouter le compte"
 msgstr "Konto hinzufügen"
 
-#: templates/configure/tab_sources.html.jinja:339
+#: templates/configure/tab_sources.html.jinja:343
 msgid "Dossiers à afficher"
 msgstr "Anzuzeigende Ordner"
 
-#: templates/configure/tab_sources.html.jinja:342
+#: templates/configure/tab_sources.html.jinja:346
 msgid ""
 "Retirer les photos du cloud une fois importées (elles restent dans sa "
 "corbeille 30 jours)"
@@ -4677,27 +4683,54 @@ msgstr ""
 "Fotos nach dem Import aus der Cloud entfernen (sie bleiben 30 Tage im "
 "Papierkorb)"
 
-#: templates/configure/tab_sources.html.jinja:343
+#: templates/configure/tab_sources.html.jinja:347
+#: templates/configure/tab_sources.html.jinja:417
 msgid "Synchroniser automatiquement (toutes les heures)"
 msgstr "Automatisch synchronisieren (stündlich)"
 
-#: templates/configure/tab_sources.html.jinja:344
+#: templates/configure/tab_sources.html.jinja:348
+#: templates/configure/tab_sources.html.jinja:418
 msgid "Synchroniser maintenant"
 msgstr "Jetzt synchronisieren"
 
-#: templates/configure/tab_sources.html.jinja:351
+#: templates/configure/tab_sources.html.jinja:355
 msgid "Aucun compte"
 msgstr "Kein Konto"
 
-#: templates/configure/tab_sources.html.jinja:351
+#: templates/configure/tab_sources.html.jinja:355
 msgid "Lecture des dossiers…"
 msgstr "Ordner werden gelesen…"
 
-#: templates/configure/tab_sources.html.jinja:407
+#: templates/configure/tab_sources.html.jinja:411
+msgid ""
+"Sur l'iPhone : app Photos › album partagé › bouton Personnes › activez « "
+"Site web public », puis « Partager le lien ». Collez ce lien ici : aucun "
+"identifiant Apple n'est demandé. Les légendes de l'album sont reprises, "
+"et une photo retirée de l'album disparaît du cadre."
+msgstr ""
+"Auf dem iPhone: Fotos-App › geteiltes Album › Taste Personen › "
+"„Öffentliche Website“ aktivieren, dann „Link teilen“. Füge den Link hier "
+"ein: Es wird keine Apple-ID benötigt. Die Bildunterschriften des Albums "
+"werden übernommen, und ein aus dem Album entferntes Foto verschwindet vom"
+" Rahmen."
+
+#: templates/configure/tab_sources.html.jinja:414
+msgid "Ajouter l'album"
+msgstr "Album hinzufügen"
+
+#: templates/configure/tab_sources.html.jinja:424
+msgid "éléments"
+msgstr "Elemente"
+
+#: templates/configure/tab_sources.html.jinja:424
+msgid "Lecture de l'album…"
+msgstr "Album wird gelesen…"
+
+#: templates/configure/tab_sources.html.jinja:454
 msgid "Photos que le cadre ne peut pas retirer du Drive"
 msgstr "Fotos, die der Rahmen nicht aus Drive entfernen kann"
 
-#: templates/configure/tab_sources.html.jinja:409
+#: templates/configure/tab_sources.html.jinja:456
 msgid ""
 "Ces photos ont été déposées dans le dossier par un autre compte Google : "
 "seul leur propriétaire peut les mettre à la corbeille. Elles restent "
@@ -4710,27 +4743,27 @@ msgstr ""
 "auf dem Rahmen. Löschen Sie sie selbst in Drive (falls Sie dürfen) oder "
 "fragen Sie den Eigentümer und klicken Sie dann auf „Erneut versuchen“."
 
-#: templates/configure/tab_sources.html.jinja:411
+#: templates/configure/tab_sources.html.jinja:458
 msgid "Réessayer à la prochaine synchronisation"
 msgstr "Bei der nächsten Synchronisierung erneut versuchen"
 
-#: templates/configure/tab_sources.html.jinja:417
+#: templates/configure/tab_sources.html.jinja:464
 msgid "Ouvrir dans Drive"
 msgstr "In Drive öffnen"
 
-#: templates/configure/tab_sources.html.jinja:417
+#: templates/configure/tab_sources.html.jinja:464
 msgid "(plus sur le cadre)"
 msgstr "(nicht mehr auf dem Rahmen)"
 
-#: templates/configure/tab_sources.html.jinja:448
+#: templates/configure/tab_sources.html.jinja:495
 msgid "Options de démarrage"
 msgstr "Boot-Optionen"
 
-#: templates/configure/tab_sources.html.jinja:452
+#: templates/configure/tab_sources.html.jinja:499
 msgid "Ignorer le premier import automatique au démarrage"
 msgstr "Ersten automatischen Import beim Start überspringen"
 
-#: templates/configure/tab_sources.html.jinja:454
+#: templates/configure/tab_sources.html.jinja:501
 msgid ""
 "Si cette option est cochée, les mises à jour automatiques (Immich, Samba)"
 " ne se lanceront pas immédiatement après un redémarrage du cadre, mais "
@@ -6034,11 +6067,29 @@ msgstr "Cloud-Einstellungen gespeichert."
 msgid "Choisissez d'abord un compte et des dossiers."
 msgstr "Wählen Sie zuerst ein Konto und Ordner."
 
-#: web/routes_imports.py:524
+#: web/routes_imports.py:524 web/routes_imports.py:603
 msgid "Synchronisation lancée : suivez-la dans la notification en bas de l'écran."
 msgstr ""
 "Synchronisierung gestartet: Verfolgen Sie sie in der Benachrichtigung "
 "unten."
+
+#: web/routes_imports.py:567
+#, python-format
+msgid "iCloud ne répond pas : %(error)s"
+msgstr "iCloud antwortet nicht: %(error)s"
+
+#: web/routes_imports.py:577
+#, python-format
+msgid "Album « %(name)s » ajouté (%(count)s éléments) : import lancé."
+msgstr "Album „%(name)s“ hinzugefügt (%(count)s Elemente): Import gestartet."
+
+#: web/routes_imports.py:593
+msgid "Réglages iCloud enregistrés."
+msgstr "iCloud-Einstellungen gespeichert."
+
+#: web/routes_imports.py:601
+msgid "Ajoutez d'abord un album partagé."
+msgstr "Füge zuerst ein geteiltes Album hinzu."
 
 #: web/routes_integrations.py:109
 msgid "Le token du bot est requis."

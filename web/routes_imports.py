@@ -522,3 +522,82 @@ def cloud_sync_api():
         return jsonify({"success": False, "message": _("Choisissez d'abord un compte et des dossiers.")}), 400
     threading.Thread(target=run_cloud_sync, args=(config,), daemon=True).start()
     return jsonify({"success": True, "message": _("Synchronisation lancée : suivez-la dans la notification en bas de l'écran.")})
+
+
+# --- Albums partagés iCloud (lien public, sans identifiant Apple) ---
+
+def run_icloud_sync(config):
+    """Synchronise puis prépare les albums partagés iCloud (suivi dans la notification des imports)."""
+    from utils import import_icloud
+    changes = 0
+    for update in import_progress.tracked("icloud", "download", import_icloud.import_icloud_photos(config)):
+        if update.get("type") == "done":
+            changes = update.get("changes", 0)
+        if update.get("type") == "error":
+            from web.workers import notify_sync_error
+            notify_sync_error("iCloud", update.get("message", ""))
+    if changes:
+        for _update in import_progress.tracked("icloud", "prepare", prepare_all_photos_with_progress(
+                config.get("display_width", 1920), config.get("display_height", 1080), source_type="icloud",
+                description_map=import_icloud.captions())):
+            pass
+        if is_slideshow_running():
+            restart_slideshow_for_update()
+    return changes
+
+
+@app.route('/api/icloud', methods=['GET'])
+@login_required
+def icloud_status_api():
+    config = load_config()
+    return jsonify({"success": True, "albums": config.get("icloud_albums") or [], "auto": config.get("icloud_auto_update", True)})
+
+
+@app.route('/api/icloud/album', methods=['POST'])
+@login_required
+def icloud_add_album_api():
+    """Ajoute un album partagé après avoir vérifié qu'il est lisible (nom et nombre d'éléments)."""
+    from utils import import_icloud
+    data = request.get_json(silent=True) or {}
+    try:
+        content = import_icloud.album(data.get("url", ""))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    except Exception as e:
+        return jsonify({"success": False, "message": _("iCloud ne répond pas : %(error)s", error=str(e)[:200])}), 502
+    config = dict(load_config())
+    albums = [a for a in config.get("icloud_albums") or [] if a.get("token") != content["token"]]
+    albums.append({"token": content["token"], "name": content["name"][:200], "count": len(content["items"]),
+                   "url": f"https://www.icloud.com/sharedalbum/#{content['token']}"})
+    config["icloud_albums"] = albums[:20]
+    if "icloud" not in config.get("display_sources", []):
+        config["display_sources"] = list(config.get("display_sources", [])) + ["icloud"]
+    save_config(config)
+    threading.Thread(target=run_icloud_sync, args=(config,), daemon=True).start()
+    return jsonify({"success": True, "message": _("Album « %(name)s » ajouté (%(count)s éléments) : import lancé.",
+                                                  name=content["name"], count=len(content["items"]))})
+
+
+@app.route('/api/icloud', methods=['POST'])
+@login_required
+def icloud_save_api():
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    if "remove" in data:
+        config["icloud_albums"] = [a for a in config.get("icloud_albums") or [] if a.get("token") != data["remove"]]
+    if "auto" in data:
+        config["icloud_auto_update"] = bool(data["auto"])
+    save_config(config)
+    if "remove" in data:
+        threading.Thread(target=run_icloud_sync, args=(config,), daemon=True).start()
+    return jsonify({"success": True, "message": _("Réglages iCloud enregistrés.")})
+
+
+@app.route('/api/icloud/sync', methods=['POST'])
+@login_required
+def icloud_sync_api():
+    config = load_config()
+    if not config.get("icloud_albums"):
+        return jsonify({"success": False, "message": _("Ajoutez d'abord un album partagé.")}), 400
+    threading.Thread(target=run_icloud_sync, args=(config,), daemon=True).start()
+    return jsonify({"success": True, "message": _("Synchronisation lancée : suivez-la dans la notification en bas de l'écran.")})

@@ -102,6 +102,10 @@
                         <label class="form-check-label ml-2" for="display_source_cloud">{{ _("Autres clouds (Dropbox, OneDrive...)") }}</label>
                     </div>
                     <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_icloud" name="display_sources" value="icloud" {% if 'icloud' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_icloud">{{ _("Albums partagés iCloud") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_messages">{{ _('Messages') }}</label>
                     </div>
@@ -398,6 +402,49 @@
                             });
                         }
                         document.querySelectorAll(".tablink[onclick*=\"'tab-sources'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        load();
+                    });
+                </script>
+
+                <fieldset class="mt-4" id="icloud-box">
+                    <legend><h3><i class="fab fa-apple mr-2"></i>{{ _("Albums partagés iCloud") }}</h3></legend>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Sur l'iPhone : app Photos › album partagé › bouton Personnes › activez « Site web public », puis « Partager le lien ». Collez ce lien ici : aucun identifiant Apple n'est demandé. Les légendes de l'album sont reprises, et une photo retirée de l'album disparaît du cadre.") }}</p>
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <input type="url" id="ic-url" class="flex-1 min-w-0" placeholder="https://www.icloud.com/sharedalbum/#B0…">
+                        <button type="button" id="ic-add" class="btn-primary"><i class="fas fa-plus mr-1"></i>{{ _("Ajouter l'album") }}</button>
+                    </div>
+                    <ul id="ic-albums" class="denied-list mt-3"></ul>
+                    <label class="flex items-center gap-2 mt-2"><input type="checkbox" id="ic-auto"> {{ _("Synchroniser automatiquement (toutes les heures)") }}</label>
+                    <button type="button" id="ic-sync" class="btn-secondary mt-2"><i class="fas fa-sync-alt mr-1"></i>{{ _("Synchroniser maintenant") }}</button>
+                    <p id="ic-status" class="text-sm mt-2"></p>
+                </fieldset>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { items: {{ _("éléments")|tojson }}, remove: {{ _("Retirer")|tojson }}, checking: {{ _("Lecture de l'album…")|tojson }} };
+                        const say = (t, ok) => { $("ic-status").textContent = t || ""; $("ic-status").className = "text-sm mt-2 " + (ok ? "text-green-700" : "text-red-600"); };
+                        const post = async (url, body) => (await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })).json();
+                        async function load() {
+                            const d = await (await fetch("/api/icloud")).json();
+                            $("ic-auto").checked = d.auto;
+                            $("ic-sync").classList.toggle("hidden", !d.albums.length);
+                            $("ic-albums").innerHTML = "";
+                            d.albums.forEach(a => {
+                                const li = document.createElement("li");
+                                const name = document.createElement("span"); name.textContent = `${a.name} (${a.count} ${T.items})`;
+                                const btn = document.createElement("button"); btn.type = "button"; btn.className = "link ml-2"; btn.textContent = T.remove;
+                                btn.addEventListener("click", async () => { const r = await post("/api/icloud", { remove: a.token }); say(r.message, r.success); load(); });
+                                li.append(name, btn); $("ic-albums").appendChild(li);
+                            });
+                        }
+                        $("ic-add").addEventListener("click", async () => {
+                            say(T.checking, true);
+                            const r = await post("/api/icloud/album", { url: $("ic-url").value.trim() });
+                            say(r.message, r.success);
+                            if (r.success) { $("ic-url").value = ""; load(); }
+                        });
+                        $("ic-auto").addEventListener("change", async () => { const r = await post("/api/icloud", { auto: $("ic-auto").checked }); say(r.message, r.success); });
+                        $("ic-sync").addEventListener("click", async () => { const r = await post("/api/icloud/sync"); say(r.message, r.success); });
                         load();
                     });
                 </script>

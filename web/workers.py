@@ -688,3 +688,17 @@ def cloud_update_worker():
         except Exception as e:
             logger.warning(f"[Cloud] Synchronisation automatique : {e}")
         time.sleep(max(15, int(config.get("cloud_update_interval_minutes", 60))) * 60)
+
+
+def icloud_update_worker():
+    """Synchronisation automatique des albums partagés iCloud."""
+    from web.routes_imports import run_icloud_sync
+    time.sleep(180)  # laisser le cadre démarrer
+    while True:
+        config = load_config()
+        try:
+            if config.get("icloud_auto_update", True) and config.get("icloud_albums"):
+                run_icloud_sync(config)
+        except Exception as e:
+            logger.warning(f"[iCloud] Synchronisation automatique : {e}")
+        time.sleep(max(15, int(config.get("icloud_update_interval_minutes", 60))) * 60)
