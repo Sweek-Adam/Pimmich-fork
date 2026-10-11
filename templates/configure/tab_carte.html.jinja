@@ -1,0 +1,325 @@
+        <div id="tab-carte" class="tabcontent">
+            <fieldset id="trips-map-box" class="mb-4">
+                <legend><h3><i class="fas fa-globe-europe mr-2"></i>{{ _("Carte des voyages") }}</h3></legend>
+                <p class="text-sm text-gray-600 mb-3">{{ _("Les photos sont regroupées en voyages (loin de la maison) et en sorties, d'après leur date et leur position. Les moments sans position peuvent être placés à la main.") }}</p>
+                <div class="tm-totals">
+                    <div><strong id="tm-trips">…</strong><small>{{ _("voyages") }}</small></div>
+                    <div><strong id="tm-outings">…</strong><small>{{ _("sorties") }}</small></div>
+                    <div><strong id="tm-countries">…</strong><small>{{ _("pays visités") }}</small></div>
+                    <div><strong id="tm-unplaced">…</strong><small>{{ _("moments à placer") }}</small></div>
+                </div>
+                <div id="tm-memory" class="tm-memory hidden"></div>
+                <div id="tm-years" class="tm-years"></div>
+                <div id="tm-placing" class="tm-placing hidden">
+                    <p><i class="fas fa-map-pin mr-2"></i><span id="tm-placing-text"></span></p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <input type="text" id="tm-search" class="flex-1 border rounded px-2 py-1" placeholder="{{ _('Chercher un lieu (ville, pays)…') }}">
+                        <button type="button" id="tm-search-btn" class="system-button bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded"><i class="fas fa-search"></i></button>
+                        <button type="button" id="tm-placing-cancel" class="system-button bg-gray-400 hover:bg-gray-500 text-white py-1 px-3 rounded">{{ _("Annuler") }}</button>
+                    </div>
+                    <div id="tm-results" class="tm-results"></div>
+                </div>
+                <div id="tm-map" class="tm-map"></div>
+                <p id="tm-status" class="text-sm mt-2"></p>
+            </fieldset>
+
+            <fieldset id="trip-detail-box" class="mb-4 hidden">
+                <legend><h3 id="td-title"></h3></legend>
+                <p id="td-meta" class="text-sm text-gray-600"></p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <button type="button" id="td-play" class="system-button bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded"><i class="fas fa-play mr-2"></i>{{ _("Raconter sur le cadre") }}</button>
+                    <button type="button" id="td-place" class="system-button bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded"><i class="fas fa-map-marker-alt mr-2"></i><span id="td-place-label"></span></button>
+                    <button type="button" id="td-rename" class="system-button bg-gray-500 hover:bg-gray-600 text-white py-2 px-3 rounded"><i class="fas fa-pen mr-2"></i>{{ _("Renommer") }}</button>
+                    <button type="button" id="td-forget" class="system-button bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded hidden"><i class="fas fa-undo mr-2"></i>{{ _("Oublier la position donnée") }}</button>
+                </div>
+                <img id="td-card" class="td-card hidden" alt="">
+                <div id="td-photos" class="tm-grid mt-3"></div>
+            </fieldset>
+
+            <fieldset id="trips-list-box" class="mb-4">
+                <legend><h3><i class="fas fa-stream mr-2"></i>{{ _("Chronologie") }}</h3></legend>
+                <div id="tm-list"></div>
+            </fieldset>
+
+            {% if is_admin %}
+            <fieldset id="trips-settings" class="mb-4">
+                <legend><h3><i class="fas fa-sliders-h mr-2"></i>{{ _("Sur le cadre") }}</h3></legend>
+                <label for="tm-cards" class="block font-semibold mb-1">{{ _("Cartes dans le diaporama") }}</label>
+                <select id="tm-cards" class="border rounded px-2 py-1">
+                    <option value="off">{{ _("Aucune") }}</option>
+                    <option value="memories">{{ _("Souvenirs du jour (« il y a un an, nous étions… »)") }}</option>
+                    <option value="all">{{ _("Tous les voyages, les souvenirs et le récapitulatif de chaque année") }}</option>
+                </select>
+                <label class="flex items-center gap-2 mt-3"><input type="checkbox" id="tm-osm">{{ _("Fond de carte détaillé OpenStreetMap dans cette page (les images de la carte viennent d'openstreetmap.org)") }}</label>
+                <p class="text-xs text-gray-500 mt-2">{{ _("La recherche de villes utilise OpenStreetMap quand « Trouver le nom du lieu » est activé dans Infos des photos ; sinon, seuls les pays sont proposés, et vous pouvez toujours cliquer sur la carte.") }}</p>
+            </fieldset>
+            {% endif %}
+
+            <style>
+                .tm-totals { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+                .tm-totals div { border: 1px solid var(--border); border-radius: 12px; padding: .6rem; text-align: center; }
+                .tm-totals strong { display: block; font-size: 1.4rem; }
+                .tm-totals small { color: var(--muted); }
+                @media (max-width: 640px) { .tm-totals { grid-template-columns: repeat(2, 1fr); } }
+                .tm-map { height: 62vh; min-height: 320px; border-radius: 12px; margin-top: .8rem; background: #cde1ec; z-index: 0; }
+                .tm-years { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
+                .tm-years button { width: auto; height: auto; margin: 0; background: transparent; color: inherit; font-weight: 500;
+                    border: 1px solid var(--border); border-radius: 999px; padding: .15rem .8rem; font-size: .85rem; }
+                .tm-years button:hover { background: rgba(214, 76, 52, .1); }
+                .tm-years button.active { background: #d64c34; color: #fff; border-color: #d64c34; }
+                #tab-carte .system-button { width: auto; margin-top: 0; }
+                .tm-memory { margin-top: .8rem; padding: .7rem 1rem; border-radius: 12px; background: #fdf0e6; color: #7a3416; cursor: pointer; }
+                .tm-placing { margin-top: .8rem; padding: .7rem 1rem; border-radius: 12px; background: #e8f1fb; color: #1d4f86; }
+                .tm-results button { display: block; width: 100%; margin: 0; background: transparent; color: inherit; font-weight: 400; border-radius: 0;
+                    text-align: left; padding: .35rem .5rem; border-bottom: 1px solid rgba(0,0,0,.08); font-size: .9rem; }
+                .tm-results button:hover { background: rgba(255,255,255,.6); }
+                .tm-year-title { font-weight: 700; font-size: 1.1rem; margin: 1rem 0 .4rem; }
+                .tm-year-title small { font-weight: 400; color: var(--muted); margin-left: .5rem; }
+                .tm-item { display: flex; gap: .75rem; align-items: center; padding: .5rem; border-radius: 10px; cursor: pointer; }
+                .tm-item:hover, .tm-item.active { background: rgba(214, 76, 52, .08); }
+                .tm-item img { width: 76px; height: 52px; object-fit: cover; border-radius: 8px; flex: none; background: #ddd; }
+                .tm-item .tm-kind { font-size: .7rem; padding: 1px 7px; border-radius: 999px; color: #fff; }
+                .tm-kind.trip { background: #d64c34; } .tm-kind.outing { background: #2f8f5b; } .tm-kind.unplaced { background: #888; }
+                .tm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .4rem; }
+                .tm-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; }
+                .td-card { width: 100%; max-width: 720px; border-radius: 12px; margin-top: .8rem; }
+                .leaflet-container { font: inherit; }
+                .tm-home-icon { background: #3478be; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,.4); }
+            </style>
+            <script>
+                (() => {
+                    const T = {
+                        trip: {{ _("Voyage")|tojson }}, outing: {{ _("Sortie")|tojson }}, unplaced: {{ _("À placer")|tojson }},
+                        all: {{ _("Toutes les années")|tojson }}, photos: {{ _("{n} photos")|tojson }},
+                        place: {{ _("Placer sur la carte")|tojson }}, move: {{ _("Déplacer")|tojson }},
+                        placing: {{ _("Cliquez sur la carte à l'endroit de « {title} », ou cherchez un lieu.")|tojson }},
+                        rename: {{ _("Nom de ce voyage :")|tojson }}, name: {{ _("Nom de cet endroit (facultatif) :")|tojson }},
+                        memory1: {{ _("Il y a un an : {title}")|tojson }}, memoryN: {{ _("Il y a {n} ans : {title}")|tojson }},
+                        noresult: {{ _("Aucun lieu trouvé.")|tojson }}, empty: {{ _("Aucune photo datée pour l'instant : les voyages apparaîtront avec les photos.")|tojson }},
+                        error: {{ _("Erreur de communication avec le serveur.")|tojson }}, km: {{ _("à {n} km de la maison")|tojson }},
+                        home: {{ _("Maison")|tojson }}
+                    };
+                    const $ = id => document.getElementById(id);
+                    const post = async (url, body, method) => {
+                        try { return await (await fetch(url, {method: method || "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body || {})})).json(); }
+                        catch (e) { return {success: false, message: T.error}; }
+                    };
+                    const say = (text, ok) => { $("tm-status").textContent = text || ""; $("tm-status").className = "text-sm mt-2 " + (ok === false ? "text-red-600" : "text-green-700"); };
+                    let map = null, layers = null, data = null, year = null, selected = null, placing = null, started = false;
+
+                    function loadLeaflet() {
+                        return new Promise(resolve => {
+                            if (window.L) return resolve();
+                            const css = document.createElement("link");
+                            css.rel = "stylesheet"; css.href = "{{ url_for('static', filename='vendor/leaflet/leaflet.min.css') }}";
+                            document.head.append(css);
+                            const js = document.createElement("script");
+                            js.src = "{{ url_for('static', filename='vendor/leaflet/leaflet.min.js') }}";
+                            js.onload = resolve;
+                            document.head.append(js);
+                        });
+                    }
+
+                    async function start() {
+                        if (started) return;
+                        started = true;
+                        await loadLeaflet();
+                        data = await (await fetch("/api/trips")).json();
+                        map = L.map("tm-map", {worldCopyJump: true, minZoom: 1}).setView([30, 10], 2);
+                        if (data.settings.osm_tiles) {
+                            L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 18, attribution: "© OpenStreetMap"}).addTo(map);
+                        } else {
+                            const world = await (await fetch("/api/map/world.json")).json();
+                            const visited = new Set(data.visited);
+                            L.geoJSON(world, {style: f => ({color: "#c4baaa", weight: 1, fillOpacity: 1,
+                                fillColor: visited.has(f.properties.iso) ? "#f7cda0" : "#f6f2e9"})}).addTo(map);
+                        }
+                        layers = L.layerGroup().addTo(map);
+                        map.on("click", e => { if (placing) placeAt(e.latlng.lat, e.latlng.lng, ""); });
+                        const settings = $("tm-cards");
+                        if (settings) {
+                            settings.value = data.settings.cards;
+                            $("tm-osm").checked = data.settings.osm_tiles;
+                            settings.addEventListener("change", () => post("/api/trips/settings", {cards: settings.value}).then(r => say(r.message, r.success)));
+                            $("tm-osm").addEventListener("change", async () => { const r = await post("/api/trips/settings", {osm_tiles: $("tm-osm").checked}); say(r.message, r.success); location.reload(); });
+                        }
+                        render();
+                    }
+
+                    async function reload(keepSelection) {
+                        data = await (await fetch("/api/trips")).json();
+                        render();
+                        if (keepSelection && selected) {
+                            const again = data.trips.find(t => t.id === selected) || data.trips.find(t => t.start === (data.trips.find(x => x.id === selected) || {}).start);
+                            if (again) select(again.id, false);
+                        }
+                    }
+
+                    function visible() { return data.trips.filter(t => !year || t.start.startsWith(year)); }
+
+                    function render() {
+                        const trips = data.trips;
+                        $("tm-trips").textContent = trips.filter(t => t.kind === "trip").length;
+                        $("tm-outings").textContent = trips.filter(t => t.kind === "outing").length;
+                        $("tm-countries").textContent = data.visited.length;
+                        $("tm-unplaced").textContent = trips.filter(t => t.kind === "unplaced").length;
+                        // Souvenir du jour
+                        const memory = data.memories[0];
+                        $("tm-memory").classList.toggle("hidden", !memory);
+                        if (memory) {
+                            const trip = trips.find(t => t.id === memory.id);
+                            $("tm-memory").textContent = (memory.years === 1 ? T.memory1 : T.memoryN).replace("{n}", memory.years).replace("{title}", trip.title);
+                            $("tm-memory").onclick = () => select(trip.id, true);
+                        }
+                        // Années
+                        const years = [...new Set(trips.map(t => t.start.slice(0, 4)))].sort().reverse();
+                        $("tm-years").innerHTML = "";
+                        [null, ...years].forEach(y => {
+                            const b = document.createElement("button");
+                            b.type = "button"; b.textContent = y || T.all;
+                            b.className = (year === y) ? "active" : "";
+                            b.onclick = () => { year = y; render(); };
+                            $("tm-years").append(b);
+                        });
+                        drawMap();
+                        drawList();
+                    }
+
+                    function drawMap() {
+                        layers.clearLayers();
+                        const bounds = [];
+                        if (data.home) {
+                            L.marker(data.home, {icon: L.divIcon({className: "tm-home-icon", iconSize: [16, 16]}), title: T.home}).addTo(layers);
+                        }
+                        visible().filter(t => t.lat !== null).forEach(t => {
+                            const color = t.kind === "trip" ? "#d64c34" : "#2f8f5b";
+                            if (t.route.length > 1) L.polyline(t.route, {color, weight: 2, dashArray: "6 6", opacity: .8}).addTo(layers);
+                            const radius = Math.min(18, 6 + Math.sqrt(t.count));
+                            const marker = L.circleMarker([t.lat, t.lon], {radius, color: "#fff", weight: 2, fillColor: color, fillOpacity: selected === t.id ? 1 : .85}).addTo(layers);
+                            marker.bindTooltip(`${t.title} · ${t.dates}`);
+                            marker.on("click", ev => { L.DomEvent.stopPropagation(ev); select(t.id, false); });
+                            bounds.push([t.lat, t.lon]);
+                        });
+                        if (bounds.length && !selected) map.fitBounds(bounds, {padding: [40, 40], maxZoom: 7});
+                    }
+
+                    function drawList() {
+                        const list = $("tm-list");
+                        list.innerHTML = "";
+                        const trips = visible();
+                        if (!trips.length) { list.textContent = T.empty; return; }
+                        let current = null;
+                        trips.forEach(t => {
+                            const y = t.start.slice(0, 4);
+                            if (y !== current) {
+                                current = y;
+                                const h = document.createElement("div");
+                                h.className = "tm-year-title"; h.textContent = y;
+                                const info = data.years[y];
+                                if (info) { const s = document.createElement("small"); s.textContent = `${info.trips} ✈ · ${info.countries.join(", ")}`; h.append(s); }
+                                list.append(h);
+                            }
+                            const row = document.createElement("div");
+                            row.className = "tm-item" + (selected === t.id ? " active" : "");
+                            const img = document.createElement("img"); img.loading = "lazy"; img.src = t.cover_url; img.alt = "";
+                            const text = document.createElement("div");
+                            const title = document.createElement("div"); title.className = "font-semibold"; title.textContent = t.title;
+                            const meta = document.createElement("div"); meta.className = "text-sm text-gray-600";
+                            const kind = document.createElement("span"); kind.className = "tm-kind " + t.kind; kind.textContent = T[t.kind];
+                            meta.append(kind, " ", `${t.dates} · ${T.photos.replace("{n}", t.count)}`);
+                            text.append(title, meta);
+                            row.append(img, text);
+                            row.onclick = () => select(t.id, true);
+                            list.append(row);
+                        });
+                    }
+
+                    async function select(id, zoom) {
+                        selected = id;
+                        const r = await (await fetch(`/api/trips/${encodeURIComponent(id)}`)).json();
+                        if (!r.success) return;
+                        const t = r.trip;
+                        $("trip-detail-box").classList.remove("hidden");
+                        $("td-title").textContent = t.title;
+                        const bits = [t.dates, T.photos.replace("{n}", t.count)];
+                        if (t.countries.length) bits.push(t.countries.map(c => c.name).join(", "));
+                        if (t.distance_km !== null && t.kind !== "unplaced") bits.push(T.km.replace("{n}", t.distance_km));
+                        $("td-meta").textContent = bits.join(" · ");
+                        $("td-place-label").textContent = t.lat === null ? T.place : T.move;
+                        $("td-forget").classList.toggle("hidden", !t.manual);
+                        $("td-card").classList.toggle("hidden", t.lat === null);
+                        if (t.lat !== null) $("td-card").src = `/api/trips/${encodeURIComponent(id)}/card.jpg?t=${Date.now()}`;
+                        const grid = $("td-photos");
+                        grid.innerHTML = "";
+                        r.photos.slice(0, 120).forEach(p => { const img = document.createElement("img"); img.loading = "lazy"; img.src = p.thumb; img.alt = ""; grid.append(img); });
+                        $("td-play").onclick = async () => { const res = await post(`/api/trips/${encodeURIComponent(id)}/play`); say(res.message, res.success); };
+                        $("td-place").onclick = () => startPlacing(t);
+                        $("td-rename").onclick = async () => {
+                            const name = prompt(T.rename, t.title);
+                            if (name === null) return;
+                            if (t.lat === null) { startPlacing(t, name); return; }
+                            const res = await post(`/api/trips/${encodeURIComponent(id)}/place`, {name});
+                            say(res.message, res.success); reload(true);
+                        };
+                        $("td-forget").onclick = async () => { const res = await post(`/api/trips/${encodeURIComponent(id)}/place`, {}, "DELETE"); say(res.message, res.success); reload(true); };
+                        drawMap(); drawList();
+                        if (zoom && t.lat !== null) {
+                            if (t.route.length > 1) map.fitBounds(t.route, {padding: [60, 60], maxZoom: 9}); else map.setView([t.lat, t.lon], 8);
+                        }
+                        $("trip-detail-box").scrollIntoView({behavior: "smooth", block: "nearest"});
+                    }
+
+                    function startPlacing(t, name) {
+                        placing = {id: t.id, name: name || ""};
+                        $("tm-placing").classList.remove("hidden");
+                        $("tm-placing-text").textContent = T.placing.replace("{title}", name || t.title);
+                        $("tm-results").innerHTML = "";
+                        $("tm-search").value = name || "";
+                        $("tm-map").scrollIntoView({behavior: "smooth", block: "center"});
+                        $("tm-map").style.cursor = "crosshair";
+                    }
+
+                    function stopPlacing() {
+                        placing = null;
+                        $("tm-placing").classList.add("hidden");
+                        $("tm-map").style.cursor = "";
+                    }
+
+                    async function placeAt(lat, lon, suggested) {
+                        const target = placing;
+                        if (!target) return;
+                        const name = target.name || suggested || prompt(T.name, "") || "";
+                        stopPlacing();
+                        const res = await post(`/api/trips/${encodeURIComponent(target.id)}/place`, {lat, lon, name});
+                        say(res.message, res.success);
+                        await reload(true);
+                    }
+
+                    async function search() {
+                        const q = $("tm-search").value.trim();
+                        if (q.length < 2) return;
+                        const r = await (await fetch(`/api/places/search?q=${encodeURIComponent(q)}`)).json();
+                        const box = $("tm-results");
+                        box.innerHTML = "";
+                        if (!r.results || !r.results.length) { box.textContent = T.noresult; return; }
+                        r.results.forEach(p => {
+                            const b = document.createElement("button");
+                            b.type = "button"; b.textContent = p.name;
+                            b.onclick = () => {
+                                map.setView([p.lat, p.lon], p.bbox ? 5 : 10);
+                                placeAt(p.lat, p.lon, p.name.split(",")[0]);
+                            };
+                            box.append(b);
+                        });
+                    }
+
+                    $("tm-search-btn").addEventListener("click", search);
+                    $("tm-search").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); search(); } });
+                    $("tm-placing-cancel").addEventListener("click", stopPlacing);
+                    // Leaflet a besoin d'une carte visible : démarrage à la première ouverture de l'onglet
+                    new ResizeObserver(entries => {
+                        if (entries[0].contentRect.width > 0) { start().then(() => map && map.invalidateSize()); }
+                    }).observe($("tm-map"));
+                })();
+            </script>
+        </div>

@@ -146,6 +146,7 @@
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-queue')"><i class="fas fa-stream fa-fw"></i>{{ _('À suivre') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-playlists')"><i class="fas fa-list-ul fa-fw"></i>{{ _('Playlists') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-favoris')"><i class="fas fa-star fa-fw"></i>{{ _('Favoris') }} <span id="favorites-count-badge" class="nav-badge yellow hidden">0</span></button>
+                    <button type="button" class="tablink" onclick="openTab(event, 'tab-carte')"><i class="fas fa-globe-europe fa-fw"></i>{{ _('Carte') }}</button>
                     <button type="button" class="tablink" onclick="openTab(event, 'tab-messages')"><i class="fas fa-comment-alt fa-fw"></i>{{ _('Messages') }}</button>
                 </div>
             </div>
@@ -232,6 +233,7 @@
 {% include 'configure/tab_playlists.html.jinja' %}
 
 {% include 'configure/tab_favoris.html.jinja' %}
+{% include 'configure/tab_carte.html.jinja' %}
 
 
 {% include 'configure/tab_son.html.jinja' %}

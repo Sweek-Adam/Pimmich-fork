@@ -13,7 +13,7 @@ from utils import history
 BASE_DIR = Path(__file__).resolve().parent.parent
 STORE = BASE_DIR / "cache" / "view_counts.json"
 PREPARED_DIR = BASE_DIR / "static" / "prepared"
-SKIP = {"messages", "compositions", "citation"}
+SKIP = {"messages", "compositions", "citation", "voyages", "voyages_recits"}
 
 
 def _load():

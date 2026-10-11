@@ -489,6 +489,12 @@
   ]
  ],
  [
+  "/api/map/world.json",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/memories/today",
   [
    "GET"
@@ -672,6 +678,12 @@
  ],
  [
   "/api/ping",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/places/search",
   [
    "GET"
   ]
@@ -1225,6 +1237,43 @@
  ],
  [
   "/api/trigger_reboot",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/trips",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/trips/<trip_id>",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/trips/<trip_id>/card.jpg",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/trips/<trip_id>/place",
+  [
+   "DELETE",
+   "POST"
+  ]
+ ],
+ [
+  "/api/trips/<trip_id>/play",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/trips/settings",
   [
    "POST"
   ]

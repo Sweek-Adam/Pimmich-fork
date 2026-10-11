@@ -82,3 +82,28 @@ def fill_places(index, language="fr", limit=60):
         if place is not None:
             cache[_key(lat, lon)] = place
     return asked
+
+
+SEARCH_URL = "https://nominatim.openstreetmap.org/search"
+
+
+def search(query, language="fr", limit=6):
+    """Lieux correspondant à un texte (« Lisbonne », « Mont Saint-Michel ») : [{name, lat, lon}], via OpenStreetMap.
+    À n'utiliser que si le géocodage est activé (le texte recherché est envoyé à OpenStreetMap)."""
+    query = str(query or "").strip()[:120]
+    if not query:
+        return []
+    with _lock:
+        wait = 1.1 - (time.time() - _last_request[0])
+        if wait > 0:
+            time.sleep(wait)
+        _last_request[0] = time.time()
+        try:
+            resp = requests.get(SEARCH_URL, timeout=10, headers={"User-Agent": USER_AGENT, "Accept-Language": language},
+                                params={"format": "jsonv2", "q": query, "limit": limit})
+            resp.raise_for_status()
+            results = resp.json()
+        except (requests.RequestException, ValueError):
+            return []
+    return [{"name": r.get("display_name", "")[:160], "lat": float(r["lat"]), "lon": float(r["lon"])}
+            for r in results if r.get("lat") and r.get("lon")]

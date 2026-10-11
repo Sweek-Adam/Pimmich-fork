@@ -280,7 +280,7 @@ def reorder_playlist(playlist_id):
 
 # --- Composition visuelle des playlists (sélection multiple, filtres) ---
 
-LIBRARY_SKIP = {"messages", "compositions", "citation"}
+LIBRARY_SKIP = {"messages", "compositions", "citation", "voyages", "voyages_recits"}
 
 
 def _valid_photo_list(photos):

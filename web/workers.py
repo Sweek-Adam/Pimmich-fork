@@ -951,3 +951,30 @@ def reliability_worker():
         except Exception as e:
             logger.warning(f"[Surveillance] {e}")
         time.sleep(60)
+
+
+def trips_worker():
+    """Cartes des voyages : souvenirs du jour et cartes à jour quand de nouvelles photos arrivent."""
+    from utils import photo_index, trips
+    from web.routes_trips import refresh_cards
+    shown = None
+    time.sleep(90)
+    while True:
+        config = load_config()
+        if config.get("trip_cards", "off") != "off":
+            key = (datetime.now().date().isoformat(), config.get("trip_cards"), config.get("display_width"), config.get("display_height"),
+                   config.get("language"), _mtime(photo_index.INDEX_FILE), _mtime(trips.PLACES_FILE))
+            if key != shown:
+                try:
+                    refresh_cards(config)
+                    shown = key
+                except Exception as e:
+                    logger.warning(f"[Voyages] {e}")
+        time.sleep(1800)
+
+
+def _mtime(path):
+    try:
+        return os.path.getmtime(path)
+    except OSError:
+        return 0
