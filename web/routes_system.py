@@ -201,10 +201,14 @@ def system_shutdown():
     """Éteint le système (commande vocale ou administrateur)."""
     # Derrière nginx, toutes les requêtes semblent venir de 127.0.0.1 : on s'appuie sur le jeton interne ou le rôle
     if not is_internal_request(request) and not is_admin():
-        return jsonify({"success": False, "message": "Action réservée aux administrateurs."}), 403
-    print("Arrêt du système demandé via API.")
-    subprocess.run(['sudo', '-n', 'shutdown', '-h', 'now'])
-    return jsonify({"success": True, "message": "Arrêt en cours."})
+        return jsonify({"success": False, "message": _("Action réservée aux administrateurs.")}), 403
+    logger.info("Arrêt du système demandé via API.")
+
+    def halt():
+        time.sleep(2)  # la réponse part d'abord
+        subprocess.run(['sudo', '-n', 'shutdown', '-h', 'now'], check=False)
+    threading.Thread(target=halt, daemon=True).start()
+    return jsonify({"success": True, "message": _("Le Raspberry Pi s'éteint. Attendez que le voyant vert ne clignote plus avant de débrancher l'alimentation.")})
 
 
 def _apply_wifi(ssid, password, country):

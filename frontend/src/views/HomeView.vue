@@ -2,7 +2,7 @@
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { get, post } from "../api";
-import { classicUrl } from "../boot";
+import { boot, classicUrl } from "../boot";
 import { t } from "../i18n";
 import { routeForTab } from "../nav";
 import { run } from "../toast";
@@ -109,6 +109,11 @@ async function dismissSetup() {
   if (setup.value) setup.value.dismissed = true;
 }
 
+async function shutdown() {
+  if (!window.confirm(t("Éteindre complètement le Raspberry Pi ? Il faudra débrancher puis rebrancher l'alimentation pour le rallumer."))) return;
+  await run(() => post("/api/system/shutdown"));
+}
+
 function openTab(tab?: string) {
   const route = tab ? routeForTab(tab) : undefined;
   if (route) router.push(route);
@@ -146,7 +151,9 @@ onUnmounted(() => window.clearInterval(timer));
           <i class="fas fa-step-forward"></i></button>
         <span class="spacer"></span>
         <button class="btn" type="button" :disabled="busy" @click="control('toggle_sleep')">
-          <i class="fas fa-power-off"></i>{{ status.running ? t("Mettre en veille") : t("Allumer le cadre") }}</button>
+          <i class="fas fa-moon"></i>{{ status.running ? t("Mettre en veille") : t("Allumer le cadre") }}</button>
+        <button v-if="boot.admin" class="btn danger" type="button" :title="t('Éteindre le Raspberry Pi')" @click="shutdown">
+          <i class="fas fa-power-off"></i>{{ t("Éteindre") }}</button>
       </div>
       <div class="modes">
         <button type="button" class="mode" :class="{ on: media.mode !== 'videos' }" @click="setMediaMode('all')">

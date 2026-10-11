@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 21:39+0200\n"
+"POT-Creation-Date: 2026-10-11 21:48+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -215,7 +215,7 @@ msgstr "Fuentes"
 msgid "Bibliothèque"
 msgstr "Biblioteca"
 
-#: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:158
+#: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:165
 #: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:148
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
@@ -712,7 +712,7 @@ msgstr "Volver al estilo general"
 
 #: frontend/src/components/CaptionEditor.vue:188
 #: frontend/src/components/SmartAlbumEditor.vue:126
-#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:201
+#: frontend/src/views/HomeView.vue:236 frontend/src/views/PlaylistsView.vue:201
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
@@ -1303,7 +1303,7 @@ msgid "Favoris uniquement"
 msgstr "Solo favoritos"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
-#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:153
+#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:160
 #: frontend/src/views/LibraryView.vue:114
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
@@ -1318,7 +1318,7 @@ msgid "Photos seulement"
 msgstr "Solo fotos"
 
 #: frontend/src/components/SmartAlbumEditor.vue:116
-#: frontend/src/views/HomeView.vue:155
+#: frontend/src/views/HomeView.vue:162
 #: templates/configure/_smart_albums.html.jinja:46
 #: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:605
 msgid "Vidéos seulement"
@@ -1356,7 +1356,7 @@ msgid "Statut Home Assistant :"
 msgstr "Estado de Home Assistant:"
 
 #: frontend/src/components/SpotifyCard.vue:36
-#: frontend/src/views/HomeView.vue:206
+#: frontend/src/views/HomeView.vue:213
 #: templates/configure/_son_spotify.html.jinja:100
 #: templates/configure/tab_accueil.html.jinja:73
 msgid "Ambiance"
@@ -2823,7 +2823,7 @@ msgstr "Habilitar el efecto Pan/Zoom en las fotos"
 msgid "Amplitude du zoom"
 msgstr "Amplitud del zoom"
 
-#: frontend/src/views/DisplayView.vue:66 frontend/src/views/HomeView.vue:217
+#: frontend/src/views/DisplayView.vue:66 frontend/src/views/HomeView.vue:224
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
@@ -3359,7 +3359,7 @@ msgstr "Dormir"
 msgid "Allumer"
 msgstr "Encender"
 
-#: frontend/src/views/GuestsView.vue:181 frontend/src/views/HomeView.vue:145
+#: frontend/src/views/GuestsView.vue:181 frontend/src/views/HomeView.vue:150
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
 #: templates/configure/tab_invites.html.jinja:185
@@ -3441,67 +3441,83 @@ msgstr ""
 msgid "Créer un code"
 msgstr "Crear un código"
 
-#: frontend/src/views/HomeView.vue:138
+#: frontend/src/views/HomeView.vue:113
+msgid ""
+"Éteindre complètement le Raspberry Pi ? Il faudra débrancher puis "
+"rebrancher l'alimentation pour le rallumer."
+msgstr ""
+"¿Apagar completamente la Raspberry Pi? Habrá que desenchufar y volver a "
+"enchufar la alimentación para encenderla."
+
+#: frontend/src/views/HomeView.vue:143
 msgid "Le cadre est en veille"
 msgstr "El marco está en reposo"
 
-#: frontend/src/views/HomeView.vue:141
+#: frontend/src/views/HomeView.vue:146
 #: templates/configure/tab_accueil.html.jinja:22
 #: templates/configure/tab_actions.html.jinja:27
 #: templates/configure/tab_playlists.html.jinja:20
 msgid "Photo précédente"
 msgstr "Foto anterior"
 
-#: frontend/src/views/HomeView.vue:143
+#: frontend/src/views/HomeView.vue:148
 msgid "Reprendre"
 msgstr "Reanudar"
 
-#: frontend/src/views/HomeView.vue:143
+#: frontend/src/views/HomeView.vue:148
 msgid "Pause"
 msgstr "Pausa"
 
-#: frontend/src/views/HomeView.vue:149
+#: frontend/src/views/HomeView.vue:154
 msgid "Mettre en veille"
 msgstr "Poner en reposo"
 
-#: frontend/src/views/HomeView.vue:149
+#: frontend/src/views/HomeView.vue:154
 msgid "Allumer le cadre"
 msgstr "Encender el marco"
 
-#: frontend/src/views/HomeView.vue:167
+#: frontend/src/views/HomeView.vue:155
+msgid "Éteindre le Raspberry Pi"
+msgstr "Apagar la Raspberry Pi"
+
+#: frontend/src/views/HomeView.vue:156
+msgid "Éteindre"
+msgstr "Apagar"
+
+#: frontend/src/views/HomeView.vue:174
 #: templates/configure/tab_accueil.html.jinja:39
 msgid "État du cadre"
 msgstr "Estado del marco"
 
-#: frontend/src/views/HomeView.vue:174
+#: frontend/src/views/HomeView.vue:181
 msgid "Ouvrir"
 msgstr "Abrir"
 
-#: frontend/src/views/HomeView.vue:180
+#: frontend/src/views/HomeView.vue:187
 #: templates/configure/tab_accueil.html.jinja:5
 msgid "Bien démarrer"
 msgstr "Primeros pasos"
 
-#: frontend/src/views/HomeView.vue:181
+#: frontend/src/views/HomeView.vue:188
 #: templates/configure/scripts_app.html.jinja:23
 #: templates/configure/tab_accueil.html.jinja:6
 msgid "Masquer"
 msgstr "Ocultar"
 
-#: frontend/src/views/HomeView.vue:221 web/routes_trips.py:114
+#: frontend/src/views/HomeView.vue:228 web/routes_trips.py:114
 msgid "Il y a un an"
 msgstr "Hace un año"
 
-#: frontend/src/views/HomeView.vue:221
+#: frontend/src/views/HomeView.vue:228
 #, python-brace-format
 msgid "Il y a {n} ans"
 msgstr "Hace {n} años"
 
-#: frontend/src/views/HomeView.vue:228
+#: frontend/src/views/HomeView.vue:235
 msgid "Dernières actions"
 msgstr "Últimas acciones"
 
-#: frontend/src/views/HomeView.vue:231
+#: frontend/src/views/HomeView.vue:238
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "Nada por ahora."
@@ -4009,7 +4025,7 @@ msgstr "Error de comunicación con el servidor."
 #: frontend/src/views/MaintenanceView.vue:95
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
 #: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:835
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:839
 msgid "Aucun fichier sélectionné."
 msgstr "No hay archivos seleccionados."
 
@@ -8896,7 +8912,7 @@ msgstr "Pascua"
 msgid "Œufs, herbe fraîche et fleurs de printemps."
 msgstr "Huevos, hierba fresca y flores de primavera."
 
-#: utils/auth.py:24
+#: utils/auth.py:24 web/routes_system.py:204
 msgid "Action réservée aux administrateurs."
 msgstr "Acción reservada a los administradores."
 
@@ -9959,7 +9975,7 @@ msgstr ""
 "Autoriza primero Funnel en tu cuenta de Tailscale (botón «Enable» en la "
 "página que se abre) y vuelve a activar «Fuera de casa»."
 
-#: web/routes_guests.py:558 web/routes_system.py:932
+#: web/routes_guests.py:558 web/routes_system.py:936
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale rechaza la publicación: %(detail)s"
@@ -10020,7 +10036,7 @@ msgstr "Música no encontrada."
 msgid "Volume invalide."
 msgstr "Volumen no válido."
 
-#: web/routes_home.py:210 web/routes_system.py:733
+#: web/routes_home.py:210 web/routes_system.py:737
 msgid "Réglage invalide."
 msgstr "Ajuste no válido."
 
@@ -10767,7 +10783,7 @@ msgstr "Dirección de carpeta no válida (ej.: //nas.local/photos)."
 msgid "Type de support inconnu."
 msgstr "Tipo de soporte desconocido."
 
-#: web/routes_storage.py:57 web/routes_system.py:864
+#: web/routes_storage.py:57 web/routes_system.py:868
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "No se puede usar este soporte: %(error)s"
@@ -10781,7 +10797,7 @@ msgstr "Soporte «%(name)s» añadido."
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "Aún hay fotos en este soporte: muévelas primero."
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:859
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:863
 msgid "Support inconnu."
 msgstr "Soporte desconocido."
 
@@ -10835,16 +10851,24 @@ msgstr ""
 "La aplicación web se está reiniciando... La página estará inaccesible por"
 " unos instantes."
 
-#: web/routes_system.py:213
+#: web/routes_system.py:211
+msgid ""
+"Le Raspberry Pi s'éteint. Attendez que le voyant vert ne clignote plus "
+"avant de débrancher l'alimentation."
+msgstr ""
+"La Raspberry Pi se está apagando. Espere a que el LED verde deje de "
+"parpadear antes de desenchufarla."
+
+#: web/routes_system.py:217
 msgid "Le SSID et le pays Wi-Fi sont obligatoires."
 msgstr "Se requieren SSID y país de Wi-Fi."
 
-#: web/routes_system.py:222
+#: web/routes_system.py:226
 #, python-format
 msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
 msgstr "Error al aplicar la configuración de Wi-Fi: %(error)s"
 
-#: web/routes_system.py:223
+#: web/routes_system.py:227
 msgid ""
 "Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
 " la connexion. Veuillez patienter une minute et vérifier le statut."
@@ -10852,15 +10876,15 @@ msgstr ""
 "Configuración de Wi-Fi aplicada. Se ha reiniciado el servicio de red para"
 " forzar la conexión. Espere un minuto y verifique el estado."
 
-#: web/routes_system.py:305
+#: web/routes_system.py:309
 msgid "Le fichier de configuration n'a pas été trouvé."
 msgstr "No se encontró el archivo de configuración."
 
-#: web/routes_system.py:314 web/routes_system.py:319
+#: web/routes_system.py:318 web/routes_system.py:323
 msgid "Aucun fichier de sauvegarde sélectionné."
 msgstr "No hay ningún archivo guardado seleccionado."
 
-#: web/routes_system.py:329
+#: web/routes_system.py:333
 msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
@@ -10868,7 +10892,7 @@ msgstr ""
 "¡Configuración restaurada correctamente! La presentación se reiniciará "
 "para aplicar los cambios."
 
-#: web/routes_system.py:331
+#: web/routes_system.py:335
 msgid ""
 "Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
 "valide."
@@ -10876,102 +10900,102 @@ msgstr ""
 "Archivo de copia de seguridad no válido o dañado. Este no es un archivo "
 "JSON válido."
 
-#: web/routes_system.py:333
+#: web/routes_system.py:337
 #, python-format
 msgid "Erreur lors de la restauration : %(error)s"
 msgstr "Error al restaurar: %(error)s"
 
-#: web/routes_system.py:412
+#: web/routes_system.py:416
 msgid "name_key"
 msgstr "name_key"
 
-#: web/routes_system.py:548
+#: web/routes_system.py:552
 msgid "Aucune version précédente connue."
 msgstr "No se conoce ninguna versión anterior."
 
-#: web/routes_system.py:556
+#: web/routes_system.py:560
 msgid ""
 "Retour à la version précédente en cours : Pimmich redémarre dans quelques"
 " minutes."
 msgstr "Volviendo a la versión anterior: Pimmich se reiniciará en unos minutos."
 
-#: web/routes_system.py:624
+#: web/routes_system.py:628
 msgid "La carte SD est déjà utilisée en entier : rien à agrandir."
 msgstr "La tarjeta SD ya se usa por completo: nada que ampliar."
 
-#: web/routes_system.py:631
+#: web/routes_system.py:635
 msgid "L'agrandissement n'a pas pu être programmé."
 msgstr "No se pudo programar la ampliación."
 
-#: web/routes_system.py:632
+#: web/routes_system.py:636
 msgid ""
 "C'est programmé : la partition sera agrandie au prochain redémarrage du "
 "cadre."
 msgstr "Programado: la partición se ampliará en el próximo reinicio del marco."
 
-#: web/routes_system.py:735
+#: web/routes_system.py:739
 msgid "Réglages enregistrés."
 msgstr "Configuración guardada."
 
-#: web/routes_system.py:744
+#: web/routes_system.py:748
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr "Copia de seguridad imposible: %(error)s"
 
-#: web/routes_system.py:745
+#: web/routes_system.py:749
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr "Copia de seguridad enviada a Google Drive: %(name)s"
 
-#: web/routes_system.py:754
+#: web/routes_system.py:758
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr "Restauración imposible: %(error)s"
 
-#: web/routes_system.py:758
+#: web/routes_system.py:762
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr ""
 "Copia de seguridad %(name)s restaurada (%(count)s archivos). Recargue la "
 "página."
 
-#: web/routes_system.py:785
+#: web/routes_system.py:789
 msgid "Orientation inconnue."
 msgstr "Orientación desconocida."
 
-#: web/routes_system.py:790
+#: web/routes_system.py:794
 msgid ""
 "Aucune mesure du capteur : vérifiez son branchement, et que le cadre est "
 "debout."
 msgstr "Sin medición del sensor: comprueba la conexión y que el marco esté de pie."
 
-#: web/routes_system.py:798
+#: web/routes_system.py:802
 msgid "Position mémorisée."
 msgstr "Posición memorizada."
 
-#: web/routes_system.py:845 web/routes_system.py:905
+#: web/routes_system.py:849 web/routes_system.py:909
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr "%(count)s archivos restaurados. El marco continúa con la copia."
 
-#: web/routes_system.py:861
+#: web/routes_system.py:865
 msgid "Une sauvegarde est déjà en cours."
 msgstr "Ya hay una copia en curso."
 
-#: web/routes_system.py:872
+#: web/routes_system.py:876
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr "Copia terminada: %(count)s archivos."
 
-#: web/routes_system.py:882
+#: web/routes_system.py:886
 msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
 msgstr "Copia iniciada: puede tardar con muchas fotos."
 
-#: web/routes_system.py:893 web/routes_system.py:896
+#: web/routes_system.py:897 web/routes_system.py:900
 msgid "Sauvegarde introuvable."
 msgstr "Copia no encontrada."
 
-#: web/routes_system.py:931
+#: web/routes_system.py:935
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
@@ -10979,7 +11003,7 @@ msgstr ""
 "Primero autoriza los certificados HTTPS en tu cuenta de Tailscale (página"
 " que se abre) y vuelve a intentarlo."
 
-#: web/routes_system.py:933
+#: web/routes_system.py:937
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
@@ -10987,7 +11011,7 @@ msgstr ""
 "La administración es accesible por HTTPS, sin advertencias, desde tus "
 "dispositivos Tailscale."
 
-#: web/routes_system.py:934
+#: web/routes_system.py:938
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr "Acceso HTTPS por Tailscale retirado."
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 21:39+0200\n"
+"POT-Creation-Date: 2026-10-11 21:48+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -215,7 +215,7 @@ msgstr "情報源"
 msgid "Bibliothèque"
 msgstr "ライブラリ"
 
-#: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:158
+#: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:165
 #: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:148
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
@@ -707,7 +707,7 @@ msgstr "全体のスタイルに戻す"
 
 #: frontend/src/components/CaptionEditor.vue:188
 #: frontend/src/components/SmartAlbumEditor.vue:126
-#: frontend/src/views/HomeView.vue:229 frontend/src/views/PlaylistsView.vue:201
+#: frontend/src/views/HomeView.vue:236 frontend/src/views/PlaylistsView.vue:201
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
@@ -1284,7 +1284,7 @@ msgid "Favoris uniquement"
 msgstr "お気に入りのみ"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
-#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:153
+#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:160
 #: frontend/src/views/LibraryView.vue:114
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
@@ -1299,7 +1299,7 @@ msgid "Photos seulement"
 msgstr "写真のみ"
 
 #: frontend/src/components/SmartAlbumEditor.vue:116
-#: frontend/src/views/HomeView.vue:155
+#: frontend/src/views/HomeView.vue:162
 #: templates/configure/_smart_albums.html.jinja:46
 #: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:605
 msgid "Vidéos seulement"
@@ -1337,7 +1337,7 @@ msgid "Statut Home Assistant :"
 msgstr "Home Assistant の状態："
 
 #: frontend/src/components/SpotifyCard.vue:36
-#: frontend/src/views/HomeView.vue:206
+#: frontend/src/views/HomeView.vue:213
 #: templates/configure/_son_spotify.html.jinja:100
 #: templates/configure/tab_accueil.html.jinja:73
 msgid "Ambiance"
@@ -2753,7 +2753,7 @@ msgstr "写真のパン/ズーム効果を有効にする"
 msgid "Amplitude du zoom"
 msgstr "ズームの強さ"
 
-#: frontend/src/views/DisplayView.vue:66 frontend/src/views/HomeView.vue:217
+#: frontend/src/views/DisplayView.vue:66 frontend/src/views/HomeView.vue:224
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
@@ -3249,7 +3249,7 @@ msgstr "スリープ"
 msgid "Allumer"
 msgstr "オンにする"
 
-#: frontend/src/views/GuestsView.vue:181 frontend/src/views/HomeView.vue:145
+#: frontend/src/views/GuestsView.vue:181 frontend/src/views/HomeView.vue:150
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
 #: templates/configure/tab_invites.html.jinja:185
@@ -3325,67 +3325,81 @@ msgstr "このフレームを操作する側のフレームで入力します。
 msgid "Créer un code"
 msgstr "コードを作成"
 
-#: frontend/src/views/HomeView.vue:138
+#: frontend/src/views/HomeView.vue:113
+msgid ""
+"Éteindre complètement le Raspberry Pi ? Il faudra débrancher puis "
+"rebrancher l'alimentation pour le rallumer."
+msgstr "Raspberry Pi を完全にシャットダウンしますか？再び起動するには電源を抜いて差し直す必要があります。"
+
+#: frontend/src/views/HomeView.vue:143
 msgid "Le cadre est en veille"
 msgstr "フレームはスリープ中です"
 
-#: frontend/src/views/HomeView.vue:141
+#: frontend/src/views/HomeView.vue:146
 #: templates/configure/tab_accueil.html.jinja:22
 #: templates/configure/tab_actions.html.jinja:27
 #: templates/configure/tab_playlists.html.jinja:20
 msgid "Photo précédente"
 msgstr "前の写真"
 
-#: frontend/src/views/HomeView.vue:143
+#: frontend/src/views/HomeView.vue:148
 msgid "Reprendre"
 msgstr "再開"
 
-#: frontend/src/views/HomeView.vue:143
+#: frontend/src/views/HomeView.vue:148
 msgid "Pause"
 msgstr "一時停止"
 
-#: frontend/src/views/HomeView.vue:149
+#: frontend/src/views/HomeView.vue:154
 msgid "Mettre en veille"
 msgstr "スリープにする"
 
-#: frontend/src/views/HomeView.vue:149
+#: frontend/src/views/HomeView.vue:154
 msgid "Allumer le cadre"
 msgstr "フレームをオンにする"
 
-#: frontend/src/views/HomeView.vue:167
+#: frontend/src/views/HomeView.vue:155
+msgid "Éteindre le Raspberry Pi"
+msgstr "Raspberry Pi をシャットダウン"
+
+#: frontend/src/views/HomeView.vue:156
+msgid "Éteindre"
+msgstr "シャットダウン"
+
+#: frontend/src/views/HomeView.vue:174
 #: templates/configure/tab_accueil.html.jinja:39
 msgid "État du cadre"
 msgstr "フォトフレームの状態"
 
-#: frontend/src/views/HomeView.vue:174
+#: frontend/src/views/HomeView.vue:181
 msgid "Ouvrir"
 msgstr "開く"
 
-#: frontend/src/views/HomeView.vue:180
+#: frontend/src/views/HomeView.vue:187
 #: templates/configure/tab_accueil.html.jinja:5
 msgid "Bien démarrer"
 msgstr "はじめに"
 
-#: frontend/src/views/HomeView.vue:181
+#: frontend/src/views/HomeView.vue:188
 #: templates/configure/scripts_app.html.jinja:23
 #: templates/configure/tab_accueil.html.jinja:6
 msgid "Masquer"
 msgstr "非表示"
 
-#: frontend/src/views/HomeView.vue:221 web/routes_trips.py:114
+#: frontend/src/views/HomeView.vue:228 web/routes_trips.py:114
 msgid "Il y a un an"
 msgstr "1年前"
 
-#: frontend/src/views/HomeView.vue:221
+#: frontend/src/views/HomeView.vue:228
 #, python-brace-format
 msgid "Il y a {n} ans"
 msgstr "{n}年前"
 
-#: frontend/src/views/HomeView.vue:228
+#: frontend/src/views/HomeView.vue:235
 msgid "Dernières actions"
 msgstr "最近の操作"
 
-#: frontend/src/views/HomeView.vue:231
+#: frontend/src/views/HomeView.vue:238
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr "まだありません。"
@@ -3873,7 +3887,7 @@ msgstr "サーバーとの通信エラー。"
 #: frontend/src/views/MaintenanceView.vue:95
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
 #: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:835
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:839
 msgid "Aucun fichier sélectionné."
 msgstr "ファイルが選択されていません。"
 
@@ -8553,7 +8567,7 @@ msgstr "イースター"
 msgid "Œufs, herbe fraîche et fleurs de printemps."
 msgstr "たまご、若草、春の花。"
 
-#: utils/auth.py:24
+#: utils/auth.py:24 web/routes_system.py:204
 msgid "Action réservée aux administrateurs."
 msgstr "管理者専用の操作です。"
 
@@ -9590,7 +9604,7 @@ msgid ""
 "sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
 msgstr "まずTailscaleアカウントでFunnelを許可し（開いたページの「Enable」ボタン）、「外出先から」をもう一度オンにしてください。"
 
-#: web/routes_guests.py:558 web/routes_system.py:932
+#: web/routes_guests.py:558 web/routes_system.py:936
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale が公開を拒否しました：%(detail)s"
@@ -9651,7 +9665,7 @@ msgstr "音楽が見つかりません。"
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:210 web/routes_system.py:733
+#: web/routes_home.py:210 web/routes_system.py:737
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
@@ -10374,7 +10388,7 @@ msgstr "共有アドレスが無効です（例：//nas.local/photos）。"
 msgid "Type de support inconnu."
 msgstr "不明な保存先の種類です。"
 
-#: web/routes_storage.py:57 web/routes_system.py:864
+#: web/routes_storage.py:57 web/routes_system.py:868
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "この保存先は使えません：%(error)s"
@@ -10388,7 +10402,7 @@ msgstr "保存先「%(name)s」を追加しました。"
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "この保存先にまだ写真があります。先に移動してください。"
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:859
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:863
 msgid "Support inconnu."
 msgstr "不明な保存先です。"
 
@@ -10436,147 +10450,153 @@ msgid ""
 " instants."
 msgstr "Web アプリケーションが再起動します...ページはしばらくの間アクセスできなくなります。"
 
-#: web/routes_system.py:213
+#: web/routes_system.py:211
+msgid ""
+"Le Raspberry Pi s'éteint. Attendez que le voyant vert ne clignote plus "
+"avant de débrancher l'alimentation."
+msgstr "Raspberry Pi をシャットダウンしています。緑の LED の点滅が止まってから電源を抜いてください。"
+
+#: web/routes_system.py:217
 msgid "Le SSID et le pays Wi-Fi sont obligatoires."
 msgstr "SSIDとWi-Fiの国は必須です。"
 
-#: web/routes_system.py:222
+#: web/routes_system.py:226
 #, python-format
 msgid "Erreur lors de l'application des paramètres Wi-Fi : %(error)s"
 msgstr "Wi-Fi 設定の適用中にエラーが発生しました: %(error)s"
 
-#: web/routes_system.py:223
+#: web/routes_system.py:227
 msgid ""
 "Paramètres Wi-Fi appliqués. Le service réseau a été redémarré pour forcer"
 " la connexion. Veuillez patienter une minute et vérifier le statut."
 msgstr "Wi-Fi設定が適用されました。接続を強制するためにネットワーク サービスが再起動されました。しばらく待ってからステータスを確認してください。"
 
-#: web/routes_system.py:305
+#: web/routes_system.py:309
 msgid "Le fichier de configuration n'a pas été trouvé."
 msgstr "設定ファイルが見つかりませんでした。"
 
-#: web/routes_system.py:314 web/routes_system.py:319
+#: web/routes_system.py:318 web/routes_system.py:323
 msgid "Aucun fichier de sauvegarde sélectionné."
 msgstr "保存ファイルが選択されていません。"
 
-#: web/routes_system.py:329
+#: web/routes_system.py:333
 msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
 msgstr "設定が正常に復元されました。変更を適用するためにスライドショーが再開されます。"
 
-#: web/routes_system.py:331
+#: web/routes_system.py:335
 msgid ""
 "Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
 "valide."
 msgstr "保存ファイルが無効または破損しています。これは有効な JSON ファイルではありません。"
 
-#: web/routes_system.py:333
+#: web/routes_system.py:337
 #, python-format
 msgid "Erreur lors de la restauration : %(error)s"
 msgstr "復元中のエラー: %(error)s"
 
-#: web/routes_system.py:412
+#: web/routes_system.py:416
 msgid "name_key"
 msgstr "名前キー"
 
-#: web/routes_system.py:548
+#: web/routes_system.py:552
 msgid "Aucune version précédente connue."
 msgstr "前のバージョンが見つかりません。"
 
-#: web/routes_system.py:556
+#: web/routes_system.py:560
 msgid ""
 "Retour à la version précédente en cours : Pimmich redémarre dans quelques"
 " minutes."
 msgstr "前のバージョンに戻しています。数分後に Pimmich が再起動します。"
 
-#: web/routes_system.py:624
+#: web/routes_system.py:628
 msgid "La carte SD est déjà utilisée en entier : rien à agrandir."
 msgstr "SD カードはすでにすべて使われています。拡張の必要はありません。"
 
-#: web/routes_system.py:631
+#: web/routes_system.py:635
 msgid "L'agrandissement n'a pas pu être programmé."
 msgstr "拡張を予約できませんでした。"
 
-#: web/routes_system.py:632
+#: web/routes_system.py:636
 msgid ""
 "C'est programmé : la partition sera agrandie au prochain redémarrage du "
 "cadre."
 msgstr "予約しました。次回フォトフレームを再起動するとパーティションが拡張されます。"
 
-#: web/routes_system.py:735
+#: web/routes_system.py:739
 msgid "Réglages enregistrés."
 msgstr "設定を保存しました。"
 
-#: web/routes_system.py:744
+#: web/routes_system.py:748
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr "バックアップできません：%(error)s"
 
-#: web/routes_system.py:745
+#: web/routes_system.py:749
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr "バックアップを Google Drive に送信しました：%(name)s"
 
-#: web/routes_system.py:754
+#: web/routes_system.py:758
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr "復元できません：%(error)s"
 
-#: web/routes_system.py:758
+#: web/routes_system.py:762
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr "バックアップ %(name)s を復元しました（%(count)s 個のファイル）。ページを再読み込みしてください。"
 
-#: web/routes_system.py:785
+#: web/routes_system.py:789
 msgid "Orientation inconnue."
 msgstr "不明な向きです。"
 
-#: web/routes_system.py:790
+#: web/routes_system.py:794
 msgid ""
 "Aucune mesure du capteur : vérifiez son branchement, et que le cadre est "
 "debout."
 msgstr "センサーの測定値がありません。配線と、フレームが立っているかを確認してください。"
 
-#: web/routes_system.py:798
+#: web/routes_system.py:802
 msgid "Position mémorisée."
 msgstr "向きを記憶しました。"
 
-#: web/routes_system.py:845 web/routes_system.py:905
+#: web/routes_system.py:849 web/routes_system.py:909
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr "%(count)s 個のファイルを復元しました。フレームはバックアップの内容で再開します。"
 
-#: web/routes_system.py:861
+#: web/routes_system.py:865
 msgid "Une sauvegarde est déjà en cours."
 msgstr "バックアップはすでに実行中です。"
 
-#: web/routes_system.py:872
+#: web/routes_system.py:876
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr "バックアップ完了：%(count)s ファイル。"
 
-#: web/routes_system.py:882
+#: web/routes_system.py:886
 msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
 msgstr "バックアップを開始しました。写真が多いと時間がかかります。"
 
-#: web/routes_system.py:893 web/routes_system.py:896
+#: web/routes_system.py:897 web/routes_system.py:900
 msgid "Sauvegarde introuvable."
 msgstr "バックアップが見つかりません。"
 
-#: web/routes_system.py:931
+#: web/routes_system.py:935
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
 msgstr "まず Tailscale アカウントで HTTPS 証明書を許可し（開いたページ）、もう一度お試しください。"
 
-#: web/routes_system.py:933
+#: web/routes_system.py:937
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
 msgstr "Tailscale の端末から、警告なしで HTTPS で管理画面にアクセスできます。"
 
-#: web/routes_system.py:934
+#: web/routes_system.py:938
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr "Tailscale 経由の HTTPS アクセスを解除しました。"
 
