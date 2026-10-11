@@ -863,3 +863,18 @@ def message_schedule_worker():
         except Exception as e:
             logger.warning(f"[Messages] Programmation : {e}")
         time.sleep(30)
+
+
+def hdmi_audio_worker():
+    """Son HDMI disparu (écran éteint au démarrage du Pi) : réparé automatiquement dès que l'écran répond."""
+    from utils import audio_output
+    time.sleep(60)
+    while True:
+        config = load_config()
+        try:
+            if config.get("video_audio_output", "auto") in ("hdmi", "auto") and audio_output.hdmi_audio_missing():
+                if audio_output.repair_hdmi_audio() and config.get("video_audio_output") == "hdmi":
+                    audio_output.apply_audio_output("hdmi")
+        except Exception as e:
+            logger.warning(f"[Son] Réparation HDMI : {e}")
+        time.sleep(300)

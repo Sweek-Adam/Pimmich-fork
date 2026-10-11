@@ -40,6 +40,8 @@ def apply_audio_output(output):
         return
     try:
         sink = next((s for s in _list_sinks() if _matches(s, output)), None)
+        if not sink and output == "hdmi" and repair_hdmi_audio():
+            sink = next((s for s in _list_sinks() if _matches(s, output)), None)
         if not sink:
             logger.warning(f"🔊 Aucune sortie audio '{output}' trouvée, sortie par défaut du système conservée.")
             return
@@ -49,3 +51,42 @@ def apply_audio_output(output):
         logger.info(f"🔊 Sortie audio réglée sur {output} ({sink['name']}).")
     except (OSError, subprocess.SubprocessError, ValueError) as e:
         logger.warning(f"🔊 Impossible de régler la sortie audio sur {output} : {e}")
+
+
+def _hdmi_connectors():
+    import glob
+    return [p for p in glob.glob("/sys/class/drm/card*-HDMI-A-*/status")]
+
+
+def hdmi_audio_missing():
+    """Un écran HDMI est branché, mais PipeWire n'a pas de sortie son HDMI (écran mal lu au démarrage du Pi)."""
+    connected = False
+    for status in _hdmi_connectors():
+        try:
+            connected = connected or open(status).read().strip() == "connected"
+        except OSError:
+            continue
+    if not connected:
+        return False
+    try:
+        return not any(_matches(s, "hdmi") for s in _list_sinks())
+    except (OSError, subprocess.SubprocessError, ValueError):
+        return False
+
+
+def repair_hdmi_audio():
+    """
+    Écran éteint (ou en veille) au démarrage du Pi : ses informations (EDID) ne sont pas lues, et le son HDMI
+    n'existe pas. On redemande l'écran, puis on relance WirePlumber pour qu'il retrouve la sortie HDMI.
+    """
+    import time
+    if not hdmi_audio_missing():
+        return False
+    for status in _hdmi_connectors():
+        subprocess.run(["sudo", "-n", "sh", "-c", f"echo detect > {status}"], capture_output=True, timeout=10)
+    time.sleep(2)
+    subprocess.run(["systemctl", "--user", "restart", "wireplumber"], capture_output=True, timeout=30)
+    time.sleep(4)
+    fixed = not hdmi_audio_missing()
+    logger.info("🔊 Son HDMI retrouvé (écran relu)." if fixed else "🔊 Son HDMI toujours absent : l'écran est-il allumé ?")
+    return fixed
