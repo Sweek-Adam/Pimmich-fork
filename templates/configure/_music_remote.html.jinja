@@ -18,8 +18,24 @@
         <input type="range" min="0" max="100" step="5" aria-label="{{ _('Volume du cadre') }}">
         <span class="mr-volume-value"></span>
     </label>
+    <div class="mr-sleep">
+        <i class="fas fa-moon" title="{{ _('Minuteur de sommeil') }}"></i>
+        <select aria-label="{{ _('Minuteur de sommeil') }}">
+            <option value="0">{{ _("Arrêter la musique…") }}</option>
+            <option value="15">{{ _("dans 15 min") }}</option>
+            <option value="30">{{ _("dans 30 min") }}</option>
+            <option value="60">{{ _("dans 1 h") }}</option>
+            <option value="90">{{ _("dans 1 h 30") }}</option>
+        </select>
+        <span class="mr-sleep-left"></span>
+    </div>
     <p class="mr-message"></p>
 </div>
+<style>
+    .mr-sleep { display: flex; align-items: center; gap: .4rem; margin-top: .4rem; font-size: .85rem; }
+    .mr-sleep select { padding: .15rem .4rem; }
+    .mr-sleep-left { color: var(--muted, #6b7280); }
+</style>
 <script>
     window.addEventListener("DOMContentLoaded", () => {
         if (window.__musicRemote) return;
@@ -58,6 +74,16 @@
         async function refresh() {
             if (!remotes.some(r => r.closest(".tabcontent") && r.closest(".tabcontent").offsetParent)) return;  // aucune visible
             try { state = await (await fetch("/api/music/remote")).json(); render(); } catch (e) { /* le cadre redémarre */ }
+            try { renderSleep((await (await fetch("/api/music/sleep")).json()).remaining); } catch (e) { /* idem */ }
+        }
+        const CANCEL = {{ _("Annuler le minuteur")|tojson }}, LEFT = {{ _("encore {n} min")|tojson }};
+        function renderSleep(left) {
+            remotes.forEach(r => {
+                const select = r.querySelector(".mr-sleep select");
+                select.options[0].textContent = left ? CANCEL : {{ _("Arrêter la musique…")|tojson }};
+                if (!select.matches(":focus")) select.value = "0";
+                r.querySelector(".mr-sleep-left").textContent = left ? LEFT.replace("{n}", Math.ceil(left / 60)) : "";
+            });
         }
         const say = (r, text) => { const m = r.querySelector(".mr-message"); m.textContent = text || ""; setTimeout(() => { if (m.textContent === text) m.textContent = ""; }, 4000); };
 
@@ -70,6 +96,10 @@
                 if (!res.success) say(r, res.message);
                 setTimeout(refresh, 800);
             }));
+            r.querySelector(".mr-sleep select").addEventListener("change", async (e) => {
+                const res = await post("/api/music/sleep", { minutes: Number(e.target.value) });
+                say(r, res.message); renderSleep(res.remaining); e.target.blur();
+            });
             const input = r.querySelector(".mr-volume input");
             input.addEventListener("input", () => {
                 remotes.forEach(o => { o.querySelector(".mr-volume input").value = input.value; o.querySelector(".mr-volume-value").textContent = `${input.value} %`; });

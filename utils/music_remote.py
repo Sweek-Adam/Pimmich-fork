@@ -116,3 +116,82 @@ def pop_command(max_age=30):
     except (OSError, ValueError):
         return None
     return data.get("action") if time.time() - data.get("at", 0) < max_age else None
+
+
+# --- Baisse pendant les vidéos, et arrêt de tout (minuteur de sommeil) ---
+
+DUCK_FILE = Path("/tmp/pimmich_duck.json")
+
+
+def _players():
+    if not shutil.which("playerctl"):
+        return []
+    result = _run("playerctl", "--list-all")
+    return [p.strip() for p in (result.stdout if result else "").splitlines() if p.strip() and "spotify" not in p.lower()]
+
+
+def duck(on, level=0.2):
+    """Baisse (on=True) ou rétablit le volume des musiques extérieures au diaporama (radio, Spotify sur le cadre, AirPlay, Bluetooth)."""
+    from utils import radio
+    if on:
+        saved = {}
+        volume = radio._ipc("get_property", "volume")
+        if isinstance(volume, (int, float)) and radio.playing():
+            saved["radio"] = volume
+            radio._ipc("set_property", "volume", volume * level)
+        for player in _players():
+            result = _run("playerctl", "--player", player, "volume")
+            try:
+                current = float(result.stdout.strip())
+            except (AttributeError, ValueError):
+                continue
+            saved[f"mpris:{player}"] = current
+            _run("playerctl", "--player", player, "volume", f"{current * level:.2f}")
+        if spotify.connected():
+            try:
+                state = spotify.player_state()
+                if state.get("playing") and state.get("on_frame") and state.get("volume") is not None:
+                    saved["spotify"] = state["volume"]
+                    spotify.player_action("volume", int(state["volume"] * level))
+            except Exception:
+                pass
+        DUCK_FILE.write_text(json.dumps(saved))
+        return saved
+    try:
+        saved = json.loads(DUCK_FILE.read_text())
+        DUCK_FILE.unlink(missing_ok=True)
+    except (OSError, ValueError):
+        return {}
+    for key, volume in saved.items():
+        if key == "radio":
+            radio._ipc("set_property", "volume", volume)
+        elif key.startswith("mpris:"):
+            _run("playerctl", "--player", key[6:], "volume", f"{volume:.2f}")
+        elif key == "spotify":
+            try:
+                spotify.player_action("volume", int(volume))
+            except Exception:
+                pass
+    return saved
+
+
+def pause_everything():
+    """Met en pause toutes les sources qui jouent (minuteur de sommeil)."""
+    from utils import radio
+    stopped = []
+    if radio.playing():
+        radio.set_paused(True)
+        now_playing.update("radio", state="paused")
+        stopped.append("radio")
+    for player in _players():
+        if _run("playerctl", "--player", player, "pause") is not None:
+            stopped.append(player)
+    if spotify.connected():
+        try:
+            spotify.control("pause")
+            stopped.append("spotify")
+        except Exception:
+            pass
+    control("pimmich", "pause")
+    stopped.append("pimmich")
+    return stopped

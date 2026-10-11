@@ -200,6 +200,7 @@ def configure():
         config["clock_background_enabled"] = 'clock_background_enabled' in request.form
         config["slideshow_video_enabled"] = 'slideshow_video_enabled' in request.form
         config["video_audio_enabled"] = 'video_audio_enabled' in request.form
+        config["music_duck_videos"] = 'music_duck_videos' in request.form
         config["video_hwdec_enabled"] = 'video_hwdec_enabled' in request.form
 
         config["telegram_boost_enabled"] = 'telegram_boost_enabled' in request.form

@@ -284,6 +284,25 @@ def music_remote_control_api():
     return jsonify({"success": True})
 
 
+@app.route('/api/music/sleep', methods=['GET', 'POST'])
+@login_required
+def music_sleep_api():
+    """Minuteur de sommeil : {"minutes": 30} pour arrêter la musique dans 30 min, {"minutes": 0} pour annuler."""
+    from utils import sleep_timer
+    if request.method == 'POST':
+        try:
+            minutes = int((request.get_json(silent=True) or {}).get("minutes", 0))
+        except (TypeError, ValueError):
+            return jsonify({"success": False, "message": _("Durée invalide.")}), 400
+        if minutes <= 0:
+            sleep_timer.cancel()
+            return jsonify({"success": True, "remaining": None, "message": _("Minuteur annulé.")})
+        sleep_timer.start(minutes)
+        return jsonify({"success": True, "remaining": sleep_timer.remaining(),
+                        "message": _("La musique s'arrêtera dans %(minutes)s min.", minutes=minutes)})
+    return jsonify({"success": True, "remaining": sleep_timer.remaining()})
+
+
 @app.route('/api/music/volume', methods=['POST'])
 @login_required
 def music_volume_api():

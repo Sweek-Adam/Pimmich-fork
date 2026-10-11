@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:52+0200\n"
+"POT-Creation-Date: 2026-10-11 09:57+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1397
+#: local_slideshow.py:1415
 msgid "Photos & messages"
 msgstr "Photos & messages"
 
-#: local_slideshow.py:1607
+#: local_slideshow.py:1625
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "%(num)d year ago"
 
-#: local_slideshow.py:1607
+#: local_slideshow.py:1625
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "%(num)d years ago"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "January"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "February"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "March"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "April"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "May"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "June"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "July"
 
-#: local_slideshow.py:1608 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "August"
 
-#: local_slideshow.py:1609 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "September"
 
-#: local_slideshow.py:1609 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "October"
 
-#: local_slideshow.py:1609 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "November"
 
-#: local_slideshow.py:1609 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "December"
 
-#: local_slideshow.py:1852
+#: local_slideshow.py:1870
 msgid "Données de marée non disponibles"
 msgstr "Tide data unavailable"
 
-#: local_slideshow.py:1935
+#: local_slideshow.py:1953
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Anniversary) %(num)d year ago"
 
-#: local_slideshow.py:1935
+#: local_slideshow.py:1953
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Anniversary) %(num)d years ago"
 
-#: local_slideshow.py:3109
+#: local_slideshow.py:3132
 msgid "Aucune photo trouvée."
 msgstr "No photos found."
 
-#: local_slideshow.py:3110
+#: local_slideshow.py:3133
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configure at: http://%(ip)s"
 
-#: local_slideshow.py:3111
+#: local_slideshow.py:3134
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credentials in credentials.json at the root of the SD card)"
 
-#: local_slideshow.py:3112
+#: local_slideshow.py:3135
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Screen resolution: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3113
+#: local_slideshow.py:3136
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Retrying in 60 seconds..."
 
-#: local_slideshow.py:3139
+#: local_slideshow.py:3162
 msgid "Scannez pour configurer"
 msgstr "Scan to configure"
 
@@ -348,7 +348,7 @@ msgstr "A guest"
 
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
-#: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_affichage.html.jinja:322
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
@@ -686,6 +686,41 @@ msgstr "Next"
 msgid "Volume du cadre"
 msgstr "Frame volume"
 
+#: templates/configure/_music_remote.html.jinja:22
+#: templates/configure/_music_remote.html.jinja:23
+msgid "Minuteur de sommeil"
+msgstr "Sleep timer"
+
+#: templates/configure/_music_remote.html.jinja:24
+#: templates/configure/_music_remote.html.jinja:83
+msgid "Arrêter la musique…"
+msgstr "Stop the music…"
+
+#: templates/configure/_music_remote.html.jinja:25
+msgid "dans 15 min"
+msgstr "in 15 min"
+
+#: templates/configure/_music_remote.html.jinja:26
+msgid "dans 30 min"
+msgstr "in 30 min"
+
+#: templates/configure/_music_remote.html.jinja:27
+msgid "dans 1 h"
+msgstr "in 1 h"
+
+#: templates/configure/_music_remote.html.jinja:28
+msgid "dans 1 h 30"
+msgstr "in 1 h 30"
+
+#: templates/configure/_music_remote.html.jinja:79
+msgid "Annuler le minuteur"
+msgstr "Cancel timer"
+
+#: templates/configure/_music_remote.html.jinja:79
+#, python-brace-format
+msgid "encore {n} min"
+msgstr "{n} min left"
+
 #: templates/configure/_playlist_builder.html.jinja:6
 #: templates/configure/_smart_albums.html.jinja:13
 #: templates/configure/tab_accueil.html.jinja:84
@@ -937,7 +972,7 @@ msgid "Adresse du flux RSS du podcast"
 msgstr "Podcast RSS feed address"
 
 #: templates/configure/_son_radio.html.jinja:20
-#: templates/configure/tab_affichage.html.jinja:315
+#: templates/configure/tab_affichage.html.jinja:321
 #: templates/configure/tab_heure.html.jinja:19
 msgid "Ajouter"
 msgstr "Add"
@@ -1244,7 +1279,7 @@ msgstr "No settings found."
 msgid "Enregistrement…"
 msgstr "Saving…"
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:282
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:283
 msgid "Enregistré"
 msgstr "Saved"
 
@@ -2522,11 +2557,15 @@ msgstr "Jack 3.5mm (headphone)"
 msgid "Volume :"
 msgstr "Volume :"
 
-#: templates/configure/tab_affichage.html.jinja:288
+#: templates/configure/tab_affichage.html.jinja:286
+msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
+msgstr "Lower the music during videos (it comes back afterwards)"
+
+#: templates/configure/tab_affichage.html.jinja:294
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Power management (Connected Socket)"
 
-#: templates/configure/tab_affichage.html.jinja:290
+#: templates/configure/tab_affichage.html.jinja:296
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
 " une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
@@ -2536,15 +2575,15 @@ msgstr ""
 "outlet (Wi-Fi) to turn off its power. Pimmich will send a simple HTTP "
 "request to the URLs you specify."
 
-#: templates/configure/tab_affichage.html.jinja:291
+#: templates/configure/tab_affichage.html.jinja:297
 msgid "Exemples d'URLs :"
 msgstr "Examples of URLs:"
 
-#: templates/configure/tab_affichage.html.jinja:302
+#: templates/configure/tab_affichage.html.jinja:308
 msgid "Réveil à l'arrivée d'un membre de la famille"
 msgstr "Wake up when a family member comes home"
 
-#: templates/configure/tab_affichage.html.jinja:303
+#: templates/configure/tab_affichage.html.jinja:309
 msgid ""
 "Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi "
 "après une absence, le cadre se réveille (30 minutes, même la nuit), "
@@ -2554,11 +2593,11 @@ msgstr ""
 " the frame wakes up (30 minutes, even at night), shows “Welcome home” and"
 " can start their playlist."
 
-#: templates/configure/tab_affichage.html.jinja:305
+#: templates/configure/tab_affichage.html.jinja:311
 msgid "Ajouter un téléphone vu sur le Wi-Fi"
 msgstr "Add a phone seen on the Wi-Fi"
 
-#: templates/configure/tab_affichage.html.jinja:306
+#: templates/configure/tab_affichage.html.jinja:312
 msgid ""
 "Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
 "Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
@@ -2568,37 +2607,37 @@ msgstr ""
 " off “private / random MAC address” for this network, otherwise the "
 "address changes."
 
-#: templates/configure/tab_affichage.html.jinja:308
+#: templates/configure/tab_affichage.html.jinja:314
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
 msgid "Actualiser"
 msgstr "Refresh"
 
-#: templates/configure/tab_affichage.html.jinja:315
+#: templates/configure/tab_affichage.html.jinja:321
 msgid "à la maison"
 msgstr "at home"
 
-#: templates/configure/tab_affichage.html.jinja:315
+#: templates/configure/tab_affichage.html.jinja:321
 msgid "absent"
 msgstr "away"
 
-#: templates/configure/tab_affichage.html.jinja:315
+#: templates/configure/tab_affichage.html.jinja:321
 msgid "Prénom"
 msgstr "First name"
 
-#: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_affichage.html.jinja:322
 msgid "Pas de playlist"
 msgstr "No playlist"
 
-#: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_affichage.html.jinja:322
 msgid "Aucun appareil détecté."
 msgstr "No device detected."
 
-#: templates/configure/tab_affichage.html.jinja:366
+#: templates/configure/tab_affichage.html.jinja:372
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Control the TV via HDMI-CEC"
 
-#: templates/configure/tab_affichage.html.jinja:367
+#: templates/configure/tab_affichage.html.jinja:373
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
 "veille avec lui. Activez aussi « HDMI-CEC » (Anynet+, Bravia Sync, "
@@ -2608,43 +2647,43 @@ msgstr ""
 "goes to standby with it. Also enable “HDMI-CEC” (Anynet+, Bravia Sync, "
 "SimpLink...) in the TV settings."
 
-#: templates/configure/tab_affichage.html.jinja:372
+#: templates/configure/tab_affichage.html.jinja:378
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr "Enable smart plug control"
 
-#: templates/configure/tab_affichage.html.jinja:379
+#: templates/configure/tab_affichage.html.jinja:385
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr "Plug status: Unknown"
 
-#: templates/configure/tab_affichage.html.jinja:386
+#: templates/configure/tab_affichage.html.jinja:392
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr "URL to turn the plug ON:"
 
-#: templates/configure/tab_affichage.html.jinja:395
-#: templates/configure/tab_affichage.html.jinja:408
+#: templates/configure/tab_affichage.html.jinja:401
+#: templates/configure/tab_affichage.html.jinja:414
 #: templates/configure/tab_notifications.html.jinja:14
 msgid "Tester"
 msgstr "Tester"
 
-#: templates/configure/tab_affichage.html.jinja:399
+#: templates/configure/tab_affichage.html.jinja:405
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr "URL to turn the plug OFF:"
 
-#: templates/configure/tab_affichage.html.jinja:412
+#: templates/configure/tab_affichage.html.jinja:418
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr "Delay after power-on (seconds):"
 
-#: templates/configure/tab_affichage.html.jinja:417
+#: templates/configure/tab_affichage.html.jinja:423
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
@@ -2652,27 +2691,27 @@ msgstr ""
 "Time to wait for the screen to initialize before forcing the resolution. "
 "Increase if the resolution is still incorrect."
 
-#: templates/configure/tab_affichage.html.jinja:420
+#: templates/configure/tab_affichage.html.jinja:426
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr "Status URL (optional):"
 
-#: templates/configure/tab_affichage.html.jinja:426
+#: templates/configure/tab_affichage.html.jinja:432
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "For Home Assistant, use the States API URL:"
 
-#: templates/configure/tab_affichage.html.jinja:432
+#: templates/configure/tab_affichage.html.jinja:438
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Home Assistant access token (if HA status URL):"
 
-#: templates/configure/tab_affichage.html.jinja:440
+#: templates/configure/tab_affichage.html.jinja:446
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "Show/Hide token"
 
-#: templates/configure/tab_affichage.html.jinja:445
+#: templates/configure/tab_affichage.html.jinja:451
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Create a “Long-Term Access Token” in your Home Assistant profile."
 
@@ -6834,12 +6873,12 @@ msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
 
-#: web/routes_config.py:249
+#: web/routes_config.py:250
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:284
+#: web/routes_config.py:285
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -7029,7 +7068,7 @@ msgstr "Preparing the layout... it will appear in a few seconds."
 msgid "Musique introuvable."
 msgstr "Music not found."
 
-#: web/routes_home.py:202 web/routes_music.py:293
+#: web/routes_home.py:202 web/routes_music.py:312
 msgid "Volume invalide."
 msgstr "Invalid volume."
 
@@ -7368,43 +7407,56 @@ msgstr "Control playback from the phone."
 msgid "Aucune musique en cours."
 msgstr "No music playing."
 
-#: web/routes_music.py:295
+#: web/routes_music.py:296
+msgid "Durée invalide."
+msgstr "Invalid duration."
+
+#: web/routes_music.py:299
+msgid "Minuteur annulé."
+msgstr "Timer cancelled."
+
+#: web/routes_music.py:302
+#, python-format
+msgid "La musique s'arrêtera dans %(minutes)s min."
+msgstr "The music will stop in %(minutes)s min."
+
+#: web/routes_music.py:314
 msgid "Le son du cadre ne répond pas."
 msgstr "The frame's sound isn't responding."
 
-#: web/routes_music.py:321
+#: web/routes_music.py:340
 msgid "L'annuaire des radios ne répond pas."
 msgstr "The radio directory isn't responding."
 
-#: web/routes_music.py:332 web/routes_music.py:354
+#: web/routes_music.py:351 web/routes_music.py:373
 msgid "Adresse de radio invalide."
 msgstr "Invalid radio address."
 
-#: web/routes_music.py:334
+#: web/routes_music.py:353
 msgid "Lecteur audio (mpv) introuvable sur le cadre."
 msgstr "Audio player (mpv) not found on the frame."
 
-#: web/routes_music.py:335
+#: web/routes_music.py:354
 msgid "Radio lancée sur le cadre."
 msgstr "Radio playing on the frame."
 
-#: web/routes_music.py:343
+#: web/routes_music.py:362
 msgid "Radio arrêtée."
 msgstr "Radio stopped."
 
-#: web/routes_music.py:377
+#: web/routes_music.py:396
 msgid "Flux de podcast introuvable ou invalide."
 msgstr "Podcast feed not found or invalid."
 
-#: web/routes_music.py:391
+#: web/routes_music.py:410
 msgid "Podcast inconnu."
 msgstr "Unknown podcast."
 
-#: web/routes_music.py:396
+#: web/routes_music.py:415
 msgid "Épisode introuvable."
 msgstr "Episode not found."
 
-#: web/routes_music.py:397
+#: web/routes_music.py:416
 #, python-format
 msgid "Dernier épisode lancé : %(title)s"
 msgstr "Latest episode playing: %(title)s"

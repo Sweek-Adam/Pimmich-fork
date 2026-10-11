@@ -256,10 +256,28 @@ def play_background_music(filename):
 
 VIDEO_EXTENSIONS = ('.mp4', '.mov', '.avi', '.mkv')
 
+def duck_music(on, config, previous=None):
+    """Baisse la musique pendant une vidéo (musique du diaporama et sources extérieures), puis la rétablit."""
+    level = max(0, min(100, int(config.get("music_duck_percent", 20)))) / 100
+    try:
+        if on:
+            volume = pygame.mixer.music.get_volume() if pygame.mixer.get_init() else None
+            if volume is not None:
+                pygame.mixer.music.set_volume(volume * level)
+            threading.Thread(target=lambda: __import__("utils.music_remote", fromlist=["duck"]).duck(True, level), daemon=True).start()
+            return volume if volume is not None else -1  # -1 : rien à rétablir côté diaporama, mais les autres sources oui
+        if previous is not None and previous >= 0 and pygame.mixer.get_init():
+            pygame.mixer.music.set_volume(previous)
+        threading.Thread(target=lambda: __import__("utils.music_remote", fromlist=["duck"]).duck(False), daemon=True).start()
+    except Exception as e:
+        logger.debug(f"Baisse de la musique : {e}")
+    return None
+
+
 def reinit_pygame():
     """Quitte et réinitialise complètement Pygame et les ressources associées."""
     logger.debug(f"📸 Réinitialisation complète de Pygame...")
-    pygame.quit()
+    pygame.display.quit()  # le son (musique de fond) n'est pas coupé
     pygame.display.init()
     pygame.font.init()
 
@@ -2585,11 +2603,14 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
     # de libérer la surface d'affichage.
     if pi_model in [1, 2, 3, 4, 5]:
         logger.info(f"📸 [Pi {pi_model}] Closing Pygame to release graphics overlay context for mpv.")
-        pygame.quit()
+        pygame.display.quit()  # l'affichage seulement : la musique de fond continue pendant la vidéo
         time.sleep(0.8)
     elif audio_enabled:
         if pygame.mixer.get_init(): pygame.mixer.quit()
 
+    ducked = None
+    if audio_enabled and config.get("music_duck_videos", True):  # le son de la vidéo passe devant la musique
+        ducked = duck_music(True, config)
     try:
         # 1. Fondu au noir avant de lancer la vidéo (Uniquement si Pygame n'est pas déjà fermé)
         if previous_surface and pi_model not in [1, 2, 3, 4, 5]:
@@ -2757,6 +2778,8 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
         # Relancer la musique de fond de la playlist si nécessaire
         if _current_background_music and pi_model not in [1, 2, 3, 4, 5]:
             play_background_music(_current_background_music)
+        if ducked is not None:
+            duck_music(False, config, ducked)
 
 
 # Boucle principale du diaporama

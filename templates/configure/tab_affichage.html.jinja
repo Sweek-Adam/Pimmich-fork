@@ -280,6 +280,12 @@
                             value="{{ config.get('video_audio_volume', 100) }}" class="w-16 ml-2 text-center">
                         <span class="ml-1">%</span>
                     </div>
+                    <div style="margin-top: 12px;">
+                        <label>
+                            <input type="checkbox" name="music_duck_videos" {% if config.get('music_duck_videos', True) %}checked{% endif %}>
+                            <span class="ml-2">{{ _("Baisser la musique pendant les vidéos (elle revient ensuite)") }}</span>
+                        </label>
+                    </div>
                 </fieldset>
 
                 <!-- NOUVEAU BLOC POUR LA PRISE CONNECTÉE -->
