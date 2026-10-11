@@ -115,18 +115,36 @@ def _download_cover(urls, track_id):
         return None
 
 
+def _int(value):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def position(entry, now=None):
+    """Position de lecture estimée (secondes) d'un morceau en cours, si la source la donne (Spotify), sinon None."""
+    if not entry or entry.get("position_ms") is None or not entry.get("position_at"):
+        return None
+    elapsed = ((now or time.time()) - entry["position_at"]) if entry.get("state") == "playing" else 0
+    return entry["position_ms"] / 1000 + elapsed
+
+
 def handle_librespot_event(env):
     """Traduit un événement de librespot (variables d'environnement) en état « en cours de lecture »."""
     event = env.get("PLAYER_EVENT", "")
+    position = _int(env.get("POSITION_MS"))
     if event == "track_changed":
         artists = env.get("ARTISTS") or env.get("SHOW_NAME") or ""
         update("spotify", title=env.get("NAME", ""), artist=", ".join(a for a in artists.splitlines() if a),
                album=env.get("ALBUM", ""), cover=_download_cover((env.get("COVERS") or "").split(), env.get("TRACK_ID", "")),
-               changed=time.time())
+               duration_ms=_int(env.get("DURATION_MS")), position_ms=0, position_at=time.time(), changed=time.time())
     elif event in ("playing", "started"):
-        update("spotify", state="playing")
+        update("spotify", state="playing", **({"position_ms": position, "position_at": time.time()} if position is not None else {}))
     elif event == "paused":
-        update("spotify", state="paused")
+        update("spotify", state="paused", **({"position_ms": position, "position_at": time.time()} if position is not None else {}))
+    elif event in ("seeked", "position_correction") and position is not None:
+        update("spotify", position_ms=position, position_at=time.time())  # pour le karaoké
     elif event in ("stopped", "session_disconnected", "unavailable"):
         update("spotify", state="stopped")
 

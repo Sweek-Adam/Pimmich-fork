@@ -430,6 +430,63 @@ def _long_date(now, config):
         return now.strftime("%d/%m/%Y")
 
 
+_jukebox = {"skip": None}
+
+
+def jukebox_track(config):
+    """Morceau à montrer en grand (mode jukebox ou karaoké), ou None : musique extérieure qui joue."""
+    if config.get("jukebox_mode", "off") not in ("jukebox", "karaoke"):
+        return None
+    try:
+        from utils import now_playing
+        info = now_playing.current(("pimmich",))
+    except Exception:
+        return None
+    if not info or info.get("state") != "playing" or not info.get("title"):
+        return None
+    if _jukebox["skip"] == (info.get("title"), info.get("artist")):
+        return None  # « photo suivante » demandée pendant ce morceau : retour aux photos jusqu'au suivant
+    return info
+
+
+def run_jukebox(screen, screen_width, screen_height, config):
+    """Pochette en grand (et paroles en karaoké) tant que la musique joue."""
+    from utils import jukebox, lyrics, now_playing
+    global next_photo_requested, previous_photo_requested
+    shown_key, background, lines, last_render = None, None, [], 0
+    state = {"lines": []}
+    logger.info("🎵 Mode jukebox.")
+    while True:
+        config = load_config()
+        info = jukebox_track(config)
+        if info is None or not is_within_active_hours(config):
+            return
+        handle_slideshow_events(screen_width)
+        if next_photo_requested or previous_photo_requested:
+            next_photo_requested = previous_photo_requested = False
+            _jukebox["skip"] = (info.get("title"), info.get("artist"))
+            return
+        key = (info.get("title"), info.get("artist"), info.get("cover"))
+        mode = config.get("jukebox_mode")
+        if key != shown_key:
+            shown_key, last_render = key, 0
+            background = jukebox.background(info, screen_width, screen_height)
+            state["lines"] = []
+            if mode == "karaoke":
+                def load(title=info.get("title"), artist=info.get("artist", ""), album=info.get("album", ""),
+                         duration=(info.get("duration_ms") or 0) / 1000):
+                    state["lines"] = lyrics.fetch(title, artist, album, duration or None)
+                threading.Thread(target=load, daemon=True, name="lyrics").start()
+        t = now_playing.position(info)
+        interval = 0.25 if mode == "karaoke" and state["lines"] and t is not None else 1.0
+        if time.time() - last_render >= interval:
+            image = jukebox.frame(background, info, screen_width, screen_height, mode, state["lines"] if t is not None else None, t)
+            screen.blit(pygame.image.frombytes(image.tobytes(), image.size, "RGB"), (0, 0))
+            pygame.display.flip()
+            last_render = time.time()
+        time.sleep(0.05)
+
+
 def run_night_clock(screen, screen_width, screen_height, config):
     """Horloge de nuit : l'heure seule, en grand et en couleur douce, jusqu'au retour des heures d'affichage."""
     from utils import night
@@ -2944,6 +3001,12 @@ def start_slideshow():
                     previous_photo_surface = None
                     continue
             update_brightness(config)
+
+            # Musique en cours et mode jukebox / karaoké : la pochette (et les paroles) à la place des photos
+            if jukebox_track(config):
+                run_jukebox(screen, SCREEN_WIDTH, SCREEN_HEIGHT, config)
+                previous_photo_surface = None
+                continue
 
             # --- CORRECTION: Charger les paramètres de transition ici pour qu'ils soient toujours définis ---
             # Auparavant, ils n'étaient définis que si aucune playlist personnalisée n'était utilisée.

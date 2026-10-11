@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:20+0200\n"
+"POT-Creation-Date: 2026-10-11 10:24+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1415
+#: local_slideshow.py:1472
 msgid "Photos & messages"
 msgstr "Photos & messages"
 
-#: local_slideshow.py:1625
+#: local_slideshow.py:1682
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "%(num)d year ago"
 
-#: local_slideshow.py:1625
+#: local_slideshow.py:1682
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "%(num)d years ago"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "January"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "February"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "March"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "April"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "May"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "June"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "July"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "August"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "September"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "October"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "November"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "December"
 
-#: local_slideshow.py:1870
+#: local_slideshow.py:1927
 msgid "Données de marée non disponibles"
 msgstr "Tide data unavailable"
 
-#: local_slideshow.py:1953
+#: local_slideshow.py:2010
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Anniversary) %(num)d year ago"
 
-#: local_slideshow.py:1953
+#: local_slideshow.py:2010
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Anniversary) %(num)d years ago"
 
-#: local_slideshow.py:3132
+#: local_slideshow.py:3195
 msgid "Aucune photo trouvée."
 msgstr "No photos found."
 
-#: local_slideshow.py:3133
+#: local_slideshow.py:3196
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configure at: http://%(ip)s"
 
-#: local_slideshow.py:3134
+#: local_slideshow.py:3197
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credentials in credentials.json at the root of the SD card)"
 
-#: local_slideshow.py:3135
+#: local_slideshow.py:3198
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Screen resolution: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3136
+#: local_slideshow.py:3199
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Retrying in 60 seconds..."
 
-#: local_slideshow.py:3162
+#: local_slideshow.py:3225
 msgid "Scannez pour configurer"
 msgstr "Scan to configure"
 
@@ -4977,7 +4977,7 @@ msgstr "Composition (starts here, being prepared)"
 msgid "Afficher maintenant"
 msgstr "Show now"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:218
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:221
 msgid "Musique du diaporama"
 msgstr "Slideshow music"
 
@@ -5073,11 +5073,36 @@ msgstr ""
 "Spotify and AirPlay. While Spotify or AirPlay is playing, the slideshow "
 "music pauses."
 
-#: templates/configure/tab_son.html.jinja:129
+#: templates/configure/tab_son.html.jinja:122
+msgid "Pendant Spotify, AirPlay, Bluetooth ou la radio :"
+msgstr "While Spotify, AirPlay, Bluetooth or the radio plays:"
+
+#: templates/configure/tab_son.html.jinja:124
+msgid "Les photos continuent"
+msgstr "Photos keep going"
+
+#: templates/configure/tab_son.html.jinja:125
+msgid "Jukebox : la pochette en grand à l'écran"
+msgstr "Jukebox: the album cover full screen"
+
+#: templates/configure/tab_son.html.jinja:126
+msgid "Karaoké : les paroles défilent en rythme (Spotify)"
+msgstr "Karaoke: lyrics scroll in time (Spotify)"
+
+#: templates/configure/tab_son.html.jinja:128
+msgid ""
+"Paroles synchronisées fournies par LRCLIB (le titre et l'artiste du "
+"morceau lui sont envoyés). « Photo suivante » revient aux photos jusqu'au"
+" morceau suivant."
+msgstr ""
+"Synced lyrics provided by LRCLIB (the song title and artist are sent to "
+"it). “Next photo” goes back to photos until the next song."
+
+#: templates/configure/tab_son.html.jinja:136
 msgid "Le cadre comme enceinte"
 msgstr "The frame as a speaker"
 
-#: templates/configure/tab_son.html.jinja:133
+#: templates/configure/tab_son.html.jinja:140
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -5085,7 +5110,7 @@ msgstr ""
 "In the Spotify app, choose “Cadre photo” as the device: the music plays "
 "through the frame's screen. Spotify Premium account required."
 
-#: templates/configure/tab_son.html.jinja:137
+#: templates/configure/tab_son.html.jinja:144
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -5093,7 +5118,7 @@ msgstr ""
 "From an iPhone, iPad or Mac, send audio from any app (Deezer, Apple "
 "Music, YouTube...) to “Cadre photo”."
 
-#: templates/configure/tab_son.html.jinja:142
+#: templates/configure/tab_son.html.jinja:149
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -5104,35 +5129,35 @@ msgstr ""
 " reconnects by itself afterwards. The frame only accepts a new device for"
 " 3 minutes after you press “Pair a phone”."
 
-#: templates/configure/tab_son.html.jinja:144
+#: templates/configure/tab_son.html.jinja:151
 msgid "Associer un téléphone"
 msgstr "Pair a phone"
 
-#: templates/configure/tab_son.html.jinja:150
+#: templates/configure/tab_son.html.jinja:157
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "To enable these features, run once on the Raspberry Pi:"
 
-#: templates/configure/tab_son.html.jinja:159
+#: templates/configure/tab_son.html.jinja:166
 msgid "Actif"
 msgstr "Active"
 
-#: templates/configure/tab_son.html.jinja:159
+#: templates/configure/tab_son.html.jinja:166
 msgid "Non installé"
 msgstr "Not installed"
 
-#: templates/configure/tab_son.html.jinja:203
+#: templates/configure/tab_son.html.jinja:212
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Visible: choose “Cadre photo” on the phone"
 
-#: templates/configure/tab_son.html.jinja:203
+#: templates/configure/tab_son.html.jinja:212
 msgid "connecté"
 msgstr "connected"
 
-#: templates/configure/tab_son.html.jinja:204
+#: templates/configure/tab_son.html.jinja:213
 msgid "Oublier"
 msgstr "Forget"
 
-#: templates/configure/tab_son.html.jinja:204
+#: templates/configure/tab_son.html.jinja:213
 msgid "Aucun téléphone associé."
 msgstr "No phone paired."
 
@@ -7112,67 +7137,67 @@ msgstr "Unknown layout."
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Preparing the layout... it will appear in a few seconds."
 
-#: web/routes_home.py:198
+#: web/routes_home.py:199
 msgid "Musique introuvable."
 msgstr "Music not found."
 
-#: web/routes_home.py:202 web/routes_music.py:331
+#: web/routes_home.py:203 web/routes_music.py:331
 msgid "Volume invalide."
 msgstr "Invalid volume."
 
-#: web/routes_home.py:206 web/routes_system.py:653
+#: web/routes_home.py:207 web/routes_system.py:653
 msgid "Réglage invalide."
 msgstr "Invalid setting."
 
-#: web/routes_home.py:213
+#: web/routes_home.py:216
 msgid "Réglages du son enregistrés."
 msgstr "Sound settings saved."
 
-#: web/routes_home.py:270
+#: web/routes_home.py:273
 msgid "Adresse d'appareil invalide."
 msgstr "Invalid device address."
 
-#: web/routes_home.py:276
+#: web/routes_home.py:279
 msgid "Réglages de présence enregistrés."
 msgstr "Presence settings saved."
 
-#: web/routes_home.py:302
+#: web/routes_home.py:305
 msgid "Adresse du serveur ntfy invalide."
 msgstr "Invalid ntfy server address."
 
-#: web/routes_home.py:313
+#: web/routes_home.py:316
 msgid "Notifications enregistrées."
 msgstr "Notifications saved."
 
-#: web/routes_home.py:321
+#: web/routes_home.py:324
 msgid "Pimmich"
 msgstr "Pimmich"
 
-#: web/routes_home.py:321
+#: web/routes_home.py:324
 msgid "Ceci est une notification de test du cadre photo."
 msgstr "This is a test notification from the photo frame."
 
-#: web/routes_home.py:322
+#: web/routes_home.py:325
 msgid "Activez d'abord les notifications."
 msgstr "Enable notifications first."
 
-#: web/routes_home.py:323
+#: web/routes_home.py:326
 msgid "Notification de test envoyée."
 msgstr "Test notification sent."
 
-#: web/routes_home.py:333
+#: web/routes_home.py:336
 msgid "Nouveau canal créé : abonnez de nouveau vos téléphones."
 msgstr "New channel created: subscribe your phones again."
 
-#: web/routes_home.py:373
+#: web/routes_home.py:376
 msgid "Adresse d'agenda invalide (elle commence par https:// ou webcal://)."
 msgstr "Invalid calendar address (it starts with https:// or webcal://)."
 
-#: web/routes_home.py:383
+#: web/routes_home.py:386
 msgid "Date invalide."
 msgstr "Invalid date."
 
-#: web/routes_home.py:389
+#: web/routes_home.py:392
 msgid "Agenda enregistré."
 msgstr "Calendar saved."
 

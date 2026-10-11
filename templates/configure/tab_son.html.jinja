@@ -119,6 +119,13 @@
                         </div>
                     </div>
                     <p class="text-sm text-gray-600 mt-3">{{ _("Un petit encart discret (pochette, titre, artiste) pour la musique du diaporama, Spotify et AirPlay. Pendant que Spotify ou AirPlay joue, la musique du diaporama se met en pause.") }}</p>
+                    <label for="np-jukebox" class="block mt-3">{{ _("Pendant Spotify, AirPlay, Bluetooth ou la radio :") }}</label>
+                    <select id="np-jukebox" class="w-full">
+                        <option value="off">{{ _("Les photos continuent") }}</option>
+                        <option value="jukebox">{{ _("Jukebox : la pochette en grand à l'écran") }}</option>
+                        <option value="karaoke">{{ _("Karaoké : les paroles défilent en rythme (Spotify)") }}</option>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">{{ _("Paroles synchronisées fournies par LRCLIB (le titre et l'artiste du morceau lui sont envoyés). « Photo suivante » revient aux photos jusqu'au morceau suivant.") }}</p>
                 </section>
 
                 {% include 'configure/_son_radio.html.jinja' %}
@@ -172,14 +179,16 @@
                             }
                             $("receivers-install").classList.toggle("hidden", Object.values(data.receivers).every(Boolean));
                             $("np-display").value = data.now_playing_display; $("np-position").value = data.now_playing_position;
+                            $("np-jukebox").value = data.jukebox_mode || "off";
                         }
                         async function saveDisplay() {
                             const data = await (await fetch('/api/sound', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ now_playing_display: $("np-display").value, now_playing_position: $("np-position").value }) })).json();
+                                body: JSON.stringify({ now_playing_display: $("np-display").value, now_playing_position: $("np-position").value, jukebox_mode: $("np-jukebox").value }) })).json();
                             if (typeof showToast === "function") showToast(data.message);
                         }
                         $("np-display").addEventListener("change", saveDisplay);
                         $("np-position").addEventListener("change", saveDisplay);
+                        $("np-jukebox").addEventListener("change", saveDisplay);
                         function preview() {
                             const file = $("sound-music").value;
                             $("sound-preview").classList.toggle("hidden", !file);

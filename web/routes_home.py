@@ -184,6 +184,7 @@ def sound_settings_api():
     return jsonify({"success": True, "background_music": config.get("background_music", ""), "music_volume": config.get("music_volume", 80),
                     "now_playing_display": config.get("now_playing_display", "change"),
                     "now_playing_position": config.get("now_playing_position", "bottom_left"),
+                    "jukebox_mode": config.get("jukebox_mode", "off"),
                     "files": files, "receivers": {"spotify": _service_active("pimmich-spotify"), "airplay": _service_active("pimmich-airplay"),
                                   "bluetooth": _service_active("pimmich-bluetooth")}})
 
@@ -207,6 +208,8 @@ def save_sound_settings_api():
     music_changed = (Path(music).name if music else "", volume) != (config.get("background_music", ""), config.get("music_volume", 80))
     config["background_music"], config["music_volume"] = Path(music).name if music else "", volume
     config["now_playing_display"], config["now_playing_position"] = display, position
+    if data.get("jukebox_mode") in ("off", "jukebox", "karaoke"):
+        config["jukebox_mode"] = data["jukebox_mode"]
     save_config(config)
     if music_changed:  # l'affichage du lecteur est relu en direct par le diaporama
         restart_slideshow_process()

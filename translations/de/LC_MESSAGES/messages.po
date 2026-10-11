@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:20+0200\n"
+"POT-Creation-Date: 2026-10-11 10:24+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1415
+#: local_slideshow.py:1472
 msgid "Photos & messages"
 msgstr "Fotos & Nachrichten"
 
-#: local_slideshow.py:1625
+#: local_slideshow.py:1682
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "Vor %(num)d Jahr"
 
-#: local_slideshow.py:1625
+#: local_slideshow.py:1682
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "Vor %(num)d Jahren"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "Januar"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "Februar"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "März"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "April"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "Mai"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "Juni"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "Juli"
 
-#: local_slideshow.py:1626 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1683 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "August"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "September"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "Oktober"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "November"
 
-#: local_slideshow.py:1627 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1684 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "Dezember"
 
-#: local_slideshow.py:1870
+#: local_slideshow.py:1927
 msgid "Données de marée non disponibles"
 msgstr "Gezeitendaten nicht verfügbar"
 
-#: local_slideshow.py:1953
+#: local_slideshow.py:2010
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Jahrestag) Vor %(num)d Jahr"
 
-#: local_slideshow.py:1953
+#: local_slideshow.py:2010
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Jahrestag) Vor %(num)d Jahren"
 
-#: local_slideshow.py:3132
+#: local_slideshow.py:3195
 msgid "Aucune photo trouvée."
 msgstr "Keine Fotos gefunden."
 
-#: local_slideshow.py:3133
+#: local_slideshow.py:3196
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Konfigurieren unter: http://%(ip)s"
 
-#: local_slideshow.py:3134
+#: local_slideshow.py:3197
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Zugangsdaten in credentials.json im Stammverzeichnis der SD-Karte)"
 
-#: local_slideshow.py:3135
+#: local_slideshow.py:3198
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Bildschirmauflösung: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3136
+#: local_slideshow.py:3199
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Neuer Versuch in 60 Sekunden..."
 
-#: local_slideshow.py:3162
+#: local_slideshow.py:3225
 msgid "Scannez pour configurer"
 msgstr "Zum Konfigurieren scannen"
 
@@ -5029,7 +5029,7 @@ msgstr "Komposition (beginnt hier, in Vorbereitung)"
 msgid "Afficher maintenant"
 msgstr "Jetzt anzeigen"
 
-#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:218
+#: templates/configure/tab_son.html.jinja:3 web/routes_home.py:221
 msgid "Musique du diaporama"
 msgstr "Diashow-Musik"
 
@@ -5125,11 +5125,37 @@ msgstr ""
 "Musik, Spotify und AirPlay. Während Spotify oder AirPlay spielt, pausiert"
 " die Diashow-Musik."
 
-#: templates/configure/tab_son.html.jinja:129
+#: templates/configure/tab_son.html.jinja:122
+msgid "Pendant Spotify, AirPlay, Bluetooth ou la radio :"
+msgstr "Während Spotify, AirPlay, Bluetooth oder Radio läuft:"
+
+#: templates/configure/tab_son.html.jinja:124
+msgid "Les photos continuent"
+msgstr "Die Fotos laufen weiter"
+
+#: templates/configure/tab_son.html.jinja:125
+msgid "Jukebox : la pochette en grand à l'écran"
+msgstr "Jukebox: das Cover groß auf dem Bildschirm"
+
+#: templates/configure/tab_son.html.jinja:126
+msgid "Karaoké : les paroles défilent en rythme (Spotify)"
+msgstr "Karaoke: Der Text läuft im Takt mit (Spotify)"
+
+#: templates/configure/tab_son.html.jinja:128
+msgid ""
+"Paroles synchronisées fournies par LRCLIB (le titre et l'artiste du "
+"morceau lui sont envoyés). « Photo suivante » revient aux photos jusqu'au"
+" morceau suivant."
+msgstr ""
+"Synchronisierte Texte von LRCLIB (Titel und Interpret werden dorthin "
+"gesendet). „Nächstes Foto“ kehrt bis zum nächsten Lied zu den Fotos "
+"zurück."
+
+#: templates/configure/tab_son.html.jinja:136
 msgid "Le cadre comme enceinte"
 msgstr "Der Rahmen als Lautsprecher"
 
-#: templates/configure/tab_son.html.jinja:133
+#: templates/configure/tab_son.html.jinja:140
 msgid ""
 "Dans l'application Spotify, choisissez « Cadre photo » comme appareil : "
 "la musique sort par l'écran du cadre. Compte Spotify Premium nécessaire."
@@ -5137,7 +5163,7 @@ msgstr ""
 "Wähle in der Spotify-App „Cadre photo“ als Gerät: Die Musik kommt aus dem"
 " Bildschirm des Rahmens. Spotify-Premium-Konto erforderlich."
 
-#: templates/configure/tab_son.html.jinja:137
+#: templates/configure/tab_son.html.jinja:144
 msgid ""
 "Depuis un iPhone, un iPad ou un Mac, envoyez le son de n'importe quelle "
 "application (Deezer, Apple Music, YouTube...) vers « Cadre photo »."
@@ -5145,7 +5171,7 @@ msgstr ""
 "Sende von einem iPhone, iPad oder Mac den Ton jeder beliebigen App "
 "(Deezer, Apple Music, YouTube...) an „Cadre photo“."
 
-#: templates/configure/tab_son.html.jinja:142
+#: templates/configure/tab_son.html.jinja:149
 msgid ""
 "Pour les téléphones Android (Deezer, YouTube Music...) : associez une "
 "fois le téléphone, il se reconnecte ensuite tout seul. Le cadre n'accepte"
@@ -5156,35 +5182,35 @@ msgstr ""
 "einmal, danach verbindet es sich von selbst. Der Rahmen akzeptiert ein "
 "neues Gerät nur 3 Minuten lang nach einem Tippen auf „Telefon koppeln“."
 
-#: templates/configure/tab_son.html.jinja:144
+#: templates/configure/tab_son.html.jinja:151
 msgid "Associer un téléphone"
 msgstr "Telefon koppeln"
 
-#: templates/configure/tab_son.html.jinja:150
+#: templates/configure/tab_son.html.jinja:157
 msgid "Pour activer ces fonctions, lancez une fois sur le Raspberry Pi :"
 msgstr "Um diese Funktionen zu aktivieren, führe einmal auf dem Raspberry Pi aus:"
 
-#: templates/configure/tab_son.html.jinja:159
+#: templates/configure/tab_son.html.jinja:166
 msgid "Actif"
 msgstr "Aktiv"
 
-#: templates/configure/tab_son.html.jinja:159
+#: templates/configure/tab_son.html.jinja:166
 msgid "Non installé"
 msgstr "Nicht installiert"
 
-#: templates/configure/tab_son.html.jinja:203
+#: templates/configure/tab_son.html.jinja:212
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Sichtbar: Wählen Sie „Cadre photo“ auf dem Telefon"
 
-#: templates/configure/tab_son.html.jinja:203
+#: templates/configure/tab_son.html.jinja:212
 msgid "connecté"
 msgstr "verbunden"
 
-#: templates/configure/tab_son.html.jinja:204
+#: templates/configure/tab_son.html.jinja:213
 msgid "Oublier"
 msgstr "Entfernen"
 
-#: templates/configure/tab_son.html.jinja:204
+#: templates/configure/tab_son.html.jinja:213
 msgid "Aucun téléphone associé."
 msgstr "Kein Telefon gekoppelt."
 
@@ -7201,67 +7227,67 @@ msgstr "Unbekannte Anordnung."
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Layout wird vorbereitet... es erscheint in wenigen Sekunden."
 
-#: web/routes_home.py:198
+#: web/routes_home.py:199
 msgid "Musique introuvable."
 msgstr "Musik nicht gefunden."
 
-#: web/routes_home.py:202 web/routes_music.py:331
+#: web/routes_home.py:203 web/routes_music.py:331
 msgid "Volume invalide."
 msgstr "Ungültige Lautstärke."
 
-#: web/routes_home.py:206 web/routes_system.py:653
+#: web/routes_home.py:207 web/routes_system.py:653
 msgid "Réglage invalide."
 msgstr "Ungültige Einstellung."
 
-#: web/routes_home.py:213
+#: web/routes_home.py:216
 msgid "Réglages du son enregistrés."
 msgstr "Toneinstellungen gespeichert."
 
-#: web/routes_home.py:270
+#: web/routes_home.py:273
 msgid "Adresse d'appareil invalide."
 msgstr "Ungültige Geräteadresse."
 
-#: web/routes_home.py:276
+#: web/routes_home.py:279
 msgid "Réglages de présence enregistrés."
 msgstr "Anwesenheitseinstellungen gespeichert."
 
-#: web/routes_home.py:302
+#: web/routes_home.py:305
 msgid "Adresse du serveur ntfy invalide."
 msgstr "Ungültige ntfy-Serveradresse."
 
-#: web/routes_home.py:313
+#: web/routes_home.py:316
 msgid "Notifications enregistrées."
 msgstr "Benachrichtigungen gespeichert."
 
-#: web/routes_home.py:321
+#: web/routes_home.py:324
 msgid "Pimmich"
 msgstr "Pimmich"
 
-#: web/routes_home.py:321
+#: web/routes_home.py:324
 msgid "Ceci est une notification de test du cadre photo."
 msgstr "Dies ist eine Testbenachrichtigung des Fotorahmens."
 
-#: web/routes_home.py:322
+#: web/routes_home.py:325
 msgid "Activez d'abord les notifications."
 msgstr "Aktivieren Sie zuerst die Benachrichtigungen."
 
-#: web/routes_home.py:323
+#: web/routes_home.py:326
 msgid "Notification de test envoyée."
 msgstr "Testbenachrichtigung gesendet."
 
-#: web/routes_home.py:333
+#: web/routes_home.py:336
 msgid "Nouveau canal créé : abonnez de nouveau vos téléphones."
 msgstr "Neuer Kanal erstellt: Melden Sie Ihre Telefone erneut an."
 
-#: web/routes_home.py:373
+#: web/routes_home.py:376
 msgid "Adresse d'agenda invalide (elle commence par https:// ou webcal://)."
 msgstr "Ungültige Kalenderadresse (beginnt mit https:// oder webcal://)."
 
-#: web/routes_home.py:383
+#: web/routes_home.py:386
 msgid "Date invalide."
 msgstr "Ungültiges Datum."
 
-#: web/routes_home.py:389
+#: web/routes_home.py:392
 msgid "Agenda enregistré."
 msgstr "Kalender gespeichert."
 
