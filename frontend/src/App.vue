@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { boot, classicUrl } from "./boot";
 import { groups, type NavGroup, type NavItem } from "./nav";
@@ -9,6 +9,49 @@ import { applyTheme, theme, type Theme } from "./theme";
 import { toast } from "./toast";
 
 const route = useRoute();
+
+// --- Sous-rubriques de la page : les titres de ses cartes, pour y aller directement depuis le menu ---
+const sections = ref<{ id: string; label: string }[]>([]);
+const activeSection = ref("");
+const content = ref<HTMLElement | null>(null);
+let scanTimer: number | undefined;
+let observer: MutationObserver | null = null;
+
+function scanSections() {
+  const found: { id: string; label: string }[] = [];
+  content.value?.querySelectorAll<HTMLElement>(".card-head h2").forEach((title, index) => {
+    const card = title.closest<HTMLElement>(".card");
+    const label = (title.textContent || "").trim();
+    if (!card || !label || card.offsetParent === null) return;
+    if (!card.id) card.id = `section-${index}`;
+    card.classList.add("anchored");
+    found.push({ id: card.id, label });
+  });
+  sections.value = found;
+  spy();
+}
+
+function scheduleScan() {
+  window.clearTimeout(scanTimer);
+  scanTimer = window.setTimeout(scanSections, 150);
+}
+
+function spy() {
+  let current = sections.value[0]?.id ?? "";
+  for (const s of sections.value) {
+    const el = document.getElementById(s.id);
+    if (el && el.getBoundingClientRect().top < 140) current = s.id;
+  }
+  activeSection.value = current;
+}
+
+function goTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  activeSection.value = id;
+  sheet.value = null;
+}
+
+watch(() => route.path, () => { sections.value = []; nextTick(scheduleScan); });
 const status = ref<{ running: boolean; paused: boolean } | null>(null);
 const sheet = ref<NavGroup | null>(null);
 const pendingCount = ref(0);
@@ -67,6 +110,12 @@ function openGroup(group: NavGroup) {
 }
 
 onMounted(() => {
+  if (content.value) {
+    observer = new MutationObserver(scheduleScan);
+    observer.observe(content.value, { childList: true, subtree: true });
+  }
+  window.addEventListener("scroll", spy, { passive: true });
+  scheduleScan();
   refreshStatus();
   refreshPending();
   refreshImports();
@@ -75,6 +124,8 @@ onMounted(() => {
   document.addEventListener("pimmich:pending", refreshPending);
 });
 onUnmounted(() => {
+  observer?.disconnect();
+  window.removeEventListener("scroll", spy);
   window.clearInterval(timer);
   document.removeEventListener("pimmich:status", refreshStatus);
   document.removeEventListener("pimmich:pending", refreshPending);
@@ -92,7 +143,10 @@ onUnmounted(() => {
             <router-link v-if="item.route" :to="item.route" class="nav-item" :class="{ active: route.path === item.route }">
               <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}<span v-if="badge(item)" class="badge">{{ badge(item) }}</span>
             </router-link>
-            <a v-else :href="classicUrl(item.tab)" class="nav-item classic" :title="t('Ouvre l\'interface classique')">
+            <div v-if="item.route && route.path === item.route && sections.length > 1" class="subnav">
+              <button v-for="s in sections" :key="s.id" type="button" :class="{ on: activeSection === s.id }" @click="goTo(s.id)">{{ s.label }}</button>
+            </div>
+            <a v-else-if="!item.route" :href="classicUrl(item.tab)" class="nav-item classic" :title="t('Ouvre l\'interface classique')">
               <i class="fas fa-fw" :class="item.icon"></i>{{ item.label() }}<i class="fas fa-external-link-alt ext"></i>
             </a>
           </template>
@@ -110,7 +164,10 @@ onUnmounted(() => {
         </span>
         <button class="btn icon" type="button" :title="t('Thème')" @click="cycleTheme"><i class="fas" :class="themeIcon"></i></button>
       </header>
-      <main class="content">
+      <nav v-if="sections.length > 1" class="subnav-mobile">
+        <button v-for="s in sections" :key="s.id" type="button" :class="{ on: activeSection === s.id }" @click="goTo(s.id)">{{ s.label }}</button>
+      </nav>
+      <main ref="content" class="content">
         <router-view :key="route.path" />
       </main>
     </div>
@@ -180,6 +237,13 @@ nav h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; co
 .beta { font-size: .72rem; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: .1rem .55rem; font-weight: 600; }
 .content { padding: 1.3rem 1.5rem 2.5rem; max-width: 1200px; }
 
+.subnav { display: grid; margin: .1rem 0 .4rem 1.55rem; border-left: 2px solid var(--border); }
+.subnav button { text-align: left; border: 0; background: none; font: inherit; font-size: .84rem; color: var(--muted); padding: .28rem .7rem; cursor: pointer;
+  border-left: 2px solid transparent; margin-left: -2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.subnav button:hover { color: var(--text); }
+.subnav button.on { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+.subnav-mobile { display: none; }
+:global(.card.anchored) { scroll-margin-top: 80px; }
 .bottom-nav { display: none; }
 .imports { position: fixed; right: 1rem; bottom: 1rem; z-index: 30; display: grid; gap: .4rem; width: min(320px, calc(100vw - 2rem)); }
 .import-item { display: flex; align-items: center; gap: .6rem; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: 12px; padding: .55rem .8rem; font-size: .88rem; }
@@ -199,6 +263,12 @@ nav h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; co
   .topbar h1 { font-size: 1.15rem; }
   .beta { display: none; }
   .content { padding: 1rem 1rem calc(5.5rem + env(safe-area-inset-bottom)); }
+  .subnav-mobile { display: flex; gap: .4rem; overflow-x: auto; padding: .5rem 1rem; position: sticky; top: 52px; z-index: 9;
+    background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); scrollbar-width: none; }
+  .subnav-mobile::-webkit-scrollbar { display: none; }
+  .subnav-mobile button { flex: none; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: .25rem .75rem; font: inherit; font-size: .8rem; }
+  .subnav-mobile button.on { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  :global(.card.anchored) { scroll-margin-top: 110px; }
   .bottom-nav {
     display: flex; position: fixed; inset: auto 0 0 0; z-index: 45; background: var(--surface); border-top: 1px solid var(--border);
     padding-bottom: env(safe-area-inset-bottom);
