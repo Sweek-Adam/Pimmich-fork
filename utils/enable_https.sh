@@ -45,6 +45,9 @@ server {
     listen [::]:80;
     server_name _;
     client_max_body_size 200M;
+    # Pimmich redémarre (mise à jour, nouveau réglage) : page d'attente qui se recharge, au lieu de « 502 Bad Gateway »
+    error_page 502 503 504 /pimmich_restarting.html;
+    location = /pimmich_restarting.html { root /var/www/pimmich; try_files /restarting.html =502; internal; }
 
     # Page d'envoi des invités (et ses ressources) : accessible aussi en HTTP
     location ~ ^/(upload|handle_upload|static/)  {
@@ -71,6 +74,9 @@ server {
     ssl_certificate     /etc/ssl/pimmich/pimmich.crt;
     ssl_certificate_key /etc/ssl/pimmich/pimmich.key;
     ssl_protocols TLSv1.2 TLSv1.3;
+    # Pimmich redémarre (mise à jour, nouveau réglage) : page d'attente qui se recharge, au lieu de « 502 Bad Gateway »
+    error_page 502 503 504 /pimmich_restarting.html;
+    location = /pimmich_restarting.html { root /var/www/pimmich; try_files /restarting.html =502; internal; }
 
     location / {
         proxy_pass http://pimmich_app;
@@ -86,6 +92,8 @@ server {
     }
 }
 EOL
+# Page d'attente copiée hors du dossier personnel (nginx n'a pas forcément le droit d'y lire)
+install -D -m 644 "$(cd "$(dirname "$0")/.." && pwd)/static/errors/restarting.html" /var/www/pimmich/restarting.html
 ln -sf "$SITE" /etc/nginx/sites-enabled/pimmich
 
 if nginx -t 2>/dev/null; then
