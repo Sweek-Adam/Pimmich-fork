@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:24+0200\n"
+"POT-Creation-Date: 2026-10-11 10:27+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -346,7 +346,7 @@ msgstr "ゲスト"
 
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
-#: templates/configure/tab_affichage.html.jinja:322
+#: templates/configure/tab_affichage.html.jinja:361
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
@@ -364,6 +364,7 @@ msgstr "このページをゲストブックから削除しますか？"
 msgid "Connexion"
 msgstr "接続"
 
+#: templates/configure/tab_affichage.html.jinja:298
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
 #: templates/configure/tab_comptes.html.jinja:118
@@ -372,6 +373,7 @@ msgstr "接続"
 msgid "Utilisateur"
 msgstr "ユーザー"
 
+#: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
 #: templates/configure/tab_maintenance.html.jinja:95
 #: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
@@ -529,6 +531,7 @@ msgstr "メッセージが表示されるとフレームが再生します（最
 
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:303
 #: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:236
@@ -966,7 +969,7 @@ msgid "Adresse du flux RSS du podcast"
 msgstr "ポッドキャストの RSS フィードのアドレス"
 
 #: templates/configure/_son_radio.html.jinja:20
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 #: templates/configure/tab_heure.html.jinja:19
 msgid "Ajouter"
 msgstr "追加"
@@ -2524,11 +2527,58 @@ msgstr "音量 ："
 msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "動画の間は音楽を下げる（終了後に戻す）"
 
+#: templates/configure/tab_affichage.html.jinja:293
+msgid "Home Assistant (MQTT)"
+msgstr "Home Assistant（MQTT）"
+
 #: templates/configure/tab_affichage.html.jinja:294
+msgid ""
+"Le cadre apparaît tout seul dans Home Assistant : interrupteur du "
+"diaporama (pour l'endormir ou le réveiller), choix de l'ambiance, photo "
+"suivante, et un champ « Alerte » dont le texte s'affiche aussitôt sur le "
+"cadre (ex. « La porte du garage est ouverte »)."
+msgstr ""
+"フレームはHome "
+"Assistantに自動で表示されます：スライドショーのスイッチ（スリープ／起動）、雰囲気の選択、次の写真、そして入力した文字がすぐフレームに表示される「アラート」欄（例：「ガレージのドアが開いています」）。"
+
+#: templates/configure/tab_affichage.html.jinja:295
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Activer"
+msgstr "有効にする"
+
+#: templates/configure/tab_affichage.html.jinja:297
+msgid "Serveur MQTT"
+msgstr "MQTTサーバー"
+
+#: templates/configure/tab_affichage.html.jinja:300
+msgid "Nom du cadre"
+msgstr "フレームの名前"
+
+#: templates/configure/tab_affichage.html.jinja:302
+msgid ""
+"Dans Home Assistant : ajoutez l'intégration MQTT (avec le module "
+"Mosquitto), puis utilisez ici le même utilisateur."
+msgstr "Home AssistantでMQTT統合（Mosquittoアドオン）を追加し、ここで同じユーザーを使ってください。"
+
+#: templates/configure/tab_affichage.html.jinja:310
+#: templates/configure/tab_son.html.jinja:212
+msgid "connecté"
+msgstr "接続中"
+
+#: templates/configure/tab_affichage.html.jinja:310
+msgid "non connecté"
+msgstr "未接続"
+
+#: templates/configure/tab_affichage.html.jinja:310
+#: templates/configure/tab_sources.html.jinja:554
+msgid "Mot de passe enregistré (laisser vide pour le garder)"
+msgstr "パスワード保存済み（変更しない場合は空欄のまま）"
+
+#: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "電源管理 (接続されたソケット)"
 
-#: templates/configure/tab_affichage.html.jinja:296
+#: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
 " une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
@@ -2537,15 +2587,15 @@ msgstr ""
 "画面が完全にスリープ状態にならない場合は、接続されているコンセント (Wi-Fi) を使用して電源をオフにすることができます。 Pimmich "
 "は、指定した URL に単純な HTTP リクエストを送信します。"
 
-#: templates/configure/tab_affichage.html.jinja:297
+#: templates/configure/tab_affichage.html.jinja:336
 msgid "Exemples d'URLs :"
 msgstr "URL の例:"
 
-#: templates/configure/tab_affichage.html.jinja:308
+#: templates/configure/tab_affichage.html.jinja:347
 msgid "Réveil à l'arrivée d'un membre de la famille"
 msgstr "家族が帰宅したら起動"
 
-#: templates/configure/tab_affichage.html.jinja:309
+#: templates/configure/tab_affichage.html.jinja:348
 msgid ""
 "Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi "
 "après une absence, le cadre se réveille (30 minutes, même la nuit), "
@@ -2554,11 +2604,11 @@ msgstr ""
 "家族のスマートフォンが外出後に Wi-Fi に再接続すると、フォトフレームが起動し（30 "
 "分間、夜間も）、「おかえりなさい」と表示して、その人のプレイリストを再生できます。"
 
-#: templates/configure/tab_affichage.html.jinja:311
+#: templates/configure/tab_affichage.html.jinja:350
 msgid "Ajouter un téléphone vu sur le Wi-Fi"
 msgstr "Wi-Fi 上のスマートフォンを追加"
 
-#: templates/configure/tab_affichage.html.jinja:312
+#: templates/configure/tab_affichage.html.jinja:351
 msgid ""
 "Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
 "Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
@@ -2567,37 +2617,37 @@ msgstr ""
 "スマートフォンの Wi-Fi をオンにしてから更新してください。ヒント：iPhone や Android "
 "では、このネットワークの「プライベートアドレス／ランダム MAC」をオフにしてください（オンだとアドレスが変わります）。"
 
-#: templates/configure/tab_affichage.html.jinja:314
+#: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
 msgid "Actualiser"
 msgstr "リフレッシュ"
 
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 msgid "à la maison"
 msgstr "在宅"
 
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 msgid "absent"
 msgstr "外出中"
 
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 msgid "Prénom"
 msgstr "名前"
 
-#: templates/configure/tab_affichage.html.jinja:322
+#: templates/configure/tab_affichage.html.jinja:361
 msgid "Pas de playlist"
 msgstr "プレイリストなし"
 
-#: templates/configure/tab_affichage.html.jinja:322
+#: templates/configure/tab_affichage.html.jinja:361
 msgid "Aucun appareil détecté."
 msgstr "機器が見つかりません。"
 
-#: templates/configure/tab_affichage.html.jinja:372
+#: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "HDMI-CEC でテレビを操作"
 
-#: templates/configure/tab_affichage.html.jinja:373
+#: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
 "veille avec lui. Activez aussi « HDMI-CEC » (Anynet+, Bravia Sync, "
@@ -2606,69 +2656,69 @@ msgstr ""
 "テレビの場合：フォトフレームの起動時にフレームの入力でテレビが点き、一緒にスタンバイになります。テレビの設定で「HDMI-"
 "CEC」（Anynet+、Bravia Sync、SimpLink など）も有効にしてください。"
 
-#: templates/configure/tab_affichage.html.jinja:378
+#: templates/configure/tab_affichage.html.jinja:417
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr "スマートプラグによる制御を有効にする"
 
-#: templates/configure/tab_affichage.html.jinja:385
+#: templates/configure/tab_affichage.html.jinja:424
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr "プラグの状態：不明"
 
-#: templates/configure/tab_affichage.html.jinja:392
+#: templates/configure/tab_affichage.html.jinja:431
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr "プラグをオンにする URL："
 
-#: templates/configure/tab_affichage.html.jinja:401
-#: templates/configure/tab_affichage.html.jinja:414
+#: templates/configure/tab_affichage.html.jinja:440
+#: templates/configure/tab_affichage.html.jinja:453
 #: templates/configure/tab_notifications.html.jinja:14
 msgid "Tester"
 msgstr "テスター"
 
-#: templates/configure/tab_affichage.html.jinja:405
+#: templates/configure/tab_affichage.html.jinja:444
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr "プラグをオフにする URL："
 
-#: templates/configure/tab_affichage.html.jinja:418
+#: templates/configure/tab_affichage.html.jinja:457
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr "オン後の待機時間（秒）："
 
-#: templates/configure/tab_affichage.html.jinja:423
+#: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
 msgstr "解像度を強制する前に画面が初期化されるまで待機する時間。解像度がまだ正しくない場合は、値を増やします。"
 
-#: templates/configure/tab_affichage.html.jinja:426
+#: templates/configure/tab_affichage.html.jinja:465
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr "ステータス URL（任意）："
 
-#: templates/configure/tab_affichage.html.jinja:432
+#: templates/configure/tab_affichage.html.jinja:471
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "ホーム アシスタントの場合は、States API URL を使用します。"
 
-#: templates/configure/tab_affichage.html.jinja:438
+#: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "ホーム アシスタント アクセス トークン (HA ステータス URL の場合):"
 
-#: templates/configure/tab_affichage.html.jinja:446
+#: templates/configure/tab_affichage.html.jinja:485
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "トークンを表示/非表示"
 
-#: templates/configure/tab_affichage.html.jinja:451
+#: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "ホーム アシスタント プロファイルに「長期アクセス トークン」を作成します。"
 
@@ -2924,10 +2974,6 @@ msgstr "名前（例：パーティー、落ち着き、家族のクリスマス
 #: templates/configure/tab_dispositions.html.jinja:22
 msgid "Enregistrer la sélection ci-dessous"
 msgstr "下の選択を保存"
-
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Activer"
-msgstr "有効にする"
 
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Active"
@@ -4993,10 +5039,6 @@ msgstr "未インストール"
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "検出可能：スマートフォンで「Cadre photo」を選んでください"
 
-#: templates/configure/tab_son.html.jinja:212
-msgid "connecté"
-msgstr "接続中"
-
 #: templates/configure/tab_son.html.jinja:213
 msgid "Oublier"
 msgstr "削除"
@@ -5563,10 +5605,6 @@ msgstr "今すぐ確認"
 #: templates/configure/tab_sources.html.jinja:542
 msgid "Seul un administrateur peut configurer la boîte mail du cadre."
 msgstr "フレームのメールボックスを設定できるのは管理者のみです。"
-
-#: templates/configure/tab_sources.html.jinja:554
-msgid "Mot de passe enregistré (laisser vide pour le garder)"
-msgstr "パスワード保存済み（変更しない場合は空欄のまま）"
 
 #: templates/configure/tab_sources.html.jinja:554
 msgid "Connexion…"
@@ -6600,23 +6638,23 @@ msgstr "母の日"
 msgid "Fête des pères"
 msgstr "父の日"
 
-#: web/core.py:936
+#: web/core.py:937
 msgid "Code d'invitation invalide."
 msgstr "招待コードが無効です。"
 
-#: web/core.py:942
+#: web/core.py:943
 msgid "Ce code d'invitation a expiré."
 msgstr "この招待コードの有効期限は切れています。"
 
-#: web/core.py:948
+#: web/core.py:949
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "あなたはすでに認可されています。写真を送ってください！"
 
-#: web/core.py:950
+#: web/core.py:951
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "この招待コードはすでに使用されています。"
 
-#: web/core.py:961
+#: web/core.py:962
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
@@ -6992,6 +7030,22 @@ msgstr "日付が無効です。"
 msgid "Agenda enregistré."
 msgstr "カレンダーを保存しました。"
 
+#: web/routes_homeassistant.py:38
+msgid "Alerte de la maison"
+msgstr "家からのお知らせ"
+
+#: web/routes_homeassistant.py:100 web/routes_imports.py:778
+msgid "Port invalide."
+msgstr "ポートが無効です。"
+
+#: web/routes_homeassistant.py:104
+msgid "Connexion à Home Assistant lancée."
+msgstr "Home Assistantに接続しています。"
+
+#: web/routes_homeassistant.py:104
+msgid "Home Assistant désactivé."
+msgstr "Home Assistantを無効にしました。"
+
 #: web/routes_imports.py:423
 #, python-format
 msgid ""
@@ -7059,10 +7113,6 @@ msgstr "インポートを開始しました：画面下部の通知で進行状
 #, python-format
 msgid "%(count)s fichier(s) reçu(s) : ils arrivent sur le cadre."
 msgstr "%(count)s件のファイルを受け取りました：まもなくフレームに表示されます。"
-
-#: web/routes_imports.py:778
-msgid "Port invalide."
-msgstr "ポートが無効です。"
 
 #: web/routes_imports.py:786
 msgid "Réglages de l'e-mail enregistrés."

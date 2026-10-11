@@ -288,6 +288,45 @@
                     </div>
                 </fieldset>
 
+                {% if is_admin %}
+                <fieldset class="mt-6" id="ha-box">
+                    <legend><h3><i class="fas fa-home mr-2"></i>{{ _("Home Assistant (MQTT)") }}</h3></legend>
+                    <p class="text-sm text-gray-600 mb-2">{{ _("Le cadre apparaît tout seul dans Home Assistant : interrupteur du diaporama (pour l'endormir ou le réveiller), choix de l'ambiance, photo suivante, et un champ « Alerte » dont le texte s'affiche aussitôt sur le cadre (ex. « La porte du garage est ouverte »).") }}</p>
+                    <label class="flex items-center gap-2 font-semibold"><input type="checkbox" id="ha-enabled"> {{ _("Activer") }} <span id="ha-state" class="text-sm font-normal"></span></label>
+                    <div class="grid gap-2 mt-2 em-grid">
+                        <label for="ha-host">{{ _("Serveur MQTT") }}</label><div class="flex gap-2"><input type="text" id="ha-host" class="flex-1 min-w-0" placeholder="homeassistant.local"><input type="number" id="ha-port" class="w-24" value="1883"></div>
+                        <label for="ha-user">{{ _("Utilisateur") }}</label><input type="text" id="ha-user" autocomplete="off">
+                        <label for="ha-password">{{ _("Mot de passe") }}</label><input type="password" id="ha-password" autocomplete="new-password">
+                        <label for="ha-name">{{ _("Nom du cadre") }}</label><input type="text" id="ha-name" placeholder="Pimmich">
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">{{ _("Dans Home Assistant : ajoutez l'intégration MQTT (avec le module Mosquitto), puis utilisez ici le même utilisateur.") }}</p>
+                    <button type="button" id="ha-save" class="btn-primary mt-2">{{ _("Enregistrer") }}</button>
+                    <span id="ha-status" class="text-sm ml-2"></span>
+                </fieldset>
+                <style>.em-grid { grid-template-columns: max-content 1fr; align-items: center; } @media (max-width: 640px) { .em-grid { grid-template-columns: 1fr; } }</style>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const $ = (id) => document.getElementById(id);
+                        const T = { on: {{ _("connecté")|tojson }}, off: {{ _("non connecté")|tojson }}, saved: {{ _("Mot de passe enregistré (laisser vide pour le garder)")|tojson }} };
+                        async function load() {
+                            const d = await (await fetch("/api/homeassistant")).json();
+                            $("ha-enabled").checked = d.enabled; $("ha-host").value = d.host; $("ha-port").value = d.port; $("ha-user").value = d.user;
+                            $("ha-name").value = d.device_name; $("ha-password").value = ""; $("ha-password").placeholder = d.has_password ? T.saved : "";
+                            $("ha-state").textContent = d.enabled ? `(${d.connected ? T.on : T.off})` : "";
+                        }
+                        $("ha-save").addEventListener("click", async () => {
+                            const r = await (await fetch("/api/homeassistant", { method: "POST", headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ enabled: $("ha-enabled").checked, host: $("ha-host").value, port: $("ha-port").value,
+                                                       user: $("ha-user").value, password: $("ha-password").value, device_name: $("ha-name").value }) })).json();
+                            $("ha-status").textContent = r.message; $("ha-status").className = "text-sm ml-2 " + (r.success ? "text-green-700" : "text-red-600");
+                            setTimeout(load, 3000);
+                        });
+                        document.querySelectorAll(".tablink[onclick*=\"'tab-affichage'\"]").forEach(b => b.addEventListener("click", () => setTimeout(load, 50)));
+                        if ($("ha-box").offsetParent !== null) load();
+                    });
+                </script>
+                {% endif %}
+
                 <!-- NOUVEAU BLOC POUR LA PRISE CONNECTÉE -->
                 <fieldset class="mt-6">
                     <legend>

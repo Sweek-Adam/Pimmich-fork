@@ -395,7 +395,8 @@ def inject_disk_alert():
 
 # Réglages contenant des secrets : masqués et non modifiables pour les comptes non administrateurs
 SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormglass_api_key', 'telegram_bot_token',
-                      'telegram_authorized_users', 'porcupine_access_key', 'home_assistant_token', 'wifi_ssid', 'wifi_password']
+                      'telegram_authorized_users', 'porcupine_access_key', 'home_assistant_token', 'wifi_ssid', 'wifi_password',
+                      'email_password', 'mqtt_password']
 
 
 @app.before_request

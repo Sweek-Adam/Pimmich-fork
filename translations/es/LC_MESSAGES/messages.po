@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 10:24+0200\n"
+"POT-Creation-Date: 2026-10-11 10:27+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -348,7 +348,7 @@ msgstr "Un invitado"
 
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
-#: templates/configure/tab_affichage.html.jinja:322
+#: templates/configure/tab_affichage.html.jinja:361
 #: templates/configure/tab_dispositions.html.jinja:146
 #: templates/configure/tab_heure.html.jinja:26
 #: templates/configure/tab_maintenance.html.jinja:121
@@ -366,6 +366,7 @@ msgstr "¿Quitar esta página del libro de visitas?"
 msgid "Connexion"
 msgstr "Conexión"
 
+#: templates/configure/tab_affichage.html.jinja:298
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
 #: templates/configure/tab_comptes.html.jinja:118
@@ -374,6 +375,7 @@ msgstr "Conexión"
 msgid "Utilisateur"
 msgstr "Usuario"
 
+#: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
 #: templates/configure/tab_maintenance.html.jinja:95
 #: templates/configure/tab_network.html.jinja:50 templates/login.html.jinja:62
@@ -533,6 +535,7 @@ msgstr ""
 
 #: templates/configure/_playlist_builder.html.jinja:39
 #: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:303
 #: templates/configure/tab_dispositions.html.jinja:132
 #: templates/configure/tab_legendes.html.jinja:123
 #: templates/configure/tab_messages.html.jinja:236
@@ -978,7 +981,7 @@ msgid "Adresse du flux RSS du podcast"
 msgstr "Dirección del feed RSS del pódcast"
 
 #: templates/configure/_son_radio.html.jinja:20
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 #: templates/configure/tab_heure.html.jinja:19
 msgid "Ajouter"
 msgstr "Añadir"
@@ -2576,11 +2579,62 @@ msgstr "Volumen :"
 msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "Bajar la música durante los vídeos (luego vuelve)"
 
+#: templates/configure/tab_affichage.html.jinja:293
+msgid "Home Assistant (MQTT)"
+msgstr "Home Assistant (MQTT)"
+
 #: templates/configure/tab_affichage.html.jinja:294
+msgid ""
+"Le cadre apparaît tout seul dans Home Assistant : interrupteur du "
+"diaporama (pour l'endormir ou le réveiller), choix de l'ambiance, photo "
+"suivante, et un champ « Alerte » dont le texte s'affiche aussitôt sur le "
+"cadre (ex. « La porte du garage est ouverte »)."
+msgstr ""
+"El marco aparece solo en Home Assistant: interruptor del pase de "
+"diapositivas (para dormirlo o despertarlo), elección de ambiente, foto "
+"siguiente y un campo «Alerta» cuyo texto aparece al momento en el marco "
+"(p. ej. «La puerta del garaje está abierta»)."
+
+#: templates/configure/tab_affichage.html.jinja:295
+#: templates/configure/tab_dispositions.html.jinja:29
+msgid "Activer"
+msgstr "Activar"
+
+#: templates/configure/tab_affichage.html.jinja:297
+msgid "Serveur MQTT"
+msgstr "Servidor MQTT"
+
+#: templates/configure/tab_affichage.html.jinja:300
+msgid "Nom du cadre"
+msgstr "Nombre del marco"
+
+#: templates/configure/tab_affichage.html.jinja:302
+msgid ""
+"Dans Home Assistant : ajoutez l'intégration MQTT (avec le module "
+"Mosquitto), puis utilisez ici le même utilisateur."
+msgstr ""
+"En Home Assistant: añade la integración MQTT (con el complemento "
+"Mosquitto) y usa aquí el mismo usuario."
+
+#: templates/configure/tab_affichage.html.jinja:310
+#: templates/configure/tab_son.html.jinja:212
+msgid "connecté"
+msgstr "conectado"
+
+#: templates/configure/tab_affichage.html.jinja:310
+msgid "non connecté"
+msgstr "no conectado"
+
+#: templates/configure/tab_affichage.html.jinja:310
+#: templates/configure/tab_sources.html.jinja:554
+msgid "Mot de passe enregistré (laisser vide pour le garder)"
+msgstr "Contraseña guardada (déjalo vacío para conservarla)"
+
+#: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Gestión de energía (enchufe conectado)"
 
-#: templates/configure/tab_affichage.html.jinja:296
+#: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
 " une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich "
@@ -2590,15 +2644,15 @@ msgstr ""
 "conectado (Wi-Fi) para apagarla. Pimmich enviará una solicitud HTTP "
 "simple a las URL que especifique."
 
-#: templates/configure/tab_affichage.html.jinja:297
+#: templates/configure/tab_affichage.html.jinja:336
 msgid "Exemples d'URLs :"
 msgstr "Exemples d'URLs :"
 
-#: templates/configure/tab_affichage.html.jinja:308
+#: templates/configure/tab_affichage.html.jinja:347
 msgid "Réveil à l'arrivée d'un membre de la famille"
 msgstr "Despertar cuando llega un miembro de la familia"
 
-#: templates/configure/tab_affichage.html.jinja:309
+#: templates/configure/tab_affichage.html.jinja:348
 msgid ""
 "Quand le téléphone d'une personne de la maison se reconnecte au Wi-Fi "
 "après une absence, le cadre se réveille (30 minutes, même la nuit), "
@@ -2608,11 +2662,11 @@ msgstr ""
 "tras una ausencia, el marco se despierta (30 minutos, incluso de noche), "
 "muestra «Bienvenido a casa» y puede iniciar su playlist."
 
-#: templates/configure/tab_affichage.html.jinja:311
+#: templates/configure/tab_affichage.html.jinja:350
 msgid "Ajouter un téléphone vu sur le Wi-Fi"
 msgstr "Añadir un teléfono visto en el Wi-Fi"
 
-#: templates/configure/tab_affichage.html.jinja:312
+#: templates/configure/tab_affichage.html.jinja:351
 msgid ""
 "Allumez le Wi-Fi du téléphone puis actualisez. Astuce : sur iPhone et "
 "Android, désactivez « adresse privée / MAC aléatoire » pour ce réseau, "
@@ -2622,37 +2676,37 @@ msgstr ""
 "desactiva «dirección privada / MAC aleatoria» para esta red; si no, la "
 "dirección cambia."
 
-#: templates/configure/tab_affichage.html.jinja:314
+#: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
 msgid "Actualiser"
 msgstr "Refrescar"
 
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 msgid "à la maison"
 msgstr "en casa"
 
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 msgid "absent"
 msgstr "fuera"
 
-#: templates/configure/tab_affichage.html.jinja:321
+#: templates/configure/tab_affichage.html.jinja:360
 msgid "Prénom"
 msgstr "Nombre"
 
-#: templates/configure/tab_affichage.html.jinja:322
+#: templates/configure/tab_affichage.html.jinja:361
 msgid "Pas de playlist"
 msgstr "Sin playlist"
 
-#: templates/configure/tab_affichage.html.jinja:322
+#: templates/configure/tab_affichage.html.jinja:361
 msgid "Aucun appareil détecté."
 msgstr "No se ha detectado ningún dispositivo."
 
-#: templates/configure/tab_affichage.html.jinja:372
+#: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Controlar la televisión por HDMI-CEC"
 
-#: templates/configure/tab_affichage.html.jinja:373
+#: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
 "veille avec lui. Activez aussi « HDMI-CEC » (Anynet+, Bravia Sync, "
@@ -2662,43 +2716,43 @@ msgstr ""
 "entra en reposo con él. Activa también «HDMI-CEC» (Anynet+, Bravia Sync, "
 "SimpLink...) en los ajustes del televisor."
 
-#: templates/configure/tab_affichage.html.jinja:378
+#: templates/configure/tab_affichage.html.jinja:417
 msgid ""
 "Activer le contrôle par prise\n"
 "                            connectée"
 msgstr "Activar el control mediante enchufe inteligente"
 
-#: templates/configure/tab_affichage.html.jinja:385
+#: templates/configure/tab_affichage.html.jinja:424
 msgid ""
 "État de la\n"
 "                            prise : Inconnu"
 msgstr "Estado del enchufe: Desconocido"
 
-#: templates/configure/tab_affichage.html.jinja:392
+#: templates/configure/tab_affichage.html.jinja:431
 msgid ""
 "URL\n"
 "                                pour ALLUMER la prise :"
 msgstr "URL para ENCENDER el enchufe:"
 
-#: templates/configure/tab_affichage.html.jinja:401
-#: templates/configure/tab_affichage.html.jinja:414
+#: templates/configure/tab_affichage.html.jinja:440
+#: templates/configure/tab_affichage.html.jinja:453
 #: templates/configure/tab_notifications.html.jinja:14
 msgid "Tester"
 msgstr "Ensayador"
 
-#: templates/configure/tab_affichage.html.jinja:405
+#: templates/configure/tab_affichage.html.jinja:444
 msgid ""
 "URL\n"
 "                                pour ÉTEINDRE la prise :"
 msgstr "URL para APAGAR el enchufe:"
 
-#: templates/configure/tab_affichage.html.jinja:418
+#: templates/configure/tab_affichage.html.jinja:457
 msgid ""
 "Délai\n"
 "                                après allumage (secondes) :"
 msgstr "Retardo tras el encendido (segundos):"
 
-#: templates/configure/tab_affichage.html.jinja:423
+#: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
@@ -2706,27 +2760,27 @@ msgstr ""
 "Es hora de esperar a que la pantalla se inicialice antes de forzar la "
 "resolución. Aumente si la resolución aún es incorrecta."
 
-#: templates/configure/tab_affichage.html.jinja:426
+#: templates/configure/tab_affichage.html.jinja:465
 msgid ""
 "URL\n"
 "                                de Statut (Optionnel) :"
 msgstr "URL de estado (opcional):"
 
-#: templates/configure/tab_affichage.html.jinja:432
+#: templates/configure/tab_affichage.html.jinja:471
 msgid "Pour Home Assistant, utilisez l'URL de l'API des états :"
 msgstr "Para Home Assistant, utilice la URL de la API de Estados:"
 
-#: templates/configure/tab_affichage.html.jinja:438
+#: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Token de acceso de Home Assistant (si es la URL de estado HA):"
 
-#: templates/configure/tab_affichage.html.jinja:446
+#: templates/configure/tab_affichage.html.jinja:485
 #: templates/configure/tab_sources.html.jinja:23
 #: templates/configure/tab_telegram.html.jinja:30
 msgid "Afficher/Cacher le token"
 msgstr "Mostrar/Ocultar el token"
 
-#: templates/configure/tab_affichage.html.jinja:451
+#: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Cree un \"Token de acceso a largo plazo\" en su perfil de Home Assistant."
 
@@ -2995,10 +3049,6 @@ msgstr "Nombre (p. ej. Fiesta, Tranquilo, Navidad en familia)"
 #: templates/configure/tab_dispositions.html.jinja:22
 msgid "Enregistrer la sélection ci-dessous"
 msgstr "Guardar la selección de abajo"
-
-#: templates/configure/tab_dispositions.html.jinja:29
-msgid "Activer"
-msgstr "Activar"
 
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Active"
@@ -5187,10 +5237,6 @@ msgstr "No instalado"
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Visible: elige «Cadre photo» en el teléfono"
 
-#: templates/configure/tab_son.html.jinja:212
-msgid "connecté"
-msgstr "conectado"
-
 #: templates/configure/tab_son.html.jinja:213
 msgid "Oublier"
 msgstr "Olvidar"
@@ -5787,10 +5833,6 @@ msgstr "Revisar ahora"
 #: templates/configure/tab_sources.html.jinja:542
 msgid "Seul un administrateur peut configurer la boîte mail du cadre."
 msgstr "Solo un administrador puede configurar el buzón del marco."
-
-#: templates/configure/tab_sources.html.jinja:554
-msgid "Mot de passe enregistré (laisser vide pour le garder)"
-msgstr "Contraseña guardada (déjalo vacío para conservarla)"
 
 #: templates/configure/tab_sources.html.jinja:554
 msgid "Connexion…"
@@ -6860,23 +6902,23 @@ msgstr "Día de la madre"
 msgid "Fête des pères"
 msgstr "Día del padre"
 
-#: web/core.py:936
+#: web/core.py:937
 msgid "Code d'invitation invalide."
 msgstr "Código de invitación no válido."
 
-#: web/core.py:942
+#: web/core.py:943
 msgid "Ce code d'invitation a expiré."
 msgstr "Este código de invitación ha caducado."
 
-#: web/core.py:948
+#: web/core.py:949
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "Ya estás autorizado. ¡Envíame una foto!"
 
-#: web/core.py:950
+#: web/core.py:951
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "Este código de invitación ya se ha utilizado."
 
-#: web/core.py:961
+#: web/core.py:962
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
@@ -7268,6 +7310,22 @@ msgstr "Fecha no válida."
 msgid "Agenda enregistré."
 msgstr "Agenda guardada."
 
+#: web/routes_homeassistant.py:38
+msgid "Alerte de la maison"
+msgstr "Alerta de la casa"
+
+#: web/routes_homeassistant.py:100 web/routes_imports.py:778
+msgid "Port invalide."
+msgstr "Puerto no válido."
+
+#: web/routes_homeassistant.py:104
+msgid "Connexion à Home Assistant lancée."
+msgstr "Conexión con Home Assistant iniciada."
+
+#: web/routes_homeassistant.py:104
+msgid "Home Assistant désactivé."
+msgstr "Home Assistant desactivado."
+
 #: web/routes_imports.py:423
 #, python-format
 msgid ""
@@ -7341,10 +7399,6 @@ msgstr ""
 #, python-format
 msgid "%(count)s fichier(s) reçu(s) : ils arrivent sur le cadre."
 msgstr "%(count)s archivo(s) recibido(s): llegan al marco."
-
-#: web/routes_imports.py:778
-msgid "Port invalide."
-msgstr "Puerto no válido."
 
 #: web/routes_imports.py:786
 msgid "Réglages de l'e-mail enregistrés."

@@ -21,6 +21,7 @@ from web import routes_smart_albums  # noqa: F401 (enregistre les routes)
 from web import routes_storage  # noqa: F401 (enregistre les routes)
 from web import routes_quotes  # noqa: F401 (enregistre les routes)
 from web import routes_family  # noqa: F401 (enregistre les routes)
+from web import routes_homeassistant  # noqa: F401 (enregistre les routes)
 from web import routes_voice  # noqa: F401 (enregistre les routes)
 from web import routes_system  # noqa: F401 (enregistre les routes)
 from web import routes_messages  # noqa: F401 (enregistre les routes)
@@ -56,6 +57,7 @@ if __name__ == '__main__':
     threading.Thread(target=message_schedule_worker, daemon=True).start()
     threading.Thread(target=hdmi_audio_worker, daemon=True).start()
     threading.Thread(target=music_schedule_worker, daemon=True).start()
+    routes_homeassistant.restart_bridge()  # Home Assistant (MQTT), s'il est configuré
     # Préchauffer le cache des remotes rclone (lent sur Pi 3) pour que la page de configuration s'ouvre vite
     from utils.import_gdrive import list_rclone_remotes
     threading.Thread(target=list_rclone_remotes, daemon=True).start()
