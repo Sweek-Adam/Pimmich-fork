@@ -69,3 +69,23 @@ def test_blank_drawing_is_refused():
     image.save(buffer, "PNG")
     with pytest.raises(ValueError):
         messages_manager.create_drawing(buffer.getvalue(), "Léo", "", 1920, 1080)
+
+
+def test_drawing_in_every_composition(monkeypatch, tmp_path):
+    """Un dessin d'invité apparaît comme un dessin (pas comme une carte de texte vide) dans les dispositions qui posent un message."""
+    import random
+    from utils import compositions, message_renderer
+    drawings = tmp_path / "cache" / "drawings"
+    drawings.mkdir(parents=True)
+    (drawings / "abc123abc123.png").write_bytes(drawing_png())
+    monkeypatch.setattr(message_renderer, "PROJECT_DIR", tmp_path)
+    message = {"id": "abc123abc123", "kind": "drawing", "title": "", "body": "", "signature": "Léo", "style": "nuit"}
+    tile = compositions.message_tile(message, 400, 300)
+    pixels = tile.convert("RGB").getcolors(400 * 300)
+    reds = sum(n for n, (r, g, b) in pixels if r > 180 and g < 100 and b < 100)
+    assert reds > 200  # le trait rouge du dessin est bien là
+    photos = [Image.new("RGB", (800, 600), (90, 120, 160)) for _ in range(4)]
+    for style in ("mosaique", "mur", "magazine"):
+        if style in compositions.FORMATS:
+            image = compositions.FORMATS[style][4](photos[:3], message, 1280, 720, random.Random(1))
+            assert image.size == (1280, 720)

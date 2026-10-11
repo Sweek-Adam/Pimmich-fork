@@ -222,6 +222,13 @@ def _inside(center, element, W, H, pad=0.02):
     return cx, cy
 
 
+def message_tile(item, w, h, style="nuit"):
+    """Case d'une composition occupée par un message : le dessin lui-même pour un dessin d'invité, sinon le texte mis en page."""
+    if item.get("kind") == "drawing":
+        return render_note(item, int(w), int(h)).convert("RGB")
+    return render_message(item.get("title"), item.get("body"), item.get("signature"), style, int(w), int(h))
+
+
 def _note_or_tile(message, w, h, rng, kind="postit"):
     return render_note(message, int(w), int(h), kind, seed=rng.random())
 
@@ -284,7 +291,7 @@ def mosaic(photos, message, W, H, rng):
         bx, by = int(x * W) + gutter, int(y * H) + gutter
         bw, bh = int(w * W) - 2 * gutter, int(h * H) - 2 * gutter
         if isinstance(item, dict):
-            tile = render_message(item.get("title"), item.get("body"), item.get("signature"), item.get("style", "nuit"), bw, bh)
+            tile = message_tile(item, bw, bh, item.get("style", "nuit"))
         else:
             tile = cell_photo(item, bw, bh)
         canvas.paste(tile, (bx, by))
@@ -331,8 +338,7 @@ def gallery_wall(photos, message, W, H, rng):
     for (fx, fy, size), item in zip(layout, items):
         side = size * H
         if isinstance(item, dict):
-            inner = render_message(item.get("title"), item.get("body"), item.get("signature"), item.get("style", "minimal"),
-                                   int(side * 0.75), int(side * 0.95)).convert("RGB")
+            inner = message_tile(item, side * 0.75, side * 0.95, item.get("style", "minimal")).convert("RGB")
         else:
             portrait = item.height > item.width
             inner = print_photo(item, side * (0.72 if portrait else 1.0), side * (0.95 if portrait else 0.72))
@@ -377,7 +383,7 @@ def magazine(photos, message, W, H, rng):
     for i, item in enumerate([third, second]):
         y = margin + i * (col_h + margin)
         if isinstance(item, dict):
-            tile = render_message(item.get("title"), item.get("body"), item.get("signature"), "minimal", col_w, col_h)
+            tile = message_tile(item, col_w, col_h, "minimal")
             ImageDraw.Draw(tile).rectangle([0, 0, col_w - 1, col_h - 1], outline=(30, 30, 30), width=2)
         else:
             tile = cell_photo(item, col_w, col_h)

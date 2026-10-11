@@ -215,7 +215,7 @@
             <button type="button" class="dr-mode" data-mode="eraser" aria-label="{{ _('Gomme') }}">🧽<span>{{ _('Gomme') }}</span></button>
           </div>
           <div class="dr-actions">
-            <button type="button" class="dr-icon" id="dr-undo" title="{{ _('Annuler') }}" aria-label="{{ _('Annuler') }}">↶</button>
+            <button type="button" class="dr-icon" id="dr-undo" title="{{ _('Annuler') }}" aria-label="{{ _('Annuler') }}">↩️</button>
             <button type="button" class="dr-icon" id="dr-clear" title="{{ _('Tout effacer') }}" aria-label="{{ _('Tout effacer') }}">🗑</button>
           </div>
         </div>
@@ -249,7 +249,7 @@
         .dr-mode.on span { color: #1d4ed8; }
         @media (max-width: 380px) { .dr-mode span { display: none; } }
         .dr-actions { display: flex; gap: .3rem; }
-        .dr-icon { width: 36px; height: 36px; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; font-size: 1.15rem; }
+        .dr-icon { width: 36px; height: 36px; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; font-size: 1.15rem; color: #111827; }
         .dr-panel { margin-top: .5rem; display: flex; align-items: center; gap: .6rem; }
         .dr-panel[hidden], .dr-hint[hidden] { display: none; }
         .dr-scroll { display: flex; gap: .4rem; overflow-x: auto; padding: 4px 2px; flex: 1; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -263,7 +263,7 @@
         .dr-sticker { flex: none; width: 44px; height: 44px; border-radius: 12px; border: 2px solid transparent; background: #f9fafb; font-size: 1.5rem; line-height: 1; }
         .dr-sticker.on { border-color: #2563eb; background: #eff6ff; }
         .dr-bgs { display: flex; justify-content: center; gap: .4rem; margin-top: .6rem; }
-        .dr-bgbtn { display: flex; align-items: center; gap: .35rem; border: 1px solid #e5e7eb; background: #fff; border-radius: 999px; padding: .25rem .7rem; font-size: .82rem; }
+        .dr-bgbtn { display: flex; align-items: center; gap: .35rem; border: 1px solid #e5e7eb; background: #fff; color: #374151; border-radius: 999px; padding: .25rem .7rem; font-size: .82rem; }
         .dr-bgbtn i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #d1d5db; display: inline-block; }
         .dr-bgbtn.on { border-color: #2563eb; color: #1d4ed8; font-weight: 600; }
       </style>
