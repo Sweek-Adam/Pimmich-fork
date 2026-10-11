@@ -601,3 +601,120 @@ def icloud_sync_api():
         return jsonify({"success": False, "message": _("Ajoutez d'abord un album partagé.")}), 400
     threading.Thread(target=run_icloud_sync, args=(config,), daemon=True).start()
     return jsonify({"success": True, "message": _("Synchronisation lancée : suivez-la dans la notification en bas de l'écran.")})
+
+
+# --- WhatsApp : export d'une discussion (.zip avec les médias) ---
+
+def run_whatsapp_import(zip_path, senders=None, caption_mode="text"):
+    """Importe puis prépare les médias d'un export WhatsApp (suivi dans la notification des imports)."""
+    from utils import import_whatsapp
+    changes = 0
+    try:
+        for update in import_progress.tracked("whatsapp", "download", import_whatsapp.import_export(zip_path, senders, caption_mode)):
+            if update.get("type") == "done":
+                changes = update.get("changes", 0)
+    finally:
+        Path(zip_path).unlink(missing_ok=True)
+    if changes:
+        config = load_config()
+        if "whatsapp" not in config.get("display_sources", []):
+            config = dict(config, display_sources=list(config.get("display_sources", [])) + ["whatsapp"])
+            save_config(config)
+        for _update in import_progress.tracked("whatsapp", "prepare", prepare_all_photos_with_progress(
+                config.get("display_width", 1920), config.get("display_height", 1080), source_type="whatsapp",
+                description_map=import_whatsapp.captions())):
+            pass
+        if is_slideshow_running():
+            restart_slideshow_for_update()
+    return changes
+
+
+def _save_whatsapp_upload(file):
+    from utils import import_whatsapp
+    path = BASE_DIR / import_whatsapp.UPLOAD_FILE
+    path.parent.mkdir(parents=True, exist_ok=True)
+    file.save(path)
+    return path
+
+
+@app.route('/api/whatsapp/upload', methods=['POST'])
+@login_required
+def whatsapp_upload_api():
+    """Reçoit l'export (.zip) et renvoie son contenu (photos, vidéos, période, expéditeurs) avant l'import."""
+    from utils import import_whatsapp
+    file = request.files.get("export")
+    if not file or not file.filename:
+        return jsonify({"success": False, "message": _("Aucun fichier sélectionné.")}), 400
+    path = _save_whatsapp_upload(file)
+    try:
+        summary = import_whatsapp.analyse(path)
+    except Exception:
+        path.unlink(missing_ok=True)
+        return jsonify({"success": False, "message": _("Ce fichier n'est pas un export WhatsApp (.zip).")}), 400
+    if not summary["photos"] and not summary["videos"]:
+        path.unlink(missing_ok=True)
+        return jsonify({"success": False, "message": _("Aucune photo ni vidéo dans cet export : choisissez « Joindre les médias » en l'exportant.")}), 400
+    return jsonify({"success": True, "summary": summary})
+
+
+@app.route('/api/whatsapp/import', methods=['POST'])
+@login_required
+def whatsapp_import_api():
+    from utils import import_whatsapp
+    path = BASE_DIR / import_whatsapp.UPLOAD_FILE
+    if not path.is_file():
+        return jsonify({"success": False, "message": _("Envoyez d'abord l'export de la discussion.")}), 400
+    data = request.get_json(silent=True) or {}
+    senders = [str(s) for s in data.get("senders") or []] or None
+    caption_mode = data.get("caption") if data.get("caption") in import_whatsapp.CAPTION_MODES else "text"
+    staged = path.with_name(f"whatsapp_{int(time.time())}.zip")
+    path.replace(staged)
+    threading.Thread(target=run_whatsapp_import, args=(staged, senders, caption_mode), daemon=True).start()
+    return jsonify({"success": True, "message": _("Import lancé : suivez-le dans la notification en bas de l'écran.")})
+
+
+@app.route('/upload/share', methods=['POST'])
+def upload_share():
+    """Cible de partage du téléphone (« Partager › Pimmich », Android) : export WhatsApp ou photos.
+
+    Connecté au cadre : l'export WhatsApp est importé directement, les photos rejoignent la source WhatsApp et partages.
+    Invité : les photos attendent la validation, comme depuis la page d'envoi.
+    """
+    files = [f for f in request.files.getlist("photos") if f and f.filename]
+    if not files:
+        flash(_("Aucun fichier sélectionné."), "error")
+        return redirect(url_for('upload_page'))
+    if not session.get("logged_in"):
+        from web.routes_guests import handle_upload
+        return handle_upload()
+    zips = [f for f in files if f.filename.lower().endswith(".zip")]
+    for file in zips[:1]:
+        path = _save_whatsapp_upload(file)
+        staged = path.with_name(f"whatsapp_{int(time.time())}.zip")
+        path.replace(staged)
+        threading.Thread(target=run_whatsapp_import, args=(staged,), daemon=True).start()
+    media = [f for f in files if Path(f.filename).suffix.lower() in (".jpg", ".jpeg", ".png", ".heic") + VIDEO_EXTENSIONS]
+    if media:
+        target = BASE_DIR / "static" / "photos" / "whatsapp"
+        target.mkdir(parents=True, exist_ok=True)
+        for file in media:
+            name = secure_filename(file.filename) or "photo.jpg"
+            stem, ext = os.path.splitext(name)
+            file.save(target / f"{datetime.now():%Y%m%d_%H%M%S}_{stem}_{secrets.token_hex(2)}{ext}")
+        threading.Thread(target=run_whatsapp_prepare, daemon=True).start()
+    flash(_("%(count)s fichier(s) reçu(s) : ils arrivent sur le cadre.", count=len(zips[:1]) + len(media)), "success")
+    return redirect(url_for('upload_page'))
+
+
+def run_whatsapp_prepare():
+    from utils import import_whatsapp
+    config = load_config()
+    if "whatsapp" not in config.get("display_sources", []):
+        config = dict(config, display_sources=list(config.get("display_sources", [])) + ["whatsapp"])
+        save_config(config)
+    for _update in import_progress.tracked("whatsapp", "prepare", prepare_all_photos_with_progress(
+            config.get("display_width", 1920), config.get("display_height", 1080), source_type="whatsapp",
+            description_map=import_whatsapp.captions())):
+        pass
+    if is_slideshow_running():
+        restart_slideshow_for_update()

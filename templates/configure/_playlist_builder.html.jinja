@@ -40,7 +40,8 @@
                     nameNeeded: {{ _("Donnez un nom à la playlist.")|tojson }}, all: {{ _("Toutes")|tojson }}, remove: {{ _("Retirer")|tojson }},
                     months: {{ [_("janvier"), _("février"), _("mars"), _("avril"), _("mai"), _("juin"), _("juillet"), _("août"), _("septembre"), _("octobre"), _("novembre"), _("décembre")]|tojson }},
                     sources: { gdrive: "Google Drive", immich: "Immich", samba: {{ _("Partage réseau")|tojson }}, usb: {{ _("Clé USB")|tojson }},
-                               smartphone: {{ _("Téléphone")|tojson }}, "invités": {{ _("Invités")|tojson }}, telegram: "Telegram" } };
+                               smartphone: {{ _("Téléphone")|tojson }}, "invités": {{ _("Invités")|tojson }}, telegram: "Telegram",
+                               cloud: "Cloud", icloud: "iCloud", whatsapp: "WhatsApp" } };
         let library = [], byPath = new Map(), selected = [], editing = null, source = "", lastClicked = null, shown = [];
 
         const visible = () => {

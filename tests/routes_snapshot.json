@@ -937,6 +937,18 @@
   ]
  ],
  [
+  "/api/whatsapp/import",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/whatsapp/upload",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/wifi_status",
   [
    "GET"
@@ -1193,6 +1205,12 @@
  ],
  [
   "/upload/message/preview",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/upload/share",
   [
    "POST"
   ]

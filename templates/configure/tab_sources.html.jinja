@@ -106,6 +106,10 @@
                         <label class="form-check-label ml-2" for="display_source_icloud">{{ _("Albums partagés iCloud") }}</label>
                     </div>
                     <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="display_source_whatsapp" name="display_sources" value="whatsapp" {% if 'whatsapp' in config.display_sources %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="display_source_whatsapp">{{ _("WhatsApp et partages depuis le téléphone") }}</label>
+                    </div>
+                    <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="display_source_messages" name="display_sources" value="messages" {% if 'messages' in config.display_sources %}checked{% endif %}>
                         <label class="form-check-label ml-2" for="display_source_messages">{{ _('Messages') }}</label>
                     </div>
