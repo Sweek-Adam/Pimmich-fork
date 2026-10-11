@@ -31,6 +31,9 @@ for name in COPIED:
 (_SANDBOX / "static" / "vendor").symlink_to(PROJECT_DIR / "static" / "vendor")  # bibliothèques de l'interface (CSS, JS, icônes)
 shutil.copytree(PROJECT_DIR / "static" / "pwa", _SANDBOX / "static" / "pwa")
 shutil.copytree(PROJECT_DIR / "static" / "fonts", _SANDBOX / "static" / "fonts")
+(_SANDBOX / "static" / "app").symlink_to(PROJECT_DIR / "static" / "app")  # nouvelle interface compilée (lecture seule)
+(_SANDBOX / "frontend").mkdir()
+(_SANDBOX / "frontend" / "src").symlink_to(PROJECT_DIR / "frontend" / "src")  # ses textes à traduire
 (_SANDBOX / "config").mkdir()
 
 # Compte administrateur principal de test

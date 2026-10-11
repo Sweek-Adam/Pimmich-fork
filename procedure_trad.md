@@ -40,12 +40,16 @@ Le processus se déroule en 4 étapes principales.
 
 ### Étape 1 : Extraction des textes à traduire
 
-Cette commande scanne tous les fichiers `.py` et `.html` du projet, recherche les textes marqués pour la traduction (par exemple, `_('Mon texte')`), et crée/met à jour un fichier modèle `messages.pot`.
+Cette commande scanne tous les fichiers `.py` et `.html` du projet, ainsi que la nouvelle interface (`frontend/src`, appels `t('Mon texte')`), recherche les textes marqués pour la traduction (par exemple, `_('Mon texte')`), et crée/met à jour un fichier modèle `messages.pot`.
 
 ```bash
-pybabel extract -F babel.cfg -o translations/messages.pot .
+PYTHONPATH=. pybabel extract -F babel.cfg -k _l -k N_ -o translations/messages.pot .
 ```
-**Note :** N'oubliez pas le `.` à la fin de la commande, qui signifie "analyser le dossier courant".
+**Notes :**
+- N'oubliez pas le `.` à la fin de la commande, qui signifie "analyser le dossier courant".
+- `PYTHONPATH=.` est nécessaire : l'extracteur de la nouvelle interface est dans `utils/babel_frontend.py`.
+- Si l'extraction échoue, `messages.pot` peut se retrouver vide : vérifiez qu'il contient bien des textes
+  (`grep -c '^msgid' translations/messages.pot`) **avant** l'étape 2, sinon toutes les traductions seraient retirées.
 
 ### Étape 2 : Mise à jour des fichiers de langue
 

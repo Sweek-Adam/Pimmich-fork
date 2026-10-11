@@ -598,7 +598,9 @@
                 });
 
                 // --- Logique de restauration de l'état au chargement de la page ---
-                let activeTabId = localStorage.getItem('activeTab') || 'tab-accueil';
+                // Lien direct (#tab-...) : depuis la nouvelle interface ou un favori ; sinon le dernier onglet ouvert
+                const tabFromHash = /^#tab-[a-z_-]+$/.test(location.hash) ? location.hash.slice(1) : null;
+                let activeTabId = tabFromHash || localStorage.getItem('activeTab') || 'tab-accueil';
                 let activeMainGroup = localStorage.getItem('activeMainGroup');
 
                 // Trouver à quel groupe appartient l'onglet actif
