@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 09:05+0200\n"
+"POT-Creation-Date: 2026-10-11 09:43+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -118,29 +118,29 @@ msgstr "(Aniversario) Hace %(num)d año"
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:3008
+#: local_slideshow.py:3073
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:3009
+#: local_slideshow.py:3074
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:3010
+#: local_slideshow.py:3075
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:3011
+#: local_slideshow.py:3076
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3012
+#: local_slideshow.py:3077
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:3038
+#: local_slideshow.py:3103
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -186,7 +186,7 @@ msgid "Compte utilisateur"
 msgstr "Cuenta de usuario"
 
 #: templates/configure.html.jinja:101 templates/login.html.jinja:89
-#: templates/upload.html.jinja:249
+#: templates/upload.html.jinja:286
 msgid "Langue"
 msgstr "Idioma"
 
@@ -320,6 +320,47 @@ msgstr ""
 "Para enviar fotos o un mensaje al marco, pide un enlace nuevo a quien te "
 "invitó."
 
+#: templates/guestbook.html.jinja:6 templates/guestbook.html.jinja:18
+#: templates/upload.html.jinja:66
+msgid "Livre d'or"
+msgstr "Libro de visitas"
+
+#: templates/guestbook.html.jinja:19
+msgid "Tous les messages et dessins laissés sur le cadre."
+msgstr "Todos los mensajes y dibujos dejados en el marco."
+
+#: templates/guestbook.html.jinja:19
+msgid "Laisser un mot"
+msgstr "Dejar un mensaje"
+
+#: templates/guestbook.html.jinja:20
+msgid "Le livre d'or est encore vide : soyez le premier à écrire !"
+msgstr "El libro de visitas aún está vacío: ¡sé el primero en escribir!"
+
+#: templates/guestbook.html.jinja:24
+msgid "Dessin"
+msgstr "Dibujo"
+
+#: templates/guestbook.html.jinja:26 web/routes_guests.py:348
+#: web/routes_guests.py:377
+msgid "Un invité"
+msgstr "Un invitado"
+
+#: templates/configure/_playlist_builder.html.jinja:41
+#: templates/configure/_son_radio.html.jinja:27
+#: templates/configure/tab_affichage.html.jinja:316
+#: templates/configure/tab_dispositions.html.jinja:146
+#: templates/configure/tab_heure.html.jinja:26
+#: templates/configure/tab_maintenance.html.jinja:121
+#: templates/configure/tab_sources.html.jinja:489
+#: templates/guestbook.html.jinja:27
+msgid "Retirer"
+msgstr "Quitar"
+
+#: templates/guestbook.html.jinja:36
+msgid "Retirer cette page du livre d'or ?"
+msgstr "¿Quitar esta página del libro de visitas?"
+
 #: templates/login.html.jinja:7
 msgid "Connexion"
 msgstr "Conexión"
@@ -429,96 +470,105 @@ msgstr "Envía fotos para el marco"
 msgid "Les photos seront soumises à validation avant d'être affichées."
 msgstr "Las fotografías estarán sujetas a validación antes de ser mostradas."
 
-#: templates/upload.html.jinja:77
+#: templates/upload.html.jinja:63
+msgid "En ce moment sur le cadre"
+msgstr "Ahora mismo en el marco"
+
+#: templates/upload.html.jinja:64
+msgid "Photo affichée sur le cadre"
+msgstr "Foto mostrada en el marco"
+
+#: templates/upload.html.jinja:114
 msgid "Envoyer"
 msgstr "Enviar"
 
-#: templates/upload.html.jinja:83
+#: templates/upload.html.jinja:120
 msgid "Écrire un message sur le cadre"
 msgstr "Escribir un mensaje en el marco"
 
-#: templates/configure/tab_messages.html.jinja:9 templates/upload.html.jinja:84
+#: templates/configure/tab_messages.html.jinja:9
+#: templates/upload.html.jinja:121
 msgid "Titre (optionnel)"
 msgstr "Título (opcional)"
 
-#: templates/upload.html.jinja:86
+#: templates/upload.html.jinja:123
 msgid "Votre message…"
 msgstr "Tu mensaje…"
 
-#: templates/upload.html.jinja:88 templates/upload.html.jinja:124
+#: templates/upload.html.jinja:125 templates/upload.html.jinja:161
 msgid "Votre prénom (optionnel)"
 msgstr "Tu nombre (opcional)"
 
 #: templates/configure/tab_messages.html.jinja:64
-#: templates/upload.html.jinja:94
+#: templates/upload.html.jinja:131
 msgid "Aperçu"
 msgstr "Avance"
 
-#: templates/upload.html.jinja:95
+#: templates/upload.html.jinja:132
 msgid "Afficher sur le cadre"
 msgstr "Mostrar en el marco"
 
 #: templates/configure/tab_messages.html.jinja:74
-#: templates/upload.html.jinja:98
+#: templates/upload.html.jinja:135
 msgid "Aperçu du message"
 msgstr "Vista previa del mensaje"
 
-#: templates/upload.html.jinja:99
+#: templates/upload.html.jinja:136
 msgid "Le message reste affiché 7 jours."
 msgstr "El mensaje se muestra durante 7 días."
 
-#: templates/upload.html.jinja:103
+#: templates/upload.html.jinja:140
 msgid "Faire un dessin pour le cadre"
 msgstr "Hacer un dibujo para el marco"
 
-#: templates/upload.html.jinja:104
+#: templates/upload.html.jinja:141
 msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
 msgstr "Dibuja con el dedo, añade pegatinas y envía."
 
-#: templates/upload.html.jinja:108
+#: templates/upload.html.jinja:145
 msgid "Trait fin"
 msgstr "Trazo fino"
 
-#: templates/upload.html.jinja:109
+#: templates/upload.html.jinja:146
 msgid "Trait moyen"
 msgstr "Trazo medio"
 
-#: templates/upload.html.jinja:110
+#: templates/upload.html.jinja:147
 msgid "Trait épais"
 msgstr "Trazo grueso"
 
-#: templates/upload.html.jinja:111
+#: templates/upload.html.jinja:148
 msgid "Gomme"
 msgstr "Goma"
 
 #: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:112
+#: templates/upload.html.jinja:149
 msgid "Annuler"
 msgstr "Cancelar"
 
-#: templates/upload.html.jinja:113
+#: templates/upload.html.jinja:150
 msgid "Tout effacer"
 msgstr "Borrar todo"
 
 #: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:114
+#: templates/upload.html.jinja:151
 msgid "Fond"
 msgstr "Fondo"
 
-#: templates/upload.html.jinja:115
+#: templates/upload.html.jinja:152
 msgid "Papier"
 msgstr "Papel"
 
 #: templates/configure/tab_messages.html.jinja:245
-#: templates/upload.html.jinja:116 utils/message_renderer.py:40
+#: templates/upload.html.jinja:153 utils/message_renderer.py:40
 msgid "Ardoise"
 msgstr "Pizarra"
 
-#: templates/upload.html.jinja:117
+#: templates/upload.html.jinja:154
 msgid "Kraft"
 msgstr "Papel kraft"
 
-#: templates/upload.html.jinja:121
+#: templates/upload.html.jinja:158
 msgid ""
 "Touchez le dessin pour poser l'autocollant (touchez-le à nouveau dans la "
 "liste pour revenir au crayon)."
@@ -526,40 +576,40 @@ msgstr ""
 "Toca el dibujo para colocar la pegatina (vuelve a tocarla en la lista "
 "para volver al lápiz)."
 
-#: templates/upload.html.jinja:125
+#: templates/upload.html.jinja:162
 msgid "Envoyer le dessin"
 msgstr "Enviar el dibujo"
 
-#: templates/upload.html.jinja:216
+#: templates/upload.html.jinja:253
 msgid "Faites d'abord un dessin."
 msgstr "Haz primero un dibujo."
 
-#: templates/upload.html.jinja:227 templates/upload.html.jinja:292
-#: templates/upload.html.jinja:329
+#: templates/upload.html.jinja:264 templates/upload.html.jinja:329
+#: templates/upload.html.jinja:366
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr "Error en el envío. Compruebe la conexión con el marco."
 
-#: templates/upload.html.jinja:237
+#: templates/upload.html.jinja:274
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "Añadir esta página a la pantalla de inicio del teléfono"
 
-#: templates/upload.html.jinja:239
+#: templates/upload.html.jinja:276
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr ""
 "en Safari, toque el botón Compartir y luego « Añadir a pantalla de inicio"
 " »."
 
-#: templates/upload.html.jinja:240
+#: templates/upload.html.jinja:277
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "en Chrome, abra el menú ⋮ y luego « Añadir a pantalla de inicio »."
 
-#: templates/upload.html.jinja:242
+#: templates/upload.html.jinja:279
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr ""
 "Pimmich se abrirá entonces como una aplicación, directamente en esta "
 "página."
 
-#: templates/upload.html.jinja:245
+#: templates/upload.html.jinja:282
 msgid ""
 "Retour à la connexion\n"
 "          administrateur"
@@ -567,11 +617,11 @@ msgstr ""
 "Volver a iniciar sesión\n"
 "          administrador"
 
-#: templates/upload.html.jinja:312
+#: templates/upload.html.jinja:349
 msgid "fichier(s) en cours d'envoi..."
 msgstr "archivo(s) enviándose..."
 
-#: templates/upload.html.jinja:323
+#: templates/upload.html.jinja:360
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Envío demasiado grande: envíe menos archivos a la vez."
 
@@ -699,16 +749,6 @@ msgstr "Ponle un nombre a la playlist."
 #: templates/configure/_playlist_builder.html.jinja:41
 msgid "Toutes"
 msgstr "Todas"
-
-#: templates/configure/_playlist_builder.html.jinja:41
-#: templates/configure/_son_radio.html.jinja:27
-#: templates/configure/tab_affichage.html.jinja:316
-#: templates/configure/tab_dispositions.html.jinja:146
-#: templates/configure/tab_heure.html.jinja:26
-#: templates/configure/tab_maintenance.html.jinja:121
-#: templates/configure/tab_sources.html.jinja:489
-msgid "Retirer"
-msgstr "Quitar"
 
 #: templates/configure/_playlist_builder.html.jinja:43
 #: utils/import_progress.py:13
@@ -1182,7 +1222,7 @@ msgstr "No se encontró ningún ajuste."
 msgid "Enregistrement…"
 msgstr "Guardando…"
 
-#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:275
+#: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:276
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -3571,6 +3611,26 @@ msgstr ""
 "Los mensajes de los invitados se muestran directamente (5 por hora y por "
 "dispositivo como máximo) y desaparecen al cabo de 7 días. Puedes "
 "eliminarlos en Contenido > Mensajes."
+
+#: templates/configure/tab_invites.html.jinja:128
+msgid ""
+"Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
+"😂 😮 👏)"
+msgstr ""
+"Reacciones: los invitados ven la foto mostrada y pueden reaccionar (❤️ 😂 "
+"😮 👏)"
+
+#: templates/configure/tab_invites.html.jinja:130
+msgid ""
+"Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
+"invités restent ensuite dans le livre d'or :"
+msgstr ""
+"Solo desde el Wi-Fi de casa. Los mensajes y dibujos de los invitados se "
+"guardan luego en el libro de visitas:"
+
+#: templates/configure/tab_invites.html.jinja:130
+msgid "ouvrir le livre d'or"
+msgstr "abrir el libro de visitas"
 
 #: templates/configure/tab_legendes.html.jinja:3
 msgid "Style des légendes"
@@ -6757,7 +6817,7 @@ msgstr ""
 msgid "Style enregistré : visible dès la photo suivante."
 msgstr "Estilo guardado: visible desde la próxima foto."
 
-#: web/routes_captions.py:112 web/routes_photos.py:284
+#: web/routes_captions.py:112 web/routes_guests.py:420 web/routes_photos.py:284
 msgid "Photo introuvable."
 msgstr "Foto no encontrada."
 
@@ -6777,12 +6837,12 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el"
 " valor anterior."
 
-#: web/routes_config.py:242
+#: web/routes_config.py:243
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:277
+#: web/routes_config.py:278
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
@@ -6855,10 +6915,6 @@ msgstr "Ya has enviado varios mensajes: inténtalo de nuevo dentro de una hora."
 msgid "Nouveau message d'invité"
 msgstr "Nuevo mensaje de invitado"
 
-#: web/routes_guests.py:348 web/routes_guests.py:377
-msgid "Un invité"
-msgstr "Un invitado"
-
 #: web/routes_guests.py:351
 #, python-format
 msgid "Merci ! Votre message va s'afficher sur le cadre (jusqu'au %(date)s)."
@@ -6878,7 +6934,23 @@ msgstr "%(name)s hizo un dibujo para el marco."
 msgid "Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s)."
 msgstr "¡Gracias! Tu dibujo se mostrará en el marco (hasta el %(date)s)."
 
-#: web/routes_guests.py:413
+#: web/routes_guests.py:411
+msgid "Les réactions sont désactivées."
+msgstr "Las reacciones están desactivadas."
+
+#: web/routes_guests.py:415
+msgid "Doucement ! Réessayez dans un moment."
+msgstr "¡Despacio! Inténtalo de nuevo en un momento."
+
+#: web/routes_guests.py:439
+msgid "Page introuvable."
+msgstr "Página no encontrada."
+
+#: web/routes_guests.py:440
+msgid "Page retirée du livre d'or."
+msgstr "Página quitada del libro de visitas."
+
+#: web/routes_guests.py:479
 msgid ""
 "Lancez d'abord une fois sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
@@ -6886,20 +6958,20 @@ msgstr ""
 "Primero ejecuta una vez en la Raspberry Pi: "
 "~/pimmich/utils/enable_remote_guests.sh"
 
-#: web/routes_guests.py:416
+#: web/routes_guests.py:482
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale rechaza la publicación: %(detail)s"
 
-#: web/routes_guests.py:422
+#: web/routes_guests.py:488
 msgid "Les invités peuvent maintenant envoyer depuis n'importe où, avec le lien."
 msgstr "Los invitados ya pueden enviar desde cualquier lugar, con el enlace."
 
-#: web/routes_guests.py:423
+#: web/routes_guests.py:489
 msgid "La page invités n'est plus accessible depuis internet."
 msgstr "La página de invitados ya no es accesible desde internet."
 
-#: web/routes_guests.py:433
+#: web/routes_guests.py:499
 msgid "Nouveau lien créé : l'ancien ne fonctionne plus."
 msgstr "Nuevo enlace creado: el anterior ya no funciona."
 

@@ -240,6 +240,12 @@
   ]
  ],
  [
+  "/api/guestbook/<entry_id>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
   "/api/hardware",
   [
    "GET"
@@ -663,6 +669,12 @@
   "/api/radio/stop",
   [
    "POST"
+  ]
+ ],
+ [
+  "/api/reactions",
+  [
+   "GET"
   ]
  ],
  [
@@ -1342,6 +1354,12 @@
   ]
  ],
  [
+  "/upload/guestbook",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/upload/message",
   [
    "POST"
@@ -1349,6 +1367,18 @@
  ],
  [
   "/upload/message/preview",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/upload/now",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/upload/react",
   [
    "POST"
   ]

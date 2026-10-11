@@ -381,6 +381,72 @@ def guest_drawing_publish():
     return jsonify({"success": True, "message": _("Merci ! Votre dessin va s'afficher sur le cadre (jusqu'au %(date)s).", date=message["expires"])})
 
 
+# --- Réactions sur la photo affichée, et livre d'or (réseau de la maison seulement) ---
+
+def _now_showing():
+    """Photo affichée en ce moment (chemin relatif à static/), ou None."""
+    try:
+        path = Path(CURRENT_PHOTO_FILE).read_text().strip()
+    except OSError:
+        return None
+    if not path.startswith("prepared/") or "/messages/" in path or not is_slideshow_running():
+        return None
+    return path
+
+
+@app.route('/upload/now', methods=['GET'])
+def guest_now_showing():
+    if not load_config().get("guest_reactions_enabled", True):
+        return jsonify({"success": False, "photo": None}), 403
+    from utils import reactions
+    photo = _now_showing()
+    return jsonify({"success": True, "photo": photo, "url": url_for('static', filename=photo) if photo else None,
+                    "counts": reactions.counts(photo) if photo else {}, "kinds": reactions.KINDS})
+
+
+@app.route('/upload/react', methods=['POST'])
+def guest_react():
+    from utils import reactions
+    if not load_config().get("guest_reactions_enabled", True):
+        return jsonify({"success": False, "message": _("Les réactions sont désactivées.")}), 403
+    data = request.get_json(silent=True) or {}
+    key, _limit = _guest_key()
+    if not rate_limit.allow(("réaction", key), 60, 3600):
+        return jsonify({"success": False, "message": _("Doucement ! Réessayez dans un moment.")}), 429
+    photo = str(data.get("photo") or "")
+    base = (BASE_DIR / "static").resolve()
+    full = (base / photo).resolve()
+    if not photo.startswith("prepared/") or base not in full.parents or not full.is_file():
+        return jsonify({"success": False, "message": _("Photo introuvable.")}), 404
+    try:
+        counts = reactions.add(photo, data.get("kind"), str(data.get("name") or ""))
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    return jsonify({"success": True, "counts": counts})
+
+
+@app.route('/upload/guestbook', methods=['GET'])
+def guest_book_page():
+    from utils import guestbook
+    return render_template('guestbook.html.jinja', entries=guestbook.entries())
+
+
+@app.route('/api/guestbook/<entry_id>', methods=['DELETE'])
+@login_required
+def guest_book_delete(entry_id):
+    from utils import guestbook
+    if not re.fullmatch(r"[0-9a-f]{12}", entry_id) or not guestbook.delete(entry_id):
+        return jsonify({"success": False, "message": _("Page introuvable.")}), 404
+    return jsonify({"success": True, "message": _("Page retirée du livre d'or.")})
+
+
+@app.route('/api/reactions', methods=['GET'])
+@login_required
+def reactions_api():
+    from utils import reactions
+    return jsonify({"success": True, "recent": reactions.recent(), "most_loved": reactions.most_loved(), "kinds": reactions.KINDS})
+
+
 # --- Invités hors de la maison (Tailscale Funnel) ---
 
 def _remote_entry_ready():

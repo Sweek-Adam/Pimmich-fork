@@ -211,6 +211,7 @@ def configure():
         config["show_clock"] = 'show_clock' in request.form
         config["show_guest_qr"] = 'show_guest_qr' in request.form
         config["guest_messages_enabled"] = 'guest_messages_enabled' in request.form
+        config["guest_reactions_enabled"] = 'guest_reactions_enabled' in request.form
         config["compositions_include_messages"] = 'compositions_include_messages' in request.form
         if 'compositions_form' in request.form:  # on enregistre les formats décochés : un nouveau format sera actif par défaut
             checked = set(request.form.getlist('compositions_styles'))

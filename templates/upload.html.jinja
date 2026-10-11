@@ -59,6 +59,43 @@
       <p class="text-center text-gray-600 mb-6">{{ _('Les photos seront soumises à validation avant d\'être affichées.')
         }}</p>
 
+      <div id="now-box" class="hidden mb-6 text-center">
+        <h2 class="text-xl font-semibold mb-2">{{ _('En ce moment sur le cadre') }}</h2>
+        <img id="now-photo" class="w-full rounded-lg shadow" alt="{{ _('Photo affichée sur le cadre') }}">
+        <div id="now-reactions" class="flex justify-center gap-2 mt-3"></div>
+        <a href="{{ url_for('guest_book_page') }}" class="inline-block mt-3 text-blue-600 underline text-sm">📖 {{ _("Livre d'or") }}</a>
+      </div>
+      <script>
+        (() => {
+          const $ = (id) => document.getElementById(id);
+          let shown = null;
+          async function refresh() {
+            let d;
+            try { d = await (await fetch("{{ url_for('guest_now_showing') }}")).json(); } catch (e) { return; }
+            $("now-box").classList.toggle("hidden", !d.photo);
+            if (!d.photo) return;
+            if (d.photo !== shown) { $("now-photo").src = d.url; shown = d.photo; }
+            render(d.kinds, d.counts);
+          }
+          function render(kinds, counts) {
+            $("now-reactions").innerHTML = "";
+            Object.entries(kinds).forEach(([kind, emoji]) => {
+              const b = document.createElement("button"); b.type = "button";
+              b.className = "px-3 py-2 rounded-full border bg-white text-lg";
+              b.textContent = `${emoji} ${counts[kind] || ""}`.trim();
+              b.addEventListener("click", async () => {
+                b.disabled = true;
+                const r = await (await fetch("{{ url_for('guest_react') }}", { method: "POST", headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ photo: shown, kind }) })).json();
+                b.disabled = false;
+                if (r.success) { render(kinds, r.counts); b.animate([{ transform: "scale(1.4)" }, { transform: "scale(1)" }], 300); }
+              });
+              $("now-reactions").appendChild(b);
+            });
+          }
+          refresh(); setInterval(refresh, 8000);
+        })();
+      </script>
       <form id="upload-form" method="POST" action="{{ url_for('handle_upload') }}" enctype="multipart/form-data">
         <div class="mb-4">
           <input type="file" name="photos" multiple required accept="image/*,video/*"

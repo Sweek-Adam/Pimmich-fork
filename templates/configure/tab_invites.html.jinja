@@ -123,5 +123,10 @@
                         <label class="form-check-label ml-2" for="guest_messages_enabled">{{ _("Autoriser les invités à écrire des messages") }}</label>
                     </div>
                     <p class="text-sm text-gray-600">{{ _("Les messages des invités s'affichent directement (5 par heure et par appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les supprimer dans Contenu > Messages.") }}</p>
+                    <div class="form-check form-switch my-3">
+                        <input class="form-check-input" type="checkbox" id="guest_reactions_enabled" name="guest_reactions_enabled" {% if config.get('guest_reactions_enabled', True) %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="guest_reactions_enabled">{{ _("Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ 😂 😮 👏)") }}</label>
+                    </div>
+                    <p class="text-sm text-gray-600">{{ _("Seulement depuis le Wi-Fi de la maison. Les messages et dessins des invités restent ensuite dans le livre d'or :") }} <a class="link" href="{{ url_for('guest_book_page') }}" target="_blank">{{ _("ouvrir le livre d'or") }}</a></p>
                 </fieldset>
             </div>

@@ -8,7 +8,7 @@ import pytest
 from conftest import ADMIN_USERNAME, login
 
 SAME_ORIGIN = {"Sec-Fetch-Site": "same-origin"}
-PUBLIC_RULES = {"/", "/login", "/logout", "/upload", "/handle_upload", "/upload/message", "/upload/message/preview", "/upload/share", "/upload/drawing",
+PUBLIC_RULES = {"/", "/login", "/logout", "/upload", "/handle_upload", "/upload/message", "/upload/message/preview", "/upload/share", "/upload/drawing", "/upload/now", "/upload/react", "/upload/guestbook",
                 "/rebooting", "/api/ping", "/static/<path:filename>"}
 SNAPSHOT = Path(__file__).with_name("routes_snapshot.json")
 

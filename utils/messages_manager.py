@@ -221,7 +221,17 @@ def create_message(title, body, signature, style, expires, author, width, height
         _save(messages)
     if on_air(message):
         push_priority(path)
+    if guest:
+        _archive(message, path)
     return message
+
+
+def _archive(message, path):
+    try:
+        from utils import guestbook
+        guestbook.archive(message, path)
+    except Exception:
+        pass  # le livre d'or ne doit jamais empêcher un message de s'afficher
 
 
 def _update(message_id, **fields):
@@ -351,6 +361,8 @@ def create_drawing(data, signature, author, width, height, guest=True):
         messages.append(message)
         _save(messages)
     push_priority(_path(message))
+    if guest:
+        _archive(message, _path(message))
     return message
 
 

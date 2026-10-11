@@ -2185,6 +2185,67 @@ def display_title_slide(screen, screen_width, screen_height, title, duration, co
 
 # Fonction pour afficher une image et l'heure                        
 
+def _reaction_shape(surface, kind, center, size):
+    x, y = center
+    if kind == "love":  # cœur
+        points = []
+        for k in range(40):
+            t = 2 * math.pi * k / 40
+            px = 16 * math.sin(t) ** 3
+            py = 13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)
+            points.append((x + px * size / 34, y - py * size / 34))
+        pygame.draw.polygon(surface, (235, 50, 80), points)
+    elif kind in ("laugh", "wow"):  # visage
+        pygame.draw.circle(surface, (255, 205, 60), (int(x), int(y)), int(size / 2))
+        eye = max(2, int(size / 12))
+        pygame.draw.circle(surface, (60, 40, 20), (int(x - size / 6), int(y - size / 8)), eye)
+        pygame.draw.circle(surface, (60, 40, 20), (int(x + size / 6), int(y - size / 8)), eye)
+        if kind == "laugh":
+            pygame.draw.arc(surface, (60, 40, 20), (x - size / 4, y - size / 8, size / 2, size / 3), math.pi, 2 * math.pi, max(2, int(size / 14)))
+        else:
+            pygame.draw.circle(surface, (60, 40, 20), (int(x), int(y + size / 6)), max(3, int(size / 9)))
+    else:  # étoile (bravo)
+        points = []
+        for k in range(10):
+            r = size / 2 if k % 2 == 0 else size / 5
+            a = -math.pi / 2 + k * math.pi / 5
+            points.append((x + r * math.cos(a), y + r * math.sin(a)))
+        pygame.draw.polygon(surface, (255, 200, 40), points)
+
+
+def reaction_burst(screen, background, kind, seconds=2.5):
+    """Une réaction d'invité s'envole sur la photo (une dizaine de symboles qui montent)."""
+    width, height = screen.get_size()
+    rng = random.Random()
+    items = [{"x": rng.uniform(width * 0.55, width * 0.95), "y": height + rng.uniform(0, height * 0.3), "size": rng.uniform(height * 0.04, height * 0.09),
+              "speed": rng.uniform(height * 0.25, height * 0.45), "phase": rng.uniform(0, 6.28)} for _ in range(12)]
+    start = last = time.time()
+    while time.time() - start < seconds:
+        now = time.time()
+        dt, last = now - last, now
+        screen.blit(background, (0, 0))
+        for item in items:
+            item["y"] -= item["speed"] * dt
+            _reaction_shape(screen, kind, (item["x"] + math.sin(now * 2 + item["phase"]) * 20, item["y"]), item["size"])
+        pygame.display.flip()
+        time.sleep(1 / 25)
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
+
+
+def check_reaction(screen, photo_path, since):
+    """Réaction d'un invité arrivée pour la photo affichée : animation. Renvoie l'horodatage de la dernière vérification."""
+    try:
+        from utils import reactions
+        event = reactions.latest_event(since)
+        if event and photo_path and str(Path(photo_path)).endswith(event["photo"]):
+            reaction_burst(screen, screen.copy(), event["kind"])
+            return event["at"]
+    except Exception as e:
+        logger.debug(f"Réaction : {e}")
+    return since
+
+
 def weather_particles(config, screen_width, screen_height):
     """Particules de pluie / neige si le temps actuel s'y prête (et si l'animation est activée)."""
     if config.get("weather_animation", "start") == "off" or not config.get("show_weather", False):
@@ -2275,6 +2336,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
             weather_fx = weather_particles(config, screen_width, screen_height)
             fx_background = screen.copy() if weather_fx else None
             last_frame = time.time()
+            reaction_since = time.time()
             # Boucle d'attente pour rester réactif aux signaux
             start_sleep = time.time()
             while time.time() - start_sleep < display_duration:
@@ -2321,6 +2383,9 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                     if weather_fx:
                         fx_background = screen.copy()
                     pygame.display.flip()
+
+                # Réaction d'un invité (❤️...) sur cette photo : elle s'envole à l'écran
+                reaction_since = check_reaction(screen, photo_path, reaction_since)
 
                 # Météo animée : pluie ou neige sur la photo (au début de l'affichage, ou tout le temps)
                 if weather_fx and weather_fx_wanted(config, time.time() - start_sleep):
