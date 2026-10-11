@@ -242,6 +242,12 @@
             }
 
             document.addEventListener("click", (event) => {
+                const smart = event.target.closest(".edit-smart-album-btn");
+                if (smart && window.openSmartAlbum) {
+                    const album = (window.__playlists || []).find(p => p.id === smart.dataset.id);
+                    if (album) window.openSmartAlbum(album);
+                    return;
+                }
                 const btn = event.target.closest(".edit-playlist-photos-btn");
                 if (!btn || !window.openPlaylistBuilder) return;
                 const playlist = (window.__playlists || []).find(p => p.id === btn.dataset.id);
@@ -322,7 +328,9 @@
                         <p class="text-sm text-gray-500" id="photo-count-${playlist.id}">${photoCountText}</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-3">
-                        <button type="button" class="edit-playlist-photos-btn btn-secondary text-sm" data-id="${playlist.id}"><i class="fas fa-images mr-1"></i>{{ _("Choisir les photos") }}</button>
+                        ${playlist.smart
+                            ? `<span class="smart-badge"><i class="fas fa-magic"></i> {{ _("Album intelligent") }}</span><button type="button" class="edit-smart-album-btn btn-secondary text-sm" data-id="${playlist.id}"><i class="fas fa-sliders-h mr-1"></i>{{ _("Modifier les règles") }}</button>`
+                            : `<button type="button" class="edit-playlist-photos-btn btn-secondary text-sm" data-id="${playlist.id}"><i class="fas fa-images mr-1"></i>{{ _("Choisir les photos") }}</button>`}
                         <select class="playlist-layout-select text-sm rounded-md border-gray-300 shadow-sm" data-playlist-id="${playlist.id}" title="{{ _('Disposition de la playlist') }}">
                             ${layoutOptionsHtml(playlist.layout || "auto")}
                         </select>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 08:13+0200\n"
+"POT-Creation-Date: 2026-10-11 08:18+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -204,6 +204,7 @@ msgid "Importer"
 msgstr "Importieren"
 
 #: templates/configure.html.jinja:118
+#: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr "Quellen"
 
@@ -526,6 +527,7 @@ msgid "Volume du cadre"
 msgstr "Lautstärke des Rahmens"
 
 #: templates/configure/_playlist_builder.html.jinja:6
+#: templates/configure/_smart_albums.html.jinja:13
 #: templates/configure/tab_accueil.html.jinja:84
 #: templates/configure/tab_legendes.html.jinja:27
 msgid "Fermer"
@@ -605,7 +607,7 @@ msgid "Nouvelle playlist"
 msgstr "Neue Playlist"
 
 #: templates/configure/_playlist_builder.html.jinja:40
-#: templates/configure/scripts_main.html.jinja:325
+#: templates/configure/scripts_main.html.jinja:333
 msgid "Choisir les photos"
 msgstr "Fotos auswählen"
 
@@ -654,9 +656,114 @@ msgid "E-mail"
 msgstr "E-Mail"
 
 #: templates/configure/_playlist_builder.html.jinja:45
+#: templates/configure/_smart_albums.html.jinja:28
 #: templates/configure/tab_sources.html.jinja:66 utils/import_progress.py:13
 msgid "Personnes"
 msgstr "Personen"
+
+#: templates/configure/_smart_albums.html.jinja:3
+msgid "Albums intelligents"
+msgstr "Intelligente Alben"
+
+#: templates/configure/_smart_albums.html.jinja:4
+msgid ""
+"Ils se remplissent tout seuls d'après la date, les personnes ou le lieu "
+"des photos, et accueillent les nouvelles photos dès leur arrivée."
+msgstr ""
+"Sie füllen sich selbst nach Datum, Personen oder Ort der Fotos und nehmen"
+" neue Fotos auf, sobald sie ankommen."
+
+#: templates/configure/_smart_albums.html.jinja:6
+msgid "Créer un album intelligent"
+msgstr "Intelligentes Album erstellen"
+
+#: templates/configure/_smart_albums.html.jinja:12
+#: templates/configure/scripts_main.html.jinja:332
+msgid "Album intelligent"
+msgstr "Intelligentes Album"
+
+#: templates/configure/_smart_albums.html.jinja:16
+#: templates/configure/tab_comptes.html.jinja:58
+msgid "Nom"
+msgstr "Name"
+
+#: templates/configure/_smart_albums.html.jinja:17
+msgid "ex : Les enfants, Été 2025, Noël en famille"
+msgstr "z. B. Die Kinder, Sommer 2025, Weihnachten mit der Familie"
+
+#: templates/configure/_smart_albums.html.jinja:19
+msgid "Période de l'année"
+msgstr "Jahreszeit"
+
+#: templates/configure/_smart_albums.html.jinja:21
+msgid "Toute l'année"
+msgstr "Ganzes Jahr"
+
+#: templates/configure/_smart_albums.html.jinja:22
+msgid "du"
+msgstr "vom"
+
+#: templates/configure/_smart_albums.html.jinja:22
+msgid "au"
+msgstr "bis"
+
+#: templates/configure/_smart_albums.html.jinja:22
+msgid "(mois-jour)"
+msgstr "(Monat-Tag)"
+
+#: templates/configure/_smart_albums.html.jinja:25
+msgid "Années"
+msgstr "Jahre"
+
+#: templates/configure/_smart_albums.html.jinja:31
+msgid "Toutes ensemble sur la photo (sinon : au moins une)"
+msgstr "Alle zusammen auf dem Foto (sonst: mindestens eine)"
+
+#: templates/configure/_smart_albums.html.jinja:34
+msgid "Lieu"
+msgstr "Ort"
+
+#: templates/configure/_smart_albums.html.jinja:35
+msgid "ex : Biarritz, Italie"
+msgstr "z. B. Biarritz, Italien"
+
+#: templates/configure/_smart_albums.html.jinja:40
+msgid "Autres"
+msgstr "Sonstiges"
+
+#: templates/configure/_smart_albums.html.jinja:42
+msgid "Favoris uniquement"
+msgstr "Nur Favoriten"
+
+#: templates/configure/_smart_albums.html.jinja:44
+#: templates/configure/tab_legendes.html.jinja:7
+msgid "Photos et vidéos"
+msgstr "Fotos und Videos"
+
+#: templates/configure/_smart_albums.html.jinja:45
+msgid "Photos seulement"
+msgstr "Nur Fotos"
+
+#: templates/configure/_smart_albums.html.jinja:46
+msgid "Vidéos seulement"
+msgstr "Nur Videos"
+
+#: templates/configure/_smart_albums.html.jinja:56
+msgid "Enregistrer l'album"
+msgstr "Album speichern"
+
+#: templates/configure/_smart_albums.html.jinja:79
+#, python-brace-format
+msgid "{n} photos"
+msgstr "{n} Fotos"
+
+#: templates/configure/_smart_albums.html.jinja:79
+msgid "Dates précises…"
+msgstr "Genaue Daten…"
+
+#: templates/configure/_smart_albums.html.jinja:79
+msgid "Aucune pour l'instant"
+msgstr "Noch keine"
 
 #: templates/configure/_son_radio.html.jinja:2
 msgid "Radios et podcasts"
@@ -1013,7 +1120,7 @@ msgstr "Speichern fehlgeschlagen: Prüfe die Verbindung zum Rahmen."
 
 #: templates/configure/scripts_gallery.html.jinja:8
 #: templates/configure/scripts_gallery.html.jinja:36
-#: templates/configure/scripts_main.html.jinja:1308
+#: templates/configure/scripts_main.html.jinja:1316
 #: templates/configure/scripts_status.html.jinja:745
 #: templates/configure/tab_heure.html.jinja:292
 #: templates/configure/tab_heure.html.jinja:295
@@ -1115,17 +1222,17 @@ msgstr "Klicken Sie, um dieses Netzwerk auszuwählen"
 
 #: templates/configure/scripts_gallery.html.jinja:34
 #: templates/configure/scripts_gallery.html.jinja:116
-#: templates/configure/scripts_main.html.jinja:1371
-#: templates/configure/scripts_main.html.jinja:1413
+#: templates/configure/scripts_main.html.jinja:1379
+#: templates/configure/scripts_main.html.jinja:1421
 msgid "Test en cours..."
 msgstr "Test läuft..."
 
 #: templates/configure/scripts_gallery.html.jinja:35
 #: templates/configure/scripts_gallery.html.jinja:130
 #: templates/configure/scripts_gallery.html.jinja:277
-#: templates/configure/scripts_main.html.jinja:1396
-#: templates/configure/scripts_main.html.jinja:1430
-#: templates/configure/scripts_main.html.jinja:1663
+#: templates/configure/scripts_main.html.jinja:1404
+#: templates/configure/scripts_main.html.jinja:1438
+#: templates/configure/scripts_main.html.jinja:1671
 #: templates/configure/scripts_status.html.jinja:111
 #: templates/configure/scripts_status.html.jinja:269
 msgid "Erreur de communication avec le serveur."
@@ -1161,7 +1268,7 @@ msgstr "Bitte geben Sie einen Namen für den Gast ein."
 
 #: templates/configure/scripts_gallery.html.jinja:44
 #: templates/configure/scripts_gallery.html.jinja:273
-#: templates/configure/scripts_main.html.jinja:994
+#: templates/configure/scripts_main.html.jinja:1002
 #: templates/configure/scripts_status.html.jinja:159
 msgid "Erreur :"
 msgstr "Fehler :"
@@ -1217,7 +1324,7 @@ msgid "Erreur lors du chargement des playlists."
 msgstr "Fehler beim Laden der Playlists."
 
 #: templates/configure/scripts_gallery.html.jinja:57
-#: templates/configure/scripts_main.html.jinja:1087
+#: templates/configure/scripts_main.html.jinja:1095
 msgid "Lancer"
 msgstr "Lancer"
 
@@ -1294,31 +1401,35 @@ msgstr "Nur dieses Format"
 msgid "Uniquement ce thème"
 msgstr "Nur dieses Thema"
 
-#: templates/configure/scripts_main.html.jinja:309
+#: templates/configure/scripts_main.html.jinja:315
 msgid "Retirer de la playlist"
 msgstr "Aus Playlist entfernen"
 
-#: templates/configure/scripts_main.html.jinja:320
+#: templates/configure/scripts_main.html.jinja:326
 msgid "Afficher/Cacher les photos"
 msgstr "Fotos ein-/ausblenden"
 
-#: templates/configure/scripts_main.html.jinja:326
+#: templates/configure/scripts_main.html.jinja:332
+msgid "Modifier les règles"
+msgstr "Regeln bearbeiten"
+
+#: templates/configure/scripts_main.html.jinja:334
 msgid "Disposition de la playlist"
 msgstr "Anordnung der Playlist"
 
-#: templates/configure/scripts_main.html.jinja:980
+#: templates/configure/scripts_main.html.jinja:988
 msgid "Veuillez entrer un nom pour la playlist."
 msgstr "Bitte geben Sie einen Namen für die Playlist ein."
 
-#: templates/configure/scripts_main.html.jinja:996
-#: templates/configure/scripts_main.html.jinja:1082
-#: templates/configure/scripts_main.html.jinja:1805
+#: templates/configure/scripts_main.html.jinja:1004
+#: templates/configure/scripts_main.html.jinja:1090
+#: templates/configure/scripts_main.html.jinja:1813
 #: templates/configure/scripts_status.html.jinja:92
 #: templates/configure/scripts_status.html.jinja:164
 msgid "Erreur de communication."
 msgstr "Kommunikationsfehler."
 
-#: templates/configure/scripts_main.html.jinja:1010
+#: templates/configure/scripts_main.html.jinja:1018
 msgid ""
 "Êtes-vous sûr de vouloir supprimer cette playlist ? Les photos ne seront "
 "pas supprimées."
@@ -1326,57 +1437,57 @@ msgstr ""
 "Sind Sie sicher, dass Sie diese Playlist löschen möchten? Fotos werden "
 "nicht gelöscht."
 
-#: templates/configure/scripts_main.html.jinja:1066
+#: templates/configure/scripts_main.html.jinja:1074
 msgid "Erreur lors de la suppression de la photo."
 msgstr "Fehler beim Löschen des Fotos."
 
-#: templates/configure/scripts_main.html.jinja:1072
+#: templates/configure/scripts_main.html.jinja:1080
 msgid "Lancement..."
 msgstr "Start..."
 
-#: templates/configure/scripts_main.html.jinja:1142
+#: templates/configure/scripts_main.html.jinja:1150
 msgid "Aucune playlist"
 msgstr "Keine Playlist"
 
-#: templates/configure/scripts_main.html.jinja:1182
+#: templates/configure/scripts_main.html.jinja:1190
 msgid "Import en cours..."
 msgstr "Import läuft..."
 
-#: templates/configure/scripts_main.html.jinja:1211
+#: templates/configure/scripts_main.html.jinja:1219
 msgid "Préparation :"
 msgstr "Vorbereitung:"
 
-#: templates/configure/scripts_main.html.jinja:1220
+#: templates/configure/scripts_main.html.jinja:1228
 msgid "Préparation terminée ! Redémarrage du diaporama..."
 msgstr "Vorbereitung abgeschlossen! Die Diashow wird neu gestartet..."
 
-#: templates/configure/scripts_main.html.jinja:1227
+#: templates/configure/scripts_main.html.jinja:1235
 msgid "Diaporama redémarré. Rechargement de la page..."
 msgstr "Diashow neu gestartet. Seite wird neu geladen..."
 
-#: templates/configure/scripts_main.html.jinja:1236
+#: templates/configure/scripts_main.html.jinja:1244
 msgid "Données de préparation invalides reçues du serveur."
 msgstr "Ungültige Staging-Daten vom Server empfangen."
 
-#: templates/configure/scripts_main.html.jinja:1244
+#: templates/configure/scripts_main.html.jinja:1252
 msgid "Erreur de connexion au serveur pour la préparation des photos."
 msgstr ""
 "Fehler beim Herstellen der Verbindung zum Server zum Vorbereiten von "
 "Fotos."
 
-#: templates/configure/scripts_main.html.jinja:1256
+#: templates/configure/scripts_main.html.jinja:1264
 msgid "Importation :"
 msgstr "Einfuhr:"
 
-#: templates/configure/scripts_main.html.jinja:1266
+#: templates/configure/scripts_main.html.jinja:1274
 msgid "Données d'import invalides reçues du serveur."
 msgstr "Ungültige Importdaten vom Server empfangen."
 
-#: templates/configure/scripts_main.html.jinja:1274
+#: templates/configure/scripts_main.html.jinja:1282
 msgid "Erreur de connexion au serveur pour l'import"
 msgstr "Fehler beim Herstellen der Verbindung zum Server für den Import"
 
-#: templates/configure/scripts_main.html.jinja:1296
+#: templates/configure/scripts_main.html.jinja:1304
 msgid ""
 "Méthode modifiée : cliquez sur « Afficher mes dossiers Google Drive » "
 "pour choisir à nouveau les dossiers."
@@ -1384,7 +1495,7 @@ msgstr ""
 "Methode geändert: Klicken Sie auf „Meine Google Drive-Ordner anzeigen“, "
 "um die Ordner erneut auszuwählen."
 
-#: templates/configure/scripts_main.html.jinja:1329
+#: templates/configure/scripts_main.html.jinja:1337
 msgid ""
 "Aucun dossier trouvé. Avez-vous partagé vos dossiers avec l'adresse du "
 "compte de service ?"
@@ -1392,62 +1503,62 @@ msgstr ""
 "Keine Ordner gefunden. Haben Sie Ihre Ordner mit der Adresse des "
 "Dienstkontos geteilt?"
 
-#: templates/configure/scripts_main.html.jinja:1348
+#: templates/configure/scripts_main.html.jinja:1356
 msgid "dossier(s) trouvé(s)"
 msgstr "Ordner gefunden"
 
-#: templates/configure/scripts_main.html.jinja:1588
+#: templates/configure/scripts_main.html.jinja:1596
 msgid "Aucune donnée de marée à afficher."
 msgstr "Es können keine Gezeitendaten angezeigt werden."
 
-#: templates/configure/scripts_main.html.jinja:1591
+#: templates/configure/scripts_main.html.jinja:1599
 msgid "Impossible de charger les données."
 msgstr "Daten können nicht geladen werden."
 
-#: templates/configure/scripts_main.html.jinja:1596
+#: templates/configure/scripts_main.html.jinja:1604
 msgid "Erreur de connexion au serveur."
 msgstr "Serververbindungsfehler."
 
-#: templates/configure/scripts_main.html.jinja:1645
+#: templates/configure/scripts_main.html.jinja:1653
 msgid "Mise à jour en cours..."
 msgstr "Aktualisierung läuft..."
 
-#: templates/configure/scripts_main.html.jinja:1690
+#: templates/configure/scripts_main.html.jinja:1698
 msgid "Veuillez sélectionner au moins un fichier."
 msgstr "Bitte wählen Sie mindestens eine Datei aus."
 
-#: templates/configure/scripts_main.html.jinja:1699
+#: templates/configure/scripts_main.html.jinja:1707
 msgid "Envoi en cours..."
 msgstr "Der Versand läuft..."
 
-#: templates/configure/scripts_main.html.jinja:1722
+#: templates/configure/scripts_main.html.jinja:1730
 msgid "Importation réussie ! Rechargement de la page..."
 msgstr "Import erfolgreich! Seite wird neu geladen..."
 
-#: templates/configure/scripts_main.html.jinja:1731
-#: templates/configure/scripts_main.html.jinja:1764
+#: templates/configure/scripts_main.html.jinja:1739
+#: templates/configure/scripts_main.html.jinja:1772
 #: templates/configure/tab_actions.html.jinja:106
 msgid "Envoyer les photos"
 msgstr "Senden Sie Fotos"
 
-#: templates/configure/scripts_main.html.jinja:1751
+#: templates/configure/scripts_main.html.jinja:1759
 msgid "Données invalides reçues du serveur."
 msgstr "Ungültige Daten vom Server empfangen."
 
-#: templates/configure/scripts_main.html.jinja:1762
+#: templates/configure/scripts_main.html.jinja:1770
 msgid "Erreur de communication :"
 msgstr "Kommunikationsfehler:"
 
-#: templates/configure/scripts_main.html.jinja:1793
+#: templates/configure/scripts_main.html.jinja:1801
 msgid "Envoi..."
 msgstr "Wird gesendet..."
 
-#: templates/configure/scripts_main.html.jinja:1808
+#: templates/configure/scripts_main.html.jinja:1816
 #: templates/configure/tab_actions.html.jinja:192
 msgid "Uploader"
 msgstr "Hochladen"
 
-#: templates/configure/scripts_main.html.jinja:1822
+#: templates/configure/scripts_main.html.jinja:1830
 msgid "Supprimer le fichier musical"
 msgstr "Musikdatei löschen"
 
@@ -2502,10 +2613,6 @@ msgstr ""
 "Zugriff auf Konten, Netzwerk oder Wartung und sehen keine gespeicherten "
 "Passwörter und Token."
 
-#: templates/configure/tab_comptes.html.jinja:58
-msgid "Nom"
-msgstr "Name"
-
 #: templates/configure/tab_comptes.html.jinja:59
 #: templates/configure/tab_comptes.html.jinja:116
 msgid "Rôle"
@@ -3222,10 +3329,6 @@ msgstr ""
 "Kontur, Schatten, Position und Neigung. Ein Foto oder Video kann auch "
 "einen eigenen Stil haben (Palettensymbol unter seiner Bildunterschrift, "
 "im Tab Vorschau)."
-
-#: templates/configure/tab_legendes.html.jinja:7
-msgid "Photos et vidéos"
-msgstr "Fotos und Videos"
 
 #: templates/configure/tab_legendes.html.jinja:7
 msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
@@ -4251,7 +4354,7 @@ msgstr ""
 msgid "Choisissez les photos d'un coup, par source, année, mois ou favoris."
 msgstr "Wählen Sie Fotos auf einmal aus – nach Quelle, Jahr, Monat oder Favoriten."
 
-#: templates/configure/tab_playlists.html.jinja:70
+#: templates/configure/tab_playlists.html.jinja:72
 msgid "Vos Playlists"
 msgstr "Vos-Playlists"
 
@@ -5453,7 +5556,8 @@ msgstr "Zen"
 msgid "Une photo à la fois, lente, avec un léger mouvement."
 msgstr "Ein Foto nach dem anderen, langsam, mit leichter Bewegung."
 
-#: utils/ambiances.py:57 utils/themed_compositions.py:627
+#: utils/ambiances.py:57 utils/smart_albums.py:29
+#: utils/themed_compositions.py:627
 msgid "Halloween"
 msgstr "Halloween"
 
@@ -5463,7 +5567,8 @@ msgid ""
 "fantômes."
 msgstr "Kürbisse und Fledermäuse; Nachrichten erscheinen in kleinen Gespenstern."
 
-#: utils/ambiances.py:65 utils/themed_compositions.py:626
+#: utils/ambiances.py:65 utils/smart_albums.py:28
+#: utils/themed_compositions.py:626
 msgid "Noël"
 msgstr "Weihnachten"
 
@@ -5791,6 +5896,26 @@ msgstr "Rahmenprobleme (Strom, Hitze, Speicher)"
 msgid "Imports terminés"
 msgstr "Abgeschlossene Importe"
 
+#: utils/smart_albums.py:24
+msgid "Été"
+msgstr "Sommer"
+
+#: utils/smart_albums.py:25 utils/themed_compositions_extra.py:625
+msgid "Automne"
+msgstr "Herbst"
+
+#: utils/smart_albums.py:26 utils/themed_compositions_extra.py:626
+msgid "Hiver"
+msgstr "Winter"
+
+#: utils/smart_albums.py:27 utils/themed_compositions_extra.py:624
+msgid "Printemps"
+msgstr "Frühling"
+
+#: utils/smart_albums.py:30
+msgid "Saint-Valentin"
+msgstr "Valentinstag"
+
 #: utils/themed_compositions.py:224
 msgid "Joyeux Noël"
 msgstr "Frohe Weihnachten"
@@ -5965,18 +6090,6 @@ msgstr "Hokusai – Die große Welle"
 msgid "Espace"
 msgstr "Weltall"
 
-#: utils/themed_compositions_extra.py:624
-msgid "Printemps"
-msgstr "Frühling"
-
-#: utils/themed_compositions_extra.py:625
-msgid "Automne"
-msgstr "Herbst"
-
-#: utils/themed_compositions_extra.py:626
-msgid "Hiver"
-msgstr "Winter"
-
 #: utils/themed_compositions_extra.py:627
 msgid "Anniversaire"
 msgstr "Geburtstag"
@@ -5993,23 +6106,23 @@ msgstr "Comic"
 msgid "Album ancien"
 msgstr "Altes Album"
 
-#: web/core.py:931
+#: web/core.py:936
 msgid "Code d'invitation invalide."
 msgstr "Ungültiger Einladungscode."
 
-#: web/core.py:937
+#: web/core.py:942
 msgid "Ce code d'invitation a expiré."
 msgstr "Dieser Einladungscode ist abgelaufen."
 
-#: web/core.py:943
+#: web/core.py:948
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "Sie sind bereits berechtigt. Senden Sie mir ein Foto!"
 
-#: web/core.py:945
+#: web/core.py:950
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "Dieser Einladungscode wurde bereits verwendet."
 
-#: web/core.py:956
+#: web/core.py:961
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
@@ -6657,42 +6770,42 @@ msgstr "Folge nicht gefunden."
 msgid "Dernier épisode lancé : %(title)s"
 msgstr "Neueste Folge läuft: %(title)s"
 
-#: web/routes_people.py:52
+#: web/routes_people.py:54
 #, python-format
 msgid "Photos de %(name)s"
 msgstr "Fotos von %(name)s"
 
-#: web/routes_people.py:87
+#: web/routes_people.py:89
 msgid "Configurez d'abord Immich (adresse et clé API)."
 msgstr "Richte zuerst Immich ein (Adresse und API-Schlüssel)."
 
-#: web/routes_people.py:93
+#: web/routes_people.py:95
 #, python-format
 msgid "Immich ne répond pas : %(error)s"
 msgstr "Immich antwortet nicht: %(error)s"
 
-#: web/routes_people.py:94
+#: web/routes_people.py:96
 #, python-format
 msgid "%(count)s personne(s) trouvée(s) dans Immich."
 msgstr "%(count)s Person(en) in Immich gefunden."
 
-#: web/routes_people.py:101 web/routes_people.py:119
+#: web/routes_people.py:103 web/routes_people.py:121
 msgid "Personne inconnue."
 msgstr "Unbekannte Person."
 
-#: web/routes_people.py:108
+#: web/routes_people.py:110
 msgid "Import de toutes ses photos depuis Immich lancé."
 msgstr "Import aller ihrer Fotos aus Immich gestartet."
 
-#: web/routes_people.py:109
+#: web/routes_people.py:111
 msgid "Ses photos importées seront retirées du cadre."
 msgstr "Ihre importierten Fotos werden vom Rahmen entfernt."
 
-#: web/routes_people.py:121
+#: web/routes_people.py:123
 msgid "Playlist créée : elle se met à jour toute seule."
 msgstr "Playlist erstellt: Sie aktualisiert sich von selbst."
 
-#: web/routes_people.py:124
+#: web/routes_people.py:126
 msgid ""
 "Aucune photo de cette personne sur le cadre pour l'instant : suivez-la "
 "pour importer ses photos."
@@ -6774,6 +6887,27 @@ msgstr "Konfiguration aktiviert."
 #: web/routes_slideshow.py:572
 msgid "Configuration supprimée."
 msgstr "Konfiguration gelöscht."
+
+#: web/routes_smart_albums.py:13
+msgid "Noël en famille"
+msgstr "Weihnachten mit der Familie"
+
+#: web/routes_smart_albums.py:63
+msgid "Donnez un nom à l'album."
+msgstr "Gib dem Album einen Namen."
+
+#: web/routes_smart_albums.py:66
+msgid "Choisissez au moins un critère (période, personnes, lieu...)."
+msgstr "Wähle mindestens ein Kriterium (Zeitraum, Personen, Ort...)."
+
+#: web/routes_smart_albums.py:71
+msgid "Une playlist porte déjà ce nom."
+msgstr "Es gibt bereits eine Playlist mit diesem Namen."
+
+#: web/routes_smart_albums.py:78
+#, python-format
+msgid "Album « %(name)s » : %(count)s photos, mis à jour automatiquement."
+msgstr "Album „%(name)s“: %(count)s Fotos, wird automatisch aktualisiert."
 
 #: web/routes_system.py:84
 msgid ""

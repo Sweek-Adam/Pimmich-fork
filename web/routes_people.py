@@ -23,6 +23,8 @@ def run_people_refresh(config=None):
         if is_slideshow_running():
             restart_slideshow_for_update()
     _sync_playlists()
+    from web.routes_smart_albums import refresh_smart_albums
+    refresh_smart_albums()  # albums « personnes »
     return result
 
 

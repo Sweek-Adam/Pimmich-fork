@@ -663,6 +663,9 @@ def load_favorites():
         return []
 
 
+ON_FAVORITES_CHANGED = []  # fonctions appelées après un changement de favoris (ex. albums intelligents « favoris »)
+
+
 def save_favorites(favorites_list):
     """Sauvegarde la liste des photos favorites dans un fichier JSON."""
     try:
@@ -670,6 +673,8 @@ def save_favorites(favorites_list):
             json.dump(favorites_list, f, indent=2)
     except Exception as e:
         logger.info(f"😒 Erreur lors de la sauvegarde des favoris : {e}")
+    for callback in list(ON_FAVORITES_CHANGED):
+        callback()
 
 
 def load_polaroid_texts():
