@@ -62,6 +62,7 @@ SETTINGS = {
     "display_width": ("int", (240, 7680), 1920),
     "display_height": ("int", (240, 7680), 1080),
     "screen_height_percent": ("int", (10, 100), 100),
+    "display_backend": ("choice", ["x11", "wayland"], "x11"),
     # Télévision et prise connectée
     "cec_enabled": ("bool", None, False),
     "smart_plug_enabled": ("bool", None, False),

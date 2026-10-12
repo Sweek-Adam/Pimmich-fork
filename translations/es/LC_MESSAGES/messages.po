@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-11 21:48+0200\n"
+"POT-Creation-Date: 2026-10-12 07:41+0200\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -18,129 +18,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1486
+#: local_slideshow.py:1491
 msgid "Photos & messages"
 msgstr "Fotos y mensajes"
 
-#: local_slideshow.py:1696
+#: local_slideshow.py:1701
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "Hace %(num)d año"
 
-#: local_slideshow.py:1696
+#: local_slideshow.py:1701
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "Hace %(num)d años"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "enero"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "febrero"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "marzo"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "abril"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "mayo"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "junio"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "julio"
 
-#: local_slideshow.py:1697 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "agosto"
 
-#: local_slideshow.py:1698 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "septiembre"
 
-#: local_slideshow.py:1698 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "octubre"
 
-#: local_slideshow.py:1698 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "noviembre"
 
-#: local_slideshow.py:1698 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "diciembre"
 
-#: local_slideshow.py:1997
+#: local_slideshow.py:2002
 msgid "Données de marée non disponibles"
 msgstr "Datos de mareas no disponibles"
 
-#: local_slideshow.py:2080
+#: local_slideshow.py:2085
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Aniversario) Hace %(num)d año"
 
-#: local_slideshow.py:2080
+#: local_slideshow.py:2085
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:3278
+#: local_slideshow.py:3290
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:3279
+#: local_slideshow.py:3291
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:3280
+#: local_slideshow.py:3292
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:3281
+#: local_slideshow.py:3293
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3282
+#: local_slideshow.py:3294
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:3308
+#: local_slideshow.py:3320
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -411,7 +411,7 @@ msgid "Ajouter"
 msgstr "Añadir"
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:109
+#: frontend/src/views/DisplayView.vue:112
 msgid "Bouton physique"
 msgstr "Botón físico"
 
@@ -2662,10 +2662,32 @@ msgid "Hauteur d'affichage cible (px) :"
 msgstr "Altura de visualización de destino (px):"
 
 #: frontend/src/views/DisplayView.vue:33
+msgid "Mode d'affichage du diaporama"
+msgstr "Modo de visualización de la presentación"
+
+#: frontend/src/views/DisplayView.vue:34
+msgid ""
+"Wayland natif : environ 85 Mo de mémoire en moins (Xwayland n'est plus "
+"nécessaire). Le changement prend effet au prochain démarrage du Raspberry"
+" Pi."
+msgstr ""
+"Wayland nativo: unos 85 MB menos de memoria (Xwayland ya no es "
+"necesario). El cambio se aplica en el próximo arranque de la Raspberry "
+"Pi."
+
+#: frontend/src/views/DisplayView.vue:35
+msgid "X11 (via Xwayland, éprouvé)"
+msgstr "X11 (vía Xwayland, probado)"
+
+#: frontend/src/views/DisplayView.vue:35
+msgid "Wayland natif (plus léger)"
+msgstr "Wayland nativo (más ligero)"
+
+#: frontend/src/views/DisplayView.vue:36
 msgid "Hauteur utile de l'écran"
 msgstr "Altura útil de la pantalla"
 
-#: frontend/src/views/DisplayView.vue:34
+#: frontend/src/views/DisplayView.vue:37
 msgid ""
 "Pour un écran dont le bas est caché par le cadre : les photos n'occupent "
 "que cette partie de la hauteur."
@@ -2673,164 +2695,164 @@ msgstr ""
 "Para una pantalla cuya parte inferior queda oculta por el marco: las "
 "fotos solo ocupan esta parte de la altura."
 
-#: frontend/src/views/DisplayView.vue:36
+#: frontend/src/views/DisplayView.vue:39
 #: templates/configure/tab_affichage.html.jinja:64
 msgid "Horaires Semaine (Lun-Ven)"
 msgstr "Horario semanal (lunes a viernes)"
 
-#: frontend/src/views/DisplayView.vue:37 frontend/src/views/DisplayView.vue:41
+#: frontend/src/views/DisplayView.vue:40 frontend/src/views/DisplayView.vue:44
 #: templates/configure/tab_affichage.html.jinja:65
 #: templates/configure/tab_affichage.html.jinja:72
 msgid "Allumage :"
 msgstr "Encendido:"
 
-#: frontend/src/views/DisplayView.vue:38 frontend/src/views/DisplayView.vue:42
+#: frontend/src/views/DisplayView.vue:41 frontend/src/views/DisplayView.vue:45
 #: templates/configure/tab_affichage.html.jinja:67
 #: templates/configure/tab_affichage.html.jinja:74
 msgid "Extinction :"
 msgstr "Extinción:"
 
-#: frontend/src/views/DisplayView.vue:40
+#: frontend/src/views/DisplayView.vue:43
 #: templates/configure/tab_affichage.html.jinja:71
 msgid "Horaires Weekend (Sam-Dim)"
 msgstr "Horario de fin de semana (sábado-domingo)"
 
-#: frontend/src/views/DisplayView.vue:44
+#: frontend/src/views/DisplayView.vue:47
 #: templates/configure/tab_affichage.html.jinja:81
 msgid "Le soir et la nuit"
 msgstr "Por la tarde y por la noche"
 
-#: frontend/src/views/DisplayView.vue:45
+#: frontend/src/views/DisplayView.vue:48
 #: templates/configure/tab_affichage.html.jinja:83
 msgid "Baisser la luminosité le soir"
 msgstr "Bajar el brillo por la tarde"
 
-#: frontend/src/views/DisplayView.vue:45
+#: frontend/src/views/DisplayView.vue:48
 #: templates/configure/tab_affichage.html.jinja:100
 msgid "La baisse se fait en douceur (45 minutes) et dure jusqu'au matin."
 msgstr "La bajada es progresiva (45 minutos) y dura hasta la mañana."
 
-#: frontend/src/views/DisplayView.vue:46
+#: frontend/src/views/DisplayView.vue:49
 #: templates/configure/tab_affichage.html.jinja:86
 msgid "À partir de :"
 msgstr "A partir de:"
 
-#: frontend/src/views/DisplayView.vue:47
+#: frontend/src/views/DisplayView.vue:50
 #: templates/configure/tab_affichage.html.jinja:89
 msgid "Une heure précise"
 msgstr "Una hora concreta"
 
-#: frontend/src/views/DisplayView.vue:47
+#: frontend/src/views/DisplayView.vue:50
 #: templates/configure/tab_affichage.html.jinja:90
 msgid "Le coucher du soleil"
 msgstr "La puesta de sol"
 
-#: frontend/src/views/DisplayView.vue:48
+#: frontend/src/views/DisplayView.vue:51
 #: templates/configure/tab_affichage.html.jinja:96
 msgid "Luminosité du soir :"
 msgstr "Brillo por la tarde:"
 
-#: frontend/src/views/DisplayView.vue:49
+#: frontend/src/views/DisplayView.vue:52
 #: templates/configure/tab_affichage.html.jinja:101
 msgid "En dehors des heures d'affichage :"
 msgstr "Fuera del horario de visualización:"
 
-#: frontend/src/views/DisplayView.vue:50
+#: frontend/src/views/DisplayView.vue:53
 #: templates/configure/tab_affichage.html.jinja:104
 msgid "Écran éteint"
 msgstr "Pantalla apagada"
 
-#: frontend/src/views/DisplayView.vue:50
+#: frontend/src/views/DisplayView.vue:53
 #: templates/configure/tab_affichage.html.jinja:105
 msgid "Horloge de nuit (l'heure seule, en couleur douce)"
 msgstr "Reloj nocturno (solo la hora, en un color suave)"
 
-#: frontend/src/views/DisplayView.vue:51
+#: frontend/src/views/DisplayView.vue:54
 #: templates/configure/tab_affichage.html.jinja:109
 msgid "Luminosité :"
 msgstr "Brillo:"
 
-#: frontend/src/views/DisplayView.vue:52
+#: frontend/src/views/DisplayView.vue:55
 #: templates/configure/tab_affichage.html.jinja:113
 msgid "Couleur :"
 msgstr "Color:"
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Ambre"
 msgstr "Ámbar"
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Rouge"
 msgstr "Rojo"
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Blanc"
 msgstr "Blanco"
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Bleu"
 msgstr "Azul"
 
-#: frontend/src/views/DisplayView.vue:54
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:121
 msgid "Afficher la date"
 msgstr "Mostrar la fecha"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:59
 msgid "Transitions et mouvement"
 msgstr "Transiciones y movimiento"
 
-#: frontend/src/views/DisplayView.vue:57
+#: frontend/src/views/DisplayView.vue:60
 #: templates/configure/tab_affichage.html.jinja:186
 msgid "Activer l'effet de transition entre les photos"
 msgstr "Habilitar el efecto de transición entre fotos"
 
-#: frontend/src/views/DisplayView.vue:58
+#: frontend/src/views/DisplayView.vue:61
 #: templates/configure/tab_affichage.html.jinja:195
 msgid "Type de transition :"
 msgstr "Tipo de transición:"
 
-#: frontend/src/views/DisplayView.vue:59
+#: frontend/src/views/DisplayView.vue:62
 #: templates/configure/tab_affichage.html.jinja:190
 msgid "Durée de transition (secondes) :"
 msgstr "Duración de la transición (segundos):"
 
-#: frontend/src/views/DisplayView.vue:60
+#: frontend/src/views/DisplayView.vue:63
 #: templates/configure/tab_affichage.html.jinja:210
 msgid "Caler le rythme sur la musique de fond (changement de photo sur le temps)"
 msgstr "Sincronizar con la música de fondo (cambio de foto al ritmo)"
 
-#: frontend/src/views/DisplayView.vue:61
+#: frontend/src/views/DisplayView.vue:64
 #: templates/configure/tab_affichage.html.jinja:214
 msgid "Fréquence d'images (FPS) :"
 msgstr "Fotogramas por segundo (FPS):"
 
-#: frontend/src/views/DisplayView.vue:62
+#: frontend/src/views/DisplayView.vue:65
 #: templates/configure/tab_affichage.html.jinja:216
 msgid "Automatique (30 FPS sur Pi 3, 60 FPS sinon)"
 msgstr "Automático (30 FPS en Pi 3, 60 FPS en los demás)"
 
-#: frontend/src/views/DisplayView.vue:63
+#: frontend/src/views/DisplayView.vue:66
 #: templates/configure/tab_affichage.html.jinja:176
 msgid "Activer l'effet Pan/Zoom sur les photos"
 msgstr "Habilitar el efecto Pan/Zoom en las fotos"
 
-#: frontend/src/views/DisplayView.vue:64
+#: frontend/src/views/DisplayView.vue:67
 msgid "Amplitude du zoom"
 msgstr "Amplitud del zoom"
 
-#: frontend/src/views/DisplayView.vue:66 frontend/src/views/HomeView.vue:224
+#: frontend/src/views/DisplayView.vue:69 frontend/src/views/HomeView.vue:224
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
 msgid "Ce jour-là"
 msgstr "Tal día como hoy"
 
-#: frontend/src/views/DisplayView.vue:67
+#: frontend/src/views/DisplayView.vue:70
 #: templates/configure/tab_affichage.html.jinja:240
 msgid ""
 "Les photos prises un jour comme aujourd'hui, les années précédentes "
@@ -2840,30 +2862,30 @@ msgstr ""
 "Fotos tomadas un día como hoy en años anteriores (todas las fuentes: "
 "fecha de la cámara o del nombre del archivo para WhatsApp y teléfonos)."
 
-#: frontend/src/views/DisplayView.vue:69
+#: frontend/src/views/DisplayView.vue:72
 #: templates/configure/tab_affichage.html.jinja:242
 msgid "Ruban « Il y a 5 ans » sur ces photos"
 msgstr "Cinta «Hace 5 años» en estas fotos"
 
-#: frontend/src/views/DisplayView.vue:70
+#: frontend/src/views/DisplayView.vue:73
 msgid "Composition « Ce jour-là » (une photo par année)"
 msgstr "Composición «Este día» (una foto por año)"
 
-#: frontend/src/views/DisplayView.vue:71 frontend/src/views/DisplayView.vue:81
+#: frontend/src/views/DisplayView.vue:74 frontend/src/views/DisplayView.vue:84
 msgid "Toutes les (minutes)"
 msgstr "Cada (minutos)"
 
-#: frontend/src/views/DisplayView.vue:72
+#: frontend/src/views/DisplayView.vue:75
 #: templates/configure/tab_affichage.html.jinja:231
 msgid "Activer le boost pour les photos à leur date anniversaire de prise de vue"
 msgstr "Habilite el impulso para las fotos en el aniversario de su toma."
 
-#: frontend/src/views/DisplayView.vue:73
+#: frontend/src/views/DisplayView.vue:76
 #: templates/configure/tab_affichage.html.jinja:235
 msgid "Facteur de boost anniversaire :"
 msgstr "Factor de impulso de cumpleaños:"
 
-#: frontend/src/views/DisplayView.vue:74
+#: frontend/src/views/DisplayView.vue:77
 #: templates/configure/tab_affichage.html.jinja:222
 msgid ""
 "Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
@@ -2872,16 +2894,16 @@ msgstr ""
 "Frecuencia de favoritos (número de adiciones adicionales a la lista de "
 "reproducción):"
 
-#: frontend/src/views/DisplayView.vue:75
+#: frontend/src/views/DisplayView.vue:78
 #: templates/configure/tab_affichage.html.jinja:225
 msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "Ej: 0 = sin impulso, 2 = 3 veces más posibilidades de aparecer."
 
-#: frontend/src/views/DisplayView.vue:77
+#: frontend/src/views/DisplayView.vue:80
 msgid "Agenda « Cette semaine »"
 msgstr "Agenda «Esta semana»"
 
-#: frontend/src/views/DisplayView.vue:78
+#: frontend/src/views/DisplayView.vue:81
 msgid ""
 "Les événements des 7 prochains jours et vos comptes à rebours (réglés "
 "dans Horloge & météo)."
@@ -2889,63 +2911,63 @@ msgstr ""
 "Los eventos de los próximos 7 días y tus cuentas atrás (en Reloj y "
 "tiempo)."
 
-#: frontend/src/views/DisplayView.vue:80
+#: frontend/src/views/DisplayView.vue:83
 #: templates/configure/tab_heure.html.jinja:5
 msgid "Afficher la diapositive « Cette semaine »"
 msgstr "Mostrar la diapositiva «Esta semana»"
 
-#: frontend/src/views/DisplayView.vue:83 frontend/src/views/LibraryView.vue:116
+#: frontend/src/views/DisplayView.vue:86 frontend/src/views/LibraryView.vue:116
 msgid "Vidéos"
 msgstr "Vídeos"
 
-#: frontend/src/views/DisplayView.vue:84
+#: frontend/src/views/DisplayView.vue:87
 #: templates/configure/tab_affichage.html.jinja:248
 msgid "Afficher les vidéos dans le diaporama"
 msgstr "Mostrar vídeos en presentación de diapositivas"
 
-#: frontend/src/views/DisplayView.vue:85
+#: frontend/src/views/DisplayView.vue:88
 #: templates/configure/tab_affichage.html.jinja:253
 msgid "Activer le son pour les vidéos"
 msgstr "Habilitar sonido para videos"
 
-#: frontend/src/views/DisplayView.vue:86
+#: frontend/src/views/DisplayView.vue:89
 #: templates/configure/tab_affichage.html.jinja:264
 msgid "Sortie audio :"
 msgstr "Salida de audio:"
 
-#: frontend/src/views/DisplayView.vue:87
+#: frontend/src/views/DisplayView.vue:90
 #: templates/configure/tab_affichage.html.jinja:267
 msgid "Automatique"
 msgstr "Automático"
 
-#: frontend/src/views/DisplayView.vue:87
+#: frontend/src/views/DisplayView.vue:90
 #: templates/configure/tab_affichage.html.jinja:269
 msgid "HDMI"
 msgstr "HDMI"
 
-#: frontend/src/views/DisplayView.vue:87
+#: frontend/src/views/DisplayView.vue:90
 #: templates/configure/tab_affichage.html.jinja:271
 msgid "Jack 3.5mm (Casque)"
 msgstr "Conector de 3,5 mm (auriculares)"
 
-#: frontend/src/views/DisplayView.vue:88 frontend/src/views/VoiceView.vue:32
+#: frontend/src/views/DisplayView.vue:91 frontend/src/views/VoiceView.vue:32
 #: templates/configure/tab_affichage.html.jinja:276
 msgid "Volume :"
 msgstr "Volumen :"
 
-#: frontend/src/views/DisplayView.vue:89
+#: frontend/src/views/DisplayView.vue:92
 #: templates/configure/tab_affichage.html.jinja:286
 msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "Bajar la música durante los vídeos (luego vuelve)"
 
-#: frontend/src/views/DisplayView.vue:90
+#: frontend/src/views/DisplayView.vue:93
 #: templates/configure/tab_affichage.html.jinja:258
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr ""
 "Habilitar la decodificación de vídeo por hardware (más fluido, pero puede"
 " ser inestable)"
 
-#: frontend/src/views/DisplayView.vue:91
+#: frontend/src/views/DisplayView.vue:94
 #: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
@@ -2954,16 +2976,16 @@ msgstr ""
 "Marque esta casilla para una reproducción más fluida en Raspberry Pis. "
 "Desmarque si experimenta pantallas azules/negras después de los videos."
 
-#: frontend/src/views/DisplayView.vue:93
+#: frontend/src/views/DisplayView.vue:96
 msgid "Télévision"
 msgstr "Televisión"
 
-#: frontend/src/views/DisplayView.vue:94
+#: frontend/src/views/DisplayView.vue:97
 #: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Controlar la televisión por HDMI-CEC"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:98
 #: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
@@ -2974,12 +2996,12 @@ msgstr ""
 "entra en reposo con él. Activa también «HDMI-CEC» (Anynet+, Bravia Sync, "
 "SimpLink...) en los ajustes del televisor."
 
-#: frontend/src/views/DisplayView.vue:97
+#: frontend/src/views/DisplayView.vue:100
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Gestión de energía (enchufe conectado)"
 
-#: frontend/src/views/DisplayView.vue:98
+#: frontend/src/views/DisplayView.vue:101
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -2990,23 +3012,23 @@ msgstr ""
 "conectado (Wi-Fi) para apagarla. Pimmich enviará una solicitud HTTP "
 "simple a las URL que especifique."
 
-#: frontend/src/views/DisplayView.vue:100
+#: frontend/src/views/DisplayView.vue:103
 msgid "Activer le contrôle par prise connectée"
 msgstr "Activar el control por enchufe inteligente"
 
-#: frontend/src/views/DisplayView.vue:101
+#: frontend/src/views/DisplayView.vue:104
 msgid "URL pour ALLUMER la prise :"
 msgstr "URL para ENCENDER el enchufe:"
 
-#: frontend/src/views/DisplayView.vue:102
+#: frontend/src/views/DisplayView.vue:105
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr "URL para APAGAR el enchufe:"
 
-#: frontend/src/views/DisplayView.vue:103
+#: frontend/src/views/DisplayView.vue:106
 msgid "Délai après allumage (secondes) :"
 msgstr "Retraso tras el encendido (segundos):"
 
-#: frontend/src/views/DisplayView.vue:104
+#: frontend/src/views/DisplayView.vue:107
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
@@ -3015,21 +3037,21 @@ msgstr ""
 "Es hora de esperar a que la pantalla se inicialice antes de forzar la "
 "resolución. Aumente si la resolución aún es incorrecta."
 
-#: frontend/src/views/DisplayView.vue:105
+#: frontend/src/views/DisplayView.vue:108
 msgid "URL de Statut (Optionnel) :"
 msgstr "URL de estado (opcional):"
 
-#: frontend/src/views/DisplayView.vue:106
+#: frontend/src/views/DisplayView.vue:109
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Token de acceso de Home Assistant (si es la URL de estado HA):"
 
-#: frontend/src/views/DisplayView.vue:107
+#: frontend/src/views/DisplayView.vue:110
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Cree un \"Token de acceso a largo plazo\" en su perfil de Home Assistant."
 
-#: frontend/src/views/DisplayView.vue:110
+#: frontend/src/views/DisplayView.vue:113
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
@@ -3037,11 +3059,11 @@ msgstr ""
 "Un botón conectado a la Raspberry Pi: una pulsación pone el marco en "
 "reposo y otra lo despierta."
 
-#: frontend/src/views/DisplayView.vue:112
+#: frontend/src/views/DisplayView.vue:115
 msgid "Activer le bouton physique"
 msgstr "Activar el botón físico"
 
-#: frontend/src/views/DisplayView.vue:113
+#: frontend/src/views/DisplayView.vue:116
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "Pin GPIO (numeración BCM)"
 
@@ -3772,7 +3794,7 @@ msgstr ""
 "Temas de temporada solo durante su periodo (y más frecuentes en ese "
 "momento)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:363
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:364
 msgid "Gardez au moins une disposition."
 msgstr "Mantén al menos una disposición."
 
@@ -6840,9 +6862,9 @@ msgid "Enregistrement…"
 msgstr "Guardando…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:319 web/routes_settings.py:373
-#: web/routes_settings.py:395 web/routes_settings.py:447
-#: web/routes_settings.py:471 web/routes_settings.py:481
+#: web/routes_settings.py:320 web/routes_settings.py:374
+#: web/routes_settings.py:396 web/routes_settings.py:448
+#: web/routes_settings.py:472 web/routes_settings.py:482
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -9747,13 +9769,13 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el"
 " valor anterior."
 
-#: web/routes_config.py:253 web/routes_settings.py:480
+#: web/routes_config.py:253 web/routes_settings.py:481
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:314
-#: web/routes_settings.py:371 web/routes_settings.py:445
+#: web/routes_config.py:281 web/routes_settings.py:315
+#: web/routes_settings.py:372 web/routes_settings.py:446
 msgid "Réglages modifiés"
 msgstr "Ajustes modificados"
 
@@ -9765,8 +9787,8 @@ msgstr ""
 "Configuración guardada. La presentación de diapositivas se reinició para "
 "aplicar los cambios."
 
-#: web/routes_family.py:26 web/routes_settings.py:360
-#: web/routes_settings.py:465
+#: web/routes_family.py:26 web/routes_settings.py:361
+#: web/routes_settings.py:466
 msgid "Liste invalide."
 msgstr "Lista no válida."
 
@@ -10656,29 +10678,29 @@ msgstr "Playlist no encontrada."
 msgid "Citation du jour enregistrée."
 msgstr "Cita del día guardada."
 
-#: web/routes_settings.py:289
+#: web/routes_settings.py:290
 msgid "Aucun réglage à enregistrer."
 msgstr "Ningún ajuste que guardar."
 
-#: web/routes_settings.py:293
+#: web/routes_settings.py:294
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Ajuste desconocido: %(key)s"
 
-#: web/routes_settings.py:297
+#: web/routes_settings.py:298
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Valor no válido para «%(key)s»."
 
-#: web/routes_settings.py:390
+#: web/routes_settings.py:391
 msgid "Valeur invalide."
 msgstr "Valor no válido."
 
-#: web/routes_settings.py:395
+#: web/routes_settings.py:396
 msgid "Supprimé."
 msgstr "Eliminado."
 
-#: web/routes_settings.py:438 web/routes_storage.py:114
+#: web/routes_settings.py:439 web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Fuente desconocida."
 

@@ -266,6 +266,11 @@ def duck_music(on, config, previous=None):
     return None
 
 
+def wayland_native(config):
+    """Réglage « display_backend » : le diaporama s'affiche directement en Wayland (sinon en X11, via Xwayland)."""
+    return config.get("display_backend", "x11") == "wayland" and bool(os.environ.get("WAYLAND_DISPLAY"))
+
+
 def reinit_pygame():
     """Quitte et réinitialise complètement Pygame et les ressources associées."""
     logger.debug(f"📸 Réinitialisation complète de Pygame...")
@@ -2796,6 +2801,8 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
             # MODIFICATION: Sur Pi 4/5, x11 est trop lent. On utilise gpu même en mode logiciel.
             if pi_model in [4, 5]:
                 command.extend(['--hwdec=no', '--vo=gpu'])
+            elif wayland_native(config):
+                command.extend(['--hwdec=no', '--vo=wlshm'])  # sans Xwayland : sortie Wayland logicielle
             else:
                 command.extend(['--hwdec=no', '--vo=x11'])
 
@@ -2949,6 +2956,11 @@ def start_slideshow():
         except Exception as e:
             logger.warning(f"😒 Orientation de l'écran : {e}")
 
+        # Affichage en Wayland natif (sans Xwayland : environ 85 Mo de mémoire en moins) ou en X11 (via Xwayland)
+        if wayland_native(config):
+            os.environ["SDL_VIDEODRIVER"] = "wayland"
+            os.environ["SDL_VIDEO_WAYLAND_WMCLASS"] = "pimmich"  # app_id de la fenêtre (règle plein écran de Sway)
+            os.environ["SDL_APP_ID"] = "pimmich"
         # ✅ NOUVEAU : Initialiser uniquement les modules d'affichage et de police pour économiser du CPU (éviter d'init le mixer)
         pygame.display.init()
         pygame.font.init()

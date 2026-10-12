@@ -324,6 +324,7 @@ fi
 if ! grep -q 'app_id="mpv"' "$SWAY_CONFIG_FILE" 2>/dev/null; then
     echo 'for_window [app_id="mpv"] floating enable, border none, fullscreen enable' >> "$SWAY_CONFIG_FILE"
     echo 'for_window [class="python3"] floating enable, border none, fullscreen enable' >> "$SWAY_CONFIG_FILE"
+    echo 'for_window [app_id="pimmich"] floating enable, border none, fullscreen enable' >> "$SWAY_CONFIG_FILE"
 fi
 
 chown -R "$REAL_USER:$REAL_USER" "$SWAY_CONFIG_DIR"  # créé avec sudo : rendu à l'utilisateur (mises à jour)
