@@ -383,7 +383,7 @@ To have the frame update itself every day at 4:30 am:
 
 - Run it **without `sudo`**. It adds a line to your crontab (`crontab -l` to see it); `--time 03:15` picks another time, `--off` turns automatic updates off.
 - Every night, `utils/auto_update.sh` checks GitHub for something new. If there is, it runs the same update as the interface button, then restarts Pimmich. If the new version crashes at startup, Pimmich goes back to the previous one on its own.
-- With `--system`, system packages are updated too (`apt-get upgrade`, then `apt-get autoremove` to remove packages no longer needed), without an automatic reboot. The log says when a reboot is advised.
+- With `--system`, system packages are updated too (`apt-get full-upgrade`, new kernels included, then `apt-get autoremove` to remove packages no longer needed), without an automatic reboot. The log says when a reboot is advised.
 - Nothing is done during a sync (rclone) or another update: it waits for the next night.
 - Log: `~/pimmich/logs/auto_update.log`.
 
