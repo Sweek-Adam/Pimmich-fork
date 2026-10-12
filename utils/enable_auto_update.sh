@@ -53,4 +53,4 @@ fi
 
 echo "✅ Mise à jour automatique chaque jour à $TIME${SYSTEM:+ (Pimmich et système)}."
 echo "   Ligne de la crontab : $LINE"
-echo "   Journal : $(dirname "$SCRIPT")/../logs/auto_update.log"
+echo "   Journal : $(cd "$(dirname "$SCRIPT")/.." && pwd)/logs/auto_update.log"
