@@ -362,6 +362,21 @@ The slideshow code can handle a sleep button (GPIO 23 by default, wired to groun
 
 **Automatic rollback**: if the new version crashes 3 times in a row within 90 seconds of starting, `start_pimmich.sh` goes back to the previous version on its own. The new version is confirmed after about 2 minutes of normal operation. The "**Go back to the previous version**" button also lets you roll back by hand.
 
+### Automatic nightly update (crontab)
+
+To have the frame update itself every day at 4:30 am:
+
+```bash
+~/pimmich/utils/enable_auto_update.sh            # Pimmich only
+~/pimmich/utils/enable_auto_update.sh --system   # Pimmich + system packages (asks for the password once)
+```
+
+- Run it **without `sudo`**. It adds a line to your crontab (`crontab -l` to see it); `--time 03:15` picks another time, `--off` turns automatic updates off.
+- Every night, `utils/auto_update.sh` checks GitHub for something new. If there is, it runs the same update as the interface button, then restarts Pimmich. If the new version crashes at startup, Pimmich goes back to the previous one on its own.
+- With `--system`, system packages are updated too (`apt-get upgrade`), without an automatic reboot. The log says when a reboot is advised.
+- Nothing is done during a sync (rclone) or another update: it waits for the next night.
+- Log: `~/pimmich/logs/auto_update.log`.
+
 ### Update over SSH (`git pull`)
 
 ```bash

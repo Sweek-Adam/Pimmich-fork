@@ -362,6 +362,21 @@ Le code du diaporama sait gérer un bouton de mise en veille (GPIO 23 par défau
 
 **Retour arrière automatique** : si la nouvelle version plante 3 fois de suite dans les 90 secondes après son lancement, `start_pimmich.sh` revient tout seul à la version précédente. La nouvelle version est validée après environ 2 minutes de fonctionnement normal. Le bouton « **Revenir à la version précédente** » permet aussi de revenir en arrière à la main.
 
+### Mise à jour automatique chaque nuit (crontab)
+
+Pour que le cadre se mette à jour tout seul, chaque jour à 4 h 30 :
+
+```bash
+~/pimmich/utils/enable_auto_update.sh            # Pimmich seulement
+~/pimmich/utils/enable_auto_update.sh --system   # Pimmich + paquets du système (demande le mot de passe une fois)
+```
+
+- Lancez-le **sans `sudo`**. Il ajoute une ligne à votre crontab (`crontab -l` pour la voir) ; `--time 03:15` choisit une autre heure, `--off` coupe la mise à jour automatique.
+- Chaque nuit, `utils/auto_update.sh` regarde s'il y a du nouveau sur GitHub. Si oui, il fait la même mise à jour que le bouton de l'interface, puis relance Pimmich. Si la nouvelle version plante au démarrage, Pimmich revient tout seul à la précédente.
+- Avec `--system`, les paquets du système sont aussi mis à jour (`apt-get upgrade`), sans redémarrage automatique. Le journal signale quand un redémarrage est conseillé.
+- Rien n'est fait pendant une synchronisation (rclone) ou une autre mise à jour : ce sera pour la nuit suivante.
+- Journal : `~/pimmich/logs/auto_update.log`.
+
 ### Mettre à jour en SSH (`git pull`)
 
 ```bash
