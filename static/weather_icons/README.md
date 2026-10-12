@@ -2,6 +2,10 @@
 
 Ce dossier est destiné à contenir les icônes météo utilisées par le diaporama.
 
+## Icônes fournies
+
+Toutes les icônes des codes OpenWeatherMap (`01d` à `50n`, jour et nuit) sont présentes. Celles qui manquaient ont été dessinées par `utils/make_weather_icons.py` (dessins originaux, même style plat) : relancez-le pour recréer une icône supprimée, ou avec `--all` pour toutes les redessiner.
+
 ## Comment obtenir les icônes ?
 
 Pimmich utilise les codes d'icônes de l'API OpenWeatherMap. Vous devez télécharger les images correspondantes et les placer dans ce dossier.
