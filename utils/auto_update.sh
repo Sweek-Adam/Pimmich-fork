@@ -64,7 +64,11 @@ elif [ "$SYSTEM" = 1 ]; then
         sudo -n DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y -q autoremove >> "$LOG" 2>&1 || log "Nettoyage (autoremove) impossible."
         sudo -n /usr/bin/apt-get -q autoclean >> "$LOG" 2>&1 || true
         log "Paquets du système à jour (et paquets inutiles retirés)."
-        [ -f /var/run/reboot-required ] && log "Un redémarrage est conseillé pour terminer certaines mises à jour du système."
+        # Raspberry Pi OS ne crée pas toujours /var/run/reboot-required : on compare aussi le noyau installé à celui en cours
+        NEWEST=$(ls /lib/modules 2> /dev/null | grep -- "$(uname -r | sed 's/^[0-9.]*//')$" | sort -V | tail -1)
+        if [ -f /var/run/reboot-required ] || { [ -n "$NEWEST" ] && [ "$NEWEST" != "$(uname -r)" ]; }; then
+            log "Un redémarrage est conseillé pour terminer les mises à jour du système (noyau ${NEWEST:-mis à jour})."
+        fi
     else
         log "Mise à jour du système impossible (droits sudo ? réseau ?) : voir ci-dessus."
     fi
