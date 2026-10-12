@@ -2,14 +2,15 @@
 Agenda familial et comptes à rebours, affichés sur le cadre (diapositive « Cette semaine »).
 
 - Agenda : adresse iCal secrète d'un agenda (Google Agenda : Paramètres > « Adresse secrète au format iCal »),
-  lue sans compte ni connexion ; événements récurrents annuels (anniversaires) et hebdomadaires gérés ;
+  lue sans compte ni connexion ; répétitions iCal complètes (python-dateutil), exceptions et occurrences déplacées ;
 - comptes à rebours : événements saisis dans l'interface (vacances, mariage...).
 """
 import re
 import time
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 import requests
+from dateutil.rrule import rrulestr
 
 CACHE_SECONDS = 30 * 60
 _cache = {"url": None, "at": 0, "events": []}
@@ -21,10 +22,14 @@ def _unfold(text):
 
 
 def _parse_date(value):
+    """Date iCal -> (datetime local sans fuseau, journée entière ?). Les heures UTC (« Z ») passent à l'heure locale."""
     value = value.strip()
     try:
         if "T" in value:
-            return datetime.strptime(value[:15], "%Y%m%dT%H%M%S"), False
+            moment = datetime.strptime(value[:15], "%Y%m%dT%H%M%S")
+            if value.endswith("Z"):
+                moment = moment.replace(tzinfo=timezone.utc).astimezone().replace(tzinfo=None)
+            return moment, False
         return datetime.strptime(value[:8], "%Y%m%d"), True
     except ValueError:
         return None, True
@@ -35,11 +40,14 @@ def _unescape(text):
 
 
 def parse_ics(text):
-    """Événements d'un fichier iCal : [{title, start (datetime), all_day, rrule}]."""
+    """
+    Événements d'un fichier iCal : [{title, start (datetime), all_day, rrule, uid, exdates, recurrence_id, cancelled}].
+    `recurrence_id` : occurrence d'une série modifiée à part (déplacée, renommée) ; elle remplace celle de la série.
+    """
     events, current = [], None
     for line in _unfold(text):
         if line == "BEGIN:VEVENT":
-            current = {}
+            current = {"exdates": []}
         elif line == "END:VEVENT" and current is not None:
             if current.get("start") and current.get("title"):
                 events.append(current)
@@ -53,33 +61,54 @@ def parse_ics(text):
                 current["start"], current["all_day"] = _parse_date(value)
             elif name == "RRULE":
                 current["rrule"] = value.upper()
+            elif name == "UID":
+                current["uid"] = value.strip()
+            elif name == "EXDATE":
+                current["exdates"] += [d for d, _ in map(_parse_date, value.split(",")) if d]
+            elif name == "RECURRENCE-ID":
+                current["recurrence_id"] = _parse_date(value)[0]
+            elif name == "STATUS":
+                current["cancelled"] = value.strip().upper() == "CANCELLED"
     return events
 
 
+def _local_rule(rule):
+    """Règle RRULE avec une fin (UNTIL) à l'heure locale sans fuseau, comme les dates de début."""
+    def until(match):
+        moment, _all_day = _parse_date(match.group(1))
+        return f"UNTIL={moment:%Y%m%dT%H%M%S}" if moment else ""
+    return re.sub(r"UNTIL=([0-9TZ]+)", until, rule).strip(";")
+
+
 def occurrences(events, start, days):
-    """Occurrences entre `start` (date) et `start + days` : [{title, when (datetime), all_day}], dans l'ordre."""
-    end = start + timedelta(days=days)
+    """
+    Occurrences entre `start` (date) et `start + days` : [{title, when (datetime), all_day}], dans l'ordre, sans doublon.
+    Répétitions complètes (fréquence, intervalle, jours, fin, nombre), dates exclues, occurrences déplacées et
+    événements annulés sont pris en compte.
+    """
+    window_start = datetime.combine(start, datetime.min.time())
+    window_end = window_start + timedelta(days=days)
+    replaced = {(e.get("uid"), e["recurrence_id"]) for e in events if e.get("recurrence_id")}
     found = []
     for e in events:
+        if e.get("cancelled"):
+            continue
         first, rule = e["start"], e.get("rrule", "")
-        candidates = []
-        if "FREQ=YEARLY" in rule:
-            for year in (start.year, start.year + 1):
-                try:
-                    candidates.append(first.replace(year=year))
-                except ValueError:  # 29 février
-                    candidates.append(first.replace(year=year, day=28))
-        elif "FREQ=WEEKLY" in rule:
-            delta = (start - first.date()).days
-            if delta > 0:
-                first = first + timedelta(days=7 * (delta // 7))
-            candidates = [first + timedelta(days=7 * k) for k in range(0, days // 7 + 2)]
+        if rule and not e.get("recurrence_id"):
+            try:
+                series = rrulestr(_local_rule(rule), dtstart=first)
+                candidates = series.between(window_start, window_end - timedelta(seconds=1), inc=True)
+            except (ValueError, TypeError):
+                candidates = [first]
+            skipped = set(e.get("exdates") or [])
+            candidates = [when for when in candidates if when not in skipped and (e.get("uid"), when) not in replaced]
         else:
             candidates = [first]
         for when in candidates:
-            if when >= datetime.combine(first.date(), datetime.min.time()) and start <= when.date() < end:
+            if window_start <= when < window_end:
                 found.append({"title": e["title"], "when": when, "all_day": e.get("all_day", True)})
-    return sorted(found, key=lambda o: o["when"])
+    unique = {(o["title"], o["when"]): o for o in found}  # un même événement présent dans deux agendas
+    return sorted(unique.values(), key=lambda o: o["when"])
 
 
 def upcoming(config, today=None, days=7):

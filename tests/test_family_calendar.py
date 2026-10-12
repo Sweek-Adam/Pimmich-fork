@@ -68,3 +68,63 @@ def test_week_board_renders():
     image = week_board([{"title": "Piscine", "when": datetime(2026, 10, 11, 17), "all_day": False}],
                        [{"title": "Vacances", "days": 7}], 640, 360, random.Random(1), date(2026, 10, 10))
     assert image.size == (640, 360)
+
+
+GOOGLE = """BEGIN:VCALENDAR
+BEGIN:VEVENT
+UID:jdr-a
+DTSTART;TZID=Europe/Paris:20260728T210000
+RRULE:FREQ=WEEKLY;UNTIL=20261019T215959Z;INTERVAL=3;BYDAY=TU
+SUMMARY:Jdr Poudlard
+END:VEVENT
+BEGIN:VEVENT
+UID:jdr-b
+DTSTART;TZID=Europe/Paris:20260303T210000
+RRULE:FREQ=WEEKLY;UNTIL=20260413T215959Z;INTERVAL=3;BYDAY=TU
+SUMMARY:Jdr Poudlard
+END:VEVENT
+BEGIN:VEVENT
+UID:jdr-c
+DTSTART;TZID=Europe/Paris:20261027T210000
+RRULE:FREQ=WEEKLY;INTERVAL=3;BYDAY=TU
+SUMMARY:Jdr Poudlard
+END:VEVENT
+BEGIN:VEVENT
+UID:karate-old
+DTSTART;TZID=Europe/Paris:20241028T193000
+RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=20241124T225959Z;INTERVAL=1;BYDAY=MO,TH
+SUMMARY:[Montigny] Karaté
+END:VEVENT
+BEGIN:VEVENT
+UID:karate
+DTSTART;TZID=Europe/Paris:20241125T193000
+RRULE:FREQ=WEEKLY;WKST=MO;INTERVAL=1;BYDAY=MO,TH
+EXDATE;TZID=Europe/Paris:20261015T193000
+SUMMARY:[Montigny] Karaté
+END:VEVENT
+BEGIN:VEVENT
+UID:karate
+RECURRENCE-ID;TZID=Europe/Paris:20261012T193000
+DTSTART;TZID=Europe/Paris:20261012T180000
+SUMMARY:[Montigny] Karaté (avancé)
+END:VEVENT
+BEGIN:VEVENT
+UID:annule
+DTSTART;TZID=Europe/Paris:20261014T120000
+STATUS:CANCELLED
+SUMMARY:Annulé
+END:VEVENT
+END:VCALENDAR"""
+
+
+def test_google_calendar_series():
+    """Séries découpées (UNTIL), toutes les 3 semaines, plusieurs jours, exclusions, occurrence déplacée, annulation."""
+    week = fc.occurrences(fc.parse_ics(GOOGLE), date(2026, 10, 12), 7)
+    got = [(o["title"], o["when"].strftime("%a %d %H:%M")) for o in week]
+    # déplacée (remplace celle de 19:30) ; jeudi 15 exclu ; pas de Jdr : toutes les 3 semaines (29/09, puis fin le 19/10)
+    assert got == [("[Montigny] Karaté (avancé)", "Mon 12 18:00")]
+    three_weeks = fc.occurrences(fc.parse_ics(GOOGLE), date(2026, 10, 19), 21)
+    jdr = [o["when"].date() for o in three_weeks if o["title"] == "Jdr Poudlard"]
+    assert jdr == [date(2026, 10, 27)]  # la 1re série s'arrête le 19/10 (pas de 20/10), la nouvelle commence le 27/10
+    karate = [o["when"].date() for o in three_weeks if o["title"] == "[Montigny] Karaté"]
+    assert len(karate) == 6 and all(d.weekday() in (0, 3) for d in karate)  # lundi et jeudi, sans doublon
