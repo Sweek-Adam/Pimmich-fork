@@ -245,6 +245,16 @@ sudo reboot
 
 Pour vérifier que la protection est active : `Système > Maintenance`, carte « Système de Fichiers de la Carte SD », rubrique « Protection contre l'usure ».
 
+### Optimiser Raspberry Pi OS pour le cadre
+
+```bash
+sudo ~/pimmich/utils/optimize_pi.sh --dry-run   # aperçu : ce qui serait changé
+sudo ~/pimmich/utils/optimize_pi.sh             # applique, puis : sudo reboot
+sudo ~/pimmich/utils/optimize_pi.sh --undo      # revient à la configuration d'origine
+```
+
+Le script désactive ce qui ne sert pas à un cadre photo : cloud-init (utile seulement au premier démarrage, environ 10 s gagnées à chaque démarrage), l'attente du réseau au démarrage, les mises à jour automatiques du système (remplacées par celles de 4 h 30, voir plus bas), l'index des pages de manuel, NFS et l'impression. Il regroupe aussi les écritures sur la carte SD et retire la détection de caméra et l'écran arc-en-ciel du démarrage (`config.txt` est sauvegardé avant). Le bureau, l'enceinte Bluetooth et `cadre.local` ne sont pas touchés.
+
 ### Certificat HTTPS
 
 `setup.sh` a déjà lancé `utils/enable_https.sh` : l'interface est en HTTPS dès l'installation. Si le **nom d'hôte** ou l'**adresse IP** du cadre change, recréez le certificat pour qu'il couvre la nouvelle adresse :
@@ -373,7 +383,7 @@ Pour que le cadre se mette à jour tout seul, chaque jour à 4 h 30 :
 
 - Lancez-le **sans `sudo`**. Il ajoute une ligne à votre crontab (`crontab -l` pour la voir) ; `--time 03:15` choisit une autre heure, `--off` coupe la mise à jour automatique.
 - Chaque nuit, `utils/auto_update.sh` regarde s'il y a du nouveau sur GitHub. Si oui, il fait la même mise à jour que le bouton de l'interface, puis relance Pimmich. Si la nouvelle version plante au démarrage, Pimmich revient tout seul à la précédente.
-- Avec `--system`, les paquets du système sont aussi mis à jour (`apt-get upgrade`), sans redémarrage automatique. Le journal signale quand un redémarrage est conseillé.
+- Avec `--system`, les paquets du système sont aussi mis à jour (`apt-get upgrade`, puis `apt-get autoremove` pour retirer les paquets devenus inutiles), sans redémarrage automatique. Le journal signale quand un redémarrage est conseillé.
 - Rien n'est fait pendant une synchronisation (rclone) ou une autre mise à jour : ce sera pour la nuit suivante.
 - Journal : `~/pimmich/logs/auto_update.log`.
 

@@ -3,7 +3,7 @@
 # - Pimmich : s'il y a du nouveau sur GitHub, même mise à jour que le bouton de l'interface (update_script.sh),
 #   puis relance de l'application ; si la nouvelle version plante au démarrage, start_pimmich.sh revient tout seul
 #   à la précédente ;
-# - avec --system : les paquets du système aussi (apt-get upgrade, sans redémarrage automatique).
+# - avec --system : les paquets du système aussi (apt-get upgrade puis autoremove, sans redémarrage automatique).
 # Tout est noté dans logs/auto_update.log. Rien n'est fait pendant une synchronisation (rclone) ou une autre mise à jour.
 
 cd "$(dirname "$0")/.." || exit 1
@@ -59,7 +59,10 @@ elif [ "$SYSTEM" = 1 ]; then
     if sudo -n DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get update -q >> "$LOG" 2>&1 && \
        sudo -n DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y -q -o Dpkg::Options::=--force-confdef \
             -o Dpkg::Options::=--force-confold upgrade >> "$LOG" 2>&1; then
-        log "Paquets du système à jour."
+        # paquets devenus inutiles (anciens noyaux, dépendances orphelines) et archives téléchargées
+        sudo -n DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y -q autoremove >> "$LOG" 2>&1 || log "Nettoyage (autoremove) impossible."
+        sudo -n /usr/bin/apt-get -q autoclean >> "$LOG" 2>&1 || true
+        log "Paquets du système à jour (et paquets inutiles retirés)."
         [ -f /var/run/reboot-required ] && log "Un redémarrage est conseillé pour terminer certaines mises à jour du système."
     else
         log "Mise à jour du système impossible (droits sudo ? réseau ?) : voir ci-dessus."
