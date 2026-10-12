@@ -52,7 +52,9 @@ else
 fi
 
 # --- Système (option --system) ---
-if [ "$SYSTEM" = 1 ]; then
+if [ "$SYSTEM" = 1 ] && pgrep -x "apt-get|apt|dpkg|unattended-upgr" > /dev/null; then
+    log "Une autre mise à jour du système est en cours (apt) : la mise à jour du système est reportée à demain."
+elif [ "$SYSTEM" = 1 ]; then
     # sans question (DEBIAN_FRONTEND) ; fichiers de configuration modifiés à la main conservés (confold)
     if sudo -n DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get update -q >> "$LOG" 2>&1 && \
        sudo -n DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y -q -o Dpkg::Options::=--force-confdef \
