@@ -705,6 +705,9 @@ def perform_transition(screen, old_image_surface, new_image_path, duration, scre
 
 # Vérifie si on est dans les heures actives
 def is_within_active_hours(config):
+    from utils import clock_sync
+    if not clock_sync.trusted():
+        return True  # heure pas encore synchronisée (démarrage sans Internet) : on affiche les photos
     now = datetime.now()
     try:
         if now.weekday() >= 5:
@@ -1299,6 +1302,8 @@ AHEAD_MAX = 2
 def _render_composition(plan, snapshot, start, messages, include_messages, width, height):
     """Compose la composition qui commence à `start` : (image, diapositives utilisées, format) ou None."""
     rng = random.Random()
+    if not snapshot or not layout_engine.is_message(snapshot[start % len(snapshot)]):
+        plan = layout_engine.without_message_only(plan)  # pas de message à afficher : pas de disposition construite autour
     for _attempt in range(4):  # un autre format si celui-ci ne peut pas accueillir les photos suivantes
         style = layout_engine.pick_format(plan, rng)
         count = layout_engine.photo_count(style, rng)
@@ -1498,6 +1503,57 @@ def draw_guest_qr(screen, screen_width, screen_height, config):
         screen.blit(surface, (x, y))
     except Exception as e:
         logger.debug(f"QR code invités non affiché : {e}")
+
+
+# --- Point d'accès de secours (aucun réseau Wi-Fi connu) : comment s'y connecter ---
+_hotspot_cache = {"read": 0, "state": None, "key": None, "surface": None}
+
+
+def _hotspot_surface(state, width):
+    from utils import hotspot
+    qr = qrcode.QRCode(border=2)
+    qr.add_data(hotspot.qr_payload(state["ssid"], state["password"]))
+    qr.make(fit=True)
+    side = max(120, int(width * 0.11))
+    qr.box_size = max(3, side // (qr.modules_count + 4))
+    qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+    title_font = pygame.font.Font(None, max(26, width // 42))
+    font = pygame.font.Font(None, max(22, width // 56))
+    lines = [(title_font, _("Pas de réseau Wi-Fi connu"), (255, 214, 120)),
+             (font, _("1. Connectez votre téléphone au Wi-Fi « %(ssid)s »", ssid=state["ssid"]), (255, 255, 255)),
+             (font, _("Mot de passe : %(password)s", password=state["password"]), (255, 255, 255)),
+             (font, _("2. Ouvrez http://%(address)s puis Système > Réseau", address=state["address"]), (255, 255, 255))]
+    rendered = [f.render(text, True, color) for f, text, color in lines]
+    pad = max(12, width // 120)
+    text_w = max(r.get_width() for r in rendered)
+    text_h = sum(r.get_height() + pad // 2 for r in rendered)
+    surface = pygame.Surface((qr_img.size[0] + text_w + 3 * pad, max(qr_img.size[1], text_h) + 2 * pad), pygame.SRCALPHA)
+    pygame.draw.rect(surface, (0, 0, 0, 190), surface.get_rect(), border_radius=pad)
+    surface.blit(pygame.image.frombytes(qr_img.tobytes(), qr_img.size, "RGB"), (pad, (surface.get_height() - qr_img.size[1]) // 2))
+    y = (surface.get_height() - text_h) // 2
+    for r in rendered:
+        surface.blit(r, (qr_img.size[0] + 2 * pad, y))
+        y += r.get_height() + pad // 2
+    return surface
+
+
+def draw_hotspot_card(screen, screen_width, screen_height):
+    """Point d'accès de secours ouvert : son nom, son mot de passe et un QR code pour s'y connecter."""
+    cache = _hotspot_cache
+    if time.time() - cache["read"] > 5:
+        from utils import hotspot
+        cache["read"], cache["state"] = time.time(), hotspot.state()
+    state = cache["state"]
+    if not state:
+        return
+    try:
+        key = (state.get("ssid"), state.get("password"), screen_width)
+        if cache["key"] != key:
+            cache["key"], cache["surface"] = key, _hotspot_surface(state, screen_width)
+        surface = cache["surface"]
+        screen.blit(surface, ((screen_width - surface.get_width()) // 2, screen_height - surface.get_height() - 20))
+    except Exception as e:
+        logger.debug(f"Instructions du point d'accès non affichées : {e}")
 
 
 # --- Morceau en cours (Spotify, AirPlay, musique du diaporama) ---
@@ -1809,6 +1865,7 @@ def _render_clock_row(row, font, text_color, outline_color):
 
 def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata=None):
     draw_guest_qr(screen, screen_width, screen_height, config)
+    draw_hotspot_card(screen, screen_width, screen_height)
     draw_memory_banner(screen, screen_width, screen_height, config, photo_metadata)
     sync_background_music()
     draw_now_playing(screen, screen_width, screen_height, config)

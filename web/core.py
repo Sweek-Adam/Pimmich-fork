@@ -1065,7 +1065,12 @@ def get_cpu_temperature():
 
 
 def is_active_hours(config, now=None):
-    """Vrai si l'heure actuelle est dans la plage d'affichage du diaporama (semaine / week-end)."""
+    """Vrai si l'heure actuelle est dans la plage d'affichage du diaporama (semaine / week-end).
+    Heure pas encore synchronisée (démarrage sans Internet) : toujours vrai, pour ne pas rester éteint par erreur."""
+    if now is None:
+        from utils import clock_sync
+        if not clock_sync.trusted():
+            return True
     now = now or datetime.now()
     if now.weekday() >= 5:
         start_str = config.get("active_start_weekend", config.get("active_start", "07:00"))

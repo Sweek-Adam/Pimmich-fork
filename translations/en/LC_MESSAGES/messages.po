@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-12 07:41+0200\n"
+"POT-Creation-Date: 2026-10-23 17:52+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -18,129 +18,148 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1491
+#: local_slideshow.py:1494
 msgid "Photos & messages"
 msgstr "Photos & messages"
 
-#: local_slideshow.py:1701
+#: local_slideshow.py:1520
+msgid "Pas de réseau Wi-Fi connu"
+msgstr "No known Wi-Fi network"
+
+#: local_slideshow.py:1521
+#, python-format
+msgid "1. Connectez votre téléphone au Wi-Fi « %(ssid)s »"
+msgstr "1. Connect your phone to the “%(ssid)s” Wi-Fi"
+
+#: local_slideshow.py:1522
+#, python-format
+msgid "Mot de passe : %(password)s"
+msgstr "Password: %(password)s"
+
+#: local_slideshow.py:1523
+#, python-format
+msgid "2. Ouvrez http://%(address)s puis Système > Réseau"
+msgstr "2. Open http://%(address)s then System > Network"
+
+#: local_slideshow.py:1755
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "%(num)d year ago"
 
-#: local_slideshow.py:1701
+#: local_slideshow.py:1755
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "%(num)d years ago"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "January"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "February"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "March"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "April"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "May"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "June"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "July"
 
-#: local_slideshow.py:1702 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1756 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "August"
 
-#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1757 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "September"
 
-#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1757 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "October"
 
-#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1757 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "November"
 
-#: local_slideshow.py:1703 templates/configure/_playlist_builder.html.jinja:42
+#: local_slideshow.py:1757 templates/configure/_playlist_builder.html.jinja:42
 #: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "December"
 
-#: local_slideshow.py:2002
+#: local_slideshow.py:2057
 msgid "Données de marée non disponibles"
 msgstr "Tide data unavailable"
 
-#: local_slideshow.py:2085
+#: local_slideshow.py:2140
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(Anniversary) %(num)d year ago"
 
-#: local_slideshow.py:2085
+#: local_slideshow.py:2140
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Anniversary) %(num)d years ago"
 
-#: local_slideshow.py:3290
+#: local_slideshow.py:3345
 msgid "Aucune photo trouvée."
 msgstr "No photos found."
 
-#: local_slideshow.py:3291
+#: local_slideshow.py:3346
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configure at: http://%(ip)s"
 
-#: local_slideshow.py:3292
+#: local_slideshow.py:3347
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credentials in credentials.json at the root of the SD card)"
 
-#: local_slideshow.py:3293
+#: local_slideshow.py:3348
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Screen resolution: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3294
+#: local_slideshow.py:3349
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Retrying in 60 seconds..."
 
-#: local_slideshow.py:3320
+#: local_slideshow.py:3375
 msgid "Scannez pour configurer"
 msgstr "Scan to configure"
 
@@ -727,6 +746,7 @@ msgstr "Cancel"
 #: frontend/src/components/SpotifyCard.vue:136
 #: frontend/src/components/sources/CloudCards.vue:132
 #: frontend/src/components/sources/GdriveCard.vue:75
+#: frontend/src/views/NetworkView.vue:165
 #: frontend/src/views/PlaylistsView.vue:202
 #: frontend/src/views/SoundView.vue:166
 #: templates/configure/_playlist_builder.html.jinja:39
@@ -747,7 +767,7 @@ msgid "Home Assistant (MQTT)"
 msgstr "Home Assistant (MQTT)"
 
 #: frontend/src/components/HomeAssistantCard.vue:28
-#: frontend/src/views/SoundView.vue:186
+#: frontend/src/views/NetworkView.vue:146 frontend/src/views/SoundView.vue:186
 #: templates/configure/tab_affichage.html.jinja:310
 #: templates/configure/tab_son.html.jinja:212
 msgid "connecté"
@@ -773,7 +793,8 @@ msgstr ""
 
 #: frontend/src/components/HomeAssistantCard.vue:31
 #: frontend/src/components/PresenceCard.vue:52
-#: frontend/src/views/LayoutsView.vue:117 frontend/src/views/NetworkView.vue:87
+#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/NetworkView.vue:132
 #: templates/configure/tab_affichage.html.jinja:295
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Activer"
@@ -805,7 +826,8 @@ msgstr "User"
 #: frontend/src/components/HomeAssistantCard.vue:36
 #: frontend/src/views/AccountsView.vue:84
 #: frontend/src/views/MaintenanceView.vue:263
-#: frontend/src/views/NetworkView.vue:96
+#: frontend/src/views/NetworkView.vue:158
+#: frontend/src/views/NetworkView.vue:177
 #: templates/configure/tab_affichage.html.jinja:299
 #: templates/configure/tab_comptes.html.jinja:112
 #: templates/configure/tab_maintenance.html.jinja:228
@@ -892,7 +914,7 @@ msgid "Aucun appareil détecté."
 msgstr "No device detected."
 
 #: frontend/src/components/PresenceCard.vue:73
-#: frontend/src/views/LogsView.vue:63 frontend/src/views/NetworkView.vue:73
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/NetworkView.vue:118
 #: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
@@ -1187,7 +1209,6 @@ msgid "Portrait, mais l'image était à l'envers"
 msgstr "Portrait, but the picture was upside down"
 
 #: frontend/src/components/SettingField.vue:62
-#: frontend/src/views/NetworkView.vue:97
 msgid "Enregistré (laisser vide pour garder)"
 msgstr "Saved (leave empty to keep)"
 
@@ -1512,7 +1533,7 @@ msgid "Changer d'application"
 msgstr "Change app"
 
 #: frontend/src/components/SpotifyCard.vue:145
-#: frontend/src/views/NetworkView.vue:75
+#: frontend/src/views/NetworkView.vue:120
 #: templates/configure/_son_spotify.html.jinja:43
 msgid "Connecté"
 msgstr "Connected"
@@ -1862,6 +1883,7 @@ msgid "Relever la boîte mail (toutes les 5 minutes)"
 msgstr "Check the mailbox (every 5 minutes)"
 
 #: frontend/src/components/sources/CloudCards.vue:121
+#: frontend/src/views/NetworkView.vue:178
 #: templates/configure/tab_sources.html.jinja:529
 msgid "Adresse du cadre"
 msgstr "Frame address"
@@ -3758,7 +3780,7 @@ msgid ""
 "moment-là)"
 msgstr "Seasonal themes only during their period (and more frequent at that time)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:364
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:365
 msgid "Gardez au moins une disposition."
 msgstr "Keep at least one layout."
 
@@ -4010,7 +4032,7 @@ msgstr "Communication error with the server."
 #: frontend/src/views/MaintenanceView.vue:95
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
 #: web/routes_frames.py:265 web/routes_guests.py:87 web/routes_guests.py:92
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:839
+#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:922
 msgid "Aucun fichier sélectionné."
 msgstr "No files selected."
 
@@ -4857,56 +4879,68 @@ msgstr "Hide from the slideshow without deleting"
 msgid "Supprimer ce message"
 msgstr "Delete this message"
 
-#: frontend/src/views/NetworkView.vue:19
+#: frontend/src/views/NetworkView.vue:24
 #: templates/configure/tab_network.html.jinja:33
 #: utils/themed_compositions.py:633
 msgid "France"
 msgstr "France"
 
-#: frontend/src/views/NetworkView.vue:19
+#: frontend/src/views/NetworkView.vue:24
 #: templates/configure/tab_network.html.jinja:33
 msgid "États-Unis"
 msgstr "United States"
 
-#: frontend/src/views/NetworkView.vue:19
+#: frontend/src/views/NetworkView.vue:24
 #: templates/configure/tab_network.html.jinja:33
 msgid "Royaume-Uni"
 msgstr "United Kingdom"
 
-#: frontend/src/views/NetworkView.vue:19
+#: frontend/src/views/NetworkView.vue:24
 #: templates/configure/tab_network.html.jinja:34
 msgid "Allemagne"
 msgstr "Deutschland"
 
-#: frontend/src/views/NetworkView.vue:20
+#: frontend/src/views/NetworkView.vue:25
 #: templates/configure/tab_network.html.jinja:34
 msgid "Espagne"
 msgstr "Spain"
 
-#: frontend/src/views/NetworkView.vue:20
+#: frontend/src/views/NetworkView.vue:25
 #: templates/configure/tab_network.html.jinja:34
 msgid "Canada"
 msgstr "Canada"
 
-#: frontend/src/views/NetworkView.vue:20
+#: frontend/src/views/NetworkView.vue:25
 #: templates/configure/tab_network.html.jinja:34
 msgid "Belgique"
 msgstr "Belgium"
 
-#: frontend/src/views/NetworkView.vue:20
+#: frontend/src/views/NetworkView.vue:25
 #: templates/configure/tab_network.html.jinja:35
 msgid "Suisse"
 msgstr "Switzerland"
 
-#: frontend/src/views/NetworkView.vue:30
+#: frontend/src/views/NetworkView.vue:54
 msgid ""
-"Appliquer ces paramètres Wi-Fi ? La connexion au cadre peut être coupée "
-"une minute."
+"C'est le réseau utilisé en ce moment : le cadre peut ne plus être "
+"joignable. "
 msgstr ""
-"Apply these Wi-Fi settings? The connection to the frame may drop for a "
-"minute."
+"This is the network in use right now: the frame may no longer be "
+"reachable. "
 
-#: frontend/src/views/NetworkView.vue:51
+#: frontend/src/views/NetworkView.vue:55
+#, python-brace-format
+msgid "Oublier le réseau « {name} » ?"
+msgstr "Forget the “{name}” network?"
+
+#: frontend/src/views/NetworkView.vue:61
+#, python-brace-format
+msgid ""
+"Se connecter à « {name} » ? La connexion au cadre peut être coupée une "
+"minute."
+msgstr "Connect to “{name}”? The connection to the frame may drop for a minute."
+
+#: frontend/src/views/NetworkView.vue:101
 msgid ""
 "Couper le réseau filaire ? Si le cadre n'a pas de Wi-Fi, il ne sera plus "
 "joignable."
@@ -4914,76 +4948,153 @@ msgstr ""
 "Turn off the wired network? If the frame has no Wi-Fi, it will no longer "
 "be reachable."
 
-#: frontend/src/views/NetworkView.vue:72
+#: frontend/src/views/NetworkView.vue:117
 #: templates/configure/tab_network.html.jinja:4
 msgid "État de la connexion Wi-Fi"
 msgstr "Wi-Fi connection status"
 
-#: frontend/src/views/NetworkView.vue:75 frontend/src/views/NetworkView.vue:83
+#: frontend/src/views/NetworkView.vue:120
+#: frontend/src/views/NetworkView.vue:128
 #: templates/configure/tab_network.html.jinja:8
 #: templates/configure/tab_network.html.jinja:89
 msgid "État:"
 msgstr "Status :"
 
-#: frontend/src/views/NetworkView.vue:75
+#: frontend/src/views/NetworkView.vue:120
 msgid "Non connecté"
 msgstr "Not connected"
 
-#: frontend/src/views/NetworkView.vue:76
+#: frontend/src/views/NetworkView.vue:121
 #: templates/configure/tab_network.html.jinja:12
 msgid "Réseau (SSID):"
 msgstr "Network (SSID):"
 
-#: frontend/src/views/NetworkView.vue:77 frontend/src/views/NetworkView.vue:84
+#: frontend/src/views/NetworkView.vue:122
+#: frontend/src/views/NetworkView.vue:129
 #: templates/configure/tab_network.html.jinja:16
 #: templates/configure/tab_network.html.jinja:91
 msgid "Adresse IP:"
 msgstr "IP address:"
 
-#: frontend/src/views/NetworkView.vue:81
+#: frontend/src/views/NetworkView.vue:126
 #: templates/configure/tab_network.html.jinja:88
 msgid "Interface Filaire (eth0)"
 msgstr "Wired Interface (eth0)"
 
-#: frontend/src/views/NetworkView.vue:87
+#: frontend/src/views/NetworkView.vue:132
 msgid "Désactiver"
 msgstr "Disable"
 
-#: frontend/src/views/NetworkView.vue:92
-#: templates/configure/tab_network.html.jinja:23
-msgid "Configuration Wi-Fi"
-msgstr "Wi-Fi Configuration"
+#: frontend/src/views/NetworkView.vue:138
+msgid "Réseaux mémorisés"
+msgstr "Saved networks"
 
-#: frontend/src/views/NetworkView.vue:94
-msgid "Pays"
-msgstr "Country"
+#: frontend/src/views/NetworkView.vue:139
+msgid ""
+"Le cadre se connecte tout seul au premier réseau de la liste qui est à "
+"portée. Changez l'ordre avec les flèches."
+msgstr ""
+"The frame connects on its own to the first network in the list that is in"
+" range. Change the order with the arrows."
 
-#: frontend/src/views/NetworkView.vue:95
+#: frontend/src/views/NetworkView.vue:143 frontend/src/views/QueueView.vue:110
+msgid "Monter"
+msgstr "Move up"
+
+#: frontend/src/views/NetworkView.vue:144 frontend/src/views/QueueView.vue:111
+msgid "Descendre"
+msgstr "Move down"
+
+#: frontend/src/views/NetworkView.vue:147 templates/login.html.jinja:44
+msgid "Se connecter"
+msgstr "Connect"
+
+#: frontend/src/views/NetworkView.vue:148 frontend/src/views/SoundView.vue:187
+#: templates/configure/tab_son.html.jinja:213
+msgid "Oublier"
+msgstr "Forget"
+
+#: frontend/src/views/NetworkView.vue:150
+msgid "Aucun réseau mémorisé."
+msgstr "No saved network."
+
+#: frontend/src/views/NetworkView.vue:154
+msgid "Ajouter un réseau"
+msgstr "Add a network"
+
+#: frontend/src/views/NetworkView.vue:155
+msgid ""
+"Même s'il n'est pas à portée : pratique pour préparer le cadre avant de "
+"l'emporter ailleurs."
+msgstr ""
+"Even if it is out of range: handy to prepare the frame before taking it "
+"somewhere else."
+
+#: frontend/src/views/NetworkView.vue:157
 msgid "SSID (Nom du réseau)"
 msgstr "SSID (network name)"
 
-#: frontend/src/views/NetworkView.vue:98
+#: frontend/src/views/NetworkView.vue:159
 #: templates/configure/tab_network.html.jinja:64
 msgid "Laissez vide si le réseau est ouvert."
 msgstr "Leave blank if the network is open."
 
-#: frontend/src/views/NetworkView.vue:99
-#: templates/configure/tab_network.html.jinja:68
-msgid "Appliquer les paramètres Wi-Fi"
-msgstr "Apply Wi-Fi settings"
+#: frontend/src/views/NetworkView.vue:160
+msgid "Réseau masqué (son nom n'apparaît pas dans la liste)"
+msgstr "Hidden network (its name does not appear in the list)"
 
-#: frontend/src/views/NetworkView.vue:104
+#: frontend/src/views/NetworkView.vue:161
+msgid "Mémoriser ce réseau"
+msgstr "Save this network"
+
+#: frontend/src/views/NetworkView.vue:164
+msgid "Pays"
+msgstr "Country"
+
+#: frontend/src/views/NetworkView.vue:171
+msgid "Point d'accès de secours"
+msgstr "Fallback hotspot"
+
+#: frontend/src/views/NetworkView.vue:172
+msgid "ouvert en ce moment"
+msgstr "open right now"
+
+#: frontend/src/views/NetworkView.vue:173
+msgid ""
+"Si aucun réseau connu n'est trouvé pendant 2 minutes, le cadre crée son "
+"propre Wi-Fi. Son nom, son mot de passe et un QR code s'affichent sur "
+"l'écran : connectez-y un téléphone, puis ouvrez l'adresse indiquée pour "
+"choisir un réseau. Toutes les 5 minutes, il réessaie les réseaux connus."
+msgstr ""
+"If no known network is found for 2 minutes, the frame creates its own Wi-"
+"Fi. Its name, password and a QR code appear on the screen: connect a "
+"phone to it, then open the address shown to choose a network. Every 5 "
+"minutes it tries the known networks again."
+
+#: frontend/src/views/NetworkView.vue:174
+msgid "Activer le point d'accès de secours"
+msgstr "Enable the fallback hotspot"
+
+#: frontend/src/views/NetworkView.vue:176
+msgid "Nom du Wi-Fi"
+msgstr "Wi-Fi name"
+
+#: frontend/src/views/NetworkView.vue:177
+msgid "créé à la première ouverture"
+msgstr "created when first opened"
+
+#: frontend/src/views/NetworkView.vue:183
 #: templates/configure/tab_network.html.jinja:103
 msgid "Réseaux Wi-Fi à proximité"
 msgstr "Nearby Wi-Fi networks"
 
-#: frontend/src/views/NetworkView.vue:105
+#: frontend/src/views/NetworkView.vue:184
 #: templates/configure/scripts_gallery.html.jinja:12
 #: templates/configure/tab_network.html.jinja:109
 msgid "Lancer le scan"
 msgstr "Start the scan"
 
-#: frontend/src/views/NetworkView.vue:110
+#: frontend/src/views/NetworkView.vue:189
 msgid "Choisir"
 msgstr "Choose"
 
@@ -5378,14 +5489,6 @@ msgstr "Drag photos to change the order, or use the arrows; ▶ shows it right a
 msgid "Composition (commence ici, en préparation)"
 msgstr "Composition (starts here, being prepared)"
 
-#: frontend/src/views/QueueView.vue:110
-msgid "Monter"
-msgstr "Move up"
-
-#: frontend/src/views/QueueView.vue:111
-msgid "Descendre"
-msgstr "Move down"
-
 #: frontend/src/views/QueueView.vue:112
 #: templates/configure/tab_queue.html.jinja:101
 msgid "Afficher maintenant"
@@ -5607,11 +5710,6 @@ msgstr "Pair a phone"
 #: templates/configure/tab_son.html.jinja:212
 msgid "Visible : choisissez « Cadre photo » sur le téléphone"
 msgstr "Visible: choose “Cadre photo” on the phone"
-
-#: frontend/src/views/SoundView.vue:187
-#: templates/configure/tab_son.html.jinja:213
-msgid "Oublier"
-msgstr "Forget"
 
 #: frontend/src/views/SoundView.vue:188
 #: templates/configure/tab_son.html.jinja:213
@@ -6343,10 +6441,6 @@ msgstr "Your family photo frame"
 msgid "Afficher/Cacher le mot de passe"
 msgstr "Show/Hide Password"
 
-#: templates/login.html.jinja:44
-msgid "Se connecter"
-msgstr "Connect"
-
 #: templates/login.html.jinja:46
 msgid "ou"
 msgstr "or"
@@ -6787,7 +6881,7 @@ msgstr "Preparation"
 msgid "photos préparées"
 msgstr "photos prepared"
 
-#: templates/configure/scripts_app.html.jinja:22 web/workers.py:679
+#: templates/configure/scripts_app.html.jinja:22 web/workers.py:686
 msgid "Import terminé"
 msgstr "Import finished"
 
@@ -6808,9 +6902,9 @@ msgid "Enregistrement…"
 msgstr "Saving…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:320 web/routes_settings.py:374
-#: web/routes_settings.py:396 web/routes_settings.py:448
-#: web/routes_settings.py:472 web/routes_settings.py:482
+#: web/routes_settings.py:321 web/routes_settings.py:375
+#: web/routes_settings.py:397 web/routes_settings.py:449
+#: web/routes_settings.py:473 web/routes_settings.py:483
 msgid "Enregistré"
 msgstr "Saved"
 
@@ -8205,6 +8299,10 @@ msgstr ""
 msgid "Style et Positionnement"
 msgstr "Style and Positioning"
 
+#: templates/configure/tab_network.html.jinja:23
+msgid "Configuration Wi-Fi"
+msgstr "Wi-Fi Configuration"
+
 #: templates/configure/tab_network.html.jinja:25
 msgid ""
 "La sélection du pays est obligatoire pour activer\n"
@@ -8229,6 +8327,10 @@ msgid ""
 msgstr ""
 "SSID (Name of\n"
 "                            network)"
+
+#: templates/configure/tab_network.html.jinja:68
+msgid "Appliquer les paramètres Wi-Fi"
+msgstr "Apply Wi-Fi settings"
 
 #: templates/configure/tab_network.html.jinja:71
 msgid ""
@@ -8982,7 +9084,7 @@ msgstr "The slideshow is stopped"
 msgid "Il devrait tourner à cette heure-ci. Relancez-le depuis l'accueil."
 msgstr "It should be running at this time. Restart it from the home page."
 
-#: utils/health.py:100 web/workers.py:655
+#: utils/health.py:100 web/workers.py:662
 msgid "Problème de synchronisation"
 msgstr "Sync problem"
 
@@ -9688,13 +9790,13 @@ msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
 
-#: web/routes_config.py:253 web/routes_settings.py:481
+#: web/routes_config.py:253 web/routes_settings.py:482
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:315
-#: web/routes_settings.py:372 web/routes_settings.py:446
+#: web/routes_config.py:281 web/routes_settings.py:316
+#: web/routes_settings.py:373 web/routes_settings.py:447
 msgid "Réglages modifiés"
 msgstr "Settings changed"
 
@@ -9704,8 +9806,8 @@ msgid ""
 "changements."
 msgstr "Configuration saved. The slideshow was restarted to apply the changes."
 
-#: web/routes_family.py:26 web/routes_settings.py:361
-#: web/routes_settings.py:466
+#: web/routes_family.py:26 web/routes_settings.py:362
+#: web/routes_settings.py:467 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Invalid list."
 
@@ -9918,7 +10020,7 @@ msgstr ""
 "First allow Funnel on your Tailscale account (“Enable” button on the page"
 " that opens), then turn “Away from home” on again."
 
-#: web/routes_guests.py:558 web/routes_system.py:936
+#: web/routes_guests.py:558 web/routes_system.py:1019
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale refused to publish: %(detail)s"
@@ -9979,7 +10081,7 @@ msgstr "Music not found."
 msgid "Volume invalide."
 msgstr "Invalid volume."
 
-#: web/routes_home.py:210 web/routes_system.py:737
+#: web/routes_home.py:210 web/routes_system.py:820
 msgid "Réglage invalide."
 msgstr "Invalid setting."
 
@@ -10128,7 +10230,7 @@ msgstr "%(count)s file(s) received: they are on their way to the frame."
 msgid "Réglages de l'e-mail enregistrés."
 msgstr "Email settings saved."
 
-#: web/routes_imports.py:805
+#: web/routes_imports.py:805 web/routes_system.py:310
 #, python-format
 msgid "Connexion impossible : %(error)s"
 msgstr "Could not connect: %(error)s"
@@ -10587,29 +10689,29 @@ msgstr "Playlist not found."
 msgid "Citation du jour enregistrée."
 msgstr "Quote of the day saved."
 
-#: web/routes_settings.py:290
+#: web/routes_settings.py:291
 msgid "Aucun réglage à enregistrer."
 msgstr "No setting to save."
 
-#: web/routes_settings.py:294
+#: web/routes_settings.py:295
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unknown setting: %(key)s"
 
-#: web/routes_settings.py:298
+#: web/routes_settings.py:299
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Invalid value for “%(key)s”."
 
-#: web/routes_settings.py:391
+#: web/routes_settings.py:392
 msgid "Valeur invalide."
 msgstr "Invalid value."
 
-#: web/routes_settings.py:396
+#: web/routes_settings.py:397
 msgid "Supprimé."
 msgstr "Deleted."
 
-#: web/routes_settings.py:439 web/routes_storage.py:114
+#: web/routes_settings.py:440 web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Unknown source."
 
@@ -10714,7 +10816,7 @@ msgstr "Invalid share address (e.g. //nas.local/photos)."
 msgid "Type de support inconnu."
 msgstr "Unknown storage type."
 
-#: web/routes_storage.py:57 web/routes_system.py:868
+#: web/routes_storage.py:57 web/routes_system.py:951
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "Cannot use this storage: %(error)s"
@@ -10728,7 +10830,7 @@ msgstr "Storage “%(name)s” added."
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "Photos are still on this storage: move them first."
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:863
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:946
 msgid "Support inconnu."
 msgstr "Unknown storage."
 
@@ -10807,15 +10909,65 @@ msgstr ""
 "Wi-Fi settings applied. The network service has been restarted to force "
 "connection. Please wait a minute and check the status."
 
-#: web/routes_system.py:309
+#: web/routes_system.py:283
+msgid "Nom de réseau invalide (1 à 32 caractères)."
+msgstr "Invalid network name (1 to 32 characters)."
+
+#: web/routes_system.py:285
+msgid ""
+"Le mot de passe Wi-Fi doit faire de 8 à 63 caractères (ou rester vide "
+"pour un réseau ouvert)."
+msgstr ""
+"The Wi-Fi password must be 8 to 63 characters (or empty for an open "
+"network)."
+
+#: web/routes_system.py:288
+#, python-format
+msgid "Réseau non enregistré : %(error)s"
+msgstr "Network not saved: %(error)s"
+
+#: web/routes_system.py:289
+#, python-format
+msgid ""
+"Réseau « %(ssid)s » mémorisé : le cadre s'y connectera dès qu'il sera à "
+"portée."
+msgstr ""
+"Network “%(ssid)s” saved: the frame will connect to it as soon as it is "
+"in range."
+
+#: web/routes_system.py:297 web/routes_system.py:307
+msgid "Réseau inconnu."
+msgstr "Unknown network."
+
+#: web/routes_system.py:299
+msgid "Réseau oublié."
+msgstr "Network forgotten."
+
+#: web/routes_system.py:311
+msgid "Connecté."
+msgstr "Connected."
+
+#: web/routes_system.py:322
+msgid "Ordre de préférence enregistré."
+msgstr "Order of preference saved."
+
+#: web/routes_system.py:330
+msgid "Pays invalide."
+msgstr "Invalid country."
+
+#: web/routes_system.py:338
+msgid "Pays du Wi-Fi enregistré."
+msgstr "Wi-Fi country saved."
+
+#: web/routes_system.py:392
 msgid "Le fichier de configuration n'a pas été trouvé."
 msgstr "The configuration file was not found."
 
-#: web/routes_system.py:318 web/routes_system.py:323
+#: web/routes_system.py:401 web/routes_system.py:406
 msgid "Aucun fichier de sauvegarde sélectionné."
 msgstr "No backup file selected."
 
-#: web/routes_system.py:333
+#: web/routes_system.py:416
 msgid ""
 "Configuration restaurée avec succès ! Le diaporama va redémarrer pour "
 "appliquer les changements."
@@ -10823,106 +10975,106 @@ msgstr ""
 "Configuration successfully restored! The slideshow will restart to apply "
 "the changes."
 
-#: web/routes_system.py:335
+#: web/routes_system.py:418
 msgid ""
 "Fichier de sauvegarde invalide ou corrompu. Ce n'est pas un fichier JSON "
 "valide."
 msgstr "Invalid or corrupted backup file. This is not a valid JSON file."
 
-#: web/routes_system.py:337
+#: web/routes_system.py:420
 #, python-format
 msgid "Erreur lors de la restauration : %(error)s"
 msgstr "Restore error: %(error)s"
 
-#: web/routes_system.py:416
+#: web/routes_system.py:499
 msgid "name_key"
 msgstr "name_key"
 
-#: web/routes_system.py:552
+#: web/routes_system.py:635
 msgid "Aucune version précédente connue."
 msgstr "No previous version known."
 
-#: web/routes_system.py:560
+#: web/routes_system.py:643
 msgid ""
 "Retour à la version précédente en cours : Pimmich redémarre dans quelques"
 " minutes."
 msgstr "Going back to the previous version: Pimmich will restart in a few minutes."
 
-#: web/routes_system.py:628
+#: web/routes_system.py:711
 msgid "La carte SD est déjà utilisée en entier : rien à agrandir."
 msgstr "The SD card is already fully used: nothing to extend."
 
-#: web/routes_system.py:635
+#: web/routes_system.py:718
 msgid "L'agrandissement n'a pas pu être programmé."
 msgstr "The resize could not be scheduled."
 
-#: web/routes_system.py:636
+#: web/routes_system.py:719
 msgid ""
 "C'est programmé : la partition sera agrandie au prochain redémarrage du "
 "cadre."
 msgstr "Scheduled: the partition will be extended at the frame's next reboot."
 
-#: web/routes_system.py:739
+#: web/routes_system.py:822
 msgid "Réglages enregistrés."
 msgstr "Settings saved."
 
-#: web/routes_system.py:748
+#: web/routes_system.py:831
 #, python-format
 msgid "Sauvegarde impossible : %(error)s"
 msgstr "Backup failed: %(error)s"
 
-#: web/routes_system.py:749
+#: web/routes_system.py:832
 #, python-format
 msgid "Sauvegarde envoyée sur Google Drive : %(name)s"
 msgstr "Backup uploaded to Google Drive: %(name)s"
 
-#: web/routes_system.py:758
+#: web/routes_system.py:841
 #, python-format
 msgid "Restauration impossible : %(error)s"
 msgstr "Restore failed: %(error)s"
 
-#: web/routes_system.py:762
+#: web/routes_system.py:845
 #, python-format
 msgid "Sauvegarde %(name)s restaurée (%(count)s fichiers). Rechargez la page."
 msgstr "Backup %(name)s restored (%(count)s files). Reload the page."
 
-#: web/routes_system.py:789
+#: web/routes_system.py:872
 msgid "Orientation inconnue."
 msgstr "Unknown orientation."
 
-#: web/routes_system.py:794
+#: web/routes_system.py:877
 msgid ""
 "Aucune mesure du capteur : vérifiez son branchement, et que le cadre est "
 "debout."
 msgstr "No sensor reading: check its wiring, and that the frame is standing up."
 
-#: web/routes_system.py:802
+#: web/routes_system.py:885
 msgid "Position mémorisée."
 msgstr "Position recorded."
 
-#: web/routes_system.py:849 web/routes_system.py:909
+#: web/routes_system.py:932 web/routes_system.py:992
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr "%(count)s files restored. The frame resumes with the backup."
 
-#: web/routes_system.py:865
+#: web/routes_system.py:948
 msgid "Une sauvegarde est déjà en cours."
 msgstr "A backup is already running."
 
-#: web/routes_system.py:876
+#: web/routes_system.py:959
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr "Backup complete: %(count)s files."
 
-#: web/routes_system.py:886
+#: web/routes_system.py:969
 msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
 msgstr "Backup started: it can take a while with many photos."
 
-#: web/routes_system.py:897 web/routes_system.py:900
+#: web/routes_system.py:980 web/routes_system.py:983
 msgid "Sauvegarde introuvable."
 msgstr "Backup not found."
 
-#: web/routes_system.py:935
+#: web/routes_system.py:1018
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
@@ -10930,7 +11082,7 @@ msgstr ""
 "First allow HTTPS certificates on your Tailscale account (page that "
 "opens), then try again."
 
-#: web/routes_system.py:937
+#: web/routes_system.py:1020
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
@@ -10938,7 +11090,7 @@ msgstr ""
 "The admin is reachable over HTTPS, without warnings, from your Tailscale "
 "devices."
 
-#: web/routes_system.py:938
+#: web/routes_system.py:1021
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr "HTTPS access via Tailscale removed."
 
@@ -11029,78 +11181,78 @@ msgstr "Disabled voice control service."
 msgid "Erreur interne du serveur : %(error)s"
 msgstr "Internal server error: %(error)s"
 
-#: web/workers.py:168 web/workers.py:279 web/workers.py:374
+#: web/workers.py:175 web/workers.py:286 web/workers.py:381
 msgid "Import initial ignoré."
 msgstr "Initial import skipped."
 
-#: web/workers.py:181 web/workers.py:292
+#: web/workers.py:188 web/workers.py:299
 #, python-format
 msgid "Mise à jour auto. activée. Intervalle : %(hours)sh."
 msgstr "Auto update enabled. Interval: %(hours)sh."
 
-#: web/workers.py:187
+#: web/workers.py:194
 msgid "Lancement du téléchargement..."
 msgstr "Starting download..."
 
-#: web/workers.py:220 web/workers.py:313 web/workers.py:391
+#: web/workers.py:227 web/workers.py:320 web/workers.py:398
 msgid "Préparation des photos..."
 msgstr "Preparing photos..."
 
-#: web/workers.py:236 web/workers.py:337
+#: web/workers.py:243 web/workers.py:344
 msgid "Mise à jour terminée. Redémarrage du diaporama..."
 msgstr "Update complete. Restarting slideshow..."
 
-#: web/workers.py:241 web/workers.py:342 web/workers.py:410
+#: web/workers.py:248 web/workers.py:349 web/workers.py:417
 msgid "Dernière mise à jour réussie."
 msgstr "Last update successful."
 
-#: web/workers.py:244 web/workers.py:345 web/workers.py:412
+#: web/workers.py:251 web/workers.py:352 web/workers.py:419
 msgid "Mise à jour terminée avec avertissements/erreurs."
 msgstr "Update completed with warnings/errors."
 
-#: web/workers.py:251
+#: web/workers.py:258
 msgid "Mise à jour automatique désactivée."
 msgstr "Automatic update disabled."
 
-#: web/workers.py:298
+#: web/workers.py:305
 msgid "Lancement de l'import..."
 msgstr "Starting import..."
 
-#: web/workers.py:351
+#: web/workers.py:358
 msgid "Mise à jour automatique Samba désactivée."
 msgstr "Samba automatic update disabled."
 
-#: web/workers.py:378
+#: web/workers.py:385
 msgid "Recherche de nouveautés..."
 msgstr "Checking for new items..."
 
-#: web/workers.py:415
+#: web/workers.py:422
 msgid "Aucune nouveauté."
 msgstr "Nothing new."
 
-#: web/workers.py:421
+#: web/workers.py:428
 msgid "Mise à jour automatique Google Drive désactivée."
 msgstr "Google Drive automatic update disabled."
 
-#: web/workers.py:593
+#: web/workers.py:600
 msgid "vous"
 msgstr "you"
 
-#: web/workers.py:604
+#: web/workers.py:611
 #, python-format
 msgid "Bienvenue à la maison, %(name)s !"
 msgstr "Welcome home, %(name)s!"
 
-#: web/workers.py:679
+#: web/workers.py:686
 #, python-format
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr "%(count)s photo(s) added from %(source)s."
 
-#: web/workers.py:985
+#: web/workers.py:1015
 msgid "Diaporama instable"
 msgstr "Unstable slideshow"
 
-#: web/workers.py:985
+#: web/workers.py:1015
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "It had to be restarted %(count)s times in one hour."

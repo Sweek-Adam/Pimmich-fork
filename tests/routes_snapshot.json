@@ -1513,6 +1513,42 @@
   ]
  ],
  [
+  "/api/wifi/country",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/wifi/networks",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/wifi/networks",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/wifi/networks/<uuid>",
+  [
+   "DELETE"
+  ]
+ ],
+ [
+  "/api/wifi/networks/<uuid>/connect",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/wifi/networks/order",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/wifi_status",
   [
    "GET"

@@ -63,6 +63,7 @@ SETTINGS = {
     "display_height": ("int", (240, 7680), 1080),
     "screen_height_percent": ("int", (10, 100), 100),
     "display_backend": ("choice", ["x11", "wayland"], "x11"),
+    "wifi_hotspot_fallback": ("bool", None, False),
     # Télévision et prise connectée
     "cec_enabled": ("bool", None, False),
     "smart_plug_enabled": ("bool", None, False),
@@ -165,7 +166,7 @@ SETTINGS = {
 
 
 # Réglages visibles et modifiables seulement par un administrateur (comme dans l'interface classique)
-ADMIN_ONLY = {"telegram_authorized_users"}
+ADMIN_ONLY = {"telegram_authorized_users", "wifi_hotspot_fallback"}
 
 # Secrets : jamais renvoyés au navigateur ; on sait seulement s'ils sont définis, et on peut les remplacer
 SECRETS = ("immich_token", "smb_password", "weather_api_key", "stormglass_api_key", "telegram_bot_token",

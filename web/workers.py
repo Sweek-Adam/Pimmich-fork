@@ -69,6 +69,10 @@ def schedule_worker():
         in_schedule_at_boot = (start_time <= end_time and start_time <= now_time <= end_time) or \
                               (start_time > end_time and (now_time >= start_time or now_time <= end_time))
         
+        from utils import clock_sync
+        if not clock_sync.trusted():  # démarrage sans Internet : l'heure peut dater du dernier arrêt
+            logger.info("📅 Heure pas encore synchronisée (pas d'Internet ?) : le diaporama démarre quand même.")
+            in_schedule_at_boot = True
         if in_schedule_at_boot:
             logger.info(f"📅 Entre {start_str} et {end_str} = Heures actives au démarrage, lancement du diaporama.")
             start_slideshow()
@@ -98,6 +102,9 @@ def schedule_worker():
                 in_schedule = start_time <= now_time <= end_time
             else:
                 in_schedule = now_time >= start_time or now_time <= end_time
+            from utils import clock_sync
+            if not clock_sync.trusted():
+                in_schedule = True  # heure pas encore synchronisée : on affiche plutôt que de rester éteint par erreur
 
             # Réinitialiser l'override manuel si on change de plage horaire (ex: passage de nuit à jour)
             if last_schedule_state is not None and last_schedule_state != in_schedule:
@@ -919,6 +926,29 @@ def button_worker():
             logger.warning(f"[Bouton] Lecture : {e}")
             watcher.pin = None
         time.sleep(gpio_button.POLL if watcher.pin is not None else 1)
+
+
+def hotspot_worker():
+    """Point d'accès de secours « Cadre-Pimmich » quand aucun réseau connu n'est trouvé (réglage wifi_hotspot_fallback)."""
+    from utils import hotspot, wifi_networks
+    hotspot.STATE_FILE.unlink(missing_ok=True)
+    if not shutil.which("nmcli"):
+        return
+    fallback = hotspot.Fallback()
+    actions = {"start": hotspot.start, "stop": hotspot.stop, "clients": hotspot.clients, "wait": time.sleep,
+               "online": wifi_networks.online}
+    time.sleep(30)
+    while True:
+        try:
+            config = load_config()
+            enabled = bool(config.get("wifi_hotspot_fallback"))
+            key = hotspot.password(config, save_config) if enabled else ""
+            result = fallback.step(enabled, wifi_networks.online(), key, actions)
+            if result in ("started", "restarted", "back_online", "stopped", "failed"):
+                logger.info(f"[Wi-Fi] Point d'accès de secours : {result}")
+        except Exception as e:
+            logger.warning(f"[Wi-Fi] Point d'accès de secours : {e}")
+        time.sleep(30)
 
 
 def music_schedule_worker():

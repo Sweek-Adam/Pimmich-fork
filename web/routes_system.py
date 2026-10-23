@@ -255,6 +255,89 @@ def wifi_apply_api():
     return jsonify({"success": ok, "message": message}), (200 if ok else 400)
 
 
+UUID = re.compile(r"^[0-9a-fA-F-]{36}$")
+
+
+@app.route('/api/wifi/networks', methods=['GET'])
+@admin_required
+def wifi_networks_api():
+    """Réseaux Wi-Fi mémorisés (du préféré au moins préféré) et point d'accès de secours (sans les mots de passe des réseaux)."""
+    from utils import hotspot, wifi_networks
+    config = load_config()
+    current = hotspot.state()
+    return jsonify({"success": True, "networks": wifi_networks.saved(), "country": config.get("wifi_country", "FR"),
+                    "hotspot": {"enabled": bool(config.get("wifi_hotspot_fallback")), "active": bool(current),
+                                "ssid": hotspot.SSID, "address": hotspot.ADDRESS,
+                                "password": config.get("wifi_hotspot_password") or None}})
+
+
+@app.route('/api/wifi/networks', methods=['POST'])
+@admin_required
+def wifi_network_add_api():
+    """Mémorise un réseau (même s'il n'est pas à portée en ce moment) ; le cadre s'y connectera tout seul."""
+    from utils import wifi_networks
+    data = request.get_json(silent=True) or {}
+    ssid, password = str(data.get("ssid") or "").strip(), str(data.get("password") or "")
+    problem = wifi_networks.check(ssid, password)
+    if problem == "ssid":
+        return jsonify({"success": False, "message": _("Nom de réseau invalide (1 à 32 caractères).")}), 400
+    if problem == "password":
+        return jsonify({"success": False, "message": _("Le mot de passe Wi-Fi doit faire de 8 à 63 caractères (ou rester vide pour un réseau ouvert).")}), 400
+    ok, message = wifi_networks.add(ssid, password, bool(data.get("hidden")))
+    if not ok:
+        return jsonify({"success": False, "message": _("Réseau non enregistré : %(error)s", error=message)}), 500
+    return jsonify({"success": True, "message": _("Réseau « %(ssid)s » mémorisé : le cadre s'y connectera dès qu'il sera à portée.", ssid=ssid)})
+
+
+@app.route('/api/wifi/networks/<uuid>', methods=['DELETE'])
+@admin_required
+def wifi_network_delete_api(uuid):
+    from utils import wifi_networks
+    if not UUID.match(uuid):
+        return jsonify({"success": False, "message": _("Réseau inconnu.")}), 400
+    ok, message = wifi_networks.remove(uuid)
+    return jsonify({"success": ok, "message": _("Réseau oublié.") if ok else message}), (200 if ok else 500)
+
+
+@app.route('/api/wifi/networks/<uuid>/connect', methods=['POST'])
+@admin_required
+def wifi_network_connect_api(uuid):
+    from utils import wifi_networks
+    if not UUID.match(uuid):
+        return jsonify({"success": False, "message": _("Réseau inconnu.")}), 400
+    ok, message = wifi_networks.connect(uuid)
+    if not ok:
+        return jsonify({"success": False, "message": _("Connexion impossible : %(error)s", error=message)}), 500
+    return jsonify({"success": True, "message": _("Connecté.")})
+
+
+@app.route('/api/wifi/networks/order', methods=['POST'])
+@admin_required
+def wifi_network_order_api():
+    from utils import wifi_networks
+    uuids = (request.get_json(silent=True) or {}).get("uuids")
+    if not isinstance(uuids, list) or not all(isinstance(u, str) and UUID.match(u) for u in uuids):
+        return jsonify({"success": False, "message": _("Liste invalide.")}), 400
+    ok, message = wifi_networks.reorder(uuids)
+    return jsonify({"success": ok, "message": _("Ordre de préférence enregistré.") if ok else message}), (200 if ok else 500)
+
+
+@app.route('/api/wifi/country', methods=['POST'])
+@admin_required
+def wifi_country_api():
+    country = str((request.get_json(silent=True) or {}).get("country") or "").strip().upper()
+    if not re.fullmatch(r"[A-Z]{2}", country):
+        return jsonify({"success": False, "message": _("Pays invalide.")}), 400
+    result = subprocess.run(['sudo', '-n', '/usr/bin/raspi-config', 'nonint', 'do_wifi_country', country],
+                            capture_output=True, text=True, timeout=30)
+    if result.returncode != 0:
+        return jsonify({"success": False, "message": result.stderr.strip() or "raspi-config"}), 500
+    config = load_config()
+    config["wifi_country"] = country
+    save_config(config)
+    return jsonify({"success": True, "message": _("Pays du Wi-Fi enregistré.")})
+
+
 @app.route('/api/wifi_status')
 @login_required
 def get_wifi_status_api():
