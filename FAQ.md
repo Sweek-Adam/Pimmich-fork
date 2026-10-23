@@ -133,6 +133,10 @@ Le script est conçu pour être relancé sans risque. Il détectera l'absence du
 
 **R :** Dans `Écran > Affichage`, essayez d'activer l'option "**Activer le décodage vidéo matériel**". C'est beaucoup plus performant, surtout sur Raspberry Pi. Si cela cause des problèmes (écran noir/bleu après une vidéo), désactivez-la.
 
+**Q : Le cadre peut-il retenir plusieurs réseaux Wi-Fi ? Et s'il n'en trouve aucun ?**
+
+**R :** Oui : `Système > Réseau`, carte « Réseaux mémorisés ». Ajoutez autant de réseaux que vous voulez, même s'ils ne sont pas à portée (pratique avant d'emporter le cadre chez quelqu'un), et rangez-les par ordre de préférence. Sans aucun réseau, le cadre démarre quand même et affiche les photos déjà présentes. Si l'heure n'a pas pu être mise à jour, faute d'Internet, il ignore les heures d'affichage pour ne pas rester éteint par erreur. Avec le « Point d'accès de secours » activé, il crée au bout de 2 minutes son propre Wi-Fi « Cadre-Pimmich » : le mot de passe et un QR code s'affichent à l'écran ; connectez-y votre téléphone, ouvrez `http://10.42.0.1`, puis ajoutez le réseau du lieu dans `Système > Réseau`.
+
 **Q : Le Wi-Fi ne se connecte pas, mais l'Ethernet (câble) fonctionne. Pourquoi ?**
 
 **R :** Parfois, si un câble Ethernet est branché, le système lui donne la priorité. Dans `Système > Réseau`, vous pouvez essayer de désactiver temporairement l'"**Interface Filaire (eth0)**" pour forcer le système à utiliser exclusivement le Wi-Fi.

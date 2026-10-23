@@ -117,6 +117,10 @@ The script is designed to be re-run safely. It will detect that the credentials 
 
 **A:** In `Screen > Display`, try enabling "**Enable hardware video decoding**". It is much more efficient, especially on a Raspberry Pi. If it causes problems (black/blue screen after a video), disable it.
 
+**Q: Can the frame remember several Wi-Fi networks? What if it finds none?**
+
+**A:** Yes: `System > Network`, "Saved networks" card. Add as many networks as you like, even out of range (handy before taking the frame to someone's home), and sort them by preference. With no network at all, the frame still starts and shows the photos it already has. If the time could not be updated for lack of Internet, it ignores the display hours so it does not stay off by mistake. With the "Fallback hotspot" enabled, after 2 minutes it creates its own "Cadre-Pimmich" Wi-Fi: the password and a QR code appear on screen; connect your phone, open `http://10.42.0.1`, then add the local network in `System > Network`.
+
 **Q: The Wi-Fi won't connect, but Ethernet (cable) works. Why?**
 
 **A:** Sometimes, if an Ethernet cable is plugged in, the system gives it priority. In `System > Network`, you can try temporarily disabling the "**Wired Interface (eth0)**" to force the system to use Wi-Fi only.
