@@ -615,5 +615,7 @@ FORMATS.update(_THEMES_EXTRA)
 FORMATS.update(_THEMES_FAMILY)
 THEME_KEYS = list(_THEMES) + list(_THEMES_EXTRA) + list(_THEMES_FAMILY)
 from utils.message_compositions import FORMATS as _MESSAGE_FORMATS  # noqa: E402
+from utils.party import THEMES as _PARTY  # noqa: E402
 FORMATS.update(_MESSAGE_FORMATS)
+FORMATS.update(_PARTY)
 MESSAGE_FORMATS = set(_MESSAGE_FORMATS)  # construites autour d'un message : seulement quand un message est à afficher

@@ -432,6 +432,13 @@ def source_choices():
                ("personnes", translate("Photos des personnes suivies (Immich)"))]
     names = [u["username"] for u in user_manager.list_users()] + [session.get("username") or ""]
     choices += [(source, translate("Envois de %(name)s", name=members.label(source, names))) for source in members.sources()]
+    party_config = load_config().get("party") or {}
+    for folder in sorted((BASE_DIR / "static" / "photos").glob("fete_*")):  # albums des fêtes (mode fête)
+        if folder.is_dir():
+            day = folder.name[5:]
+            name = party_config.get("name") if party_config.get("source") == folder.name else ""
+            label = f"{day[6:8]}/{day[4:6]}/{day[:4]}" if len(day) == 8 and day.isdigit() else day
+            choices.append((folder.name, translate("Fête : %(name)s", name=f"{name} ({label})" if name else label)))
     choices.append(("messages", translate("Messages")))
     return choices
 

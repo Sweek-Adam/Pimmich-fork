@@ -38,6 +38,10 @@ def in_season(theme, today=None):
     if theme in OCCASION_THEMES:  # moments de famille et fêtes du calendrier
         from utils import occasions
         return occasions.in_season(theme, today)
+    if theme == "fete":  # Mur de la fête : seulement pendant le mode fête
+        from utils import party
+        from utils.config_manager import load_config
+        return party.active(load_config())
     if theme == "nouvel_an":
         return (today.month == 12 and today.day >= 26) or (today.month == 1 and today.day <= 7)
     md = (today.month, today.day)
@@ -51,7 +55,7 @@ def in_season(theme, today=None):
 
 
 OCCASION_THEMES = {"anniversaire_perso", "mariage", "naissance", "rentree", "saint_valentin", "fete_meres", "fete_peres"}
-SEASONAL = {"noel", "halloween", "paques", "printemps", "automne", "hiver", "nouvel_an"} | OCCASION_THEMES
+SEASONAL = {"noel", "halloween", "paques", "printemps", "automne", "hiver", "nouvel_an", "fete"} | OCCASION_THEMES
 
 
 # --- Outils de dessin ---

@@ -33,6 +33,7 @@ from web import routes_messages  # noqa: F401 (enregistre les routes)
 from web import routes_home  # noqa: F401 (enregistre les routes)
 from web import routes_music  # noqa: F401 (enregistre les routes)
 from web import routes_media  # noqa: F401 (enregistre les routes)
+from web import routes_party  # noqa: F401 (enregistre les routes)
 from web.workers import *  # noqa: F401,F403
 
 
@@ -68,6 +69,7 @@ if __name__ == '__main__':
     threading.Thread(target=reliability_worker, daemon=True).start()
     from web.workers import night_work_worker
     threading.Thread(target=night_work_worker, daemon=True, name="night-work").start()
+    threading.Thread(target=routes_party.party_worker, daemon=True, name="party").start()
     threading.Thread(target=button_worker, daemon=True, name="button").start()  # bouton physique (GPIO)
     threading.Thread(target=hotspot_worker, daemon=True, name="hotspot").start()  # Wi-Fi de secours
     routes_homeassistant.restart_bridge()  # Home Assistant (MQTT), s'il est configuré

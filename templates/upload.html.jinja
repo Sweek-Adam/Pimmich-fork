@@ -21,6 +21,9 @@
     .reaction:hover { border-color: var(--accent); }
     section[id] { scroll-margin-top: 64px; }
     .record { display: grid; justify-items: center; gap: 6px; }
+    .party { background: linear-gradient(135deg, #6d28d9, #db2777); color: #fff; border: 0; }
+    .party .card-title .emoji { background: rgba(255,255,255,.2); }
+    .party .btn { justify-self: start; }
   </style>
 </head>
 <body>
@@ -37,6 +40,14 @@
       <h1>{{ _('Partager avec le cadre') }}</h1>
       <p class="muted small">{{ _('Photos, messages, vocaux et dessins : ils apparaîtront sur le cadre photo de la famille.') }}</p>
     </header>
+
+    {% if party_name %}
+    <section class="card party">
+      <div class="card-title"><span class="emoji">🎉</span>{{ party_name }}</div>
+      <p class="small">{{ _('Envoyez vos photos de la fête : elles apparaissent tout de suite sur le cadre, avec votre prénom.') }}</p>
+      <a class="btn green" href="#photos-box">📷 {{ _('Envoyer mes photos') }}</a>
+    </section>
+    {% endif %}
 
     <nav class="chips jump">
       <a class="chip" href="#photos-box">📷 {{ _('Photos') }}</a>

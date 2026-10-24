@@ -73,8 +73,10 @@ def upload_page():
     """Affiche la page publique pour envoyer des photos."""
     from utils import trusted_guests
     config = load_config()
+    from utils import party
     response = app.make_response(render_template('upload.html.jinja', guest_messages_enabled=config.get("guest_messages_enabled", True),
-                                                 frame_width=int(config.get("display_width", 1920)), frame_height=int(config.get("display_height", 1080))))
+                                                 frame_width=int(config.get("display_width", 1920)), frame_height=int(config.get("display_height", 1080)),
+                                                 party_name=party.state(config).get("name") if party.active(config) else None))
     if not trusted_guests.valid(request.cookies.get(trusted_guests.COOKIE)):  # identifiant de l'appareil (invités de confiance)
         response.set_cookie(trusted_guests.COOKIE, trusted_guests.new_device(), max_age=5 * 365 * 86400, httponly=True, samesite="Lax")
     return response
@@ -113,6 +115,14 @@ def handle_upload():
             logger.info(f"[Upload] Nouveau fichier reçu de l'invité et en attente : {final_path.name}")
             count += 1
 
+    from utils import party
+    config_now = load_config()
+    if count and party.active(config_now) and party.state(config_now).get("auto_approve", True):
+        # Mode fête : chaque photo est préparée seule et montrée tout de suite (pas de redémarrage du diaporama)
+        threading.Thread(target=publish_party_photos, args=(saved, guest_name), daemon=True, name="party-photos").start()
+        flash(_('Merci ! %(count)s photo(s) envoyée(s) : elles arrivent sur le cadre.', count=count), "success")
+        return redirect(url_for('upload_page'))
+
     if count and trusted_guests.is_trusted(load_config(), device):
         # Invité de confiance : ses photos sont validées d'office (préparées en arrière-plan)
         threading.Thread(target=lambda: [approve_pending(p) for p in saved], daemon=True, name="guest-trusted").start()
@@ -131,11 +141,40 @@ def handle_upload():
     return redirect(url_for('upload_page'))
 
 
+def publish_party_photos(paths, guest_name=""):
+    """Photos d'invités pendant la fête : rangées dans l'album de la fête, préparées une par une, montrées aussitôt."""
+    from utils import party, trusted_guests
+    from utils import prepare_all_photos as prep
+    config = load_config()
+    source = party.state(config).get("source")
+    if not source:
+        return
+    folder = BASE_DIR / "static" / "photos" / source
+    folder.mkdir(parents=True, exist_ok=True)
+    width, height = int(config.get("display_width", 1920)), int(config.get("display_height", 1080))
+    for pending in map(Path, paths):
+        if not prep.is_media(pending.name):
+            continue
+        target = folder / pending.name
+        shutil.move(str(pending), str(target))
+        trusted_guests.forget(pending.name)
+        try:
+            kind, _preview = prep.prepare_media(source, target.name, width, height)
+        except Exception as e:
+            logger.warning(f"[Fête] {target.name} non préparée : {e}")
+            continue
+        if kind == "photo":
+            party.push_live(BASE_DIR / "static" / "prepared" / source / prep.prepared_name(target.name), guest_name)
+        logger.info(f"[Fête] Photo de {guest_name or 'un invité'} ajoutée : {target.name}")
+
+
 def approve_pending(pending_path):
     """Valide une photo d'invité : préparée dans la source « invités », puis retirée de l'attente. Renvoie (succès, message)."""
     from utils import trusted_guests
+    from utils import party
     pending_path = Path(pending_path)
-    target_source = "invités"
+    config_now = load_config()
+    target_source = party.state(config_now).get("source") if party.active(config_now) else "invités"  # fête : son album
     source_dir = BASE_DIR / "static" / "photos" / target_source
     source_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy(str(pending_path), str(source_dir / pending_path.name))  # copie : l'original reste en attente en cas d'échec
@@ -151,8 +190,8 @@ def approve_pending(pending_path):
         pending_path.unlink(missing_ok=True)
         trusted_guests.forget(pending_path.name)
         config = load_config()
-        if 'invités' not in config.get('display_sources', []):  # la photo validée doit être diffusée
-            config = dict(config, display_sources=list(config.get('display_sources', [])) + ['invités'])
+        if target_source not in config.get('display_sources', []):  # la photo validée doit être diffusée
+            config = dict(config, display_sources=list(config.get('display_sources', [])) + [target_source])
             save_config(config)
         if is_slideshow_running():
             restart_slideshow_for_update()

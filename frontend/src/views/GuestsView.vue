@@ -120,7 +120,27 @@ async function removeCode(token: string) {
   codes.value = (await post<{ codes: { token: string; label: string }[] }>("/api/frame/pairing", { token }, "DELETE")).codes;
 }
 
+// --- Mode fête ---
+interface Party { active: boolean; name: string; until: string | null; only_party: boolean; auto_approve: boolean; photos: number }
+const party = ref<Party | null>(null);
+const partyForm = reactive({ name: "", hours: 6, only_party: true, auto_approve: true });
+async function loadParty() {
+  party.value = await get<Party>("/api/party");
+  if (party.value.name && !partyForm.name) partyForm.name = party.value.name;
+}
+async function startParty() {
+  const r = await run(() => post<Party & { success: boolean; message?: string }>("/api/party/start", { ...partyForm }));
+  if (r?.success) party.value = r;
+}
+async function stopParty() {
+  if (!window.confirm(t("Terminer la fête ? Le diaporama habituel reprend ; l'album de la fête reste dans les sources."))) return;
+  const r = await run(() => post<Party & { success: boolean; message?: string }>("/api/party/stop"));
+  if (r?.success) party.value = r;
+}
+const untilLabel = (iso: string | null) => iso ? new Date(iso).toLocaleString([], { weekday: "long", hour: "2-digit", minute: "2-digit" }) : "";
+
 onMounted(() => {
+  loadParty().catch(() => {});
   if (boot.admin) { loadRemote(); loadFrames(); loadCodes(); }
 });
 </script>
@@ -140,6 +160,27 @@ onMounted(() => {
       </div>
       <p class="small muted">{{ t("Les photos des invités passent par « À valider » avant d'être affichées.") }}</p>
     </div>
+  </section>
+
+  <section v-if="party" class="card party" :class="{ on: party.active }">
+    <div class="card-head"><h2><i class="fas fa-glass-cheers"></i>{{ t("Mode fête") }}</h2>
+      <span v-if="party.active" class="pill ok">{{ t("En cours jusqu'à {time}", { time: untilLabel(party.until) }) }}</span></div>
+    <template v-if="party.active">
+      <p><strong>{{ party.name }}</strong> · {{ t("{count} photo(s) reçue(s)", { count: party.photos }) }}</p>
+      <p class="small muted">{{ t("Le QR code est affiché en grand sur le cadre. Chaque photo envoyée passe aussitôt en grand avec le prénom de l'invité, puis dans le Mur de la fête.") }}</p>
+      <div class="row">
+        <button class="btn" type="button" @click="startParty"><i class="fas fa-clock"></i>{{ t("Prolonger ({hours} h)", { hours: partyForm.hours }) }}</button>
+        <button class="btn danger" type="button" @click="stopParty"><i class="fas fa-stop"></i>{{ t("Terminer la fête") }}</button>
+      </div>
+    </template>
+    <template v-else>
+      <p class="small muted">{{ t("Pour un anniversaire, un mariage ou une soirée : un grand QR code à l'écran, les invités envoient leurs photos depuis leur téléphone et elles s'affichent tout de suite. Elles sont gardées dans leur propre album.") }}</p>
+      <label class="field">{{ t("Nom de la fête") }}<input v-model="partyForm.name" type="text" maxlength="60" :placeholder="t('ex. Les 40 ans de Léa')"></label>
+      <label class="field">{{ t("Durée (heures)") }}<input v-model.number="partyForm.hours" type="number" min="1" max="48"></label>
+      <label class="check"><input v-model="partyForm.only_party" type="checkbox"> {{ t("Montrer seulement les photos de la fête") }}</label>
+      <label class="check"><input v-model="partyForm.auto_approve" type="checkbox"> {{ t("Afficher les photos sans les valider (tous ceux qui ont le QR code peuvent envoyer)") }}</label>
+      <button class="btn primary" type="button" @click="startParty"><i class="fas fa-glass-cheers"></i>{{ t("Lancer la fête") }}</button>
+    </template>
   </section>
 
   <section v-if="boot.admin && remote" class="card">
@@ -234,4 +275,7 @@ summary { cursor: pointer; color: var(--accent); font-weight: 600; }
 .codes { list-style: none; padding: 0; margin: .5rem 0; }
 .codes li { display: flex; gap: .5rem; align-items: center; padding: .35rem 0; }
 .alert { margin: .6rem 0; }
+.party.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.party .field { display: grid; gap: .3rem; margin: .5rem 0; }
+.party .check { display: flex; gap: .5rem; align-items: center; margin: .35rem 0; }
 </style>

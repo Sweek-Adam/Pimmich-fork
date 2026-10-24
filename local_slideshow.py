@@ -1275,6 +1275,7 @@ def control_fan(temperature, threshold=55, pin=14):
 
 # --- Dispositions : compositions préparées en arrière-plan pour ne jamais ralentir le diaporama ---
 # Une composition est préparée pour un emplacement précis de la playlist (les photos qui suivent, dans l'ordre).
+_live_arrivals = set()  # photos de la fête tout juste arrivées : montrées seules, en grand
 _composition = {"thread": None, "ready": None, "target": None, "counter": 0, "slot": 0, "style": None}
 _queue_lock = threading.Lock()
 _queue_context = {}  # dernier état publié pour l'onglet « À suivre » (republié quand une composition est prête)
@@ -1499,6 +1500,9 @@ def _guest_qr_surface(size, caption):
 
 
 def draw_guest_qr(screen, screen_width, screen_height, config):
+    from utils import party
+    if party.active(config):
+        return draw_party(screen, screen_width, screen_height, config)
     if not config.get("show_guest_qr", True):
         return
     try:
@@ -1513,6 +1517,43 @@ def draw_guest_qr(screen, screen_width, screen_height, config):
         screen.blit(surface, (x, y))
     except Exception as e:
         logger.debug(f"QR code invités non affiché : {e}")
+
+
+# --- Mode fête : QR code en grand, nom de la fête, prénom de l'invité qui vient d'envoyer la photo ---
+CURRENT_SLIDE = {"path": None}
+_party_cache = {"key": None, "surface": None}
+
+
+def draw_party(screen, screen_width, screen_height, config):
+    from utils import party
+    try:
+        size = max(120, int(min(screen_width, screen_height) * 0.17))
+        qr = _guest_qr_surface(size, _("Envoyez vos photos !"))
+        margin = 18
+        if qr is not None:
+            screen.blit(qr, (screen_width - qr.get_width() - margin, screen_height - qr.get_height() - margin))
+        author = party.author_of(CURRENT_SLIDE["path"])
+        name = party.state(config).get("name") or ""
+        key = (author, name, screen_width)
+        if _party_cache["key"] != key:
+            font = pygame.font.Font(None, max(28, screen_height // 18))
+            lines = [text for text in ((_("Photo de %(name)s", name=author) if author else ""), name) if text]
+            if lines:
+                renders = [font.render(text, True, (255, 255, 255)) for text in lines[:1]]
+                pad = max(10, screen_height // 80)
+                width = max(r.get_width() for r in renders) + 2 * pad
+                height = sum(r.get_height() for r in renders) + 2 * pad
+                surface = pygame.Surface((width, height), pygame.SRCALPHA)
+                pygame.draw.rect(surface, (120, 40, 160, 190), surface.get_rect(), border_radius=pad * 2)
+                surface.blit(renders[0], (pad, pad))
+                _party_cache["surface"] = surface
+            else:
+                _party_cache["surface"] = None
+            _party_cache["key"] = key
+        if _party_cache["surface"] is not None:
+            screen.blit(_party_cache["surface"], (margin, screen_height - _party_cache["surface"].get_height() - margin))
+    except Exception as e:
+        logger.debug(f"Mode fête : bandeau non affiché ({e})")
 
 
 # --- Point d'accès de secours (aucun réseau Wi-Fi connu) : comment s'y connecter ---
@@ -3532,6 +3573,15 @@ def start_slideshow():
                 # Ordre demandé depuis l'interface (onglet « À suivre ») : appliqué avant le média suivant
                 playlist, playlist_index = play_queue.apply_requested_order(playlist, playlist_index)
 
+                # Mode fête : les photos tout juste envoyées passent tout de suite, en grand (sans redémarrer)
+                from utils import party
+                arrived = party.pop_live()
+                if arrived:
+                    playlist = party.inject(playlist, playlist_index, [item["path"] for item in arrived])
+                    _live_arrivals.update(os.path.realpath(item["path"]) for item in arrived)
+                    logger.info(f"[Fête] {len(arrived)} nouvelle(s) photo(s) affichée(s) tout de suite")
+                arrival = os.path.realpath(playlist[playlist_index]) in _live_arrivals
+
                 # Disposition de cette diapositive : photo unique ou composition des photos suivantes
                 layout_plan = layout_engine.resolve(config, custom_layout if is_custom_run else None)
                 forced_layout = pop_forced_layout()  # « afficher maintenant » depuis l'interface (une fois)
@@ -3542,7 +3592,8 @@ def start_slideshow():
                     wanted = bool(slide_plan.formats)
                 else:  # un message arrive : affiché dans une disposition qui accepte les messages, plutôt que seul
                     wanted, slide_plan = layout_engine.plan_for_slide(slide_plan, playlist[playlist_index], _composition["counter"], include_messages)
-                    wanted = wanted and bool(slide_plan.formats)
+                    wanted = wanted and bool(slide_plan.formats) and not arrival  # photo de la fête qui arrive : en grand
+                _live_arrivals.discard(os.path.realpath(playlist[playlist_index]))
                 memories_slide = None if forced_layout is not None or config.get("media_mode") == "videos" \
                     else pop_memories_slide(config, SCREEN_WIDTH, SCREEN_HEIGHT)
                 if memories_slide:  # « Ce jour-là » : une diapositive en plus, sans décaler la playlist
@@ -3554,6 +3605,7 @@ def start_slideshow():
                     composition_path, composition_used = take_composition(playlist, playlist_index, wait_seconds=40)
 
                 photo_path = composition_path or playlist[playlist_index]
+                CURRENT_SLIDE["path"] = photo_path
 
                 # Préparer dès maintenant la composition suivante, pendant l'affichage de celle-ci
                 next_index = (playlist_index + (composition_used if composition_path else 1)) % len(playlist)
