@@ -299,18 +299,24 @@ def animations_for(style, chunk, messages_by_id, width, height, include_messages
         if gif:
             gifs.append((path, gif))
     items = []
-    for path, gif in gifs[:animated.MAX_ITEMS]:
-        drawings = []
-        for inverted in (False, True):
-            rng = random.Random()
-            rng.setstate(rng_state)
-            compositions.probe({path: inverted})
-            try:
-                drawn, _used = render_chunk(style, chunk, messages_by_id, width, height, include_messages, rng)
-            finally:
-                compositions.probe(None)
-            drawings.append(drawn)
-        item = animated.locate(image, drawings[0], drawings[1], gif) if all(d is not None for d in drawings) else None
-        if item:
-            items.append(item)
+    if not gifs:
+        return items
+    compositions.cached_photos(True)
+    try:
+        for path, gif in gifs[:animated.MAX_ITEMS]:
+            drawings = []
+            for inverted in (False, True):
+                rng = random.Random()
+                rng.setstate(rng_state)
+                compositions.probe({path: inverted})
+                try:
+                    drawn, _used = render_chunk(style, chunk, messages_by_id, width, height, include_messages, rng)
+                finally:
+                    compositions.probe(None)
+                drawings.append(drawn)
+            item = animated.locate(image, drawings[0], drawings[1], gif) if all(d is not None for d in drawings) else None
+            if item:
+                items.append(item)
+    finally:
+        compositions.cached_photos(False)
     return items

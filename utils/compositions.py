@@ -56,6 +56,31 @@ def probe(paths_inverted):
 
 def load_photo(display_path, max_side=1400):
     """Charge une photo réduite (décodage JPEG accéléré), orientée selon ses données EXIF."""
+    cache = getattr(_probe, "cache", None)
+    if cache is None:
+        return _load_photo(display_path, max_side)
+    key = (str(display_path), max_side)
+    if key not in cache:  # dessins de repérage : chaque photo n'est lue qu'une fois
+        cache[key] = _load_photo(display_path, max_side, probing=False)
+    image = cache[key]
+    if image is None:
+        return None
+    probes = getattr(_probe, "paths", None) or {}
+    if str(display_path) in probes:
+        stand_in = animated.gradient(image.size, probes[str(display_path)])
+        stand_in.info.update(image.info)
+        return stand_in
+    copy = image.copy()
+    copy.info.update(image.info)
+    return copy
+
+
+def cached_photos(enabled):
+    """Pendant les dessins de repérage, les photos lues sont gardées en mémoire (même dessin plusieurs fois)."""
+    _probe.cache = {} if enabled else None
+
+
+def _load_photo(display_path, max_side=1400, probing=True):
     for candidate in (original_for(display_path), Path(display_path)):
         try:
             with Image.open(candidate) as image:
@@ -63,7 +88,7 @@ def load_photo(display_path, max_side=1400):
                 image = ImageOps.exif_transpose(image).convert("RGB")
                 image.thumbnail((max_side, max_side), Image.LANCZOS, reducing_gap=2.0)
                 image = faces.attach(image, faces.for_file(candidate, image))
-                probes = getattr(_probe, "paths", None) or {}
+                probes = (getattr(_probe, "paths", None) or {}) if probing else {}
                 if str(display_path) in probes:  # même taille et mêmes visages : la photo est cadrée exactement pareil
                     stand_in = animated.gradient(image.size, probes[str(display_path)])
                     stand_in.info.update(image.info)

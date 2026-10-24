@@ -19,7 +19,7 @@ import logging
 import os
 from pathlib import Path
 
-from PIL import Image, ImageSequence
+from PIL import Image, ImageChops, ImageSequence
 
 logger = logging.getLogger("pimmich.animated")
 
@@ -188,7 +188,7 @@ def matches(item, displayed):
 
 # --- Repérage dans les compositions ---
 
-def _consensus(points, target, candidates, rng, tolerance, rounds=80):
+def _consensus(points, target, candidates, rng, tolerance, rounds=60):
     """Transformation affine suivie par le plus de pixels parmi `candidates` : (coefficients, pixels qui la suivent)."""
     import numpy as np
     if len(candidates) < 3:
@@ -214,13 +214,15 @@ def gradient(size, inverted):
     """Dégradé de repérage : rouge selon x, vert selon y ; bleu à 0 (ou tout inversé, bleu à 255)."""
     import numpy as np
     w, h = size
-    u = np.linspace(0, 255, w, dtype=np.float32)[None, :].repeat(h, 0)
-    v = np.linspace(0, 255, h, dtype=np.float32)[:, None].repeat(w, 1)
-    b = np.zeros((h, w), np.float32)
-    rgb = np.stack([u, v, b], axis=2)
+    u = np.linspace(0, 255, w).round().astype(np.uint8)
+    v = np.linspace(0, 255, h).round().astype(np.uint8)
     if inverted:
-        rgb = 255 - rgb
-    return Image.fromarray(rgb.round().astype(np.uint8), "RGB")
+        u, v = 255 - u, 255 - v
+    rgb = np.empty((h, w, 3), np.uint8)
+    rgb[..., 0] = u[None, :]
+    rgb[..., 1] = v[:, None]
+    rgb[..., 2] = 255 if inverted else 0
+    return Image.fromarray(rgb, "RGB")
 
 
 def locate(base, low, high, gif_path):
@@ -229,8 +231,15 @@ def locate(base, low, high, gif_path):
     dégradé inversé). Retourne {box, affine, mask (image L)} ou None (GIF caché ou couleurs transformées).
     """
     import numpy as np
-    a = np.asarray(low.convert("RGB"), dtype=np.float32)
-    b = np.asarray(high.convert("RGB"), dtype=np.float32)
+    # Zone où les deux dessins diffèrent (bleu : 0 contre 255), puis calculs sur cette zone seulement
+    spread = np.asarray(ImageChops.subtract(high.convert("RGB").getchannel("B"), low.convert("RGB").getchannel("B")))
+    rows, cols = np.nonzero(spread.max(axis=1) > 12)[0], np.nonzero(spread.max(axis=0) > 12)[0]
+    if not len(rows):
+        return None
+    ox, oy = int(cols.min()), int(rows.min())
+    region = (ox, oy, int(cols.max()) + 1, int(rows.max()) + 1)
+    a = np.asarray(low.convert("RGB").crop(region), dtype=np.float32)
+    b = np.asarray(high.convert("RGB").crop(region), dtype=np.float32)
     alpha = np.clip((b[..., 2] - a[..., 2]) / 255.0, 0, 1)  # opacité du GIF à chaque pixel
     visible = alpha > 0.05
     solid = alpha > 0.6
@@ -242,12 +251,12 @@ def locate(base, low, high, gif_path):
     weight = alpha[vy, vx]
     u = 0.5 + (a[vy, vx, 0] - b[vy, vx, 0]) / (2 * 255 * weight)
     v = 0.5 + (a[vy, vx, 1] - b[vy, vx, 1]) / (2 * 255 * weight)
-    points = np.stack([vx + 0.5, vy + 0.5, np.ones(len(vx))], axis=1)
+    points = np.stack([vx + ox + 0.5, vy + oy + 0.5, np.ones(len(vx))], axis=1)  # coordonnées de l'écran
     target = np.stack([0.5 + u * (gw - 1), 0.5 + v * (gh - 1)], axis=1)  # centres des pixels du GIF
     tolerance = max(1.5, 0.006 * max(gw, gh))
     solid_idx = np.nonzero(weight > 0.6)[0]
     rng = np.random.default_rng(0)
-    sample = solid_idx if len(solid_idx) <= 20000 else rng.choice(solid_idx, 20000, replace=False)
+    sample = solid_idx if len(solid_idx) <= 6000 else rng.choice(solid_idx, 6000, replace=False)
     # Consensus : le GIF lui-même, plutôt que ce qui en dérive autrement (fond flou tiré de lui-même, plus agrandi)
     models, remaining = [], sample
     for _model in range(2):
@@ -276,7 +285,7 @@ def locate(base, low, high, gif_path):
     keep = np.linalg.norm(points @ best - target, axis=1) < tolerance * 1.5
     if keep.sum() < MIN_PIXELS:
         return None
-    ky, kx = vy[keep], vx[keep]
+    ky, kx = vy[keep] + oy, vx[keep] + ox
     x0, y0, x1, y1 = int(kx.min()), int(ky.min()), int(kx.max()) + 1, int(ky.max()) + 1
     # Coefficients exprimés depuis le coin de la boîte
     affine = [float(best[0, 0]), float(best[1, 0]), float(best[2, 0] + best[0, 0] * x0 + best[1, 0] * y0),
