@@ -247,16 +247,23 @@ def locate(base, low, high, gif_path):
         return None
     with Image.open(gif_path) as gif:
         gw, gh = gif.size
-    vy, vx = np.nonzero(visible)
-    weight = alpha[vy, vx]
-    u = 0.5 + (a[vy, vx, 0] - b[vy, vx, 0]) / (2 * 255 * weight)
-    v = 0.5 + (a[vy, vx, 1] - b[vy, vx, 1]) / (2 * 255 * weight)
-    points = np.stack([vx + ox + 0.5, vy + oy + 0.5, np.ones(len(vx))], axis=1)  # coordonnées de l'écran
-    target = np.stack([0.5 + u * (gw - 1), 0.5 + v * (gh - 1)], axis=1)  # centres des pixels du GIF
+    def coords(ys, xs):
+        """Points de l'écran et point du GIF montré à cet endroit (calculés pour ces pixels seulement)."""
+        w = alpha[ys, xs]
+        u = 0.5 + (a[ys, xs, 0] - b[ys, xs, 0]) / (510 * w)
+        v = 0.5 + (a[ys, xs, 1] - b[ys, xs, 1]) / (510 * w)
+        return xs + (ox + 0.5), ys + (oy + 0.5), 0.5 + u * (gw - 1), 0.5 + v * (gh - 1)
+
     tolerance = max(1.5, 0.006 * max(gw, gh))
-    solid_idx = np.nonzero(weight > 0.6)[0]
+    sy, sx = np.nonzero(solid)
     rng = np.random.default_rng(0)
-    sample = solid_idx if len(solid_idx) <= 6000 else rng.choice(solid_idx, 6000, replace=False)
+    if len(sx) > 6000:
+        pick = rng.choice(len(sx), 6000, replace=False)
+        sy, sx = sy[pick], sx[pick]
+    px, py, tx, ty = coords(sy, sx)
+    points = np.stack([px, py, np.ones(len(px), np.float32)], axis=1).astype(np.float64)
+    target = np.stack([tx, ty], axis=1).astype(np.float64)
+    sample = np.arange(len(px))
     # Consensus : le GIF lui-même, plutôt que ce qui en dérive autrement (fond flou tiré de lui-même, plus agrandi)
     models, remaining = [], sample
     for _model in range(2):
@@ -264,7 +271,7 @@ def locate(base, low, high, gif_path):
         if found is None:
             break
         coeffs, inliers = found
-        if inliers.sum() >= max(MIN_PIXELS * len(sample) / max(1, len(solid_idx)), 0.12 * len(sample)):
+        if inliers.sum() >= max(MIN_PIXELS * len(sample) / max(1, int(solid.sum())), 0.12 * len(sample)):
             models.append(coeffs)
         remaining = remaining[~inliers]
         if len(remaining) < 50:
@@ -273,18 +280,25 @@ def locate(base, low, high, gif_path):
         return None
     determinants = [abs(m[0, 0] * m[1, 1] - m[1, 0] * m[0, 1]) for m in models]
     best, det = max(zip(models, determinants), key=lambda pair: pair[1])
-    # Là où le GIF doit apparaître d'après ce modèle, presque tous les pixels doivent le suivre (sinon les couleurs
-    # ont été transformées par la disposition et seuls quelques morceaux tombent juste par hasard)
-    mapped = points[sample] @ best
-    inside = (mapped[:, 0] >= 0) & (mapped[:, 0] <= gw) & (mapped[:, 1] >= 0) & (mapped[:, 1] <= gh)
-    follows = np.linalg.norm(mapped - target[sample], axis=1) < tolerance
-    if inside.sum() < 50 or float((follows & inside).sum() / inside.sum()) < MIN_COVERAGE:
-        return None
     if not 0.01 < det < 1e4:  # transformation écrasée (couleurs transformées par la disposition)
         return None
-    keep = np.linalg.norm(points @ best - target, axis=1) < tolerance * 1.5
+    # Là où le GIF doit apparaître d'après ce modèle, presque tous les pixels doivent le suivre (sinon les couleurs
+    # ont été transformées par la disposition et seuls quelques morceaux tombent juste par hasard)
+    mapped = points @ best
+    inside = (mapped[:, 0] >= 0) & (mapped[:, 0] <= gw) & (mapped[:, 1] >= 0) & (mapped[:, 1] <= gh)
+    follows = np.linalg.norm(mapped - target, axis=1) < tolerance
+    if inside.sum() < 50 or float((follows & inside).sum() / inside.sum()) < MIN_COVERAGE:
+        return None
+    # Pixels qui montrent le GIF (tous les pixels visibles, en simple précision)
+    vy, vx = np.nonzero(visible)
+    px, py, tx, ty = coords(vy, vx)
+    c = best.astype(np.float32)
+    ex = c[0, 0] * px + c[1, 0] * py + c[2, 0] - tx
+    ey = c[0, 1] * px + c[1, 1] * py + c[2, 1] - ty
+    keep = ex * ex + ey * ey < (tolerance * 1.5) ** 2
     if keep.sum() < MIN_PIXELS:
         return None
+    weight = alpha[vy, vx]
     ky, kx = vy[keep] + oy, vx[keep] + ox
     x0, y0, x1, y1 = int(kx.min()), int(ky.min()), int(kx.max()) + 1, int(ky.max()) + 1
     # Coefficients exprimés depuis le coin de la boîte
