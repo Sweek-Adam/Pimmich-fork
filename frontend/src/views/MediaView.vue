@@ -17,7 +17,15 @@ interface ImportItem {
   download: { percent: number; current: number; total: number }; prepare: { percent: number; current: number; total: number }; work: Work | null;
 }
 
+interface SpaceItem { source: string; label: string; name: string; kind: "photo" | "video"; size: number; estimate: number; gain: number; detail: string; cloud_copy: boolean; queued: boolean }
+interface Space { items: SpaceItem[]; gain: number; saved: number; count: number; queue: { source: string; name: string }[] }
+
 const imports = ref<ImportItem[]>([]);
+const space = ref<Space | null>(null);
+const spaceLoading = ref(false);
+const picked = reactive<Record<string, boolean>>({});
+const keyOf = (i: { source: string; name: string }) => `${i.source}/${i.name}`;
+const aloneHint = () => t("Pas d'autre copie que celle du cadre");
 const sources = ref<Source[]>([]);
 const loading = ref(true);
 const filter = ref<"all" | "ready" | "todo" | "failed">("todo");
@@ -63,6 +71,28 @@ async function prepare(source: string, names: string[]) {
     sources.value.find((s) => s.source === source)?.items.forEach((m) => { if (set.has(m.name)) m.queued = true; });
     loadImports();
   }
+}
+async function analyseSpace() {
+  spaceLoading.value = true;
+  try {
+    space.value = await get<Space>("/api/media/space");
+    for (const i of space.value.items) picked[keyOf(i)] = !i.queued;
+  } finally {
+    spaceLoading.value = false;
+  }
+}
+const pickedItems = computed(() => (space.value?.items ?? []).filter((i) => picked[keyOf(i)] && !i.queued));
+const pickedGain = computed(() => pickedItems.value.reduce((n, i) => n + i.gain, 0));
+async function reduce() {
+  const items = pickedItems.value;
+  if (!items.length) return;
+  const alone = items.filter((i) => !i.cloud_copy).length;
+  const warning = alone
+    ? t("{count} de ces médias n'existent que sur le cadre (téléphone, invités, Telegram...) : leur original sera remplacé par la version réduite, sans retour possible.", { count: alone })
+    : t("Les originaux restent disponibles dans leur source (Google Drive, Immich...).");
+  if (!window.confirm(`${t("Remplacer {count} original(aux) par une version réduite ?", { count: items.length })}\n\n${warning}`)) return;
+  await run(() => post("/api/media/reduce", { items: items.map((i) => ({ source: i.source, name: i.name })) }));
+  analyseSpace();
 }
 const missingNames = (s: Source) => s.items.filter((m) => m.state !== "ok" && !m.queued).map((m) => m.name);
 
@@ -123,6 +153,37 @@ onUnmounted(() => window.clearInterval(timer));
         </ul>
       </details>
     </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h2><i class="fas fa-compress-arrows-alt"></i>{{ t("Gagner de la place") }}</h2>
+      <button class="btn small" type="button" :disabled="spaceLoading" @click="analyseSpace">
+        <i class="fas" :class="spaceLoading ? 'fa-spinner fa-spin' : 'fa-search'"></i> {{ space ? t("Actualiser") : t("Analyser") }}</button></div>
+    <p class="small muted">{{ t("Les très grosses photos (plus de 4096 px) et vidéos (plus de 100 Mo) déjà prêtes peuvent être remplacées par une version réduite, toujours plus grande que l'écran : photos en 4096 px avec leurs données (date, lieu), vidéos en 1080p, réencodées la nuit.") }}</p>
+    <template v-if="space">
+      <p v-if="space.count" class="small ok-text">{{ t("Déjà gagné : {size} ({count} médias réduits).", { size: mb(space.saved), count: space.count }) }}</p>
+      <p v-if="!space.items.length" class="muted">{{ t("Aucun média ne gagnerait à être réduit.") }}</p>
+      <template v-else>
+        <div class="space-head">
+          <strong>{{ t("{count} médias, jusqu'à {size} à gagner", { count: space.items.length, size: mb(space.gain) }) }}</strong>
+          <span class="spacer"></span>
+          <button class="btn small primary" type="button" :disabled="!pickedItems.length" @click="reduce">
+            <i class="fas fa-compress"></i> {{ t("Réduire la sélection ({size})", { size: mb(pickedGain) }) }}</button>
+        </div>
+        <ul class="items">
+          <li v-for="i in space.items.slice(0, 200)" :key="keyOf(i)">
+            <input type="checkbox" v-model="picked[keyOf(i)]" :disabled="i.queued" :aria-label="i.name">
+            <span class="thumb"><i class="fas" :class="i.kind === 'video' ? 'fa-film' : 'fa-image'"></i></span>
+            <div class="item-body">
+              <div class="name" :title="i.name">{{ i.name }}</div>
+              <div class="small muted">{{ i.label }} · {{ i.detail }} · {{ mb(i.size) }} → ~{{ mb(i.estimate) }}</div>
+            </div>
+            <span v-if="i.queued" class="pill off">{{ t("Prévue cette nuit") }}</span>
+            <span v-else-if="!i.cloud_copy" class="pill warn" :title="aloneHint()">{{ t("Seul exemplaire") }}</span>
+          </li>
+        </ul>
+      </template>
+    </template>
   </section>
 
   <section class="card">
@@ -199,5 +260,6 @@ onUnmounted(() => window.clearInterval(timer));
 .pill.bad { background: var(--danger-soft); color: var(--danger); }
 .btn.small { padding: .3rem .7rem; font-size: .82rem; }
 .more { margin-top: .4rem; }
+.space-head { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin: .5rem 0; }
 @media (max-width: 560px) { .items li { flex-wrap: wrap; } .items .pill { margin-left: 60px; } }
 </style>

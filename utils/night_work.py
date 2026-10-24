@@ -146,6 +146,11 @@ def run_once(config, width, height, now=None, prepare=None, notify=None, still_n
     if heavy and heavy_allowed(config, now):
         _prepare_group(heavy, width, height, prepare, still_night)
         done["heavy"] = len(heavy)
+    # Vidéos à réduire (Gagner de la place), demandées pendant la journée
+    from utils import space_saver
+    waiting = space_saver.queued()
+    if night and waiting:
+        done["reduced"] = space_saver.run_videos(waiting, still_night)
     state = _state()
     key = night_key(now)
     if night and failed and state.get("retried") != key:

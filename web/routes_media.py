@@ -92,3 +92,45 @@ def media_prepare_api():
 
     threading.Thread(target=work, daemon=True, name=f"prepare-{source}").start()
     return jsonify({"success": True, "message": _("%(count)s média(s) en préparation : suivez l'avancement ci-dessous.", count=len(wanted))})
+
+
+# --- Gagner de la place : originaux énormes remplacés par une version réduite ---
+
+@app.route('/api/media/space')
+@login_required
+def media_space_api():
+    from utils import space_saver
+    width, height = _screen()
+    labels = _labels()
+    items = space_saver.candidates(width, height)
+    for item in items:
+        item["label"] = labels.get(item["source"], item["source"])
+    return jsonify({"success": True, "items": items, "gain": sum(i["gain"] for i in items), **space_saver.summary()})
+
+
+@app.route('/api/media/reduce', methods=['POST'])
+@login_required
+def media_reduce_api():
+    from utils import night_work, space_saver
+    data = request.get_json(silent=True) or {}
+    width, height = _screen()
+    allowed = {(c["source"], c["name"]) for c in space_saver.candidates(width, height)}
+    items = [(i.get("source"), i.get("name")) for i in data.get("items") or [] if isinstance(i, dict)]
+    items = [i for i in items if i in allowed]  # seulement des candidats (préparés, assez gros) : rien d'autre n'est touché
+    if not items:
+        return jsonify({"success": False, "message": _("Aucun média à réduire.")}), 400
+    night = not night_work.active_now(load_config())
+    result = space_saver.request(items, now_ok_for_videos=night)
+    if result["videos_now"]:
+        threading.Thread(target=space_saver.run_videos, args=(result["videos_now"],), daemon=True, name="reduce-videos").start()
+    parts = []
+    if result["photos"]:
+        parts.append(_("%(count)s photo(s) réduite(s) : %(size)s Mo gagnés.", count=result["photos"], size=round(result["saved"] / 1048576)))
+    if result["videos_now"]:
+        parts.append(_("%(count)s vidéo(s) en cours de réduction.", count=len(result["videos_now"])))
+    if result["videos_later"]:
+        parts.append(_("%(count)s vidéo(s) réduite(s) cette nuit, quand le cadre sera éteint.", count=result["videos_later"]))
+    if result["errors"]:
+        parts.append(_("Échecs : %(list)s", list="; ".join(result["errors"][:3])))
+    return jsonify({"success": not result["errors"] or bool(result["photos"] or result["videos_now"] or result["videos_later"]),
+                    "message": " ".join(parts)})

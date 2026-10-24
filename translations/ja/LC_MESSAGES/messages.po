@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-24 23:02+0200\n"
+"POT-Creation-Date: 2026-10-24 23:07+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -187,11 +187,11 @@ msgstr "停止中"
 msgid "Thème"
 msgstr "テーマ"
 
-#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:92
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:122
 msgid "préparation"
 msgstr "準備中"
 
-#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:92
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:122
 msgid "téléchargement"
 msgstr "ダウンロード中"
 
@@ -916,9 +916,9 @@ msgid "Aucun appareil détecté."
 msgstr "機器が見つかりません。"
 
 #: frontend/src/components/PresenceCard.vue:73
-#: frontend/src/views/LogsView.vue:63 frontend/src/views/MediaView.vue:130
-#: frontend/src/views/NetworkView.vue:125 frontend/src/views/PendingView.vue:51
-#: frontend/src/views/QueueView.vue:87
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/MediaView.vue:161
+#: frontend/src/views/MediaView.vue:191 frontend/src/views/NetworkView.vue:125
+#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
@@ -4574,97 +4574,159 @@ msgid ""
 " propre licence :"
 msgstr "Pimmich は MIT ライセンスで配布されています。サードパーティのコンポーネントはそれぞれのライセンスに従います："
 
-#: frontend/src/views/MediaView.vue:31
+#: frontend/src/views/MediaView.vue:28
+msgid "Pas d'autre copie que celle du cadre"
+msgstr "フォトフレーム以外にコピーがありません"
+
+#: frontend/src/views/MediaView.vue:39
 msgid "En file d'attente"
 msgstr "待機中"
 
-#: frontend/src/views/MediaView.vue:31
+#: frontend/src/views/MediaView.vue:39 frontend/src/views/MediaView.vue:181
 msgid "Prévue cette nuit"
 msgstr "今夜準備予定"
 
-#: frontend/src/views/MediaView.vue:31
+#: frontend/src/views/MediaView.vue:39
 msgid "Prêt"
 msgstr "準備済み"
 
-#: frontend/src/views/MediaView.vue:31
+#: frontend/src/views/MediaView.vue:39
 msgid "Pas préparé"
 msgstr "未準備"
 
-#: frontend/src/views/MediaView.vue:31
+#: frontend/src/views/MediaView.vue:39
 msgid "Fichier préparé vide"
 msgstr "準備ファイルが空"
 
-#: frontend/src/views/MediaView.vue:31
+#: frontend/src/views/MediaView.vue:39
 msgid "Préparé pour une autre taille d'écran"
 msgstr "別の画面サイズ用"
 
-#: frontend/src/views/MediaView.vue:86
+#: frontend/src/views/MediaView.vue:91
+#, python-brace-format
+msgid ""
+"{count} de ces médias n'existent que sur le cadre (téléphone, invités, "
+"Telegram...) : leur original sera remplacé par la version réduite, sans "
+"retour possible."
+msgstr "このうち{count}件はフォトフレームにしかありません（スマートフォン、ゲスト、Telegramなど）。元のファイルは縮小版に置き換えられ、元に戻せません。"
+
+#: frontend/src/views/MediaView.vue:92
+msgid ""
+"Les originaux restent disponibles dans leur source (Google Drive, "
+"Immich...)."
+msgstr "元のファイルは取り込み元（Google Drive、Immichなど）に残ります。"
+
+#: frontend/src/views/MediaView.vue:93
+#, python-brace-format
+msgid "Remplacer {count} original(aux) par une version réduite ?"
+msgstr "{count}件の元ファイルを縮小版に置き換えますか？"
+
+#: frontend/src/views/MediaView.vue:116
 msgid "Préparation en cours"
 msgstr "準備中"
 
-#: frontend/src/views/MediaView.vue:87
+#: frontend/src/views/MediaView.vue:117
 msgid "Aucun import ni préparation en cours."
 msgstr "進行中の取り込みや準備はありません。"
 
-#: frontend/src/views/MediaView.vue:92
+#: frontend/src/views/MediaView.vue:122
 msgid "depuis"
 msgstr "経過"
 
-#: frontend/src/views/MediaView.vue:98
+#: frontend/src/views/MediaView.vue:128
 #, python-brace-format
 msgid "{done} médias sur {total} préparés"
 msgstr "{total}件中{done}件を準備済み"
 
-#: frontend/src/views/MediaView.vue:108
+#: frontend/src/views/MediaView.vue:138
 msgid "encodage vidéo"
 msgstr "動画エンコード"
 
-#: frontend/src/views/MediaView.vue:108
+#: frontend/src/views/MediaView.vue:138
 #: templates/configure/scripts_gallery.html.jinja:53
 msgid "photo"
 msgstr "写真"
 
-#: frontend/src/views/MediaView.vue:112
+#: frontend/src/views/MediaView.vue:142
 #, python-brace-format
 msgid "Vidéo encodée à {percent} %"
 msgstr "動画エンコード {percent}%"
 
-#: frontend/src/views/MediaView.vue:116
+#: frontend/src/views/MediaView.vue:146
 msgid "Derniers médias traités"
 msgstr "最近処理したメディア"
 
-#: frontend/src/views/MediaView.vue:129
+#: frontend/src/views/MediaView.vue:159
+msgid "Gagner de la place"
+msgstr "空き容量を増やす"
+
+#: frontend/src/views/MediaView.vue:161
+msgid "Analyser"
+msgstr "分析"
+
+#: frontend/src/views/MediaView.vue:162
+msgid ""
+"Les très grosses photos (plus de 4096 px) et vidéos (plus de 100 Mo) déjà"
+" prêtes peuvent être remplacées par une version réduite, toujours plus "
+"grande que l'écran : photos en 4096 px avec leurs données (date, lieu), "
+"vidéos en 1080p, réencodées la nuit."
+msgstr "準備済みのとても大きな写真（4096px超）と動画（100MB超）は、画面より大きいままの縮小版に置き換えられます。写真は4096pxでデータ（日付、場所）を保持、動画は1080pで夜に再エンコードします。"
+
+#: frontend/src/views/MediaView.vue:164
+#, python-brace-format
+msgid "Déjà gagné : {size} ({count} médias réduits)."
+msgstr "節約済み：{size}（{count}件を縮小）。"
+
+#: frontend/src/views/MediaView.vue:165
+msgid "Aucun média ne gagnerait à être réduit."
+msgstr "縮小する価値のあるメディアはありません。"
+
+#: frontend/src/views/MediaView.vue:168
+#, python-brace-format
+msgid "{count} médias, jusqu'à {size} à gagner"
+msgstr "{count}件、最大{size}節約できます"
+
+#: frontend/src/views/MediaView.vue:171
+#, python-brace-format
+msgid "Réduire la sélection ({size})"
+msgstr "選択を縮小（{size}）"
+
+#: frontend/src/views/MediaView.vue:182
+msgid "Seul exemplaire"
+msgstr "唯一のコピー"
+
+#: frontend/src/views/MediaView.vue:190
 msgid "Médias du cadre"
 msgstr "フォトフレームのメディア"
 
-#: frontend/src/views/MediaView.vue:131
+#: frontend/src/views/MediaView.vue:192
 msgid ""
 "Tous les médias reçus, source par source. Un média « pas préparé » "
 "n'apparaît pas sur le cadre : le bouton Préparer le rattrape (import "
 "interrompu, ancien bug...)."
 msgstr "受信したすべてのメディアをソースごとに表示します。「未準備」のメディアはフレームに表示されません。「準備」ボタンで取り戻せます（中断した取り込み、古い不具合など）。"
 
-#: frontend/src/views/MediaView.vue:133
+#: frontend/src/views/MediaView.vue:194
 msgid "À préparer"
 msgstr "未準備"
 
-#: frontend/src/views/MediaView.vue:133
+#: frontend/src/views/MediaView.vue:194
 msgid "En échec"
 msgstr "失敗"
 
-#: frontend/src/views/MediaView.vue:133
+#: frontend/src/views/MediaView.vue:194
 msgid "Préparés"
 msgstr "準備済み"
 
-#: frontend/src/views/MediaView.vue:133
+#: frontend/src/views/MediaView.vue:194
 msgid "Tous"
 msgstr "すべて"
 
-#: frontend/src/views/MediaView.vue:135
+#: frontend/src/views/MediaView.vue:196
 msgid "Rechercher un fichier"
 msgstr "ファイルを検索"
 
-#: frontend/src/views/MediaView.vue:137
+#: frontend/src/views/MediaView.vue:198
 #: templates/configure/scripts_gallery.html.jinja:8
 #: templates/configure/scripts_gallery.html.jinja:36
 #: templates/configure/scripts_main.html.jinja:1320
@@ -4684,29 +4746,29 @@ msgstr "ファイルを検索"
 msgid "Chargement..."
 msgstr "読み込み中..."
 
-#: frontend/src/views/MediaView.vue:138
+#: frontend/src/views/MediaView.vue:199
 msgid "Tous les médias sont préparés."
 msgstr "すべてのメディアが準備済みです。"
 
-#: frontend/src/views/MediaView.vue:138
+#: frontend/src/views/MediaView.vue:199
 msgid "Aucun média."
 msgstr "メディアはありません。"
 
-#: frontend/src/views/MediaView.vue:144
+#: frontend/src/views/MediaView.vue:205
 #, python-brace-format
 msgid "{prepared} préparés sur {total}"
 msgstr "{total}件中{prepared}件準備済み"
 
-#: frontend/src/views/MediaView.vue:147
+#: frontend/src/views/MediaView.vue:208
 #, python-brace-format
 msgid "Préparer les {count} manquants"
 msgstr "未準備の{count}件を準備"
 
-#: frontend/src/views/MediaView.vue:161
+#: frontend/src/views/MediaView.vue:222
 msgid "Préparer"
 msgstr "準備"
 
-#: frontend/src/views/MediaView.vue:165
+#: frontend/src/views/MediaView.vue:226
 msgid "Afficher plus"
 msgstr "さらに表示"
 
@@ -10293,6 +10355,30 @@ msgstr "準備するものはありません（処理中または見つかりま
 #, python-format
 msgid "%(count)s média(s) en préparation : suivez l'avancement ci-dessous."
 msgstr "%(count)s件を準備中です。下で進行状況を確認できます。"
+
+#: web/routes_media.py:121
+msgid "Aucun média à réduire."
+msgstr "縮小するメディアはありません。"
+
+#: web/routes_media.py:128
+#, python-format
+msgid "%(count)s photo(s) réduite(s) : %(size)s Mo gagnés."
+msgstr "%(count)s枚を縮小：%(size)s MB節約。"
+
+#: web/routes_media.py:130
+#, python-format
+msgid "%(count)s vidéo(s) en cours de réduction."
+msgstr "%(count)s本の動画を縮小中です。"
+
+#: web/routes_media.py:132
+#, python-format
+msgid "%(count)s vidéo(s) réduite(s) cette nuit, quand le cadre sera éteint."
+msgstr "%(count)s本の動画は今夜、フレームが消えている間に縮小します。"
+
+#: web/routes_media.py:134
+#, python-format
+msgid "Échecs : %(list)s"
+msgstr "失敗：%(list)s"
 
 #: web/routes_messages.py:61 web/routes_messages.py:79
 #, python-format
