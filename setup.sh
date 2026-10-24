@@ -99,7 +99,14 @@ echo "Mise à jour de pip..."
 pip install --default-timeout=1000 --retries=10 --upgrade pip
 
 echo "Installation des dépendances de requirements.txt..."
-if ! pip install --default-timeout=1000 --retries=10 -r requirements.txt; then
+REQUIREMENTS=requirements.txt
+# Profil « léger » (Raspberry Pi Zero, 1, 2) : pas de détection des visages (OpenCV, trop lourd pour ces cartes)
+if grep -qE "Raspberry Pi (Zero|[12] )|Raspberry Pi Model" /proc/device-tree/model 2>/dev/null || [ "$(uname -m)" = "armv6l" ]; then
+    echo "ℹ️ Petit Raspberry Pi détecté : installation sans OpenCV (recadrage selon les visages désactivé)."
+    REQUIREMENTS=$(mktemp)
+    grep -v "^opencv" requirements.txt > "$REQUIREMENTS"
+fi
+if ! pip install --default-timeout=1000 --retries=10 -r "$REQUIREMENTS"; then
     echo "❌ Échec de l'installation des dépendances Python de base !"
     exit 1
 fi

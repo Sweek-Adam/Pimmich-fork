@@ -9,6 +9,25 @@ interface Hardware { model: string | null; temperature: number | null; undervolt
 const hw = ref<Hardware | null>(null);
 const level = (ok: boolean, warn: boolean) => (ok ? "ok" : warn ? "warn" : "err");
 
+// --- Profil matériel ---
+interface Profile {
+  model: string; ram_mb: number | null; detected: string; selected: string; current: string; profiles: { key: string; label: string }[];
+  limits: { gif_budget_mb: number; gif_items: number; compositions_ahead: number; videos_always_light: boolean; video_light_above_mb: number; video_night_above_mb: number };
+  recommended: { key: string; label: string; current: unknown; recommended: unknown }[];
+}
+const profile = ref<Profile | null>(null);
+async function loadProfile() { profile.value = await get<Profile>("/api/hardware_profile"); }
+async function chooseProfile(value: string) {
+  await run(() => post("/api/settings", { hardware_profile: value }));
+  await loadProfile();
+}
+async function applyRecommended() {
+  await run(() => post("/api/hardware_profile/apply"));
+  await loadProfile();
+}
+const show = (v: unknown) => (v === true ? t("Oui") : v === false ? t("Non") : String(v));
+const profileLabel = (key: string) => profile.value?.profiles.find((p) => p.key === key)?.label ?? key;
+
 // --- Mise à jour ---
 interface Update { success: boolean; current?: { sha: string; date: string }; behind?: number; changes: { title: string }[]; state?: { status?: string; previous?: string } }
 const update = ref<Update | null>(null);
@@ -156,6 +175,7 @@ onMounted(() => {
   get<Hardware>("/api/hardware").then((d) => (hw.value = d)).catch(() => {});
   get<Update>("/api/update/check").then((d) => (update.value = d)).catch((e) => (update.value = { success: false, changes: [], ...(e as ApiError).data }));
   loadMaintenance().catch(() => {});
+  loadProfile().catch(() => {});
   loadStorage().catch(() => {});
   loadFull().catch(() => {});
   loadHttps();
@@ -176,6 +196,31 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
       <div><small>{{ t("Carte SD") }}</small><strong :class="hw.sd_errors === null ? '' : level(!hw.sd_errors, true)">{{ hw.sd_errors === null ? t("Inconnu") : hw.sd_errors ? `${hw.sd_errors} ${t("erreur(s)")}` : t("Aucune erreur") }}</strong></div>
     </div>
     <p v-if="hw?.supply" class="small muted">{{ t("Alimentation conseillée pour ce modèle :") }} {{ hw.supply }}</p>
+  </section>
+
+  <section v-if="profile" class="card">
+    <div class="card-head"><h2><i class="fas fa-sliders-h"></i>{{ t("Profil matériel") }}</h2></div>
+    <p class="small muted">{{ t("Pimmich s'adapte à la puissance du Raspberry Pi : mémoire des animations, compositions préparées d'avance, vidéos plus légères sur les petits modèles. Vos réglages restent prioritaires.") }}</p>
+    <label class="field">{{ t("Profil") }}
+      <select :value="profile.selected" @change="chooseProfile(($event.target as HTMLSelectElement).value)">
+        <option value="auto">{{ t("Automatique : {profile}", { profile: profileLabel(profile.detected) }) }}</option>
+        <option v-for="p in profile.profiles" :key="p.key" :value="p.key">{{ p.label }}</option>
+      </select>
+    </label>
+    <div class="facts">
+      <div><small>{{ t("Modèle") }}</small><strong>{{ profile.model }}{{ profile.ram_mb ? ` · ${Math.round(profile.ram_mb / 1024 * 10) / 10} Go` : "" }}</strong></div>
+      <div><small>{{ t("Mémoire des animations (GIF, photos animées)") }}</small><strong>{{ profile.limits.gif_budget_mb }} Mo · {{ t("{count} par composition", { count: profile.limits.gif_items }) }}</strong></div>
+      <div><small>{{ t("Compositions préparées d'avance") }}</small><strong>{{ profile.limits.compositions_ahead }}</strong></div>
+      <div><small>{{ t("Vidéos allégées (720p)") }}</small><strong>{{ profile.limits.videos_always_light ? t("Toutes") : profile.limits.video_light_above_mb ? t("À partir de {size} Mo", { size: profile.limits.video_light_above_mb }) : t("Jamais") }}</strong></div>
+    </div>
+    <template v-if="profile.recommended.length">
+      <p class="small"><strong>{{ t("Réglages conseillés pour ce profil :") }}</strong></p>
+      <ul class="small reco">
+        <li v-for="r in profile.recommended" :key="r.key">{{ r.label }} : {{ show(r.current) }} → <strong>{{ show(r.recommended) }}</strong></li>
+      </ul>
+      <button class="btn primary" type="button" @click="applyRecommended"><i class="fas fa-magic"></i> {{ t("Appliquer les réglages conseillés") }}</button>
+    </template>
+    <p v-else class="small ok">{{ t("Les réglages sont déjà ceux conseillés.") }}</p>
   </section>
 
   <div class="grid grid-2 two">

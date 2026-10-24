@@ -42,8 +42,9 @@ def heavy_limit(config):
     """Poids (octets) à partir duquel une vidéo attend la nuit ; None si le réglage est désactivé."""
     if not config.get("heavy_videos_at_night", True):
         return None
+    from utils import hardware_profile
     try:
-        return max(0.0, float(config.get("video_night_above_mb", HEAVY_DEFAULT_MB))) * 1024 * 1024
+        return max(0.0, float(hardware_profile.setting(config, "video_night_above_mb"))) * 1024 * 1024
     except (TypeError, ValueError):
         return HEAVY_DEFAULT_MB * 1024 * 1024
 

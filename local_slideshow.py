@@ -1352,6 +1352,8 @@ def prepare_composition(config, plan, playlist, start, width, height, force=Fals
     _composition.update(target=target, ready=None)
     compositions.set_full_photos(config.get("compositions_full_photos", True))
     layout_engine.set_video_clips(config.get("short_videos_in_layouts", True))
+    from utils import hardware_profile
+    animated.set_limits(hardware_profile.value(config, "gif_items"))
     compositions.faces.set_enabled(config.get("smart_crop", True))
     include_messages = config.get("compositions_include_messages", True)
     snapshot = list(playlist)
@@ -2554,9 +2556,11 @@ class GifPlayer:
     l'image fixe : seules les zones des GIF sont redessinées, l'horloge et la météo restent par-dessus.
     Les images sont décodées en arrière-plan (la photo reste fixe le temps de les préparer).
     """
-    BUDGET = 48 * 1024 * 1024  # mémoire des images décodées (le Raspberry Pi 3 n'a que 1 Go)
+    BUDGET = 48 * 1024 * 1024  # mémoire des images décodées : selon le profil matériel (le Raspberry Pi 3 n'a que 1 Go)
 
     def __init__(self, display_path, base_surface, pil_image):
+        from utils import hardware_profile
+        self.budget = hardware_profile.value(load_config(), "gif_budget_mb") * 1024 * 1024
         self.base = base_surface
         self.tracks = []
         self.ready = False
@@ -2572,7 +2576,7 @@ class GifPlayer:
         try:
             items = [item for item in items if animated.matches(item, pil_image)]
             total = sum(item["box"][2] * item["box"][3] * 4 * min(animated.MAX_FRAMES, animated.frame_count(item["gif"])) for item in items)
-            scale = min(1.0, math.sqrt(self.BUDGET / total)) if total else 1.0
+            scale = min(1.0, math.sqrt(self.budget / total)) if total else 1.0
             tracks = []
             for item in items:
                 images = animated.frames(item, scale)
@@ -3119,6 +3123,9 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
 
 # Boucle principale du diaporama
 def start_slideshow():
+    global AHEAD_MAX
+    from utils import hardware_profile
+    AHEAD_MAX = hardware_profile.value(load_config(), "compositions_ahead")  # compositions préparées d'avance (mémoire)
     pi_model = get_pi_model()
     global _current_background_music
     try:

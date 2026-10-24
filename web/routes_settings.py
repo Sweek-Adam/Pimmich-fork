@@ -57,6 +57,7 @@ SETTINGS = {
     "video_light_above_mb": ("int", (0, 100000), 150),
     "heavy_videos_at_night": ("bool", None, True),
     "motion_photos_enabled": ("bool", None, True),
+    "hardware_profile": ("choice", ["auto", "leger", "standard", "complet"], "auto"),
     "short_videos_in_layouts": ("bool", None, True),
     "short_videos_max_seconds": ("int", (2, 120), 15),
     "video_night_above_mb": ("int", (0, 100000), 50),
@@ -172,7 +173,7 @@ SETTINGS = {
 
 
 # Réglages visibles et modifiables seulement par un administrateur (comme dans l'interface classique)
-ADMIN_ONLY = {"telegram_authorized_users", "wifi_hotspot_fallback"}
+ADMIN_ONLY = {"telegram_authorized_users", "wifi_hotspot_fallback", "hardware_profile"}
 
 # Secrets : jamais renvoyés au navigateur ; on sait seulement s'ils sont définis, et on peut les remplacer
 SECRETS = ("immich_token", "smb_password", "weather_api_key", "stormglass_api_key", "telegram_bot_token",
@@ -265,6 +266,9 @@ def clock_fonts():
     return found
 
 
+PROFILE_DEFAULTS = {"video_light_above_mb", "video_night_above_mb"}
+
+
 def current_values(config=None):
     config = config or load_config()
     values = {}
@@ -277,6 +281,9 @@ def current_values(config=None):
             value = config.get("active_start" if "start" in key else "active_end", default)
         if key == "immich_max_photos":
             value = (config.get("max_photos_to_download") or {}).get("immich", default)
+        if key in PROFILE_DEFAULTS and key not in config:  # valeur du profil matériel tant qu'on ne l'a pas changée
+            from utils import hardware_profile
+            value = hardware_profile.setting(config, key)
         if kind == "choice" and value is not None:
             value = str(value)
         values[key] = value
@@ -487,3 +494,42 @@ def gdrive_service_account_api():
     except ValueError as e:
         return jsonify({"success": False, "message": _("Clé Google Drive non enregistrée : %(error)s", error=str(e))}), 400
     return jsonify({"success": True, "message": _("Enregistré"), "service_email": get_service_account_email()})
+
+
+# --- Profil matériel (Raspberry Pi 2, 3, 4, 5) ---
+
+@app.route('/api/hardware_profile', methods=['GET'])
+@login_required
+@admin_required
+def hardware_profile_api():
+    from utils import hardware_profile as hp
+    config = load_config()
+    translate = _  # appel indirect : l'extracteur ne doit pas prendre les clés « label » pour des textes
+    key = hp.current(config)
+    limits = hp.PROFILES[key]
+    return jsonify({"success": True, "model": hp.model() or _("Ordinateur (pas un Raspberry Pi)"), "ram_mb": hp.memory_mb(),
+                    "detected": hp.detect(), "selected": config.get("hardware_profile", "auto"), "current": key,
+                    "profiles": [{"key": k, "label": translate(p["label"])} for k, p in hp.PROFILES.items()],
+                    "limits": {"gif_budget_mb": limits["gif_budget_mb"], "gif_items": limits["gif_items"],
+                               "compositions_ahead": limits["compositions_ahead"], "videos_always_light": limits["videos_always_light"],
+                               "video_light_above_mb": hp.setting(config, "video_light_above_mb"),
+                               "video_night_above_mb": hp.setting(config, "video_night_above_mb")},
+                    "recommended": [dict(r, label=translate(r["label"])) for r in hp.recommended(config, current_values(config))]})
+
+
+@app.route('/api/hardware_profile/apply', methods=['POST'])
+@login_required
+@admin_required
+def hardware_profile_apply_api():
+    """Applique les réglages conseillés pour le profil (ceux qui diffèrent seulement)."""
+    from utils import hardware_profile as hp
+    config = load_config()
+    changes = {r["key"]: clean(r["key"], r["recommended"]) for r in hp.recommended(config, current_values(config))}
+    if not changes:
+        return jsonify({"success": True, "message": _("Les réglages sont déjà ceux conseillés.")})
+    previous = copy.deepcopy(config)
+    save_config(dict(config, **changes))
+    from web.routes_history import log
+    log("settings", _("Réglages conseillés appliqués"), {"type": "restore_config", "data": previous}, merge=True)
+    schedule_slideshow_restart()
+    return jsonify({"success": True, "message": _("%(count)s réglage(s) adapté(s) au Raspberry Pi.", count=len(changes))})

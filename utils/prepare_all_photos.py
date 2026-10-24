@@ -386,14 +386,17 @@ def prepare_video(source_path, dest_path, output_width, output_height, on_progre
     Les vidéos lourdes (au-delà de `light_above_mb` Mo ; 0 : jamais) sont encodées en version allégée : 720p,
     30 images/s au plus, réglages économes en mémoire. Elles restent affichées en plein écran.
     """
+    from utils import hardware_profile
+    config = load_config()
+    always_light = light_above_mb is None and hardware_profile.value(config, "videos_always_light")  # petits Pi : 720p
     if light_above_mb is None:
-        light_above_mb = load_config().get("video_light_above_mb", LIGHT_VIDEO_DEFAULT_MB)
+        light_above_mb = hardware_profile.setting(config, "video_light_above_mb")
     try:
         light_above_mb = float(light_above_mb)
     except (TypeError, ValueError):
         light_above_mb = LIGHT_VIDEO_DEFAULT_MB
     size_mb = os.path.getsize(source_path) / (1024 * 1024)
-    light = light_above_mb > 0 and size_mb >= light_above_mb
+    light = always_light or (light_above_mb > 0 and size_mb >= light_above_mb)
     pi_model = get_pi_model()
     if light:
         output_width, output_height = _even(output_width * 2 / 3), _even(output_height * 2 / 3)

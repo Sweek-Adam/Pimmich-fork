@@ -34,6 +34,12 @@ MAX_COLOR_GAP_MOTION = 75  # photo animée : la vidéo commence un peu avant la 
 MAX_COLOR_GAP = 45         # écart moyen de couleur toléré (disposition qui transforme les couleurs : immobile)
 
 
+def set_limits(items):
+    """GIF animés au plus par composition (selon le profil matériel)."""
+    global MAX_ITEMS
+    MAX_ITEMS = max(1, int(items))
+
+
 def is_animated(path):
     if Path(path).suffix.lower() not in EXTENSIONS:
         return False

@@ -125,6 +125,15 @@ The script is designed to be re-run safely. It will detect that the credentials 
 
 **A:** Type its name instead of its IP address. `https://cadre-photo.local` works from a phone or computer on the same network. `https://cadre-photo.home` goes through an Orange Livebox (the suffix depends on the router, often `.home` or `.lan`). `https://cadre-photo` works from anywhere with Tailscale. Replace `cadre-photo` with the name given to the Raspberry Pi at installation. The exact list is shown in `System > Network`, "Frame address" card. Without `https://`, the browser may run a search instead of opening the page.
 
+**Q: Does Pimmich run on a Raspberry Pi 2, 3, 4 or 5?**
+
+**A:** Yes. Pimmich detects the model and picks a profile (`System > Maintenance`, "Hardware profile" card):
+- **Light** (Zero, Pi 1, Pi 2): videos in 720p, one animation per composition, no face detection;
+- **Standard** (Pi 3, Pi 4 with 1 GB);
+- **Full** (Pi 4 and 5).
+
+The profile never overrides a setting you chose. It suggests "recommended settings", applied only when you click the button. On small models, installation skips OpenCV, which is too heavy for them.
+
 **Q: Can the frame remember several Wi-Fi networks? What if it finds none?**
 
 **A:** Yes: `System > Network`, "Saved networks" card. Add as many networks as you like, even out of range (handy before taking the frame to someone's home), and sort them by preference. With no network at all, the frame still starts and shows the photos it already has. If the time could not be updated for lack of Internet, it ignores the display hours so it does not stay off by mistake. With the "Fallback hotspot" enabled, after 2 minutes it creates its own "Cadre-Pimmich" Wi-Fi: the password and a QR code appear on screen; connect your phone, open `http://10.42.0.1`, then add the local network in `System > Network`.

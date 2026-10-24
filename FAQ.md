@@ -141,6 +141,15 @@ Le script est conçu pour être relancé sans risque. Il détectera l'absence du
 
 **R :** Tapez son nom plutôt que son adresse IP. `https://cadre-photo.local` fonctionne depuis un téléphone ou un ordinateur branché sur le même réseau. `https://cadre-photo.home` passe par une Livebox (le suffixe dépend de la box, souvent `.home` ou `.lan`). `https://cadre-photo` fonctionne de partout avec Tailscale. Remplacez `cadre-photo` par le nom choisi pour le Raspberry Pi à l'installation. La liste exacte est affichée dans `Système > Réseau`, carte « Adresse du cadre ». Sans le `https://`, le navigateur peut lancer une recherche au lieu d'ouvrir la page.
 
+**Q : Pimmich marche-t-il sur un Raspberry Pi 2, 3, 4 ou 5 ?**
+
+**R :** Oui. Pimmich reconnaît le modèle et choisit un profil (`Système > Maintenance`, carte « Profil matériel ») :
+- **Léger** (Zero, Pi 1, Pi 2) : vidéos en 720p, une seule animation par composition, pas de détection des visages ;
+- **Standard** (Pi 3, Pi 4 avec 1 Go) ;
+- **Complet** (Pi 4 et 5).
+
+Le profil ne remplace jamais un réglage que vous avez choisi. Il propose des « réglages conseillés », appliqués seulement si vous cliquez sur le bouton. Sur les petits modèles, l'installation saute OpenCV, trop lourd pour eux.
+
 **Q : Le cadre peut-il retenir plusieurs réseaux Wi-Fi ? Et s'il n'en trouve aucun ?**
 
 **R :** Oui : `Système > Réseau`, carte « Réseaux mémorisés ». Ajoutez autant de réseaux que vous voulez, même s'ils ne sont pas à portée (pratique avant d'emporter le cadre chez quelqu'un), et rangez-les par ordre de préférence. Sans aucun réseau, le cadre démarre quand même et affiche les photos déjà présentes. Si l'heure n'a pas pu être mise à jour, faute d'Internet, il ignore les heures d'affichage pour ne pas rester éteint par erreur. Avec le « Point d'accès de secours » activé, il crée au bout de 2 minutes son propre Wi-Fi « Cadre-Pimmich » : le mot de passe et un QR code s'affichent à l'écran ; connectez-y votre téléphone, ouvrez `http://10.42.0.1`, puis ajoutez le réseau du lieu dans `Système > Réseau`.
