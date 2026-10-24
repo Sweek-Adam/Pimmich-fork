@@ -54,6 +54,7 @@ SETTINGS = {
     "media_mode": ("choice", ["all", "videos"], "all"),
     "video_audio_enabled": ("bool", None, False),
     "video_hwdec_enabled": ("bool", None, False),
+    "video_light_above_mb": ("int", (0, 100000), 150),
     "video_audio_output": ("choice", ["auto", "hdmi", "jack"], "auto"),
     "video_audio_volume": ("int", (0, 100), 100),
     "music_duck_videos": ("bool", None, True),

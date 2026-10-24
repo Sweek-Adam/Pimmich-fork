@@ -8,6 +8,8 @@ try:
 except ImportError:
     HEIF_SUPPORT = False
 import subprocess, sys
+import threading
+import time
 from utils.config import load_config
 import piexif
 from utils.image_filters import create_polaroid_effect, create_postcard_effect
@@ -341,15 +343,72 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
     except Exception as e:
         raise Exception(f"Erreur lors du traitement de l'image '{os.path.basename(source_path)}': {e}")
 
-def prepare_video(source_path, dest_path, output_width, output_height):
-    """Prépare une vidéo pour l'affichage et génère sa vignette."""
+LIGHT_VIDEO_DEFAULT_MB = 150  # au-delà (réglage « video_light_above_mb »), encodage allégé : 720p, 30 images/s au plus
+
+
+def _even(value):
+    return max(2, int(value) // 2 * 2)
+
+
+def video_duration(source_path):
+    """Durée de la vidéo en secondes (None si inconnue)."""
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(source_path)],
+                             capture_output=True, text=True, timeout=30).stdout.strip()
+        return float(out) if out else None
+    except (OSError, subprocess.SubprocessError, ValueError):
+        return None
+
+
+def run_ffmpeg(command, duration=None, on_progress=None):
+    """Lance ffmpeg en suivant son avancement (pourcentage, vitesse). Retourne (code, fin du message d'erreur)."""
+    import tempfile
+    command = list(command)
+    at = command.index("ffmpeg") + 1
+    command[at:at] = ["-nostats", "-progress", "pipe:1"]
+    with tempfile.TemporaryFile(mode="w+", encoding="utf-8", errors="replace") as errors:
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=errors, text=True, encoding="utf-8", errors="replace")
+        speed = None
+        for line in process.stdout:
+            key, _sep, value = line.strip().partition("=")
+            if key == "speed" and value not in ("", "N/A"):
+                speed = value
+            elif key == "out_time_us" and duration and on_progress and value.isdigit():
+                on_progress(100 * int(value) / 1e6 / duration, speed)
+        code = process.wait()
+        errors.seek(0)
+        return code, errors.read()[-600:]
+
+
+def prepare_video(source_path, dest_path, output_width, output_height, on_progress=None, light_above_mb=None):
+    """
+    Prépare une vidéo pour l'affichage et génère sa vignette.
+    Les vidéos lourdes (au-delà de `light_above_mb` Mo ; 0 : jamais) sont encodées en version allégée : 720p,
+    30 images/s au plus, réglages économes en mémoire. Elles restent affichées en plein écran.
+    """
+    if light_above_mb is None:
+        light_above_mb = load_config().get("video_light_above_mb", LIGHT_VIDEO_DEFAULT_MB)
+    try:
+        light_above_mb = float(light_above_mb)
+    except (TypeError, ValueError):
+        light_above_mb = LIGHT_VIDEO_DEFAULT_MB
+    size_mb = os.path.getsize(source_path) / (1024 * 1024)
+    light = light_above_mb > 0 and size_mb >= light_above_mb
+    pi_model = get_pi_model()
+    if light:
+        output_width, output_height = _even(output_width * 2 / 3), _even(output_height * 2 / 3)
+        print(f"[Video Prep] Vidéo lourde ({size_mb:.0f} Mo) : encodage allégé en {output_width}x{output_height}")
+    # Encodage logiciel : moins de fils (et de mémoire) sur les petits Raspberry Pi et pour les vidéos lourdes
+    software = ['-c:v', 'libx264', '-preset', 'superfast' if light else 'veryfast', '-crf', '26' if light else '23',
+                '-profile:v', 'high', '-level', '4.0']
+    if light or (pi_model and pi_model <= 3):
+        software += ['-threads', '2', '-x264-params', 'rc-lookahead=10:ref=2']
     try:
         # --- MODIFICATION SIGALOU 29/01/2026 (2) ---
         # Logique d'encodage améliorée pour Pi 4/5 et meilleure gestion des erreurs.
         encoder = 'libx264'
-        encoder_params = ['-preset', 'veryfast', '-crf', '23', '-profile:v', 'high', '-level', '4.0']
-        pi_model = get_pi_model()
-        
+        encoder_params = software[2:]
+        bitrate = '4M' if light else '8M'
         try:
             result = subprocess.run(['ffmpeg', '-encoders'], capture_output=True, text=True, check=True, timeout=20)
             available_encoders = result.stdout
@@ -357,11 +416,11 @@ def prepare_video(source_path, dest_path, output_width, output_height):
             # Priorité à l'encodeur matériel moderne v4l2m2m pour tous les modèles de Raspberry Pi (3, 4, 5)
             if pi_model and 'h264_v4l2m2m' in available_encoders:
                 encoder = 'h264_v4l2m2m'
-                encoder_params = ['-b:v', '8M']
+                encoder_params = ['-b:v', bitrate]
                 print(f"[Video Prep] Raspberry Pi {pi_model} détecté. Utilisation de l'encodeur matériel : h264_v4l2m2m")
             elif pi_model and 'h264_omx' in available_encoders:
                 encoder = 'h264_omx'
-                encoder_params = ['-b:v', '8M']
+                encoder_params = ['-b:v', bitrate]
                 print(f"[Video Prep] Raspberry Pi {pi_model} détecté. Utilisation de l'encodeur matériel legacy : h264_omx")
             else:
                 print("[Video Prep] Aucun encodeur matériel trouvé, utilisation de l'encodeur logiciel : libx264")
@@ -376,6 +435,7 @@ def prepare_video(source_path, dest_path, output_width, output_height):
 
         command = [
             'ffmpeg', '-i', source_path, '-vf', f"scale='min({output_width},iw)':'min({output_height},ih)':force_original_aspect_ratio=decrease,pad={output_width}:{output_height}:(ow-iw)/2:(oh-ih)/2",
+            *(['-fpsmax', '30'] if light else []),
             '-c:v', encoder, *encoder_params,
             '-pix_fmt', 'yuv420p',  # Ajout pour une meilleure compatibilité
             '-c:a', 'aac', '-b:a', '128k',
@@ -385,20 +445,22 @@ def prepare_video(source_path, dest_path, output_width, output_height):
         # Priorité basse : le diaporama reste fluide et le Raspberry Pi évite les pics de consommation
         if shutil.which("nice"):
             command = ["nice", "-n", "15", *command]
-        result = subprocess.run(command, check=False, capture_output=True, text=True, encoding='utf-8')
+        duration = video_duration(source_path)
+        report = (lambda percent, speed: on_progress(percent, f"{encoder}{' · ' + speed if speed else ''}")) if on_progress else None
+        code, errors = run_ffmpeg(command, duration, report)
 
-        if result.returncode != 0 and encoder != 'libx264':
+        if code != 0 and encoder != 'libx264':
             # L'encodeur matériel refuse certaines vidéos (ex. HEVC de téléphone sur Pi 3) : nouvel essai en logiciel
             print(f"[Video Prep] Encodeur matériel {encoder} en échec, nouvel essai avec libx264 (plus lent)")
             tmp_path.unlink(missing_ok=True)
-            software = ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-profile:v', 'high', '-level', '4.0']
             index = command.index('-c:v')
             command = command[:index] + software + command[index + 2 + len(encoder_params):]
-            result = subprocess.run(command, check=False, capture_output=True, text=True, encoding='utf-8')
+            encoder = 'libx264'
+            code, errors = run_ffmpeg(command, duration, report)
 
-        if result.returncode != 0:
+        if code != 0:
             tmp_path.unlink(missing_ok=True)
-            raise Exception(f"ffmpeg a échoué avec le code {result.returncode}. Erreur: {result.stderr.strip()[-600:]}")
+            raise Exception(f"ffmpeg a échoué avec le code {code}. Erreur: {errors.strip()}")
         os.replace(tmp_path, dest_path)
     
     except Exception as video_e:
@@ -415,6 +477,143 @@ def prepare_video(source_path, dest_path, output_width, output_height):
     except Exception as thumb_e:
         print(f"[Vignette] Avertissement: Impossible de créer la vignette pour {os.path.basename(source_path)}: {thumb_e}")
 
+# --- Un média à la fois : imports, bouton « Préparer » de l'inventaire ---
+
+PHOTO_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif', '.heic', '.heif')
+PREPARE_LOCK = threading.RLock()  # deux préparations en même temps satureraient un Raspberry Pi
+ERRORS_FILE = Path("cache") / "prepare_errors.json"
+_errors_lock = threading.Lock()
+
+
+def is_media(filename):
+    return filename.lower().endswith(PHOTO_EXTENSIONS + VIDEO_EXTENSIONS) and not filename.startswith(".")
+
+
+def is_video(filename):
+    return filename.lower().endswith(VIDEO_EXTENSIONS)
+
+
+def prepared_name(filename):
+    return os.path.splitext(filename)[0] + (".mp4" if is_video(filename) else ".jpg")
+
+
+def preparation_state(prepared_dir, filename, width, height):
+    """« ok » (prêt), « missing » (pas préparé), « empty » (fichier vide ou coupé) ou « stale » (autre taille d'écran)."""
+    prep_path = Path(prepared_dir) / prepared_name(filename)
+    try:
+        if not prep_path.is_file():
+            return "missing"
+        if prep_path.stat().st_size == 0:
+            return "empty"
+        if not is_video(filename):
+            with Image.open(prep_path) as prepared:
+                if prepared.size != (width, height):
+                    return "stale"
+    except Exception:
+        return "empty"
+    return "ok"
+
+
+def preparation_errors():
+    try:
+        return json.loads(ERRORS_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _record_error(source_type, filename, error):
+    key = f"{source_type}/{filename}"
+    with _errors_lock:
+        errors = preparation_errors()
+        if error:
+            errors[key] = {"error": str(error)[:400], "at": time.strftime("%Y-%m-%d %H:%M")}
+        elif key not in errors:
+            return
+        else:
+            errors.pop(key)
+        try:
+            ERRORS_FILE.parent.mkdir(parents=True, exist_ok=True)
+            tmp = ERRORS_FILE.with_suffix(".tmp")
+            tmp.write_text(json.dumps(errors, ensure_ascii=False), encoding="utf-8")
+            os.replace(tmp, ERRORS_FILE)
+        except OSError:
+            pass
+
+
+def _load_user_texts():
+    if USER_TEXT_MAP_CACHE_FILE.exists():
+        try:
+            with open(USER_TEXT_MAP_CACHE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError):
+            print(f"Avertissement: Impossible de charger le fichier de textes utilisateur {USER_TEXT_MAP_CACHE_FILE}")
+    return {}
+
+
+def prepare_media(source_type, filename, width, height, description_map=None, user_text_map=None, index=None, total=None):
+    """
+    Prépare un média de la source (photo ou vidéo). Retourne (type, aperçu). L'avancement est visible dans les
+    détails de l'import ; un échec est noté pour l'inventaire des médias (et retiré quand le média passe).
+    """
+    from utils import import_progress
+    description_map = description_map or {}
+    user_text_map = _load_user_texts() if user_text_map is None else user_text_map
+    src_path = os.path.join("static", "photos", source_type, filename)
+    prepared_dir = Path("static") / "prepared" / source_type
+    prepared_dir.mkdir(parents=True, exist_ok=True)
+    base_name = os.path.splitext(filename)[0]
+    video = is_video(filename)
+    try:
+        size = os.path.getsize(src_path)
+    except OSError:
+        size = None
+    with PREPARE_LOCK:
+        import_progress.work_started(source_type, filename, "video" if video else "photo", size, index, total,
+                                     step="encodage" if video else "photo")
+        try:
+            if video:
+                progress = lambda percent, info: import_progress.work_progress(source_type, percent, speed=info)
+                prepare_video(src_path, str(prepared_dir / f"{base_name}.mp4"), width, height, on_progress=progress)
+                result = ("vidéo", f"{base_name}_thumbnail.jpg")
+            else:
+                dest_filename = f"{base_name}.jpg"
+                # Modification Sigalou 25/01/2026 - Priorité au texte saisi, puis à la description Immich
+                caption = user_text_map.get(f"{source_type}/{dest_filename}")
+                if caption is None:
+                    immich_data = description_map.get(filename)
+                    if immich_data and isinstance(immich_data, dict):
+                        caption = immich_data.get("description")
+                    elif isinstance(immich_data, str):
+                        caption = immich_data  # Backward compatibility
+                prepare_photo(src_path, str(prepared_dir / dest_filename), width, height, source_type=source_type, caption=caption)
+                result = ("photo", dest_filename)
+        except Exception as e:
+            import_progress.work_done(source_type, filename, ok=False, error=str(e))
+            _record_error(source_type, filename, e)
+            raise
+        import_progress.work_done(source_type, filename, ok=True)
+        _record_error(source_type, filename, None)
+        return result
+
+
+def media_inventory(source_type, width, height):
+    """Médias d'une source et leur état de préparation (du plus récent au plus ancien)."""
+    source_dir = Path("static") / "photos" / source_type
+    prepared_dir = Path("static") / "prepared" / source_type
+    errors = preparation_errors()
+    items = []
+    for entry in os.scandir(source_dir) if source_dir.is_dir() else []:
+        if not entry.is_file() or not is_media(entry.name):
+            continue
+        stat = entry.stat()
+        state = preparation_state(prepared_dir, entry.name, width, height)
+        error = errors.get(f"{source_type}/{entry.name}")
+        items.append({"name": entry.name, "kind": "video" if is_video(entry.name) else "photo", "size": stat.st_size,
+                      "modified": int(stat.st_mtime), "state": state, "prepared": prepared_name(entry.name),
+                      "error": error["error"] if error and state != "ok" else None})
+    return sorted(items, key=lambda i: -i["modified"])
+
+
 def prepare_all_photos_with_progress(screen_width=None, screen_height=None, source_type="unknown", description_map=None):
     """Prépare les photos et retourne des objets structurés pour le suivi."""
     if description_map is None:
@@ -427,13 +626,7 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
         pass
     
     # Charger les textes saisis par l'utilisateur
-    user_text_map = {}
-    if USER_TEXT_MAP_CACHE_FILE.exists():
-        try:
-            with open(USER_TEXT_MAP_CACHE_FILE, 'r', encoding='utf-8') as f:
-                user_text_map = json.load(f)
-        except (json.JSONDecodeError, IOError):
-            print(f"Avertissement: Impossible de charger le fichier de textes utilisateur {USER_TEXT_MAP_CACHE_FILE}")
+    user_text_map = _load_user_texts()
     
     actual_output_width = screen_width if screen_width is not None else DEFAULT_OUTPUT_WIDTH
     actual_output_height = screen_height if screen_height is not None else DEFAULT_OUTPUT_HEIGHT
@@ -448,31 +641,12 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
     PREPARED_SOURCE_DIR.mkdir(parents=True, exist_ok=True)
     
     # Smart synchronization logic
-    source_files = {f: os.path.splitext(f)[0] for f in os.listdir(SOURCE_DIR_FOR_PREP) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.heic', '.heif') + VIDEO_EXTENSIONS)}
+    source_files = {f: os.path.splitext(f)[0] for f in os.listdir(SOURCE_DIR_FOR_PREP) if is_media(f)}
     source_basenames = set(source_files.values())
     
-    # Détecter les basenames déjà préparés de manière robuste (non vide et plus récent que la source)
-    prepared_basenames = set()
-    if PREPARED_SOURCE_DIR.exists():
-        for filename, basename in source_files.items():
-            ext = ".mp4" if filename.lower().endswith(VIDEO_EXTENSIONS) else ".jpg"
-            prep_path = PREPARED_SOURCE_DIR / f"{basename}{ext}"
-            src_path = SOURCE_DIR_FOR_PREP / filename
-            
-            # Vérifications robustes :
-            # 1. Le fichier préparé principal existe
-            # 2. Sa taille est supérieure à 0 octet (pas corrompu ou coupé pendant l'import)
-            # 3. Il est plus récent ou égal à la photo source téléchargée
-            try:
-                if prep_path.is_file() and prep_path.stat().st_size > 0:
-                    if ext == ".jpg":
-                        # Préparée pour une autre taille d'écran (changement d'orientation) : à refaire
-                        with Image.open(prep_path) as prepared:
-                            if prepared.size != (actual_output_width, actual_output_height):
-                                continue
-                    prepared_basenames.add(basename)
-            except Exception:
-                pass  # En cas d'erreur de lecture des stats, on considère non préparé par sécurité
+    # Déjà préparés : fichier présent, non vide, à la taille de l'écran (sinon : changement d'orientation, à refaire)
+    prepared_basenames = {basename for filename, basename in source_files.items()
+                          if preparation_state(PREPARED_SOURCE_DIR, filename, actual_output_width, actual_output_height) == "ok"}
 
     # Récupérer tous les basenames actuellement présents sur le disque dans prepared/
     all_prepared_basenames_on_disk = set()
@@ -512,6 +686,8 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
     # Determine files to prepare (new ones)
     basenames_to_prepare = source_basenames - prepared_basenames
     files_to_prepare = [f for f, basename in source_files.items() if basename in basenames_to_prepare]
+    # Les petits médias d'abord (photos, courtes vidéos) : ils arrivent vite sur le cadre, les gros vidéos à la fin
+    files_to_prepare.sort(key=lambda f: (os.path.getsize(SOURCE_DIR_FOR_PREP / f) if (SOURCE_DIR_FOR_PREP / f).exists() else 0, f))
     total = len(files_to_prepare)
     
     if total == 0:
@@ -538,41 +714,9 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
             yield yield_and_log("warning", "Préparation annulée par l'utilisateur.")
             return
         
-        src_path = os.path.join(SOURCE_DIR_FOR_PREP, filename)
-        
         try:
-            base_name, extension = os.path.splitext(filename)
-            current_preview = ""
-            
-            if extension.lower() in VIDEO_EXTENSIONS:
-                # Video processing
-                dest_filename = f"{base_name}.mp4"
-                dest_path = PREPARED_SOURCE_DIR / dest_filename
-                prepare_video(src_path, str(dest_path), actual_output_width, actual_output_height)
-                message_type = "vidéo"
-                current_preview = f"{base_name}_thumbnail.jpg"
-            else:
-                # Image processing
-                dest_filename = f"{base_name}.jpg"
-                dest_path = PREPARED_SOURCE_DIR / dest_filename
-                relative_path_key = f"{source_type}/{dest_filename}"
-                
-                # Modification Sigalou 25/01/2026 - Utilisation des métadonnées du JSON uniquement
-                # Priority 1: User text
-                caption = user_text_map.get(relative_path_key)
-                
-                # Priority 2: Immich description (if no user text)
-                if caption is None:
-                    immich_data = description_map.get(filename)
-                    if immich_data and isinstance(immich_data, dict):
-                        caption = immich_data.get("description")
-                    elif isinstance(immich_data, str):
-                        caption = immich_data  # Backward compatibility
-                # Fin Modification Sigalou 25/01/2026
-                
-                prepare_photo(src_path, str(dest_path), actual_output_width, actual_output_height, source_type=source_type, caption=caption)
-                message_type = "photo"
-                current_preview = f"{base_name}.jpg"
+            message_type, current_preview = prepare_media(source_type, filename, actual_output_width, actual_output_height,
+                                                          description_map, user_text_map, index=i, total=total)
             
             if i == 1:
                 percent = 25  # Modif Sigalou, Début boucle après cleaning 21%
@@ -588,7 +732,8 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
             )
         
         except Exception as e:
-            yield yield_and_log("warning", f"Erreur lors de la préparation de {filename}: {e}")
+            yield yield_and_log("warning", f"Erreur lors de la préparation de {filename}: {e}",
+                                extra={"current": i, "total": total})
     
     yield yield_and_log(
         "done",

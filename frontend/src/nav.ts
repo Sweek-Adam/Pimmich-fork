@@ -24,6 +24,7 @@ export const groups: NavGroup[] = [
   { key: "photos", label: () => t("Photos"), icon: "fa-images", items: [
     { label: () => t("Importer"), icon: "fa-file-import", tab: "tab-actions", route: "/importer" },
     { label: () => t("Sources"), icon: "fa-folder-open", tab: "tab-sources", route: "/sources" },
+    { label: () => t("Préparation des médias"), icon: "fa-cogs", tab: "tab-preparation", route: "/preparation" },
     { label: () => t("Bibliothèque"), icon: "fa-th", tab: "tab-apercu", route: "/bibliotheque" },
     { label: () => t("À suivre"), icon: "fa-stream", tab: "tab-queue", route: "/a-suivre" },
     { label: () => t("Playlists"), icon: "fa-list-ul", tab: "tab-playlists", route: "/playlists" },

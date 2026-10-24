@@ -199,6 +199,7 @@ onUnmounted(() => {
         <i class="fas" :class="item.active ? 'fa-sync-alt fa-spin' : 'fa-check-circle'"></i>
         <span class="spacer">{{ item.label }} · {{ item.phase === "prepare" ? t("préparation") : t("téléchargement") }}</span>
         <strong>{{ item.phase === "prepare" ? item.prepare.percent : item.download.percent }}%</strong>
+        <router-link v-if="route.path !== '/preparation'" to="/preparation" class="import-more" :title="t('Plus de détails')">{{ t("Détails") }}</router-link>
       </div>
     </div>
     <div v-if="toast.text" class="toast" :class="{ error: toast.error }" role="status">{{ toast.text }}</div>
@@ -248,6 +249,8 @@ nav h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; co
 .imports { position: fixed; right: 1rem; bottom: 1rem; z-index: 30; display: grid; gap: .4rem; width: min(320px, calc(100vw - 2rem)); }
 .import-item { display: flex; align-items: center; gap: .6rem; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: 12px; padding: .55rem .8rem; font-size: .88rem; }
 .import-item i { color: var(--accent); }
+.import-more { font-size: .8rem; font-weight: 600; padding: .15rem .55rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.import-more:hover { text-decoration: none; filter: brightness(1.05); }
 @media (max-width: 760px) { .imports { bottom: calc(4.6rem + env(safe-area-inset-bottom)); right: .5rem; } }
 .sheet-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, .35); z-index: 40; display: flex; align-items: flex-end; }
 .sheet {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-24 22:27+0200\n"
+"POT-Creation-Date: 2026-10-24 22:46+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -187,13 +187,21 @@ msgstr "Gestoppt"
 msgid "Thème"
 msgstr "Design"
 
-#: frontend/src/App.vue:200
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:92
 msgid "préparation"
 msgstr "Vorbereitung"
 
-#: frontend/src/App.vue:200
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:92
 msgid "téléchargement"
 msgstr "Download"
+
+#: frontend/src/App.vue:202
+msgid "Plus de détails"
+msgstr "Mehr Details"
+
+#: frontend/src/App.vue:202
+msgid "Détails"
+msgstr "Details"
 
 #: frontend/src/components/SmartAlbumEditor.vue:121 frontend/src/i18n.ts:2
 #: frontend/src/views/PlaylistsView.vue:136
@@ -230,121 +238,125 @@ msgstr "Importieren"
 msgid "Sources"
 msgstr "Quellen"
 
-#: frontend/src/nav.ts:27 templates/configure.html.jinja:147
+#: frontend/src/nav.ts:27
+msgid "Préparation des médias"
+msgstr "Medienvorbereitung"
+
+#: frontend/src/nav.ts:28 templates/configure.html.jinja:147
 msgid "Bibliothèque"
 msgstr "Bibliothek"
 
-#: frontend/src/nav.ts:28 frontend/src/views/HomeView.vue:165
+#: frontend/src/nav.ts:29 frontend/src/views/HomeView.vue:165
 #: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:148
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "Als Nächstes"
 
-#: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:29
+#: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:30
 #: templates/configure.html.jinja:149
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr "Wiedergabelisten"
 
-#: frontend/src/nav.ts:30 frontend/src/views/LibraryView.vue:120
+#: frontend/src/nav.ts:31 frontend/src/views/LibraryView.vue:120
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr "Favoriten"
 
-#: frontend/src/nav.ts:31 templates/configure.html.jinja:151
+#: frontend/src/nav.ts:32 templates/configure.html.jinja:151
 msgid "Carte"
 msgstr "Karte"
 
-#: frontend/src/nav.ts:32 frontend/src/views/MessagesView.vue:145
+#: frontend/src/nav.ts:33 frontend/src/views/MessagesView.vue:145
 #: templates/configure.html.jinja:152
 #: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "Nachrichten"
 
-#: frontend/src/nav.ts:34 frontend/src/views/DisplayView.vue:25
+#: frontend/src/nav.ts:35 frontend/src/views/DisplayView.vue:25
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:33
 msgid "Écran"
 msgstr "Bildschirm"
 
-#: frontend/src/nav.ts:35 templates/configure.html.jinja:157
+#: frontend/src/nav.ts:36 templates/configure.html.jinja:157
 msgid "Dispositions"
 msgstr "Anordnungen"
 
-#: frontend/src/nav.ts:36 templates/configure.html.jinja:158
+#: frontend/src/nav.ts:37 templates/configure.html.jinja:158
 msgid "Affichage"
 msgstr "Anzeige"
 
-#: frontend/src/nav.ts:37 templates/configure.html.jinja:159
+#: frontend/src/nav.ts:38 templates/configure.html.jinja:159
 msgid "Horloge & météo"
 msgstr "Uhr & Wetter"
 
-#: frontend/src/nav.ts:38 frontend/src/views/CaptionsView.vue:12
+#: frontend/src/nav.ts:39 frontend/src/views/CaptionsView.vue:12
 #: templates/configure.html.jinja:160
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "Foto-Infos"
 
-#: frontend/src/nav.ts:39 templates/configure.html.jinja:161
+#: frontend/src/nav.ts:40 templates/configure.html.jinja:161
 msgid "Légendes"
 msgstr "Bildunterschriften"
 
-#: frontend/src/nav.ts:40 templates/configure.html.jinja:162
+#: frontend/src/nav.ts:41 templates/configure.html.jinja:162
 msgid "Son"
 msgstr "Ton"
 
-#: frontend/src/nav.ts:42 templates/configure.html.jinja:96
+#: frontend/src/nav.ts:43 templates/configure.html.jinja:96
 #: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:34
 msgid "Partage"
 msgstr "Teilen"
 
-#: frontend/src/nav.ts:43 templates/configure.html.jinja:167
+#: frontend/src/nav.ts:44 templates/configure.html.jinja:167
 #: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr "Gäste"
 
-#: frontend/src/nav.ts:44 templates/configure.html.jinja:168
+#: frontend/src/nav.ts:45 templates/configure.html.jinja:168
 msgid "À valider"
 msgstr "Zu prüfen"
 
-#: frontend/src/nav.ts:45 templates/configure.html.jinja:169
+#: frontend/src/nav.ts:46 templates/configure.html.jinja:169
 msgid "Telegram"
 msgstr "Telegramm"
 
-#: frontend/src/nav.ts:47 templates/configure.html.jinja:96
+#: frontend/src/nav.ts:48 templates/configure.html.jinja:96
 #: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:35
 msgid "Système"
 msgstr "System"
 
-#: frontend/src/nav.ts:48 templates/configure.html.jinja:174
+#: frontend/src/nav.ts:49 templates/configure.html.jinja:174
 msgid "Comptes"
 msgstr "Konten"
 
-#: frontend/src/nav.ts:49 templates/configure.html.jinja:176
+#: frontend/src/nav.ts:50 templates/configure.html.jinja:176
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: frontend/src/nav.ts:50 templates/configure.html.jinja:177
+#: frontend/src/nav.ts:51 templates/configure.html.jinja:177
 msgid "Maintenance"
 msgstr "Wartung"
 
-#: frontend/src/nav.ts:51 templates/configure.html.jinja:178
+#: frontend/src/nav.ts:52 templates/configure.html.jinja:178
 msgid "Réseau"
 msgstr "Netzwerk"
 
-#: frontend/src/nav.ts:52 templates/configure.html.jinja:180
+#: frontend/src/nav.ts:53 templates/configure.html.jinja:180
 msgid "Commande vocale"
 msgstr "Sprachsteuerung"
 
-#: frontend/src/nav.ts:53 templates/configure.html.jinja:182
+#: frontend/src/nav.ts:54 templates/configure.html.jinja:182
 msgid "Statistiques"
 msgstr "Statistiken"
 
-#: frontend/src/nav.ts:54 templates/configure.html.jinja:183
+#: frontend/src/nav.ts:55 templates/configure.html.jinja:183
 msgid "Journaux"
 msgstr "Protokolle"
 
@@ -430,7 +442,7 @@ msgid "Ajouter"
 msgstr "Hinzufügen"
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:112
+#: frontend/src/views/DisplayView.vue:114
 msgid "Bouton physique"
 msgstr "Physischer Taster"
 
@@ -915,8 +927,9 @@ msgid "Aucun appareil détecté."
 msgstr "Kein Gerät erkannt."
 
 #: frontend/src/components/PresenceCard.vue:73
-#: frontend/src/views/LogsView.vue:63 frontend/src/views/NetworkView.vue:125
-#: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/MediaView.vue:130
+#: frontend/src/views/NetworkView.vue:125 frontend/src/views/PendingView.vue:51
+#: frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
 #: templates/configure/tab_validation.html.jinja:11
@@ -2990,13 +3003,27 @@ msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "Musik während Videos leiser stellen (danach wieder normal)"
 
 #: frontend/src/views/DisplayView.vue:93
+msgid "Encodage allégé des vidéos à partir de (Mo)"
+msgstr "Leichtere Videokodierung ab (MB)"
+
+#: frontend/src/views/DisplayView.vue:94
+msgid ""
+"Les vidéos plus lourdes sont préparées en 720p (30 images/s au plus) : "
+"bien plus rapide et moins gourmand sur un Raspberry Pi, toujours en plein"
+" écran. 0 = jamais."
+msgstr ""
+"Größere Videos werden in 720p (höchstens 30 Bilder/s) vorbereitet: viel "
+"schneller und schonender für einen Raspberry Pi, weiterhin im Vollbild. 0"
+" = nie."
+
+#: frontend/src/views/DisplayView.vue:95
 #: templates/configure/tab_affichage.html.jinja:258
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr ""
 "Hardware-Videodekodierung aktivieren (flüssiger, aber möglicherweise "
 "instabil)"
 
-#: frontend/src/views/DisplayView.vue:94
+#: frontend/src/views/DisplayView.vue:96
 #: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
@@ -3006,16 +3033,16 @@ msgstr ""
 " Raspberry Pis. Deaktivieren Sie das Kontrollkästchen, wenn nach Videos "
 "blaue/schwarze Bildschirme angezeigt werden."
 
-#: frontend/src/views/DisplayView.vue:96
+#: frontend/src/views/DisplayView.vue:98
 msgid "Télévision"
 msgstr "Fernseher"
 
-#: frontend/src/views/DisplayView.vue:97
+#: frontend/src/views/DisplayView.vue:99
 #: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Fernseher über HDMI-CEC steuern"
 
-#: frontend/src/views/DisplayView.vue:98
+#: frontend/src/views/DisplayView.vue:100
 #: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
@@ -3026,12 +3053,12 @@ msgstr ""
 "Rahmens ein und geht mit ihm in Standby. Aktivieren Sie auch „HDMI-CEC“ "
 "(Anynet+, Bravia Sync, SimpLink...) in den TV-Einstellungen."
 
-#: frontend/src/views/DisplayView.vue:100
+#: frontend/src/views/DisplayView.vue:102
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Energieverwaltung (Connected Socket)"
 
-#: frontend/src/views/DisplayView.vue:101
+#: frontend/src/views/DisplayView.vue:103
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -3042,23 +3069,23 @@ msgstr ""
 " Sie ihn über eine angeschlossene Steckdose (WLAN) ausschalten. Pimmich "
 "sendet eine einfache HTTP-Anfrage an die von Ihnen angegebenen URLs."
 
-#: frontend/src/views/DisplayView.vue:103
+#: frontend/src/views/DisplayView.vue:105
 msgid "Activer le contrôle par prise connectée"
 msgstr "Steuerung über smarte Steckdose aktivieren"
 
-#: frontend/src/views/DisplayView.vue:104
+#: frontend/src/views/DisplayView.vue:106
 msgid "URL pour ALLUMER la prise :"
 msgstr "URL zum EINSCHALTEN der Steckdose:"
 
-#: frontend/src/views/DisplayView.vue:105
+#: frontend/src/views/DisplayView.vue:107
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr "URL zum AUSSCHALTEN der Steckdose:"
 
-#: frontend/src/views/DisplayView.vue:106
+#: frontend/src/views/DisplayView.vue:108
 msgid "Délai après allumage (secondes) :"
 msgstr "Verzögerung nach dem Einschalten (Sekunden):"
 
-#: frontend/src/views/DisplayView.vue:107
+#: frontend/src/views/DisplayView.vue:109
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
@@ -3068,21 +3095,21 @@ msgstr ""
 " erzwingen. Erhöhen Sie den Wert, wenn die Auflösung immer noch falsch "
 "ist."
 
-#: frontend/src/views/DisplayView.vue:108
+#: frontend/src/views/DisplayView.vue:110
 msgid "URL de Statut (Optionnel) :"
 msgstr "Status-URL (optional):"
 
-#: frontend/src/views/DisplayView.vue:109
+#: frontend/src/views/DisplayView.vue:111
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Home Assistant-Zugriffstoken (bei HA-Status-URL):"
 
-#: frontend/src/views/DisplayView.vue:110
+#: frontend/src/views/DisplayView.vue:112
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Erstellen Sie in Ihrem Home Assistant-Profil ein „Long-Term Access Token“."
 
-#: frontend/src/views/DisplayView.vue:113
+#: frontend/src/views/DisplayView.vue:115
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
@@ -3090,11 +3117,11 @@ msgstr ""
 "Ein Taster am Raspberry Pi: Ein Druck schaltet den Rahmen in den "
 "Ruhezustand, ein weiterer weckt ihn."
 
-#: frontend/src/views/DisplayView.vue:115
+#: frontend/src/views/DisplayView.vue:117
 msgid "Activer le bouton physique"
 msgstr "Physischen Taster aktivieren"
 
-#: frontend/src/views/DisplayView.vue:116
+#: frontend/src/views/DisplayView.vue:118
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "GPIO-Pin (BCM-Nummerierung)"
 
@@ -3823,7 +3850,7 @@ msgid ""
 "moment-là)"
 msgstr "Saisonthemen nur in ihrem Zeitraum (und dann häufiger)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:365
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:366
 msgid "Gardez au moins une disposition."
 msgstr "Behalten Sie mindestens ein Layout."
 
@@ -4705,6 +4732,141 @@ msgid ""
 msgstr ""
 "Pimmich steht unter der MIT-Lizenz. Komponenten von Drittanbietern "
 "behalten ihre eigene Lizenz:"
+
+#: frontend/src/views/MediaView.vue:31
+msgid "En file d'attente"
+msgstr "In Warteschlange"
+
+#: frontend/src/views/MediaView.vue:31
+msgid "Prêt"
+msgstr "Bereit"
+
+#: frontend/src/views/MediaView.vue:31
+msgid "Pas préparé"
+msgstr "Nicht vorbereitet"
+
+#: frontend/src/views/MediaView.vue:31
+msgid "Fichier préparé vide"
+msgstr "Vorbereitete Datei ist leer"
+
+#: frontend/src/views/MediaView.vue:31
+msgid "Préparé pour une autre taille d'écran"
+msgstr "Für eine andere Bildschirmgröße vorbereitet"
+
+#: frontend/src/views/MediaView.vue:86
+msgid "Préparation en cours"
+msgstr "Laufende Vorbereitung"
+
+#: frontend/src/views/MediaView.vue:87
+msgid "Aucun import ni préparation en cours."
+msgstr "Kein Import und keine Vorbereitung läuft."
+
+#: frontend/src/views/MediaView.vue:92
+msgid "depuis"
+msgstr "seit"
+
+#: frontend/src/views/MediaView.vue:98
+#, python-brace-format
+msgid "{done} médias sur {total} préparés"
+msgstr "{done} von {total} Medien vorbereitet"
+
+#: frontend/src/views/MediaView.vue:108
+msgid "encodage vidéo"
+msgstr "Videokodierung"
+
+#: frontend/src/views/MediaView.vue:108
+#: templates/configure/scripts_gallery.html.jinja:53
+msgid "photo"
+msgstr "Foto"
+
+#: frontend/src/views/MediaView.vue:112
+#, python-brace-format
+msgid "Vidéo encodée à {percent} %"
+msgstr "Video zu {percent} % kodiert"
+
+#: frontend/src/views/MediaView.vue:116
+msgid "Derniers médias traités"
+msgstr "Zuletzt verarbeitete Medien"
+
+#: frontend/src/views/MediaView.vue:129
+msgid "Médias du cadre"
+msgstr "Medien des Rahmens"
+
+#: frontend/src/views/MediaView.vue:131
+msgid ""
+"Tous les médias reçus, source par source. Un média « pas préparé » "
+"n'apparaît pas sur le cadre : le bouton Préparer le rattrape (import "
+"interrompu, ancien bug...)."
+msgstr ""
+"Alle empfangenen Medien, Quelle für Quelle. Ein „nicht vorbereitetes“ "
+"Medium erscheint nicht auf dem Rahmen: Die Taste Vorbereiten holt es nach"
+" (abgebrochener Import, alter Fehler...)."
+
+#: frontend/src/views/MediaView.vue:133
+msgid "À préparer"
+msgstr "Vorzubereiten"
+
+#: frontend/src/views/MediaView.vue:133
+msgid "En échec"
+msgstr "Fehlgeschlagen"
+
+#: frontend/src/views/MediaView.vue:133
+msgid "Préparés"
+msgstr "Vorbereitet"
+
+#: frontend/src/views/MediaView.vue:133
+msgid "Tous"
+msgstr "Alle"
+
+#: frontend/src/views/MediaView.vue:135
+msgid "Rechercher un fichier"
+msgstr "Datei suchen"
+
+#: frontend/src/views/MediaView.vue:137
+#: templates/configure/scripts_gallery.html.jinja:8
+#: templates/configure/scripts_gallery.html.jinja:36
+#: templates/configure/scripts_main.html.jinja:1320
+#: templates/configure/scripts_status.html.jinja:745
+#: templates/configure/tab_heure.html.jinja:307
+#: templates/configure/tab_heure.html.jinja:310
+#: templates/configure/tab_network.html.jinja:9
+#: templates/configure/tab_network.html.jinja:12
+#: templates/configure/tab_network.html.jinja:16
+#: templates/configure/tab_network.html.jinja:90
+#: templates/configure/tab_network.html.jinja:92
+#: templates/configure/tab_network.html.jinja:96
+#: templates/configure/tab_stats.html.jinja:73
+#: templates/configure/tab_stats.html.jinja:76
+#: templates/configure/tab_stats.html.jinja:80
+#: templates/configure/tab_stats.html.jinja:83
+msgid "Chargement..."
+msgstr "Laden..."
+
+#: frontend/src/views/MediaView.vue:138
+msgid "Tous les médias sont préparés."
+msgstr "Alle Medien sind vorbereitet."
+
+#: frontend/src/views/MediaView.vue:138
+msgid "Aucun média."
+msgstr "Keine Medien."
+
+#: frontend/src/views/MediaView.vue:144
+#, python-brace-format
+msgid "{prepared} préparés sur {total}"
+msgstr "{prepared} von {total} vorbereitet"
+
+#: frontend/src/views/MediaView.vue:147
+#, python-brace-format
+msgid "Préparer les {count} manquants"
+msgstr "Die {count} fehlenden vorbereiten"
+
+#: frontend/src/views/MediaView.vue:161
+msgid "Préparer"
+msgstr "Vorbereiten"
+
+#: frontend/src/views/MediaView.vue:165
+msgid "Afficher plus"
+msgstr "Mehr anzeigen"
 
 #: frontend/src/views/MessagesView.vue:22
 #: templates/configure/tab_messages.html.jinja:132
@@ -6677,7 +6839,7 @@ msgstr "Neu aufnehmen"
 
 #: templates/configure/tab_accueil.html.jinja:335
 #: templates/upload.html.jinja:177 templates/upload.html.jinja:298
-#: templates/upload.html.jinja:639 templates/upload.html.jinja:676
+#: templates/upload.html.jinja:641 templates/upload.html.jinja:678
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr "Upload fehlgeschlagen. Überprüfen Sie die Verbindung zum Bilderrahmen."
 
@@ -6781,33 +6943,33 @@ msgstr "Liniert"
 msgid "Kraft"
 msgstr "Packpapier"
 
-#: templates/upload.html.jinja:600
+#: templates/upload.html.jinja:602
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "Diese Seite zum Startbildschirm des Telefons hinzufügen"
 
-#: templates/upload.html.jinja:602
+#: templates/upload.html.jinja:604
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr ""
 "in Safari auf die Schaltfläche „Teilen“ tippen, dann „Zum Home-"
 "Bildschirm“."
 
-#: templates/upload.html.jinja:603
+#: templates/upload.html.jinja:605
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "in Chrome das Menü ⋮ öffnen, dann „Zum Startbildschirm hinzufügen“."
 
-#: templates/upload.html.jinja:605
+#: templates/upload.html.jinja:607
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich öffnet sich dann wie eine App direkt auf dieser Seite."
 
-#: templates/upload.html.jinja:610
+#: templates/upload.html.jinja:612
 msgid "Connexion administrateur"
 msgstr "Administrator-Anmeldung"
 
-#: templates/upload.html.jinja:659
+#: templates/upload.html.jinja:661
 msgid "fichier(s) en cours d'envoi..."
 msgstr "Datei(en) werden hochgeladen..."
 
-#: templates/upload.html.jinja:670
+#: templates/upload.html.jinja:672
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Upload zu groß: Senden Sie weniger Dateien auf einmal."
 
@@ -7031,34 +7193,15 @@ msgid "Enregistrement…"
 msgstr "Wird gespeichert…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:321 web/routes_settings.py:375
-#: web/routes_settings.py:397 web/routes_settings.py:449
-#: web/routes_settings.py:473 web/routes_settings.py:483
+#: web/routes_settings.py:322 web/routes_settings.py:376
+#: web/routes_settings.py:398 web/routes_settings.py:450
+#: web/routes_settings.py:474 web/routes_settings.py:484
 msgid "Enregistré"
 msgstr "Gespeichert"
 
 #: templates/configure/scripts_app.html.jinja:141
 msgid "Échec de l'enregistrement : vérifiez la connexion au cadre."
 msgstr "Speichern fehlgeschlagen: Prüfe die Verbindung zum Rahmen."
-
-#: templates/configure/scripts_gallery.html.jinja:8
-#: templates/configure/scripts_gallery.html.jinja:36
-#: templates/configure/scripts_main.html.jinja:1320
-#: templates/configure/scripts_status.html.jinja:745
-#: templates/configure/tab_heure.html.jinja:307
-#: templates/configure/tab_heure.html.jinja:310
-#: templates/configure/tab_network.html.jinja:9
-#: templates/configure/tab_network.html.jinja:12
-#: templates/configure/tab_network.html.jinja:16
-#: templates/configure/tab_network.html.jinja:90
-#: templates/configure/tab_network.html.jinja:92
-#: templates/configure/tab_network.html.jinja:96
-#: templates/configure/tab_stats.html.jinja:73
-#: templates/configure/tab_stats.html.jinja:76
-#: templates/configure/tab_stats.html.jinja:80
-#: templates/configure/tab_stats.html.jinja:83
-msgid "Chargement..."
-msgstr "Laden..."
 
 #: templates/configure/scripts_gallery.html.jinja:10
 msgid "N/A"
@@ -7203,10 +7346,6 @@ msgstr "Link kopieren"
 #: templates/configure/scripts_gallery.html.jinja:51
 msgid "La copie a échoué."
 msgstr "Das Kopieren ist fehlgeschlagen."
-
-#: templates/configure/scripts_gallery.html.jinja:53
-msgid "photo"
-msgstr "Foto"
 
 #: templates/configure/scripts_gallery.html.jinja:54
 #: templates/configure/tab_queue.html.jinja:89
@@ -9964,13 +10103,13 @@ msgstr ""
 "Der Wert für das Immich-Fotolimit ist ungültig. Der bisherige Wert bleibt"
 " erhalten."
 
-#: web/routes_config.py:253 web/routes_settings.py:482
+#: web/routes_config.py:253 web/routes_settings.py:483
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive-Schlüssel nicht gespeichert: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:316
-#: web/routes_settings.py:373 web/routes_settings.py:447
+#: web/routes_config.py:281 web/routes_settings.py:317
+#: web/routes_settings.py:374 web/routes_settings.py:448
 msgid "Réglages modifiés"
 msgstr "Einstellungen geändert"
 
@@ -9982,8 +10121,8 @@ msgstr ""
 "Konfiguration gespeichert. Die Diashow wurde neu gestartet, um die "
 "Änderungen zu übernehmen."
 
-#: web/routes_family.py:26 web/routes_settings.py:362
-#: web/routes_settings.py:467 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:363
+#: web/routes_settings.py:468 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Ungültige Liste."
 
@@ -10548,6 +10687,19 @@ msgstr ""
 "Noch keine Gezeitendaten: Die Diashow ruft sie ab, oder nutzen Sie "
 "„Aktualisierung erzwingen“."
 
+#: web/routes_media.py:73 web/routes_settings.py:441 web/routes_storage.py:114
+msgid "Source inconnue."
+msgstr "Unbekannte Quelle."
+
+#: web/routes_media.py:84
+msgid "Rien à préparer (déjà en cours ou introuvable)."
+msgstr "Nichts vorzubereiten (läuft bereits oder nicht gefunden)."
+
+#: web/routes_media.py:94
+#, python-format
+msgid "%(count)s média(s) en préparation : suivez l'avancement ci-dessous."
+msgstr "%(count)s Medium/Medien in Vorbereitung: Fortschritt unten verfolgen."
+
 #: web/routes_messages.py:61 web/routes_messages.py:79
 #, python-format
 msgid "Message « %(text)s »"
@@ -10885,31 +11037,27 @@ msgstr "Playlist nicht gefunden."
 msgid "Citation du jour enregistrée."
 msgstr "Zitat des Tages gespeichert."
 
-#: web/routes_settings.py:291
+#: web/routes_settings.py:292
 msgid "Aucun réglage à enregistrer."
 msgstr "Keine Einstellung zu speichern."
 
-#: web/routes_settings.py:295
+#: web/routes_settings.py:296
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unbekannte Einstellung: %(key)s"
 
-#: web/routes_settings.py:299
+#: web/routes_settings.py:300
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Ungültiger Wert für „%(key)s“."
 
-#: web/routes_settings.py:392
+#: web/routes_settings.py:393
 msgid "Valeur invalide."
 msgstr "Ungültiger Wert."
 
-#: web/routes_settings.py:397
+#: web/routes_settings.py:398
 msgid "Supprimé."
 msgstr "Gelöscht."
-
-#: web/routes_settings.py:440 web/routes_storage.py:114
-msgid "Source inconnue."
-msgstr "Unbekannte Quelle."
 
 #: web/routes_slideshow.py:135
 msgid "Diaporama mis en veille."

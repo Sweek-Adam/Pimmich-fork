@@ -17,6 +17,9 @@ def test_hardware_encoder_failure_falls_back_to_software(tmp_path, monkeypatch):
         open(out, "wb").write(b"video")
         return types.SimpleNamespace(returncode=0, stdout="", stderr="")
     monkeypatch.setattr(prep.subprocess, "run", fake_run)
+    monkeypatch.setattr(prep, "run_ffmpeg", lambda command, duration=None, on_progress=None: (
+        (lambda r: (r.returncode, r.stderr))(fake_run(command))))
+    monkeypatch.setattr(prep, "video_duration", lambda path: None)
     monkeypatch.setattr(prep, "get_pi_model", lambda: 3)
     (tmp_path / "photos" / "gdrive").mkdir(parents=True)
     source = tmp_path / "photos" / "gdrive" / "film.mp4"

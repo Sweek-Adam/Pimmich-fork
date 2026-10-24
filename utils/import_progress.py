@@ -17,6 +17,8 @@ FORGET_AFTER = 20          # un import terminé reste affiché quelques secondes
 
 _lock = threading.Lock()
 _imports = {}
+_work = {}  # source -> média en cours de préparation (détails de l'import), et derniers médias traités
+RECENT = 12
 ON_FINISHED = []  # fonctions appelées à la fin d'une préparation
 ON_IMPORT_DONE = []  # fonctions appelées avec le bilan d'un import terminé (notifications)
 
@@ -93,6 +95,48 @@ def tracked(source, phase, generator):
         finish(source, phase)
 
 
+def work_started(source, name, kind, size, index=None, total=None, step=None):
+    """Un média commence à être préparé (détails : nom, type, poids, encodage...)."""
+    with _lock:
+        work = _work.setdefault(source, {"recent": [], "failed": []})
+        work["current"] = {"name": name, "kind": kind, "size": size, "started": time.time(), "index": index, "total": total,
+                           "step": step or "", "percent": None, "speed": None}
+
+
+def work_progress(source, percent=None, step=None, speed=None):
+    with _lock:
+        current = (_work.get(source) or {}).get("current")
+        if current:
+            if percent is not None:
+                current["percent"] = max(0, min(100, int(percent)))
+            if step is not None:
+                current["step"] = step
+            if speed is not None:
+                current["speed"] = speed
+
+
+def work_done(source, name, ok=True, error=None):
+    with _lock:
+        work = _work.setdefault(source, {"recent": [], "failed": []})
+        current = work.pop("current", None) or {}
+        item = {"name": name, "kind": current.get("kind"), "size": current.get("size"), "ok": ok,
+                "seconds": round(time.time() - current.get("started", time.time()), 1), "error": (error or "")[:300] if not ok else None}
+        work["recent"] = ([item] + work["recent"])[:RECENT]
+        if not ok:
+            work["failed"] = ([item] + [f for f in work["failed"] if f["name"] != name])[:50]
+
+
+def work(source):
+    with _lock:
+        data = _work.get(source)
+        if not data:
+            return None
+        current = dict(data["current"]) if data.get("current") else None
+        if current:
+            current["elapsed"] = round(time.time() - current["started"], 1)
+        return {"current": current, "recent": [dict(r) for r in data["recent"]], "failed": [dict(f) for f in data["failed"]]}
+
+
 def snapshot(now=None):
     """Imports à afficher : en cours, ou terminés depuis quelques secondes."""
     now = now or time.time()
@@ -107,9 +151,12 @@ def snapshot(now=None):
                 continue
             out.append(dict(entry, label=SOURCE_LABELS.get(source, source), download=dict(entry["download"]),
                             prepare=dict(entry["prepare"]), active=not entry.get("finished")))
+    for item in out:
+        item["work"] = work(item["source"])
     return sorted(out, key=lambda e: e["started"])
 
 
 def reset():
     with _lock:
         _imports.clear()
+        _work.clear()
