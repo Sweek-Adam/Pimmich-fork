@@ -69,6 +69,8 @@ def source(sandbox, monkeypatch):
     for d in (folder, prepared, motion_photos.CACHE_DIR / "tel"):
         shutil.rmtree(d, ignore_errors=True)
     folder.mkdir(parents=True)
+    monkeypatch.setattr(motion_photos, "SCAN_FILE", motion_photos.CACHE_DIR / "tel" / "scan.json")
+    monkeypatch.setitem(motion_photos._scan, "data", None)
     monkeypatch.setattr(prep, "load_config", lambda: {"smart_crop": False})
     yield folder, prepared
     for d in (folder, prepared, motion_photos.CACHE_DIR / "tel"):

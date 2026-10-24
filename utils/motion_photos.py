@@ -15,6 +15,7 @@ CACHE_DIR = Path("cache") / "motion"     # clips extraits et animations (jamais 
 MAX_SECONDS = 4
 FPS = 15
 MAX_SIDE = 960
+PING_PONG_SECONDS = 2.0
 LIVE_PHOTO_MAX_BYTES = 20 * 1024 * 1024
 PHOTO_EXT = (".jpg", ".jpeg", ".heic", ".heif")
 BRANDS = (b"mp4", b"iso", b"qt  ", b"avc", b"hev", b"MSNV", b"M4V")
@@ -89,8 +90,44 @@ def is_live_photo_video(path):
     return any(path.with_suffix(ext).is_file() for ext in (".HEIC", ".heic", ".JPG", ".jpg", ".JPEG", ".jpeg"))
 
 
-def has_motion(path):
-    return embedded_video(path) is not None or companion_video(path) is not None
+SCAN_FILE = CACHE_DIR / "scan.json"   # photo -> contient une vidéo ? (lire chaque photo en entier coûte cher)
+_scan = {"data": None}
+
+
+def _scan_cache():
+    if _scan["data"] is None:
+        try:
+            _scan["data"] = json.loads(SCAN_FILE.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            _scan["data"] = {}
+    return _scan["data"]
+
+
+def _save_scan():
+    try:
+        SCAN_FILE.parent.mkdir(parents=True, exist_ok=True)
+        tmp = SCAN_FILE.with_suffix(".tmp")
+        tmp.write_text(json.dumps(_scan["data"] or {}), encoding="utf-8")
+        os.replace(tmp, SCAN_FILE)
+    except OSError:
+        pass
+
+
+def has_motion(path, save=True):
+    """La photo contient-elle une vidéo (ou a-t-elle un .MOV de Live Photo) ? Résultat mémorisé par fichier."""
+    if companion_video(path) is not None:
+        return True
+    try:
+        stat = os.stat(path)
+    except OSError:
+        return False
+    key = f"{path}:{stat.st_size}:{int(stat.st_mtime)}"
+    cache = _scan_cache()
+    if key not in cache:
+        cache[key] = embedded_video(path) is not None
+        if save:
+            _save_scan()
+    return cache[key]
 
 
 def animation_path(source, name):
@@ -135,6 +172,11 @@ def build_animation(photo_path, out_path, aspect, runner=None):
         width, height = max(2, int(MAX_SIDE * aspect) // 2 * 2), MAX_SIDE
     tmp = out_path.with_suffix(".tmp.webp")
     graph = f"fps={FPS},scale={width}:{height}:force_original_aspect_ratio=increase,crop={width}:{height}"
+    from utils.prepare_all_photos import video_duration
+    duration = video_duration(clip)
+    if duration is not None and duration <= PING_PONG_SECONDS:
+        # Clip très court (souvent 0,5 s chez Samsung) : aller-retour, une boucle douce plutôt qu'un saut
+        graph += ",split[a][b];[b]reverse,trim=start_frame=1[r];[a][r]concat=n=2:v=1:a=0"
     command = ["nice", "-n", "15", "ffmpeg", "-y", "-loglevel", "error", "-t", str(MAX_SECONDS), "-i", str(clip), "-an",
                "-vf", graph, "-c:v", "libwebp_anim", "-lossless", "0", "-q:v", "70", "-loop", "0", str(tmp)]
     try:
@@ -164,8 +206,9 @@ def pending(width, height, sources=None):
             shown = prepared / f"{Path(entry.name).stem}.jpg"
             if f"{source}/{entry.name}" in failed or animated.sidecar(shown).exists():
                 continue
-            if prep.preparation_state(prepared, entry.name, width, height) == "ok" and has_motion(entry.path):
+            if has_motion(entry.path, save=False) and prep.preparation_state(prepared, entry.name, width, height) == "ok":
                 todo.append((source, entry.name))
+    _save_scan()
     return todo
 
 
