@@ -183,168 +183,394 @@
 
     <section class="card" id="drawing-box">
       <div class="card-title"><span class="emoji">🎨</span>{{ _('Faire un dessin pour le cadre') }}</div>
-      <p class="muted small">{{ _('Dessinez avec le doigt, ajoutez des autocollants, puis envoyez.') }}</p>
-        <div class="dr-stage">
+      <p class="muted small">{{ _('Dessinez avec le doigt, ajoutez des autocollants ou du texte, puis envoyez. Le bouton plein écran agrandit la zone de dessin.') }}</p>
+      <div class="dr-editor" id="dr-editor">
+        <div class="dr-stage" id="dr-stage">
           <canvas id="dr-canvas" class="dr-canvas"></canvas>
-          <p id="dr-hint" class="dr-hint" hidden>{{ _("Touchez le dessin pour poser l'autocollant") }}</p>
+          <p id="dr-hint" class="dr-hint" hidden></p>
+          <p id="dr-rotate" class="dr-rotate" hidden>📱↻ {{ _('Tournez le téléphone pour dessiner en grand') }}</p>
+          <button type="button" class="dr-close" id="dr-close" aria-label="{{ _('Quitter le plein écran') }}">✕</button>
         </div>
-        <div class="dr-bar">
-          <div class="dr-modes" role="tablist">
-            <button type="button" class="dr-mode on" data-mode="pen" aria-label="{{ _('Crayon') }}">✏️<span>{{ _('Crayon') }}</span></button>
-            <button type="button" class="dr-mode" data-mode="sticker" aria-label="{{ _('Autocollants') }}">😀<span>{{ _('Autocollants') }}</span></button>
-            <button type="button" class="dr-mode" data-mode="eraser" aria-label="{{ _('Gomme') }}">🧽<span>{{ _('Gomme') }}</span></button>
+        <div class="dr-tools">
+          <div class="dr-bar">
+            <div class="dr-modes" role="tablist">
+              <button type="button" class="dr-mode on" data-mode="pen" title="{{ _('Crayon') }}">✏️<span>{{ _('Crayon') }}</span></button>
+              <button type="button" class="dr-mode" data-mode="marker" title="{{ _('Feutre fluo') }}">🖍️<span>{{ _('Fluo') }}</span></button>
+              <button type="button" class="dr-mode" data-mode="text" title="{{ _('Texte') }}">🔤<span>{{ _('Texte') }}</span></button>
+              <button type="button" class="dr-mode" data-mode="sticker" title="{{ _('Autocollants') }}">😀<span>{{ _('Autocollants') }}</span></button>
+              <button type="button" class="dr-mode" data-mode="eraser" title="{{ _('Gomme') }}">🧽<span>{{ _('Gomme') }}</span></button>
+            </div>
+            <div class="dr-actions">
+              <button type="button" class="dr-icon" id="dr-undo" title="{{ _('Annuler') }}" aria-label="{{ _('Annuler') }}">↩️</button>
+              <button type="button" class="dr-icon" id="dr-redo" title="{{ _('Rétablir') }}" aria-label="{{ _('Rétablir') }}">↪️</button>
+              <button type="button" class="dr-icon" id="dr-clear" title="{{ _('Tout effacer') }}" aria-label="{{ _('Tout effacer') }}">🗑</button>
+              <button type="button" class="dr-icon dr-full-btn" id="dr-full" title="{{ _('Plein écran') }}" aria-label="{{ _('Plein écran') }}"></button>
+            </div>
           </div>
-          <div class="dr-actions">
-            <button type="button" class="dr-icon" id="dr-undo" title="{{ _('Annuler') }}" aria-label="{{ _('Annuler') }}">↩️</button>
-            <button type="button" class="dr-icon" id="dr-clear" title="{{ _('Tout effacer') }}" aria-label="{{ _('Tout effacer') }}">🗑</button>
+          <div class="dr-panel" id="dr-color-panel">
+            <div class="dr-scroll" id="dr-colors"></div>
+            <label class="dr-custom" title="{{ _('Autre couleur') }}"><input type="color" id="dr-custom" value="#00bcd4" aria-label="{{ _('Autre couleur') }}"><span>🎨</span></label>
           </div>
-        </div>
-        <div class="dr-panel" id="dr-pen-panel">
-          <div class="dr-scroll" id="dr-colors"></div>
-          <div class="dr-sizes">
-            <button type="button" class="dr-size" data-size="4" aria-label="{{ _('Trait fin') }}"><span style="width:6px;height:6px"></span></button>
-            <button type="button" class="dr-size on" data-size="10" aria-label="{{ _('Trait moyen') }}"><span style="width:12px;height:12px"></span></button>
-            <button type="button" class="dr-size" data-size="24" aria-label="{{ _('Trait épais') }}"><span style="width:20px;height:20px"></span></button>
+          <div class="dr-panel" id="dr-sticker-panel" hidden><div class="dr-scroll" id="dr-stickers"></div></div>
+          <div class="dr-panel dr-size-row">
+            <span class="small muted" id="dr-size-label">{{ _('Épaisseur') }}</span>
+            <input type="range" id="dr-size" min="2" max="40" value="10" aria-labelledby="dr-size-label">
+            <span class="dr-dot-box"><span class="dr-dot" id="dr-dot"></span></span>
           </div>
+          <div class="dr-bgs" role="radiogroup" aria-label="{{ _('Fond') }}" id="dr-bgs"></div>
+          <div class="dr-send-row">
+            <input type="text" id="dr-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}">
+            <button type="button" id="dr-send" class="btn green">🎨 {{ _('Envoyer le dessin') }}</button>
+          </div>
+          <p id="dr-status" class="status"></p>
         </div>
-        <div class="dr-panel" id="dr-sticker-panel" hidden><div class="dr-scroll" id="dr-stickers"></div></div>
-        <div class="dr-bgs" role="radiogroup" aria-label="{{ _('Fond') }}">
-          <button type="button" class="dr-bgbtn on" data-bg="paper"><i style="background:#fffdf6"></i>{{ _('Papier') }}</button>
-          <button type="button" class="dr-bgbtn" data-bg="slate"><i style="background:#2f3b33"></i>{{ _('Ardoise') }}</button>
-          <button type="button" class="dr-bgbtn" data-bg="kraft"><i style="background:#d9b98c"></i>{{ _('Kraft') }}</button>
-        </div>
-        <input type="text" id="dr-signature" maxlength="80" placeholder="{{ _('Votre prénom (optionnel)') }}">
-        <button type="button" id="dr-send" class="btn green">🎨 {{ _('Envoyer le dessin') }}</button>
-        <p id="dr-status" class="status"></p>
+      </div>
     </section>
       <style>
-        .dr-stage { position: relative; }
-        .dr-canvas { width: 100%; border-radius: 14px; border: 1px solid #d1d5db; touch-action: none; background: #fffdf6; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
-        .dr-hint { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); margin: 0; background: rgba(17,24,39,.75); color: #fff; font-size: .78rem; padding: .25rem .7rem; border-radius: 999px; pointer-events: none; white-space: nowrap; }
-        .dr-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .4rem; margin-top: .6rem; }
-        .dr-modes { display: flex; background: #f3f4f6; border-radius: 12px; padding: 3px; gap: 3px; }
-        .dr-mode { border: 0; background: none; border-radius: 9px; padding: .35rem .45rem; font-size: 1.05rem; display: flex; align-items: center; gap: .3rem; }
-        .dr-mode span { font-size: .78rem; font-weight: 600; color: #4b5563; }
-        .dr-mode.on { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
-        .dr-mode.on span { color: #1d4ed8; }
-        @media (max-width: 380px) { .dr-mode span { display: none; } }
+        .dr-editor { display: grid; gap: .6rem; }
+        .dr-stage { position: relative; display: flex; align-items: center; justify-content: center; }
+        .dr-canvas { width: 100%; border-radius: 14px; border: 1px solid var(--border); touch-action: none; background: #fffdf6; display: block; box-shadow: 0 2px 10px rgba(0,0,0,.08); cursor: crosshair; }
+        .dr-hint, .dr-rotate { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); margin: 0; background: rgba(17,24,39,.78); color: #fff; font-size: .78rem; padding: .25rem .7rem; border-radius: 999px; pointer-events: none; white-space: nowrap; }
+        .dr-rotate { top: auto; bottom: 10px; }
+        .dr-panel[hidden], .dr-hint[hidden], .dr-rotate[hidden] { display: none; }
+        .dr-tools { display: grid; gap: .55rem; min-width: 0; }
+        .dr-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .4rem; }
+        .dr-modes { display: flex; background: var(--surface-2); border-radius: 12px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+        .dr-mode { border: 0; background: none; color: var(--text); border-radius: 9px; padding: .35rem .45rem; font-size: 1.05rem; display: flex; align-items: center; gap: .3rem; cursor: pointer; }
+        .dr-mode span { font-size: .76rem; font-weight: 600; color: var(--muted); }
+        .dr-mode.on { background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,.18); }
+        .dr-mode.on span { color: var(--accent); }
+        @media (max-width: 460px) { .dr-mode span { display: none; } .dr-mode { padding: .4rem .55rem; } }
         .dr-actions { display: flex; gap: .3rem; }
-        .dr-icon { width: 36px; height: 36px; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; font-size: 1.15rem; color: #111827; }
-        .dr-panel { margin-top: .5rem; display: flex; align-items: center; gap: .6rem; min-width: 0; max-width: 100%; }
-        .dr-panel[hidden], .dr-hint[hidden] { display: none; }
+        .dr-icon { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); font-size: 1.1rem; color: var(--text); cursor: pointer; display: inline-grid; place-items: center; padding: 0; }
+        .dr-full-btn { color: var(--accent); }
+        .dr-icon:disabled { opacity: .35; }
+        .dr-panel { display: flex; align-items: center; gap: .6rem; min-width: 0; max-width: 100%; }
         .dr-scroll { display: flex; gap: .4rem; overflow-x: auto; padding: 4px 2px; flex: 1 1 0; min-width: 0; scrollbar-width: thin; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
         .dr-scroll::-webkit-scrollbar { height: 4px; }
         .dr-scroll::-webkit-scrollbar-thumb { background: #c7c9d6; border-radius: 4px; }
-        .dr-color { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 1px #d1d5db; }
-        .dr-color.on { box-shadow: 0 0 0 3px #2563eb; }
-        .dr-sizes { display: flex; gap: .3rem; flex: none; }
-        .dr-size { width: 36px; height: 36px; border-radius: 10px; border: 2px solid #e5e7eb; background: #fff; display: inline-flex; align-items: center; justify-content: center; }
-        .dr-size.on { border-color: #2563eb; }
-        .dr-size span { display: block; border-radius: 50%; background: #333; }
-        .dr-sticker { flex: none; width: 44px; height: 44px; border-radius: 12px; border: 2px solid transparent; background: #f9fafb; font-size: 1.5rem; line-height: 1; }
-        .dr-sticker.on { border-color: #2563eb; background: #eff6ff; }
-        .dr-bgs { display: flex; justify-content: center; gap: .4rem; margin-top: .6rem; }
-        .dr-bgbtn { display: flex; align-items: center; gap: .35rem; border: 1px solid #e5e7eb; background: #fff; color: #374151; border-radius: 999px; padding: .25rem .7rem; font-size: .82rem; }
-        .dr-bgbtn i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #d1d5db; display: inline-block; }
-        .dr-bgbtn.on { border-color: #2563eb; color: #1d4ed8; font-weight: 600; }
+        .dr-color { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--border); cursor: pointer; }
+        .dr-color.on { box-shadow: 0 0 0 3px var(--accent); }
+        .dr-custom { position: relative; flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red); cursor: pointer; }
+        .dr-custom.on { box-shadow: 0 0 0 3px var(--accent); }
+        .dr-custom input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; border: 0; padding: 0; }
+        .dr-custom span { font-size: .9rem; pointer-events: none; filter: drop-shadow(0 0 2px #fff); }
+        .dr-size-row input[type=range] { flex: 1; accent-color: var(--accent); }
+        .dr-dot-box { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; border: 1px solid var(--border); background: #fffdf6; }
+        .dr-dot { display: block; border-radius: 50%; background: #222; overflow: visible; }
+        .dr-sticker { flex: none; width: 44px; height: 44px; border-radius: 12px; border: 2px solid transparent; background: var(--surface-2); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+        .dr-sticker.on { border-color: var(--accent); background: var(--accent-soft); }
+        .dr-bgs { display: flex; justify-content: center; flex-wrap: wrap; gap: .35rem; }
+        .dr-bgbtn { display: flex; align-items: center; gap: .35rem; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: .22rem .65rem; font-size: .8rem; cursor: pointer; }
+        .dr-bgbtn i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #c9ccd6; display: inline-block; background-size: 6px 6px; }
+        .dr-bgbtn.on { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+        .dr-send-row { display: grid; gap: .5rem; }
+        .dr-close, .dr-full-off { display: none; }
+        /* Plein écran : le dessin prend toute la place, les outils se rangent sur le côté (paysage) ou en bas (portrait) */
+        html.dr-lock, html.dr-lock body { overflow: hidden; overscroll-behavior: none; }
+        .dr-editor.full { position: fixed; inset: 0; z-index: 1000; background: #1d2130; display: flex; flex-direction: column; gap: 0;
+          height: 100vh; height: 100dvh; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+        .dr-editor.full .dr-stage { flex: 1 1 auto; min-height: 0; padding: 8px; }
+        .dr-editor.full .dr-canvas { border-radius: 6px; border: 0; box-shadow: 0 4px 30px rgba(0,0,0,.5); }
+        .dr-editor.full .dr-tools { flex: none; background: var(--surface); padding: 8px 10px; max-height: 42vh; overflow-y: auto; gap: .45rem; }
+        .dr-editor.full .dr-close { display: grid; place-items: center; position: absolute; top: 12px; left: 12px; width: 40px; height: 40px; border-radius: 50%;
+          border: 0; background: rgba(17,24,39,.7); color: #fff; font-size: 1.1rem; cursor: pointer; }
+        @media (orientation: landscape) {
+          .dr-editor.full { flex-direction: row; }
+          .dr-editor.full .dr-tools { width: min(300px, 38vw); max-height: none; height: 100%; align-content: start; }
+          .dr-editor.full .dr-bar { flex-direction: column; align-items: stretch; }
+          .dr-editor.full .dr-modes, .dr-editor.full .dr-actions { justify-content: space-between; }
+          .dr-editor.full .dr-mode span { display: none; }
+          .dr-editor.full .dr-scroll { flex-wrap: wrap; overflow: visible; }
+        }
       </style>
       <script>
         (() => {
           const $ = (id) => document.getElementById(id);
-          const canvas = $("dr-canvas"), ctx = canvas.getContext("2d");
-          canvas.width = 1280;
-          canvas.height = Math.round(1280 * {{ frame_height }} / {{ frame_width }});
-          const BACKGROUNDS = { paper: "#fffdf6", slate: "#2f3b33", kraft: "#d9b98c" };
-          const DARK_BG = { slate: true };
-          const COLORS = ["#222222", "#ffffff", "#e53935", "#fb8c00", "#fdd835", "#43a047", "#1e88e5", "#8e24aa", "#ec407a", "#795548"];
-          const STICKERS = ["❤️", "😘", "😂", "🥰", "🎉", "🎂", "🎈", "🌞", "🌈", "⭐", "🌸", "🍀", "🐶", "🐱", "🦄", "👍", "🏖️", "⛄", "🎄", "🎃"];
-          let mode = "pen", background = "paper", color = COLORS[0], size = 10, sticker = STICKERS[0], current = null;
-          const ops = [];
-          const point = (e) => { const r = canvas.getBoundingClientRect(); return [(e.clientX - r.left) * canvas.width / r.width, (e.clientY - r.top) * canvas.height / r.height]; };
-          function stroke(op, from) {
-            ctx.lineCap = ctx.lineJoin = "round";
-            ctx.strokeStyle = op.erase ? BACKGROUNDS[background] : op.color;
-            ctx.lineWidth = op.size;
-            ctx.beginPath();
-            const pts = op.points;
-            const start = Math.max(0, from || 0);
-            ctx.moveTo(pts[start][0], pts[start][1]);
-            if (pts.length === 1) ctx.lineTo(pts[0][0] + 0.1, pts[0][1]);
-            for (let i = start + 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
-            ctx.stroke();
+          const ICON = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+          const ICON_FULL = ICON("M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"), ICON_EXIT = ICON("M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5");
+          const T = {
+            sticker: {{ _("Touchez le dessin pour poser l'autocollant")|tojson }},
+            text: {{ _("Touchez le dessin pour écrire un texte")|tojson }},
+            ask: {{ _("Texte à écrire sur le dessin :")|tojson }},
+            draft: {{ _("Votre dessin précédent a été retrouvé.")|tojson }},
+            empty: {{ _("Faites d'abord un dessin.")|tojson }},
+            failed: {{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }},
+            full: {{ _("Plein écran")|tojson }}, exit: {{ _("Quitter le plein écran")|tojson }},
+          };
+          const editor = $("dr-editor"), stage = $("dr-stage"), canvas = $("dr-canvas"), ctx = canvas.getContext("2d");
+          const W = 1600, H = Math.max(200, Math.round(1600 * {{ frame_height }} / {{ frame_width }}));
+          canvas.width = W; canvas.height = H;
+          const layer = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+          const ink = layer(W, H), work = layer(W, H), ictx = ink.getContext("2d"), wctx = work.getContext("2d");
+          const BACKGROUNDS = [
+            ["paper", {{ _('Papier')|tojson }}, "#fffdf6"], ["white", {{ _('Blanc')|tojson }}, "#ffffff"],
+            ["grid", {{ _('Quadrillage')|tojson }}, "#ffffff"], ["lines", {{ _('Cahier')|tojson }}, "#fffef9"],
+            ["kraft", {{ _('Kraft')|tojson }}, "#d9b98c"], ["slate", {{ _('Ardoise')|tojson }}, "#2f3b33"], ["night", {{ _('Nuit')|tojson }}, "#1b2240"],
+          ];
+          const DARK = { slate: true, night: true };
+          const COLORS = ["#222222", "#ffffff", "#e53935", "#fb8c00", "#fdd835", "#7cb342", "#43a047", "#00acc1", "#1e88e5", "#3949ab", "#8e24aa", "#ec407a", "#f8bbd0", "#795548", "#9e9e9e"];
+          const STICKERS = ["❤️", "😘", "😂", "🥰", "😎", "🤗", "🎉", "🎂", "🎁", "🎈", "🌞", "🌈", "⭐", "✨", "🌸", "🌻", "🍀", "🦋", "🐶", "🐱", "🐰", "🦄", "🐻", "👍", "👋", "💋", "🏖️", "⛄", "🎄", "🎃", "🍕", "🍰", "⚽", "🚗", "✈️", "🏠"];
+          let mode = "pen", background = "paper", color = COLORS[0], size = 10, sticker = STICKERS[0];
+          let ops = [], redo = [], current = null, pointerId = null, full = false, pushed = false;
+
+          // --- Dessin ---
+          const width = (op) => op.tool === "eraser" ? op.size * 3 : op.tool === "marker" ? op.size * 2.4 : op.size;
+          function strokePath(c, pts) {  // courbe lissée qui passe par le milieu des points successifs
+            c.beginPath();
+            c.moveTo(pts[0][0], pts[0][1]);
+            for (let i = 1; i < pts.length - 1; i++) {
+              c.quadraticCurveTo(pts[i][0], pts[i][1], (pts[i][0] + pts[i + 1][0]) / 2, (pts[i][1] + pts[i + 1][1]) / 2);
+            }
+            const last = pts[pts.length - 1];
+            c.lineTo(last[0], last[1]);
+            c.stroke();
           }
-          function draw(op) {
-            if (op.type === "stroke") return stroke(op);
-            ctx.font = `${op.size}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
-            ctx.textAlign = "center"; ctx.textBaseline = "middle";
-            ctx.fillText(op.emoji, op.x, op.y);
+          function paint(c, op) {
+            c.save();
+            if (op.type === "stroke") {
+              c.lineCap = c.lineJoin = "round";
+              c.strokeStyle = c.fillStyle = op.color;
+              if (op.tool === "eraser") { c.globalCompositeOperation = "destination-out"; c.strokeStyle = c.fillStyle = "#000"; }
+              if (op.tool === "marker") c.globalAlpha = 0.38;
+              const pts = op.points, w = width(op);
+              if (pts.length === 1) {
+                c.beginPath(); c.arc(pts[0][0], pts[0][1], w / 2, 0, Math.PI * 2); c.fill();
+              } else if (op.tool === "pen" && pts.some(p => p[2] !== 0.5)) {  // stylet : l'épaisseur suit la pression
+                for (let i = 1; i < pts.length; i++) {
+                  c.lineWidth = w * (0.3 + 1.4 * (pts[i - 1][2] + pts[i][2]) / 2);
+                  c.beginPath(); c.moveTo(pts[i - 1][0], pts[i - 1][1]); c.lineTo(pts[i][0], pts[i][1]); c.stroke();
+                }
+              } else {
+                c.lineWidth = w;
+                strokePath(c, pts);
+              }
+            } else if (op.type === "sticker") {
+              c.font = `${op.size}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+              c.textAlign = "center"; c.textBaseline = "middle";
+              c.fillText(op.emoji, op.x, op.y);
+            } else if (op.type === "text") {
+              c.font = `bold ${op.size}px "Bradley Hand","Segoe Print","Comic Sans MS","Chalkboard SE",cursive`;
+              c.textAlign = "center"; c.textBaseline = "middle"; c.fillStyle = op.color;
+              op.text.split("\n").forEach((line, i, all) => c.fillText(line, op.x, op.y + (i - (all.length - 1) / 2) * op.size * 1.15, W * 0.95));
+            }
+            c.restore();
           }
-          function redraw() {
-            ctx.fillStyle = BACKGROUNDS[background];
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ops.forEach(draw);
+          function paintBackground(c) {
+            const [, , base] = BACKGROUNDS.find(b => b[0] === background);
+            c.fillStyle = base; c.fillRect(0, 0, W, H);
+            c.save();
+            if (background === "grid") {
+              c.strokeStyle = "rgba(70,130,220,.22)"; c.lineWidth = 2;
+              const step = W / 32;
+              for (let x = step; x < W; x += step) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x, H); c.stroke(); }
+              for (let y = step; y < H; y += step) { c.beginPath(); c.moveTo(0, y); c.lineTo(W, y); c.stroke(); }
+            } else if (background === "lines") {
+              c.strokeStyle = "rgba(70,130,220,.3)"; c.lineWidth = 2;
+              const step = H / 14;
+              for (let y = step * 1.5; y < H; y += step) { c.beginPath(); c.moveTo(0, y); c.lineTo(W, y); c.stroke(); }
+              c.strokeStyle = "rgba(220,60,60,.45)"; c.beginPath(); c.moveTo(W * 0.08, 0); c.lineTo(W * 0.08, H); c.stroke();
+            } else if (background === "night") {
+              let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+              c.fillStyle = "rgba(255,255,255,.55)";
+              for (let i = 0; i < 90; i++) { c.beginPath(); c.arc(rnd() * W, rnd() * H, 0.8 + rnd() * 2.2, 0, Math.PI * 2); c.fill(); }
+            }
+            c.restore();
           }
+          const shown = () => { const i = ops.map(o => o.type).lastIndexOf("clear"); return ops.slice(i + 1); };
+          function rebuild() { ictx.clearRect(0, 0, W, H); shown().forEach(op => paint(ictx, op)); render(); }
+          function render() {
+            paintBackground(ctx);
+            if (current) {
+              wctx.clearRect(0, 0, W, H); wctx.drawImage(ink, 0, 0); paint(wctx, current); ctx.drawImage(work, 0, 0);
+            } else {
+              ctx.drawImage(ink, 0, 0);
+            }
+          }
+          let frame = 0;
+          const schedule = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; render(); }); };
+          function commit(op) {
+            ops.push(op); redo = [];
+            if (op.type === "clear") ictx.clearRect(0, 0, W, H); else paint(ictx, op);
+            render(); saveDraft(); refresh();
+          }
+
+          // --- Brouillon (gardé dans ce téléphone si la page se recharge) ---
+          const DRAFT = "pimmich-drawing-draft";
+          let draftTimer = 0;
+          function saveDraft() {
+            clearTimeout(draftTimer);
+            draftTimer = setTimeout(() => {
+              try { localStorage.setItem(DRAFT, JSON.stringify({ background, ops: shown(), w: W, h: H })); } catch (e) { /* stockage indisponible */ }
+            }, 400);
+          }
+          function loadDraft() {
+            try {
+              const d = JSON.parse(localStorage.getItem(DRAFT) || "null");
+              if (d && d.w === W && d.h === H && Array.isArray(d.ops) && d.ops.length) {
+                ops = d.ops; if (BACKGROUNDS.some(b => b[0] === d.background)) background = d.background;
+                return true;
+              }
+            } catch (e) { /* brouillon illisible : on repart de zéro */ }
+            return false;
+          }
+          const dropDraft = () => { try { localStorage.removeItem(DRAFT); } catch (e) { /* rien */ } };
+
+          // --- Outils ---
           function selectColor(c) {
             color = c;
             document.querySelectorAll(".dr-color").forEach(o => o.classList.toggle("on", o.dataset.color === c));
+            $("dr-custom").parentElement.classList.toggle("on", !COLORS.includes(c));
+            refresh();
           }
           COLORS.forEach(c => {
             const b = document.createElement("button"); b.type = "button"; b.className = "dr-color"; b.style.background = c; b.dataset.color = c;
             b.setAttribute("aria-label", c);
-            b.addEventListener("click", () => { selectColor(c); setMode("pen"); });
+            b.addEventListener("click", () => { selectColor(c); if (mode === "sticker" || mode === "eraser") setMode("pen"); });
             $("dr-colors").appendChild(b);
           });
+          $("dr-custom").addEventListener("input", (e) => { selectColor(e.target.value); if (mode === "sticker" || mode === "eraser") setMode("pen"); });
           STICKERS.forEach(emoji => {
             const b = document.createElement("button"); b.type = "button"; b.className = "dr-sticker"; b.textContent = emoji;
             b.addEventListener("click", () => { sticker = emoji; refresh(); });
             $("dr-stickers").appendChild(b);
           });
+          BACKGROUNDS.forEach(([key, label, base]) => {
+            const b = document.createElement("button"); b.type = "button"; b.className = "dr-bgbtn"; b.dataset.bg = key;
+            const dot = document.createElement("i"); dot.style.backgroundColor = base;
+            if (key === "grid") dot.style.backgroundImage = "linear-gradient(rgba(70,130,220,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(70,130,220,.5) 1px, transparent 1px)";
+            if (key === "lines") dot.style.backgroundImage = "linear-gradient(rgba(70,130,220,.6) 1px, transparent 1px)";
+            b.append(dot, label);
+            b.addEventListener("click", () => {
+              background = key;
+              // Une couleur qui se voit sur le fond choisi (noir sur l'ardoise, blanc sur le papier : invisibles)
+              if (DARK[background] && color === "#222222") selectColor("#ffffff");
+              if (!DARK[background] && color === "#ffffff") selectColor("#222222");
+              refresh(); render(); saveDraft();
+            });
+            $("dr-bgs").appendChild(b);
+          });
+          const stickerSize = () => W * (0.04 + size / 40 * 0.14);
+          const textSize = () => W * (0.025 + size / 40 * 0.07);
           function setMode(next) { mode = next; refresh(); }
           function refresh() {
             document.querySelectorAll(".dr-mode").forEach(b => b.classList.toggle("on", b.dataset.mode === mode));
             document.querySelectorAll(".dr-sticker").forEach(b => b.classList.toggle("on", b.textContent === sticker));
-            $("dr-pen-panel").hidden = mode === "sticker";
+            document.querySelectorAll(".dr-bgbtn").forEach(b => b.classList.toggle("on", b.dataset.bg === background));
+            $("dr-color-panel").hidden = mode === "sticker" || mode === "eraser";
             $("dr-sticker-panel").hidden = mode !== "sticker";
-            $("dr-hint").hidden = mode !== "sticker";
+            $("dr-hint").hidden = !(mode === "sticker" || mode === "text");
+            $("dr-hint").textContent = mode === "text" ? T.text : T.sticker;
+            $("dr-undo").disabled = !ops.length; $("dr-redo").disabled = !redo.length;
+            // Aperçu de l'épaisseur à l'échelle de l'écran
+            const scale = canvas.getBoundingClientRect().width / W || 0.3;
+            const px = mode === "sticker" ? stickerSize() * 0.8 : mode === "text" ? textSize() : width({ tool: mode, size });
+            const dot = $("dr-dot"), d = Math.max(3, Math.min(40, px * scale));
+            dot.style.width = dot.style.height = d + "px";
+            dot.style.background = mode === "eraser" ? "repeating-conic-gradient(#bbb 0 25%, #fff 0 50%) 0 0/8px 8px" : color;
+            dot.style.opacity = mode === "marker" ? 0.45 : 1;
+            dot.style.borderRadius = mode === "text" ? "4px" : "50%";
+            dot.textContent = mode === "sticker" ? sticker : "";
+            if (mode === "sticker") { dot.style.background = "none"; dot.style.width = dot.style.height = "auto"; dot.style.fontSize = Math.max(12, Math.min(34, d)) + "px"; dot.style.lineHeight = "1"; }
           }
           document.querySelectorAll(".dr-mode").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
-          document.querySelectorAll(".dr-size").forEach(b => b.addEventListener("click", () => {
-            size = Number(b.dataset.size); document.querySelectorAll(".dr-size").forEach(o => o.classList.toggle("on", o === b));
-          }));
-          document.querySelectorAll(".dr-bgbtn").forEach(b => b.addEventListener("click", () => {
-            background = b.dataset.bg;
-            document.querySelectorAll(".dr-bgbtn").forEach(o => o.classList.toggle("on", o === b));
-            // Une couleur qui se voit sur le fond choisi (noir sur l'ardoise, blanc sur le papier : invisibles)
-            if (DARK_BG[background] && color === "#222222") selectColor("#ffffff");
-            if (!DARK_BG[background] && color === "#ffffff") selectColor("#222222");
-            redraw();
-          }));
-          $("dr-undo").addEventListener("click", () => { ops.pop(); redraw(); });
-          $("dr-clear").addEventListener("click", () => { ops.length = 0; redraw(); });
+          $("dr-size").addEventListener("input", (e) => { size = Number(e.target.value); refresh(); });
+          $("dr-undo").addEventListener("click", () => { if (ops.length) { redo.push(ops.pop()); rebuild(); saveDraft(); refresh(); } });
+          $("dr-redo").addEventListener("click", () => { if (redo.length) { ops.push(redo.pop()); rebuild(); saveDraft(); refresh(); } });
+          $("dr-clear").addEventListener("click", () => { if (shown().length) commit({ type: "clear" }); });
+          document.addEventListener("keydown", (e) => {
+            if (!full && !editor.contains(document.activeElement)) return;
+            if (e.target && e.target.id === "dr-signature") return;
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") { e.preventDefault(); $(e.shiftKey ? "dr-redo" : "dr-undo").click(); }
+            if (e.key === "Escape" && full) closeFull();
+          });
+
+          // --- Doigt, souris ou stylet ---
+          const point = (e) => {
+            const r = canvas.getBoundingClientRect();
+            const pressure = e.pointerType === "pen" && e.pressure > 0 ? e.pressure : 0.5;
+            return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * H / r.height, Math.round(pressure * 100) / 100];
+          };
           canvas.addEventListener("pointerdown", (e) => {
             e.preventDefault();
+            if (pointerId !== null) return;  // un second doigt (ou la paume) ne dessine pas
             const [x, y] = point(e);
-            if (mode === "sticker") { ops.push({ type: "sticker", emoji: sticker, x, y, size: canvas.width * 0.09 }); redraw(); return; }
-            current = { type: "stroke", color, size: mode === "eraser" ? size * 3 : size, erase: mode === "eraser", points: [[x, y]] };
+            if (mode === "sticker") { commit({ type: "sticker", emoji: sticker, x, y, size: stickerSize() }); return; }
+            if (mode === "text") {
+              const text = (window.prompt(T.ask) || "").trim().slice(0, 120);
+              if (text) commit({ type: "text", text, x, y, size: textSize(), color });
+              return;
+            }
+            pointerId = e.pointerId;
+            current = { type: "stroke", tool: mode, color, size, points: [point(e)] };
             canvas.setPointerCapture(e.pointerId);
-            stroke(current);
+            schedule();
           });
           canvas.addEventListener("pointermove", (e) => {
-            if (!current) return;
-            current.points.push(point(e));
-            stroke(current, current.points.length - 2);
+            if (!current || e.pointerId !== pointerId) return;
+            const events = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+            (events.length ? events : [e]).forEach(ev => {
+              const p = point(ev), last = current.points[current.points.length - 1];
+              if (Math.hypot(p[0] - last[0], p[1] - last[1]) >= 1.5) current.points.push(p);
+            });
+            schedule();
           });
-          const finish = () => { if (current) { ops.push(current); current = null; } };
+          const finish = (e) => {
+            if (!current || e.pointerId !== pointerId) return;
+            const op = current; current = null; pointerId = null;
+            commit(op);
+          };
           canvas.addEventListener("pointerup", finish);
           canvas.addEventListener("pointercancel", finish);
-          selectColor(color);
-          refresh();
-          redraw();
+
+          // --- Plein écran ---
+          function fit() {
+            $("dr-rotate").hidden = !(full && W > H && window.innerHeight > window.innerWidth);
+            if (!full) { canvas.style.width = "100%"; canvas.style.height = "auto"; refresh(); return; }
+            const box = stage.getBoundingClientRect(), pad = 16;
+            const scale = Math.min((box.width - pad) / W, (box.height - pad) / H);
+            canvas.style.width = Math.max(50, W * scale) + "px"; canvas.style.height = Math.max(30, H * scale) + "px";
+            refresh();
+          }
+          const fullscreenElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+          function setFull(on) {
+            full = on;
+            editor.classList.toggle("full", on);
+            document.documentElement.classList.toggle("dr-lock", on);
+            $("dr-full").innerHTML = on ? ICON_EXIT : ICON_FULL;
+            $("dr-full").title = $("dr-full").ariaLabel = on ? T.exit : T.full;
+            requestAnimationFrame(fit);
+          }
+          function openFull() {
+            setFull(true);
+            try { history.pushState({ drawing: true }, ""); pushed = true; } catch (e) { pushed = false; }
+            const request = editor.requestFullscreen || editor.webkitRequestFullscreen;
+            if (request) {
+              Promise.resolve(request.call(editor)).then(() => {
+                if (screen.orientation && screen.orientation.lock) screen.orientation.lock(W > H ? "landscape" : "portrait").catch(() => {});
+              }).catch(() => {});  // iPhone : pas de plein écran pour une page, la zone couvre quand même tout l'écran
+            }
+          }
+          function closeFull(fromHistory) {
+            if (!full) return;
+            setFull(false);
+            if (fullscreenElement()) { const exit = document.exitFullscreen || document.webkitExitFullscreen; Promise.resolve(exit.call(document)).catch(() => {}); }
+            if (pushed && !fromHistory) { pushed = false; history.back(); }
+            pushed = false;
+          }
+          $("dr-full").addEventListener("click", () => full ? closeFull() : openFull());
+          $("dr-close").addEventListener("click", () => closeFull());
+          window.addEventListener("popstate", () => { if (full) { pushed = false; closeFull(true); } });  // bouton retour du téléphone
+          ["fullscreenchange", "webkitfullscreenchange"].forEach(ev => document.addEventListener(ev, () => { if (!fullscreenElement() && full) closeFull(); }));
+          window.addEventListener("resize", () => requestAnimationFrame(fit));
+
+          // --- Envoi ---
           $("dr-send").addEventListener("click", () => {
             const status = (t, ok) => { $("dr-status").textContent = t; $("dr-status").className = "status " + (ok ? "ok" : "err"); };
-            const visible = ops.some(op => op.type === "sticker" || (!op.erase && op.color !== BACKGROUNDS[background]));
-            if (!visible) { status({{ _("Faites d'abord un dessin.")|tojson }}, false); return; }
+            const visible = shown().some(op => op.type !== "stroke" || (op.tool !== "eraser" && op.color !== BACKGROUNDS.find(b => b[0] === background)[2]));
+            if (!visible) { status(T.empty, false); return; }
             $("dr-send").disabled = true;
+            render();
             canvas.toBlob(async (blob) => {
               const form = new FormData();
               form.append("drawing", blob, "dessin.png");
@@ -352,14 +578,21 @@
               try {
                 const r = await (await fetch("{{ url_for('guest_drawing_publish') }}", { method: "POST", body: form })).json();
                 status(r.message, r.success);
-                if (r.success) { ops.length = 0; redraw(); }
+                if (r.success) { ops = []; redo = []; rebuild(); dropDraft(); refresh(); closeFull(); }
               } catch (err) {
-                status({{ _("Échec de l'envoi. Vérifiez la connexion au cadre.")|tojson }}, false);
+                status(T.failed, false);
               } finally {
                 $("dr-send").disabled = false;
               }
             }, "image/png");
           });
+
+          $("dr-full").innerHTML = ICON_FULL;
+          const restored = loadDraft();
+          selectColor(color);
+          rebuild();
+          refresh();
+          if (restored) { $("dr-status").textContent = T.draft; $("dr-status").className = "status ok"; }
         })();
       </script>
     {% endif %}

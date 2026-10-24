@@ -73,3 +73,31 @@ def test_wide_photo_preparation_keeps_the_face(sandbox, monkeypatch, tmp_path):
     with Image.open(dest) as out:
         reds = [x for x in range(out.width) if out.getpixel((x, 140))[0] > 200 and out.getpixel((x, 140))[2] < 80]
     assert reds, "le visage doit rester dans l'image"
+
+
+def test_huge_jpeg_is_decoded_reduced_without_warning(monkeypatch, tmp_path, recwarn):
+    """Photo de très grande taille (panorama, 100 Mpx et plus) : décodée réduite, sans alerte « bombe »."""
+    import warnings
+    from PIL import Image as PILImage
+    from utils import prepare_all_photos
+    monkeypatch.setattr(prepare_all_photos, "load_config", lambda: {"smart_crop": False})
+    monkeypatch.setattr(PILImage, "MAX_IMAGE_PIXELS", 1_000_000)  # 1200×1000 joue le rôle d'une photo géante
+    big = tmp_path / "big.jpg"
+    Image.new("RGB", (1200, 1000), (200, 120, 40)).save(big, quality=80)
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", PILImage.DecompressionBombWarning)
+        image = prepare_all_photos.open_for_screen(str(big), 360)
+        assert image.size == (600, 500)  # 1/2 : jamais sous la hauteur de l'écran
+        prepare_all_photos.prepare_photo(str(big), str(tmp_path / "out.jpg"), 640, 360)
+    with Image.open(tmp_path / "out.jpg") as out:
+        assert out.size == (640, 360)
+    # Les autres formats (non décodables réduits) gardent la protection
+    png = tmp_path / "big.png"
+    Image.new("RGB", (1200, 1000)).save(png)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        try:
+            prepare_all_photos.open_for_screen(str(png), 360)
+            raise AssertionError("image trop grande acceptée")
+        except ValueError:
+            pass

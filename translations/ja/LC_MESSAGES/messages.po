@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-24 22:12+0200\n"
+"POT-Creation-Date: 2026-10-24 22:27+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -653,12 +653,13 @@ msgstr "文字色"
 
 #: frontend/src/components/CaptionEditor.vue:145
 #: templates/configure/tab_legendes.html.jinja:206
+#: templates/upload.html.jinja:212
 msgid "Autre couleur"
 msgstr "その他の色"
 
 #: frontend/src/components/CaptionEditor.vue:147
 #: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:211
+#: templates/upload.html.jinja:220
 msgid "Fond"
 msgstr "背景"
 
@@ -730,7 +731,7 @@ msgstr "全体のスタイルに戻す"
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:198
+#: templates/upload.html.jinja:204
 msgid "Annuler"
 msgstr "キャンセル"
 
@@ -917,7 +918,8 @@ msgid "Carte postale"
 msgstr "ポストカード"
 
 #: frontend/src/components/QuoteCard.vue:15
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:30
+#: templates/configure/tab_messages.html.jinja:245
+#: templates/upload.html.jinja:309 utils/message_renderer.py:30
 msgid "Nuit"
 msgstr "ナイト"
 
@@ -928,7 +930,7 @@ msgstr "パステル"
 
 #: frontend/src/components/QuoteCard.vue:15
 #: templates/configure/tab_messages.html.jinja:245
-#: templates/upload.html.jinja:213 utils/message_renderer.py:40
+#: templates/upload.html.jinja:309 utils/message_renderer.py:40
 msgid "Ardoise"
 msgstr "黒板"
 
@@ -2741,6 +2743,7 @@ msgstr "赤"
 
 #: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:116
+#: templates/upload.html.jinja:307
 msgid "Blanc"
 msgstr "白"
 
@@ -6391,7 +6394,7 @@ msgid "Les photos seront soumises à validation avant d'être affichées."
 msgstr "写真は表示される前に検証の対象となります。"
 
 #: templates/upload.html.jinja:93 templates/upload.html.jinja:107
-#: templates/upload.html.jinja:132 templates/upload.html.jinja:216
+#: templates/upload.html.jinja:132 templates/upload.html.jinja:222
 msgid "Votre prénom (optionnel)"
 msgstr "お名前（任意）"
 
@@ -6440,8 +6443,8 @@ msgid "Recommencer"
 msgstr "録り直す"
 
 #: templates/configure/tab_accueil.html.jinja:335
-#: templates/upload.html.jinja:177 templates/upload.html.jinja:357
-#: templates/upload.html.jinja:408 templates/upload.html.jinja:445
+#: templates/upload.html.jinja:177 templates/upload.html.jinja:298
+#: templates/upload.html.jinja:639 templates/upload.html.jinja:676
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr "送信に失敗しました。フォトフレームへの接続を確認してください。"
 
@@ -6450,82 +6453,124 @@ msgid "Faire un dessin pour le cadre"
 msgstr "フレームに絵を描く"
 
 #: templates/upload.html.jinja:186
-msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
-msgstr "指で描いてスタンプを貼り、送信してください。"
+msgid ""
+"Dessinez avec le doigt, ajoutez des autocollants ou du texte, puis "
+"envoyez. Le bouton plein écran agrandit la zone de dessin."
+msgstr "指で描いて、ステッカーや文字を追加して送信します。全画面ボタンで描く場所が大きくなります。"
 
-#: templates/upload.html.jinja:189
-msgid "Touchez le dessin pour poser l'autocollant"
-msgstr "絵をタップしてステッカーを貼ります"
+#: templates/upload.html.jinja:191
+msgid "Tournez le téléphone pour dessiner en grand"
+msgstr "スマートフォンを横にすると大きく描けます"
 
-#: templates/upload.html.jinja:193
+#: templates/upload.html.jinja:192 templates/upload.html.jinja:299
+msgid "Quitter le plein écran"
+msgstr "全画面を終了"
+
+#: templates/upload.html.jinja:197
 msgid "Crayon"
 msgstr "ペン"
 
-#: templates/upload.html.jinja:194
+#: templates/upload.html.jinja:198
+msgid "Feutre fluo"
+msgstr "蛍光ペン"
+
+#: templates/upload.html.jinja:198
+msgid "Fluo"
+msgstr "蛍光"
+
+#: templates/upload.html.jinja:199
+msgid "Texte"
+msgstr "文字"
+
+#: templates/upload.html.jinja:200
 msgid "Autocollants"
 msgstr "ステッカー"
 
-#: templates/upload.html.jinja:195
+#: templates/upload.html.jinja:201
 msgid "Gomme"
 msgstr "消しゴム"
 
-#: templates/upload.html.jinja:199
+#: templates/upload.html.jinja:205
+msgid "Rétablir"
+msgstr "やり直し"
+
+#: templates/upload.html.jinja:206
 msgid "Tout effacer"
 msgstr "すべて消す"
 
-#: templates/upload.html.jinja:205
-msgid "Trait fin"
-msgstr "細い線"
+#: templates/upload.html.jinja:207 templates/upload.html.jinja:299
+msgid "Plein écran"
+msgstr "全画面"
 
-#: templates/upload.html.jinja:206
-msgid "Trait moyen"
-msgstr "普通の線"
+#: templates/upload.html.jinja:216
+msgid "Épaisseur"
+msgstr "太さ"
 
-#: templates/upload.html.jinja:207
-msgid "Trait épais"
-msgstr "太い線"
-
-#: templates/upload.html.jinja:212
-msgid "Papier"
-msgstr "紙"
-
-#: templates/upload.html.jinja:214
-msgid "Kraft"
-msgstr "クラフト紙"
-
-#: templates/upload.html.jinja:217
+#: templates/upload.html.jinja:223
 msgid "Envoyer le dessin"
 msgstr "絵を送る"
 
-#: templates/upload.html.jinja:346
+#: templates/upload.html.jinja:293
+msgid "Touchez le dessin pour poser l'autocollant"
+msgstr "絵をタップしてステッカーを貼ります"
+
+#: templates/upload.html.jinja:294
+msgid "Touchez le dessin pour écrire un texte"
+msgstr "絵をタップして文字を書きます"
+
+#: templates/upload.html.jinja:295
+msgid "Texte à écrire sur le dessin :"
+msgstr "絵に書く文字："
+
+#: templates/upload.html.jinja:296
+msgid "Votre dessin précédent a été retrouvé."
+msgstr "前回の絵を復元しました。"
+
+#: templates/upload.html.jinja:297
 msgid "Faites d'abord un dessin."
 msgstr "まず絵を描いてください。"
 
-#: templates/upload.html.jinja:369
+#: templates/upload.html.jinja:307
+msgid "Papier"
+msgstr "紙"
+
+#: templates/upload.html.jinja:308
+msgid "Quadrillage"
+msgstr "方眼"
+
+#: templates/upload.html.jinja:308
+msgid "Cahier"
+msgstr "ノート"
+
+#: templates/upload.html.jinja:309
+msgid "Kraft"
+msgstr "クラフト紙"
+
+#: templates/upload.html.jinja:600
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "このページをスマートフォンのホーム画面に追加"
 
-#: templates/upload.html.jinja:371
+#: templates/upload.html.jinja:602
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr "Safari で共有ボタンをタップし、「ホーム画面に追加」を選択します。"
 
-#: templates/upload.html.jinja:372
+#: templates/upload.html.jinja:603
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "Chrome でメニュー ⋮ を開き、「ホーム画面に追加」を選択します。"
 
-#: templates/upload.html.jinja:374
+#: templates/upload.html.jinja:605
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich がアプリとして、このページから直接開くようになります。"
 
-#: templates/upload.html.jinja:379
+#: templates/upload.html.jinja:610
 msgid "Connexion administrateur"
 msgstr "管理者ログイン"
 
-#: templates/upload.html.jinja:428
+#: templates/upload.html.jinja:659
 msgid "fichier(s) en cours d'envoi..."
 msgstr "件のファイルを送信中..."
 
-#: templates/upload.html.jinja:439
+#: templates/upload.html.jinja:670
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "送信サイズが大きすぎます。一度に送信するファイル数を減らしてください。"
 

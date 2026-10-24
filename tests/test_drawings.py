@@ -89,3 +89,9 @@ def test_drawing_in_every_composition(monkeypatch, tmp_path):
         if style in compositions.FORMATS:
             image = compositions.FORMATS[style][4](photos[:3], message, 1280, 720, random.Random(1))
             assert image.size == (1280, 720)
+
+
+def test_drawing_editor_has_fullscreen_and_new_tools(client, sandbox, monkeypatch):
+    html = client.get("/upload").get_data(as_text=True)
+    for marker in ('id="dr-full"', 'id="dr-redo"', 'data-mode="marker"', 'data-mode="text"', 'id="dr-size"', 'id="dr-custom"', "requestFullscreen"):
+        assert marker in html, marker

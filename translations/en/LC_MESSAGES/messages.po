@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-24 22:12+0200\n"
+"POT-Creation-Date: 2026-10-24 22:27+0200\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -658,12 +658,13 @@ msgstr "Text colour"
 
 #: frontend/src/components/CaptionEditor.vue:145
 #: templates/configure/tab_legendes.html.jinja:206
+#: templates/upload.html.jinja:212
 msgid "Autre couleur"
 msgstr "Other colour"
 
 #: frontend/src/components/CaptionEditor.vue:147
 #: templates/configure/tab_legendes.html.jinja:75
-#: templates/upload.html.jinja:211
+#: templates/upload.html.jinja:220
 msgid "Fond"
 msgstr "Background"
 
@@ -735,7 +736,7 @@ msgstr "Use the general style"
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
-#: templates/upload.html.jinja:198
+#: templates/upload.html.jinja:204
 msgid "Annuler"
 msgstr "Cancel"
 
@@ -928,7 +929,8 @@ msgid "Carte postale"
 msgstr "Postcard"
 
 #: frontend/src/components/QuoteCard.vue:15
-#: templates/configure/tab_messages.html.jinja:245 utils/message_renderer.py:30
+#: templates/configure/tab_messages.html.jinja:245
+#: templates/upload.html.jinja:309 utils/message_renderer.py:30
 msgid "Nuit"
 msgstr "Night"
 
@@ -939,7 +941,7 @@ msgstr "Pastel"
 
 #: frontend/src/components/QuoteCard.vue:15
 #: templates/configure/tab_messages.html.jinja:245
-#: templates/upload.html.jinja:213 utils/message_renderer.py:40
+#: templates/upload.html.jinja:309 utils/message_renderer.py:40
 msgid "Ardoise"
 msgstr "Chalkboard"
 
@@ -2796,6 +2798,7 @@ msgstr "Red"
 
 #: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:116
+#: templates/upload.html.jinja:307
 msgid "Blanc"
 msgstr "White"
 
@@ -6567,7 +6570,7 @@ msgid "Les photos seront soumises à validation avant d'être affichées."
 msgstr "Photos will be subject to validation before being displayed."
 
 #: templates/upload.html.jinja:93 templates/upload.html.jinja:107
-#: templates/upload.html.jinja:132 templates/upload.html.jinja:216
+#: templates/upload.html.jinja:132 templates/upload.html.jinja:222
 msgid "Votre prénom (optionnel)"
 msgstr "Your first name (optional)"
 
@@ -6618,8 +6621,8 @@ msgid "Recommencer"
 msgstr "Record again"
 
 #: templates/configure/tab_accueil.html.jinja:335
-#: templates/upload.html.jinja:177 templates/upload.html.jinja:357
-#: templates/upload.html.jinja:408 templates/upload.html.jinja:445
+#: templates/upload.html.jinja:177 templates/upload.html.jinja:298
+#: templates/upload.html.jinja:639 templates/upload.html.jinja:676
 msgid "Échec de l'envoi. Vérifiez la connexion au cadre."
 msgstr "Upload failed. Check the connection to the frame."
 
@@ -6628,82 +6631,126 @@ msgid "Faire un dessin pour le cadre"
 msgstr "Draw something for the frame"
 
 #: templates/upload.html.jinja:186
-msgid "Dessinez avec le doigt, ajoutez des autocollants, puis envoyez."
-msgstr "Draw with your finger, add stickers, then send."
+msgid ""
+"Dessinez avec le doigt, ajoutez des autocollants ou du texte, puis "
+"envoyez. Le bouton plein écran agrandit la zone de dessin."
+msgstr ""
+"Draw with your finger, add stickers or text, then send. The full-screen "
+"button enlarges the drawing area."
 
-#: templates/upload.html.jinja:189
-msgid "Touchez le dessin pour poser l'autocollant"
-msgstr "Tap the drawing to place the sticker"
+#: templates/upload.html.jinja:191
+msgid "Tournez le téléphone pour dessiner en grand"
+msgstr "Turn your phone sideways for a bigger drawing area"
 
-#: templates/upload.html.jinja:193
+#: templates/upload.html.jinja:192 templates/upload.html.jinja:299
+msgid "Quitter le plein écran"
+msgstr "Exit full screen"
+
+#: templates/upload.html.jinja:197
 msgid "Crayon"
 msgstr "Pen"
 
-#: templates/upload.html.jinja:194
+#: templates/upload.html.jinja:198
+msgid "Feutre fluo"
+msgstr "Highlighter"
+
+#: templates/upload.html.jinja:198
+msgid "Fluo"
+msgstr "Highlighter"
+
+#: templates/upload.html.jinja:199
+msgid "Texte"
+msgstr "Text"
+
+#: templates/upload.html.jinja:200
 msgid "Autocollants"
 msgstr "Stickers"
 
-#: templates/upload.html.jinja:195
+#: templates/upload.html.jinja:201
 msgid "Gomme"
 msgstr "Eraser"
 
-#: templates/upload.html.jinja:199
+#: templates/upload.html.jinja:205
+msgid "Rétablir"
+msgstr "Redo"
+
+#: templates/upload.html.jinja:206
 msgid "Tout effacer"
 msgstr "Clear all"
 
-#: templates/upload.html.jinja:205
-msgid "Trait fin"
-msgstr "Thin line"
+#: templates/upload.html.jinja:207 templates/upload.html.jinja:299
+msgid "Plein écran"
+msgstr "Full screen"
 
-#: templates/upload.html.jinja:206
-msgid "Trait moyen"
-msgstr "Medium line"
+#: templates/upload.html.jinja:216
+msgid "Épaisseur"
+msgstr "Thickness"
 
-#: templates/upload.html.jinja:207
-msgid "Trait épais"
-msgstr "Thick line"
-
-#: templates/upload.html.jinja:212
-msgid "Papier"
-msgstr "Paper"
-
-#: templates/upload.html.jinja:214
-msgid "Kraft"
-msgstr "Kraft paper"
-
-#: templates/upload.html.jinja:217
+#: templates/upload.html.jinja:223
 msgid "Envoyer le dessin"
 msgstr "Send drawing"
 
-#: templates/upload.html.jinja:346
+#: templates/upload.html.jinja:293
+msgid "Touchez le dessin pour poser l'autocollant"
+msgstr "Tap the drawing to place the sticker"
+
+#: templates/upload.html.jinja:294
+msgid "Touchez le dessin pour écrire un texte"
+msgstr "Tap the drawing to write some text"
+
+#: templates/upload.html.jinja:295
+msgid "Texte à écrire sur le dessin :"
+msgstr "Text to write on the drawing:"
+
+#: templates/upload.html.jinja:296
+msgid "Votre dessin précédent a été retrouvé."
+msgstr "Your previous drawing has been restored."
+
+#: templates/upload.html.jinja:297
 msgid "Faites d'abord un dessin."
 msgstr "Draw something first."
 
-#: templates/upload.html.jinja:369
+#: templates/upload.html.jinja:307
+msgid "Papier"
+msgstr "Paper"
+
+#: templates/upload.html.jinja:308
+msgid "Quadrillage"
+msgstr "Grid"
+
+#: templates/upload.html.jinja:308
+msgid "Cahier"
+msgstr "Notebook"
+
+#: templates/upload.html.jinja:309
+msgid "Kraft"
+msgstr "Kraft paper"
+
+#: templates/upload.html.jinja:600
 msgid "Ajouter cette page à l'écran d'accueil du téléphone"
 msgstr "Add this page to your phone's home screen"
 
-#: templates/upload.html.jinja:371
+#: templates/upload.html.jinja:602
 msgid "dans Safari, touchez le bouton Partager puis « Sur l'écran d'accueil »."
 msgstr "in Safari, tap the Share button, then « Add to Home Screen »."
 
-#: templates/upload.html.jinja:372
+#: templates/upload.html.jinja:603
 msgid "dans Chrome, ouvrez le menu ⋮ puis « Ajouter à l'écran d'accueil »."
 msgstr "in Chrome, open the ⋮ menu, then « Add to Home screen »."
 
-#: templates/upload.html.jinja:374
+#: templates/upload.html.jinja:605
 msgid "Pimmich s'ouvrira alors comme une application, directement sur cette page."
 msgstr "Pimmich will then open like an app, directly on this page."
 
-#: templates/upload.html.jinja:379
+#: templates/upload.html.jinja:610
 msgid "Connexion administrateur"
 msgstr "Administrator login"
 
-#: templates/upload.html.jinja:428
+#: templates/upload.html.jinja:659
 msgid "fichier(s) en cours d'envoi..."
 msgstr "file(s) uploading..."
 
-#: templates/upload.html.jinja:439
+#: templates/upload.html.jinja:670
 msgid "Envoi trop volumineux : envoyez moins de fichiers à la fois."
 msgstr "Upload too large: send fewer files at a time."
 

@@ -154,6 +154,26 @@ def get_pi_model():
         return None
     return None
 
+def open_for_screen(source_path, output_height):
+    """
+    Ouvre une photo pour la préparer. Les très grandes photos JPEG (panoramas, appareils de 100 mégapixels et plus)
+    sont décodées directement à 1/2, 1/4 ou 1/8 de leur taille, sans descendre sous la hauteur de l'écran : bien
+    moins de mémoire (le Raspberry Pi 3 n'a que 1 Go) et de temps. Pillow signale ces photos comme de possibles
+    « bombes de décompression » : c'est sans objet pour un JPEG décodé réduit ; les autres formats gardent la limite.
+    """
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", Image.DecompressionBombWarning)
+        img = Image.open(source_path)
+    if img.format == "JPEG":
+        side = max(1, int(output_height))  # les deux côtés : la photo peut encore être tournée (EXIF)
+        img.draft("RGB", (side, side))
+    elif img.width * img.height > (Image.MAX_IMAGE_PIXELS or float("inf")):
+        img.close()
+        raise ValueError(f"image trop grande ({img.width}×{img.height}) pour être préparée")
+    return img
+
+
 def prepare_photo(source_path, dest_path, output_width, output_height, source_type=None, caption=None):
     """Prépare une photo pour l'affichage avec redimensionnement, rotation EXIF et fond flou."""
     config = load_config()
@@ -169,7 +189,7 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
                 logger.warning(f"Support HEIF désactivé (pillow-heif non installé). Impossible de traiter {source_path}")
                 return None
         
-        img = Image.open(source_path)
+        img = open_for_screen(source_path, output_height)
         
         # Modification Sigalou 25/01/2026 - Suppression de la lecture EXIF redondante
         # Les métadonnées sont déjà dans le JSON créé par download_album.py
