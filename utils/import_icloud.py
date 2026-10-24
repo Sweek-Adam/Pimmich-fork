@@ -96,7 +96,7 @@ def _filename(token, item):
     """Nom local stable d'un élément (même élément = même nom d'un import à l'autre)."""
     path = item["url"].split("?", 1)[0]
     ext = Path(path).suffix.lower()
-    if ext not in (".jpg", ".jpeg", ".png", ".heic", ".mp4", ".mov"):
+    if ext not in (".jpg", ".jpeg", ".png", ".gif", ".heic", ".mp4", ".mov"):
         ext = ".mp4" if item["video"] else ".jpg"
     guid = re.sub(r"[^A-Za-z0-9]", "", item["guid"])[:24]
     return f"{token[:8]}_{guid}{ext}"

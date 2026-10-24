@@ -699,7 +699,7 @@ def upload_share():
         staged = path.with_name(f"whatsapp_{int(time.time())}.zip")
         path.replace(staged)
         threading.Thread(target=run_whatsapp_import, args=(staged,), daemon=True).start()
-    media = [f for f in files if Path(f.filename).suffix.lower() in (".jpg", ".jpeg", ".png", ".heic") + VIDEO_EXTENSIONS]
+    media = [f for f in files if Path(f.filename).suffix.lower() in (".jpg", ".jpeg", ".png", ".gif", ".heic") + VIDEO_EXTENSIONS]
     if media:
         target = BASE_DIR / "static" / "photos" / "whatsapp"
         target.mkdir(parents=True, exist_ok=True)
@@ -847,7 +847,7 @@ def my_uploads_delete_api(name):
     removed = 0
     for folder in (PREPARED_DIR / source, BASE_DIR / "static" / "photos" / source, BASE_DIR / "static" / ".backups" / source):
         for f in folder.glob(f"{stem}*") if folder.is_dir() else []:
-            if re.sub(r"(_polaroid|_postcard|_thumbnail)$", "", f.stem) == stem:
+            if re.sub(r"(_polaroid|_postcard|_thumbnail|_animation)$", "", f.stem) == stem:
                 f.unlink()
                 removed += 1
     if not removed:

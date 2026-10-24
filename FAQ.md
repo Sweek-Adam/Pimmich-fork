@@ -93,6 +93,10 @@ Le script est conçu pour être relancé sans risque. Il détectera l'absence du
 
 **R :** Oui : sur l'`Accueil`, choisissez « Vidéos seulement ». Le cadre enchaîne alors toutes les vidéos, sans photo ni carte spéciale ; revenez à « Photos et vidéos » pour le diaporama habituel.
 
+**Q : Les GIF animés sont-ils pris en charge ?**
+
+**R :** Oui, par tous les imports : téléphone, invités, Google Drive et autres clouds, Immich, iCloud, Samba, clé USB, e-mail, WhatsApp et Telegram. Telegram envoie les GIF sous forme de petite vidéo : le cadre les reconvertit en GIF. Le GIF s'anime en photo seule (le zoom lent est alors désactivé) comme dans les dispositions, où il garde sa place, son inclinaison et ce qui le recouvre. Les dispositions qui changent les couleurs des photos (photomaton, pellicule, album ancien) gardent le GIF immobile, sur sa première image. Les effets Polaroid et Carte postale aussi.
+
 **Q : Comment afficher l'heure, la météo, les marées ou l'agenda ?**
 
 **R :** Tout se règle dans `Écran > Horloge & météo` : heure et date (police, taille, couleurs, fond), météo (clé OpenWeatherMap), marées (clé StormGlass et coordonnées du port), agenda Google (adresse iCal secrète) et comptes à rebours. L'heure et la météo restent visibles sur les dispositions (mosaïque, mur...).

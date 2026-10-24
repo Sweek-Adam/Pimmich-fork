@@ -913,7 +913,7 @@ def handle_new_telegram_photo(temp_photo_path_str, caption, user_name=None):
             new_filename_base = f"telegram_{timestamp}_{secrets.token_hex(4)}"
             
             # 2. Copier la photo temporaire vers le dossier source permanent
-            source_photo_path = source_dir / f"{new_filename_base}.jpg"
+            source_photo_path = source_dir / f"{new_filename_base}{'.gif' if temp_photo_path.suffix.lower() == '.gif' else '.jpg'}"
             shutil.copy(temp_photo_path, source_photo_path)
             
             # 3. Préparer la photo

@@ -15,7 +15,7 @@ import random
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 
-from utils import compositions
+from utils import animated, compositions
 from utils.message_renderer import N_
 
 AUTO, UNIQUE, COMPOSITIONS = "auto", "unique", "compositions"
@@ -286,3 +286,31 @@ def render_chunk(style, chunk, messages_by_id, width, height, include_messages=T
     if len(photos) < max(1, min_n - takes_slot) or (style in compositions.MESSAGE_FORMATS and not notes):
         return None, 0
     return render(photos, message, width, height, rng), max(1, used)
+
+
+def animations_for(style, chunk, messages_by_id, width, height, include_messages, rng_state, image, used):
+    """
+    GIF animés de la composition `image` (dessinée avec ce tirage au sort `rng_state`) : où rejouer chacun.
+    Deux dessins de repérage par GIF, avec le même tirage (voir utils/animated.py).
+    """
+    gifs = []
+    for path in chunk[:used]:
+        gif = None if is_message(path) or is_video(path) else compositions.original_gif(path)
+        if gif:
+            gifs.append((path, gif))
+    items = []
+    for path, gif in gifs[:animated.MAX_ITEMS]:
+        drawings = []
+        for inverted in (False, True):
+            rng = random.Random()
+            rng.setstate(rng_state)
+            compositions.probe({path: inverted})
+            try:
+                drawn, _used = render_chunk(style, chunk, messages_by_id, width, height, include_messages, rng)
+            finally:
+                compositions.probe(None)
+            drawings.append(drawn)
+        item = animated.locate(image, drawings[0], drawings[1], gif) if all(d is not None for d in drawings) else None
+        if item:
+            items.append(item)
+    return items

@@ -12,7 +12,7 @@ PREPARED_DIR = Path("static/prepared/gdrive")
 MANIFEST_FILE = TARGET_DIR / ".gdrive_manifest.json"
 KEY_FILE = Path(os.path.dirname(__file__)).parent / "config" / "gdrive_service_account.json"
 
-ALLOWED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.heic', '.heif', '.mp4', '.mov', '.avi', '.mkv'}
+ALLOWED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.heic', '.heif', '.mp4', '.mov', '.avi', '.mkv'}
 FOLDER_MIME = "application/vnd.google-apps.folder"
 DRIVE_API = "https://www.googleapis.com/drive/v3"
 SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]

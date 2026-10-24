@@ -452,7 +452,7 @@ def download_and_extract_album(config):
             for local_file in local_files:
                 if os.path.isfile(os.path.join(photos_folder, local_file)):
                     # Ne vérifier que les fichiers médias correspondants
-                    if local_file.lower().endswith(('.jpg', '.jpeg', '.png', '.heic', '.heif', '.mp4', '.mov', '.avi', '.mkv')):
+                    if local_file.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.heic', '.heif', '.mp4', '.mov', '.avi', '.mkv')):
                         if local_file not in zip_files_set:
                             try:
                                 os.remove(os.path.join(photos_folder, local_file))

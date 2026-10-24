@@ -310,6 +310,13 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
             img_to_save.save(dest_path, 'JPEG', quality=85, optimize=True, exif=exif_bytes_to_add)
         else:
             img_to_save.save(dest_path, 'JPEG', quality=85, optimize=True)
+
+        # GIF animé : la photo préparée montre sa première image, l'animation est rejouée par-dessus à l'affichage
+        from utils import animated
+        if animated.is_animated(source_path):
+            animated.write(dest_path, [animated.single_item(source_path, x_offset, y_offset, img_content.width, img_content.height)])
+        else:
+            animated.write(dest_path, [])
     
     except Exception as e:
         raise Exception(f"Erreur lors du traitement de l'image '{os.path.basename(source_path)}': {e}")
@@ -421,7 +428,7 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
     PREPARED_SOURCE_DIR.mkdir(parents=True, exist_ok=True)
     
     # Smart synchronization logic
-    source_files = {f: os.path.splitext(f)[0] for f in os.listdir(SOURCE_DIR_FOR_PREP) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.heic', '.heif') + VIDEO_EXTENSIONS)}
+    source_files = {f: os.path.splitext(f)[0] for f in os.listdir(SOURCE_DIR_FOR_PREP) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.heic', '.heif') + VIDEO_EXTENSIONS)}
     source_basenames = set(source_files.values())
     
     # Détecter les basenames déjà préparés de manière robuste (non vide et plus récent que la source)
@@ -452,7 +459,7 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
     if PREPARED_SOURCE_DIR.exists():
         for f in PREPARED_SOURCE_DIR.iterdir():
             if f.is_file():
-                base = re.sub(r'(_polaroid|_postcard|_thumbnail)$', '', f.stem)
+                base = re.sub(r'(_polaroid|_postcard|_thumbnail|_animation)$', '', f.stem)
                 all_prepared_basenames_on_disk.add(base)
     
     # Delete obsolete media (except for smartphone source)

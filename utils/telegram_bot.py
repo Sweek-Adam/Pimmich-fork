@@ -33,9 +33,12 @@ class PimmichBot:
         """Registers all the command and message handlers for the bot."""
         self.app.add_handler(CommandHandler(["start", "help"], self.start_command_handler))
         self.app.add_handler(MessageHandler(filters.PHOTO, self.photo_handler))
+        # GIF : Telegram les envoie en « animation » (petite vidéo MP4), ou en fichier GIF
+        gif_filter = filters.ANIMATION | filters.Document.MimeType("image/gif")
+        self.app.add_handler(MessageHandler(gif_filter, self.animation_handler))
         self.app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.text_message_handler))
         # A fallback for any other message type
-        self.app.add_handler(MessageHandler(~filters.COMMAND & ~filters.PHOTO & ~filters.TEXT, self.unsupported_message_handler))
+        self.app.add_handler(MessageHandler(~filters.COMMAND & ~filters.PHOTO & ~filters.TEXT & ~gif_filter, self.unsupported_message_handler))
 
     def _is_user_authorized(self, user_id):
         """Checks if a user is either an admin or an authorized guest."""
@@ -121,6 +124,36 @@ class PimmichBot:
         except Exception as e:
             logger.error(f"Error processing photo from {user.id}: {e}", exc_info=True)
             await update.message.reply_text(f"❌ Oups, une erreur est survenue lors du traitement de votre photo. L'administrateur a été notifié.")
+
+    async def animation_handler(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """GIF reçu : converti en vrai GIF animé (Telegram envoie une vidéo MP4), puis ajouté comme une photo."""
+        user = update.effective_user
+        if not self._is_user_authorized(user.id):
+            await update.message.reply_text("🚫 Désolé, vous n'êtes pas autorisé à envoyer de photos.")
+            return
+        display_name = self._get_user_display_name(user)
+        await update.message.reply_text("📬 GIF bien reçu ! Traitement en cours...")
+        try:
+            media = update.message.animation or update.message.document
+            temp_dir = Path("cache/telegram_temp")
+            temp_dir.mkdir(parents=True, exist_ok=True)
+            is_gif = (media.mime_type or "") == "image/gif"
+            download_path = temp_dir / f"{user.id}_{media.file_unique_id}{'.gif' if is_gif else '.mp4'}"
+            media_file = await media.get_file()
+            await media_file.download_to_drive(str(download_path))
+            loop = asyncio.get_running_loop()
+            gif_path = download_path
+            if not is_gif:
+                from utils import animated
+                gif_path = download_path.with_suffix(".gif")
+                await loop.run_in_executor(None, animated.video_to_gif, str(download_path), str(gif_path))
+                download_path.unlink(missing_ok=True)
+            await loop.run_in_executor(None, self.photo_callback, str(gif_path), update.message.caption or "", display_name)
+            gif_path.unlink(missing_ok=True)
+            await update.message.reply_text("✅ Votre GIF a été ajouté au cadre !")
+        except Exception as e:
+            logger.error(f"Error processing animation from {user.id}: {e}", exc_info=True)
+            await update.message.reply_text("❌ Oups, une erreur est survenue lors du traitement de votre GIF.")
 
     async def text_message_handler(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handles plain text messages, checking for potential invitation codes."""

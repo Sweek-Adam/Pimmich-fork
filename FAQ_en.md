@@ -93,6 +93,10 @@ The script is designed to be re-run safely. It will detect that the credentials 
 
 **A:** Yes: on the `Home` page, choose "Videos only". The frame then plays all videos one after another, without photos or special cards; switch back to "Photos and videos" for the usual slideshow.
 
+**Q: Are animated GIFs supported?**
+
+**A:** Yes, from every import: phone, guests, Google Drive and other clouds, Immich, iCloud, Samba, USB stick, e-mail, WhatsApp and Telegram. Telegram sends GIFs as short videos: the frame converts them back to GIFs. A GIF animates as a single photo (the slow zoom is then turned off) and in layouts, where it keeps its place, its tilt and whatever covers it. Layouts that change photo colours (photo booth, film strip, old album) keep the GIF still, on its first frame. So do the Polaroid and Postcard effects.
+
 **Q: How do I show the time, weather, tides or calendar?**
 
 **A:** Everything is in `Screen > Clock & weather`: time and date (font, size, colours, background), weather (OpenWeatherMap key), tides (StormGlass key and harbour coordinates), Google calendar (secret iCal address) and countdowns. Time and weather stay visible on layouts (mosaic, wall...).

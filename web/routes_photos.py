@@ -1,7 +1,7 @@
 """Gestion des photos préparées : suppression, filtres, favoris, textes."""
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from web.core import _
-from utils import messages_manager
+from utils import animated, messages_manager
 
 
     
@@ -16,6 +16,7 @@ def delete_photo(photo):
         # Déterminer les chemins des versions alternatives et de la sauvegarde
         polaroid_path = photo_path_obj.with_name(f"{photo_path_obj.stem}_polaroid.jpg")
         postcard_path = photo_path_obj.with_name(f"{photo_path_obj.stem}_postcard.jpg")
+        animated.sidecar(photo_path_obj).unlink(missing_ok=True)  # GIF animé : son animation
         backup_path = Path('static/.backups') / photo
 
         # Supprimer tous les fichiers associés

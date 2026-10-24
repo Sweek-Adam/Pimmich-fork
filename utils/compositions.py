@@ -6,11 +6,12 @@ sous forme de note (post-it, fiche) ou de case de texte.
 import math
 import random
 import logging
+import threading
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageOps, ImageChops
 
-from utils import faces
+from utils import animated, faces
 from utils.message_renderer import N_, render_message, render_note, _textured, _gradient, _paste_with_shadow, _vignette, soft_blur
 
 logger = logging.getLogger("pimmich.compositions")
@@ -18,8 +19,10 @@ logger = logging.getLogger("pimmich.compositions")
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 PHOTOS_DIR = PROJECT_DIR / "static" / "photos"
 OUTPUT_DIR = PROJECT_DIR / "static" / "compositions"
-IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png")
+IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".gif")
 VARIANT_SUFFIXES = ("_polaroid", "_postcard")
+# Repérage des GIF animés (utils/animated.py) : {média préparé: dégradé inversé ou non} pendant un dessin de repérage
+_probe = threading.local()
 
 # --- Chargement des photos ---
 
@@ -33,11 +36,22 @@ def original_for(display_path):
     source = path.parent.name
     folder = PHOTOS_DIR / source
     if folder.is_dir():
-        for ext in IMAGE_EXTENSIONS + (".JPG", ".JPEG", ".PNG"):
+        for ext in IMAGE_EXTENSIONS + tuple(e.upper() for e in IMAGE_EXTENSIONS):
             candidate = folder / f"{stem}{ext}"
             if candidate.exists():
                 return candidate
     return path.with_name(f"{stem}{path.suffix}") if path.with_name(f"{stem}{path.suffix}").exists() else path
+
+
+def original_gif(display_path):
+    """GIF animé d'origine d'un média préparé (None pour une photo ordinaire)."""
+    original = original_for(display_path)
+    return original if animated.is_animated(original) else None
+
+
+def probe(paths_inverted):
+    """Dessins de repérage : `paths_inverted` = {média préparé: inversé}, ou None pour revenir aux vraies photos."""
+    _probe.paths = {str(k): v for k, v in (paths_inverted or {}).items()}
 
 
 def load_photo(display_path, max_side=1400):
@@ -48,7 +62,13 @@ def load_photo(display_path, max_side=1400):
                 image.draft("RGB", (max_side, max_side))
                 image = ImageOps.exif_transpose(image).convert("RGB")
                 image.thumbnail((max_side, max_side), Image.LANCZOS, reducing_gap=2.0)
-                return faces.attach(image, faces.for_file(candidate, image))
+                image = faces.attach(image, faces.for_file(candidate, image))
+                probes = getattr(_probe, "paths", None) or {}
+                if str(display_path) in probes:  # même taille et mêmes visages : la photo est cadrée exactement pareil
+                    stand_in = animated.gradient(image.size, probes[str(display_path)])
+                    stand_in.info.update(image.info)
+                    return stand_in
+                return image
         except Exception as e:
             logger.debug(f"Photo illisible pour une composition ({candidate}) : {e}")
     return None

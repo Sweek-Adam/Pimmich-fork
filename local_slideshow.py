@@ -6,7 +6,7 @@ os.environ["PYGAME_BLEND_ALPHA_SDL2"] = "1"
 import pygame
 import traceback
 import requests
-from PIL import Image, ImageOps, ImageFilter, ImageDraw
+from PIL import Image, ImageChops, ImageOps, ImageFilter, ImageDraw
 import signal
 import re
 import socket
@@ -29,7 +29,7 @@ from utils.audio_output import apply_audio_output
 from utils.security import internal_headers
 from utils.dedup import hashes_for, remove_duplicates
 from utils.messages_manager import pop_priority, list_messages
-from utils import compositions, layout_engine
+from utils import animated, compositions, layout_engine
 from utils import play_queue
 from utils import now_playing
 from utils import music_remote
@@ -1066,7 +1066,7 @@ def get_path_to_display(photo_path_obj, source, filter_states):
         if postcard_path.exists():
             path_to_display = str(postcard_path)
     # Priorité 2: Comportement par défaut pour la source Telegram (si aucun filtre n'est actif)
-    elif source == 'telegram' and active_filter in ['none', 'original']:
+    elif source == 'telegram' and active_filter in ['none', 'original'] and not animated.sidecar(photo_path_obj).exists():  # GIF : animé tel quel
         postcard_path = photo_path_obj.with_name(f"{photo_path_obj.stem}_postcard.jpg")
         if postcard_path.exists():
             path_to_display = str(postcard_path)
@@ -1300,7 +1300,7 @@ AHEAD_MAX = 2
 
 
 def _render_composition(plan, snapshot, start, messages, include_messages, width, height):
-    """Compose la composition qui commence à `start` : (image, diapositives utilisées, format) ou None."""
+    """Compose la composition qui commence à `start` : (image, diapositives utilisées, format, GIF animés) ou None."""
     rng = random.Random()
     if not snapshot or not layout_engine.is_message(snapshot[start % len(snapshot)]):
         plan = layout_engine.without_message_only(plan)  # pas de message à afficher : pas de disposition construite autour
@@ -1312,18 +1312,25 @@ def _render_composition(plan, snapshot, start, messages, include_messages, width
             chunk = layout_engine.take_slides(snapshot, start, count, layout_engine.MESSAGE_SLOTS.get(style, 1))
         else:
             chunk = layout_engine.take_chunk(snapshot, start, count)
+        state = rng.getstate()
         image, used = layout_engine.render_chunk(style, chunk, messages, width, height, include_messages, rng)
         if image is not None:
-            return image, used, style
+            try:  # GIF animés : rejoués par-dessus pendant l'affichage
+                moving = layout_engine.animations_for(style, chunk, messages, width, height, include_messages, state, image, used)
+            except Exception as e:
+                logger.warning(f"[Dispositions] GIF animés non repérés : {e}")
+                moving = []
+            return image, used, style, moving
     return None
 
 
-def _save_composition(image):
+def _save_composition(image, moving=None):
     """Fichiers en rotation : jamais réécrire celui affiché ni ceux préparés d'avance."""
     compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     _composition["slot"] = (_composition["slot"] + 1) % (AHEAD_MAX + 2)
     path = compositions.OUTPUT_DIR / f"composition_{_composition['slot']}.jpg"
     image.save(path, "JPEG", quality=88)
+    animated.write(path, moving)  # toujours réécrit : pas d'animation d'une ancienne composition
     return str(path)
 
 
@@ -1363,8 +1370,8 @@ def prepare_composition(config, plan, playlist, start, width, height, force=Fals
                 if result is None:
                     logger.info(f"[Dispositions] Aucune composition possible à partir de la diapositive {start} : affichage seul")
                     return
-                image, used, style = result
-                path = _save_composition(image)
+                image, used, style, moving = result
+                path = _save_composition(image, moving)
                 if _composition["target"] == target:
                     _composition["ready"], _composition["style"] = (path, used), style
                     publish_queue()  # la composition apparaît dans « À suivre »
@@ -1376,8 +1383,8 @@ def prepare_composition(config, plan, playlist, start, width, height, force=Fals
             started = time.time()
             result = _render_composition(nxt[1], snapshot, nxt[0] % len(snapshot), messages, include_messages, width, height)
             if result:
-                image, used2, style2 = result
-                _ahead[(target[0], nxt[0] % len(snapshot))] = (_save_composition(image), used2, style2)
+                image, used2, style2, moving2 = result
+                _ahead[(target[0], nxt[0] % len(snapshot))] = (_save_composition(image, moving2), used2, style2)
                 logger.info(f"[Dispositions] « {style2} » préparée d'avance en {time.time() - started:.1f}s")
         except Exception as e:
             logger.warning(f"[Dispositions] Préparation impossible : {e}")
@@ -2540,6 +2547,116 @@ def draw_weather_frame(screen, background, particles):
     pygame.display.flip()
 
 
+class GifPlayer:
+    """
+    Rejoue les GIF animés d'une image affichée (photo seule ou composition, voir utils/animated.py) par-dessus
+    l'image fixe : seules les zones des GIF sont redessinées, l'horloge et la météo restent par-dessus.
+    Les images sont décodées en arrière-plan (la photo reste fixe le temps de les préparer).
+    """
+    BUDGET = 48 * 1024 * 1024  # mémoire des images décodées (le Raspberry Pi 3 n'a que 1 Go)
+
+    def __init__(self, display_path, base_surface, pil_image):
+        self.base = base_surface
+        self.tracks = []
+        self.ready = False
+        self.patches = None
+        items = animated.read(display_path) if display_path else []
+        self.expected = bool(items) and pil_image.size == base_surface.get_size()
+        if self.expected:
+            threading.Thread(target=self._load, args=(items, pil_image.copy()), daemon=True, name="gif").start()
+        else:
+            self.ready = True
+
+    def _load(self, items, pil_image):
+        try:
+            items = [item for item in items if animated.matches(item, pil_image)]
+            total = sum(item["box"][2] * item["box"][3] * 4 * min(animated.MAX_FRAMES, animated.frame_count(item["gif"])) for item in items)
+            scale = min(1.0, math.sqrt(self.BUDGET / total)) if total else 1.0
+            tracks = []
+            for item in items:
+                images = animated.frames(item, scale)
+                if len(images) < 2:
+                    continue
+                mode = "RGBA" if item.get("mask") else "RGB"
+                surfaces = [[pygame.image.frombytes(image.tobytes(), image.size, mode), duration, False] for image, duration in images]
+                box = pygame.Rect(item["box"])
+                tracks.append({"box": box, "frames": surfaces, "index": 0, "due": 0.0, "alpha": mode == "RGBA",
+                               "clip": box.clip(self.base.get_rect())})
+            self.tracks = [t for t in tracks if t["clip"].width and t["clip"].height]
+            if self.tracks:
+                logger.info(f"[GIF] {len(self.tracks)} animation(s), {sum(len(t['frames']) for t in self.tracks)} images (échelle {scale:.2f})")
+        except Exception as e:
+            logger.warning(f"[GIF] Animation impossible : {e}")
+            self.tracks = []
+        self.ready = True
+
+    def set_overlay(self, screen):
+        """Ce que l'habillage (heure, météo, icônes) dessine sur les zones des GIF : redessiné par-dessus chaque image."""
+        if not self.ready:
+            self.patches = None  # calculé à la première image, d'après l'écran à ce moment-là
+            return
+        self.patches = []
+        for track in self.tracks:
+            clip = track["clip"]
+            drawn = Image.frombytes("RGB", clip.size, pygame.image.tobytes(screen.subsurface(clip), "RGB"))
+            plain = Image.frombytes("RGB", clip.size, pygame.image.tobytes(self.base.subsurface(clip), "RGB"))
+            mask = ImageChops.difference(drawn, plain).convert("L").point(lambda v: 255 if v > 2 else 0)
+            if mask.getbbox() is None:
+                self.patches.append(None)
+                continue
+            drawn.putalpha(mask)
+            self.patches.append(pygame.image.frombytes(drawn.tobytes(), drawn.size, "RGBA"))
+
+    def step(self, screen, now):
+        """Avance les GIF dont l'image suivante est due ; retourne les zones redessinées et le délai avant la suivante."""
+        if not self.ready or not self.tracks:
+            return [], 0.1
+        if self.patches is None:
+            self.set_overlay(screen)
+        rects = []
+        for number, track in enumerate(self.tracks):
+            if now < track["due"]:
+                continue
+            frame = track["frames"][track["index"]]
+            if not frame[2]:  # conversion au format de l'écran (blits rapides), une fois par image
+                frame[0] = frame[0].convert_alpha() if track["alpha"] else frame[0].convert()
+                frame[2] = True
+            surface = frame[0]
+            if surface.get_size() != track["box"].size:
+                surface = pygame.transform.scale(surface, track["box"].size)
+            clip = track["clip"]
+            screen.blit(self.base, clip.topleft, clip)
+            screen.blit(surface, track["box"].topleft)
+            patch = self.patches[number]
+            if patch is not None:
+                screen.blit(patch, clip.topleft)
+            track["due"] = max(track["due"] + frame[1], now) if track["due"] else now + frame[1]
+            track["index"] = (track["index"] + 1) % len(track["frames"])
+            rects.append(clip)
+        wait = max(0.0, min(t["due"] for t in self.tracks) - now)
+        return rects, min(0.1, wait)
+
+
+def show_regions(screen, rects):
+    """Affiche seulement ces zones (avec la baisse de luminosité du soir), sans redessiner tout l'écran."""
+    if not rects:
+        return
+    _heartbeat()
+    level = _DIM["level"]
+    if level >= 0.99:
+        pygame.display.update(rects)
+        return
+    shade = pygame.Surface((1, 1))
+    shade.fill((0, 0, 0))
+    shade.set_alpha(int(255 * (1 - level)))
+    backups = [(rect, screen.subsurface(rect).copy()) for rect in rects]
+    for rect in rects:
+        screen.blit(pygame.transform.scale(shade, rect.size), rect.topleft)
+    pygame.display.update(rects)
+    for rect, backup in backups:  # l'image n'est assombrie qu'à l'écran
+        screen.blit(backup, rect.topleft)
+
+
 def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, config, main_font, photo_path=None, ignore_postcard_flag=False):
     """
     Affiche une image préparée avec un effet de pan/zoom et gère les contrôles (pause, suivant, précédent).
@@ -2587,11 +2704,15 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
         # Always blit the base image first (this will be overwritten by animation if enabled)
         pygame_image_base = pygame.image.frombytes(pil_image.tobytes(), pil_image.size, pil_image.mode)
         screen.blit(pygame_image_base, (0, 0))
-        
+        gifs = GifPlayer(photo_path, pygame_image_base, pil_image)
+        if gifs.expected:
+            pan_zoom_enabled = False  # GIF animé : l'animation remplace le zoom lent
+
         if not pan_zoom_enabled: # If pan/zoom is disabled, just show static image
             # Affichage statique : blit une fois et attendre la durée
             draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata)
             pygame.display.flip()
+            gifs.set_overlay(screen)
             shown_music_key = now_playing_key(config)
             weather_fx = weather_particles(config, screen_width, screen_height)
             fx_background = screen.copy() if weather_fx else None
@@ -2643,6 +2764,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                     if weather_fx:
                         fx_background = screen.copy()
                     pygame.display.flip()
+                    gifs.set_overlay(screen)
 
                 # Réaction d'un invité (❤️...) sur cette photo : elle s'envole à l'écran
                 reaction_since = check_reaction(screen, photo_path, reaction_since)
@@ -2660,7 +2782,10 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                     pygame.display.flip()
                     fx_background = None
 
-                time.sleep(0.1)
+                # GIF animés : image suivante de chacun, dès qu'elle est due
+                rects, wait = gifs.step(screen, time.time())
+                show_regions(screen, rects)
+                time.sleep(wait)
         else:
             # Logique de l'effet Pan/Zoom
             zoom_factor = float(config.get("pan_zoom_factor", 1.15)) # Récupérer le facteur de zoom de la config

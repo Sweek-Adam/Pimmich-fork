@@ -121,7 +121,7 @@ def frame_receive_photos_api():
     target.mkdir(parents=True, exist_ok=True)
     for file in files:
         name = secure_filename(file.filename) or "photo.jpg"
-        if Path(name).suffix.lower() not in (".jpg", ".jpeg", ".png", ".heic") + VIDEO_EXTENSIONS:
+        if Path(name).suffix.lower() not in (".jpg", ".jpeg", ".png", ".gif", ".heic") + VIDEO_EXTENSIONS:
             continue
         file.save(members.unique_name(target, f"{sender}_{name}"))
     config = load_config()
