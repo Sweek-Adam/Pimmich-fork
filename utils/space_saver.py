@@ -13,6 +13,7 @@ import os
 import subprocess
 import threading
 import time
+import warnings
 from pathlib import Path
 
 from PIL import Image
@@ -91,7 +92,10 @@ def candidates(width, height, sources=None):
                     if size < PHOTO_MIN_BYTES:
                         continue
                     try:
-                        with Image.open(path) as image:
+                        with warnings.catch_warnings():  # photos géantes attendues ici (lecture de l'en-tête seulement)
+                            warnings.simplefilter("ignore", Image.DecompressionBombWarning)
+                            image = Image.open(path)
+                        with image:
                             w, h = image.size
                     except Exception:
                         continue
@@ -141,7 +145,10 @@ def reduce_photo(path):
     path = Path(path)
     before, stat = path.stat().st_size, path.stat()
     tmp = path.with_name(f".{path.name}.reduction")
-    with Image.open(path) as image:
+    with warnings.catch_warnings():  # décodée directement réduite (JPEG) : pas de risque mémoire
+        warnings.simplefilter("ignore", Image.DecompressionBombWarning)
+        image = Image.open(path)
+    with image:
         exif, icc = image.info.get("exif"), image.info.get("icc_profile")
         image.draft("RGB", (PHOTO_MAX_SIDE, PHOTO_MAX_SIDE))
         image = image.convert("RGB")
