@@ -147,9 +147,10 @@ def run_once(config, width, height, now=None, prepare=None, notify=None, still_n
         _prepare_group(heavy, width, height, prepare, still_night)
         done["heavy"] = len(heavy)
     # Photos animées des téléphones : leur animation (courte vidéo extraite de la photo)
-    if night and config.get("motion_photos_enabled", True):
+    if night and (config.get("motion_photos_enabled", True) or config.get("short_videos_in_layouts", True)):
         from utils import motion_photos
-        todo = motion_photos.pending(width, height)
+        clips = int(config.get("short_videos_max_seconds", motion_photos.CLIP_MAX_DEFAULT)) if config.get("short_videos_in_layouts", True) else 0
+        todo = motion_photos.pending(width, height, clip_max_seconds=clips)
         if todo:
             done["motion"] = motion_photos.run(todo, still_night)
     # Vidéos à réduire (Gagner de la place), demandées pendant la journée

@@ -146,12 +146,14 @@ _motion_running = threading.Event()
 def media_motion_api():
     from utils import motion_photos
     width, height = _screen()
+    config = load_config()
+    clips = int(config.get("short_videos_max_seconds", motion_photos.CLIP_MAX_DEFAULT)) if config.get("short_videos_in_layouts", True) else 0
     if request.method == 'GET':
-        return jsonify({"success": True, "pending": len(motion_photos.pending(width, height)), "running": _motion_running.is_set(),
-                        "enabled": load_config().get("motion_photos_enabled", True)})
+        return jsonify({"success": True, "pending": len(motion_photos.pending(width, height, clip_max_seconds=clips)), "running": _motion_running.is_set(),
+                        "enabled": config.get("motion_photos_enabled", True) or bool(clips)})
     if _motion_running.is_set():
         return jsonify({"success": False, "message": _("Les animations sont déjà en cours de création.")}), 409
-    todo = motion_photos.pending(width, height)
+    todo = motion_photos.pending(width, height, clip_max_seconds=clips)
     if not todo:
         return jsonify({"success": False, "message": _("Aucune photo animée en attente.")}), 400
 

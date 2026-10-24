@@ -115,17 +115,38 @@ def is_video(path):
     return str(path).lower().endswith(VIDEO_EXTENSIONS)
 
 
+VIDEO_CLIPS = {"enabled": True}  # réglage « short_videos_in_layouts » (fixé par le diaporama)
+
+
+def set_video_clips(enabled):
+    VIDEO_CLIPS["enabled"] = bool(enabled)
+
+
+def clip_ready(path):
+    """Courte vidéo dont l'animation est prête : elle peut tourner en boucle (sans le son) dans une composition."""
+    if not VIDEO_CLIPS["enabled"] or not is_video(path):
+        return False
+    from utils import motion_photos
+    p = Path(path)
+    return motion_photos.video_clip_path(p.parent.name, p.stem).exists()
+
+
+def stays_alone(path):
+    """Les vidéos restent en photo unique (avec le son), sauf les courtes vidéos dont l'animation est prête."""
+    return is_video(path) and not clip_ready(path)
+
+
 def take_chunk(playlist, start, count):
     """
     Les `count` diapositives suivantes à partir de `start` (la playlist boucle), en s'arrêtant avant une vidéo :
-    les vidéos restent toujours en photo unique.
+    les vidéos restent en photo unique (sauf les courtes vidéos animées, voir `stays_alone`).
     """
     chunk = []
     if not playlist:
         return chunk
     for offset in range(min(count, len(playlist))):
         path = playlist[(start + offset) % len(playlist)]
-        if is_video(path):
+        if stays_alone(path):
             break
         chunk.append(path)
     return chunk
@@ -219,7 +240,7 @@ def take_slides(playlist, start, photos_wanted, message_slots):
     chunk, photos, messages = [], 0, 0
     for offset in range(len(playlist)):
         path = playlist[(start + offset) % len(playlist)]
-        if is_video(path):
+        if stays_alone(path):
             break
         if is_message(path):
             if messages >= message_slots:
@@ -295,7 +316,7 @@ def animations_for(style, chunk, messages_by_id, width, height, include_messages
     """
     gifs = []
     for path in chunk[:used]:
-        gif, motion = (None, False) if is_message(path) or is_video(path) else compositions.animation_source(path)
+        gif, motion = (None, False) if is_message(path) or stays_alone(path) else compositions.animation_source(path)
         if gif:
             gifs.append((path, gif, motion))
     items = []

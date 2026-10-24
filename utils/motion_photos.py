@@ -11,6 +11,8 @@ import struct
 import subprocess
 from pathlib import Path
 
+from PIL import Image
+
 CACHE_DIR = Path("cache") / "motion"     # clips extraits et animations (jamais dans les dossiers synchronisés)
 MAX_SECONDS = 4
 FPS = 15
@@ -134,6 +136,29 @@ def animation_path(source, name):
     return CACHE_DIR / source / f"{Path(name).stem}.webp"
 
 
+VIDEO_EXT = (".mp4", ".mov", ".avi", ".mkv", ".m4v")
+CLIP_MAX_DEFAULT = 15  # secondes : réglage « short_videos_max_seconds »
+
+
+def video_clip_path(source, stem):
+    """Animation d'une courte vidéo (pour les dispositions), d'après le nom de sa version préparée."""
+    return CACHE_DIR / source / f"{stem}.clip.webp"
+
+
+def clip_duration(path):
+    """Durée d'une vidéo (s), mémorisée par fichier ; None si inconnue."""
+    try:
+        stat = os.stat(path)
+    except OSError:
+        return None
+    key = f"dur:{path}:{stat.st_size}:{int(stat.st_mtime)}"
+    cache = _scan_cache()
+    if key not in cache:
+        from utils.prepare_all_photos import video_duration
+        cache[key] = video_duration(path)
+    return cache[key]
+
+
 def prepared_box(prepared_jpg):
     """Rectangle (x, y, w, h) de la photo dans l'image préparée (noté par la préparation dans les EXIF)."""
     import piexif
@@ -154,8 +179,9 @@ def build_animation(photo_path, out_path, aspect, runner=None):
     Retourne le chemin, ou None si la photo n'a pas de vidéo.
     """
     photo_path, out_path = Path(photo_path), Path(out_path)
-    span = embedded_video(photo_path)
-    clip = companion_video(photo_path)
+    is_clip = photo_path.suffix.lower() in VIDEO_EXT  # courte vidéo (dispositions) : la vidéo elle-même
+    span = None if is_clip else embedded_video(photo_path)
+    clip = photo_path if is_clip else companion_video(photo_path)
     if not span and not clip:
         return None
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -191,8 +217,11 @@ def build_animation(photo_path, out_path, aspect, runner=None):
             temp_clip.unlink(missing_ok=True)
 
 
-def pending(width, height, sources=None):
-    """Photos animées préparées dont l'animation n'est pas encore créée : [(source, nom)]."""
+def pending(width, height, sources=None, clip_max_seconds=0):
+    """
+    Photos animées préparées dont l'animation n'est pas encore créée : [(source, nom)] ; avec `clip_max_seconds`,
+    aussi les vidéos préparées d'au plus cette durée (elles pourront tourner en boucle dans les dispositions).
+    """
     from utils import animated
     from utils import prepare_all_photos as prep
     root = Path("static") / "photos"
@@ -201,7 +230,18 @@ def pending(width, height, sources=None):
     for source in sources or (sorted(d.name for d in root.iterdir() if d.is_dir() and not d.name.startswith(".")) if root.is_dir() else []):
         prepared = Path("static") / "prepared" / source
         for entry in os.scandir(root / source) if (root / source).is_dir() else []:
-            if not entry.is_file() or entry.name.startswith(".") or not entry.name.lower().endswith(PHOTO_EXT):
+            if not entry.is_file() or entry.name.startswith("."):
+                continue
+            if entry.name.lower().endswith(VIDEO_EXT):
+                stem = Path(entry.name).stem
+                if (clip_max_seconds and f"{source}/{entry.name}" not in failed and not video_clip_path(source, stem).exists()
+                        and not is_live_photo_video(entry.path) and (prepared / f"{stem}_thumbnail.jpg").exists()
+                        and prep.preparation_state(prepared, entry.name, width, height) == "ok"):
+                    duration = clip_duration(entry.path)
+                    if duration and duration <= clip_max_seconds:
+                        todo.append((source, entry.name))
+                continue
+            if not entry.name.lower().endswith(PHOTO_EXT):
                 continue
             shown = prepared / f"{Path(entry.name).stem}.jpg"
             if f"{source}/{entry.name}" in failed or animated.sidecar(shown).exists():
@@ -233,6 +273,15 @@ def animate(source, name):
     """Crée l'animation d'une photo animée déjà préparée et la relie à sa photo préparée. Retourne True si c'est fait."""
     from utils import animated
     photo = Path("static") / "photos" / source / name
+    if photo.suffix.lower() in VIDEO_EXT:  # courte vidéo : cadrage de son image d'aperçu, pas de rejeu en plein écran
+        thumb = Path("static") / "prepared" / source / f"{photo.stem}_thumbnail.jpg"
+        try:
+            with Image.open(thumb) as image:
+                aspect = image.width / image.height
+            return bool(build_animation(photo, video_clip_path(source, photo.stem), aspect))
+        except Exception as e:
+            _mark_failed(source, name, e)
+            return False
     shown = Path("static") / "prepared" / source / f"{photo.stem}.jpg"
     box = prepared_box(shown)
     if not box:

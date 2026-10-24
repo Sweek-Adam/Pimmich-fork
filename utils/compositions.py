@@ -51,11 +51,14 @@ def original_gif(display_path):
 
 def animation_source(display_path):
     """Ce qui s'anime pour ce média : (GIF d'origine ou animation d'une photo animée, photo animée ?) ou (None, False)."""
+    from utils import motion_photos
+    path = Path(display_path)
+    if path.suffix.lower() == ".mp4":  # courte vidéo : son animation (si elle est prête)
+        clip = motion_photos.video_clip_path(path.parent.name, path.stem)
+        return (clip, True) if clip.exists() else (None, False)
     gif = original_gif(display_path)
     if gif:
         return gif, False
-    from utils import motion_photos
-    path = Path(display_path)
     folder = PHOTOS_DIR / path.parent.name
     for ext in (".jpg", ".jpeg", ".JPG", ".JPEG", ".heic", ".HEIC"):
         webp = motion_photos.animation_path(path.parent.name, f"{path.stem}{ext}")
@@ -96,7 +99,11 @@ def cached_photos(enabled):
 
 
 def _load_photo(display_path, max_side=1400, probing=True):
-    for candidate in (original_for(display_path), Path(display_path)):
+    candidates = (original_for(display_path), Path(display_path))
+    if str(display_path).lower().endswith(".mp4"):  # courte vidéo dans une composition : son image d'aperçu
+        path = Path(display_path)
+        candidates = (path.with_name(f"{path.stem}_thumbnail.jpg"),)
+    for candidate in candidates:
         try:
             with Image.open(candidate) as image:
                 image.draft("RGB", (max_side, max_side))

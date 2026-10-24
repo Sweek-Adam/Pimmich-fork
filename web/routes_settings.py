@@ -57,6 +57,8 @@ SETTINGS = {
     "video_light_above_mb": ("int", (0, 100000), 150),
     "heavy_videos_at_night": ("bool", None, True),
     "motion_photos_enabled": ("bool", None, True),
+    "short_videos_in_layouts": ("bool", None, True),
+    "short_videos_max_seconds": ("int", (2, 120), 15),
     "video_night_above_mb": ("int", (0, 100000), 50),
     "video_audio_output": ("choice", ["auto", "hdmi", "jack"], "auto"),
     "video_audio_volume": ("int", (0, 100), 100),

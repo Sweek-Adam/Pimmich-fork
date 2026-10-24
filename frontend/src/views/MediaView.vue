@@ -169,7 +169,7 @@ onUnmounted(() => window.clearInterval(timer));
     <div class="card-head"><h2><i class="fas fa-play-circle"></i>{{ t("Photos animées") }}</h2>
       <button class="btn small primary" type="button" :disabled="motion.running" @click="makeMotion">
         <i class="fas" :class="motion.running ? 'fa-spinner fa-spin' : 'fa-magic'"></i> {{ motion.running ? t("Création en cours...") : t("Créer maintenant") }}</button></div>
-    <p class="small muted">{{ t("{count} photo(s) animée(s) de téléphone attendent leur animation (créée automatiquement cette nuit).", { count: motion.pending }) }}</p>
+    <p class="small muted">{{ t("{count} photo(s) animée(s) ou courte(s) vidéo(s) attendent leur animation (créée automatiquement cette nuit).", { count: motion.pending }) }}</p>
   </section>
 
   <section class="card">

@@ -1351,6 +1351,7 @@ def prepare_composition(config, plan, playlist, start, width, height, force=Fals
     reserved = None if force else _ahead.pop(target, None)
     _composition.update(target=target, ready=None)
     compositions.set_full_photos(config.get("compositions_full_photos", True))
+    layout_engine.set_video_clips(config.get("short_videos_in_layouts", True))
     compositions.faces.set_enabled(config.get("smart_crop", True))
     include_messages = config.get("compositions_include_messages", True)
     snapshot = list(playlist)

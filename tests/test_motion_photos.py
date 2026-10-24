@@ -31,9 +31,9 @@ def motion_jpeg(path, size=(320, 240)):
 def fake_ffmpeg(command, **kwargs):
     """Remplace ffmpeg : vérifie le clip extrait et écrit une animation WebP de 3 images au bon format."""
     clip = Path(command[command.index("-i") + 1])
-    assert clip.read_bytes()[:4] == FAKE_MP4[:4] or clip.suffix.lower() == ".mov"
+    assert clip.read_bytes()[:4] == FAKE_MP4[:4] or clip.suffix.lower() in (".mov", ".mp4")
     graph = command[command.index("-vf") + 1]
-    width, height = (int(v) for v in graph.split("crop=")[1].split(":"))
+    width, height = (int(v) for v in graph.split("crop=")[1].split(",")[0].split(":"))
     frames = [Image.new("RGB", (width, height), (200, 100 + i * 20, 50)) for i in range(3)]
     frames[0].save(command[-1], save_all=True, append_images=frames[1:], duration=66, loop=0)
     return subprocess.CompletedProcess(command, 0, "", "")
@@ -118,3 +118,33 @@ def test_failed_animation_is_not_retried_every_night(source, monkeypatch):
     monkeypatch.setattr(motion_photos.subprocess, "run", lambda c, **k: subprocess.CompletedProcess(c, 1, "", "codec inconnu"))
     assert motion_photos.run(motion_photos.pending(640, 360, ["tel"])) == 0
     assert motion_photos.pending(640, 360, ["tel"]) == []
+
+
+def test_short_video_joins_a_layout_once_its_clip_is_ready(source, monkeypatch):
+    from utils import compositions as comp
+    from utils import layout_engine as le
+    folder, prepared = source
+    prepared.mkdir(parents=True, exist_ok=True)
+    (folder / "clip.mp4").write_bytes(b"x" * 1000)
+    (folder / "long.mp4").write_bytes(b"x" * 1000)
+    for stem in ("clip", "long"):
+        (prepared / f"{stem}.mp4").write_bytes(b"video")
+        Image.new("RGB", (320, 180), (30, 120, 200)).save(prepared / f"{stem}_thumbnail.jpg")
+    for i in range(3):
+        Image.new("RGB", (64, 36), (200, 40 * i, 90)).save(prepared / f"p{i}.jpg")
+    monkeypatch.setattr(motion_photos, "clip_duration", lambda path: 6.0 if "clip" in str(path) else 90.0)
+    assert motion_photos.pending(640, 360, ["tel"], clip_max_seconds=15) == [("tel", "clip.mp4")]
+    playlist = [str(prepared / "p0.jpg"), str(prepared / "clip.mp4"), str(prepared / "p1.jpg"), str(prepared / "long.mp4")]
+    le.set_video_clips(True)
+    assert le.take_chunk(playlist, 0, 4) == playlist[:1]         # animation pas encore prête : la vidéo reste seule
+    monkeypatch.setattr(motion_photos.subprocess, "run", fake_ffmpeg)
+    assert motion_photos.run(motion_photos.pending(640, 360, ["tel"], clip_max_seconds=15)) == 1
+    clip = motion_photos.video_clip_path("tel", "clip")
+    with Image.open(clip) as webp:
+        assert abs(webp.width / webp.height - 16 / 9) < 0.02
+    assert le.take_chunk(playlist, 0, 4) == playlist[:3]         # la longue vidéo reste seule (avec le son)
+    assert comp.animation_source(playlist[1]) == (clip, True)
+    assert comp.load_photo(playlist[1]).size == (320, 180)        # image d'aperçu de la vidéo
+    le.set_video_clips(False)
+    assert le.take_chunk(playlist, 0, 4) == playlist[:1]
+    le.set_video_clips(True)
