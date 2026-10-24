@@ -295,15 +295,15 @@ def animations_for(style, chunk, messages_by_id, width, height, include_messages
     """
     gifs = []
     for path in chunk[:used]:
-        gif = None if is_message(path) or is_video(path) else compositions.original_gif(path)
+        gif, motion = (None, False) if is_message(path) or is_video(path) else compositions.animation_source(path)
         if gif:
-            gifs.append((path, gif))
+            gifs.append((path, gif, motion))
     items = []
     if not gifs:
         return items
     compositions.cached_photos(True)
     try:
-        for path, gif in gifs[:animated.MAX_ITEMS]:
+        for path, gif, motion in gifs[:animated.MAX_ITEMS]:
             drawings = []
             for inverted in (False, True):
                 rng = random.Random()
@@ -314,7 +314,7 @@ def animations_for(style, chunk, messages_by_id, width, height, include_messages
                 finally:
                     compositions.probe(None)
                 drawings.append(drawn)
-            item = animated.locate(image, drawings[0], drawings[1], gif) if all(d is not None for d in drawings) else None
+            item = animated.locate(image, drawings[0], drawings[1], gif, motion) if all(d is not None for d in drawings) else None
             if item:
                 items.append(item)
     finally:

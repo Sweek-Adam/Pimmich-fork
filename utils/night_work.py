@@ -146,6 +146,12 @@ def run_once(config, width, height, now=None, prepare=None, notify=None, still_n
     if heavy and heavy_allowed(config, now):
         _prepare_group(heavy, width, height, prepare, still_night)
         done["heavy"] = len(heavy)
+    # Photos animées des téléphones : leur animation (courte vidéo extraite de la photo)
+    if night and config.get("motion_photos_enabled", True):
+        from utils import motion_photos
+        todo = motion_photos.pending(width, height)
+        if todo:
+            done["motion"] = motion_photos.run(todo, still_night)
     # Vidéos à réduire (Gagner de la place), demandées pendant la journée
     from utils import space_saver
     waiting = space_saver.queued()

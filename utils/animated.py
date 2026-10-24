@@ -30,6 +30,7 @@ MAX_FRAMES = 150           # au-delà, une image sur deux (même durée totale)
 MAX_ITEMS = 3              # GIF animés au plus par composition (les autres restent immobiles)
 MIN_PIXELS = 400           # GIF presque caché dans la composition : laissé immobile
 MIN_COVERAGE = 0.85        # part de l'emplacement calculé qui doit suivre le GIF
+MAX_COLOR_GAP_MOTION = 75  # photo animée : la vidéo commence un peu avant la photo (scène proche, pas identique)
 MAX_COLOR_GAP = 45         # écart moyen de couleur toléré (disposition qui transforme les couleurs : immobile)
 
 
@@ -96,7 +97,8 @@ def read(display_path):
             continue
         if gif.is_file() and len(box) == 4 and box[2] > 0 and box[3] > 0:
             mask = _absolute(item["mask"]) if item.get("mask") else None
-            items.append({"gif": gif, "box": box, "affine": item.get("affine"), "mask": mask if mask and mask.is_file() else None})
+            items.append({"gif": gif, "box": box, "affine": item.get("affine"), "mask": mask if mask and mask.is_file() else None,
+                          "motion": bool(item.get("motion"))})
     return items
 
 
@@ -183,7 +185,8 @@ def matches(item, displayed):
         sx, sy = first.width / w, first.height / h
         mask[int(inside[1] * sy):int(inside[3] * sy), int(inside[0] * sx):int(inside[2] * sx)] = True
         weight = weight * mask
-    return float((gap * weight).sum() / max(1.0, weight.sum())) <= MAX_COLOR_GAP
+    limit = MAX_COLOR_GAP_MOTION if item.get("motion") else MAX_COLOR_GAP
+    return float((gap * weight).sum() / max(1.0, weight.sum())) <= limit
 
 
 # --- Repérage dans les compositions ---
@@ -225,7 +228,7 @@ def gradient(size, inverted):
     return Image.fromarray(rgb, "RGB")
 
 
-def locate(base, low, high, gif_path):
+def locate(base, low, high, gif_path, motion=False):
     """
     Emplacement du GIF dans la composition `base`, d'après les deux dessins de repérage (`low` : dégradé, `high` :
     dégradé inversé). Retourne {box, affine, mask (image L)} ou None (GIF caché ou couleurs transformées).
@@ -307,11 +310,11 @@ def locate(base, low, high, gif_path):
     mask_values = np.zeros((y1 - y0, x1 - x0), np.float32)
     mask_values[ky - y0, kx - x0] = weight[keep]
     mask = Image.fromarray((mask_values * 255).round().astype(np.uint8), "L")
-    item = {"gif": str(gif_path), "box": [x0, y0, x1 - x0, y1 - y0], "affine": affine, "mask": mask}
+    item = {"gif": str(gif_path), "box": [x0, y0, x1 - x0, y1 - y0], "affine": affine, "mask": mask, "motion": motion}
     # La première image du GIF, posée à cet endroit, doit ressembler au dessin (sinon : filtre de couleurs)
     first = np.asarray(frames(dict(item, mask=None), limit=1)[0][0], dtype=np.float32)
     drawn = np.asarray(base.convert("RGB").crop((x0, y0, x1, y1)), dtype=np.float32)
     gap = np.abs(first - drawn).mean(axis=2)
-    if float((gap * mask_values).sum() / max(1.0, mask_values.sum())) > MAX_COLOR_GAP:
+    if float((gap * mask_values).sum() / max(1.0, mask_values.sum())) > (MAX_COLOR_GAP_MOTION if motion else MAX_COLOR_GAP):
         return None
     return item

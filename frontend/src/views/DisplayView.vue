@@ -90,6 +90,8 @@ const sections: Section[] = [
       options: () => [{ value: "auto", label: t("Automatique") }, { value: "hdmi", label: t("HDMI") }, { value: "jack", label: t("Jack 3.5mm (Casque)") }] },
     { key: "video_audio_volume", label: () => t("Volume :"), type: "range", min: 0, max: 100, step: 5, unit: " %", showIf: (v) => !!v.slideshow_video_enabled && !!v.video_audio_enabled },
     { key: "music_duck_videos", label: () => t("Baisser la musique pendant les vidéos (elle revient ensuite)"), type: "toggle" },
+    { key: "motion_photos_enabled", label: () => t("Animer les photos animées des téléphones"), type: "toggle",
+      help: () => t("Photos animées Samsung et Google, Live Photos d'iPhone : leur courte vidéo est rejouée sur la photo, comme un GIF. Les animations sont créées la nuit (ou tout de suite depuis Préparation des médias).") },
     { key: "heavy_videos_at_night", label: () => t("Préparer les grosses vidéos la nuit seulement"), type: "toggle",
       help: () => t("Pendant la journée, le cadre prépare d'abord les photos et les petites vidéos ; les grosses attendent que l'écran soit éteint (le Raspberry Pi reste fluide). Le bouton Préparer de la page Préparation des médias agit toujours tout de suite.") },
     { key: "video_night_above_mb", label: () => t("Grosse vidéo à partir de (Mo)"), type: "number", min: 0, max: 100000, showIf: (v) => !!v.heavy_videos_at_night },

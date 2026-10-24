@@ -134,3 +134,35 @@ def media_reduce_api():
         parts.append(_("Échecs : %(list)s", list="; ".join(result["errors"][:3])))
     return jsonify({"success": not result["errors"] or bool(result["photos"] or result["videos_now"] or result["videos_later"]),
                     "message": " ".join(parts)})
+
+
+# --- Photos animées des téléphones (Samsung, Google, Live Photos) ---
+
+_motion_running = threading.Event()
+
+
+@app.route('/api/media/motion', methods=['GET', 'POST'])
+@login_required
+def media_motion_api():
+    from utils import motion_photos
+    width, height = _screen()
+    if request.method == 'GET':
+        return jsonify({"success": True, "pending": len(motion_photos.pending(width, height)), "running": _motion_running.is_set(),
+                        "enabled": load_config().get("motion_photos_enabled", True)})
+    if _motion_running.is_set():
+        return jsonify({"success": False, "message": _("Les animations sont déjà en cours de création.")}), 409
+    todo = motion_photos.pending(width, height)
+    if not todo:
+        return jsonify({"success": False, "message": _("Aucune photo animée en attente.")}), 400
+
+    def work():
+        _motion_running.set()
+        try:
+            motion_photos.run(todo)
+            if is_slideshow_running():
+                restart_slideshow_for_update()
+        finally:
+            _motion_running.clear()
+
+    threading.Thread(target=work, daemon=True, name="motion-photos").start()
+    return jsonify({"success": True, "message": _("%(count)s animation(s) en cours de création.", count=len(todo))})

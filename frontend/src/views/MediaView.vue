@@ -21,6 +21,7 @@ interface SpaceItem { source: string; label: string; name: string; kind: "photo"
 interface Space { items: SpaceItem[]; gain: number; saved: number; count: number; queue: { source: string; name: string }[] }
 
 const imports = ref<ImportItem[]>([]);
+const motion = ref<{ pending: number; running: boolean; enabled: boolean } | null>(null);
 const space = ref<Space | null>(null);
 const spaceLoading = ref(false);
 const picked = reactive<Record<string, boolean>>({});
@@ -72,6 +73,13 @@ async function prepare(source: string, names: string[]) {
     loadImports();
   }
 }
+async function loadMotion() {
+  try { motion.value = await get<{ pending: number; running: boolean; enabled: boolean }>("/api/media/motion"); } catch { motion.value = null; }
+}
+async function makeMotion() {
+  const r = await run(() => post("/api/media/motion"));
+  if (r?.success && motion.value) motion.value.running = true;
+}
 async function analyseSpace() {
   spaceLoading.value = true;
   try {
@@ -101,10 +109,12 @@ let wasActive = false;
 onMounted(() => {
   loadInventory();
   loadImports();
+  loadMotion();
   timer = window.setInterval(async () => {
     await loadImports();
     const active = imports.value.some((i) => i.active);
     if (wasActive && !active) loadInventory();  // une préparation vient de finir : états à jour
+    if (motion.value?.running) loadMotion();
     wasActive = active;
   }, 2000);
 });
@@ -153,6 +163,13 @@ onUnmounted(() => window.clearInterval(timer));
         </ul>
       </details>
     </div>
+  </section>
+
+  <section v-if="motion && motion.enabled && (motion.pending || motion.running)" class="card">
+    <div class="card-head"><h2><i class="fas fa-play-circle"></i>{{ t("Photos animées") }}</h2>
+      <button class="btn small primary" type="button" :disabled="motion.running" @click="makeMotion">
+        <i class="fas" :class="motion.running ? 'fa-spinner fa-spin' : 'fa-magic'"></i> {{ motion.running ? t("Création en cours...") : t("Créer maintenant") }}</button></div>
+    <p class="small muted">{{ t("{count} photo(s) animée(s) de téléphone attendent leur animation (créée automatiquement cette nuit).", { count: motion.pending }) }}</p>
   </section>
 
   <section class="card">

@@ -49,6 +49,21 @@ def original_gif(display_path):
     return original if animated.is_animated(original) else None
 
 
+def animation_source(display_path):
+    """Ce qui s'anime pour ce média : (GIF d'origine ou animation d'une photo animée, photo animée ?) ou (None, False)."""
+    gif = original_gif(display_path)
+    if gif:
+        return gif, False
+    from utils import motion_photos
+    path = Path(display_path)
+    folder = PHOTOS_DIR / path.parent.name
+    for ext in (".jpg", ".jpeg", ".JPG", ".JPEG", ".heic", ".HEIC"):
+        webp = motion_photos.animation_path(path.parent.name, f"{path.stem}{ext}")
+        if (folder / f"{path.stem}{ext}").exists() and webp.exists():
+            return webp, True
+    return None, False
+
+
 def probe(paths_inverted):
     """Dessins de repérage : `paths_inverted` = {média préparé: inversé}, ou None pour revenir aux vraies photos."""
     _probe.paths = {str(k): v for k, v in (paths_inverted or {}).items()}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-24 23:07+0200\n"
+"POT-Creation-Date: 2026-10-24 23:21+0200\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -187,11 +187,11 @@ msgstr "Gestoppt"
 msgid "Thème"
 msgstr "Design"
 
-#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:122
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:132
 msgid "préparation"
 msgstr "Vorbereitung"
 
-#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:122
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:132
 msgid "téléchargement"
 msgstr "Download"
 
@@ -442,7 +442,7 @@ msgid "Ajouter"
 msgstr "Hinzufügen"
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:117
+#: frontend/src/views/DisplayView.vue:119
 msgid "Bouton physique"
 msgstr "Physischer Taster"
 
@@ -927,8 +927,8 @@ msgid "Aucun appareil détecté."
 msgstr "Kein Gerät erkannt."
 
 #: frontend/src/components/PresenceCard.vue:73
-#: frontend/src/views/LogsView.vue:63 frontend/src/views/MediaView.vue:161
-#: frontend/src/views/MediaView.vue:191 frontend/src/views/NetworkView.vue:125
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/MediaView.vue:178
+#: frontend/src/views/MediaView.vue:208 frontend/src/views/NetworkView.vue:125
 #: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
@@ -3003,10 +3003,24 @@ msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "Musik während Videos leiser stellen (danach wieder normal)"
 
 #: frontend/src/views/DisplayView.vue:93
+msgid "Animer les photos animées des téléphones"
+msgstr "Bewegte Fotos von Handys animieren"
+
+#: frontend/src/views/DisplayView.vue:94
+msgid ""
+"Photos animées Samsung et Google, Live Photos d'iPhone : leur courte "
+"vidéo est rejouée sur la photo, comme un GIF. Les animations sont créées "
+"la nuit (ou tout de suite depuis Préparation des médias)."
+msgstr ""
+"Bewegte Fotos von Samsung und Google, Live Photos vom iPhone: ihr kurzes "
+"Video läuft wie ein GIF über dem Foto. Die Animationen werden nachts "
+"erstellt (oder sofort über Medienvorbereitung)."
+
+#: frontend/src/views/DisplayView.vue:95
 msgid "Préparer les grosses vidéos la nuit seulement"
 msgstr "Große Videos nur nachts vorbereiten"
 
-#: frontend/src/views/DisplayView.vue:94
+#: frontend/src/views/DisplayView.vue:96
 msgid ""
 "Pendant la journée, le cadre prépare d'abord les photos et les petites "
 "vidéos ; les grosses attendent que l'écran soit éteint (le Raspberry Pi "
@@ -3017,15 +3031,15 @@ msgstr ""
 "warten, bis der Bildschirm aus ist (der Raspberry Pi bleibt flüssig). Die"
 " Taste Vorbereiten auf der Seite Medienvorbereitung wirkt immer sofort."
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:97
 msgid "Grosse vidéo à partir de (Mo)"
 msgstr "Großes Video ab (MB)"
 
-#: frontend/src/views/DisplayView.vue:96
+#: frontend/src/views/DisplayView.vue:98
 msgid "Encodage allégé des vidéos à partir de (Mo)"
 msgstr "Leichtere Videokodierung ab (MB)"
 
-#: frontend/src/views/DisplayView.vue:97
+#: frontend/src/views/DisplayView.vue:99
 msgid ""
 "Les vidéos plus lourdes sont préparées en 720p (30 images/s au plus) : "
 "bien plus rapide et moins gourmand sur un Raspberry Pi, toujours en plein"
@@ -3035,14 +3049,14 @@ msgstr ""
 "schneller und schonender für einen Raspberry Pi, weiterhin im Vollbild. 0"
 " = nie."
 
-#: frontend/src/views/DisplayView.vue:98
+#: frontend/src/views/DisplayView.vue:100
 #: templates/configure/tab_affichage.html.jinja:258
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr ""
 "Hardware-Videodekodierung aktivieren (flüssiger, aber möglicherweise "
 "instabil)"
 
-#: frontend/src/views/DisplayView.vue:99
+#: frontend/src/views/DisplayView.vue:101
 #: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
@@ -3052,16 +3066,16 @@ msgstr ""
 " Raspberry Pis. Deaktivieren Sie das Kontrollkästchen, wenn nach Videos "
 "blaue/schwarze Bildschirme angezeigt werden."
 
-#: frontend/src/views/DisplayView.vue:101
+#: frontend/src/views/DisplayView.vue:103
 msgid "Télévision"
 msgstr "Fernseher"
 
-#: frontend/src/views/DisplayView.vue:102
+#: frontend/src/views/DisplayView.vue:104
 #: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Fernseher über HDMI-CEC steuern"
 
-#: frontend/src/views/DisplayView.vue:103
+#: frontend/src/views/DisplayView.vue:105
 #: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
@@ -3072,12 +3086,12 @@ msgstr ""
 "Rahmens ein und geht mit ihm in Standby. Aktivieren Sie auch „HDMI-CEC“ "
 "(Anynet+, Bravia Sync, SimpLink...) in den TV-Einstellungen."
 
-#: frontend/src/views/DisplayView.vue:105
+#: frontend/src/views/DisplayView.vue:107
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Energieverwaltung (Connected Socket)"
 
-#: frontend/src/views/DisplayView.vue:106
+#: frontend/src/views/DisplayView.vue:108
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -3088,23 +3102,23 @@ msgstr ""
 " Sie ihn über eine angeschlossene Steckdose (WLAN) ausschalten. Pimmich "
 "sendet eine einfache HTTP-Anfrage an die von Ihnen angegebenen URLs."
 
-#: frontend/src/views/DisplayView.vue:108
+#: frontend/src/views/DisplayView.vue:110
 msgid "Activer le contrôle par prise connectée"
 msgstr "Steuerung über smarte Steckdose aktivieren"
 
-#: frontend/src/views/DisplayView.vue:109
+#: frontend/src/views/DisplayView.vue:111
 msgid "URL pour ALLUMER la prise :"
 msgstr "URL zum EINSCHALTEN der Steckdose:"
 
-#: frontend/src/views/DisplayView.vue:110
+#: frontend/src/views/DisplayView.vue:112
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr "URL zum AUSSCHALTEN der Steckdose:"
 
-#: frontend/src/views/DisplayView.vue:111
+#: frontend/src/views/DisplayView.vue:113
 msgid "Délai après allumage (secondes) :"
 msgstr "Verzögerung nach dem Einschalten (Sekunden):"
 
-#: frontend/src/views/DisplayView.vue:112
+#: frontend/src/views/DisplayView.vue:114
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
@@ -3114,21 +3128,21 @@ msgstr ""
 " erzwingen. Erhöhen Sie den Wert, wenn die Auflösung immer noch falsch "
 "ist."
 
-#: frontend/src/views/DisplayView.vue:113
+#: frontend/src/views/DisplayView.vue:115
 msgid "URL de Statut (Optionnel) :"
 msgstr "Status-URL (optional):"
 
-#: frontend/src/views/DisplayView.vue:114
+#: frontend/src/views/DisplayView.vue:116
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Home Assistant-Zugriffstoken (bei HA-Status-URL):"
 
-#: frontend/src/views/DisplayView.vue:115
+#: frontend/src/views/DisplayView.vue:117
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Erstellen Sie in Ihrem Home Assistant-Profil ein „Long-Term Access Token“."
 
-#: frontend/src/views/DisplayView.vue:118
+#: frontend/src/views/DisplayView.vue:120
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
@@ -3136,11 +3150,11 @@ msgstr ""
 "Ein Taster am Raspberry Pi: Ein Druck schaltet den Rahmen in den "
 "Ruhezustand, ein weiterer weckt ihn."
 
-#: frontend/src/views/DisplayView.vue:120
+#: frontend/src/views/DisplayView.vue:122
 msgid "Activer le bouton physique"
 msgstr "Physischen Taster aktivieren"
 
-#: frontend/src/views/DisplayView.vue:121
+#: frontend/src/views/DisplayView.vue:123
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "GPIO-Pin (BCM-Nummerierung)"
 
@@ -3869,7 +3883,7 @@ msgid ""
 "moment-là)"
 msgstr "Saisonthemen nur in ihrem Zeitraum (und dann häufiger)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:368
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:369
 msgid "Gardez au moins une disposition."
 msgstr "Behalten Sie mindestens ein Layout."
 
@@ -4752,35 +4766,35 @@ msgstr ""
 "Pimmich steht unter der MIT-Lizenz. Komponenten von Drittanbietern "
 "behalten ihre eigene Lizenz:"
 
-#: frontend/src/views/MediaView.vue:28
+#: frontend/src/views/MediaView.vue:29
 msgid "Pas d'autre copie que celle du cadre"
 msgstr "Keine andere Kopie als die auf dem Rahmen"
 
-#: frontend/src/views/MediaView.vue:39
+#: frontend/src/views/MediaView.vue:40
 msgid "En file d'attente"
 msgstr "In Warteschlange"
 
-#: frontend/src/views/MediaView.vue:39 frontend/src/views/MediaView.vue:181
+#: frontend/src/views/MediaView.vue:40 frontend/src/views/MediaView.vue:198
 msgid "Prévue cette nuit"
 msgstr "Heute Nacht geplant"
 
-#: frontend/src/views/MediaView.vue:39
+#: frontend/src/views/MediaView.vue:40
 msgid "Prêt"
 msgstr "Bereit"
 
-#: frontend/src/views/MediaView.vue:39
+#: frontend/src/views/MediaView.vue:40
 msgid "Pas préparé"
 msgstr "Nicht vorbereitet"
 
-#: frontend/src/views/MediaView.vue:39
+#: frontend/src/views/MediaView.vue:40
 msgid "Fichier préparé vide"
 msgstr "Vorbereitete Datei ist leer"
 
-#: frontend/src/views/MediaView.vue:39
+#: frontend/src/views/MediaView.vue:40
 msgid "Préparé pour une autre taille d'écran"
 msgstr "Für eine andere Bildschirmgröße vorbereitet"
 
-#: frontend/src/views/MediaView.vue:91
+#: frontend/src/views/MediaView.vue:99
 #, python-brace-format
 msgid ""
 "{count} de ces médias n'existent que sur le cadre (téléphone, invités, "
@@ -4791,61 +4805,82 @@ msgstr ""
 "Telegram...): Ihr Original wird unwiderruflich durch die verkleinerte "
 "Version ersetzt."
 
-#: frontend/src/views/MediaView.vue:92
+#: frontend/src/views/MediaView.vue:100
 msgid ""
 "Les originaux restent disponibles dans leur source (Google Drive, "
 "Immich...)."
 msgstr "Die Originale bleiben in ihrer Quelle verfügbar (Google Drive, Immich...)."
 
-#: frontend/src/views/MediaView.vue:93
+#: frontend/src/views/MediaView.vue:101
 #, python-brace-format
 msgid "Remplacer {count} original(aux) par une version réduite ?"
 msgstr "{count} Original(e) durch eine verkleinerte Version ersetzen?"
 
-#: frontend/src/views/MediaView.vue:116
+#: frontend/src/views/MediaView.vue:126
 msgid "Préparation en cours"
 msgstr "Laufende Vorbereitung"
 
-#: frontend/src/views/MediaView.vue:117
+#: frontend/src/views/MediaView.vue:127
 msgid "Aucun import ni préparation en cours."
 msgstr "Kein Import und keine Vorbereitung läuft."
 
-#: frontend/src/views/MediaView.vue:122
+#: frontend/src/views/MediaView.vue:132
 msgid "depuis"
 msgstr "seit"
 
-#: frontend/src/views/MediaView.vue:128
+#: frontend/src/views/MediaView.vue:138
 #, python-brace-format
 msgid "{done} médias sur {total} préparés"
 msgstr "{done} von {total} Medien vorbereitet"
 
-#: frontend/src/views/MediaView.vue:138
+#: frontend/src/views/MediaView.vue:148
 msgid "encodage vidéo"
 msgstr "Videokodierung"
 
-#: frontend/src/views/MediaView.vue:138
+#: frontend/src/views/MediaView.vue:148
 #: templates/configure/scripts_gallery.html.jinja:53
 msgid "photo"
 msgstr "Foto"
 
-#: frontend/src/views/MediaView.vue:142
+#: frontend/src/views/MediaView.vue:152
 #, python-brace-format
 msgid "Vidéo encodée à {percent} %"
 msgstr "Video zu {percent} % kodiert"
 
-#: frontend/src/views/MediaView.vue:146
+#: frontend/src/views/MediaView.vue:156
 msgid "Derniers médias traités"
 msgstr "Zuletzt verarbeitete Medien"
 
-#: frontend/src/views/MediaView.vue:159
+#: frontend/src/views/MediaView.vue:169
+msgid "Photos animées"
+msgstr "Bewegte Fotos"
+
+#: frontend/src/views/MediaView.vue:171
+msgid "Création en cours..."
+msgstr "Wird erstellt..."
+
+#: frontend/src/views/MediaView.vue:171
+msgid "Créer maintenant"
+msgstr "Jetzt erstellen"
+
+#: frontend/src/views/MediaView.vue:172
+#, python-brace-format
+msgid ""
+"{count} photo(s) animée(s) de téléphone attendent leur animation (créée "
+"automatiquement cette nuit)."
+msgstr ""
+"{count} bewegte(s) Foto(s) warten auf ihre Animation (wird heute Nacht "
+"automatisch erstellt)."
+
+#: frontend/src/views/MediaView.vue:176
 msgid "Gagner de la place"
 msgstr "Speicherplatz freigeben"
 
-#: frontend/src/views/MediaView.vue:161
+#: frontend/src/views/MediaView.vue:178
 msgid "Analyser"
 msgstr "Analysieren"
 
-#: frontend/src/views/MediaView.vue:162
+#: frontend/src/views/MediaView.vue:179
 msgid ""
 "Les très grosses photos (plus de 4096 px) et vidéos (plus de 100 Mo) déjà"
 " prêtes peuvent être remplacées par une version réduite, toujours plus "
@@ -4857,34 +4892,34 @@ msgstr ""
 "noch größer als der Bildschirm ist: Fotos mit 4096 px samt Daten (Datum, "
 "Ort), Videos in 1080p, nachts neu kodiert."
 
-#: frontend/src/views/MediaView.vue:164
+#: frontend/src/views/MediaView.vue:181
 #, python-brace-format
 msgid "Déjà gagné : {size} ({count} médias réduits)."
 msgstr "Bereits gespart: {size} ({count} Medien verkleinert)."
 
-#: frontend/src/views/MediaView.vue:165
+#: frontend/src/views/MediaView.vue:182
 msgid "Aucun média ne gagnerait à être réduit."
 msgstr "Kein Medium würde von einer Verkleinerung profitieren."
 
-#: frontend/src/views/MediaView.vue:168
+#: frontend/src/views/MediaView.vue:185
 #, python-brace-format
 msgid "{count} médias, jusqu'à {size} à gagner"
 msgstr "{count} Medien, bis zu {size} einsparbar"
 
-#: frontend/src/views/MediaView.vue:171
+#: frontend/src/views/MediaView.vue:188
 #, python-brace-format
 msgid "Réduire la sélection ({size})"
 msgstr "Auswahl verkleinern ({size})"
 
-#: frontend/src/views/MediaView.vue:182
+#: frontend/src/views/MediaView.vue:199
 msgid "Seul exemplaire"
 msgstr "Einzige Kopie"
 
-#: frontend/src/views/MediaView.vue:190
+#: frontend/src/views/MediaView.vue:207
 msgid "Médias du cadre"
 msgstr "Medien des Rahmens"
 
-#: frontend/src/views/MediaView.vue:192
+#: frontend/src/views/MediaView.vue:209
 msgid ""
 "Tous les médias reçus, source par source. Un média « pas préparé » "
 "n'apparaît pas sur le cadre : le bouton Préparer le rattrape (import "
@@ -4894,27 +4929,27 @@ msgstr ""
 "Medium erscheint nicht auf dem Rahmen: Die Taste Vorbereiten holt es nach"
 " (abgebrochener Import, alter Fehler...)."
 
-#: frontend/src/views/MediaView.vue:194
+#: frontend/src/views/MediaView.vue:211
 msgid "À préparer"
 msgstr "Vorzubereiten"
 
-#: frontend/src/views/MediaView.vue:194
+#: frontend/src/views/MediaView.vue:211
 msgid "En échec"
 msgstr "Fehlgeschlagen"
 
-#: frontend/src/views/MediaView.vue:194
+#: frontend/src/views/MediaView.vue:211
 msgid "Préparés"
 msgstr "Vorbereitet"
 
-#: frontend/src/views/MediaView.vue:194
+#: frontend/src/views/MediaView.vue:211
 msgid "Tous"
 msgstr "Alle"
 
-#: frontend/src/views/MediaView.vue:196
+#: frontend/src/views/MediaView.vue:213
 msgid "Rechercher un fichier"
 msgstr "Datei suchen"
 
-#: frontend/src/views/MediaView.vue:198
+#: frontend/src/views/MediaView.vue:215
 #: templates/configure/scripts_gallery.html.jinja:8
 #: templates/configure/scripts_gallery.html.jinja:36
 #: templates/configure/scripts_main.html.jinja:1320
@@ -4934,29 +4969,29 @@ msgstr "Datei suchen"
 msgid "Chargement..."
 msgstr "Laden..."
 
-#: frontend/src/views/MediaView.vue:199
+#: frontend/src/views/MediaView.vue:216
 msgid "Tous les médias sont préparés."
 msgstr "Alle Medien sind vorbereitet."
 
-#: frontend/src/views/MediaView.vue:199
+#: frontend/src/views/MediaView.vue:216
 msgid "Aucun média."
 msgstr "Keine Medien."
 
-#: frontend/src/views/MediaView.vue:205
+#: frontend/src/views/MediaView.vue:222
 #, python-brace-format
 msgid "{prepared} préparés sur {total}"
 msgstr "{prepared} von {total} vorbereitet"
 
-#: frontend/src/views/MediaView.vue:208
+#: frontend/src/views/MediaView.vue:225
 #, python-brace-format
 msgid "Préparer les {count} manquants"
 msgstr "Die {count} fehlenden vorbereiten"
 
-#: frontend/src/views/MediaView.vue:222
+#: frontend/src/views/MediaView.vue:239
 msgid "Préparer"
 msgstr "Vorbereiten"
 
-#: frontend/src/views/MediaView.vue:226
+#: frontend/src/views/MediaView.vue:243
 msgid "Afficher plus"
 msgstr "Mehr anzeigen"
 
@@ -7285,9 +7320,9 @@ msgid "Enregistrement…"
 msgstr "Wird gespeichert…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:324 web/routes_settings.py:378
-#: web/routes_settings.py:400 web/routes_settings.py:452
-#: web/routes_settings.py:476 web/routes_settings.py:486
+#: web/routes_settings.py:325 web/routes_settings.py:379
+#: web/routes_settings.py:401 web/routes_settings.py:453
+#: web/routes_settings.py:477 web/routes_settings.py:487
 msgid "Enregistré"
 msgstr "Gespeichert"
 
@@ -9357,39 +9392,39 @@ msgstr "Eier, frisches Gras und Frühlingsblumen."
 msgid "Action réservée aux administrateurs."
 msgstr "Aktion nur für Administratoren."
 
-#: utils/compositions.py:484
+#: utils/compositions.py:499
 msgid "Tableau en liège"
 msgstr "Pinnwand aus Kork"
 
-#: utils/compositions.py:485
+#: utils/compositions.py:500
 msgid "Polaroïds éparpillés"
 msgstr "Verstreute Polaroids"
 
-#: utils/compositions.py:486
+#: utils/compositions.py:501
 msgid "Mosaïque"
 msgstr "Mosaik"
 
-#: utils/compositions.py:487
+#: utils/compositions.py:502
 msgid "Pellicule"
 msgstr "Filmstreifen"
 
-#: utils/compositions.py:488
+#: utils/compositions.py:503
 msgid "Mur de cadres"
 msgstr "Bilderwand"
 
-#: utils/compositions.py:489
+#: utils/compositions.py:504
 msgid "Duo / Triptyque"
 msgstr "Diptychon / Triptychon"
 
-#: utils/compositions.py:490
+#: utils/compositions.py:505
 msgid "Magazine"
 msgstr "Magazin"
 
-#: utils/compositions.py:491
+#: utils/compositions.py:506
 msgid "Scrapbook"
 msgstr "Scrapbook"
 
-#: utils/compositions.py:492
+#: utils/compositions.py:507
 msgid "Photomaton"
 msgstr "Fotoautomat"
 
@@ -10199,13 +10234,13 @@ msgstr ""
 "Der Wert für das Immich-Fotolimit ist ungültig. Der bisherige Wert bleibt"
 " erhalten."
 
-#: web/routes_config.py:253 web/routes_settings.py:485
+#: web/routes_config.py:253 web/routes_settings.py:486
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive-Schlüssel nicht gespeichert: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:319
-#: web/routes_settings.py:376 web/routes_settings.py:450
+#: web/routes_config.py:281 web/routes_settings.py:320
+#: web/routes_settings.py:377 web/routes_settings.py:451
 msgid "Réglages modifiés"
 msgstr "Einstellungen geändert"
 
@@ -10217,8 +10252,8 @@ msgstr ""
 "Konfiguration gespeichert. Die Diashow wurde neu gestartet, um die "
 "Änderungen zu übernehmen."
 
-#: web/routes_family.py:26 web/routes_settings.py:365
-#: web/routes_settings.py:470 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:366
+#: web/routes_settings.py:471 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Ungültige Liste."
 
@@ -10783,7 +10818,7 @@ msgstr ""
 "Noch keine Gezeitendaten: Die Diashow ruft sie ab, oder nutzen Sie "
 "„Aktualisierung erzwingen“."
 
-#: web/routes_media.py:73 web/routes_settings.py:443 web/routes_storage.py:114
+#: web/routes_media.py:73 web/routes_settings.py:444 web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Unbekannte Quelle."
 
@@ -10821,6 +10856,19 @@ msgstr ""
 #, python-format
 msgid "Échecs : %(list)s"
 msgstr "Fehler: %(list)s"
+
+#: web/routes_media.py:153
+msgid "Les animations sont déjà en cours de création."
+msgstr "Die Animationen werden bereits erstellt."
+
+#: web/routes_media.py:156
+msgid "Aucune photo animée en attente."
+msgstr "Kein bewegtes Foto wartet."
+
+#: web/routes_media.py:168
+#, python-format
+msgid "%(count)s animation(s) en cours de création."
+msgstr "%(count)s Animation(en) werden erstellt."
 
 #: web/routes_messages.py:61 web/routes_messages.py:79
 #, python-format
@@ -11159,25 +11207,25 @@ msgstr "Playlist nicht gefunden."
 msgid "Citation du jour enregistrée."
 msgstr "Zitat des Tages gespeichert."
 
-#: web/routes_settings.py:294
+#: web/routes_settings.py:295
 msgid "Aucun réglage à enregistrer."
 msgstr "Keine Einstellung zu speichern."
 
-#: web/routes_settings.py:298
+#: web/routes_settings.py:299
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unbekannte Einstellung: %(key)s"
 
-#: web/routes_settings.py:302
+#: web/routes_settings.py:303
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Ungültiger Wert für „%(key)s“."
 
-#: web/routes_settings.py:395
+#: web/routes_settings.py:396
 msgid "Valeur invalide."
 msgstr "Ungültiger Wert."
 
-#: web/routes_settings.py:400
+#: web/routes_settings.py:401
 msgid "Supprimé."
 msgstr "Gelöscht."
 

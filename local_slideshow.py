@@ -2623,7 +2623,7 @@ class GifPlayer:
                 frame[2] = True
             surface = frame[0]
             if surface.get_size() != track["box"].size:
-                surface = pygame.transform.scale(surface, track["box"].size)
+                surface = pygame.transform.smoothscale(surface, track["box"].size)
             clip = track["clip"]
             screen.blit(self.base, clip.topleft, clip)
             screen.blit(surface, track["box"].topleft)

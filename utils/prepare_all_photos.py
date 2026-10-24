@@ -605,8 +605,9 @@ def media_inventory(source_type, width, height):
     config = load_config()
     waits_night = not night_work.heavy_allowed(config)
     items = []
+    from utils import motion_photos
     for entry in os.scandir(source_dir) if source_dir.is_dir() else []:
-        if not entry.is_file() or not is_media(entry.name):
+        if not entry.is_file() or not is_media(entry.name) or motion_photos.is_live_photo_video(entry.path):
             continue
         stat = entry.stat()
         state = preparation_state(prepared_dir, entry.name, width, height)
@@ -645,7 +646,14 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
     PREPARED_SOURCE_DIR.mkdir(parents=True, exist_ok=True)
     
     # Smart synchronization logic
-    source_files = {f: os.path.splitext(f)[0] for f in os.listdir(SOURCE_DIR_FOR_PREP) if is_media(f)}
+    from utils import motion_photos
+    source_files = {f: os.path.splitext(f)[0] for f in os.listdir(SOURCE_DIR_FOR_PREP)
+                    if is_media(f) and not motion_photos.is_live_photo_video(SOURCE_DIR_FOR_PREP / f)}  # Live Photo : vidéo de la photo
+    for f in os.listdir(SOURCE_DIR_FOR_PREP):  # préparée autrefois comme une vidéo à part : retirée du diaporama
+        if motion_photos.is_live_photo_video(SOURCE_DIR_FOR_PREP / f):
+            stem = os.path.splitext(f)[0]
+            for old in (PREPARED_SOURCE_DIR / f"{stem}.mp4", PREPARED_SOURCE_DIR / f"{stem}_thumbnail.jpg"):
+                old.unlink(missing_ok=True)
     source_basenames = set(source_files.values())
     
     # Déjà préparés : fichier présent, non vide, à la taille de l'écran (sinon : changement d'orientation, à refaire)
