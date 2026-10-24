@@ -1049,3 +1049,32 @@ def _mtime(path):
         return os.path.getmtime(path)
     except OSError:
         return 0
+
+
+def night_work_worker():
+    """La nuit (diaporama éteint) : grosses vidéos en attente, puis une nouvelle tentative pour les médias en échec."""
+    from utils import night_work, notify
+
+    def tell(failed):
+        config = load_config()
+        names = ", ".join(name for _source, name in failed[:5]) + ("…" if len(failed) > 5 else "")
+        base = notify.base_url(config)
+        with app.app_context():
+            notify.send(config, "media", _("Médias impossibles à préparer"),
+                        _("%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai cette nuit : %(names)s", count=len(failed), names=names),
+                        key=f"media:{night_work.night_key()}", click=f"{base}/app/#/preparation" if base else None, repeat_after=24 * 3600)
+
+    time.sleep(300)
+    while True:
+        try:
+            config = load_config()
+            busy = any(i.get("active") for i in import_progress.snapshot())
+            if not busy and not night_work.active_now(config):
+                width, height = int(config.get("display_width", 1920)), int(config.get("display_height", 1080))
+                done = night_work.run_once(config, width, height, notify=tell)
+                if done["heavy"] or done["retried"]:
+                    logger.info(f"[Nuit] {done['heavy']} grosse(s) vidéo(s), {done['retried']} nouvel(s) essai(s), "
+                                f"{len(done['notified'])} échec(s) signalé(s)")
+        except Exception as e:
+            logger.warning(f"[Nuit] {e}")
+        time.sleep(600)

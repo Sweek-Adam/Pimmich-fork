@@ -601,6 +601,9 @@ def media_inventory(source_type, width, height):
     source_dir = Path("static") / "photos" / source_type
     prepared_dir = Path("static") / "prepared" / source_type
     errors = preparation_errors()
+    from utils import night_work
+    config = load_config()
+    waits_night = not night_work.heavy_allowed(config)
     items = []
     for entry in os.scandir(source_dir) if source_dir.is_dir() else []:
         if not entry.is_file() or not is_media(entry.name):
@@ -610,7 +613,8 @@ def media_inventory(source_type, width, height):
         error = errors.get(f"{source_type}/{entry.name}")
         items.append({"name": entry.name, "kind": "video" if is_video(entry.name) else "photo", "size": stat.st_size,
                       "modified": int(stat.st_mtime), "state": state, "prepared": prepared_name(entry.name),
-                      "error": error["error"] if error and state != "ok" else None})
+                      "error": error["error"] if error and state != "ok" else None,
+                      "night": state != "ok" and waits_night and night_work.is_heavy(entry.path, config)})
     return sorted(items, key=lambda i: -i["modified"])
 
 
@@ -688,6 +692,14 @@ def prepare_all_photos_with_progress(screen_width=None, screen_height=None, sour
     files_to_prepare = [f for f, basename in source_files.items() if basename in basenames_to_prepare]
     # Les petits médias d'abord (photos, courtes vidéos) : ils arrivent vite sur le cadre, les gros vidéos à la fin
     files_to_prepare.sort(key=lambda f: (os.path.getsize(SOURCE_DIR_FOR_PREP / f) if (SOURCE_DIR_FOR_PREP / f).exists() else 0, f))
+    # Grosses vidéos : la nuit seulement (diaporama éteint), pour ne pas saturer le Raspberry Pi pendant l'affichage
+    from utils import night_work
+    config_now = load_config()
+    if not night_work.heavy_allowed(config_now):
+        later = [f for f in files_to_prepare if night_work.is_heavy(SOURCE_DIR_FOR_PREP / f, config_now)]
+        if later:
+            files_to_prepare = [f for f in files_to_prepare if f not in later]
+            yield yield_and_log("info", f"{len(later)} grosse(s) vidéo(s) préparée(s) cette nuit, quand le cadre sera éteint.")
     total = len(files_to_prepare)
     
     if total == 0:

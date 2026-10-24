@@ -5,7 +5,7 @@ import { t } from "../i18n";
 import { run } from "../toast";
 
 type State = "ok" | "missing" | "empty" | "stale";
-interface Media { name: string; kind: "photo" | "video"; size: number; modified: number; state: State; prepared: string; error: string | null; queued: boolean }
+interface Media { name: string; kind: "photo" | "video"; size: number; modified: number; state: State; prepared: string; error: string | null; queued: boolean; night?: boolean }
 interface Source { source: string; label: string; items: Media[]; total: number; prepared: number }
 interface Work {
   current: { name: string; kind: string; size: number | null; elapsed: number; index: number | null; total: number | null; step: string; percent: number | null; speed: string | null } | null;
@@ -28,8 +28,8 @@ const PAGE = 60;
 
 const mb = (bytes: number | null | undefined) => bytes == null ? "" : bytes >= 1048576 ? `${(bytes / 1048576).toFixed(bytes >= 104857600 ? 0 : 1)} Mo` : `${Math.max(1, Math.round(bytes / 1024))} Ko`;
 const duration = (s: number) => s < 60 ? `${Math.round(s)} s` : s < 3600 ? `${Math.floor(s / 60)} min ${String(Math.round(s % 60)).padStart(2, "0")}` : `${Math.floor(s / 3600)} h ${String(Math.floor((s % 3600) / 60)).padStart(2, "0")}`;
-const stateLabel = (m: Media) => m.queued ? t("En file d'attente") : ({ ok: t("Prêt"), missing: t("Pas préparé"), empty: t("Fichier préparé vide"), stale: t("Préparé pour une autre taille d'écran") }[m.state]);
-const stateClass = (m: Media) => m.queued ? "off" : m.state === "ok" ? "ok" : m.error ? "bad" : "warn";
+const stateLabel = (m: Media) => m.queued ? t("En file d'attente") : m.night && !m.error ? t("Prévue cette nuit") : ({ ok: t("Prêt"), missing: t("Pas préparé"), empty: t("Fichier préparé vide"), stale: t("Préparé pour une autre taille d'écran") }[m.state]);
+const stateClass = (m: Media) => m.queued || (m.night && !m.error) ? "off" : m.state === "ok" ? "ok" : m.error ? "bad" : "warn";
 const thumb = (source: string, m: Media) => m.state !== "ok" ? null
   : `/static/prepared/${encodeURIComponent(source)}/${encodeURIComponent(m.kind === "video" ? m.prepared.replace(/\.mp4$/, "_thumbnail.jpg") : m.prepared)}`;
 

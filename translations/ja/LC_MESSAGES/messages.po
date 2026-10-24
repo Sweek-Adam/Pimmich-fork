@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-24 22:46+0200\n"
+"POT-Creation-Date: 2026-10-24 23:02+0200\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -440,7 +440,7 @@ msgid "Ajouter"
 msgstr "追加"
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:114
+#: frontend/src/views/DisplayView.vue:117
 msgid "Bouton physique"
 msgstr "物理ボタン"
 
@@ -2923,22 +2923,40 @@ msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "動画の間は音楽を下げる（終了後に戻す）"
 
 #: frontend/src/views/DisplayView.vue:93
+msgid "Préparer les grosses vidéos la nuit seulement"
+msgstr "大きな動画は夜だけ準備する"
+
+#: frontend/src/views/DisplayView.vue:94
+msgid ""
+"Pendant la journée, le cadre prépare d'abord les photos et les petites "
+"vidéos ; les grosses attendent que l'écran soit éteint (le Raspberry Pi "
+"reste fluide). Le bouton Préparer de la page Préparation des médias agit "
+"toujours tout de suite."
+msgstr ""
+"日中は写真と小さな動画を先に準備し、大きな動画は画面が消えるまで待ちます（Raspberry "
+"Piが快適なまま）。「メディアの準備」ページの「準備」ボタンはいつでもすぐに実行します。"
+
+#: frontend/src/views/DisplayView.vue:95
+msgid "Grosse vidéo à partir de (Mo)"
+msgstr "大きな動画とみなすサイズ（MB以上）"
+
+#: frontend/src/views/DisplayView.vue:96
 msgid "Encodage allégé des vidéos à partir de (Mo)"
 msgstr "軽量エンコードにする動画のサイズ（MB以上）"
 
-#: frontend/src/views/DisplayView.vue:94
+#: frontend/src/views/DisplayView.vue:97
 msgid ""
 "Les vidéos plus lourdes sont préparées en 720p (30 images/s au plus) : "
 "bien plus rapide et moins gourmand sur un Raspberry Pi, toujours en plein"
 " écran. 0 = jamais."
 msgstr "これより大きい動画は720p（最大30fps）で準備します。Raspberry Piでずっと速く軽く、全画面表示のままです。0 = しない。"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:98
 #: templates/configure/tab_affichage.html.jinja:258
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr "ハードウェア ビデオ デコードを有効にする (スムーズですが、不安定になる可能性があります)"
 
-#: frontend/src/views/DisplayView.vue:96
+#: frontend/src/views/DisplayView.vue:99
 #: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
@@ -2947,16 +2965,16 @@ msgstr ""
 "Raspberry Pi "
 "での再生をよりスムーズにするには、このボックスをチェックします。ビデオの後にブルースクリーンやブラックスクリーンが発生する場合は、チェックを外します。"
 
-#: frontend/src/views/DisplayView.vue:98
+#: frontend/src/views/DisplayView.vue:101
 msgid "Télévision"
 msgstr "テレビ"
 
-#: frontend/src/views/DisplayView.vue:99
+#: frontend/src/views/DisplayView.vue:102
 #: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "HDMI-CEC でテレビを操作"
 
-#: frontend/src/views/DisplayView.vue:100
+#: frontend/src/views/DisplayView.vue:103
 #: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
@@ -2966,12 +2984,12 @@ msgstr ""
 "テレビの場合：フォトフレームの起動時にフレームの入力でテレビが点き、一緒にスタンバイになります。テレビの設定で「HDMI-"
 "CEC」（Anynet+、Bravia Sync、SimpLink など）も有効にしてください。"
 
-#: frontend/src/views/DisplayView.vue:102
+#: frontend/src/views/DisplayView.vue:105
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "電源管理 (接続されたソケット)"
 
-#: frontend/src/views/DisplayView.vue:103
+#: frontend/src/views/DisplayView.vue:106
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -2981,54 +2999,54 @@ msgstr ""
 "画面が完全にスリープ状態にならない場合は、接続されているコンセント (Wi-Fi) を使用して電源をオフにすることができます。 Pimmich "
 "は、指定した URL に単純な HTTP リクエストを送信します。"
 
-#: frontend/src/views/DisplayView.vue:105
+#: frontend/src/views/DisplayView.vue:108
 msgid "Activer le contrôle par prise connectée"
 msgstr "スマートプラグで制御する"
 
-#: frontend/src/views/DisplayView.vue:106
+#: frontend/src/views/DisplayView.vue:109
 msgid "URL pour ALLUMER la prise :"
 msgstr "プラグをオンにする URL："
 
-#: frontend/src/views/DisplayView.vue:107
+#: frontend/src/views/DisplayView.vue:110
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr "プラグをオフにする URL："
 
-#: frontend/src/views/DisplayView.vue:108
+#: frontend/src/views/DisplayView.vue:111
 msgid "Délai après allumage (secondes) :"
 msgstr "電源投入後の待機時間（秒）："
 
-#: frontend/src/views/DisplayView.vue:109
+#: frontend/src/views/DisplayView.vue:112
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
 msgstr "解像度を強制する前に画面が初期化されるまで待機する時間。解像度がまだ正しくない場合は、値を増やします。"
 
-#: frontend/src/views/DisplayView.vue:110
+#: frontend/src/views/DisplayView.vue:113
 msgid "URL de Statut (Optionnel) :"
 msgstr "状態の URL（任意）："
 
-#: frontend/src/views/DisplayView.vue:111
+#: frontend/src/views/DisplayView.vue:114
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "ホーム アシスタント アクセス トークン (HA ステータス URL の場合):"
 
-#: frontend/src/views/DisplayView.vue:112
+#: frontend/src/views/DisplayView.vue:115
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "ホーム アシスタント プロファイルに「長期アクセス トークン」を作成します。"
 
-#: frontend/src/views/DisplayView.vue:115
+#: frontend/src/views/DisplayView.vue:118
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
 msgstr "Raspberry Pi につないだボタン：1 回押すとスリープ、もう 1 回でスリープ解除します。"
 
-#: frontend/src/views/DisplayView.vue:117
+#: frontend/src/views/DisplayView.vue:120
 msgid "Activer le bouton physique"
 msgstr "物理ボタンを有効にする"
 
-#: frontend/src/views/DisplayView.vue:118
+#: frontend/src/views/DisplayView.vue:121
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "GPIO ピン（BCM 番号）"
 
@@ -3714,7 +3732,7 @@ msgid ""
 "moment-là)"
 msgstr "季節のテーマは期間中のみ表示（その期間はより頻繁に表示）"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:366
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:368
 msgid "Gardez au moins une disposition."
 msgstr "レイアウトを少なくとも1つ残してください。"
 
@@ -4559,6 +4577,10 @@ msgstr "Pimmich は MIT ライセンスで配布されています。サード�
 #: frontend/src/views/MediaView.vue:31
 msgid "En file d'attente"
 msgstr "待機中"
+
+#: frontend/src/views/MediaView.vue:31
+msgid "Prévue cette nuit"
+msgstr "今夜準備予定"
 
 #: frontend/src/views/MediaView.vue:31
 msgid "Prêt"
@@ -6936,9 +6958,9 @@ msgid "Enregistrement…"
 msgstr "保存中…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:322 web/routes_settings.py:376
-#: web/routes_settings.py:398 web/routes_settings.py:450
-#: web/routes_settings.py:474 web/routes_settings.py:484
+#: web/routes_settings.py:324 web/routes_settings.py:378
+#: web/routes_settings.py:400 web/routes_settings.py:452
+#: web/routes_settings.py:476 web/routes_settings.py:486
 msgid "Enregistré"
 msgstr "保存しました"
 
@@ -9289,6 +9311,10 @@ msgstr "フォトフレームの問題（電源、熱、ディスク）"
 msgid "Imports terminés"
 msgstr "完了したインポート"
 
+#: utils/notify.py:23 web/workers.py:1063
+msgid "Médias impossibles à préparer"
+msgstr "準備できないメディア"
+
 #: utils/quotes.py:19
 msgid "Le mot de la famille"
 msgstr "家族の言葉"
@@ -9697,13 +9723,13 @@ msgid ""
 "précédente est conservée."
 msgstr "イミッチ写真制限の値が無効です。以前の値が保持されます。"
 
-#: web/routes_config.py:253 web/routes_settings.py:483
+#: web/routes_config.py:253 web/routes_settings.py:485
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive のキーが保存されませんでした：%(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:317
-#: web/routes_settings.py:374 web/routes_settings.py:448
+#: web/routes_config.py:281 web/routes_settings.py:319
+#: web/routes_settings.py:376 web/routes_settings.py:450
 msgid "Réglages modifiés"
 msgstr "設定を変更"
 
@@ -9713,8 +9739,8 @@ msgid ""
 "changements."
 msgstr "設定が保存されました。変更を適用するためにスライドショーが再開されました。"
 
-#: web/routes_family.py:26 web/routes_settings.py:363
-#: web/routes_settings.py:468 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:365
+#: web/routes_settings.py:470 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "リストが無効です。"
 
@@ -10255,7 +10281,7 @@ msgid ""
 " Forcer la mise à jour »."
 msgstr "潮汐データはまだありません。スライドショーが取得するか、「強制更新」を使ってください。"
 
-#: web/routes_media.py:73 web/routes_settings.py:441 web/routes_storage.py:114
+#: web/routes_media.py:73 web/routes_settings.py:443 web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "不明なソースです。"
 
@@ -10593,25 +10619,25 @@ msgstr "プレイリストが見つかりません。"
 msgid "Citation du jour enregistrée."
 msgstr "今日の言葉を保存しました。"
 
-#: web/routes_settings.py:292
+#: web/routes_settings.py:294
 msgid "Aucun réglage à enregistrer."
 msgstr "保存する設定がありません。"
 
-#: web/routes_settings.py:296
+#: web/routes_settings.py:298
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "不明な設定：%(key)s"
 
-#: web/routes_settings.py:300
+#: web/routes_settings.py:302
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "「%(key)s」の値が無効です。"
 
-#: web/routes_settings.py:393
+#: web/routes_settings.py:395
 msgid "Valeur invalide."
 msgstr "無効な値です。"
 
-#: web/routes_settings.py:398
+#: web/routes_settings.py:400
 msgid "Supprimé."
 msgstr "削除しました。"
 
@@ -11132,4 +11158,11 @@ msgstr "スライドショーが不安定"
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "1時間に %(count)s 回再起動が必要でした。"
+
+#: web/workers.py:1064
+#, python-format
+msgid ""
+"%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "
+"cette nuit : %(names)s"
+msgstr "今夜再試行しましたが、%(count)s件のメディアを準備できませんでした：%(names)s"
 

@@ -66,6 +66,8 @@ if __name__ == '__main__':
     threading.Thread(target=music_schedule_worker, daemon=True).start()
     threading.Thread(target=stats_worker, daemon=True).start()
     threading.Thread(target=reliability_worker, daemon=True).start()
+    from web.workers import night_work_worker
+    threading.Thread(target=night_work_worker, daemon=True, name="night-work").start()
     threading.Thread(target=button_worker, daemon=True, name="button").start()  # bouton physique (GPIO)
     threading.Thread(target=hotspot_worker, daemon=True, name="hotspot").start()  # Wi-Fi de secours
     routes_homeassistant.restart_bridge()  # Home Assistant (MQTT), s'il est configuré

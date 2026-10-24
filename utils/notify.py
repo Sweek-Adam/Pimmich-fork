@@ -20,6 +20,7 @@ EVENTS = {
     "sync": {"label": N_("Erreurs de synchronisation"), "default": True, "tags": "warning", "priority": 4},
     "health": {"label": N_("Problèmes du cadre (alimentation, chaleur, disque)"), "default": True, "tags": "rotating_light", "priority": 4},
     "imports": {"label": N_("Imports terminés"), "default": False, "tags": "white_check_mark", "priority": 2},
+    "media": {"label": N_("Médias impossibles à préparer"), "default": True, "tags": "film_frames", "priority": 3},
 }
 REPEAT_AFTER = 10 * 60
 _last_sent = {}
