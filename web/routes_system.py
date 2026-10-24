@@ -342,8 +342,9 @@ def wifi_country_api():
 @login_required
 def get_wifi_status_api():
     """Retourne l'état actuel de la connexion Wi-Fi."""
+    from utils import network_names
     status = get_wifi_status()
-    return jsonify({"success": True, **status})
+    return jsonify({"success": True, **status, "names": network_names.addresses()})
 
 
 @app.route('/api/interface_status/<interface_name>')

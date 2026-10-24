@@ -4,7 +4,8 @@ import { get, post } from "../api";
 import { t } from "../i18n";
 import { notify, run } from "../toast";
 
-interface WifiStatus { is_connected: boolean; ssid: string; ip_address: string }
+interface FrameName { name: string; where: "local" | "box" | "tailscale" }
+interface WifiStatus { is_connected: boolean; ssid: string; ip_address: string; names?: FrameName[] }
 interface Iface { state: string; ip_address?: string }
 interface Network { ssid: string; signal: number; security: string }
 interface Saved { name: string; uuid: string; priority: number; active: boolean; autoconnect: boolean }
@@ -103,6 +104,12 @@ async function toggleEth() {
   window.setTimeout(loadStatus, 3000);
 }
 
+const whereLabel = (where: FrameName["where"]) => ({
+  local: t("sur le même réseau (téléphone, ordinateur)"),
+  box: t("enregistré par la box internet"),
+  tailscale: t("depuis n'importe où, avec Tailscale"),
+}[where]);
+
 const bars = (signal: number) => (signal > 75 ? 4 : signal > 50 ? 3 : signal > 25 ? 2 : 1);
 
 onMounted(async () => {
@@ -132,6 +139,15 @@ onMounted(async () => {
         {{ eth.state === "UP" ? t("Désactiver") : t("Activer") }}</button>
     </section>
   </div>
+
+  <section v-if="status && status.names && status.names.length" class="card two">
+    <div class="card-head"><h2><i class="fas fa-link"></i>{{ t("Adresse du cadre") }}</h2></div>
+    <p class="small muted">{{ t("Tapez l'une de ces adresses dans le navigateur : elles restent valables même si l'adresse IP du cadre change.") }}</p>
+    <ul class="names">
+      <li v-for="n in status.names" :key="n.name"><a :href="`https://${n.name}`"><code>{{ n.name }}</code></a>
+        <span class="small muted">{{ whereLabel(n.where) }}</span></li>
+    </ul>
+  </section>
 
   <div v-if="saved" class="grid grid-2 two">
     <section class="card">
@@ -195,6 +211,8 @@ onMounted(async () => {
 <style scoped>
 .top { margin-bottom: 1rem; }
 .two { margin-bottom: 1rem; }
+.names { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .4rem; }
+.names li { display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem; }
 .two .card + .card { margin-top: 0; }
 .saved { list-style: none; padding: 0; margin: .4rem 0 0; }
 .saved li { display: flex; align-items: center; gap: .5rem; padding: .45rem 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }

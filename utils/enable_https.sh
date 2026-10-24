@@ -21,6 +21,10 @@ HOST=$(hostname)
 # --- Certificat ---
 mkdir -p "$CERT_DIR"
 SAN="DNS:${HOST},DNS:${HOST}.local,DNS:localhost,IP:127.0.0.1"
+# Noms donnés par la box (ex. cadre-photo.home chez Orange) : l'adresse reste valable si l'IP change
+for domain in $(nmcli -t -f IP4.DOMAIN dev show 2> /dev/null | cut -d: -f2 | sort -u) home lan; do
+    case ",$SAN," in *",DNS:${HOST}.${domain},"*) ;; *) SAN="${SAN},DNS:${HOST}.${domain}" ;; esac
+done
 for ip in $(hostname -I); do
     SAN="${SAN},IP:${ip}"
 done
@@ -31,7 +35,7 @@ if [ ! -f "$CERT_DIR/pimmich.crt" ] || [ "${1:-}" = "--renew" ]; then
         -subj "/CN=${HOST}/O=Pimmich" -addext "subjectAltName=${SAN}" 2>/dev/null
     chmod 600 "$CERT_DIR/pimmich.key"
 else
-    echo "Certificat existant conservé ($CERT_DIR/pimmich.crt). Pour le recréer (nouvelle adresse IP) : sudo $0 --renew"
+    echo "Certificat existant conservé ($CERT_DIR/pimmich.crt). Pour le recréer (nouveau nom ou nouvelle adresse) : sudo $0 --renew"
 fi
 
 # --- Configuration nginx ---
@@ -98,7 +102,7 @@ ln -sf "$SITE" /etc/nginx/sites-enabled/pimmich
 
 if nginx -t 2>/dev/null; then
     systemctl reload nginx
-    echo "✅ HTTPS activé : https://$(hostname -I | awk '{print $1}')  (ou https://${HOST}.local)"
+    echo "✅ HTTPS activé : https://$(hostname -I | awk '{print $1}')  (ou https://${HOST}.local, https://${HOST}.home)"
 else
     echo "❌ Configuration nginx invalide, retour à la configuration précédente." >&2
     nginx -t || true
