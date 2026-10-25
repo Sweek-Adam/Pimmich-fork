@@ -30,6 +30,10 @@ from utils.security import internal_headers
 from utils.dedup import hashes_for, remove_duplicates
 from utils.messages_manager import pop_priority, list_messages
 from utils import animated, compositions, layout_engine
+from slideshow import compositions as slideshow_compositions
+from slideshow.compositions import _ahead, _composition, apply_priority, prepare_composition, publish_queue, take_composition, upcoming_compositions  # noqa: F401
+from slideshow.display import GifPlayer, _DIM, _heartbeat, _raw_flip, show_regions, update_brightness  # noqa: F401
+from slideshow.weather import get_tides, get_weather_and_forecast, load_icon
 from utils import play_queue
 from utils import now_playing
 from utils import music_remote
@@ -62,14 +66,11 @@ PREPARED_BASE_DIR = Path(BASE_DIR) / 'static' / 'prepared'
 STATUS_FILE = "/tmp/pimmich_slideshow_status.json"
 SOUNDS_DIR = Path(BASE_DIR) / 'static' / 'sounds'
 CUSTOM_PLAYLIST_FILE = "/tmp/pimmich_custom_playlist.json"
-ICONS_DIR = Path(BASE_DIR) / 'static' / 'icons'
 NEW_POSTCARD_FLAG = Path(BASE_DIR) / 'cache' / 'new_postcard.flag'
 CURRENT_PHOTO_FILE = "/tmp/pimmich_current_photo.txt"
 CONFIG_PATH = os.path.join(BASE_DIR, 'config', 'config.json')
 FAVORITES_PATH = os.path.join(BASE_DIR, 'config', 'favorites.json')
 FILTER_STATES_PATH = os.path.join(BASE_DIR, 'config', 'filter_states.json')
-TIDES_CACHE_FILE = Path(BASE_DIR) / 'cache' / 'tides.json'
-_icon_cache = {} # Cache pour les icônes météo chargées
 _envelope_blink_end_time = None # Pour gérer le clignotement de l'icône
 _postcard_count_cache = 0
 _last_postcard_count_check = 0
@@ -394,52 +395,14 @@ def parse_color(hex_color):
     else:
         return (255, 255, 255) # Default to white if invalid
 
-# New function to perform a transition between two images
-def _heartbeat(grace=0):
-    """Le diaporama est vivant (surveillance : il est relancé s'il se fige)."""
-    try:
-        from utils import reliability
-        reliability.beat(grace)
-    except Exception:
-        pass
 
 
-# --- Luminosité du soir : les photos sont assombries au moment de l'affichage (tous écrans HDMI) ---
-_DIM = {"level": 1.0, "surface": None}
-_raw_flip = pygame.display.flip
 
 
-def _dimmed_flip(*args):
-    _heartbeat()
-    level = _DIM["level"]
-    screen = pygame.display.get_surface()
-    if level >= 0.99 or screen is None:
-        return _raw_flip()
-    surface = _DIM["surface"]
-    if surface is None or surface.get_size() != screen.get_size() or surface.get_alpha() != int(255 * (1 - level)):
-        surface = pygame.Surface(screen.get_size())
-        surface.fill((0, 0, 0))
-        surface.set_alpha(int(255 * (1 - level)))
-        _DIM["surface"] = surface
-    backup = screen.copy()  # l'image n'est assombrie qu'à l'écran : les dessins suivants partent de l'original
-    screen.blit(surface, (0, 0))
-    _raw_flip()
-    screen.blit(backup, (0, 0))
 
 
-pygame.display.flip = _dimmed_flip
 
 
-def update_brightness(config):
-    """Luminosité du moment (baisse du soir), d'après l'heure ou le coucher du soleil."""
-    try:
-        from utils import night, sky
-        sunset = sky.today(config).get("sunset") if config.get("dim_start") == "sunset" else None
-        _DIM["level"] = night.brightness(config, sunset=sunset)
-    except Exception as e:
-        logger.debug(f"Luminosité du soir : {e}")
-        _DIM["level"] = 1.0
-    return _DIM["level"]
 
 
 def _long_date(now, config):
@@ -771,258 +734,10 @@ def is_within_active_hours(config):
     else:
         return now_time >= start_time or now_time <= end_time
 
-# --- Gestion de la météo ---
-_weather_and_forecast_data = None
-_last_weather_and_forecast_fetch = None
-_weather_warning_printed = False
 
-def get_weather_and_forecast(config):
-    """Récupère la météo actuelle et les prévisions sur 3 jours."""
-    global _weather_and_forecast_data, _last_weather_and_forecast_fetch, _weather_warning_printed
-    
-    api_key = config.get("weather_api_key")
-    city = config.get("weather_city")
-    units = config.get("weather_units", "metric")
-    try:
-        interval_minutes = int(config.get("weather_update_interval_minutes", 30))
-    except (ValueError, TypeError):
-        interval_minutes = 30
 
-    if not api_key or not city:
-        if not _weather_warning_printed:
-            logger.info(f"[Weather] Clé API ou ville manquante. La météo est désactivée.")
-            _weather_warning_printed = True
-        return None
 
-    now = datetime.now()
-    if _last_weather_and_forecast_fetch and (now - _last_weather_and_forecast_fetch).total_seconds() < interval_minutes * 60:
-        return _weather_and_forecast_data
 
-    logger.info(f"[Weather] Récupération des prévisions météo...")
-    _last_weather_and_forecast_fetch = now # Mettre à jour pour éviter les appels répétés en cas d'échec
-
-    try:
-        # Utilise l'API de prévision 5 jours / 3 heures (disponible en offre gratuite)
-        url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units={units}&lang=fr"
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        api_data = response.json()
-
-        # --- Traitement des données pour obtenir une prévision par jour ---
-        current_weather = api_data['list'][0]
-        
-        daily_forecasts = collections.defaultdict(lambda: {'temps': [], 'icons': []})
-        
-        # Grouper les données par jour
-        for forecast in api_data['list']:
-            day = datetime.fromtimestamp(forecast['dt']).strftime('%Y-%m-%d')
-            daily_forecasts[day]['temps'].append(forecast['main']['temp'])
-            daily_forecasts[day]['icons'].append((forecast['weather'][0]['icon'], forecast['dt_txt'], forecast['weather'][0]['description']))
-
-        processed_forecast = []
-        # Trier les jours et prendre les 3 prochains jours (en excluant aujourd'hui)
-        today_str = datetime.now().strftime('%Y-%m-%d')
-        sorted_days = sorted([day for day in daily_forecasts.keys() if day > today_str])[:3]
-
-        day_map_fr = {'Mon':'Lun', 'Tue':'Mar', 'Wed':'Mer', 'Thu':'Jeu', 'Fri':'Ven', 'Sat':'Sam', 'Sun':'Dim'}
-
-        for i, day_str in enumerate(sorted_days):
-            day_data = daily_forecasts[day_str]
-            
-            if i == 0:
-                day_name_fr = "Demain"
-            else:
-                day_name_en = datetime.strptime(day_str, '%Y-%m-%d').strftime('%a')
-                day_name_fr = day_map_fr.get(day_name_en, day_name_en.upper())
-
-            min_temp = round(min(day_data['temps']))
-            max_temp = round(max(day_data['temps']))
-            
-            # Choisir une icône représentative (celle la plus proche de 13h)
-            midday_icon = day_data['icons'][0][0] # icon
-            midday_desc = day_data['icons'][0][2] # description
-            min_hour_diff = 24
-            for icon, dt_txt, desc in day_data['icons']:
-                hour = int(dt_txt.split(' ')[1].split(':')[0])
-                if abs(hour - 13) < min_hour_diff:
-                    min_hour_diff = abs(hour - 13)
-                    midday_icon = icon
-                    midday_desc = desc
-
-            processed_forecast.append({
-                'day': day_name_fr,
-                'min_temp': min_temp,
-                'max_temp': max_temp,
-                'icon': midday_icon,
-                'description': midday_desc.capitalize()
-            })
-        
-        _weather_and_forecast_data = {'current': current_weather, 'forecast': processed_forecast}
-        try:
-            from utils import sky
-            coord = (api_data.get('city') or {}).get('coord') or {}
-            sky.remember_location(coord.get('lat'), coord.get('lon'))  # lever / coucher du soleil, lune
-        except Exception:
-            pass
-        logger.info(f"[Weather] Météo et prévisions mises à jour pour {city}.")
-        return _weather_and_forecast_data
-
-    except requests.exceptions.RequestException as e:
-        logger.info(f"[Weather] Erreur réseau lors de la récupération des prévisions : {e}")
-        return None
-    except Exception as e:
-        logger.info(f"[Weather] Erreur générale lors de la récupération des prévisions : {e}")
-        traceback.print_exc()
-        return None
-
-# --- Gestion des marées ---
-_tides_data = None
-_last_tides_fetch = None
-_tides_warning_printed = False
-
-def get_tides(config):
-    """Récupère les prochaines marées haute et basse, avec un cache en mémoire et un cache fichier persistant."""
-    global _tides_data, _last_tides_fetch, _tides_warning_printed
-    api_key = config.get("stormglass_api_key")
-    lat = config.get("tide_latitude")
-    lon = config.get("tide_longitude")
-    # Intervalle de cache de 12 heures pour limiter les appels API à 2 par jour max.
-    cache_duration_seconds = 12 * 3600
-
-    if not all([api_key, lat, lon]):
-        if not _tides_warning_printed:
-            logger.info(f"[Tides] Clé API StormGlass, latitude ou longitude manquante. Les marées sont désactivées.")
-            _tides_warning_printed = True
-        return None
-
-    # 1. Vérifier le cache en mémoire d'abord
-    now = datetime.now()
-    if _last_tides_fetch and (now - _last_tides_fetch).total_seconds() < cache_duration_seconds:
-        return _tides_data
-
-    # 2. Le cache mémoire est expiré, on vérifie le cache fichier
-    TIDES_CACHE_FILE.parent.mkdir(exist_ok=True)
-    if TIDES_CACHE_FILE.exists():
-        try:
-            with open(TIDES_CACHE_FILE, 'r') as f:
-                cache_content = json.load(f)
-            
-            last_file_fetch_dt = datetime.fromisoformat(cache_content['timestamp'])
-            
-            if (now - last_file_fetch_dt).total_seconds() < cache_duration_seconds:
-                # Si c'est une entrée de cooldown, on ne fait rien et on attend.
-                if cache_content.get('cooldown'):
-                    logger.info(f"[Tides] Cooldown API actif depuis le cache fichier.")
-                    _last_tides_fetch = now # Mettre à jour le timer en mémoire pour respecter le cooldown
-                    _tides_data = None
-                    return None
-
-                tide_data_from_cache = cache_content.get('data')
-
-                # --- NOUVEAU: Vérification du format du cache pour la compatibilité ascendante ---
-                if isinstance(tide_data_from_cache, list):
-                    logger.info(f"[Tides] Données de marée valides (format liste) trouvées dans le cache fichier.")
-                    _tides_data = tide_data_from_cache
-                    _last_tides_fetch = now
-                    return tide_data_from_cache
-                else:
-                    logger.info(f"[Tides] Ancien format de cache détecté (dictionnaire). Le cache sera invalidé et recréé.")
-                    # On laisse l'exécution continuer pour appeler l'API
-        except Exception as e:
-            logger.info(f"[Tides] Erreur lecture du cache fichier, récupération depuis l'API. Erreur: {e}")
-
-    # 3. Les deux caches sont invalides, appeler l'API
-    logger.info(f"[Tides] Récupération des données de marée depuis l'API StormGlass...")
-    _last_tides_fetch = now # Mettre à jour pour éviter les appels répétés en cas d'échec
-
-    try:
-        start_time_utc = datetime.utcnow()
-        end_time_utc = start_time_utc + timedelta(days=7) # --- MODIFICATION: Récupérer 7 jours de données ---
-
-        headers = {'Authorization': api_key}
-        params = {'lat': lat, 'lng': lon, 'start': start_time_utc.isoformat(), 'end': end_time_utc.isoformat()}
-        
-        response = requests.get('https://api.stormglass.io/v2/tide/extremes/point', params=params, headers=headers, timeout=15)
-        response.raise_for_status()
-        extremes_data = response.json().get('data', [])
-
-        # Filtrer pour ne garder que les marées futures
-        now_utc = datetime.utcnow().replace(tzinfo=None)
-        future_extremes = [e for e in extremes_data if datetime.fromisoformat(e['time'].replace('Z', '+00:00')).replace(tzinfo=None) > now_utc]
-
-        if not future_extremes:
-            logger.info(f"[Tides] Aucune marée future trouvée dans les données de l'API pour les prochaines 24h.")
-            return None
-
-        # Sauvegarder la liste complète des marées futures dans le cache
-        data_to_cache = {'data': future_extremes, 'timestamp': datetime.now().isoformat()}
-        
-        with open(TIDES_CACHE_FILE, 'w') as f:
-            json.dump(data_to_cache, f, indent=2)
-        
-        logger.info(f"[Tides] Données de marée mises à jour et cache sauvegardé.")
-        # --- CORRECTION: Mettre à jour le cache en mémoire avant de retourner ---
-        _tides_data = future_extremes
-        return _tides_data
-    except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 402:
-            logger.info(f"[Tides] ERREUR: Quota API StormGlass dépassé. Prochaine tentative dans 12h.")
-            # Écrire un timestamp de cooldown dans le cache pour éviter les re-tentatives si le script redémarre
-            cooldown_data = {'data': {}, 'timestamp': datetime.now().isoformat(), 'cooldown': True}
-            try:
-                with open(TIDES_CACHE_FILE, 'w') as f:
-                    json.dump(cooldown_data, f, indent=2)
-                logger.info(f"[Tides] Timestamp de cooldown écrit dans le cache fichier.")
-            except Exception as write_e:
-                logger.info(f"[Tides] Impossible d'écrire le cooldown dans le cache fichier: {write_e}")
-        else:
-            logger.info(f"[Tides] Erreur HTTP lors de la récupération des marées : {e}")
-        _tides_data = None
-        return None
-    except Exception as e:
-        logger.info(f"[Tides] Erreur générale lors de la récupération des marées : {e}")
-        traceback.print_exc()
-        _tides_data = None # Mettre le cache en mémoire à None pour forcer une nouvelle tentative
-        return None
-
-def load_icon(icon_name, size, is_weather_icon=True):
-    """
-    Charge une icône, la met en cache et la retourne comme une surface Pygame.
-    Retourne un carré rouge en cas d'échec pour un débogage visuel.
-    """
-    if size <= 0:
-        logger.info(f"[Display] AVERTISSEMENT: Taille d'icône invalide ({size}px) pour '{icon_name}'.")
-        return None
-
-    icon_key = f"{icon_name}_{size}"
-    if icon_key in _icon_cache:
-        return _icon_cache[icon_key]
-
-    if is_weather_icon:
-        icon_dir = PREPARED_BASE_DIR.parent / 'weather_icons'
-    else:
-        icon_dir = ICONS_DIR
-    
-    icon_path = icon_dir / f"{icon_name}.png"
-
-    if icon_path.exists():
-        try:
-            loaded_surface = pygame.image.load(str(icon_path)).convert_alpha()
-            icon_surface = pygame.transform.scale(loaded_surface, (size, size))
-            _icon_cache[icon_key] = icon_surface
-            return icon_surface
-        except Exception as e:
-            logger.info(f"[Display] Erreur chargement icône '{icon_path}': {e}")
-            # Fall through to return placeholder
-    else:
-        warning_key = f"warn_{icon_name}"
-        if warning_key not in _icon_cache:
-            logger.info(f"[Display] AVERTISSEMENT: Fichier icône non trouvé : {icon_path}")
-            _icon_cache[warning_key] = True
-    
-    # --- Retourner None en cas d'échec ---
-    # Cela permet à la logique d'affichage de simplement ignorer l'icône.
-    return None
 
 def draw_pause_icon(screen, screen_width, screen_height):
     """Affiche une icône de pause en bas au centre de l'écran."""
@@ -1319,9 +1034,6 @@ def control_fan(temperature, threshold=55, pin=14):
 # Une composition est préparée pour un emplacement précis de la playlist (les photos qui suivent, dans l'ordre).
 RELOAD_FLAG = Path("/tmp/pimmich_reload.flag")  # voir utils/slideshow_manager.restart_slideshow_for_update
 _live_arrivals = set()  # photos de la fête tout juste arrivées : montrées seules, en grand
-_composition = {"thread": None, "ready": None, "target": None, "counter": 0, "slot": 0, "style": None}
-_queue_lock = threading.Lock()
-_queue_context = {}  # dernier état publié pour l'onglet « À suivre » (republié quand une composition est prête)
 
 
 FORCE_LAYOUT_FILE = Path("/tmp/pimmich_force_layout.json")
@@ -1339,176 +1051,20 @@ def pop_forced_layout():
     return None
 
 
-_ahead = {}  # compositions préparées d'avance : {(playlist, indice): (chemin, diapositives utilisées, format)}
-AHEAD_MAX = 2
 
 
-def _render_composition(plan, snapshot, start, messages, include_messages, width, height):
-    """Compose la composition qui commence à `start` : (image, diapositives utilisées, format, GIF animés) ou None."""
-    rng = random.Random()
-    if not snapshot or not layout_engine.is_message(snapshot[start % len(snapshot)]):
-        plan = layout_engine.without_message_only(plan)  # pas de message à afficher : pas de disposition construite autour
-    for _attempt in range(4):  # un autre format si celui-ci ne peut pas accueillir les photos suivantes
-        style = layout_engine.pick_format(plan, rng)
-        count = layout_engine.photo_count(style, rng)
-        if include_messages and layout_engine.accepts_messages(style) and style not in compositions.LIMITS:
-            # les messages (dans la limite de la disposition) ne prennent pas la place des photos
-            chunk = layout_engine.take_slides(snapshot, start, count, layout_engine.MESSAGE_SLOTS.get(style, 1))
-        else:
-            chunk = layout_engine.take_chunk(snapshot, start, count)
-        state = rng.getstate()
-        image, used = layout_engine.render_chunk(style, chunk, messages, width, height, include_messages, rng)
-        if image is not None:
-            try:  # GIF animés : rejoués par-dessus pendant l'affichage
-                moving = layout_engine.animations_for(style, chunk, messages, width, height, include_messages, state, image, used)
-            except Exception as e:
-                logger.warning(f"[Dispositions] GIF animés non repérés : {e}")
-                moving = []
-            return image, used, style, moving
-    return None
 
 
-def _save_composition(image, moving=None):
-    """Fichiers en rotation : jamais réécrire celui affiché ni ceux préparés d'avance."""
-    compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    _composition["slot"] = (_composition["slot"] + 1) % (AHEAD_MAX + 2)
-    path = compositions.OUTPUT_DIR / f"composition_{_composition['slot']}.jpg"
-    image.save(path, "JPEG", quality=88)
-    animated.write(path, moving)  # toujours réécrit : pas d'animation d'une ancienne composition
-    return str(path)
 
 
-def prepare_composition(config, plan, playlist, start, width, height, force=False, base_plan=None):
-    """
-    Prépare en arrière-plan la composition qui commencera à l'indice `start` de cette playlist,
-    puis, dans la foulée, la suivante (préparée d'avance : le diaporama n'attend plus une composition lente).
-    """
-    target = (id(playlist), start)
-    for key in [k for k in _ahead if k[0] != id(playlist)]:
-        _ahead.pop(key, None)  # playlist reconstruite ou réordonnée : réserves périmées
-    if not force and _composition["target"] == target and (_composition["ready"] or (_composition["thread"] and _composition["thread"].is_alive())):
-        return  # déjà prête ou en cours pour cet emplacement
-    if _composition["thread"] and _composition["thread"].is_alive():
-        if not force:
-            return  # une autre préparation est en cours : on ne surcharge pas le processeur
-        _composition["thread"].join(30)  # disposition forcée : on attend la fin de la préparation en cours
-    reserved = None if force else _ahead.pop(target, None)
-    _composition.update(target=target, ready=None)
-    compositions.set_full_photos(config.get("compositions_full_photos", True))
-    layout_engine.set_video_clips(config.get("short_videos_in_layouts", True))
-    from utils import hardware_profile
-    animated.set_limits(hardware_profile.value(config, "gif_items"))
-    compositions.faces.set_enabled(config.get("smart_crop", True))
-    include_messages = config.get("compositions_include_messages", True)
-    snapshot = list(playlist)
-    base_plan = base_plan or plan
-
-    def work():
-        try:
-            messages = {m["id"]: m for m in list_messages() if not m.get("hidden")} if include_messages else {}
-            if reserved:  # déjà préparée d'avance
-                path, used, style = reserved
-                if _composition["target"] == target:
-                    _composition["ready"], _composition["style"] = (path, used), style
-                    publish_queue()
-            else:
-                started = time.time()
-                result = _render_composition(plan, snapshot, start, messages, include_messages, width, height)
-                if result is None:
-                    logger.info(f"[Dispositions] Aucune composition possible à partir de la diapositive {start} : affichage seul")
-                    return
-                image, used, style, moving = result
-                path = _save_composition(image, moving)
-                if _composition["target"] == target:
-                    _composition["ready"], _composition["style"] = (path, used), style
-                    publish_queue()  # la composition apparaît dans « À suivre »
-                logger.info(f"[Dispositions] « {style} » ({used} photos) prête en {time.time() - started:.1f}s")
-            # La suivante, d'avance
-            nxt = layout_engine.next_composition_start(base_plan, snapshot, start + used, include_messages)
-            if nxt is None or len(_ahead) >= AHEAD_MAX or (target[0], nxt[0] % len(snapshot)) in _ahead:
-                return
-            started = time.time()
-            result = _render_composition(nxt[1], snapshot, nxt[0] % len(snapshot), messages, include_messages, width, height)
-            if result:
-                image, used2, style2, moving2 = result
-                _ahead[(target[0], nxt[0] % len(snapshot))] = (_save_composition(image, moving2), used2, style2)
-                logger.info(f"[Dispositions] « {style2} » préparée d'avance en {time.time() - started:.1f}s")
-        except Exception as e:
-            logger.warning(f"[Dispositions] Préparation impossible : {e}")
-
-    _composition["thread"] = threading.Thread(target=work, daemon=True)
-    _composition["thread"].start()
 
 
-def upcoming_compositions(plan, playlist, start, counter, include_messages=True):
-    """
-    Où tomberont les prochaines compositions parmi les médias suivants (onglet « À suivre »).
-    Exact pour celle déjà préparée ; la suivante n'est connue que par la photo où elle commencera.
-    """
-    found, offset, index = [], 0, start
-    limit = min(play_queue.UPCOMING_COUNT, len(playlist))
-    while offset < limit and playlist:
-        index %= len(playlist)
-        wanted, slot_plan = layout_engine.plan_for_slide(plan, playlist[index], counter, include_messages)
-        if wanted and slot_plan.formats:
-            ready = _composition["ready"] if _composition["target"] == (id(playlist), index) else None
-            style = _composition["style"]
-            if not ready and (id(playlist), index) in _ahead:  # préparée d'avance
-                path, used, style = _ahead[(id(playlist), index)]
-                ready = (path, used)
-            if not ready:
-                found.append({"at": offset, "count": None, "style": None, "image": None})
-                break
-            path, used = ready
-            found.append({"at": offset, "count": used, "style": style, "image": path})
-            offset, index, counter = offset + used, index + used, 0
-        else:
-            offset, index, counter = offset + 1, index + 1, counter + 1
-    return found
 
 
-def publish_queue(**context):
-    """Publie l'état de la file « À suivre » (le contexte est mémorisé pour être republié plus tard)."""
-    with _queue_lock:  # appelée par la boucle principale et par la préparation en arrière-plan
-        _queue_context.update(context)
-        ctx = _queue_context
-        if not ctx.get("playlist"):
-            return
-        try:
-            planned = upcoming_compositions(ctx["plan"], ctx["playlist"], ctx["next_index"], ctx["next_counter"], ctx.get("include_messages", True))
-        except Exception as e:
-            logger.debug(f"[À suivre] Compositions non calculées : {e}")
-            planned = []
-        play_queue.publish_state(ctx["playlist"], ctx["index"], ctx["override"], ctx["consumed"], planned)
 
 
-def take_composition(playlist, start, wait_seconds=0):
-    """Composition prête pour cet emplacement : (chemin, nombre de diapositives utilisées), sinon (None, 0)."""
-    if _composition["target"] != (id(playlist), start):
-        return None, 0
-    thread = _composition["thread"]
-    if wait_seconds and not _composition["ready"] and thread and thread.is_alive():
-        thread.join(wait_seconds)  # l'écran garde la diapositive précédente pendant ce temps
-    ready, _composition["ready"], _composition["target"] = _composition["ready"], None, None
-    return ready if ready else (None, 0)
 
 
-def apply_priority(playlist, all_media, queue):
-    """
-    Place en tête de la playlist les médias de la file prioritaire (déjà dans l'ordre « dernier arrivé,
-    premier affiché ») qui font partie des médias affichables, sans les répéter ensuite.
-    """
-    available = {os.path.realpath(p): p for p in all_media}
-    priority = []
-    for p in queue:
-        real = os.path.realpath(p)
-        if real in available and available[real] not in priority:
-            priority.append(available[real])
-    if not priority:
-        return playlist
-    first = {os.path.realpath(p) for p in priority}
-    logger.info(f"[Diaporama] {len(priority)} nouveau(x) message(s) affiché(s) en premier")
-    return priority + [p for p in playlist if os.path.realpath(p) not in first]
 
 
 # --- QR code permanent vers la page invités (envoi de photos et de messages) ---
@@ -2661,116 +2217,8 @@ def draw_weather_frame(screen, background, particles):
     pygame.display.flip()
 
 
-class GifPlayer:
-    """
-    Rejoue les GIF animés d'une image affichée (photo seule ou composition, voir utils/animated.py) par-dessus
-    l'image fixe : seules les zones des GIF sont redessinées, l'horloge et la météo restent par-dessus.
-    Les images sont décodées en arrière-plan (la photo reste fixe le temps de les préparer).
-    """
-    BUDGET = 48 * 1024 * 1024  # mémoire des images décodées : selon le profil matériel (le Raspberry Pi 3 n'a que 1 Go)
-
-    def __init__(self, display_path, base_surface, pil_image):
-        from utils import hardware_profile
-        self.budget = hardware_profile.value(load_config(), "gif_budget_mb") * 1024 * 1024
-        self.base = base_surface
-        self.tracks = []
-        self.ready = False
-        self.patches = None
-        items = animated.read(display_path) if display_path else []
-        self.expected = bool(items) and pil_image.size == base_surface.get_size()
-        if self.expected:
-            threading.Thread(target=self._load, args=(items, pil_image.copy()), daemon=True, name="gif").start()
-        else:
-            self.ready = True
-
-    def _load(self, items, pil_image):
-        try:
-            items = [item for item in items if animated.matches(item, pil_image)]
-            total = sum(item["box"][2] * item["box"][3] * 4 * min(animated.MAX_FRAMES, animated.frame_count(item["gif"])) for item in items)
-            scale = min(1.0, math.sqrt(self.budget / total)) if total else 1.0
-            tracks = []
-            for item in items:
-                images = animated.frames(item, scale)
-                if len(images) < 2:
-                    continue
-                mode = "RGBA" if item.get("mask") else "RGB"
-                surfaces = [[pygame.image.frombytes(image.tobytes(), image.size, mode), duration, False] for image, duration in images]
-                box = pygame.Rect(item["box"])
-                tracks.append({"box": box, "frames": surfaces, "index": 0, "due": 0.0, "alpha": mode == "RGBA",
-                               "clip": box.clip(self.base.get_rect())})
-            self.tracks = [t for t in tracks if t["clip"].width and t["clip"].height]
-            if self.tracks:
-                logger.info(f"[GIF] {len(self.tracks)} animation(s), {sum(len(t['frames']) for t in self.tracks)} images (échelle {scale:.2f})")
-        except Exception as e:
-            logger.warning(f"[GIF] Animation impossible : {e}")
-            self.tracks = []
-        self.ready = True
-
-    def set_overlay(self, screen):
-        """Ce que l'habillage (heure, météo, icônes) dessine sur les zones des GIF : redessiné par-dessus chaque image."""
-        if not self.ready:
-            self.patches = None  # calculé à la première image, d'après l'écran à ce moment-là
-            return
-        self.patches = []
-        for track in self.tracks:
-            clip = track["clip"]
-            drawn = Image.frombytes("RGB", clip.size, pygame.image.tobytes(screen.subsurface(clip), "RGB"))
-            plain = Image.frombytes("RGB", clip.size, pygame.image.tobytes(self.base.subsurface(clip), "RGB"))
-            mask = ImageChops.difference(drawn, plain).convert("L").point(lambda v: 255 if v > 2 else 0)
-            if mask.getbbox() is None:
-                self.patches.append(None)
-                continue
-            drawn.putalpha(mask)
-            self.patches.append(pygame.image.frombytes(drawn.tobytes(), drawn.size, "RGBA"))
-
-    def step(self, screen, now):
-        """Avance les GIF dont l'image suivante est due ; retourne les zones redessinées et le délai avant la suivante."""
-        if not self.ready or not self.tracks:
-            return [], 0.1
-        if self.patches is None:
-            self.set_overlay(screen)
-        rects = []
-        for number, track in enumerate(self.tracks):
-            if now < track["due"]:
-                continue
-            frame = track["frames"][track["index"]]
-            if not frame[2]:  # conversion au format de l'écran (blits rapides), une fois par image
-                frame[0] = frame[0].convert_alpha() if track["alpha"] else frame[0].convert()
-                frame[2] = True
-            surface = frame[0]
-            if surface.get_size() != track["box"].size:
-                surface = pygame.transform.smoothscale(surface, track["box"].size)
-            clip = track["clip"]
-            screen.blit(self.base, clip.topleft, clip)
-            screen.blit(surface, track["box"].topleft)
-            patch = self.patches[number]
-            if patch is not None:
-                screen.blit(patch, clip.topleft)
-            track["due"] = max(track["due"] + frame[1], now) if track["due"] else now + frame[1]
-            track["index"] = (track["index"] + 1) % len(track["frames"])
-            rects.append(clip)
-        wait = max(0.0, min(t["due"] for t in self.tracks) - now)
-        return rects, min(0.1, wait)
 
 
-def show_regions(screen, rects):
-    """Affiche seulement ces zones (avec la baisse de luminosité du soir), sans redessiner tout l'écran."""
-    if not rects:
-        return
-    _heartbeat()
-    level = _DIM["level"]
-    if level >= 0.99:
-        pygame.display.update(rects)
-        return
-    shade = pygame.Surface((1, 1))
-    shade.fill((0, 0, 0))
-    shade.set_alpha(int(255 * (1 - level)))
-    backups = [(rect, screen.subsurface(rect).copy()) for rect in rects]
-    for rect in rects:
-        screen.blit(pygame.transform.scale(shade, rect.size), rect.topleft)
-    pygame.display.update(rects)
-    for rect, backup in backups:  # l'image n'est assombrie qu'à l'écran
-        screen.blit(backup, rect.topleft)
 
 
 def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, config, main_font, photo_path=None, ignore_postcard_flag=False):
@@ -3234,9 +2682,8 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
 
 # Boucle principale du diaporama
 def start_slideshow():
-    global AHEAD_MAX
     from utils import hardware_profile
-    AHEAD_MAX = hardware_profile.value(load_config(), "compositions_ahead")  # compositions préparées d'avance (mémoire)
+    slideshow_compositions.AHEAD_MAX = hardware_profile.value(load_config(), "compositions_ahead")  # compositions d'avance (mémoire)
     pi_model = get_pi_model()
     global _current_background_music
     try:

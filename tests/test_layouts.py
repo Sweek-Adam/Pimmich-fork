@@ -130,8 +130,9 @@ def test_slow_composition_is_still_shown(monkeypatch, sandbox):
     pytest.importorskip("pygame")
     import local_slideshow as ls
     monkeypatch.setattr(comp, "OUTPUT_DIR", sandbox / "static" / "compositions")
-    monkeypatch.setattr(ls, "list_messages", lambda: [])
-    monkeypatch.setattr(ls, "publish_queue", lambda **_: None)
+    from slideshow import compositions as slideshow_compositions
+    monkeypatch.setattr(slideshow_compositions, "list_messages", lambda: [])
+    monkeypatch.setattr(slideshow_compositions, "publish_queue", lambda **_: None)
 
     def slow_render(style, chunk, messages, width, height, include_messages, rng):
         time.sleep(0.5)
@@ -236,9 +237,10 @@ def test_the_following_composition_is_prepared_ahead(monkeypatch, sandbox):
     pytest.importorskip("pygame")
     import local_slideshow as ls
     monkeypatch.setattr(comp, "OUTPUT_DIR", sandbox / "static" / "compositions")
-    monkeypatch.setattr(ls, "list_messages", lambda: [])
-    monkeypatch.setattr(ls, "publish_queue", lambda **_: None)
-    monkeypatch.setattr(ls, "_ahead", {})
+    from slideshow import compositions as slideshow_compositions
+    monkeypatch.setattr(slideshow_compositions, "list_messages", lambda: [])
+    monkeypatch.setattr(slideshow_compositions, "publish_queue", lambda **_: None)
+    monkeypatch.setattr(slideshow_compositions, "_ahead", {})
     monkeypatch.setattr(le, "render_chunk", lambda style, chunk, *a, **k: (Image.new("RGB", (32, 18)), 3))
     monkeypatch.setattr(le, "photo_count", lambda style, rng: 3)
     plan = le.LayoutPlan(True, ["mosaique"], 2)
@@ -246,8 +248,8 @@ def test_the_following_composition_is_prepared_ahead(monkeypatch, sandbox):
     ls.prepare_composition({}, plan, playlist, 2, 64, 36)
     ls._composition["thread"].join(5)
     assert ls.take_composition(playlist, 2)[1] == 3
-    assert (id(playlist), 7) in ls._ahead  # 2 photos seules après la composition (2..4), puis la suivante en 7
+    assert (id(playlist), 7) in slideshow_compositions._ahead  # 2 photos seules après la composition (2..4), puis la suivante en 7
     ls.prepare_composition({}, plan, playlist, 7, 64, 36)  # reprise de la réserve : instantané
     ls._composition["thread"].join(5)
-    assert ls.take_composition(playlist, 7)[0] and (id(playlist), 7) not in ls._ahead
+    assert ls.take_composition(playlist, 7)[0] and (id(playlist), 7) not in slideshow_compositions._ahead
     assert le.next_composition_start(plan, playlist, 5)[0] == 7
