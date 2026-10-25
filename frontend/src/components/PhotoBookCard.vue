@@ -28,6 +28,7 @@ async function load() {
   } catch { /* hors ligne : on réessaie */ }
 }
 let calendarTouched = false;
+function touchCalendar() { calendarTouched = true; }
 function stopPolling() { window.clearInterval(timer); timer = undefined; }
 async function create(kind: "book" | "calendar" = "book") {
   const wanted = kind === "calendar" ? calendarYear.value : year.value;
@@ -55,7 +56,7 @@ onUnmounted(stopPolling);
     <h3 class="sub"><i class="fas fa-calendar-alt"></i> {{ t("Calendrier photo à imprimer") }}</h3>
     <p class="small muted">{{ t("Un mois par page (A4 en portrait) : une belle photo prise ce mois-là une année précédente, et la grille des jours avec les anniversaires de la famille (page Occasions), la fête des mères et des pères.") }}</p>
     <div class="row">
-      <input v-model.number="calendarYear" type="number" min="2000" max="2100" class="year" :disabled="job?.running" @input="calendarTouched = true">
+      <input v-model.number="calendarYear" type="number" min="2000" max="2100" class="year" :disabled="job?.running" @input="touchCalendar">
       <button class="btn primary" type="button" :disabled="job?.running" @click="create('calendar')">
         <i class="fas" :class="job?.running && job.kind === 'calendar' ? 'fa-spinner fa-spin' : 'fa-calendar-plus'"></i>
         {{ job?.running && job.kind === "calendar" ? t("Création en cours...") : t("Créer le calendrier") }}</button>
