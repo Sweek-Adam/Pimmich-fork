@@ -36,7 +36,21 @@ from utils import music_remote
 from utils import photo_index
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
+_TRANSLATIONS = {}
+
+
 def _(text, **kwargs):
+    """Texte affiché sur le cadre, dans la langue choisie (réglage « language » ; catalogues de l'interface)."""
+    try:
+        lang = (load_config().get("language") or "fr")[:2]
+    except Exception:
+        lang = "fr"
+    if lang != "fr":
+        if lang not in _TRANSLATIONS:
+            import gettext
+            _TRANSLATIONS[lang] = gettext.translation("messages", localedir=str(Path(__file__).resolve().parent / "translations"),
+                                                      languages=[lang], fallback=True)
+        text = _TRANSLATIONS[lang].gettext(text)
     try:
         return text % kwargs if kwargs else text
     except (KeyError, TypeError, ValueError):

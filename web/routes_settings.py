@@ -59,6 +59,7 @@ SETTINGS = {
     "motion_photos_enabled": ("bool", None, True),
     "hardware_profile": ("choice", ["auto", "leger", "standard", "complet"], "auto"),
     "family_game_enabled": ("bool", None, True),
+    "language": ("choice", ["fr", "en", "es", "de", "ja"], "fr"),
     "game_rounds": ("int", (1, 15), 6),
     "game_question_seconds": ("int", (5, 300), 25),
     "game_reveal_seconds": ("int", (3, 60), 9),

@@ -10,7 +10,7 @@ import qrcode
 from PIL import Image, ImageDraw, ImageFilter
 
 from utils import family_game as game
-from utils.message_renderer import FONT_DIRS, _font, _gradient
+from utils.message_renderer import FONT_DIRS, N_, _font, _gradient
 
 TITLE, HAND = "PermanentMarker-Regular.ttf", "PatrickHand-Regular.ttf"
 # Texte lisible avec accents : DejaVu (Raspberry Pi OS), sinon la police manuscrite fournie avec Pimmich
@@ -184,16 +184,16 @@ def lobby(state, W, H, url, translate):
     draw = ImageDraw.Draw(canvas)
     mode = (state or {}).get("mode", "classique")
     _center(draw, translate(game.MODES.get(mode, game.MODES["classique"])), H * 0.06, _fit_font(draw, translate(game.MODES.get(mode, "")), TITLE, int(H * 0.11), W * 0.9), GOLD)
-    _center(draw, translate("Le jeu des photos de famille"), H * 0.2, _font(HAND, int(H * 0.05)), SOFT, shadow=False)
+    _center(draw, translate(N_("Le jeu des photos de famille")), H * 0.2, _font(HAND, int(H * 0.05)), SOFT, shadow=False)
     # QR code à gauche, règles au milieu, joueurs à droite
     side = int(min(H * 0.45, W * 0.24))
     top = int(H * 0.3)
     canvas.paste(_qr(url, side), (int(W * 0.04), top))
-    draw.text((W * 0.04, top + side + H * 0.02), translate("Scannez pour jouer"), font=_font(BOLD, int(H * 0.035)), fill=WHITE)
+    draw.text((W * 0.04, top + side + H * 0.02), translate(N_("Scannez pour jouer")), font=_font(BOLD, int(H * 0.035)), fill=WHITE)
     left, width = W * 0.04 + side + W * 0.04, W * 0.68 - (W * 0.04 + side + W * 0.04)
     panel = Image.new("RGBA", (int(width + W * 0.03), int(H * 0.56)), (255, 255, 255, 28))
     canvas.paste(panel, (int(left - W * 0.015), int(top - H * 0.02)), panel)
-    draw.text((left, top), translate("Règles du jeu"), font=_font(BOLD, int(H * 0.042)), fill=GOLD)
+    draw.text((left, top), translate(N_("Règles du jeu")), font=_font(BOLD, int(H * 0.042)), fill=GOLD)
     lines = game.rules(state, translate)
     size = 0.04
     while True:  # le texte le plus grand qui tient dans le cadre des règles
@@ -211,10 +211,10 @@ def lobby(state, W, H, url, translate):
         y += H * 0.01
     players = (state or {}).get("players", {})
     px = W * 0.72
-    draw.text((px, top), translate("Joueurs (%(count)s)", count=len(players)), font=_font(BOLD, int(H * 0.042)), fill=GOLD)
+    draw.text((px, top), translate(N_("Joueurs (%(count)s)"), count=len(players)), font=_font(BOLD, int(H * 0.042)), fill=GOLD)
     for i, name in enumerate(sorted(players.values())[:9]):
         draw.text((px, top + H * 0.075 + i * H * 0.052), f"– {name}", font=_fit_font(draw, f"– {name}", BOLD, int(H * 0.038), W * 0.26), fill=WHITE)
-    hint = translate("Appuyez sur « Commencer » sur un téléphone") if players else translate("Entrez votre prénom sur le téléphone")
+    hint = translate(N_("Appuyez sur « Commencer » sur un téléphone")) if players else translate(N_("Entrez votre prénom sur le téléphone"))
     _center(draw, hint, H * 0.9, _font(HAND, int(H * 0.045)), SOFT, shadow=False)
     return canvas
 
@@ -229,8 +229,8 @@ def frame(state, now, W, H, url, translate=lambda s, **k: s % k if k else s):
         draw = ImageDraw.Draw(canvas)
         ranking = [(n, s) for n, s, _p in game.scores(state)]
         winner = ranking[0][0] if ranking else ""
-        _center(draw, translate("Bravo %(name)s !", name=winner), H * 0.08, _font(TITLE, int(H * 0.1)), GOLD)
-        _center(draw, translate("Classement final"), H * 0.24, _font(HAND, int(H * 0.055)), SOFT, shadow=False)
+        _center(draw, translate(N_("Bravo %(name)s !"), name=winner), H * 0.08, _font(TITLE, int(H * 0.1)), GOLD)
+        _center(draw, translate(N_("Classement final")), H * 0.24, _font(HAND, int(H * 0.055)), SOFT, shadow=False)
         _ranking(draw, ranking, W * 0.3, H * 0.36, W, H, limit=8)
         return canvas
 
@@ -239,7 +239,7 @@ def frame(state, now, W, H, url, translate=lambda s, **k: s % k if k else s):
     qkind = question["kind"]
     title = f"{number + 1}/{total} · {game.question_text(question, translate)}"
     answered = len(state["answers"].get(str(number), {}))
-    count_text = translate("%(done)s / %(count)s ont répondu", done=answered, count=len(state["players"]))
+    count_text = translate(N_("%(done)s / %(count)s ont répondu"), done=answered, count=len(state["players"]))
     duration = game.step_duration(state, number, kind)
     progress = 1 - max(0.0, left) / duration if duration else 1.0
     keys = [PREPARED / k for k in question.get("keys", [])]
@@ -247,7 +247,7 @@ def frame(state, now, W, H, url, translate=lambda s, **k: s % k if k else s):
     if kind == "memorize":
         canvas = _backdrop(W, H)
         _grid(canvas, keys, H * 0.13, H * 0.9)
-        _header(canvas, f"{number + 1}/{total} · {translate('Retenez bien ces photos !')}", left)
+        _header(canvas, f"{number + 1}/{total} · {translate(N_('Retenez bien ces photos !'))}", left)
         return canvas
 
     if kind in ("question", "vote") or kind == "reveal" and qkind not in ("caption", "challenge"):
@@ -268,7 +268,7 @@ def frame(state, now, W, H, url, translate=lambda s, **k: s % k if k else s):
                 font = _font(TITLE, int(H * 0.09))
                 for i, line in enumerate(_wrap(draw, translate(question["text"]), font, W * 0.85)):
                     _center(draw, line, H * 0.3 + i * H * 0.11, font, GOLD)
-                _center(draw, translate("Prenez la photo avec votre téléphone (page /jeu)"), H * 0.66, _font(HAND, int(H * 0.05)), SOFT, shadow=False)
+                _center(draw, translate(N_("Prenez la photo avec votre téléphone (page /jeu)")), H * 0.66, _font(HAND, int(H * 0.05)), SOFT, shadow=False)
         elif qkind == "caption" and kind == "vote":
             canvas = _photo_screen(PREPARED / question["key"], W, H, dim=0.55)
             draw = ImageDraw.Draw(canvas)
@@ -295,9 +295,9 @@ def frame(state, now, W, H, url, translate=lambda s, **k: s % k if k else s):
             info = count_text
             if kind == "vote":
                 voted = len(state.get("votes", {}).get(str(number), {}))
-                info = translate("Votez sur votre téléphone pour votre préférée · %(done)s vote(s)", done=voted)
+                info = translate(N_("Votez sur votre téléphone pour votre préférée · %(done)s vote(s)"), done=voted)
             elif qkind == "timeline":
-                info = translate("Touchez les lettres dans l'ordre sur votre téléphone") + "     ·     " + count_text
+                info = translate(N_("Touchez les lettres dans l'ordre sur votre téléphone")) + "     ·     " + count_text
             elif question.get("options") and qkind not in ("older", "memory"):
                 info = "   ".join(question["options"]) + "     ·     " + count_text
             _footer(canvas, info)
@@ -306,7 +306,7 @@ def frame(state, now, W, H, url, translate=lambda s, **k: s % k if k else s):
         draw = ImageDraw.Draw(canvas)
         answer = str(question["answer"])
         if qkind in ("older", "timeline", "memory"):
-            answer = translate("Réponse : %(answer)s", answer=" → ".join(answer) if qkind == "timeline" else answer)
+            answer = translate(N_("Réponse : %(answer)s"), answer=" → ".join(answer) if qkind == "timeline" else answer)
         _center(draw, answer, H * 0.2, _fit_font(draw, answer, TITLE, int(H * 0.14), W * 0.9), GOLD)
     else:
         # Légende ou défi : les gagnants
@@ -322,7 +322,7 @@ def frame(state, now, W, H, url, translate=lambda s, **k: s % k if k else s):
         if winners:
             best_player = winners[0][1]
             name = state["players"].get(best_player, "?")
-            _center(draw, translate("Bravo %(name)s !", name=name), H * 0.17, _font(TITLE, int(H * 0.09)), GOLD)
+            _center(draw, translate(N_("Bravo %(name)s !"), name=name), H * 0.17, _font(TITLE, int(H * 0.09)), GOLD)
             if qkind == "caption":
                 font = _font(HAND, int(H * 0.07))
                 for i, line in enumerate(_wrap(draw, f"« {winners[0][2]} »", font, W * 0.85)[:2]):
@@ -339,7 +339,7 @@ def bingo_banner(state, now, W, H, translate=lambda s, **k: s % k if k else s):
     """Bandeau du bingo pendant le diaporama (dernier gagnant en grand quelques secondes)."""
     winners = (state or {}).get("winners", [])
     fresh = [w for w in winners if now - w["at"] < 15]
-    text = translate("BINGO ! %(name)s", name=fresh[-1]["name"]) if fresh else translate("Bingo souvenirs en cours · page /jeu")
+    text = translate(N_("BINGO ! %(name)s"), name=fresh[-1]["name"]) if fresh else translate(N_("Bingo souvenirs en cours · page /jeu"))
     font = _font(TITLE if fresh else BOLD, int(H * (0.08 if fresh else 0.035)))
     probe = ImageDraw.Draw(Image.new("RGB", (1, 1)))
     w = int(probe.textlength(text, font=font)) + 40

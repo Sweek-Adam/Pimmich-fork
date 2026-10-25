@@ -83,6 +83,11 @@ const sections: Section[] = [
       { key: "agenda_slide", label: () => t("Afficher la diapositive « Cette semaine »"), type: "toggle" },
       { key: "agenda_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 1, max: 1440, showIf: (v) => !!v.agenda_slide },
     ] },
+  { title: () => t("Langue"), icon: "fa-language", fields: [
+    { key: "language", label: () => t("Langue des textes affichés sur le cadre"), type: "select",
+      options: () => [{ value: "fr", label: "Français" }, { value: "en", label: "English" }, { value: "es", label: "Español" }, { value: "de", label: "Deutsch" }, { value: "ja", label: "日本語" }],
+      help: () => t("Date, jeux, mode fête, compositions, citations... L'interface d'administration suit la langue de votre navigateur.") },
+  ] },
   { title: () => t("Vidéos"), icon: "fa-video", fields: [
     { key: "slideshow_video_enabled", label: () => t("Afficher les vidéos dans le diaporama"), type: "toggle" },
     { key: "video_audio_enabled", label: () => t("Activer le son pour les vidéos"), type: "toggle", showIf: (v) => !!v.slideshow_video_enabled },
