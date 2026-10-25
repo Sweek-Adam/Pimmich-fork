@@ -928,6 +928,31 @@ def button_worker():
         time.sleep(gpio_button.POLL if watcher.pin is not None else 1)
 
 
+def daily_photo_worker():
+    """Photo du jour par e-mail, à l'heure choisie (désactivée par défaut)."""
+    from utils import daily_photo
+    time.sleep(120)
+    while True:
+        try:
+            config = load_config()
+            state = daily_photo.load_state()
+            if daily_photo.due(config, state):
+                state["last_day"] = datetime.now().strftime("%Y-%m-%d")  # un seul essai par jour, même en cas d'échec
+                daily_photo.save_state(state)
+                with app.app_context():
+                    from web.routes_daily_photo import send_daily_photo
+                    try:
+                        key = send_daily_photo(config)
+                        logger.info(f"[Photo du jour] {key} envoyée à {len(daily_photo.recipients(config))} adresse(s)")
+                        daily_photo.save_state(dict(daily_photo.load_state(), last_error=None))
+                    except Exception as e:
+                        logger.warning(f"[Photo du jour] Envoi impossible : {e}")
+                        daily_photo.save_state(dict(daily_photo.load_state(), last_error=str(e)[:200]))
+        except Exception as e:
+            logger.warning(f"[Photo du jour] {e}")
+        time.sleep(60)
+
+
 def auto_backup_worker():
     """Sauvegarde complète automatique de la semaine (disque USB ou NAS), la nuit."""
     from utils import auto_backup, night_work, notify

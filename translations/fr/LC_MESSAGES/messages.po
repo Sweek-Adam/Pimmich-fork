@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:20+0100\n"
+"POT-Creation-Date: 2026-10-26 00:23+0100\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -356,7 +356,7 @@ msgstr ""
 msgid "Jeux"
 msgstr ""
 
-#: frontend/src/nav.ts:51 frontend/src/views/GuestsView.vue:192
+#: frontend/src/nav.ts:51 frontend/src/views/GuestsView.vue:193
 #: templates/game.html.jinja:39
 msgid "Jeux de famille"
 msgstr ""
@@ -435,7 +435,7 @@ msgid ""
 "bibliothèque."
 msgstr ""
 
-#: frontend/src/news.ts:15 frontend/src/views/GuestsView.vue:171
+#: frontend/src/news.ts:15 frontend/src/views/GuestsView.vue:172
 msgid "Mode fête"
 msgstr ""
 
@@ -573,7 +573,7 @@ msgstr ""
 #: frontend/src/components/PresenceCard.vue:62
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
-#: frontend/src/views/GuestsView.vue:246 frontend/src/views/GuestsView.vue:268
+#: frontend/src/views/GuestsView.vue:248 frontend/src/views/GuestsView.vue:270
 #: frontend/src/views/MaintenanceView.vue:314
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
@@ -934,6 +934,49 @@ msgstr ""
 #: templates/configure/tab_sources.html.jinja:543
 #: templates/upload.html.jinja:136
 msgid "Enregistrer"
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:33
+msgid "Photo du jour par e-mail"
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:34
+msgid ""
+"Pour les proches qui n'ont pas de cadre : chaque jour, une photo par "
+"e-mail (un souvenir « ce jour-là » de préférence, sinon une photo arrivée"
+" récemment ou une des plus aimées). Les destinataires ne voient pas les "
+"adresses des autres."
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:35
+msgid ""
+"Configurez d'abord la boîte mail du cadre (Sources › Photos reçues par "
+"e-mail) : c'est elle qui envoie la photo."
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:38
+msgid "Envoyer la photo du jour"
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:39
+msgid "Adresses (séparées par des virgules)"
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:42
+msgid "Chaque jour à"
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:44
+msgid "Envoyer maintenant"
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:46
+msgid "Dernier envoi impossible :"
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:47
+#, python-brace-format
+msgid "Dernier envoi : {date}"
 msgstr ""
 
 #: frontend/src/components/HomeAssistantCard.vue:27
@@ -1521,7 +1564,7 @@ msgid "Album intelligent"
 msgstr ""
 
 #: frontend/src/components/SmartAlbumEditor.vue:76
-#: frontend/src/views/GuestsView.vue:259
+#: frontend/src/views/GuestsView.vue:261
 #: templates/configure/_smart_albums.html.jinja:16
 #: templates/configure/tab_comptes.html.jinja:58
 #: templates/configure/tab_invites.html.jinja:161
@@ -3655,12 +3698,12 @@ msgid ""
 "sur la page /jeu."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:14
+#: frontend/src/views/GuestsView.vue:15
 #: templates/configure/tab_invites.html.jinja:112
 msgid "QR code pour les invités"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:15
+#: frontend/src/views/GuestsView.vue:16
 #: templates/configure/tab_invites.html.jinja:114
 msgid ""
 "Affiche en permanence sur le diaporama un QR code vers la page invités, "
@@ -3668,17 +3711,17 @@ msgid ""
 " au même Wi-Fi."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:17
+#: frontend/src/views/GuestsView.vue:18
 #: templates/configure/tab_invites.html.jinja:117
 msgid "Afficher le QR code"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:18
+#: frontend/src/views/GuestsView.vue:19
 #: templates/configure/tab_invites.html.jinja:119
 msgid "Position :"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:30
+#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:30
 #: frontend/src/views/SoundView.vue:137
 #: templates/configure/tab_invites.html.jinja:122
 #: templates/configure/tab_metadata.html.jinja:82
@@ -3686,7 +3729,7 @@ msgstr ""
 msgid "En bas à droite"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:19 frontend/src/views/PhotoInfoView.vue:30
+#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:30
 #: frontend/src/views/SoundView.vue:136
 #: templates/configure/tab_invites.html.jinja:123
 #: templates/configure/tab_metadata.html.jinja:84
@@ -3694,7 +3737,7 @@ msgstr ""
 msgid "En bas à gauche"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:29
+#: frontend/src/views/GuestsView.vue:21 frontend/src/views/PhotoInfoView.vue:29
 #: frontend/src/views/SoundView.vue:139
 #: templates/configure/tab_invites.html.jinja:124
 #: templates/configure/tab_metadata.html.jinja:78
@@ -3702,7 +3745,7 @@ msgstr ""
 msgid "En haut à droite"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:20 frontend/src/views/PhotoInfoView.vue:29
+#: frontend/src/views/GuestsView.vue:21 frontend/src/views/PhotoInfoView.vue:29
 #: frontend/src/views/SoundView.vue:138
 #: templates/configure/tab_invites.html.jinja:125
 #: templates/configure/tab_metadata.html.jinja:80
@@ -3710,107 +3753,107 @@ msgstr ""
 msgid "En haut à gauche"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:22
+#: frontend/src/views/GuestsView.vue:23
 msgid "Messages et réactions"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:23
+#: frontend/src/views/GuestsView.vue:24
 #: templates/configure/tab_invites.html.jinja:129
 msgid "Autoriser les invités à écrire des messages"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:24
+#: frontend/src/views/GuestsView.vue:25
 msgid ""
 "Les messages des invités s'affichent directement (5 par heure et par "
 "appareil au maximum) et disparaissent au bout de 7 jours. Vous pouvez les"
 " supprimer dans Photos > Messages."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:25
+#: frontend/src/views/GuestsView.vue:26
 #: templates/configure/tab_invites.html.jinja:134
 msgid ""
 "Lire les messages vocaux quand leur carte s'affiche (au plus toutes les "
 "20 minutes)"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:26
+#: frontend/src/views/GuestsView.vue:27
 #: templates/configure/tab_invites.html.jinja:137
 msgid "Volume des messages vocaux :"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:27
+#: frontend/src/views/GuestsView.vue:28
 #: templates/configure/tab_invites.html.jinja:142
 msgid ""
 "Réactions : les invités voient la photo affichée et peuvent y réagir (❤️ "
 "😂 😮 👏)"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:28
+#: frontend/src/views/GuestsView.vue:29
 #: templates/configure/tab_invites.html.jinja:144
 msgid ""
 "Seulement depuis le Wi-Fi de la maison. Les messages et dessins des "
 "invités restent ensuite dans le livre d'or :"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:34
+#: frontend/src/views/GuestsView.vue:35
 #: templates/configure/tab_invites.html.jinja:32
 #: templates/configure/tab_invites.html.jinja:99
 msgid "Notre cadre photo"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:35
+#: frontend/src/views/GuestsView.vue:36
 #: templates/configure/tab_invites.html.jinja:35
 #: templates/configure/tab_invites.html.jinja:70
 msgid "Lien copié : collez-le dans un message à la famille."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:47
+#: frontend/src/views/GuestsView.vue:48
 #: templates/configure/tab_invites.html.jinja:67
 msgid ""
 "Tailscale n'est pas installé sur le cadre : "
 "https://tailscale.com/download/linux"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:48
+#: frontend/src/views/GuestsView.vue:49
 #: templates/configure/tab_invites.html.jinja:68
 msgid ""
 "Tailscale est installé mais pas connecté : lancez « sudo tailscale up » "
 "sur le cadre."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:49
+#: frontend/src/views/GuestsView.vue:50
 #: templates/configure/tab_invites.html.jinja:69
 msgid ""
 "Une seule fois, lancez sur le Raspberry Pi : "
 "~/pimmich/utils/enable_remote_guests.sh"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:91
+#: frontend/src/views/GuestsView.vue:92
 #: templates/configure/tab_invites.html.jinja:188
 msgid "Votre message :"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:113
+#: frontend/src/views/GuestsView.vue:114
 msgid "Retirer ce cadre ?"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:141
+#: frontend/src/views/GuestsView.vue:142
 msgid ""
 "Terminer la fête ? Le diaporama habituel reprend ; l'album de la fête "
 "reste dans les sources."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:155
+#: frontend/src/views/GuestsView.vue:156
 #: templates/configure/tab_invites.html.jinja:7
 msgid "QR code de la page invités"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:157
+#: frontend/src/views/GuestsView.vue:158
 #: templates/configure/tab_invites.html.jinja:4
 msgid "Inviter la famille et les amis"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:158
+#: frontend/src/views/GuestsView.vue:159
 #: templates/configure/tab_invites.html.jinja:9
 msgid ""
 "Les personnes connectées à votre Wi-Fi scannent ce QR code (ou ouvrent "
@@ -3818,107 +3861,107 @@ msgid ""
 "le cadre."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:161
+#: frontend/src/views/GuestsView.vue:162
 #: templates/configure/tab_invites.html.jinja:32
 msgid ""
 "Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi"
 " de la maison) :"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:162 frontend/src/views/GuestsView.vue:210
+#: frontend/src/views/GuestsView.vue:163 frontend/src/views/GuestsView.vue:211
 #: templates/configure/tab_invites.html.jinja:12
 #: templates/configure/tab_invites.html.jinja:55
 msgid "Partager le lien"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:163
+#: frontend/src/views/GuestsView.vue:164
 #: templates/configure/tab_invites.html.jinja:13
 msgid "Ouvrir la page invités"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:164
+#: frontend/src/views/GuestsView.vue:165
 #: templates/configure/tab_invites.html.jinja:144
 msgid "ouvrir le livre d'or"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:166
+#: frontend/src/views/GuestsView.vue:167
 #: templates/configure/tab_invites.html.jinja:17
 msgid "Les photos des invités passent par « À valider » avant d'être affichées."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:172
+#: frontend/src/views/GuestsView.vue:173
 #, python-brace-format
 msgid "En cours jusqu'à {time}"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:174
+#: frontend/src/views/GuestsView.vue:175
 #, python-brace-format
 msgid "{count} photo(s) reçue(s)"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:175
+#: frontend/src/views/GuestsView.vue:176
 msgid ""
 "Le QR code est affiché en grand sur le cadre. Chaque photo envoyée passe "
 "aussitôt en grand avec le prénom de l'invité, puis dans le Mur de la "
 "fête."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:177
+#: frontend/src/views/GuestsView.vue:178
 #, python-brace-format
 msgid "Prolonger ({hours} h)"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:178
+#: frontend/src/views/GuestsView.vue:179
 msgid "Terminer la fête"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:182
+#: frontend/src/views/GuestsView.vue:183
 msgid ""
 "Pour un anniversaire, un mariage ou une soirée : un grand QR code à "
 "l'écran, les invités envoient leurs photos depuis leur téléphone et elles"
 " s'affichent tout de suite. Elles sont gardées dans leur propre album."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:183
+#: frontend/src/views/GuestsView.vue:184
 msgid "Nom de la fête"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:183
+#: frontend/src/views/GuestsView.vue:184
 msgid "ex. Les 40 ans de Léa"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:184
+#: frontend/src/views/GuestsView.vue:185
 msgid "Durée (heures)"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:185
+#: frontend/src/views/GuestsView.vue:186
 msgid "Montrer seulement les photos de la fête"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:186
+#: frontend/src/views/GuestsView.vue:187
 msgid ""
 "Afficher les photos sans les valider (tous ceux qui ont le QR code "
 "peuvent envoyer)"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:187
+#: frontend/src/views/GuestsView.vue:188
 msgid "Lancer la fête"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:193
+#: frontend/src/views/GuestsView.vue:194
 msgid "Ouvrir les jeux"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:194
+#: frontend/src/views/GuestsView.vue:195
 msgid "Lancer une partie, la suivre en direct et régler les temps : menu Jeux."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:198
+#: frontend/src/views/GuestsView.vue:199
 #: templates/configure/tab_invites.html.jinja:45
 msgid "Hors de la maison"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:199
+#: frontend/src/views/GuestsView.vue:200
 #: templates/configure/tab_invites.html.jinja:47
 msgid ""
 "La famille peut aussi envoyer photos et messages depuis chez elle, avec "
@@ -3927,46 +3970,46 @@ msgid ""
 "internet. Les photos passent toujours par « À valider »."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:202
+#: frontend/src/views/GuestsView.vue:203
 #: templates/configure/tab_invites.html.jinja:49
 msgid "Autoriser les envois depuis l'extérieur"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:203
+#: frontend/src/views/GuestsView.vue:204
 #: templates/configure/tab_invites.html.jinja:90
 msgid "Autoriser Funnel sur Tailscale"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:205
+#: frontend/src/views/GuestsView.vue:206
 #: templates/configure/tab_invites.html.jinja:51
 msgid "QR code du lien secret"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:209
+#: frontend/src/views/GuestsView.vue:210
 #: templates/configure/tab_invites.html.jinja:71
 msgid ""
 "Envoyez vos photos et vos messages sur notre cadre photo, où que vous "
 "soyez :"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:211
+#: frontend/src/views/GuestsView.vue:212
 #: templates/configure/tab_invites.html.jinja:56
 msgid "Changer le lien"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:213
+#: frontend/src/views/GuestsView.vue:214
 #: templates/configure/tab_invites.html.jinja:58
 msgid ""
 "« Changer le lien » rend l'ancien inutilisable (par exemple s'il a "
 "circulé trop largement)."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:221
+#: frontend/src/views/GuestsView.vue:223
 #: templates/configure/tab_invites.html.jinja:149
 msgid "Cadres de la famille"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:222
+#: frontend/src/views/GuestsView.vue:224
 #: templates/configure/tab_invites.html.jinja:150
 msgid ""
 "Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au "
@@ -3975,42 +4018,42 @@ msgid ""
 "sur les deux cadres."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:223
+#: frontend/src/views/GuestsView.vue:225
 #: templates/configure/tab_invites.html.jinja:188
 msgid "Aucun autre cadre pour l'instant."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:230
+#: frontend/src/views/GuestsView.vue:232
 #: templates/configure/tab_invites.html.jinja:186
 msgid "injoignable"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:230
+#: frontend/src/views/GuestsView.vue:232
 #: templates/configure/tab_invites.html.jinja:187
 msgid "code refusé"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:230
+#: frontend/src/views/GuestsView.vue:232
 #: templates/configure/tab_invites.html.jinja:187
 msgid "diaporama en cours"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:230
+#: frontend/src/views/GuestsView.vue:232
 #: templates/configure/tab_invites.html.jinja:187
 msgid "en veille"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:232
+#: frontend/src/views/GuestsView.vue:234
 #: templates/configure/tab_invites.html.jinja:185
 msgid "Endormir"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:232
+#: frontend/src/views/GuestsView.vue:234
 #: templates/configure/tab_invites.html.jinja:185
 msgid "Allumer"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:233 frontend/src/views/HomeView.vue:158
+#: frontend/src/views/GuestsView.vue:235 frontend/src/views/HomeView.vue:158
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
 #: templates/configure/tab_invites.html.jinja:185
@@ -4018,87 +4061,87 @@ msgstr ""
 msgid "Photo suivante"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:234
+#: frontend/src/views/GuestsView.vue:236
 #: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:6
 msgid "Envoyer des photos"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:235
+#: frontend/src/views/GuestsView.vue:237
 #: templates/configure/tab_invites.html.jinja:186
 msgid "Envoyer un message"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:238
+#: frontend/src/views/GuestsView.vue:240
 msgid "Partager automatiquement avec ce cadre :"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:240
+#: frontend/src/views/GuestsView.vue:242
 msgid "les nouvelles photos reçues"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:242
+#: frontend/src/views/GuestsView.vue:244
 msgid "les messages"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:244
+#: frontend/src/views/GuestsView.vue:246
 #, python-brace-format
 msgid "Déjà partagés : {photos} photo(s), {messages} message(s)"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:251
+#: frontend/src/views/GuestsView.vue:253
 #: templates/configure/tab_invites.html.jinja:153
 msgid "Ajouter un cadre"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:253
+#: frontend/src/views/GuestsView.vue:255
 #: templates/configure/tab_invites.html.jinja:155
 msgid ""
 "Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
 "dessous), puis « Créer un code »."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:254
+#: frontend/src/views/GuestsView.vue:256
 #: templates/configure/tab_invites.html.jinja:156
 msgid ""
 "Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
 "https://192.168.1.30) et ce code."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:257
+#: frontend/src/views/GuestsView.vue:259
 #: frontend/src/views/MaintenanceView.vue:324
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:258
+#: frontend/src/views/GuestsView.vue:260
 #: templates/configure/tab_invites.html.jinja:160
 msgid "Code"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:259
+#: frontend/src/views/GuestsView.vue:261
 #: templates/configure/tab_invites.html.jinja:161
 msgid "ex : Chez Mamie"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:260
+#: frontend/src/views/GuestsView.vue:262
 #: templates/configure/tab_invites.html.jinja:163
 msgid "Ajouter le cadre"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:264
+#: frontend/src/views/GuestsView.vue:266
 #: templates/configure/tab_invites.html.jinja:166
 msgid "Code d'association de ce cadre"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:265
+#: frontend/src/views/GuestsView.vue:267
 #: templates/configure/tab_invites.html.jinja:167
 msgid ""
 "À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
 "l'accès."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:270
+#: frontend/src/views/GuestsView.vue:272
 #: templates/configure/tab_invites.html.jinja:169
 msgid "Créer un code"
 msgstr ""
@@ -10828,7 +10871,7 @@ msgstr ""
 msgid "Imports terminés"
 msgstr ""
 
-#: utils/notify.py:23 web/workers.py:1220
+#: utils/notify.py:23 web/workers.py:1245
 msgid "Médias impossibles à préparer"
 msgstr ""
 
@@ -11349,6 +11392,63 @@ msgstr ""
 msgid ""
 "Configuration enregistrée. Le diaporama a été relancé pour appliquer les "
 "changements."
+msgstr ""
+
+#: web/routes_daily_photo.py:39
+msgid "Aucune photo à envoyer pour l'instant."
+msgstr ""
+
+#: web/routes_daily_photo.py:58
+#, python-format
+msgid "Ce jour-là, il y a %(years)s ans"
+msgstr ""
+
+#: web/routes_daily_photo.py:58
+msgid "Ce jour-là, il y a un an"
+msgstr ""
+
+#: web/routes_daily_photo.py:59
+msgid "Arrivée cette semaine sur le cadre"
+msgstr ""
+
+#: web/routes_daily_photo.py:59
+msgid "Une des photos préférées de la famille"
+msgstr ""
+
+#: web/routes_daily_photo.py:60
+msgid "le cadre photo"
+msgstr ""
+
+#: web/routes_daily_photo.py:61
+#, python-format
+msgid "La photo du jour · %(day)s %(month)s"
+msgstr ""
+
+#: web/routes_daily_photo.py:62 web/routes_daily_photo.py:67
+#, python-format
+msgid "Envoyée par %(frame)s."
+msgstr ""
+
+#: web/routes_daily_photo.py:90
+msgid "Heure invalide."
+msgstr ""
+
+#: web/routes_daily_photo.py:93
+msgid "Photo du jour enregistrée."
+msgstr ""
+
+#: web/routes_daily_photo.py:106
+msgid "Ajoutez d'abord au moins une adresse."
+msgstr ""
+
+#: web/routes_daily_photo.py:112
+#, python-format
+msgid "Envoi impossible : %(error)s"
+msgstr ""
+
+#: web/routes_daily_photo.py:113
+#, python-format
+msgid "Photo envoyée à %(count)s adresse(s)."
 msgstr ""
 
 #: web/routes_family.py:26 web/routes_settings.py:412
@@ -12987,20 +13087,20 @@ msgstr ""
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr ""
 
-#: web/workers.py:948
+#: web/workers.py:973
 msgid "Sauvegarde automatique impossible"
 msgstr ""
 
-#: web/workers.py:1172
+#: web/workers.py:1197
 msgid "Diaporama instable"
 msgstr ""
 
-#: web/workers.py:1172
+#: web/workers.py:1197
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr ""
 
-#: web/workers.py:1221
+#: web/workers.py:1246
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "

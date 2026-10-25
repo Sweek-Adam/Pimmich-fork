@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
+import DailyPhotoCard from "../components/DailyPhotoCard.vue";
 import SettingsPage from "../components/SettingsPage.vue";
 import { get, post } from "../api";
 import { boot } from "../boot";
@@ -217,6 +218,7 @@ onMounted(() => {
 
   <SettingsPage :sections="sections" />
 
+  <DailyPhotoCard v-if="boot.admin" />
   <section v-if="boot.admin" class="card frames-box">
     <div class="card-head"><h2><i class="fas fa-th"></i>{{ t("Cadres de la famille") }}</h2></div>
     <p class="small muted">{{ t("Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au chalet…) : voir la photo affichée, les allumer, leur envoyer des photos ou un message. Ils doivent être joignables : même réseau, ou Tailscale sur les deux cadres.") }}</p>

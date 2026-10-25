@@ -35,6 +35,7 @@ from web import routes_music  # noqa: F401 (enregistre les routes)
 from web import routes_media  # noqa: F401 (enregistre les routes)
 from web import routes_party  # noqa: F401 (enregistre les routes)
 from web import routes_photobook  # noqa: F401 (enregistre les routes)
+from web import routes_daily_photo  # noqa: F401 (enregistre les routes)
 from web import routes_game  # noqa: F401 (enregistre les routes)
 from web.workers import *  # noqa: F401,F403
 
@@ -78,7 +79,8 @@ if __name__ == '__main__':
     from web.workers import night_work_worker
     threading.Thread(target=night_work_worker, daemon=True, name="night-work").start()
     threading.Thread(target=routes_party.party_worker, daemon=True, name="party").start()
-    from web.workers import daily_summary_worker, frame_share_worker, auto_backup_worker
+    from web.workers import daily_summary_worker, frame_share_worker, auto_backup_worker, daily_photo_worker
+    threading.Thread(target=daily_photo_worker, daemon=True, name="daily-photo").start()  # photo du jour par e-mail
     threading.Thread(target=auto_backup_worker, daemon=True, name="auto-backup").start()  # sauvegarde de la semaine
     threading.Thread(target=frame_share_worker, daemon=True, name="frame-share").start()  # cadres jumelés
     threading.Thread(target=daily_summary_worker, daemon=True, name="daily-summary").start()
