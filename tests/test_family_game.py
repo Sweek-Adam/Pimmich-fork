@@ -16,6 +16,7 @@ def library(sandbox, monkeypatch, tmp_path):
     from utils import photo_index
     monkeypatch.setattr(game, "STATE_FILE", tmp_path / "game.json")
     monkeypatch.setattr(game, "LOCK_FILE", tmp_path / "game.lock")
+    monkeypatch.setattr(game, "PHOTOS_DIR", tmp_path / "photos")
     prepared = photo_index.PREPARED_DIR
     index = {}
     for i, year in enumerate([2008, 2012, 2015, 2015, 2019, 2021, 2023]):
@@ -97,7 +98,8 @@ def test_game_screens_render(library):
 def test_game_pages_for_phones(client, admin_client, library, monkeypatch):
     from utils import photo_index
     monkeypatch.setattr(photo_index, "load", lambda: library)
-    assert "Où et quand" in client.get("/jeu").get_data(as_text=True)
+    assert "Jeux de famille" in client.get("/jeu").get_data(as_text=True)
+    assert any(m["key"] == "bingo" for m in client.get("/jeu/modes").get_json()["modes"])
     assert client.get("/jeu/state").get_json()["phase"] == "over"
     assert client.post("/jeu/new", json={"rounds": 4}, headers=SAME).get_json()["success"]
     assert client.post("/jeu/new", json={}, headers=SAME).status_code == 409   # déjà une partie
@@ -109,3 +111,120 @@ def test_game_pages_for_phones(client, admin_client, library, monkeypatch):
     assert state["phase"] == "question" and state["question"] and "answer" not in state
     assert admin_client.post("/api/game/stop", headers=SAME).get_json()["success"]
     assert client.get("/jeu/state").get_json()["phase"] == "over"
+
+
+def _play(state_mode, library, **kw):
+    t0 = time.time()
+    state = game.new_game(library, LABELS, rounds=kw.get("rounds", 3), now=t0, rng=random.Random(kw.get("seed", 4)), mode=state_mode, people=kw.get("people"))
+    return t0, state
+
+
+def _steps_until(state, number, name):
+    """Secondes depuis le départ jusqu'au milieu de l'étape `name` de la question `number`."""
+    at = 0
+    for n, q in enumerate(state["questions"]):
+        for step, seconds in game.steps(q):
+            if n == number and step == name:
+                return at + seconds / 2
+            at += seconds
+    raise AssertionError("étape absente")
+
+
+@pytest.mark.parametrize("mode", ["avant_apres", "ligne", "memoire", "proche", "zoom", "puzzle", "melange"])
+def test_every_mode_builds_and_renders(library, mode):
+    from utils import game_screen
+    t0, state = _play(mode, library)
+    assert state, mode
+    lea = game.join("Léa")
+    game.start(t0 + 1)
+    state = game.current()
+    for number, question in enumerate(state["questions"]):
+        for step, _s in game.steps(question):
+            moment = t0 + 1 + _steps_until(state, number, step)
+            assert game_screen.frame(state, moment, 480, 270, "http://x/jeu").size == (480, 270)
+            view = game.public_view(state, lea, moment)
+            assert view["phase"] == step and ("answer" not in view or step == "reveal")
+
+
+def test_timeline_memory_and_older_scoring(library):
+    t0, state = _play("ligne", library, rounds=2)
+    lea, tom = game.join("Léa"), game.join("Tom")
+    game.start(t0)
+    state = game.current()
+    q = state["questions"][0]
+    at = t0 + _steps_until(state, 0, "question")
+    wrong = q["answer"][::-1]
+    assert game.answer(lea, q["answer"].lower(), at) and game.answer(tom, wrong, at)
+    assert not game.answer(game.join("Max"), "AAAA", at)  # pas un ordre
+    points = game.round_points(game.current(), 0)
+    assert points[lea] == 100 and points[tom] == sum(25 for a, b in zip(wrong, q["answer"]) if a == b)
+
+
+def test_closest_ranks_the_nearest_guesses():
+    q = {"kind": "closest", "answer": 40}
+    assert game.question_points(q, {"a": 41, "b": 39, "c": 50, "d": 100, "e": 0}) == {"a": 100, "b": 100, "c": 30, "e": 10, "d": 0}
+
+
+def test_zoom_rewards_fast_answers():
+    q = {"kind": "year", "answer": 2015, "effect": "zoom"}
+    assert game.question_points(q, {"a": 2015, "b": 2015}, {"a": 0.9, "b": 0.1}) == {"a": 94, "b": 46}
+
+
+def test_caption_and_vote(library):
+    t0, state = _play("legende", library, rounds=1)
+    lea, tom, max_ = game.join("Léa"), game.join("Tom"), game.join("Max")
+    game.start(t0)
+    state = game.current()
+    write = t0 + _steps_until(state, 0, "question")
+    assert game.answer(lea, "  Quand le chat   voit le gâteau  ", write) and game.answer(tom, "Vive les vacances", write)
+    assert game.current()["answers"]["0"][lea] == "Quand le chat voit le gâteau"
+    vote_at = t0 + _steps_until(state, 0, "vote")
+    entries = {p: n for n, p, _v in game.entries(game.current(), 0)}
+    assert not game.vote(lea, entries[lea], vote_at)              # pas pour soi
+    assert game.vote(lea, entries[tom], vote_at) and game.vote(max_, entries[tom], vote_at) and game.vote(tom, entries[lea], vote_at)
+    assert not game.vote(max_, entries[lea], vote_at)             # un seul vote
+    assert game.round_points(game.current(), 0) == {lea: 100, tom: 200}
+    reveal = game.public_view(game.current(), tom, t0 + _steps_until(state, 0, "reveal"))
+    assert reveal["best"][0] == {"name": "Tom", "text": "Vive les vacances", "votes": 2}
+
+
+def test_photo_challenge(library):
+    import io
+    t0, state = _play("defi", library, rounds=1)
+    lea, tom = game.join("Léa"), game.join("Tom")
+    game.start(t0)
+    state = game.current()
+    at = t0 + _steps_until(state, 0, "question")
+    buffer = io.BytesIO()
+    Image.new("RGB", (3000, 2000), (200, 30, 30)).save(buffer, "JPEG")
+    assert game.answer_photo(lea, buffer.getvalue(), at) and not game.answer_photo(lea, buffer.getvalue(), at)
+    assert not game.answer_photo(tom, b"pas une image", at)
+    saved = game.PHOTOS_DIR / game.current()["answers"]["0"][lea]
+    with Image.open(saved) as image:
+        assert max(image.size) == 1600
+    from utils import game_screen
+    assert game_screen.frame(game.current(), t0 + _steps_until(state, 0, "vote"), 480, 270, "x").size == (480, 270)
+    game.stop()
+    assert not saved.exists()
+
+
+def test_person_needs_known_faces(library):
+    assert game.new_game(library, LABELS, rounds=3, mode="qui") is None
+    people = {k: [["Léa", "Tom", "Zoé"][i % 3]] for i, k in enumerate(k for k in library if k.startswith("jeu/"))}
+    state = game.new_game(library, LABELS, rounds=3, mode="qui", people=people, rng=random.Random(1))
+    assert state and all(q["kind"] == "person" and q["effect"] == "blur" and q["answer"] in q["options"] for q in state["questions"])
+
+
+def test_bingo_runs_alongside_the_slideshow(library):
+    t0, state = _play("bingo", library)
+    assert game.phase(state, t0 + 5)[0] == "bingo" and not game.running(t0 + 5) and game.bingo_active(t0 + 5)
+    lea = game.join("Léa")
+    view = game.public_view(game.current(), lea)
+    assert len(view["grid"]) == 9 and len(set(view["grid"])) == 9
+    assert not game.check_bingo(lea, 0)["bingo"] and not game.check_bingo(lea, 1)["bingo"]
+    assert game.check_bingo(lea, 2)["bingo"]                     # première ligne complète
+    assert not game.check_bingo(lea, 4)["bingo"]                  # déjà gagné
+    assert game.public_view(game.current(), lea)["winners"] == ["Léa"]
+    from utils import game_screen
+    assert game_screen.bingo_banner(game.current(), time.time(), 1280, 720).size[1] > 0
+    assert game.phase(game.current(), t0 + game.BINGO_MINUTES * 60 + 1)[0] == "over"

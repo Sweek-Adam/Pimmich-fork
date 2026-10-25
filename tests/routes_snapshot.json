@@ -1737,13 +1737,31 @@
   ]
  ],
  [
+  "/jeu/bingo",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/jeu/join",
   [
    "POST"
   ]
  ],
  [
+  "/jeu/modes",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/jeu/new",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/jeu/photo",
   [
    "POST"
   ]
@@ -1758,6 +1776,12 @@
   "/jeu/state",
   [
    "GET"
+  ]
+ ],
+ [
+  "/jeu/vote",
+  [
+   "POST"
   ]
  ],
  [

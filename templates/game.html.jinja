@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ _('Où et quand ?') }} - Pimmich</title>
+  <title>{{ _('Jeux') }} - Pimmich</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='guest.css') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <style>
@@ -23,14 +23,21 @@
     .answer { font-size: 2rem; font-weight: 800; text-align: center; color: var(--accent); }
     .players { display: flex; flex-wrap: wrap; gap: 6px; }
     .players span { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 4px 10px; font-weight: 600; }
+    .letters { grid-template-columns: repeat(4, 1fr); }
+    .option:disabled { opacity: .4; }
+    .bingo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .cell { aspect-ratio: 1; border: 2px solid var(--border); background: var(--surface); color: var(--text); border-radius: 12px; font: inherit; font-size: .85rem; font-weight: 600; padding: 4px; }
+    .cell.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+    .photo-btn { display: inline-flex; justify-content: center; }
+    textarea { width: 100%; font: inherit; }
   </style>
 </head>
 <body>
   <main class="page">
     <header class="brand hero">
       <div class="big">🎲</div>
-      <h1>{{ _('Où et quand ?') }}</h1>
-      <p class="muted small">{{ _("Le jeu des photos de famille : devinez l'année, le lieu ou l'auteur de la photo affichée sur le cadre.") }}</p>
+      <h1>{{ _('Jeux de famille') }}</h1>
+      <p class="muted small">{{ _("Les jeux des photos de famille : devinez, retenez, votez... depuis votre téléphone, le cadre affiche la partie.") }}</p>
     </header>
     <section class="card" id="game"><p class="muted">{{ _('Chargement...') }}</p></section>
     <p class="center small"><a href="{{ url_for('upload_page') }}">← {{ _('Retour à la page invités') }}</a></p>
@@ -40,13 +47,14 @@
       const T = {
         disabled: {{ _("Le jeu est désactivé sur ce cadre.")|tojson }},
         none: {{ _("Aucune partie en cours.")|tojson }},
+        game: {{ _("Jeu")|tojson }},
         create: {{ _("Lancer une partie")|tojson }},
         rounds: {{ _("Nombre de questions")|tojson }},
         name: {{ _("Votre prénom")|tojson }},
         join: {{ _("Rejoindre")|tojson }},
         players: {{ _("Joueurs inscrits")|tojson }},
         start: {{ _("Commencer")|tojson }},
-        waiting: {{ _("Les photos s'affichent sur le cadre : regardez l'écran !")|tojson }},
+        look: {{ _("Regardez bien l'écran du cadre !")|tojson }},
         question: {{ _("Question")|tojson }},
         send: {{ _("Valider")|tojson }},
         sent: {{ _("Réponse envoyée ! Attendez la réponse sur le cadre.")|tojson }},
@@ -54,62 +62,126 @@
         you: {{ _("Vous avez gagné %(points)s points.", points="{points}")|tojson }},
         noanswer: {{ _("Pas de réponse pour cette question.")|tojson }},
         podium: {{ _("Classement final")|tojson }},
-        again: {{ _("Rejouer")|tojson }},
         notjoined: {{ _("La partie a commencé : vous pourrez jouer à la prochaine.")|tojson }},
+        order: {{ _("Touchez les lettres de la plus ancienne à la plus récente :")|tojson }},
+        reset: {{ _("Recommencer")|tojson }},
+        number: {{ _("Votre estimation")|tojson }},
+        caption: {{ _("Votre légende")|tojson }},
+        photo: {{ _("Prendre la photo")|tojson }},
+        sending: {{ _("Envoi...")|tojson }},
+        vote: {{ _("Votez pour votre préférée (pas la vôtre) :")|tojson }},
+        voted: {{ _("Vote enregistré !")|tojson }},
+        photoN: {{ _("Photo %(n)s", n="{n}")|tojson }},
+        best: {{ _("Les préférées :")|tojson }},
+        votes: {{ _("vote(s)")|tojson }},
+        bingo: {{ _("Cochez une case quand le cadre montre une photo qui correspond. Une ligne complète : BINGO !")|tojson }},
+        bingoWin: {{ _("BINGO ! Bravo !")|tojson }},
+        winners: {{ _("Gagnants :")|tojson }},
+        minutes: {{ _("Encore %(minutes)s min", minutes="{m}")|tojson }},
       };
       const box = document.getElementById("game");
       const enabled = {{ 'true' if enabled else 'false' }};
-      let view = null, shownKey = null, year = 2015;
+      let view = null, shownKey = null, year = 2015, order = "", modes = [];
       const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-      async function api(url, body) {
-        const r = await fetch(url, body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const $ = (id) => document.getElementById(id);
+      async function api(url, body, form) {
+        const options = form ? { method: "POST", body: form } : body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
+        const r = await fetch(url, options);
         const data = await r.json().catch(() => ({}));
         if (!data.success && data.message) alert(data.message);
         return data;
       }
       const ranking = (list) => `<ol class="ranking">${(list || []).map((r) => `<li class="${r.name === view.me ? "me" : ""}"><span>${esc(r.name)}</span><strong>${r.score} pts</strong></li>`).join("")}</ol>`;
+      const head = (v) => `<p class="small muted">${T.question} ${v.number}/${v.total}</p><h2>${esc(v.question)}</h2><div class="timer" id="timer">${v.left} s</div>`;
+      function joinForm(v) {
+        return v.me ? `<p>👋 <strong>${esc(v.me)}</strong></p>` : `<label class="field">${T.name}<input type="text" id="name" maxlength="24" autocomplete="given-name"></label>
+          <button class="btn green" id="join">${T.join}</button>`;
+      }
+      function bindJoin() {
+        const join = $("join");
+        if (join) join.onclick = async () => { await api("/jeu/join", { name: $("name").value }); refresh(); };
+      }
       function render() {
         const v = view;
-        const key = [v.phase, v.number, v.answered, v.me, (v.players || []).length].join("|");
-        if (key === shownKey && v.phase !== "question" && v.phase !== "reveal") return;
-        const timer = document.getElementById("timer");
-        if (key === shownKey && timer) { timer.textContent = `${v.left} s`; return; }
+        const key = [v.phase, v.number, v.answered, v.voted, v.me, (v.players || []).length, (v.checked || []).join(), (v.winners || []).length].join("|");
+        const timer = $("timer");
+        if (key === shownKey) { if (timer) timer.textContent = `${v.left} s`; return; }
         shownKey = key;
         if (!enabled) { box.innerHTML = `<p>${T.disabled}</p>`; return; }
         if (v.phase === "over") {
           box.innerHTML = `<p class="muted">${T.none}</p>
+            <label class="field">${T.game}<select id="mode">${modes.map((m) => `<option value="${m.key}">${esc(m.label)}</option>`).join("")}</select></label>
             <label class="field">${T.rounds}<select id="rounds"><option>4</option><option selected>6</option><option>8</option><option>10</option></select></label>
             <button class="btn green" id="create">🎲 ${T.create}</button>`;
-          document.getElementById("create").onclick = async () => { await api("/jeu/new", { rounds: Number(document.getElementById("rounds").value) }); refresh(); };
+          $("create").onclick = async () => { await api("/jeu/new", { mode: $("mode").value, rounds: Number($("rounds").value) }); refresh(); };
         } else if (v.phase === "lobby") {
-          box.innerHTML = (v.me ? `<p>👋 <strong>${esc(v.me)}</strong></p>` : `
-            <label class="field">${T.name}<input type="text" id="name" maxlength="24" autocomplete="given-name"></label>
-            <button class="btn green" id="join">${T.join}</button>`) +
-            `<p class="small muted">${T.players}</p><div class="players">${(v.players || []).map((p) => `<span>${esc(p)}</span>`).join("")}</div>` +
+          box.innerHTML = joinForm(v) + `<p class="small muted">${T.players}</p><div class="players">${(v.players || []).map((p) => `<span>${esc(p)}</span>`).join("")}</div>` +
             (v.me ? `<button class="btn green" id="start">▶️ ${T.start}</button>` : "");
-          const join = document.getElementById("join");
-          if (join) join.onclick = async () => { await api("/jeu/join", { name: document.getElementById("name").value }); refresh(); };
-          const start = document.getElementById("start");
-          if (start) start.onclick = async () => { await api("/jeu/start", {}); refresh(); };
+          bindJoin();
+          if ($("start")) $("start").onclick = async () => { await api("/jeu/start", {}); refresh(); };
+        } else if (v.phase === "bingo") {
+          if (!v.me) { box.innerHTML = joinForm(v); bindJoin(); return; }
+          const won = (v.winners || []).includes(v.me);
+          box.innerHTML = `<p class="small muted">${T.bingo} · ${T.minutes.replace("{m}", v.minutes)}</p>
+            <div class="bingo">${(v.grid || []).map((item, i) => `<button class="cell ${(v.checked || []).includes(i) ? "on" : ""}" data-i="${i}">${esc(item)}</button>`).join("")}</div>
+            ${won ? `<p class="answer">🎉 ${T.bingoWin}</p>` : ""}${(v.winners || []).length ? `<p class="small">${T.winners} ${v.winners.map(esc).join(", ")}</p>` : ""}`;
+          box.querySelectorAll(".cell").forEach((b) => b.onclick = async () => { await api("/jeu/bingo", { cell: Number(b.dataset.i) }); refresh(); });
+        } else if (v.phase === "memorize") {
+          box.innerHTML = `<p class="small muted">${T.question} ${v.number}/${v.total}</p><h2>👀 ${T.look}</h2><div class="timer" id="timer">${v.left} s</div>`;
         } else if (v.phase === "question") {
-          const head = `<p class="small muted">${T.question} ${v.number}/${v.total}</p><h2>${esc(v.question)}</h2><div class="timer" id="timer">${v.left} s</div>`;
-          if (!v.me) box.innerHTML = head + `<p class="muted">${T.notjoined}</p>`;
-          else if (v.answered) box.innerHTML = head + `<p>✅ ${T.sent}</p>`;
-          else if (v.kind === "year") {
-            box.innerHTML = head + `<div class="year"><button id="minus">−</button><output id="out">${year}</output><button id="plus">+</button>
+          if (!v.me) { box.innerHTML = head(v) + `<p class="muted">${T.notjoined}</p>`; return; }
+          if (v.answered) { box.innerHTML = head(v) + `<p>✅ ${T.sent}</p>`; return; }
+          if (v.kind === "year") {
+            box.innerHTML = head(v) + `<div class="year"><button id="minus">−</button><output id="out">${year}</output><button id="plus">+</button>
               <input type="range" id="range" min="1950" max="${v.max_year}" value="${year}"></div><button class="btn green" id="send">${T.send}</button>`;
-            const set = (y) => { year = Math.max(1950, Math.min(v.max_year, y)); document.getElementById("out").textContent = year; document.getElementById("range").value = year; };
-            document.getElementById("minus").onclick = () => set(year - 1);
-            document.getElementById("plus").onclick = () => set(year + 1);
-            document.getElementById("range").oninput = (e) => set(Number(e.target.value));
-            document.getElementById("send").onclick = async () => { await api("/jeu/answer", { value: year }); refresh(); };
+            const set = (y) => { year = Math.max(1950, Math.min(v.max_year, y)); $("out").textContent = year; $("range").value = year; };
+            $("minus").onclick = () => set(year - 1);
+            $("plus").onclick = () => set(year + 1);
+            $("range").oninput = (e) => set(Number(e.target.value));
+            $("send").onclick = async () => { await api("/jeu/answer", { value: year }); refresh(); };
+          } else if (v.kind === "closest") {
+            box.innerHTML = head(v) + `<label class="field">${T.number}<input type="number" id="num" inputmode="numeric" min="0"></label><button class="btn green" id="send">${T.send}</button>`;
+            $("send").onclick = async () => { await api("/jeu/answer", { value: Number($("num").value) }); refresh(); };
+          } else if (v.kind === "timeline") {
+            order = "";
+            const draw = () => {
+              box.innerHTML = head(v) + `<p>${T.order}</p><div class="options letters">${"ABCD".split("").map((l) => `<button class="option" data-l="${l}" ${order.includes(l) ? "disabled" : ""}>${l}</button>`).join("")}</div>
+                <p class="answer">${order.split("").join(" → ") || "…"}</p><button class="btn" id="reset">${T.reset}</button>
+                ${order.length === 4 ? `<button class="btn green" id="send">${T.send}</button>` : ""}`;
+              box.querySelectorAll(".option").forEach((b) => b.onclick = () => { order += b.dataset.l; draw(); });
+              $("reset").onclick = () => { order = ""; draw(); };
+              if ($("send")) $("send").onclick = async () => { await api("/jeu/answer", { value: order }); refresh(); };
+            };
+            draw();
+          } else if (v.kind === "caption") {
+            box.innerHTML = head(v) + `<label class="field">${T.caption}<textarea id="cap" maxlength="90" rows="3"></textarea></label><button class="btn green" id="send">${T.send}</button>`;
+            $("send").onclick = async () => { await api("/jeu/answer", { value: $("cap").value }); refresh(); };
+          } else if (v.kind === "challenge") {
+            box.innerHTML = head(v) + `<label class="btn green photo-btn">📸 ${T.photo}<input type="file" id="shot" accept="image/*" capture="environment" hidden></label><p id="status" class="small muted"></p>`;
+            $("shot").onchange = async () => {
+              const file = $("shot").files[0];
+              if (!file) return;
+              $("status").textContent = T.sending;
+              const form = new FormData();
+              form.append("photo", file);
+              await api("/jeu/photo", undefined, form);
+              refresh();
+            };
           } else {
-            box.innerHTML = head + `<div class="options">${(v.options || []).map((o, i) => `<button class="option" data-i="${i}">${esc(o)}</button>`).join("")}</div>`;
+            box.innerHTML = head(v) + `<div class="options">${(v.options || []).map((o, i) => `<button class="option" data-i="${i}">${esc(o)}</button>`).join("")}</div>`;
             box.querySelectorAll(".option").forEach((b) => b.onclick = async () => { await api("/jeu/answer", { value: v.options[Number(b.dataset.i)] }); refresh(); });
           }
+        } else if (v.phase === "vote") {
+          if (!v.me) { box.innerHTML = head(v) + `<p class="muted">${T.notjoined}</p>`; return; }
+          if (v.voted) { box.innerHTML = head(v) + `<p>✅ ${T.voted}</p>`; return; }
+          box.innerHTML = head(v) + `<p>${T.vote}</p><div class="options">${(v.entries || []).map((e) =>
+            `<button class="option" data-n="${e.n}" ${e.mine ? "disabled" : ""}>${e.text ? `${e.n}. ${esc(e.text)}` : T.photoN.replace("{n}", e.n)}</button>`).join("")}</div>`;
+          box.querySelectorAll(".option").forEach((b) => b.onclick = async () => { await api("/jeu/vote", { choice: Number(b.dataset.n) }); refresh(); });
         } else if (v.phase === "reveal") {
-          box.innerHTML = `<p class="small muted">${T.question} ${v.number}/${v.total}</p><p>${T.answer}</p><div class="answer">${esc(v.answer)}</div>
-            <p>${v.me ? (v.mine == null ? T.noanswer : T.you.replace("{points}", v.gained)) : ""}</p>${ranking(v.ranking)}`;
+          const best = (v.best || []).length ? `<p>${T.best}</p><ol class="ranking">${v.best.map((b) => `<li><span>${esc(b.name)}${b.text ? ` : « ${esc(b.text)} »` : ""}</span><strong>${b.votes} ${T.votes}</strong></li>`).join("")}</ol>` : "";
+          const answerText = v.answer == null ? "" : `<p>${T.answer}</p><div class="answer">${esc(String(v.answer).length === 4 && v.kind === "timeline" ? v.answer.split("").join(" → ") : v.answer)}</div>`;
+          box.innerHTML = `<p class="small muted">${T.question} ${v.number}/${v.total}</p>${answerText}${best}
+            <p>${v.me ? (v.gained ? T.you.replace("{points}", v.gained) : T.noanswer) : ""}</p>${ranking(v.ranking)}`;
         } else if (v.phase === "podium") {
           box.innerHTML = `<h2>🏆 ${T.podium}</h2>${ranking(v.ranking)}`;
         }
@@ -120,6 +192,7 @@
           render();
         } catch (e) { /* hors ligne : on réessaie */ }
       }
+      fetch("/jeu/modes").then((r) => r.json()).then((d) => { modes = d.modes || []; shownKey = null; refresh(); }).catch(() => {});
       refresh();
       setInterval(refresh, 1000);
     })();

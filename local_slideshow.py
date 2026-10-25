@@ -509,7 +509,8 @@ def run_game(screen, screen_width, screen_height):
             return
         handle_slideshow_events(screen_width)
         key = (kind, number, int(left), len((state or {}).get("players", {})),
-               len((state or {}).get("answers", {}).get(str(number), {})) if number is not None else 0)
+               len((state or {}).get("answers", {}).get(str(number), {})) if number is not None else 0,
+               len((state or {}).get("votes", {}).get(str(number), {})) if number is not None else 0)
         if key != shown:
             try:
                 image = game_screen.frame(state, now, screen_width, screen_height, url, _)
@@ -1941,8 +1942,35 @@ def _render_clock_row(row, font, text_color, outline_color):
     return surface
 
 
+def bingo_key():
+    """Change quand le bingo commence, finit ou a un nouveau gagnant (l'écran est alors redessiné)."""
+    try:
+        from utils import family_game
+        state = family_game.current()
+        if family_game.phase(state)[0] != "bingo":
+            return None
+        fresh = any(time.time() - w["at"] < 15 for w in state.get("winners", []))
+        return (len(state.get("winners", [])), fresh)
+    except Exception:
+        return None
+
+
+def draw_bingo(screen, screen_width, screen_height):
+    try:
+        from utils import family_game, game_screen
+        state = family_game.current()
+        if family_game.phase(state)[0] != "bingo":
+            return
+        banner = game_screen.bingo_banner(state, time.time(), screen_width, screen_height, _)
+        surface = pygame.image.frombytes(banner.tobytes(), banner.size, "RGBA")
+        screen.blit(surface, ((screen_width - surface.get_width()) // 2, 12))
+    except Exception as e:
+        logger.debug(f"Bingo : bandeau non affiché ({e})")
+
+
 def draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata=None):
     draw_guest_qr(screen, screen_width, screen_height, config)
+    draw_bingo(screen, screen_width, screen_height)
     draw_hotspot_card(screen, screen_width, screen_height)
     draw_memory_banner(screen, screen_width, screen_height, config, photo_metadata)
     sync_background_music()
@@ -2786,7 +2814,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
             draw_overlay(screen, screen_width, screen_height, config, main_font, photo_metadata)
             pygame.display.flip()
             gifs.set_overlay(screen)
-            shown_music_key = now_playing_key(config)
+            shown_music_key = (now_playing_key(config), bingo_key())
             weather_fx = weather_particles(config, screen_width, screen_height)
             fx_background = screen.copy() if weather_fx else None
             last_frame = time.time()
@@ -2826,7 +2854,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                 ticks = pygame.time.get_ticks()
                 p_count = get_today_postcard_count() if config.get("display_telegram_notification_overlay", True) else 0
                 sync_background_music()
-                music_key = now_playing_key(config)  # nouveau morceau, ou fin de son affichage : on redessine
+                music_key = (now_playing_key(config), bingo_key())  # nouveau morceau, gagnant du bingo : on redessine
                 music_changed = music_key != shown_music_key
                 shown_music_key = music_key
                 if was_paused or p_count > 0 or music_changed:
