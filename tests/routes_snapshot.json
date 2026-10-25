@@ -926,6 +926,19 @@
   ]
  ],
  [
+  "/api/photo_voice",
+  [
+   "DELETE",
+   "POST"
+  ]
+ ],
+ [
+  "/api/photo_voice/listen",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/photobook",
   [
    "GET",

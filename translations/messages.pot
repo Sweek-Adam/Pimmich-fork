@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:23+0100\n"
+"POT-Creation-Date: 2026-10-26 00:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,29 +157,29 @@ msgstr ""
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:3174
+#: local_slideshow.py:3183
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:3175
+#: local_slideshow.py:3184
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:3176
+#: local_slideshow.py:3185
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:3177
+#: local_slideshow.py:3186
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:3178
+#: local_slideshow.py:3187
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:3204
+#: local_slideshow.py:3213
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -244,7 +244,7 @@ msgstr ""
 msgid "Nouveautés"
 msgstr ""
 
-#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:121
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:122
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:53
 msgid "Photos"
@@ -282,7 +282,7 @@ msgstr ""
 msgid "Playlists"
 msgstr ""
 
-#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:126
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:127
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -654,7 +654,7 @@ msgid ""
 msgstr ""
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:160
+#: frontend/src/views/LibraryView.vue:161
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr ""
@@ -742,7 +742,7 @@ msgstr ""
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:166
+#: frontend/src/views/LibraryView.vue:168
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -1543,7 +1543,7 @@ msgid "Non défini"
 msgstr ""
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:127 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:128 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr ""
 
@@ -1597,7 +1597,7 @@ msgid "du"
 msgstr ""
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:125
+#: frontend/src/views/LibraryView.vue:126
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -1649,7 +1649,7 @@ msgstr ""
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
 #: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:168
-#: frontend/src/views/LibraryView.vue:120
+#: frontend/src/views/LibraryView.vue:121
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
@@ -2041,6 +2041,32 @@ msgstr ""
 msgid ""
 "La version gratuite de StormGlass limite le nombre d'appels par jour : le"
 " cadre ne les récupère que deux fois par jour."
+msgstr ""
+
+#: frontend/src/components/VoiceMemo.vue:33
+msgid "Micro inaccessible : autorisez-le dans le navigateur."
+msgstr ""
+
+#: frontend/src/components/VoiceMemo.vue:57
+msgid "Supprimer le souvenir vocal de cette photo ?"
+msgstr ""
+
+#: frontend/src/components/VoiceMemo.vue:69
+msgid "Supprimer le souvenir vocal"
+msgstr ""
+
+#: frontend/src/components/VoiceMemo.vue:73
+#, python-brace-format
+msgid "Arrêter ({s} s)"
+msgstr ""
+
+#: frontend/src/components/VoiceMemo.vue:73
+msgid "Raconter à nouveau"
+msgstr ""
+
+#: frontend/src/components/VoiceMemo.vue:73
+#: frontend/src/components/VoiceMemo.vue:74
+msgid "Raconter cette photo"
 msgstr ""
 
 #: frontend/src/components/sources/CloudCards.vue:36
@@ -3229,7 +3255,7 @@ msgid ""
 msgstr ""
 
 #: frontend/src/views/DisplayView.vue:100
-#: frontend/src/views/LibraryView.vue:122
+#: frontend/src/views/LibraryView.vue:123
 msgid "Vidéos"
 msgstr ""
 
@@ -4554,91 +4580,91 @@ msgstr ""
 msgid "Affiche les messages"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:18
+#: frontend/src/views/LibraryView.vue:19
 msgid ""
 "Recherche par contenu grâce à l'analyse des images d'Immich (photos "
 "importées d'Immich)"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:61
+#: frontend/src/views/LibraryView.vue:62
 msgid "Ajoutée aux favoris."
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:61
+#: frontend/src/views/LibraryView.vue:62
 msgid "Retirée des favoris."
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:75
+#: frontend/src/views/LibraryView.vue:76
 msgid "Légende enregistrée."
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:108
+#: frontend/src/views/LibraryView.vue:109
 msgid "Décrivez la photo : plage, chien, neige…"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:108
+#: frontend/src/views/LibraryView.vue:109
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:110
+#: frontend/src/views/LibraryView.vue:111
 msgid "Par contenu (Immich)"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:112
+#: frontend/src/views/LibraryView.vue:113
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:116
+#: frontend/src/views/LibraryView.vue:117
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:124
+#: frontend/src/views/LibraryView.vue:125
 msgid "Du"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:130
+#: frontend/src/views/LibraryView.vue:131
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:130
+#: frontend/src/views/LibraryView.vue:131
 #, python-brace-format
 msgid "{n} résultats"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:136
+#: frontend/src/views/LibraryView.vue:137
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:136
+#: frontend/src/views/LibraryView.vue:137
 msgid "Aucune photo ne correspond."
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:141
-#: frontend/src/views/LibraryView.vue:165
+#: frontend/src/views/LibraryView.vue:142
+#: frontend/src/views/LibraryView.vue:167
 msgid "Favori"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:148
+#: frontend/src/views/LibraryView.vue:149
 msgid "Précédente"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:158
+#: frontend/src/views/LibraryView.vue:159
 msgid "Ajouter une légende…"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:165
+#: frontend/src/views/LibraryView.vue:167
 msgid "Ajouter aux favoris"
 msgstr ""
 
-#: frontend/src/views/LibraryView.vue:169
+#: frontend/src/views/LibraryView.vue:171
 msgid "Suivante"
 msgstr ""
 
@@ -12494,6 +12520,25 @@ msgstr ""
 
 #: web/routes_playlists.py:344
 msgid "Playlist non trouvée."
+msgstr ""
+
+#: web/routes_playlists.py:396
+msgid "Aucun souvenir vocal sur cette photo."
+msgstr ""
+
+#: web/routes_playlists.py:397
+msgid "Souvenir vocal supprimé."
+msgstr ""
+
+#: web/routes_playlists.py:401
+msgid "Photo ou enregistrement manquant."
+msgstr ""
+
+#: web/routes_playlists.py:407
+#, python-format
+msgid ""
+"Souvenir vocal enregistré (%(seconds)s s) : il sera lu quand la photo "
+"passera sur le cadre."
 msgstr ""
 
 #: web/routes_quotes.py:52

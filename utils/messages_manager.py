@@ -434,36 +434,46 @@ def render_voice_card(message, width, height):
     return image
 
 
-def create_voice(data, signature, author, width, height, guest=True):
-    """Enregistre un message vocal (converti en Ogg Vorbis, 90 s au plus) et sa carte dans le diaporama."""
+def encode_voice(data, target):
+    """Enregistrement du téléphone -> Ogg Vorbis (volume égalisé, MAX_VOICE_SECONDS au plus). Retourne sa durée (s).
+    ValueError si le fichier n'est pas un enregistrement lisible ou s'il est trop court."""
     import subprocess
     import tempfile
+    target = Path(target)
     if not data or len(data) > MAX_VOICE_BYTES:
         raise ValueError("Enregistrement vide ou trop lourd.")
-    message = {"id": secrets.token_hex(6), "kind": "voice", "title": "", "body": "", "signature": (signature or "").strip()[:MAX_SIGNATURE],
-               "style": "nuit", "expires": (date.today() + timedelta(days=GUEST_MAX_DAYS)).isoformat() if guest else None,
-               "author": author or "", "guest": guest, "created": datetime.now().strftime("%Y-%m-%d %H:%M")}
-    VOICE_DIR.mkdir(parents=True, exist_ok=True)
+    target.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(suffix=".audio") as source:
         source.write(data)
         source.flush()
         for codec in (["-ac", "1", "-c:a", "libvorbis", "-q:a", "4"], ["-ac", "2", "-c:a", "vorbis", "-strict", "-2"]):  # repli : encodeur intégré
             result = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", source.name, "-t", str(MAX_VOICE_SECONDS), "-vn", "-ar", "44100",
-                                     "-af", "loudnorm=I=-16:TP=-1.5", *codec, str(voice_path(message["id"]))], capture_output=True, timeout=120)
+                                     "-af", "loudnorm=I=-16:TP=-1.5", *codec, str(target)], capture_output=True, timeout=120)
             if result.returncode == 0 or b"Invalid data" in result.stderr:
                 break
-    if result.returncode != 0 or not voice_path(message["id"]).exists():
-        voice_path(message["id"]).unlink(missing_ok=True)
+    if result.returncode != 0 or not target.exists():
+        target.unlink(missing_ok=True)
         raise ValueError("Ce fichier n'est pas un enregistrement audio lisible.")
     try:
-        out = subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", str(voice_path(message["id"]))],
+        out = subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", str(target)],
                              capture_output=True, text=True, timeout=30).stdout
-        message["seconds"] = round(float(out.strip()))
+        seconds = round(float(out.strip()))
     except (ValueError, OSError):
-        message["seconds"] = 0
-    if message["seconds"] < 1:
-        voice_path(message["id"]).unlink(missing_ok=True)
+        seconds = 0
+    if seconds < 1:
+        target.unlink(missing_ok=True)
         raise ValueError("Enregistrement trop court.")
+    return seconds
+
+
+def create_voice(data, signature, author, width, height, guest=True):
+    """Enregistre un message vocal (converti en Ogg Vorbis, 90 s au plus) et sa carte dans le diaporama."""
+    if not data or len(data) > MAX_VOICE_BYTES:
+        raise ValueError("Enregistrement vide ou trop lourd.")
+    message = {"id": secrets.token_hex(6), "kind": "voice", "title": "", "body": "", "signature": (signature or "").strip()[:MAX_SIGNATURE],
+               "style": "nuit", "expires": (date.today() + timedelta(days=GUEST_MAX_DAYS)).isoformat() if guest else None,
+               "author": author or "", "guest": guest, "created": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    message["seconds"] = encode_voice(data, voice_path(message["id"]))
     _render_to_file(message, width, height)
     with _lock:
         messages = _load()

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:23+0100\n"
+"POT-Creation-Date: 2026-10-26 00:34+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -158,29 +158,29 @@ msgstr "(誕生日) %(num)d 年前"
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:3174
+#: local_slideshow.py:3183
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:3175
+#: local_slideshow.py:3184
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:3176
+#: local_slideshow.py:3185
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:3177
+#: local_slideshow.py:3186
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3178
+#: local_slideshow.py:3187
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:3204
+#: local_slideshow.py:3213
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -245,7 +245,7 @@ msgstr "ホーム"
 msgid "Nouveautés"
 msgstr "新着情報"
 
-#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:121
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:122
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:53
 msgid "Photos"
@@ -283,7 +283,7 @@ msgstr "次に表示"
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:126
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:127
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -657,7 +657,7 @@ msgstr ""
 "14）につなぎます。抵抗は不要です。"
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:160
+#: frontend/src/views/LibraryView.vue:161
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr "このキャプションのスタイル"
@@ -745,7 +745,7 @@ msgstr "グロー"
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:166
+#: frontend/src/views/LibraryView.vue:168
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -1557,7 +1557,7 @@ msgid "Non défini"
 msgstr "未定義"
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:127 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:128 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "クリア"
 
@@ -1611,7 +1611,7 @@ msgid "du"
 msgstr "開始"
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:125
+#: frontend/src/views/LibraryView.vue:126
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -1663,7 +1663,7 @@ msgstr "お気に入りのみ"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
 #: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:168
-#: frontend/src/views/LibraryView.vue:120
+#: frontend/src/views/LibraryView.vue:121
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
@@ -2056,6 +2056,32 @@ msgid ""
 "La version gratuite de StormGlass limite le nombre d'appels par jour : le"
 " cadre ne les récupère que deux fois par jour."
 msgstr "StormGlass の無料プランは 1 日の呼び出し回数に制限があるため、フォトフレームは 1 日 2 回だけ取得します。"
+
+#: frontend/src/components/VoiceMemo.vue:33
+msgid "Micro inaccessible : autorisez-le dans le navigateur."
+msgstr "マイクを使えません。ブラウザで許可してください。"
+
+#: frontend/src/components/VoiceMemo.vue:57
+msgid "Supprimer le souvenir vocal de cette photo ?"
+msgstr "この写真の音声メモを削除しますか？"
+
+#: frontend/src/components/VoiceMemo.vue:69
+msgid "Supprimer le souvenir vocal"
+msgstr "音声メモを削除"
+
+#: frontend/src/components/VoiceMemo.vue:73
+#, python-brace-format
+msgid "Arrêter ({s} s)"
+msgstr "停止（{s}秒）"
+
+#: frontend/src/components/VoiceMemo.vue:73
+msgid "Raconter à nouveau"
+msgstr "もう一度話す"
+
+#: frontend/src/components/VoiceMemo.vue:73
+#: frontend/src/components/VoiceMemo.vue:74
+msgid "Raconter cette photo"
+msgstr "この写真の思い出を話す"
 
 #: frontend/src/components/sources/CloudCards.vue:36
 #: templates/configure/tab_sources.html.jinja:495
@@ -3257,7 +3283,7 @@ msgid ""
 msgstr "日付、ゲーム、パーティーモード、組み合わせ表示、名言など。管理画面はブラウザの言語に従います。"
 
 #: frontend/src/views/DisplayView.vue:100
-#: frontend/src/views/LibraryView.vue:122
+#: frontend/src/views/LibraryView.vue:123
 msgid "Vidéos"
 msgstr "動画"
 
@@ -4604,91 +4630,91 @@ msgstr "季節のテーマ"
 msgid "Affiche les messages"
 msgstr "メッセージを表示"
 
-#: frontend/src/views/LibraryView.vue:18
+#: frontend/src/views/LibraryView.vue:19
 msgid ""
 "Recherche par contenu grâce à l'analyse des images d'Immich (photos "
 "importées d'Immich)"
 msgstr "Immichの画像解析による内容検索（Immichから取り込んだ写真）"
 
-#: frontend/src/views/LibraryView.vue:61
+#: frontend/src/views/LibraryView.vue:62
 msgid "Ajoutée aux favoris."
 msgstr "お気に入りに追加しました。"
 
-#: frontend/src/views/LibraryView.vue:61
+#: frontend/src/views/LibraryView.vue:62
 msgid "Retirée des favoris."
 msgstr "お気に入りから外しました。"
 
-#: frontend/src/views/LibraryView.vue:75
+#: frontend/src/views/LibraryView.vue:76
 msgid "Légende enregistrée."
 msgstr "キャプションを保存しました。"
 
-#: frontend/src/views/LibraryView.vue:108
+#: frontend/src/views/LibraryView.vue:109
 msgid "Décrivez la photo : plage, chien, neige…"
 msgstr "写真を説明：海、犬、雪…"
 
-#: frontend/src/views/LibraryView.vue:108
+#: frontend/src/views/LibraryView.vue:109
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "検索（場所、キャプション、ファイル名…）"
 
-#: frontend/src/views/LibraryView.vue:110
+#: frontend/src/views/LibraryView.vue:111
 msgid "Par contenu (Immich)"
 msgstr "内容で検索（Immich）"
 
-#: frontend/src/views/LibraryView.vue:112
+#: frontend/src/views/LibraryView.vue:113
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "すべてのソース"
 
-#: frontend/src/views/LibraryView.vue:116
+#: frontend/src/views/LibraryView.vue:117
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "全員"
 
-#: frontend/src/views/LibraryView.vue:124
+#: frontend/src/views/LibraryView.vue:125
 msgid "Du"
 msgstr "開始"
 
-#: frontend/src/views/LibraryView.vue:130
+#: frontend/src/views/LibraryView.vue:131
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} 件（{shown} 件を表示）"
 
-#: frontend/src/views/LibraryView.vue:130
+#: frontend/src/views/LibraryView.vue:131
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} 件"
 
-#: frontend/src/views/LibraryView.vue:136
+#: frontend/src/views/LibraryView.vue:137
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "お気に入りの写真はまだありません。写真の星をタップして追加してください。"
 
-#: frontend/src/views/LibraryView.vue:136
+#: frontend/src/views/LibraryView.vue:137
 msgid "Aucune photo ne correspond."
 msgstr "一致する写真はありません。"
 
-#: frontend/src/views/LibraryView.vue:141
-#: frontend/src/views/LibraryView.vue:165
+#: frontend/src/views/LibraryView.vue:142
+#: frontend/src/views/LibraryView.vue:167
 msgid "Favori"
 msgstr "お気に入り"
 
-#: frontend/src/views/LibraryView.vue:148
+#: frontend/src/views/LibraryView.vue:149
 msgid "Précédente"
 msgstr "前へ"
 
-#: frontend/src/views/LibraryView.vue:158
+#: frontend/src/views/LibraryView.vue:159
 msgid "Ajouter une légende…"
 msgstr "キャプションを追加…"
 
-#: frontend/src/views/LibraryView.vue:165
+#: frontend/src/views/LibraryView.vue:167
 msgid "Ajouter aux favoris"
 msgstr "お気に入りに追加"
 
-#: frontend/src/views/LibraryView.vue:169
+#: frontend/src/views/LibraryView.vue:171
 msgid "Suivante"
 msgstr "次へ"
 
@@ -12684,6 +12710,25 @@ msgstr "写真が見つかりません：%(name)s"
 #: web/routes_playlists.py:344
 msgid "Playlist non trouvée."
 msgstr "プレイリストが見つかりません。"
+
+#: web/routes_playlists.py:396
+msgid "Aucun souvenir vocal sur cette photo."
+msgstr "この写真には音声メモがありません。"
+
+#: web/routes_playlists.py:397
+msgid "Souvenir vocal supprimé."
+msgstr "音声メモを削除しました。"
+
+#: web/routes_playlists.py:401
+msgid "Photo ou enregistrement manquant."
+msgstr "写真または録音がありません。"
+
+#: web/routes_playlists.py:407
+#, python-format
+msgid ""
+"Souvenir vocal enregistré (%(seconds)s s) : il sera lu quand la photo "
+"passera sur le cadre."
+msgstr "音声メモを保存しました（%(seconds)s秒）。写真がフレームに表示されると再生されます。"
 
 #: web/routes_quotes.py:52
 msgid "Citation du jour enregistrée."

@@ -2226,12 +2226,21 @@ def play_voice_message(photo_path, config):
     s'efface derrière la voix puis revient. Renvoie la durée de lecture (la carte reste affichée le temps de l'écouter)."""
     try:
         path = Path(str(photo_path or ""))
-        if path.parent.name != "messages" or not config.get("voice_messages_enabled", True):
+        if path.parent.name == "messages":
+            if not config.get("voice_messages_enabled", True):
+                return 0
+            voice, played_key = Path(BASE_DIR) / "cache" / "voice" / f"{path.stem}.ogg", path.stem
+        else:  # souvenir vocal enregistré sur cette photo (utils/photo_voice.py)
+            if not config.get("photo_voices_enabled", True) or not photo_path:
+                return 0
+            from utils import photo_voice
+            played_key = photo_voice.key_for(path)
+            voice = photo_voice.path_for(played_key)
+            if voice is None:
+                return 0
+        if not voice.exists() or time.time() - _voice_played.get(played_key, 0) < VOICE_REPLAY_SECONDS:
             return 0
-        voice = Path(BASE_DIR) / "cache" / "voice" / f"{path.stem}.ogg"
-        if not voice.exists() or time.time() - _voice_played.get(path.stem, 0) < VOICE_REPLAY_SECONDS:
-            return 0
-        _voice_played[path.stem] = time.time()
+        _voice_played[played_key] = time.time()
         lead = 0.7  # silence au début : la sortie HDMI se réveille sans manger les premiers mots
         length = _voice_length(voice) + lead
         volume = max(0, min(100, int(config.get("voice_volume", 100))))

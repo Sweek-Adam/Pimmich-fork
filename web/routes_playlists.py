@@ -363,14 +363,59 @@ def library_search_api():
             return jsonify({"success": False, "message": _("Immich ne répond pas : %(error)s", error=str(e)[:120])}), 502
     items, total = library_search.search(favorites, "" if smart is not None else args.get("q", "")[:120], date(args.get("from")), date(args.get("to")),
                                          args.get("source", ""), args.get("person", ""), args.get("fav") == "1", args.get("media", ""), smart=smart)
+    from utils import photo_voice
+    voices = photo_voice.load()
     results = []
     for item in items:
         thumb = item["path"].rsplit(".", 1)[0] + "_thumbnail.jpg" if item["video"] else item["path"]
         results.append({"path": item["path"], "date": item["date"], "place": item.get("place"), "people": item["people"], "caption": item["caption"],
                         "video": item["video"], "favorite": item["path"] in favorite_set, "source": item["path"].split("/", 1)[0],
                         "thumb": url_for("static", filename=f"prepared/{thumb}"),
-                        "url": url_for("static", filename=f"prepared/{item['path']}")})
+                        "url": url_for("static", filename=f"prepared/{item['path']}"),
+                        "voice": (voices.get(photo_voice.key_for(item["path"])) or {}).get("seconds")})
     return jsonify({"success": True, "total": total, "items": results, "smart_available": immich_search.available(config)})
+
+
+# --- Souvenirs vocaux : l'histoire d'une photo, racontée de vive voix ---
+
+def _voice_key(path):
+    from utils import photo_voice
+    path = str(path or "")
+    if not path or ".." in Path(path).parts or not (PREPARED_DIR / path).is_file():
+        return None
+    return photo_voice.key_for(path)
+
+
+@app.route('/api/photo_voice', methods=['POST', 'DELETE'])
+@login_required
+def photo_voice_api():
+    from utils import photo_voice
+    if request.method == 'DELETE':
+        key = _voice_key((request.get_json(silent=True) or {}).get("path"))
+        if not key or not photo_voice.delete(key):
+            return jsonify({"success": False, "message": _("Aucun souvenir vocal sur cette photo.")}), 404
+        return jsonify({"success": True, "message": _("Souvenir vocal supprimé.")})
+    key = _voice_key(request.form.get("path"))
+    file = request.files.get("voice")
+    if not key or not file:
+        return jsonify({"success": False, "message": _("Photo ou enregistrement manquant.")}), 400
+    try:
+        seconds = photo_voice.save(key, file.read(), author=session.get("username") or "")
+    except ValueError as e:
+        return jsonify({"success": False, "message": str(e)}), 400
+    return jsonify({"success": True, "seconds": seconds,
+                    "message": _("Souvenir vocal enregistré (%(seconds)s s) : il sera lu quand la photo passera sur le cadre.", seconds=seconds)})
+
+
+@app.route('/api/photo_voice/listen')
+@login_required
+def photo_voice_listen_api():
+    from utils import photo_voice
+    key = _voice_key(request.args.get("path"))
+    path = photo_voice.path_for(key) if key else None
+    if not path:
+        abort(404)
+    return send_from_directory(str(path.parent), path.name, mimetype="audio/ogg", max_age=0)
 
 
 @app.route('/api/stats/photos', methods=['GET'])

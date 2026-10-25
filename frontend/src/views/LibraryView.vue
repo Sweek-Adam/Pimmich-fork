@@ -5,12 +5,13 @@ import { currentLang, t } from "../i18n";
 import { notify, run } from "../toast";
 import CaptionEditor from "../components/CaptionEditor.vue";
 import PhotoBookCard from "../components/PhotoBookCard.vue";
+import VoiceMemo from "../components/VoiceMemo.vue";
 
 const props = defineProps<{ favorites?: boolean }>();
 
 interface Item {
   path: string; thumb: string; url: string; date: string | null; place?: string | null; people: string[];
-  caption?: string | null; video: boolean; favorite: boolean; source: string;
+  caption?: string | null; video: boolean; favorite: boolean; source: string; voice?: number | null;
 }
 
 const filters = reactive({ q: "", source: "", person: "", media: "", from: "", to: "", fav: !!props.favorites, smart: false });
@@ -159,6 +160,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
             <button class="btn" type="submit" :disabled="captionText === (current.caption || '')"><i class="fas fa-check"></i></button>
             <button class="btn" type="button" :title="t('Style de cette légende')" @click="styling = true"><i class="fas fa-palette"></i></button>
           </form>
+          <VoiceMemo v-if="!current.video" :path="current.path" :seconds="current.voice" @changed="(s) => { if (current) current.voice = s; }" />
           <p class="small dim">{{ sourceLabel(current.source) }} · {{ current.path.split("/").pop() }}</p>
         </div>
         <button class="btn" type="button" @click="toggleFavorite(current)">
