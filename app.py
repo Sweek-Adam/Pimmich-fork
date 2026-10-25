@@ -84,6 +84,8 @@ if __name__ == '__main__':
     threading.Thread(target=daily_photo_worker, daemon=True, name="daily-photo").start()  # photo du jour par e-mail
     threading.Thread(target=auto_backup_worker, daemon=True, name="auto-backup").start()  # sauvegarde de la semaine
     threading.Thread(target=frame_share_worker, daemon=True, name="frame-share").start()  # cadres jumelés
+    from web.workers import frame_wall_worker
+    threading.Thread(target=frame_wall_worker, daemon=True, name="frame-wall").start()  # mur de cadres
     threading.Thread(target=daily_summary_worker, daemon=True, name="daily-summary").start()
     if on_pi:
         threading.Thread(target=button_worker, daemon=True, name="button").start()  # bouton physique (GPIO)

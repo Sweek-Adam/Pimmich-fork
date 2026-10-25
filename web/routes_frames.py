@@ -350,3 +350,107 @@ def _share_with(frame, sender, is_media):
             frame_share.mark_sent(frame["id"], messages=[message["id"]])
             sent += 1
     return sent
+
+
+# --- Mur de cadres : une grande photo partagée entre plusieurs cadres côte à côte (utils/frame_wall.py) ---
+
+@app.route('/api/frame/wall', methods=['POST'])
+@frame_token_required
+def frame_wall_receive_api():
+    from utils import frame_wall
+    tile = request.files.get("tile")
+    try:
+        show_at, until = float(request.form.get("show_at")), float(request.form.get("until"))
+    except (TypeError, ValueError):
+        return jsonify({"success": False, "message": "Horaire invalide."}), 400
+    if not tile or until <= show_at or until - show_at > 600 or abs(show_at - time.time()) > 120:
+        return jsonify({"success": False, "message": "Morceau invalide."}), 400
+    frame_wall.receive(tile.read(20 * 1024 * 1024), show_at, until)
+    return jsonify({"success": True})
+
+
+def wall_settings(config=None):
+    wall = dict({"enabled": False, "order": ["self"], "gap": 4, "seconds": 15}, **((config or load_config()).get("frame_wall") or {}))
+    known = {f["id"] for f in _frames()} | {"self"}
+    wall["order"] = [i for i in wall["order"] if i in known] or ["self"]
+    return wall
+
+
+@app.route('/api/frames/wall', methods=['GET', 'PUT'])
+@admin_required
+def frames_wall_api():
+    config = dict(load_config())
+    if request.method == 'PUT':
+        data = request.get_json(silent=True) or {}
+        wall = wall_settings(config)
+        if "order" in data and isinstance(data["order"], list):
+            known = {f["id"] for f in _frames()} | {"self"}
+            wall["order"] = [str(i) for i in data["order"] if str(i) in known][:8] or ["self"]
+        for key, low, high in (("gap", 0, 30), ("seconds", 5, 300)):
+            if key in data:
+                try:
+                    wall[key] = max(low, min(high, int(data[key])))
+                except (TypeError, ValueError):
+                    return jsonify({"success": False, "message": _("Valeur invalide.")}), 400
+        if "enabled" in data:
+            wall["enabled"] = bool(data["enabled"]) and len(wall["order"]) >= 2
+        config["frame_wall"] = wall
+        save_config(config)
+        message = _("Mur de cadres lancé : la première photo arrive dans quelques secondes.") if wall["enabled"] else _("Mur de cadres arrêté.")
+        return jsonify({"success": True, "message": message, "wall": wall})
+    return jsonify({"success": True, "wall": wall_settings(config), "frames": [{"id": f["id"], "name": f.get("name") or f["url"]} for f in _frames()]})
+
+
+def wall_step(wall, show_at, recent):
+    """Une photo du mur : découpée, envoyée à chaque cadre (en parallèle) ; retourne la clé de la photo."""
+    import urllib3
+    from PIL import Image
+    from utils import frame_wall, photo_index
+    urllib3.disable_warnings()
+    config = load_config()
+    choice = frame_wall.choose(photo_index.load(), BASE_DIR, recent=recent)
+    if not choice:
+        return None
+    key, path = choice
+    with Image.open(path) as image:
+        image.draft("RGB", (len(wall["order"]) * 1920, 1080))
+        from PIL import ImageOps
+        image = ImageOps.exif_transpose(image).convert("RGB")
+    screen = (int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+    tiles = frame_wall.split(image, len(wall["order"]), screen, wall["gap"] / 100)
+    until = show_at + wall["seconds"]
+    frames = {f["id"]: f for f in _frames()}
+
+    def send(member, tile):
+        if member == "self":
+            frame_wall.receive(frame_wall.tile_bytes(tile), show_at, until)
+            return
+        try:
+            _call(frames[member], "POST", "/api/frame/wall", files={"tile": ("tile.jpg", frame_wall.tile_bytes(tile), "image/jpeg")},
+                  data={"show_at": show_at, "until": until})
+        except requests.RequestException as e:
+            logger.info(f"[Mur] {frames[member].get('name')} injoignable : {e.__class__.__name__}")
+    workers = [threading.Thread(target=send, args=(m, t), daemon=True) for m, t in zip(wall["order"], tiles)]
+    for worker in workers:
+        worker.start()
+    for worker in workers:
+        worker.join(timeout=frame_wall.LEAD)
+    return key
+
+
+def wall_loop():
+    """Tant que le mur est lancé : une nouvelle photo toutes les `seconds`, envoyée un peu avant son heure."""
+    from utils import frame_wall
+    recent, show_at = [], 0.0
+    while True:
+        wall = wall_settings()
+        if not wall["enabled"]:
+            return
+        show_at = max(show_at, time.time() + frame_wall.LEAD)
+        key = wall_step(wall, show_at, recent)
+        if not key:
+            time.sleep(10)
+            continue
+        recent = (recent + [key])[-50:]
+        show_at += wall["seconds"]
+        time.sleep(max(0.0, show_at - frame_wall.LEAD - 1 - time.time()))  # la suivante part un peu avant la fin de celle-ci

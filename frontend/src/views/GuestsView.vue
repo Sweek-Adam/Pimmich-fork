@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
 import DailyPhotoCard from "../components/DailyPhotoCard.vue";
+import FrameWallCard from "../components/FrameWallCard.vue";
 import SettingsPage from "../components/SettingsPage.vue";
 import { get, post } from "../api";
 import { boot } from "../boot";
@@ -218,6 +219,7 @@ onMounted(() => {
 
   <SettingsPage :sections="sections" />
 
+  <FrameWallCard v-if="boot.admin" />
   <DailyPhotoCard v-if="boot.admin" />
   <section v-if="boot.admin" class="card frames-box">
     <div class="card-head"><h2><i class="fas fa-th"></i>{{ t("Cadres de la famille") }}</h2></div>

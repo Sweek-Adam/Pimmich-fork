@@ -976,6 +976,21 @@ def auto_backup_worker():
         time.sleep(1800)
 
 
+def frame_wall_worker():
+    """Mur de cadres : la boucle tourne tant qu'il est lancé (réglages relus toutes les 5 s sinon)."""
+    from web.routes_frames import wall_loop, wall_settings
+    while True:
+        try:
+            if wall_settings()["enabled"]:
+                logger.info("[Mur] Mur de cadres lancé.")
+                wall_loop()
+                logger.info("[Mur] Mur de cadres arrêté.")
+        except Exception as e:
+            logger.warning(f"[Mur] {e}")
+            time.sleep(10)
+        time.sleep(5)
+
+
 def frame_share_worker():
     """Cadres jumelés : les nouveautés partent vers les cadres choisis, toutes les deux minutes."""
     from web.routes_frames import share_with_frames

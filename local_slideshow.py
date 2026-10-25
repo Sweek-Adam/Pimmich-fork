@@ -2534,6 +2534,33 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
         logger.info(f"Erreur affichage photo avec pan/zoom : {e}")
         traceback.print_exc()
 
+def show_wall_tile(screen, tile, width, height):
+    """Mur de cadres : le morceau s'affiche exactement à son heure (mêmes horloges sur tous les cadres), jusqu'à la fin."""
+    from PIL import ImageOps
+    from utils import frame_wall
+    path, show_at, until = tile
+    try:
+        with Image.open(path) as image:
+            image = ImageOps.fit(image.convert("RGB"), (width, height), Image.LANCZOS)
+        surface = pygame.image.frombytes(image.tobytes(), image.size, "RGB")
+    except (OSError, ValueError) as e:
+        logger.warning(f"[Mur] Morceau illisible : {e}")
+        frame_wall.done(path)
+        return
+    while time.time() < show_at - 0.02:
+        handle_slideshow_events(width)
+        time.sleep(min(0.05, max(0.0, show_at - time.time() - 0.02)))
+    while time.time() < show_at:
+        pass  # dernières millisecondes : attente active, pour que tous les écrans changent ensemble
+    screen.blit(surface, (0, 0))
+    pygame.display.flip()
+    CURRENT_SLIDE["path"] = str(path)
+    while time.time() < until - 0.05:
+        handle_slideshow_events(width)
+        time.sleep(0.05)
+    frame_wall.done(path)
+
+
 def ken_burns(screen, base, pil_image, photo_path, config, duration, main_font, photo_metadata, screen_width, ignore_postcard_flag):
     """Affichage avec l'effet Ken Burns (zoom lent vers les visages), à la cadence que permet le Raspberry Pi."""
     global paused
@@ -3250,6 +3277,13 @@ def start_slideshow():
                     _live_arrivals.update(os.path.realpath(item["path"]) for item in arrived)
                     logger.info(f"[Fête] {len(arrived)} nouvelle(s) photo(s) affichée(s) tout de suite")
                 arrival = os.path.realpath(playlist[playlist_index]) in _live_arrivals
+
+                # Mur de cadres : un morceau de la grande photo partagée, affiché à l'heure dite (sans décaler la playlist)
+                from utils import frame_wall
+                wall_tile = frame_wall.pending()
+                if wall_tile:
+                    show_wall_tile(screen, wall_tile, SCREEN_WIDTH, SCREEN_HEIGHT)
+                    continue
 
                 # Disposition de cette diapositive : photo unique ou composition des photos suivantes
                 layout_plan = layout_engine.resolve(config, custom_layout if is_custom_run else None)

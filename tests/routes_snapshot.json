@@ -377,6 +377,12 @@
   ]
  ],
  [
+  "/api/frame/wall",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/frames",
   [
    "GET"
@@ -409,6 +415,13 @@
  [
   "/api/frames/<frame_id>/share",
   [
+   "PUT"
+  ]
+ ],
+ [
+  "/api/frames/wall",
+  [
+   "GET",
    "PUT"
   ]
  ],
