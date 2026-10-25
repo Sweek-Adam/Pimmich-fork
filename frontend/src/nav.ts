@@ -45,6 +45,9 @@ export const groups: NavGroup[] = [
     { label: () => t("À valider"), icon: "fa-check-circle", tab: "tab-validation", route: "/a-valider" },
     { label: () => t("Telegram"), icon: "fa-paper-plane", tab: "tab-telegram", route: "/telegram" },
   ] },
+  { key: "jeux", label: () => t("Jeux"), icon: "fa-dice", items: [
+    { label: () => t("Jeux de famille"), icon: "fa-dice", tab: "tab-jeux", route: "/jeux" },
+  ] },
   { key: "systeme", label: () => t("Système"), icon: "fa-cog", items: [
     { label: () => t("Comptes"), icon: "fa-users", tab: "tab-comptes", route: "/comptes" },
     { label: () => t("Notifications"), icon: "fa-bell", tab: "tab-notifications", admin: true, route: "/notifications" },

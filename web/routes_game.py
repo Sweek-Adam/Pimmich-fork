@@ -45,8 +45,9 @@ def game_new_api():
         return jsonify({"success": False, "message": _("Une partie est déjà en cours.")}), 409
     from utils import people, photo_index
     data = request.get_json(silent=True) or {}
+    config = load_config()
     try:
-        rounds = max(3, min(12, int(data.get("rounds", 6))))
+        rounds = max(1, min(15, int(data.get("rounds", config.get("game_rounds", 6)))))
     except (TypeError, ValueError):
         rounds = 6
     mode = data.get("mode") if data.get("mode") in family_game.MODES else "classique"
@@ -54,7 +55,7 @@ def game_new_api():
         who = people.by_photo() if mode in ("qui", "melange") else {}
     except Exception:
         who = {}
-    state = family_game.new_game(photo_index.load(), _labels(), rounds, mode=mode, people=who)
+    state = family_game.new_game(photo_index.load(), _labels(), rounds, mode=mode, people=who, timing=family_game.timing_from(config))
     if not state:
         return jsonify({"success": False, "message": _("Pas assez de photos pour ce jeu (dates, lieux ou personnes manquants).")}), 400
     return jsonify({"success": True, "message": _("Partie créée : entrez votre prénom pour jouer.")})
@@ -94,9 +95,35 @@ def game_photo_api():
     """Défi photo : la photo prise par le joueur."""
     file = request.files.get("photo")
     data = file.read(15 * 1024 * 1024 + 1) if file else b""
-    if not data or len(data) > 15 * 1024 * 1024 or not family_game.answer_photo(request.cookies.get(COOKIE), data):
+    player = request.cookies.get(COOKIE)
+    if not data or len(data) > 15 * 1024 * 1024 or not family_game.answer_photo(player, data):
         return jsonify({"success": False, "message": _("Photo non prise en compte (trop tard, déjà envoyée ou illisible).")}), 400
+    if load_config().get("game_keep_challenge_photos", False):
+        threading.Thread(target=_keep_challenge_photo, args=(player,), daemon=True, name="game-photo").start()
     return jsonify({"success": True})
+
+
+def _keep_challenge_photo(player):
+    """Photo du défi gardée : dans l'album de la fête (mode fête) ou dans la source « jeux », puis préparée."""
+    from utils import party
+    from utils import prepare_all_photos as prep
+    state = family_game.current()
+    kind, number, _left = family_game.phase(state)
+    name = (state or {}).get("answers", {}).get(str(number), {}).get(player) if number is not None else None
+    if not name:
+        return
+    config = load_config()
+    source = party.state(config).get("source") if party.active(config) else "jeux"
+    folder = BASE_DIR / "static" / "photos" / source
+    folder.mkdir(parents=True, exist_ok=True)
+    shutil.copy(str(family_game.PHOTOS_DIR / name), str(folder / name))
+    try:
+        prep.prepare_media(source, name, int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+    except Exception as e:
+        logger.warning(f"[Jeu] Photo du défi non préparée : {e}")
+        return
+    if source not in config.get("display_sources", []):
+        save_config(dict(config, display_sources=list(config.get("display_sources", [])) + [source]))
 
 
 @app.route('/jeu/vote', methods=['POST'])
@@ -120,6 +147,29 @@ def game_bingo_api():
 def game_modes_api():
     translate = _
     return jsonify({"success": True, "modes": [{"key": k, "label": translate(v)} for k, v in family_game.MODES.items()]})
+
+
+@app.route('/api/game/status')
+@login_required
+def game_status_api():
+    translate = _
+    return jsonify({"success": True, **family_game.admin_view(family_game.current(), translate=translate)})
+
+
+@app.route('/api/game/start', methods=['POST'])
+@login_required
+def game_admin_start_api():
+    if not family_game.start():
+        return jsonify({"success": False, "message": _("La partie ne peut pas commencer (aucun joueur ?).")}), 400
+    return jsonify({"success": True, "message": _("C'est parti !")})
+
+
+@app.route('/api/game/skip', methods=['POST'])
+@login_required
+def game_skip_api():
+    if not family_game.skip():
+        return jsonify({"success": False, "message": _("Rien à passer.")}), 400
+    return jsonify({"success": True, "message": _("Étape suivante.")})
 
 
 @app.route('/api/game/stop', methods=['POST'])

@@ -54,12 +54,24 @@ MODES = {
     "legende": N_("Légende la plus drôle"), "defi": N_("Défi photo"), "memoire": N_("Mémoire"),
     "proche": N_("Le plus proche"), "melange": N_("Mélange de tout"), "bingo": N_("Bingo souvenirs"),
 }
-STEPS = {  # étapes de chaque question : (nom, secondes)
-    "memory": [("memorize", 12), ("question", 20), ("reveal", REVEAL_SECONDS)],
-    "timeline": [("question", 40), ("reveal", 11)],
-    "caption": [("question", 60), ("vote", 30), ("reveal", 12)],
-    "challenge": [("question", 180), ("vote", 40), ("reveal", 14)],
-}
+# Temps de la partie (réglables dans Jeux ; figés dans la partie à sa création, pour le cadre et les téléphones)
+TIMING = {"question": QUESTION_SECONDS, "reveal": REVEAL_SECONDS, "podium": PODIUM_SECONDS, "memorize": 12, "timeline": 40,
+          "caption": 60, "vote": 30, "challenge": 180, "lobby_minutes": LOBBY_TIMEOUT // 60, "bingo_minutes": BINGO_MINUTES,
+          "speed_bonus": True, "max_players": MAX_PLAYERS, "auto_reveal": True}
+SETTING_KEYS = {"question": "game_question_seconds", "reveal": "game_reveal_seconds", "podium": "game_podium_seconds",
+                "memorize": "game_memorize_seconds", "timeline": "game_timeline_seconds", "caption": "game_caption_seconds",
+                "vote": "game_vote_seconds", "challenge": "game_challenge_seconds", "lobby_minutes": "game_lobby_minutes",
+                "bingo_minutes": "game_bingo_minutes", "speed_bonus": "game_speed_bonus", "max_players": "game_max_players",
+                "auto_reveal": "game_auto_reveal"}
+
+
+def timing_from(config):
+    """Temps choisis dans les réglages (valeurs par défaut sinon)."""
+    out = dict(TIMING)
+    for key, setting in SETTING_KEYS.items():
+        if setting in (config or {}):
+            out[key] = config[setting]
+    return out
 CHALLENGES = [N_("Une photo avec quelqu'un qui porte du rouge"), N_("La plus belle grimace"), N_("Un selfie à trois ou plus"),
               N_("Quelque chose de rond"), N_("Une photo de vos chaussures"), N_("La pose de super-héros"),
               N_("Un animal (même en peluche)"), N_("Quelque chose qui commence par la lettre P"), N_("Votre plus beau sourire"),
@@ -97,8 +109,19 @@ def _save(state):
     os.replace(tmp, STATE_FILE)
 
 
-def steps(question):
-    return STEPS.get(question["kind"], [("question", QUESTION_SECONDS), ("reveal", REVEAL_SECONDS)])
+def steps(question, timing=None):
+    """Étapes d'une question : [(nom, secondes)]."""
+    t = dict(TIMING, **(timing or {}))
+    kind = question["kind"]
+    if kind == "memory":
+        return [("memorize", t["memorize"]), ("question", t["question"]), ("reveal", t["reveal"])]
+    if kind == "timeline":
+        return [("question", t["timeline"]), ("reveal", t["reveal"] + 2)]
+    if kind == "caption":
+        return [("question", t["caption"]), ("vote", t["vote"]), ("reveal", t["reveal"] + 3)]
+    if kind == "challenge":
+        return [("question", t["challenge"]), ("vote", t["vote"] + 10), ("reveal", t["reveal"] + 5)]
+    return [("question", t["question"]), ("reveal", t["reveal"])]
 
 
 # --- Questions ---
@@ -334,18 +357,20 @@ def question_points(question, answers, times=None, votes=None):
 
 # --- Partie ---
 
-def new_game(index, labels, rounds=6, now=None, rng=None, kinds=KINDS, mode="classique", people=None):
+def new_game(index, labels, rounds=6, now=None, rng=None, kinds=KINDS, mode="classique", people=None, timing=None):
     """Ouvre la salle d'attente d'une nouvelle partie. Retourne l'état, ou None s'il n'y a pas assez de photos."""
     rng = rng or random.Random()
+    timing = dict(TIMING, **(timing or {}))
     if mode == "bingo":
-        state = {"id": secrets.token_hex(4), "mode": "bingo", "created": now or time.time(), "until": (now or time.time()) + BINGO_MINUTES * 60,
+        state = {"id": secrets.token_hex(4), "mode": "bingo", "created": now or time.time(), "timing": timing,
+                 "until": (now or time.time()) + timing["bingo_minutes"] * 60,
                  "players": {}, "grids": {}, "checked": {}, "winners": [], "seed": rng.randint(0, 10 ** 6)}
     else:
         questions = make_rounds(index, labels, rounds, rng, kinds, mode, people)
         if len(questions) < min(2, rounds):
             return None
         state = {"id": secrets.token_hex(4), "mode": mode, "created": now or time.time(), "started": None, "questions": questions,
-                 "players": {}, "answers": {}, "times": {}, "votes": {}}
+                 "players": {}, "answers": {}, "times": {}, "votes": {}, "timing": timing}
     with _locked():
         _clear_photos()
         _save(state)
@@ -356,7 +381,7 @@ def _timeline_of(state):
     """[(début, question, étape, durée)] de toute la partie."""
     out, at = [], 0.0
     for number, question in enumerate(state["questions"]):
-        for name, seconds in steps(question):
+        for name, seconds in steps(question, state.get("timing")):
             out.append((at, number, name, seconds))
             at += seconds
     return out, at
@@ -370,18 +395,19 @@ def phase(state, now=None):
     if state.get("mode") == "bingo":
         return ("bingo", None, state["until"] - now) if now < state["until"] else ("over", None, 0)
     if not state.get("started"):
-        return ("lobby", None, 0) if now - state["created"] < LOBBY_TIMEOUT else ("over", None, 0)
+        lobby = dict(TIMING, **(state.get("timing") or {}))["lobby_minutes"] * 60
+        return ("lobby", None, 0) if now - state["created"] < lobby else ("over", None, 0)
     elapsed = now - state["started"]
     timeline, total = _timeline_of(state)
     for start, number, name, seconds in timeline:
         if start <= elapsed < start + seconds:
             return name, number, start + seconds - elapsed
-    left = total + PODIUM_SECONDS - elapsed
+    left = total + dict(TIMING, **(state.get("timing") or {}))["podium"] - elapsed
     return ("podium", None, left) if left > 0 else ("over", None, 0)
 
 
 def step_duration(state, number, name):
-    return dict(steps(state["questions"][number])).get(name, QUESTION_SECONDS)
+    return dict(steps(state["questions"][number], state.get("timing"))).get(name, QUESTION_SECONDS)
 
 
 def current():
@@ -407,7 +433,7 @@ def join(name, player=None):
         if phase(state)[0] == "over":
             return None
         if player not in state["players"]:
-            if len(state["players"]) >= MAX_PLAYERS:
+            if len(state["players"]) >= dict(TIMING, **(state.get("timing") or {}))["max_players"]:
                 return None
             player = secrets.token_hex(6)
         state["players"][player] = name
@@ -427,6 +453,12 @@ def start(now=None):
         state["started"] = now or time.time()
         _save(state)
     return True
+
+
+def _finish_if_everyone_done(state, kind, left, done):
+    """Tout le monde a répondu (ou voté) : l'étape se termine tout de suite (la réponse s'affiche)."""
+    if done >= len(state["players"]) and left > 0.5 and dict(TIMING, **(state.get("timing") or {}))["auto_reveal"]:
+        state["started"] -= left - 0.3
 
 
 def answer(player, value, now=None):
@@ -468,6 +500,7 @@ def answer(player, value, now=None):
             return False
         answers[player] = value
         state.setdefault("times", {}).setdefault(str(number), {})[player] = round(max(0.0, left) / step_duration(state, number, "question"), 3)
+        _finish_if_everyone_done(state, kind, left, len(answers))
         _save(state)
     return True
 
@@ -494,6 +527,7 @@ def answer_photo(player, data, now=None):
         except Exception:
             return False
         answers[player] = name
+        _finish_if_everyone_done(state, kind, _left, len(answers))
         _save(state)
     return True
 
@@ -519,13 +553,19 @@ def vote(player, choice, now=None):
         if player in votes:
             return False
         votes[player] = target
+        # Tous ceux qui peuvent voter l'ont fait (un joueur seul avec sa proposition ne peut pas voter)
+        voters = [p for p in state["players"] if any(e[1] != p for e in entries(state, number))]
+        _finish_if_everyone_done(state, kind, _left, len(votes) + len(state["players"]) - len(voters))
         _save(state)
     return True
 
 
 def round_points(state, number):
     key = str(number)
-    return question_points(state["questions"][number], state["answers"].get(key, {}), state.get("times", {}).get(key), state.get("votes", {}).get(key))
+    question = state["questions"][number]
+    if not dict(TIMING, **(state.get("timing") or {}))["speed_bonus"]:
+        question = {k: v for k, v in question.items() if k != "effect"}  # pas de bonus de vitesse
+    return question_points(question, state["answers"].get(key, {}), state.get("times", {}).get(key), state.get("votes", {}).get(key))
 
 
 def scores(state, upto=None):
@@ -621,4 +661,38 @@ def public_view(state, player=None, now=None, translate=lambda s, **k: s % k if 
                                  "votes": gained.get(p, 0) // 100} for _n, p, v in ranked[:3]]
     if kind in ("reveal", "podium"):
         view["ranking"] = [{"name": n, "score": s} for n, s, _p in scores(state, number)]
+    return view
+
+
+def skip(now=None):
+    """Termine tout de suite l'étape en cours (question, vote, dévoilement...). Retourne True si c'est fait."""
+    now = now or time.time()
+    with _locked():
+        state = _load()
+        kind, _number, left = phase(state, now)
+        if kind in ("lobby", "over", "bingo") or left <= 0:
+            return False
+        state["started"] -= left + 0.01
+        _save(state)
+    return True
+
+
+def admin_view(state, now=None, translate=lambda s, **k: s % k if k else s):
+    """État de la partie pour la page Jeux de l'interface (avec la réponse : c'est l'organisateur)."""
+    kind, number, left = phase(state, now)
+    view = {"phase": kind, "left": round(max(0, left)), "mode": (state or {}).get("mode"),
+            "mode_label": translate(MODES.get((state or {}).get("mode"), "")) if state else "",
+            "total": len((state or {}).get("questions", [])), "timing": (state or {}).get("timing")}
+    if not state or kind == "over":
+        return view
+    if kind == "bingo":
+        view["players"] = [{"name": state["players"][p], "checked": len(state["checked"].get(p, []))} for p in state["players"]]
+        view["winners"] = [w["name"] for w in state["winners"]]
+        return view
+    ranking = scores(state, number if kind not in ("podium",) else None)
+    view["players"] = [{"name": n, "score": s} for n, s, _p in ranking]
+    if number is not None:
+        question = state["questions"][number]
+        view.update(number=number + 1, question=question_text(question, translate), answer=question.get("answer"),
+                    answered=len(state["answers"].get(str(number), {})), voted=len(state.get("votes", {}).get(str(number), {})))
     return view

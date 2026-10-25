@@ -137,21 +137,10 @@ async function stopParty() {
   const r = await run(() => post<Party & { success: boolean; message?: string }>("/api/party/stop"));
   if (r?.success) party.value = r;
 }
-// --- Jeu « Où et quand ? » ---
-const gameRounds = ref(6);
-const gameMode = ref("classique");
-const gameModes = ref<{ key: string; label: string }[]>([]);
-async function newGame() {
-  const r = await run(() => post("/jeu/new", { rounds: gameRounds.value, mode: gameMode.value }));
-  if (r?.success) window.open("/jeu", "_blank");
-}
-async function stopGame() { await run(() => post("/api/game/stop")); }
-
 const untilLabel = (iso: string | null) => iso ? new Date(iso).toLocaleString([], { weekday: "long", hour: "2-digit", minute: "2-digit" }) : "";
 
 onMounted(() => {
   loadParty().catch(() => {});
-  get<{ modes: { key: string; label: string }[] }>("/jeu/modes").then((d) => (gameModes.value = d.modes)).catch(() => {});
   if (boot.admin) { loadRemote(); loadFrames(); loadCodes(); }
 });
 </script>
@@ -195,15 +184,9 @@ onMounted(() => {
   </section>
 
   <section class="card">
-    <div class="card-head"><h2><i class="fas fa-dice"></i>{{ t("Jeux de famille") }}</h2></div>
-    <p class="small muted">{{ t("Le cadre affiche la partie, chacun joue sur son téléphone : deviner l'année ou le lieu, remettre des photos dans l'ordre, retenir, écrire la légende la plus drôle, relever des défis photo, bingo souvenirs... Les joueurs scannent le QR code affiché sur le cadre (page /jeu).") }}</p>
-    <div class="row">
-      <label class="field inline">{{ t("Jeu") }} <select v-model="gameMode"><option v-for="m in gameModes" :key="m.key" :value="m.key">{{ m.label }}</option></select></label>
-      <label class="field inline">{{ t("Questions") }} <select v-model.number="gameRounds"><option :value="4">4</option><option :value="6">6</option><option :value="8">8</option><option :value="10">10</option></select></label>
-      <button class="btn primary" type="button" @click="newGame"><i class="fas fa-play"></i>{{ t("Lancer une partie") }}</button>
-      <a class="btn" href="/jeu" target="_blank"><i class="fas fa-mobile-alt"></i>{{ t("Ouvrir la page du jeu") }}</a>
-      <button class="btn danger" type="button" @click="stopGame"><i class="fas fa-stop"></i>{{ t("Arrêter la partie") }}</button>
-    </div>
+    <div class="card-head"><h2><i class="fas fa-dice"></i>{{ t("Jeux de famille") }}</h2>
+      <router-link class="btn small" to="/jeux">{{ t("Ouvrir les jeux") }}</router-link></div>
+    <p class="small muted">{{ t("Lancer une partie, la suivre en direct et régler les temps : menu Jeux.") }}</p>
   </section>
 
   <section v-if="boot.admin && remote" class="card">

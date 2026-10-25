@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 16:49+0100\n"
+"POT-Creation-Date: 2026-10-25 16:56+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -61,73 +61,73 @@ msgid "Il y a %(num)d ans"
 msgstr "Hace %(num)d años"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "enero"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "febrero"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "marzo"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "abril"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "mayo"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "junio"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "julio"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:583 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "agosto"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:584 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "septiembre"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:584 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "octubre"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:584 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "noviembre"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:584 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "diciembre"
@@ -336,36 +336,45 @@ msgstr "Por validar"
 msgid "Telegram"
 msgstr "Telegram"
 
-#: frontend/src/nav.ts:48 templates/configure.html.jinja:96
+#: frontend/src/nav.ts:48 templates/game.html.jinja:6
+msgid "Jeux"
+msgstr "Juegos"
+
+#: frontend/src/nav.ts:49 frontend/src/views/GuestsView.vue:187
+#: templates/game.html.jinja:39
+msgid "Jeux de famille"
+msgstr "Juegos en familia"
+
+#: frontend/src/nav.ts:51 templates/configure.html.jinja:96
 #: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:35
 msgid "Système"
 msgstr "Sistema"
 
-#: frontend/src/nav.ts:49 templates/configure.html.jinja:174
+#: frontend/src/nav.ts:52 templates/configure.html.jinja:174
 msgid "Comptes"
 msgstr "Cuentas"
 
-#: frontend/src/nav.ts:50 templates/configure.html.jinja:176
+#: frontend/src/nav.ts:53 templates/configure.html.jinja:176
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: frontend/src/nav.ts:51 templates/configure.html.jinja:177
+#: frontend/src/nav.ts:54 templates/configure.html.jinja:177
 msgid "Maintenance"
 msgstr "Mantenimiento"
 
-#: frontend/src/nav.ts:52 templates/configure.html.jinja:178
+#: frontend/src/nav.ts:55 templates/configure.html.jinja:178
 msgid "Réseau"
 msgstr "Red"
 
-#: frontend/src/nav.ts:53 templates/configure.html.jinja:180
+#: frontend/src/nav.ts:56 templates/configure.html.jinja:180
 msgid "Commande vocale"
 msgstr "Control por voz"
 
-#: frontend/src/nav.ts:54 templates/configure.html.jinja:182
+#: frontend/src/nav.ts:57 templates/configure.html.jinja:182
 msgid "Statistiques"
 msgstr "Estadística"
 
-#: frontend/src/nav.ts:55 templates/configure.html.jinja:183
+#: frontend/src/nav.ts:58 templates/configure.html.jinja:183
 msgid "Journaux"
 msgstr "Registros"
 
@@ -420,7 +429,7 @@ msgstr "cada año"
 #: frontend/src/components/PresenceCard.vue:62
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
-#: frontend/src/views/GuestsView.vue:249 frontend/src/views/GuestsView.vue:271
+#: frontend/src/views/GuestsView.vue:232 frontend/src/views/GuestsView.vue:254
 #: frontend/src/views/MaintenanceView.vue:296
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
@@ -1057,6 +1066,7 @@ msgid "Radios et podcasts"
 msgstr "Radios y pódcasts"
 
 #: frontend/src/components/RadioCard.vue:48
+#: frontend/src/views/GamesView.vue:130
 #: templates/configure/_son_radio.html.jinja:5 templates/upload.html.jinja:171
 msgid "Arrêter"
 msgstr "Detener"
@@ -1263,7 +1273,7 @@ msgid "Album intelligent"
 msgstr "Álbum inteligente"
 
 #: frontend/src/components/SmartAlbumEditor.vue:76
-#: frontend/src/views/GuestsView.vue:262
+#: frontend/src/views/GuestsView.vue:245
 #: templates/configure/_smart_albums.html.jinja:16
 #: templates/configure/tab_comptes.html.jinja:58
 #: templates/configure/tab_invites.html.jinja:161
@@ -3180,6 +3190,267 @@ msgstr "Activar el botón físico"
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "Pin GPIO (numeración BCM)"
 
+#: frontend/src/views/GamesView.vue:22
+msgid "Deviner l'année, le lieu ou qui a envoyé la photo."
+msgstr "Adivinar el año, el lugar o quién envió la foto."
+
+#: frontend/src/views/GamesView.vue:23
+msgid "Deux photos : laquelle est la plus ancienne ?"
+msgstr "Dos fotos: ¿cuál es la más antigua?"
+
+#: frontend/src/views/GamesView.vue:24
+msgid "La photo se dézoome peu à peu : répondre tôt rapporte plus."
+msgstr "La foto se aleja poco a poco: responder pronto da más puntos."
+
+#: frontend/src/views/GamesView.vue:25
+msgid "Les pièces se remettent en place peu à peu : répondre tôt rapporte plus."
+msgstr "Las piezas vuelven a su sitio poco a poco: responder pronto da más puntos."
+
+#: frontend/src/views/GamesView.vue:26
+msgid "Remettre 4 photos dans l'ordre, de la plus ancienne à la plus récente."
+msgstr "Ordenar 4 fotos, de la más antigua a la más reciente."
+
+#: frontend/src/views/GamesView.vue:27
+msgid "Qui est sur la photo floutée ? (personnes reconnues par Immich)"
+msgstr "¿Quién está en la foto borrosa? (personas reconocidas por Immich)"
+
+#: frontend/src/views/GamesView.vue:28
+msgid "Chacun écrit la légende la plus drôle, puis tout le monde vote."
+msgstr "Cada uno escribe la leyenda más divertida y luego todos votan."
+
+#: frontend/src/views/GamesView.vue:29
+msgid ""
+"Un défi (« quelque chose de bleu »...) : chacun prend une photo, puis "
+"tout le monde vote."
+msgstr "Un reto («algo azul»...): cada uno hace una foto y luego todos votan."
+
+#: frontend/src/views/GamesView.vue:30
+msgid "6 photos à retenir, puis : laquelle n'y était pas ?"
+msgstr "6 fotos para recordar y luego: ¿cuál no estaba?"
+
+#: frontend/src/views/GamesView.vue:31
+msgid "Des nombres à deviner sur vos photos : le plus proche gagne."
+msgstr "Números que adivinar sobre sus fotos: gana el más cercano."
+
+#: frontend/src/views/GamesView.vue:32
+msgid "Un peu de chaque jeu."
+msgstr "Un poco de cada juego."
+
+#: frontend/src/views/GamesView.vue:33
+msgid ""
+"Une grille sur chaque téléphone pendant le diaporama : la première ligne "
+"complète gagne."
+msgstr ""
+"Una cuadrícula en cada teléfono durante la presentación: gana la primera "
+"línea completa."
+
+#: frontend/src/views/GamesView.vue:36
+msgid "Salle d'attente"
+msgstr "Sala de espera"
+
+#: frontend/src/views/GamesView.vue:36
+msgid "Photos à retenir"
+msgstr "Fotos para recordar"
+
+#: frontend/src/views/GamesView.vue:36 templates/game.html.jinja:58
+msgid "Question"
+msgstr "Pregunta"
+
+#: frontend/src/views/GamesView.vue:36
+msgid "Vote"
+msgstr "Voto"
+
+#: frontend/src/views/GamesView.vue:37
+msgid "Réponse"
+msgstr "Respuesta"
+
+#: frontend/src/views/GamesView.vue:37
+msgid "Podium"
+msgstr "Podio"
+
+#: frontend/src/views/GamesView.vue:37
+msgid "Bingo en cours"
+msgstr "Bingo en curso"
+
+#: frontend/src/views/GamesView.vue:37
+msgid "Aucune partie"
+msgstr "Ninguna partida"
+
+#: frontend/src/views/GamesView.vue:41
+msgid "Temps de jeu"
+msgstr "Tiempos de juego"
+
+#: frontend/src/views/GamesView.vue:42
+msgid ""
+"Les temps sont pris en compte pour la prochaine partie (une partie en "
+"cours garde les siens)."
+msgstr ""
+"Los tiempos se aplican a la próxima partida (una partida en curso "
+"conserva los suyos)."
+
+#: frontend/src/views/GamesView.vue:44
+msgid "Temps pour répondre"
+msgstr "Tiempo para responder"
+
+#: frontend/src/views/GamesView.vue:45
+msgid "Affichage de la réponse et des points"
+msgstr "Visualización de la respuesta y los puntos"
+
+#: frontend/src/views/GamesView.vue:46
+msgid "Mémoire : temps pour retenir les photos"
+msgstr "Memoria: tiempo para recordar las fotos"
+
+#: frontend/src/views/GamesView.vue:47
+msgid "Ligne du temps : temps pour remettre dans l'ordre"
+msgstr "Línea del tiempo: tiempo para ordenar"
+
+#: frontend/src/views/GamesView.vue:48
+msgid "Légende la plus drôle : temps pour écrire"
+msgstr "Leyenda más divertida: tiempo para escribir"
+
+#: frontend/src/views/GamesView.vue:49
+msgid "Défi photo : temps pour prendre la photo"
+msgstr "Reto fotográfico: tiempo para hacer la foto"
+
+#: frontend/src/views/GamesView.vue:50
+msgid "Temps pour voter"
+msgstr "Tiempo para votar"
+
+#: frontend/src/views/GamesView.vue:51
+msgid "Affichage du podium final"
+msgstr "Visualización del podio final"
+
+#: frontend/src/views/GamesView.vue:52
+msgid "Salle d'attente abandonnée après"
+msgstr "Sala de espera abandonada tras"
+
+#: frontend/src/views/GamesView.vue:53
+msgid "Durée d'un bingo"
+msgstr "Duración de un bingo"
+
+#: frontend/src/views/GamesView.vue:55
+msgid "Règles"
+msgstr "Reglas"
+
+#: frontend/src/views/GamesView.vue:56
+msgid "Autoriser les jeux (page /jeu, depuis le Wi-Fi de la maison)"
+msgstr "Permitir los juegos (página /jeu, desde el Wi-Fi de casa)"
+
+#: frontend/src/views/GamesView.vue:57
+msgid "Nombre de questions par défaut"
+msgstr "Número de preguntas por defecto"
+
+#: frontend/src/views/GamesView.vue:58
+msgid ""
+"Dès que tout le monde a répondu (ou voté), afficher la réponse sans "
+"attendre"
+msgstr ""
+"En cuanto todos hayan respondido (o votado), mostrar la respuesta sin "
+"esperar"
+
+#: frontend/src/views/GamesView.vue:59
+msgid "Bonus de vitesse (zoom, puzzle, flou : répondre tôt rapporte plus)"
+msgstr ""
+"Bonus de velocidad (zoom, puzle, desenfoque: responder pronto da más "
+"puntos)"
+
+#: frontend/src/views/GamesView.vue:60
+msgid "Nombre maximum de joueurs"
+msgstr "Número máximo de jugadores"
+
+#: frontend/src/views/GamesView.vue:61
+msgid "Garder les photos du défi (album de la fête, ou source « jeux »)"
+msgstr "Guardar las fotos del reto (álbum de la fiesta, o fuente «jeux»)"
+
+#: frontend/src/views/GamesView.vue:62
+msgid "Sinon, elles sont effacées à la fin de la partie."
+msgstr "Si no, se borran al final de la partida."
+
+#: frontend/src/views/GamesView.vue:81
+msgid "Arrêter la partie ? Le diaporama reprend."
+msgstr "¿Detener la partida? Vuelve la presentación."
+
+#: frontend/src/views/GamesView.vue:98 templates/game.html.jinja:51
+msgid "Lancer une partie"
+msgstr "Empezar una partida"
+
+#: frontend/src/views/GamesView.vue:99 templates/game.html.jinja:50
+#: templates/upload.html.jinja:60
+msgid "Jeu"
+msgstr "Juego"
+
+#: frontend/src/views/GamesView.vue:102 templates/game.html.jinja:52
+msgid "Nombre de questions"
+msgstr "Número de preguntas"
+
+#: frontend/src/views/GamesView.vue:105
+#: frontend/src/views/PlaylistsView.vue:163
+#: templates/configure/scripts_gallery.html.jinja:57
+#: templates/configure/scripts_main.html.jinja:1099
+msgid "Lancer"
+msgstr "Lancero"
+
+#: frontend/src/views/GamesView.vue:106
+msgid "Ouvrir la page des joueurs"
+msgstr "Abrir la página de los jugadores"
+
+#: frontend/src/views/GamesView.vue:108
+msgid "Les joueurs scannent le QR code affiché sur le cadre, ou ouvrent :"
+msgstr "Los jugadores escanean el código QR del marco, o abren:"
+
+#: frontend/src/views/GamesView.vue:112
+msgid "Partie en cours"
+msgstr "Partida en curso"
+
+#: frontend/src/views/GamesView.vue:116
+#, python-brace-format
+msgid "Question {n}/{total}"
+msgstr "Pregunta {n}/{total}"
+
+#: frontend/src/views/GamesView.vue:117
+#, python-brace-format
+msgid "encore {m} min"
+msgstr "quedan {m} min"
+
+#: frontend/src/views/GamesView.vue:119
+msgid "Réponse :"
+msgstr "Respuesta:"
+
+#: frontend/src/views/GamesView.vue:120
+#, python-brace-format
+msgid "{n} réponse(s)"
+msgstr "{n} respuesta(s)"
+
+#: frontend/src/views/GamesView.vue:120
+#, python-brace-format
+msgid "{n} vote(s)"
+msgstr "{n} voto(s)"
+
+#: frontend/src/views/GamesView.vue:123
+#, python-brace-format
+msgid "{n} case(s)"
+msgstr "{n} casilla(s)"
+
+#: frontend/src/views/GamesView.vue:125
+msgid "Aucun joueur pour l'instant."
+msgstr "Todavía no hay jugadores."
+
+#: frontend/src/views/GamesView.vue:128 templates/game.html.jinja:56
+msgid "Commencer"
+msgstr "Empezar"
+
+#: frontend/src/views/GamesView.vue:129 templates/configure/_tour.html.jinja:9
+msgid "Passer"
+msgstr "Saltar"
+
+#: frontend/src/views/GamesView.vue:133
+msgid ""
+"Aucune partie en cours. Lancez-en une à gauche, ou depuis un téléphone "
+"sur la page /jeu."
+msgstr ""
+"No hay ninguna partida en curso. Empiece una a la izquierda o desde un "
+"teléfono en la página /jeu."
+
 #: frontend/src/views/GuestsView.vue:14
 #: templates/configure/tab_invites.html.jinja:112
 msgid "QR code pour les invités"
@@ -3345,17 +3616,17 @@ msgstr ""
 "¿Terminar la fiesta? Vuelve la presentación habitual; el álbum de la "
 "fiesta se queda en las fuentes."
 
-#: frontend/src/views/GuestsView.vue:161
+#: frontend/src/views/GuestsView.vue:150
 #: templates/configure/tab_invites.html.jinja:7
 msgid "QR code de la page invités"
 msgstr "Código QR de la página de invitados"
 
-#: frontend/src/views/GuestsView.vue:163
+#: frontend/src/views/GuestsView.vue:152
 #: templates/configure/tab_invites.html.jinja:4
 msgid "Inviter la famille et les amis"
 msgstr "Invitar a familiares y amigos"
 
-#: frontend/src/views/GuestsView.vue:164
+#: frontend/src/views/GuestsView.vue:153
 #: templates/configure/tab_invites.html.jinja:9
 msgid ""
 "Les personnes connectées à votre Wi-Fi scannent ce QR code (ou ouvrent "
@@ -3365,7 +3636,7 @@ msgstr ""
 "Las personas conectadas a tu Wi-Fi escanean este QR code (o abren la "
 "dirección de abajo) para enviar fotos y escribir mensajes en el marco."
 
-#: frontend/src/views/GuestsView.vue:167
+#: frontend/src/views/GuestsView.vue:156
 #: templates/configure/tab_invites.html.jinja:32
 msgid ""
 "Envoyez vos photos et vos messages sur notre cadre photo (depuis le Wi-Fi"
@@ -3374,42 +3645,42 @@ msgstr ""
 "Envía tus fotos y mensajes a nuestro marco de fotos (desde el Wi-Fi de "
 "casa):"
 
-#: frontend/src/views/GuestsView.vue:168 frontend/src/views/GuestsView.vue:222
+#: frontend/src/views/GuestsView.vue:157 frontend/src/views/GuestsView.vue:205
 #: templates/configure/tab_invites.html.jinja:12
 #: templates/configure/tab_invites.html.jinja:55
 msgid "Partager le lien"
 msgstr "Compartir el enlace"
 
-#: frontend/src/views/GuestsView.vue:169
+#: frontend/src/views/GuestsView.vue:158
 #: templates/configure/tab_invites.html.jinja:13
 msgid "Ouvrir la page invités"
 msgstr "Abrir la página de invitados"
 
-#: frontend/src/views/GuestsView.vue:170
+#: frontend/src/views/GuestsView.vue:159
 #: templates/configure/tab_invites.html.jinja:144
 msgid "ouvrir le livre d'or"
 msgstr "abrir el libro de visitas"
 
-#: frontend/src/views/GuestsView.vue:172
+#: frontend/src/views/GuestsView.vue:161
 #: templates/configure/tab_invites.html.jinja:17
 msgid "Les photos des invités passent par « À valider » avant d'être affichées."
 msgstr "Las fotos de los invitados pasan por «Por validar» antes de mostrarse."
 
-#: frontend/src/views/GuestsView.vue:177
+#: frontend/src/views/GuestsView.vue:166
 msgid "Mode fête"
 msgstr "Modo fiesta"
 
-#: frontend/src/views/GuestsView.vue:178
+#: frontend/src/views/GuestsView.vue:167
 #, python-brace-format
 msgid "En cours jusqu'à {time}"
 msgstr "En curso hasta {time}"
 
-#: frontend/src/views/GuestsView.vue:180
+#: frontend/src/views/GuestsView.vue:169
 #, python-brace-format
 msgid "{count} photo(s) reçue(s)"
 msgstr "{count} foto(s) recibida(s)"
 
-#: frontend/src/views/GuestsView.vue:181
+#: frontend/src/views/GuestsView.vue:170
 msgid ""
 "Le QR code est affiché en grand sur le cadre. Chaque photo envoyée passe "
 "aussitôt en grand avec le prénom de l'invité, puis dans le Mur de la "
@@ -3419,16 +3690,16 @@ msgstr ""
 "instante en grande con el nombre del invitado, y luego en el Muro de la "
 "fiesta."
 
-#: frontend/src/views/GuestsView.vue:183
+#: frontend/src/views/GuestsView.vue:172
 #, python-brace-format
 msgid "Prolonger ({hours} h)"
 msgstr "Prolongar ({hours} h)"
 
-#: frontend/src/views/GuestsView.vue:184
+#: frontend/src/views/GuestsView.vue:173
 msgid "Terminer la fête"
 msgstr "Terminar la fiesta"
 
-#: frontend/src/views/GuestsView.vue:188
+#: frontend/src/views/GuestsView.vue:177
 msgid ""
 "Pour un anniversaire, un mariage ou une soirée : un grand QR code à "
 "l'écran, les invités envoient leurs photos depuis leur téléphone et elles"
@@ -3438,23 +3709,23 @@ msgstr ""
 " los invitados envían sus fotos desde el teléfono y aparecen al instante."
 " Se guardan en su propio álbum."
 
-#: frontend/src/views/GuestsView.vue:189
+#: frontend/src/views/GuestsView.vue:178
 msgid "Nom de la fête"
 msgstr "Nombre de la fiesta"
 
-#: frontend/src/views/GuestsView.vue:189
+#: frontend/src/views/GuestsView.vue:178
 msgid "ex. Les 40 ans de Léa"
 msgstr "p. ej. Los 40 de Lea"
 
-#: frontend/src/views/GuestsView.vue:190
+#: frontend/src/views/GuestsView.vue:179
 msgid "Durée (heures)"
 msgstr "Duración (horas)"
 
-#: frontend/src/views/GuestsView.vue:191
+#: frontend/src/views/GuestsView.vue:180
 msgid "Montrer seulement les photos de la fête"
 msgstr "Mostrar solo las fotos de la fiesta"
 
-#: frontend/src/views/GuestsView.vue:192
+#: frontend/src/views/GuestsView.vue:181
 msgid ""
 "Afficher les photos sans les valider (tous ceux qui ont le QR code "
 "peuvent envoyer)"
@@ -3462,53 +3733,26 @@ msgstr ""
 "Mostrar las fotos sin validarlas (cualquiera con el código QR puede "
 "enviar)"
 
-#: frontend/src/views/GuestsView.vue:193
+#: frontend/src/views/GuestsView.vue:182
 msgid "Lancer la fête"
 msgstr "Empezar la fiesta"
 
-#: frontend/src/views/GuestsView.vue:198 templates/game.html.jinja:39
-msgid "Jeux de famille"
-msgstr "Juegos en familia"
+#: frontend/src/views/GuestsView.vue:188
+msgid "Ouvrir les jeux"
+msgstr "Abrir los juegos"
 
-#: frontend/src/views/GuestsView.vue:199
-msgid ""
-"Le cadre affiche la partie, chacun joue sur son téléphone : deviner "
-"l'année ou le lieu, remettre des photos dans l'ordre, retenir, écrire la "
-"légende la plus drôle, relever des défis photo, bingo souvenirs... Les "
-"joueurs scannent le QR code affiché sur le cadre (page /jeu)."
+#: frontend/src/views/GuestsView.vue:189
+msgid "Lancer une partie, la suivre en direct et régler les temps : menu Jeux."
 msgstr ""
-"El marco muestra la partida y cada uno juega en su teléfono: adivinar el "
-"año o el lugar, ordenar fotos, recordar, escribir la leyenda más "
-"divertida, retos fotográficos, bingo de recuerdos... Los jugadores "
-"escanean el código QR del marco (página /jeu)."
+"Empezar una partida, seguirla en directo y ajustar los tiempos: menú "
+"Juegos."
 
-#: frontend/src/views/GuestsView.vue:201 templates/game.html.jinja:50
-#: templates/upload.html.jinja:60
-msgid "Jeu"
-msgstr "Juego"
-
-#: frontend/src/views/GuestsView.vue:202
-msgid "Questions"
-msgstr "Preguntas"
-
-#: frontend/src/views/GuestsView.vue:203 templates/game.html.jinja:51
-msgid "Lancer une partie"
-msgstr "Empezar una partida"
-
-#: frontend/src/views/GuestsView.vue:204
-msgid "Ouvrir la page du jeu"
-msgstr "Abrir la página del juego"
-
-#: frontend/src/views/GuestsView.vue:205
-msgid "Arrêter la partie"
-msgstr "Detener la partida"
-
-#: frontend/src/views/GuestsView.vue:210
+#: frontend/src/views/GuestsView.vue:193
 #: templates/configure/tab_invites.html.jinja:45
 msgid "Hors de la maison"
 msgstr "Fuera de casa"
 
-#: frontend/src/views/GuestsView.vue:211
+#: frontend/src/views/GuestsView.vue:194
 #: templates/configure/tab_invites.html.jinja:47
 msgid ""
 "La famille peut aussi envoyer photos et messages depuis chez elle, avec "
@@ -3521,34 +3765,34 @@ msgstr ""
 "la administración y tus fotos nunca son accesibles desde internet. Las "
 "fotos siguen pasando por «Por validar»."
 
-#: frontend/src/views/GuestsView.vue:214
+#: frontend/src/views/GuestsView.vue:197
 #: templates/configure/tab_invites.html.jinja:49
 msgid "Autoriser les envois depuis l'extérieur"
 msgstr "Permitir envíos desde fuera"
 
-#: frontend/src/views/GuestsView.vue:215
+#: frontend/src/views/GuestsView.vue:198
 #: templates/configure/tab_invites.html.jinja:90
 msgid "Autoriser Funnel sur Tailscale"
 msgstr "Autorizar Funnel en Tailscale"
 
-#: frontend/src/views/GuestsView.vue:217
+#: frontend/src/views/GuestsView.vue:200
 #: templates/configure/tab_invites.html.jinja:51
 msgid "QR code du lien secret"
 msgstr "Código QR del enlace secreto"
 
-#: frontend/src/views/GuestsView.vue:221
+#: frontend/src/views/GuestsView.vue:204
 #: templates/configure/tab_invites.html.jinja:71
 msgid ""
 "Envoyez vos photos et vos messages sur notre cadre photo, où que vous "
 "soyez :"
 msgstr "Envía tus fotos y mensajes a nuestro marco de fotos, estés donde estés:"
 
-#: frontend/src/views/GuestsView.vue:223
+#: frontend/src/views/GuestsView.vue:206
 #: templates/configure/tab_invites.html.jinja:56
 msgid "Changer le lien"
 msgstr "Cambiar el enlace"
 
-#: frontend/src/views/GuestsView.vue:225
+#: frontend/src/views/GuestsView.vue:208
 #: templates/configure/tab_invites.html.jinja:58
 msgid ""
 "« Changer le lien » rend l'ancien inutilisable (par exemple s'il a "
@@ -3557,12 +3801,12 @@ msgstr ""
 "«Cambiar el enlace» inutiliza el anterior (por ejemplo, si se ha "
 "difundido demasiado)."
 
-#: frontend/src/views/GuestsView.vue:233
+#: frontend/src/views/GuestsView.vue:216
 #: templates/configure/tab_invites.html.jinja:149
 msgid "Cadres de la famille"
 msgstr "Marcos de la familia"
 
-#: frontend/src/views/GuestsView.vue:234
+#: frontend/src/views/GuestsView.vue:217
 #: templates/configure/tab_invites.html.jinja:150
 msgid ""
 "Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au "
@@ -3575,42 +3819,42 @@ msgstr ""
 "fotos o un mensaje. Deben estar accesibles: misma red, o Tailscale en "
 "ambos marcos."
 
-#: frontend/src/views/GuestsView.vue:235
+#: frontend/src/views/GuestsView.vue:218
 #: templates/configure/tab_invites.html.jinja:188
 msgid "Aucun autre cadre pour l'instant."
 msgstr "Aún no hay otros marcos."
 
-#: frontend/src/views/GuestsView.vue:242
+#: frontend/src/views/GuestsView.vue:225
 #: templates/configure/tab_invites.html.jinja:186
 msgid "injoignable"
 msgstr "inaccesible"
 
-#: frontend/src/views/GuestsView.vue:242
+#: frontend/src/views/GuestsView.vue:225
 #: templates/configure/tab_invites.html.jinja:187
 msgid "code refusé"
 msgstr "código rechazado"
 
-#: frontend/src/views/GuestsView.vue:242
+#: frontend/src/views/GuestsView.vue:225
 #: templates/configure/tab_invites.html.jinja:187
 msgid "diaporama en cours"
 msgstr "pase de diapositivas en curso"
 
-#: frontend/src/views/GuestsView.vue:242
+#: frontend/src/views/GuestsView.vue:225
 #: templates/configure/tab_invites.html.jinja:187
 msgid "en veille"
 msgstr "en reposo"
 
-#: frontend/src/views/GuestsView.vue:244
+#: frontend/src/views/GuestsView.vue:227
 #: templates/configure/tab_invites.html.jinja:185
 msgid "Endormir"
 msgstr "Dormir"
 
-#: frontend/src/views/GuestsView.vue:244
+#: frontend/src/views/GuestsView.vue:227
 #: templates/configure/tab_invites.html.jinja:185
 msgid "Allumer"
 msgstr "Encender"
 
-#: frontend/src/views/GuestsView.vue:245 frontend/src/views/HomeView.vue:150
+#: frontend/src/views/GuestsView.vue:228 frontend/src/views/HomeView.vue:150
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
 #: templates/configure/tab_invites.html.jinja:185
@@ -3618,22 +3862,22 @@ msgstr "Encender"
 msgid "Photo suivante"
 msgstr "siguiente foto"
 
-#: frontend/src/views/GuestsView.vue:246
+#: frontend/src/views/GuestsView.vue:229
 #: templates/configure/tab_invites.html.jinja:185 templates/upload.html.jinja:6
 msgid "Envoyer des photos"
 msgstr "Enviar fotos"
 
-#: frontend/src/views/GuestsView.vue:247
+#: frontend/src/views/GuestsView.vue:230
 #: templates/configure/tab_invites.html.jinja:186
 msgid "Envoyer un message"
 msgstr "Enviar un mensaje"
 
-#: frontend/src/views/GuestsView.vue:254
+#: frontend/src/views/GuestsView.vue:237
 #: templates/configure/tab_invites.html.jinja:153
 msgid "Ajouter un cadre"
 msgstr "Añadir un marco"
 
-#: frontend/src/views/GuestsView.vue:256
+#: frontend/src/views/GuestsView.vue:239
 #: templates/configure/tab_invites.html.jinja:155
 msgid ""
 "Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
@@ -3642,7 +3886,7 @@ msgstr ""
 "En el otro marco: Compartir › Invitados › «Código de asociación» (abajo) "
 "y luego «Crear un código»."
 
-#: frontend/src/views/GuestsView.vue:257
+#: frontend/src/views/GuestsView.vue:240
 #: templates/configure/tab_invites.html.jinja:156
 msgid ""
 "Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
@@ -3651,34 +3895,34 @@ msgstr ""
 "Aquí: su dirección (ej. https://100.101.102.103 con Tailscale, o "
 "https://192.168.1.30) y ese código."
 
-#: frontend/src/views/GuestsView.vue:260
+#: frontend/src/views/GuestsView.vue:243
 #: frontend/src/views/MaintenanceView.vue:306
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
 msgstr "Dirección"
 
-#: frontend/src/views/GuestsView.vue:261
+#: frontend/src/views/GuestsView.vue:244
 #: templates/configure/tab_invites.html.jinja:160
 msgid "Code"
 msgstr "Código"
 
-#: frontend/src/views/GuestsView.vue:262
+#: frontend/src/views/GuestsView.vue:245
 #: templates/configure/tab_invites.html.jinja:161
 msgid "ex : Chez Mamie"
 msgstr "ej.: Casa de la abuela"
 
-#: frontend/src/views/GuestsView.vue:263
+#: frontend/src/views/GuestsView.vue:246
 #: templates/configure/tab_invites.html.jinja:163
 msgid "Ajouter le cadre"
 msgstr "Añadir el marco"
 
-#: frontend/src/views/GuestsView.vue:267
+#: frontend/src/views/GuestsView.vue:250
 #: templates/configure/tab_invites.html.jinja:166
 msgid "Code d'association de ce cadre"
 msgstr "Código de asociación de este marco"
 
-#: frontend/src/views/GuestsView.vue:268
+#: frontend/src/views/GuestsView.vue:251
 #: templates/configure/tab_invites.html.jinja:167
 msgid ""
 "À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
@@ -3687,7 +3931,7 @@ msgstr ""
 "Introdúcelo en el marco que controlará este. Quita un código para cortar "
 "el acceso."
 
-#: frontend/src/views/GuestsView.vue:273
+#: frontend/src/views/GuestsView.vue:256
 #: templates/configure/tab_invites.html.jinja:169
 msgid "Créer un code"
 msgstr "Crear un código"
@@ -4023,7 +4267,7 @@ msgstr ""
 "Temas de temporada solo durante su periodo (y más frecuentes en ese "
 "momento)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:379
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:394
 msgid "Gardez au moins une disposition."
 msgstr "Mantén al menos una disposición."
 
@@ -4456,7 +4700,7 @@ msgstr "Ajustes recomendados para este perfil:"
 msgid "Appliquer les réglages conseillés"
 msgstr "Aplicar los ajustes recomendados"
 
-#: frontend/src/views/MaintenanceView.vue:223 web/routes_settings.py:537
+#: frontend/src/views/MaintenanceView.vue:223 web/routes_settings.py:552
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "Los ajustes ya son los recomendados."
 
@@ -6004,12 +6248,6 @@ msgstr "Música de la lista"
 msgid "Pas de musique"
 msgstr "Sin música"
 
-#: frontend/src/views/PlaylistsView.vue:163
-#: templates/configure/scripts_gallery.html.jinja:57
-#: templates/configure/scripts_main.html.jinja:1099
-msgid "Lancer"
-msgstr "Lancero"
-
 #: frontend/src/views/PlaylistsView.vue:164
 #: templates/configure/scripts_main.html.jinja:334
 msgid "Modifier les règles"
@@ -6964,10 +7202,6 @@ msgstr "Finalizar la sesión"
 msgid "Enregistrer les modifications"
 msgstr "Guardar cambios"
 
-#: templates/game.html.jinja:6
-msgid "Jeux"
-msgstr "Juegos"
-
 #: templates/game.html.jinja:40
 msgid ""
 "Les jeux des photos de famille : devinez, retenez, votez... depuis votre "
@@ -6988,10 +7222,6 @@ msgstr "El juego está desactivado en este marco."
 msgid "Aucune partie en cours."
 msgstr "No hay ninguna partida en curso."
 
-#: templates/game.html.jinja:52
-msgid "Nombre de questions"
-msgstr "Número de preguntas"
-
 #: templates/game.html.jinja:53
 msgid "Votre prénom"
 msgstr "Su nombre"
@@ -7004,17 +7234,9 @@ msgstr "Unirse"
 msgid "Joueurs inscrits"
 msgstr "Jugadores"
 
-#: templates/game.html.jinja:56
-msgid "Commencer"
-msgstr "Empezar"
-
 #: templates/game.html.jinja:57
 msgid "Regardez bien l'écran du cadre !"
 msgstr "¡Mire bien la pantalla del marco!"
-
-#: templates/game.html.jinja:58
-msgid "Question"
-msgstr "Pregunta"
 
 #: templates/game.html.jinja:59
 msgid "Valider"
@@ -7573,10 +7795,6 @@ msgstr "Copiado"
 msgid "Aucun résultat."
 msgstr "Sin resultados."
 
-#: templates/configure/_tour.html.jinja:9
-msgid "Passer"
-msgstr "Saltar"
-
 #: templates/configure/_tour.html.jinja:31
 msgid "Bienvenue dans Pimmich !"
 msgstr "¡Bienvenido a Pimmich!"
@@ -7647,7 +7865,7 @@ msgstr ""
 "Arrastra fotos a cualquier parte de esta página para enviarlas al marco. "
 "¡Disfruta!"
 
-#: templates/configure/_tour.html.jinja:40
+#: templates/configure/_tour.html.jinja:40 web/routes_game.py:164
 msgid "C'est parti !"
 msgstr "¡Vamos!"
 
@@ -7693,9 +7911,9 @@ msgid "Enregistrement…"
 msgstr "Guardando…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:335 web/routes_settings.py:389
-#: web/routes_settings.py:411 web/routes_settings.py:470
-#: web/routes_settings.py:494 web/routes_settings.py:504
+#: web/routes_settings.py:350 web/routes_settings.py:404
+#: web/routes_settings.py:426 web/routes_settings.py:485
+#: web/routes_settings.py:509 web/routes_settings.py:519
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -9874,205 +10092,205 @@ msgstr "Un poco de todo"
 msgid "Bingo souvenirs"
 msgstr "Bingo de recuerdos"
 
-#: utils/family_game.py:63
+#: utils/family_game.py:75
 msgid "Une photo avec quelqu'un qui porte du rouge"
 msgstr "Una foto con alguien vestido de rojo"
 
-#: utils/family_game.py:63
+#: utils/family_game.py:75
 msgid "La plus belle grimace"
 msgstr "La mejor mueca"
 
-#: utils/family_game.py:63
+#: utils/family_game.py:75
 msgid "Un selfie à trois ou plus"
 msgstr "Un selfie de tres o más"
 
-#: utils/family_game.py:64
+#: utils/family_game.py:76
 msgid "Quelque chose de rond"
 msgstr "Algo redondo"
 
-#: utils/family_game.py:64
+#: utils/family_game.py:76
 msgid "Une photo de vos chaussures"
 msgstr "Una foto de sus zapatos"
 
-#: utils/family_game.py:64
+#: utils/family_game.py:76
 msgid "La pose de super-héros"
 msgstr "La pose de superhéroe"
 
-#: utils/family_game.py:65
+#: utils/family_game.py:77
 msgid "Un animal (même en peluche)"
 msgstr "Un animal (aunque sea de peluche)"
 
-#: utils/family_game.py:65
+#: utils/family_game.py:77
 msgid "Quelque chose qui commence par la lettre P"
 msgstr "Algo que empiece por la letra P"
 
-#: utils/family_game.py:65
+#: utils/family_game.py:77
 msgid "Votre plus beau sourire"
 msgstr "Su mejor sonrisa"
 
-#: utils/family_game.py:66
+#: utils/family_game.py:78
 msgid "Une photo prise de très haut ou de très bas"
 msgstr "Una foto tomada desde muy alto o muy bajo"
 
-#: utils/family_game.py:66
+#: utils/family_game.py:78
 msgid "Le plat ou la boisson du moment"
 msgstr "El plato o la bebida del momento"
 
-#: utils/family_game.py:66
+#: utils/family_game.py:78
 msgid "Une imitation d'une photo de famille"
 msgstr "Una imitación de una foto de familia"
 
-#: utils/family_game.py:67
+#: utils/family_game.py:79
 msgid "Quelque chose de bleu"
 msgstr "Algo azul"
 
-#: utils/family_game.py:67 utils/family_game.py:73
+#: utils/family_game.py:79 utils/family_game.py:85
 msgid "Un câlin"
 msgstr "Un abrazo"
 
-#: utils/family_game.py:67
+#: utils/family_game.py:79
 msgid "Le plus beau reflet (miroir, vitre, eau)"
 msgstr "El mejor reflejo (espejo, cristal, agua)"
 
-#: utils/family_game.py:68
+#: utils/family_game.py:80
 msgid "À la plage"
 msgstr "En la playa"
 
-#: utils/family_game.py:68
+#: utils/family_game.py:80
 msgid "Un gâteau"
 msgstr "Un pastel"
 
-#: utils/family_game.py:68
+#: utils/family_game.py:80
 msgid "Des lunettes de soleil"
 msgstr "Gafas de sol"
 
-#: utils/family_game.py:68
+#: utils/family_game.py:80
 msgid "Un chien"
 msgstr "Un perro"
 
-#: utils/family_game.py:68
+#: utils/family_game.py:80
 msgid "Un chat"
 msgstr "Un gato"
 
-#: utils/family_game.py:68
+#: utils/family_game.py:80
 msgid "La neige"
 msgstr "La nieve"
 
-#: utils/family_game.py:69
+#: utils/family_game.py:81
 msgid "Un bébé"
 msgstr "Un bebé"
 
-#: utils/family_game.py:69
+#: utils/family_game.py:81
 msgid "Une fête d'anniversaire"
 msgstr "Una fiesta de cumpleaños"
 
-#: utils/family_game.py:69 utils/themed_compositions.py:565
+#: utils/family_game.py:81 utils/themed_compositions.py:565
 msgid "La montagne"
 msgstr "La montaña"
 
-#: utils/family_game.py:69
+#: utils/family_game.py:81
 msgid "Un selfie"
 msgstr "Un selfie"
 
-#: utils/family_game.py:69
+#: utils/family_game.py:81
 msgid "Un repas en famille"
 msgstr "Una comida en familia"
 
-#: utils/family_game.py:70
+#: utils/family_game.py:82
 msgid "Une voiture"
 msgstr "Un coche"
 
-#: utils/family_game.py:70
+#: utils/family_game.py:82
 msgid "Un chapeau"
 msgstr "Un sombrero"
 
-#: utils/family_game.py:70
+#: utils/family_game.py:82
 msgid "Des fleurs"
 msgstr "Flores"
 
-#: utils/family_game.py:70
+#: utils/family_game.py:82
 msgid "Un coucher de soleil"
 msgstr "Una puesta de sol"
 
-#: utils/family_game.py:70
+#: utils/family_game.py:82
 msgid "Un vélo"
 msgstr "Una bicicleta"
 
-#: utils/family_game.py:70 utils/themed_compositions.py:596
+#: utils/family_game.py:82 utils/themed_compositions.py:596
 msgid "La mer"
 msgstr "El mar"
 
-#: utils/family_game.py:71
+#: utils/family_game.py:83
 msgid "Une grimace"
 msgstr "Una mueca"
 
-#: utils/family_game.py:71
+#: utils/family_game.py:83
 msgid "Un sapin de Noël"
 msgstr "Un árbol de Navidad"
 
-#: utils/family_game.py:71
+#: utils/family_game.py:83
 msgid "Une piscine"
 msgstr "Una piscina"
 
-#: utils/family_game.py:71
+#: utils/family_game.py:83
 msgid "Un pique-nique"
 msgstr "Un pícnic"
 
-#: utils/family_game.py:71
+#: utils/family_game.py:83
 msgid "Un déguisement"
 msgstr "Un disfraz"
 
-#: utils/family_game.py:72
+#: utils/family_game.py:84
 msgid "Quelqu'un qui dort"
 msgstr "Alguien durmiendo"
 
-#: utils/family_game.py:72
+#: utils/family_game.py:84
 msgid "Un bateau"
 msgstr "Un barco"
 
-#: utils/family_game.py:72
+#: utils/family_game.py:84
 msgid "Un monument"
 msgstr "Un monumento"
 
-#: utils/family_game.py:72
+#: utils/family_game.py:84
 msgid "Une photo floue"
 msgstr "Una foto borrosa"
 
-#: utils/family_game.py:72
+#: utils/family_game.py:84
 msgid "Un pouce levé"
 msgstr "Un pulgar arriba"
 
-#: utils/family_game.py:73
+#: utils/family_game.py:85
 msgid "Une glace"
 msgstr "Un helado"
 
-#: utils/family_game.py:73
+#: utils/family_game.py:85
 msgid "Des bougies"
 msgstr "Velas"
 
-#: utils/family_game.py:73
+#: utils/family_game.py:85
 msgid "Un jardin"
 msgstr "Un jardín"
 
-#: utils/family_game.py:73
+#: utils/family_game.py:85
 msgid "Une photo en noir et blanc"
 msgstr "Una foto en blanco y negro"
 
-#: utils/family_game.py:216
+#: utils/family_game.py:239
 #, python-format
 msgid "Combien de photos de %(year)s sont sur le cadre ?"
 msgstr "¿Cuántas fotos de %(year)s hay en el marco?"
 
-#: utils/family_game.py:218
+#: utils/family_game.py:241
 #, python-format
 msgid "Combien de photos ont été envoyées par %(name)s ?"
 msgstr "¿Cuántas fotos ha enviado %(name)s?"
 
-#: utils/family_game.py:220
+#: utils/family_game.py:243
 msgid "Combien de photos y a-t-il sur le cadre ?"
 msgstr "¿Cuántas fotos hay en el marco?"
 
-#: utils/family_game.py:227
+#: utils/family_game.py:250
 #, python-format
 msgid "Combien de photos ont été prises en %(month)s (toutes années confondues) ?"
 msgstr "¿Cuántas fotos se tomaron en %(month)s (todos los años)?"
@@ -10912,13 +11130,13 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el"
 " valor anterior."
 
-#: web/routes_config.py:253 web/routes_settings.py:503
+#: web/routes_config.py:253 web/routes_settings.py:518
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:330
-#: web/routes_settings.py:387 web/routes_settings.py:468
+#: web/routes_config.py:281 web/routes_settings.py:345
+#: web/routes_settings.py:402 web/routes_settings.py:483
 msgid "Réglages modifiés"
 msgstr "Ajustes modificados"
 
@@ -10930,8 +11148,8 @@ msgstr ""
 "Configuración guardada. La presentación de diapositivas se reinició para "
 "aplicar los cambios."
 
-#: web/routes_family.py:26 web/routes_settings.py:376
-#: web/routes_settings.py:488 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:391
+#: web/routes_settings.py:503 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Lista no válida."
 
@@ -11002,43 +11220,51 @@ msgstr "Demasiadas partidas: inténtelo más tarde."
 msgid "Une partie est déjà en cours."
 msgstr "Ya hay una partida en curso."
 
-#: web/routes_game.py:59
+#: web/routes_game.py:60
 msgid "Pas assez de photos pour ce jeu (dates, lieux ou personnes manquants)."
 msgstr ""
 "No hay suficientes fotos para este juego (faltan fechas, lugares o "
 "personas)."
 
-#: web/routes_game.py:60
+#: web/routes_game.py:61
 msgid "Partie créée : entrez votre prénom pour jouer."
 msgstr "Partida creada: escriba su nombre para jugar."
 
-#: web/routes_game.py:71
+#: web/routes_game.py:72
 msgid "Impossible de rejoindre la partie (prénom manquant ou partie complète)."
 msgstr "No se puede unir (falta el nombre o partida completa)."
 
-#: web/routes_game.py:80
+#: web/routes_game.py:81 web/routes_game.py:163
 msgid "La partie ne peut pas commencer (aucun joueur ?)."
 msgstr "La partida no puede empezar (¿sin jugadores?)."
 
-#: web/routes_game.py:88
+#: web/routes_game.py:89
 msgid "Réponse non prise en compte (trop tard ou déjà répondu)."
 msgstr "Respuesta no registrada (demasiado tarde o ya respondida)."
 
-#: web/routes_game.py:98
+#: web/routes_game.py:100
 msgid "Photo non prise en compte (trop tard, déjà envoyée ou illisible)."
 msgstr "Foto no registrada (demasiado tarde, ya enviada o ilegible)."
 
-#: web/routes_game.py:106
+#: web/routes_game.py:133
 msgid ""
 "Vote non pris en compte (trop tard, déjà voté, ou c'est votre "
 "proposition)."
 msgstr "Voto no registrado (demasiado tarde, ya votó o es su propuesta)."
 
-#: web/routes_game.py:115
+#: web/routes_game.py:142
 msgid "Pas de bingo en cours."
 msgstr "No hay ningún bingo en curso."
 
-#: web/routes_game.py:129
+#: web/routes_game.py:171
+msgid "Rien à passer."
+msgstr "Nada que saltar."
+
+#: web/routes_game.py:172
+msgid "Étape suivante."
+msgstr "Siguiente paso."
+
+#: web/routes_game.py:179
 msgid "Partie arrêtée : le diaporama reprend."
 msgstr "Partida detenida: vuelve la presentación."
 
@@ -11534,7 +11760,7 @@ msgstr ""
 "Aún no hay datos de mareas: la presentación los obtiene, o use «Forzar "
 "actualización»."
 
-#: web/routes_media.py:73 web/routes_settings.py:461 web/routes_storage.py:114
+#: web/routes_media.py:73 web/routes_settings.py:476 web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Fuente desconocida."
 
@@ -11940,37 +12166,37 @@ msgstr "Playlist no encontrada."
 msgid "Citation du jour enregistrée."
 msgstr "Cita del día guardada."
 
-#: web/routes_settings.py:305
+#: web/routes_settings.py:320
 msgid "Aucun réglage à enregistrer."
 msgstr "Ningún ajuste que guardar."
 
-#: web/routes_settings.py:309
+#: web/routes_settings.py:324
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Ajuste desconocido: %(key)s"
 
-#: web/routes_settings.py:313
+#: web/routes_settings.py:328
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Valor no válido para «%(key)s»."
 
-#: web/routes_settings.py:406
+#: web/routes_settings.py:421
 msgid "Valeur invalide."
 msgstr "Valor no válido."
 
-#: web/routes_settings.py:411
+#: web/routes_settings.py:426
 msgid "Supprimé."
 msgstr "Eliminado."
 
-#: web/routes_settings.py:518
+#: web/routes_settings.py:533
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "Ordenador (no es una Raspberry Pi)"
 
-#: web/routes_settings.py:541
+#: web/routes_settings.py:556
 msgid "Réglages conseillés appliqués"
 msgstr "Ajustes recomendados aplicados"
 
-#: web/routes_settings.py:543
+#: web/routes_settings.py:558
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s ajuste(s) adaptado(s) a la Raspberry Pi."

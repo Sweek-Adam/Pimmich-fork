@@ -58,7 +58,7 @@ def test_points():
 
 def test_full_game_timeline(library):
     t0 = time.time()
-    state = game.new_game(library, LABELS, rounds=3, now=t0, rng=random.Random(1))
+    state = game.new_game(library, LABELS, rounds=3, now=t0, rng=random.Random(1), timing={"auto_reveal": False})
     assert game.phase(state, t0 + 5)[0] == "lobby" and not game.start(t0 + 5)  # personne d'inscrit
     lea, tom = game.join("Léa"), game.join("  Tom  ")
     assert lea and tom and game.join("") is None
@@ -115,7 +115,8 @@ def test_game_pages_for_phones(client, admin_client, library, monkeypatch):
 
 def _play(state_mode, library, **kw):
     t0 = time.time()
-    state = game.new_game(library, LABELS, rounds=kw.get("rounds", 3), now=t0, rng=random.Random(kw.get("seed", 4)), mode=state_mode, people=kw.get("people"))
+    state = game.new_game(library, LABELS, rounds=kw.get("rounds", 3), now=t0, rng=random.Random(kw.get("seed", 4)), mode=state_mode,
+                          people=kw.get("people"), timing=kw.get("timing"))
     return t0, state
 
 
@@ -171,7 +172,7 @@ def test_zoom_rewards_fast_answers():
 
 
 def test_caption_and_vote(library):
-    t0, state = _play("legende", library, rounds=1)
+    t0, state = _play("legende", library, rounds=1, timing={"auto_reveal": False})
     lea, tom, max_ = game.join("Léa"), game.join("Tom"), game.join("Max")
     game.start(t0)
     state = game.current()
@@ -228,3 +229,76 @@ def test_bingo_runs_alongside_the_slideshow(library):
     from utils import game_screen
     assert game_screen.bingo_banner(game.current(), time.time(), 1280, 720).size[1] > 0
     assert game.phase(game.current(), t0 + game.BINGO_MINUTES * 60 + 1)[0] == "over"
+
+
+def test_custom_timing_is_frozen_in_the_game(library):
+    t0 = time.time()
+    state = game.new_game(library, LABELS, rounds=2, now=t0, rng=random.Random(5), timing={"question": 10, "reveal": 4, "podium": 6})
+    game.join("Léa")
+    game.start(t0)
+    state = game.current()
+    assert game.phase(state, t0 + 9)[0] == "question" and game.phase(state, t0 + 11)[0] == "reveal"
+    assert game.phase(state, t0 + 2 * 14 + 5)[0] == "podium" and game.phase(state, t0 + 2 * 14 + 7)[0] == "over"
+    assert game.timing_from({"game_question_seconds": 40, "game_speed_bonus": False}) == dict(game.TIMING, question=40, speed_bonus=False)
+
+
+def test_skip_and_admin_view(library):
+    t0 = time.time()
+    game.new_game(library, LABELS, rounds=2, rng=random.Random(5))
+    assert game.admin_view(game.current())["phase"] == "lobby" and not game.skip()
+    game.join("Léa")
+    game.start()
+    view = game.admin_view(game.current())
+    assert view["phase"] == "question" and view["number"] == 1 and view["answer"] is not None and view["players"] == [{"name": "Léa", "score": 0}]
+    assert game.skip() and game.phase(game.current())[0] == "reveal"
+    assert game.skip() and game.admin_view(game.current())["number"] == 2
+
+
+def test_no_speed_bonus_when_disabled(library):
+    t0 = time.time()
+    game.new_game(library, LABELS, rounds=2, now=t0, rng=random.Random(5), mode="zoom", timing={"speed_bonus": False})
+    lea = game.join("Léa")
+    game.start(t0)
+    state = game.current()
+    q = state["questions"][0]
+    assert game.answer(lea, q["answer"], t0 + game.QUESTION_SECONDS - 1)   # réponse tardive
+    assert game.round_points(game.current(), 0)[lea] == 100
+
+
+def test_games_admin_api(admin_client, library, monkeypatch):
+    from utils import photo_index
+    monkeypatch.setattr(photo_index, "load", lambda: library)
+    assert admin_client.get("/api/game/status").get_json()["phase"] == "over"
+    assert admin_client.post("/api/settings", json={"game_question_seconds": 15, "game_reveal_seconds": 5}, headers=SAME).get_json()["success"]
+    assert admin_client.post("/jeu/new", json={"mode": "avant_apres", "rounds": 2}, headers=SAME).get_json()["success"]
+    assert game.current()["timing"]["question"] == 15
+    assert admin_client.post("/api/game/start", headers=SAME).status_code == 400       # personne
+    admin_client.post("/jeu/join", json={"name": "Léa"}, headers=SAME)
+    assert admin_client.post("/api/game/start", headers=SAME).get_json()["success"]
+    status = admin_client.get("/api/game/status").get_json()
+    assert status["phase"] == "question" and status["mode"] == "avant_apres" and status["answer"] in ("A", "B")
+    assert admin_client.post("/api/game/skip", headers=SAME).get_json()["success"]
+    assert admin_client.get("/api/game/status").get_json()["phase"] == "reveal"
+    admin_client.post("/api/game/stop", headers=SAME)
+    admin_client.post("/api/settings", json={"game_question_seconds": 25, "game_reveal_seconds": 9}, headers=SAME)
+
+
+def test_answer_shown_as_soon_as_everyone_answered(library):
+    t0 = time.time()
+    game.new_game(library, LABELS, rounds=2, now=t0, rng=random.Random(5))
+    lea, tom = game.join("Léa"), game.join("Tom")
+    game.start(t0)
+    q = game.current()["questions"][0]
+    value = q["answer"] if q["kind"] == "year" else q["options"][0]
+    assert game.answer(lea, value, t0 + 2) and game.phase(game.current(), t0 + 3)[0] == "question"   # Tom n'a pas répondu
+    assert game.answer(tom, value, t0 + 3) and game.phase(game.current(), t0 + 3.5)[0] == "reveal"   # tout le monde : réponse
+
+
+def test_auto_reveal_can_be_disabled(library):
+    t0 = time.time()
+    game.new_game(library, LABELS, rounds=2, now=t0, rng=random.Random(5), timing={"auto_reveal": False})
+    lea = game.join("Léa")
+    game.start(t0)
+    q = game.current()["questions"][0]
+    assert game.answer(lea, q["answer"] if q["kind"] == "year" else q["options"][0], t0 + 2)
+    assert game.phase(game.current(), t0 + 3)[0] == "question"
