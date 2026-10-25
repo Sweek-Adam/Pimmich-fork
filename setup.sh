@@ -273,15 +273,12 @@ if [ ! -f "$CREDENTIALS_FILE" ]; then
     # Le script python affichera lui-même le mot de passe généré.
     sudo -E "$VENV_PYTHON" utils/create_initial_user.py --output "$CREDENTIALS_FILE"
     
-    echo "🔑 Configuration des droits sudo (Sécurité, Reboot, Shutdown)..."
-    SUDOERS_CONF="/etc/sudoers.d/pimmich-auth"
-    # Autorisations NOPASSWD pour toutes les fonctions critiques (Réseau, Disques, Système)
-    COMMANDS="/usr/bin/tee $CREDENTIALS_FILE, /usr/sbin/reboot, /usr/sbin/shutdown, /usr/bin/nmcli, /usr/bin/raspi-config, /usr/bin/mount, /usr/bin/umount, /usr/bin/timedatectl"
-    echo "$REAL_USER ALL=(ALL) NOPASSWD: $COMMANDS" | sudo tee "$SUDOERS_CONF" > /dev/null
-    sudo chmod 440 "$SUDOERS_CONF"
 else
     echo "✅ Le fichier d'identification $CREDENTIALS_FILE existe déjà. Aucune modification."
 fi
+
+echo "🔑 Droits sudo de Pimmich (seulement les commandes nécessaires : réseau, disques, redémarrage, mises à jour)..."
+SUDO_USER="$REAL_USER" sudo -E ./utils/harden_sudo.sh || echo "⚠️ Droits sudo non configurés : certaines fonctions (Wi-Fi, disques) demanderont un mot de passe."
 
 echo "=== [9/12] Configuration du démarrage en mode console (CLI) ==="
 sudo raspi-config nonint do_boot_behaviour B2

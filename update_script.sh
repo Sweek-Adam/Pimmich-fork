@@ -101,9 +101,9 @@ echo "--- Réapplication des règles Sway pour mpv et python3 ---"
 SWAY_CONFIG_DIR="$HOME/.config/sway"
 SWAY_CONFIG_FILE="$SWAY_CONFIG_DIR/config"
 
-# Utiliser tee -a avec sudo pour ajouter les lignes si elles ne sont pas déjà présentes
-grep -q 'for_window \[app_id="mpv"\]' "$SWAY_CONFIG_FILE" || echo 'for_window [app_id="mpv"] floating enable, border none, fullscreen enable' | sudo tee -a "$SWAY_CONFIG_FILE" > /dev/null
-grep -q 'for_window \[class="python3"\]' "$SWAY_CONFIG_FILE" || echo 'for_window [class="python3"] floating enable, border none, fullscreen enable' | sudo tee -a "$SWAY_CONFIG_FILE" > /dev/null
+# Ajouter les lignes si elles ne sont pas déjà présentes (fichier de l'utilisateur : pas besoin de sudo)
+grep -q 'for_window \[app_id="mpv"\]' "$SWAY_CONFIG_FILE" || echo 'for_window [app_id="mpv"] floating enable, border none, fullscreen enable' | tee -a "$SWAY_CONFIG_FILE" > /dev/null
+grep -q 'for_window \[class="python3"\]' "$SWAY_CONFIG_FILE" || echo 'for_window [class="python3"] floating enable, border none, fullscreen enable' | tee -a "$SWAY_CONFIG_FILE" > /dev/null
 # diaporama en Wayland natif (réglage « Mode d'affichage du diaporama »)
 grep -q 'for_window \[app_id="pimmich"\]' "$SWAY_CONFIG_FILE" || echo 'for_window [app_id="pimmich"] floating enable, border none, fullscreen enable' >> "$SWAY_CONFIG_FILE" 2>/dev/null || true
 

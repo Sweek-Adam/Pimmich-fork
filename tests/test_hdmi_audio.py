@@ -10,8 +10,11 @@ def test_repair_when_screen_connected_but_no_hdmi_sink(monkeypatch, tmp_path):
     monkeypatch.setattr(audio_output, "_list_sinks", lambda: sinks[0])
     calls = []
 
+    inputs = []
+
     def run(args, **kwargs):
         calls.append(args)
+        inputs.append(kwargs.get("input"))
         if args[:3] == ["systemctl", "--user", "restart"]:
             sinks[0] = sinks[0] + [{"id": 2, "name": "alsa_output.platform-3f902000.hdmi.hdmi-stereo", "card": "vc4-hdmi"}]
         return type("R", (), {"returncode": 0, "stdout": "", "stderr": ""})()
@@ -19,7 +22,8 @@ def test_repair_when_screen_connected_but_no_hdmi_sink(monkeypatch, tmp_path):
     monkeypatch.setattr("time.sleep", lambda s: None)
     assert audio_output.hdmi_audio_missing()
     assert audio_output.repair_hdmi_audio()
-    assert any("detect" in " ".join(c) for c in calls) and not audio_output.hdmi_audio_missing()
+    assert ["sudo", "-n", "/usr/bin/tee", str(status)] in calls and "detect\n" in inputs  # jamais un shell en root
+    assert not audio_output.hdmi_audio_missing()
     audio_output.apply_audio_output("hdmi")
     assert ["wpctl", "set-default", "2"] in calls
 

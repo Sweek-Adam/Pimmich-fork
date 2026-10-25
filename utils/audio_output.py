@@ -83,7 +83,8 @@ def repair_hdmi_audio():
     if not hdmi_audio_missing():
         return False
     for status in _hdmi_connectors():
-        subprocess.run(["sudo", "-n", "sh", "-c", f"echo detect > {status}"], capture_output=True, timeout=10)
+        # tee sur ce seul fichier (autorisé par utils/harden_sudo.sh), jamais un shell complet en root
+        subprocess.run(["sudo", "-n", "/usr/bin/tee", status], input="detect\n", text=True, capture_output=True, timeout=10)
     time.sleep(2)
     subprocess.run(["systemctl", "--user", "restart", "wireplumber"], capture_output=True, timeout=30)
     time.sleep(4)
