@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>{{ _('Le cadre photo') }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='guest.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='pwa/icon-192.png') }}">
+  <style>
+    body { font-size: 1.25rem; }
+    .page { max-width: 640px; }
+    h1 { font-size: 1.9rem; margin: .2rem 0 .8rem; text-align: center; }
+    .now { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: #000; border-radius: 18px; display: block; }
+    .off { aspect-ratio: 16 / 10; border-radius: 18px; background: var(--surface-2); display: flex; align-items: center; justify-content: center;
+           font-size: 1.4rem; color: var(--muted); text-align: center; padding: 1rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .big { border: 0; border-radius: 22px; min-height: 120px; font: inherit; font-size: 1.45rem; font-weight: 800; color: var(--text);
+           background: var(--surface); box-shadow: 0 2px 0 var(--border); display: flex; flex-direction: column; align-items: center;
+           justify-content: center; gap: 6px; cursor: pointer; padding: 10px; }
+    .big .icon { font-size: 2.6rem; line-height: 1; }
+    .big:active { transform: scale(.97); }
+    .big.love { background: #ffe1e8; color: #b0123c; }
+    .big.rec { background: #c62828; color: #fff; }
+    .big.wide { grid-column: 1 / -1; min-height: 96px; flex-direction: row; gap: 14px; }
+    textarea { width: 100%; font: inherit; font-size: 1.4rem; border-radius: 16px; padding: 12px; border: 2px solid var(--border); background: var(--surface); color: var(--text); }
+    .status { text-align: center; font-size: 1.3rem; font-weight: 700; min-height: 1.8em; margin: 10px 0 0; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>{{ _('Bonjour %(name)s !', name=name) if name else _('Bonjour !') }}</h1>
+    <img id="now" class="now hidden" alt="">
+    <div id="off" class="off">{{ _('Le cadre est éteint.') }}</div>
+
+    <div id="controls" class="grid">
+      <button class="big" data-action="previous"><span class="icon">⏮️</span>{{ _('Avant') }}</button>
+      <button class="big" data-action="next"><span class="icon">⏭️</span>{{ _('Après') }}</button>
+      <button class="big" data-action="pause"><span class="icon">⏯️</span>{{ _('Pause') }}</button>
+      <button class="big love" data-action="love"><span class="icon">❤️</span>{{ _("J'aime") }}</button>
+      <button class="big" id="write"><span class="icon">✍️</span>{{ _('Écrire un mot') }}</button>
+      <button class="big" id="record"><span class="icon">🎤</span><span id="record-label">{{ _('Dire un mot') }}</span></button>
+      <button class="big wide" id="power"><span class="icon" id="power-icon">🌙</span><span id="power-label">{{ _('Éteindre le cadre') }}</span></button>
+    </div>
+
+    <div id="writer" class="hidden">
+      <textarea id="text" rows="4" maxlength="300" placeholder="{{ _('Votre mot pour la famille…') }}"></textarea>
+      <div class="grid">
+        <button class="big" id="cancel"><span class="icon">↩️</span>{{ _('Retour') }}</button>
+        <button class="big love" id="send"><span class="icon">📨</span>{{ _('Envoyer') }}</button>
+      </div>
+    </div>
+    <p id="status" class="status"></p>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let running = false, recorder = null, chunks = [];
+    const say = (text, ok = true) => { $("status").textContent = text || ""; $("status").style.color = ok ? "" : "#c62828"; if (text) setTimeout(() => { if ($("status").textContent === text) $("status").textContent = ""; }, 5000); };
+    async function call(url, body) {
+      const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}), credentials: "same-origin" });
+      return r.json().catch(() => ({ success: false }));
+    }
+    async function refresh() {
+      try {
+        const data = await (await fetch("{{ url_for('simple_now_api') }}", { credentials: "same-origin" })).json();
+        running = data.running;
+        $("now").classList.toggle("hidden", !data.url);
+        $("off").classList.toggle("hidden", !!data.url);
+        $("off").textContent = running ? {{ _('Le cadre change de photo…')|tojson }} : {{ _('Le cadre est éteint.')|tojson }};
+        if (data.url && $("now").dataset.src !== data.url) { $("now").src = data.url; $("now").dataset.src = data.url; }
+        $("power-icon").textContent = running ? "🌙" : "☀️";
+        $("power-label").textContent = running ? {{ _('Éteindre le cadre')|tojson }} : {{ _('Allumer le cadre')|tojson }};
+      } catch (e) { /* hors ligne : on réessaie */ }
+    }
+    document.querySelectorAll("[data-action]").forEach((button) => button.addEventListener("click", async () => {
+      const r = await call("{{ url_for('simple_action_api') }}", { action: button.dataset.action });
+      say(r.message || (r.success ? "" : {{ _('Le cadre ne répond pas.')|tojson }}), r.success);
+      setTimeout(refresh, 1500);
+    }));
+    $("power").addEventListener("click", async () => {
+      const r = await call("{{ url_for('simple_action_api') }}", { action: running ? "sleep" : "wake" });
+      say(r.message, r.success);
+      setTimeout(refresh, 4000);
+    });
+    $("write").addEventListener("click", () => { $("controls").classList.add("hidden"); $("writer").classList.remove("hidden"); $("text").focus(); });
+    $("cancel").addEventListener("click", () => { $("writer").classList.add("hidden"); $("controls").classList.remove("hidden"); });
+    $("send").addEventListener("click", async () => {
+      const text = $("text").value.trim();
+      if (!text) return;
+      const r = await call("{{ url_for('simple_message_api') }}", { text });
+      say(r.message, r.success);
+      if (r.success) { $("text").value = ""; $("cancel").click(); }
+    });
+    $("record").addEventListener("click", async () => {
+      if (recorder && recorder.state === "recording") { recorder.stop(); return; }
+      if (!window.isSecureContext || !navigator.mediaDevices || !window.MediaRecorder) { say({{ _('Micro indisponible sur ce téléphone.')|tojson }}, false); return; }
+      let stream;
+      try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { say({{ _('Micro inaccessible : autorisez-le dans le navigateur.')|tojson }}, false); return; }
+      chunks = [];
+      recorder = new MediaRecorder(stream);
+      recorder.ondataavailable = (e) => chunks.push(e.data);
+      recorder.onstop = async () => {
+        stream.getTracks().forEach((t) => t.stop());
+        $("record").classList.remove("rec");
+        $("record-label").textContent = {{ _('Dire un mot')|tojson }};
+        const form = new FormData();
+        form.append("voice", new Blob(chunks, { type: recorder.mimeType || "audio/webm" }), "mot");
+        say({{ _('Envoi…')|tojson }});
+        const r = await (await fetch("{{ url_for('simple_voice_api') }}", { method: "POST", body: form, credentials: "same-origin" })).json().catch(() => ({ success: false }));
+        say(r.message, r.success);
+      };
+      recorder.start();
+      $("record").classList.add("rec");
+      $("record-label").textContent = {{ _('Appuyez pour finir')|tojson }};
+      setTimeout(() => { if (recorder && recorder.state === "recording") recorder.stop(); }, 90000);
+    });
+    refresh();
+    setInterval(refresh, 5000);
+  </script>
+</body>
+</html>

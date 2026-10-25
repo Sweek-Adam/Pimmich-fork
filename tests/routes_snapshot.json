@@ -1284,6 +1284,20 @@
   ]
  ],
  [
+  "/api/simple_link",
+  [
+   "DELETE",
+   "GET",
+   "POST"
+  ]
+ ],
+ [
+  "/api/simple_link/qr.png",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/slideshow/layout",
   [
    "GET"
@@ -1980,6 +1994,36 @@
  ],
  [
   "/shutdown",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/simple",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/simple/action",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/simple/message",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/simple/now",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/simple/voice",
   [
    "POST"
   ]
