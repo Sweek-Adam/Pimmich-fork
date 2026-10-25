@@ -66,6 +66,8 @@ const sections: Section[] = [
       options: () => [{ value: "auto", label: t("Automatique (30 FPS sur Pi 3, 60 FPS sinon)") }, { value: "30", label: "30 FPS" }, { value: "60", label: "60 FPS" }] },
     { key: "pan_zoom_enabled", label: () => t("Activer l'effet Pan/Zoom sur les photos"), type: "toggle" },
     { key: "pan_zoom_factor", label: () => t("Amplitude du zoom"), type: "number", min: 1, max: 2, step: 0.05, showIf: (v) => !!v.pan_zoom_enabled },
+    { key: "pan_zoom_style", label: () => t("Mouvement"), type: "select", showIf: (v) => !!v.pan_zoom_enabled,
+      options: () => [{ value: "kenburns", label: t("Ken Burns : zoom lent vers les visages") }, { value: "pan", label: t("Glissement d'un bord à l'autre") }] },
   ] },
   { title: () => t("Ce jour-là"), icon: "fa-history",
     intro: () => t("Les photos prises un jour comme aujourd'hui, les années précédentes (toutes les sources : date de l'appareil photo, ou du nom du fichier pour WhatsApp et les téléphones)."),

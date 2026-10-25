@@ -13,17 +13,17 @@ PROFILES = {
     "leger": {
         "label": N_("Léger (Raspberry Pi Zero, 1, 2)"),
         "gif_budget_mb": 24, "gif_items": 1, "compositions_ahead": 1, "videos_always_light": True,
-        "video_light_above_mb": 0, "video_night_above_mb": 20,
+        "video_light_above_mb": 0, "video_night_above_mb": 20, "kenburns_fps": 8,
     },
     "standard": {
         "label": N_("Standard (Raspberry Pi 3, Pi 4 avec 1 Go)"),
         "gif_budget_mb": 48, "gif_items": 2, "compositions_ahead": 2, "videos_always_light": False,
-        "video_light_above_mb": 150, "video_night_above_mb": 50,
+        "video_light_above_mb": 150, "video_night_above_mb": 50, "kenburns_fps": 12,
     },
     "complet": {
         "label": N_("Complet (Raspberry Pi 4 et 5, ordinateur)"),
         "gif_budget_mb": 160, "gif_items": 3, "compositions_ahead": 3, "videos_always_light": False,
-        "video_light_above_mb": 600, "video_night_above_mb": 400,
+        "video_light_above_mb": 600, "video_night_above_mb": 400, "kenburns_fps": 30,
     },
 }
 CHOICES = ["auto", *PROFILES]

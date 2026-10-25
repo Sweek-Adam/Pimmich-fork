@@ -218,3 +218,46 @@ def open_screen(config, width=None, height=None):
         info = pygame.display.Info()
         width, height = info.current_w or 1920, info.current_h or 1080
     return pygame.display.set_mode((width, height), pygame.FULLSCREEN), width, height
+
+
+class KenBurns:
+    """
+    Effet « Ken Burns » : pendant l'affichage, la photo grandit (ou recule) lentement en glissant vers les visages.
+    `faces` : visages en coordonnées relatives (x, y, largeur, hauteur), voir utils/faces.py ; sans visage, le
+    mouvement va vers le haut du centre (là où sont souvent les sujets).
+    """
+
+    def __init__(self, size, zoom=1.15, faces=(), rng=None, zoom_in=None):
+        import random
+        rng = rng or random.Random()
+        self.width, self.height = size
+        self.zoom = max(1.02, float(zoom))
+        if faces:
+            left = min(f[0] for f in faces)
+            top = min(f[1] for f in faces)
+            right = max(f[0] + f[2] for f in faces)
+            bottom = max(f[1] + f[3] for f in faces)
+            target = ((left + right) / 2, (top + bottom) / 2)
+        else:
+            target = (0.5 + rng.uniform(-0.12, 0.12), 0.42 + rng.uniform(-0.06, 0.06))
+        zoom_in = rng.random() < 0.6 if zoom_in is None else zoom_in
+        middle = (0.5, 0.5)
+        # Zoom avant : de la photo entière vers les visages ; zoom arrière : l'inverse
+        self.start = (1.0, middle) if zoom_in else (self.zoom, target)
+        self.end = (self.zoom, target) if zoom_in else (1.0, middle)
+
+    def rect(self, progress):
+        """Partie de la photo à montrer (x, y, largeur, hauteur) à cet instant (0 à 1, avec accélération douce)."""
+        p = 0.5 * (1 - math.cos(max(0.0, min(1.0, progress)) * math.pi))
+        (z0, (x0, y0)), (z1, (x1, y1)) = self.start, self.end
+        z = z0 + (z1 - z0) * p
+        w, h = self.width / z, self.height / z
+        cx, cy = (x0 + (x1 - x0) * p) * self.width, (y0 + (y1 - y0) * p) * self.height
+        left = min(max(0.0, cx - w / 2), self.width - w)
+        top = min(max(0.0, cy - h / 2), self.height - h)
+        return left, top, w, h
+
+    def draw(self, screen, base, progress):
+        left, top, w, h = self.rect(progress)
+        area = pygame.Rect(int(left), int(top), max(1, int(round(w))), max(1, int(round(h)))).clip(base.get_rect())
+        pygame.transform.smoothscale(base.subsurface(area), screen.get_size(), screen)

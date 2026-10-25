@@ -32,7 +32,7 @@ from utils.messages_manager import pop_priority, list_messages
 from utils import animated, compositions, layout_engine
 from slideshow import compositions as slideshow_compositions
 from slideshow.compositions import _ahead, _composition, apply_priority, prepare_composition, publish_queue, take_composition, upcoming_compositions  # noqa: F401
-from slideshow.display import GifPlayer, _DIM, _heartbeat, _raw_flip, show_regions, update_brightness  # noqa: F401
+from slideshow.display import GifPlayer, KenBurns, _DIM, _heartbeat, _raw_flip, show_regions, update_brightness  # noqa: F401
 from slideshow.weather import get_tides, get_weather_and_forecast, load_icon
 from utils import play_queue
 from utils import now_playing
@@ -2425,6 +2425,9 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                 rects, wait = gifs.step(screen, time.time())
                 show_regions(screen, rects)
                 time.sleep(wait)
+        elif config.get("pan_zoom_style", "kenburns") == "kenburns":
+            ken_burns(screen, pygame_image_base, pil_image, photo_path, config, display_duration, main_font, photo_metadata,
+                      screen_width, ignore_postcard_flag)
         else:
             # Logique de l'effet Pan/Zoom
             zoom_factor = float(config.get("pan_zoom_factor", 1.15)) # Récupérer le facteur de zoom de la config
@@ -2521,6 +2524,38 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
     except Exception as e:
         logger.info(f"Erreur affichage photo avec pan/zoom : {e}")
         traceback.print_exc()
+
+def ken_burns(screen, base, pil_image, photo_path, config, duration, main_font, photo_metadata, screen_width, ignore_postcard_flag):
+    """Affichage avec l'effet Ken Burns (zoom lent vers les visages), à la cadence que permet le Raspberry Pi."""
+    global paused
+    from utils import hardware_profile
+    faces = []
+    try:
+        from utils import faces as face_detection
+        faces = face_detection.for_file(photo_path, pil_image) if photo_path else []
+    except Exception:
+        pass
+    effect = KenBurns(base.get_size(), float(config.get("pan_zoom_factor", 1.15)), faces)
+    fps = hardware_profile.value(config, "kenburns_fps")
+    start = time.time()
+    while time.time() - start < duration:
+        frame_start = time.time()
+        handle_slideshow_events(screen_width)
+        if not ignore_postcard_flag and NEW_POSTCARD_FLAG.exists():
+            return
+        if next_photo_requested or previous_photo_requested:
+            return
+        if paused:
+            draw_pause_icon(screen, *screen.get_size())
+            pygame.display.flip()
+            time.sleep(0.1)
+            start += 0.1  # le mouvement reprend là où il s'était arrêté
+            continue
+        effect.draw(screen, base, (time.time() - start) / duration)
+        draw_overlay(screen, *screen.get_size(), config, main_font, photo_metadata)
+        pygame.display.flip()
+        time.sleep(max(0.0, 1 / fps - (time.time() - frame_start)))
+
 
 def fade_to_black(screen, previous_surface, duration, clock):
     """Effectue un fondu au noir sur la surface donnée."""

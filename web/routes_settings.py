@@ -35,6 +35,7 @@ SETTINGS = {
     # Effets
     "pan_zoom_enabled": ("bool", None, False),
     "pan_zoom_factor": ("float", (1.0, 2.0), 1.15),
+    "pan_zoom_style": ("choice", ["kenburns", "pan"], "kenburns"),
     "transition_enabled": ("bool", None, True),
     "transition_duration": ("float", (0.0, 10.0), 1.0),
     "transition_type": ("choice", TRANSITIONS, "fade"),
