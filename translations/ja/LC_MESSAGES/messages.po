@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:12+0100\n"
+"POT-Creation-Date: 2026-10-26 00:15+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -1060,11 +1060,11 @@ msgstr ""
 "PIRセンサー（HC-SR501）の配線：VCCを5V（2番ピン）、GNDをグランド（6番ピン）、OUTを選んだピン（GPIO 24 = "
 "物理18番ピン）へ。"
 
-#: frontend/src/components/PhotoBookCard.vue:41
+#: frontend/src/components/PhotoBookCard.vue:45
 msgid "Livre photo de l'année"
 msgstr "1年のフォトブック"
 
-#: frontend/src/components/PhotoBookCard.vue:42
+#: frontend/src/components/PhotoBookCard.vue:46
 msgid ""
 "Un PDF prêt à imprimer (A4 à l'italienne) : une couverture, les plus "
 "belles photos mois par mois (les plus aimées et les favorites d'abord, "
@@ -1072,30 +1072,51 @@ msgid ""
 "chiffres."
 msgstr "印刷できるPDF（A4横）：表紙、月ごとのベスト写真（人気とお気に入りを優先、ぼやけた写真やスクリーンショットは除外）、そして1年の数字。"
 
-#: frontend/src/components/PhotoBookCard.vue:45
+#: frontend/src/components/PhotoBookCard.vue:49
 #, python-brace-format
 msgid "{count} photos"
 msgstr "{count}枚"
 
-#: frontend/src/components/PhotoBookCard.vue:49
+#: frontend/src/components/PhotoBookCard.vue:53
+#: frontend/src/components/PhotoBookCard.vue:61
 #: frontend/src/views/MediaView.vue:179
 msgid "Création en cours..."
 msgstr "作成中..."
 
-#: frontend/src/components/PhotoBookCard.vue:49
+#: frontend/src/components/PhotoBookCard.vue:53
 msgid "Créer le livre"
 msgstr "ブックを作成"
 
-#: frontend/src/components/PhotoBookCard.vue:52
+#: frontend/src/components/PhotoBookCard.vue:55
+msgid "Calendrier photo à imprimer"
+msgstr "印刷できるフォトカレンダー"
+
+#: frontend/src/components/PhotoBookCard.vue:56
+msgid ""
+"Un mois par page (A4 en portrait) : une belle photo prise ce mois-là une "
+"année précédente, et la grille des jours avec les anniversaires de la "
+"famille (page Occasions), la fête des mères et des pères."
+msgstr "1ページに1か月（A4縦）：以前の年のその月に撮った写真と、家族の誕生日（記念日ページ）、母の日・父の日入りのカレンダー。"
+
+#: frontend/src/components/PhotoBookCard.vue:61
+msgid "Créer le calendrier"
+msgstr "カレンダーを作成"
+
+#: frontend/src/components/PhotoBookCard.vue:64
 #, python-brace-format
 msgid "Page {done} sur {total}"
 msgstr "{total}ページ中{done}ページ"
 
-#: frontend/src/components/PhotoBookCard.vue:53
+#: frontend/src/components/PhotoBookCard.vue:65
 msgid "Aucune photo datée de cette année-là."
 msgstr "その年の日付のある写真はありません。"
 
-#: frontend/src/components/PhotoBookCard.vue:56
+#: frontend/src/components/PhotoBookCard.vue:69
+#, python-brace-format
+msgid "Télécharger le calendrier {year}"
+msgstr "{year}年のカレンダーをダウンロード"
+
+#: frontend/src/components/PhotoBookCard.vue:69
 #, python-brace-format
 msgid "Télécharger le livre {year}"
 msgstr "{year}年のブックをダウンロード"
@@ -11003,6 +11024,61 @@ msgstr "いちばん写真を撮った月"
 msgid "Notre année"
 msgstr "わたしたちの1年"
 
+#: utils/photo_calendar.py:22
+msgid "lun."
+msgstr "月"
+
+#: utils/photo_calendar.py:22
+msgid "mar."
+msgstr "火"
+
+#: utils/photo_calendar.py:22
+msgid "mer."
+msgstr "水"
+
+#: utils/photo_calendar.py:22
+msgid "jeu."
+msgstr "木"
+
+#: utils/photo_calendar.py:22
+msgid "ven."
+msgstr "金"
+
+#: utils/photo_calendar.py:22
+msgid "sam."
+msgstr "土"
+
+#: utils/photo_calendar.py:22
+msgid "dim."
+msgstr "日"
+
+#: utils/photo_calendar.py:64
+#, python-format
+msgid "%(name)s (%(age)s ans)"
+msgstr "%(name)s（%(age)s歳）"
+
+#: utils/photo_calendar.py:66
+#, python-format
+msgid "Mariage %(name)s"
+msgstr "%(name)sの結婚記念日"
+
+#: utils/photo_calendar.py:68
+#, python-format
+msgid "Naissance %(name)s"
+msgstr "%(name)sの誕生"
+
+#: utils/photo_calendar.py:71 utils/themed_compositions_family.py:193
+msgid "Fête des mères"
+msgstr "母の日"
+
+#: utils/photo_calendar.py:71 utils/themed_compositions_family.py:194
+msgid "Fête des pères"
+msgstr "父の日"
+
+#: utils/photo_calendar.py:150
+msgid "Calendrier de la famille"
+msgstr "家族のカレンダー"
+
 #: utils/quotes.py:19
 msgid "Le mot de la famille"
 msgstr "家族の言葉"
@@ -11269,14 +11345,6 @@ msgstr "名前入り誕生日"
 #: utils/themed_compositions_family.py:191
 msgid "Rentrée"
 msgstr "新学期"
-
-#: utils/themed_compositions_family.py:193
-msgid "Fête des mères"
-msgstr "母の日"
-
-#: utils/themed_compositions_family.py:194
-msgid "Fête des pères"
-msgstr "父の日"
 
 #: web/core.py:963
 msgid "Code d'invitation invalide."
@@ -12389,20 +12457,29 @@ msgid ""
 "pour importer ses photos."
 msgstr "この人物の写真はまだフレームにありません。フォローすると写真をインポートします。"
 
-#: web/routes_photobook.py:46
+#: web/routes_photobook.py:60 web/routes_photobook.py:62
 msgid "Année invalide."
 msgstr "年が正しくありません。"
 
-#: web/routes_photobook.py:49
+#: web/routes_photobook.py:65
 msgid "Un livre photo est déjà en cours de création."
 msgstr "フォトブックはすでに作成中です。"
 
-#: web/routes_photobook.py:63
+#: web/routes_photobook.py:80
+#, python-format
+msgid "Création du calendrier %(year)s : quelques minutes."
+msgstr "%(year)s年のカレンダーを作成中：数分かかります。"
+
+#: web/routes_photobook.py:81
 #, python-format
 msgid "Création du livre photo %(year)s : quelques minutes."
 msgstr "%(year)s年のフォトブックを作成中：数分かかります。"
 
-#: web/routes_photobook.py:74
+#: web/routes_photobook.py:94
+msgid "Calendrier"
+msgstr "カレンダー"
+
+#: web/routes_photobook.py:94
 msgid "Livre photo"
 msgstr "フォトブック"
 

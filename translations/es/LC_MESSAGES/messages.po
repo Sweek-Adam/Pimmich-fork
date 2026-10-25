@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:12+0100\n"
+"POT-Creation-Date: 2026-10-26 00:15+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -1093,11 +1093,11 @@ msgstr ""
 "Cableado de un sensor PIR (HC-SR501): VCC a 5 V (pin 2), GND a masa (pin "
 "6), OUT al pin elegido (GPIO 24 = pin físico 18)."
 
-#: frontend/src/components/PhotoBookCard.vue:41
+#: frontend/src/components/PhotoBookCard.vue:45
 msgid "Livre photo de l'année"
 msgstr "Libro de fotos del año"
 
-#: frontend/src/components/PhotoBookCard.vue:42
+#: frontend/src/components/PhotoBookCard.vue:46
 msgid ""
 "Un PDF prêt à imprimer (A4 à l'italienne) : une couverture, les plus "
 "belles photos mois par mois (les plus aimées et les favorites d'abord, "
@@ -1108,30 +1108,54 @@ msgstr ""
 "mes a mes (las más queridas y favoritas primero, sin fotos borrosas ni "
 "capturas de pantalla) y el año en cifras."
 
-#: frontend/src/components/PhotoBookCard.vue:45
+#: frontend/src/components/PhotoBookCard.vue:49
 #, python-brace-format
 msgid "{count} photos"
 msgstr "{count} fotos"
 
-#: frontend/src/components/PhotoBookCard.vue:49
+#: frontend/src/components/PhotoBookCard.vue:53
+#: frontend/src/components/PhotoBookCard.vue:61
 #: frontend/src/views/MediaView.vue:179
 msgid "Création en cours..."
 msgstr "Creando..."
 
-#: frontend/src/components/PhotoBookCard.vue:49
+#: frontend/src/components/PhotoBookCard.vue:53
 msgid "Créer le livre"
 msgstr "Crear el libro"
 
-#: frontend/src/components/PhotoBookCard.vue:52
+#: frontend/src/components/PhotoBookCard.vue:55
+msgid "Calendrier photo à imprimer"
+msgstr "Calendario de fotos para imprimir"
+
+#: frontend/src/components/PhotoBookCard.vue:56
+msgid ""
+"Un mois par page (A4 en portrait) : une belle photo prise ce mois-là une "
+"année précédente, et la grille des jours avec les anniversaires de la "
+"famille (page Occasions), la fête des mères et des pères."
+msgstr ""
+"Un mes por página (A4 vertical): una bonita foto tomada ese mes un año "
+"anterior y la cuadrícula de días con los cumpleaños de la familia (página"
+" Ocasiones), el Día de la Madre y del Padre."
+
+#: frontend/src/components/PhotoBookCard.vue:61
+msgid "Créer le calendrier"
+msgstr "Crear el calendario"
+
+#: frontend/src/components/PhotoBookCard.vue:64
 #, python-brace-format
 msgid "Page {done} sur {total}"
 msgstr "Página {done} de {total}"
 
-#: frontend/src/components/PhotoBookCard.vue:53
+#: frontend/src/components/PhotoBookCard.vue:65
 msgid "Aucune photo datée de cette année-là."
 msgstr "Ninguna foto fechada de ese año."
 
-#: frontend/src/components/PhotoBookCard.vue:56
+#: frontend/src/components/PhotoBookCard.vue:69
+#, python-brace-format
+msgid "Télécharger le calendrier {year}"
+msgstr "Descargar el calendario {year}"
+
+#: frontend/src/components/PhotoBookCard.vue:69
 #, python-brace-format
 msgid "Télécharger le livre {year}"
 msgstr "Descargar el libro {year}"
@@ -11462,6 +11486,61 @@ msgstr "el mes más fotografiado"
 msgid "Notre année"
 msgstr "Nuestro año"
 
+#: utils/photo_calendar.py:22
+msgid "lun."
+msgstr "lun."
+
+#: utils/photo_calendar.py:22
+msgid "mar."
+msgstr "mar."
+
+#: utils/photo_calendar.py:22
+msgid "mer."
+msgstr "mié."
+
+#: utils/photo_calendar.py:22
+msgid "jeu."
+msgstr "jue."
+
+#: utils/photo_calendar.py:22
+msgid "ven."
+msgstr "vie."
+
+#: utils/photo_calendar.py:22
+msgid "sam."
+msgstr "sáb."
+
+#: utils/photo_calendar.py:22
+msgid "dim."
+msgstr "dom."
+
+#: utils/photo_calendar.py:64
+#, python-format
+msgid "%(name)s (%(age)s ans)"
+msgstr "%(name)s (%(age)s años)"
+
+#: utils/photo_calendar.py:66
+#, python-format
+msgid "Mariage %(name)s"
+msgstr "Boda %(name)s"
+
+#: utils/photo_calendar.py:68
+#, python-format
+msgid "Naissance %(name)s"
+msgstr "Nacimiento %(name)s"
+
+#: utils/photo_calendar.py:71 utils/themed_compositions_family.py:193
+msgid "Fête des mères"
+msgstr "Día de la madre"
+
+#: utils/photo_calendar.py:71 utils/themed_compositions_family.py:194
+msgid "Fête des pères"
+msgstr "Día del padre"
+
+#: utils/photo_calendar.py:150
+msgid "Calendrier de la famille"
+msgstr "Calendario de la familia"
+
 #: utils/quotes.py:19
 msgid "Le mot de la famille"
 msgstr "La frase de la familia"
@@ -11728,14 +11807,6 @@ msgstr "Cumpleaños con nombre"
 #: utils/themed_compositions_family.py:191
 msgid "Rentrée"
 msgstr "Vuelta al cole"
-
-#: utils/themed_compositions_family.py:193
-msgid "Fête des mères"
-msgstr "Día de la madre"
-
-#: utils/themed_compositions_family.py:194
-msgid "Fête des pères"
-msgstr "Día del padre"
 
 #: web/core.py:963
 msgid "Code d'invitation invalide."
@@ -12888,20 +12959,29 @@ msgstr ""
 "Aún no hay fotos de esta persona en el marco: síguela para importar sus "
 "fotos."
 
-#: web/routes_photobook.py:46
+#: web/routes_photobook.py:60 web/routes_photobook.py:62
 msgid "Année invalide."
 msgstr "Año no válido."
 
-#: web/routes_photobook.py:49
+#: web/routes_photobook.py:65
 msgid "Un livre photo est déjà en cours de création."
 msgstr "Ya se está creando un libro de fotos."
 
-#: web/routes_photobook.py:63
+#: web/routes_photobook.py:80
+#, python-format
+msgid "Création du calendrier %(year)s : quelques minutes."
+msgstr "Creando el calendario %(year)s: unos minutos."
+
+#: web/routes_photobook.py:81
 #, python-format
 msgid "Création du livre photo %(year)s : quelques minutes."
 msgstr "Creando el libro de fotos %(year)s: unos minutos."
 
-#: web/routes_photobook.py:74
+#: web/routes_photobook.py:94
+msgid "Calendrier"
+msgstr "Calendario"
+
+#: web/routes_photobook.py:94
 msgid "Livre photo"
 msgstr "Libro de fotos"
 
