@@ -58,7 +58,7 @@ def sized(config, width, height):
 
 def _env():
     env = os.environ.copy()
-    runtime = env.setdefault("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}")
+    runtime = env.setdefault("XDG_RUNTIME_DIR", f"/run/user/{getattr(os, "getuid", lambda: 0)()}")
     if "WAYLAND_DISPLAY" not in env:
         sockets = sorted(p for p in glob.glob(f"{runtime}/wayland-*") if not p.endswith(".lock"))
         if sockets:

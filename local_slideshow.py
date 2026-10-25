@@ -317,9 +317,8 @@ def reinit_pygame():
     slideshow_weather._icon_cache.clear()  # icônes à recharger pour le nouvel affichage
     logger.debug(f"📸 Cache des icônes météo vidé.")
 
-    info = pygame.display.Info()
-    width, height = info.current_w, info.current_h
-    screen = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
+    from slideshow.display import open_screen
+    screen, width, height = open_screen(load_config())
     pygame.mouse.set_visible(False)
     logger.debug(f"📸 Pygame entièrement réinitialisé à {width}x{height}.")
     return screen, width, height
@@ -354,8 +353,10 @@ def load_favorites():
 
 def get_local_ip():
     """Tente de récupérer l'adresse IP locale de la machine de manière robuste."""
-    # Méthode 1: Utiliser `hostname -I` (plus fiable sur Linux/RPi)
+    # Méthode 1: Utiliser `hostname -I` (plus fiable sur Linux/RPi ; sous Windows, hostname donne le nom de la machine)
     try:
+        if not sys.platform.startswith("linux"):
+            raise FileNotFoundError
         result = subprocess.run(
             ['hostname', '-I'],
             capture_output=True, text=True, check=True, timeout=2
@@ -496,7 +497,8 @@ def run_game(screen, screen_width, screen_height):
     from utils import family_game, game_screen
     logger.info("🎲 Partie « Où et quand ? »")
     ip = get_local_ip()
-    url = f"http://{ip}/jeu" if ip else "http://cadre-photo.local/jeu"
+    from utils.platform_info import guest_base_url
+    url = f"{guest_base_url(ip)}/jeu" if ip else "http://cadre-photo.local/jeu"
     shown = None
     while True:
         state = family_game.current()
@@ -1101,7 +1103,8 @@ def _guest_qr_surface(size, caption):
     key = (cache["ip"], size, caption)
     if cache["key"] != key:
         qr = qrcode.QRCode(border=2)
-        qr.add_data(f"http://{cache['ip']}/upload")
+        from utils.platform_info import guest_base_url
+        qr.add_data(f"{guest_base_url(cache['ip'])}/upload")
         qr.make(fit=True)
         modules = qr.modules_count + 2 * qr.border
         qr.box_size = max(3, size // modules)  # nombre entier de pixels par case : QR net, facile à lire
@@ -2550,7 +2553,12 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
         if pi_model != 3:
             command.append('--ontop')
 
-        if hwdec_enabled:
+        from utils.platform_info import desktop
+        if desktop():
+            # Ordinateur : décodage matériel du système, sur l'écran choisi pour le diaporama
+            from slideshow.display import desktop_screen
+            command.extend(['--hwdec=auto', f'--screen={desktop_screen(config)}', f'--fs-screen={desktop_screen(config)}'])
+        elif hwdec_enabled:
             # Pour tous les modèles de Raspberry Pi (1/2/3/4/5), on essaie en premier le mode DMABUF Haute Performance.
             # C'est le seul mode matériel direct (zéro-copie) qui évite les saccades de bande passante et l'écran noir de 15s.
             if pi_model in [1, 2, 3, 4, 5]:
@@ -2719,7 +2727,8 @@ def start_slideshow():
         # Orientation de l'écran (paysage, portrait...) : l'affichage pivote avant la création de la fenêtre
         try:
             from utils import screen_rotation
-            if not screen_rotation.apply(screen_rotation.current(load_config())):
+            from utils.platform_info import desktop
+            if not desktop() and not screen_rotation.apply(screen_rotation.current(load_config())):
                 logger.warning("😒 Impossible de faire pivoter l'écran (wlr-randr/swaymsg).")
         except Exception as e:
             logger.warning(f"😒 Orientation de l'écran : {e}")
@@ -2763,7 +2772,8 @@ def start_slideshow():
         
         # Création de l'écran
         logger.debug(f"📸 Tentative de création de l'écran {SCREEN_WIDTH}x{SCREEN_HEIGHT}...")
-        screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
+        from slideshow.display import open_screen
+        screen, SCREEN_WIDTH, SCREEN_HEIGHT = open_screen(config, SCREEN_WIDTH, SCREEN_HEIGHT)
         logger.info(f"✅ Écran créé avec succès : {screen.get_size()}")
         
         pygame.mouse.set_visible(False)
@@ -3054,7 +3064,8 @@ def start_slideshow():
                 qr_surface, qr_height, qr_spacing = None, 0, 30
                 try:
                     ip_address_for_qr = get_local_ip()
-                    url = f"http://{ip_address_for_qr}"
+                    from utils.platform_info import guest_base_url
+                    url = guest_base_url(ip_address_for_qr)
                     qr_img_pil = qrcode.make(url, box_size=8).convert('RGB')
                     qr_surface = pygame.image.frombytes(qr_img_pil.tobytes(), qr_img_pil.size, qr_img_pil.mode)
                     qr_height = qr_surface.get_height()
@@ -3234,7 +3245,8 @@ def start_slideshow():
                             play_background_music(_current_background_music)
                     else:
                         # Cas général (PC de bureau)
-                        screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
+                        from slideshow.display import open_screen
+                        screen, SCREEN_WIDTH, SCREEN_HEIGHT = open_screen(config, SCREEN_WIDTH, SCREEN_HEIGHT)
                         pygame.mouse.set_visible(False)
                         
                     # Pas de bandeau « Reprise » : le média suivant s'affiche directement (sans transition depuis une image périmée)

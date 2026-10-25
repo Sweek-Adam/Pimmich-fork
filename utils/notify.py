@@ -36,7 +36,8 @@ def base_url(config):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.connect(("192.0.2.1", 80))  # aucune donnée envoyée : sert seulement à connaître l'adresse locale
-            return f"http://{sock.getsockname()[0]}"
+            from utils.platform_info import guest_base_url
+            return guest_base_url(sock.getsockname()[0])
     except OSError:
         return None
 

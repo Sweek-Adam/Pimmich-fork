@@ -79,6 +79,13 @@ logger.info("🟩=Display_Manager")
 # ============================================================
 
 def get_display_output_name():
+    from utils.platform_info import desktop
+    if desktop():
+        return None  # ordinateur : l'écran est géré par le système (pas de sway / wlr-randr)
+    return _display_output_name()
+
+
+def _display_output_name():
     """Trouve le nom de la sortie HDMI active (Wayfire/Sway)."""
     #logger.info("get_display_output_name() LANCÉ")
     
@@ -106,7 +113,7 @@ def get_display_output_name():
         logger.debug("🖥 Fallback sway...")
         env = os.environ.copy()
         if "SWAYSOCK" not in env:
-            uid = os.getuid()
+            uid = getattr(os, "getuid", lambda: 0)()
             socks = glob.glob(f"/run/user/{uid}/sway-ipc.*")
             if socks:
                 env["SWAYSOCK"] = socks[0]
@@ -219,6 +226,9 @@ def set_display_power(on=True):
 
 def set_software_display_power(on=True):
     """Active/désactive DPMS via wlr-randr/swaymsg."""
+    from utils.platform_info import desktop
+    if desktop():
+        return True  # ordinateur : pas de mise en veille de l'écran par Pimmich
     #logger.info(f"set_software_display_power({on})")
     output = get_display_output_name()
     

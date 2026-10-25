@@ -21,8 +21,9 @@ def new_interface():
         page = APP_INDEX.read_text(encoding="utf-8")
     except OSError:
         return redirect(url_for('configure'))  # interface pas encore compilée
+    from utils.platform_info import desktop
     boot = {"lang": str(get_locale() or "fr"), "user": session.get("username") or "", "admin": bool(is_admin()),
-            "classic": url_for('configure')}
+            "classic": url_for('configure'), "edition": "event" if desktop() else "frame"}
     # « </ » échappé : le JSON ne peut pas fermer la balise <script>
     script = "<script>window.PIMMICH = " + json.dumps(boot, ensure_ascii=False).replace("</", "<\\/") + ";</script>"
     response = make_response(page.replace("<!--PIMMICH_BOOT-->", script, 1))

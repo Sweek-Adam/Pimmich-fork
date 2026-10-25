@@ -63,7 +63,7 @@ async function refreshImports() {
 let timer: number | undefined;
 
 const visibleGroups = computed(() =>
-  groups.map((g) => ({ ...g, items: g.items.filter((i) => !i.admin || boot.admin) })),
+  groups.map((g) => ({ ...g, items: g.items.filter((i) => (!i.admin || boot.admin) && !(i.pi && boot.edition === "event")) })),
 );
 
 const current = computed<NavItem | undefined>(() => {

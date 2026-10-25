@@ -4,6 +4,8 @@ import { t } from "./i18n";
 export interface News { id: number; date: string; icon: string; title: () => string; text: () => string; route?: string }
 
 export const NEWS: News[] = [
+  { id: 15, date: "2026-10-25", icon: "fa-laptop", title: () => t("Pimmich sur un ordinateur"),
+    text: () => t("Édition « événement » pour un mariage ou une fête : Pimmich sur un Mac ou un PC, le diaporama sur une télé ou un vidéoprojecteur (voir EVENEMENT.md sur GitHub).") },
   { id: 14, date: "2026-10-25", icon: "fa-language", title: () => t("Le cadre parle votre langue"),
     text: () => t("Les textes affichés sur le cadre (jeux, fête, compositions) suivent la langue choisie dans Affichage."), route: "/affichage" },
   { id: 13, date: "2026-10-25", icon: "fa-dice", title: () => t("Menu Jeux"),

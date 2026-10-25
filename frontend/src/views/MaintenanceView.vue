@@ -3,11 +3,14 @@ import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { ApiError, get, post } from "../api";
 import { currentLang, t } from "../i18n";
 import { notify, run } from "../toast";
+import { boot } from "../boot";
 
 // --- Matériel ---
 interface Hardware { model: string | null; temperature: number | null; undervoltage_now: boolean | null; undervoltage_since_boot: boolean | null; sd_errors: number | null; supply?: string }
 const hw = ref<Hardware | null>(null);
 const level = (ok: boolean, warn: boolean) => (ok ? "ok" : warn ? "warn" : "err");
+
+const onPi = boot.edition !== "event";  // édition ordinateur : pas de cartes propres au Raspberry Pi
 
 // --- Profil matériel ---
 interface Profile {
@@ -186,7 +189,7 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
 </script>
 
 <template>
-  <section class="card">
+  <section v-if="onPi" class="card">
     <div class="card-head"><h2><i class="fas fa-microchip"></i>{{ t("Matériel") }}</h2></div>
     <div v-if="hw" class="facts">
       <div><small>{{ t("Modèle") }}</small><strong>{{ hw.model || t("Inconnu") }}</strong></div>
@@ -198,7 +201,7 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
     <p v-if="hw?.supply" class="small muted">{{ t("Alimentation conseillée pour ce modèle :") }} {{ hw.supply }}</p>
   </section>
 
-  <section v-if="profile" class="card">
+  <section v-if="profile && onPi" class="card">
     <div class="card-head"><h2><i class="fas fa-sliders-h"></i>{{ t("Profil matériel") }}</h2></div>
     <p class="small muted">{{ t("Pimmich s'adapte à la puissance du Raspberry Pi : mémoire des animations, compositions préparées d'avance, vidéos plus légères sur les petits modèles. Vos réglages restent prioritaires.") }}</p>
     <label class="field">{{ t("Profil") }}
@@ -241,7 +244,7 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
       </div>
     </section>
 
-    <section class="card">
+    <section v-if="onPi" class="card">
       <div class="card-head"><h2><i class="fas fa-power-off"></i>{{ t("Contrôle du système") }}</h2></div>
       <div class="system">
         <form method="POST" action="/restart_app" @submit="confirmSubmit(t('Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l\'application web ? Le système d\'exploitation ne sera pas redémarré.'))($event)">
@@ -285,7 +288,7 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
     </div>
   </section>
 
-  <section v-if="storage" class="card">
+  <section v-if="storage && onPi" class="card">
     <div class="card-head"><h2><i class="fas fa-hdd"></i>{{ t("Stockage des photos") }}</h2></div>
     <div class="supports">
       <div class="support"><strong>{{ t("Carte SD") }}</strong>
@@ -362,7 +365,7 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
   </section>
 
   <div class="grid grid-2 two">
-    <section v-if="https" class="card">
+    <section v-if="https && onPi" class="card">
       <div class="card-head"><h2><i class="fas fa-lock"></i>{{ t("HTTPS sans avertissement (Tailscale)") }}</h2></div>
       <p class="small muted">{{ t("Ouvre l'administration à une adresse sécurisée par un vrai certificat, depuis vos appareils connectés à Tailscale (à la maison comme ailleurs). Elle n'est jamais publiée sur internet.") }}</p>
       <label class="check"><input type="checkbox" class="switch" :checked="https.enabled" :disabled="!https.installed" @change="toggleHttps(($event.target as HTMLInputElement).checked)">{{ t("Activer l'accès HTTPS par Tailscale") }}</label>
@@ -371,7 +374,7 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
       <a v-if="activation" class="btn primary" :href="activation" target="_blank" rel="noopener">{{ t("Autoriser sur Tailscale") }}</a>
       <a v-if="https.link" :href="https.link" target="_blank" rel="noopener" class="link">{{ https.link }}</a>
     </section>
-    <section class="card">
+    <section v-if="onPi" class="card">
       <div class="card-head"><h2><i class="fas fa-sd-card"></i>{{ t("Système de Fichiers de la Carte SD") }}</h2></div>
       <h3>{{ t("Protection contre l'usure") }}</h3>
       <p v-if="sd" class="small" :class="sd.log2ram ? 'ok' : ''">{{ sd.log2ram ? t("Active : les journaux sont écrits en mémoire vive et recopiés sur la carte une fois par jour.") : t("Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur le Raspberry Pi : sudo ~/pimmich/utils/enable_sd_protection.sh puis redémarrez.") }}</p>

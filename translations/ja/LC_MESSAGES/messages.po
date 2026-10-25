@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 18:05+0100\n"
+"POT-Creation-Date: 2026-10-25 18:39+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,157 +18,157 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: local_slideshow.py:1553
+#: local_slideshow.py:1132
 msgid "Photos & messages"
 msgstr "写真とメッセージ"
 
-#: local_slideshow.py:1574
+#: local_slideshow.py:1153
 msgid "Envoyez vos photos !"
 msgstr "写真を送ってね！"
 
-#: local_slideshow.py:1583
+#: local_slideshow.py:1162
 #, python-format
 msgid "Photo de %(name)s"
 msgstr "%(name)sさんの写真"
 
-#: local_slideshow.py:1616
+#: local_slideshow.py:1195
 msgid "Pas de réseau Wi-Fi connu"
 msgstr "既知の Wi-Fi がありません"
 
-#: local_slideshow.py:1617
+#: local_slideshow.py:1196
 #, python-format
 msgid "1. Connectez votre téléphone au Wi-Fi « %(ssid)s »"
 msgstr "1. スマホを Wi-Fi「%(ssid)s」に接続"
 
-#: local_slideshow.py:1618
+#: local_slideshow.py:1197
 #, python-format
 msgid "Mot de passe : %(password)s"
 msgstr "パスワード：%(password)s"
 
-#: local_slideshow.py:1619
+#: local_slideshow.py:1198
 #, python-format
 msgid "2. Ouvrez http://%(address)s puis Système > Réseau"
 msgstr "2. http://%(address)s を開き、システム > ネットワーク へ"
 
-#: local_slideshow.py:1851
+#: local_slideshow.py:1430
 #, python-format
 msgid "Il y a %(num)d an"
 msgstr "%(num)d 年前"
 
-#: local_slideshow.py:1851
+#: local_slideshow.py:1430
 #, python-format
 msgid "Il y a %(num)d ans"
 msgstr "%(num)d 年前"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "1月"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "2月"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "3月"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "4月"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "5月"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "6月"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "7月"
 
-#: local_slideshow.py:1852 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
+#: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "8月"
 
-#: local_slideshow.py:1853 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "9月"
 
-#: local_slideshow.py:1853 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "10月"
 
-#: local_slideshow.py:1853 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "11月"
 
-#: local_slideshow.py:1853 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
+#: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
+#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "12月"
 
-#: local_slideshow.py:2180
+#: local_slideshow.py:1759
 msgid "Données de marée non disponibles"
 msgstr "潮汐データは利用できません"
 
-#: local_slideshow.py:2263
+#: local_slideshow.py:1842
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d an"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:2263
+#: local_slideshow.py:1842
 #, python-format
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:3598
+#: local_slideshow.py:3077
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:3599
+#: local_slideshow.py:3078
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:3600
+#: local_slideshow.py:3079
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:3601
+#: local_slideshow.py:3080
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3602
+#: local_slideshow.py:3081
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:3628
+#: local_slideshow.py:3107
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -223,279 +223,290 @@ msgstr "詳細"
 msgid "{n} photos"
 msgstr "{n}枚"
 
-#: frontend/src/nav.ts:21 frontend/src/nav.ts:22
+#: frontend/src/nav.ts:22 frontend/src/nav.ts:23
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:109
 #: templates/configure.html.jinja:141 templates/configure.html.jinja:246
 msgid "Accueil"
 msgstr "ホーム"
 
-#: frontend/src/nav.ts:23 frontend/src/views/NewsView.vue:13
+#: frontend/src/nav.ts:24 frontend/src/views/NewsView.vue:13
 msgid "Nouveautés"
 msgstr "新着情報"
 
-#: frontend/src/nav.ts:25 frontend/src/views/LibraryView.vue:120
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:120
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:53
 msgid "Photos"
 msgstr "写真"
 
-#: frontend/src/nav.ts:26 frontend/src/views/ImportView.vue:183
+#: frontend/src/nav.ts:27 frontend/src/views/ImportView.vue:183
 #: templates/configure.html.jinja:145
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr "インポート"
 
-#: frontend/src/components/SmartAlbumEditor.vue:107 frontend/src/nav.ts:27
+#: frontend/src/components/SmartAlbumEditor.vue:107 frontend/src/nav.ts:28
 #: templates/configure.html.jinja:146
 #: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr "情報源"
 
-#: frontend/src/nav.ts:28 frontend/src/news.ts:23
+#: frontend/src/nav.ts:29 frontend/src/news.ts:25
 msgid "Préparation des médias"
 msgstr "メディアの準備"
 
-#: frontend/src/nav.ts:29 templates/configure.html.jinja:147
+#: frontend/src/nav.ts:30 templates/configure.html.jinja:147
 msgid "Bibliothèque"
 msgstr "ライブラリ"
 
-#: frontend/src/nav.ts:30 frontend/src/views/HomeView.vue:173
+#: frontend/src/nav.ts:31 frontend/src/views/HomeView.vue:173
 #: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:148
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr "次に表示"
 
-#: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:31
+#: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:32
 #: templates/configure.html.jinja:149
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: frontend/src/nav.ts:32 frontend/src/views/LibraryView.vue:125
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:125
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr "お気に入り"
 
-#: frontend/src/nav.ts:33 templates/configure.html.jinja:151
+#: frontend/src/nav.ts:34 templates/configure.html.jinja:151
 msgid "Carte"
 msgstr "地図"
 
-#: frontend/src/nav.ts:34 frontend/src/views/MessagesView.vue:145
+#: frontend/src/nav.ts:35 frontend/src/views/MessagesView.vue:145
 #: templates/configure.html.jinja:152
 #: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr "メッセージ"
 
-#: frontend/src/nav.ts:36 frontend/src/views/DisplayView.vue:25
+#: frontend/src/nav.ts:37 frontend/src/views/DisplayView.vue:25
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:33
 msgid "Écran"
 msgstr "ディスプレイ"
 
-#: frontend/src/nav.ts:37 templates/configure.html.jinja:157
+#: frontend/src/nav.ts:38 templates/configure.html.jinja:157
 msgid "Dispositions"
 msgstr "レイアウト"
 
-#: frontend/src/nav.ts:38 templates/configure.html.jinja:158
+#: frontend/src/nav.ts:39 templates/configure.html.jinja:158
 msgid "Affichage"
 msgstr "画面"
 
-#: frontend/src/nav.ts:39 templates/configure.html.jinja:159
+#: frontend/src/nav.ts:40 templates/configure.html.jinja:159
 msgid "Horloge & météo"
 msgstr "時計と天気"
 
-#: frontend/src/nav.ts:40 frontend/src/views/CaptionsView.vue:12
+#: frontend/src/nav.ts:41 frontend/src/views/CaptionsView.vue:12
 #: templates/configure.html.jinja:160
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr "写真の情報"
 
-#: frontend/src/nav.ts:41 templates/configure.html.jinja:161
+#: frontend/src/nav.ts:42 templates/configure.html.jinja:161
 msgid "Légendes"
 msgstr "キャプション"
 
-#: frontend/src/nav.ts:42 templates/configure.html.jinja:162
+#: frontend/src/nav.ts:43 templates/configure.html.jinja:162
 msgid "Son"
 msgstr "サウンド"
 
-#: frontend/src/nav.ts:44 templates/configure.html.jinja:96
+#: frontend/src/nav.ts:45 templates/configure.html.jinja:96
 #: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:34
 msgid "Partage"
 msgstr "共有"
 
-#: frontend/src/nav.ts:45 templates/configure.html.jinja:167
+#: frontend/src/nav.ts:46 templates/configure.html.jinja:167
 #: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr "ゲスト"
 
-#: frontend/src/nav.ts:46 templates/configure.html.jinja:168
+#: frontend/src/nav.ts:47 templates/configure.html.jinja:168
 msgid "À valider"
 msgstr "承認待ち"
 
-#: frontend/src/nav.ts:47 templates/configure.html.jinja:169
+#: frontend/src/nav.ts:48 templates/configure.html.jinja:169
 msgid "Telegram"
 msgstr "電報"
 
-#: frontend/src/nav.ts:49 templates/game.html.jinja:6
+#: frontend/src/nav.ts:50 templates/game.html.jinja:6
 msgid "Jeux"
 msgstr "ゲーム"
 
-#: frontend/src/nav.ts:50 frontend/src/views/GuestsView.vue:187
+#: frontend/src/nav.ts:51 frontend/src/views/GuestsView.vue:187
 #: templates/game.html.jinja:39
 msgid "Jeux de famille"
 msgstr "家族ゲーム"
 
-#: frontend/src/nav.ts:52 templates/configure.html.jinja:96
+#: frontend/src/nav.ts:53 templates/configure.html.jinja:96
 #: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:35
 msgid "Système"
 msgstr "システム"
 
-#: frontend/src/nav.ts:53 templates/configure.html.jinja:174
+#: frontend/src/nav.ts:54 templates/configure.html.jinja:174
 msgid "Comptes"
 msgstr "アカウント"
 
-#: frontend/src/nav.ts:54 templates/configure.html.jinja:176
+#: frontend/src/nav.ts:55 templates/configure.html.jinja:176
 msgid "Notifications"
 msgstr "通知"
 
-#: frontend/src/nav.ts:55 templates/configure.html.jinja:177
+#: frontend/src/nav.ts:56 templates/configure.html.jinja:177
 msgid "Maintenance"
 msgstr "メンテナンス"
 
-#: frontend/src/nav.ts:56 templates/configure.html.jinja:178
+#: frontend/src/nav.ts:57 templates/configure.html.jinja:178
 msgid "Réseau"
 msgstr "ネットワーク"
 
-#: frontend/src/nav.ts:57 templates/configure.html.jinja:180
+#: frontend/src/nav.ts:58 templates/configure.html.jinja:180
 msgid "Commande vocale"
 msgstr "音声操作"
 
-#: frontend/src/nav.ts:58 templates/configure.html.jinja:182
+#: frontend/src/nav.ts:59 templates/configure.html.jinja:182
 msgid "Statistiques"
 msgstr "統計"
 
-#: frontend/src/nav.ts:59 templates/configure.html.jinja:183
+#: frontend/src/nav.ts:60 templates/configure.html.jinja:183
 msgid "Journaux"
 msgstr "ログ"
 
 #: frontend/src/news.ts:7
+msgid "Pimmich sur un ordinateur"
+msgstr "パソコンでPimmich"
+
+#: frontend/src/news.ts:8
+msgid ""
+"Édition « événement » pour un mariage ou une fête : Pimmich sur un Mac ou"
+" un PC, le diaporama sur une télé ou un vidéoprojecteur (voir "
+"EVENEMENT.md sur GitHub)."
+msgstr "結婚式やパーティー向け「イベント」版：MacやPCでPimmichを動かし、テレビやプロジェクターでスライドショー（GitHubのEVENT_en.mdを参照）。"
+
+#: frontend/src/news.ts:9
 msgid "Le cadre parle votre langue"
 msgstr "フレームがあなたの言語に"
 
-#: frontend/src/news.ts:8
+#: frontend/src/news.ts:10
 msgid ""
 "Les textes affichés sur le cadre (jeux, fête, compositions) suivent la "
 "langue choisie dans Affichage."
 msgstr "フレームの文字（ゲーム、パーティー、組み合わせ表示）は「表示」で選んだ言語になります。"
 
-#: frontend/src/news.ts:9
+#: frontend/src/news.ts:11
 msgid "Menu Jeux"
 msgstr "ゲームメニュー"
 
-#: frontend/src/news.ts:10
+#: frontend/src/news.ts:12
 msgid ""
 "Onze jeux de famille joués depuis les téléphones : lancez une partie, "
 "suivez-la en direct et réglez les temps."
 msgstr "スマートフォンで遊ぶ11の家族ゲーム：開始、ライブ確認、時間設定。"
 
-#: frontend/src/news.ts:11
+#: frontend/src/news.ts:13
 msgid "Recherche par contenu"
 msgstr "内容で検索"
 
-#: frontend/src/news.ts:12
+#: frontend/src/news.ts:14
 msgid ""
 "Avec un serveur Immich : cherchez « plage », « chien »... dans la "
 "bibliothèque."
 msgstr "Immichサーバーがあれば、ライブラリで「海」「犬」などを検索できます。"
 
-#: frontend/src/news.ts:13 frontend/src/views/GuestsView.vue:166
+#: frontend/src/news.ts:15 frontend/src/views/GuestsView.vue:166
 msgid "Mode fête"
 msgstr "パーティーモード"
 
-#: frontend/src/news.ts:14
+#: frontend/src/news.ts:16
 msgid ""
 "Un grand QR code à l'écran : les photos des invités s'affichent tout de "
 "suite, puis dans le Mur de la fête."
 msgstr "画面に大きなQRコード：ゲストの写真がすぐに表示され、パーティーウォールに並びます。"
 
-#: frontend/src/news.ts:15 frontend/src/views/MaintenanceView.vue:202
+#: frontend/src/news.ts:17 frontend/src/views/MaintenanceView.vue:205
 msgid "Profil matériel"
 msgstr "ハードウェアプロファイル"
 
-#: frontend/src/news.ts:16
+#: frontend/src/news.ts:18
 msgid ""
 "Pimmich s'adapte à votre Raspberry Pi (2, 3, 4 ou 5) et propose des "
 "réglages conseillés."
 msgstr "PimmichがRaspberry Pi（2・3・4・5）に合わせ、おすすめ設定を提案します。"
 
-#: frontend/src/news.ts:17
+#: frontend/src/news.ts:19
 msgid "Photos animées et courtes vidéos"
 msgstr "動く写真と短い動画"
 
-#: frontend/src/news.ts:18
+#: frontend/src/news.ts:20
 msgid ""
 "Les photos animées des téléphones s'animent comme des GIF ; les courtes "
 "vidéos tournent en boucle dans les dispositions."
 msgstr "スマートフォンの動く写真がGIFのように動き、短い動画はレイアウト内でループします。"
 
-#: frontend/src/news.ts:19 frontend/src/views/MediaView.vue:176
+#: frontend/src/news.ts:21 frontend/src/views/MediaView.vue:176
 msgid "Gagner de la place"
 msgstr "空き容量を増やす"
 
-#: frontend/src/news.ts:20
+#: frontend/src/news.ts:22
 msgid ""
 "Les très gros originaux déjà prêts peuvent être remplacés par une version"
 " réduite."
 msgstr "準備済みのとても大きな元ファイルを縮小版に置き換えられます。"
 
-#: frontend/src/news.ts:21
+#: frontend/src/news.ts:23
 msgid "Le travail lourd la nuit"
 msgstr "重い処理は夜に"
 
-#: frontend/src/news.ts:22
+#: frontend/src/news.ts:24
 msgid ""
 "Les grosses vidéos sont préparées quand le cadre est éteint ; les échecs "
 "sont réessayés chaque nuit."
 msgstr "大きな動画はフレームが消えている間に準備し、失敗は毎晩再試行します。"
 
-#: frontend/src/news.ts:24
+#: frontend/src/news.ts:26
 msgid ""
 "Tous les médias, préparés ou non, avec un bouton pour rattraper ceux "
 "restés de côté ; détails de l'import en cours."
 msgstr "準備済み・未準備のすべてのメディアと取りこぼしを戻すボタン、取り込みの詳細。"
 
-#: frontend/src/news.ts:25
+#: frontend/src/news.ts:27
 msgid "Zone de dessin en plein écran"
 msgstr "全画面のお絵かき"
 
-#: frontend/src/news.ts:26
+#: frontend/src/news.ts:28
 msgid ""
 "Feutre fluo, texte, autocollants, gomme, fonds, pression du stylet : la "
 "page invités a été améliorée."
 msgstr "蛍光ペン、文字、ステッカー、消しゴム、背景、筆圧：ゲストページが改良されました。"
 
-#: frontend/src/components/sources/CloudCards.vue:121 frontend/src/news.ts:27
+#: frontend/src/components/sources/CloudCards.vue:121 frontend/src/news.ts:29
 #: frontend/src/views/NetworkView.vue:144
 #: frontend/src/views/NetworkView.vue:194
 #: templates/configure/tab_sources.html.jinja:529
 msgid "Adresse du cadre"
 msgstr "フレームのアドレス"
 
-#: frontend/src/news.ts:28
+#: frontend/src/news.ts:30
 msgid ""
 "cadre-photo.local, .home ou Tailscale : plus besoin de connaître "
 "l'adresse IP."
 msgstr "cadre-photo.local、.home、Tailscale：IPアドレスを知る必要はありません。"
 
-#: frontend/src/news.ts:29
+#: frontend/src/news.ts:31
 msgid "GIF animés"
 msgstr "アニメーションGIF"
 
-#: frontend/src/news.ts:30
+#: frontend/src/news.ts:32
 msgid ""
 "Acceptés par tous les imports et animés à l'écran, en photo seule comme "
 "dans les dispositions."
@@ -551,7 +562,7 @@ msgstr "毎年"
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
 #: frontend/src/views/GuestsView.vue:232 frontend/src/views/GuestsView.vue:254
-#: frontend/src/views/MaintenanceView.vue:296
+#: frontend/src/views/MaintenanceView.vue:299
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
@@ -960,7 +971,7 @@ msgstr "ポート"
 #: frontend/src/views/AccountsView.vue:69
 #: frontend/src/views/AccountsView.vue:71
 #: frontend/src/views/AccountsView.vue:86
-#: frontend/src/views/MaintenanceView.vue:307
+#: frontend/src/views/MaintenanceView.vue:310
 #: templates/configure/tab_affichage.html.jinja:298
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
@@ -972,7 +983,7 @@ msgstr "ユーザー"
 
 #: frontend/src/components/HomeAssistantCard.vue:36
 #: frontend/src/views/AccountsView.vue:84
-#: frontend/src/views/MaintenanceView.vue:308
+#: frontend/src/views/MaintenanceView.vue:311
 #: frontend/src/views/NetworkView.vue:174
 #: frontend/src/views/NetworkView.vue:193
 #: templates/configure/tab_affichage.html.jinja:299
@@ -1466,7 +1477,7 @@ msgstr "お気に入りのみ"
 #: frontend/src/views/LibraryView.vue:119
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
-#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:605
+#: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
 msgid "Photos et vidéos"
 msgstr "写真と動画"
 
@@ -1479,7 +1490,7 @@ msgstr "写真のみ"
 #: frontend/src/components/SmartAlbumEditor.vue:116
 #: frontend/src/views/HomeView.vue:170
 #: templates/configure/_smart_albums.html.jinja:46
-#: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:605
+#: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:606
 msgid "Vidéos seulement"
 msgstr "動画のみ"
 
@@ -2624,7 +2635,7 @@ msgid "Pendant toute la photo"
 msgstr "写真の表示中ずっと"
 
 #: frontend/src/views/ClockView.vue:54
-#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:217
 #: templates/configure/tab_heure.html.jinja:180
 msgid "Jamais"
 msgstr "表示しない"
@@ -3877,7 +3888,7 @@ msgid ""
 msgstr "ここに：そのアドレス（例：Tailscaleならhttps://100.101.102.103、またはhttps://192.168.1.30）とコード。"
 
 #: frontend/src/views/GuestsView.vue:243
-#: frontend/src/views/MaintenanceView.vue:306
+#: frontend/src/views/MaintenanceView.vue:309
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
@@ -4437,56 +4448,56 @@ msgstr "リアルタイム表示"
 msgid "{n} lignes affichées (les 500 dernières du fichier)"
 msgstr "{n} 行を表示（ファイルの最後の500行）"
 
-#: frontend/src/views/MaintenanceView.vue:28
+#: frontend/src/views/MaintenanceView.vue:31
 msgid "Oui"
 msgstr "はい"
 
-#: frontend/src/views/MaintenanceView.vue:28
+#: frontend/src/views/MaintenanceView.vue:31
 msgid "Non"
 msgstr "いいえ"
 
-#: frontend/src/views/MaintenanceView.vue:35
+#: frontend/src/views/MaintenanceView.vue:38
 #: templates/configure/tab_maintenance.html.jinja:414
 msgid "Revenir à la version précédente ? Pimmich va redémarrer."
 msgstr "前のバージョンに戻しますか？Pimmich が再起動します。"
 
-#: frontend/src/views/MaintenanceView.vue:53
+#: frontend/src/views/MaintenanceView.vue:56
 #: templates/configure/tab_maintenance.html.jinja:381
 msgid "Sauvegarde en cours..."
 msgstr "バックアップ中..."
 
-#: frontend/src/views/MaintenanceView.vue:55
+#: frontend/src/views/MaintenanceView.vue:58
 #: templates/configure/tab_maintenance.html.jinja:383
 msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
 msgstr "現在の設定を Drive の最新バックアップで置き換えます。よろしいですか？"
 
-#: frontend/src/views/MaintenanceView.vue:70
-#: frontend/src/views/MaintenanceView.vue:196
-#: frontend/src/views/MaintenanceView.vue:291
+#: frontend/src/views/MaintenanceView.vue:73
+#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:294
 #: templates/configure/tab_maintenance.html.jinja:10
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Carte SD"
 msgstr "SD カード"
 
-#: frontend/src/views/MaintenanceView.vue:79
+#: frontend/src/views/MaintenanceView.vue:82
 #: templates/configure/tab_maintenance.html.jinja:255
 #, python-brace-format
 msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "「{source}」の写真を「{target}」に移動しますか？"
 
-#: frontend/src/views/MaintenanceView.vue:104
+#: frontend/src/views/MaintenanceView.vue:107
 #: templates/configure/tab_maintenance.html.jinja:135
 msgid ""
 "Remplacer les réglages, comptes, messages et playlists actuels par cette "
 "sauvegarde ?"
 msgstr "現在の設定、アカウント、メッセージ、プレイリストをこのバックアップで置き換えますか？"
 
-#: frontend/src/views/MaintenanceView.vue:105
+#: frontend/src/views/MaintenanceView.vue:108
 #: templates/configure/tab_maintenance.html.jinja:136
 msgid "Restauration en cours..."
 msgstr "復元中..."
 
-#: frontend/src/views/MaintenanceView.vue:110
+#: frontend/src/views/MaintenanceView.vue:113
 #: templates/configure/scripts_gallery.html.jinja:35
 #: templates/configure/scripts_gallery.html.jinja:130
 #: templates/configure/scripts_gallery.html.jinja:281
@@ -4501,25 +4512,25 @@ msgstr "復元中..."
 msgid "Erreur de communication avec le serveur."
 msgstr "サーバーとの通信エラー。"
 
-#: frontend/src/views/MaintenanceView.vue:114
-#: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:119
-#: web/routes_frames.py:265 web/routes_guests.py:89 web/routes_guests.py:94
-#: web/routes_imports.py:653 web/routes_imports.py:691 web/routes_system.py:923
+#: frontend/src/views/MaintenanceView.vue:117
+#: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:120
+#: web/routes_frames.py:266 web/routes_guests.py:89 web/routes_guests.py:94
+#: web/routes_imports.py:654 web/routes_imports.py:692 web/routes_system.py:923
 msgid "Aucun fichier sélectionné."
 msgstr "ファイルが選択されていません。"
 
-#: frontend/src/views/MaintenanceView.vue:127
+#: frontend/src/views/MaintenanceView.vue:130
 #: templates/configure/scripts_status.html.jinja:905
 msgid ""
 "Cette opération va préparer le système à étendre la partition au prochain"
 " redémarrage. Voulez-vous continuer ?"
 msgstr "この操作により、システムは次回の再起動時にパーティションを拡張する準備が整います。続けますか?"
 
-#: frontend/src/views/MaintenanceView.vue:157
+#: frontend/src/views/MaintenanceView.vue:160
 msgid "domaine public"
 msgstr "パブリックドメイン"
 
-#: frontend/src/views/MaintenanceView.vue:163
+#: frontend/src/views/MaintenanceView.vue:166
 #: templates/configure/tab_maintenance.html.jinja:525
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
@@ -4531,73 +4542,73 @@ msgstr ""
 "は自動では起動しなくなります。フォトフレームに戻るには、デスクトップまたはメニューの「Revenir au cadre "
 "Pimmich」ショートカットを使ってください。続けますか？"
 
-#: frontend/src/views/MaintenanceView.vue:167
+#: frontend/src/views/MaintenanceView.vue:170
 #: templates/configure/tab_maintenance.html.jinja:518
 msgid ""
 "Le Raspberry Pi va redémarrer en mode cadre photo Pimmich (le bureau ne "
 "s'affichera plus). Continuer ?"
 msgstr "Raspberry Pi を Pimmich フォトフレームモードで再起動します（デスクトップは表示されなくなります）。続けますか？"
 
-#: frontend/src/views/MaintenanceView.vue:190
+#: frontend/src/views/MaintenanceView.vue:193
 #: templates/configure/tab_maintenance.html.jinja:4
 msgid "Matériel"
 msgstr "ハードウェア"
 
-#: frontend/src/views/MaintenanceView.vue:192
-#: frontend/src/views/MaintenanceView.vue:211
+#: frontend/src/views/MaintenanceView.vue:195
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:7
 msgid "Modèle"
 msgstr "モデル"
 
-#: frontend/src/views/MaintenanceView.vue:192
-#: frontend/src/views/MaintenanceView.vue:193
 #: frontend/src/views/MaintenanceView.vue:195
 #: frontend/src/views/MaintenanceView.vue:196
+#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:199
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Inconnu"
 msgstr "不明"
 
-#: frontend/src/views/MaintenanceView.vue:193
+#: frontend/src/views/MaintenanceView.vue:196
 #: templates/configure/tab_maintenance.html.jinja:8
 msgid "Température"
 msgstr "温度"
 
-#: frontend/src/views/MaintenanceView.vue:194
+#: frontend/src/views/MaintenanceView.vue:197
 #: templates/configure/tab_maintenance.html.jinja:9
 msgid "Alimentation"
 msgstr "電源"
 
-#: frontend/src/views/MaintenanceView.vue:195
+#: frontend/src/views/MaintenanceView.vue:198
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Insuffisante en ce moment"
 msgstr "現在不足しています"
 
-#: frontend/src/views/MaintenanceView.vue:195
+#: frontend/src/views/MaintenanceView.vue:198
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "A faibli depuis le démarrage"
 msgstr "起動後に低下しました"
 
-#: frontend/src/views/MaintenanceView.vue:195
+#: frontend/src/views/MaintenanceView.vue:198
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Correcte"
 msgstr "正常"
 
-#: frontend/src/views/MaintenanceView.vue:196
+#: frontend/src/views/MaintenanceView.vue:199
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "erreur(s)"
 msgstr "件のエラー"
 
-#: frontend/src/views/MaintenanceView.vue:196
+#: frontend/src/views/MaintenanceView.vue:199
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Aucune erreur"
 msgstr "エラーなし"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:201
 #: templates/configure/tab_maintenance.html.jinja:19
 msgid "Alimentation conseillée pour ce modèle :"
 msgstr "このモデルの推奨電源："
 
-#: frontend/src/views/MaintenanceView.vue:203
+#: frontend/src/views/MaintenanceView.vue:206
 msgid ""
 "Pimmich s'adapte à la puissance du Raspberry Pi : mémoire des animations,"
 " compositions préparées d'avance, vidéos plus légères sur les petits "
@@ -4606,60 +4617,60 @@ msgstr ""
 "PimmichはRaspberry "
 "Piの性能に合わせて調整します（アニメーション用メモリ、事前準備する組み合わせ表示、小さなモデルでの軽量動画）。ご自身の設定が優先されます。"
 
-#: frontend/src/views/MaintenanceView.vue:204
+#: frontend/src/views/MaintenanceView.vue:207
 msgid "Profil"
 msgstr "プロファイル"
 
-#: frontend/src/views/MaintenanceView.vue:206
+#: frontend/src/views/MaintenanceView.vue:209
 #, python-brace-format
 msgid "Automatique : {profile}"
 msgstr "自動：{profile}"
 
-#: frontend/src/views/MaintenanceView.vue:212
+#: frontend/src/views/MaintenanceView.vue:215
 msgid "Mémoire des animations (GIF, photos animées)"
 msgstr "アニメーション用メモリ（GIF、動く写真）"
 
-#: frontend/src/views/MaintenanceView.vue:212
+#: frontend/src/views/MaintenanceView.vue:215
 #, python-brace-format
 msgid "{count} par composition"
 msgstr "組み合わせごとに{count}"
 
-#: frontend/src/views/MaintenanceView.vue:213
+#: frontend/src/views/MaintenanceView.vue:216
 msgid "Compositions préparées d'avance"
 msgstr "事前に準備する組み合わせ表示"
 
-#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:217
 msgid "Vidéos allégées (720p)"
 msgstr "軽量動画（720p）"
 
-#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:217
 #: templates/configure/_playlist_builder.html.jinja:41
 msgid "Toutes"
 msgstr "すべて"
 
-#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:217
 #, python-brace-format
 msgid "À partir de {size} Mo"
 msgstr "{size} MB以上"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:220
 msgid "Réglages conseillés pour ce profil :"
 msgstr "このプロファイルのおすすめ設定："
 
-#: frontend/src/views/MaintenanceView.vue:221
+#: frontend/src/views/MaintenanceView.vue:224
 msgid "Appliquer les réglages conseillés"
 msgstr "おすすめ設定を適用"
 
-#: frontend/src/views/MaintenanceView.vue:223 web/routes_settings.py:554
+#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:554
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "設定はすでにおすすめどおりです。"
 
-#: frontend/src/views/MaintenanceView.vue:228
+#: frontend/src/views/MaintenanceView.vue:231
 #: templates/configure/tab_maintenance.html.jinja:392
 msgid "Mise à jour de l'application"
 msgstr "アプリケーションのアップデート"
 
-#: frontend/src/views/MaintenanceView.vue:229
+#: frontend/src/views/MaintenanceView.vue:232
 #: templates/configure/tab_maintenance.html.jinja:394
 msgid ""
 "Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
@@ -4667,156 +4678,156 @@ msgid ""
 "précédente."
 msgstr "Pimmich は GitHub から更新して再起動します。新しいバージョンが起動しない場合は、自動的に前のバージョンに戻ります。"
 
-#: frontend/src/views/MaintenanceView.vue:231
-#: frontend/src/views/MaintenanceView.vue:408
+#: frontend/src/views/MaintenanceView.vue:234
+#: frontend/src/views/MaintenanceView.vue:411
 #: templates/configure/tab_maintenance.html.jinja:396
 msgid "Version installée :"
 msgstr "インストール済みのバージョン："
 
-#: frontend/src/views/MaintenanceView.vue:232
+#: frontend/src/views/MaintenanceView.vue:235
 #: templates/configure/tab_maintenance.html.jinja:411
 msgid "Impossible de joindre GitHub (connexion internet ?)."
 msgstr "GitHub に接続できません（インターネット接続を確認してください）。"
 
-#: frontend/src/views/MaintenanceView.vue:233
+#: frontend/src/views/MaintenanceView.vue:236
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Mise à jour disponible :"
 msgstr "アップデートがあります："
 
-#: frontend/src/views/MaintenanceView.vue:233
+#: frontend/src/views/MaintenanceView.vue:236
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "changement(s)"
 msgstr "件の変更"
 
-#: frontend/src/views/MaintenanceView.vue:233
+#: frontend/src/views/MaintenanceView.vue:236
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Pimmich est à jour."
 msgstr "Pimmich は最新です。"
 
-#: frontend/src/views/MaintenanceView.vue:235
+#: frontend/src/views/MaintenanceView.vue:238
 #: templates/configure/tab_maintenance.html.jinja:412
 msgid "Dernière mise à jour en cours de validation (redémarrage)."
 msgstr "最新のアップデートを確認中です（再起動）。"
 
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:239
 #: templates/configure/tab_maintenance.html.jinja:413
 msgid "Le cadre est revenu à une version précédente."
 msgstr "フォトフレームは前のバージョンに戻りました。"
 
-#: frontend/src/views/MaintenanceView.vue:239
+#: frontend/src/views/MaintenanceView.vue:242
 #: templates/configure/tab_maintenance.html.jinja:403
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "アップデートを開始しますか?追跡ページにリダイレクトされます。"
 
-#: frontend/src/views/MaintenanceView.vue:239
+#: frontend/src/views/MaintenanceView.vue:242
 #: templates/configure/tab_maintenance.html.jinja:404
 msgid "Lancer la mise à jour"
 msgstr "アップデートを開始する"
 
-#: frontend/src/views/MaintenanceView.vue:240
+#: frontend/src/views/MaintenanceView.vue:243
 #: templates/configure/tab_maintenance.html.jinja:406
 msgid "Revenir à la version précédente"
 msgstr "前のバージョンに戻す"
 
-#: frontend/src/views/MaintenanceView.vue:245
+#: frontend/src/views/MaintenanceView.vue:248
 #: templates/configure/tab_maintenance.html.jinja:473
 msgid "Contrôle du système"
 msgstr "システム制御"
 
-#: frontend/src/views/MaintenanceView.vue:247
+#: frontend/src/views/MaintenanceView.vue:250
 #: templates/configure/tab_maintenance.html.jinja:476
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr "Web アプリケーションのみを再起動してもよろしいですか?オペレーティング システムは再起動されません。"
 
-#: frontend/src/views/MaintenanceView.vue:248
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:479
 msgid "Redémarrer l'application web"
 msgstr "Webアプリケーションを再起動します"
 
-#: frontend/src/views/MaintenanceView.vue:249
+#: frontend/src/views/MaintenanceView.vue:252
 msgid "Redémarrer le système maintenant ?"
 msgstr "今すぐシステムを再起動しますか？"
 
-#: frontend/src/views/MaintenanceView.vue:250
+#: frontend/src/views/MaintenanceView.vue:253
 #: templates/configure/tab_maintenance.html.jinja:488
 msgid "Redémarrer le système"
 msgstr "システムを再起動します"
 
-#: frontend/src/views/MaintenanceView.vue:251
+#: frontend/src/views/MaintenanceView.vue:254
 #: templates/configure/tab_maintenance.html.jinja:496
 msgid "Supprimer les logs"
 msgstr "ログの削除"
 
-#: frontend/src/views/MaintenanceView.vue:252
+#: frontend/src/views/MaintenanceView.vue:255
 #: templates/configure/tab_maintenance.html.jinja:501
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "システムの電源を切ってもよろしいですか?"
 
-#: frontend/src/views/MaintenanceView.vue:253
+#: frontend/src/views/MaintenanceView.vue:256
 #: templates/configure/tab_maintenance.html.jinja:504
 msgid "Éteindre le système"
 msgstr "システムをシャットダウンします"
 
-#: frontend/src/views/MaintenanceView.vue:254
+#: frontend/src/views/MaintenanceView.vue:257
 msgid "Mode actuel :"
 msgstr "現在のモード："
 
-#: frontend/src/views/MaintenanceView.vue:254
+#: frontend/src/views/MaintenanceView.vue:257
 msgid "bureau Raspberry Pi OS (administration seule, sans diaporama)"
 msgstr "Raspberry Pi OS デスクトップ（管理画面のみ、スライドショーなし）"
 
-#: frontend/src/views/MaintenanceView.vue:254
+#: frontend/src/views/MaintenanceView.vue:257
 msgid "cadre photo Pimmich"
 msgstr "Pimmich フォトフレーム"
 
-#: frontend/src/views/MaintenanceView.vue:255
+#: frontend/src/views/MaintenanceView.vue:258
 #: templates/configure/tab_maintenance.html.jinja:509
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Raspberry Pi OS（デスクトップ）に戻す"
 
-#: frontend/src/views/MaintenanceView.vue:256
+#: frontend/src/views/MaintenanceView.vue:259
 #: templates/configure/tab_maintenance.html.jinja:513
 msgid "Repasser sur Pimmich (cadre photo)"
 msgstr "Pimmich（フォトフレーム）に戻す"
 
-#: frontend/src/views/MaintenanceView.vue:262
+#: frontend/src/views/MaintenanceView.vue:265
 #: templates/configure/tab_maintenance.html.jinja:202
 msgid "Espace disque"
 msgstr "ディスク容量"
 
-#: frontend/src/views/MaintenanceView.vue:263
+#: frontend/src/views/MaintenanceView.vue:266
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "Go libres sur"
 msgstr "GB 空き / 全体"
 
-#: frontend/src/views/MaintenanceView.vue:263
+#: frontend/src/views/MaintenanceView.vue:266
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "utilisés"
 msgstr "使用済み"
 
-#: frontend/src/views/MaintenanceView.vue:264
+#: frontend/src/views/MaintenanceView.vue:267
 #: templates/configure/tab_maintenance.html.jinja:359
 msgid "espace faible"
 msgstr "空き容量不足"
 
-#: frontend/src/views/MaintenanceView.vue:265
+#: frontend/src/views/MaintenanceView.vue:268
 #: templates/configure/tab_maintenance.html.jinja:360
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr "件の Google Drive メディアが自動的に削除される可能性があります。"
 
-#: frontend/src/views/MaintenanceView.vue:267
+#: frontend/src/views/MaintenanceView.vue:270
 #: templates/configure/tab_maintenance.html.jinja:205
 msgid "Alerter sous (Go libres) :"
 msgstr "警告するしきい値（空き GB）："
 
-#: frontend/src/views/MaintenanceView.vue:268
+#: frontend/src/views/MaintenanceView.vue:271
 #: templates/configure/tab_maintenance.html.jinja:209
 msgid "Libérer de la place automatiquement"
 msgstr "自動的に空き容量を確保"
 
-#: frontend/src/views/MaintenanceView.vue:270
+#: frontend/src/views/MaintenanceView.vue:273
 #: templates/configure/tab_maintenance.html.jinja:211
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
@@ -4826,12 +4837,12 @@ msgstr ""
 "しきい値を下回ると、Google Drive から既に削除された Google Drive "
 "の写真や動画が古いものから順にフォトフレームから削除されます。お気に入りは削除されません。"
 
-#: frontend/src/views/MaintenanceView.vue:271
+#: frontend/src/views/MaintenanceView.vue:274
 #: templates/configure/tab_maintenance.html.jinja:324
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr "Google Drive への自動バックアップ"
 
-#: frontend/src/views/MaintenanceView.vue:272
+#: frontend/src/views/MaintenanceView.vue:275
 #: templates/configure/tab_maintenance.html.jinja:326
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
@@ -4841,128 +4852,128 @@ msgstr ""
 "設定、アカウント、プレイリスト、お気に入り、招待、メッセージを Google Drive のフォルダにバックアップします（rclone "
 "接続）。写真は含まれません。"
 
-#: frontend/src/views/MaintenanceView.vue:274
+#: frontend/src/views/MaintenanceView.vue:277
 #: templates/configure/tab_maintenance.html.jinja:329 utils/health.py:159
 msgid "Activer la sauvegarde automatique"
 msgstr "自動バックアップを有効にする"
 
-#: frontend/src/views/MaintenanceView.vue:275
+#: frontend/src/views/MaintenanceView.vue:278
 #: templates/configure/tab_maintenance.html.jinja:332
 msgid "Dossier Google Drive :"
 msgstr "Google Drive フォルダ："
 
-#: frontend/src/views/MaintenanceView.vue:276
+#: frontend/src/views/MaintenanceView.vue:279
 #: templates/configure/tab_maintenance.html.jinja:334
 msgid "Toutes les (heures) :"
 msgstr "間隔（時間）："
 
-#: frontend/src/views/MaintenanceView.vue:277
+#: frontend/src/views/MaintenanceView.vue:280
 #: templates/configure/tab_maintenance.html.jinja:336
 msgid "Sauvegardes conservées :"
 msgstr "保持するバックアップ数："
 
-#: frontend/src/views/MaintenanceView.vue:279
+#: frontend/src/views/MaintenanceView.vue:282
 #: templates/configure/tab_maintenance.html.jinja:367
 msgid "Dernière sauvegarde réussie :"
 msgstr "最後に成功したバックアップ："
 
-#: frontend/src/views/MaintenanceView.vue:280
+#: frontend/src/views/MaintenanceView.vue:283
 #: templates/configure/tab_maintenance.html.jinja:368
 msgid "Dernier échec :"
 msgstr "最後の失敗："
 
-#: frontend/src/views/MaintenanceView.vue:282
+#: frontend/src/views/MaintenanceView.vue:285
 #: templates/configure/tab_maintenance.html.jinja:342
 msgid "Enregistrer ces réglages"
 msgstr "この設定を保存"
 
-#: frontend/src/views/MaintenanceView.vue:283
-#: frontend/src/views/MaintenanceView.vue:342
+#: frontend/src/views/MaintenanceView.vue:286
+#: frontend/src/views/MaintenanceView.vue:345
 #: templates/configure/tab_maintenance.html.jinja:86
 #: templates/configure/tab_maintenance.html.jinja:344
 msgid "Sauvegarder maintenant"
 msgstr "今すぐバックアップ"
 
-#: frontend/src/views/MaintenanceView.vue:284
+#: frontend/src/views/MaintenanceView.vue:287
 #: templates/configure/tab_maintenance.html.jinja:346
 msgid "Restaurer la dernière sauvegarde"
 msgstr "最新のバックアップを復元"
 
-#: frontend/src/views/MaintenanceView.vue:289
+#: frontend/src/views/MaintenanceView.vue:292
 #: templates/configure/tab_maintenance.html.jinja:215
 msgid "Stockage des photos"
 msgstr "写真の保存先"
 
-#: frontend/src/views/MaintenanceView.vue:292
-#: frontend/src/views/MaintenanceView.vue:294
+#: frontend/src/views/MaintenanceView.vue:295
+#: frontend/src/views/MaintenanceView.vue:297
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "libres sur"
 msgstr "空き／全体"
 
-#: frontend/src/views/MaintenanceView.vue:295
+#: frontend/src/views/MaintenanceView.vue:298
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Débranché"
 msgstr "未接続"
 
-#: frontend/src/views/MaintenanceView.vue:298
+#: frontend/src/views/MaintenanceView.vue:301
 #: templates/configure/tab_maintenance.html.jinja:220
 msgid "Ajouter un support"
 msgstr "保存先を追加"
 
-#: frontend/src/views/MaintenanceView.vue:300
+#: frontend/src/views/MaintenanceView.vue:303
 #: templates/configure/tab_maintenance.html.jinja:256
 msgid ""
 "Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
 "un dossier « pimmich »."
 msgstr "ディスクの既存の内容はそのまま残ります。Pimmichは「pimmich」フォルダーに写真を保存します。"
 
-#: frontend/src/views/MaintenanceView.vue:301
+#: frontend/src/views/MaintenanceView.vue:304
 #: templates/configure/tab_maintenance.html.jinja:254
 msgid "Utiliser ce disque"
 msgstr "このディスクを使う"
 
-#: frontend/src/views/MaintenanceView.vue:302
+#: frontend/src/views/MaintenanceView.vue:305
 #: templates/configure/tab_maintenance.html.jinja:222
 msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
 msgstr "USBディスクが見つかりません。接続してからこのタブを開き直してください。"
 
-#: frontend/src/views/MaintenanceView.vue:304
+#: frontend/src/views/MaintenanceView.vue:307
 #: templates/configure/tab_maintenance.html.jinja:224
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "ネットワーク共有（NAS、パソコン）"
 
-#: frontend/src/views/MaintenanceView.vue:310
+#: frontend/src/views/MaintenanceView.vue:313
 #: templates/configure/tab_maintenance.html.jinja:230
 msgid "Ajouter le partage"
 msgstr "共有を追加"
 
-#: frontend/src/views/MaintenanceView.vue:312
+#: frontend/src/views/MaintenanceView.vue:315
 #: templates/configure/tab_maintenance.html.jinja:234
 msgid "Emplacement de chaque source"
 msgstr "ソースごとの保存先"
 
-#: frontend/src/views/MaintenanceView.vue:316
+#: frontend/src/views/MaintenanceView.vue:319
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "fichiers"
 msgstr "ファイル"
 
-#: frontend/src/views/MaintenanceView.vue:316
+#: frontend/src/views/MaintenanceView.vue:319
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "support débranché"
 msgstr "保存先が未接続"
 
-#: frontend/src/views/MaintenanceView.vue:323
+#: frontend/src/views/MaintenanceView.vue:326
 #: templates/configure/tab_maintenance.html.jinja:254
 #, python-brace-format
 msgid "Déplacement de « {source} » : {done} / {total} fichiers"
 msgstr "「{source}」を移動中：{done} / {total} ファイル"
 
-#: frontend/src/views/MaintenanceView.vue:328
+#: frontend/src/views/MaintenanceView.vue:331
 #: templates/configure/tab_maintenance.html.jinja:68
 msgid "Sauvegarde complète"
 msgstr "完全バックアップ"
 
-#: frontend/src/views/MaintenanceView.vue:329
+#: frontend/src/views/MaintenanceView.vue:332
 #: templates/configure/tab_maintenance.html.jinja:69
 msgid ""
 "Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, "
@@ -4971,76 +4982,76 @@ msgid ""
 "installation."
 msgstr "フレームのすべて：設定、アカウント、プレイリスト、メッセージ、絵と音声メッセージ、ゲストブック、キャプション、リアクション、音楽、履歴。このフレームでも新しいインストールでもワンクリックで復元できます。"
 
-#: frontend/src/views/MaintenanceView.vue:332
+#: frontend/src/views/MaintenanceView.vue:335
 #: templates/configure/tab_maintenance.html.jinja:72
 msgid "Sans les photos"
 msgstr "写真なし"
 
-#: frontend/src/views/MaintenanceView.vue:333
+#: frontend/src/views/MaintenanceView.vue:336
 #: templates/configure/tab_maintenance.html.jinja:74
 msgid "Télécharger"
 msgstr "ダウンロード"
 
-#: frontend/src/views/MaintenanceView.vue:335
+#: frontend/src/views/MaintenanceView.vue:338
 #: templates/configure/tab_maintenance.html.jinja:78
 msgid "Restaurer ce fichier"
 msgstr "このファイルを復元"
 
-#: frontend/src/views/MaintenanceView.vue:338
+#: frontend/src/views/MaintenanceView.vue:341
 #: templates/configure/tab_maintenance.html.jinja:81
 msgid "Avec les photos, sur un disque USB ou un NAS"
 msgstr "写真あり（USBドライブまたはNASへ）"
 
-#: frontend/src/views/MaintenanceView.vue:339
+#: frontend/src/views/MaintenanceView.vue:342
 #: templates/configure/tab_maintenance.html.jinja:82
 msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
 msgstr "まず下の「写真の保存先」で保存先を追加してください。"
 
-#: frontend/src/views/MaintenanceView.vue:344
+#: frontend/src/views/MaintenanceView.vue:347
 #: templates/configure/tab_maintenance.html.jinja:112
 #, python-brace-format
 msgid "Sauvegarde en cours : {done} / {total} fichiers"
 msgstr "バックアップ中：{done} / {total} ファイル"
 
-#: frontend/src/views/MaintenanceView.vue:350
+#: frontend/src/views/MaintenanceView.vue:353
 #: templates/configure/tab_maintenance.html.jinja:122
 msgid "avec photos"
 msgstr "写真あり"
 
-#: frontend/src/views/MaintenanceView.vue:351
+#: frontend/src/views/MaintenanceView.vue:354
 #: templates/configure/tab_maintenance.html.jinja:61
 #: templates/configure/tab_maintenance.html.jinja:126
 msgid "Restaurer"
 msgstr "復元する"
 
-#: frontend/src/views/MaintenanceView.vue:354
+#: frontend/src/views/MaintenanceView.vue:357
 #: templates/configure/tab_maintenance.html.jinja:38
 msgid "Sauvegarde et Restauration"
 msgstr "バックアップと復元"
 
-#: frontend/src/views/MaintenanceView.vue:356
+#: frontend/src/views/MaintenanceView.vue:359
 #: templates/configure/tab_maintenance.html.jinja:49
 msgid "Télécharger la sauvegarde"
 msgstr "バックアップをダウンロードする"
 
-#: frontend/src/views/MaintenanceView.vue:357
+#: frontend/src/views/MaintenanceView.vue:360
 #: templates/configure/tab_maintenance.html.jinja:56
 msgid ""
 "Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
 "fichier de sauvegarde."
 msgstr "本気ですか？現在の設定はバックアップ ファイルの内容によって上書きされます。"
 
-#: frontend/src/views/MaintenanceView.vue:359
+#: frontend/src/views/MaintenanceView.vue:362
 #: templates/configure/tab_maintenance.html.jinja:54
 msgid "Restaurer une configuration"
 msgstr "構成を復元する"
 
-#: frontend/src/views/MaintenanceView.vue:366
+#: frontend/src/views/MaintenanceView.vue:369
 #: templates/configure/tab_maintenance.html.jinja:160
 msgid "HTTPS sans avertissement (Tailscale)"
 msgstr "警告なしの HTTPS（Tailscale）"
 
-#: frontend/src/views/MaintenanceView.vue:367
+#: frontend/src/views/MaintenanceView.vue:370
 #: templates/configure/tab_maintenance.html.jinja:161
 msgid ""
 "Ouvre l'administration à une adresse sécurisée par un vrai certificat, "
@@ -5050,44 +5061,44 @@ msgstr ""
 "Tailscale "
 "に接続した端末から（自宅でも外出先でも）、本物の証明書で保護されたアドレスで管理画面を開けます。インターネットには公開されません。"
 
-#: frontend/src/views/MaintenanceView.vue:368
+#: frontend/src/views/MaintenanceView.vue:371
 #: templates/configure/tab_maintenance.html.jinja:162
 msgid "Activer l'accès HTTPS par Tailscale"
 msgstr "Tailscale 経由の HTTPS アクセスを有効にする"
 
-#: frontend/src/views/MaintenanceView.vue:369
+#: frontend/src/views/MaintenanceView.vue:372
 #: templates/configure/tab_maintenance.html.jinja:174
 msgid "Tailscale n'est pas installé sur ce cadre."
 msgstr "このフレームには Tailscale がインストールされていません。"
 
-#: frontend/src/views/MaintenanceView.vue:370
+#: frontend/src/views/MaintenanceView.vue:373
 #: templates/configure/tab_maintenance.html.jinja:175
 msgid "Tailscale n'est pas connecté."
 msgstr "Tailscale に接続されていません。"
 
-#: frontend/src/views/MaintenanceView.vue:371
+#: frontend/src/views/MaintenanceView.vue:374
 #: templates/configure/tab_maintenance.html.jinja:190
 msgid "Autoriser sur Tailscale"
 msgstr "Tailscale で許可"
 
-#: frontend/src/views/MaintenanceView.vue:375
+#: frontend/src/views/MaintenanceView.vue:378
 #: templates/configure/tab_maintenance.html.jinja:444
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SDカードファイルシステム"
 
-#: frontend/src/views/MaintenanceView.vue:376
+#: frontend/src/views/MaintenanceView.vue:379
 #: templates/configure/tab_maintenance.html.jinja:458
 msgid "Protection contre l'usure"
 msgstr "摩耗対策"
 
-#: frontend/src/views/MaintenanceView.vue:377
+#: frontend/src/views/MaintenanceView.vue:380
 #: templates/configure/tab_maintenance.html.jinja:465
 msgid ""
 "Active : les journaux sont écrits en mémoire vive et recopiés sur la "
 "carte une fois par jour."
 msgstr "有効：ログはメモリに書き込まれ、1日1回カードにコピーされます。"
 
-#: frontend/src/views/MaintenanceView.vue:377
+#: frontend/src/views/MaintenanceView.vue:380
 #: templates/configure/tab_maintenance.html.jinja:466
 msgid ""
 "Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur"
@@ -5097,64 +5108,64 @@ msgstr ""
 "無効。SD カードへの書き込みを減らすには、Raspberry Pi で一度 sudo "
 "~/pimmich/utils/enable_sd_protection.sh を実行して再起動してください。"
 
-#: frontend/src/views/MaintenanceView.vue:378
+#: frontend/src/views/MaintenanceView.vue:381
 msgid "Taille de la partition"
 msgstr "パーティションのサイズ"
 
-#: frontend/src/views/MaintenanceView.vue:380
+#: frontend/src/views/MaintenanceView.vue:383
 msgid "Partition système :"
 msgstr "システムパーティション："
 
-#: frontend/src/views/MaintenanceView.vue:380
+#: frontend/src/views/MaintenanceView.vue:383
 msgid "carte SD :"
 msgstr "SD カード："
 
-#: frontend/src/views/MaintenanceView.vue:381
+#: frontend/src/views/MaintenanceView.vue:384
 msgid "Toute la carte SD est déjà utilisée : rien à agrandir."
 msgstr "SD カード全体がすでに使われています。拡張の必要はありません。"
 
-#: frontend/src/views/MaintenanceView.vue:383
+#: frontend/src/views/MaintenanceView.vue:386
 msgid ""
 "ne sont pas utilisés sur la carte SD. L'opération ne supprime aucune "
 "donnée ; l'agrandissement se termine au prochain redémarrage."
 msgstr "が SD カード上で使われていません。データは削除されず、拡張は次回の再起動で完了します。"
 
-#: frontend/src/views/MaintenanceView.vue:384
+#: frontend/src/views/MaintenanceView.vue:387
 #: templates/configure/tab_maintenance.html.jinja:455
 msgid "Étendre le système de fichiers"
 msgstr "ファイルシステムを拡張する"
 
-#: frontend/src/views/MaintenanceView.vue:387
+#: frontend/src/views/MaintenanceView.vue:390
 msgid "Taille de la carte SD inconnue."
 msgstr "SD カードのサイズが不明です。"
 
-#: frontend/src/views/MaintenanceView.vue:392
+#: frontend/src/views/MaintenanceView.vue:395
 msgid "À propos"
 msgstr "情報"
 
-#: frontend/src/views/MaintenanceView.vue:395
+#: frontend/src/views/MaintenanceView.vue:398
 msgid "Pimmich, le projet d'origine"
 msgstr "Pimmich（元のプロジェクト）"
 
-#: frontend/src/views/MaintenanceView.vue:396
+#: frontend/src/views/MaintenanceView.vue:399
 msgid "Créé par Gotenash et Shenron, dans le cadre du Gadgetaulab. Merci à eux !"
 msgstr "Gotenash と Shenron が Gadgetaulab で制作しました。ありがとうございます！"
 
-#: frontend/src/views/MaintenanceView.vue:404
+#: frontend/src/views/MaintenanceView.vue:407
 msgid "Ce cadre"
 msgstr "このフォトフレーム"
 
-#: frontend/src/views/MaintenanceView.vue:405
+#: frontend/src/views/MaintenanceView.vue:408
 msgid ""
 "Fork personnel de Pimmich, avec de nombreuses fonctionnalités ajoutées, "
 "pour un usage purement perso."
 msgstr "多くの機能を追加した Pimmich の個人用フォークです（個人利用のみ）。"
 
-#: frontend/src/views/MaintenanceView.vue:412
+#: frontend/src/views/MaintenanceView.vue:415
 msgid "Licences"
 msgstr "ライセンス"
 
-#: frontend/src/views/MaintenanceView.vue:413
+#: frontend/src/views/MaintenanceView.vue:416
 msgid ""
 "Pimmich est distribué sous licence MIT. Les composants tiers gardent leur"
 " propre licence :"
@@ -6229,7 +6240,7 @@ msgid "Musique du cadre"
 msgstr "フレームの音楽"
 
 #: frontend/src/views/SoundView.vue:87 templates/configure/tab_son.html.jinja:3
-#: web/routes_home.py:224
+#: web/routes_home.py:235
 msgid "Musique du diaporama"
 msgstr "スライドショーの音楽"
 
@@ -9225,8 +9236,8 @@ msgstr ""
 "写真をドラッグして順番を変更できます。リストの先頭の写真が、現在の写真のすぐ次に表示されます。▶ "
 "ボタンを押すとすぐに表示されます。紫の枠は同じ組み写真に含まれる写真をまとめたもので、一緒に移動します。"
 
-#: templates/configure/tab_queue.html.jinja:8 web/routes_frames.py:98
-#: web/routes_home.py:130
+#: templates/configure/tab_queue.html.jinja:8 web/routes_frames.py:99
+#: web/routes_home.py:131
 msgid "Le diaporama n'est pas en cours."
 msgstr "スライドショーは実行されていません。"
 
@@ -10220,21 +10231,21 @@ msgstr "庭"
 msgid "Une photo en noir et blanc"
 msgstr "白黒写真"
 
-#: utils/family_game.py:280
+#: utils/family_game.py:276
 #, python-format
 msgid "Combien de photos de %(year)s sont sur le cadre ?"
 msgstr "%(year)s年の写真はフレームに何枚？"
 
-#: utils/family_game.py:282
+#: utils/family_game.py:278
 #, python-format
 msgid "Combien de photos ont été envoyées par %(name)s ?"
 msgstr "%(name)sさんが送った写真は何枚？"
 
-#: utils/family_game.py:284
+#: utils/family_game.py:280
 msgid "Combien de photos y a-t-il sur le cadre ?"
 msgstr "フレームの写真は全部で何枚？"
 
-#: utils/family_game.py:291
+#: utils/family_game.py:287
 #, python-format
 msgid "Combien de photos ont été prises en %(month)s (toutes années confondues) ?"
 msgstr "%(month)sに撮られた写真は何枚（全年）？"
@@ -10707,7 +10718,7 @@ msgstr "準備できないメディア"
 msgid "Bilan du jour (photos reçues, échecs, place libre, température)"
 msgstr "今日のまとめ（受信写真、失敗、空き容量、温度）"
 
-#: utils/party.py:181
+#: utils/party.py:182
 msgid "Mur de la fête"
 msgstr "パーティーウォール"
 
@@ -10975,23 +10986,23 @@ msgstr "母の日"
 msgid "Fête des pères"
 msgstr "父の日"
 
-#: web/core.py:962
+#: web/core.py:963
 msgid "Code d'invitation invalide."
 msgstr "招待コードが無効です。"
 
-#: web/core.py:968
+#: web/core.py:969
 msgid "Ce code d'invitation a expiré."
 msgstr "この招待コードの有効期限は切れています。"
 
-#: web/core.py:974
+#: web/core.py:975
 msgid "Vous êtes déjà autorisé. Envoyez-moi une photo !"
 msgstr "あなたはすでに認可されています。写真を送ってください！"
 
-#: web/core.py:976
+#: web/core.py:977
 msgid "Ce code d'invitation a déjà été utilisé."
 msgstr "この招待コードはすでに使用されています。"
 
-#: web/core.py:987
+#: web/core.py:988
 #, python-format
 msgid ""
 "Félicitations %(name)s ! Vous pouvez maintenant envoyer des cartes "
@@ -11093,7 +11104,7 @@ msgid "Style enregistré : visible dès la photo suivante."
 msgstr "スタイルを保存しました：次の写真から反映されます。"
 
 #: web/routes_captions.py:112 web/routes_guests.py:531
-#: web/routes_imports.py:845 web/routes_imports.py:854 web/routes_photos.py:285
+#: web/routes_imports.py:846 web/routes_imports.py:855 web/routes_photos.py:285
 msgid "Photo introuvable."
 msgstr "写真が見つかりません。"
 
@@ -11137,57 +11148,57 @@ msgstr "リストが無効です。"
 msgid "%(count)s date(s) enregistrée(s)."
 msgstr "%(count)s件の日付を保存しました。"
 
-#: web/routes_frames.py:47
+#: web/routes_frames.py:48
 msgid "Autre cadre"
 msgstr "他のフレーム"
 
-#: web/routes_frames.py:108 web/routes_frames.py:270 web/routes_guests.py:299
+#: web/routes_frames.py:109 web/routes_frames.py:271 web/routes_guests.py:299
 msgid "Action inconnue."
 msgstr "アクションは不明。"
 
-#: web/routes_frames.py:138
+#: web/routes_frames.py:139
 #, python-format
 msgid "%(count)s photo(s) reçue(s)."
 msgstr "%(count)s枚の写真を受け取りました。"
 
-#: web/routes_frames.py:155 web/routes_messages.py:65
+#: web/routes_frames.py:156 web/routes_messages.py:65
 msgid "Message publié : il apparaîtra dans le diaporama."
 msgstr "メッセージを公開しました。スライドショーに表示されます。"
 
-#: web/routes_frames.py:209
+#: web/routes_frames.py:210
 msgid "Adresse ou code invalide."
 msgstr "アドレスまたはコードが無効です。"
 
-#: web/routes_frames.py:214
+#: web/routes_frames.py:215
 msgid "Ce cadre ne répond pas : vérifiez son adresse (réseau local ou Tailscale)."
 msgstr "このフレームが応答しません。アドレス（ローカルネットワークまたはTailscale）を確認してください。"
 
-#: web/routes_frames.py:216
+#: web/routes_frames.py:217
 msgid "Le code d'association est refusé par ce cadre."
 msgstr "このフレームがペアリングコードを拒否しました。"
 
-#: web/routes_frames.py:221
+#: web/routes_frames.py:222
 #, python-format
 msgid "Cadre « %(name)s » ajouté."
 msgstr "フレーム「%(name)s」を追加しました。"
 
-#: web/routes_frames.py:230
+#: web/routes_frames.py:231
 msgid "Cadre retiré."
 msgstr "フレームを削除しました。"
 
-#: web/routes_frames.py:257
+#: web/routes_frames.py:258
 msgid "Cadre inconnu."
 msgstr "不明なフレームです。"
 
-#: web/routes_frames.py:272
+#: web/routes_frames.py:273
 msgid "Ce cadre ne répond pas."
 msgstr "このフレームが応答しません。"
 
-#: web/routes_frames.py:277
+#: web/routes_frames.py:278
 msgid "C'est fait."
 msgstr "完了しました。"
 
-#: web/routes_frames.py:277
+#: web/routes_frames.py:278
 msgid "Ce cadre a refusé la demande."
 msgstr "このフレームが要求を拒否しました。"
 
@@ -11260,11 +11271,11 @@ msgstr "ありがとうございます！%(count)s枚送信しました。まも
 msgid "%(count)s photo(s) d'invité"
 msgstr "ゲストの写真%(count)s枚"
 
-#: web/routes_guests.py:138 web/routes_imports.py:737
+#: web/routes_guests.py:138 web/routes_imports.py:738
 msgid "Nouvelle photo d'invité"
 msgstr "ゲストの新しい写真"
 
-#: web/routes_guests.py:138 web/routes_imports.py:737
+#: web/routes_guests.py:138 web/routes_imports.py:738
 #, python-format
 msgid "%(count)s photo(s) à valider sur le cadre."
 msgstr "フォトフレームで承認待ちの写真が %(count)s 枚あります。"
@@ -11413,212 +11424,212 @@ msgstr "取り消すものはありません。"
 msgid "Annulé : %(action)s"
 msgstr "取り消しました：%(action)s"
 
-#: web/routes_home.py:87
+#: web/routes_home.py:88
 msgid "Étape inconnue."
 msgstr "不明なステップです。"
 
-#: web/routes_home.py:116
+#: web/routes_home.py:117
 msgid "Mes réglages"
 msgstr "自分の設定"
 
-#: web/routes_home.py:118
+#: web/routes_home.py:119
 #, python-format
 msgid "Ambiance « %(name)s »"
 msgstr "雰囲気「%(name)s」"
 
-#: web/routes_home.py:119
+#: web/routes_home.py:120
 #, python-format
 msgid "Ambiance « %(name)s » appliquée."
 msgstr "ムード「%(name)s」を適用しました。"
 
-#: web/routes_home.py:128 web/routes_playlists.py:94
-#: web/routes_slideshow.py:516
+#: web/routes_home.py:129 web/routes_playlists.py:94
+#: web/routes_slideshow.py:517
 msgid "Disposition inconnue."
 msgstr "不明なレイアウトです。"
 
-#: web/routes_home.py:133
+#: web/routes_home.py:134
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "レイアウトを準備中です… 数秒で表示されます。"
 
-#: web/routes_home.py:202
+#: web/routes_home.py:213
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
-#: web/routes_home.py:206 web/routes_music.py:331
+#: web/routes_home.py:217 web/routes_music.py:331
 msgid "Volume invalide."
 msgstr "音量が無効です。"
 
-#: web/routes_home.py:210 web/routes_system.py:821
+#: web/routes_home.py:221 web/routes_system.py:821
 msgid "Réglage invalide."
 msgstr "無効な設定です。"
 
-#: web/routes_home.py:219
+#: web/routes_home.py:230
 msgid "Réglages du son enregistrés."
 msgstr "サウンド設定を保存しました。"
 
-#: web/routes_home.py:276
+#: web/routes_home.py:287
 msgid "Adresse d'appareil invalide."
 msgstr "機器のアドレスが無効です。"
 
-#: web/routes_home.py:282
+#: web/routes_home.py:293
 msgid "Réglages de présence enregistrés."
 msgstr "在宅設定を保存しました。"
 
-#: web/routes_home.py:308
+#: web/routes_home.py:319
 msgid "Adresse du serveur ntfy invalide."
 msgstr "ntfy サーバーのアドレスが無効です。"
 
-#: web/routes_home.py:319
+#: web/routes_home.py:330
 msgid "Notifications enregistrées."
 msgstr "通知設定を保存しました。"
 
-#: web/routes_home.py:327
+#: web/routes_home.py:338
 msgid "Pimmich"
 msgstr "Pimmich"
 
-#: web/routes_home.py:327
+#: web/routes_home.py:338
 msgid "Ceci est une notification de test du cadre photo."
 msgstr "フォトフレームからのテスト通知です。"
 
-#: web/routes_home.py:328
+#: web/routes_home.py:339
 msgid "Activez d'abord les notifications."
 msgstr "先に通知を有効にしてください。"
 
-#: web/routes_home.py:329
+#: web/routes_home.py:340
 msgid "Notification de test envoyée."
 msgstr "テスト通知を送信しました。"
 
-#: web/routes_home.py:339
+#: web/routes_home.py:350
 msgid "Nouveau canal créé : abonnez de nouveau vos téléphones."
 msgstr "新しいチャンネルを作成しました。スマートフォンを再登録してください。"
 
-#: web/routes_home.py:379
+#: web/routes_home.py:390
 msgid "Adresse d'agenda invalide (elle commence par https:// ou webcal://)."
 msgstr "カレンダーのアドレスが無効です（https:// または webcal:// で始まります）。"
 
-#: web/routes_home.py:389
+#: web/routes_home.py:400
 msgid "Date invalide."
 msgstr "日付が無効です。"
 
-#: web/routes_home.py:395
+#: web/routes_home.py:406
 msgid "Agenda enregistré."
 msgstr "カレンダーを保存しました。"
 
-#: web/routes_homeassistant.py:38
+#: web/routes_homeassistant.py:39
 msgid "Alerte de la maison"
 msgstr "家からのお知らせ"
 
-#: web/routes_homeassistant.py:100 web/routes_imports.py:785
+#: web/routes_homeassistant.py:101 web/routes_imports.py:786
 msgid "Port invalide."
 msgstr "ポートが無効です。"
 
-#: web/routes_homeassistant.py:104
+#: web/routes_homeassistant.py:105
 msgid "Connexion à Home Assistant lancée."
 msgstr "Home Assistantに接続しています。"
 
-#: web/routes_homeassistant.py:104
+#: web/routes_homeassistant.py:105
 msgid "Home Assistant désactivé."
 msgstr "Home Assistantを無効にしました。"
 
-#: web/routes_imports.py:210
+#: web/routes_imports.py:211
 #, python-format
 msgid "%(count)s photo(s) envoyée(s)"
 msgstr "%(count)s枚の写真を送信"
 
-#: web/routes_imports.py:430
+#: web/routes_imports.py:431
 #, python-format
 msgid ""
 "%(count)s photo(s) seront de nouveau proposées à la corbeille à la "
 "prochaine synchronisation."
 msgstr "%(count)s 枚の写真を次回の同期で再度ゴミ箱に移動します。"
 
-#: web/routes_imports.py:488
+#: web/routes_imports.py:489
 msgid "Compte ajouté : choisissez maintenant les dossiers."
 msgstr "アカウントを追加しました。フォルダを選んでください。"
 
-#: web/routes_imports.py:509
+#: web/routes_imports.py:510
 msgid "Compte inconnu."
 msgstr "不明なアカウントです。"
 
-#: web/routes_imports.py:520
+#: web/routes_imports.py:521
 msgid "Réglages du cloud enregistrés."
 msgstr "クラウドの設定を保存しました。"
 
-#: web/routes_imports.py:528
+#: web/routes_imports.py:529
 msgid "Choisissez d'abord un compte et des dossiers."
 msgstr "先にアカウントとフォルダを選んでください。"
 
-#: web/routes_imports.py:530 web/routes_imports.py:609
+#: web/routes_imports.py:531 web/routes_imports.py:610
 msgid "Synchronisation lancée : suivez-la dans la notification en bas de l'écran."
 msgstr "同期を開始しました。画面下部の通知で進行状況を確認できます。"
 
-#: web/routes_imports.py:573
+#: web/routes_imports.py:574
 #, python-format
 msgid "iCloud ne répond pas : %(error)s"
 msgstr "iCloudが応答しません：%(error)s"
 
-#: web/routes_imports.py:583
+#: web/routes_imports.py:584
 #, python-format
 msgid "Album « %(name)s » ajouté (%(count)s éléments) : import lancé."
 msgstr "アルバム「%(name)s」を追加しました（%(count)s件）：インポートを開始しました。"
 
-#: web/routes_imports.py:599
+#: web/routes_imports.py:600
 msgid "Réglages iCloud enregistrés."
 msgstr "iCloudの設定を保存しました。"
 
-#: web/routes_imports.py:607
+#: web/routes_imports.py:608
 msgid "Ajoutez d'abord un album partagé."
 msgstr "まず共有アルバムを追加してください。"
 
-#: web/routes_imports.py:659
+#: web/routes_imports.py:660
 msgid "Ce fichier n'est pas un export WhatsApp (.zip)."
 msgstr "このファイルはWhatsAppのエクスポート（.zip）ではありません。"
 
-#: web/routes_imports.py:662
+#: web/routes_imports.py:663
 msgid ""
 "Aucune photo ni vidéo dans cet export : choisissez « Joindre les médias »"
 " en l'exportant."
 msgstr "このエクスポートには写真も動画もありません。エクスポート時に「メディアを添付」を選んでください。"
 
-#: web/routes_imports.py:672
+#: web/routes_imports.py:673
 msgid "Envoyez d'abord l'export de la discussion."
 msgstr "まずトークのエクスポートをアップロードしてください。"
 
-#: web/routes_imports.py:679
+#: web/routes_imports.py:680
 msgid "Import lancé : suivez-le dans la notification en bas de l'écran."
 msgstr "インポートを開始しました：画面下部の通知で進行状況を確認できます。"
 
-#: web/routes_imports.py:711
+#: web/routes_imports.py:712
 #, python-format
 msgid "%(count)s fichier(s) reçu(s) : ils arrivent sur le cadre."
 msgstr "%(count)s件のファイルを受け取りました：まもなくフレームに表示されます。"
 
-#: web/routes_imports.py:793
+#: web/routes_imports.py:794
 msgid "Réglages de l'e-mail enregistrés."
 msgstr "メールの設定を保存しました。"
 
-#: web/routes_imports.py:805 web/routes_system.py:310
+#: web/routes_imports.py:806 web/routes_system.py:310
 #, python-format
 msgid "Connexion impossible : %(error)s"
 msgstr "接続できません：%(error)s"
 
-#: web/routes_imports.py:806
+#: web/routes_imports.py:807
 #, python-format
 msgid "Connexion réussie : %(count)s messages dans la boîte."
 msgstr "接続しました：メールボックスに%(count)s件のメッセージがあります。"
 
-#: web/routes_imports.py:814
+#: web/routes_imports.py:815
 msgid "Activez d'abord la réception par e-mail."
 msgstr "まずメール受信を有効にしてください。"
 
-#: web/routes_imports.py:819
+#: web/routes_imports.py:820
 #, python-format
 msgid ""
 "%(accepted)s photo(s) ajoutée(s), %(pending)s à valider, %(ignored)s "
 "ignorée(s)."
 msgstr "%(accepted)s枚追加、%(pending)s枚承認待ち、%(ignored)s枚無視しました。"
 
-#: web/routes_imports.py:857
+#: web/routes_imports.py:858
 msgid "Photo supprimée du cadre."
 msgstr "写真をフレームから削除しました。"
 
@@ -12150,63 +12161,63 @@ msgstr "おすすめ設定を適用しました"
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s件の設定をRaspberry Piに合わせました。"
 
-#: web/routes_slideshow.py:135
+#: web/routes_slideshow.py:136
 msgid "Diaporama mis en veille."
 msgstr "スライドショーをスリープにしました。"
 
-#: web/routes_slideshow.py:135
+#: web/routes_slideshow.py:136
 msgid "Diaporama réveillé."
 msgstr "スライドショーを再開しました。"
 
-#: web/routes_slideshow.py:386
+#: web/routes_slideshow.py:387
 #, python-format
 msgid "Résolution appliquée : %(width)sx%(height)s. Le diaporama a été redémarré."
 msgstr "適用される解像度: %(width)sx%(height)s。スライドショーを再開しました。"
 
-#: web/routes_slideshow.py:388
+#: web/routes_slideshow.py:389
 #, python-format
 msgid ""
 "Résolution appliquée : %(width)sx%(height)s. Le diaporama n'était pas en "
 "cours."
 msgstr "適用される解像度: %(width)sx%(height)s。スライドショーは進行中ではありませんでした。"
 
-#: web/routes_slideshow.py:479
+#: web/routes_slideshow.py:480
 msgid "Composition"
 msgstr "組み写真"
 
-#: web/routes_slideshow.py:490 web/routes_slideshow.py:495
+#: web/routes_slideshow.py:491 web/routes_slideshow.py:496
 msgid "Ordre invalide."
 msgstr "無効な順番です。"
 
-#: web/routes_slideshow.py:500
+#: web/routes_slideshow.py:501
 msgid "Nouvel ordre enregistré."
 msgstr "新しい順番を保存しました。"
 
-#: web/routes_slideshow.py:522
+#: web/routes_slideshow.py:523
 msgid "Disposition appliquée au diaporama."
 msgstr "レイアウトをスライドショーに適用しました。"
 
-#: web/routes_slideshow.py:552
+#: web/routes_slideshow.py:553
 msgid "Configuration enregistrée."
 msgstr "設定を保存しました。"
 
-#: web/routes_slideshow.py:565
+#: web/routes_slideshow.py:566
 msgid "Configuration activée."
 msgstr "設定を有効にしました。"
 
-#: web/routes_slideshow.py:574
+#: web/routes_slideshow.py:575
 msgid "Configuration supprimée."
 msgstr "設定を削除しました。"
 
-#: web/routes_slideshow.py:599
+#: web/routes_slideshow.py:600
 msgid "Mode inconnu."
 msgstr "不明なモードです。"
 
-#: web/routes_slideshow.py:608
+#: web/routes_slideshow.py:609
 msgid "Le cadre enchaîne maintenant toutes les vidéos."
 msgstr "フレームはすべての動画を続けて再生します。"
 
-#: web/routes_slideshow.py:609
+#: web/routes_slideshow.py:610
 msgid "Retour au diaporama photos et vidéos."
 msgstr "写真と動画のスライドショーに戻りました。"
 

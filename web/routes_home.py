@@ -136,9 +136,18 @@ def force_layout_now_api():
 
 def _local_ip():
     """Adresse IP du cadre sur le réseau local."""
-    try:
-        return subprocess.run(["hostname", "-I"], capture_output=True, text=True, timeout=3).stdout.split()[0]
-    except (OSError, subprocess.SubprocessError, IndexError):
+    import sys
+    if sys.platform.startswith("linux"):
+        try:
+            return subprocess.run(["hostname", "-I"], capture_output=True, text=True, timeout=3).stdout.split()[0]
+        except (OSError, subprocess.SubprocessError, IndexError):
+            pass
+    import socket
+    try:  # ordinateur : l'adresse de la carte réseau qui mène à Internet (aucune donnée envoyée)
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+            sock.connect(("192.0.2.1", 80))
+            return sock.getsockname()[0]
+    except OSError:
         return request.host.split(":")[0] or "127.0.0.1"
 
 
@@ -146,7 +155,8 @@ def _local_ip():
 @login_required
 def guest_qr_png():
     """QR code de la page invités (sur le Wi-Fi ; ?remote=1 : lien secret utilisable de partout), à afficher ou imprimer."""
-    url = f"http://{_local_ip()}/upload"
+    from utils.platform_info import guest_base_url
+    url = f"{guest_base_url(_local_ip())}/upload"
     if request.args.get("remote") and is_admin():
         from utils import remote_guests
         config, status = load_config(), remote_guests.tailscale_status()

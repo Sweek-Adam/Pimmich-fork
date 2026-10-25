@@ -332,7 +332,7 @@ def restart_slideshow_process(force_start=False):
         # Utiliser Popen pour ne pas bloquer, et s'assurer que l'environnement est correct
         env = os.environ.copy()
         if "SWAYSOCK" not in env:
-            user_id = os.getuid()
+            user_id = getattr(os, "getuid", lambda: 0)()
             socks = glob.glob(f"/run/user/{user_id}/sway-ipc.*")
             if socks:
                 env["SWAYSOCK"] = socks[0]

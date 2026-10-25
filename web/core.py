@@ -592,7 +592,7 @@ def get_screen_resolution():
     try:
         # Assurer que SWAYSOCK est défini
         if "SWAYSOCK" not in os.environ:
-            user_id = os.getuid()
+            user_id = getattr(os, "getuid", lambda: 0)()
             # Utiliser glob pour trouver le socket, car le nom peut varier
             sock_path_pattern = f"/run/user/{user_id}/sway-ipc.*"
             socks = glob.glob(sock_path_pattern)

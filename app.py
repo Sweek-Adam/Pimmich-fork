@@ -54,17 +54,23 @@ if __name__ == '__main__':
     maintenance_thread = threading.Thread(target=maintenance_worker, daemon=True)
     maintenance_thread.start()
     from web.workers import presence_worker, cloud_update_worker, icloud_update_worker, email_worker, people_worker, rotation_worker, storage_worker, quote_worker, message_schedule_worker, hdmi_audio_worker, music_schedule_worker, stats_worker, reliability_worker, trips_worker, button_worker, hotspot_worker
-    threading.Thread(target=presence_worker, daemon=True).start()
+    from utils.platform_info import desktop, web_port
+    on_pi = not desktop()  # édition ordinateur : pas de matériel du Raspberry Pi (GPIO, capteur, disques, Wi-Fi de secours)
+    if on_pi:
+        threading.Thread(target=presence_worker, daemon=True).start()
     threading.Thread(target=cloud_update_worker, daemon=True).start()
     threading.Thread(target=icloud_update_worker, daemon=True).start()
     threading.Thread(target=email_worker, daemon=True).start()
     threading.Thread(target=people_worker, daemon=True).start()
-    threading.Thread(target=rotation_worker, daemon=True).start()
-    threading.Thread(target=storage_worker, daemon=True).start()
+    if on_pi:
+        threading.Thread(target=rotation_worker, daemon=True).start()
+    if on_pi:
+        threading.Thread(target=storage_worker, daemon=True).start()
     threading.Thread(target=quote_worker, daemon=True).start()
     threading.Thread(target=trips_worker, daemon=True).start()
     threading.Thread(target=message_schedule_worker, daemon=True).start()
-    threading.Thread(target=hdmi_audio_worker, daemon=True).start()
+    if on_pi:
+        threading.Thread(target=hdmi_audio_worker, daemon=True).start()
     threading.Thread(target=music_schedule_worker, daemon=True).start()
     threading.Thread(target=stats_worker, daemon=True).start()
     threading.Thread(target=reliability_worker, daemon=True).start()
@@ -73,8 +79,9 @@ if __name__ == '__main__':
     threading.Thread(target=routes_party.party_worker, daemon=True, name="party").start()
     from web.workers import daily_summary_worker
     threading.Thread(target=daily_summary_worker, daemon=True, name="daily-summary").start()
-    threading.Thread(target=button_worker, daemon=True, name="button").start()  # bouton physique (GPIO)
-    threading.Thread(target=hotspot_worker, daemon=True, name="hotspot").start()  # Wi-Fi de secours
+    if on_pi:
+        threading.Thread(target=button_worker, daemon=True, name="button").start()  # bouton physique (GPIO)
+        threading.Thread(target=hotspot_worker, daemon=True, name="hotspot").start()  # Wi-Fi de secours
     routes_homeassistant.restart_bridge()  # Home Assistant (MQTT), s'il est configuré
     # Préchauffer le cache des remotes rclone (lent sur Pi 3) pour que la page de configuration s'ouvre vite
     from utils.import_gdrive import list_rclone_remotes
@@ -86,7 +93,7 @@ if __name__ == '__main__':
 
     # --- NOUVEAU: Démarrage du contrôle vocal si activé ---
     config = load_config()
-    if config.get('voice_control_enabled'):
+    if config.get('voice_control_enabled') and on_pi:
         print("Le contrôle vocal est activé, démarrage du service...")
         start_voice_control()
 
@@ -97,13 +104,17 @@ if __name__ == '__main__':
         from utils import updater
         time.sleep(120)
         try:
-            with urllib.request.urlopen("http://127.0.0.1:5000/login", timeout=10) as resp:
+            with urllib.request.urlopen(f"http://127.0.0.1:{5000 if on_pi else web_port()}/login", timeout=10) as resp:
                 if resp.status == 200 and updater.mark_healthy():
                     print("[Mise à jour] Nouvelle version validée.")
         except OSError:
             pass
     threading.Thread(target=confirm_update, daemon=True).start()
 
-    # Écoute uniquement en local : l'accès réseau passe par nginx (port 80)
-    app.run(host='127.0.0.1', port=5000)
+    if on_pi:
+        # Écoute uniquement en local : l'accès réseau passe par nginx (port 80)
+        app.run(host='127.0.0.1', port=5000)
+    else:
+        # Ordinateur (édition événement) : pas de nginx, les invités arrivent directement sur ce port
+        app.run(host=os.environ.get("PIMMICH_HOST", "0.0.0.0"), port=web_port(), threaded=True)
 

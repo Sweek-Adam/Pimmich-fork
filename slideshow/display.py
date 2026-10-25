@@ -178,3 +178,43 @@ def show_regions(screen, rects):
     pygame.display.update(rects)
     for rect, backup in backups:  # l'image n'est assombrie qu'à l'écran
         screen.blit(backup, rect.topleft)
+
+
+def desktop_screen(config):
+    """Numéro de l'écran choisi (édition ordinateur), borné aux écrans branchés."""
+    try:
+        count = len(pygame.display.get_desktop_sizes())
+    except (AttributeError, pygame.error):
+        count = 1
+    try:
+        index = int(config.get("desktop_display", 0))
+    except (TypeError, ValueError):
+        index = 0
+    return max(0, min(index, count - 1))
+
+
+def open_screen(config, width=None, height=None):
+    """
+    Ouvre l'écran du diaporama : plein écran sur le Raspberry Pi ; sur un ordinateur, l'écran choisi au lancement
+    (portable, télé, vidéoprojecteur), en plein écran ou dans une fenêtre (réglage « desktop_windowed »).
+    Retourne (écran, largeur, hauteur).
+    """
+    from utils.platform_info import desktop
+    if desktop():
+        index = desktop_screen(config)
+        try:
+            width, height = pygame.display.get_desktop_sizes()[index]
+        except (AttributeError, IndexError, pygame.error):
+            info = pygame.display.Info()
+            width, height = info.current_w or 1920, info.current_h or 1080
+        pygame.display.set_caption(config.get("party", {}).get("name") or "Pimmich")
+        if config.get("desktop_windowed"):
+            width, height = int(width * 0.7) // 2 * 2, int(height * 0.7) // 2 * 2
+            screen = pygame.display.set_mode((width, height), 0, display=index)
+        else:
+            screen = pygame.display.set_mode((width, height), pygame.FULLSCREEN, display=index)
+        return screen, width, height
+    if not width or not height:
+        info = pygame.display.Info()
+        width, height = info.current_w or 1920, info.current_h or 1080
+    return pygame.display.set_mode((width, height), pygame.FULLSCREEN), width, height

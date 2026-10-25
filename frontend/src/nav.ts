@@ -8,6 +8,7 @@ export interface NavItem {
   tab: string;
   route?: string;
   admin?: boolean;
+  pi?: boolean;  // seulement sur le Raspberry Pi (masqué dans l'édition ordinateur)
 }
 
 export interface NavGroup {
@@ -53,8 +54,8 @@ export const groups: NavGroup[] = [
     { label: () => t("Comptes"), icon: "fa-users", tab: "tab-comptes", route: "/comptes" },
     { label: () => t("Notifications"), icon: "fa-bell", tab: "tab-notifications", admin: true, route: "/notifications" },
     { label: () => t("Maintenance"), icon: "fa-tools", tab: "tab-maintenance", admin: true, route: "/maintenance" },
-    { label: () => t("Réseau"), icon: "fa-wifi", tab: "tab-network", admin: true, route: "/reseau" },
-    { label: () => t("Commande vocale"), icon: "fa-microphone-alt", tab: "tab-vocal", route: "/commande-vocale" },
+    { label: () => t("Réseau"), icon: "fa-wifi", tab: "tab-network", admin: true, route: "/reseau", pi: true },
+    { label: () => t("Commande vocale"), icon: "fa-microphone-alt", tab: "tab-vocal", route: "/commande-vocale", pi: true },
     { label: () => t("Statistiques"), icon: "fa-chart-bar", tab: "tab-stats", admin: true, route: "/statistiques" },
     { label: () => t("Journaux"), icon: "fa-file-alt", tab: "tab-logs", admin: true, route: "/journaux" },
   ] },

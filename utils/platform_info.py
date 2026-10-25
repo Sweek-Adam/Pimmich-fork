@@ -4,7 +4,7 @@ un portable qui affiche le diaporama sur un écran ou un vidéoprojecteur, pour 
 
   - tmp_path(nom) : fichiers d'échange en mémoire entre l'interface et le diaporama (/tmp sur le Raspberry Pi,
     le dossier temporaire du système ailleurs) ;
-  - desktop() : édition ordinateur (pas de Wi-Fi géré, pas de sudo, pas de sway) ;
+  - desktop() : édition ordinateur, « événement » (pas de Wi-Fi géré, pas de sudo, pas de sway) ;
   - web_port() / guest_base_url() : adresse donnée aux invités (avec le port sur un ordinateur).
 """
 import os
@@ -18,8 +18,11 @@ LINUX = sys.platform.startswith("linux")
 
 
 def desktop():
-    """Édition ordinateur : demandée par le lanceur (PIMMICH_DESKTOP=1), ou tout système autre que Linux."""
-    return os.environ.get("PIMMICH_DESKTOP") == "1" or not LINUX
+    """
+    Édition ordinateur : demandée par le lanceur pimmich_event.py (PIMMICH_EDITION=event), ou tout système autre que
+    Linux. À ne pas confondre avec PIMMICH_DESKTOP=1 : bureau Raspberry Pi OS (administration seule, sans diaporama).
+    """
+    return os.environ.get("PIMMICH_EDITION") == "event" or not LINUX
 
 
 def tmp_dir():

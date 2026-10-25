@@ -10,6 +10,7 @@ interface PimmichBoot {
   user: string;
   admin: boolean;
   classic: string;
+  edition?: "frame" | "event";  // « event » : Pimmich sur un ordinateur (pimmich_event.py), sans le matériel du Raspberry Pi
 }
 
 interface Window {

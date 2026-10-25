@@ -20,7 +20,7 @@ def main():
     if "SWAYSOCK" not in os.environ:
         # Logique de fallback si la variable n'est pas définie
         # (peut être nécessaire si appelé depuis un contexte inattendu)
-        user_id = os.getuid()
+        user_id = getattr(os, "getuid", lambda: 0)()
         sock_path_pattern = f"/run/user/{user_id}/sway-ipc.*"
         import glob
         socks = glob.glob(sock_path_pattern)
