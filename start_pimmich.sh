@@ -23,6 +23,14 @@ cd "$(dirname "$0")" || exit 1
 # S'assurer que le dossier de logs existe
 mkdir -p logs
 
+# Une fois par démarrage du Pi : garder l'image de l'écran de démarrage jusqu'à la première photo (fond de sway, puis
+# diaporama), tirer le style du prochain démarrage, et remettre un fond noir une fois le cadre lancé
+if [ -f cache/boot_screen/pick.png ] && [ ! -f /tmp/pimmich_boot_handoff ]; then
+    touch /tmp/pimmich_boot_handoff
+    venv/bin/python -m utils.boot_screen --handoff 2>> logs/pimmich.log || true
+    (sleep 90; venv/bin/python -m utils.boot_screen --after-boot; swaymsg output '*' bg '#000000' solid_color) > /dev/null 2>&1 &
+fi
+
 cleanup() {
     echo "📟📟$(date +'%d-%m %H:%M:%S') 📟 🧹 Nettoyage des processus Pimmich existants..." >> logs/pimmich.log
     # Tuer le processus de contrôle vocal s'il est en cours

@@ -13,7 +13,14 @@ PIMMICH="$HOME_DIR/pimmich"
 THEME=cadre-photo
 DEST="/usr/share/plymouth/themes/$THEME"
 
+CACHE="$PIMMICH/cache/boot_screen"
+QUIT_DROPIN=/etc/systemd/system/plymouth-quit.service.d/pimmich-retain.conf
+SWAY_CONFIG="$HOME_DIR/.config/sway/config"
+
 if [ "${1:-}" = "--undo" ]; then
+    rm -f "$QUIT_DROPIN" && systemctl daemon-reload
+    [ -f "$SWAY_CONFIG" ] && sed -i '/# Pimmich : écran de démarrage/,+1d' "$SWAY_CONFIG"
+    rm -f "$CACHE/pick.png"
     plymouth-set-default-theme -R pix && echo "✅ Écran de démarrage de Raspberry Pi OS remis."
     exit 0
 fi
@@ -29,7 +36,27 @@ sudo -u "$USER_NAME" bash -c "cd '$PIMMICH' && '$PIMMICH/venv/bin/python' -m uti
 rm -rf "$DEST"
 install -d "$DEST"
 install -m 644 "$TMP"/* "$DEST"/
+# Mêmes fonds pour le cadre (sway, puis diaporama jusqu'à la première photo), et style du prochain démarrage
+sudo -u "$USER_NAME" mkdir -p "$CACHE"
+sudo -u "$USER_NAME" cp "$TMP"/bg*.png "$CACHE"/
 rm -rf "$TMP"
+if [ ! -f "$CACHE/pick.png" ]; then
+    sudo -u "$USER_NAME" "$PIMMICH/venv/bin/python" -c "from PIL import Image; import random; Image.new('L', (random.randint(1, 4), 1)).save('$CACHE/pick.png')"
+fi
+sudo -u "$USER_NAME" bash -c "cd '$PIMMICH' && venv/bin/python -m utils.boot_screen --after-boot"
+ln -sf "$CACHE/pick.png" "$DEST/pick.png"
+
+# Fin de l'écran de démarrage : l'image reste figée (pas d'écran noir ni de texte) jusqu'à l'affichage du cadre
+install -d "$(dirname "$QUIT_DROPIN")"
+printf '[Service]\nExecStart=\nExecStart=-/usr/bin/plymouth quit --retain-splash\n' > "$QUIT_DROPIN"
+systemctl daemon-reload
+sudo -u "$USER_NAME" touch "$HOME_DIR/.hushlogin"
+for getty in /etc/systemd/system/getty@tty1.service.d/*.conf; do
+    [ -f "$getty" ] && grep -q -- "--autologin" "$getty" && ! grep -q -- "--noissue" "$getty" && sed -i 's/--autologin/--noissue --autologin/' "$getty"
+done
+if [ -f "$SWAY_CONFIG" ] && ! grep -q "# Pimmich : écran de démarrage" "$SWAY_CONFIG"; then
+    printf '# Pimmich : écran de démarrage (même image jusqu au diaporama)\noutput * bg %s fill\n' "$CACHE/current.png" >> "$SWAY_CONFIG"
+fi
 
 # Ni logo ni texte du noyau, curseur caché, écran Plymouth dès le début
 CMDLINE=/boot/firmware/cmdline.txt

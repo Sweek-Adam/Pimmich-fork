@@ -474,70 +474,92 @@ def export_theme(out_dir, width=1920, height=1080, url=None, address=None, font_
     return out
 
 
-# Script Plymouth : un style au hasard, fond mis à l'échelle de l'écran, fonction mise en valeur tour à tour,
-# trois points d'attente (et l'anneau qui tourne pour le style lumière). Aucun message du système n'est affiché.
+# Script Plymouth. Le style vient de pick.png (lien vers cache/boot_screen/pick.png, dont la largeur vaut style + 1) :
+# choisi au démarrage précédent, il est lu dès que le disque principal est monté, si bien que le cadre sait quel
+# style est à l'écran et peut garder la même image jusqu'à la première photo. Sans pick.png : un style au hasard.
+# Fonction mise en valeur tour à tour, trois points d'attente (et l'anneau du style lumière) ; aucun message du système.
 PLYMOUTH_SCRIPT = """# Thème « Cadre photo » (généré par utils/boot_screen.py : ne pas modifier à la main)
 {data}
 
 Window.SetBackgroundTopColor(0, 0, 0);
 Window.SetBackgroundBottomColor(0, 0, 0);
-style = Math.Int(Math.Random() * {nstyles});
-if (style >= {nstyles}) style = {nstyles} - 1;
 sw = Window.GetWidth();
 sh = Window.GetHeight();
 kx = sw / {width};
 ky = sh / {height};
-
-background.image = Image(bgfile[style]).Scale(sw, sh);
-background.sprite = Sprite(background.image);
-background.sprite.SetZ(-10);
-
-for (i = 0; i < ncards[style]; i++) {{
-    hl[i].image = Image(hlfile[style * 10 + i]);
-    hl[i].image = hl[i].image.Scale(hl[i].image.GetWidth() * kx, hl[i].image.GetHeight() * ky);
-    hl[i].sprite = Sprite(hl[i].image);
-    hl[i].sprite.SetPosition(hlx[style * 10 + i] * kx, hly[style * 10 + i] * ky, 5);
-    hl[i].sprite.SetOpacity(0);
-}}
-
-dot_on = Image(dotfile[style]);
-dot_off = Image(dotffile[style]);
-for (i = 0; i < 3; i++) {{
-    dots[i] = Sprite(dot_off);
-    dots[i].SetPosition((dotx[style] + i * 40) * kx, doty[style] * ky, 6);
-}}
-
-if (spinfile[style] != "") {{
-    spin.image = Image(spinfile[style]);
-    spin.sprite = Sprite(spin.image);
-    spin.x = dotx[style] * kx + 140;
-    spin.y = doty[style] * ky - 18;
-}}
-
+shown = 0;
 frame = 0;
+
+fun show(chosen) {{
+    if (chosen < 0 || chosen >= {nstyles}) chosen = Math.Int(Math.Random() * {nstyles});
+    if (chosen >= {nstyles}) chosen = {nstyles} - 1;
+    global.style = chosen;
+    global.background.image = Image(global.bgfile[chosen]).Scale(global.sw, global.sh);
+    global.background.sprite = Sprite(global.background.image);
+    global.background.sprite.SetZ(-10);
+    for (i = 0; i < global.ncards[chosen]; i++) {{
+        k = chosen * 10 + i;
+        img = Image(global.hlfile[k]);
+        global.hl[i].image = img.Scale(img.GetWidth() * global.kx, img.GetHeight() * global.ky);
+        global.hl[i].sprite = Sprite(global.hl[i].image);
+        global.hl[i].sprite.SetPosition(global.hlx[k] * global.kx, global.hly[k] * global.ky, 5);
+        global.hl[i].sprite.SetOpacity(0);
+    }}
+    global.dot_on = Image(global.dotfile[chosen]);
+    global.dot_off = Image(global.dotffile[chosen]);
+    for (i = 0; i < 3; i++) {{
+        global.dots[i] = Sprite(global.dot_off);
+        global.dots[i].SetPosition((global.dotx[chosen] + i * 40) * global.kx, global.doty[chosen] * global.ky, 6);
+    }}
+    global.spinning = 0;
+    if (global.spinfile[chosen] != "") {{
+        global.spinning = 1;
+        global.spin.image = Image(global.spinfile[chosen]);
+        global.spin.sprite = Sprite(global.spin.image);
+        global.spin.x = global.dotx[chosen] * global.kx + 140;
+        global.spin.y = global.doty[chosen] * global.ky - 18;
+    }}
+    global.shown = 1;
+}}
+
+fun root_mounted() {{
+    if (global.shown) return;
+    pick = Image("pick.png");
+    w = pick.GetWidth();
+    chosen = -1;
+    if (w >= 1 && w <= {nstyles}) chosen = w - 1;
+    show(chosen);
+}}
+Plymouth.SetRootMountedFunction(root_mounted);
+
 fun refresh() {{
-    frame++;
-    step = Math.Int(frame / {cycle});
-    card = step - Math.Int(step / ncards[style]) * ncards[style];
-    phase = (frame - step * {cycle}) / {cycle};
-    for (i = 0; i < ncards[style]; i++) {{
+    global.frame++;
+    if (global.shown == 0) {{
+        if (global.frame > 250) show(-1);  # disque principal pas encore signalé après 5 s : style au hasard
+        return;
+    }}
+    n = global.ncards[global.style];
+    step = Math.Int(global.frame / {cycle});
+    card = step - Math.Int(step / n) * n;
+    phase = (global.frame - step * {cycle}) / {cycle};
+    for (i = 0; i < n; i++) {{
         if (i == card) {{
             opacity = 1;
             if (phase < 0.2) opacity = phase / 0.2;
             if (phase > 0.85) opacity = (1 - phase) / 0.15;
-            hl[i].sprite.SetOpacity(opacity);
+            global.hl[i].sprite.SetOpacity(opacity);
         }}
-        else hl[i].sprite.SetOpacity(0);
+        else global.hl[i].sprite.SetOpacity(0);
     }}
-    d = Math.Int(frame / {dot});
+    d = Math.Int(global.frame / {dot});
     d = d - Math.Int(d / 3) * 3;
     for (i = 0; i < 3; i++) {{
-        if (i == d) dots[i].SetImage(dot_on);
-        else dots[i].SetImage(dot_off);
+        if (i == d) global.dots[i].SetImage(global.dot_on);
+        else global.dots[i].SetImage(global.dot_off);
     }}
-    if (spinfile[style] != "") {{
-        spin.sprite.SetImage(spin.image.Rotate(frame * 0.12));
-        spin.sprite.SetPosition(spin.x, spin.y, 6);
+    if (global.spinning) {{
+        global.spin.sprite.SetImage(global.spin.image.Rotate(global.frame * 0.12));
+        global.spin.sprite.SetPosition(global.spin.x, global.spin.y, 6);
     }}
 }}
 Plymouth.SetRefreshFunction(refresh);
@@ -547,8 +569,71 @@ fun no_message(text) {{ }}
 Plymouth.SetMessageFunction(no_message);
 """
 
+CACHE_DIR = Path(__file__).resolve().parent.parent / "cache" / "boot_screen"
+BOOT_STYLE_FILE = "pimmich_boot_style"  # dans le dossier temporaire : style affiché à ce démarrage
+
+
+def _read_pick(cache_dir=CACHE_DIR):
+    try:
+        with Image.open(cache_dir / "pick.png") as img:
+            style = img.width - 1
+        return style if 0 <= style < len(STYLES) else None
+    except (OSError, ValueError):
+        return None
+
+
+def handoff(cache_dir=CACHE_DIR, rng=random):
+    """Au démarrage du cadre : note le style affiché par l'écran de démarrage (pour le garder jusqu'à la première
+    photo) et tire celui du prochain démarrage (pick.png), différent de celui-ci. Retourne le style affiché."""
+    from utils.platform_info import tmp_path
+    cache_dir = Path(cache_dir)
+    current = _read_pick(cache_dir)
+    if current is None or not (cache_dir / f"bg{current}.png").exists():
+        return None
+    Path(str(tmp_path(BOOT_STYLE_FILE))).write_text(str(current))
+    following = rng.choice([s for s in range(len(STYLES)) if s != current] or [current])
+    tmp = cache_dir / "pick.tmp.png"
+    Image.new("L", (following + 1, 1)).save(tmp)
+    tmp.replace(cache_dir / "pick.png")
+    return current
+
+
+def after_boot(cache_dir=CACHE_DIR):
+    """Une fois le cadre démarré : le fond de l'affichage (current.png) prend le style du prochain démarrage."""
+    cache_dir = Path(cache_dir)
+    style = _read_pick(cache_dir)
+    if style is None:
+        return
+    link = cache_dir / "current.png"
+    tmp = cache_dir / "current.tmp.png"
+    tmp.unlink(missing_ok=True)
+    tmp.symlink_to(f"bg{style}.png")
+    tmp.replace(link)
+
+
+def boot_background(width, height):
+    """Image de l'écran de démarrage de ce démarrage (pygame), à garder jusqu'à la première photo ; une seule fois."""
+    from utils.platform_info import tmp_path
+    marker = Path(str(tmp_path(BOOT_STYLE_FILE)))
+    try:
+        style = int(marker.read_text())
+        marker.unlink()
+    except (OSError, ValueError):
+        return None
+    path = CACHE_DIR / f"bg{style}.png"
+    if not path.exists():
+        return None
+    import pygame
+    image = pygame.image.load(str(path))
+    return pygame.transform.smoothscale(image, (width, height)) if image.get_size() != (width, height) else image
+
 
 if __name__ == "__main__":
     import sys
-    size = (sys.argv[2] if len(sys.argv) > 2 else "1920x1080").lower().split("x")
-    print(export_theme(sys.argv[1] if len(sys.argv) > 1 else THEME_NAME, int(size[0]), int(size[1])))
+    if sys.argv[1:2] == ["--handoff"]:
+        handoff()
+    elif sys.argv[1:2] == ["--after-boot"]:
+        after_boot()
+    else:
+        size = (sys.argv[2] if len(sys.argv) > 2 else "1920x1080").lower().split("x")
+        print(export_theme(sys.argv[1] if len(sys.argv) > 1 else THEME_NAME, int(size[0]), int(size[1])))

@@ -2779,6 +2779,16 @@ def start_slideshow():
         pygame.mouse.set_visible(False)
         logger.debug(f"📸 Mouse cursor hidden.")       
 
+        # Juste après l'allumage : l'image de l'écran de démarrage reste affichée jusqu'à la première photo
+        try:
+            from utils import boot_screen
+            boot_image = boot_screen.boot_background(SCREEN_WIDTH, SCREEN_HEIGHT)
+            if boot_image is not None:
+                screen.blit(boot_image, (0, 0))
+                pygame.display.flip()
+        except Exception as e:
+            logger.debug(f"Écran de démarrage non repris : {e}")
+
 
         # --- Enregistrement des gestionnaires de signaux ---
         if hasattr(signal, "SIGUSR1"):  # Windows : commandes par fichier (utils/slideshow_commands.py)
