@@ -46,15 +46,16 @@ def save_settings(settings):
 
 
 def displays():
-    """Écrans branchés : [(numéro, largeur, hauteur)]."""
+    """
+    Écrans branchés : [(numéro, largeur, hauteur)]. Demandés à pygame dans un processus à part : sur macOS, ouvrir
+    SDL dans le même processus que la fenêtre de réglages (Tk) fait planter Tk.
+    """
+    code = ("import os, json; os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'; import pygame; pygame.display.init(); "
+            "print(json.dumps(pygame.display.get_desktop_sizes()))")
     try:
-        os.environ.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
-        import pygame
-        pygame.display.init()
-        sizes = pygame.display.get_desktop_sizes()
-        pygame.display.quit()
-        return [(i, w, h) for i, (w, h) in enumerate(sizes)]
-    except Exception:
+        out = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, timeout=20).stdout.strip().splitlines()
+        return [(i, int(w), int(h)) for i, (w, h) in enumerate(json.loads(out[-1]))] or [(0, 1920, 1080)]
+    except (OSError, subprocess.SubprocessError, ValueError, IndexError):
         return [(0, 1920, 1080)]
 
 
