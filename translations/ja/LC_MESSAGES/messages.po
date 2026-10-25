@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 23:14+0100\n"
+"POT-Creation-Date: 2026-10-25 23:18+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -289,7 +289,7 @@ msgstr "地図"
 msgid "Messages"
 msgstr "メッセージ"
 
-#: frontend/src/nav.ts:37 frontend/src/views/DisplayView.vue:25
+#: frontend/src/nav.ts:37 frontend/src/views/DisplayView.vue:26
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:33
 msgid "Écran"
@@ -592,19 +592,22 @@ msgid "Ajouter"
 msgstr "追加"
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:129
+#: frontend/src/views/DisplayView.vue:130
 msgid "Bouton physique"
 msgstr "物理ボタン"
 
 #: frontend/src/components/ButtonCard.vue:25
+#: frontend/src/components/MotionCard.vue:25
 msgid "Bibliothèque GPIO absente. Sur le Raspberry Pi, lancez une fois :"
 msgstr "GPIO ライブラリがありません。Raspberry Pi で一度実行してください："
 
 #: frontend/src/components/ButtonCard.vue:26
+#: frontend/src/components/MotionCard.vue:26
 msgid "puis redémarrez l'application."
 msgstr "その後アプリを再起動してください。"
 
 #: frontend/src/components/ButtonCard.vue:28
+#: frontend/src/components/MotionCard.vue:28
 #, python-brace-format
 msgid "Broche GPIO {pin} inutilisable :"
 msgstr "GPIO ピン {pin} は使用できません："
@@ -615,6 +618,7 @@ msgid "Bouton surveillé sur la broche GPIO {pin}."
 msgstr "GPIO ピン {pin} のボタンを監視中です。"
 
 #: frontend/src/components/ButtonCard.vue:30
+#: frontend/src/components/MotionCard.vue:30
 msgid "Activation en cours…"
 msgstr "有効化しています…"
 
@@ -623,6 +627,7 @@ msgid "Dernier appui :"
 msgstr "最後に押された時刻："
 
 #: frontend/src/components/ButtonCard.vue:31
+#: frontend/src/components/MotionCard.vue:31
 msgid "aucun pour l'instant"
 msgstr "まだありません"
 
@@ -1012,6 +1017,37 @@ msgid ""
 "Mosquitto), puis utilisez ici le même utilisateur."
 msgstr "Home AssistantでMQTT統合（Mosquittoアドオン）を追加し、ここで同じユーザーを使ってください。"
 
+#: frontend/src/components/MotionCard.vue:24
+#: frontend/src/views/DisplayView.vue:136
+msgid "Détecteur de mouvement"
+msgstr "人感センサー"
+
+#: frontend/src/components/MotionCard.vue:29
+#, python-brace-format
+msgid "Capteur surveillé sur la broche GPIO {pin}."
+msgstr "GPIO {pin} 番ピンのセンサーを監視中。"
+
+#: frontend/src/components/MotionCard.vue:31
+msgid "Dernier mouvement :"
+msgstr "最後の動き："
+
+#: frontend/src/components/MotionCard.vue:32
+msgid "écran éteint (personne n'est là)"
+msgstr "画面オフ（誰もいません）"
+
+#: frontend/src/components/MotionCard.vue:34
+msgid "Le détecteur n'est pas activé."
+msgstr "センサーは無効です。"
+
+#: frontend/src/components/MotionCard.vue:35
+msgid ""
+"Câblage d'un capteur PIR (HC-SR501) : VCC sur 5 V (broche 2), GND sur une"
+" masse (broche 6), OUT sur la broche choisie (GPIO 24 = broche physique "
+"18)."
+msgstr ""
+"PIRセンサー（HC-SR501）の配線：VCCを5V（2番ピン）、GNDをグランド（6番ピン）、OUTを選んだピン（GPIO 24 = "
+"物理18番ピン）へ。"
+
 #: frontend/src/components/PresenceCard.vue:50
 #: templates/configure/tab_affichage.html.jinja:347
 msgid "Réveil à l'arrivée d'un membre de la famille"
@@ -1243,28 +1279,28 @@ msgid "Adresse du flux RSS du podcast"
 msgstr "ポッドキャストの RSS フィードのアドレス"
 
 #: frontend/src/components/ScreenCard.vue:16
-#: frontend/src/views/DisplayView.vue:28
+#: frontend/src/views/DisplayView.vue:29
 #: templates/configure/tab_affichage.html.jinja:17
 #: templates/configure/tab_affichage.html.jinja:38
 msgid "Paysage (Horizontal)"
 msgstr "横（横）"
 
 #: frontend/src/components/ScreenCard.vue:16
-#: frontend/src/views/DisplayView.vue:28
+#: frontend/src/views/DisplayView.vue:29
 #: templates/configure/tab_affichage.html.jinja:17
 #: templates/configure/tab_affichage.html.jinja:38
 msgid "Portrait (Vertical)"
 msgstr "ポートレート（縦）"
 
 #: frontend/src/components/ScreenCard.vue:17
-#: frontend/src/views/DisplayView.vue:29
+#: frontend/src/views/DisplayView.vue:30
 #: templates/configure/tab_affichage.html.jinja:18
 #: templates/configure/tab_affichage.html.jinja:39
 msgid "Paysage retourné"
 msgstr "横向き（上下反転）"
 
 #: frontend/src/components/ScreenCard.vue:17
-#: frontend/src/views/DisplayView.vue:29
+#: frontend/src/views/DisplayView.vue:30
 #: templates/configure/tab_affichage.html.jinja:18
 #: templates/configure/tab_affichage.html.jinja:39
 msgid "Portrait retourné"
@@ -2676,113 +2712,113 @@ msgstr "経度 (～4.4861) :"
 msgid "Clé API StormGlass :"
 msgstr "Clé API StormGlass:"
 
-#: frontend/src/views/DisplayView.vue:14
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Fondu enchaîné"
 msgstr "クロスフェード"
 
-#: frontend/src/views/DisplayView.vue:14
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Fondu au noir"
 msgstr "黒へフェード"
 
-#: frontend/src/views/DisplayView.vue:14
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Zoom en fondu"
 msgstr "ズームフェード"
 
-#: frontend/src/views/DisplayView.vue:15
+#: frontend/src/views/DisplayView.vue:16
 #: templates/configure/tab_affichage.html.jinja:199
 msgid "Glisser depuis la gauche"
 msgstr "左からスワイプ"
 
-#: frontend/src/views/DisplayView.vue:15
+#: frontend/src/views/DisplayView.vue:16
 #: templates/configure/tab_affichage.html.jinja:199
 msgid "Glisser depuis la droite"
 msgstr "右からスワイプ"
 
-#: frontend/src/views/DisplayView.vue:16
+#: frontend/src/views/DisplayView.vue:17
 #: templates/configure/tab_affichage.html.jinja:200
 msgid "Glisser depuis le bas"
 msgstr "下からスワイプ"
 
-#: frontend/src/views/DisplayView.vue:16
+#: frontend/src/views/DisplayView.vue:17
 #: templates/configure/tab_affichage.html.jinja:200
 msgid "Glisser depuis le haut"
 msgstr "上からスワイプ"
 
-#: frontend/src/views/DisplayView.vue:17
+#: frontend/src/views/DisplayView.vue:18
 #: templates/configure/tab_affichage.html.jinja:201
 msgid "Pousser vers la gauche"
 msgstr "左へ押し出す"
 
-#: frontend/src/views/DisplayView.vue:17
+#: frontend/src/views/DisplayView.vue:18
 #: templates/configure/tab_affichage.html.jinja:201
 msgid "Pousser vers le haut"
 msgstr "上へ押し出す"
 
-#: frontend/src/views/DisplayView.vue:17
+#: frontend/src/views/DisplayView.vue:18
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Rideau"
 msgstr "ワイプ"
 
-#: frontend/src/views/DisplayView.vue:18
+#: frontend/src/views/DisplayView.vue:19
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Stores"
 msgstr "ブラインド"
 
-#: frontend/src/views/DisplayView.vue:18
+#: frontend/src/views/DisplayView.vue:19
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Iris (cercle qui s'ouvre)"
 msgstr "アイリス（円が開く）"
 
-#: frontend/src/views/DisplayView.vue:18
+#: frontend/src/views/DisplayView.vue:19
 #: templates/configure/tab_affichage.html.jinja:203
 msgid "Au hasard (une différente à chaque photo)"
 msgstr "ランダム（写真ごとに変える）"
 
-#: frontend/src/views/DisplayView.vue:22
+#: frontend/src/views/DisplayView.vue:23
 #: templates/configure/tab_affichage.html.jinja:4
 msgid "Paramètres d'affichage"
 msgstr "表示設定"
 
-#: frontend/src/views/DisplayView.vue:23
+#: frontend/src/views/DisplayView.vue:24
 #: templates/configure/tab_affichage.html.jinja:7
 msgid "Durée d'affichage (en secondes) :"
 msgstr "表示時間 (秒単位):"
 
-#: frontend/src/views/DisplayView.vue:26
+#: frontend/src/views/DisplayView.vue:27
 #: templates/configure/tab_affichage.html.jinja:13
 msgid "Orientation du cadre"
 msgstr "フレームの向き"
 
-#: frontend/src/views/DisplayView.vue:27
+#: frontend/src/views/DisplayView.vue:28
 #: templates/configure/tab_affichage.html.jinja:23
 msgid ""
 "L'écran pivote tout seul et les photos sont repréparées en arrière-plan "
 "aux nouvelles dimensions (le diaporama continue pendant ce temps)."
 msgstr "画面は自動で回転し、写真は新しいサイズでバックグラウンドで作り直されます（その間もスライドショーは続きます）。"
 
-#: frontend/src/views/DisplayView.vue:30
+#: frontend/src/views/DisplayView.vue:31
 #: templates/configure/tab_affichage.html.jinja:19
 msgid "Automatique (capteur d'orientation)"
 msgstr "自動（向きセンサー）"
 
-#: frontend/src/views/DisplayView.vue:31
+#: frontend/src/views/DisplayView.vue:32
 #: templates/configure/tab_affichage.html.jinja:163
 msgid "Largeur d'affichage cible (px) :"
 msgstr "ターゲット表示幅 (px):"
 
-#: frontend/src/views/DisplayView.vue:32
+#: frontend/src/views/DisplayView.vue:33
 #: templates/configure/tab_affichage.html.jinja:166
 msgid "Hauteur d'affichage cible (px) :"
 msgstr "ターゲットの表示高さ (px):"
 
-#: frontend/src/views/DisplayView.vue:33
+#: frontend/src/views/DisplayView.vue:34
 msgid "Mode d'affichage du diaporama"
 msgstr "スライドショーの表示方式"
 
-#: frontend/src/views/DisplayView.vue:34
+#: frontend/src/views/DisplayView.vue:35
 msgid ""
 "Wayland natif : environ 85 Mo de mémoire en moins (Xwayland n'est plus "
 "nécessaire). Le changement prend effet au prochain démarrage du Raspberry"
@@ -2791,183 +2827,183 @@ msgstr ""
 "ネイティブ Wayland：メモリを約 85 MB 節約します（Xwayland が不要になります）。Raspberry Pi "
 "の次回起動時に反映されます。"
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:36
 msgid "X11 (via Xwayland, éprouvé)"
 msgstr "X11（Xwayland 経由、実績あり）"
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:36
 msgid "Wayland natif (plus léger)"
 msgstr "ネイティブ Wayland（軽量）"
 
-#: frontend/src/views/DisplayView.vue:36
+#: frontend/src/views/DisplayView.vue:37
 msgid "Hauteur utile de l'écran"
 msgstr "画面の有効な高さ"
 
-#: frontend/src/views/DisplayView.vue:37
+#: frontend/src/views/DisplayView.vue:38
 msgid ""
 "Pour un écran dont le bas est caché par le cadre : les photos n'occupent "
 "que cette partie de la hauteur."
 msgstr "画面の下部がフレームで隠れる場合、写真は高さのこの部分だけを使います。"
 
-#: frontend/src/views/DisplayView.vue:39
+#: frontend/src/views/DisplayView.vue:40
 #: templates/configure/tab_affichage.html.jinja:64
 msgid "Horaires Semaine (Lun-Ven)"
 msgstr "週間営業時間 (月曜～金曜)"
 
-#: frontend/src/views/DisplayView.vue:40 frontend/src/views/DisplayView.vue:44
+#: frontend/src/views/DisplayView.vue:41 frontend/src/views/DisplayView.vue:45
 #: templates/configure/tab_affichage.html.jinja:65
 #: templates/configure/tab_affichage.html.jinja:72
 msgid "Allumage :"
 msgstr "点火："
 
-#: frontend/src/views/DisplayView.vue:41 frontend/src/views/DisplayView.vue:45
+#: frontend/src/views/DisplayView.vue:42 frontend/src/views/DisplayView.vue:46
 #: templates/configure/tab_affichage.html.jinja:67
 #: templates/configure/tab_affichage.html.jinja:74
 msgid "Extinction :"
 msgstr "絶滅 :"
 
-#: frontend/src/views/DisplayView.vue:43
+#: frontend/src/views/DisplayView.vue:44
 #: templates/configure/tab_affichage.html.jinja:71
 msgid "Horaires Weekend (Sam-Dim)"
 msgstr "週末の営業時間（土～日）"
 
-#: frontend/src/views/DisplayView.vue:47
+#: frontend/src/views/DisplayView.vue:48
 #: templates/configure/tab_affichage.html.jinja:81
 msgid "Le soir et la nuit"
 msgstr "夕方と夜"
 
-#: frontend/src/views/DisplayView.vue:48
+#: frontend/src/views/DisplayView.vue:49
 #: templates/configure/tab_affichage.html.jinja:83
 msgid "Baisser la luminosité le soir"
 msgstr "夕方に明るさを下げる"
 
-#: frontend/src/views/DisplayView.vue:48
+#: frontend/src/views/DisplayView.vue:49
 #: templates/configure/tab_affichage.html.jinja:100
 msgid "La baisse se fait en douceur (45 minutes) et dure jusqu'au matin."
 msgstr "45分かけてゆっくり暗くなり、朝まで続きます。"
 
-#: frontend/src/views/DisplayView.vue:49
+#: frontend/src/views/DisplayView.vue:50
 #: templates/configure/tab_affichage.html.jinja:86
 msgid "À partir de :"
 msgstr "開始："
 
-#: frontend/src/views/DisplayView.vue:50
+#: frontend/src/views/DisplayView.vue:51
 #: templates/configure/tab_affichage.html.jinja:89
 msgid "Une heure précise"
 msgstr "指定した時刻"
 
-#: frontend/src/views/DisplayView.vue:50
+#: frontend/src/views/DisplayView.vue:51
 #: templates/configure/tab_affichage.html.jinja:90
 msgid "Le coucher du soleil"
 msgstr "日没"
 
-#: frontend/src/views/DisplayView.vue:51
+#: frontend/src/views/DisplayView.vue:52
 #: templates/configure/tab_affichage.html.jinja:96
 msgid "Luminosité du soir :"
 msgstr "夕方の明るさ："
 
-#: frontend/src/views/DisplayView.vue:52
+#: frontend/src/views/DisplayView.vue:53
 #: templates/configure/tab_affichage.html.jinja:101
 msgid "En dehors des heures d'affichage :"
 msgstr "表示時間外："
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:54
 #: templates/configure/tab_affichage.html.jinja:104
 msgid "Écran éteint"
 msgstr "画面オフ"
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:54
 #: templates/configure/tab_affichage.html.jinja:105
 msgid "Horloge de nuit (l'heure seule, en couleur douce)"
 msgstr "夜間時計（時刻のみ、やさしい色で）"
 
-#: frontend/src/views/DisplayView.vue:54
+#: frontend/src/views/DisplayView.vue:55
 #: templates/configure/tab_affichage.html.jinja:109
 msgid "Luminosité :"
 msgstr "明るさ："
 
-#: frontend/src/views/DisplayView.vue:55
+#: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:113
 msgid "Couleur :"
 msgstr "色："
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Ambre"
 msgstr "アンバー"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Rouge"
 msgstr "赤"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 #: templates/upload.html.jinja:319
 msgid "Blanc"
 msgstr "白"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Bleu"
 msgstr "青"
 
-#: frontend/src/views/DisplayView.vue:57
+#: frontend/src/views/DisplayView.vue:58
 #: templates/configure/tab_affichage.html.jinja:121
 msgid "Afficher la date"
 msgstr "日付を表示"
 
-#: frontend/src/views/DisplayView.vue:59
+#: frontend/src/views/DisplayView.vue:60
 msgid "Transitions et mouvement"
 msgstr "切り替え効果と動き"
 
-#: frontend/src/views/DisplayView.vue:60
+#: frontend/src/views/DisplayView.vue:61
 #: templates/configure/tab_affichage.html.jinja:186
 msgid "Activer l'effet de transition entre les photos"
 msgstr "写真間のトランジション効果を有効にする"
 
-#: frontend/src/views/DisplayView.vue:61
+#: frontend/src/views/DisplayView.vue:62
 #: templates/configure/tab_affichage.html.jinja:195
 msgid "Type de transition :"
 msgstr "遷移タイプ:"
 
-#: frontend/src/views/DisplayView.vue:62
+#: frontend/src/views/DisplayView.vue:63
 #: templates/configure/tab_affichage.html.jinja:190
 msgid "Durée de transition (secondes) :"
 msgstr "移行時間 (秒):"
 
-#: frontend/src/views/DisplayView.vue:63
+#: frontend/src/views/DisplayView.vue:64
 #: templates/configure/tab_affichage.html.jinja:210
 msgid "Caler le rythme sur la musique de fond (changement de photo sur le temps)"
 msgstr "BGMのリズムに合わせる（拍に合わせて写真を切り替え）"
 
-#: frontend/src/views/DisplayView.vue:64
+#: frontend/src/views/DisplayView.vue:65
 #: templates/configure/tab_affichage.html.jinja:214
 msgid "Fréquence d'images (FPS) :"
 msgstr "フレームレート（FPS）："
 
-#: frontend/src/views/DisplayView.vue:65
+#: frontend/src/views/DisplayView.vue:66
 #: templates/configure/tab_affichage.html.jinja:216
 msgid "Automatique (30 FPS sur Pi 3, 60 FPS sinon)"
 msgstr "自動（Pi 3 では 30 FPS、それ以外は 60 FPS）"
 
-#: frontend/src/views/DisplayView.vue:66
+#: frontend/src/views/DisplayView.vue:67
 #: templates/configure/tab_affichage.html.jinja:176
 msgid "Activer l'effet Pan/Zoom sur les photos"
 msgstr "写真のパン/ズーム効果を有効にする"
 
-#: frontend/src/views/DisplayView.vue:67
+#: frontend/src/views/DisplayView.vue:68
 msgid "Amplitude du zoom"
 msgstr "ズームの強さ"
 
-#: frontend/src/views/DisplayView.vue:69 frontend/src/views/HomeView.vue:232
+#: frontend/src/views/DisplayView.vue:70 frontend/src/views/HomeView.vue:232
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
 msgid "Ce jour-là"
 msgstr "あの日"
 
-#: frontend/src/views/DisplayView.vue:70
+#: frontend/src/views/DisplayView.vue:71
 #: templates/configure/tab_affichage.html.jinja:240
 msgid ""
 "Les photos prises un jour comme aujourd'hui, les années précédentes "
@@ -2975,119 +3011,119 @@ msgid ""
 " WhatsApp et les téléphones)."
 msgstr "過去の今日に撮影された写真（すべてのソース：カメラの日付、または WhatsApp やスマートフォンのファイル名から）。"
 
-#: frontend/src/views/DisplayView.vue:72
+#: frontend/src/views/DisplayView.vue:73
 #: templates/configure/tab_affichage.html.jinja:242
 msgid "Ruban « Il y a 5 ans » sur ces photos"
 msgstr "これらの写真に「5 年前」のリボンを表示"
 
-#: frontend/src/views/DisplayView.vue:73
+#: frontend/src/views/DisplayView.vue:74
 msgid "Composition « Ce jour-là » (une photo par année)"
 msgstr "「この日」コラージュ（1年に1枚）"
 
-#: frontend/src/views/DisplayView.vue:74 frontend/src/views/DisplayView.vue:84
+#: frontend/src/views/DisplayView.vue:75 frontend/src/views/DisplayView.vue:85
 msgid "Toutes les (minutes)"
 msgstr "間隔（分）"
 
-#: frontend/src/views/DisplayView.vue:75
+#: frontend/src/views/DisplayView.vue:76
 #: templates/configure/tab_affichage.html.jinja:231
 msgid "Activer le boost pour les photos à leur date anniversaire de prise de vue"
 msgstr "撮影記念日に写真のブーストを有効にする"
 
-#: frontend/src/views/DisplayView.vue:76
+#: frontend/src/views/DisplayView.vue:77
 #: templates/configure/tab_affichage.html.jinja:235
 msgid "Facteur de boost anniversaire :"
 msgstr "誕生日ブースト係数:"
 
-#: frontend/src/views/DisplayView.vue:77
+#: frontend/src/views/DisplayView.vue:78
 #: templates/configure/tab_affichage.html.jinja:222
 msgid ""
 "Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
 "lecture) :"
 msgstr "お気に入りの頻度 (プレイリストへの追加の数):"
 
-#: frontend/src/views/DisplayView.vue:78
+#: frontend/src/views/DisplayView.vue:79
 #: templates/configure/tab_affichage.html.jinja:225
 msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "例: 0 = ブーストなし、2 = 出現確率が 3 倍になります。"
 
-#: frontend/src/views/DisplayView.vue:80
+#: frontend/src/views/DisplayView.vue:81
 msgid "Agenda « Cette semaine »"
 msgstr "「今週」の予定"
 
-#: frontend/src/views/DisplayView.vue:81
+#: frontend/src/views/DisplayView.vue:82
 msgid ""
 "Les événements des 7 prochains jours et vos comptes à rebours (réglés "
 "dans Horloge & météo)."
 msgstr "今後7日間の予定とカウントダウン（「時計と天気」で設定）。"
 
-#: frontend/src/views/DisplayView.vue:83
+#: frontend/src/views/DisplayView.vue:84
 #: templates/configure/tab_heure.html.jinja:5
 msgid "Afficher la diapositive « Cette semaine »"
 msgstr "「今週」のスライドを表示"
 
-#: frontend/src/views/DisplayView.vue:86 templates/configure.html.jinja:127
+#: frontend/src/views/DisplayView.vue:87 templates/configure.html.jinja:127
 msgid "Langue"
 msgstr "言語"
 
-#: frontend/src/views/DisplayView.vue:87
+#: frontend/src/views/DisplayView.vue:88
 msgid "Langue des textes affichés sur le cadre"
 msgstr "フレームに表示する文字の言語"
 
-#: frontend/src/views/DisplayView.vue:89
+#: frontend/src/views/DisplayView.vue:90
 msgid ""
 "Date, jeux, mode fête, compositions, citations... L'interface "
 "d'administration suit la langue de votre navigateur."
 msgstr "日付、ゲーム、パーティーモード、組み合わせ表示、名言など。管理画面はブラウザの言語に従います。"
 
-#: frontend/src/views/DisplayView.vue:91 frontend/src/views/LibraryView.vue:121
+#: frontend/src/views/DisplayView.vue:92 frontend/src/views/LibraryView.vue:121
 msgid "Vidéos"
 msgstr "動画"
 
-#: frontend/src/views/DisplayView.vue:92
+#: frontend/src/views/DisplayView.vue:93
 #: templates/configure/tab_affichage.html.jinja:248
 msgid "Afficher les vidéos dans le diaporama"
 msgstr "ビデオをスライドショーで表示する"
 
-#: frontend/src/views/DisplayView.vue:93
+#: frontend/src/views/DisplayView.vue:94
 #: templates/configure/tab_affichage.html.jinja:253
 msgid "Activer le son pour les vidéos"
 msgstr "ビデオのサウンドを有効にする"
 
-#: frontend/src/views/DisplayView.vue:94
+#: frontend/src/views/DisplayView.vue:95
 #: templates/configure/tab_affichage.html.jinja:264
 msgid "Sortie audio :"
 msgstr "オーディオ出力:"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:96
 #: templates/configure/tab_affichage.html.jinja:267
 msgid "Automatique"
 msgstr "自動"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:96
 #: templates/configure/tab_affichage.html.jinja:269
 msgid "HDMI"
 msgstr "HDMI"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:96
 #: templates/configure/tab_affichage.html.jinja:271
 msgid "Jack 3.5mm (Casque)"
 msgstr "3.5mmジャック（ヘッドフォン）"
 
-#: frontend/src/views/DisplayView.vue:96 frontend/src/views/VoiceView.vue:32
+#: frontend/src/views/DisplayView.vue:97 frontend/src/views/VoiceView.vue:32
 #: templates/configure/tab_affichage.html.jinja:276
 msgid "Volume :"
 msgstr "音量 ："
 
-#: frontend/src/views/DisplayView.vue:97
+#: frontend/src/views/DisplayView.vue:98
 #: templates/configure/tab_affichage.html.jinja:286
 msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "動画の間は音楽を下げる（終了後に戻す）"
 
-#: frontend/src/views/DisplayView.vue:98
+#: frontend/src/views/DisplayView.vue:99
 msgid "Animer les photos animées des téléphones"
 msgstr "スマートフォンの動く写真を再生する"
 
-#: frontend/src/views/DisplayView.vue:99
+#: frontend/src/views/DisplayView.vue:100
 msgid ""
 "Photos animées Samsung et Google, Live Photos d'iPhone : leur courte "
 "vidéo est rejouée sur la photo, comme un GIF. Les animations sont créées "
@@ -3096,25 +3132,25 @@ msgstr ""
 "SamsungとGoogleのモーションフォト、iPhoneのLive "
 "Photos：短い動画をGIFのように写真の上で再生します。アニメーションは夜に作成されます（「メディアの準備」からすぐに作成も可能）。"
 
-#: frontend/src/views/DisplayView.vue:100
+#: frontend/src/views/DisplayView.vue:101
 msgid "Courtes vidéos dans les dispositions (en boucle, sans le son)"
 msgstr "短い動画をレイアウトに入れる（ループ、無音）"
 
-#: frontend/src/views/DisplayView.vue:101
+#: frontend/src/views/DisplayView.vue:102
 msgid ""
 "Une courte vidéo peut prendre place dans une composition, comme un GIF ; "
 "les autres vidéos restent seules à l'écran, avec le son."
 msgstr "短い動画はGIFのように組み合わせ表示に入ります。それ以外の動画は音声付きで単独表示のままです。"
 
-#: frontend/src/views/DisplayView.vue:102
+#: frontend/src/views/DisplayView.vue:103
 msgid "Courte vidéo : au plus (secondes)"
 msgstr "短い動画：最大（秒）"
 
-#: frontend/src/views/DisplayView.vue:103
+#: frontend/src/views/DisplayView.vue:104
 msgid "Préparer les grosses vidéos la nuit seulement"
 msgstr "大きな動画は夜だけ準備する"
 
-#: frontend/src/views/DisplayView.vue:104
+#: frontend/src/views/DisplayView.vue:105
 msgid ""
 "Pendant la journée, le cadre prépare d'abord les photos et les petites "
 "vidéos ; les grosses attendent que l'écran soit éteint (le Raspberry Pi "
@@ -3124,27 +3160,27 @@ msgstr ""
 "日中は写真と小さな動画を先に準備し、大きな動画は画面が消えるまで待ちます（Raspberry "
 "Piが快適なまま）。「メディアの準備」ページの「準備」ボタンはいつでもすぐに実行します。"
 
-#: frontend/src/views/DisplayView.vue:105
+#: frontend/src/views/DisplayView.vue:106
 msgid "Grosse vidéo à partir de (Mo)"
 msgstr "大きな動画とみなすサイズ（MB以上）"
 
-#: frontend/src/views/DisplayView.vue:106
+#: frontend/src/views/DisplayView.vue:107
 msgid "Encodage allégé des vidéos à partir de (Mo)"
 msgstr "軽量エンコードにする動画のサイズ（MB以上）"
 
-#: frontend/src/views/DisplayView.vue:107
+#: frontend/src/views/DisplayView.vue:108
 msgid ""
 "Les vidéos plus lourdes sont préparées en 720p (30 images/s au plus) : "
 "bien plus rapide et moins gourmand sur un Raspberry Pi, toujours en plein"
 " écran. 0 = jamais."
 msgstr "これより大きい動画は720p（最大30fps）で準備します。Raspberry Piでずっと速く軽く、全画面表示のままです。0 = しない。"
 
-#: frontend/src/views/DisplayView.vue:108
+#: frontend/src/views/DisplayView.vue:109
 #: templates/configure/tab_affichage.html.jinja:258
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr "ハードウェア ビデオ デコードを有効にする (スムーズですが、不安定になる可能性があります)"
 
-#: frontend/src/views/DisplayView.vue:109
+#: frontend/src/views/DisplayView.vue:110
 #: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
@@ -3153,16 +3189,16 @@ msgstr ""
 "Raspberry Pi "
 "での再生をよりスムーズにするには、このボックスをチェックします。ビデオの後にブルースクリーンやブラックスクリーンが発生する場合は、チェックを外します。"
 
-#: frontend/src/views/DisplayView.vue:111
+#: frontend/src/views/DisplayView.vue:112
 msgid "Télévision"
 msgstr "テレビ"
 
-#: frontend/src/views/DisplayView.vue:112
+#: frontend/src/views/DisplayView.vue:113
 #: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "HDMI-CEC でテレビを操作"
 
-#: frontend/src/views/DisplayView.vue:113
+#: frontend/src/views/DisplayView.vue:114
 #: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
@@ -3172,11 +3208,11 @@ msgstr ""
 "テレビの場合：フォトフレームの起動時にフレームの入力でテレビが点き、一緒にスタンバイになります。テレビの設定で「HDMI-"
 "CEC」（Anynet+、Bravia Sync、SimpLink など）も有効にしてください。"
 
-#: frontend/src/views/DisplayView.vue:114
+#: frontend/src/views/DisplayView.vue:115
 msgid "Piloter le cadre avec la télécommande de la TV"
 msgstr "テレビのリモコンでフレームを操作"
 
-#: frontend/src/views/DisplayView.vue:115
+#: frontend/src/views/DisplayView.vue:116
 msgid ""
 "Quand la TV est sur l'entrée du cadre : ▶ / ◀ photo suivante ou "
 "précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, Stop ou Retour "
@@ -3186,12 +3222,12 @@ msgstr ""
 "テレビがフレームの入力になっているとき：▶ / ◀ で次・前の写真、OK で一時停止、▲ "
 "または赤ボタンで写真に❤️、停止または戻るでスリープ。どのキーでも復帰します。テレビのHDMI-CECを有効にしてください。"
 
-#: frontend/src/views/DisplayView.vue:117
+#: frontend/src/views/DisplayView.vue:118
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "電源管理 (接続されたソケット)"
 
-#: frontend/src/views/DisplayView.vue:118
+#: frontend/src/views/DisplayView.vue:119
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -3201,56 +3237,72 @@ msgstr ""
 "画面が完全にスリープ状態にならない場合は、接続されているコンセント (Wi-Fi) を使用して電源をオフにすることができます。 Pimmich "
 "は、指定した URL に単純な HTTP リクエストを送信します。"
 
-#: frontend/src/views/DisplayView.vue:120
+#: frontend/src/views/DisplayView.vue:121
 msgid "Activer le contrôle par prise connectée"
 msgstr "スマートプラグで制御する"
 
-#: frontend/src/views/DisplayView.vue:121
+#: frontend/src/views/DisplayView.vue:122
 msgid "URL pour ALLUMER la prise :"
 msgstr "プラグをオンにする URL："
 
-#: frontend/src/views/DisplayView.vue:122
+#: frontend/src/views/DisplayView.vue:123
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr "プラグをオフにする URL："
 
-#: frontend/src/views/DisplayView.vue:123
+#: frontend/src/views/DisplayView.vue:124
 msgid "Délai après allumage (secondes) :"
 msgstr "電源投入後の待機時間（秒）："
 
-#: frontend/src/views/DisplayView.vue:124
+#: frontend/src/views/DisplayView.vue:125
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
 msgstr "解像度を強制する前に画面が初期化されるまで待機する時間。解像度がまだ正しくない場合は、値を増やします。"
 
-#: frontend/src/views/DisplayView.vue:125
+#: frontend/src/views/DisplayView.vue:126
 msgid "URL de Statut (Optionnel) :"
 msgstr "状態の URL（任意）："
 
-#: frontend/src/views/DisplayView.vue:126
+#: frontend/src/views/DisplayView.vue:127
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "ホーム アシスタント アクセス トークン (HA ステータス URL の場合):"
 
-#: frontend/src/views/DisplayView.vue:127
+#: frontend/src/views/DisplayView.vue:128
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "ホーム アシスタント プロファイルに「長期アクセス トークン」を作成します。"
 
-#: frontend/src/views/DisplayView.vue:130
+#: frontend/src/views/DisplayView.vue:131
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
 msgstr "Raspberry Pi につないだボタン：1 回押すとスリープ、もう 1 回でスリープ解除します。"
 
-#: frontend/src/views/DisplayView.vue:132
+#: frontend/src/views/DisplayView.vue:133
 msgid "Activer le bouton physique"
 msgstr "物理ボタンを有効にする"
 
-#: frontend/src/views/DisplayView.vue:133
+#: frontend/src/views/DisplayView.vue:134
+#: frontend/src/views/DisplayView.vue:140
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "GPIO ピン（BCM 番号）"
+
+#: frontend/src/views/DisplayView.vue:137
+msgid ""
+"Un petit capteur infrarouge (PIR) branché sur le Raspberry Pi : l'écran "
+"s'éteint quand personne n'est passé devant le cadre depuis un moment, et "
+"se rallume dès que quelqu'un entre dans la pièce."
+msgstr "Raspberry Piにつないだ小さな赤外線（PIR）センサー：しばらく誰も前を通らないと画面が消え、誰かが部屋に入るとすぐに点きます。"
+
+#: frontend/src/views/DisplayView.vue:139
+msgid "Activer le détecteur de mouvement"
+msgstr "人感センサーを有効にする"
+
+#: frontend/src/views/DisplayView.vue:141
+msgid "Éteindre l'écran après (minutes sans personne)"
+msgstr "画面を消すまで（誰もいない分数）"
 
 #: frontend/src/views/GamesView.vue:22
 msgid "Deviner l'année, le lieu ou qui a envoyé la photo."
@@ -4263,7 +4315,7 @@ msgid ""
 "moment-là)"
 msgstr "季節のテーマは期間中のみ表示（その期間はより頻繁に表示）"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:397
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:412
 msgid "Gardez au moins une disposition."
 msgstr "レイアウトを少なくとも1つ残してください。"
 
@@ -4675,7 +4727,7 @@ msgstr "このプロファイルのおすすめ設定："
 msgid "Appliquer les réglages conseillés"
 msgstr "おすすめ設定を適用"
 
-#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:555
+#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:570
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "設定はすでにおすすめどおりです。"
 
@@ -7829,9 +7881,9 @@ msgid "Enregistrement…"
 msgstr "保存中…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:353 web/routes_settings.py:407
-#: web/routes_settings.py:429 web/routes_settings.py:488
-#: web/routes_settings.py:512 web/routes_settings.py:522
+#: web/routes_settings.py:357 web/routes_settings.py:422
+#: web/routes_settings.py:444 web/routes_settings.py:503
+#: web/routes_settings.py:527 web/routes_settings.py:537
 msgid "Enregistré"
 msgstr "保存しました"
 
@@ -10739,7 +10791,7 @@ msgstr "フォトフレームの問題（電源、熱、ディスク）"
 msgid "Imports terminés"
 msgstr "完了したインポート"
 
-#: utils/notify.py:23 web/workers.py:1121
+#: utils/notify.py:23 web/workers.py:1182
 msgid "Médias impossibles à préparer"
 msgstr "準備できないメディア"
 
@@ -11151,13 +11203,13 @@ msgid ""
 "précédente est conservée."
 msgstr "イミッチ写真制限の値が無効です。以前の値が保持されます。"
 
-#: web/routes_config.py:253 web/routes_settings.py:521
+#: web/routes_config.py:253 web/routes_settings.py:536
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive のキーが保存されませんでした：%(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:348
-#: web/routes_settings.py:405 web/routes_settings.py:486
+#: web/routes_config.py:281 web/routes_settings.py:352
+#: web/routes_settings.py:420 web/routes_settings.py:501
 msgid "Réglages modifiés"
 msgstr "設定を変更"
 
@@ -11167,8 +11219,8 @@ msgid ""
 "changements."
 msgstr "設定が保存されました。変更を適用するためにスライドショーが再開されました。"
 
-#: web/routes_family.py:26 web/routes_settings.py:394
-#: web/routes_settings.py:506 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:409
+#: web/routes_settings.py:521 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "リストが無効です。"
 
@@ -11763,7 +11815,7 @@ msgid ""
 " Forcer la mise à jour »."
 msgstr "潮汐データはまだありません。スライドショーが取得するか、「強制更新」を使ってください。"
 
-#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:479
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:494
 #: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "不明なソースです。"
@@ -12165,37 +12217,37 @@ msgstr "プレイリストが見つかりません。"
 msgid "Citation du jour enregistrée."
 msgstr "今日の言葉を保存しました。"
 
-#: web/routes_settings.py:323
+#: web/routes_settings.py:327
 msgid "Aucun réglage à enregistrer."
 msgstr "保存する設定がありません。"
 
-#: web/routes_settings.py:327
+#: web/routes_settings.py:331
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "不明な設定：%(key)s"
 
-#: web/routes_settings.py:331
+#: web/routes_settings.py:335
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "「%(key)s」の値が無効です。"
 
-#: web/routes_settings.py:424
+#: web/routes_settings.py:439
 msgid "Valeur invalide."
 msgstr "無効な値です。"
 
-#: web/routes_settings.py:429
+#: web/routes_settings.py:444
 msgid "Supprimé."
 msgstr "削除しました。"
 
-#: web/routes_settings.py:536
+#: web/routes_settings.py:551
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "パソコン（Raspberry Piではありません）"
 
-#: web/routes_settings.py:559
+#: web/routes_settings.py:574
 msgid "Réglages conseillés appliqués"
 msgstr "おすすめ設定を適用しました"
 
-#: web/routes_settings.py:561
+#: web/routes_settings.py:576
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s件の設定をRaspberry Piに合わせました。"
@@ -12735,16 +12787,16 @@ msgstr "おかえりなさい、%(name)s！"
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr "%(source)s から %(count)s 枚の写真を追加しました。"
 
-#: web/workers.py:1073
+#: web/workers.py:1134
 msgid "Diaporama instable"
 msgstr "スライドショーが不安定"
 
-#: web/workers.py:1073
+#: web/workers.py:1134
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "1時間に %(count)s 回再起動が必要でした。"
 
-#: web/workers.py:1122
+#: web/workers.py:1183
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "

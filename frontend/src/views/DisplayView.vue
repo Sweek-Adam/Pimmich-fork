@@ -2,6 +2,7 @@
 import ButtonCard from "../components/ButtonCard.vue";
 import HomeAssistantCard from "../components/HomeAssistantCard.vue";
 import PresenceCard from "../components/PresenceCard.vue";
+import MotionCard from "../components/MotionCard.vue";
 import ScreenCard from "../components/ScreenCard.vue";
 import SettingsPage from "../components/SettingsPage.vue";
 import SmartPlugCard from "../components/SmartPlugCard.vue";
@@ -132,6 +133,13 @@ const sections: Section[] = [
     { key: "button_enabled", label: () => t("Activer le bouton physique"), type: "toggle" },
     { key: "button_pin", label: () => t("Broche GPIO (numérotation BCM)"), type: "number", min: 2, max: 27, showIf: (v) => !!v.button_enabled },
   ] },
+  { title: () => t("Détecteur de mouvement"), icon: "fa-walking",
+    intro: () => t("Un petit capteur infrarouge (PIR) branché sur le Raspberry Pi : l'écran s'éteint quand personne n'est passé devant le cadre depuis un moment, et se rallume dès que quelqu'un entre dans la pièce."),
+    fields: [
+    { key: "motion_sensor_enabled", label: () => t("Activer le détecteur de mouvement"), type: "toggle" },
+    { key: "motion_sensor_pin", label: () => t("Broche GPIO (numérotation BCM)"), type: "number", min: 2, max: 27, showIf: (v) => !!v.motion_sensor_enabled },
+    { key: "motion_sleep_minutes", label: () => t("Éteindre l'écran après (minutes sans personne)"), type: "number", min: 1, max: 240, showIf: (v) => !!v.motion_sensor_enabled },
+  ] },
 ];
 </script>
 
@@ -141,6 +149,7 @@ const sections: Section[] = [
       <ScreenCard />
       <SmartPlugCard />
       <ButtonCard />
+      <MotionCard />
       <PresenceCard />
       <HomeAssistantCard v-if="boot.admin" />
     </div>

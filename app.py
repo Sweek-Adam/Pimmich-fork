@@ -53,7 +53,7 @@ if __name__ == '__main__':
     telegram_thread.start()
     maintenance_thread = threading.Thread(target=maintenance_worker, daemon=True)
     maintenance_thread.start()
-    from web.workers import presence_worker, cloud_update_worker, icloud_update_worker, email_worker, people_worker, rotation_worker, storage_worker, quote_worker, message_schedule_worker, hdmi_audio_worker, music_schedule_worker, stats_worker, reliability_worker, trips_worker, button_worker, hotspot_worker, tv_remote_worker
+    from web.workers import presence_worker, cloud_update_worker, icloud_update_worker, email_worker, people_worker, rotation_worker, storage_worker, quote_worker, message_schedule_worker, hdmi_audio_worker, music_schedule_worker, stats_worker, reliability_worker, trips_worker, button_worker, hotspot_worker, tv_remote_worker, motion_worker
     from utils.platform_info import desktop, web_port
     on_pi = not desktop()  # édition ordinateur : pas de matériel du Raspberry Pi (GPIO, capteur, disques, Wi-Fi de secours)
     if on_pi:
@@ -83,6 +83,7 @@ if __name__ == '__main__':
         threading.Thread(target=button_worker, daemon=True, name="button").start()  # bouton physique (GPIO)
         threading.Thread(target=hotspot_worker, daemon=True, name="hotspot").start()  # Wi-Fi de secours
         threading.Thread(target=tv_remote_worker, daemon=True, name="tv-remote").start()  # télécommande de la TV (CEC)
+        threading.Thread(target=motion_worker, daemon=True, name="motion").start()  # détecteur de mouvement (GPIO)
     routes_homeassistant.restart_bridge()  # Home Assistant (MQTT), s'il est configuré
     # Préchauffer le cache des remotes rclone (lent sur Pi 3) pour que la page de configuration s'ouvre vite
     from utils.import_gdrive import list_rclone_remotes

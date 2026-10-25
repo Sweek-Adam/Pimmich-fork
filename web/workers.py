@@ -928,6 +928,67 @@ def button_worker():
         time.sleep(gpio_button.POLL if watcher.pin is not None else 1)
 
 
+def motion_screen(on):
+    """Écran allumé ou éteint par le détecteur de mouvement : veille de l'écran (et TV par HDMI-CEC), sans prise."""
+    from utils import cec
+    from utils.display_manager import set_software_display_power
+    if load_config().get("cec_enabled"):
+        cec.tv_on() if on else cec.tv_standby()
+    set_software_display_power(on)
+
+
+def motion_worker():
+    """Détecteur de mouvement (GPIO) : écran éteint après quelques minutes sans personne, rallumé au premier passage."""
+    from utils import gpio_button, motion_sensor
+    gpio = gpio_button.load_gpio()
+    motion_sensor.STATE["available"] = gpio is not None
+    if gpio is None:
+        return
+    watcher = motion_sensor.Watcher(gpio)
+    idle = motion_sensor.Idle(600)
+    reload_at, active = 0, False
+    while True:
+        now = time.monotonic()
+        if now >= reload_at:
+            config = load_config()
+            wanted = (bool(config.get("motion_sensor_enabled")), int(config.get("motion_sensor_pin", 24) or 24))
+            idle.delay = 60 * max(1, int(config.get("motion_sleep_minutes", 10) or 10))
+            try:
+                watcher.configure(*wanted)
+                motion_sensor.STATE.update(pin=watcher.pin, error=None)
+            except Exception as e:
+                if motion_sensor.STATE.get("error") != str(e):
+                    logger.warning(f"[Mouvement] GPIO {wanted[1]} : {e}")
+                motion_sensor.STATE.update(pin=None, error=str(e))
+                watcher.pin = None
+            active = watcher.pin is not None and is_slideshow_running() and is_active_hours(config)
+            reload_at = now + 5
+        if watcher.pin is None:
+            if idle.off:  # capteur désactivé alors que l'écran était éteint par lui : on le rallume
+                idle.off = False
+                motion_screen(True)
+            motion_sensor.STATE["screen_off"] = False
+            time.sleep(1)
+            continue
+        try:
+            moving = watcher.motion()
+        except Exception as e:
+            logger.warning(f"[Mouvement] Lecture : {e}")
+            watcher.pin = None
+            continue
+        if moving:
+            motion_sensor.STATE["last_motion"] = time.time()
+        decision = idle.decide(moving, now, active)
+        if decision:
+            logger.info(f"[Mouvement] {'Quelqu’un est là : écran rallumé' if decision == 'on' else 'Personne depuis un moment : écran éteint'}")
+            try:
+                motion_screen(decision == "on")
+            except Exception as e:
+                logger.warning(f"[Mouvement] Écran : {e}")
+        motion_sensor.STATE["screen_off"] = idle.off
+        time.sleep(motion_sensor.POLL)
+
+
 def tv_remote_action(code):
     """Touche de la télécommande de la TV -> action du cadre (voir utils/tv_remote.py)."""
     from utils import reactions, slideshow_commands, tv_remote

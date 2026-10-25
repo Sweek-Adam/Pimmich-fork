@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 23:14+0100\n"
+"POT-Creation-Date: 2026-10-25 23:18+0100\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -289,7 +289,7 @@ msgstr "Map"
 msgid "Messages"
 msgstr "Messages"
 
-#: frontend/src/nav.ts:37 frontend/src/views/DisplayView.vue:25
+#: frontend/src/nav.ts:37 frontend/src/views/DisplayView.vue:26
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:33
 msgid "Écran"
@@ -616,19 +616,22 @@ msgid "Ajouter"
 msgstr "Add"
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:129
+#: frontend/src/views/DisplayView.vue:130
 msgid "Bouton physique"
 msgstr "Physical button"
 
 #: frontend/src/components/ButtonCard.vue:25
+#: frontend/src/components/MotionCard.vue:25
 msgid "Bibliothèque GPIO absente. Sur le Raspberry Pi, lancez une fois :"
 msgstr "GPIO library missing. On the Raspberry Pi, run once:"
 
 #: frontend/src/components/ButtonCard.vue:26
+#: frontend/src/components/MotionCard.vue:26
 msgid "puis redémarrez l'application."
 msgstr "then restart the application."
 
 #: frontend/src/components/ButtonCard.vue:28
+#: frontend/src/components/MotionCard.vue:28
 #, python-brace-format
 msgid "Broche GPIO {pin} inutilisable :"
 msgstr "GPIO pin {pin} unusable:"
@@ -639,6 +642,7 @@ msgid "Bouton surveillé sur la broche GPIO {pin}."
 msgstr "Button watched on GPIO pin {pin}."
 
 #: frontend/src/components/ButtonCard.vue:30
+#: frontend/src/components/MotionCard.vue:30
 msgid "Activation en cours…"
 msgstr "Activating…"
 
@@ -647,6 +651,7 @@ msgid "Dernier appui :"
 msgstr "Last press:"
 
 #: frontend/src/components/ButtonCard.vue:31
+#: frontend/src/components/MotionCard.vue:31
 msgid "aucun pour l'instant"
 msgstr "none yet"
 
@@ -1043,6 +1048,37 @@ msgstr ""
 "In Home Assistant: add the MQTT integration (with the Mosquitto add-on), "
 "then use the same user here."
 
+#: frontend/src/components/MotionCard.vue:24
+#: frontend/src/views/DisplayView.vue:136
+msgid "Détecteur de mouvement"
+msgstr "Motion sensor"
+
+#: frontend/src/components/MotionCard.vue:29
+#, python-brace-format
+msgid "Capteur surveillé sur la broche GPIO {pin}."
+msgstr "Sensor watched on GPIO pin {pin}."
+
+#: frontend/src/components/MotionCard.vue:31
+msgid "Dernier mouvement :"
+msgstr "Last motion:"
+
+#: frontend/src/components/MotionCard.vue:32
+msgid "écran éteint (personne n'est là)"
+msgstr "screen off (nobody around)"
+
+#: frontend/src/components/MotionCard.vue:34
+msgid "Le détecteur n'est pas activé."
+msgstr "The sensor is not enabled."
+
+#: frontend/src/components/MotionCard.vue:35
+msgid ""
+"Câblage d'un capteur PIR (HC-SR501) : VCC sur 5 V (broche 2), GND sur une"
+" masse (broche 6), OUT sur la broche choisie (GPIO 24 = broche physique "
+"18)."
+msgstr ""
+"Wiring a PIR sensor (HC-SR501): VCC to 5 V (pin 2), GND to ground (pin "
+"6), OUT to the chosen pin (GPIO 24 = physical pin 18)."
+
 #: frontend/src/components/PresenceCard.vue:50
 #: templates/configure/tab_affichage.html.jinja:347
 msgid "Réveil à l'arrivée d'un membre de la famille"
@@ -1280,28 +1316,28 @@ msgid "Adresse du flux RSS du podcast"
 msgstr "Podcast RSS feed address"
 
 #: frontend/src/components/ScreenCard.vue:16
-#: frontend/src/views/DisplayView.vue:28
+#: frontend/src/views/DisplayView.vue:29
 #: templates/configure/tab_affichage.html.jinja:17
 #: templates/configure/tab_affichage.html.jinja:38
 msgid "Paysage (Horizontal)"
 msgstr "Landscape (Horizontal)"
 
 #: frontend/src/components/ScreenCard.vue:16
-#: frontend/src/views/DisplayView.vue:28
+#: frontend/src/views/DisplayView.vue:29
 #: templates/configure/tab_affichage.html.jinja:17
 #: templates/configure/tab_affichage.html.jinja:38
 msgid "Portrait (Vertical)"
 msgstr "Portrait (Vertical)"
 
 #: frontend/src/components/ScreenCard.vue:17
-#: frontend/src/views/DisplayView.vue:29
+#: frontend/src/views/DisplayView.vue:30
 #: templates/configure/tab_affichage.html.jinja:18
 #: templates/configure/tab_affichage.html.jinja:39
 msgid "Paysage retourné"
 msgstr "Landscape (upside down)"
 
 #: frontend/src/components/ScreenCard.vue:17
-#: frontend/src/views/DisplayView.vue:29
+#: frontend/src/views/DisplayView.vue:30
 #: templates/configure/tab_affichage.html.jinja:18
 #: templates/configure/tab_affichage.html.jinja:39
 msgid "Portrait retourné"
@@ -2749,87 +2785,87 @@ msgstr "Longitude (eg: -4.4861):"
 msgid "Clé API StormGlass :"
 msgstr "Api Key StormGlass :"
 
-#: frontend/src/views/DisplayView.vue:14
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Fondu enchaîné"
 msgstr "Crossfade"
 
-#: frontend/src/views/DisplayView.vue:14
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Fondu au noir"
 msgstr "Fade through black"
 
-#: frontend/src/views/DisplayView.vue:14
+#: frontend/src/views/DisplayView.vue:15
 #: templates/configure/tab_affichage.html.jinja:198
 msgid "Zoom en fondu"
 msgstr "Zoom fade"
 
-#: frontend/src/views/DisplayView.vue:15
+#: frontend/src/views/DisplayView.vue:16
 #: templates/configure/tab_affichage.html.jinja:199
 msgid "Glisser depuis la gauche"
 msgstr "Swipe from left"
 
-#: frontend/src/views/DisplayView.vue:15
+#: frontend/src/views/DisplayView.vue:16
 #: templates/configure/tab_affichage.html.jinja:199
 msgid "Glisser depuis la droite"
 msgstr "Swipe from right"
 
-#: frontend/src/views/DisplayView.vue:16
+#: frontend/src/views/DisplayView.vue:17
 #: templates/configure/tab_affichage.html.jinja:200
 msgid "Glisser depuis le bas"
 msgstr "Swipe from bottom"
 
-#: frontend/src/views/DisplayView.vue:16
+#: frontend/src/views/DisplayView.vue:17
 #: templates/configure/tab_affichage.html.jinja:200
 msgid "Glisser depuis le haut"
 msgstr "Swipe from up"
 
-#: frontend/src/views/DisplayView.vue:17
+#: frontend/src/views/DisplayView.vue:18
 #: templates/configure/tab_affichage.html.jinja:201
 msgid "Pousser vers la gauche"
 msgstr "Push left"
 
-#: frontend/src/views/DisplayView.vue:17
+#: frontend/src/views/DisplayView.vue:18
 #: templates/configure/tab_affichage.html.jinja:201
 msgid "Pousser vers le haut"
 msgstr "Push up"
 
-#: frontend/src/views/DisplayView.vue:17
+#: frontend/src/views/DisplayView.vue:18
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Rideau"
 msgstr "Wipe"
 
-#: frontend/src/views/DisplayView.vue:18
+#: frontend/src/views/DisplayView.vue:19
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Stores"
 msgstr "Blinds"
 
-#: frontend/src/views/DisplayView.vue:18
+#: frontend/src/views/DisplayView.vue:19
 #: templates/configure/tab_affichage.html.jinja:202
 msgid "Iris (cercle qui s'ouvre)"
 msgstr "Iris (opening circle)"
 
-#: frontend/src/views/DisplayView.vue:18
+#: frontend/src/views/DisplayView.vue:19
 #: templates/configure/tab_affichage.html.jinja:203
 msgid "Au hasard (une différente à chaque photo)"
 msgstr "Random (a different one for each photo)"
 
-#: frontend/src/views/DisplayView.vue:22
+#: frontend/src/views/DisplayView.vue:23
 #: templates/configure/tab_affichage.html.jinja:4
 msgid "Paramètres d'affichage"
 msgstr "Display's parameters"
 
-#: frontend/src/views/DisplayView.vue:23
+#: frontend/src/views/DisplayView.vue:24
 #: templates/configure/tab_affichage.html.jinja:7
 msgid "Durée d'affichage (en secondes) :"
 msgstr "Display's duration :"
 
-#: frontend/src/views/DisplayView.vue:26
+#: frontend/src/views/DisplayView.vue:27
 #: templates/configure/tab_affichage.html.jinja:13
 msgid "Orientation du cadre"
 msgstr "Frame orientation"
 
-#: frontend/src/views/DisplayView.vue:27
+#: frontend/src/views/DisplayView.vue:28
 #: templates/configure/tab_affichage.html.jinja:23
 msgid ""
 "L'écran pivote tout seul et les photos sont repréparées en arrière-plan "
@@ -2838,26 +2874,26 @@ msgstr ""
 "The screen rotates by itself and photos are re-prepared in the background"
 " at the new size (the slideshow keeps running meanwhile)."
 
-#: frontend/src/views/DisplayView.vue:30
+#: frontend/src/views/DisplayView.vue:31
 #: templates/configure/tab_affichage.html.jinja:19
 msgid "Automatique (capteur d'orientation)"
 msgstr "Automatic (orientation sensor)"
 
-#: frontend/src/views/DisplayView.vue:31
+#: frontend/src/views/DisplayView.vue:32
 #: templates/configure/tab_affichage.html.jinja:163
 msgid "Largeur d'affichage cible (px) :"
 msgstr "Target display width (px) :"
 
-#: frontend/src/views/DisplayView.vue:32
+#: frontend/src/views/DisplayView.vue:33
 #: templates/configure/tab_affichage.html.jinja:166
 msgid "Hauteur d'affichage cible (px) :"
 msgstr "Target display height (px) :"
 
-#: frontend/src/views/DisplayView.vue:33
+#: frontend/src/views/DisplayView.vue:34
 msgid "Mode d'affichage du diaporama"
 msgstr "Slideshow display mode"
 
-#: frontend/src/views/DisplayView.vue:34
+#: frontend/src/views/DisplayView.vue:35
 msgid ""
 "Wayland natif : environ 85 Mo de mémoire en moins (Xwayland n'est plus "
 "nécessaire). Le changement prend effet au prochain démarrage du Raspberry"
@@ -2866,19 +2902,19 @@ msgstr ""
 "Native Wayland: about 85 MB less memory (Xwayland is no longer needed). "
 "The change takes effect at the next Raspberry Pi startup."
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:36
 msgid "X11 (via Xwayland, éprouvé)"
 msgstr "X11 (via Xwayland, proven)"
 
-#: frontend/src/views/DisplayView.vue:35
+#: frontend/src/views/DisplayView.vue:36
 msgid "Wayland natif (plus léger)"
 msgstr "Native Wayland (lighter)"
 
-#: frontend/src/views/DisplayView.vue:36
+#: frontend/src/views/DisplayView.vue:37
 msgid "Hauteur utile de l'écran"
 msgstr "Usable screen height"
 
-#: frontend/src/views/DisplayView.vue:37
+#: frontend/src/views/DisplayView.vue:38
 msgid ""
 "Pour un écran dont le bas est caché par le cadre : les photos n'occupent "
 "que cette partie de la hauteur."
@@ -2886,165 +2922,165 @@ msgstr ""
 "For a screen whose bottom is hidden by the frame: photos only use this "
 "part of the height."
 
-#: frontend/src/views/DisplayView.vue:39
+#: frontend/src/views/DisplayView.vue:40
 #: templates/configure/tab_affichage.html.jinja:64
 msgid "Horaires Semaine (Lun-Ven)"
 msgstr "Weekly Hours (Mon-Fri)"
 
-#: frontend/src/views/DisplayView.vue:40 frontend/src/views/DisplayView.vue:44
+#: frontend/src/views/DisplayView.vue:41 frontend/src/views/DisplayView.vue:45
 #: templates/configure/tab_affichage.html.jinja:65
 #: templates/configure/tab_affichage.html.jinja:72
 msgid "Allumage :"
 msgstr "Ignition:"
 
-#: frontend/src/views/DisplayView.vue:41 frontend/src/views/DisplayView.vue:45
+#: frontend/src/views/DisplayView.vue:42 frontend/src/views/DisplayView.vue:46
 #: templates/configure/tab_affichage.html.jinja:67
 #: templates/configure/tab_affichage.html.jinja:74
 msgid "Extinction :"
 msgstr "Extinction :"
 
-#: frontend/src/views/DisplayView.vue:43
+#: frontend/src/views/DisplayView.vue:44
 #: templates/configure/tab_affichage.html.jinja:71
 msgid "Horaires Weekend (Sam-Dim)"
 msgstr "Weekend hours (Sat-Sun)"
 
-#: frontend/src/views/DisplayView.vue:47
+#: frontend/src/views/DisplayView.vue:48
 #: templates/configure/tab_affichage.html.jinja:81
 msgid "Le soir et la nuit"
 msgstr "Evening and night"
 
-#: frontend/src/views/DisplayView.vue:48
+#: frontend/src/views/DisplayView.vue:49
 #: templates/configure/tab_affichage.html.jinja:83
 msgid "Baisser la luminosité le soir"
 msgstr "Lower the brightness in the evening"
 
-#: frontend/src/views/DisplayView.vue:48
+#: frontend/src/views/DisplayView.vue:49
 #: templates/configure/tab_affichage.html.jinja:100
 msgid "La baisse se fait en douceur (45 minutes) et dure jusqu'au matin."
 msgstr "The change is gradual (45 minutes) and lasts until morning."
 
-#: frontend/src/views/DisplayView.vue:49
+#: frontend/src/views/DisplayView.vue:50
 #: templates/configure/tab_affichage.html.jinja:86
 msgid "À partir de :"
 msgstr "From:"
 
-#: frontend/src/views/DisplayView.vue:50
+#: frontend/src/views/DisplayView.vue:51
 #: templates/configure/tab_affichage.html.jinja:89
 msgid "Une heure précise"
 msgstr "A set time"
 
-#: frontend/src/views/DisplayView.vue:50
+#: frontend/src/views/DisplayView.vue:51
 #: templates/configure/tab_affichage.html.jinja:90
 msgid "Le coucher du soleil"
 msgstr "Sunset"
 
-#: frontend/src/views/DisplayView.vue:51
+#: frontend/src/views/DisplayView.vue:52
 #: templates/configure/tab_affichage.html.jinja:96
 msgid "Luminosité du soir :"
 msgstr "Evening brightness:"
 
-#: frontend/src/views/DisplayView.vue:52
+#: frontend/src/views/DisplayView.vue:53
 #: templates/configure/tab_affichage.html.jinja:101
 msgid "En dehors des heures d'affichage :"
 msgstr "Outside display hours:"
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:54
 #: templates/configure/tab_affichage.html.jinja:104
 msgid "Écran éteint"
 msgstr "Screen off"
 
-#: frontend/src/views/DisplayView.vue:53
+#: frontend/src/views/DisplayView.vue:54
 #: templates/configure/tab_affichage.html.jinja:105
 msgid "Horloge de nuit (l'heure seule, en couleur douce)"
 msgstr "Night clock (just the time, in a soft colour)"
 
-#: frontend/src/views/DisplayView.vue:54
+#: frontend/src/views/DisplayView.vue:55
 #: templates/configure/tab_affichage.html.jinja:109
 msgid "Luminosité :"
 msgstr "Brightness:"
 
-#: frontend/src/views/DisplayView.vue:55
+#: frontend/src/views/DisplayView.vue:56
 #: templates/configure/tab_affichage.html.jinja:113
 msgid "Couleur :"
 msgstr "Colour:"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Ambre"
 msgstr "Amber"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Rouge"
 msgstr "Red"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 #: templates/upload.html.jinja:319
 msgid "Blanc"
 msgstr "White"
 
-#: frontend/src/views/DisplayView.vue:56
+#: frontend/src/views/DisplayView.vue:57
 #: templates/configure/tab_affichage.html.jinja:116
 msgid "Bleu"
 msgstr "Blue"
 
-#: frontend/src/views/DisplayView.vue:57
+#: frontend/src/views/DisplayView.vue:58
 #: templates/configure/tab_affichage.html.jinja:121
 msgid "Afficher la date"
 msgstr "Show the date"
 
-#: frontend/src/views/DisplayView.vue:59
+#: frontend/src/views/DisplayView.vue:60
 msgid "Transitions et mouvement"
 msgstr "Transitions and motion"
 
-#: frontend/src/views/DisplayView.vue:60
+#: frontend/src/views/DisplayView.vue:61
 #: templates/configure/tab_affichage.html.jinja:186
 msgid "Activer l'effet de transition entre les photos"
 msgstr "Enable the transition effect between photos"
 
-#: frontend/src/views/DisplayView.vue:61
+#: frontend/src/views/DisplayView.vue:62
 #: templates/configure/tab_affichage.html.jinja:195
 msgid "Type de transition :"
 msgstr "Transition type:"
 
-#: frontend/src/views/DisplayView.vue:62
+#: frontend/src/views/DisplayView.vue:63
 #: templates/configure/tab_affichage.html.jinja:190
 msgid "Durée de transition (secondes) :"
 msgstr "Transition duration (seconds):"
 
-#: frontend/src/views/DisplayView.vue:63
+#: frontend/src/views/DisplayView.vue:64
 #: templates/configure/tab_affichage.html.jinja:210
 msgid "Caler le rythme sur la musique de fond (changement de photo sur le temps)"
 msgstr "Sync to the background music (photos change on the beat)"
 
-#: frontend/src/views/DisplayView.vue:64
+#: frontend/src/views/DisplayView.vue:65
 #: templates/configure/tab_affichage.html.jinja:214
 msgid "Fréquence d'images (FPS) :"
 msgstr "Frame rate (FPS):"
 
-#: frontend/src/views/DisplayView.vue:65
+#: frontend/src/views/DisplayView.vue:66
 #: templates/configure/tab_affichage.html.jinja:216
 msgid "Automatique (30 FPS sur Pi 3, 60 FPS sinon)"
 msgstr "Automatic (30 FPS on Pi 3, 60 FPS otherwise)"
 
-#: frontend/src/views/DisplayView.vue:66
+#: frontend/src/views/DisplayView.vue:67
 #: templates/configure/tab_affichage.html.jinja:176
 msgid "Activer l'effet Pan/Zoom sur les photos"
 msgstr "Enable Pan/Zoom effect on photos"
 
-#: frontend/src/views/DisplayView.vue:67
+#: frontend/src/views/DisplayView.vue:68
 msgid "Amplitude du zoom"
 msgstr "Zoom amount"
 
-#: frontend/src/views/DisplayView.vue:69 frontend/src/views/HomeView.vue:232
+#: frontend/src/views/DisplayView.vue:70 frontend/src/views/HomeView.vue:232
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
 msgid "Ce jour-là"
 msgstr "On this day"
 
-#: frontend/src/views/DisplayView.vue:70
+#: frontend/src/views/DisplayView.vue:71
 #: templates/configure/tab_affichage.html.jinja:240
 msgid ""
 "Les photos prises un jour comme aujourd'hui, les années précédentes "
@@ -3054,65 +3090,65 @@ msgstr ""
 "Photos taken on this day in previous years (all sources: camera date, or "
 "file name for WhatsApp and phones)."
 
-#: frontend/src/views/DisplayView.vue:72
+#: frontend/src/views/DisplayView.vue:73
 #: templates/configure/tab_affichage.html.jinja:242
 msgid "Ruban « Il y a 5 ans » sur ces photos"
 msgstr "“5 years ago” ribbon on these photos"
 
-#: frontend/src/views/DisplayView.vue:73
+#: frontend/src/views/DisplayView.vue:74
 msgid "Composition « Ce jour-là » (une photo par année)"
 msgstr "“On this day” composition (one photo per year)"
 
-#: frontend/src/views/DisplayView.vue:74 frontend/src/views/DisplayView.vue:84
+#: frontend/src/views/DisplayView.vue:75 frontend/src/views/DisplayView.vue:85
 msgid "Toutes les (minutes)"
 msgstr "Every (minutes)"
 
-#: frontend/src/views/DisplayView.vue:75
+#: frontend/src/views/DisplayView.vue:76
 #: templates/configure/tab_affichage.html.jinja:231
 msgid "Activer le boost pour les photos à leur date anniversaire de prise de vue"
 msgstr "Enable boost for photos on their shooting anniversary"
 
-#: frontend/src/views/DisplayView.vue:76
+#: frontend/src/views/DisplayView.vue:77
 #: templates/configure/tab_affichage.html.jinja:235
 msgid "Facteur de boost anniversaire :"
 msgstr "Birthday boost factor:"
 
-#: frontend/src/views/DisplayView.vue:77
+#: frontend/src/views/DisplayView.vue:78
 #: templates/configure/tab_affichage.html.jinja:222
 msgid ""
 "Fréquence des favoris (nombre d'ajouts supplémentaires dans la liste de "
 "lecture) :"
 msgstr "Favorites frequency (number of additional additions to the playlist):"
 
-#: frontend/src/views/DisplayView.vue:78
+#: frontend/src/views/DisplayView.vue:79
 #: templates/configure/tab_affichage.html.jinja:225
 msgid "Ex: 0 = pas de boost, 2 = 3x plus de chances d'apparaître."
 msgstr "Ex: 0 = no boost, 2 = 3x more chance of appearing."
 
-#: frontend/src/views/DisplayView.vue:80
+#: frontend/src/views/DisplayView.vue:81
 msgid "Agenda « Cette semaine »"
 msgstr "“This week” calendar"
 
-#: frontend/src/views/DisplayView.vue:81
+#: frontend/src/views/DisplayView.vue:82
 msgid ""
 "Les événements des 7 prochains jours et vos comptes à rebours (réglés "
 "dans Horloge & météo)."
 msgstr "Events of the next 7 days and your countdowns (set in Clock & weather)."
 
-#: frontend/src/views/DisplayView.vue:83
+#: frontend/src/views/DisplayView.vue:84
 #: templates/configure/tab_heure.html.jinja:5
 msgid "Afficher la diapositive « Cette semaine »"
 msgstr "Show the “This week” slide"
 
-#: frontend/src/views/DisplayView.vue:86 templates/configure.html.jinja:127
+#: frontend/src/views/DisplayView.vue:87 templates/configure.html.jinja:127
 msgid "Langue"
 msgstr "Language"
 
-#: frontend/src/views/DisplayView.vue:87
+#: frontend/src/views/DisplayView.vue:88
 msgid "Langue des textes affichés sur le cadre"
 msgstr "Language of the texts shown on the frame"
 
-#: frontend/src/views/DisplayView.vue:89
+#: frontend/src/views/DisplayView.vue:90
 msgid ""
 "Date, jeux, mode fête, compositions, citations... L'interface "
 "d'administration suit la langue de votre navigateur."
@@ -3120,55 +3156,55 @@ msgstr ""
 "Date, games, party mode, compositions, quotes... The admin interface "
 "follows your browser's language."
 
-#: frontend/src/views/DisplayView.vue:91 frontend/src/views/LibraryView.vue:121
+#: frontend/src/views/DisplayView.vue:92 frontend/src/views/LibraryView.vue:121
 msgid "Vidéos"
 msgstr "Videos"
 
-#: frontend/src/views/DisplayView.vue:92
+#: frontend/src/views/DisplayView.vue:93
 #: templates/configure/tab_affichage.html.jinja:248
 msgid "Afficher les vidéos dans le diaporama"
 msgstr "Show videos in slideshow"
 
-#: frontend/src/views/DisplayView.vue:93
+#: frontend/src/views/DisplayView.vue:94
 #: templates/configure/tab_affichage.html.jinja:253
 msgid "Activer le son pour les vidéos"
 msgstr "Enable sound for videos"
 
-#: frontend/src/views/DisplayView.vue:94
+#: frontend/src/views/DisplayView.vue:95
 #: templates/configure/tab_affichage.html.jinja:264
 msgid "Sortie audio :"
 msgstr "Sound output :"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:96
 #: templates/configure/tab_affichage.html.jinja:267
 msgid "Automatique"
 msgstr "Automatic"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:96
 #: templates/configure/tab_affichage.html.jinja:269
 msgid "HDMI"
 msgstr "HDMI"
 
-#: frontend/src/views/DisplayView.vue:95
+#: frontend/src/views/DisplayView.vue:96
 #: templates/configure/tab_affichage.html.jinja:271
 msgid "Jack 3.5mm (Casque)"
 msgstr "Jack 3.5mm (headphone)"
 
-#: frontend/src/views/DisplayView.vue:96 frontend/src/views/VoiceView.vue:32
+#: frontend/src/views/DisplayView.vue:97 frontend/src/views/VoiceView.vue:32
 #: templates/configure/tab_affichage.html.jinja:276
 msgid "Volume :"
 msgstr "Volume :"
 
-#: frontend/src/views/DisplayView.vue:97
+#: frontend/src/views/DisplayView.vue:98
 #: templates/configure/tab_affichage.html.jinja:286
 msgid "Baisser la musique pendant les vidéos (elle revient ensuite)"
 msgstr "Lower the music during videos (it comes back afterwards)"
 
-#: frontend/src/views/DisplayView.vue:98
+#: frontend/src/views/DisplayView.vue:99
 msgid "Animer les photos animées des téléphones"
 msgstr "Animate phone motion photos"
 
-#: frontend/src/views/DisplayView.vue:99
+#: frontend/src/views/DisplayView.vue:100
 msgid ""
 "Photos animées Samsung et Google, Live Photos d'iPhone : leur courte "
 "vidéo est rejouée sur la photo, comme un GIF. Les animations sont créées "
@@ -3178,11 +3214,11 @@ msgstr ""
 "plays over the photo, like a GIF. Animations are created at night (or "
 "right away from Media preparation)."
 
-#: frontend/src/views/DisplayView.vue:100
+#: frontend/src/views/DisplayView.vue:101
 msgid "Courtes vidéos dans les dispositions (en boucle, sans le son)"
 msgstr "Short videos in layouts (looping, muted)"
 
-#: frontend/src/views/DisplayView.vue:101
+#: frontend/src/views/DisplayView.vue:102
 msgid ""
 "Une courte vidéo peut prendre place dans une composition, comme un GIF ; "
 "les autres vidéos restent seules à l'écran, avec le son."
@@ -3190,15 +3226,15 @@ msgstr ""
 "A short video can appear in a composition, like a GIF; other videos stay "
 "alone on screen, with sound."
 
-#: frontend/src/views/DisplayView.vue:102
+#: frontend/src/views/DisplayView.vue:103
 msgid "Courte vidéo : au plus (secondes)"
 msgstr "Short video: at most (seconds)"
 
-#: frontend/src/views/DisplayView.vue:103
+#: frontend/src/views/DisplayView.vue:104
 msgid "Préparer les grosses vidéos la nuit seulement"
 msgstr "Prepare large videos at night only"
 
-#: frontend/src/views/DisplayView.vue:104
+#: frontend/src/views/DisplayView.vue:105
 msgid ""
 "Pendant la journée, le cadre prépare d'abord les photos et les petites "
 "vidéos ; les grosses attendent que l'écran soit éteint (le Raspberry Pi "
@@ -3209,15 +3245,15 @@ msgstr ""
 "ones wait until the screen is off (the Raspberry Pi stays smooth). The "
 "Prepare button on the Media preparation page always acts immediately."
 
-#: frontend/src/views/DisplayView.vue:105
+#: frontend/src/views/DisplayView.vue:106
 msgid "Grosse vidéo à partir de (Mo)"
 msgstr "Large video from (MB)"
 
-#: frontend/src/views/DisplayView.vue:106
+#: frontend/src/views/DisplayView.vue:107
 msgid "Encodage allégé des vidéos à partir de (Mo)"
 msgstr "Lighter video encoding from (MB)"
 
-#: frontend/src/views/DisplayView.vue:107
+#: frontend/src/views/DisplayView.vue:108
 msgid ""
 "Les vidéos plus lourdes sont préparées en 720p (30 images/s au plus) : "
 "bien plus rapide et moins gourmand sur un Raspberry Pi, toujours en plein"
@@ -3226,12 +3262,12 @@ msgstr ""
 "Heavier videos are prepared in 720p (30 fps at most): much faster and "
 "lighter on a Raspberry Pi, still full screen. 0 = never."
 
-#: frontend/src/views/DisplayView.vue:108
+#: frontend/src/views/DisplayView.vue:109
 #: templates/configure/tab_affichage.html.jinja:258
 msgid "Activer le décodage vidéo matériel (plus fluide, mais peut être instable)"
 msgstr "Activate hardware video decoding (more fluid, but can be unstable)"
 
-#: frontend/src/views/DisplayView.vue:109
+#: frontend/src/views/DisplayView.vue:110
 #: templates/configure/tab_affichage.html.jinja:260
 msgid ""
 "Cochez cette case pour une lecture plus fluide sur les Raspberry Pi. "
@@ -3240,16 +3276,16 @@ msgstr ""
 "Check this box for smoother playback on Raspberry Pis. Uncheck if you "
 "experience blue/black screens after videos."
 
-#: frontend/src/views/DisplayView.vue:111
+#: frontend/src/views/DisplayView.vue:112
 msgid "Télévision"
 msgstr "Television"
 
-#: frontend/src/views/DisplayView.vue:112
+#: frontend/src/views/DisplayView.vue:113
 #: templates/configure/tab_affichage.html.jinja:411
 msgid "Piloter la télévision par HDMI-CEC"
 msgstr "Control the TV via HDMI-CEC"
 
-#: frontend/src/views/DisplayView.vue:113
+#: frontend/src/views/DisplayView.vue:114
 #: templates/configure/tab_affichage.html.jinja:412
 msgid ""
 "Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en "
@@ -3260,11 +3296,11 @@ msgstr ""
 "goes to standby with it. Also enable “HDMI-CEC” (Anynet+, Bravia Sync, "
 "SimpLink...) in the TV settings."
 
-#: frontend/src/views/DisplayView.vue:114
+#: frontend/src/views/DisplayView.vue:115
 msgid "Piloter le cadre avec la télécommande de la TV"
 msgstr "Control the frame with the TV remote"
 
-#: frontend/src/views/DisplayView.vue:115
+#: frontend/src/views/DisplayView.vue:116
 msgid ""
 "Quand la TV est sur l'entrée du cadre : ▶ / ◀ photo suivante ou "
 "précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, Stop ou Retour "
@@ -3275,12 +3311,12 @@ msgstr ""
 "pause, ▲ or red button ❤️ on the photo, Stop or Back puts the frame to "
 "sleep; any key wakes it up. Requires HDMI-CEC enabled on the TV."
 
-#: frontend/src/views/DisplayView.vue:117
+#: frontend/src/views/DisplayView.vue:118
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Power management (Connected Socket)"
 
-#: frontend/src/views/DisplayView.vue:118
+#: frontend/src/views/DisplayView.vue:119
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -3291,23 +3327,23 @@ msgstr ""
 "outlet (Wi-Fi) to turn off its power. Pimmich will send a simple HTTP "
 "request to the URLs you specify."
 
-#: frontend/src/views/DisplayView.vue:120
+#: frontend/src/views/DisplayView.vue:121
 msgid "Activer le contrôle par prise connectée"
 msgstr "Enable smart plug control"
 
-#: frontend/src/views/DisplayView.vue:121
+#: frontend/src/views/DisplayView.vue:122
 msgid "URL pour ALLUMER la prise :"
 msgstr "URL to turn the plug ON:"
 
-#: frontend/src/views/DisplayView.vue:122
+#: frontend/src/views/DisplayView.vue:123
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr "URL to turn the plug OFF:"
 
-#: frontend/src/views/DisplayView.vue:123
+#: frontend/src/views/DisplayView.vue:124
 msgid "Délai après allumage (secondes) :"
 msgstr "Delay after power-on (seconds):"
 
-#: frontend/src/views/DisplayView.vue:124
+#: frontend/src/views/DisplayView.vue:125
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
@@ -3316,21 +3352,21 @@ msgstr ""
 "Time to wait for the screen to initialize before forcing the resolution. "
 "Increase if the resolution is still incorrect."
 
-#: frontend/src/views/DisplayView.vue:125
+#: frontend/src/views/DisplayView.vue:126
 msgid "URL de Statut (Optionnel) :"
 msgstr "Status URL (optional):"
 
-#: frontend/src/views/DisplayView.vue:126
+#: frontend/src/views/DisplayView.vue:127
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Home Assistant access token (if HA status URL):"
 
-#: frontend/src/views/DisplayView.vue:127
+#: frontend/src/views/DisplayView.vue:128
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Create a “Long-Term Access Token” in your Home Assistant profile."
 
-#: frontend/src/views/DisplayView.vue:130
+#: frontend/src/views/DisplayView.vue:131
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
@@ -3338,13 +3374,32 @@ msgstr ""
 "A button wired to the Raspberry Pi: one press puts the frame to sleep, "
 "another wakes it up."
 
-#: frontend/src/views/DisplayView.vue:132
+#: frontend/src/views/DisplayView.vue:133
 msgid "Activer le bouton physique"
 msgstr "Enable the physical button"
 
-#: frontend/src/views/DisplayView.vue:133
+#: frontend/src/views/DisplayView.vue:134
+#: frontend/src/views/DisplayView.vue:140
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "GPIO pin (BCM numbering)"
+
+#: frontend/src/views/DisplayView.vue:137
+msgid ""
+"Un petit capteur infrarouge (PIR) branché sur le Raspberry Pi : l'écran "
+"s'éteint quand personne n'est passé devant le cadre depuis un moment, et "
+"se rallume dès que quelqu'un entre dans la pièce."
+msgstr ""
+"A small infrared (PIR) sensor plugged into the Raspberry Pi: the screen "
+"turns off when nobody has walked past the frame for a while, and back on "
+"as soon as someone enters the room."
+
+#: frontend/src/views/DisplayView.vue:139
+msgid "Activer le détecteur de mouvement"
+msgstr "Enable the motion sensor"
+
+#: frontend/src/views/DisplayView.vue:141
+msgid "Éteindre l'écran après (minutes sans personne)"
+msgstr "Turn the screen off after (minutes with nobody)"
 
 #: frontend/src/views/GamesView.vue:22
 msgid "Deviner l'année, le lieu ou qui a envoyé la photo."
@@ -4401,7 +4456,7 @@ msgid ""
 "moment-là)"
 msgstr "Seasonal themes only during their period (and more frequent at that time)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:397
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:412
 msgid "Gardez au moins une disposition."
 msgstr "Keep at least one layout."
 
@@ -4829,7 +4884,7 @@ msgstr "Recommended settings for this profile:"
 msgid "Appliquer les réglages conseillés"
 msgstr "Apply recommended settings"
 
-#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:555
+#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:570
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "Settings already match the recommendations."
 
@@ -8085,9 +8140,9 @@ msgid "Enregistrement…"
 msgstr "Saving…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:353 web/routes_settings.py:407
-#: web/routes_settings.py:429 web/routes_settings.py:488
-#: web/routes_settings.py:512 web/routes_settings.py:522
+#: web/routes_settings.py:357 web/routes_settings.py:422
+#: web/routes_settings.py:444 web/routes_settings.py:503
+#: web/routes_settings.py:527 web/routes_settings.py:537
 msgid "Enregistré"
 msgstr "Saved"
 
@@ -11097,7 +11152,7 @@ msgstr "Frame problems (power, heat, disk)"
 msgid "Imports terminés"
 msgstr "Finished imports"
 
-#: utils/notify.py:23 web/workers.py:1121
+#: utils/notify.py:23 web/workers.py:1182
 msgid "Médias impossibles à préparer"
 msgstr "Media that could not be prepared"
 
@@ -11511,13 +11566,13 @@ msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
 
-#: web/routes_config.py:253 web/routes_settings.py:521
+#: web/routes_config.py:253 web/routes_settings.py:536
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:348
-#: web/routes_settings.py:405 web/routes_settings.py:486
+#: web/routes_config.py:281 web/routes_settings.py:352
+#: web/routes_settings.py:420 web/routes_settings.py:501
 msgid "Réglages modifiés"
 msgstr "Settings changed"
 
@@ -11527,8 +11582,8 @@ msgid ""
 "changements."
 msgstr "Configuration saved. The slideshow was restarted to apply the changes."
 
-#: web/routes_family.py:26 web/routes_settings.py:394
-#: web/routes_settings.py:506 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:409
+#: web/routes_settings.py:521 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Invalid list."
 
@@ -12131,7 +12186,7 @@ msgid ""
 " Forcer la mise à jour »."
 msgstr "No tide data yet: the slideshow fetches it, or use \"Force update\"."
 
-#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:479
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:494
 #: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Unknown source."
@@ -12543,37 +12598,37 @@ msgstr "Playlist not found."
 msgid "Citation du jour enregistrée."
 msgstr "Quote of the day saved."
 
-#: web/routes_settings.py:323
+#: web/routes_settings.py:327
 msgid "Aucun réglage à enregistrer."
 msgstr "No setting to save."
 
-#: web/routes_settings.py:327
+#: web/routes_settings.py:331
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unknown setting: %(key)s"
 
-#: web/routes_settings.py:331
+#: web/routes_settings.py:335
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Invalid value for “%(key)s”."
 
-#: web/routes_settings.py:424
+#: web/routes_settings.py:439
 msgid "Valeur invalide."
 msgstr "Invalid value."
 
-#: web/routes_settings.py:429
+#: web/routes_settings.py:444
 msgid "Supprimé."
 msgstr "Deleted."
 
-#: web/routes_settings.py:536
+#: web/routes_settings.py:551
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "Computer (not a Raspberry Pi)"
 
-#: web/routes_settings.py:559
+#: web/routes_settings.py:574
 msgid "Réglages conseillés appliqués"
 msgstr "Recommended settings applied"
 
-#: web/routes_settings.py:561
+#: web/routes_settings.py:576
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s setting(s) adapted to the Raspberry Pi."
@@ -13141,16 +13196,16 @@ msgstr "Welcome home, %(name)s!"
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr "%(count)s photo(s) added from %(source)s."
 
-#: web/workers.py:1073
+#: web/workers.py:1134
 msgid "Diaporama instable"
 msgstr "Unstable slideshow"
 
-#: web/workers.py:1073
+#: web/workers.py:1134
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "It had to be restarted %(count)s times in one hour."
 
-#: web/workers.py:1122
+#: web/workers.py:1183
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "

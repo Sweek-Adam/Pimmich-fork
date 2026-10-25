@@ -100,6 +100,10 @@ SETTINGS = {
     # Bouton physique (GPIO, numérotation BCM)
     "button_enabled": ("bool", None, False),
     "button_pin": ("int", (2, 27), 23),
+    # Détecteur de mouvement (GPIO) : écran éteint quand personne n'est là
+    "motion_sensor_enabled": ("bool", None, False),
+    "motion_sensor_pin": ("int", (2, 27), 24),
+    "motion_sleep_minutes": ("int", (1, 240), 10),
     # Dispositions
     "compositions_every": ("int", (0, 100), 5),
     "compositions_full_photos": ("bool", None, True),
@@ -351,6 +355,17 @@ def settings_save_api():
         threading.Thread(target=reprepare_all_sources, daemon=True, name="reprepare").start()
     schedule_slideshow_restart()
     return jsonify({"success": True, "message": _("Enregistré"), "values": current_values(config)})
+
+
+@app.route('/api/motion_sensor', methods=['GET'])
+@login_required
+def motion_sensor_api():
+    """État du détecteur de mouvement : bibliothèque GPIO, broche surveillée, dernier mouvement, écran éteint."""
+    from utils import gpio_button, motion_sensor
+    state = dict(motion_sensor.STATE)
+    if state["available"] is None:
+        state["available"] = gpio_button.load_gpio() is not None
+    return jsonify(state)
 
 
 @app.route('/api/gpio_button', methods=['GET'])
