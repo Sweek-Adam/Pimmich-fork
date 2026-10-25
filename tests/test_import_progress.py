@@ -49,3 +49,21 @@ def test_progress_api(admin_client):
     list(ip.tracked("smartphone", "prepare", iter([{"type": "progress", "current": 2, "total": 5}])))
     data = admin_client.get("/api/imports/progress").get_json()["imports"]
     assert data[0]["label"] == "Téléphone" and data[0]["prepare"]["current"] == 2 and data[0]["prepare"]["total"] == 5
+
+
+def test_automatic_sync_without_news_stays_hidden():
+    nothing = [{"type": "progress", "stage": "SCANNING", "percent": 10, "message": "Analyse..."},
+               {"type": "done", "stage": "IMPORT_COMPLETE", "percent": 100, "message": "Synchronisation terminée. Aucune nouvelle photo.", "changes": 0}]
+    events = ip.tracked("gdrive", "download", iter(nothing), quiet=True)
+    next(events)
+    assert ip.snapshot() == []  # recherche de nouveautés : rien d'affiché
+    list(events)
+    assert ip.snapshot() == [] and ip.snapshot(ip.time.time() + ip.QUIET_AFTER_DOWNLOAD + 1) == []
+    # Des nouveautés : l'import automatique apparaît comme un import lancé à la main
+    events = ip.tracked("gdrive", "download", download_events(), quiet=True)
+    next(events); next(events)
+    assert ip.snapshot()[0]["download"]["total"] == 4
+    # Une erreur se montre aussi
+    ip.reset()
+    list(ip.tracked("samba", "download", iter([{"type": "error", "message": "Partage introuvable"}]), quiet=True))
+    assert ip.snapshot()[0]["error"] == "Partage introuvable"

@@ -197,7 +197,7 @@ def immich_update_worker():
                 # Étape 1: Téléchargement
                 download_success = False
                 description_map = {} # Initialiser un mappage vide
-                for update in import_progress.tracked("immich", "download", download_and_extract_album(config)):
+                for update in import_progress.tracked("immich", "download", download_and_extract_album(config), quiet=True):
                     # NOUVEAU: Afficher les messages de progression du worker dans les logs pour le débogage
                     if update.get("message"):
                         logger.info(f"🖼️🔄  {update.get('message')}")
@@ -228,7 +228,7 @@ def immich_update_worker():
                     screen_width = config.get("display_width", 1920) # Utiliser la résolution configurée
                     screen_height = config.get("display_height", 1080) # Utiliser la résolution configurée
                     prep_successful = False
-                    for update in import_progress.tracked("immich", "prepare", prepare_all_photos_with_progress(screen_width=screen_width, screen_height=screen_height, source_type="immich", description_map=final_description_map)):
+                    for update in import_progress.tracked("immich", "prepare", prepare_all_photos_with_progress(screen_width=screen_width, screen_height=screen_height, source_type="immich", description_map=final_description_map), quiet=True):
                         immich_status_manager.update_status(message=update.get('message', '')) # Update status with preparation message
                         if update.get("type") == "error":
                             notify_sync_error("Immich", update.get("message", ""))
@@ -306,7 +306,7 @@ def samba_update_worker():
                 print("[Auto-Update Samba] Lancement de l'import et de la préparation...")
                 
                 import_success = False
-                for update in import_progress.tracked("samba", "download", import_samba_photos(config)):
+                for update in import_progress.tracked("samba", "download", import_samba_photos(config), quiet=True):
                     if update.get("type") == "error":
                         notify_sync_error("Samba", update.get("message", ""))
                         logger.info(f"[Auto-Update Samba] Erreur lors de l'import : {update.get('message')}")
@@ -330,7 +330,7 @@ def samba_update_worker():
                     screen_width = config.get("display_width", 1920) # Utiliser la résolution configurée
                     screen_height = config.get("display_height", 1080) # Utiliser la résolution configurée
                     prep_successful = False
-                    for update in import_progress.tracked("samba", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, "samba", description_map=final_description_map)):
+                    for update in import_progress.tracked("samba", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, "samba", description_map=final_description_map), quiet=True):
                         samba_status_manager.update_status(message=update.get('message', '')) # Update status with preparation message
                         if update.get("type") == "error":
                             notify_sync_error("Samba", update.get("message", ""))
@@ -384,7 +384,7 @@ def gdrive_update_worker():
                 with app.app_context():
                     gdrive_status_manager.update_status(message=_("Recherche de nouveautés..."))
                 changes = None
-                for update in import_progress.tracked("gdrive", "download", import_gdrive_photos(config)):
+                for update in import_progress.tracked("gdrive", "download", import_gdrive_photos(config), quiet=True):
                     if update.get("type") == "error":
                         notify_sync_error("Google Drive", update.get("message", ""))
                         logger.info(f"[Auto-Update Google Drive] Erreur lors de l'import : {update.get('message')}")
@@ -402,7 +402,7 @@ def gdrive_update_worker():
                     screen_width = config.get("display_width", 1920)
                     screen_height = config.get("display_height", 1080)
                     prep_successful = False
-                    for update in import_progress.tracked("gdrive", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, "gdrive", description_map=description_map)):
+                    for update in import_progress.tracked("gdrive", "prepare", prepare_all_photos_with_progress(screen_width, screen_height, "gdrive", description_map=description_map), quiet=True):
                         gdrive_status_manager.update_status(message=update.get('message', ''))
                         if update.get("type") == "error":
                             notify_sync_error("Google Drive", update.get("message", ""))

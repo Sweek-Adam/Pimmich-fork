@@ -36,10 +36,13 @@ def _entry(source):
     return entry
 
 
-def update(source, phase, event):
-    """Interprète un événement d'import ou de préparation."""
+def update(source, phase, event, quiet=False):
+    """Interprète un événement d'import ou de préparation.
+
+    quiet : synchronisation automatique, cachée tant qu'elle n'a rien à télécharger ni à préparer."""
     with _lock:
         entry = _entry(source)
+        entry.setdefault("quiet", quiet)
         step = entry[phase]
         entry["phase"], entry["updated"] = phase, time.time()
         if event.get("message"):
@@ -49,6 +52,7 @@ def update(source, phase, event):
         if isinstance(event.get("current"), int):
             step["current"] = event["current"]
         if step["total"]:
+            entry["quiet"] = False  # des médias à traiter : l'import devient visible
             step["percent"] = min(100, int(100 * step["current"] / step["total"]))
         elif isinstance(event.get("percent"), (int, float)):
             step["percent"] = max(step["percent"], min(99, int(event["percent"])))
@@ -57,6 +61,7 @@ def update(source, phase, event):
             if step["total"]:
                 step["current"] = step["total"]
         if event.get("type") == "error":
+            entry["quiet"] = False
             entry["error"] = str(event.get("message", ""))[:200]
 
 
@@ -84,12 +89,12 @@ def finish(source, phase):
                 pass
 
 
-def tracked(source, phase, generator):
-    """Relaie les événements du générateur tout en mettant à jour le suivi."""
+def tracked(source, phase, generator, quiet=False):
+    """Relaie les événements du générateur tout en mettant à jour le suivi (quiet : voir update)."""
     try:
         for event in generator:
             if isinstance(event, dict):
-                update(source, phase, event)
+                update(source, phase, event, quiet=quiet)
             yield event
     finally:
         finish(source, phase)
@@ -146,8 +151,10 @@ def snapshot(now=None):
             if not entry.get("finished") and entry["download"]["done"] and entry["phase"] == "download" \
                     and now - entry.get("updated", now) > QUIET_AFTER_DOWNLOAD:
                 entry["finished"] = now  # rien à préparer ensuite : affiché « terminé » quelques secondes
-            if entry.get("finished") and now - entry["finished"] > FORGET_AFTER:
-                _imports.pop(source, None)
+            if entry.get("finished") and (now - entry["finished"] > FORGET_AFTER or entry.get("quiet")):
+                _imports.pop(source, None)  # une synchronisation sans nouveauté disparaît sans s'être montrée
+                continue
+            if entry.get("quiet"):
                 continue
             out.append(dict(entry, label=SOURCE_LABELS.get(source, source), download=dict(entry["download"]),
                             prepare=dict(entry["prepare"]), active=not entry.get("finished")))
