@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 23:00+0100\n"
+"POT-Creation-Date: 2026-10-25 23:14+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -146,29 +146,29 @@ msgstr "(Aniversario) Hace %(num)d año"
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Aniversario) Hace %(num)d años"
 
-#: local_slideshow.py:3077
+#: local_slideshow.py:3087
 msgid "Aucune photo trouvée."
 msgstr "No se encontraron fotos."
 
-#: local_slideshow.py:3078
+#: local_slideshow.py:3088
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Configura en: http://%(ip)s"
 
-#: local_slideshow.py:3079
+#: local_slideshow.py:3089
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Credenciales en credentials.json en la raíz de la SD)"
 
-#: local_slideshow.py:3080
+#: local_slideshow.py:3090
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Resolución de pantalla: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3081
+#: local_slideshow.py:3091
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Nuevo intento en 60 segundos..."
 
-#: local_slideshow.py:3107
+#: local_slideshow.py:3117
 msgid "Scannez pour configurer"
 msgstr "Escanea para configurar"
 
@@ -618,7 +618,7 @@ msgid "Ajouter"
 msgstr "Añadir"
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:127
+#: frontend/src/views/DisplayView.vue:129
 msgid "Bouton physique"
 msgstr "Botón físico"
 
@@ -3286,12 +3286,28 @@ msgstr ""
 "entra en reposo con él. Activa también «HDMI-CEC» (Anynet+, Bravia Sync, "
 "SimpLink...) en los ajustes del televisor."
 
+#: frontend/src/views/DisplayView.vue:114
+msgid "Piloter le cadre avec la télécommande de la TV"
+msgstr "Controlar el marco con el mando de la TV"
+
 #: frontend/src/views/DisplayView.vue:115
+msgid ""
+"Quand la TV est sur l'entrée du cadre : ▶ / ◀ photo suivante ou "
+"précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, Stop ou Retour "
+"mise en veille ; n'importe quelle touche réveille le cadre. Nécessite le "
+"HDMI-CEC activé sur la TV."
+msgstr ""
+"Cuando la TV está en la entrada del marco: ▶ / ◀ foto siguiente o "
+"anterior, OK pausa, ▲ o botón rojo ❤️ en la foto, Stop o Atrás pone el "
+"marco en reposo; cualquier tecla lo despierta. Requiere HDMI-CEC activado"
+" en la TV."
+
+#: frontend/src/views/DisplayView.vue:117
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr "Gestión de energía (enchufe conectado)"
 
-#: frontend/src/views/DisplayView.vue:116
+#: frontend/src/views/DisplayView.vue:118
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -3302,23 +3318,23 @@ msgstr ""
 "conectado (Wi-Fi) para apagarla. Pimmich enviará una solicitud HTTP "
 "simple a las URL que especifique."
 
-#: frontend/src/views/DisplayView.vue:118
+#: frontend/src/views/DisplayView.vue:120
 msgid "Activer le contrôle par prise connectée"
 msgstr "Activar el control por enchufe inteligente"
 
-#: frontend/src/views/DisplayView.vue:119
+#: frontend/src/views/DisplayView.vue:121
 msgid "URL pour ALLUMER la prise :"
 msgstr "URL para ENCENDER el enchufe:"
 
-#: frontend/src/views/DisplayView.vue:120
+#: frontend/src/views/DisplayView.vue:122
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr "URL para APAGAR el enchufe:"
 
-#: frontend/src/views/DisplayView.vue:121
+#: frontend/src/views/DisplayView.vue:123
 msgid "Délai après allumage (secondes) :"
 msgstr "Retraso tras el encendido (segundos):"
 
-#: frontend/src/views/DisplayView.vue:122
+#: frontend/src/views/DisplayView.vue:124
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
@@ -3327,21 +3343,21 @@ msgstr ""
 "Es hora de esperar a que la pantalla se inicialice antes de forzar la "
 "resolución. Aumente si la resolución aún es incorrecta."
 
-#: frontend/src/views/DisplayView.vue:123
+#: frontend/src/views/DisplayView.vue:125
 msgid "URL de Statut (Optionnel) :"
 msgstr "URL de estado (opcional):"
 
-#: frontend/src/views/DisplayView.vue:124
+#: frontend/src/views/DisplayView.vue:126
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr "Token de acceso de Home Assistant (si es la URL de estado HA):"
 
-#: frontend/src/views/DisplayView.vue:125
+#: frontend/src/views/DisplayView.vue:127
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr "Cree un \"Token de acceso a largo plazo\" en su perfil de Home Assistant."
 
-#: frontend/src/views/DisplayView.vue:128
+#: frontend/src/views/DisplayView.vue:130
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
@@ -3349,11 +3365,11 @@ msgstr ""
 "Un botón conectado a la Raspberry Pi: una pulsación pone el marco en "
 "reposo y otra lo despierta."
 
-#: frontend/src/views/DisplayView.vue:130
+#: frontend/src/views/DisplayView.vue:132
 msgid "Activer le bouton physique"
 msgstr "Activar el botón físico"
 
-#: frontend/src/views/DisplayView.vue:131
+#: frontend/src/views/DisplayView.vue:133
 msgid "Broche GPIO (numérotation BCM)"
 msgstr "Pin GPIO (numeración BCM)"
 
@@ -4435,7 +4451,7 @@ msgstr ""
 "Temas de temporada solo durante su periodo (y más frecuentes en ese "
 "momento)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:396
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:397
 msgid "Gardez au moins une disposition."
 msgstr "Mantén al menos una disposición."
 
@@ -4864,7 +4880,7 @@ msgstr "Ajustes recomendados para este perfil:"
 msgid "Appliquer les réglages conseillés"
 msgstr "Aplicar los ajustes recomendados"
 
-#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:554
+#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:555
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "Los ajustes ya son los recomendados."
 
@@ -8138,9 +8154,9 @@ msgid "Enregistrement…"
 msgstr "Guardando…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:352 web/routes_settings.py:406
-#: web/routes_settings.py:428 web/routes_settings.py:487
-#: web/routes_settings.py:511 web/routes_settings.py:521
+#: web/routes_settings.py:353 web/routes_settings.py:407
+#: web/routes_settings.py:429 web/routes_settings.py:488
+#: web/routes_settings.py:512 web/routes_settings.py:522
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -11171,7 +11187,7 @@ msgstr "Problemas del marco (alimentación, calor, disco)"
 msgid "Imports terminés"
 msgstr "Importaciones terminadas"
 
-#: utils/notify.py:23 web/workers.py:1063
+#: utils/notify.py:23 web/workers.py:1121
 msgid "Médias impossibles à préparer"
 msgstr "Medios imposibles de preparar"
 
@@ -11593,13 +11609,13 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el"
 " valor anterior."
 
-#: web/routes_config.py:253 web/routes_settings.py:520
+#: web/routes_config.py:253 web/routes_settings.py:521
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:347
-#: web/routes_settings.py:404 web/routes_settings.py:485
+#: web/routes_config.py:281 web/routes_settings.py:348
+#: web/routes_settings.py:405 web/routes_settings.py:486
 msgid "Réglages modifiés"
 msgstr "Ajustes modificados"
 
@@ -11611,8 +11627,8 @@ msgstr ""
 "Configuración guardada. La presentación de diapositivas se reinició para "
 "aplicar los cambios."
 
-#: web/routes_family.py:26 web/routes_settings.py:393
-#: web/routes_settings.py:505 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:394
+#: web/routes_settings.py:506 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Lista no válida."
 
@@ -12223,7 +12239,7 @@ msgstr ""
 "Aún no hay datos de mareas: la presentación los obtiene, o use «Forzar "
 "actualización»."
 
-#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:478
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:479
 #: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Fuente desconocida."
@@ -12639,37 +12655,37 @@ msgstr "Playlist no encontrada."
 msgid "Citation du jour enregistrée."
 msgstr "Cita del día guardada."
 
-#: web/routes_settings.py:322
+#: web/routes_settings.py:323
 msgid "Aucun réglage à enregistrer."
 msgstr "Ningún ajuste que guardar."
 
-#: web/routes_settings.py:326
+#: web/routes_settings.py:327
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Ajuste desconocido: %(key)s"
 
-#: web/routes_settings.py:330
+#: web/routes_settings.py:331
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Valor no válido para «%(key)s»."
 
-#: web/routes_settings.py:423
+#: web/routes_settings.py:424
 msgid "Valeur invalide."
 msgstr "Valor no válido."
 
-#: web/routes_settings.py:428
+#: web/routes_settings.py:429
 msgid "Supprimé."
 msgstr "Eliminado."
 
-#: web/routes_settings.py:535
+#: web/routes_settings.py:536
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "Ordenador (no es una Raspberry Pi)"
 
-#: web/routes_settings.py:558
+#: web/routes_settings.py:559
 msgid "Réglages conseillés appliqués"
 msgstr "Ajustes recomendados aplicados"
 
-#: web/routes_settings.py:560
+#: web/routes_settings.py:561
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s ajuste(s) adaptado(s) a la Raspberry Pi."
@@ -13239,16 +13255,16 @@ msgstr "¡Bienvenido a casa, %(name)s!"
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr "%(count)s foto(s) añadida(s) desde %(source)s."
 
-#: web/workers.py:1015
+#: web/workers.py:1073
 msgid "Diaporama instable"
 msgstr "Presentación inestable"
 
-#: web/workers.py:1015
+#: web/workers.py:1073
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "Tuvo que reiniciarse %(count)s veces en una hora."
 
-#: web/workers.py:1064
+#: web/workers.py:1122
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "

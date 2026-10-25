@@ -111,6 +111,8 @@ const sections: Section[] = [
   { title: () => t("Télévision"), icon: "fa-tv", fields: [
     { key: "cec_enabled", label: () => t("Piloter la télévision par HDMI-CEC"), type: "toggle",
       help: () => t("Avec une TV : elle s'allume sur l'entrée du cadre au réveil et se met en veille avec lui. Activez aussi « HDMI-CEC » (Anynet+, Bravia Sync, SimpLink...) dans les réglages de la TV.") },
+    { key: "tv_remote_enabled", label: () => t("Piloter le cadre avec la télécommande de la TV"), type: "toggle",
+      help: () => t("Quand la TV est sur l'entrée du cadre : ▶ / ◀ photo suivante ou précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, Stop ou Retour mise en veille ; n'importe quelle touche réveille le cadre. Nécessite le HDMI-CEC activé sur la TV.") },
   ] },
   { title: () => t("Gestion de l'alimentation (Prise Connectée)"), icon: "fa-plug",
     intro: () => t("Si votre écran ne se met pas complètement en veille, vous pouvez utiliser une prise connectée (Wi-Fi) pour couper son alimentation. Pimmich enverra une simple requête HTTP aux URLs que vous spécifiez."),

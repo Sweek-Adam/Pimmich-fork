@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 23:00+0100\n"
+"POT-Creation-Date: 2026-10-25 23:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,29 +145,29 @@ msgstr ""
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr ""
 
-#: local_slideshow.py:3077
+#: local_slideshow.py:3087
 msgid "Aucune photo trouvée."
 msgstr ""
 
-#: local_slideshow.py:3078
+#: local_slideshow.py:3088
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr ""
 
-#: local_slideshow.py:3079
+#: local_slideshow.py:3089
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr ""
 
-#: local_slideshow.py:3080
+#: local_slideshow.py:3090
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr ""
 
-#: local_slideshow.py:3081
+#: local_slideshow.py:3091
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr ""
 
-#: local_slideshow.py:3107
+#: local_slideshow.py:3117
 msgid "Scannez pour configurer"
 msgstr ""
 
@@ -591,7 +591,7 @@ msgid "Ajouter"
 msgstr ""
 
 #: frontend/src/components/ButtonCard.vue:24
-#: frontend/src/views/DisplayView.vue:127
+#: frontend/src/views/DisplayView.vue:129
 msgid "Bouton physique"
 msgstr ""
 
@@ -3138,12 +3138,24 @@ msgid ""
 "SimpLink...) dans les réglages de la TV."
 msgstr ""
 
+#: frontend/src/views/DisplayView.vue:114
+msgid "Piloter le cadre avec la télécommande de la TV"
+msgstr ""
+
 #: frontend/src/views/DisplayView.vue:115
+msgid ""
+"Quand la TV est sur l'entrée du cadre : ▶ / ◀ photo suivante ou "
+"précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, Stop ou Retour "
+"mise en veille ; n'importe quelle touche réveille le cadre. Nécessite le "
+"HDMI-CEC activé sur la TV."
+msgstr ""
+
+#: frontend/src/views/DisplayView.vue:117
 #: templates/configure/tab_affichage.html.jinja:333
 msgid "Gestion de l'alimentation (Prise Connectée)"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:116
+#: frontend/src/views/DisplayView.vue:118
 #: templates/configure/tab_affichage.html.jinja:335
 msgid ""
 "Si votre écran ne se met pas complètement en veille, vous pouvez utiliser"
@@ -3151,54 +3163,54 @@ msgid ""
 "enverra une simple requête HTTP aux URLs que vous spécifiez."
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:118
+#: frontend/src/views/DisplayView.vue:120
 msgid "Activer le contrôle par prise connectée"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:119
+#: frontend/src/views/DisplayView.vue:121
 msgid "URL pour ALLUMER la prise :"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:120
+#: frontend/src/views/DisplayView.vue:122
 msgid "URL pour ÉTEINDRE la prise :"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:121
+#: frontend/src/views/DisplayView.vue:123
 msgid "Délai après allumage (secondes) :"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:122
+#: frontend/src/views/DisplayView.vue:124
 #: templates/configure/tab_affichage.html.jinja:462
 msgid ""
 "Temps d'attente pour que l'écran s'initialise avant de forcer la "
 "résolution. Augmentez si la résolution est toujours incorrecte."
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:123
+#: frontend/src/views/DisplayView.vue:125
 msgid "URL de Statut (Optionnel) :"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:124
+#: frontend/src/views/DisplayView.vue:126
 #: templates/configure/tab_affichage.html.jinja:477
 msgid "Token d'accès Home Assistant (si URL de statut HA) :"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:125
+#: frontend/src/views/DisplayView.vue:127
 #: templates/configure/tab_affichage.html.jinja:490
 msgid "Créez un \"Token d'accès longue durée\" dans votre profil Home Assistant."
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:128
+#: frontend/src/views/DisplayView.vue:130
 msgid ""
 "Un bouton branché sur le Raspberry Pi : un appui met le cadre en veille, "
 "un autre le réveille."
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:130
+#: frontend/src/views/DisplayView.vue:132
 msgid "Activer le bouton physique"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:131
+#: frontend/src/views/DisplayView.vue:133
 msgid "Broche GPIO (numérotation BCM)"
 msgstr ""
 
@@ -4203,7 +4215,7 @@ msgid ""
 "moment-là)"
 msgstr ""
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:396
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:397
 msgid "Gardez au moins une disposition."
 msgstr ""
 
@@ -4610,7 +4622,7 @@ msgstr ""
 msgid "Appliquer les réglages conseillés"
 msgstr ""
 
-#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:554
+#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:555
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr ""
 
@@ -7733,9 +7745,9 @@ msgid "Enregistrement…"
 msgstr ""
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:352 web/routes_settings.py:406
-#: web/routes_settings.py:428 web/routes_settings.py:487
-#: web/routes_settings.py:511 web/routes_settings.py:521
+#: web/routes_settings.py:353 web/routes_settings.py:407
+#: web/routes_settings.py:429 web/routes_settings.py:488
+#: web/routes_settings.py:512 web/routes_settings.py:522
 msgid "Enregistré"
 msgstr ""
 
@@ -10540,7 +10552,7 @@ msgstr ""
 msgid "Imports terminés"
 msgstr ""
 
-#: utils/notify.py:23 web/workers.py:1063
+#: utils/notify.py:23 web/workers.py:1121
 msgid "Médias impossibles à préparer"
 msgstr ""
 
@@ -10952,13 +10964,13 @@ msgid ""
 "précédente est conservée."
 msgstr ""
 
-#: web/routes_config.py:253 web/routes_settings.py:520
+#: web/routes_config.py:253 web/routes_settings.py:521
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr ""
 
-#: web/routes_config.py:281 web/routes_settings.py:347
-#: web/routes_settings.py:404 web/routes_settings.py:485
+#: web/routes_config.py:281 web/routes_settings.py:348
+#: web/routes_settings.py:405 web/routes_settings.py:486
 msgid "Réglages modifiés"
 msgstr ""
 
@@ -10968,8 +10980,8 @@ msgid ""
 "changements."
 msgstr ""
 
-#: web/routes_family.py:26 web/routes_settings.py:393
-#: web/routes_settings.py:505 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:394
+#: web/routes_settings.py:506 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr ""
 
@@ -11564,7 +11576,7 @@ msgid ""
 " Forcer la mise à jour »."
 msgstr ""
 
-#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:478
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:479
 #: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr ""
@@ -11966,37 +11978,37 @@ msgstr ""
 msgid "Citation du jour enregistrée."
 msgstr ""
 
-#: web/routes_settings.py:322
+#: web/routes_settings.py:323
 msgid "Aucun réglage à enregistrer."
 msgstr ""
 
-#: web/routes_settings.py:326
+#: web/routes_settings.py:327
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr ""
 
-#: web/routes_settings.py:330
+#: web/routes_settings.py:331
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr ""
 
-#: web/routes_settings.py:423
+#: web/routes_settings.py:424
 msgid "Valeur invalide."
 msgstr ""
 
-#: web/routes_settings.py:428
+#: web/routes_settings.py:429
 msgid "Supprimé."
 msgstr ""
 
-#: web/routes_settings.py:535
+#: web/routes_settings.py:536
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr ""
 
-#: web/routes_settings.py:558
+#: web/routes_settings.py:559
 msgid "Réglages conseillés appliqués"
 msgstr ""
 
-#: web/routes_settings.py:560
+#: web/routes_settings.py:561
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr ""
@@ -12536,16 +12548,16 @@ msgstr ""
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr ""
 
-#: web/workers.py:1015
+#: web/workers.py:1073
 msgid "Diaporama instable"
 msgstr ""
 
-#: web/workers.py:1015
+#: web/workers.py:1073
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr ""
 
-#: web/workers.py:1064
+#: web/workers.py:1122
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "

@@ -91,6 +91,7 @@ SETTINGS = {
     "wifi_hotspot_fallback": ("bool", None, False),
     # Télévision et prise connectée
     "cec_enabled": ("bool", None, False),
+    "tv_remote_enabled": ("bool", None, True),
     "smart_plug_enabled": ("bool", None, False),
     "smart_plug_on_url": ("url", 500, ""),
     "smart_plug_off_url": ("url", 500, ""),

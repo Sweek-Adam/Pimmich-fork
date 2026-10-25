@@ -928,6 +928,64 @@ def button_worker():
         time.sleep(gpio_button.POLL if watcher.pin is not None else 1)
 
 
+def tv_remote_action(code):
+    """Touche de la télécommande de la TV -> action du cadre (voir utils/tv_remote.py)."""
+    from utils import reactions, slideshow_commands, tv_remote
+    from web.routes_slideshow import toggle_sleep
+    action = tv_remote.action_for(code)
+    running = is_slideshow_running()
+    if not running:
+        action = "wake"  # cadre en veille : n'importe quelle touche le réveille
+    elif action in ("next", "previous", "pause"):
+        slideshow_commands.send(action)
+    elif action == "love":
+        try:
+            photo = Path(CURRENT_PHOTO_FILE).read_text().strip()
+            if photo:
+                reactions.add(photo, "love", who="Télécommande")
+        except (OSError, ValueError):
+            pass
+    if action in ("wake", "sleep"):
+        threading.Thread(target=toggle_sleep, daemon=True, name="tv-remote-sleep").start()
+    tv_remote.note(code, action)
+    return action
+
+
+def tv_remote_worker():
+    """Télécommande de la TV par HDMI-CEC : clavier « vc4-hdmi » lu en continu (réglage tv_remote_enabled)."""
+    from utils import cec, tv_remote
+    last = {"code": None, "at": 0.0}
+
+    def on_key(code):
+        now = time.monotonic()
+        if code == last["code"] and now - last["at"] < 0.3:
+            return  # certaines TV envoient la même touche deux fois
+        last.update(code=code, at=now)
+        try:
+            action = tv_remote_action(code)
+            logger.info(f"[Télécommande] Touche {code} : {action or 'sans effet'}")
+        except Exception as e:
+            logger.warning(f"[Télécommande] Touche {code} : {e}")
+
+    while True:
+        if not load_config().get("tv_remote_enabled", True):
+            time.sleep(30)
+            continue
+        device = tv_remote.find_device()
+        tv_remote.STATE["device"] = device
+        if not device:
+            time.sleep(300)
+            continue
+        cec.register()
+        try:
+            tv_remote.listen(device, on_key)
+        except OSError as e:
+            if tv_remote.STATE.get("error") != str(e):
+                logger.warning(f"[Télécommande] {device} : {e}")
+            tv_remote.STATE["error"] = str(e)
+        time.sleep(10)
+
+
 def hotspot_worker():
     """Point d'accès de secours « Cadre-Pimmich » quand aucun réseau connu n'est trouvé (réglage wifi_hotspot_fallback)."""
     from utils import hotspot, wifi_networks

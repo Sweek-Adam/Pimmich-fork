@@ -31,6 +31,11 @@ def tv_on():
     return woke
 
 
+def register():
+    """Se présente à la TV comme lecteur « Cadre photo » : elle envoie alors les touches de sa télécommande au cadre."""
+    return available() and _ctl("--playback", "--osd-name", "Cadre photo")
+
+
 def tv_standby():
     return available() and _ctl("--to", "0", "--standby")
 
