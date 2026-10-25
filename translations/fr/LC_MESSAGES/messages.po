@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 17:44+0100\n"
+"POT-Creation-Date: 2026-10-25 18:05+0100\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -215,8 +215,8 @@ msgstr ""
 #: frontend/src/components/SmartAlbumEditor.vue:121 frontend/src/i18n.ts:2
 #: frontend/src/views/PlaylistsView.vue:136
 #: frontend/src/views/PlaylistsView.vue:151
-#: frontend/src/views/QueueView.vue:102 frontend/src/views/TripsView.vue:258
-#: frontend/src/views/TripsView.vue:288
+#: frontend/src/views/QueueView.vue:102 frontend/src/views/TripsView.vue:296
+#: frontend/src/views/TripsView.vue:326
 #: templates/configure/_smart_albums.html.jinja:80
 #: templates/configure/tab_carte.html.jinja:95
 #, python-brace-format
@@ -717,7 +717,7 @@ msgstr ""
 #: frontend/src/components/SmartAlbumEditor.vue:72
 #: frontend/src/views/LibraryView.vue:165
 #: frontend/src/views/PlaylistsView.vue:179
-#: frontend/src/views/TripsView.vue:263
+#: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
 #: templates/configure/_smart_albums.html.jinja:13
 #: templates/configure/tab_accueil.html.jinja:84
@@ -879,7 +879,7 @@ msgstr ""
 #: frontend/src/components/CaptionEditor.vue:188
 #: frontend/src/components/SmartAlbumEditor.vue:126
 #: frontend/src/views/HomeView.vue:244 frontend/src/views/PlaylistsView.vue:201
-#: frontend/src/views/TripsView.vue:245
+#: frontend/src/views/TripsView.vue:283
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
 #: templates/upload.html.jinja:216
@@ -4107,7 +4107,7 @@ msgstr ""
 msgid "Le prénom de l'expéditeur"
 msgstr ""
 
-#: frontend/src/views/ImportView.vue:181 frontend/src/views/TripsView.vue:300
+#: frontend/src/views/ImportView.vue:181 frontend/src/views/TripsView.vue:338
 #: templates/configure/scripts_gallery.html.jinja:18
 #: templates/configure/tab_actions.html.jinja:166
 #: templates/configure/tab_carte.html.jinja:51
@@ -6098,7 +6098,7 @@ msgid "Modifier les photos"
 msgstr ""
 
 #: frontend/src/views/PlaylistsView.vue:166
-#: frontend/src/views/TripsView.vue:268
+#: frontend/src/views/TripsView.vue:306
 #: templates/configure/tab_carte.html.jinja:34
 msgid "Renommer"
 msgstr ""
@@ -6108,7 +6108,7 @@ msgid "Nom de la playlist"
 msgstr ""
 
 #: frontend/src/views/PlaylistsView.vue:184
-#: frontend/src/views/TripsView.vue:234
+#: frontend/src/views/TripsView.vue:272
 #: templates/configure/_playlist_builder.html.jinja:14
 #: templates/configure/_playlist_builder.html.jinja:107
 #: templates/configure/tab_carte.html.jinja:95
@@ -6738,123 +6738,154 @@ msgstr ""
 msgid "Nom de ce voyage :"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:223
+#: frontend/src/views/TripsView.vue:238
+msgid "Oublier les lieux importés ?"
+msgstr ""
+
+#: frontend/src/views/TripsView.vue:247
+msgid "Retrouver les lieux de vos photos"
+msgstr ""
+
+#: frontend/src/views/TripsView.vue:248
+#, python-brace-format
+msgid "{n} / {total} avec un lieu"
+msgstr ""
+
+#: frontend/src/views/TripsView.vue:249
+msgid ""
+"Beaucoup de téléphones retirent le lieu des photos au partage. Envoyez "
+"votre chronologie Google Maps (téléphone : Paramètres > Position > "
+"Chronologie > Exporter, fichier Timeline.json) ou les fichiers .json d'un"
+" export Google Takeout de Google Photos : chaque photo retrouve l'endroit"
+" où vous étiez à ce moment-là."
+msgstr ""
+
+#: frontend/src/views/TripsView.vue:252
+msgid "Envoyer des fichiers (.json ou .zip)"
+msgstr ""
+
+#: frontend/src/views/TripsView.vue:253
+#, python-brace-format
+msgid "Oublier les lieux importés ({n})"
+msgstr ""
+
+#: frontend/src/views/TripsView.vue:261
 #: templates/configure/tab_carte.html.jinja:6
 msgid "voyages"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:224
+#: frontend/src/views/TripsView.vue:262
 #: templates/configure/tab_carte.html.jinja:7
 msgid "sorties"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:225
+#: frontend/src/views/TripsView.vue:263
 #: templates/configure/tab_carte.html.jinja:8
 msgid "pays visités"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:226
+#: frontend/src/views/TripsView.vue:264
 #: templates/configure/tab_carte.html.jinja:9
 msgid "moments à placer"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:230
+#: frontend/src/views/TripsView.vue:268
 #: templates/configure/tab_carte.html.jinja:103
 msgid "Où est la maison ? Placez-la pour distinguer les voyages des sorties."
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:231 frontend/src/views/TripsView.vue:237
+#: frontend/src/views/TripsView.vue:269 frontend/src/views/TripsView.vue:275
 #: templates/configure/tab_carte.html.jinja:14
 msgid "Placer la maison"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:241
+#: frontend/src/views/TripsView.vue:279
 #: templates/configure/tab_carte.html.jinja:102
 msgid "Cliquez sur la carte à l'endroit de la maison, ou cherchez votre ville."
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:241
+#: frontend/src/views/TripsView.vue:279
 #: templates/configure/tab_carte.html.jinja:97
 #, python-brace-format
 msgid "Cliquez sur la carte à l'endroit de « {title} », ou cherchez un lieu."
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:243
+#: frontend/src/views/TripsView.vue:281
 #: templates/configure/tab_carte.html.jinja:18
 msgid "Chercher un lieu (ville, pays)…"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:247
+#: frontend/src/views/TripsView.vue:285
 #: templates/configure/tab_carte.html.jinja:100
 msgid "Aucun lieu trouvé."
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:260
+#: frontend/src/views/TripsView.vue:298
 #: templates/configure/tab_carte.html.jinja:101
 #, python-brace-format
 msgid "à {n} km de la maison"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:266
+#: frontend/src/views/TripsView.vue:304
 #: templates/configure/tab_carte.html.jinja:32
 msgid "Raconter sur le cadre"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:267
+#: frontend/src/views/TripsView.vue:305
 #: templates/configure/tab_carte.html.jinja:96
 msgid "Placer sur la carte"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:267
+#: frontend/src/views/TripsView.vue:305
 #: templates/configure/tab_carte.html.jinja:96
 msgid "Déplacer"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:269
+#: frontend/src/views/TripsView.vue:307
 #: templates/configure/tab_carte.html.jinja:35
 msgid "Oublier la position donnée"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:278
+#: frontend/src/views/TripsView.vue:316
 #: templates/configure/tab_carte.html.jinja:42
 msgid "Chronologie"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:279
+#: frontend/src/views/TripsView.vue:317
 #: templates/configure/tab_carte.html.jinja:100
 msgid ""
 "Aucune photo datée pour l'instant : les voyages apparaîtront avec les "
 "photos."
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:296
+#: frontend/src/views/TripsView.vue:334
 #: templates/configure/tab_carte.html.jinja:48
 msgid "Sur le cadre"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:298
+#: frontend/src/views/TripsView.vue:336
 #: templates/configure/tab_carte.html.jinja:49
 msgid "Cartes dans le diaporama"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:301
+#: frontend/src/views/TripsView.vue:339
 #: templates/configure/tab_carte.html.jinja:52
 msgid "Souvenirs du jour (« il y a un an, nous étions… »)"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:302
+#: frontend/src/views/TripsView.vue:340
 #: templates/configure/tab_carte.html.jinja:53
 msgid "Tous les voyages, les souvenirs et le récapitulatif de chaque année"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:307
+#: frontend/src/views/TripsView.vue:345
 #: templates/configure/tab_carte.html.jinja:55
 msgid ""
 "Fond de carte détaillé OpenStreetMap dans cette page (les images de la "
 "carte viennent d'openstreetmap.org)"
 msgstr ""
 
-#: frontend/src/views/TripsView.vue:309
+#: frontend/src/views/TripsView.vue:347
 #: templates/configure/tab_carte.html.jinja:56
 msgid ""
 "La recherche de villes utilise OpenStreetMap quand « Trouver le nom du "
@@ -12350,6 +12381,32 @@ msgstr ""
 
 #: web/routes_trips.py:311
 msgid "Maison placée : voyages et sorties sont recalculés."
+msgstr ""
+
+#: web/routes_trips.py:332
+msgid "Aucun fichier reçu."
+msgstr ""
+
+#: web/routes_trips.py:336
+#, python-format
+msgid "Fichier illisible : %(error)s"
+msgstr ""
+
+#: web/routes_trips.py:338
+msgid ""
+"Aucun lieu dans ces fichiers (chronologie Google Maps ou Google Takeout "
+"attendus)."
+msgstr ""
+
+#: web/routes_trips.py:341
+#, python-format
+msgid ""
+"%(count)s photo(s) ont retrouvé leur lieu. Les noms des villes arrivent "
+"dans quelques minutes."
+msgstr ""
+
+#: web/routes_trips.py:349
+msgid "Lieux importés oubliés."
 msgstr ""
 
 #: web/routes_voice.py:32

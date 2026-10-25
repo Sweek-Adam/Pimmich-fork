@@ -150,9 +150,15 @@ def photo_info(prepared):
 
 def load():
     try:
-        return json.loads(INDEX_FILE.read_text())
+        index = json.loads(INDEX_FILE.read_text())
     except (OSError, ValueError):
         return {}
+    try:  # lieux retrouvés grâce à la chronologie Google Maps ou à Google Takeout (photos sans GPS)
+        from utils import location_import
+        location_import.merge_into(index)
+    except Exception:
+        pass
+    return index
 
 
 def _photos(prepared_dir):

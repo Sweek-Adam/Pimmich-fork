@@ -213,9 +213,47 @@ onMounted(async () => {
   initMap();
 });
 onUnmounted(() => map.value?.remove());
+
+// --- Retrouver les lieux (photos sans GPS) ---
+const places = ref<{ photos: number; with_place: number; imported: number } | null>(null);
+const importing = ref(false);
+async function loadPlaces() { places.value = await get<{ photos: number; with_place: number; imported: number }>("/api/locations"); }
+async function importPlaces(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (!input.files?.length) return;
+  const form = new FormData();
+  for (const file of Array.from(input.files)) form.append("files", file);
+  importing.value = true;
+  try {
+    const r = await fetch("/api/locations/import", { method: "POST", body: form });
+    const d = await r.json();
+    notify(d.message || "", !d.success);
+  } finally {
+    importing.value = false;
+    input.value = "";
+    loadPlaces().catch(() => {});
+  }
+}
+async function forgetPlaces() {
+  if (!window.confirm(t("Oublier les lieux importés ?"))) return;
+  await run(() => post("/api/locations", undefined, "DELETE"));
+  loadPlaces().catch(() => {});
+}
+onMounted(() => { loadPlaces().catch(() => {}); });
 </script>
 
 <template>
+  <section v-if="places && places.photos" class="card places-card">
+    <div class="card-head"><h2><i class="fas fa-map-marker-alt"></i>{{ t("Retrouver les lieux de vos photos") }}</h2>
+      <span class="pill" :class="places.with_place ? 'ok' : 'off'">{{ t("{n} / {total} avec un lieu", { n: places.with_place, total: places.photos }) }}</span></div>
+    <p class="small muted">{{ t("Beaucoup de téléphones retirent le lieu des photos au partage. Envoyez votre chronologie Google Maps (téléphone : Paramètres > Position > Chronologie > Exporter, fichier Timeline.json) ou les fichiers .json d'un export Google Takeout de Google Photos : chaque photo retrouve l'endroit où vous étiez à ce moment-là.") }}</p>
+    <div class="row">
+      <label class="btn primary" :class="{ disabled: importing }"><i class="fas" :class="importing ? 'fa-spinner fa-spin' : 'fa-file-upload'"></i>
+        {{ t("Envoyer des fichiers (.json ou .zip)") }}<input type="file" accept=".json,.zip,application/json,application/zip" multiple hidden :disabled="importing" @change="importPlaces"></label>
+      <button v-if="places.imported" class="btn" type="button" @click="forgetPlaces"><i class="fas fa-undo"></i>{{ t("Oublier les lieux importés ({n})", { n: places.imported }) }}</button>
+    </div>
+  </section>
+
   <div v-if="!data" class="card"><div class="skeleton" style="height: 420px"></div></div>
   <template v-else>
     <section class="card">
@@ -344,4 +382,6 @@ onUnmounted(() => map.value?.remove());
 .field { display: grid; gap: .3rem; font-weight: 600; }
 .field select { font-weight: 400; max-width: 100%; }
 .check { display: flex; gap: .6rem; align-items: flex-start; margin: .9rem 0 .4rem; }
+.places-card { margin-bottom: 1rem; }
+.places-card .row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
 </style>

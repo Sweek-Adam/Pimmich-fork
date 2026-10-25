@@ -309,3 +309,41 @@ def trips_home_api():
         return jsonify({"success": False, "message": _("Choisissez un endroit sur la carte.")}), 400
     save_config(dict(load_config(), latitude=lat, longitude=lon))
     return jsonify({"success": True, "message": _("Maison placée : voyages et sorties sont recalculés.")})
+
+
+# --- Retrouver les lieux des photos sans GPS (chronologie Google Maps, Google Takeout) ---
+
+@app.route('/api/locations', methods=['GET'])
+@login_required
+def locations_status_api():
+    from utils import location_import, photo_index
+    index = photo_index.load()
+    photos = [e for k, e in index.items() if not k.lower().endswith((".mp4", ".mov"))]
+    return jsonify({"success": True, "photos": len(photos), "with_place": sum(1 for e in photos if e.get("lat") is not None),
+                    "imported": len(location_import.load_locations())})
+
+
+@app.route('/api/locations/import', methods=['POST'])
+@login_required
+def locations_import_api():
+    from utils import location_import, photo_index
+    files = [(f.filename or "export.json", f.read()) for f in request.files.getlist("files") if f and f.filename]
+    if not files:
+        return jsonify({"success": False, "message": _("Aucun fichier reçu.")}), 400
+    try:
+        result = location_import.import_files(files, photo_index.load())
+    except Exception as e:
+        return jsonify({"success": False, "message": _("Fichier illisible : %(error)s", error=str(e)[:120])}), 400
+    if not result["points"] and not result["takeout"]:
+        return jsonify({"success": False, "message": _("Aucun lieu dans ces fichiers (chronologie Google Maps ou Google Takeout attendus)."), **result}), 400
+    _cache["key"] = None  # voyages recalculés avec les nouveaux lieux
+    return jsonify({"success": True, **result,
+                    "message": _("%(count)s photo(s) ont retrouvé leur lieu. Les noms des villes arrivent dans quelques minutes.", count=result["added"])})
+
+
+@app.route('/api/locations', methods=['DELETE'])
+@login_required
+def locations_forget_api():
+    from utils import location_import
+    location_import.save_locations({})
+    return jsonify({"success": True, "message": _("Lieux importés oubliés.")})
