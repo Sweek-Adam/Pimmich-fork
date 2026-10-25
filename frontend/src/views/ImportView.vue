@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { get, post } from "../api";
 import { currentLang, t } from "../i18n";
 import { notify, run } from "../toast";
+import ScanCard from "../components/ScanCard.vue";
 
 type Source = "usb" | "immich" | "samba" | "gdrive";
 interface Step { percent?: number; message?: string; type?: string; stage?: string; current_photo_url?: string }
@@ -194,6 +195,7 @@ onUnmounted(() => stream?.close());
         <button type="button" :title="t('Retirer du cadre')" @click="removeUpload(u.name)">×</button></figure>
     </div>
   </section>
+  <ScanCard />
 </template>
 
 <style scoped>

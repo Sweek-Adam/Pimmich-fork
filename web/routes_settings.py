@@ -466,7 +466,8 @@ def source_choices():
                ("telegram", translate("Photos reçues par Telegram")), ("invités", translate("Photos des invités (validées)")),
                ("cloud", translate("Autres clouds (Dropbox, OneDrive...)")), ("icloud", translate("Albums partagés iCloud")),
                ("whatsapp", translate("WhatsApp et partages depuis le téléphone")), ("email", translate("Photos reçues par e-mail")),
-               ("personnes", translate("Photos des personnes suivies (Immich)"))]
+               ("personnes", translate("Photos des personnes suivies (Immich)")), ("scans", translate("Photos papier scannées")),
+               ("films", translate("Films de l'année"))]
     names = [u["username"] for u in user_manager.list_users()] + [session.get("username") or ""]
     choices += [(source, translate("Envois de %(name)s", name=members.label(source, names))) for source in members.sources()]
     party_config = load_config().get("party") or {}

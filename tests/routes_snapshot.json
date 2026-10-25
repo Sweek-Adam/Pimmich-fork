@@ -1162,6 +1162,25 @@
   ]
  ],
  [
+  "/api/scan",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/scan/<scan_id>",
+  [
+   "DELETE",
+   "POST"
+  ]
+ ],
+ [
+  "/api/scan/<scan_id>.jpg",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/scan_wifi",
   [
    "GET"

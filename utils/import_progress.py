@@ -11,7 +11,7 @@ import time
 from utils.message_renderer import N_
 
 SOURCE_LABELS = {"gdrive": "Google Drive", "cloud": "Cloud", "icloud": "iCloud", "whatsapp": "WhatsApp", "email": N_("E-mail"), "personnes": N_("Personnes"), "immich": "Immich", "samba": N_("Partage réseau"), "usb": N_("Clé USB"),
-                 "smartphone": N_("Téléphone"), "invités": N_("Invités"), "telegram": "Telegram", "films": N_("Films de l'année")}
+                 "smartphone": N_("Téléphone"), "invités": N_("Invités"), "telegram": "Telegram", "films": N_("Films de l'année"), "scans": N_("Photos papier scannées")}
 QUIET_AFTER_DOWNLOAD = 45  # sans préparation dans ce délai après le téléchargement : import considéré comme fini
 FORGET_AFTER = 20          # un import terminé reste affiché quelques secondes (« terminé »)
 
