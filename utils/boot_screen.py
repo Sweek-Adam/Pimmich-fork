@@ -3,7 +3,9 @@
 un fond sombre aux reflets colorés, « Votre cadre photo s'allume », les fonctions du cadre en cartes (mises en valeur
 tour à tour pendant le démarrage) et le QR code pour envoyer une photo depuis un téléphone.
 
-Les images sont dessinées ici (Pillow) ; utils/install_boot_screen.sh les installe comme thème Plymouth.
+Quatre styles (aurore, lumière, mosaïque, néon) : le thème en tire un au hasard à chaque démarrage.
+Les images sont dessinées ici (Pillow, `python3 -m utils.boot_screen <dossier>`) ; utils/install_boot_screen.sh les
+installe comme thème Plymouth.
 """
 import math
 import random
@@ -427,3 +429,126 @@ def preview(width=1920, height=1080, step=0, **kwargs):
             dot.putalpha(dot.getchannel("A").point(lambda v: v // 3))
         image.alpha_composite(dot, (x + i * 40, y))
     return image.convert("RGB")
+
+
+THEME_NAME = "cadre-photo"
+CYCLE_FRAMES, DOT_FRAMES = 90, 25  # Plymouth rafraîchit 50 fois par seconde : une fonction toutes les 1,8 s
+
+
+def export_theme(out_dir, width=1920, height=1080, url=None, address=None, font_path=None):
+    """Écrit le thème Plymouth complet (images des 4 styles + script qui en choisit un au hasard) dans out_dir."""
+    import socket
+    host = socket.gethostname().lower().split(".")[0] or "cadre-photo"
+    address = address or f"{host}.local"
+    url = url or f"http://{address}/upload"
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    lines = []
+    for s, style in enumerate(STYLES):
+        parts = render(width, height, url=url, address=address, font_path=font_path, style=style)
+        parts["background"].save(out / f"bg{s}.png", optimize=True)
+        dot = parts["dot"]
+        dot.save(out / f"dot{s}.png")
+        faint = dot.copy()
+        faint.putalpha(dot.getchannel("A").point(lambda v: v // 3))
+        faint.save(out / f"dotf{s}.png")
+        lines.append(f'bgfile[{s}] = "bg{s}.png"; dotfile[{s}] = "dot{s}.png"; dotffile[{s}] = "dotf{s}.png";')
+        lines.append(f"ncards[{s}] = {len(parts['cards'])}; dotx[{s}] = {parts['dots_at'][0]}; doty[{s}] = {parts['dots_at'][1]};")
+        for i, (cx, cy, cw, ch) in enumerate(parts["cards"]):
+            highlight = _glow_frame(cw, ch, ch // 2) if parts.get("per_card_highlight") else parts["highlight"]
+            highlight.save(out / f"hl{s}_{i}.png")
+            k = s * 10 + i
+            lines.append(f'hlfile[{k}] = "hl{s}_{i}.png"; hlx[{k}] = {cx - (highlight.width - cw) // 2}; '
+                         f"hly[{k}] = {cy - (highlight.height - ch) // 2};")
+        if parts.get("spinner"):
+            parts["spinner"].save(out / f"spin{s}.png")
+            lines.append(f'spinfile[{s}] = "spin{s}.png";')
+        else:
+            lines.append(f'spinfile[{s}] = "";')
+    (out / f"{THEME_NAME}.script").write_text(PLYMOUTH_SCRIPT.format(
+        nstyles=len(STYLES), width=width, height=height, cycle=CYCLE_FRAMES, dot=DOT_FRAMES, data="\n".join(lines)))
+    (out / f"{THEME_NAME}.plymouth").write_text(
+        "[Plymouth Theme]\nName=Cadre photo\nDescription=Votre cadre photo s'allume\nModuleName=script\n\n"
+        f"[script]\nImageDir=/usr/share/plymouth/themes/{THEME_NAME}\n"
+        f"ScriptFile=/usr/share/plymouth/themes/{THEME_NAME}/{THEME_NAME}.script\n")
+    return out
+
+
+# Script Plymouth : un style au hasard, fond mis à l'échelle de l'écran, fonction mise en valeur tour à tour,
+# trois points d'attente (et l'anneau qui tourne pour le style lumière). Aucun message du système n'est affiché.
+PLYMOUTH_SCRIPT = """# Thème « Cadre photo » (généré par utils/boot_screen.py : ne pas modifier à la main)
+{data}
+
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+style = Math.Int(Math.Random() * {nstyles});
+if (style >= {nstyles}) style = {nstyles} - 1;
+sw = Window.GetWidth();
+sh = Window.GetHeight();
+kx = sw / {width};
+ky = sh / {height};
+
+background.image = Image(bgfile[style]).Scale(sw, sh);
+background.sprite = Sprite(background.image);
+background.sprite.SetZ(-10);
+
+for (i = 0; i < ncards[style]; i++) {{
+    hl[i].image = Image(hlfile[style * 10 + i]);
+    hl[i].image = hl[i].image.Scale(hl[i].image.GetWidth() * kx, hl[i].image.GetHeight() * ky);
+    hl[i].sprite = Sprite(hl[i].image);
+    hl[i].sprite.SetPosition(hlx[style * 10 + i] * kx, hly[style * 10 + i] * ky, 5);
+    hl[i].sprite.SetOpacity(0);
+}}
+
+dot_on = Image(dotfile[style]);
+dot_off = Image(dotffile[style]);
+for (i = 0; i < 3; i++) {{
+    dots[i] = Sprite(dot_off);
+    dots[i].SetPosition((dotx[style] + i * 40) * kx, doty[style] * ky, 6);
+}}
+
+if (spinfile[style] != "") {{
+    spin.image = Image(spinfile[style]);
+    spin.sprite = Sprite(spin.image);
+    spin.x = dotx[style] * kx + 140;
+    spin.y = doty[style] * ky - 18;
+}}
+
+frame = 0;
+fun refresh() {{
+    frame++;
+    step = Math.Int(frame / {cycle});
+    card = step - Math.Int(step / ncards[style]) * ncards[style];
+    phase = (frame - step * {cycle}) / {cycle};
+    for (i = 0; i < ncards[style]; i++) {{
+        if (i == card) {{
+            opacity = 1;
+            if (phase < 0.2) opacity = phase / 0.2;
+            if (phase > 0.85) opacity = (1 - phase) / 0.15;
+            hl[i].sprite.SetOpacity(opacity);
+        }}
+        else hl[i].sprite.SetOpacity(0);
+    }}
+    d = Math.Int(frame / {dot});
+    d = d - Math.Int(d / 3) * 3;
+    for (i = 0; i < 3; i++) {{
+        if (i == d) dots[i].SetImage(dot_on);
+        else dots[i].SetImage(dot_off);
+    }}
+    if (spinfile[style] != "") {{
+        spin.sprite.SetImage(spin.image.Rotate(frame * 0.12));
+        spin.sprite.SetPosition(spin.x, spin.y, 6);
+    }}
+}}
+Plymouth.SetRefreshFunction(refresh);
+
+# Pas de messages du système, pas de barre de progression : seulement l'écran du cadre.
+fun no_message(text) {{ }}
+Plymouth.SetMessageFunction(no_message);
+"""
+
+
+if __name__ == "__main__":
+    import sys
+    size = (sys.argv[2] if len(sys.argv) > 2 else "1920x1080").lower().split("x")
+    print(export_theme(sys.argv[1] if len(sys.argv) > 1 else THEME_NAME, int(size[0]), int(size[1])))
