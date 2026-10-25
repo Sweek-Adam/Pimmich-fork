@@ -213,7 +213,14 @@ def prepare_photo(source_path, dest_path, output_width, output_height, source_ty
         # Convert to RGB if necessary
         if img.mode in ('RGBA', 'LA', 'P'):
             img = img.convert('RGB')
-        
+
+        # Photo trop sombre ou terne : corrigée dans la copie affichée (jamais l'original)
+        if config.get("auto_enhance_enabled", True) and img.mode == "RGB" and source_type != "messages":
+            from utils import auto_enhance
+            img, steps = auto_enhance.auto(img)
+            if steps:
+                logger.debug(f"Amélioration automatique de {Path(source_path).name} : {steps}")
+
         # Determine if the image is portrait-like
         img_aspect_ratio = img.width / img.height
         display_area_aspect_ratio = output_width / effective_photo_height

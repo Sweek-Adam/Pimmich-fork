@@ -34,6 +34,8 @@ const fields: Field[] = [
   { key: "compositions_full_photos", label: () => t("Photos entières (sans recadrage)"), type: "toggle" },
   { key: "smart_crop", label: () => t("Recadrage intelligent : garder les visages entiers"), type: "toggle",
     help: () => t("Quand une photo doit être coupée (cases des compositions, photos très larges), le cadre garde les visages au lieu du centre de l'image.") },
+  { key: "auto_enhance_enabled", label: () => t("Améliorer automatiquement les photos sombres ou ternes"), type: "toggle",
+    help: () => t("À la préparation, les photos trop sombres sont légèrement éclaircies et les photos ternes retrouvent du contraste ; les photos de soirée à l'éclairage coloré et les photos correctes restent telles quelles. Les originaux ne sont jamais modifiés ; le changement vaut pour les photos préparées ensuite.") },
   { key: "compositions_include_messages", label: () => t("Inclure les messages dans les compositions"), type: "toggle" },
   { key: "compositions_seasonal", label: () => t("Thèmes de saison seulement pendant leur période (et plus fréquents à ce moment-là)"), type: "toggle" },
 ];

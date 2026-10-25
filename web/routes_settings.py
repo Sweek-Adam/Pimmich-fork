@@ -111,6 +111,7 @@ SETTINGS = {
     "compositions_every": ("int", (0, 100), 5),
     "compositions_full_photos": ("bool", None, True),
     "smart_crop": ("bool", None, True),
+    "auto_enhance_enabled": ("bool", None, True),
     "compositions_include_messages": ("bool", None, True),
     "compositions_seasonal": ("bool", None, True),
     # Telegram

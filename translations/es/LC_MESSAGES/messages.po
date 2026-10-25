@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:38+0100\n"
+"POT-Creation-Date: 2026-10-26 00:43+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -1047,7 +1047,7 @@ msgstr ""
 
 #: frontend/src/components/HomeAssistantCard.vue:31
 #: frontend/src/components/PresenceCard.vue:52
-#: frontend/src/views/LayoutsView.vue:117
+#: frontend/src/views/LayoutsView.vue:119
 #: frontend/src/views/NetworkView.vue:139
 #: templates/configure/tab_affichage.html.jinja:295
 #: templates/configure/tab_dispositions.html.jinja:29
@@ -2701,7 +2701,7 @@ msgid "Administrateur"
 msgstr "Administrador"
 
 #: frontend/src/views/AccountsView.vue:75
-#: frontend/src/views/LayoutsView.vue:119 frontend/src/views/MediaView.vue:250
+#: frontend/src/views/LayoutsView.vue:121 frontend/src/views/MediaView.vue:250
 #: frontend/src/views/PlaylistsView.vue:167
 #: frontend/src/views/TelegramView.vue:111
 #: templates/configure/tab_comptes.html.jinja:95
@@ -4718,19 +4718,19 @@ msgstr "Aún no hay envíos."
 msgid "Retirer du cadre"
 msgstr "Quitar del marco"
 
-#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:133
+#: frontend/src/views/LayoutsView.vue:26 frontend/src/views/LayoutsView.vue:135
 #: templates/configure/tab_accueil.html.jinja:89
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Formats"
 msgstr "Formatos"
 
-#: frontend/src/views/LayoutsView.vue:27 frontend/src/views/LayoutsView.vue:133
+#: frontend/src/views/LayoutsView.vue:27 frontend/src/views/LayoutsView.vue:135
 #: templates/configure/tab_accueil.html.jinja:90
 #: templates/configure/tab_dispositions.html.jinja:108
 msgid "Thèmes"
 msgstr "Temas"
 
-#: frontend/src/views/LayoutsView.vue:28 frontend/src/views/LayoutsView.vue:134
+#: frontend/src/views/LayoutsView.vue:28 frontend/src/views/LayoutsView.vue:136
 msgid "Avec un message"
 msgstr "Con un mensaje"
 
@@ -4770,11 +4770,28 @@ msgstr ""
 "anchas), el marco conserva las caras en lugar del centro de la imagen."
 
 #: frontend/src/views/LayoutsView.vue:37
+msgid "Améliorer automatiquement les photos sombres ou ternes"
+msgstr "Mejorar automáticamente las fotos oscuras o apagadas"
+
+#: frontend/src/views/LayoutsView.vue:38
+msgid ""
+"À la préparation, les photos trop sombres sont légèrement éclaircies et "
+"les photos ternes retrouvent du contraste ; les photos de soirée à "
+"l'éclairage coloré et les photos correctes restent telles quelles. Les "
+"originaux ne sont jamais modifiés ; le changement vaut pour les photos "
+"préparées ensuite."
+msgstr ""
+"Al preparar, las fotos demasiado oscuras se aclaran un poco y las "
+"apagadas recuperan contraste; las fotos de fiesta con luz de colores y "
+"las fotos correctas no se tocan. Los originales nunca se modifican; el "
+"ajuste vale para las fotos preparadas a partir de ahora."
+
+#: frontend/src/views/LayoutsView.vue:39
 #: templates/configure/tab_dispositions.html.jinja:100
 msgid "Inclure les messages dans les compositions"
 msgstr "Incluir los mensajes en las composiciones"
 
-#: frontend/src/views/LayoutsView.vue:38
+#: frontend/src/views/LayoutsView.vue:40
 #: templates/configure/tab_dispositions.html.jinja:104
 msgid ""
 "Thèmes de saison seulement pendant leur période (et plus fréquents à ce "
@@ -4783,25 +4800,25 @@ msgstr ""
 "Temas de temporada solo durante su periodo (y más frecuentes en ese "
 "momento)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:415
+#: frontend/src/views/LayoutsView.vue:58 web/routes_settings.py:416
 msgid "Gardez au moins une disposition."
 msgstr "Mantén al menos una disposición."
 
-#: frontend/src/views/LayoutsView.vue:73
+#: frontend/src/views/LayoutsView.vue:75
 msgid "Donnez un nom à cette configuration."
 msgstr "Pon un nombre a esta configuración."
 
-#: frontend/src/views/LayoutsView.vue:84
+#: frontend/src/views/LayoutsView.vue:86
 #: templates/configure/tab_dispositions.html.jinja:31
 msgid "Supprimer cette configuration ?"
 msgstr "¿Eliminar esta configuración?"
 
-#: frontend/src/views/LayoutsView.vue:99
+#: frontend/src/views/LayoutsView.vue:101
 #: templates/configure/tab_dispositions.html.jinja:4
 msgid "Disposition du moment"
 msgstr "Disposición actual"
 
-#: frontend/src/views/LayoutsView.vue:100
+#: frontend/src/views/LayoutsView.vue:102
 #: templates/configure/tab_dispositions.html.jinja:6
 msgid ""
 "Choisissez une disposition à afficher une seule fois tout de suite, ou à "
@@ -4812,54 +4829,54 @@ msgstr ""
 "usarla hasta nuevo aviso. «Según mis ajustes» usa las disposiciones "
 "marcadas abajo."
 
-#: frontend/src/views/LayoutsView.vue:111
+#: frontend/src/views/LayoutsView.vue:113
 #: templates/configure/tab_dispositions.html.jinja:16
 msgid "Mes configurations"
 msgstr "Mis configuraciones"
 
-#: frontend/src/views/LayoutsView.vue:112
+#: frontend/src/views/LayoutsView.vue:114
 #: templates/configure/tab_dispositions.html.jinja:18
 msgid ""
 "Enregistrez vos choix de dispositions sous un nom, puis passez de l'une à"
 " l'autre d'un clic."
 msgstr "Guarda tus disposiciones con un nombre y cambia de una a otra con un clic."
 
-#: frontend/src/views/LayoutsView.vue:115
+#: frontend/src/views/LayoutsView.vue:117
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "disposition(s)"
 msgstr "disposición(es)"
 
-#: frontend/src/views/LayoutsView.vue:116
+#: frontend/src/views/LayoutsView.vue:118
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Active"
 msgstr "Activa"
 
-#: frontend/src/views/LayoutsView.vue:118
+#: frontend/src/views/LayoutsView.vue:120
 #: templates/configure/tab_dispositions.html.jinja:29
 msgid "Remplacer par la sélection"
 msgstr "Reemplazar por la selección"
 
-#: frontend/src/views/LayoutsView.vue:122
+#: frontend/src/views/LayoutsView.vue:124
 #: templates/configure/tab_dispositions.html.jinja:30
 msgid "Aucune configuration enregistrée."
 msgstr "No hay ninguna configuración guardada."
 
-#: frontend/src/views/LayoutsView.vue:124
+#: frontend/src/views/LayoutsView.vue:126
 #: templates/configure/tab_dispositions.html.jinja:21
 msgid "Nom (ex : Soirée, Calme, Noël en famille)"
 msgstr "Nombre (p. ej. Fiesta, Tranquilo, Navidad en familia)"
 
-#: frontend/src/views/LayoutsView.vue:125
+#: frontend/src/views/LayoutsView.vue:127
 #: templates/configure/tab_dispositions.html.jinja:22
 msgid "Enregistrer la sélection ci-dessous"
 msgstr "Guardar la selección de abajo"
 
-#: frontend/src/views/LayoutsView.vue:131
+#: frontend/src/views/LayoutsView.vue:133
 #: templates/configure/tab_dispositions.html.jinja:81
 msgid "Dispositions utilisées"
 msgstr "Disposiciones utilizadas"
 
-#: frontend/src/views/LayoutsView.vue:134
+#: frontend/src/views/LayoutsView.vue:136
 msgid ""
 "Construites autour d'un message ou d'un dessin d'invité : elles "
 "n'apparaissent que lorsqu'un message est à afficher."
@@ -4867,12 +4884,12 @@ msgstr ""
 "Creadas en torno a un mensaje o un dibujo de invitado: solo aparecen "
 "cuando hay un mensaje que mostrar."
 
-#: frontend/src/views/LayoutsView.vue:142
+#: frontend/src/views/LayoutsView.vue:144
 #: templates/configure/tab_dispositions.html.jinja:117
 msgid "Thème de saison"
 msgstr "Tema de temporada"
 
-#: frontend/src/views/LayoutsView.vue:143
+#: frontend/src/views/LayoutsView.vue:145
 #: templates/configure/tab_accueil.html.jinja:104
 #: templates/configure/tab_dispositions.html.jinja:118
 msgid "Affiche les messages"
@@ -5247,7 +5264,7 @@ msgstr "Ajustes recomendados para este perfil:"
 msgid "Appliquer les réglages conseillés"
 msgstr "Aplicar los ajustes recomendados"
 
-#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:574
+#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:575
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "Los ajustes ya son los recomendados."
 
@@ -8549,9 +8566,9 @@ msgid "Enregistrement…"
 msgstr "Guardando…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:360 web/routes_settings.py:425
-#: web/routes_settings.py:447 web/routes_settings.py:507
-#: web/routes_settings.py:531 web/routes_settings.py:541
+#: web/routes_settings.py:361 web/routes_settings.py:426
+#: web/routes_settings.py:448 web/routes_settings.py:508
+#: web/routes_settings.py:532 web/routes_settings.py:542
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -12107,13 +12124,13 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el"
 " valor anterior."
 
-#: web/routes_config.py:253 web/routes_settings.py:540
+#: web/routes_config.py:253 web/routes_settings.py:541
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:355
-#: web/routes_settings.py:423 web/routes_settings.py:505
+#: web/routes_config.py:281 web/routes_settings.py:356
+#: web/routes_settings.py:424 web/routes_settings.py:506
 msgid "Réglages modifiés"
 msgstr "Ajustes modificados"
 
@@ -12182,8 +12199,8 @@ msgstr "Envío imposible: %(error)s"
 msgid "Photo envoyée à %(count)s adresse(s)."
 msgstr "Foto enviada a %(count)s dirección(es)."
 
-#: web/routes_family.py:26 web/routes_settings.py:412
-#: web/routes_settings.py:525 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:413
+#: web/routes_settings.py:526 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Lista no válida."
 
@@ -12803,7 +12820,7 @@ msgstr ""
 "Aún no hay datos de mareas: la presentación los obtiene, o use «Forzar "
 "actualización»."
 
-#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:498
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:499
 #: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Fuente desconocida."
@@ -13307,37 +13324,37 @@ msgstr "Vista previa no encontrada: vuelve a empezar."
 msgid "Photo ajoutée au cadre."
 msgstr "Foto añadida al marco."
 
-#: web/routes_settings.py:330
+#: web/routes_settings.py:331
 msgid "Aucun réglage à enregistrer."
 msgstr "Ningún ajuste que guardar."
 
-#: web/routes_settings.py:334
+#: web/routes_settings.py:335
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Ajuste desconocido: %(key)s"
 
-#: web/routes_settings.py:338
+#: web/routes_settings.py:339
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Valor no válido para «%(key)s»."
 
-#: web/routes_settings.py:442
+#: web/routes_settings.py:443
 msgid "Valeur invalide."
 msgstr "Valor no válido."
 
-#: web/routes_settings.py:447
+#: web/routes_settings.py:448
 msgid "Supprimé."
 msgstr "Eliminado."
 
-#: web/routes_settings.py:555
+#: web/routes_settings.py:556
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "Ordenador (no es una Raspberry Pi)"
 
-#: web/routes_settings.py:578
+#: web/routes_settings.py:579
 msgid "Réglages conseillés appliqués"
 msgstr "Ajustes recomendados aplicados"
 
-#: web/routes_settings.py:580
+#: web/routes_settings.py:581
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s ajuste(s) adaptado(s) a la Raspberry Pi."
