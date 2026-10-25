@@ -6,8 +6,9 @@ import qrcode
 from flask import send_file
 from utils import ambiances, health, layout_engine, now_playing, spotify
 from utils.message_renderer import N_
+from utils.platform_info import tmp_path
 
-FORCE_LAYOUT_FILE = Path("/tmp/pimmich_force_layout.json")
+FORCE_LAYOUT_FILE = tmp_path("pimmich_force_layout.json")
 
 
 def _tr(text, **params):
@@ -129,7 +130,7 @@ def force_layout_now_api():
     if not is_slideshow_running():
         return jsonify({"success": False, "message": _("Le diaporama n'est pas en cours.")}), 409
     FORCE_LAYOUT_FILE.write_text(json.dumps({"layout": layout, "requested": time.time()}))
-    _send_slideshow_signal(signal.SIGUSR1)  # passer tout de suite à la diapositive suivante
+    _send_slideshow_signal("next")  # passer tout de suite à la diapositive suivante
     return jsonify({"success": True, "message": _("Préparation de la disposition... elle s'affiche dans quelques secondes.")})
 
 

@@ -16,9 +16,10 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from utils.message_renderer import N_, _font, _gradient, _paste_with_shadow, _textured, _vignette
+from utils.platform_info import tmp_path
 
-LIVE_FILE = Path("/tmp/pimmich_party_live.json")      # photos arrivées, pas encore montrées (hors carte SD)
-AUTHORS_FILE = Path("/tmp/pimmich_party_authors.json")  # photo préparée -> prénom de l'invité (bandeau à l'écran)
+LIVE_FILE = tmp_path("pimmich_party_live.json")      # photos arrivées, pas encore montrées (hors carte SD)
+AUTHORS_FILE = tmp_path("pimmich_party_authors.json")  # photo préparée -> prénom de l'invité (bandeau à l'écran)
 MAX_HOURS = 48
 _lock = threading.Lock()
 

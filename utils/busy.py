@@ -9,8 +9,9 @@ import sys
 import time
 from contextlib import contextmanager
 from pathlib import Path
+from utils.platform_info import tmp_path
 
-WORK_FILE = Path("/tmp/pimmich_working.json")  # travail lourd en cours (mémoire vive)
+WORK_FILE = tmp_path("pimmich_working.json")  # travail lourd en cours (mémoire vive)
 
 
 @contextmanager

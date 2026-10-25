@@ -6,10 +6,11 @@ import json
 import threading
 import time
 from pathlib import Path
+from utils.platform_info import tmp_path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STORE = BASE_DIR / "cache" / "reactions.json"
-EVENT_FILE = Path("/tmp/pimmich_reaction.json")  # dernière réaction, pour l'animation (hors carte SD)
+EVENT_FILE = tmp_path("pimmich_reaction.json")  # dernière réaction, pour l'animation (hors carte SD)
 KINDS = {"love": "❤️", "laugh": "😂", "wow": "😮", "bravo": "👏"}
 RECENT = 200
 _lock = threading.Lock()

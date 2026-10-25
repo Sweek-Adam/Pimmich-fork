@@ -7,6 +7,7 @@ from datetime import date
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from web.core import _
 from utils import ambiances, messages_manager
+from utils.platform_info import tmp_path
 
 _bridge = {"bridge": None, "thread": None}
 
@@ -24,7 +25,7 @@ def _actions():
 
     def next_photo():
         try:
-            os.kill(int(open("/tmp/pimmich_slideshow.pid").read()), signal.SIGUSR1)
+            __import__("utils.slideshow_commands", fromlist=["send"]).send("next")
         except (OSError, ValueError):
             pass
 

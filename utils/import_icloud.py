@@ -9,12 +9,13 @@ import threading
 from pathlib import Path
 
 import requests
+from utils.platform_info import tmp_path
 
 TARGET_DIR = Path("static/photos/icloud")
 PREPARED_DIR = Path("static/prepared/icloud")
 MANIFEST_FILE = TARGET_DIR / ".icloud_manifest.json"
 CAPTIONS_FILE = Path("cache") / "icloud_captions.json"
-CANCEL_FLAG = Path("/tmp/pimmich_cancel_import.flag")
+CANCEL_FLAG = tmp_path("pimmich_cancel_import.flag")
 TOKEN = re.compile(r"^[A-Za-z0-9]{10,40}$")
 BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 HEADERS = {"Content-Type": "text/plain", "Origin": "https://www.icloud.com", "User-Agent": "Mozilla/5.0 Pimmich"}

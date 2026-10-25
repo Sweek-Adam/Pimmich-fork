@@ -18,6 +18,7 @@ from flask import send_file
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from web.core import _
 from utils import members, messages_manager
+from utils.platform_info import tmp_path
 
 TOKEN_HEADER = "X-Pimmich-Frame-Token"
 SHARED_SOURCE = "cadres"
@@ -93,7 +94,7 @@ def frame_command_api():
     config = dict(load_config())
     if action == "next":
         try:
-            os.kill(int(open("/tmp/pimmich_slideshow.pid").read()), signal.SIGUSR1)
+            __import__("utils.slideshow_commands", fromlist=["send"]).send("next")
         except (OSError, ValueError):
             return jsonify({"success": False, "message": _("Le diaporama n'est pas en cours.")}), 409
     elif action in ("on", "off"):

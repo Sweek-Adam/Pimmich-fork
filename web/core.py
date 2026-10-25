@@ -139,6 +139,7 @@ import smbclient
 
 
 from smbprotocol.exceptions import SMBException
+from utils.platform_info import tmp_path
 
 
 APP_INSTANCE_ID = secrets.token_hex(8)
@@ -509,10 +510,10 @@ TELEGRAM_GUEST_USERS_PATH = 'config/telegram_guest_users.json'
 NEW_POSTCARD_FLAG_PATH = 'cache/new_postcard.flag'
 
 
-CUSTOM_PLAYLIST_FILE = "/tmp/pimmich_custom_playlist.json"
+CUSTOM_PLAYLIST_FILE = str(tmp_path("pimmich_custom_playlist.json"))
 
 
-CURRENT_PHOTO_FILE = "/tmp/pimmich_current_photo.txt"
+CURRENT_PHOTO_FILE = str(tmp_path("pimmich_current_photo.txt"))
 
 
 PREPARED_DIR = BASE_DIR / "static" / "prepared"
@@ -988,13 +989,12 @@ def validate_telegram_invitation(code, user_id, user_name):
 
 
 def _send_slideshow_signal(sig):
-    """Helper function to send a signal to the slideshow process."""
+    """Commande au diaporama : « next », « previous » ou « pause » (signal Unix, ou fichier de commande sous Windows)."""
     if not is_slideshow_running():
         return jsonify({"success": False, "message": "Le diaporama n'est pas en cours."}), 404
+    from utils import slideshow_commands
     try:
-        with open("/tmp/pimmich_slideshow.pid", "r") as f:
-            pid = int(f.read())
-        os.kill(pid, sig)
+        slideshow_commands.send(sig)
         return jsonify({"success": True})
     except (FileNotFoundError, ValueError, ProcessLookupError) as e:
         return jsonify({"success": False, "message": f"Impossible de communiquer avec le diaporama : {e}"}), 500

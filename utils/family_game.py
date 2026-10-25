@@ -16,7 +16,6 @@ Bingo souvenirs : une grille sur chaque téléphone pendant le diaporama habitue
 L'état tient dans un petit fichier en mémoire vive, partagé par l'interface (inscriptions, réponses) et le
 diaporama (affichage). Le déroulé ne dépend que de l'heure de départ : chacun calcule où en est la partie.
 """
-import fcntl
 import json
 import os
 import random
@@ -27,10 +26,11 @@ from datetime import datetime
 from pathlib import Path
 
 from utils.message_renderer import N_
+from utils.platform_info import tmp_path
 
-STATE_FILE = Path("/tmp/pimmich_game.json")
-LOCK_FILE = Path("/tmp/pimmich_game.lock")
-PHOTOS_DIR = Path("/tmp/pimmich_game_photos")  # photos du défi (mémoire vive, effacées avec la partie)
+STATE_FILE = tmp_path("pimmich_game.json")
+LOCK_FILE = tmp_path("pimmich_game.lock")
+PHOTOS_DIR = tmp_path("pimmich_game_photos")  # photos du défi (mémoire vive, effacées avec la partie)
 LOBBY_TIMEOUT = 15 * 60       # partie abandonnée dans la salle d'attente
 QUESTION_SECONDS = 25
 REVEAL_SECONDS = 9
@@ -128,13 +128,9 @@ BINGO_ITEMS = [N_("À la plage"), N_("Un gâteau"), N_("Des lunettes de soleil")
 
 @contextmanager
 def _locked():
-    LOCK_FILE.touch(exist_ok=True)
-    with open(LOCK_FILE, "r+") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
-        try:
-            yield
-        finally:
-            fcntl.flock(lock, fcntl.LOCK_UN)
+    from utils.file_lock import locked
+    with locked(LOCK_FILE):
+        yield
 
 
 def _load():

@@ -2,6 +2,7 @@
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from utils import play_queue, layout_engine, compositions, spotify
 from web.core import _, _send_slideshow_signal
+from utils.platform_info import tmp_path
 
 
 # --- Gestion Diaporama ---
@@ -271,19 +272,19 @@ def set_slideshow_duration():
 @app.route('/api/slideshow/next', methods=['POST'])
 @login_or_internal_required
 def slideshow_next():
-    return _send_slideshow_signal(signal.SIGUSR1)
+    return _send_slideshow_signal("next")
 
 
 @app.route('/api/slideshow/previous', methods=['POST'])
 @login_or_internal_required
 def slideshow_previous():
-    return _send_slideshow_signal(signal.SIGUSR2)
+    return _send_slideshow_signal("previous")
 
 
 @app.route('/api/slideshow/toggle_pause', methods=['POST'])
 @login_or_internal_required
 def slideshow_toggle_pause():
-    return _send_slideshow_signal(signal.SIGTSTP)
+    return _send_slideshow_signal("pause")
 
 
 @app.route('/api/slideshow/toggle_notifications', methods=['POST'])
@@ -310,7 +311,7 @@ def slideshow_status():
     if not is_slideshow_running():
         return jsonify({"running": False, "paused": False})
     try:
-        with open("/tmp/pimmich_slideshow_status.json", "r") as f:
+        with open(str(tmp_path("pimmich_slideshow_status.json")), "r") as f:
             status = json.load(f)
         config = load_config()
         return jsonify({"running": True, "notifications_enabled": config.get("display_telegram_notification_overlay", True), **status})
@@ -496,7 +497,7 @@ def slideshow_queue_reorder():
         paths.append(path)
     play_queue.request_order(paths)
     if data.get("play_now"):
-        _send_slideshow_signal(signal.SIGUSR1)  # passer tout de suite au premier média demandé
+        _send_slideshow_signal("next")  # passer tout de suite au premier média demandé
     return jsonify({"success": True, "message": _("Nouvel ordre enregistré.")})
 
 

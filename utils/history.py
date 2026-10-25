@@ -10,11 +10,12 @@ import secrets
 import threading
 import time
 from pathlib import Path
+from utils.platform_info import tmp_path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STORE = BASE_DIR / "cache" / "history.json"
 UNDO_DIR = BASE_DIR / "cache" / "undo"
-DISPLAYED = Path("/tmp/pimmich_displayed.json")
+DISPLAYED = tmp_path("pimmich_displayed.json")
 MAX_EVENTS = 300
 MAX_DISPLAYED = 300
 _lock = threading.Lock()

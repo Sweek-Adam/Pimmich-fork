@@ -8,7 +8,6 @@ L'état est partagé par un petit fichier JSON (lu par le diaporama et l'interfa
 Bibliothèque standard uniquement : le module est lancé par librespot, hors de l'application.
 """
 import base64
-import fcntl
 import hashlib
 import json
 import os
@@ -17,10 +16,11 @@ import sys
 import time
 import urllib.request
 from pathlib import Path
+from utils.platform_info import tmp_path
 
-STATE_FILE = Path("/tmp/pimmich_now_playing.json")
-COVER_DIR = Path("/tmp/pimmich_covers")
-AIRPLAY_PIPE = Path("/tmp/shairport-sync-metadata")
+STATE_FILE = tmp_path("pimmich_now_playing.json")
+COVER_DIR = tmp_path("pimmich_covers")
+AIRPLAY_PIPE = tmp_path("shairport-sync-metadata")
 SOURCES = ("spotify", "airplay", "bluetooth", "radio", "pimmich")
 EXTERNAL = ("spotify", "airplay", "bluetooth", "radio")
 
@@ -43,9 +43,8 @@ def update(source, **fields):
 
 
 def _update(source, fields):
-    lock_path = STATE_FILE.with_suffix(".lock")
-    with open(lock_path, "a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    from utils.file_lock import locked
+    with locked(STATE_FILE.with_suffix(".lock")):
         data = _load()
         entry = dict(data.get(source) or {})
         if "title" in fields and fields["title"] != entry.get("title"):

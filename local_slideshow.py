@@ -38,6 +38,7 @@ from utils import play_queue
 from utils import now_playing
 from utils import music_remote
 from utils import photo_index
+from utils.platform_info import tmp_path
 
 # Helper minimal pour l'extraction des traductions (Pybabel)
 _TRANSLATIONS = {}
@@ -63,11 +64,11 @@ def _(text, **kwargs):
 # Définition des chemins
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PREPARED_BASE_DIR = Path(BASE_DIR) / 'static' / 'prepared'
-STATUS_FILE = "/tmp/pimmich_slideshow_status.json"
+STATUS_FILE = str(tmp_path("pimmich_slideshow_status.json"))
 SOUNDS_DIR = Path(BASE_DIR) / 'static' / 'sounds'
-CUSTOM_PLAYLIST_FILE = "/tmp/pimmich_custom_playlist.json"
+CUSTOM_PLAYLIST_FILE = str(tmp_path("pimmich_custom_playlist.json"))
 NEW_POSTCARD_FLAG = Path(BASE_DIR) / 'cache' / 'new_postcard.flag'
-CURRENT_PHOTO_FILE = "/tmp/pimmich_current_photo.txt"
+CURRENT_PHOTO_FILE = str(tmp_path("pimmich_current_photo.txt"))
 CONFIG_PATH = os.path.join(BASE_DIR, 'config', 'config.json')
 FAVORITES_PATH = os.path.join(BASE_DIR, 'config', 'favorites.json')
 FILTER_STATES_PATH = os.path.join(BASE_DIR, 'config', 'filter_states.json')
@@ -184,10 +185,29 @@ def handle_slideshow_events(screen_width):
     """Gère les événements Pygame comme QUIT et les clics de souris pour le contrôle tactile."""
     _heartbeat()
     global paused, next_photo_requested, previous_photo_requested
+    from utils import slideshow_commands
+    command = slideshow_commands.pop()  # Windows : commandes par fichier (pas de signaux Unix)
+    if command == "next":
+        next_photo_requested = True
+    elif command == "previous":
+        previous_photo_requested = True
+    elif command == "pause":
+        paused = not paused
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.KEYDOWN:  # ordinateur : flèches, espace (pause), Échap (quitter le plein écran)
+            if event.key in (pygame.K_RIGHT, pygame.K_PAGEDOWN):
+                next_photo_requested = True
+            elif event.key in (pygame.K_LEFT, pygame.K_PAGEUP):
+                previous_photo_requested = True
+            elif event.key == pygame.K_SPACE:
+                paused = not paused
+            elif event.key == pygame.K_ESCAPE:
+                from utils.platform_info import desktop
+                if desktop():
+                    pygame.display.iconify()
         # --- NOUVEAU : Gestion des clics pour le contrôle tactile ---
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # On ne gère que le clic gauche (bouton 1), qui correspond à un appui sur l'écran tactile
@@ -293,8 +313,8 @@ def reinit_pygame():
     pygame.display.init()
     pygame.font.init()
 
-    global _icon_cache
-    _icon_cache = {}
+    from slideshow import weather as slideshow_weather
+    slideshow_weather._icon_cache.clear()  # icônes à recharger pour le nouvel affichage
     logger.debug(f"📸 Cache des icônes météo vidé.")
 
     info = pygame.display.Info()
@@ -1032,11 +1052,11 @@ def control_fan(temperature, threshold=55, pin=14):
 
 # --- Dispositions : compositions préparées en arrière-plan pour ne jamais ralentir le diaporama ---
 # Une composition est préparée pour un emplacement précis de la playlist (les photos qui suivent, dans l'ordre).
-RELOAD_FLAG = Path("/tmp/pimmich_reload.flag")  # voir utils/slideshow_manager.restart_slideshow_for_update
+RELOAD_FLAG = tmp_path("pimmich_reload.flag")  # voir utils/slideshow_manager.restart_slideshow_for_update
 _live_arrivals = set()  # photos de la fête tout juste arrivées : montrées seules, en grand
 
 
-FORCE_LAYOUT_FILE = Path("/tmp/pimmich_force_layout.json")
+FORCE_LAYOUT_FILE = tmp_path("pimmich_force_layout.json")
 
 
 def pop_forced_layout():
@@ -2555,7 +2575,7 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
         # Légende de la vidéo : sous-titres au style choisi (mêmes polices que les photos)
         subtitle_args = []
         try:
-            subtitle_file = captions.video_subtitles(video_path, config, "/tmp/pimmich_caption.ass")
+            subtitle_file = captions.video_subtitles(video_path, config, str(tmp_path("pimmich_caption.ass")))
             if subtitle_file:
                 subtitle_args = [f'--sub-file={subtitle_file}', f'--sub-fonts-dir={os.path.join(BASE_DIR, "static", "fonts")}']
         except Exception as e:
@@ -2650,9 +2670,9 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
             
             # Extraction du log de diagnostic réel
             log_content = ""
-            if os.path.exists("/tmp/mpv_pimmich.log"):
+            if os.path.exists(str(tmp_path("mpv_pimmich.log"))):
                 try:
-                    with open("/tmp/mpv_pimmich.log", "r") as f:
+                    with open(str(tmp_path("mpv_pimmich.log")), "r") as f:
                         # On ne prend que les 50 dernières lignes pour ne pas saturer le log Pimmich
                         log_content = "".join(f.readlines()[-50:])
                 except Exception: 
@@ -2751,9 +2771,10 @@ def start_slideshow():
 
 
         # --- Enregistrement des gestionnaires de signaux ---
-        signal.signal(signal.SIGUSR1, signal_handler_next)      # Pour "suivant"
-        signal.signal(signal.SIGUSR2, signal_handler_previous)   # Pour "précédent"
-        signal.signal(signal.SIGTSTP, signal_handler_pause_toggle) # Pour "pause/reprendre"
+        if hasattr(signal, "SIGUSR1"):  # Windows : commandes par fichier (utils/slideshow_commands.py)
+            signal.signal(signal.SIGUSR1, signal_handler_next)      # Pour "suivant"
+            signal.signal(signal.SIGUSR2, signal_handler_previous)   # Pour "précédent"
+            signal.signal(signal.SIGTSTP, signal_handler_pause_toggle) # Pour "pause/reprendre"
         logger.debug(f"📸 Signal handlers registered.")
 
         # Initialiser le fichier de statut

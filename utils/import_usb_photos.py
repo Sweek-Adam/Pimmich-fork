@@ -5,8 +5,9 @@ import subprocess
 from pathlib import Path
 import tempfile
 import time
+from utils.platform_info import tmp_path
 
-CANCEL_FLAG = Path('/tmp/pimmich_cancel_import.flag')
+CANCEL_FLAG = Path(str(tmp_path("pimmich_cancel_import.flag")))
 TARGET_DIR = Path("static/photos/usb")
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"}
 

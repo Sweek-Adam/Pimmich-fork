@@ -11,8 +11,9 @@ import time
 from pathlib import Path
 
 from utils import wifi_networks
+from utils.platform_info import tmp_path
 
-STATE_FILE = Path("/tmp/pimmich_hotspot.json")  # lu par le diaporama pour afficher les instructions
+STATE_FILE = tmp_path("pimmich_hotspot.json")  # lu par le diaporama pour afficher les instructions
 SSID = "Cadre-Pimmich"
 ADDRESS = "10.42.0.1"  # adresse du cadre sur son point d'accès (partage de connexion de NetworkManager)
 OFFLINE_DELAY = 120  # secondes sans réseau avant d'ouvrir le point d'accès

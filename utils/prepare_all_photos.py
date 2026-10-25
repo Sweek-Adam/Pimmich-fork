@@ -21,6 +21,7 @@ from pathlib import Path
 from logging.handlers import RotatingFileHandler
 
 from .config_manager import load_config
+from utils.platform_info import tmp_path
 
 # Configuration
 SOURCE_DIR = "static/photos"
@@ -36,7 +37,7 @@ DESCRIPTION_MAP_CACHE_FILE = Path("cache") / "immich_description_map.json"
 # Chemin vers le cache des textes saisis par l'utilisateur
 USER_TEXT_MAP_CACHE_FILE = Path("cache") / "user_texts.json"
 
-CANCEL_FLAG = Path('/tmp/pimmich_cancel_import.flag')
+CANCEL_FLAG = Path(str(tmp_path("pimmich_cancel_import.flag")))
 
 
 # ============================================================

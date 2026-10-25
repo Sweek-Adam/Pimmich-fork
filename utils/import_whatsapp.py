@@ -16,12 +16,13 @@ import threading
 import zipfile
 from datetime import datetime
 from pathlib import Path
+from utils.platform_info import tmp_path
 
 TARGET_DIR = Path("static/photos/whatsapp")
 UPLOAD_FILE = Path("cache") / "whatsapp_upload.zip"
 CAPTIONS_FILE = Path("cache") / "whatsapp_captions.json"
 MANIFEST_FILE = TARGET_DIR / ".whatsapp_manifest.json"
-CANCEL_FLAG = Path("/tmp/pimmich_cancel_import.flag")
+CANCEL_FLAG = tmp_path("pimmich_cancel_import.flag")
 MEDIA_EXT = {".jpg", ".jpeg", ".png", ".gif", ".heic", ".mp4", ".mov"}
 CAPTION_MODES = ("text", "sender", "both", "none")
 MAX_CHAT_BYTES = 50 * 1024 * 1024

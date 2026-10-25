@@ -4,8 +4,9 @@ import sys
 import signal
 import psutil
 import json
+from utils.platform_info import tmp_path
 
-PID_FILE = "/tmp/pimmich_voice_control.pid"
+PID_FILE = str(tmp_path("pimmich_voice_control.pid"))
 STATUS_FILE = "logs/voice_control_status.json"
 _log_files = {}
 

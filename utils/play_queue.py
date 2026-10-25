@@ -9,9 +9,10 @@ import os
 import json
 import time
 from pathlib import Path
+from utils.platform_info import tmp_path
 
-STATE_FILE = Path("/tmp/pimmich_queue.json")
-ORDER_FILE = Path("/tmp/pimmich_queue_order.json")
+STATE_FILE = tmp_path("pimmich_queue.json")
+ORDER_FILE = tmp_path("pimmich_queue_order.json")
 UPCOMING_COUNT = 30
 
 

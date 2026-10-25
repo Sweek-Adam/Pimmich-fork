@@ -14,8 +14,9 @@ import time
 from pathlib import Path
 
 from utils import now_playing, spotify
+from utils.platform_info import tmp_path
 
-COMMAND_FILE = Path("/tmp/pimmich_music_command.json")
+COMMAND_FILE = tmp_path("pimmich_music_command.json")
 ACTIONS = ("previous", "pause", "play", "next")
 SINK = "@DEFAULT_AUDIO_SINK@"
 
@@ -120,7 +121,7 @@ def pop_command(max_age=30):
 
 # --- Baisse pendant les vidéos, et arrêt de tout (minuteur de sommeil) ---
 
-DUCK_FILE = Path("/tmp/pimmich_duck.json")
+DUCK_FILE = tmp_path("pimmich_duck.json")
 
 
 def _players():

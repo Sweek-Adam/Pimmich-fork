@@ -9,8 +9,9 @@ import json
 import shutil
 import time
 from pathlib import Path
+from utils.platform_info import tmp_path
 
-HEARTBEAT = Path("/tmp/pimmich_heartbeat.json")
+HEARTBEAT = tmp_path("pimmich_heartbeat.json")
 _last_beat = [0.0]
 
 

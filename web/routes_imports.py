@@ -2,13 +2,14 @@
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from utils import import_progress
 from web.core import _
+from utils.platform_info import tmp_path
 
 
 @app.route("/import-usb")
 @login_required
 def import_usb():
     # Nettoyer le drapeau d'annulation avant de commencer
-    cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+    cancel_flag = Path(str(tmp_path("pimmich_cancel_import.flag")))
     if cancel_flag.exists(): cancel_flag.unlink()
 
     @stream_with_context
@@ -29,7 +30,7 @@ def import_usb():
 @login_required
 def import_immich():
     # Nettoyer le drapeau d'annulation avant de commencer
-    cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+    cancel_flag = Path(str(tmp_path("pimmich_cancel_import.flag")))
     if cancel_flag.exists(): cancel_flag.unlink()
 
     config = load_config()
@@ -71,7 +72,7 @@ def import_immich():
 @login_required
 def import_samba():
     # Nettoyer le drapeau d'annulation avant de commencer
-    cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+    cancel_flag = Path(str(tmp_path("pimmich_cancel_import.flag")))
     if cancel_flag.exists(): cancel_flag.unlink()
 
     config = load_config()
@@ -113,7 +114,7 @@ def import_samba():
 @login_required
 def import_gdrive():
     # Nettoyer le drapeau d'annulation avant de commencer
-    cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+    cancel_flag = Path(str(tmp_path("pimmich_cancel_import.flag")))
     if cancel_flag.exists(): cancel_flag.unlink()
 
     config = load_config()
@@ -173,7 +174,7 @@ def gdrive_folders():
 @login_required
 def import_smartphone():
     # Nettoyer le drapeau d'annulation avant de commencer
-    cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+    cancel_flag = Path(str(tmp_path("pimmich_cancel_import.flag")))
     if cancel_flag.exists(): cancel_flag.unlink()
 
     """
@@ -279,7 +280,7 @@ def test_samba_connection():
 @login_required
 def prepare_photos():
     # Nettoyer le drapeau d'annulation avant de commencer
-    cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+    cancel_flag = Path(str(tmp_path("pimmich_cancel_import.flag")))
     if cancel_flag.exists(): cancel_flag.unlink()
 
     """
@@ -407,7 +408,7 @@ def download_photos():
 def cancel_import():
     """Crée un fichier drapeau pour signaler l'annulation aux processus d'import/préparation."""
     try:
-        Path('/tmp/pimmich_cancel_import.flag').touch()
+        Path(str(tmp_path("pimmich_cancel_import.flag"))).touch()
         return jsonify({"success": True, "message": "Signal d'annulation envoyé."})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500

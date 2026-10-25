@@ -17,9 +17,10 @@ from pathlib import Path
 import requests
 
 from utils import now_playing
+from utils.platform_info import tmp_path
 
-SOCKET = "/tmp/pimmich-radio.sock"
-STATE_FILE = Path("/tmp/pimmich_radio.json")
+SOCKET = str(tmp_path("pimmich-radio.sock"))
+STATE_FILE = tmp_path("pimmich_radio.json")
 DIRECTORY = "https://de1.api.radio-browser.info"
 USER_AGENT = "Pimmich/1.0 (cadre photo)"
 

@@ -10,6 +10,7 @@ from logging.handlers import RotatingFileHandler
 
 from .display_manager import set_display_power
 from .config_manager import load_config
+from utils.platform_info import tmp_path
 
 # ============================================================
 # Configuration du logging avec émojis
@@ -70,8 +71,8 @@ logger.debug("----------------Initialisation Slideshow Manager----------------")
 # ============================================================
 # Constantes
 # ============================================================
-PID_FILE = "/tmp/pimmich_slideshow.pid"
-RELOAD_FLAG = Path("/tmp/pimmich_reload.flag")  # le diaporama refait sa liste de médias (sans redémarrer)
+PID_FILE = str(tmp_path("pimmich_slideshow.pid"))
+RELOAD_FLAG = tmp_path("pimmich_reload.flag")  # le diaporama refait sa liste de médias (sans redémarrer)
 
 # ============================================================
 # Fonctions

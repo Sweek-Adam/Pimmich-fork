@@ -5,6 +5,7 @@ import subprocess
 import threading
 from datetime import datetime
 from pathlib import Path
+from utils.platform_info import tmp_path
 
 TARGET_DIR = Path("static/photos/gdrive")
 PREPARED_DIR = Path("static/prepared/gdrive")
@@ -425,7 +426,7 @@ def _import_gdrive_photos(config, profile=None):
         yield {"type": "stats", "stage": "COPYING", "percent": 20, "message": f"Début du téléchargement de {total} fichiers...", "total": total}
 
         # --- Phase 4: Télécharger ---
-        cancel_flag = Path('/tmp/pimmich_cancel_import.flag')
+        cancel_flag = Path(str(tmp_path("pimmich_cancel_import.flag")))
         downloaded = 0
         downloaded_files = []
         for i, (f, name) in enumerate(to_download, 1):
