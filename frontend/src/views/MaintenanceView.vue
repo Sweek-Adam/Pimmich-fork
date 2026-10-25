@@ -103,6 +103,20 @@ async function loadFull() {
   if (full.value.status.running) fullTimer = window.setTimeout(loadFull, 3000);
 }
 async function startFull() { await run(() => post("/api/backup/full/storage", { storage: fullTarget.value })); loadFull(); }
+// Sauvegarde automatique de la semaine
+interface AutoBackup { settings: { enabled: boolean; storage: string; weekday: number; keep: number }; state: { last_success?: number; last_try?: number; ok?: boolean; message?: string } }
+const auto = ref<AutoBackup | null>(null);
+const weekdays = () => [t("lundi"), t("mardi"), t("mercredi"), t("jeudi"), t("vendredi"), t("samedi"), t("dimanche")];
+async function loadAuto() {
+  try { auto.value = await get<AutoBackup>("/api/backup/full/auto"); } catch { auto.value = null; }
+}
+async function saveAuto(change: Partial<AutoBackup["settings"]>) {
+  if (!auto.value) return;
+  const wanted = { ...auto.value.settings, ...change };
+  if (wanted.enabled && !wanted.storage) wanted.storage = fullTarget.value || full.value?.storages[0]?.id || "";
+  const r = await run(() => post<{ success: boolean; message?: string; settings: AutoBackup["settings"] }>("/api/backup/full/auto", wanted, "PUT"));
+  if (r?.success) auto.value.settings = r.settings; else loadAuto();
+}
 async function restoreFull(url: string, init: RequestInit) {
   if (!window.confirm(t("Remplacer les réglages, comptes, messages et playlists actuels par cette sauvegarde ?"))) return;
   notify(t("Restauration en cours..."));
@@ -181,6 +195,7 @@ onMounted(() => {
   loadProfile().catch(() => {});
   loadStorage().catch(() => {});
   loadFull().catch(() => {});
+  loadAuto();
   loadHttps();
   loadFs();
   get<{ log2ram: boolean }>("/api/sd_protection").then((d) => (sd.value = d)).catch(() => {});
@@ -344,6 +359,23 @@ onUnmounted(() => { window.clearTimeout(storageTimer); window.clearTimeout(fullT
           <select v-model="fullTarget"><option v-for="s in full.storages" :key="s.id" :value="s.id">{{ s.label }}</option></select>
           <button class="btn primary" type="button" :disabled="full.status.running" @click="startFull"><i class="fas fa-save"></i>{{ t("Sauvegarder maintenant") }}</button>
         </div>
+        <div v-if="auto && full?.storages.length" class="auto">
+          <label class="check"><input type="checkbox" :checked="auto.settings.enabled" @change="saveAuto({ enabled: ($event.target as HTMLInputElement).checked })">
+            {{ t("Automatiquement chaque semaine, la nuit") }}</label>
+          <div v-if="auto.settings.enabled" class="row">
+            <select :value="auto.settings.storage" @change="saveAuto({ storage: ($event.target as HTMLSelectElement).value })">
+              <option v-for="s in full.storages" :key="s.id" :value="s.id">{{ s.label }}</option></select>
+            <select :value="auto.settings.weekday" @change="saveAuto({ weekday: Number(($event.target as HTMLSelectElement).value) })">
+              <option v-for="(d, i) in weekdays()" :key="i" :value="i">{{ t("le {day}", { day: d }) }}</option></select>
+            <label class="small">{{ t("Garder les") }}
+              <input type="number" min="1" max="20" :value="auto.settings.keep" class="keep" @change="saveAuto({ keep: Number(($event.target as HTMLInputElement).value) })">
+              {{ t("dernières") }}</label>
+          </div>
+          <p v-if="auto.settings.enabled && auto.state.last_try" class="small" :class="auto.state.ok ? 'ok' : 'warn'">
+            {{ auto.state.ok ? t("Dernière sauvegarde automatique : {date}", { date: new Date((auto.state.last_success || 0) * 1000).toLocaleString() })
+               : t("Dernier essai ({date}) : {message}", { date: new Date(auto.state.last_try * 1000).toLocaleString(), message: auto.state.message || "" }) }}</p>
+          <p v-else-if="auto.settings.enabled" class="small muted">{{ t("Les photos d'origine, les réglages et les messages sont copiés quand l'écran est éteint ; les plus anciennes sauvegardes automatiques sont effacées.") }}</p>
+        </div>
         <p v-if="full?.status.running" class="small">{{ t("Sauvegarde en cours : {done} / {total} fichiers", { done: full.status.done || 0, total: full.status.total || "…" }) }}</p>
         <p v-else-if="full?.status.message" class="small" :class="full.status.ok === false ? 'warn' : 'ok'">{{ full.status.message }}</p>
       </div>
@@ -451,6 +483,9 @@ details { margin: .6rem 0; }
 summary { cursor: pointer; color: var(--accent); font-weight: 600; }
 .box { border: 1px solid var(--border); border-radius: 12px; padding: .8rem; display: grid; gap: .5rem; align-content: start; }
 .box h3 { margin: 0; }
+.auto { display: grid; gap: .4rem; border-top: 1px solid var(--border); padding-top: .5rem; }
+.auto .check { display: flex; gap: .4rem; align-items: center; }
+.auto .keep { width: 4rem; }
 .file { font-size: .85rem; }
 .list { list-style: none; padding: 0; margin: .8rem 0 0; }
 .list li { display: flex; gap: .5rem; align-items: center; padding: .4rem 0; border-bottom: 1px solid var(--border); }

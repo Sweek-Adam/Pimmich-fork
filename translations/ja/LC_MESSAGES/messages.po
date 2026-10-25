@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 23:35+0100\n"
+"POT-Creation-Date: 2026-10-25 23:39+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -445,7 +445,7 @@ msgid ""
 "suite, puis dans le Mur de la fête."
 msgstr "画面に大きなQRコード：ゲストの写真がすぐに表示され、パーティーウォールに並びます。"
 
-#: frontend/src/news.ts:17 frontend/src/views/MaintenanceView.vue:205
+#: frontend/src/news.ts:17 frontend/src/views/MaintenanceView.vue:220
 msgid "Profil matériel"
 msgstr "ハードウェアプロファイル"
 
@@ -574,7 +574,7 @@ msgstr "毎年"
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
 #: frontend/src/views/GuestsView.vue:246 frontend/src/views/GuestsView.vue:268
-#: frontend/src/views/MaintenanceView.vue:299
+#: frontend/src/views/MaintenanceView.vue:314
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
@@ -988,7 +988,7 @@ msgstr "ポート"
 #: frontend/src/views/AccountsView.vue:69
 #: frontend/src/views/AccountsView.vue:71
 #: frontend/src/views/AccountsView.vue:86
-#: frontend/src/views/MaintenanceView.vue:310
+#: frontend/src/views/MaintenanceView.vue:325
 #: templates/configure/tab_affichage.html.jinja:298
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
@@ -1000,7 +1000,7 @@ msgstr "ユーザー"
 
 #: frontend/src/components/HomeAssistantCard.vue:36
 #: frontend/src/views/AccountsView.vue:84
-#: frontend/src/views/MaintenanceView.vue:311
+#: frontend/src/views/MaintenanceView.vue:326
 #: frontend/src/views/NetworkView.vue:174
 #: frontend/src/views/NetworkView.vue:193
 #: templates/configure/tab_affichage.html.jinja:299
@@ -2723,7 +2723,7 @@ msgid "Pendant toute la photo"
 msgstr "写真の表示中ずっと"
 
 #: frontend/src/views/ClockView.vue:54
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 #: templates/configure/tab_heure.html.jinja:180
 msgid "Jamais"
 msgstr "表示しない"
@@ -4023,7 +4023,7 @@ msgid ""
 msgstr "ここに：そのアドレス（例：Tailscaleならhttps://100.101.102.103、またはhttps://192.168.1.30）とコード。"
 
 #: frontend/src/views/GuestsView.vue:257
-#: frontend/src/views/MaintenanceView.vue:309
+#: frontend/src/views/MaintenanceView.vue:324
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
@@ -4607,8 +4607,8 @@ msgid "Remplacer les réglages actuels par la dernière sauvegarde du Drive ?"
 msgstr "現在の設定を Drive の最新バックアップで置き換えます。よろしいですか？"
 
 #: frontend/src/views/MaintenanceView.vue:73
-#: frontend/src/views/MaintenanceView.vue:199
-#: frontend/src/views/MaintenanceView.vue:294
+#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:309
 #: templates/configure/tab_maintenance.html.jinja:10
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Carte SD"
@@ -4620,19 +4620,54 @@ msgstr "SD カード"
 msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "「{source}」の写真を「{target}」に移動しますか？"
 
-#: frontend/src/views/MaintenanceView.vue:107
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "lundi"
+msgstr "月曜日"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "mardi"
+msgstr "火曜日"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "mercredi"
+msgstr "水曜日"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "jeudi"
+msgstr "木曜日"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "vendredi"
+msgstr "金曜日"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "samedi"
+msgstr "土曜日"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "dimanche"
+msgstr "日曜日"
+
+#: frontend/src/views/MaintenanceView.vue:121
 #: templates/configure/tab_maintenance.html.jinja:135
 msgid ""
 "Remplacer les réglages, comptes, messages et playlists actuels par cette "
 "sauvegarde ?"
 msgstr "現在の設定、アカウント、メッセージ、プレイリストをこのバックアップで置き換えますか？"
 
-#: frontend/src/views/MaintenanceView.vue:108
+#: frontend/src/views/MaintenanceView.vue:122
 #: templates/configure/tab_maintenance.html.jinja:136
 msgid "Restauration en cours..."
 msgstr "復元中..."
 
-#: frontend/src/views/MaintenanceView.vue:113
+#: frontend/src/views/MaintenanceView.vue:127
 #: templates/configure/scripts_gallery.html.jinja:35
 #: templates/configure/scripts_gallery.html.jinja:130
 #: templates/configure/scripts_gallery.html.jinja:281
@@ -4647,25 +4682,25 @@ msgstr "復元中..."
 msgid "Erreur de communication avec le serveur."
 msgstr "サーバーとの通信エラー。"
 
-#: frontend/src/views/MaintenanceView.vue:117
+#: frontend/src/views/MaintenanceView.vue:131
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:121
 #: web/routes_frames.py:294 web/routes_guests.py:89 web/routes_guests.py:94
 #: web/routes_imports.py:654 web/routes_imports.py:692 web/routes_system.py:923
 msgid "Aucun fichier sélectionné."
 msgstr "ファイルが選択されていません。"
 
-#: frontend/src/views/MaintenanceView.vue:130
+#: frontend/src/views/MaintenanceView.vue:144
 #: templates/configure/scripts_status.html.jinja:905
 msgid ""
 "Cette opération va préparer le système à étendre la partition au prochain"
 " redémarrage. Voulez-vous continuer ?"
 msgstr "この操作により、システムは次回の再起動時にパーティションを拡張する準備が整います。続けますか?"
 
-#: frontend/src/views/MaintenanceView.vue:160
+#: frontend/src/views/MaintenanceView.vue:174
 msgid "domaine public"
 msgstr "パブリックドメイン"
 
-#: frontend/src/views/MaintenanceView.vue:166
+#: frontend/src/views/MaintenanceView.vue:180
 #: templates/configure/tab_maintenance.html.jinja:525
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
@@ -4677,73 +4712,73 @@ msgstr ""
 "は自動では起動しなくなります。フォトフレームに戻るには、デスクトップまたはメニューの「Revenir au cadre "
 "Pimmich」ショートカットを使ってください。続けますか？"
 
-#: frontend/src/views/MaintenanceView.vue:170
+#: frontend/src/views/MaintenanceView.vue:184
 #: templates/configure/tab_maintenance.html.jinja:518
 msgid ""
 "Le Raspberry Pi va redémarrer en mode cadre photo Pimmich (le bureau ne "
 "s'affichera plus). Continuer ?"
 msgstr "Raspberry Pi を Pimmich フォトフレームモードで再起動します（デスクトップは表示されなくなります）。続けますか？"
 
-#: frontend/src/views/MaintenanceView.vue:193
+#: frontend/src/views/MaintenanceView.vue:208
 #: templates/configure/tab_maintenance.html.jinja:4
 msgid "Matériel"
 msgstr "ハードウェア"
 
-#: frontend/src/views/MaintenanceView.vue:195
-#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:210
+#: frontend/src/views/MaintenanceView.vue:229
 #: templates/configure/tab_maintenance.html.jinja:7
 msgid "Modèle"
 msgstr "モデル"
 
-#: frontend/src/views/MaintenanceView.vue:195
-#: frontend/src/views/MaintenanceView.vue:196
-#: frontend/src/views/MaintenanceView.vue:198
-#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:210
+#: frontend/src/views/MaintenanceView.vue:211
+#: frontend/src/views/MaintenanceView.vue:213
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Inconnu"
 msgstr "不明"
 
-#: frontend/src/views/MaintenanceView.vue:196
+#: frontend/src/views/MaintenanceView.vue:211
 #: templates/configure/tab_maintenance.html.jinja:8
 msgid "Température"
 msgstr "温度"
 
-#: frontend/src/views/MaintenanceView.vue:197
+#: frontend/src/views/MaintenanceView.vue:212
 #: templates/configure/tab_maintenance.html.jinja:9
 msgid "Alimentation"
 msgstr "電源"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:213
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Insuffisante en ce moment"
 msgstr "現在不足しています"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:213
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "A faibli depuis le démarrage"
 msgstr "起動後に低下しました"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:213
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Correcte"
 msgstr "正常"
 
-#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "erreur(s)"
 msgstr "件のエラー"
 
-#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Aucune erreur"
 msgstr "エラーなし"
 
-#: frontend/src/views/MaintenanceView.vue:201
+#: frontend/src/views/MaintenanceView.vue:216
 #: templates/configure/tab_maintenance.html.jinja:19
 msgid "Alimentation conseillée pour ce modèle :"
 msgstr "このモデルの推奨電源："
 
-#: frontend/src/views/MaintenanceView.vue:206
+#: frontend/src/views/MaintenanceView.vue:221
 msgid ""
 "Pimmich s'adapte à la puissance du Raspberry Pi : mémoire des animations,"
 " compositions préparées d'avance, vidéos plus légères sur les petits "
@@ -4752,60 +4787,60 @@ msgstr ""
 "PimmichはRaspberry "
 "Piの性能に合わせて調整します（アニメーション用メモリ、事前準備する組み合わせ表示、小さなモデルでの軽量動画）。ご自身の設定が優先されます。"
 
-#: frontend/src/views/MaintenanceView.vue:207
+#: frontend/src/views/MaintenanceView.vue:222
 msgid "Profil"
 msgstr "プロファイル"
 
-#: frontend/src/views/MaintenanceView.vue:209
+#: frontend/src/views/MaintenanceView.vue:224
 #, python-brace-format
 msgid "Automatique : {profile}"
 msgstr "自動：{profile}"
 
-#: frontend/src/views/MaintenanceView.vue:215
+#: frontend/src/views/MaintenanceView.vue:230
 msgid "Mémoire des animations (GIF, photos animées)"
 msgstr "アニメーション用メモリ（GIF、動く写真）"
 
-#: frontend/src/views/MaintenanceView.vue:215
+#: frontend/src/views/MaintenanceView.vue:230
 #, python-brace-format
 msgid "{count} par composition"
 msgstr "組み合わせごとに{count}"
 
-#: frontend/src/views/MaintenanceView.vue:216
+#: frontend/src/views/MaintenanceView.vue:231
 msgid "Compositions préparées d'avance"
 msgstr "事前に準備する組み合わせ表示"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 msgid "Vidéos allégées (720p)"
 msgstr "軽量動画（720p）"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 #: templates/configure/_playlist_builder.html.jinja:41
 msgid "Toutes"
 msgstr "すべて"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 #, python-brace-format
 msgid "À partir de {size} Mo"
 msgstr "{size} MB以上"
 
-#: frontend/src/views/MaintenanceView.vue:220
+#: frontend/src/views/MaintenanceView.vue:235
 msgid "Réglages conseillés pour ce profil :"
 msgstr "このプロファイルのおすすめ設定："
 
-#: frontend/src/views/MaintenanceView.vue:224
+#: frontend/src/views/MaintenanceView.vue:239
 msgid "Appliquer les réglages conseillés"
 msgstr "おすすめ設定を適用"
 
-#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:570
+#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:570
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "設定はすでにおすすめどおりです。"
 
-#: frontend/src/views/MaintenanceView.vue:231
+#: frontend/src/views/MaintenanceView.vue:246
 #: templates/configure/tab_maintenance.html.jinja:392
 msgid "Mise à jour de l'application"
 msgstr "アプリケーションのアップデート"
 
-#: frontend/src/views/MaintenanceView.vue:232
+#: frontend/src/views/MaintenanceView.vue:247
 #: templates/configure/tab_maintenance.html.jinja:394
 msgid ""
 "Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
@@ -4813,156 +4848,156 @@ msgid ""
 "précédente."
 msgstr "Pimmich は GitHub から更新して再起動します。新しいバージョンが起動しない場合は、自動的に前のバージョンに戻ります。"
 
-#: frontend/src/views/MaintenanceView.vue:234
-#: frontend/src/views/MaintenanceView.vue:411
+#: frontend/src/views/MaintenanceView.vue:249
+#: frontend/src/views/MaintenanceView.vue:443
 #: templates/configure/tab_maintenance.html.jinja:396
 msgid "Version installée :"
 msgstr "インストール済みのバージョン："
 
-#: frontend/src/views/MaintenanceView.vue:235
+#: frontend/src/views/MaintenanceView.vue:250
 #: templates/configure/tab_maintenance.html.jinja:411
 msgid "Impossible de joindre GitHub (connexion internet ?)."
 msgstr "GitHub に接続できません（インターネット接続を確認してください）。"
 
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Mise à jour disponible :"
 msgstr "アップデートがあります："
 
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "changement(s)"
 msgstr "件の変更"
 
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Pimmich est à jour."
 msgstr "Pimmich は最新です。"
 
-#: frontend/src/views/MaintenanceView.vue:238
+#: frontend/src/views/MaintenanceView.vue:253
 #: templates/configure/tab_maintenance.html.jinja:412
 msgid "Dernière mise à jour en cours de validation (redémarrage)."
 msgstr "最新のアップデートを確認中です（再起動）。"
 
-#: frontend/src/views/MaintenanceView.vue:239
+#: frontend/src/views/MaintenanceView.vue:254
 #: templates/configure/tab_maintenance.html.jinja:413
 msgid "Le cadre est revenu à une version précédente."
 msgstr "フォトフレームは前のバージョンに戻りました。"
 
-#: frontend/src/views/MaintenanceView.vue:242
+#: frontend/src/views/MaintenanceView.vue:257
 #: templates/configure/tab_maintenance.html.jinja:403
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "アップデートを開始しますか?追跡ページにリダイレクトされます。"
 
-#: frontend/src/views/MaintenanceView.vue:242
+#: frontend/src/views/MaintenanceView.vue:257
 #: templates/configure/tab_maintenance.html.jinja:404
 msgid "Lancer la mise à jour"
 msgstr "アップデートを開始する"
 
-#: frontend/src/views/MaintenanceView.vue:243
+#: frontend/src/views/MaintenanceView.vue:258
 #: templates/configure/tab_maintenance.html.jinja:406
 msgid "Revenir à la version précédente"
 msgstr "前のバージョンに戻す"
 
-#: frontend/src/views/MaintenanceView.vue:248
+#: frontend/src/views/MaintenanceView.vue:263
 #: templates/configure/tab_maintenance.html.jinja:473
 msgid "Contrôle du système"
 msgstr "システム制御"
 
-#: frontend/src/views/MaintenanceView.vue:250
+#: frontend/src/views/MaintenanceView.vue:265
 #: templates/configure/tab_maintenance.html.jinja:476
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
 "système d'exploitation ne sera pas redémarré."
 msgstr "Web アプリケーションのみを再起動してもよろしいですか?オペレーティング システムは再起動されません。"
 
-#: frontend/src/views/MaintenanceView.vue:251
+#: frontend/src/views/MaintenanceView.vue:266
 #: templates/configure/tab_maintenance.html.jinja:479
 msgid "Redémarrer l'application web"
 msgstr "Webアプリケーションを再起動します"
 
-#: frontend/src/views/MaintenanceView.vue:252
+#: frontend/src/views/MaintenanceView.vue:267
 msgid "Redémarrer le système maintenant ?"
 msgstr "今すぐシステムを再起動しますか？"
 
-#: frontend/src/views/MaintenanceView.vue:253
+#: frontend/src/views/MaintenanceView.vue:268
 #: templates/configure/tab_maintenance.html.jinja:488
 msgid "Redémarrer le système"
 msgstr "システムを再起動します"
 
-#: frontend/src/views/MaintenanceView.vue:254
+#: frontend/src/views/MaintenanceView.vue:269
 #: templates/configure/tab_maintenance.html.jinja:496
 msgid "Supprimer les logs"
 msgstr "ログの削除"
 
-#: frontend/src/views/MaintenanceView.vue:255
+#: frontend/src/views/MaintenanceView.vue:270
 #: templates/configure/tab_maintenance.html.jinja:501
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "システムの電源を切ってもよろしいですか?"
 
-#: frontend/src/views/MaintenanceView.vue:256
+#: frontend/src/views/MaintenanceView.vue:271
 #: templates/configure/tab_maintenance.html.jinja:504
 msgid "Éteindre le système"
 msgstr "システムをシャットダウンします"
 
-#: frontend/src/views/MaintenanceView.vue:257
+#: frontend/src/views/MaintenanceView.vue:272
 msgid "Mode actuel :"
 msgstr "現在のモード："
 
-#: frontend/src/views/MaintenanceView.vue:257
+#: frontend/src/views/MaintenanceView.vue:272
 msgid "bureau Raspberry Pi OS (administration seule, sans diaporama)"
 msgstr "Raspberry Pi OS デスクトップ（管理画面のみ、スライドショーなし）"
 
-#: frontend/src/views/MaintenanceView.vue:257
+#: frontend/src/views/MaintenanceView.vue:272
 msgid "cadre photo Pimmich"
 msgstr "Pimmich フォトフレーム"
 
-#: frontend/src/views/MaintenanceView.vue:258
+#: frontend/src/views/MaintenanceView.vue:273
 #: templates/configure/tab_maintenance.html.jinja:509
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Raspberry Pi OS（デスクトップ）に戻す"
 
-#: frontend/src/views/MaintenanceView.vue:259
+#: frontend/src/views/MaintenanceView.vue:274
 #: templates/configure/tab_maintenance.html.jinja:513
 msgid "Repasser sur Pimmich (cadre photo)"
 msgstr "Pimmich（フォトフレーム）に戻す"
 
-#: frontend/src/views/MaintenanceView.vue:265
+#: frontend/src/views/MaintenanceView.vue:280
 #: templates/configure/tab_maintenance.html.jinja:202
 msgid "Espace disque"
 msgstr "ディスク容量"
 
-#: frontend/src/views/MaintenanceView.vue:266
+#: frontend/src/views/MaintenanceView.vue:281
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "Go libres sur"
 msgstr "GB 空き / 全体"
 
-#: frontend/src/views/MaintenanceView.vue:266
+#: frontend/src/views/MaintenanceView.vue:281
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "utilisés"
 msgstr "使用済み"
 
-#: frontend/src/views/MaintenanceView.vue:267
+#: frontend/src/views/MaintenanceView.vue:282
 #: templates/configure/tab_maintenance.html.jinja:359
 msgid "espace faible"
 msgstr "空き容量不足"
 
-#: frontend/src/views/MaintenanceView.vue:268
+#: frontend/src/views/MaintenanceView.vue:283
 #: templates/configure/tab_maintenance.html.jinja:360
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr "件の Google Drive メディアが自動的に削除される可能性があります。"
 
-#: frontend/src/views/MaintenanceView.vue:270
+#: frontend/src/views/MaintenanceView.vue:285
 #: templates/configure/tab_maintenance.html.jinja:205
 msgid "Alerter sous (Go libres) :"
 msgstr "警告するしきい値（空き GB）："
 
-#: frontend/src/views/MaintenanceView.vue:271
+#: frontend/src/views/MaintenanceView.vue:286
 #: templates/configure/tab_maintenance.html.jinja:209
 msgid "Libérer de la place automatiquement"
 msgstr "自動的に空き容量を確保"
 
-#: frontend/src/views/MaintenanceView.vue:273
+#: frontend/src/views/MaintenanceView.vue:288
 #: templates/configure/tab_maintenance.html.jinja:211
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
@@ -4972,12 +5007,12 @@ msgstr ""
 "しきい値を下回ると、Google Drive から既に削除された Google Drive "
 "の写真や動画が古いものから順にフォトフレームから削除されます。お気に入りは削除されません。"
 
-#: frontend/src/views/MaintenanceView.vue:274
+#: frontend/src/views/MaintenanceView.vue:289
 #: templates/configure/tab_maintenance.html.jinja:324
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr "Google Drive への自動バックアップ"
 
-#: frontend/src/views/MaintenanceView.vue:275
+#: frontend/src/views/MaintenanceView.vue:290
 #: templates/configure/tab_maintenance.html.jinja:326
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
@@ -4987,128 +5022,128 @@ msgstr ""
 "設定、アカウント、プレイリスト、お気に入り、招待、メッセージを Google Drive のフォルダにバックアップします（rclone "
 "接続）。写真は含まれません。"
 
-#: frontend/src/views/MaintenanceView.vue:277
+#: frontend/src/views/MaintenanceView.vue:292
 #: templates/configure/tab_maintenance.html.jinja:329 utils/health.py:159
 msgid "Activer la sauvegarde automatique"
 msgstr "自動バックアップを有効にする"
 
-#: frontend/src/views/MaintenanceView.vue:278
+#: frontend/src/views/MaintenanceView.vue:293
 #: templates/configure/tab_maintenance.html.jinja:332
 msgid "Dossier Google Drive :"
 msgstr "Google Drive フォルダ："
 
-#: frontend/src/views/MaintenanceView.vue:279
+#: frontend/src/views/MaintenanceView.vue:294
 #: templates/configure/tab_maintenance.html.jinja:334
 msgid "Toutes les (heures) :"
 msgstr "間隔（時間）："
 
-#: frontend/src/views/MaintenanceView.vue:280
+#: frontend/src/views/MaintenanceView.vue:295
 #: templates/configure/tab_maintenance.html.jinja:336
 msgid "Sauvegardes conservées :"
 msgstr "保持するバックアップ数："
 
-#: frontend/src/views/MaintenanceView.vue:282
+#: frontend/src/views/MaintenanceView.vue:297
 #: templates/configure/tab_maintenance.html.jinja:367
 msgid "Dernière sauvegarde réussie :"
 msgstr "最後に成功したバックアップ："
 
-#: frontend/src/views/MaintenanceView.vue:283
+#: frontend/src/views/MaintenanceView.vue:298
 #: templates/configure/tab_maintenance.html.jinja:368
 msgid "Dernier échec :"
 msgstr "最後の失敗："
 
-#: frontend/src/views/MaintenanceView.vue:285
+#: frontend/src/views/MaintenanceView.vue:300
 #: templates/configure/tab_maintenance.html.jinja:342
 msgid "Enregistrer ces réglages"
 msgstr "この設定を保存"
 
-#: frontend/src/views/MaintenanceView.vue:286
-#: frontend/src/views/MaintenanceView.vue:345
+#: frontend/src/views/MaintenanceView.vue:301
+#: frontend/src/views/MaintenanceView.vue:360
 #: templates/configure/tab_maintenance.html.jinja:86
 #: templates/configure/tab_maintenance.html.jinja:344
 msgid "Sauvegarder maintenant"
 msgstr "今すぐバックアップ"
 
-#: frontend/src/views/MaintenanceView.vue:287
+#: frontend/src/views/MaintenanceView.vue:302
 #: templates/configure/tab_maintenance.html.jinja:346
 msgid "Restaurer la dernière sauvegarde"
 msgstr "最新のバックアップを復元"
 
-#: frontend/src/views/MaintenanceView.vue:292
+#: frontend/src/views/MaintenanceView.vue:307
 #: templates/configure/tab_maintenance.html.jinja:215
 msgid "Stockage des photos"
 msgstr "写真の保存先"
 
-#: frontend/src/views/MaintenanceView.vue:295
-#: frontend/src/views/MaintenanceView.vue:297
+#: frontend/src/views/MaintenanceView.vue:310
+#: frontend/src/views/MaintenanceView.vue:312
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "libres sur"
 msgstr "空き／全体"
 
-#: frontend/src/views/MaintenanceView.vue:298
+#: frontend/src/views/MaintenanceView.vue:313
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Débranché"
 msgstr "未接続"
 
-#: frontend/src/views/MaintenanceView.vue:301
+#: frontend/src/views/MaintenanceView.vue:316
 #: templates/configure/tab_maintenance.html.jinja:220
 msgid "Ajouter un support"
 msgstr "保存先を追加"
 
-#: frontend/src/views/MaintenanceView.vue:303
+#: frontend/src/views/MaintenanceView.vue:318
 #: templates/configure/tab_maintenance.html.jinja:256
 msgid ""
 "Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
 "un dossier « pimmich »."
 msgstr "ディスクの既存の内容はそのまま残ります。Pimmichは「pimmich」フォルダーに写真を保存します。"
 
-#: frontend/src/views/MaintenanceView.vue:304
+#: frontend/src/views/MaintenanceView.vue:319
 #: templates/configure/tab_maintenance.html.jinja:254
 msgid "Utiliser ce disque"
 msgstr "このディスクを使う"
 
-#: frontend/src/views/MaintenanceView.vue:305
+#: frontend/src/views/MaintenanceView.vue:320
 #: templates/configure/tab_maintenance.html.jinja:222
 msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
 msgstr "USBディスクが見つかりません。接続してからこのタブを開き直してください。"
 
-#: frontend/src/views/MaintenanceView.vue:307
+#: frontend/src/views/MaintenanceView.vue:322
 #: templates/configure/tab_maintenance.html.jinja:224
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "ネットワーク共有（NAS、パソコン）"
 
-#: frontend/src/views/MaintenanceView.vue:313
+#: frontend/src/views/MaintenanceView.vue:328
 #: templates/configure/tab_maintenance.html.jinja:230
 msgid "Ajouter le partage"
 msgstr "共有を追加"
 
-#: frontend/src/views/MaintenanceView.vue:315
+#: frontend/src/views/MaintenanceView.vue:330
 #: templates/configure/tab_maintenance.html.jinja:234
 msgid "Emplacement de chaque source"
 msgstr "ソースごとの保存先"
 
-#: frontend/src/views/MaintenanceView.vue:319
+#: frontend/src/views/MaintenanceView.vue:334
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "fichiers"
 msgstr "ファイル"
 
-#: frontend/src/views/MaintenanceView.vue:319
+#: frontend/src/views/MaintenanceView.vue:334
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "support débranché"
 msgstr "保存先が未接続"
 
-#: frontend/src/views/MaintenanceView.vue:326
+#: frontend/src/views/MaintenanceView.vue:341
 #: templates/configure/tab_maintenance.html.jinja:254
 #, python-brace-format
 msgid "Déplacement de « {source} » : {done} / {total} fichiers"
 msgstr "「{source}」を移動中：{done} / {total} ファイル"
 
-#: frontend/src/views/MaintenanceView.vue:331
-#: templates/configure/tab_maintenance.html.jinja:68
+#: frontend/src/views/MaintenanceView.vue:346
+#: templates/configure/tab_maintenance.html.jinja:68 web/routes_system.py:977
 msgid "Sauvegarde complète"
 msgstr "完全バックアップ"
 
-#: frontend/src/views/MaintenanceView.vue:332
+#: frontend/src/views/MaintenanceView.vue:347
 #: templates/configure/tab_maintenance.html.jinja:69
 msgid ""
 "Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, "
@@ -5117,76 +5152,110 @@ msgid ""
 "installation."
 msgstr "フレームのすべて：設定、アカウント、プレイリスト、メッセージ、絵と音声メッセージ、ゲストブック、キャプション、リアクション、音楽、履歴。このフレームでも新しいインストールでもワンクリックで復元できます。"
 
-#: frontend/src/views/MaintenanceView.vue:335
+#: frontend/src/views/MaintenanceView.vue:350
 #: templates/configure/tab_maintenance.html.jinja:72
 msgid "Sans les photos"
 msgstr "写真なし"
 
-#: frontend/src/views/MaintenanceView.vue:336
+#: frontend/src/views/MaintenanceView.vue:351
 #: templates/configure/tab_maintenance.html.jinja:74
 msgid "Télécharger"
 msgstr "ダウンロード"
 
-#: frontend/src/views/MaintenanceView.vue:338
+#: frontend/src/views/MaintenanceView.vue:353
 #: templates/configure/tab_maintenance.html.jinja:78
 msgid "Restaurer ce fichier"
 msgstr "このファイルを復元"
 
-#: frontend/src/views/MaintenanceView.vue:341
+#: frontend/src/views/MaintenanceView.vue:356
 #: templates/configure/tab_maintenance.html.jinja:81
 msgid "Avec les photos, sur un disque USB ou un NAS"
 msgstr "写真あり（USBドライブまたはNASへ）"
 
-#: frontend/src/views/MaintenanceView.vue:342
+#: frontend/src/views/MaintenanceView.vue:357
 #: templates/configure/tab_maintenance.html.jinja:82
 msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
 msgstr "まず下の「写真の保存先」で保存先を追加してください。"
 
-#: frontend/src/views/MaintenanceView.vue:347
+#: frontend/src/views/MaintenanceView.vue:364
+msgid "Automatiquement chaque semaine, la nuit"
+msgstr "毎週夜に自動で"
+
+#: frontend/src/views/MaintenanceView.vue:369
+#, python-brace-format
+msgid "le {day}"
+msgstr "{day}"
+
+#: frontend/src/views/MaintenanceView.vue:370
+msgid "Garder les"
+msgstr "最新"
+
+#: frontend/src/views/MaintenanceView.vue:372
+msgid "dernières"
+msgstr "件を保持"
+
+#: frontend/src/views/MaintenanceView.vue:375
+#, python-brace-format
+msgid "Dernière sauvegarde automatique : {date}"
+msgstr "最後の自動バックアップ：{date}"
+
+#: frontend/src/views/MaintenanceView.vue:376
+#, python-brace-format
+msgid "Dernier essai ({date}) : {message}"
+msgstr "最後の試行（{date}）：{message}"
+
+#: frontend/src/views/MaintenanceView.vue:377
+msgid ""
+"Les photos d'origine, les réglages et les messages sont copiés quand "
+"l'écran est éteint ; les plus anciennes sauvegardes automatiques sont "
+"effacées."
+msgstr "画面がオフの間に元の写真・設定・メッセージをコピーし、古い自動バックアップは削除します。"
+
+#: frontend/src/views/MaintenanceView.vue:379
 #: templates/configure/tab_maintenance.html.jinja:112
 #, python-brace-format
 msgid "Sauvegarde en cours : {done} / {total} fichiers"
 msgstr "バックアップ中：{done} / {total} ファイル"
 
-#: frontend/src/views/MaintenanceView.vue:353
+#: frontend/src/views/MaintenanceView.vue:385
 #: templates/configure/tab_maintenance.html.jinja:122
 msgid "avec photos"
 msgstr "写真あり"
 
-#: frontend/src/views/MaintenanceView.vue:354
+#: frontend/src/views/MaintenanceView.vue:386
 #: templates/configure/tab_maintenance.html.jinja:61
 #: templates/configure/tab_maintenance.html.jinja:126
 msgid "Restaurer"
 msgstr "復元する"
 
-#: frontend/src/views/MaintenanceView.vue:357
+#: frontend/src/views/MaintenanceView.vue:389
 #: templates/configure/tab_maintenance.html.jinja:38
 msgid "Sauvegarde et Restauration"
 msgstr "バックアップと復元"
 
-#: frontend/src/views/MaintenanceView.vue:359
+#: frontend/src/views/MaintenanceView.vue:391
 #: templates/configure/tab_maintenance.html.jinja:49
 msgid "Télécharger la sauvegarde"
 msgstr "バックアップをダウンロードする"
 
-#: frontend/src/views/MaintenanceView.vue:360
+#: frontend/src/views/MaintenanceView.vue:392
 #: templates/configure/tab_maintenance.html.jinja:56
 msgid ""
 "Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
 "fichier de sauvegarde."
 msgstr "本気ですか？現在の設定はバックアップ ファイルの内容によって上書きされます。"
 
-#: frontend/src/views/MaintenanceView.vue:362
+#: frontend/src/views/MaintenanceView.vue:394
 #: templates/configure/tab_maintenance.html.jinja:54
 msgid "Restaurer une configuration"
 msgstr "構成を復元する"
 
-#: frontend/src/views/MaintenanceView.vue:369
+#: frontend/src/views/MaintenanceView.vue:401
 #: templates/configure/tab_maintenance.html.jinja:160
 msgid "HTTPS sans avertissement (Tailscale)"
 msgstr "警告なしの HTTPS（Tailscale）"
 
-#: frontend/src/views/MaintenanceView.vue:370
+#: frontend/src/views/MaintenanceView.vue:402
 #: templates/configure/tab_maintenance.html.jinja:161
 msgid ""
 "Ouvre l'administration à une adresse sécurisée par un vrai certificat, "
@@ -5196,44 +5265,44 @@ msgstr ""
 "Tailscale "
 "に接続した端末から（自宅でも外出先でも）、本物の証明書で保護されたアドレスで管理画面を開けます。インターネットには公開されません。"
 
-#: frontend/src/views/MaintenanceView.vue:371
+#: frontend/src/views/MaintenanceView.vue:403
 #: templates/configure/tab_maintenance.html.jinja:162
 msgid "Activer l'accès HTTPS par Tailscale"
 msgstr "Tailscale 経由の HTTPS アクセスを有効にする"
 
-#: frontend/src/views/MaintenanceView.vue:372
+#: frontend/src/views/MaintenanceView.vue:404
 #: templates/configure/tab_maintenance.html.jinja:174
 msgid "Tailscale n'est pas installé sur ce cadre."
 msgstr "このフレームには Tailscale がインストールされていません。"
 
-#: frontend/src/views/MaintenanceView.vue:373
+#: frontend/src/views/MaintenanceView.vue:405
 #: templates/configure/tab_maintenance.html.jinja:175
 msgid "Tailscale n'est pas connecté."
 msgstr "Tailscale に接続されていません。"
 
-#: frontend/src/views/MaintenanceView.vue:374
+#: frontend/src/views/MaintenanceView.vue:406
 #: templates/configure/tab_maintenance.html.jinja:190
 msgid "Autoriser sur Tailscale"
 msgstr "Tailscale で許可"
 
-#: frontend/src/views/MaintenanceView.vue:378
+#: frontend/src/views/MaintenanceView.vue:410
 #: templates/configure/tab_maintenance.html.jinja:444
 msgid "Système de Fichiers de la Carte SD"
 msgstr "SDカードファイルシステム"
 
-#: frontend/src/views/MaintenanceView.vue:379
+#: frontend/src/views/MaintenanceView.vue:411
 #: templates/configure/tab_maintenance.html.jinja:458
 msgid "Protection contre l'usure"
 msgstr "摩耗対策"
 
-#: frontend/src/views/MaintenanceView.vue:380
+#: frontend/src/views/MaintenanceView.vue:412
 #: templates/configure/tab_maintenance.html.jinja:465
 msgid ""
 "Active : les journaux sont écrits en mémoire vive et recopiés sur la "
 "carte une fois par jour."
 msgstr "有効：ログはメモリに書き込まれ、1日1回カードにコピーされます。"
 
-#: frontend/src/views/MaintenanceView.vue:380
+#: frontend/src/views/MaintenanceView.vue:412
 #: templates/configure/tab_maintenance.html.jinja:466
 msgid ""
 "Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur"
@@ -5243,64 +5312,64 @@ msgstr ""
 "無効。SD カードへの書き込みを減らすには、Raspberry Pi で一度 sudo "
 "~/pimmich/utils/enable_sd_protection.sh を実行して再起動してください。"
 
-#: frontend/src/views/MaintenanceView.vue:381
+#: frontend/src/views/MaintenanceView.vue:413
 msgid "Taille de la partition"
 msgstr "パーティションのサイズ"
 
-#: frontend/src/views/MaintenanceView.vue:383
+#: frontend/src/views/MaintenanceView.vue:415
 msgid "Partition système :"
 msgstr "システムパーティション："
 
-#: frontend/src/views/MaintenanceView.vue:383
+#: frontend/src/views/MaintenanceView.vue:415
 msgid "carte SD :"
 msgstr "SD カード："
 
-#: frontend/src/views/MaintenanceView.vue:384
+#: frontend/src/views/MaintenanceView.vue:416
 msgid "Toute la carte SD est déjà utilisée : rien à agrandir."
 msgstr "SD カード全体がすでに使われています。拡張の必要はありません。"
 
-#: frontend/src/views/MaintenanceView.vue:386
+#: frontend/src/views/MaintenanceView.vue:418
 msgid ""
 "ne sont pas utilisés sur la carte SD. L'opération ne supprime aucune "
 "donnée ; l'agrandissement se termine au prochain redémarrage."
 msgstr "が SD カード上で使われていません。データは削除されず、拡張は次回の再起動で完了します。"
 
-#: frontend/src/views/MaintenanceView.vue:387
+#: frontend/src/views/MaintenanceView.vue:419
 #: templates/configure/tab_maintenance.html.jinja:455
 msgid "Étendre le système de fichiers"
 msgstr "ファイルシステムを拡張する"
 
-#: frontend/src/views/MaintenanceView.vue:390
+#: frontend/src/views/MaintenanceView.vue:422
 msgid "Taille de la carte SD inconnue."
 msgstr "SD カードのサイズが不明です。"
 
-#: frontend/src/views/MaintenanceView.vue:395
+#: frontend/src/views/MaintenanceView.vue:427
 msgid "À propos"
 msgstr "情報"
 
-#: frontend/src/views/MaintenanceView.vue:398
+#: frontend/src/views/MaintenanceView.vue:430
 msgid "Pimmich, le projet d'origine"
 msgstr "Pimmich（元のプロジェクト）"
 
-#: frontend/src/views/MaintenanceView.vue:399
+#: frontend/src/views/MaintenanceView.vue:431
 msgid "Créé par Gotenash et Shenron, dans le cadre du Gadgetaulab. Merci à eux !"
 msgstr "Gotenash と Shenron が Gadgetaulab で制作しました。ありがとうございます！"
 
-#: frontend/src/views/MaintenanceView.vue:407
+#: frontend/src/views/MaintenanceView.vue:439
 msgid "Ce cadre"
 msgstr "このフォトフレーム"
 
-#: frontend/src/views/MaintenanceView.vue:408
+#: frontend/src/views/MaintenanceView.vue:440
 msgid ""
 "Fork personnel de Pimmich, avec de nombreuses fonctionnalités ajoutées, "
 "pour un usage purement perso."
 msgstr "多くの機能を追加した Pimmich の個人用フォークです（個人利用のみ）。"
 
-#: frontend/src/views/MaintenanceView.vue:415
+#: frontend/src/views/MaintenanceView.vue:447
 msgid "Licences"
 msgstr "ライセンス"
 
-#: frontend/src/views/MaintenanceView.vue:416
+#: frontend/src/views/MaintenanceView.vue:448
 msgid ""
 "Pimmich est distribué sous licence MIT. Les composants tiers gardent leur"
 " propre licence :"
@@ -10856,7 +10925,7 @@ msgstr "フォトフレームの問題（電源、熱、ディスク）"
 msgid "Imports terminés"
 msgstr "完了したインポート"
 
-#: utils/notify.py:23 web/workers.py:1197
+#: utils/notify.py:23 web/workers.py:1220
 msgid "Médias impossibles à préparer"
 msgstr "準備できないメディア"
 
@@ -11040,34 +11109,6 @@ msgstr "Happy New Year"
 #, python-format
 msgid "il y a %(num)s an"
 msgstr "%(num)s 年前"
-
-#: utils/themed_compositions_extra.py:577
-msgid "lundi"
-msgstr "月曜日"
-
-#: utils/themed_compositions_extra.py:577
-msgid "mardi"
-msgstr "火曜日"
-
-#: utils/themed_compositions_extra.py:577
-msgid "mercredi"
-msgstr "水曜日"
-
-#: utils/themed_compositions_extra.py:577
-msgid "jeudi"
-msgstr "木曜日"
-
-#: utils/themed_compositions_extra.py:577
-msgid "vendredi"
-msgstr "金曜日"
-
-#: utils/themed_compositions_extra.py:577
-msgid "samedi"
-msgstr "土曜日"
-
-#: utils/themed_compositions_extra.py:577
-msgid "dimanche"
-msgstr "日曜日"
 
 #: utils/themed_compositions_extra.py:580
 msgid "Cette semaine"
@@ -11590,7 +11631,7 @@ msgid ""
 "sur la page qui s'ouvre), puis réactivez « Hors de la maison »."
 msgstr "まずTailscaleアカウントでFunnelを許可し（開いたページの「Enable」ボタン）、「外出先から」をもう一度オンにしてください。"
 
-#: web/routes_guests.py:597 web/routes_system.py:1020
+#: web/routes_guests.py:597 web/routes_system.py:1065
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale が公開を拒否しました：%(detail)s"
@@ -12477,7 +12518,7 @@ msgstr "共有アドレスが無効です（例：//nas.local/photos）。"
 msgid "Type de support inconnu."
 msgstr "不明な保存先の種類です。"
 
-#: web/routes_storage.py:57 web/routes_system.py:952
+#: web/routes_storage.py:57 web/routes_system.py:962
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "この保存先は使えません：%(error)s"
@@ -12491,7 +12532,8 @@ msgstr "保存先「%(name)s」を追加しました。"
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "この保存先にまだ写真があります。先に移動してください。"
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:947
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:957
+#: web/routes_system.py:1010
 msgid "Support inconnu."
 msgstr "不明な保存先です。"
 
@@ -12697,41 +12739,56 @@ msgstr "センサーの測定値がありません。配線と、フレームが
 msgid "Position mémorisée."
 msgstr "向きを記憶しました。"
 
-#: web/routes_system.py:933 web/routes_system.py:993
+#: web/routes_system.py:933 web/routes_system.py:1038
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr "%(count)s 個のファイルを復元しました。フレームはバックアップの内容で再開します。"
 
-#: web/routes_system.py:949
+#: web/routes_system.py:948
+msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
+msgstr "バックアップを開始しました。写真が多いと時間がかかります。"
+
+#: web/routes_system.py:959
 msgid "Une sauvegarde est déjà en cours."
 msgstr "バックアップはすでに実行中です。"
 
-#: web/routes_system.py:960
+#: web/routes_system.py:969
+#, python-format
+msgid ""
+"Pas assez de place sur « %(name)s » : %(free)s Go libres, %(needed)s Go "
+"nécessaires."
+msgstr "「%(name)s」の空き容量が足りません：空き%(free)s GB、必要%(needed)s GB。"
+
+#: web/routes_system.py:981
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr "バックアップ完了：%(count)s ファイル。"
 
-#: web/routes_system.py:970
-msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
-msgstr "バックアップを開始しました。写真が多いと時間がかかります。"
+#: web/routes_system.py:1013
+msgid "Sauvegarde automatique activée."
+msgstr "自動バックアップをオンにしました。"
 
-#: web/routes_system.py:981 web/routes_system.py:984
+#: web/routes_system.py:1013
+msgid "Sauvegarde automatique désactivée."
+msgstr "自動バックアップをオフにしました。"
+
+#: web/routes_system.py:1026 web/routes_system.py:1029
 msgid "Sauvegarde introuvable."
 msgstr "バックアップが見つかりません。"
 
-#: web/routes_system.py:1019
+#: web/routes_system.py:1064
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
 msgstr "まず Tailscale アカウントで HTTPS 証明書を許可し（開いたページ）、もう一度お試しください。"
 
-#: web/routes_system.py:1021
+#: web/routes_system.py:1066
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
 msgstr "Tailscale の端末から、警告なしで HTTPS で管理画面にアクセスできます。"
 
-#: web/routes_system.py:1022
+#: web/routes_system.py:1067
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr "Tailscale 経由の HTTPS アクセスを解除しました。"
 
@@ -12915,16 +12972,20 @@ msgstr "おかえりなさい、%(name)s！"
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr "%(source)s から %(count)s 枚の写真を追加しました。"
 
-#: web/workers.py:1149
+#: web/workers.py:948
+msgid "Sauvegarde automatique impossible"
+msgstr "自動バックアップに失敗しました"
+
+#: web/workers.py:1172
 msgid "Diaporama instable"
 msgstr "スライドショーが不安定"
 
-#: web/workers.py:1149
+#: web/workers.py:1172
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "1時間に %(count)s 回再起動が必要でした。"
 
-#: web/workers.py:1198
+#: web/workers.py:1221
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "

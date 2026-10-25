@@ -928,6 +928,29 @@ def button_worker():
         time.sleep(gpio_button.POLL if watcher.pin is not None else 1)
 
 
+def auto_backup_worker():
+    """Sauvegarde complète automatique de la semaine (disque USB ou NAS), la nuit."""
+    from utils import auto_backup, night_work, notify
+    from web.routes_system import start_full_backup
+    time.sleep(300)
+    while True:
+        try:
+            config = load_config()
+            state = auto_backup.load_state()
+            if auto_backup.due(config, state, night_work.active_now(config)):
+                wanted = auto_backup.settings(config)
+                logger.info("[Sauvegarde] Sauvegarde complète automatique de la semaine...")
+                with app.app_context():
+                    ok, message = start_full_backup(wanted["storage"], auto=True, wait=True)
+                    auto_backup.save_state(auto_backup.note(state, ok, message))
+                    logger.info(f"[Sauvegarde] {'Terminée' if ok else 'Échec'} : {message}")
+                    if not ok:
+                        notify.send(config, "health", _("Sauvegarde automatique impossible"), message, key="auto-backup", repeat_after=24 * 3600)
+        except Exception as e:
+            logger.warning(f"[Sauvegarde] {e}")
+        time.sleep(1800)
+
+
 def frame_share_worker():
     """Cadres jumelés : les nouveautés partent vers les cadres choisis, toutes les deux minutes."""
     from web.routes_frames import share_with_frames

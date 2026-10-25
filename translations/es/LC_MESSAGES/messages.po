@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 23:35+0100\n"
+"POT-Creation-Date: 2026-10-25 23:39+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -453,7 +453,7 @@ msgstr ""
 "Un gran código QR en pantalla: las fotos de los invitados aparecen al "
 "instante y luego en el Muro de la fiesta."
 
-#: frontend/src/news.ts:17 frontend/src/views/MaintenanceView.vue:205
+#: frontend/src/news.ts:17 frontend/src/views/MaintenanceView.vue:220
 msgid "Profil matériel"
 msgstr "Perfil de hardware"
 
@@ -600,7 +600,7 @@ msgstr "cada año"
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
 #: frontend/src/views/GuestsView.vue:246 frontend/src/views/GuestsView.vue:268
-#: frontend/src/views/MaintenanceView.vue:299
+#: frontend/src/views/MaintenanceView.vue:314
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
 #: templates/configure/_son_radio.html.jinja:27
@@ -1019,7 +1019,7 @@ msgstr "Puerto"
 #: frontend/src/views/AccountsView.vue:69
 #: frontend/src/views/AccountsView.vue:71
 #: frontend/src/views/AccountsView.vue:86
-#: frontend/src/views/MaintenanceView.vue:310
+#: frontend/src/views/MaintenanceView.vue:325
 #: templates/configure/tab_affichage.html.jinja:298
 #: templates/configure/tab_comptes.html.jinja:75
 #: templates/configure/tab_comptes.html.jinja:79
@@ -1031,7 +1031,7 @@ msgstr "Usuario"
 
 #: frontend/src/components/HomeAssistantCard.vue:36
 #: frontend/src/views/AccountsView.vue:84
-#: frontend/src/views/MaintenanceView.vue:311
+#: frontend/src/views/MaintenanceView.vue:326
 #: frontend/src/views/NetworkView.vue:174
 #: frontend/src/views/NetworkView.vue:193
 #: templates/configure/tab_affichage.html.jinja:299
@@ -2816,7 +2816,7 @@ msgid "Pendant toute la photo"
 msgstr "Durante toda la foto"
 
 #: frontend/src/views/ClockView.vue:54
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 #: templates/configure/tab_heure.html.jinja:180
 msgid "Jamais"
 msgstr "Nunca"
@@ -4202,7 +4202,7 @@ msgstr ""
 "https://192.168.1.30) y ese código."
 
 #: frontend/src/views/GuestsView.vue:257
-#: frontend/src/views/MaintenanceView.vue:309
+#: frontend/src/views/MaintenanceView.vue:324
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
@@ -4810,8 +4810,8 @@ msgstr ""
 "Drive?"
 
 #: frontend/src/views/MaintenanceView.vue:73
-#: frontend/src/views/MaintenanceView.vue:199
-#: frontend/src/views/MaintenanceView.vue:294
+#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:309
 #: templates/configure/tab_maintenance.html.jinja:10
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Carte SD"
@@ -4823,7 +4823,42 @@ msgstr "Tarjeta SD"
 msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "¿Mover las fotos de «{source}» a «{target}»?"
 
-#: frontend/src/views/MaintenanceView.vue:107
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "lundi"
+msgstr "lunes"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "mardi"
+msgstr "martes"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "mercredi"
+msgstr "miércoles"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "jeudi"
+msgstr "jueves"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "vendredi"
+msgstr "viernes"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "samedi"
+msgstr "sábado"
+
+#: frontend/src/views/MaintenanceView.vue:109
+#: utils/themed_compositions_extra.py:577
+msgid "dimanche"
+msgstr "domingo"
+
+#: frontend/src/views/MaintenanceView.vue:121
 #: templates/configure/tab_maintenance.html.jinja:135
 msgid ""
 "Remplacer les réglages, comptes, messages et playlists actuels par cette "
@@ -4832,12 +4867,12 @@ msgstr ""
 "¿Reemplazar los ajustes, cuentas, mensajes y listas actuales por esta "
 "copia?"
 
-#: frontend/src/views/MaintenanceView.vue:108
+#: frontend/src/views/MaintenanceView.vue:122
 #: templates/configure/tab_maintenance.html.jinja:136
 msgid "Restauration en cours..."
 msgstr "Restaurando..."
 
-#: frontend/src/views/MaintenanceView.vue:113
+#: frontend/src/views/MaintenanceView.vue:127
 #: templates/configure/scripts_gallery.html.jinja:35
 #: templates/configure/scripts_gallery.html.jinja:130
 #: templates/configure/scripts_gallery.html.jinja:281
@@ -4852,14 +4887,14 @@ msgstr "Restaurando..."
 msgid "Erreur de communication avec le serveur."
 msgstr "Error de comunicación con el servidor."
 
-#: frontend/src/views/MaintenanceView.vue:117
+#: frontend/src/views/MaintenanceView.vue:131
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:121
 #: web/routes_frames.py:294 web/routes_guests.py:89 web/routes_guests.py:94
 #: web/routes_imports.py:654 web/routes_imports.py:692 web/routes_system.py:923
 msgid "Aucun fichier sélectionné."
 msgstr "No hay archivos seleccionados."
 
-#: frontend/src/views/MaintenanceView.vue:130
+#: frontend/src/views/MaintenanceView.vue:144
 #: templates/configure/scripts_status.html.jinja:905
 msgid ""
 "Cette opération va préparer le système à étendre la partition au prochain"
@@ -4868,11 +4903,11 @@ msgstr ""
 "Esta operación preparará el sistema para extender la partición al "
 "siguiente reinicio. ¿Quieres continuar?"
 
-#: frontend/src/views/MaintenanceView.vue:160
+#: frontend/src/views/MaintenanceView.vue:174
 msgid "domaine public"
 msgstr "dominio público"
 
-#: frontend/src/views/MaintenanceView.vue:166
+#: frontend/src/views/MaintenanceView.vue:180
 #: templates/configure/tab_maintenance.html.jinja:525
 msgid ""
 "Le Raspberry va redémarrer sur le bureau Raspberry Pi OS et Pimmich ne se"
@@ -4885,7 +4920,7 @@ msgstr ""
 "use el acceso directo «Revenir au cadre Pimmich» del escritorio o del "
 "menú. ¿Continuar?"
 
-#: frontend/src/views/MaintenanceView.vue:170
+#: frontend/src/views/MaintenanceView.vue:184
 #: templates/configure/tab_maintenance.html.jinja:518
 msgid ""
 "Le Raspberry Pi va redémarrer en mode cadre photo Pimmich (le bureau ne "
@@ -4894,66 +4929,66 @@ msgstr ""
 "La Raspberry Pi se reiniciará en modo marco de fotos Pimmich (el "
 "escritorio dejará de mostrarse). ¿Continuar?"
 
-#: frontend/src/views/MaintenanceView.vue:193
+#: frontend/src/views/MaintenanceView.vue:208
 #: templates/configure/tab_maintenance.html.jinja:4
 msgid "Matériel"
 msgstr "Hardware"
 
-#: frontend/src/views/MaintenanceView.vue:195
-#: frontend/src/views/MaintenanceView.vue:214
+#: frontend/src/views/MaintenanceView.vue:210
+#: frontend/src/views/MaintenanceView.vue:229
 #: templates/configure/tab_maintenance.html.jinja:7
 msgid "Modèle"
 msgstr "Modelo"
 
-#: frontend/src/views/MaintenanceView.vue:195
-#: frontend/src/views/MaintenanceView.vue:196
-#: frontend/src/views/MaintenanceView.vue:198
-#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:210
+#: frontend/src/views/MaintenanceView.vue:211
+#: frontend/src/views/MaintenanceView.vue:213
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Inconnu"
 msgstr "Desconocido"
 
-#: frontend/src/views/MaintenanceView.vue:196
+#: frontend/src/views/MaintenanceView.vue:211
 #: templates/configure/tab_maintenance.html.jinja:8
 msgid "Température"
 msgstr "Temperatura"
 
-#: frontend/src/views/MaintenanceView.vue:197
+#: frontend/src/views/MaintenanceView.vue:212
 #: templates/configure/tab_maintenance.html.jinja:9
 msgid "Alimentation"
 msgstr "Alimentación"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:213
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Insuffisante en ce moment"
 msgstr "Insuficiente ahora mismo"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:213
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "A faibli depuis le démarrage"
 msgstr "Ha fallado desde el arranque"
 
-#: frontend/src/views/MaintenanceView.vue:198
+#: frontend/src/views/MaintenanceView.vue:213
 #: templates/configure/tab_maintenance.html.jinja:17
 msgid "Correcte"
 msgstr "Correcta"
 
-#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "erreur(s)"
 msgstr "error(es)"
 
-#: frontend/src/views/MaintenanceView.vue:199
+#: frontend/src/views/MaintenanceView.vue:214
 #: templates/configure/tab_maintenance.html.jinja:18
 msgid "Aucune erreur"
 msgstr "Sin errores"
 
-#: frontend/src/views/MaintenanceView.vue:201
+#: frontend/src/views/MaintenanceView.vue:216
 #: templates/configure/tab_maintenance.html.jinja:19
 msgid "Alimentation conseillée pour ce modèle :"
 msgstr "Alimentación recomendada para este modelo:"
 
-#: frontend/src/views/MaintenanceView.vue:206
+#: frontend/src/views/MaintenanceView.vue:221
 msgid ""
 "Pimmich s'adapte à la puissance du Raspberry Pi : mémoire des animations,"
 " compositions préparées d'avance, vidéos plus légères sur les petits "
@@ -4963,60 +4998,60 @@ msgstr ""
 "animaciones, composiciones preparadas por adelantado, vídeos más ligeros "
 "en los modelos pequeños. Sus ajustes tienen prioridad."
 
-#: frontend/src/views/MaintenanceView.vue:207
+#: frontend/src/views/MaintenanceView.vue:222
 msgid "Profil"
 msgstr "Perfil"
 
-#: frontend/src/views/MaintenanceView.vue:209
+#: frontend/src/views/MaintenanceView.vue:224
 #, python-brace-format
 msgid "Automatique : {profile}"
 msgstr "Automático: {profile}"
 
-#: frontend/src/views/MaintenanceView.vue:215
+#: frontend/src/views/MaintenanceView.vue:230
 msgid "Mémoire des animations (GIF, photos animées)"
 msgstr "Memoria de animaciones (GIF, fotos en movimiento)"
 
-#: frontend/src/views/MaintenanceView.vue:215
+#: frontend/src/views/MaintenanceView.vue:230
 #, python-brace-format
 msgid "{count} par composition"
 msgstr "{count} por composición"
 
-#: frontend/src/views/MaintenanceView.vue:216
+#: frontend/src/views/MaintenanceView.vue:231
 msgid "Compositions préparées d'avance"
 msgstr "Composiciones preparadas por adelantado"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 msgid "Vidéos allégées (720p)"
 msgstr "Vídeos aligerados (720p)"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 #: templates/configure/_playlist_builder.html.jinja:41
 msgid "Toutes"
 msgstr "Todas"
 
-#: frontend/src/views/MaintenanceView.vue:217
+#: frontend/src/views/MaintenanceView.vue:232
 #, python-brace-format
 msgid "À partir de {size} Mo"
 msgstr "A partir de {size} MB"
 
-#: frontend/src/views/MaintenanceView.vue:220
+#: frontend/src/views/MaintenanceView.vue:235
 msgid "Réglages conseillés pour ce profil :"
 msgstr "Ajustes recomendados para este perfil:"
 
-#: frontend/src/views/MaintenanceView.vue:224
+#: frontend/src/views/MaintenanceView.vue:239
 msgid "Appliquer les réglages conseillés"
 msgstr "Aplicar los ajustes recomendados"
 
-#: frontend/src/views/MaintenanceView.vue:226 web/routes_settings.py:570
+#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:570
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "Los ajustes ya son los recomendados."
 
-#: frontend/src/views/MaintenanceView.vue:231
+#: frontend/src/views/MaintenanceView.vue:246
 #: templates/configure/tab_maintenance.html.jinja:392
 msgid "Mise à jour de l'application"
 msgstr "Actualización de la aplicación"
 
-#: frontend/src/views/MaintenanceView.vue:232
+#: frontend/src/views/MaintenanceView.vue:247
 #: templates/configure/tab_maintenance.html.jinja:394
 msgid ""
 "Pimmich se met à jour depuis GitHub puis redémarre. Si la nouvelle "
@@ -5026,63 +5061,63 @@ msgstr ""
 "Pimmich se actualiza desde GitHub y luego se reinicia. Si la nueva "
 "versión no arranca, el marco vuelve solo a la versión anterior."
 
-#: frontend/src/views/MaintenanceView.vue:234
-#: frontend/src/views/MaintenanceView.vue:411
+#: frontend/src/views/MaintenanceView.vue:249
+#: frontend/src/views/MaintenanceView.vue:443
 #: templates/configure/tab_maintenance.html.jinja:396
 msgid "Version installée :"
 msgstr "Versión instalada:"
 
-#: frontend/src/views/MaintenanceView.vue:235
+#: frontend/src/views/MaintenanceView.vue:250
 #: templates/configure/tab_maintenance.html.jinja:411
 msgid "Impossible de joindre GitHub (connexion internet ?)."
 msgstr "No se puede contactar con GitHub (¿conexión a internet?)."
 
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Mise à jour disponible :"
 msgstr "Actualización disponible:"
 
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "changement(s)"
 msgstr "cambio(s)"
 
-#: frontend/src/views/MaintenanceView.vue:236
+#: frontend/src/views/MaintenanceView.vue:251
 #: templates/configure/tab_maintenance.html.jinja:410
 msgid "Pimmich est à jour."
 msgstr "Pimmich está actualizado."
 
-#: frontend/src/views/MaintenanceView.vue:238
+#: frontend/src/views/MaintenanceView.vue:253
 #: templates/configure/tab_maintenance.html.jinja:412
 msgid "Dernière mise à jour en cours de validation (redémarrage)."
 msgstr "Última actualización en validación (reinicio)."
 
-#: frontend/src/views/MaintenanceView.vue:239
+#: frontend/src/views/MaintenanceView.vue:254
 #: templates/configure/tab_maintenance.html.jinja:413
 msgid "Le cadre est revenu à une version précédente."
 msgstr "El marco ha vuelto a una versión anterior."
 
-#: frontend/src/views/MaintenanceView.vue:242
+#: frontend/src/views/MaintenanceView.vue:257
 #: templates/configure/tab_maintenance.html.jinja:403
 msgid "Lancer la mise à jour ? Vous allez être redirigé vers la page de suivi."
 msgstr "¿Iniciar la actualización? Serás redirigido a la página de seguimiento."
 
-#: frontend/src/views/MaintenanceView.vue:242
+#: frontend/src/views/MaintenanceView.vue:257
 #: templates/configure/tab_maintenance.html.jinja:404
 msgid "Lancer la mise à jour"
 msgstr "Iniciar la actualización"
 
-#: frontend/src/views/MaintenanceView.vue:243
+#: frontend/src/views/MaintenanceView.vue:258
 #: templates/configure/tab_maintenance.html.jinja:406
 msgid "Revenir à la version précédente"
 msgstr "Volver a la versión anterior"
 
-#: frontend/src/views/MaintenanceView.vue:248
+#: frontend/src/views/MaintenanceView.vue:263
 #: templates/configure/tab_maintenance.html.jinja:473
 msgid "Contrôle du système"
 msgstr "Control del sistema"
 
-#: frontend/src/views/MaintenanceView.vue:250
+#: frontend/src/views/MaintenanceView.vue:265
 #: templates/configure/tab_maintenance.html.jinja:476
 msgid ""
 "Êtes-vous sûr de vouloir redémarrer UNIQUEMENT l'application web ? Le "
@@ -5091,93 +5126,93 @@ msgstr ""
 "¿Está seguro de que desea reiniciar SOLO la aplicación web? El sistema "
 "operativo no se reiniciará."
 
-#: frontend/src/views/MaintenanceView.vue:251
+#: frontend/src/views/MaintenanceView.vue:266
 #: templates/configure/tab_maintenance.html.jinja:479
 msgid "Redémarrer l'application web"
 msgstr "Reiniciar la aplicación web"
 
-#: frontend/src/views/MaintenanceView.vue:252
+#: frontend/src/views/MaintenanceView.vue:267
 msgid "Redémarrer le système maintenant ?"
 msgstr "¿Reiniciar el sistema ahora?"
 
-#: frontend/src/views/MaintenanceView.vue:253
+#: frontend/src/views/MaintenanceView.vue:268
 #: templates/configure/tab_maintenance.html.jinja:488
 msgid "Redémarrer le système"
 msgstr "Reiniciar el sistema"
 
-#: frontend/src/views/MaintenanceView.vue:254
+#: frontend/src/views/MaintenanceView.vue:269
 #: templates/configure/tab_maintenance.html.jinja:496
 msgid "Supprimer les logs"
 msgstr "Eliminar registros"
 
-#: frontend/src/views/MaintenanceView.vue:255
+#: frontend/src/views/MaintenanceView.vue:270
 #: templates/configure/tab_maintenance.html.jinja:501
 msgid "Êtes-vous sûr de vouloir ÉTEINDRE le système ?"
 msgstr "¿Está seguro que desea apagar el sistema?"
 
-#: frontend/src/views/MaintenanceView.vue:256
+#: frontend/src/views/MaintenanceView.vue:271
 #: templates/configure/tab_maintenance.html.jinja:504
 msgid "Éteindre le système"
 msgstr "Apague el sistema"
 
-#: frontend/src/views/MaintenanceView.vue:257
+#: frontend/src/views/MaintenanceView.vue:272
 msgid "Mode actuel :"
 msgstr "Modo actual:"
 
-#: frontend/src/views/MaintenanceView.vue:257
+#: frontend/src/views/MaintenanceView.vue:272
 msgid "bureau Raspberry Pi OS (administration seule, sans diaporama)"
 msgstr "escritorio de Raspberry Pi OS (solo administración, sin presentación)"
 
-#: frontend/src/views/MaintenanceView.vue:257
+#: frontend/src/views/MaintenanceView.vue:272
 msgid "cadre photo Pimmich"
 msgstr "marco de fotos Pimmich"
 
-#: frontend/src/views/MaintenanceView.vue:258
+#: frontend/src/views/MaintenanceView.vue:273
 #: templates/configure/tab_maintenance.html.jinja:509
 msgid "Repasser sur Raspberry Pi OS (bureau)"
 msgstr "Volver a Raspberry Pi OS (escritorio)"
 
-#: frontend/src/views/MaintenanceView.vue:259
+#: frontend/src/views/MaintenanceView.vue:274
 #: templates/configure/tab_maintenance.html.jinja:513
 msgid "Repasser sur Pimmich (cadre photo)"
 msgstr "Volver a Pimmich (marco de fotos)"
 
-#: frontend/src/views/MaintenanceView.vue:265
+#: frontend/src/views/MaintenanceView.vue:280
 #: templates/configure/tab_maintenance.html.jinja:202
 msgid "Espace disque"
 msgstr "Espacio en disco"
 
-#: frontend/src/views/MaintenanceView.vue:266
+#: frontend/src/views/MaintenanceView.vue:281
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "Go libres sur"
 msgstr "GB libres de"
 
-#: frontend/src/views/MaintenanceView.vue:266
+#: frontend/src/views/MaintenanceView.vue:281
 #: templates/configure/tab_maintenance.html.jinja:358
 msgid "utilisés"
 msgstr "usados"
 
-#: frontend/src/views/MaintenanceView.vue:267
+#: frontend/src/views/MaintenanceView.vue:282
 #: templates/configure/tab_maintenance.html.jinja:359
 msgid "espace faible"
 msgstr "poco espacio"
 
-#: frontend/src/views/MaintenanceView.vue:268
+#: frontend/src/views/MaintenanceView.vue:283
 #: templates/configure/tab_maintenance.html.jinja:360
 msgid "média(s) Google Drive pourraient être supprimés automatiquement."
 msgstr "medio(s) de Google Drive podrían eliminarse automáticamente."
 
-#: frontend/src/views/MaintenanceView.vue:270
+#: frontend/src/views/MaintenanceView.vue:285
 #: templates/configure/tab_maintenance.html.jinja:205
 msgid "Alerter sous (Go libres) :"
 msgstr "Avisar por debajo de (GB libres):"
 
-#: frontend/src/views/MaintenanceView.vue:271
+#: frontend/src/views/MaintenanceView.vue:286
 #: templates/configure/tab_maintenance.html.jinja:209
 msgid "Libérer de la place automatiquement"
 msgstr "Liberar espacio automáticamente"
 
-#: frontend/src/views/MaintenanceView.vue:273
+#: frontend/src/views/MaintenanceView.vue:288
 #: templates/configure/tab_maintenance.html.jinja:211
 msgid ""
 "Sous le seuil, les photos et vidéos Google Drive déjà retirées du Drive "
@@ -5188,12 +5223,12 @@ msgstr ""
 "del Drive se borran del marco, empezando por los más antiguos. Los "
 "favoritos nunca se eliminan."
 
-#: frontend/src/views/MaintenanceView.vue:274
+#: frontend/src/views/MaintenanceView.vue:289
 #: templates/configure/tab_maintenance.html.jinja:324
 msgid "Sauvegarde automatique sur Google Drive"
 msgstr "Copia de seguridad automática en Google Drive"
 
-#: frontend/src/views/MaintenanceView.vue:275
+#: frontend/src/views/MaintenanceView.vue:290
 #: templates/configure/tab_maintenance.html.jinja:326
 msgid ""
 "Sauvegarde les réglages, comptes, playlists, favoris, invitations et "
@@ -5204,75 +5239,75 @@ msgstr ""
 "invitaciones y mensajes en una carpeta de su Google Drive (conexión "
 "rclone). Las fotos no se incluyen."
 
-#: frontend/src/views/MaintenanceView.vue:277
+#: frontend/src/views/MaintenanceView.vue:292
 #: templates/configure/tab_maintenance.html.jinja:329 utils/health.py:159
 msgid "Activer la sauvegarde automatique"
 msgstr "Activar la copia de seguridad automática"
 
-#: frontend/src/views/MaintenanceView.vue:278
+#: frontend/src/views/MaintenanceView.vue:293
 #: templates/configure/tab_maintenance.html.jinja:332
 msgid "Dossier Google Drive :"
 msgstr "Carpeta de Google Drive:"
 
-#: frontend/src/views/MaintenanceView.vue:279
+#: frontend/src/views/MaintenanceView.vue:294
 #: templates/configure/tab_maintenance.html.jinja:334
 msgid "Toutes les (heures) :"
 msgstr "Cada (horas):"
 
-#: frontend/src/views/MaintenanceView.vue:280
+#: frontend/src/views/MaintenanceView.vue:295
 #: templates/configure/tab_maintenance.html.jinja:336
 msgid "Sauvegardes conservées :"
 msgstr "Copias de seguridad conservadas:"
 
-#: frontend/src/views/MaintenanceView.vue:282
+#: frontend/src/views/MaintenanceView.vue:297
 #: templates/configure/tab_maintenance.html.jinja:367
 msgid "Dernière sauvegarde réussie :"
 msgstr "Última copia de seguridad correcta:"
 
-#: frontend/src/views/MaintenanceView.vue:283
+#: frontend/src/views/MaintenanceView.vue:298
 #: templates/configure/tab_maintenance.html.jinja:368
 msgid "Dernier échec :"
 msgstr "Último error:"
 
-#: frontend/src/views/MaintenanceView.vue:285
+#: frontend/src/views/MaintenanceView.vue:300
 #: templates/configure/tab_maintenance.html.jinja:342
 msgid "Enregistrer ces réglages"
 msgstr "Guardar esta configuración"
 
-#: frontend/src/views/MaintenanceView.vue:286
-#: frontend/src/views/MaintenanceView.vue:345
+#: frontend/src/views/MaintenanceView.vue:301
+#: frontend/src/views/MaintenanceView.vue:360
 #: templates/configure/tab_maintenance.html.jinja:86
 #: templates/configure/tab_maintenance.html.jinja:344
 msgid "Sauvegarder maintenant"
 msgstr "Hacer copia de seguridad ahora"
 
-#: frontend/src/views/MaintenanceView.vue:287
+#: frontend/src/views/MaintenanceView.vue:302
 #: templates/configure/tab_maintenance.html.jinja:346
 msgid "Restaurer la dernière sauvegarde"
 msgstr "Restaurar la última copia de seguridad"
 
-#: frontend/src/views/MaintenanceView.vue:292
+#: frontend/src/views/MaintenanceView.vue:307
 #: templates/configure/tab_maintenance.html.jinja:215
 msgid "Stockage des photos"
 msgstr "Almacenamiento de fotos"
 
-#: frontend/src/views/MaintenanceView.vue:295
-#: frontend/src/views/MaintenanceView.vue:297
+#: frontend/src/views/MaintenanceView.vue:310
+#: frontend/src/views/MaintenanceView.vue:312
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "libres sur"
 msgstr "libres de"
 
-#: frontend/src/views/MaintenanceView.vue:298
+#: frontend/src/views/MaintenanceView.vue:313
 #: templates/configure/tab_maintenance.html.jinja:253
 msgid "Débranché"
 msgstr "Desconectado"
 
-#: frontend/src/views/MaintenanceView.vue:301
+#: frontend/src/views/MaintenanceView.vue:316
 #: templates/configure/tab_maintenance.html.jinja:220
 msgid "Ajouter un support"
 msgstr "Añadir un soporte"
 
-#: frontend/src/views/MaintenanceView.vue:303
+#: frontend/src/views/MaintenanceView.vue:318
 #: templates/configure/tab_maintenance.html.jinja:256
 msgid ""
 "Le contenu actuel du disque est conservé : Pimmich range ses photos dans "
@@ -5281,53 +5316,53 @@ msgstr ""
 "Se conserva el contenido actual del disco: Pimmich guarda sus fotos en "
 "una carpeta «pimmich»."
 
-#: frontend/src/views/MaintenanceView.vue:304
+#: frontend/src/views/MaintenanceView.vue:319
 #: templates/configure/tab_maintenance.html.jinja:254
 msgid "Utiliser ce disque"
 msgstr "Usar este disco"
 
-#: frontend/src/views/MaintenanceView.vue:305
+#: frontend/src/views/MaintenanceView.vue:320
 #: templates/configure/tab_maintenance.html.jinja:222
 msgid "Aucun disque USB détecté : branchez-le puis rouvrez cet onglet."
 msgstr "No se detecta ningún disco USB: conéctalo y vuelve a abrir esta pestaña."
 
-#: frontend/src/views/MaintenanceView.vue:307
+#: frontend/src/views/MaintenanceView.vue:322
 #: templates/configure/tab_maintenance.html.jinja:224
 msgid "Partage réseau (NAS, ordinateur)"
 msgstr "Carpeta de red (NAS, ordenador)"
 
-#: frontend/src/views/MaintenanceView.vue:313
+#: frontend/src/views/MaintenanceView.vue:328
 #: templates/configure/tab_maintenance.html.jinja:230
 msgid "Ajouter le partage"
 msgstr "Añadir la carpeta"
 
-#: frontend/src/views/MaintenanceView.vue:315
+#: frontend/src/views/MaintenanceView.vue:330
 #: templates/configure/tab_maintenance.html.jinja:234
 msgid "Emplacement de chaque source"
 msgstr "Ubicación de cada fuente"
 
-#: frontend/src/views/MaintenanceView.vue:319
+#: frontend/src/views/MaintenanceView.vue:334
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "fichiers"
 msgstr "archivos"
 
-#: frontend/src/views/MaintenanceView.vue:319
+#: frontend/src/views/MaintenanceView.vue:334
 #: templates/configure/tab_maintenance.html.jinja:255
 msgid "support débranché"
 msgstr "soporte desconectado"
 
-#: frontend/src/views/MaintenanceView.vue:326
+#: frontend/src/views/MaintenanceView.vue:341
 #: templates/configure/tab_maintenance.html.jinja:254
 #, python-brace-format
 msgid "Déplacement de « {source} » : {done} / {total} fichiers"
 msgstr "Moviendo «{source}»: {done} / {total} archivos"
 
-#: frontend/src/views/MaintenanceView.vue:331
-#: templates/configure/tab_maintenance.html.jinja:68
+#: frontend/src/views/MaintenanceView.vue:346
+#: templates/configure/tab_maintenance.html.jinja:68 web/routes_system.py:977
 msgid "Sauvegarde complète"
 msgstr "Copia de seguridad completa"
 
-#: frontend/src/views/MaintenanceView.vue:332
+#: frontend/src/views/MaintenanceView.vue:347
 #: templates/configure/tab_maintenance.html.jinja:69
 msgid ""
 "Tout ce qui fait votre cadre : réglages, comptes, playlists, messages, "
@@ -5339,59 +5374,95 @@ msgstr ""
 "notas de voz, libro de visitas, leyendas, reacciones, música e historial."
 " Se restaura con un clic, en este marco o en una instalación nueva."
 
-#: frontend/src/views/MaintenanceView.vue:335
+#: frontend/src/views/MaintenanceView.vue:350
 #: templates/configure/tab_maintenance.html.jinja:72
 msgid "Sans les photos"
 msgstr "Sin las fotos"
 
-#: frontend/src/views/MaintenanceView.vue:336
+#: frontend/src/views/MaintenanceView.vue:351
 #: templates/configure/tab_maintenance.html.jinja:74
 msgid "Télécharger"
 msgstr "Descargar"
 
-#: frontend/src/views/MaintenanceView.vue:338
+#: frontend/src/views/MaintenanceView.vue:353
 #: templates/configure/tab_maintenance.html.jinja:78
 msgid "Restaurer ce fichier"
 msgstr "Restaurar este archivo"
 
-#: frontend/src/views/MaintenanceView.vue:341
+#: frontend/src/views/MaintenanceView.vue:356
 #: templates/configure/tab_maintenance.html.jinja:81
 msgid "Avec les photos, sur un disque USB ou un NAS"
 msgstr "Con las fotos, en un disco USB o un NAS"
 
-#: frontend/src/views/MaintenanceView.vue:342
+#: frontend/src/views/MaintenanceView.vue:357
 #: templates/configure/tab_maintenance.html.jinja:82
 msgid "Ajoutez d'abord un support dans « Stockage des photos » ci-dessous."
 msgstr "Primero añade un soporte en «Almacenamiento de fotos» más abajo."
 
-#: frontend/src/views/MaintenanceView.vue:347
+#: frontend/src/views/MaintenanceView.vue:364
+msgid "Automatiquement chaque semaine, la nuit"
+msgstr "Automáticamente cada semana, por la noche"
+
+#: frontend/src/views/MaintenanceView.vue:369
+#, python-brace-format
+msgid "le {day}"
+msgstr "el {day}"
+
+#: frontend/src/views/MaintenanceView.vue:370
+msgid "Garder les"
+msgstr "Conservar las"
+
+#: frontend/src/views/MaintenanceView.vue:372
+msgid "dernières"
+msgstr "últimas"
+
+#: frontend/src/views/MaintenanceView.vue:375
+#, python-brace-format
+msgid "Dernière sauvegarde automatique : {date}"
+msgstr "Última copia automática: {date}"
+
+#: frontend/src/views/MaintenanceView.vue:376
+#, python-brace-format
+msgid "Dernier essai ({date}) : {message}"
+msgstr "Último intento ({date}): {message}"
+
+#: frontend/src/views/MaintenanceView.vue:377
+msgid ""
+"Les photos d'origine, les réglages et les messages sont copiés quand "
+"l'écran est éteint ; les plus anciennes sauvegardes automatiques sont "
+"effacées."
+msgstr ""
+"Las fotos originales, los ajustes y los mensajes se copian con la "
+"pantalla apagada; las copias automáticas más antiguas se borran."
+
+#: frontend/src/views/MaintenanceView.vue:379
 #: templates/configure/tab_maintenance.html.jinja:112
 #, python-brace-format
 msgid "Sauvegarde en cours : {done} / {total} fichiers"
 msgstr "Copia en curso: {done} / {total} archivos"
 
-#: frontend/src/views/MaintenanceView.vue:353
+#: frontend/src/views/MaintenanceView.vue:385
 #: templates/configure/tab_maintenance.html.jinja:122
 msgid "avec photos"
 msgstr "con fotos"
 
-#: frontend/src/views/MaintenanceView.vue:354
+#: frontend/src/views/MaintenanceView.vue:386
 #: templates/configure/tab_maintenance.html.jinja:61
 #: templates/configure/tab_maintenance.html.jinja:126
 msgid "Restaurer"
 msgstr "Restaurar"
 
-#: frontend/src/views/MaintenanceView.vue:357
+#: frontend/src/views/MaintenanceView.vue:389
 #: templates/configure/tab_maintenance.html.jinja:38
 msgid "Sauvegarde et Restauration"
 msgstr "Copia de seguridad y restauración"
 
-#: frontend/src/views/MaintenanceView.vue:359
+#: frontend/src/views/MaintenanceView.vue:391
 #: templates/configure/tab_maintenance.html.jinja:49
 msgid "Télécharger la sauvegarde"
 msgstr "Descargar copia de seguridad"
 
-#: frontend/src/views/MaintenanceView.vue:360
+#: frontend/src/views/MaintenanceView.vue:392
 #: templates/configure/tab_maintenance.html.jinja:56
 msgid ""
 "Êtes-vous sûr ? La configuration actuelle sera écrasée par le contenu du "
@@ -5400,17 +5471,17 @@ msgstr ""
 "¿Está seguro? La configuración actual se sobrescribirá con el contenido "
 "del archivo de copia de seguridad."
 
-#: frontend/src/views/MaintenanceView.vue:362
+#: frontend/src/views/MaintenanceView.vue:394
 #: templates/configure/tab_maintenance.html.jinja:54
 msgid "Restaurer une configuration"
 msgstr "Restaurar una configuración"
 
-#: frontend/src/views/MaintenanceView.vue:369
+#: frontend/src/views/MaintenanceView.vue:401
 #: templates/configure/tab_maintenance.html.jinja:160
 msgid "HTTPS sans avertissement (Tailscale)"
 msgstr "HTTPS sin advertencias (Tailscale)"
 
-#: frontend/src/views/MaintenanceView.vue:370
+#: frontend/src/views/MaintenanceView.vue:402
 #: templates/configure/tab_maintenance.html.jinja:161
 msgid ""
 "Ouvre l'administration à une adresse sécurisée par un vrai certificat, "
@@ -5421,37 +5492,37 @@ msgstr ""
 "real, desde tus dispositivos conectados a Tailscale (en casa o fuera). "
 "Nunca se publica en internet."
 
-#: frontend/src/views/MaintenanceView.vue:371
+#: frontend/src/views/MaintenanceView.vue:403
 #: templates/configure/tab_maintenance.html.jinja:162
 msgid "Activer l'accès HTTPS par Tailscale"
 msgstr "Activar el acceso HTTPS por Tailscale"
 
-#: frontend/src/views/MaintenanceView.vue:372
+#: frontend/src/views/MaintenanceView.vue:404
 #: templates/configure/tab_maintenance.html.jinja:174
 msgid "Tailscale n'est pas installé sur ce cadre."
 msgstr "Tailscale no está instalado en este marco."
 
-#: frontend/src/views/MaintenanceView.vue:373
+#: frontend/src/views/MaintenanceView.vue:405
 #: templates/configure/tab_maintenance.html.jinja:175
 msgid "Tailscale n'est pas connecté."
 msgstr "Tailscale no está conectado."
 
-#: frontend/src/views/MaintenanceView.vue:374
+#: frontend/src/views/MaintenanceView.vue:406
 #: templates/configure/tab_maintenance.html.jinja:190
 msgid "Autoriser sur Tailscale"
 msgstr "Autorizar en Tailscale"
 
-#: frontend/src/views/MaintenanceView.vue:378
+#: frontend/src/views/MaintenanceView.vue:410
 #: templates/configure/tab_maintenance.html.jinja:444
 msgid "Système de Fichiers de la Carte SD"
 msgstr "Sistema de archivos de tarjeta SD"
 
-#: frontend/src/views/MaintenanceView.vue:379
+#: frontend/src/views/MaintenanceView.vue:411
 #: templates/configure/tab_maintenance.html.jinja:458
 msgid "Protection contre l'usure"
 msgstr "Protección contra el desgaste"
 
-#: frontend/src/views/MaintenanceView.vue:380
+#: frontend/src/views/MaintenanceView.vue:412
 #: templates/configure/tab_maintenance.html.jinja:465
 msgid ""
 "Active : les journaux sont écrits en mémoire vive et recopiés sur la "
@@ -5460,7 +5531,7 @@ msgstr ""
 "Activa: los registros se escriben en la RAM y se copian a la tarjeta una "
 "vez al día."
 
-#: frontend/src/views/MaintenanceView.vue:380
+#: frontend/src/views/MaintenanceView.vue:412
 #: templates/configure/tab_maintenance.html.jinja:466
 msgid ""
 "Inactive. Pour réduire les écritures sur la carte SD, lancez une fois sur"
@@ -5471,23 +5542,23 @@ msgstr ""
 "en la Raspberry Pi: sudo ~/pimmich/utils/enable_sd_protection.sh y "
 "reinicia."
 
-#: frontend/src/views/MaintenanceView.vue:381
+#: frontend/src/views/MaintenanceView.vue:413
 msgid "Taille de la partition"
 msgstr "Tamaño de la partición"
 
-#: frontend/src/views/MaintenanceView.vue:383
+#: frontend/src/views/MaintenanceView.vue:415
 msgid "Partition système :"
 msgstr "Partición del sistema:"
 
-#: frontend/src/views/MaintenanceView.vue:383
+#: frontend/src/views/MaintenanceView.vue:415
 msgid "carte SD :"
 msgstr "tarjeta SD:"
 
-#: frontend/src/views/MaintenanceView.vue:384
+#: frontend/src/views/MaintenanceView.vue:416
 msgid "Toute la carte SD est déjà utilisée : rien à agrandir."
 msgstr "Toda la tarjeta SD ya está en uso: nada que ampliar."
 
-#: frontend/src/views/MaintenanceView.vue:386
+#: frontend/src/views/MaintenanceView.vue:418
 msgid ""
 "ne sont pas utilisés sur la carte SD. L'opération ne supprime aucune "
 "donnée ; l'agrandissement se termine au prochain redémarrage."
@@ -5495,32 +5566,32 @@ msgstr ""
 "no se usan en la tarjeta SD. La operación no borra ningún dato; la "
 "ampliación termina en el próximo reinicio."
 
-#: frontend/src/views/MaintenanceView.vue:387
+#: frontend/src/views/MaintenanceView.vue:419
 #: templates/configure/tab_maintenance.html.jinja:455
 msgid "Étendre le système de fichiers"
 msgstr "Ampliar el sistema de archivos"
 
-#: frontend/src/views/MaintenanceView.vue:390
+#: frontend/src/views/MaintenanceView.vue:422
 msgid "Taille de la carte SD inconnue."
 msgstr "Tamaño de la tarjeta SD desconocido."
 
-#: frontend/src/views/MaintenanceView.vue:395
+#: frontend/src/views/MaintenanceView.vue:427
 msgid "À propos"
 msgstr "Acerca de"
 
-#: frontend/src/views/MaintenanceView.vue:398
+#: frontend/src/views/MaintenanceView.vue:430
 msgid "Pimmich, le projet d'origine"
 msgstr "Pimmich, el proyecto original"
 
-#: frontend/src/views/MaintenanceView.vue:399
+#: frontend/src/views/MaintenanceView.vue:431
 msgid "Créé par Gotenash et Shenron, dans le cadre du Gadgetaulab. Merci à eux !"
 msgstr "Creado por Gotenash y Shenron en el Gadgetaulab. ¡Gracias a ellos!"
 
-#: frontend/src/views/MaintenanceView.vue:407
+#: frontend/src/views/MaintenanceView.vue:439
 msgid "Ce cadre"
 msgstr "Este marco"
 
-#: frontend/src/views/MaintenanceView.vue:408
+#: frontend/src/views/MaintenanceView.vue:440
 msgid ""
 "Fork personnel de Pimmich, avec de nombreuses fonctionnalités ajoutées, "
 "pour un usage purement perso."
@@ -5528,11 +5599,11 @@ msgstr ""
 "Fork personal de Pimmich, con muchas funciones añadidas, para uso "
 "puramente personal."
 
-#: frontend/src/views/MaintenanceView.vue:415
+#: frontend/src/views/MaintenanceView.vue:447
 msgid "Licences"
 msgstr "Licencias"
 
-#: frontend/src/views/MaintenanceView.vue:416
+#: frontend/src/views/MaintenanceView.vue:448
 msgid ""
 "Pimmich est distribué sous licence MIT. Les composants tiers gardent leur"
 " propre licence :"
@@ -11310,7 +11381,7 @@ msgstr "Problemas del marco (alimentación, calor, disco)"
 msgid "Imports terminés"
 msgstr "Importaciones terminadas"
 
-#: utils/notify.py:23 web/workers.py:1197
+#: utils/notify.py:23 web/workers.py:1220
 msgid "Médias impossibles à préparer"
 msgstr "Medios imposibles de preparar"
 
@@ -11494,34 +11565,6 @@ msgstr "Feliz Año"
 #, python-format
 msgid "il y a %(num)s an"
 msgstr "hace %(num)s año"
-
-#: utils/themed_compositions_extra.py:577
-msgid "lundi"
-msgstr "lunes"
-
-#: utils/themed_compositions_extra.py:577
-msgid "mardi"
-msgstr "martes"
-
-#: utils/themed_compositions_extra.py:577
-msgid "mercredi"
-msgstr "miércoles"
-
-#: utils/themed_compositions_extra.py:577
-msgid "jeudi"
-msgstr "jueves"
-
-#: utils/themed_compositions_extra.py:577
-msgid "vendredi"
-msgstr "viernes"
-
-#: utils/themed_compositions_extra.py:577
-msgid "samedi"
-msgstr "sábado"
-
-#: utils/themed_compositions_extra.py:577
-msgid "dimanche"
-msgstr "domingo"
 
 #: utils/themed_compositions_extra.py:580
 msgid "Cette semaine"
@@ -12062,7 +12105,7 @@ msgstr ""
 "Autoriza primero Funnel en tu cuenta de Tailscale (botón «Enable» en la "
 "página que se abre) y vuelve a activar «Fuera de casa»."
 
-#: web/routes_guests.py:597 web/routes_system.py:1020
+#: web/routes_guests.py:597 web/routes_system.py:1065
 #, python-format
 msgid "Tailscale refuse la publication : %(detail)s"
 msgstr "Tailscale rechaza la publicación: %(detail)s"
@@ -12977,7 +13020,7 @@ msgstr "Dirección de carpeta no válida (ej.: //nas.local/photos)."
 msgid "Type de support inconnu."
 msgstr "Tipo de soporte desconocido."
 
-#: web/routes_storage.py:57 web/routes_system.py:952
+#: web/routes_storage.py:57 web/routes_system.py:962
 #, python-format
 msgid "Impossible d'utiliser ce support : %(error)s"
 msgstr "No se puede usar este soporte: %(error)s"
@@ -12991,7 +13034,8 @@ msgstr "Soporte «%(name)s» añadido."
 msgid "Des photos sont encore sur ce support : déplacez-les d'abord."
 msgstr "Aún hay fotos en este soporte: muévelas primero."
 
-#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:947
+#: web/routes_storage.py:73 web/routes_storage.py:116 web/routes_system.py:957
+#: web/routes_system.py:1010
 msgid "Support inconnu."
 msgstr "Soporte desconocido."
 
@@ -13215,29 +13259,46 @@ msgstr "Sin medición del sensor: comprueba la conexión y que el marco esté de
 msgid "Position mémorisée."
 msgstr "Posición memorizada."
 
-#: web/routes_system.py:933 web/routes_system.py:993
+#: web/routes_system.py:933 web/routes_system.py:1038
 #, python-format
 msgid "%(count)s fichiers restaurés. Le cadre reprend avec la sauvegarde."
 msgstr "%(count)s archivos restaurados. El marco continúa con la copia."
 
-#: web/routes_system.py:949
+#: web/routes_system.py:948
+msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
+msgstr "Copia iniciada: puede tardar con muchas fotos."
+
+#: web/routes_system.py:959
 msgid "Une sauvegarde est déjà en cours."
 msgstr "Ya hay una copia en curso."
 
-#: web/routes_system.py:960
+#: web/routes_system.py:969
+#, python-format
+msgid ""
+"Pas assez de place sur « %(name)s » : %(free)s Go libres, %(needed)s Go "
+"nécessaires."
+msgstr ""
+"No hay espacio suficiente en «%(name)s»: %(free)s GB libres, %(needed)s "
+"GB necesarios."
+
+#: web/routes_system.py:981
 #, python-format
 msgid "Sauvegarde terminée : %(count)s fichiers."
 msgstr "Copia terminada: %(count)s archivos."
 
-#: web/routes_system.py:970
-msgid "Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos."
-msgstr "Copia iniciada: puede tardar con muchas fotos."
+#: web/routes_system.py:1013
+msgid "Sauvegarde automatique activée."
+msgstr "Copia automática activada."
 
-#: web/routes_system.py:981 web/routes_system.py:984
+#: web/routes_system.py:1013
+msgid "Sauvegarde automatique désactivée."
+msgstr "Copia automática desactivada."
+
+#: web/routes_system.py:1026 web/routes_system.py:1029
 msgid "Sauvegarde introuvable."
 msgstr "Copia no encontrada."
 
-#: web/routes_system.py:1019
+#: web/routes_system.py:1064
 msgid ""
 "Autorisez d'abord les certificats HTTPS sur votre compte Tailscale (page "
 "qui s'ouvre), puis réessayez."
@@ -13245,7 +13306,7 @@ msgstr ""
 "Primero autoriza los certificados HTTPS en tu cuenta de Tailscale (página"
 " que se abre) y vuelve a intentarlo."
 
-#: web/routes_system.py:1021
+#: web/routes_system.py:1066
 msgid ""
 "L'administration est accessible en HTTPS, sans avertissement, depuis vos "
 "appareils Tailscale."
@@ -13253,7 +13314,7 @@ msgstr ""
 "La administración es accesible por HTTPS, sin advertencias, desde tus "
 "dispositivos Tailscale."
 
-#: web/routes_system.py:1022
+#: web/routes_system.py:1067
 msgid "Accès HTTPS par Tailscale retiré."
 msgstr "Acceso HTTPS por Tailscale retirado."
 
@@ -13441,16 +13502,20 @@ msgstr "¡Bienvenido a casa, %(name)s!"
 msgid "%(count)s photo(s) ajoutée(s) depuis %(source)s."
 msgstr "%(count)s foto(s) añadida(s) desde %(source)s."
 
-#: web/workers.py:1149
+#: web/workers.py:948
+msgid "Sauvegarde automatique impossible"
+msgstr "Copia automática imposible"
+
+#: web/workers.py:1172
 msgid "Diaporama instable"
 msgstr "Presentación inestable"
 
-#: web/workers.py:1149
+#: web/workers.py:1172
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "Tuvo que reiniciarse %(count)s veces en una hora."
 
-#: web/workers.py:1198
+#: web/workers.py:1221
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "

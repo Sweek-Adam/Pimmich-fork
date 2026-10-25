@@ -78,7 +78,8 @@ if __name__ == '__main__':
     from web.workers import night_work_worker
     threading.Thread(target=night_work_worker, daemon=True, name="night-work").start()
     threading.Thread(target=routes_party.party_worker, daemon=True, name="party").start()
-    from web.workers import daily_summary_worker, frame_share_worker
+    from web.workers import daily_summary_worker, frame_share_worker, auto_backup_worker
+    threading.Thread(target=auto_backup_worker, daemon=True, name="auto-backup").start()  # sauvegarde de la semaine
     threading.Thread(target=frame_share_worker, daemon=True, name="frame-share").start()  # cadres jumelés
     threading.Thread(target=daily_summary_worker, daemon=True, name="daily-summary").start()
     if on_pi:

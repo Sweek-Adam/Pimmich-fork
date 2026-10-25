@@ -942,23 +942,45 @@ def full_backup_storage_api():
         return jsonify({"success": True, "backups": _backups_on_storages(), "status": dict(_full_backup),
                         "storages": [{"id": s["id"], "label": s.get("label", s["id"])} for s in load_config().get("storages") or []]})
     storage_id = (request.get_json(silent=True) or {}).get("storage")
+    ok, message = start_full_backup(storage_id)
+    if not ok:
+        return jsonify({"success": False, "message": message}), 409 if _full_backup.get("running") else 400
+    return jsonify({"success": True, "message": _("Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos.")})
+
+
+def start_full_backup(storage_id, auto=False, wait=False):
+    """Sauvegarde complète avec les photos vers ce support (en arrière-plan, ou attendue si wait) : (lancée, message).
+    auto : sauvegarde de la semaine (nom à part, les plus anciennes effacées au-delà du nombre choisi)."""
+    from utils import auto_backup, full_backup, storage
     item = next((s for s in load_config().get("storages") or [] if s.get("id") == storage_id), None)
     if item is None:
-        return jsonify({"success": False, "message": _("Support inconnu.")}), 404
+        return False, _("Support inconnu.")
     if _full_backup.get("running"):
-        return jsonify({"success": False, "message": _("Une sauvegarde est déjà en cours.")}), 409
+        return False, _("Une sauvegarde est déjà en cours.")
     ok, message = storage.mount(item)
     if not ok:
-        return jsonify({"success": False, "message": _("Impossible d'utiliser ce support : %(error)s", error=message)}), 400
-    target = storage.mountpoint(item) / "pimmich" / "sauvegardes" / f"pimmich-complet-{datetime.now():%Y-%m-%d-%H%M}.zip"
+        return False, _("Impossible d'utiliser ce support : %(error)s", error=message)
+    folder = storage.mountpoint(item) / "pimmich" / "sauvegardes"
+    target = folder / (auto_backup.target_name() if auto else f"pimmich-complet-{datetime.now():%Y-%m-%d-%H%M}.zip")
+    if auto:
+        needed = auto_backup.photos_size(BASE_DIR / "static" / "photos")
+        free = shutil.disk_usage(storage.mountpoint(item)).free
+        if free < needed * 1.05 + 50 * 1024 * 1024:
+            return False, _("Pas assez de place sur « %(name)s » : %(free)s Go libres, %(needed)s Go nécessaires.",
+                            name=item.get("label", item["id"]), free=round(free / 1e9, 1), needed=round(needed / 1e9, 1))
     _full_backup.clear()
-    _full_backup.update(running=True, done=0, total=0)
+    _full_backup.update(running=True, done=0, total=0, auto=auto)
 
     def run():
         try:
-            count, size = full_backup.build(target, with_photos=True, progress=lambda d, t: _full_backup.update(done=d, total=t))
+            from utils import busy
+            with busy.working(_("Sauvegarde complète")):
+                count, size = full_backup.build(target, with_photos=True, progress=lambda d, t: _full_backup.update(done=d, total=t))
+            if auto:
+                auto_backup.prune(folder, auto_backup.settings(load_config())["keep"])
             _full_backup.update(message=_("Sauvegarde terminée : %(count)s fichiers.", count=count), ok=True)
         except Exception as e:
+            target.unlink(missing_ok=True)  # sauvegarde incomplète : inutilisable
             _full_backup.update(message=str(e)[:300], ok=False)
         finally:
             _full_backup["running"] = False
@@ -966,8 +988,31 @@ def full_backup_storage_api():
     def run_in_context():
         with app.app_context():
             run()
+    if wait:
+        run_in_context()
+        return bool(_full_backup.get("ok")), _full_backup.get("message", "")
     threading.Thread(target=run_in_context, daemon=True, name="full-backup").start()
-    return jsonify({"success": True, "message": _("Sauvegarde lancée : elle peut durer un moment avec beaucoup de photos.")})
+    return True, ""
+
+
+@app.route('/api/backup/full/auto', methods=['GET', 'PUT'])
+@admin_required
+def full_backup_auto_api():
+    """Sauvegarde complète automatique de la semaine : réglages et dernier résultat."""
+    from utils import auto_backup
+    if request.method == 'PUT':
+        data = request.get_json(silent=True) or {}
+        config = dict(load_config())
+        wanted = auto_backup.settings(dict(config, auto_full_backup=dict(config.get("auto_full_backup") or {}, **{
+            k: data[k] for k in ("enabled", "storage", "weekday", "keep") if k in data})))
+        wanted["enabled"] = bool(wanted["enabled"])
+        if wanted["enabled"] and not any(s.get("id") == wanted["storage"] for s in config.get("storages") or []):
+            return jsonify({"success": False, "message": _("Support inconnu.")}), 400
+        config["auto_full_backup"] = wanted
+        save_config(config)
+        return jsonify({"success": True, "message": _("Sauvegarde automatique activée.") if wanted["enabled"] else _("Sauvegarde automatique désactivée."),
+                        "settings": wanted})
+    return jsonify({"success": True, "settings": auto_backup.settings(load_config()), "state": auto_backup.load_state()})
 
 
 @app.route('/api/backup/full/storage/restore', methods=['POST'])
