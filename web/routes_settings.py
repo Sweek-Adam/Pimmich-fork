@@ -59,6 +59,7 @@ SETTINGS = {
     "motion_photos_enabled": ("bool", None, True),
     "hardware_profile": ("choice", ["auto", "leger", "standard", "complet"], "auto"),
     "family_game_enabled": ("bool", None, True),
+    "daily_summary_time": ("time", None, "20:00"),
     "language": ("choice", ["fr", "en", "es", "de", "ja"], "fr"),
     "game_rounds": ("int", (1, 15), 6),
     "game_question_seconds": ("int", (5, 300), 25),

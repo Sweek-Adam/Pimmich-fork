@@ -7,6 +7,8 @@ import { notify, run } from "../toast";
 interface Notify { enabled: boolean; url: string | null; app_url: string | null; server: string; events: { key: string; label: string; on: boolean }[] }
 
 const data = ref<Notify | null>(null);
+const dailyTime = ref("20:00");
+async function saveDaily() { await run(() => post("/api/settings", { daily_summary_time: dailyTime.value })); }
 const qr = ref("");
 
 async function load() {
@@ -35,6 +37,7 @@ async function newTopic() {
   load();
 }
 
+onMounted(() => { get<{ values: Record<string, unknown> }>("/api/settings").then((d) => { dailyTime.value = String(d.values.daily_summary_time || "20:00"); }).catch(() => {}); });
 onMounted(load);
 </script>
 
@@ -60,6 +63,8 @@ onMounted(load);
       <h3>{{ t("Me prévenir pour") }}</h3>
       <label v-for="e in data.events" :key="e.key" class="check">
         <input v-model="e.on" type="checkbox" @change="save({ events: { [e.key]: e.on } })">{{ e.label }}</label>
+      <label v-if="data.events.some((e) => e.key === 'daily' && e.on)" class="check daily">{{ t("Heure du bilan :") }}
+        <input v-model="dailyTime" type="time" @change="saveDaily"></label>
     </div>
     <details class="advanced">
       <summary>{{ t("Options avancées") }}</summary>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 17:42+0100\n"
+"POT-Creation-Date: 2026-10-25 17:44+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -1588,7 +1588,7 @@ msgid "Demande de code à Spotify…"
 msgstr "Solicitando un código a Spotify…"
 
 #: frontend/src/components/SpotifyCard.vue:97
-#: frontend/src/views/NotificationsView.vue:26
+#: frontend/src/views/NotificationsView.vue:28
 #: frontend/src/views/TelegramView.vue:73
 msgid "Copié."
 msgstr "Copiado."
@@ -1678,7 +1678,7 @@ msgid "Nom : Pimmich. Dans « Redirect URIs », collez cette adresse :"
 msgstr "Nombre: Pimmich. En «Redirect URIs», pega esta dirección:"
 
 #: frontend/src/components/SpotifyCard.vue:132
-#: frontend/src/views/NotificationsView.vue:53
+#: frontend/src/views/NotificationsView.vue:56
 #: frontend/src/views/TelegramView.vue:109
 #: templates/configure/_son_spotify.html.jinja:30
 #: templates/configure/tab_notifications.html.jinja:11
@@ -4422,7 +4422,7 @@ msgstr ""
 "Temas de temporada solo durante su periodo (y más frecuentes en ese "
 "momento)"
 
-#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:395
+#: frontend/src/views/LayoutsView.vue:56 web/routes_settings.py:396
 msgid "Gardez au moins une disposition."
 msgstr "Mantén al menos una disposición."
 
@@ -4851,7 +4851,7 @@ msgstr "Ajustes recomendados para este perfil:"
 msgid "Appliquer les réglages conseillés"
 msgstr "Aplicar los ajustes recomendados"
 
-#: frontend/src/views/MaintenanceView.vue:223 web/routes_settings.py:553
+#: frontend/src/views/MaintenanceView.vue:223 web/routes_settings.py:554
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "Los ajustes ya son los recomendados."
 
@@ -6084,20 +6084,20 @@ msgstr "Nuevo"
 msgid "Voir"
 msgstr "Ver"
 
-#: frontend/src/views/NotificationsView.vue:33
-#: frontend/src/views/NotificationsView.vue:68
+#: frontend/src/views/NotificationsView.vue:35
+#: frontend/src/views/NotificationsView.vue:73
 #: templates/configure/tab_notifications.html.jinja:24
 msgid "Changer de canal (les téléphones abonnés devront s'abonner de nouveau)"
 msgstr ""
 "Cambiar de canal (los teléfonos suscritos tendrán que volver a "
 "suscribirse)"
 
-#: frontend/src/views/NotificationsView.vue:44
+#: frontend/src/views/NotificationsView.vue:47
 #: templates/configure/tab_notifications.html.jinja:3
 msgid "Notifications sur votre téléphone"
 msgstr "Notificaciones en tu teléfono"
 
-#: frontend/src/views/NotificationsView.vue:45
+#: frontend/src/views/NotificationsView.vue:48
 #: templates/configure/tab_notifications.html.jinja:4
 msgid ""
 "Le cadre vous prévient sur votre téléphone (photo d'invité à valider, "
@@ -6106,22 +6106,22 @@ msgstr ""
 "El marco te avisa en tu teléfono (foto de invitado por validar, "
 "problema...). Gratis y sin cuenta, con la app ntfy."
 
-#: frontend/src/views/NotificationsView.vue:46
+#: frontend/src/views/NotificationsView.vue:49
 #: templates/configure/tab_notifications.html.jinja:5
 msgid "Activer les notifications"
 msgstr "Activar las notificaciones"
 
-#: frontend/src/views/NotificationsView.vue:48
+#: frontend/src/views/NotificationsView.vue:51
 #: templates/configure/tab_notifications.html.jinja:7
 msgid "QR code du canal de notifications"
 msgstr "Código QR del canal de notificaciones"
 
-#: frontend/src/views/NotificationsView.vue:50
+#: frontend/src/views/NotificationsView.vue:53
 #: templates/configure/tab_notifications.html.jinja:9
 msgid "Installez l'application « ntfy » (App Store ou Google Play)."
 msgstr "Instala la app «ntfy» (App Store o Google Play)."
 
-#: frontend/src/views/NotificationsView.vue:51
+#: frontend/src/views/NotificationsView.vue:54
 #: templates/configure/tab_notifications.html.jinja:10
 msgid ""
 "Dans ntfy, touchez « + » puis collez l'adresse ci-dessous (ou ouvrez le "
@@ -6130,34 +6130,38 @@ msgstr ""
 "En ntfy, toca «+» y pega la dirección de abajo (o abre el enlace en el "
 "teléfono):"
 
-#: frontend/src/views/NotificationsView.vue:54
+#: frontend/src/views/NotificationsView.vue:57
 #: templates/configure/tab_notifications.html.jinja:12
 msgid "Ouvrir dans ntfy"
 msgstr "Abrir en ntfy"
 
-#: frontend/src/views/NotificationsView.vue:55
+#: frontend/src/views/NotificationsView.vue:58
 #: templates/configure/tab_notifications.html.jinja:13
 msgid "Envoyez une notification de test pour vérifier."
 msgstr "Envía una notificación de prueba para comprobarlo."
 
-#: frontend/src/views/NotificationsView.vue:56
+#: frontend/src/views/NotificationsView.vue:59
 #: templates/configure/tab_affichage.html.jinja:440
 #: templates/configure/tab_affichage.html.jinja:453
 #: templates/configure/tab_notifications.html.jinja:14
 msgid "Tester"
 msgstr "Ensayador"
 
-#: frontend/src/views/NotificationsView.vue:60
+#: frontend/src/views/NotificationsView.vue:63
 #: templates/configure/tab_notifications.html.jinja:18
 msgid "Me prévenir pour"
 msgstr "Avisarme de"
 
-#: frontend/src/views/NotificationsView.vue:65
+#: frontend/src/views/NotificationsView.vue:66
+msgid "Heure du bilan :"
+msgstr "Hora del resumen:"
+
+#: frontend/src/views/NotificationsView.vue:70
 #: templates/configure/tab_notifications.html.jinja:21
 msgid "Options avancées"
 msgstr "Opciones avanzadas"
 
-#: frontend/src/views/NotificationsView.vue:66
+#: frontend/src/views/NotificationsView.vue:71
 #: templates/configure/tab_notifications.html.jinja:22
 msgid "Serveur ntfy (si vous hébergez le vôtre)"
 msgstr "Servidor ntfy (si alojas el tuyo)"
@@ -8070,9 +8074,9 @@ msgid "Enregistrement…"
 msgstr "Guardando…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:351 web/routes_settings.py:405
-#: web/routes_settings.py:427 web/routes_settings.py:486
-#: web/routes_settings.py:510 web/routes_settings.py:520
+#: web/routes_settings.py:352 web/routes_settings.py:406
+#: web/routes_settings.py:428 web/routes_settings.py:487
+#: web/routes_settings.py:511 web/routes_settings.py:521
 msgid "Enregistré"
 msgstr "Guardado"
 
@@ -10178,6 +10182,39 @@ msgstr "Scrapbook"
 msgid "Photomaton"
 msgstr "Fotomatón"
 
+#: utils/daily_summary.py:47
+#, python-format
+msgid "Reçus : %(photos)s photo(s), %(videos)s vidéo(s)."
+msgstr "Recibidos: %(photos)s foto(s), %(videos)s vídeo(s)."
+
+#: utils/daily_summary.py:53
+#, python-format
+msgid "Messages des invités : %(count)s."
+msgstr "Mensajes de invitados: %(count)s."
+
+#: utils/daily_summary.py:58
+#, python-format
+msgid "Médias en échec : %(count)s (voir Préparation des médias)."
+msgstr "Medios con error: %(count)s (ver Preparación de medios)."
+
+#: utils/daily_summary.py:61
+#, python-format
+msgid "Place libre : %(size)s Go."
+msgstr "Espacio libre: %(size)s GB."
+
+#: utils/daily_summary.py:66
+#, python-format
+msgid "Température : %(temp)s °C."
+msgstr "Temperatura: %(temp)s °C."
+
+#: utils/daily_summary.py:69
+msgid "Attention : l'alimentation a faibli depuis le démarrage."
+msgstr "Atención: la alimentación ha bajado desde el arranque."
+
+#: utils/daily_summary.py:70
+msgid "Bilan du jour"
+msgstr "Resumen del día"
+
 #: utils/family_game.py:44
 msgid "En quelle année a été prise cette photo ?"
 msgstr "¿En qué año se tomó esta foto?"
@@ -11074,6 +11111,10 @@ msgstr "Importaciones terminadas"
 msgid "Médias impossibles à préparer"
 msgstr "Medios imposibles de preparar"
 
+#: utils/notify.py:24
+msgid "Bilan du jour (photos reçues, échecs, place libre, température)"
+msgstr "Resumen del día (fotos recibidas, errores, espacio libre, temperatura)"
+
 #: utils/party.py:181
 msgid "Mur de la fête"
 msgstr "Muro de la fiesta"
@@ -11488,13 +11529,13 @@ msgstr ""
 "El valor del límite de fotografías de Immich no es válido. Se mantiene el"
 " valor anterior."
 
-#: web/routes_config.py:253 web/routes_settings.py:519
+#: web/routes_config.py:253 web/routes_settings.py:520
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Clave de Google Drive no guardada: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:346
-#: web/routes_settings.py:403 web/routes_settings.py:484
+#: web/routes_config.py:281 web/routes_settings.py:347
+#: web/routes_settings.py:404 web/routes_settings.py:485
 msgid "Réglages modifiés"
 msgstr "Ajustes modificados"
 
@@ -11506,8 +11547,8 @@ msgstr ""
 "Configuración guardada. La presentación de diapositivas se reinició para "
 "aplicar los cambios."
 
-#: web/routes_family.py:26 web/routes_settings.py:392
-#: web/routes_settings.py:504 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:393
+#: web/routes_settings.py:505 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Lista no válida."
 
@@ -12118,7 +12159,7 @@ msgstr ""
 "Aún no hay datos de mareas: la presentación los obtiene, o use «Forzar "
 "actualización»."
 
-#: web/routes_media.py:73 web/routes_settings.py:477 web/routes_storage.py:114
+#: web/routes_media.py:73 web/routes_settings.py:478 web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Fuente desconocida."
 
@@ -12524,37 +12565,37 @@ msgstr "Playlist no encontrada."
 msgid "Citation du jour enregistrée."
 msgstr "Cita del día guardada."
 
-#: web/routes_settings.py:321
+#: web/routes_settings.py:322
 msgid "Aucun réglage à enregistrer."
 msgstr "Ningún ajuste que guardar."
 
-#: web/routes_settings.py:325
+#: web/routes_settings.py:326
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Ajuste desconocido: %(key)s"
 
-#: web/routes_settings.py:329
+#: web/routes_settings.py:330
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Valor no válido para «%(key)s»."
 
-#: web/routes_settings.py:422
+#: web/routes_settings.py:423
 msgid "Valeur invalide."
 msgstr "Valor no válido."
 
-#: web/routes_settings.py:427
+#: web/routes_settings.py:428
 msgid "Supprimé."
 msgstr "Eliminado."
 
-#: web/routes_settings.py:534
+#: web/routes_settings.py:535
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "Ordenador (no es una Raspberry Pi)"
 
-#: web/routes_settings.py:557
+#: web/routes_settings.py:558
 msgid "Réglages conseillés appliqués"
 msgstr "Ajustes recomendados aplicados"
 
-#: web/routes_settings.py:559
+#: web/routes_settings.py:560
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s ajuste(s) adaptado(s) a la Raspberry Pi."

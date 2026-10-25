@@ -1078,3 +1078,21 @@ def night_work_worker():
         except Exception as e:
             logger.warning(f"[Nuit] {e}")
         time.sleep(600)
+
+
+def daily_summary_worker():
+    """Bilan du jour, une fois par jour à l'heure choisie (si la notification « Bilan du jour » est cochée)."""
+    from utils import daily_summary, notify
+    time.sleep(120)
+    while True:
+        try:
+            config = load_config()
+            if notify.wants(config, "daily") and daily_summary.due(config):
+                with app.app_context():
+                    translate = _
+                    title, text = daily_summary.build(config, translate=translate)
+                    notify.send(config, "daily", title, text, key=f"daily:{datetime.now():%Y-%m-%d}", repeat_after=20 * 3600)
+                daily_summary.mark_sent()
+        except Exception as e:
+            logger.warning(f"[Bilan] {e}")
+        time.sleep(300)
