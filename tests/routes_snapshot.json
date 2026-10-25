@@ -926,6 +926,18 @@
   ]
  ],
  [
+  "/api/photobook/film_<year>.mp4",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/photobook/film_<year>/slideshow",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/ping",
   [
    "GET"

@@ -5,13 +5,16 @@ import { t } from "../i18n";
 import { run } from "../toast";
 
 // Livre photo de l'année : PDF prêt à imprimer, créé en arrière-plan sur le cadre
-interface Job { running: boolean; kind: "book" | "calendar" | null; year: number | null; done: number; total: number; error: string | null; pages: number }
-interface Book { kind: "book" | "calendar"; year: number; size: number; created: number }
+type Kind = "book" | "calendar" | "film";
+interface Job { running: boolean; kind: Kind | null; year: number | null; done: number; total: number; error: string | null; pages: number }
+interface Book { kind: Kind; year: number; size: number; created: number }
 const years = ref<Record<string, number>>({});
 const job = ref<Job | null>(null);
 const books = ref<Book[]>([]);
 const year = ref<number | null>(null);
 const calendarYear = ref<number>(new Date().getFullYear() + 1);
+const musics = ref<string[]>([]);
+const music = ref("");
 let timer: number | undefined;
 
 const choices = computed(() => Object.entries(years.value).map(([y, n]) => ({ year: Number(y), count: n })).sort((a, b) => b.year - a.year));
@@ -30,14 +33,22 @@ async function load() {
 let calendarTouched = false;
 function touchCalendar() { calendarTouched = true; }
 function stopPolling() { window.clearInterval(timer); timer = undefined; }
-async function create(kind: "book" | "calendar" = "book") {
+async function create(kind: Kind = "book") {
   const wanted = kind === "calendar" ? calendarYear.value : year.value;
   if (wanted === null) return;
-  const r = await run(() => post("/api/photobook", { year: wanted, kind }));
+  const r = await run(() => post("/api/photobook", { year: wanted, kind, music: kind === "film" ? music.value : undefined }));
   if (r) { await load(); if (!timer) timer = window.setInterval(load, 2000); }
 }
 
-onMounted(load);
+async function toSlideshow(b: Book) { await run(() => post(`/api/photobook/film_${b.year}/slideshow`)); }
+const fileUrl = (b: Book) => b.kind === "film" ? `/api/photobook/film_${b.year}.mp4` : b.kind === "calendar" ? `/api/photobook/calendar_${b.year}.pdf` : `/api/photobook/${b.year}.pdf`;
+const fileLabel = (b: Book) => b.kind === "film" ? t("Télécharger le film {year}", { year: b.year })
+  : b.kind === "calendar" ? t("Télécharger le calendrier {year}", { year: b.year }) : t("Télécharger le livre {year}", { year: b.year });
+
+onMounted(async () => {
+  load();
+  try { musics.value = (await get<{ files: string[] }>("/api/music_files")).files; music.value = musics.value[0] || ""; } catch { musics.value = []; }
+});
 onUnmounted(stopPolling);
 </script>
 
@@ -61,13 +72,27 @@ onUnmounted(stopPolling);
         <i class="fas" :class="job?.running && job.kind === 'calendar' ? 'fa-spinner fa-spin' : 'fa-calendar-plus'"></i>
         {{ job?.running && job.kind === "calendar" ? t("Création en cours...") : t("Créer le calendrier") }}</button>
     </div>
+    <h3 class="sub"><i class="fas fa-film"></i> {{ t("Film de l'année") }}</h3>
+    <p class="small muted">{{ t("Un petit film des plus belles photos de l'année choisie ci-dessus, mois par mois, avec une musique de la bibliothèque du cadre. Le montage prend une dizaine de minutes sur un Raspberry Pi.") }}</p>
+    <div class="row">
+      <select v-model="music" :disabled="job?.running">
+        <option value="">{{ t("Sans musique") }}</option>
+        <option v-for="m in musics" :key="m" :value="m">{{ m.replace(/\.(mp3|wav)$/i, "") }}</option>
+      </select>
+      <button class="btn primary" type="button" :disabled="job?.running || year === null" @click="create('film')">
+        <i class="fas" :class="job?.running && job.kind === 'film' ? 'fa-spinner fa-spin' : 'fa-video'"></i>
+        {{ job?.running && job.kind === "film" ? t("Montage en cours...") : t("Monter le film {year}", { year: year ?? "" }) }}</button>
+    </div>
     <div v-if="job?.running" class="bar"><span :style="{ width: percent + '%' }"></span></div>
     <p v-if="job?.running && job.total" class="small muted">{{ t("Page {done} sur {total}", { done: job.done, total: job.total }) }}</p>
     <p v-if="!job?.running && job?.error === 'empty'" class="small warn">{{ t("Aucune photo datée de cette année-là.") }}</p>
     <p v-else-if="!job?.running && job?.error" class="small err">{{ job.error }}</p>
-    <p v-for="b in books" :key="b.year" class="small">
-      <a class="btn small" :href="b.kind === 'calendar' ? `/api/photobook/calendar_${b.year}.pdf` : `/api/photobook/${b.year}.pdf`"><i class="fas fa-download"></i>
-        {{ b.kind === "calendar" ? t("Télécharger le calendrier {year}", { year: b.year }) : t("Télécharger le livre {year}", { year: b.year }) }}</a>
+    <p v-for="b in books" :key="b.kind + b.year" class="small files">
+      <a class="btn small" :href="b.kind === 'film' ? fileUrl(b) + '?download=1' : fileUrl(b)"><i class="fas fa-download"></i> {{ fileLabel(b) }}</a>
+      <template v-if="b.kind === 'film'">
+        <a class="btn small" :href="fileUrl(b)" target="_blank"><i class="fas fa-play"></i> {{ t("Regarder") }}</a>
+        <button class="btn small" type="button" @click="toSlideshow(b)"><i class="fas fa-tv"></i> {{ t("Passer sur le cadre") }}</button>
+      </template>
       <span class="muted"> {{ mb(b.size) }}</span></p>
   </section>
 </template>
@@ -79,5 +104,6 @@ onUnmounted(stopPolling);
 .bar span { display: block; height: 100%; background: var(--accent); transition: width .4s; }
 .sub { margin: 1rem 0 .2rem; font-size: 1rem; }
 .year { width: 6rem; }
+.files { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; }
 .warn { color: var(--warn); } .err { color: var(--danger); }
 </style>

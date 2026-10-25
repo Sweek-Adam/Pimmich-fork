@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:15+0100\n"
+"POT-Creation-Date: 2026-10-26 00:20+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -1061,10 +1061,25 @@ msgstr ""
 "物理18番ピン）へ。"
 
 #: frontend/src/components/PhotoBookCard.vue:45
+#, python-brace-format
+msgid "Télécharger le film {year}"
+msgstr "{year}年のムービーをダウンロード"
+
+#: frontend/src/components/PhotoBookCard.vue:46
+#, python-brace-format
+msgid "Télécharger le calendrier {year}"
+msgstr "{year}年のカレンダーをダウンロード"
+
+#: frontend/src/components/PhotoBookCard.vue:46
+#, python-brace-format
+msgid "Télécharger le livre {year}"
+msgstr "{year}年のブックをダウンロード"
+
+#: frontend/src/components/PhotoBookCard.vue:57
 msgid "Livre photo de l'année"
 msgstr "1年のフォトブック"
 
-#: frontend/src/components/PhotoBookCard.vue:46
+#: frontend/src/components/PhotoBookCard.vue:58
 msgid ""
 "Un PDF prêt à imprimer (A4 à l'italienne) : une couverture, les plus "
 "belles photos mois par mois (les plus aimées et les favorites d'abord, "
@@ -1072,54 +1087,76 @@ msgid ""
 "chiffres."
 msgstr "印刷できるPDF（A4横）：表紙、月ごとのベスト写真（人気とお気に入りを優先、ぼやけた写真やスクリーンショットは除外）、そして1年の数字。"
 
-#: frontend/src/components/PhotoBookCard.vue:49
+#: frontend/src/components/PhotoBookCard.vue:61
 #, python-brace-format
 msgid "{count} photos"
 msgstr "{count}枚"
 
-#: frontend/src/components/PhotoBookCard.vue:53
-#: frontend/src/components/PhotoBookCard.vue:61
+#: frontend/src/components/PhotoBookCard.vue:65
+#: frontend/src/components/PhotoBookCard.vue:73
 #: frontend/src/views/MediaView.vue:179
 msgid "Création en cours..."
 msgstr "作成中..."
 
-#: frontend/src/components/PhotoBookCard.vue:53
+#: frontend/src/components/PhotoBookCard.vue:65
 msgid "Créer le livre"
 msgstr "ブックを作成"
 
-#: frontend/src/components/PhotoBookCard.vue:55
+#: frontend/src/components/PhotoBookCard.vue:67
 msgid "Calendrier photo à imprimer"
 msgstr "印刷できるフォトカレンダー"
 
-#: frontend/src/components/PhotoBookCard.vue:56
+#: frontend/src/components/PhotoBookCard.vue:68
 msgid ""
 "Un mois par page (A4 en portrait) : une belle photo prise ce mois-là une "
 "année précédente, et la grille des jours avec les anniversaires de la "
 "famille (page Occasions), la fête des mères et des pères."
 msgstr "1ページに1か月（A4縦）：以前の年のその月に撮った写真と、家族の誕生日（記念日ページ）、母の日・父の日入りのカレンダー。"
 
-#: frontend/src/components/PhotoBookCard.vue:61
+#: frontend/src/components/PhotoBookCard.vue:73
 msgid "Créer le calendrier"
 msgstr "カレンダーを作成"
 
-#: frontend/src/components/PhotoBookCard.vue:64
+#: frontend/src/components/PhotoBookCard.vue:75 web/routes_photobook.py:42
+msgid "Film de l'année"
+msgstr "1年のムービー"
+
+#: frontend/src/components/PhotoBookCard.vue:76
+msgid ""
+"Un petit film des plus belles photos de l'année choisie ci-dessus, mois "
+"par mois, avec une musique de la bibliothèque du cadre. Le montage prend "
+"une dizaine de minutes sur un Raspberry Pi."
+msgstr "上で選んだ年のベスト写真を月ごとにまとめた短いムービー（フレームの音楽付き）。Raspberry Piで約10分かかります。"
+
+#: frontend/src/components/PhotoBookCard.vue:79
+msgid "Sans musique"
+msgstr "音楽なし"
+
+#: frontend/src/components/PhotoBookCard.vue:84
+msgid "Montage en cours..."
+msgstr "作成中..."
+
+#: frontend/src/components/PhotoBookCard.vue:84
+#, python-brace-format
+msgid "Monter le film {year}"
+msgstr "{year}年のムービーを作成"
+
+#: frontend/src/components/PhotoBookCard.vue:87
 #, python-brace-format
 msgid "Page {done} sur {total}"
 msgstr "{total}ページ中{done}ページ"
 
-#: frontend/src/components/PhotoBookCard.vue:65
+#: frontend/src/components/PhotoBookCard.vue:88
 msgid "Aucune photo datée de cette année-là."
 msgstr "その年の日付のある写真はありません。"
 
-#: frontend/src/components/PhotoBookCard.vue:69
-#, python-brace-format
-msgid "Télécharger le calendrier {year}"
-msgstr "{year}年のカレンダーをダウンロード"
+#: frontend/src/components/PhotoBookCard.vue:93
+msgid "Regarder"
+msgstr "見る"
 
-#: frontend/src/components/PhotoBookCard.vue:69
-#, python-brace-format
-msgid "Télécharger le livre {year}"
-msgstr "{year}年のブックをダウンロード"
+#: frontend/src/components/PhotoBookCard.vue:94
+msgid "Passer sur le cadre"
+msgstr "フレームで再生"
 
 #: frontend/src/components/PresenceCard.vue:50
 #: templates/configure/tab_affichage.html.jinja:347
@@ -10778,6 +10815,10 @@ msgstr "家族を招待（QR code、Telegram）"
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr "接続を保護（HTTPS）"
 
+#: utils/import_progress.py:14
+msgid "Films de l'année"
+msgstr "1年のムービー"
+
 #: utils/layout_engine.py:35
 msgid "Selon les réglages"
 msgstr "設定に従う"
@@ -11020,7 +11061,7 @@ msgstr "訪れた場所"
 msgid "le mois le plus photographié"
 msgstr "いちばん写真を撮った月"
 
-#: utils/photo_book.py:290
+#: utils/photo_book.py:290 utils/year_film.py:64
 msgid "Notre année"
 msgstr "わたしたちの1年"
 
@@ -11820,7 +11861,7 @@ msgstr "不明なレイアウトです。"
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "レイアウトを準備中です… 数秒で表示されます。"
 
-#: web/routes_home.py:213
+#: web/routes_home.py:213 web/routes_photobook.py:73
 msgid "Musique introuvable."
 msgstr "音楽が見つかりません。"
 
@@ -12457,31 +12498,48 @@ msgid ""
 "pour importer ses photos."
 msgstr "この人物の写真はまだフレームにありません。フォローすると写真をインポートします。"
 
-#: web/routes_photobook.py:60 web/routes_photobook.py:62
+#: web/routes_photobook.py:66 web/routes_photobook.py:68
 msgid "Année invalide."
 msgstr "年が正しくありません。"
 
-#: web/routes_photobook.py:65
+#: web/routes_photobook.py:76
 msgid "Un livre photo est déjà en cours de création."
 msgstr "フォトブックはすでに作成中です。"
 
-#: web/routes_photobook.py:80
+#: web/routes_photobook.py:91
 #, python-format
 msgid "Création du calendrier %(year)s : quelques minutes."
 msgstr "%(year)s年のカレンダーを作成中：数分かかります。"
 
-#: web/routes_photobook.py:81
+#: web/routes_photobook.py:93
+#, python-format
+msgid "Montage du film %(year)s : une dizaine de minutes sur un Raspberry Pi."
+msgstr "%(year)s年のムービーを作成中：Raspberry Piで約10分。"
+
+#: web/routes_photobook.py:94
 #, python-format
 msgid "Création du livre photo %(year)s : quelques minutes."
 msgstr "%(year)s年のフォトブックを作成中：数分かかります。"
 
-#: web/routes_photobook.py:94
+#: web/routes_photobook.py:107
 msgid "Calendrier"
 msgstr "カレンダー"
 
-#: web/routes_photobook.py:94
+#: web/routes_photobook.py:107
 msgid "Livre photo"
 msgstr "フォトブック"
+
+#: web/routes_photobook.py:118
+msgid "Film"
+msgstr "ムービー"
+
+#: web/routes_photobook.py:127
+msgid "Film introuvable."
+msgstr "ムービーが見つかりません。"
+
+#: web/routes_photobook.py:143
+msgid "Le film passera dans le diaporama dès qu'il sera préparé."
+msgstr "準備ができ次第、スライドショーで再生されます。"
 
 #: web/routes_photos.py:274
 msgid "Tri automatique enregistré : appliqué au prochain tour du diaporama."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:15+0100\n"
+"POT-Creation-Date: 2026-10-26 00:20+0100\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -1095,10 +1095,25 @@ msgstr ""
 "Masse (Pin 6), OUT an den gewählten Pin (GPIO 24 = physischer Pin 18)."
 
 #: frontend/src/components/PhotoBookCard.vue:45
+#, python-brace-format
+msgid "Télécharger le film {year}"
+msgstr "Film {year} herunterladen"
+
+#: frontend/src/components/PhotoBookCard.vue:46
+#, python-brace-format
+msgid "Télécharger le calendrier {year}"
+msgstr "Kalender {year} herunterladen"
+
+#: frontend/src/components/PhotoBookCard.vue:46
+#, python-brace-format
+msgid "Télécharger le livre {year}"
+msgstr "Buch {year} herunterladen"
+
+#: frontend/src/components/PhotoBookCard.vue:57
 msgid "Livre photo de l'année"
 msgstr "Fotobuch des Jahres"
 
-#: frontend/src/components/PhotoBookCard.vue:46
+#: frontend/src/components/PhotoBookCard.vue:58
 msgid ""
 "Un PDF prêt à imprimer (A4 à l'italienne) : une couverture, les plus "
 "belles photos mois par mois (les plus aimées et les favorites d'abord, "
@@ -1109,26 +1124,26 @@ msgstr ""
 "Monat für Monat (die beliebtesten und Favoriten zuerst, ohne unscharfe "
 "Fotos oder Bildschirmfotos), dann das Jahr in Zahlen."
 
-#: frontend/src/components/PhotoBookCard.vue:49
+#: frontend/src/components/PhotoBookCard.vue:61
 #, python-brace-format
 msgid "{count} photos"
 msgstr "{count} Fotos"
 
-#: frontend/src/components/PhotoBookCard.vue:53
-#: frontend/src/components/PhotoBookCard.vue:61
+#: frontend/src/components/PhotoBookCard.vue:65
+#: frontend/src/components/PhotoBookCard.vue:73
 #: frontend/src/views/MediaView.vue:179
 msgid "Création en cours..."
 msgstr "Wird erstellt..."
 
-#: frontend/src/components/PhotoBookCard.vue:53
+#: frontend/src/components/PhotoBookCard.vue:65
 msgid "Créer le livre"
 msgstr "Buch erstellen"
 
-#: frontend/src/components/PhotoBookCard.vue:55
+#: frontend/src/components/PhotoBookCard.vue:67
 msgid "Calendrier photo à imprimer"
 msgstr "Fotokalender zum Ausdrucken"
 
-#: frontend/src/components/PhotoBookCard.vue:56
+#: frontend/src/components/PhotoBookCard.vue:68
 msgid ""
 "Un mois par page (A4 en portrait) : une belle photo prise ce mois-là une "
 "année précédente, et la grille des jours avec les anniversaires de la "
@@ -1138,28 +1153,53 @@ msgstr ""
 "früheren Jahres und das Tagesraster mit den Geburtstagen der Familie "
 "(Seite Anlässe), Mutter- und Vatertag."
 
-#: frontend/src/components/PhotoBookCard.vue:61
+#: frontend/src/components/PhotoBookCard.vue:73
 msgid "Créer le calendrier"
 msgstr "Kalender erstellen"
 
-#: frontend/src/components/PhotoBookCard.vue:64
+#: frontend/src/components/PhotoBookCard.vue:75 web/routes_photobook.py:42
+msgid "Film de l'année"
+msgstr "Film des Jahres"
+
+#: frontend/src/components/PhotoBookCard.vue:76
+msgid ""
+"Un petit film des plus belles photos de l'année choisie ci-dessus, mois "
+"par mois, avec une musique de la bibliothèque du cadre. Le montage prend "
+"une dizaine de minutes sur un Raspberry Pi."
+msgstr ""
+"Ein kleiner Film mit den schönsten Fotos des oben gewählten Jahres, Monat"
+" für Monat, mit Musik aus der Bibliothek des Rahmens. Der Schnitt dauert "
+"auf einem Raspberry Pi etwa zehn Minuten."
+
+#: frontend/src/components/PhotoBookCard.vue:79
+msgid "Sans musique"
+msgstr "Ohne Musik"
+
+#: frontend/src/components/PhotoBookCard.vue:84
+msgid "Montage en cours..."
+msgstr "Wird geschnitten..."
+
+#: frontend/src/components/PhotoBookCard.vue:84
+#, python-brace-format
+msgid "Monter le film {year}"
+msgstr "Film {year} erstellen"
+
+#: frontend/src/components/PhotoBookCard.vue:87
 #, python-brace-format
 msgid "Page {done} sur {total}"
 msgstr "Seite {done} von {total}"
 
-#: frontend/src/components/PhotoBookCard.vue:65
+#: frontend/src/components/PhotoBookCard.vue:88
 msgid "Aucune photo datée de cette année-là."
 msgstr "Kein datiertes Foto aus diesem Jahr."
 
-#: frontend/src/components/PhotoBookCard.vue:69
-#, python-brace-format
-msgid "Télécharger le calendrier {year}"
-msgstr "Kalender {year} herunterladen"
+#: frontend/src/components/PhotoBookCard.vue:93
+msgid "Regarder"
+msgstr "Ansehen"
 
-#: frontend/src/components/PhotoBookCard.vue:69
-#, python-brace-format
-msgid "Télécharger le livre {year}"
-msgstr "Buch {year} herunterladen"
+#: frontend/src/components/PhotoBookCard.vue:94
+msgid "Passer sur le cadre"
+msgstr "Auf dem Rahmen zeigen"
 
 #: frontend/src/components/PresenceCard.vue:50
 #: templates/configure/tab_affichage.html.jinja:347
@@ -11268,6 +11308,10 @@ msgstr "Familie einladen (QR code, Telegram)"
 msgid "Sécuriser la connexion (HTTPS)"
 msgstr "Verbindung absichern (HTTPS)"
 
+#: utils/import_progress.py:14
+msgid "Films de l'année"
+msgstr "Filme des Jahres"
+
 #: utils/layout_engine.py:35
 msgid "Selon les réglages"
 msgstr "Gemäß Einstellungen"
@@ -11512,7 +11556,7 @@ msgstr "verschiedene Orte"
 msgid "le mois le plus photographié"
 msgstr "der meistfotografierte Monat"
 
-#: utils/photo_book.py:290
+#: utils/photo_book.py:290 utils/year_film.py:64
 msgid "Notre année"
 msgstr "Unser Jahr"
 
@@ -12334,7 +12378,7 @@ msgstr "Unbekannte Anordnung."
 msgid "Préparation de la disposition... elle s'affiche dans quelques secondes."
 msgstr "Layout wird vorbereitet... es erscheint in wenigen Sekunden."
 
-#: web/routes_home.py:213
+#: web/routes_home.py:213 web/routes_photobook.py:73
 msgid "Musique introuvable."
 msgstr "Musik nicht gefunden."
 
@@ -13003,31 +13047,48 @@ msgstr ""
 "Noch keine Fotos dieser Person auf dem Rahmen: Folge ihr, um ihre Fotos "
 "zu importieren."
 
-#: web/routes_photobook.py:60 web/routes_photobook.py:62
+#: web/routes_photobook.py:66 web/routes_photobook.py:68
 msgid "Année invalide."
 msgstr "Ungültiges Jahr."
 
-#: web/routes_photobook.py:65
+#: web/routes_photobook.py:76
 msgid "Un livre photo est déjà en cours de création."
 msgstr "Ein Fotobuch wird bereits erstellt."
 
-#: web/routes_photobook.py:80
+#: web/routes_photobook.py:91
 #, python-format
 msgid "Création du calendrier %(year)s : quelques minutes."
 msgstr "Kalender %(year)s wird erstellt: einige Minuten."
 
-#: web/routes_photobook.py:81
+#: web/routes_photobook.py:93
+#, python-format
+msgid "Montage du film %(year)s : une dizaine de minutes sur un Raspberry Pi."
+msgstr "Film %(year)s wird erstellt: etwa zehn Minuten auf einem Raspberry Pi."
+
+#: web/routes_photobook.py:94
 #, python-format
 msgid "Création du livre photo %(year)s : quelques minutes."
 msgstr "Fotobuch %(year)s wird erstellt: einige Minuten."
 
-#: web/routes_photobook.py:94
+#: web/routes_photobook.py:107
 msgid "Calendrier"
 msgstr "Kalender"
 
-#: web/routes_photobook.py:94
+#: web/routes_photobook.py:107
 msgid "Livre photo"
 msgstr "Fotobuch"
+
+#: web/routes_photobook.py:118
+msgid "Film"
+msgstr "Film"
+
+#: web/routes_photobook.py:127
+msgid "Film introuvable."
+msgstr "Film nicht gefunden."
+
+#: web/routes_photobook.py:143
+msgid "Le film passera dans le diaporama dès qu'il sera préparé."
+msgstr "Der Film läuft in der Diashow, sobald er vorbereitet ist."
 
 #: web/routes_photos.py:274
 msgid "Tri automatique enregistré : appliqué au prochain tour du diaporama."
