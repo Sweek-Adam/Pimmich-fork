@@ -185,13 +185,35 @@ def lobby(state, W, H, url, translate):
     mode = (state or {}).get("mode", "classique")
     _center(draw, translate(game.MODES.get(mode, game.MODES["classique"])), H * 0.06, _fit_font(draw, translate(game.MODES.get(mode, "")), TITLE, int(H * 0.11), W * 0.9), GOLD)
     _center(draw, translate("Le jeu des photos de famille"), H * 0.2, _font(HAND, int(H * 0.05)), SOFT, shadow=False)
-    side = int(H * 0.45)
-    canvas.paste(_qr(url, side), (int(W * 0.12), int(H * 0.32)))
-    draw.text((W * 0.12, H * 0.32 + side + H * 0.02), translate("Scannez pour jouer"), font=_font(BOLD, int(H * 0.035)), fill=WHITE)
+    # QR code à gauche, règles au milieu, joueurs à droite
+    side = int(min(H * 0.45, W * 0.24))
+    top = int(H * 0.3)
+    canvas.paste(_qr(url, side), (int(W * 0.04), top))
+    draw.text((W * 0.04, top + side + H * 0.02), translate("Scannez pour jouer"), font=_font(BOLD, int(H * 0.035)), fill=WHITE)
+    left, width = W * 0.04 + side + W * 0.04, W * 0.68 - (W * 0.04 + side + W * 0.04)
+    panel = Image.new("RGBA", (int(width + W * 0.03), int(H * 0.56)), (255, 255, 255, 28))
+    canvas.paste(panel, (int(left - W * 0.015), int(top - H * 0.02)), panel)
+    draw.text((left, top), translate("Règles du jeu"), font=_font(BOLD, int(H * 0.042)), fill=GOLD)
+    lines = game.rules(state, translate)
+    size = 0.04
+    while True:  # le texte le plus grand qui tient dans le cadre des règles
+        font = _font(HAND, int(H * size))
+        wrapped = [_wrap(draw, line, font, width - W * 0.03) for line in lines]
+        height = sum(len(w) for w in wrapped) * H * size * 1.18 + len(wrapped) * H * 0.01
+        if height <= H * 0.45 or size <= 0.026:
+            break
+        size -= 0.002
+    y = top + H * 0.075
+    for parts in wrapped:
+        for i, part in enumerate(parts):
+            draw.text((left, y), ("•  " if i == 0 else "    ") + part, font=font, fill=WHITE)
+            y += H * size * 1.18
+        y += H * 0.01
     players = (state or {}).get("players", {})
-    draw.text((W * 0.55, H * 0.32), translate("Joueurs (%(count)s)", count=len(players)), font=_font(BOLD, int(H * 0.045)), fill=GOLD)
-    for i, name in enumerate(sorted(players.values())[:10]):
-        draw.text((W * 0.55, H * 0.4 + i * H * 0.055), f"– {name}", font=_font(BOLD, int(H * 0.04)), fill=WHITE)
+    px = W * 0.72
+    draw.text((px, top), translate("Joueurs (%(count)s)", count=len(players)), font=_font(BOLD, int(H * 0.042)), fill=GOLD)
+    for i, name in enumerate(sorted(players.values())[:9]):
+        draw.text((px, top + H * 0.075 + i * H * 0.052), f"– {name}", font=_fit_font(draw, f"– {name}", BOLD, int(H * 0.038), W * 0.26), fill=WHITE)
     hint = translate("Appuyez sur « Commencer » sur un téléphone") if players else translate("Entrez votre prénom sur le téléphone")
     _center(draw, hint, H * 0.9, _font(HAND, int(H * 0.045)), SOFT, shadow=False)
     return canvas

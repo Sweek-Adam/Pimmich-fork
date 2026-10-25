@@ -72,6 +72,47 @@ def timing_from(config):
         if setting in (config or {}):
             out[key] = config[setting]
     return out
+# Règles affichées sur le cadre, à côté du QR code (salle d'attente) ; %(question)s... : temps de la partie
+RULES = {
+    "classique": [N_("Une photo de famille s'affiche : devinez l'année, le lieu ou qui l'a envoyée."),
+                  N_("L'année exacte vaut 100 points, puis 25 de moins par année d'écart."), N_("%(question)s secondes pour répondre.")],
+    "avant_apres": [N_("Deux photos, A et B : touchez celle qui a été prise en premier."), N_("100 points par bonne réponse."),
+                    N_("%(question)s secondes pour répondre.")],
+    "zoom": [N_("La photo commence très zoomée et se dévoile peu à peu."), N_("Devinez l'année, le lieu ou l'auteur."),
+             N_("Plus vous répondez tôt, plus vous gagnez de points !")],
+    "puzzle": [N_("Les morceaux de la photo se remettent en place un à un."), N_("Devinez l'année, le lieu ou l'auteur."),
+               N_("Plus vous répondez tôt, plus vous gagnez de points !")],
+    "ligne": [N_("Quatre photos, A, B, C et D."), N_("Touchez les lettres de la plus ancienne à la plus récente."),
+              N_("25 points par photo bien placée ; %(timeline)s secondes par manche.")],
+    "qui": [N_("Une photo floue d'une personne de la famille se précise peu à peu."), N_("Choisissez qui c'est."),
+            N_("Plus vous répondez tôt, plus vous gagnez de points !")],
+    "legende": [N_("Une photo s'affiche : écrivez la légende la plus drôle (%(caption)s secondes)."),
+                N_("Les légendes apparaissent sans les prénoms : votez pour votre préférée (pas la vôtre)."), N_("100 points par vote reçu.")],
+    "defi": [N_("Un défi s'affiche : prenez la photo avec votre téléphone."), N_("Vous avez %(challenge_minutes)s minute(s) ; puis tout le monde vote."),
+             N_("100 points par vote reçu.")],
+    "memoire": [N_("Six photos s'affichent pendant %(memorize)s secondes : retenez-les bien !"),
+                N_("Puis quatre photos : laquelle n'y était pas ?"), N_("100 points par bonne réponse.")],
+    "proche": [N_("Une question sur vos photos : « combien... ? »"), N_("Tapez votre estimation."),
+               N_("Le plus proche gagne 100 points, puis 60, 30 et 10.")],
+    "melange": [N_("Un peu de chaque jeu : années, avant / après, ligne du temps, mémoire, nombres..."),
+                N_("Les règles de chaque question s'affichent sur votre téléphone."), N_("Le meilleur score total gagne !")],
+}
+COMMON_RULES = [N_("Scannez le QR code et entrez votre prénom."), N_("Répondez sur votre téléphone, la réponse s'affiche ici.")]
+
+
+def rules(state, translate=lambda s, **k: s % k if k else s):
+    """Règles du jeu (lignes traduites, avec les temps de la partie)."""
+    timing = dict(TIMING, **((state or {}).get("timing") or {}))
+    params = dict(timing, challenge_minutes=max(1, round(timing["challenge"] / 60)))
+    lines = []
+    for text in COMMON_RULES + RULES.get((state or {}).get("mode", "classique"), RULES["classique"]):
+        try:
+            lines.append(translate(text, **{k: v for k, v in params.items() if f"%({k})s" in text}))
+        except (KeyError, TypeError, ValueError):
+            lines.append(translate(text))
+    return lines
+
+
 CHALLENGES = [N_("Une photo avec quelqu'un qui porte du rouge"), N_("La plus belle grimace"), N_("Un selfie à trois ou plus"),
               N_("Quelque chose de rond"), N_("Une photo de vos chaussures"), N_("La pose de super-héros"),
               N_("Un animal (même en peluche)"), N_("Quelque chose qui commence par la lettre P"), N_("Votre plus beau sourire"),

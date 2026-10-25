@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 16:56+0100\n"
+"POT-Creation-Date: 2026-10-25 17:02+0100\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -61,73 +61,73 @@ msgid "Il y a %(num)d ans"
 msgstr "Vor %(num)d Jahren"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "Januar"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "Februar"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "März"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "April"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "Mai"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "Juni"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "Juli"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "August"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "September"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "Oktober"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "November"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "Dezember"
@@ -10106,205 +10106,342 @@ msgstr "Von allem etwas"
 msgid "Bingo souvenirs"
 msgstr "Erinnerungs-Bingo"
 
-#: utils/family_game.py:75
+#: utils/family_game.py:77
+msgid ""
+"Une photo de famille s'affiche : devinez l'année, le lieu ou qui l'a "
+"envoyée."
+msgstr ""
+"Ein Familienfoto erscheint: Rate das Jahr, den Ort oder wer es geschickt "
+"hat."
+
+#: utils/family_game.py:78
+msgid "L'année exacte vaut 100 points, puis 25 de moins par année d'écart."
+msgstr "Das genaue Jahr gibt 100 Punkte, dann 25 weniger pro Jahr Abweichung."
+
+#: utils/family_game.py:78 utils/family_game.py:80
+#, python-format
+msgid "%(question)s secondes pour répondre."
+msgstr "%(question)s Sekunden zum Antworten."
+
+#: utils/family_game.py:79
+msgid "Deux photos, A et B : touchez celle qui a été prise en premier."
+msgstr "Zwei Fotos, A und B: Tippe auf das zuerst aufgenommene."
+
+#: utils/family_game.py:79 utils/family_game.py:94
+msgid "100 points par bonne réponse."
+msgstr "100 Punkte pro richtiger Antwort."
+
+#: utils/family_game.py:81
+msgid "La photo commence très zoomée et se dévoile peu à peu."
+msgstr "Das Foto beginnt stark vergrößert und zeigt sich nach und nach."
+
+#: utils/family_game.py:81 utils/family_game.py:83
+msgid "Devinez l'année, le lieu ou l'auteur."
+msgstr "Rate das Jahr, den Ort oder den Absender."
+
+#: utils/family_game.py:82 utils/family_game.py:84 utils/family_game.py:88
+msgid "Plus vous répondez tôt, plus vous gagnez de points !"
+msgstr "Je früher du antwortest, desto mehr Punkte!"
+
+#: utils/family_game.py:83
+msgid "Les morceaux de la photo se remettent en place un à un."
+msgstr "Die Teile des Fotos fügen sich eins nach dem anderen zusammen."
+
+#: utils/family_game.py:85
+msgid "Quatre photos, A, B, C et D."
+msgstr "Vier Fotos, A, B, C und D."
+
+#: utils/family_game.py:85
+msgid "Touchez les lettres de la plus ancienne à la plus récente."
+msgstr "Tippe die Buchstaben vom ältesten zum neuesten."
+
+#: utils/family_game.py:86
+#, python-format
+msgid "25 points par photo bien placée ; %(timeline)s secondes par manche."
+msgstr "25 Punkte pro richtig platziertem Foto; %(timeline)s Sekunden pro Runde."
+
+#: utils/family_game.py:87
+msgid "Une photo floue d'une personne de la famille se précise peu à peu."
+msgstr "Ein unscharfes Foto eines Familienmitglieds wird langsam scharf."
+
+#: utils/family_game.py:87
+msgid "Choisissez qui c'est."
+msgstr "Wähle, wer es ist."
+
+#: utils/family_game.py:89
+#, python-format
+msgid ""
+"Une photo s'affiche : écrivez la légende la plus drôle (%(caption)s "
+"secondes)."
+msgstr ""
+"Ein Foto erscheint: Schreib die lustigste Bildunterschrift (%(caption)s "
+"Sekunden)."
+
+#: utils/family_game.py:90
+msgid ""
+"Les légendes apparaissent sans les prénoms : votez pour votre préférée "
+"(pas la vôtre)."
+msgstr ""
+"Die Bildunterschriften erscheinen ohne Namen: Stimme für deinen Favoriten"
+" (nicht deinen)."
+
+#: utils/family_game.py:90 utils/family_game.py:92
+msgid "100 points par vote reçu."
+msgstr "100 Punkte pro erhaltener Stimme."
+
+#: utils/family_game.py:91
+msgid "Un défi s'affiche : prenez la photo avec votre téléphone."
+msgstr "Eine Challenge erscheint: Mach das Foto mit deinem Handy."
+
+#: utils/family_game.py:91
+#, python-format
+msgid "Vous avez %(challenge_minutes)s minute(s) ; puis tout le monde vote."
+msgstr "Du hast %(challenge_minutes)s Minute(n); dann stimmen alle ab."
+
+#: utils/family_game.py:93
+#, python-format
+msgid "Six photos s'affichent pendant %(memorize)s secondes : retenez-les bien !"
+msgstr "Sechs Fotos erscheinen %(memorize)s Sekunden lang: Merk sie dir gut!"
+
+#: utils/family_game.py:94
+msgid "Puis quatre photos : laquelle n'y était pas ?"
+msgstr "Dann vier Fotos: Welches war nicht dabei?"
+
+#: utils/family_game.py:95
+msgid "Une question sur vos photos : « combien... ? »"
+msgstr "Eine Frage zu euren Fotos: „Wie viele...?“"
+
+#: utils/family_game.py:95
+msgid "Tapez votre estimation."
+msgstr "Gib deine Schätzung ein."
+
+#: utils/family_game.py:96
+msgid "Le plus proche gagne 100 points, puis 60, 30 et 10."
+msgstr "Wer am nächsten liegt, bekommt 100 Punkte, dann 60, 30 und 10."
+
+#: utils/family_game.py:97
+msgid ""
+"Un peu de chaque jeu : années, avant / après, ligne du temps, mémoire, "
+"nombres..."
+msgstr ""
+"Von jedem Spiel etwas: Jahre, vorher/nachher, Zeitleiste, Gedächtnis, "
+"Zahlen..."
+
+#: utils/family_game.py:98
+msgid "Les règles de chaque question s'affichent sur votre téléphone."
+msgstr "Die Regeln jeder Frage erscheinen auf deinem Handy."
+
+#: utils/family_game.py:98
+msgid "Le meilleur score total gagne !"
+msgstr "Die höchste Gesamtpunktzahl gewinnt!"
+
+#: utils/family_game.py:100
+msgid "Scannez le QR code et entrez votre prénom."
+msgstr "Scanne den QR-Code und gib deinen Vornamen ein."
+
+#: utils/family_game.py:100
+msgid "Répondez sur votre téléphone, la réponse s'affiche ici."
+msgstr "Antworte auf deinem Handy, die Lösung erscheint hier."
+
+#: utils/family_game.py:116
 msgid "Une photo avec quelqu'un qui porte du rouge"
 msgstr "Ein Foto mit jemandem, der Rot trägt"
 
-#: utils/family_game.py:75
+#: utils/family_game.py:116
 msgid "La plus belle grimace"
 msgstr "Die beste Grimasse"
 
-#: utils/family_game.py:75
+#: utils/family_game.py:116
 msgid "Un selfie à trois ou plus"
 msgstr "Ein Selfie zu dritt oder mehr"
 
-#: utils/family_game.py:76
+#: utils/family_game.py:117
 msgid "Quelque chose de rond"
 msgstr "Etwas Rundes"
 
-#: utils/family_game.py:76
+#: utils/family_game.py:117
 msgid "Une photo de vos chaussures"
 msgstr "Ein Foto deiner Schuhe"
 
-#: utils/family_game.py:76
+#: utils/family_game.py:117
 msgid "La pose de super-héros"
 msgstr "Die Superhelden-Pose"
 
-#: utils/family_game.py:77
+#: utils/family_game.py:118
 msgid "Un animal (même en peluche)"
 msgstr "Ein Tier (auch ein Kuscheltier)"
 
-#: utils/family_game.py:77
+#: utils/family_game.py:118
 msgid "Quelque chose qui commence par la lettre P"
 msgstr "Etwas, das mit P beginnt"
 
-#: utils/family_game.py:77
+#: utils/family_game.py:118
 msgid "Votre plus beau sourire"
 msgstr "Dein schönstes Lächeln"
 
-#: utils/family_game.py:78
+#: utils/family_game.py:119
 msgid "Une photo prise de très haut ou de très bas"
 msgstr "Ein Foto von ganz oben oder ganz unten"
 
-#: utils/family_game.py:78
+#: utils/family_game.py:119
 msgid "Le plat ou la boisson du moment"
 msgstr "Das Gericht oder Getränk des Moments"
 
-#: utils/family_game.py:78
+#: utils/family_game.py:119
 msgid "Une imitation d'une photo de famille"
 msgstr "Ein nachgestelltes Familienfoto"
 
-#: utils/family_game.py:79
+#: utils/family_game.py:120
 msgid "Quelque chose de bleu"
 msgstr "Etwas Blaues"
 
-#: utils/family_game.py:79 utils/family_game.py:85
+#: utils/family_game.py:120 utils/family_game.py:126
 msgid "Un câlin"
 msgstr "Eine Umarmung"
 
-#: utils/family_game.py:79
+#: utils/family_game.py:120
 msgid "Le plus beau reflet (miroir, vitre, eau)"
 msgstr "Die schönste Spiegelung (Spiegel, Fenster, Wasser)"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "À la plage"
 msgstr "Am Strand"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Un gâteau"
 msgstr "Ein Kuchen"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Des lunettes de soleil"
 msgstr "Sonnenbrille"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Un chien"
 msgstr "Ein Hund"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Un chat"
 msgstr "Eine Katze"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "La neige"
 msgstr "Schnee"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Un bébé"
 msgstr "Ein Baby"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Une fête d'anniversaire"
 msgstr "Eine Geburtstagsfeier"
 
-#: utils/family_game.py:81 utils/themed_compositions.py:565
+#: utils/family_game.py:122 utils/themed_compositions.py:565
 msgid "La montagne"
 msgstr "Die Berge"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Un selfie"
 msgstr "Ein Selfie"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Un repas en famille"
 msgstr "Ein Familienessen"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Une voiture"
 msgstr "Ein Auto"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Un chapeau"
 msgstr "Ein Hut"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Des fleurs"
 msgstr "Blumen"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Un coucher de soleil"
 msgstr "Ein Sonnenuntergang"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Un vélo"
 msgstr "Ein Fahrrad"
 
-#: utils/family_game.py:82 utils/themed_compositions.py:596
+#: utils/family_game.py:123 utils/themed_compositions.py:596
 msgid "La mer"
 msgstr "Das Meer"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Une grimace"
 msgstr "Eine Grimasse"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Un sapin de Noël"
 msgstr "Ein Weihnachtsbaum"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Une piscine"
 msgstr "Ein Schwimmbad"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Un pique-nique"
 msgstr "Ein Picknick"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Un déguisement"
 msgstr "Ein Kostüm"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Quelqu'un qui dort"
 msgstr "Jemand, der schläft"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Un bateau"
 msgstr "Ein Boot"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Un monument"
 msgstr "Ein Denkmal"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Une photo floue"
 msgstr "Ein unscharfes Foto"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Un pouce levé"
 msgstr "Ein Daumen hoch"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Une glace"
 msgstr "Ein Eis"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Des bougies"
 msgstr "Kerzen"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Un jardin"
 msgstr "Ein Garten"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Une photo en noir et blanc"
 msgstr "Ein Schwarzweißfoto"
 
-#: utils/family_game.py:239
+#: utils/family_game.py:280
 #, python-format
 msgid "Combien de photos de %(year)s sont sur le cadre ?"
 msgstr "Wie viele Fotos von %(year)s sind auf dem Rahmen?"
 
-#: utils/family_game.py:241
+#: utils/family_game.py:282
 #, python-format
 msgid "Combien de photos ont été envoyées par %(name)s ?"
 msgstr "Wie viele Fotos hat %(name)s geschickt?"
 
-#: utils/family_game.py:243
+#: utils/family_game.py:284
 msgid "Combien de photos y a-t-il sur le cadre ?"
 msgstr "Wie viele Fotos sind auf dem Rahmen?"
 
-#: utils/family_game.py:250
+#: utils/family_game.py:291
 #, python-format
 msgid "Combien de photos ont été prises en %(month)s (toutes années confondues) ?"
 msgstr "Wie viele Fotos wurden im %(month)s aufgenommen (alle Jahre)?"

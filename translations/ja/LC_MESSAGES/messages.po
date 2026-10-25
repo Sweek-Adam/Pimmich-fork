@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 16:56+0100\n"
+"POT-Creation-Date: 2026-10-25 17:02+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -61,73 +61,73 @@ msgid "Il y a %(num)d ans"
 msgstr "%(num)d 年前"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "1月"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "2月"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "3月"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "4月"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "5月"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "6月"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "7月"
 
 #: local_slideshow.py:1837 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:623 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:664 utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "8月"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "9月"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "10月"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "11月"
 
 #: local_slideshow.py:1838 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:624 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:665 utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "12月"
@@ -9688,205 +9688,334 @@ msgstr "ミックス"
 msgid "Bingo souvenirs"
 msgstr "思い出ビンゴ"
 
-#: utils/family_game.py:75
+#: utils/family_game.py:77
+msgid ""
+"Une photo de famille s'affiche : devinez l'année, le lieu ou qui l'a "
+"envoyée."
+msgstr "家族写真が表示されます：年・場所・送った人を当てよう。"
+
+#: utils/family_game.py:78
+msgid "L'année exacte vaut 100 points, puis 25 de moins par année d'écart."
+msgstr "ぴったりの年は100点、1年ずれるごとに25点減。"
+
+#: utils/family_game.py:78 utils/family_game.py:80
+#, python-format
+msgid "%(question)s secondes pour répondre."
+msgstr "回答時間は%(question)s秒。"
+
+#: utils/family_game.py:79
+msgid "Deux photos, A et B : touchez celle qui a été prise en premier."
+msgstr "AとBの2枚：先に撮られた方をタップ。"
+
+#: utils/family_game.py:79 utils/family_game.py:94
+msgid "100 points par bonne réponse."
+msgstr "正解1問につき100点。"
+
+#: utils/family_game.py:81
+msgid "La photo commence très zoomée et se dévoile peu à peu."
+msgstr "写真は大きくズームした状態から少しずつ見えてきます。"
+
+#: utils/family_game.py:81 utils/family_game.py:83
+msgid "Devinez l'année, le lieu ou l'auteur."
+msgstr "年・場所・送った人を当てよう。"
+
+#: utils/family_game.py:82 utils/family_game.py:84 utils/family_game.py:88
+msgid "Plus vous répondez tôt, plus vous gagnez de points !"
+msgstr "早く答えるほど高得点！"
+
+#: utils/family_game.py:83
+msgid "Les morceaux de la photo se remettent en place un à un."
+msgstr "写真のピースが1つずつ元の位置に戻ります。"
+
+#: utils/family_game.py:85
+msgid "Quatre photos, A, B, C et D."
+msgstr "A・B・C・Dの4枚の写真。"
+
+#: utils/family_game.py:85
+msgid "Touchez les lettres de la plus ancienne à la plus récente."
+msgstr "古い順に文字をタップ。"
+
+#: utils/family_game.py:86
+#, python-format
+msgid "25 points par photo bien placée ; %(timeline)s secondes par manche."
+msgstr "正しい位置1枚につき25点、1回%(timeline)s秒。"
+
+#: utils/family_game.py:87
+msgid "Une photo floue d'une personne de la famille se précise peu à peu."
+msgstr "家族のぼやけた写真が少しずつはっきりします。"
+
+#: utils/family_game.py:87
+msgid "Choisissez qui c'est."
+msgstr "誰か選んでね。"
+
+#: utils/family_game.py:89
+#, python-format
+msgid ""
+"Une photo s'affiche : écrivez la légende la plus drôle (%(caption)s "
+"secondes)."
+msgstr "写真が表示されます：一番面白いキャプションを書こう（%(caption)s秒）。"
+
+#: utils/family_game.py:90
+msgid ""
+"Les légendes apparaissent sans les prénoms : votez pour votre préférée "
+"(pas la vôtre)."
+msgstr "キャプションは名前なしで表示：お気に入りに投票（自分以外）。"
+
+#: utils/family_game.py:90 utils/family_game.py:92
+msgid "100 points par vote reçu."
+msgstr "得票1つにつき100点。"
+
+#: utils/family_game.py:91
+msgid "Un défi s'affiche : prenez la photo avec votre téléphone."
+msgstr "お題が表示されます：スマートフォンで写真を撮ろう。"
+
+#: utils/family_game.py:91
+#, python-format
+msgid "Vous avez %(challenge_minutes)s minute(s) ; puis tout le monde vote."
+msgstr "制限時間は%(challenge_minutes)s分、その後全員で投票。"
+
+#: utils/family_game.py:93
+#, python-format
+msgid "Six photos s'affichent pendant %(memorize)s secondes : retenez-les bien !"
+msgstr "6枚の写真が%(memorize)s秒表示：よく覚えてね！"
+
+#: utils/family_game.py:94
+msgid "Puis quatre photos : laquelle n'y était pas ?"
+msgstr "次に4枚：なかったのはどれ？"
+
+#: utils/family_game.py:95
+msgid "Une question sur vos photos : « combien... ? »"
+msgstr "写真についての質問：「何枚…？」"
+
+#: utils/family_game.py:95
+msgid "Tapez votre estimation."
+msgstr "予想を入力してね。"
+
+#: utils/family_game.py:96
+msgid "Le plus proche gagne 100 points, puis 60, 30 et 10."
+msgstr "一番近い人は100点、次は60・30・10点。"
+
+#: utils/family_game.py:97
+msgid ""
+"Un peu de chaque jeu : années, avant / après, ligne du temps, mémoire, "
+"nombres..."
+msgstr "いろいろなゲーム：年、どっちが先、タイムライン、記憶、数…"
+
+#: utils/family_game.py:98
+msgid "Les règles de chaque question s'affichent sur votre téléphone."
+msgstr "各問題のルールはスマートフォンに表示されます。"
+
+#: utils/family_game.py:98
+msgid "Le meilleur score total gagne !"
+msgstr "合計得点が一番高い人の勝ち！"
+
+#: utils/family_game.py:100
+msgid "Scannez le QR code et entrez votre prénom."
+msgstr "QRコードを読み取って名前を入力。"
+
+#: utils/family_game.py:100
+msgid "Répondez sur votre téléphone, la réponse s'affiche ici."
+msgstr "スマートフォンで答えると、ここに答えが表示されます。"
+
+#: utils/family_game.py:116
 msgid "Une photo avec quelqu'un qui porte du rouge"
 msgstr "赤い服の人と写真"
 
-#: utils/family_game.py:75
+#: utils/family_game.py:116
 msgid "La plus belle grimace"
 msgstr "最高の変顔"
 
-#: utils/family_game.py:75
+#: utils/family_game.py:116
 msgid "Un selfie à trois ou plus"
 msgstr "3人以上で自撮り"
 
-#: utils/family_game.py:76
+#: utils/family_game.py:117
 msgid "Quelque chose de rond"
 msgstr "丸いもの"
 
-#: utils/family_game.py:76
+#: utils/family_game.py:117
 msgid "Une photo de vos chaussures"
 msgstr "あなたの靴"
 
-#: utils/family_game.py:76
+#: utils/family_game.py:117
 msgid "La pose de super-héros"
 msgstr "ヒーローポーズ"
 
-#: utils/family_game.py:77
+#: utils/family_game.py:118
 msgid "Un animal (même en peluche)"
 msgstr "動物（ぬいぐるみでもOK）"
 
-#: utils/family_game.py:77
+#: utils/family_game.py:118
 msgid "Quelque chose qui commence par la lettre P"
 msgstr "「P」で始まるもの"
 
-#: utils/family_game.py:77
+#: utils/family_game.py:118
 msgid "Votre plus beau sourire"
 msgstr "最高の笑顔"
 
-#: utils/family_game.py:78
+#: utils/family_game.py:119
 msgid "Une photo prise de très haut ou de très bas"
 msgstr "とても高い所か低い所から撮った写真"
 
-#: utils/family_game.py:78
+#: utils/family_game.py:119
 msgid "Le plat ou la boisson du moment"
 msgstr "今の料理か飲み物"
 
-#: utils/family_game.py:78
+#: utils/family_game.py:119
 msgid "Une imitation d'une photo de famille"
 msgstr "家族写真の再現"
 
-#: utils/family_game.py:79
+#: utils/family_game.py:120
 msgid "Quelque chose de bleu"
 msgstr "青いもの"
 
-#: utils/family_game.py:79 utils/family_game.py:85
+#: utils/family_game.py:120 utils/family_game.py:126
 msgid "Un câlin"
 msgstr "ハグ"
 
-#: utils/family_game.py:79
+#: utils/family_game.py:120
 msgid "Le plus beau reflet (miroir, vitre, eau)"
 msgstr "一番きれいな映り込み（鏡・窓・水）"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "À la plage"
 msgstr "海辺"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Un gâteau"
 msgstr "ケーキ"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Des lunettes de soleil"
 msgstr "サングラス"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Un chien"
 msgstr "犬"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "Un chat"
 msgstr "猫"
 
-#: utils/family_game.py:80
+#: utils/family_game.py:121
 msgid "La neige"
 msgstr "雪"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Un bébé"
 msgstr "赤ちゃん"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Une fête d'anniversaire"
 msgstr "誕生日パーティー"
 
-#: utils/family_game.py:81 utils/themed_compositions.py:565
+#: utils/family_game.py:122 utils/themed_compositions.py:565
 msgid "La montagne"
 msgstr "山"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Un selfie"
 msgstr "自撮り"
 
-#: utils/family_game.py:81
+#: utils/family_game.py:122
 msgid "Un repas en famille"
 msgstr "家族の食事"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Une voiture"
 msgstr "車"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Un chapeau"
 msgstr "帽子"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Des fleurs"
 msgstr "花"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Un coucher de soleil"
 msgstr "夕焼け"
 
-#: utils/family_game.py:82
+#: utils/family_game.py:123
 msgid "Un vélo"
 msgstr "自転車"
 
-#: utils/family_game.py:82 utils/themed_compositions.py:596
+#: utils/family_game.py:123 utils/themed_compositions.py:596
 msgid "La mer"
 msgstr "海"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Une grimace"
 msgstr "変顔"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Un sapin de Noël"
 msgstr "クリスマスツリー"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Une piscine"
 msgstr "プール"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Un pique-nique"
 msgstr "ピクニック"
 
-#: utils/family_game.py:83
+#: utils/family_game.py:124
 msgid "Un déguisement"
 msgstr "仮装"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Quelqu'un qui dort"
 msgstr "寝ている人"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Un bateau"
 msgstr "船"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Un monument"
 msgstr "名所"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Une photo floue"
 msgstr "ぼやけた写真"
 
-#: utils/family_game.py:84
+#: utils/family_game.py:125
 msgid "Un pouce levé"
 msgstr "いいね（親指）"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Une glace"
 msgstr "アイス"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Des bougies"
 msgstr "ろうそく"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Un jardin"
 msgstr "庭"
 
-#: utils/family_game.py:85
+#: utils/family_game.py:126
 msgid "Une photo en noir et blanc"
 msgstr "白黒写真"
 
-#: utils/family_game.py:239
+#: utils/family_game.py:280
 #, python-format
 msgid "Combien de photos de %(year)s sont sur le cadre ?"
 msgstr "%(year)s年の写真はフレームに何枚？"
 
-#: utils/family_game.py:241
+#: utils/family_game.py:282
 #, python-format
 msgid "Combien de photos ont été envoyées par %(name)s ?"
 msgstr "%(name)sさんが送った写真は何枚？"
 
-#: utils/family_game.py:243
+#: utils/family_game.py:284
 msgid "Combien de photos y a-t-il sur le cadre ?"
 msgstr "フレームの写真は全部で何枚？"
 
-#: utils/family_game.py:250
+#: utils/family_game.py:291
 #, python-format
 msgid "Combien de photos ont été prises en %(month)s (toutes années confondues) ?"
 msgstr "%(month)sに撮られた写真は何枚（全年）？"

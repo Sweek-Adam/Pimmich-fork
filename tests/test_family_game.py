@@ -302,3 +302,10 @@ def test_auto_reveal_can_be_disabled(library):
     q = game.current()["questions"][0]
     assert game.answer(lea, q["answer"] if q["kind"] == "year" else q["options"][0], t0 + 2)
     assert game.phase(game.current(), t0 + 3)[0] == "question"
+
+
+def test_rules_use_the_game_timing():
+    lines = game.rules({"mode": "legende", "timing": {"caption": 45}})
+    assert any("45 secondes" in line for line in lines) and "QR code" in lines[0]
+    assert any("2 minute(s)" in line for line in game.rules({"mode": "defi", "timing": {"challenge": 120}}))
+    assert all(game.rules({"mode": mode}) for mode in game.RULES)
