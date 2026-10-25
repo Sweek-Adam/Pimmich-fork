@@ -307,6 +307,7 @@ def run(items, still_night=lambda: True):
     for source, name in items:
         if not still_night():
             break
-        with prep.PREPARE_LOCK:
+        from utils import busy
+        with prep.PREPARE_LOCK, busy.working(f"animation de {source}/{name}"):
             made += bool(animate(source, name))
     return made

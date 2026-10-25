@@ -18,6 +18,8 @@ from pathlib import Path
 
 from PIL import Image
 
+from utils import busy
+
 PHOTO_MAX_SIDE = 4096
 PHOTO_MIN_BYTES = 4 * 1024 * 1024
 VIDEO_MAX_HEIGHT = 1080
@@ -202,7 +204,7 @@ def request(items, now_ok_for_videos):
         path = Path("static") / "photos" / source / name
         if name.lower().endswith(PHOTO_EXT):
             try:
-                with prep.PREPARE_LOCK:
+                with prep.PREPARE_LOCK, busy.working(f"réduction de {source}/{name}"):
                     before, after = reduce_photo(path)
                 _remember(source, name, before, after)
                 result["photos"] += 1
@@ -233,7 +235,7 @@ def run_videos(items, still_night=lambda: True):
             _remember(source, name, 0, 0)
             continue
         try:
-            with prep.PREPARE_LOCK:
+            with prep.PREPARE_LOCK, busy.working(f"réduction de {source}/{name}"):
                 before, after = reduce_video(path)
             _remember(source, name, before, after)
             saved += before - after

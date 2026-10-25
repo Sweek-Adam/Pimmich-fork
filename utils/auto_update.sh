@@ -34,7 +34,24 @@ if pgrep -f "[p]immich_update_safe" > /dev/null; then
 fi
 
 # --- Pimmich ---
-if ! git fetch --quiet origin main 2>> "$LOG"; then
+# Jamais pendant un travail lourd (encodage de la nuit, préparation), une fête ou une partie de jeu : la mise à jour
+# redémarre Pimmich. On attend jusqu'à 2 heures, sinon ce sera pour la nuit suivante.
+PYTHON=venv/bin/python
+[ -x "$PYTHON" ] || PYTHON=python3
+WAITED=0
+while BUSY=$("$PYTHON" -m utils.busy 2> /dev/null); [ -n "$BUSY" ]; do
+    if [ "$WAITED" -ge 7200 ]; then
+        log "Cadre occupé ($BUSY) : mise à jour de Pimmich reportée à demain."
+        SKIP_PIMMICH=1
+        break
+    fi
+    [ "$WAITED" = 0 ] && log "Cadre occupé ($BUSY) : la mise à jour attend (2 heures au plus)."
+    sleep 300
+    WAITED=$((WAITED + 300))
+done
+if [ "${SKIP_PIMMICH:-0}" = 1 ]; then
+    :
+elif ! git fetch --quiet origin main 2>> "$LOG"; then
     log "GitHub injoignable : mise à jour de Pimmich reportée."
 else
     BEHIND=$(git rev-list --count HEAD..origin/main 2> /dev/null || echo 0)
@@ -42,6 +59,8 @@ else
         log "Pimmich : $BEHIND nouveauté(s) ($(git rev-parse --short HEAD) -> $(git rev-parse --short origin/main)), mise à jour..."
         if ./update_script.sh >> "$LOG" 2>&1; then
             # start_pimmich.sh relance l'application sur la nouvelle version (et revient à l'ancienne si elle plante)
+            BUSY=$("$PYTHON" -m utils.busy 2> /dev/null)  # un travail a pu commencer pendant la mise à jour
+            for _i in $(seq 1 24); do [ -z "$BUSY" ] && break; sleep 300; BUSY=$("$PYTHON" -m utils.busy 2> /dev/null); done
             pkill -f "python3 -u app.py"
             log "Pimmich mis à jour ($(git rev-parse --short HEAD)) et relancé."
         else

@@ -570,7 +570,8 @@ def prepare_media(source_type, filename, width, height, description_map=None, us
         size = os.path.getsize(src_path)
     except OSError:
         size = None
-    with PREPARE_LOCK:
+    from utils import busy
+    with PREPARE_LOCK, busy.working(f"préparation de {source_type}/{filename}"):
         import_progress.work_started(source_type, filename, "video" if video else "photo", size, index, total,
                                      step="encodage" if video else "photo")
         try:
