@@ -24,8 +24,13 @@ def _captions():
         return {}
 
 
-def search(favorites=(), text="", start=None, end=None, source="", person="", only_favorites=False, media="", limit=300):
-    """Photos qui correspondent : (résultats, total), les plus récentes d'abord."""
+def search(favorites=(), text="", start=None, end=None, source="", person="", only_favorites=False, media="", limit=300, smart=None):
+    """
+    Photos qui correspondent : (résultats, total), les plus récentes d'abord.
+    `smart` : noms trouvés par la recherche par contenu d'Immich (utils/immich_search.py) ; les résultats suivent
+    alors l'ordre de pertinence d'Immich et le texte n'est plus cherché dans les légendes.
+    """
+    from utils import immich_search
     captions = _captions()
     words = [w for w in _fold(text).split() if w]
     found = []
@@ -43,10 +48,19 @@ def search(favorites=(), text="", start=None, end=None, source="", person="", on
             continue
         if start and day < start or end and day > end:
             continue
+        if smart is not None:
+            position = immich_search.rank(item["path"], smart)
+            if position is None:
+                continue
+            found.append(dict(item, caption=captions.get(item["path"], ""), _rank=position))
+            continue
         if words:
             haystack = _fold(" ".join([item["path"], item.get("place") or "", captions.get(item["path"], ""), " ".join(item["people"])]))
             if not all(w in haystack for w in words):
                 continue
         found.append(dict(item, caption=captions.get(item["path"], "")))
-    found.sort(key=lambda i: i["date"] or "", reverse=True)
+    if smart is not None:
+        found.sort(key=lambda i: i["_rank"])
+    else:
+        found.sort(key=lambda i: i["date"] or "", reverse=True)
     return found[:limit], len(found)

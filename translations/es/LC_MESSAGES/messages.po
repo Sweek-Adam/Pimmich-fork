@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 06:35+0100\n"
+"POT-Creation-Date: 2026-10-25 08:23+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -229,7 +229,7 @@ msgstr "{n} fotos"
 msgid "Accueil"
 msgstr "Inicio"
 
-#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:115
+#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:120
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:53
 msgid "Photos"
@@ -267,7 +267,7 @@ msgstr "A continuación"
 msgid "Playlists"
 msgstr "Listas de reproducción"
 
-#: frontend/src/nav.ts:31 frontend/src/views/LibraryView.vue:120
+#: frontend/src/nav.ts:31 frontend/src/views/LibraryView.vue:125
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -500,7 +500,7 @@ msgstr ""
 "falta resistencia."
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:154
+#: frontend/src/views/LibraryView.vue:159
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr "Estilo de esta leyenda"
@@ -588,7 +588,7 @@ msgstr "Halo luminoso"
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:160
+#: frontend/src/views/LibraryView.vue:165
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:263
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -1243,7 +1243,7 @@ msgid "Non défini"
 msgstr "Indefinido"
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:121 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:126 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "Borrar"
 
@@ -1297,7 +1297,7 @@ msgid "du"
 msgstr "del"
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:119
+#: frontend/src/views/LibraryView.vue:124
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -1349,7 +1349,7 @@ msgstr "Solo favoritos"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
 #: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:160
-#: frontend/src/views/LibraryView.vue:114
+#: frontend/src/views/LibraryView.vue:119
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:605
@@ -2965,7 +2965,7 @@ msgstr ""
 msgid "Afficher la diapositive « Cette semaine »"
 msgstr "Mostrar la diapositiva «Esta semana»"
 
-#: frontend/src/views/DisplayView.vue:86 frontend/src/views/LibraryView.vue:116
+#: frontend/src/views/DisplayView.vue:86 frontend/src/views/LibraryView.vue:121
 msgid "Vidéos"
 msgstr "Vídeos"
 
@@ -4111,77 +4111,93 @@ msgstr "Tema de temporada"
 msgid "Affiche les messages"
 msgstr "Muestra los mensajes"
 
-#: frontend/src/views/LibraryView.vue:57
+#: frontend/src/views/LibraryView.vue:17
+msgid ""
+"Recherche par contenu grâce à l'analyse des images d'Immich (photos "
+"importées d'Immich)"
+msgstr ""
+"Búsqueda por contenido gracias al análisis de imágenes de Immich (fotos "
+"importadas de Immich)"
+
+#: frontend/src/views/LibraryView.vue:60
 msgid "Ajoutée aux favoris."
 msgstr "Añadida a favoritos."
 
-#: frontend/src/views/LibraryView.vue:57
+#: frontend/src/views/LibraryView.vue:60
 msgid "Retirée des favoris."
 msgstr "Quitada de favoritos."
 
-#: frontend/src/views/LibraryView.vue:71
+#: frontend/src/views/LibraryView.vue:74
 msgid "Légende enregistrée."
 msgstr "Leyenda guardada."
 
-#: frontend/src/views/LibraryView.vue:104
+#: frontend/src/views/LibraryView.vue:107
+msgid "Décrivez la photo : plage, chien, neige…"
+msgstr "Describa la foto: playa, perro, nieve…"
+
+#: frontend/src/views/LibraryView.vue:107
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "Buscar (lugar, leyenda, nombre de archivo…)"
 
-#: frontend/src/views/LibraryView.vue:106
+#: frontend/src/views/LibraryView.vue:109
+msgid "Par contenu (Immich)"
+msgstr "Por contenido (Immich)"
+
+#: frontend/src/views/LibraryView.vue:111
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "Todas las fuentes"
 
-#: frontend/src/views/LibraryView.vue:110
+#: frontend/src/views/LibraryView.vue:115
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "Todos"
 
-#: frontend/src/views/LibraryView.vue:118
+#: frontend/src/views/LibraryView.vue:123
 msgid "Du"
 msgstr "Del"
 
-#: frontend/src/views/LibraryView.vue:124
+#: frontend/src/views/LibraryView.vue:129
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} resultados ({shown} mostrados)"
 
-#: frontend/src/views/LibraryView.vue:124
+#: frontend/src/views/LibraryView.vue:129
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} resultados"
 
-#: frontend/src/views/LibraryView.vue:130
+#: frontend/src/views/LibraryView.vue:135
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "Aún no hay fotos favoritas: toca la estrella de una foto para añadirla."
 
-#: frontend/src/views/LibraryView.vue:130
+#: frontend/src/views/LibraryView.vue:135
 msgid "Aucune photo ne correspond."
 msgstr "Ninguna foto coincide."
 
-#: frontend/src/views/LibraryView.vue:135
-#: frontend/src/views/LibraryView.vue:159
+#: frontend/src/views/LibraryView.vue:140
+#: frontend/src/views/LibraryView.vue:164
 msgid "Favori"
 msgstr "Favorito"
 
-#: frontend/src/views/LibraryView.vue:142
+#: frontend/src/views/LibraryView.vue:147
 msgid "Précédente"
 msgstr "Anterior"
 
-#: frontend/src/views/LibraryView.vue:152
+#: frontend/src/views/LibraryView.vue:157
 msgid "Ajouter une légende…"
 msgstr "Añadir una leyenda…"
 
-#: frontend/src/views/LibraryView.vue:159
+#: frontend/src/views/LibraryView.vue:164
 msgid "Ajouter aux favoris"
 msgstr "Añadir a favoritos"
 
-#: frontend/src/views/LibraryView.vue:163
+#: frontend/src/views/LibraryView.vue:168
 msgid "Suivante"
 msgstr "Siguiente"
 
@@ -11495,7 +11511,7 @@ msgstr "Fotos de %(name)s"
 msgid "Configurez d'abord Immich (adresse et clé API)."
 msgstr "Configura primero Immich (dirección y clave API)."
 
-#: web/routes_people.py:95
+#: web/routes_people.py:95 web/routes_playlists.py:363
 #, python-format
 msgid "Immich ne répond pas : %(error)s"
 msgstr "Immich no responde: %(error)s"

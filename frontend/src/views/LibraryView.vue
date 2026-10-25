@@ -12,7 +12,9 @@ interface Item {
   caption?: string | null; video: boolean; favorite: boolean; source: string;
 }
 
-const filters = reactive({ q: "", source: "", person: "", media: "", from: "", to: "", fav: !!props.favorites });
+const filters = reactive({ q: "", source: "", person: "", media: "", from: "", to: "", fav: !!props.favorites, smart: false });
+const smartAvailable = ref(false);
+const smartHint = () => t("Recherche par contenu grâce à l'analyse des images d'Immich (photos importées d'Immich)");
 const items = ref<Item[]>([]);
 const total = ref(0);
 const loading = ref(true);
@@ -32,11 +34,12 @@ async function search() {
   loading.value = true;
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(filters)) {
-    if (key === "fav") { if (value) params.set("fav", "1"); }
+    if (key === "fav" || key === "smart") { if (value) params.set(key, "1"); }
     else if (value) params.set(key, String(value));
   }
   try {
-    const d = await get<{ items: Item[]; total: number }>(`/api/library/search?${params}`);
+    const d = await get<{ items: Item[]; total: number; smart_available?: boolean }>(`/api/library/search?${params}`);
+    smartAvailable.value = !!d.smart_available;
     items.value = d.items;
     total.value = d.total;
   } catch (e) {
@@ -101,7 +104,9 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
   <section class="card">
     <form class="filters" @submit.prevent="search">
       <label class="search"><i class="fas fa-search"></i>
-        <input v-model="filters.q" type="search" :placeholder="t('Rechercher (lieu, légende, nom de fichier…)')"></label>
+        <input v-model="filters.q" type="search" :placeholder="filters.smart ? t('Décrivez la photo : plage, chien, neige…') : t('Rechercher (lieu, légende, nom de fichier…)')"></label>
+      <label v-if="smartAvailable" class="smart" :title="smartHint()">
+        <input v-model="filters.smart" type="checkbox"> {{ t("Par contenu (Immich)") }}</label>
       <select v-model="filters.source">
         <option value="">{{ t("Toutes les sources") }}</option>
         <option v-for="s in sources" :key="s" :value="s">{{ sourceLabel(s) }}</option>
@@ -169,6 +174,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
 .filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
 .search { flex: 1 1 260px; display: flex; align-items: center; gap: .5rem; border: 1px solid var(--border); border-radius: 10px; padding: 0 .7rem; background: var(--surface); }
 .search i { color: var(--muted); }
+.smart { display: flex; align-items: center; gap: .35rem; font-size: .85rem; white-space: nowrap; }
 .search input { border: 0; flex: 1; padding: .5rem 0; outline: none; }
 .date { display: flex; align-items: center; gap: .3rem; font-size: .9rem; color: var(--muted); }
 .date input { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: .35rem .5rem; }

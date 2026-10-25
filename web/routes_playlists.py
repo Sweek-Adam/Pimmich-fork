@@ -351,10 +351,18 @@ def library_search_api():
     from utils import library_search
     args = request.args
     date = lambda v: v if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v or "") else None
+    from utils import immich_search
     favorites = load_favorites()
     favorite_set = set(favorites)
-    items, total = library_search.search(favorites, args.get("q", "")[:120], date(args.get("from")), date(args.get("to")),
-                                         args.get("source", ""), args.get("person", ""), args.get("fav") == "1", args.get("media", ""))
+    config = load_config()
+    smart = None
+    if args.get("smart") == "1" and args.get("q") and immich_search.available(config):
+        try:  # recherche par contenu : l'analyse des images d'Immich
+            smart = immich_search.smart_search(config, args.get("q"))
+        except Exception as e:
+            return jsonify({"success": False, "message": _("Immich ne répond pas : %(error)s", error=str(e)[:120])}), 502
+    items, total = library_search.search(favorites, "" if smart is not None else args.get("q", "")[:120], date(args.get("from")), date(args.get("to")),
+                                         args.get("source", ""), args.get("person", ""), args.get("fav") == "1", args.get("media", ""), smart=smart)
     results = []
     for item in items:
         thumb = item["path"].rsplit(".", 1)[0] + "_thumbnail.jpg" if item["video"] else item["path"]
@@ -362,7 +370,7 @@ def library_search_api():
                         "video": item["video"], "favorite": item["path"] in favorite_set, "source": item["path"].split("/", 1)[0],
                         "thumb": url_for("static", filename=f"prepared/{thumb}"),
                         "url": url_for("static", filename=f"prepared/{item['path']}")})
-    return jsonify({"success": True, "total": total, "items": results})
+    return jsonify({"success": True, "total": total, "items": results, "smart_available": immich_search.available(config)})
 
 
 @app.route('/api/stats/photos', methods=['GET'])
