@@ -6,6 +6,7 @@ from web.core import *  # noqa: F401,F403 (application, constantes et utilitaire
 from web.core import _
 from utils import import_progress
 from utils import prepare_all_photos as prep
+import glob
 
 _queued = set()  # (source, nom) déjà demandés : un double clic ne prépare pas deux fois
 _queued_lock = threading.Lock()
@@ -92,6 +93,34 @@ def media_prepare_api():
 
     threading.Thread(target=work, daemon=True, name=f"prepare-{source}").start()
     return jsonify({"success": True, "message": _("%(count)s média(s) en préparation : suivez l'avancement ci-dessous.", count=len(wanted))})
+
+
+@app.route('/api/media/delete_failed', methods=['POST'])
+@login_required
+def media_delete_failed_api():
+    """Supprime des médias en échec (fichier illisible, vidéo abîmée…) : seulement ceux qui ont échoué et ne sont pas prêts."""
+    data = request.get_json(silent=True) or {}
+    source, names = data.get("source"), data.get("names") or []
+    if source not in _sources() or not isinstance(names, list):
+        return jsonify({"success": False, "message": _("Source inconnue.")}), 400
+    width, height = _screen()
+    failed = {i["name"] for i in prep.media_inventory(source, width, height) if i["state"] != "ok" and i["error"]}
+    folder = BASE_DIR / "static" / "photos" / source
+    removed = 0
+    for name in names:
+        if not isinstance(name, str) or name not in failed:
+            continue  # jamais un média prêt, ni un nom qui ne vient pas de l'inventaire
+        try:
+            (folder / name).unlink(missing_ok=True)
+            for leftover in (PREPARED_DIR / source).glob(f"{glob.escape(Path(name).stem)}.*") if (PREPARED_DIR / source).is_dir() else []:
+                leftover.unlink(missing_ok=True)  # préparation incomplète
+            prep.forget_error(source, name)
+            removed += 1
+        except OSError as e:
+            logger.warning(f"Suppression de {source}/{name} impossible : {e}")
+    if not removed:
+        return jsonify({"success": False, "message": _("Aucun média en échec à supprimer.")}), 400
+    return jsonify({"success": True, "message": _("%(count)s média(s) en échec supprimé(s).", count=removed)})
 
 
 # --- Gagner de la place : originaux énormes remplacés par une version réduite ---

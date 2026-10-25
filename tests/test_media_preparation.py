@@ -144,3 +144,23 @@ def test_run_ffmpeg_reports_progress(tmp_path):
     assert code == 0 and seen and max(seen) >= 90
     code, errors = prep.run_ffmpeg(["ffmpeg", "-y", "-i", str(tmp_path / "absent.mp4"), str(tmp_path / "x.mp4")])
     assert code != 0 and "absent.mp4" in errors
+
+
+def test_delete_failed_media_only(admin_client, source, monkeypatch):
+    folder, prepared = source
+    for name in ("casse.jpg", "pret.jpg", "attente.jpg"):
+        (folder / name).write_bytes(b"x")
+    prepared.mkdir(parents=True)
+    Image.new("RGB", (64, 36)).save(prepared / "pret.jpg")
+    monkeypatch.setattr(prep, "prepare_photo", lambda *a, **k: (_ for _ in ()).throw(ValueError("illisible")))
+    from web import routes_media
+    monkeypatch.setattr(routes_media, "_screen", lambda: (64, 36))
+    with pytest.raises(ValueError):
+        prep.prepare_media("essai", "casse.jpg", 64, 36)
+    # Ni un média prêt, ni un média seulement en attente, ni un autre dossier
+    for bad in (["pret.jpg"], ["attente.jpg"], ["../essai/casse.jpg"]):
+        assert admin_client.post("/api/media/delete_failed", json={"source": "essai", "names": bad}, headers=SAME).status_code == 400
+    r = admin_client.post("/api/media/delete_failed", json={"source": "essai", "names": ["casse.jpg", "pret.jpg"]}, headers=SAME)
+    assert r.get_json()["success"]
+    assert not (folder / "casse.jpg").exists() and (folder / "pret.jpg").exists() and (folder / "attente.jpg").exists()
+    assert "essai/casse.jpg" not in prep.preparation_errors()

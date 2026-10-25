@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 18:39+0100\n"
+"POT-Creation-Date: 2026-10-25 23:00+0100\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -196,11 +196,11 @@ msgstr "Stopped"
 msgid "Thème"
 msgstr "Theme"
 
-#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:132
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:140
 msgid "préparation"
 msgstr "preparing"
 
-#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:132
+#: frontend/src/App.vue:200 frontend/src/views/MediaView.vue:140
 msgid "téléchargement"
 msgstr "downloading"
 
@@ -463,7 +463,7 @@ msgid ""
 "vidéos tournent en boucle dans les dispositions."
 msgstr "Phone motion photos animate like GIFs; short videos loop in layouts."
 
-#: frontend/src/news.ts:21 frontend/src/views/MediaView.vue:176
+#: frontend/src/news.ts:21 frontend/src/views/MediaView.vue:184
 msgid "Gagner de la place"
 msgstr "Free up space"
 
@@ -1101,8 +1101,8 @@ msgid "Aucun appareil détecté."
 msgstr "No device detected."
 
 #: frontend/src/components/PresenceCard.vue:73
-#: frontend/src/views/LogsView.vue:63 frontend/src/views/MediaView.vue:178
-#: frontend/src/views/MediaView.vue:208 frontend/src/views/NetworkView.vue:125
+#: frontend/src/views/LogsView.vue:63 frontend/src/views/MediaView.vue:186
+#: frontend/src/views/MediaView.vue:216 frontend/src/views/NetworkView.vue:125
 #: frontend/src/views/PendingView.vue:51 frontend/src/views/QueueView.vue:87
 #: templates/configure/tab_affichage.html.jinja:353
 #: templates/configure/tab_logs.html.jinja:13
@@ -2424,7 +2424,7 @@ msgid "Administrateur"
 msgstr "Administrator"
 
 #: frontend/src/views/AccountsView.vue:75
-#: frontend/src/views/LayoutsView.vue:119
+#: frontend/src/views/LayoutsView.vue:119 frontend/src/views/MediaView.vue:250
 #: frontend/src/views/PlaylistsView.vue:167
 #: frontend/src/views/TelegramView.vue:111
 #: templates/configure/tab_comptes.html.jinja:95
@@ -5354,7 +5354,7 @@ msgstr "No other copy than the one on the frame"
 msgid "En file d'attente"
 msgstr "Queued"
 
-#: frontend/src/views/MediaView.vue:40 frontend/src/views/MediaView.vue:198
+#: frontend/src/views/MediaView.vue:40 frontend/src/views/MediaView.vue:206
 msgid "Prévue cette nuit"
 msgstr "Scheduled tonight"
 
@@ -5396,54 +5396,64 @@ msgstr "The originals remain available in their source (Google Drive, Immich...)
 msgid "Remplacer {count} original(aux) par une version réduite ?"
 msgstr "Replace {count} original(s) with a reduced version?"
 
-#: frontend/src/views/MediaView.vue:126
+#: frontend/src/views/MediaView.vue:107
+#, python-brace-format
+msgid "Supprimer « {name} » du cadre ?"
+msgstr "Delete “{name}” from the frame?"
+
+#: frontend/src/views/MediaView.vue:108
+#, python-brace-format
+msgid "Supprimer les {count} médias en échec de cette source ?"
+msgstr "Delete the {count} failed media from this source?"
+
+#: frontend/src/views/MediaView.vue:134
 msgid "Préparation en cours"
 msgstr "Preparation in progress"
 
-#: frontend/src/views/MediaView.vue:127
+#: frontend/src/views/MediaView.vue:135
 msgid "Aucun import ni préparation en cours."
 msgstr "No import or preparation in progress."
 
-#: frontend/src/views/MediaView.vue:132
+#: frontend/src/views/MediaView.vue:140
 msgid "depuis"
 msgstr "for"
 
-#: frontend/src/views/MediaView.vue:138
+#: frontend/src/views/MediaView.vue:146
 #, python-brace-format
 msgid "{done} médias sur {total} préparés"
 msgstr "{done} of {total} media prepared"
 
-#: frontend/src/views/MediaView.vue:148
+#: frontend/src/views/MediaView.vue:156
 msgid "encodage vidéo"
 msgstr "video encoding"
 
-#: frontend/src/views/MediaView.vue:148
+#: frontend/src/views/MediaView.vue:156
 #: templates/configure/scripts_gallery.html.jinja:53
 msgid "photo"
 msgstr "photo"
 
-#: frontend/src/views/MediaView.vue:152
+#: frontend/src/views/MediaView.vue:160
 #, python-brace-format
 msgid "Vidéo encodée à {percent} %"
 msgstr "Video {percent}% encoded"
 
-#: frontend/src/views/MediaView.vue:156
+#: frontend/src/views/MediaView.vue:164
 msgid "Derniers médias traités"
 msgstr "Last processed media"
 
-#: frontend/src/views/MediaView.vue:169
+#: frontend/src/views/MediaView.vue:177
 msgid "Photos animées"
 msgstr "Motion photos"
 
-#: frontend/src/views/MediaView.vue:171
+#: frontend/src/views/MediaView.vue:179
 msgid "Création en cours..."
 msgstr "Creating..."
 
-#: frontend/src/views/MediaView.vue:171
+#: frontend/src/views/MediaView.vue:179
 msgid "Créer maintenant"
 msgstr "Create now"
 
-#: frontend/src/views/MediaView.vue:172
+#: frontend/src/views/MediaView.vue:180
 #, python-brace-format
 msgid ""
 "{count} photo(s) animée(s) ou courte(s) vidéo(s) attendent leur animation"
@@ -5452,11 +5462,11 @@ msgstr ""
 "{count} motion photo(s) or short video(s) are waiting for their animation"
 " (created automatically tonight)."
 
-#: frontend/src/views/MediaView.vue:178
+#: frontend/src/views/MediaView.vue:186
 msgid "Analyser"
 msgstr "Analyse"
 
-#: frontend/src/views/MediaView.vue:179
+#: frontend/src/views/MediaView.vue:187
 msgid ""
 "Les très grosses photos (plus de 4096 px) et vidéos (plus de 100 Mo) déjà"
 " prêtes peuvent être remplacées par une version réduite, toujours plus "
@@ -5468,34 +5478,34 @@ msgstr ""
 "the screen: photos at 4096 px with their data (date, place), videos in "
 "1080p, re-encoded at night."
 
-#: frontend/src/views/MediaView.vue:181
+#: frontend/src/views/MediaView.vue:189
 #, python-brace-format
 msgid "Déjà gagné : {size} ({count} médias réduits)."
 msgstr "Already saved: {size} ({count} media reduced)."
 
-#: frontend/src/views/MediaView.vue:182
+#: frontend/src/views/MediaView.vue:190
 msgid "Aucun média ne gagnerait à être réduit."
 msgstr "No media would benefit from being reduced."
 
-#: frontend/src/views/MediaView.vue:185
+#: frontend/src/views/MediaView.vue:193
 #, python-brace-format
 msgid "{count} médias, jusqu'à {size} à gagner"
 msgstr "{count} media, up to {size} to save"
 
-#: frontend/src/views/MediaView.vue:188
+#: frontend/src/views/MediaView.vue:196
 #, python-brace-format
 msgid "Réduire la sélection ({size})"
 msgstr "Reduce selection ({size})"
 
-#: frontend/src/views/MediaView.vue:199
+#: frontend/src/views/MediaView.vue:207
 msgid "Seul exemplaire"
 msgstr "Only copy"
 
-#: frontend/src/views/MediaView.vue:207
+#: frontend/src/views/MediaView.vue:215
 msgid "Médias du cadre"
 msgstr "Frame media"
 
-#: frontend/src/views/MediaView.vue:209
+#: frontend/src/views/MediaView.vue:217
 msgid ""
 "Tous les médias reçus, source par source. Un média « pas préparé » "
 "n'apparaît pas sur le cadre : le bouton Préparer le rattrape (import "
@@ -5505,27 +5515,27 @@ msgstr ""
 "shown on the frame: the Prepare button catches it up (interrupted import,"
 " old bug...)."
 
-#: frontend/src/views/MediaView.vue:211
+#: frontend/src/views/MediaView.vue:219
 msgid "À préparer"
 msgstr "To prepare"
 
-#: frontend/src/views/MediaView.vue:211
+#: frontend/src/views/MediaView.vue:219
 msgid "En échec"
 msgstr "Failed"
 
-#: frontend/src/views/MediaView.vue:211
+#: frontend/src/views/MediaView.vue:219
 msgid "Préparés"
 msgstr "Prepared"
 
-#: frontend/src/views/MediaView.vue:211
+#: frontend/src/views/MediaView.vue:219
 msgid "Tous"
 msgstr "All"
 
-#: frontend/src/views/MediaView.vue:213
+#: frontend/src/views/MediaView.vue:221
 msgid "Rechercher un fichier"
 msgstr "Search for a file"
 
-#: frontend/src/views/MediaView.vue:215
+#: frontend/src/views/MediaView.vue:223
 #: templates/configure/scripts_gallery.html.jinja:8
 #: templates/configure/scripts_gallery.html.jinja:36
 #: templates/configure/scripts_main.html.jinja:1320
@@ -5545,29 +5555,34 @@ msgstr "Search for a file"
 msgid "Chargement..."
 msgstr "Loading..."
 
-#: frontend/src/views/MediaView.vue:216
+#: frontend/src/views/MediaView.vue:224
 msgid "Tous les médias sont préparés."
 msgstr "All media are prepared."
 
-#: frontend/src/views/MediaView.vue:216
+#: frontend/src/views/MediaView.vue:224
 msgid "Aucun média."
 msgstr "No media."
 
-#: frontend/src/views/MediaView.vue:222
+#: frontend/src/views/MediaView.vue:230
 #, python-brace-format
 msgid "{prepared} préparés sur {total}"
 msgstr "{prepared} of {total} prepared"
 
-#: frontend/src/views/MediaView.vue:225
+#: frontend/src/views/MediaView.vue:233
 #, python-brace-format
 msgid "Préparer les {count} manquants"
 msgstr "Prepare the {count} missing"
 
-#: frontend/src/views/MediaView.vue:239
+#: frontend/src/views/MediaView.vue:235
+#, python-brace-format
+msgid "Supprimer les {count} en échec"
+msgstr "Delete the {count} failed"
+
+#: frontend/src/views/MediaView.vue:249
 msgid "Préparer"
 msgstr "Prepare"
 
-#: frontend/src/views/MediaView.vue:243
+#: frontend/src/views/MediaView.vue:255
 msgid "Afficher plus"
 msgstr "Show more"
 
@@ -12101,52 +12116,62 @@ msgid ""
 " Forcer la mise à jour »."
 msgstr "No tide data yet: the slideshow fetches it, or use \"Force update\"."
 
-#: web/routes_media.py:73 web/routes_settings.py:478 web/routes_storage.py:114
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:478
+#: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Unknown source."
 
-#: web/routes_media.py:84
+#: web/routes_media.py:85
 msgid "Rien à préparer (déjà en cours ou introuvable)."
 msgstr "Nothing to prepare (already in progress or not found)."
 
-#: web/routes_media.py:94
+#: web/routes_media.py:95
 #, python-format
 msgid "%(count)s média(s) en préparation : suivez l'avancement ci-dessous."
 msgstr "%(count)s media being prepared: follow the progress below."
 
-#: web/routes_media.py:121
+#: web/routes_media.py:122
+msgid "Aucun média en échec à supprimer."
+msgstr "No failed media to delete."
+
+#: web/routes_media.py:123
+#, python-format
+msgid "%(count)s média(s) en échec supprimé(s)."
+msgstr "%(count)s failed media deleted."
+
+#: web/routes_media.py:150
 msgid "Aucun média à réduire."
 msgstr "No media to reduce."
 
-#: web/routes_media.py:128
+#: web/routes_media.py:157
 #, python-format
 msgid "%(count)s photo(s) réduite(s) : %(size)s Mo gagnés."
 msgstr "%(count)s photo(s) reduced: %(size)s MB saved."
 
-#: web/routes_media.py:130
+#: web/routes_media.py:159
 #, python-format
 msgid "%(count)s vidéo(s) en cours de réduction."
 msgstr "%(count)s video(s) being reduced."
 
-#: web/routes_media.py:132
+#: web/routes_media.py:161
 #, python-format
 msgid "%(count)s vidéo(s) réduite(s) cette nuit, quand le cadre sera éteint."
 msgstr "%(count)s video(s) will be reduced tonight, when the frame is off."
 
-#: web/routes_media.py:134
+#: web/routes_media.py:163
 #, python-format
 msgid "Échecs : %(list)s"
 msgstr "Failures: %(list)s"
 
-#: web/routes_media.py:155
+#: web/routes_media.py:184
 msgid "Les animations sont déjà en cours de création."
 msgstr "Animations are already being created."
 
-#: web/routes_media.py:158
+#: web/routes_media.py:187
 msgid "Aucune photo animée en attente."
 msgstr "No motion photo waiting."
 
-#: web/routes_media.py:170
+#: web/routes_media.py:199
 #, python-format
 msgid "%(count)s animation(s) en cours de création."
 msgstr "%(count)s animation(s) being created."

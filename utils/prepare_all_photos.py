@@ -544,6 +544,11 @@ def _record_error(source_type, filename, error):
             pass
 
 
+def forget_error(source_type, filename):
+    """Oublie l'échec noté pour ce média (média supprimé)."""
+    _record_error(source_type, filename, None)
+
+
 def _load_user_texts():
     if USER_TEXT_MAP_CACHE_FILE.exists():
         try:

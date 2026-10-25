@@ -102,6 +102,14 @@ async function reduce() {
   await run(() => post("/api/media/reduce", { items: items.map((i) => ({ source: i.source, name: i.name })) }));
   analyseSpace();
 }
+const failedNames = (s: Source) => s.items.filter((m) => m.state !== "ok" && m.error).map((m) => m.name);
+async function removeFailed(source: string, names: string[]) {
+  const question = names.length === 1 ? t("Supprimer « {name} » du cadre ?", { name: names[0] })
+    : t("Supprimer les {count} médias en échec de cette source ?", { count: names.length });
+  if (!window.confirm(question)) return;
+  const r = await run(() => post("/api/media/delete_failed", { source, names }));
+  if (r) loadInventory();
+}
 const missingNames = (s: Source) => s.items.filter((m) => m.state !== "ok" && !m.queued).map((m) => m.name);
 
 let timer: number | undefined;
@@ -223,6 +231,8 @@ onUnmounted(() => window.clearInterval(timer));
         <span class="spacer"></span>
         <button v-if="missingNames(s).length" class="btn small primary" type="button" @click.stop="prepare(s.source, missingNames(s))">
           <i class="fas fa-play"></i> {{ t("Préparer les {count} manquants", { count: missingNames(s).length }) }}</button>
+        <button v-if="failedNames(s).length" class="btn small danger" type="button" @click.stop="removeFailed(s.source, failedNames(s))">
+          <i class="fas fa-trash"></i> {{ t("Supprimer les {count} en échec", { count: failedNames(s).length }) }}</button>
       </div>
       <ul v-if="open[s.source] !== false" class="items">
         <li v-for="m in s.list.slice(0, shown[s.source] || PAGE)" :key="m.name">
@@ -237,6 +247,8 @@ onUnmounted(() => window.clearInterval(timer));
           </div>
           <span class="pill" :class="stateClass(m)">{{ stateLabel(m) }}</span>
           <button v-if="m.state !== 'ok' && !m.queued" class="btn small" type="button" @click="prepare(s.source, [m.name])">{{ t("Préparer") }}</button>
+          <button v-if="m.state !== 'ok' && m.error" class="btn icon danger" type="button" :title="t('Supprimer')"
+                  @click="removeFailed(s.source, [m.name])"><i class="fas fa-trash-alt"></i></button>
         </li>
       </ul>
       <button v-if="open[s.source] !== false && s.list.length > (shown[s.source] || PAGE)" class="btn small more" type="button"
