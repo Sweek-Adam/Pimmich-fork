@@ -70,7 +70,8 @@ async function newLink() {
 }
 
 // --- Cadres de la famille ---
-interface Frame { id: string; name: string; url: string; online: boolean; unauthorized?: boolean; running?: boolean; photos?: number; has_photo?: boolean }
+interface Frame { id: string; name: string; url: string; online: boolean; unauthorized?: boolean; running?: boolean; photos?: number; has_photo?: boolean;
+  share_photos: boolean; share_messages: boolean; shared: { photos: number; messages: number } }
 const frames = ref<Frame[]>([]);
 const codes = ref<{ token: string; label: string }[]>([]);
 const newFrame = reactive({ url: "", token: "", name: "" });
@@ -103,6 +104,10 @@ async function framePhotos(f: Frame, event: Event) {
   } catch (e) {
     notify((e as Error).message, true);
   }
+}
+async function frameShare(f: Frame, key: "share_photos" | "share_messages", value: boolean) {
+  const done = await run(() => post(`/api/frames/${f.id}/share`, { [key]: value }, "PUT"));
+  if (done) f[key] = value; else loadFrames();
 }
 async function removeFrame(f: Frame) {
   if (!window.confirm(t("Retirer ce cadre ?"))) return;
@@ -229,6 +234,15 @@ onMounted(() => {
             <label class="btn small">{{ t("Envoyer des photos") }}<input type="file" accept="image/*,video/*" multiple hidden @change="framePhotos(f, $event)"></label>
             <button class="btn small" type="button" @click="frameMessage(f)">{{ t("Envoyer un message") }}</button>
           </div>
+          <div class="share small">
+            <span class="muted">{{ t("Partager automatiquement avec ce cadre :") }}</span>
+            <label><input type="checkbox" :checked="f.share_photos" @change="frameShare(f, 'share_photos', ($event.target as HTMLInputElement).checked)">
+              {{ t("les nouvelles photos reçues") }}</label>
+            <label><input type="checkbox" :checked="f.share_messages" @change="frameShare(f, 'share_messages', ($event.target as HTMLInputElement).checked)">
+              {{ t("les messages") }}</label>
+            <span v-if="f.shared && (f.shared.photos || f.shared.messages)" class="muted">
+              {{ t("Déjà partagés : {photos} photo(s), {messages} message(s)", { photos: f.shared.photos, messages: f.shared.messages }) }}</span>
+          </div>
           <button class="btn small danger" type="button" @click="removeFrame(f)">{{ t("Retirer") }}</button>
         </div>
       </article>
@@ -273,6 +287,8 @@ onMounted(() => {
 .frame img, .noimg { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #111; }
 .noimg { display: grid; place-items: center; color: #666; font-size: 2rem; }
 .frame .body { padding: .6rem .7rem; display: grid; gap: .4rem; }
+.share { display: grid; gap: .2rem; padding: .4rem 0; border-top: 1px solid var(--border); }
+.share label { display: flex; gap: .4rem; align-items: center; }
 details { margin-top: .8rem; }
 summary { cursor: pointer; color: var(--accent); font-weight: 600; }
 .add { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .6rem; align-items: end; margin-top: .6rem; }

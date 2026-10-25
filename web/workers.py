@@ -928,6 +928,21 @@ def button_worker():
         time.sleep(gpio_button.POLL if watcher.pin is not None else 1)
 
 
+def frame_share_worker():
+    """Cadres jumelés : les nouveautés partent vers les cadres choisis, toutes les deux minutes."""
+    from web.routes_frames import share_with_frames
+    time.sleep(60)
+    while True:
+        try:
+            if any(f.get("share_photos") or f.get("share_messages") for f in load_config().get("family_frames") or []):
+                count = share_with_frames()
+                if count:
+                    logger.info(f"[Cadres jumelés] {count} nouveauté(s) partagée(s).")
+        except Exception as e:
+            logger.warning(f"[Cadres jumelés] {e}")
+        time.sleep(120)
+
+
 def motion_screen(on):
     """Écran allumé ou éteint par le détecteur de mouvement : veille de l'écran (et TV par HDMI-CEC), sans prise."""
     from utils import cec

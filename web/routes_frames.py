@@ -10,6 +10,7 @@ import io
 import os
 import secrets
 import signal
+import time
 from functools import wraps
 
 import requests
@@ -17,7 +18,7 @@ from flask import send_file
 
 from web.core import *  # noqa: F401,F403 (application, constantes et utilitaires partagés)
 from web.core import _
-from utils import members, messages_manager
+from utils import frame_share, members, messages_manager
 from utils.platform_info import tmp_path
 
 TOKEN_HEADER = "X-Pimmich-Frame-Token"
@@ -145,8 +146,9 @@ def frame_receive_message_api():
     data = request.get_json(silent=True) or {}
     config = load_config()
     try:
-        messages_manager.create_message(data.get("title"), data.get("body"), data.get("signature"), data.get("style"), None,
-                                        str(data.get("from") or "")[:60], int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+        message = messages_manager.create_message(data.get("title"), data.get("body"), data.get("signature"), data.get("style"), None,
+                                                  str(data.get("from") or "")[:60], int(config.get("display_width", 1920)), int(config.get("display_height", 1080)))
+        messages_manager._update(message["id"], from_frame=True)  # venu d'un autre cadre : il ne repartira pas (cadres jumelés)
     except ValueError as e:
         return jsonify({"success": False, "message": str(e)}), 400
     if messages_manager.SOURCE_NAME not in config.get("display_sources", []):
@@ -195,7 +197,9 @@ def frames_api():
                 status = {"online": True, "unauthorized": True}
         except requests.RequestException:
             pass
-        items.append({**status, "id": frame["id"], "name": frame.get("name") or status.get("name") or frame["url"], "url": frame["url"]})
+        items.append({**status, "id": frame["id"], "name": frame.get("name") or status.get("name") or frame["url"], "url": frame["url"],
+                      "share_photos": bool(frame.get("share_photos")), "share_messages": bool(frame.get("share_messages")),
+                      "shared": frame_share.counts(frame["id"])})
     return jsonify({"success": True, "frames": items})
 
 
@@ -222,12 +226,36 @@ def frames_add_api():
     return jsonify({"success": True, "message": _("Cadre « %(name)s » ajouté.", name=frame["name"])})
 
 
+@app.route('/api/frames/<frame_id>/share', methods=['PUT'])
+@admin_required
+def frames_share_api(frame_id):
+    """Cadres jumelés : partage automatique des nouvelles photos et des messages vers ce cadre (désactivé par défaut)."""
+    data = request.get_json(silent=True) or {}
+    config = dict(load_config())
+    frames = [dict(f) for f in config.get("family_frames") or []]
+    frame = next((f for f in frames if f.get("id") == frame_id), None)
+    if not frame:
+        return jsonify({"success": False, "message": _("Cadre inconnu.")}), 404
+    was_on = frame.get("share_photos") or frame.get("share_messages")
+    for key in ("share_photos", "share_messages"):
+        if key in data:
+            frame[key] = bool(data[key])
+    if (frame.get("share_photos") or frame.get("share_messages")) and not was_on:
+        frame["share_since"] = time.time()  # seulement les nouveautés : pas toute la bibliothèque d'un coup
+    config["family_frames"] = frames
+    save_config(config)
+    on = frame.get("share_photos") or frame.get("share_messages")
+    return jsonify({"success": True, "message": _("Partage automatique vers « %(name)s » activé.", name=frame.get("name") or frame["url"]) if on
+                    else _("Partage automatique désactivé.")})
+
+
 @app.route('/api/frames/<frame_id>', methods=['DELETE'])
 @admin_required
 def frames_remove_api(frame_id):
     config = dict(load_config())
     config["family_frames"] = [f for f in config.get("family_frames") or [] if f.get("id") != frame_id]
     save_config(config)
+    frame_share.forget(frame_id)
     return jsonify({"success": True, "message": _("Cadre retiré.")})
 
 
@@ -276,3 +304,49 @@ def frames_action_api(frame_id, action):
     except ValueError:
         result = {"success": response.ok}
     return jsonify({"success": bool(result.get("success")), "message": result.get("message") or (_("C'est fait.") if response.ok else _("Ce cadre a refusé la demande."))}), (200 if response.ok else 502)
+
+
+def share_with_frames():
+    """Cadres jumelés : envoie les nouveautés (photos, messages) aux cadres choisis. Retourne le nombre d'envois."""
+    import urllib3
+    urllib3.disable_warnings()
+    from utils.prepare_all_photos import is_media
+    config = load_config()
+    sender = config.get("frame_name") or config.get("mqtt_device_name") or "Pimmich"
+    sent = 0
+    for frame in _frames():
+        try:
+            sent += _share_with(frame, sender, is_media)
+        except requests.RequestException as e:
+            logger.info(f"[Cadres jumelés] {frame.get('name') or frame['url']} injoignable : {e.__class__.__name__}")
+    return sent
+
+
+def _share_with(frame, sender, is_media):
+    """Nouveautés pour un cadre : photos par paquets de quelques-unes, puis messages ; s'arrête au premier refus."""
+    sent = 0
+    if frame.get("share_photos"):
+        todo = frame_share.pending_photos(frame, BASE_DIR / "static" / "photos", is_media)
+        for batch in frame_share.batches(todo):
+            handles = [open(path, "rb") for _s, _n, path in batch]
+            try:
+                response = _call(frame, "POST", "/api/frame/photos", data={"from": sender},
+                                 files=[("photos", (name, handle)) for (_s, name, _p), handle in zip(batch, handles)])
+            finally:
+                for handle in handles:
+                    handle.close()
+            if not response.ok:
+                logger.warning(f"[Cadres jumelés] {frame.get('name') or frame['url']} refuse les photos ({response.status_code})")
+                break
+            frame_share.mark_sent(frame["id"], photos=[f"{s}/{n}" for s, n, _p in batch])
+            sent += len(batch)
+    if frame.get("share_messages"):
+        for message in frame_share.pending_messages(frame, messages_manager.list_messages()):
+            payload = {k: message.get(k) for k in ("title", "body", "signature", "style")}
+            response = _call(frame, "POST", "/api/frame/message", json=dict(payload, **{"from": message.get("author") or sender}))
+            if not response.ok:
+                logger.warning(f"[Cadres jumelés] {frame.get('name') or frame['url']} refuse le message ({response.status_code})")
+                break
+            frame_share.mark_sent(frame["id"], messages=[message["id"]])
+            sent += 1
+    return sent
