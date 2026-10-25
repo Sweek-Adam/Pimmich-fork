@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Pimmich\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 23:18+0100\n"
+"POT-Creation-Date: 2026-10-25 23:24+0100\n"
 "PO-Revision-Date: 2025-07-23 15:10+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -61,73 +61,85 @@ msgid "Il y a %(num)d ans"
 msgstr "Hace %(num)d años"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "janvier"
 msgstr "enero"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "février"
 msgstr "febrero"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mars"
 msgstr "marzo"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "avril"
 msgstr "abril"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "mai"
 msgstr "mayo"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juin"
 msgstr "junio"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "juillet"
 msgstr "julio"
 
 #: local_slideshow.py:1431 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:660 utils/themed_compositions_extra.py:556
+#: utils/family_game.py:660 utils/photo_book.py:32
+#: utils/themed_compositions_extra.py:556
 #: utils/themed_compositions_extra.py:578
 msgid "août"
 msgstr "agosto"
 
 #: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:661 utils/photo_book.py:33
+#: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "septembre"
 msgstr "septiembre"
 
 #: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:661 utils/photo_book.py:33
+#: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "octobre"
 msgstr "octubre"
 
 #: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:661 utils/photo_book.py:33
+#: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "novembre"
 msgstr "noviembre"
 
 #: local_slideshow.py:1432 templates/configure/_playlist_builder.html.jinja:42
-#: utils/family_game.py:661 utils/themed_compositions_extra.py:557
+#: utils/family_game.py:661 utils/photo_book.py:33
+#: utils/themed_compositions_extra.py:557
 #: utils/themed_compositions_extra.py:579
 msgid "décembre"
 msgstr "diciembre"
@@ -233,7 +245,7 @@ msgstr "Inicio"
 msgid "Nouveautés"
 msgstr "Novedades"
 
-#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:120
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:121
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:53
 msgid "Photos"
@@ -271,7 +283,7 @@ msgstr "A continuación"
 msgid "Playlists"
 msgstr "Listas de reproducción"
 
-#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:125
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:126
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -672,7 +684,7 @@ msgstr ""
 "falta resistencia."
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:159
+#: frontend/src/views/LibraryView.vue:160
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr "Estilo de esta leyenda"
@@ -760,7 +772,7 @@ msgstr "Halo luminoso"
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:165
+#: frontend/src/views/LibraryView.vue:166
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -1080,6 +1092,49 @@ msgid ""
 msgstr ""
 "Cableado de un sensor PIR (HC-SR501): VCC a 5 V (pin 2), GND a masa (pin "
 "6), OUT al pin elegido (GPIO 24 = pin físico 18)."
+
+#: frontend/src/components/PhotoBookCard.vue:41
+msgid "Livre photo de l'année"
+msgstr "Libro de fotos del año"
+
+#: frontend/src/components/PhotoBookCard.vue:42
+msgid ""
+"Un PDF prêt à imprimer (A4 à l'italienne) : une couverture, les plus "
+"belles photos mois par mois (les plus aimées et les favorites d'abord, "
+"sans les photos floues ou les captures d'écran), puis l'année en "
+"chiffres."
+msgstr ""
+"Un PDF listo para imprimir (A4 apaisado): una portada, las mejores fotos "
+"mes a mes (las más queridas y favoritas primero, sin fotos borrosas ni "
+"capturas de pantalla) y el año en cifras."
+
+#: frontend/src/components/PhotoBookCard.vue:45
+#, python-brace-format
+msgid "{count} photos"
+msgstr "{count} fotos"
+
+#: frontend/src/components/PhotoBookCard.vue:49
+#: frontend/src/views/MediaView.vue:179
+msgid "Création en cours..."
+msgstr "Creando..."
+
+#: frontend/src/components/PhotoBookCard.vue:49
+msgid "Créer le livre"
+msgstr "Crear el libro"
+
+#: frontend/src/components/PhotoBookCard.vue:52
+#, python-brace-format
+msgid "Page {done} sur {total}"
+msgstr "Página {done} de {total}"
+
+#: frontend/src/components/PhotoBookCard.vue:53
+msgid "Aucune photo datée de cette année-là."
+msgstr "Ninguna foto fechada de ese año."
+
+#: frontend/src/components/PhotoBookCard.vue:56
+#, python-brace-format
+msgid "Télécharger le livre {year}"
+msgstr "Descargar el libro {year}"
 
 #: frontend/src/components/PresenceCard.vue:50
 #: templates/configure/tab_affichage.html.jinja:347
@@ -1447,7 +1502,7 @@ msgid "Non défini"
 msgstr "Indefinido"
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:126 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:127 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "Borrar"
 
@@ -1501,7 +1556,7 @@ msgid "du"
 msgstr "del"
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:124
+#: frontend/src/views/LibraryView.vue:125
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -1553,7 +1608,7 @@ msgstr "Solo favoritos"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
 #: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:168
-#: frontend/src/views/LibraryView.vue:119
+#: frontend/src/views/LibraryView.vue:120
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
@@ -3178,7 +3233,7 @@ msgstr ""
 "Fecha, juegos, modo fiesta, composiciones, citas... La interfaz de "
 "administración sigue el idioma de su navegador."
 
-#: frontend/src/views/DisplayView.vue:92 frontend/src/views/LibraryView.vue:121
+#: frontend/src/views/DisplayView.vue:92 frontend/src/views/LibraryView.vue:122
 msgid "Vidéos"
 msgstr "Vídeos"
 
@@ -4601,7 +4656,7 @@ msgstr "Tema de temporada"
 msgid "Affiche les messages"
 msgstr "Muestra los mensajes"
 
-#: frontend/src/views/LibraryView.vue:17
+#: frontend/src/views/LibraryView.vue:18
 msgid ""
 "Recherche par contenu grâce à l'analyse des images d'Immich (photos "
 "importées d'Immich)"
@@ -4609,85 +4664,85 @@ msgstr ""
 "Búsqueda por contenido gracias al análisis de imágenes de Immich (fotos "
 "importadas de Immich)"
 
-#: frontend/src/views/LibraryView.vue:60
+#: frontend/src/views/LibraryView.vue:61
 msgid "Ajoutée aux favoris."
 msgstr "Añadida a favoritos."
 
-#: frontend/src/views/LibraryView.vue:60
+#: frontend/src/views/LibraryView.vue:61
 msgid "Retirée des favoris."
 msgstr "Quitada de favoritos."
 
-#: frontend/src/views/LibraryView.vue:74
+#: frontend/src/views/LibraryView.vue:75
 msgid "Légende enregistrée."
 msgstr "Leyenda guardada."
 
-#: frontend/src/views/LibraryView.vue:107
+#: frontend/src/views/LibraryView.vue:108
 msgid "Décrivez la photo : plage, chien, neige…"
 msgstr "Describa la foto: playa, perro, nieve…"
 
-#: frontend/src/views/LibraryView.vue:107
+#: frontend/src/views/LibraryView.vue:108
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "Buscar (lugar, leyenda, nombre de archivo…)"
 
-#: frontend/src/views/LibraryView.vue:109
+#: frontend/src/views/LibraryView.vue:110
 msgid "Par contenu (Immich)"
 msgstr "Por contenido (Immich)"
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:112
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "Todas las fuentes"
 
-#: frontend/src/views/LibraryView.vue:115
+#: frontend/src/views/LibraryView.vue:116
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "Todos"
 
-#: frontend/src/views/LibraryView.vue:123
+#: frontend/src/views/LibraryView.vue:124
 msgid "Du"
 msgstr "Del"
 
-#: frontend/src/views/LibraryView.vue:129
+#: frontend/src/views/LibraryView.vue:130
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} resultados ({shown} mostrados)"
 
-#: frontend/src/views/LibraryView.vue:129
+#: frontend/src/views/LibraryView.vue:130
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} resultados"
 
-#: frontend/src/views/LibraryView.vue:135
+#: frontend/src/views/LibraryView.vue:136
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "Aún no hay fotos favoritas: toca la estrella de una foto para añadirla."
 
-#: frontend/src/views/LibraryView.vue:135
+#: frontend/src/views/LibraryView.vue:136
 msgid "Aucune photo ne correspond."
 msgstr "Ninguna foto coincide."
 
-#: frontend/src/views/LibraryView.vue:140
-#: frontend/src/views/LibraryView.vue:164
+#: frontend/src/views/LibraryView.vue:141
+#: frontend/src/views/LibraryView.vue:165
 msgid "Favori"
 msgstr "Favorito"
 
-#: frontend/src/views/LibraryView.vue:147
+#: frontend/src/views/LibraryView.vue:148
 msgid "Précédente"
 msgstr "Anterior"
 
-#: frontend/src/views/LibraryView.vue:157
+#: frontend/src/views/LibraryView.vue:158
 msgid "Ajouter une légende…"
 msgstr "Añadir una leyenda…"
 
-#: frontend/src/views/LibraryView.vue:164
+#: frontend/src/views/LibraryView.vue:165
 msgid "Ajouter aux favoris"
 msgstr "Añadir a favoritos"
 
-#: frontend/src/views/LibraryView.vue:168
+#: frontend/src/views/LibraryView.vue:169
 msgid "Suivante"
 msgstr "Siguiente"
 
@@ -5566,10 +5621,6 @@ msgstr "Últimos medios procesados"
 #: frontend/src/views/MediaView.vue:177
 msgid "Photos animées"
 msgstr "Fotos en movimiento"
-
-#: frontend/src/views/MediaView.vue:179
-msgid "Création en cours..."
-msgstr "Creando..."
 
 #: frontend/src/views/MediaView.vue:179
 msgid "Créer maintenant"
@@ -11254,6 +11305,43 @@ msgstr "Resumen del día (fotos recibidas, errores, espacio libre, temperatura)"
 msgid "Mur de la fête"
 msgstr "Muro de la fiesta"
 
+#: utils/photo_book.py:219
+msgid "(suite)"
+msgstr "(continuación)"
+
+#: utils/photo_book.py:251
+msgid "Les souvenirs de la famille, mois par mois"
+msgstr "Los recuerdos de la familia, mes a mes"
+
+#: utils/photo_book.py:258
+#, python-format
+msgid "%(year)s en chiffres"
+msgstr "%(year)s en cifras"
+
+#: utils/photo_book.py:266
+msgid "photos prises cette année"
+msgstr "fotos tomadas este año"
+
+#: utils/photo_book.py:267
+msgid "photos choisies pour ce livre"
+msgstr "fotos elegidas para este libro"
+
+#: utils/photo_book.py:268
+msgid "cœurs reçus sur le cadre par ces photos"
+msgstr "corazones recibidos en el marco por estas fotos"
+
+#: utils/photo_book.py:269
+msgid "lieux différents"
+msgstr "lugares diferentes"
+
+#: utils/photo_book.py:270
+msgid "le mois le plus photographié"
+msgstr "el mes más fotografiado"
+
+#: utils/photo_book.py:283
+msgid "Notre année"
+msgstr "Nuestro año"
+
 #: utils/quotes.py:19
 msgid "Le mot de la famille"
 msgstr "La frase de la familia"
@@ -12659,6 +12747,23 @@ msgid ""
 msgstr ""
 "Aún no hay fotos de esta persona en el marco: síguela para importar sus "
 "fotos."
+
+#: web/routes_photobook.py:46
+msgid "Année invalide."
+msgstr "Año no válido."
+
+#: web/routes_photobook.py:49
+msgid "Un livre photo est déjà en cours de création."
+msgstr "Ya se está creando un libro de fotos."
+
+#: web/routes_photobook.py:63
+#, python-format
+msgid "Création du livre photo %(year)s : quelques minutes."
+msgstr "Creando el libro de fotos %(year)s: unos minutos."
+
+#: web/routes_photobook.py:72
+msgid "Livre photo"
+msgstr "Libro de fotos"
 
 #: web/routes_photos.py:274
 msgid "Tri automatique enregistré : appliqué au prochain tour du diaporama."

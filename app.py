@@ -34,6 +34,7 @@ from web import routes_home  # noqa: F401 (enregistre les routes)
 from web import routes_music  # noqa: F401 (enregistre les routes)
 from web import routes_media  # noqa: F401 (enregistre les routes)
 from web import routes_party  # noqa: F401 (enregistre les routes)
+from web import routes_photobook  # noqa: F401 (enregistre les routes)
 from web import routes_game  # noqa: F401 (enregistre les routes)
 from web.workers import *  # noqa: F401,F403
 

@@ -4,6 +4,7 @@ import { get, post } from "../api";
 import { currentLang, t } from "../i18n";
 import { notify, run } from "../toast";
 import CaptionEditor from "../components/CaptionEditor.vue";
+import PhotoBookCard from "../components/PhotoBookCard.vue";
 
 const props = defineProps<{ favorites?: boolean }>();
 
@@ -168,6 +169,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
     <button class="nav next" type="button" :title="t('Suivante')" @click="step(1)"><i class="fas fa-chevron-right"></i></button>
   </div>
   <CaptionEditor v-if="styling && current" scope="photo" :photo="current.path" :text="captionText" @close="styling = false" />
+  <PhotoBookCard v-if="!props.favorites" />
 </template>
 
 <style scoped>

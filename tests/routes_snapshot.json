@@ -900,6 +900,19 @@
   ]
  ],
  [
+  "/api/photobook",
+  [
+   "GET",
+   "POST"
+  ]
+ ],
+ [
+  "/api/photobook/<year>.pdf",
+  [
+   "GET"
+  ]
+ ],
+ [
   "/api/ping",
   [
    "GET"
