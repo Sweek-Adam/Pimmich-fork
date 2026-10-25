@@ -84,6 +84,12 @@ const sections: Section[] = [
       { key: "agenda_slide", label: () => t("Afficher la diapositive « Cette semaine »"), type: "toggle" },
       { key: "agenda_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 1, max: 1440, showIf: (v) => !!v.agenda_slide },
     ] },
+  { title: () => t("« Votre semaine sur le cadre »"), icon: "fa-calendar-week",
+    intro: () => t("Le dimanche soir (à partir de 17 h), une diapositive résume la semaine : les nouvelles photos et qui les a envoyées, les messages et les cœurs envoyés depuis les téléphones."),
+    fields: [
+      { key: "weekly_recap_slide", label: () => t("Afficher le résumé de la semaine"), type: "toggle" },
+      { key: "weekly_recap_every_minutes", label: () => t("Toutes les (minutes)"), type: "number", min: 1, max: 1440, showIf: (v) => !!v.weekly_recap_slide },
+    ] },
   { title: () => t("Langue"), icon: "fa-language", fields: [
     { key: "language", label: () => t("Langue des textes affichés sur le cadre"), type: "select",
       options: () => [{ value: "fr", label: "Français" }, { value: "en", label: "English" }, { value: "es", label: "Español" }, { value: "de", label: "Deutsch" }, { value: "ja", label: "日本語" }],

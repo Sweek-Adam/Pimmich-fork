@@ -922,6 +922,52 @@ def prepare_agenda(config, width, height):
     threading.Thread(target=work, daemon=True).start()
 
 
+_recap = {"path": None, "photos": 5, "shown_at": 0, "built": 0, "building": False}
+RECAP_REFRESH = 60 * 60
+LIBRARY_SOURCES = {"gdrive", "immich", "samba", "usb", "cloud", "icloud", "personnes"}  # pas des personnes : pas de « merci »
+
+
+def prepare_recap(config, width, height):
+    """Compose en arrière-plan « Votre semaine sur le cadre » (le dimanche soir), rafraîchie toutes les heures."""
+    from utils import week_recap
+    if not config.get("weekly_recap_slide", True) or not week_recap.showing():
+        _recap["path"] = None
+        return
+    if _recap["building"] or time.time() - _recap["built"] < RECAP_REFRESH:
+        return
+    _recap["building"] = True
+
+    def work():
+        try:
+            from utils import import_progress, members, reactions
+            from utils.prepare_all_photos import is_media, prepared_name
+            from utils.themed_compositions_extra import week_recap_board
+            stats = week_recap.collect(Path(BASE_DIR) / "static" / "photos", PREPARED_BASE_DIR, list_messages(),
+                                       reactions.recent(200), prepared_name, is_media)
+            if stats["photos"] < week_recap.MIN_PHOTOS:
+                _recap["path"] = None
+                return
+            senders = []
+            for source, count in stats["by_source"].most_common():
+                if source in LIBRARY_SOURCES:
+                    continue
+                label = members.label(source) if members.is_member_source(source) else import_progress.SOURCE_LABELS.get(source, source)
+                senders.append((_(label), count))
+            images = [compositions.load_photo(p, max_side=max(width, height) // 2)
+                      for p in week_recap.pick_photos(stats, Path(BASE_DIR) / "static")]
+            images = [i for i in images if i is not None]
+            path = compositions.OUTPUT_DIR / "week_recap.jpg"
+            compositions.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            week_recap_board(images, dict(stats, senders=senders), width, height, random.Random()).save(path, "JPEG", quality=88)
+            _recap.update(path=str(path), photos=len(images))
+            logger.info(f"[Votre semaine] {stats['photos']} photo(s), {stats['messages']} message(s), {stats['hearts']} cœur(s)")
+        except Exception as e:
+            logger.warning(f"[Votre semaine] Diapositive impossible : {e}")
+        finally:
+            _recap.update(built=time.time(), building=False)
+    threading.Thread(target=work, daemon=True).start()
+
+
 def special_every(config, key, default_minutes=30):
     """Intervalle (secondes) entre deux passages d'une diapositive spéciale, réglable (1 min à 24 h)."""
     try:
@@ -932,7 +978,7 @@ def special_every(config, key, default_minutes=30):
 
 
 def pop_memories_slide(config=None, width=1920, height=1080):
-    """Diapositive spéciale à montrer maintenant (« Ce jour-là », « Cette semaine »), sinon None."""
+    """Diapositive spéciale à montrer maintenant (« Ce jour-là », « Cette semaine », « Votre semaine »), sinon None."""
     memories_every = special_every(config, "memories_every_minutes")
     agenda_every = special_every(config, "agenda_every_minutes")
     if _memories["path"] and time.time() - _memories["shown_at"] > memories_every and os.path.exists(_memories["path"]):
@@ -945,6 +991,12 @@ def pop_memories_slide(config=None, width=1920, height=1080):
     if _agenda["path"] and time.time() - _agenda["shown_at"] > agenda_every and os.path.exists(_agenda["path"]):
         _agenda["shown_at"] = time.time()
         return _agenda["path"]
+    if config is not None:
+        prepare_recap(config, width, height)
+    recap_every = special_every(config, "weekly_recap_every_minutes", 45)
+    if _recap["path"] and time.time() - _recap["shown_at"] > recap_every and os.path.exists(_recap["path"]):
+        _recap["shown_at"] = time.time()
+        return _recap["path"]
     return None
 
 

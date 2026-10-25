@@ -569,6 +569,37 @@ def _fit(draw, text, font, width):
     return text.rstrip() + "…"
 
 
+def week_recap_board(images, stats, W, H, rng):
+    """
+    « Votre semaine sur le cadre » : nouvelles photos de la semaine (polaroïds), puis les chiffres (photos reçues et
+    de qui, messages, cœurs). `stats` : {photos, senders [(nom, nombre)], messages, hearts}.
+    """
+    canvas = _vignette(_textured(_gradient(W, H, (244, 236, 250), (226, 216, 240)), rng, 8), 0.3).convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+    _title(canvas, _t(N_("Votre semaine sur le cadre")), HAND2, int(H * 0.1), (96, 60, 150), (W / 2, H * 0.1), shadow=False, max_width=W * 0.86)
+    if images:
+        size = _photo_size(W, H, len(images), 0.8)
+        elements = []
+        for image in images[:5]:
+            border = max(8, size // 20)
+            elements.append(base.framed(base.print_photo(image, size, size * 0.8), border, (255, 253, 248), bottom=border * 3))
+        _place_row(canvas, elements, H * 0.47, rng, 0.84, 0.05, 6)
+    parts = [(_t(N_("%(num)s nouvelle photo")) if stats["photos"] == 1 else _t(N_("%(num)s nouvelles photos"))) % {"num": stats["photos"]}]
+    if stats.get("messages"):
+        parts.append((_t(N_("%(num)s message")) if stats["messages"] == 1 else _t(N_("%(num)s messages"))) % {"num": stats["messages"]})
+    if stats.get("hearts"):
+        parts.append((_t(N_("%(num)s cœur")) if stats["hearts"] == 1 else _t(N_("%(num)s cœurs"))) % {"num": stats["hearts"]})
+    big = _font(HAND2, int(H * 0.075))
+    line = "  ·  ".join(parts)
+    draw.text((W / 2, H * 0.8), _fit(draw, line, big, W * 0.9), font=big, fill=(96, 60, 150), anchor="mm")
+    senders = [f"{name} ({count})" for name, count in (stats.get("senders") or [])[:4]]
+    if senders:
+        small = _font(HAND, int(H * 0.05))
+        text = _t(N_("Merci à %(names)s")) % {"names": ", ".join(senders)}
+        draw.text((W / 2, H * 0.9), _fit(draw, text, small, W * 0.9), font=small, fill=(120, 100, 140), anchor="mm")
+    return canvas.convert("RGB")
+
+
 def week_board(events, countdowns, W, H, rng, today=None):
     """« Cette semaine » : événements de l'agenda des prochains jours et comptes à rebours."""
     today = today or date.today()

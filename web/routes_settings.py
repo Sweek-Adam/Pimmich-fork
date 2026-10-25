@@ -49,6 +49,8 @@ SETTINGS = {
     "memories_every_minutes": ("int", (1, 1440), 30),
     "agenda_slide": ("bool", None, True),
     "agenda_every_minutes": ("int", (1, 1440), 30),
+    "weekly_recap_slide": ("bool", None, True),
+    "weekly_recap_every_minutes": ("int", (1, 1440), 45),
     # Vidéos
     "slideshow_video_enabled": ("bool", None, True),
     "media_mode": ("choice", ["all", "videos"], "all"),
