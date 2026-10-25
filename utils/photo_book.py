@@ -12,6 +12,7 @@ de l'année, mois par mois.
 """
 import io
 import json
+import warnings
 import zlib
 from collections import defaultdict
 from datetime import datetime
@@ -26,6 +27,7 @@ DPI = 200
 PAGE_W, PAGE_H = 2339, 1654          # A4 à l'italienne (297 × 210 mm) à 200 points par pouce
 POINTS = (842, 595)                  # même page en points PDF
 MAX_PHOTOS = 80
+MAX_SOURCE_PIXELS = 40_000_000
 PER_PAGE = 4
 PAPER, INK, SOFT = (250, 247, 242), (34, 32, 40), (128, 122, 116)
 ACCENT = (196, 92, 74)
@@ -145,7 +147,11 @@ def _open(key, base_dir):
     candidates = sorted((base_dir / "static" / "photos" / source).glob(f"{_glob_escape(stem)}.*")) + [base_dir / "static" / "prepared" / key]
     for path in candidates:
         try:
-            image = Image.open(path)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", Image.DecompressionBombWarning)
+                image = Image.open(path)
+            if image.format != "JPEG" and image.width * image.height > MAX_SOURCE_PIXELS:
+                continue  # immense image non JPEG : trop de mémoire sur un Raspberry Pi, la version préparée suffit
             image.draft("RGB", (PAGE_W, PAGE_W))  # JPEG : lecture directement réduite (mémoire)
             image = ImageOps.exif_transpose(image).convert("RGB")
             image.thumbnail((PAGE_W, PAGE_W))
@@ -241,9 +247,10 @@ def _cover(items, year, title, base_dir):
     photos = [(img, path) for img, path in photos if img is not None]
     if photos:
         page.paste(_fit(photos[0][0], photos[0][1], hero_w, PAGE_H), (PAGE_W - hero_w, 0))
-        size = 250
-        for i, (img, path) in enumerate(photos[1:5]):
-            _shadowed(page, _fit(img, path, size, size), 130 + i * (size + 36), PAGE_H - size - 160)
+        thumbs, gap = photos[1:5], 36
+        size = (PAGE_W - hero_w - 2 * 130 - gap * (len(thumbs) - 1)) // max(1, len(thumbs))
+        for i, (img, path) in enumerate(thumbs):
+            _shadowed(page, _fit(img, path, size, size), 130 + i * (size + gap), PAGE_H - size - 160)
     left = 130
     draw.text((left, 230), title, font=font(130, 850), fill=INK)
     hand = font(150, 400, str(HAND)) if HAND.exists() else font(120, 300)
@@ -270,7 +277,7 @@ def _summary(items, year, index, loved):
         (tr(MONTHS[best - 1]) if best else "—", tr(N_("le mois le plus photographié"))),
     ]
     y = 400
-    for number, label in lines:
+    for number, label in [line for line in lines if line[0] not in ("0", "—")]:
         draw.text((130, y), number, font=font(96, 850), fill=ACCENT)
         draw.text((560, y + 30), label, font=font(50, 500), fill=INK)
         y += 190
