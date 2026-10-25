@@ -494,6 +494,33 @@ def run_jukebox(screen, screen_width, screen_height, config):
         time.sleep(0.05)
 
 
+def run_game(screen, screen_width, screen_height):
+    """Jeu « Où et quand ? » : l'écran du jeu (rafraîchi chaque seconde) tant qu'une partie est ouverte."""
+    from utils import family_game, game_screen
+    logger.info("🎲 Partie « Où et quand ? »")
+    ip = get_local_ip()
+    url = f"http://{ip}/jeu" if ip else "http://cadre-photo.local/jeu"
+    shown = None
+    while True:
+        state = family_game.current()
+        now = time.time()
+        kind, number, left = family_game.phase(state, now)
+        if kind == "over":
+            return
+        handle_slideshow_events(screen_width)
+        key = (kind, number, int(left), len((state or {}).get("players", {})),
+               len((state or {}).get("answers", {}).get(str(number), {})) if number is not None else 0)
+        if key != shown:
+            try:
+                image = game_screen.frame(state, now, screen_width, screen_height, url, _)
+                screen.blit(pygame.image.frombytes(image.tobytes(), image.size, "RGB"), (0, 0))
+                pygame.display.flip()
+            except Exception as e:
+                logger.warning(f"[Jeu] Écran non affiché : {e}")
+            shown = key
+        time.sleep(0.2)
+
+
 def run_night_clock(screen, screen_width, screen_height, config):
     """Horloge de nuit : l'heure seule, en grand et en couleur douce, jusqu'au retour des heures d'affichage."""
     from utils import night
@@ -3315,6 +3342,13 @@ def start_slideshow():
                     continue
             update_brightness(config)
 
+            # Partie du jeu « Où et quand ? » ouverte : l'écran du jeu à la place des photos
+            from utils import family_game
+            if family_game.running():
+                run_game(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+                previous_photo_surface = None
+                continue
+
             # Musique en cours et mode jukebox / karaoké : la pochette (et les paroles) à la place des photos
             if jukebox_track(config):
                 run_jukebox(screen, SCREEN_WIDTH, SCREEN_HEIGHT, config)
@@ -3568,6 +3602,9 @@ def start_slideshow():
             while 0 <= playlist_index < len(playlist):
                 # Vérifier si une carte postale est arrivée pour sortir de la boucle et la traiter immédiatement
                 if NEW_POSTCARD_FLAG.exists():
+                    break
+                from utils import family_game
+                if family_game.running():  # une partie commence : l'écran du jeu (boucle principale)
                     break
 
                 # Ordre demandé depuis l'interface (onglet « À suivre ») : appliqué avant le média suivant

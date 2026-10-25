@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ _('Où et quand ?') }} - Pimmich</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='guest.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <style>
+    .hero { text-align: center; }
+    .hero .big { font-size: 3rem; }
+    .timer { font-size: 2.2rem; font-weight: 800; text-align: center; color: var(--accent); }
+    .options { display: grid; gap: 10px; }
+    .option { border: 2px solid var(--border); background: var(--surface); color: var(--text); border-radius: 14px; padding: 14px; font: inherit; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+    .option:active { transform: scale(.98); }
+    .year { display: grid; grid-template-columns: 56px 1fr 56px; gap: 8px; align-items: center; }
+    .year output { font-size: 2.6rem; font-weight: 800; text-align: center; }
+    .year button { height: 56px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 1.6rem; }
+    .year input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+    .ranking { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+    .ranking li { display: flex; justify-content: space-between; padding: 8px 12px; border-radius: 10px; background: var(--surface-2); }
+    .ranking li.me { outline: 2px solid var(--accent); }
+    .answer { font-size: 2rem; font-weight: 800; text-align: center; color: var(--accent); }
+    .players { display: flex; flex-wrap: wrap; gap: 6px; }
+    .players span { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 4px 10px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="brand hero">
+      <div class="big">🎲</div>
+      <h1>{{ _('Où et quand ?') }}</h1>
+      <p class="muted small">{{ _("Le jeu des photos de famille : devinez l'année, le lieu ou l'auteur de la photo affichée sur le cadre.") }}</p>
+    </header>
+    <section class="card" id="game"><p class="muted">{{ _('Chargement...') }}</p></section>
+    <p class="center small"><a href="{{ url_for('upload_page') }}">← {{ _('Retour à la page invités') }}</a></p>
+  </main>
+  <script>
+    (() => {
+      const T = {
+        disabled: {{ _("Le jeu est désactivé sur ce cadre.")|tojson }},
+        none: {{ _("Aucune partie en cours.")|tojson }},
+        create: {{ _("Lancer une partie")|tojson }},
+        rounds: {{ _("Nombre de questions")|tojson }},
+        name: {{ _("Votre prénom")|tojson }},
+        join: {{ _("Rejoindre")|tojson }},
+        players: {{ _("Joueurs inscrits")|tojson }},
+        start: {{ _("Commencer")|tojson }},
+        waiting: {{ _("Les photos s'affichent sur le cadre : regardez l'écran !")|tojson }},
+        question: {{ _("Question")|tojson }},
+        send: {{ _("Valider")|tojson }},
+        sent: {{ _("Réponse envoyée ! Attendez la réponse sur le cadre.")|tojson }},
+        answer: {{ _("La réponse :")|tojson }},
+        you: {{ _("Vous avez gagné %(points)s points.", points="{points}")|tojson }},
+        noanswer: {{ _("Pas de réponse pour cette question.")|tojson }},
+        podium: {{ _("Classement final")|tojson }},
+        again: {{ _("Rejouer")|tojson }},
+        notjoined: {{ _("La partie a commencé : vous pourrez jouer à la prochaine.")|tojson }},
+      };
+      const box = document.getElementById("game");
+      const enabled = {{ 'true' if enabled else 'false' }};
+      let view = null, shownKey = null, year = 2015;
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      async function api(url, body) {
+        const r = await fetch(url, body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const data = await r.json().catch(() => ({}));
+        if (!data.success && data.message) alert(data.message);
+        return data;
+      }
+      const ranking = (list) => `<ol class="ranking">${(list || []).map((r) => `<li class="${r.name === view.me ? "me" : ""}"><span>${esc(r.name)}</span><strong>${r.score} pts</strong></li>`).join("")}</ol>`;
+      function render() {
+        const v = view;
+        const key = [v.phase, v.number, v.answered, v.me, (v.players || []).length].join("|");
+        if (key === shownKey && v.phase !== "question" && v.phase !== "reveal") return;
+        const timer = document.getElementById("timer");
+        if (key === shownKey && timer) { timer.textContent = `${v.left} s`; return; }
+        shownKey = key;
+        if (!enabled) { box.innerHTML = `<p>${T.disabled}</p>`; return; }
+        if (v.phase === "over") {
+          box.innerHTML = `<p class="muted">${T.none}</p>
+            <label class="field">${T.rounds}<select id="rounds"><option>4</option><option selected>6</option><option>8</option><option>10</option></select></label>
+            <button class="btn green" id="create">🎲 ${T.create}</button>`;
+          document.getElementById("create").onclick = async () => { await api("/jeu/new", { rounds: Number(document.getElementById("rounds").value) }); refresh(); };
+        } else if (v.phase === "lobby") {
+          box.innerHTML = (v.me ? `<p>👋 <strong>${esc(v.me)}</strong></p>` : `
+            <label class="field">${T.name}<input type="text" id="name" maxlength="24" autocomplete="given-name"></label>
+            <button class="btn green" id="join">${T.join}</button>`) +
+            `<p class="small muted">${T.players}</p><div class="players">${(v.players || []).map((p) => `<span>${esc(p)}</span>`).join("")}</div>` +
+            (v.me ? `<button class="btn green" id="start">▶️ ${T.start}</button>` : "");
+          const join = document.getElementById("join");
+          if (join) join.onclick = async () => { await api("/jeu/join", { name: document.getElementById("name").value }); refresh(); };
+          const start = document.getElementById("start");
+          if (start) start.onclick = async () => { await api("/jeu/start", {}); refresh(); };
+        } else if (v.phase === "question") {
+          const head = `<p class="small muted">${T.question} ${v.number}/${v.total}</p><h2>${esc(v.question)}</h2><div class="timer" id="timer">${v.left} s</div>`;
+          if (!v.me) box.innerHTML = head + `<p class="muted">${T.notjoined}</p>`;
+          else if (v.answered) box.innerHTML = head + `<p>✅ ${T.sent}</p>`;
+          else if (v.kind === "year") {
+            box.innerHTML = head + `<div class="year"><button id="minus">−</button><output id="out">${year}</output><button id="plus">+</button>
+              <input type="range" id="range" min="1950" max="${v.max_year}" value="${year}"></div><button class="btn green" id="send">${T.send}</button>`;
+            const set = (y) => { year = Math.max(1950, Math.min(v.max_year, y)); document.getElementById("out").textContent = year; document.getElementById("range").value = year; };
+            document.getElementById("minus").onclick = () => set(year - 1);
+            document.getElementById("plus").onclick = () => set(year + 1);
+            document.getElementById("range").oninput = (e) => set(Number(e.target.value));
+            document.getElementById("send").onclick = async () => { await api("/jeu/answer", { value: year }); refresh(); };
+          } else {
+            box.innerHTML = head + `<div class="options">${(v.options || []).map((o, i) => `<button class="option" data-i="${i}">${esc(o)}</button>`).join("")}</div>`;
+            box.querySelectorAll(".option").forEach((b) => b.onclick = async () => { await api("/jeu/answer", { value: v.options[Number(b.dataset.i)] }); refresh(); });
+          }
+        } else if (v.phase === "reveal") {
+          box.innerHTML = `<p class="small muted">${T.question} ${v.number}/${v.total}</p><p>${T.answer}</p><div class="answer">${esc(v.answer)}</div>
+            <p>${v.me ? (v.mine == null ? T.noanswer : T.you.replace("{points}", v.gained)) : ""}</p>${ranking(v.ranking)}`;
+        } else if (v.phase === "podium") {
+          box.innerHTML = `<h2>🏆 ${T.podium}</h2>${ranking(v.ranking)}`;
+        }
+      }
+      async function refresh() {
+        try {
+          view = await (await fetch("/jeu/state")).json();
+          render();
+        } catch (e) { /* hors ligne : on réessaie */ }
+      }
+      refresh();
+      setInterval(refresh, 1000);
+    })();
+  </script>
+</body>
+</html>

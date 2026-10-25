@@ -9,6 +9,7 @@ from conftest import ADMIN_USERNAME, login
 
 SAME_ORIGIN = {"Sec-Fetch-Site": "same-origin"}
 PUBLIC_RULES = {"/", "/login", "/logout", "/upload", "/handle_upload", "/upload/message", "/upload/message/preview", "/upload/share", "/upload/drawing", "/upload/voice", "/upload/now", "/upload/react", "/upload/guestbook",
+                "/jeu", "/jeu/state", "/jeu/new", "/jeu/join", "/jeu/start", "/jeu/answer",
                 "/rebooting", "/api/ping", "/static/<path:filename>"}
 SNAPSHOT = Path(__file__).with_name("routes_snapshot.json")
 

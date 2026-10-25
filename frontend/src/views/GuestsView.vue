@@ -137,6 +137,14 @@ async function stopParty() {
   const r = await run(() => post<Party & { success: boolean; message?: string }>("/api/party/stop"));
   if (r?.success) party.value = r;
 }
+// --- Jeu « Où et quand ? » ---
+const gameRounds = ref(6);
+async function newGame() {
+  const r = await run(() => post("/jeu/new", { rounds: gameRounds.value }));
+  if (r?.success) window.open("/jeu", "_blank");
+}
+async function stopGame() { await run(() => post("/api/game/stop")); }
+
 const untilLabel = (iso: string | null) => iso ? new Date(iso).toLocaleString([], { weekday: "long", hour: "2-digit", minute: "2-digit" }) : "";
 
 onMounted(() => {
@@ -181,6 +189,17 @@ onMounted(() => {
       <label class="check"><input v-model="partyForm.auto_approve" type="checkbox"> {{ t("Afficher les photos sans les valider (tous ceux qui ont le QR code peuvent envoyer)") }}</label>
       <button class="btn primary" type="button" @click="startParty"><i class="fas fa-glass-cheers"></i>{{ t("Lancer la fête") }}</button>
     </template>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h2><i class="fas fa-dice"></i>{{ t("Jeu « Où et quand ? »") }}</h2></div>
+    <p class="small muted">{{ t("Le cadre montre une photo de famille ; chacun devine sur son téléphone l'année, le lieu ou qui l'a envoyée. Les joueurs scannent le QR code affiché sur le cadre (page /jeu).") }}</p>
+    <div class="row">
+      <label class="field inline">{{ t("Questions") }} <select v-model.number="gameRounds"><option :value="4">4</option><option :value="6">6</option><option :value="8">8</option><option :value="10">10</option></select></label>
+      <button class="btn primary" type="button" @click="newGame"><i class="fas fa-play"></i>{{ t("Lancer une partie") }}</button>
+      <a class="btn" href="/jeu" target="_blank"><i class="fas fa-mobile-alt"></i>{{ t("Ouvrir la page du jeu") }}</a>
+      <button class="btn danger" type="button" @click="stopGame"><i class="fas fa-stop"></i>{{ t("Arrêter la partie") }}</button>
+    </div>
   </section>
 
   <section v-if="boot.admin && remote" class="card">

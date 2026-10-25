@@ -387,6 +387,12 @@
   ]
  ],
  [
+  "/api/game/stop",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/gdrive/denied",
   [
    "GET"
@@ -1714,6 +1720,42 @@
  ],
  [
   "/import-usb",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/jeu",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/jeu/answer",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/jeu/join",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/jeu/new",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/jeu/start",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/jeu/state",
   [
    "GET"
   ]

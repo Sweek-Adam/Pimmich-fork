@@ -58,6 +58,7 @@ SETTINGS = {
     "heavy_videos_at_night": ("bool", None, True),
     "motion_photos_enabled": ("bool", None, True),
     "hardware_profile": ("choice", ["auto", "leger", "standard", "complet"], "auto"),
+    "family_game_enabled": ("bool", None, True),
     "short_videos_in_layouts": ("bool", None, True),
     "short_videos_max_seconds": ("int", (2, 120), 15),
     "video_night_above_mb": ("int", (0, 100000), 50),
