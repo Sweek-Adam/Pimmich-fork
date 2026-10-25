@@ -29,6 +29,7 @@ export const router = createRouter({
     { path: "/sources", component: () => import("./views/SourcesView.vue") },
     { path: "/preparation", component: () => import("./views/MediaView.vue") },
     { path: "/jeux", component: () => import("./views/GamesView.vue") },
+    { path: "/nouveautes", component: () => import("./views/NewsView.vue") },
     { path: "/favoris", component: () => import("./views/LibraryView.vue"), props: { favorites: true } },
     { path: "/:rest(.*)*", redirect: "/" },
   ],

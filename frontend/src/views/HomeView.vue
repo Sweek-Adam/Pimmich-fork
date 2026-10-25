@@ -6,6 +6,7 @@ import { boot, classicUrl } from "../boot";
 import { t } from "../i18n";
 import { routeForTab } from "../nav";
 import { run } from "../toast";
+import { unseen } from "../news";
 
 interface Health { level: "warning" | "error" | "info"; title: string; detail: string; tab?: string }
 interface Step { key: string; title: string; done: boolean; tab: string }
@@ -16,6 +17,7 @@ interface QueueItem { thumb: string; video: boolean; name: string }
 interface HistoryEvent { id: string; at: number; text: string; who: string; undoable?: boolean; undone?: boolean }
 
 const router = useRouter();
+const fresh = unseen();
 const status = ref<{ running: boolean; paused: boolean }>({ running: false, paused: false });
 const photo = ref<string | null>(null);
 const health = ref<Health[]>([]);
@@ -137,6 +139,12 @@ onUnmounted(() => window.clearInterval(timer));
 
 <template>
   <div class="home">
+    <router-link v-if="fresh.length" to="/nouveautes" class="card news-banner">
+      <i class="fas fa-gift"></i>
+      <span><strong>{{ t("{count} nouveauté(s) sur le cadre", { count: fresh.length }) }}</strong>
+        <span class="small muted"> · {{ fresh.slice(0, 3).map((n) => n.title()).join(" · ") }}</span></span>
+      <span class="spacer"></span><i class="fas fa-chevron-right"></i>
+    </router-link>
     <section class="card now">
       <div class="screen" :class="{ off: !status.running }">
         <img v-if="photo && status.running" :src="photo" alt="">
@@ -296,4 +304,7 @@ onUnmounted(() => window.clearInterval(timer));
 .events li { display: flex; gap: .8rem; align-items: baseline; padding: .45rem 0; border-bottom: 1px solid var(--border); }
 .events li:last-child { border-bottom: 0; }
 .events li.undone .spacer { text-decoration: line-through; color: var(--muted); }
+.news-banner { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--text); border-color: var(--accent); margin-bottom: 1rem; }
+.news-banner > i:first-child { color: var(--accent); font-size: 1.3rem; }
+.news-banner .spacer { flex: 1; }
 </style>

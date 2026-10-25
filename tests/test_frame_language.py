@@ -15,4 +15,5 @@ def test_frame_texts_follow_the_language_setting(monkeypatch):
     assert ls._("Règles du jeu") == "Spielregeln"
     monkeypatch.setattr(ls, "load_config", lambda: {})
     assert ls._("Règles du jeu") == "Règles du jeu"            # français par défaut
-    assert ls._("Texte inconnu %(x)s", x=1) == "Texte inconnu 1"
+    unknown = "Texte inconnu %(x)s"  # variable : pas un texte à traduire
+    assert ls._(unknown, x=1) == "Texte inconnu 1"

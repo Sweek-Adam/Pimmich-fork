@@ -123,6 +123,47 @@ Le script est conçu pour être relancé sans risque. Il détectera l'absence du
 
 ---
 
+### Fêtes, jeux et médias
+
+**Q : Comment utiliser le cadre pendant une fête (anniversaire, mariage) ?**
+
+**R :** Ouvrez `Partage > Invités`, carte « Mode fête ». Donnez un nom et une durée, puis lancez.
+- Un grand QR code s'affiche sur le cadre.
+- Les invités envoient leurs photos depuis leur téléphone, sur le même Wi-Fi.
+- Chaque photo passe aussitôt en grand avec le prénom de l'invité, puis dans le « Mur de la fête ».
+- Les photos sont gardées dans leur propre album, disponible ensuite dans `Sources`.
+- À l'heure prévue, ou avec le bouton, le diaporama habituel reprend.
+
+**Q : Quels jeux peut-on faire avec le cadre ?**
+
+**R :** Ouvrez le menu `Jeux`. Il propose :
+- Où et quand ?
+- Avant / après
+- Zoom mystère
+- Puzzle express
+- Ligne du temps
+- Qui est-ce ?
+- Légende la plus drôle
+- Défi photo
+- Mémoire
+- Le plus proche
+- Bingo souvenirs
+- Un mélange de tout
+
+Le cadre affiche la partie et ses règles à côté d'un QR code, et chacun répond sur son téléphone (page `/jeu`). Les temps (réponse, vote, défi…) se règlent dans le même menu. Dès que tout le monde a répondu, la réponse s'affiche.
+
+**Q : Une photo ou une vidéo n'apparaît pas sur le cadre. Que faire ?**
+
+**R :** Ouvrez `Photos > Préparation des médias`. La page liste tous les médias reçus, préparés ou non, avec la raison d'un éventuel échec. Le bouton « Préparer » rattrape un média resté de côté. Pendant la journée, les grosses vidéos attendent la nuit, quand le cadre est éteint (« Prévue cette nuit »). Les échecs sont réessayés chaque nuit.
+
+**Q : Mes photos animées (Samsung, Google, Live Photos) bougent-elles sur le cadre ?**
+
+**R :** Oui. Leur courte vidéo est rejouée sur la photo, comme un GIF, en photo seule et dans les dispositions. Les animations sont créées la nuit, ou tout de suite depuis `Préparation des médias`. Les courtes vidéos (15 s au plus) peuvent aussi tourner en boucle, sans le son, dans les dispositions.
+
+**Q : Les textes du cadre peuvent-ils être dans une autre langue ?**
+
+**R :** Oui, avec `Écran > Affichage`, réglage « Langue des textes affichés sur le cadre » : français, anglais, espagnol, allemand ou japonais. L'interface d'administration, elle, suit la langue du navigateur.
+
 ### Dépannage (Troubleshooting)
 
 **Q : J'ai un problème, où puis-je trouver de l'aide ?**

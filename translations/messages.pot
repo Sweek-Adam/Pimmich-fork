@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-25 17:38+0100\n"
+"POT-Creation-Date: 2026-10-25 17:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,153 +228,276 @@ msgstr ""
 msgid "Accueil"
 msgstr ""
 
-#: frontend/src/nav.ts:24 frontend/src/views/LibraryView.vue:120
+#: frontend/src/nav.ts:23 frontend/src/views/NewsView.vue:13
+msgid "Nouveautés"
+msgstr ""
+
+#: frontend/src/nav.ts:25 frontend/src/views/LibraryView.vue:120
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:53
 msgid "Photos"
 msgstr ""
 
-#: frontend/src/nav.ts:25 frontend/src/views/ImportView.vue:183
+#: frontend/src/nav.ts:26 frontend/src/views/ImportView.vue:183
 #: templates/configure.html.jinja:145
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
 msgstr ""
 
-#: frontend/src/components/SmartAlbumEditor.vue:107 frontend/src/nav.ts:26
+#: frontend/src/components/SmartAlbumEditor.vue:107 frontend/src/nav.ts:27
 #: templates/configure.html.jinja:146
 #: templates/configure/_smart_albums.html.jinja:37
 msgid "Sources"
 msgstr ""
 
-#: frontend/src/nav.ts:27
+#: frontend/src/nav.ts:28 frontend/src/news.ts:23
 msgid "Préparation des médias"
 msgstr ""
 
-#: frontend/src/nav.ts:28 templates/configure.html.jinja:147
+#: frontend/src/nav.ts:29 templates/configure.html.jinja:147
 msgid "Bibliothèque"
 msgstr ""
 
-#: frontend/src/nav.ts:29 frontend/src/views/HomeView.vue:165
+#: frontend/src/nav.ts:30 frontend/src/views/HomeView.vue:173
 #: frontend/src/views/QueueView.vue:86 templates/configure.html.jinja:148
 #: templates/configure/tab_accueil.html.jinja:59
 msgid "À suivre"
 msgstr ""
 
-#: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:30
+#: frontend/src/components/SpotifyCard.vue:83 frontend/src/nav.ts:31
 #: templates/configure.html.jinja:149
 #: templates/configure/_son_spotify.html.jinja:112
 msgid "Playlists"
 msgstr ""
 
-#: frontend/src/nav.ts:31 frontend/src/views/LibraryView.vue:125
+#: frontend/src/nav.ts:32 frontend/src/views/LibraryView.vue:125
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
 msgid "Favoris"
 msgstr ""
 
-#: frontend/src/nav.ts:32 templates/configure.html.jinja:151
+#: frontend/src/nav.ts:33 templates/configure.html.jinja:151
 msgid "Carte"
 msgstr ""
 
-#: frontend/src/nav.ts:33 frontend/src/views/MessagesView.vue:145
+#: frontend/src/nav.ts:34 frontend/src/views/MessagesView.vue:145
 #: templates/configure.html.jinja:152
 #: templates/configure/tab_apercu.html.jinja:73
 #: templates/configure/tab_sources.html.jinja:181
 msgid "Messages"
 msgstr ""
 
-#: frontend/src/nav.ts:35 frontend/src/views/DisplayView.vue:25
+#: frontend/src/nav.ts:36 frontend/src/views/DisplayView.vue:25
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:33
 msgid "Écran"
 msgstr ""
 
-#: frontend/src/nav.ts:36 templates/configure.html.jinja:157
+#: frontend/src/nav.ts:37 templates/configure.html.jinja:157
 msgid "Dispositions"
 msgstr ""
 
-#: frontend/src/nav.ts:37 templates/configure.html.jinja:158
+#: frontend/src/nav.ts:38 templates/configure.html.jinja:158
 msgid "Affichage"
 msgstr ""
 
-#: frontend/src/nav.ts:38 templates/configure.html.jinja:159
+#: frontend/src/nav.ts:39 templates/configure.html.jinja:159
 msgid "Horloge & météo"
 msgstr ""
 
-#: frontend/src/nav.ts:39 frontend/src/views/CaptionsView.vue:12
+#: frontend/src/nav.ts:40 frontend/src/views/CaptionsView.vue:12
 #: templates/configure.html.jinja:160
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
 msgstr ""
 
-#: frontend/src/nav.ts:40 templates/configure.html.jinja:161
+#: frontend/src/nav.ts:41 templates/configure.html.jinja:161
 msgid "Légendes"
 msgstr ""
 
-#: frontend/src/nav.ts:41 templates/configure.html.jinja:162
+#: frontend/src/nav.ts:42 templates/configure.html.jinja:162
 msgid "Son"
 msgstr ""
 
-#: frontend/src/nav.ts:43 templates/configure.html.jinja:96
+#: frontend/src/nav.ts:44 templates/configure.html.jinja:96
 #: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:34
 msgid "Partage"
 msgstr ""
 
-#: frontend/src/nav.ts:44 templates/configure.html.jinja:167
+#: frontend/src/nav.ts:45 templates/configure.html.jinja:167
 #: templates/configure/_playlist_builder.html.jinja:44
 #: utils/import_progress.py:14
 msgid "Invités"
 msgstr ""
 
-#: frontend/src/nav.ts:45 templates/configure.html.jinja:168
+#: frontend/src/nav.ts:46 templates/configure.html.jinja:168
 msgid "À valider"
 msgstr ""
 
-#: frontend/src/nav.ts:46 templates/configure.html.jinja:169
+#: frontend/src/nav.ts:47 templates/configure.html.jinja:169
 msgid "Telegram"
 msgstr ""
 
-#: frontend/src/nav.ts:48 templates/game.html.jinja:6
+#: frontend/src/nav.ts:49 templates/game.html.jinja:6
 msgid "Jeux"
 msgstr ""
 
-#: frontend/src/nav.ts:49 frontend/src/views/GuestsView.vue:187
+#: frontend/src/nav.ts:50 frontend/src/views/GuestsView.vue:187
 #: templates/game.html.jinja:39
 msgid "Jeux de famille"
 msgstr ""
 
-#: frontend/src/nav.ts:51 templates/configure.html.jinja:96
+#: frontend/src/nav.ts:52 templates/configure.html.jinja:96
 #: templates/configure.html.jinja:246 templates/configure/_tour.html.jinja:35
 msgid "Système"
 msgstr ""
 
-#: frontend/src/nav.ts:52 templates/configure.html.jinja:174
+#: frontend/src/nav.ts:53 templates/configure.html.jinja:174
 msgid "Comptes"
 msgstr ""
 
-#: frontend/src/nav.ts:53 templates/configure.html.jinja:176
+#: frontend/src/nav.ts:54 templates/configure.html.jinja:176
 msgid "Notifications"
 msgstr ""
 
-#: frontend/src/nav.ts:54 templates/configure.html.jinja:177
+#: frontend/src/nav.ts:55 templates/configure.html.jinja:177
 msgid "Maintenance"
 msgstr ""
 
-#: frontend/src/nav.ts:55 templates/configure.html.jinja:178
+#: frontend/src/nav.ts:56 templates/configure.html.jinja:178
 msgid "Réseau"
 msgstr ""
 
-#: frontend/src/nav.ts:56 templates/configure.html.jinja:180
+#: frontend/src/nav.ts:57 templates/configure.html.jinja:180
 msgid "Commande vocale"
 msgstr ""
 
-#: frontend/src/nav.ts:57 templates/configure.html.jinja:182
+#: frontend/src/nav.ts:58 templates/configure.html.jinja:182
 msgid "Statistiques"
 msgstr ""
 
-#: frontend/src/nav.ts:58 templates/configure.html.jinja:183
+#: frontend/src/nav.ts:59 templates/configure.html.jinja:183
 msgid "Journaux"
+msgstr ""
+
+#: frontend/src/news.ts:7
+msgid "Le cadre parle votre langue"
+msgstr ""
+
+#: frontend/src/news.ts:8
+msgid ""
+"Les textes affichés sur le cadre (jeux, fête, compositions) suivent la "
+"langue choisie dans Affichage."
+msgstr ""
+
+#: frontend/src/news.ts:9
+msgid "Menu Jeux"
+msgstr ""
+
+#: frontend/src/news.ts:10
+msgid ""
+"Onze jeux de famille joués depuis les téléphones : lancez une partie, "
+"suivez-la en direct et réglez les temps."
+msgstr ""
+
+#: frontend/src/news.ts:11
+msgid "Recherche par contenu"
+msgstr ""
+
+#: frontend/src/news.ts:12
+msgid ""
+"Avec un serveur Immich : cherchez « plage », « chien »... dans la "
+"bibliothèque."
+msgstr ""
+
+#: frontend/src/news.ts:13 frontend/src/views/GuestsView.vue:166
+msgid "Mode fête"
+msgstr ""
+
+#: frontend/src/news.ts:14
+msgid ""
+"Un grand QR code à l'écran : les photos des invités s'affichent tout de "
+"suite, puis dans le Mur de la fête."
+msgstr ""
+
+#: frontend/src/news.ts:15 frontend/src/views/MaintenanceView.vue:202
+msgid "Profil matériel"
+msgstr ""
+
+#: frontend/src/news.ts:16
+msgid ""
+"Pimmich s'adapte à votre Raspberry Pi (2, 3, 4 ou 5) et propose des "
+"réglages conseillés."
+msgstr ""
+
+#: frontend/src/news.ts:17
+msgid "Photos animées et courtes vidéos"
+msgstr ""
+
+#: frontend/src/news.ts:18
+msgid ""
+"Les photos animées des téléphones s'animent comme des GIF ; les courtes "
+"vidéos tournent en boucle dans les dispositions."
+msgstr ""
+
+#: frontend/src/news.ts:19 frontend/src/views/MediaView.vue:176
+msgid "Gagner de la place"
+msgstr ""
+
+#: frontend/src/news.ts:20
+msgid ""
+"Les très gros originaux déjà prêts peuvent être remplacés par une version"
+" réduite."
+msgstr ""
+
+#: frontend/src/news.ts:21
+msgid "Le travail lourd la nuit"
+msgstr ""
+
+#: frontend/src/news.ts:22
+msgid ""
+"Les grosses vidéos sont préparées quand le cadre est éteint ; les échecs "
+"sont réessayés chaque nuit."
+msgstr ""
+
+#: frontend/src/news.ts:24
+msgid ""
+"Tous les médias, préparés ou non, avec un bouton pour rattraper ceux "
+"restés de côté ; détails de l'import en cours."
+msgstr ""
+
+#: frontend/src/news.ts:25
+msgid "Zone de dessin en plein écran"
+msgstr ""
+
+#: frontend/src/news.ts:26
+msgid ""
+"Feutre fluo, texte, autocollants, gomme, fonds, pression du stylet : la "
+"page invités a été améliorée."
+msgstr ""
+
+#: frontend/src/components/sources/CloudCards.vue:121 frontend/src/news.ts:27
+#: frontend/src/views/NetworkView.vue:144
+#: frontend/src/views/NetworkView.vue:194
+#: templates/configure/tab_sources.html.jinja:529
+msgid "Adresse du cadre"
+msgstr ""
+
+#: frontend/src/news.ts:28
+msgid ""
+"cadre-photo.local, .home ou Tailscale : plus besoin de connaître "
+"l'adresse IP."
+msgstr ""
+
+#: frontend/src/news.ts:29
+msgid "GIF animés"
+msgstr ""
+
+#: frontend/src/news.ts:30
+msgid ""
+"Acceptés par tous les imports et animés à l'écran, en photo seule comme "
+"dans les dispositions."
 msgstr ""
 
 #: frontend/src/components/AgendaCard.vue:32
@@ -754,7 +877,7 @@ msgstr ""
 
 #: frontend/src/components/CaptionEditor.vue:188
 #: frontend/src/components/SmartAlbumEditor.vue:126
-#: frontend/src/views/HomeView.vue:236 frontend/src/views/PlaylistsView.vue:201
+#: frontend/src/views/HomeView.vue:244 frontend/src/views/PlaylistsView.vue:201
 #: frontend/src/views/TripsView.vue:245
 #: templates/configure/tab_carte.html.jinja:20
 #: templates/configure/tab_legendes.html.jinja:122
@@ -1327,7 +1450,7 @@ msgid "Favoris uniquement"
 msgstr ""
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
-#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:160
+#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:168
 #: frontend/src/views/LibraryView.vue:119
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
@@ -1342,7 +1465,7 @@ msgid "Photos seulement"
 msgstr ""
 
 #: frontend/src/components/SmartAlbumEditor.vue:116
-#: frontend/src/views/HomeView.vue:162
+#: frontend/src/views/HomeView.vue:170
 #: templates/configure/_smart_albums.html.jinja:46
 #: templates/configure/tab_apercu.html.jinja:10 web/routes_slideshow.py:605
 msgid "Vidéos seulement"
@@ -1380,7 +1503,7 @@ msgid "Statut Home Assistant :"
 msgstr ""
 
 #: frontend/src/components/SpotifyCard.vue:36
-#: frontend/src/views/HomeView.vue:213
+#: frontend/src/views/HomeView.vue:221
 #: templates/configure/_son_spotify.html.jinja:100
 #: templates/configure/tab_accueil.html.jinja:73
 msgid "Ambiance"
@@ -1860,13 +1983,6 @@ msgstr ""
 #: frontend/src/components/sources/CloudCards.vue:119
 #: templates/configure/tab_sources.html.jinja:527
 msgid "Relever la boîte mail (toutes les 5 minutes)"
-msgstr ""
-
-#: frontend/src/components/sources/CloudCards.vue:121
-#: frontend/src/views/NetworkView.vue:144
-#: frontend/src/views/NetworkView.vue:194
-#: templates/configure/tab_sources.html.jinja:529
-msgid "Adresse du cadre"
 msgstr ""
 
 #: frontend/src/components/sources/CloudCards.vue:122
@@ -2807,7 +2923,7 @@ msgstr ""
 msgid "Amplitude du zoom"
 msgstr ""
 
-#: frontend/src/views/DisplayView.vue:69 frontend/src/views/HomeView.vue:224
+#: frontend/src/views/DisplayView.vue:69 frontend/src/views/HomeView.vue:232
 #: templates/configure/tab_accueil.html.jinja:66
 #: templates/configure/tab_affichage.html.jinja:239
 #: utils/themed_compositions_extra.py:558
@@ -3517,10 +3633,6 @@ msgstr ""
 msgid "Les photos des invités passent par « À valider » avant d'être affichées."
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:166
-msgid "Mode fête"
-msgstr ""
-
 #: frontend/src/views/GuestsView.vue:167
 #, python-brace-format
 msgid "En cours jusqu'à {time}"
@@ -3685,7 +3797,7 @@ msgstr ""
 msgid "Allumer"
 msgstr ""
 
-#: frontend/src/views/GuestsView.vue:228 frontend/src/views/HomeView.vue:150
+#: frontend/src/views/GuestsView.vue:228 frontend/src/views/HomeView.vue:158
 #: templates/configure/tab_accueil.html.jinja:24
 #: templates/configure/tab_actions.html.jinja:37
 #: templates/configure/tab_invites.html.jinja:185
@@ -3761,81 +3873,86 @@ msgstr ""
 msgid "Créer un code"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:113
+#: frontend/src/views/HomeView.vue:115
 msgid ""
 "Éteindre complètement le Raspberry Pi ? Il faudra débrancher puis "
 "rebrancher l'alimentation pour le rallumer."
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:143
+#: frontend/src/views/HomeView.vue:144
+#, python-brace-format
+msgid "{count} nouveauté(s) sur le cadre"
+msgstr ""
+
+#: frontend/src/views/HomeView.vue:151
 msgid "Le cadre est en veille"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:146
+#: frontend/src/views/HomeView.vue:154
 #: templates/configure/tab_accueil.html.jinja:22
 #: templates/configure/tab_actions.html.jinja:27
 #: templates/configure/tab_playlists.html.jinja:20
 msgid "Photo précédente"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:148
+#: frontend/src/views/HomeView.vue:156
 msgid "Reprendre"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:148
+#: frontend/src/views/HomeView.vue:156
 msgid "Pause"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:154
+#: frontend/src/views/HomeView.vue:162
 msgid "Mettre en veille"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:154
+#: frontend/src/views/HomeView.vue:162
 msgid "Allumer le cadre"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:155
+#: frontend/src/views/HomeView.vue:163
 msgid "Éteindre le Raspberry Pi"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:156
+#: frontend/src/views/HomeView.vue:164
 msgid "Éteindre"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:174
+#: frontend/src/views/HomeView.vue:182
 #: templates/configure/tab_accueil.html.jinja:39
 msgid "État du cadre"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:181
+#: frontend/src/views/HomeView.vue:189
 msgid "Ouvrir"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:187
+#: frontend/src/views/HomeView.vue:195
 #: templates/configure/tab_accueil.html.jinja:5
 msgid "Bien démarrer"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:188
+#: frontend/src/views/HomeView.vue:196
 #: templates/configure/scripts_app.html.jinja:23
 #: templates/configure/tab_accueil.html.jinja:6
 msgid "Masquer"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:228 web/routes_trips.py:114
+#: frontend/src/views/HomeView.vue:236 web/routes_trips.py:114
 msgid "Il y a un an"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:228
+#: frontend/src/views/HomeView.vue:236
 #, python-brace-format
 msgid "Il y a {n} ans"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:235
+#: frontend/src/views/HomeView.vue:243
 msgid "Dernières actions"
 msgstr ""
 
-#: frontend/src/views/HomeView.vue:238
+#: frontend/src/views/HomeView.vue:246
 #: templates/configure/tab_accueil.html.jinja:277
 msgid "Rien pour l'instant."
 msgstr ""
@@ -4429,10 +4546,6 @@ msgstr ""
 #: frontend/src/views/MaintenanceView.vue:198
 #: templates/configure/tab_maintenance.html.jinja:19
 msgid "Alimentation conseillée pour ce modèle :"
-msgstr ""
-
-#: frontend/src/views/MaintenanceView.vue:202
-msgid "Profil matériel"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:203
@@ -5089,10 +5202,6 @@ msgid ""
 " (créée automatiquement cette nuit)."
 msgstr ""
 
-#: frontend/src/views/MediaView.vue:176
-msgid "Gagner de la place"
-msgstr ""
-
 #: frontend/src/views/MediaView.vue:178
 msgid "Analyser"
 msgstr ""
@@ -5648,6 +5757,20 @@ msgstr ""
 
 #: frontend/src/views/NetworkView.vue:205
 msgid "Choisir"
+msgstr ""
+
+#: frontend/src/views/NewsView.vue:14
+msgid ""
+"Les dernières fonctions du cadre, avec un raccourci vers chacune. Les "
+"questions fréquentes sont dans la FAQ du dépôt GitHub."
+msgstr ""
+
+#: frontend/src/views/NewsView.vue:19
+msgid "Nouveau"
+msgstr ""
+
+#: frontend/src/views/NewsView.vue:23
+msgid "Voir"
 msgstr ""
 
 #: frontend/src/views/NotificationsView.vue:33
@@ -9320,6 +9443,21 @@ msgstr ""
 msgid "Résultats du diagnostic :"
 msgstr ""
 
+#: tests/test_frame_language.py:12 utils/game_screen.py:192
+msgid "Scannez pour jouer"
+msgstr ""
+
+#: tests/test_frame_language.py:13 utils/game_screen.py:232
+#: utils/game_screen.py:325
+#, python-format
+msgid "Bravo %(name)s !"
+msgstr ""
+
+#: tests/test_frame_language.py:15 tests/test_frame_language.py:17
+#: utils/game_screen.py:196
+msgid "Règles du jeu"
+msgstr ""
+
 #: utils/ambiances.py:23
 msgid "Une photo à la fois, transitions douces."
 msgstr ""
@@ -9856,14 +9994,6 @@ msgstr ""
 msgid "Le jeu des photos de famille"
 msgstr ""
 
-#: utils/game_screen.py:192
-msgid "Scannez pour jouer"
-msgstr ""
-
-#: utils/game_screen.py:196
-msgid "Règles du jeu"
-msgstr ""
-
 #: utils/game_screen.py:214
 #, python-format
 msgid "Joueurs (%(count)s)"
@@ -9875,11 +10005,6 @@ msgstr ""
 
 #: utils/game_screen.py:217
 msgid "Entrez votre prénom sur le téléphone"
-msgstr ""
-
-#: utils/game_screen.py:232 utils/game_screen.py:325
-#, python-format
-msgid "Bravo %(name)s !"
 msgstr ""
 
 #: utils/game_screen.py:242

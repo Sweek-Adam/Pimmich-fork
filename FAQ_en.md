@@ -107,6 +107,47 @@ The script is designed to be re-run safely. It will detect that the credentials 
 
 ---
 
+### Parties, games and media
+
+**Q: How do I use the frame during a party (birthday, wedding)?**
+
+**A:** Open `Sharing > Guests`, "Party mode" card. Give a name and a duration, then start.
+- A large QR code appears on the frame.
+- Guests send their photos from their phone, on the same Wi-Fi.
+- Each photo appears right away, full screen with the guest's name, then on the "Party wall".
+- Photos are kept in their own album, available afterwards in `Sources`.
+- At the chosen time, or with the button, the usual slideshow resumes.
+
+**Q: Which games can we play with the frame?**
+
+**A:** Open the `Games` menu. It offers:
+- Where and when?
+- Before / after
+- Mystery zoom
+- Express puzzle
+- Timeline
+- Who is it?
+- Funniest caption
+- Photo challenge
+- Memory
+- Closest guess
+- Memories bingo
+- A mix of everything
+
+The frame shows the game and its rules next to a QR code, and everyone answers on their phone (`/jeu` page). Timings (answer, vote, challenge…) are set in the same menu. As soon as everyone has answered, the answer is shown.
+
+**Q: A photo or video doesn't appear on the frame. What can I do?**
+
+**A:** Open `Photos > Media preparation`. The page lists every received media item, prepared or not, with the reason for any failure. The "Prepare" button catches up an item that was left out. During the day, large videos wait for the night, when the frame is off ("Scheduled tonight"). Failures are retried every night.
+
+**Q: Do my motion photos (Samsung, Google, Live Photos) move on the frame?**
+
+**A:** Yes. Their short video plays over the photo, like a GIF, as a single photo and in layouts. Animations are created at night, or right away from `Media preparation`. Short videos (15 s at most) can also loop, muted, in layouts.
+
+**Q: Can the frame's texts be in another language?**
+
+**A:** Yes, in `Screen > Display`, "Language of the texts shown on the frame" setting: French, English, Spanish, German or Japanese. The admin interface follows your browser's language.
+
 ### Troubleshooting
 
 **Q: I have a problem, where can I find help?**

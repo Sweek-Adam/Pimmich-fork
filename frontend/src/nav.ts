@@ -20,6 +20,7 @@ export interface NavGroup {
 export const groups: NavGroup[] = [
   { key: "accueil", label: () => t("Accueil"), icon: "fa-home", items: [
     { label: () => t("Accueil"), icon: "fa-home", tab: "tab-accueil", route: "/" },
+    { label: () => t("Nouveautés"), icon: "fa-gift", tab: "tab-nouveautes", route: "/nouveautes" },
   ] },
   { key: "photos", label: () => t("Photos"), icon: "fa-images", items: [
     { label: () => t("Importer"), icon: "fa-file-import", tab: "tab-actions", route: "/importer" },
