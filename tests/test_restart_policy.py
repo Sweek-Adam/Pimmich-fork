@@ -26,15 +26,16 @@ def test_a_sleeping_slideshow_is_not_woken_up(calls, monkeypatch):
     assert calls == ["start"]
 
 
-def test_restart_waits_for_the_end_of_the_import(calls, monkeypatch):
+def test_restart_waits_for_the_end_of_the_import(calls, monkeypatch, tmp_path):
     monkeypatch.setattr(sm, "is_slideshow_running", lambda: True)
+    monkeypatch.setattr(sm, "RELOAD_FLAG", tmp_path / "reload.flag")
     events = import_progress.tracked("gdrive", "prepare", iter([{"type": "progress", "current": 1, "total": 3}]))
     next(events)  # préparation en cours
     sm.restart_slideshow_process()
     sm.restart_slideshow_process()
     assert calls == [] and sm._restart_state["pending"]
-    list(events)  # toutes les photos sont préparées : un seul redémarrage
-    assert calls.count("start") == 1 and not sm._restart_state["pending"]
+    list(events)  # toutes les photos sont préparées : un seul rechargement des médias (sans redémarrer)
+    assert sm.RELOAD_FLAG.exists() and calls.count("start") == 0 and not sm._restart_state["pending"]
 
 
 def test_two_quick_requests_make_one_restart(calls, monkeypatch):

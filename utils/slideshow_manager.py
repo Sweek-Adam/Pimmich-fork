@@ -71,6 +71,7 @@ logger.debug("----------------Initialisation Slideshow Manager----------------")
 # Constantes
 # ============================================================
 PID_FILE = "/tmp/pimmich_slideshow.pid"
+RELOAD_FLAG = Path("/tmp/pimmich_reload.flag")  # le diaporama refait sa liste de médias (sans redémarrer)
 
 # ============================================================
 # Fonctions
@@ -272,6 +273,14 @@ def restart_slideshow_for_update(force_start=False):
     """
     if not _restart_allowed(force_start, "Mise à jour de contenu"):
         return
+    if not force_start and is_slideshow_running():
+        # Rechargement à chaud : la liste des médias est refaite à la diapositive suivante, sans écran figé
+        try:
+            RELOAD_FLAG.touch()
+            logger.info("📟 Médias rechargés à la prochaine diapositive (sans redémarrer le diaporama)")
+            return
+        except OSError as e:
+            logger.warning(f"📟 Rechargement à chaud impossible ({e}) : redémarrage")
     logger.info("📟 Redémarrage du diaporama pour mise à jour de contenu")
 
     # 1. Arrêter le processus existant (sans appeler set_display_power)

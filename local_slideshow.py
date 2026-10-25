@@ -1303,6 +1303,7 @@ def control_fan(temperature, threshold=55, pin=14):
 
 # --- Dispositions : compositions préparées en arrière-plan pour ne jamais ralentir le diaporama ---
 # Une composition est préparée pour un emplacement précis de la playlist (les photos qui suivent, dans l'ordre).
+RELOAD_FLAG = Path("/tmp/pimmich_reload.flag")  # voir utils/slideshow_manager.restart_slideshow_for_update
 _live_arrivals = set()  # photos de la fête tout juste arrivées : montrées seules, en grand
 _composition = {"thread": None, "ready": None, "target": None, "counter": 0, "slot": 0, "style": None}
 _queue_lock = threading.Lock()
@@ -3633,6 +3634,10 @@ def start_slideshow():
                     break
                 from utils import family_game
                 if family_game.running():  # une partie commence : l'écran du jeu (boucle principale)
+                    break
+                if RELOAD_FLAG.exists() and not is_custom_run:  # nouveaux médias : liste refaite, sans redémarrer (playlist : à sa fin)
+                    RELOAD_FLAG.unlink(missing_ok=True)
+                    logger.info("🔄 Nouveaux médias : liste du diaporama refaite")
                     break
 
                 # Ordre demandé depuis l'interface (onglet « À suivre ») : appliqué avant le média suivant
