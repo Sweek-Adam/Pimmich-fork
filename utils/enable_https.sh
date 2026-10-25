@@ -54,7 +54,7 @@ server {
     location = /pimmich_restarting.html { root /var/www/pimmich; try_files /restarting.html =502; internal; }
 
     # Page d'envoi des invités (et ses ressources) : accessible aussi en HTTP
-    location ~ ^/(upload|handle_upload|static/)  {
+    location ~ ^/(upload|handle_upload|jeu|static/)  {
         proxy_pass http://pimmich_app;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
