@@ -1210,6 +1210,41 @@ CURRENT_SLIDE = {"path": None}
 _party_cache = {"key": None, "surface": None}
 
 
+_wifi_qr_cache = {"read": 0, "height": None, "surface": None}
+
+
+def _wifi_qr_surface(height):
+    """QR code « rejoindre le Wi-Fi » (mode fête), relu toutes les 10 minutes ; le mot de passe n'est gardé que dans
+    l'image du QR code, en mémoire."""
+    cache = _wifi_qr_cache
+    if time.time() - cache["read"] < 600 and cache["height"] == height:
+        return cache["surface"]
+    cache.update(read=time.time(), height=height, surface=None)
+    try:
+        from utils import wifi_networks
+        found = wifi_networks.join_payload()
+        if not found:
+            return None
+        ssid, payload = found
+        qr = qrcode.QRCode(border=2)
+        qr.add_data(payload)
+        qr.make(fit=True)
+        caption_font = pygame.font.Font(None, max(18, height // 8))
+        text = caption_font.render(_("Wi-Fi : %(name)s", name=ssid), True, (255, 255, 255))
+        pad = max(6, height // 24)
+        side = height - text.get_height() - 3 * pad
+        qr.box_size = max(3, side // (qr.modules_count + 2 * qr.border))
+        image = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+        surface = pygame.Surface((max(image.size[0], text.get_width()) + 2 * pad, image.size[1] + text.get_height() + 3 * pad), pygame.SRCALPHA)
+        pygame.draw.rect(surface, (0, 0, 0, 150), surface.get_rect(), border_radius=pad * 2)
+        surface.blit(pygame.image.frombytes(image.tobytes(), image.size, "RGB"), ((surface.get_width() - image.size[0]) // 2, pad))
+        surface.blit(text, ((surface.get_width() - text.get_width()) // 2, image.size[1] + 2 * pad))
+        cache["surface"] = surface
+    except Exception as e:
+        logger.debug(f"QR code Wi-Fi non affiché : {e.__class__.__name__}")
+    return cache["surface"]
+
+
 def draw_party(screen, screen_width, screen_height, config):
     from utils import party
     try:
@@ -1218,6 +1253,9 @@ def draw_party(screen, screen_width, screen_height, config):
         margin = 18
         if qr is not None:
             screen.blit(qr, (screen_width - qr.get_width() - margin, screen_height - qr.get_height() - margin))
+            wifi = _wifi_qr_surface(qr.get_height()) if party.state(config).get("wifi_qr") else None
+            if wifi is not None:  # à gauche du QR code d'envoi : d'abord le Wi-Fi, puis les photos
+                screen.blit(wifi, (screen_width - qr.get_width() - wifi.get_width() - 2 * margin, screen_height - wifi.get_height() - margin))
         author = party.author_of(CURRENT_SLIDE["path"])
         name = party.state(config).get("name") or ""
         key = (author, name, screen_width)

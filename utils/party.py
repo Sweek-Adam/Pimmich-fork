@@ -51,7 +51,7 @@ def _clean_name(name):
     return name or "La fête"
 
 
-def start(config, name, hours, only_party=True, auto_approve=True, now=None):
+def start(config, name, hours, only_party=True, auto_approve=True, now=None, wifi_qr=False):
     """Nouvelle configuration avec la fête lancée (les réglages remplacés sont gardés pour la fin)."""
     now = now or datetime.now()
     if not active(config, now):
@@ -62,7 +62,7 @@ def start(config, name, hours, only_party=True, auto_approve=True, now=None):
     source = previous.get("source") or source_for(now)
     party = {"active": True, "name": _clean_name(name), "started": previous.get("started") or now.isoformat(timespec="minutes"),
              "until": (now + timedelta(hours=hours)).isoformat(timespec="minutes"), "source": source,
-             "only_party": bool(only_party), "auto_approve": bool(auto_approve),
+             "only_party": bool(only_party), "auto_approve": bool(auto_approve), "wifi_qr": bool(wifi_qr),
              "saved": previous.get("saved") or {"display_sources": list(config.get("display_sources") or []),
                                                 "layout_override": config.get("layout_override", "auto")}}
     sources = [source, "messages"] if only_party else list(dict.fromkeys(list(party["saved"]["display_sources"]) + [source]))

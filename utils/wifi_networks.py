@@ -43,6 +43,23 @@ def saved(runner=subprocess.run):
     return sorted(networks, key=lambda n: (-n["priority"], n["name"].lower()))
 
 
+def join_payload(runner=subprocess.run):
+    """Texte du QR code « rejoindre le Wi-Fi actuel » (mode fête). Le mot de passe est lu dans NetworkManager au moment
+    voulu et n'est jamais enregistré ni écrit dans les journaux. (nom du réseau, texte du QR), ou None."""
+    active = next((n for n in saved(runner) if n["active"]), None)
+    if not active:
+        return None
+    ok, out = nmcli("-s", "-g", "802-11-wireless.ssid,802-11-wireless-security.psk", "connection", "show", "uuid", active["uuid"], runner=runner)
+    lines = out.splitlines() if ok else []
+    if not lines or not lines[0]:
+        return None
+    ssid = lines[0].replace("\\:", ":")
+    key = lines[1] if len(lines) > 1 else ""
+    from utils import hotspot
+    payload = hotspot.qr_payload(ssid, key) if key else f"WIFI:T:nopass;S:{ssid};;"
+    return ssid, payload
+
+
 def check(ssid, password):
     """Message d'erreur (str) si le nom ou le mot de passe ne conviennent pas, sinon None."""
     if not ssid or len(ssid.encode()) > 32 or any(c in ssid for c in "\r\n\x00"):

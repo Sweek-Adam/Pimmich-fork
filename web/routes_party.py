@@ -7,7 +7,8 @@ from utils import party
 def _payload(config):
     data = party.state(config)
     info = {"active": party.active(config), "name": data.get("name", ""), "until": data.get("until"), "started": data.get("started"),
-            "only_party": data.get("only_party", True), "auto_approve": data.get("auto_approve", True), "source": data.get("source")}
+            "only_party": data.get("only_party", True), "auto_approve": data.get("auto_approve", True), "source": data.get("source"),
+            "wifi_qr": data.get("wifi_qr", False)}
     info.update(party.stats(config) if data.get("source") else {"photos": 0})
     return info
 
@@ -26,7 +27,8 @@ def party_start_api():
         hours = int(data.get("hours", 6))
     except (TypeError, ValueError):
         return jsonify({"success": False, "message": _("Durée invalide.")}), 400
-    config = party.start(load_config(), data.get("name"), hours, bool(data.get("only_party", True)), bool(data.get("auto_approve", True)))
+    config = party.start(load_config(), data.get("name"), hours, bool(data.get("only_party", True)), bool(data.get("auto_approve", True)),
+                         wifi_qr=bool(data.get("wifi_qr")))
     save_config(config)
     from web.routes_history import log
     log("party", _("Mode fête : %(name)s", name=config["party"]["name"]))

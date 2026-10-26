@@ -132,7 +132,7 @@ async function removeCode(token: string) {
 // --- Mode fête ---
 interface Party { active: boolean; name: string; until: string | null; only_party: boolean; auto_approve: boolean; photos: number }
 const party = ref<Party | null>(null);
-const partyForm = reactive({ name: "", hours: 6, only_party: true, auto_approve: true });
+const partyForm = reactive({ name: "", hours: 6, only_party: true, auto_approve: true, wifi_qr: false });
 async function loadParty() {
   party.value = await get<Party>("/api/party");
   if (party.value.name && !partyForm.name) partyForm.name = party.value.name;
@@ -188,6 +188,7 @@ onMounted(() => {
       <label class="field">{{ t("Durée (heures)") }}<input v-model.number="partyForm.hours" type="number" min="1" max="48"></label>
       <label class="check"><input v-model="partyForm.only_party" type="checkbox"> {{ t("Montrer seulement les photos de la fête") }}</label>
       <label class="check"><input v-model="partyForm.auto_approve" type="checkbox"> {{ t("Afficher les photos sans les valider (tous ceux qui ont le QR code peuvent envoyer)") }}</label>
+      <label class="check"><input v-model="partyForm.wifi_qr" type="checkbox"> {{ t("Afficher aussi le QR code du Wi-Fi de la maison (les invités s'y connectent d'un scan : le mot de passe est lu dans le Raspberry Pi au moment de l'afficher, jamais enregistré)") }}</label>
       <button class="btn primary" type="button" @click="startParty"><i class="fas fa-glass-cheers"></i>{{ t("Lancer la fête") }}</button>
     </template>
   </section>
