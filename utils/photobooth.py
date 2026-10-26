@@ -40,7 +40,7 @@ def settings(config):
 def discover(timeout=6):
     """Imprimantes du réseau : [{uri, name}]."""
     try:
-        out = subprocess.run(["ippfind", "-T", str(timeout)], capture_output=True, text=True, timeout=timeout + 5).stdout
+        out = subprocess.run([_tool("ippfind"), "-T", str(timeout)], capture_output=True, text=True, timeout=timeout + 5).stdout
     except (OSError, subprocess.SubprocessError):
         return []
     found = []
@@ -58,12 +58,18 @@ def _cups_down(output):
     return "Unable to connect to server" in (output or "") or "Impossible de se connecter" in (output or "")
 
 
+def _tool(name):
+    """Outil de CUPS : lpadmin est dans /usr/sbin, hors du chemin de recherche d'un compte ordinaire."""
+    import shutil
+    return shutil.which(name) or next((f"{d}/{name}" for d in ("/usr/sbin", "/usr/bin") if Path(f"{d}/{name}").exists()), name)
+
+
 def setup(uri):
     """Ajoute l'imprimante à CUPS (sans pilote). (succès, message d'erreur)."""
     if not re.match(r"^ipps?://[A-Za-z0-9.\-:\[\]]+(/[\w./\-]*)?$", uri or ""):
         return False, "Adresse d'imprimante invalide."
     try:
-        result = subprocess.run(["lpadmin", "-p", QUEUE, "-E", "-v", uri, "-m", "everywhere"], capture_output=True, text=True, timeout=60)
+        result = subprocess.run([_tool("lpadmin"), "-p", QUEUE, "-E", "-v", uri, "-m", "everywhere"], capture_output=True, text=True, timeout=60)
     except (OSError, subprocess.SubprocessError) as e:
         return False, str(e)
     output = (result.stderr or result.stdout).strip()
@@ -98,7 +104,7 @@ def send(image, title="", subtitle="", queue=QUEUE):
         card(image, title, subtitle).save(tmp.name, "JPEG", quality=95, dpi=(DPI, DPI))
         path = tmp.name
     try:
-        result = subprocess.run(["lp", "-d", queue, "-o", f"media={MEDIA}", "-o", "fit-to-page", "-o", "print-quality=5", path],
+        result = subprocess.run([_tool("lp"), "-d", queue, "-o", f"media={MEDIA}", "-o", "fit-to-page", "-o", "print-quality=5", path],
                                 capture_output=True, text=True, timeout=60)
     finally:
         Path(path).unlink(missing_ok=True)
