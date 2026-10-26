@@ -2760,6 +2760,29 @@ def draw_loading_banner(screen, text, width, height, font):
 VIDEO_HANDOVER_SECONDS = 0.4  # le temps que Wayland passe l'écran du diaporama à mpv (et inversement)
 
 
+_excerpts_computing = set()
+
+
+def video_excerpt_for(video_path, config):
+    """Extrait à lire pour cette vidéo, ou None (vidéo courte, réglage coupé, ou extrait pas encore calculé : il l'est
+    alors en arrière-plan, pour la prochaine fois)."""
+    if not config.get("video_excerpts_enabled", True):
+        return None
+    from utils import video_excerpt
+    wanted = float(config.get("video_excerpt_seconds", 20))
+    data = video_excerpt.read(video_path)
+    if data and abs(data["length"] - wanted) < 0.5:
+        return data
+    if video_path not in _excerpts_computing:
+        _excerpts_computing.add(video_path)
+
+        def work():
+            from utils.prepare_all_photos import make_excerpt
+            make_excerpt(video_path, config)
+        threading.Thread(target=work, daemon=True, name="video-excerpt").start()
+    return None
+
+
 def display_video(screen, video_path, screen_width, screen_height, config, main_font, previous_surface, clock):
     """Affiche une vidéo en plein écran en utilisant le lecteur externe mpv."""
     global _current_background_music
@@ -2849,6 +2872,10 @@ def display_video(screen, video_path, screen_width, screen_height, config, main_
         if _DIM["level"] < 0.99:  # baisse du soir : la vidéo aussi (là où le rendu de mpv le permet)
             subtitle_args.append(f'--brightness={-int((1 - _DIM["level"]) * 60)}')
         command.extend(subtitle_args)
+        excerpt = video_excerpt_for(video_path, config)
+        if excerpt:  # longue vidéo : seulement son passage le plus animé
+            command.extend([f"--start={excerpt['start']:.1f}", f"--length={excerpt['length']:.1f}"])
+            logger.info(f"[Vidéo] Extrait de {excerpt['length']:.0f} s à partir de {excerpt['start']:.0f} s")
         command.append(video_path)
 
         if audio_enabled:

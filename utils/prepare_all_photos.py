@@ -358,6 +358,20 @@ def _even(value):
     return max(2, int(value) // 2 * 2)
 
 
+def make_excerpt(video_path, config):
+    """Longue vidéo : passage le plus animé noté à côté d'elle (le cadre n'en montre que cet extrait). Jamais bloquant."""
+    if not config.get("video_excerpts_enabled", True):
+        return None
+    try:
+        from utils import video_excerpt
+        duration = video_duration(video_path)
+        if duration and duration > int(config.get("video_excerpt_above_seconds", 60)):
+            return video_excerpt.make(video_path, duration, int(config.get("video_excerpt_seconds", 20)))
+    except Exception as e:
+        logger.warning(f"Extrait de {Path(video_path).name} non calculé : {e}")
+    return None
+
+
 def video_duration(source_path):
     """Durée de la vidéo en secondes (None si inconnue)."""
     try:
@@ -591,6 +605,7 @@ def prepare_media(source_type, filename, width, height, description_map=None, us
             if video:
                 progress = lambda percent, info: import_progress.work_progress(source_type, percent, speed=info)
                 prepare_video(src_path, str(prepared_dir / f"{base_name}.mp4"), width, height, on_progress=progress)
+                make_excerpt(prepared_dir / f"{base_name}.mp4", load_config())
                 result = ("vidéo", f"{base_name}_thumbnail.jpg")
             else:
                 dest_filename = f"{base_name}.jpg"
