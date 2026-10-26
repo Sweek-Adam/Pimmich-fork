@@ -977,6 +977,25 @@
   ]
  ],
  [
+  "/api/photobooth",
+  [
+   "GET",
+   "PUT"
+  ]
+ ],
+ [
+  "/api/photobooth/printers",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/photobooth/test",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/ping",
   [
    "GET"
@@ -2146,6 +2165,12 @@
   "/upload/now",
   [
    "GET"
+  ]
+ ],
+ [
+  "/upload/print",
+  [
+   "POST"
   ]
  ],
  [

@@ -46,6 +46,20 @@
       <div class="card-title"><span class="emoji">🎉</span>{{ party_name }}</div>
       <p class="small">{{ _('Envoyez vos photos de la fête : elles apparaissent tout de suite sur le cadre, avec votre prénom.') }}</p>
       <a class="btn green" href="#photos-box">📷 {{ _('Envoyer mes photos') }}</a>
+      {% if photobooth %}
+      <button class="btn" type="button" id="print-now">🖨️ {{ _("Imprimer la photo à l'écran") }}</button>
+      <p class="small" id="print-status"></p>
+      <script>
+        document.getElementById("print-now").addEventListener("click", async (event) => {
+          event.target.disabled = true;
+          try {
+            const r = await (await fetch("{{ url_for('guest_print_api') }}", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })).json();
+            document.getElementById("print-status").textContent = r.message || "";
+          } catch (e) { document.getElementById("print-status").textContent = {{ _("L'imprimante ne répond pas.")|tojson }}; }
+          setTimeout(() => { event.target.disabled = false; }, 4000);
+        });
+      </script>
+      {% endif %}
     </section>
     {% endif %}
 

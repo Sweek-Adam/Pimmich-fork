@@ -3,6 +3,7 @@ import { onMounted, reactive, ref } from "vue";
 import DailyPhotoCard from "../components/DailyPhotoCard.vue";
 import FrameWallCard from "../components/FrameWallCard.vue";
 import SimpleModeCard from "../components/SimpleModeCard.vue";
+import PhotoboothCard from "../components/PhotoboothCard.vue";
 import SettingsPage from "../components/SettingsPage.vue";
 import { get, post } from "../api";
 import { boot } from "../boot";
@@ -220,6 +221,7 @@ onMounted(() => {
 
   <SettingsPage :sections="sections" />
 
+  <PhotoboothCard v-if="boot.admin" />
   <SimpleModeCard v-if="boot.admin" />
   <FrameWallCard v-if="boot.admin" />
   <DailyPhotoCard v-if="boot.admin" />

@@ -54,6 +54,9 @@ def _clean_name(name):
 def start(config, name, hours, only_party=True, auto_approve=True, now=None):
     """Nouvelle configuration avec la fête lancée (les réglages remplacés sont gardés pour la fin)."""
     now = now or datetime.now()
+    if not active(config, now):
+        from utils import photobooth
+        photobooth.reset_counts()  # nouvelle fête : chacun retrouve ses tirages
     hours = max(1, min(MAX_HOURS, int(hours)))
     previous = state(config) if active(config, now) else {}
     source = previous.get("source") or source_for(now)

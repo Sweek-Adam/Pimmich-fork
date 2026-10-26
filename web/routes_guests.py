@@ -76,10 +76,17 @@ def upload_page():
     from utils import party
     response = app.make_response(render_template('upload.html.jinja', guest_messages_enabled=config.get("guest_messages_enabled", True),
                                                  frame_width=int(config.get("display_width", 1920)), frame_height=int(config.get("display_height", 1080)),
-                                                 party_name=party.state(config).get("name") if party.active(config) else None))
+                                                 party_name=party.state(config).get("name") if party.active(config) else None,
+                                                 photobooth=party.active(config) and _photobooth_open(config)))
     if not trusted_guests.valid(request.cookies.get(trusted_guests.COOKIE)):  # identifiant de l'appareil (invités de confiance)
         response.set_cookie(trusted_guests.COOKIE, trusted_guests.new_device(), max_age=5 * 365 * 86400, httponly=True, samesite="Lax")
     return response
+
+
+def _photobooth_open(config):
+    from utils import photobooth
+    booth = photobooth.settings(config)
+    return bool(booth["enabled"] and booth["uri"] and booth["per_guest"])
 
 
 @app.route('/handle_upload', methods=['POST'])
@@ -165,6 +172,8 @@ def publish_party_photos(paths, guest_name=""):
             continue
         if kind == "photo":
             party.push_live(BASE_DIR / "static" / "prepared" / source / prep.prepared_name(target.name), guest_name)
+            from web.routes_party import auto_print
+            auto_print(target)  # photomaton automatique (si activé)
         logger.info(f"[Fête] Photo de {guest_name or 'un invité'} ajoutée : {target.name}")
 
 
