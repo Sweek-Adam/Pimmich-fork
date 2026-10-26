@@ -4,6 +4,10 @@ import { currentLang, t } from "../i18n";
 import { NEWS, lastSeen, markSeen } from "../news";
 
 const seenBefore = lastSeen();
+const REPO = "https://github.com/Sweek-Adam/Pimmich-fork/blob/main/";
+const french = () => currentLang().startsWith("fr");
+const manualUrl = () => REPO + (french() ? "MANUEL.md" : "MANUAL_en.md");
+const faqUrl = () => REPO + (french() ? "FAQ.md" : "FAQ_en.md");
 const dateLabel = (d: string) => new Date(d).toLocaleDateString(currentLang(), { day: "numeric", month: "long", year: "numeric" });
 onMounted(markSeen);
 </script>
@@ -12,6 +16,10 @@ onMounted(markSeen);
   <section class="card">
     <div class="card-head"><h2><i class="fas fa-gift"></i>{{ t("Nouveautés") }}</h2></div>
     <p class="small muted">{{ t("Les dernières fonctions du cadre, avec un raccourci vers chacune. Les questions fréquentes sont dans la FAQ du dépôt GitHub.") }}</p>
+    <p class="small links">
+      <a class="btn small" :href="manualUrl()" target="_blank" rel="noopener"><i class="fas fa-book"></i> {{ t("Manuel du cadre") }}</a>
+      <a class="btn small" :href="faqUrl()" target="_blank" rel="noopener"><i class="fas fa-question-circle"></i> {{ t("Questions fréquentes") }}</a>
+    </p>
     <ul class="news">
       <li v-for="n in NEWS" :key="n.id" :class="{ fresh: n.id > seenBefore }">
         <i class="fas" :class="n.icon"></i>
@@ -34,4 +42,5 @@ onMounted(markSeen);
 .body { flex: 1; min-width: 0; }
 .head { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
 .btn.small { padding: .3rem .7rem; font-size: .82rem; }
+.links { display: flex; gap: .5rem; flex-wrap: wrap; }
 </style>

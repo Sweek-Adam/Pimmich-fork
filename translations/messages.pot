@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 15:46+0100\n"
+"POT-Creation-Date: 2026-10-26 18:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -254,7 +254,7 @@ msgstr ""
 msgid "Accueil"
 msgstr ""
 
-#: frontend/src/nav.ts:24 frontend/src/views/NewsView.vue:13
+#: frontend/src/nav.ts:24 frontend/src/views/NewsView.vue:17
 msgid "Nouveautés"
 msgstr ""
 
@@ -276,7 +276,7 @@ msgstr ""
 msgid "Sources"
 msgstr ""
 
-#: frontend/src/nav.ts:29 frontend/src/news.ts:25
+#: frontend/src/nav.ts:29 frontend/src/news.ts:49
 msgid "Préparation des médias"
 msgstr ""
 
@@ -408,130 +408,250 @@ msgid "Journaux"
 msgstr ""
 
 #: frontend/src/news.ts:7
-msgid "Pimmich sur un ordinateur"
+msgid "Coloriser les photos noir et blanc"
 msgstr ""
 
 #: frontend/src/news.ts:8
+msgid ""
+"Les vieilles photos noir et blanc retrouvent des couleurs, calculées sur "
+"le cadre (une copie, l'original ne change pas). À installer une fois dans"
+" Importer."
+msgstr ""
+
+#: frontend/src/components/AutoCaptionsCard.vue:25 frontend/src/news.ts:9
+msgid "Légendes proposées automatiquement"
+msgstr ""
+
+#: frontend/src/news.ts:10
+msgid ""
+"Une courte description et des mots-clés pour chaque photo, pour la "
+"recherche ; à adopter en un clic (Immich, ou Claude en option)."
+msgstr ""
+
+#: frontend/src/components/CastCard.vue:40 frontend/src/news.ts:11
+msgid "Diffuser sur une télé"
+msgstr ""
+
+#: frontend/src/news.ts:12
+msgid "Le diaporama ou le film de l'année sur une télé Chromecast, sans câble."
+msgstr ""
+
+#: frontend/src/news.ts:13
+msgid "Plus proches"
+msgstr ""
+
+#: frontend/src/news.ts:14
+msgid ""
+"« Je pense à vous » fait s'envoler des cœurs sur les autres cadres ; "
+"commentaires des invités sur la photo affichée ; rappels d'anniversaire ;"
+" bilan du mois par e-mail."
+msgstr ""
+
+#: frontend/src/news.ts:15
+msgid "Photos oubliées et extraits vidéo"
+msgstr ""
+
+#: frontend/src/news.ts:16
+msgid ""
+"Les photos rarement montrées reviennent plus souvent ; les longues vidéos"
+" n'en montrent que le passage le plus animé."
+msgstr ""
+
+#: frontend/src/news.ts:17
+msgid "Scanner, souvenirs vocaux, Ken Burns"
+msgstr ""
+
+#: frontend/src/news.ts:18
+msgid ""
+"Numérisez les tirages papier avec le téléphone, racontez une photo de "
+"vive voix, et laissez le cadre zoomer lentement vers les visages."
+msgstr ""
+
+#: frontend/src/news.ts:19
+msgid "Livre, calendrier et film de l'année"
+msgstr ""
+
+#: frontend/src/news.ts:20
+msgid ""
+"Un livre photo prêt à imprimer, un calendrier avec les anniversaires et "
+"un petit film en musique, en bas de la bibliothèque."
+msgstr ""
+
+#: frontend/src/news.ts:21
+msgid "Photomaton et mur de cadres"
+msgstr ""
+
+#: frontend/src/news.ts:22
+msgid ""
+"Pendant une fête, les invités impriment la photo affichée ; plusieurs "
+"cadres côte à côte montrent ensemble une grande photo."
+msgstr ""
+
+#: frontend/src/components/SimpleModeCard.vue:34 frontend/src/news.ts:23
+msgid "Mode grands-parents"
+msgstr ""
+
+#: frontend/src/news.ts:24
+msgid ""
+"Une page à très gros boutons pour le téléphone de ceux qui n'aiment pas "
+"les applications, ouverte par un QR code."
+msgstr ""
+
+#: frontend/src/news.ts:25
+msgid "Télécommande de la télé et détecteur de mouvement"
+msgstr ""
+
+#: frontend/src/news.ts:26
+msgid ""
+"Pilotez le cadre avec la télécommande de la télé (HDMI-CEC) ; avec un "
+"petit capteur, l'écran s'éteint quand personne n'est là."
+msgstr ""
+
+#: frontend/src/components/DailyPhotoCard.vue:33 frontend/src/news.ts:27
+msgid "Photo du jour par e-mail"
+msgstr ""
+
+#: frontend/src/news.ts:28
+msgid ""
+"Pour les proches sans cadre : une photo par jour, un souvenir « ce "
+"jour-là » de préférence."
+msgstr ""
+
+#: frontend/src/news.ts:29
+msgid "Sauvegarde automatique chaque semaine"
+msgstr ""
+
+#: frontend/src/news.ts:30
+msgid ""
+"Photos, réglages et messages copiés chaque semaine sur un disque USB ou "
+"un NAS, la nuit."
+msgstr ""
+
+#: frontend/src/news.ts:31
+msgid "Pimmich sur un ordinateur"
+msgstr ""
+
+#: frontend/src/news.ts:32
 msgid ""
 "Édition « événement » pour un mariage ou une fête : Pimmich sur un Mac ou"
 " un PC, le diaporama sur une télé ou un vidéoprojecteur (voir "
 "EVENEMENT.md sur GitHub)."
 msgstr ""
 
-#: frontend/src/news.ts:9
+#: frontend/src/news.ts:33
 msgid "Le cadre parle votre langue"
 msgstr ""
 
-#: frontend/src/news.ts:10
+#: frontend/src/news.ts:34
 msgid ""
 "Les textes affichés sur le cadre (jeux, fête, compositions) suivent la "
 "langue choisie dans Affichage."
 msgstr ""
 
-#: frontend/src/news.ts:11
+#: frontend/src/news.ts:35
 msgid "Menu Jeux"
 msgstr ""
 
-#: frontend/src/news.ts:12
+#: frontend/src/news.ts:36
 msgid ""
 "Onze jeux de famille joués depuis les téléphones : lancez une partie, "
 "suivez-la en direct et réglez les temps."
 msgstr ""
 
-#: frontend/src/news.ts:13
+#: frontend/src/news.ts:37
 msgid "Recherche par contenu"
 msgstr ""
 
-#: frontend/src/news.ts:14
+#: frontend/src/news.ts:38
 msgid ""
 "Avec un serveur Immich : cherchez « plage », « chien »... dans la "
 "bibliothèque."
 msgstr ""
 
-#: frontend/src/news.ts:15 frontend/src/views/GuestsView.vue:176
+#: frontend/src/news.ts:39 frontend/src/views/GuestsView.vue:176
 msgid "Mode fête"
 msgstr ""
 
-#: frontend/src/news.ts:16
+#: frontend/src/news.ts:40
 msgid ""
 "Un grand QR code à l'écran : les photos des invités s'affichent tout de "
 "suite, puis dans le Mur de la fête."
 msgstr ""
 
-#: frontend/src/news.ts:17 frontend/src/views/MaintenanceView.vue:220
+#: frontend/src/news.ts:41 frontend/src/views/MaintenanceView.vue:220
 msgid "Profil matériel"
 msgstr ""
 
-#: frontend/src/news.ts:18
+#: frontend/src/news.ts:42
 msgid ""
 "Pimmich s'adapte à votre Raspberry Pi (2, 3, 4 ou 5) et propose des "
 "réglages conseillés."
 msgstr ""
 
-#: frontend/src/news.ts:19
+#: frontend/src/news.ts:43
 msgid "Photos animées et courtes vidéos"
 msgstr ""
 
-#: frontend/src/news.ts:20
+#: frontend/src/news.ts:44
 msgid ""
 "Les photos animées des téléphones s'animent comme des GIF ; les courtes "
 "vidéos tournent en boucle dans les dispositions."
 msgstr ""
 
-#: frontend/src/news.ts:21 frontend/src/views/MediaView.vue:184
+#: frontend/src/news.ts:45 frontend/src/views/MediaView.vue:184
 msgid "Gagner de la place"
 msgstr ""
 
-#: frontend/src/news.ts:22
+#: frontend/src/news.ts:46
 msgid ""
 "Les très gros originaux déjà prêts peuvent être remplacés par une version"
 " réduite."
 msgstr ""
 
-#: frontend/src/news.ts:23
+#: frontend/src/news.ts:47
 msgid "Le travail lourd la nuit"
 msgstr ""
 
-#: frontend/src/news.ts:24
+#: frontend/src/news.ts:48
 msgid ""
 "Les grosses vidéos sont préparées quand le cadre est éteint ; les échecs "
 "sont réessayés chaque nuit."
 msgstr ""
 
-#: frontend/src/news.ts:26
+#: frontend/src/news.ts:50
 msgid ""
 "Tous les médias, préparés ou non, avec un bouton pour rattraper ceux "
 "restés de côté ; détails de l'import en cours."
 msgstr ""
 
-#: frontend/src/news.ts:27
+#: frontend/src/news.ts:51
 msgid "Zone de dessin en plein écran"
 msgstr ""
 
-#: frontend/src/news.ts:28
+#: frontend/src/news.ts:52
 msgid ""
 "Feutre fluo, texte, autocollants, gomme, fonds, pression du stylet : la "
 "page invités a été améliorée."
 msgstr ""
 
-#: frontend/src/components/sources/CloudCards.vue:121 frontend/src/news.ts:29
+#: frontend/src/components/sources/CloudCards.vue:121 frontend/src/news.ts:53
 #: frontend/src/views/NetworkView.vue:144
 #: frontend/src/views/NetworkView.vue:194
 #: templates/configure/tab_sources.html.jinja:529
 msgid "Adresse du cadre"
 msgstr ""
 
-#: frontend/src/news.ts:30
+#: frontend/src/news.ts:54
 msgid ""
 "cadre-photo.local, .home ou Tailscale : plus besoin de connaître "
 "l'adresse IP."
 msgstr ""
 
-#: frontend/src/news.ts:31
+#: frontend/src/news.ts:55
 msgid "GIF animés"
 msgstr ""
 
-#: frontend/src/news.ts:32
+#: frontend/src/news.ts:56
 msgid ""
 "Acceptés par tous les imports et animés à l'écran, en photo seule comme "
 "dans les dispositions."
@@ -622,10 +742,6 @@ msgid ""
 "Avec Claude, une copie réduite de chaque photo est envoyée à Anthropic "
 "pour être décrite (environ 0,7 centime par photo, facturé sur votre "
 "compte Anthropic). Continuer ?"
-msgstr ""
-
-#: frontend/src/components/AutoCaptionsCard.vue:25
-msgid "Légendes proposées automatiquement"
 msgstr ""
 
 #: frontend/src/components/AutoCaptionsCard.vue:26
@@ -1007,10 +1123,6 @@ msgstr ""
 msgid "Annuler"
 msgstr ""
 
-#: frontend/src/components/CastCard.vue:40
-msgid "Diffuser sur une télé"
-msgstr ""
-
 #: frontend/src/components/CastCard.vue:41
 msgid ""
 "Le diaporama ou le film de l'année sur une télé Chromecast ou Google TV "
@@ -1081,10 +1193,6 @@ msgstr ""
 
 #: frontend/src/components/ColorizeCard.vue:35
 msgid "Installer la colorisation (129 Mo)"
-msgstr ""
-
-#: frontend/src/components/DailyPhotoCard.vue:33
-msgid "Photo du jour par e-mail"
 msgstr ""
 
 #: frontend/src/components/DailyPhotoCard.vue:34
@@ -1885,10 +1993,6 @@ msgstr ""
 
 #: frontend/src/components/SimpleModeCard.vue:27
 msgid "Copiez ce lien :"
-msgstr ""
-
-#: frontend/src/components/SimpleModeCard.vue:34
-msgid "Mode grands-parents"
 msgstr ""
 
 #: frontend/src/components/SimpleModeCard.vue:35
@@ -6576,17 +6680,25 @@ msgstr ""
 msgid "Choisir"
 msgstr ""
 
-#: frontend/src/views/NewsView.vue:14
+#: frontend/src/views/NewsView.vue:18
 msgid ""
 "Les dernières fonctions du cadre, avec un raccourci vers chacune. Les "
 "questions fréquentes sont dans la FAQ du dépôt GitHub."
 msgstr ""
 
-#: frontend/src/views/NewsView.vue:19
+#: frontend/src/views/NewsView.vue:20
+msgid "Manuel du cadre"
+msgstr ""
+
+#: frontend/src/views/NewsView.vue:21
+msgid "Questions fréquentes"
+msgstr ""
+
+#: frontend/src/views/NewsView.vue:27
 msgid "Nouveau"
 msgstr ""
 
-#: frontend/src/views/NewsView.vue:23
+#: frontend/src/views/NewsView.vue:31
 msgid "Voir"
 msgstr ""
 

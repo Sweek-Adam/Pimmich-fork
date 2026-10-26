@@ -1,6 +1,6 @@
 # 🖼️ Pimmich – Smart Connected Photo Frame
 
-> 🎉 **New: "event" edition** — Pimmich on a Mac or PC, for a wedding or a party: see [EVENT_en.md](EVENT_en.md).
+> 📘 **How to use the frame**: [MANUAL_en.md](MANUAL_en.md) — 🎉 **"Event" edition** (Mac or PC, for a wedding or a party): [EVENT_en.md](EVENT_en.md).
 
 
 [![Tests](https://github.com/Sweek-Adam/Pimmich-fork/actions/workflows/tests.yml/badge.svg)](https://github.com/Sweek-Adam/Pimmich-fork/actions/workflows/tests.yml)
@@ -19,6 +19,7 @@ Pimmich is a Python application designed to turn a Raspberry Pi into a smart and
 
 ## 📖 Table of Contents
 
+- [📘 User manual](MANUAL_en.md)
 - [🍴 What this fork adds](#-what-this-fork-adds)
 - [✨ Main Features](#-main-features)
 - [🧰 Technologies Used](#-technologies-used)
@@ -35,39 +36,59 @@ Pimmich is a Python application designed to turn a Raspberry Pi into a smart and
 
 ## 🍴 What this fork adds
 
-On top of everything the original Pimmich offers, this fork adds in particular:
+On top of everything the original Pimmich offers, this fork adds in particular (detailed how-to:
+[📘 MANUAL_en.md](MANUAL_en.md)):
 
 #### 🖥️ New admin interface
-- Fully rebuilt interface (Vue 3), phone-friendly, **dark mode**, search, shortcuts to every section, guided tour.
-- Settings history with undo, drag and drop on the home page, statistics, searchable library (date, source, person).
+- Fully rebuilt interface (Vue 3), phone-friendly, **dark mode**, search, shortcuts to every section, guided tour, "What's new" page.
+- Settings history with undo, drag and drop on the home page, statistics, searchable library (date, source, person, content via Immich).
 - Per-family-member accounts (own uploads and playlists), multi-frame administration.
+- Simple address: `cadre-photo.local`, `.home` or the Tailscale name; interface and frame in 5 languages.
 
 #### 📸 Photos & sources
-- Google Drive, Dropbox, OneDrive (rclone), iCloud shared albums, WhatsApp import, direct sharing from Android.
+- Google Drive, Dropbox, OneDrive (rclone), iCloud shared albums, email, WhatsApp, direct sharing from Android, animated GIFs and phones' **motion photos**.
 - Automatic filtering (blurry, dark, duplicate photos, screenshots), people recognised via Immich, face-aware cropping.
-- Smart albums, "On this day", automatic place captions, Snapchat-style captions on photos and videos.
-- Several storage locations (USB disk, NAS) and automatic screen rotation.
-- **World travel map**: photos grouped by place and period, trip stories shown on the frame.
+- **Paper photo scanner** (edges found, perspective straightened, colours revived) and **colourisation** of black-and-white photos, on the Raspberry Pi.
+- **Automatic improvement** of dark or dull photos (displayed copy only).
+- **Media preparation**: inventory, catch-up, deletion of failed media, big videos prepared at night, space saver.
+- Smart albums, "On this day", place captions, **automatically suggested captions** (Immich, or Claude as an option), Snapchat-style captions.
+- Several storage locations (USB disk, NAS), automatic screen rotation, world travel map.
 
 #### 🖼️ Display
 - Layouts (mosaic, wall, magazine…) prepared ahead of time, family layouts (birthdays with name and age, holidays…).
-- **Videos only** mode, chaining without a loading screen.
-- Fully customisable clock (font, size, colours, background), animated weather, sun and moon, quote of the day.
-- Family calendar (Google Calendar), countdowns, adjustable display frequencies, evening dimming and night clock.
-- New transitions, synced to the music beat, and seasonal moods (Halloween, Christmas, Easter…).
+- **Ken Burns** effect (slow zoom towards faces), **forgotten photos** brought back, **excerpts** of long videos (the liveliest part).
+- Customisable clock, animated weather, sun and moon, quote of the day, family calendar, countdowns.
+- "On this day", "This week" and **"Your week on the frame"** slides (Sunday evening).
+- Evening dimming, night clock, transitions synced to the music, seasonal moods.
+- Frame **boot screen** (4 styles, upload QR code) that flows into the first photo without a black screen.
+- Casting to a **Chromecast** TV (slideshow or film).
 
-#### 💌 Messages & guests
-- Scheduled or recurring messages, **drawings** with stickers, **voice messages**, reactions and a **guestbook**.
+#### 💌 Messages, guests & family
+- Scheduled or recurring messages, **drawings**, **voice messages**, reactions, **comments** on the photo shown, **guestbook**.
+- **Voice memories**: the story of a photo told out loud, played when the photo is shown.
+- **Twin frames**: automatic sharing of new items, **"Thinking of you"** (hearts fly up on the other frame), **frame wall** (one big photo across several screens).
+- **Grandparents mode**: a page with very big buttons, opened with a special link.
+- **Photo of the day** and **monthly report** by email for loved ones; **birthday reminders**.
 - Guest link reachable from outside (Tailscale) and automatically approved trusted guests.
+
+#### 🎉 Parties & games
+- **Party mode**: big QR code, guests' photos shown straight away, Party wall, **Wi-Fi QR code**.
+- **Photo booth**: 4×6 (or A4) prints on a Wi-Fi printer, with the party name.
+- **Eleven family games** played from phones ("Where and when?", "Who is it?", bingo…).
+- **"Event" edition**: Pimmich on a Mac or PC for a wedding ([EVENT_en.md](EVENT_en.md)).
+
+#### 🎁 Keepsakes
+- **Photo book of the year** (print-ready PDF), **photo calendar** with birthdays, **film of the year** with music.
 
 #### 🎵 Music
 - Spotify (player, jukebox with big cover, **karaoke** with synced lyrics), internet radios and podcasts.
 - Bluetooth, AirPlay, sleep timer, music by time of day, volume lowered during videos and voice messages.
 
 #### 🏠 Smart home & reliability
-- Home Assistant (MQTT), HDMI-CEC, Wi-Fi presence detection, notifications (ntfy).
-- One-click update with rollback, watchdog that restarts a frozen slideshow, log rotation.
-- SD card protection (log2ram, zram), full restorable backup, HTTPS access via Tailscale.
+- Home Assistant (MQTT), **TV remote** (HDMI-CEC), **motion sensor**, physical button, Wi-Fi presence detection, notifications (ntfy).
+- One-click update with rollback (and reload without restarting the slideshow), watchdog that restarts a frozen slideshow.
+- Hardware profile (Raspberry Pi 2 to 5), heavy work at night, SD card protection (log2ram, zram), limited sudo rights.
+- Full restorable backup, **automatic weekly backup** to a USB drive or NAS, HTTPS access via Tailscale.
 - Automated tests and continuous integration.
 
 ---

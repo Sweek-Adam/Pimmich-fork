@@ -26,9 +26,12 @@ Ce guide part d'une carte SD vierge et va jusqu'à un cadre photo qui démarre t
   - [Google Drive, Dropbox, OneDrive (rclone)](#google-drive-dropbox-onedrive-rclone)
   - [Commande vocale (Picovoice)](#commande-vocale-picovoice)
   - [Spotify, AirPlay et Bluetooth](#spotify-airplay-et-bluetooth)
-  - [Télévision : HDMI-CEC](#télévision--hdmi-cec)
+  - [Télévision : HDMI-CEC et télécommande](#télévision--hdmi-cec-et-télécommande)
   - [Orientation automatique (accéléromètre)](#orientation-automatique-accéléromètre)
-  - [Bouton physique (GPIO)](#bouton-physique-gpio)
+  - [Bouton physique et détecteur de mouvement (GPIO)](#bouton-physique-et-détecteur-de-mouvement-gpio)
+  - [Écran de démarrage du cadre](#écran-de-démarrage-du-cadre)
+  - [Impression (photomaton)](#impression-photomaton)
+  - [Paquets facultatifs](#paquets-facultatifs)
 - [🔄 Mises à jour et sauvegarde](#-mises-à-jour-et-sauvegarde)
 - [🩺 Dépannage rapide](#-dépannage-rapide)
 - [❓ Pour aller plus loin](#-pour-aller-plus-loin)
@@ -336,9 +339,11 @@ Le cadre apparaît ensuite sous le nom « **Cadre photo** ». La page `Écran > 
 
 Pour vérifier un service, par exemple : `systemctl --user status pimmich-spotify`.
 
-### Télévision : HDMI-CEC
+### Télévision : HDMI-CEC et télécommande
 
 Dans `Écran > Affichage`, carte « Télévision », activez « **Piloter la télévision par HDMI-CEC** » : la TV s'allume sur l'entrée du cadre au réveil et se met en veille avec lui. Activez aussi le HDMI-CEC dans les réglages de la TV (Anynet+, Bravia Sync, SimpLink…).
+
+« **Piloter le cadre avec la télécommande de la TV** » (activé par défaut) : quand la TV est sur l'entrée du cadre, ses touches pilotent le diaporama (▶ / ◀, OK, ▲ ou rouge ❤️, bleue « je pense à vous », Stop veille ; n'importe quelle touche réveille le cadre). Le compte qui fait tourner Pimmich doit appartenir au groupe `input` (c'est le cas sur Raspberry Pi OS).
 
 Pimmich utilise la commande `cec-ctl` (paquet `v4l-utils`) et le périphérique `/dev/cec0`. Si `command -v cec-ctl` ne renvoie rien, installez le paquet :
 
@@ -354,9 +359,56 @@ sudo apt install v4l-utils
 
 La bibliothèque I2C (`smbus2`) est déjà installée par `requirements.txt`.
 
-### Bouton physique (GPIO)
+### Bouton physique et détecteur de mouvement (GPIO)
 
-Le code du diaporama sait gérer un bouton de mise en veille (GPIO 23 par défaut, relié à la masse). Mais aucune page de l'interface actuelle ne permet de l'activer : cette option n'est donc pas couverte par ce guide.
+Les deux se règlent dans `Écran > Affichage` ; leurs cartes indiquent le dernier appui ou le dernier mouvement vu, pratique pour vérifier le câblage.
+
+- **Bouton** : une patte sur la broche choisie (GPIO 23 = broche physique 16 par défaut), l'autre sur une masse (broche 14). Un appui met le cadre en veille, un autre le réveille.
+- **Détecteur de mouvement** (capteur PIR HC-SR501) : VCC sur 5 V (broche 2), GND sur une masse (broche 6), OUT sur la broche choisie (GPIO 24 = broche physique 18 par défaut). L'écran s'éteint après quelques minutes sans personne et se rallume au premier passage.
+
+Si la carte indique « Bibliothèque GPIO absente », installez-la une fois :
+
+```bash
+sudo apt install -y liblgpio-dev swig && ~/pimmich/venv/bin/pip install rpi-lgpio
+```
+
+### Écran de démarrage du cadre
+
+Remplace l'écran de démarrage de Raspberry Pi OS par celui du cadre : « Votre cadre photo s'allume », dans l'un de quatre styles tiré au hasard, avec les fonctions du cadre et le QR code d'envoi ; la même image reste affichée jusqu'à la première photo (pas d'écran noir ni de texte du système).
+
+```bash
+sudo ~/pimmich/utils/install_boot_screen.sh          # installer (une minute environ)
+sudo ~/pimmich/utils/install_boot_screen.sh --undo   # revenir à l'écran de Raspberry Pi OS
+```
+
+Relancez l'installation si le nom du cadre change (le QR code contient son adresse).
+
+### Impression (photomaton)
+
+Le photomaton de fête imprime sur une imprimante Wi-Fi récente (sans pilote, « IPP Everywhere ») grâce à CUPS. `utils/optimize_pi.sh` empêche CUPS de démarrer avec le Raspberry Pi ; pour imprimer, activez-le une fois (il ne démarre alors qu'au moment d'imprimer) :
+
+```bash
+sudo ~/pimmich/utils/enable_printing.sh          # activer l'impression
+sudo ~/pimmich/utils/enable_printing.sh --undo   # la désactiver
+```
+
+Choisissez ensuite l'imprimante dans `Partage > Invités`, carte « Photomaton ».
+
+### Paquets facultatifs
+
+Certaines fonctions ont besoin d'un paquet Python en plus (ils sont listés dans `requirements.txt`, mais une installation ancienne peut ne pas les avoir) :
+
+| Fonction | Paquet |
+|---|---|
+| Colorisation des photos noir et blanc | `onnx` |
+| Diffusion sur une télé Chromecast | `pychromecast` |
+| Légendes proposées par Claude | `anthropic` |
+
+```bash
+~/pimmich/venv/bin/pip install onnx pychromecast anthropic
+```
+
+Puis redémarrez Pimmich (`Système > Maintenance`).
 
 ---
 
@@ -408,7 +460,7 @@ Au lieu de `sudo reboot`, vous pouvez aussi utiliser `Système > Maintenance > R
 `Système > Maintenance`, carte « **Sauvegarde complète** » :
 
 - « **Sans les photos** », puis « **Télécharger** » : vous obtenez un fichier `.zip` qui contient les réglages (dossier `config/`), les comptes, les playlists, les messages, dessins et messages vocaux, le livre d'or, les légendes, les réactions, la musique et l'historique. « Restaurer ce fichier » le réapplique, sur ce cadre ou sur une nouvelle installation. **Gardez ce fichier en lieu sûr** : `config/` contient vos clés et jetons d'accès (Immich, météo…).
-- « **Avec les photos, sur un disque USB ou un NAS** » : ajoutez d'abord un support dans la carte « Stockage des photos ».
+- « **Avec les photos, sur un disque USB ou un NAS** » : ajoutez d'abord un support dans la carte « Stockage des photos ». La case « **Automatiquement chaque semaine, la nuit** » la refait chaque semaine (jour et nombre de sauvegardes gardées au choix ; la place libre est vérifiée avant, et une notification prévient en cas d'échec).
 - « **Sauvegarde automatique sur Google Drive** » : réglages seulement, sans les photos, par une connexion rclone.
 
 Deux éléments ne sont **pas** dans la sauvegarde : le mot de passe `admin` (`/boot/firmware/credentials.json`, hors du dossier du projet) et les identifiants Spotify (`~/.config/pimmich`). Après une restauration sur une nouvelle installation, connectez-vous donc avec le mot de passe `admin` de cette nouvelle installation.

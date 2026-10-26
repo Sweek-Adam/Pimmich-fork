@@ -148,6 +148,54 @@ The frame shows the game and its rules next to a QR code, and everyone answers o
 
 **A:** Yes, in `Screen > Display`, "Language of the texts shown on the frame" setting: French, English, Spanish, German or Japanese. The admin interface follows your browser's language.
 
+### Keepsakes, family, TV and printing
+
+**Q: How do I make a photo book, a calendar or a film of the year?**
+
+**A:** At the bottom of `Photos > Library`. The **photo book** (landscape A4 PDF, ready to print) gathers the year's best photos month by month. The **calendar** (portrait A4) has a photo for each month and the family birthdays. The **film** (video with music) takes about ten minutes to make; it can then play on the frame or on a Chromecast TV. Everything is computed on the frame.
+
+**Q: How do I digitise old paper photos?**
+
+**A:** `Photos > Import`, "Scan a paper photo". Lay the print on a dark table, without glare, and take a picture of it: the frame finds its edges, straightens the perspective and revives the colours. Black-and-white prints can be colourised (see the next question).
+
+**Q: How do I colourise a black-and-white photo?**
+
+**A:** Once: `Photos > Import`, "Install colourisation" (129 MB, checked against their fingerprint). The `onnx` package must be installed (see [INSTALL_en.md](INSTALL_en.md#optional-packages)). Then, in the `Library`, open the photo and tap "Colourise": a colour copy joins the slideshow, the original doesn't change. Colours are soft and plausible, not always exact.
+
+**Q: Can I control the frame with the TV remote?**
+
+**A:** Yes, if the frame is plugged into an HDMI-CEC TV (Anynet+, Bravia Sync, SimpLink…, to enable in the TV settings) and the TV is on the frame's input: ▶ / ◀ next or previous photo, OK pause, ▲ or red key ❤️, blue key "thinking of you" to the other frames, Stop or Back sleep; any key wakes the frame. A computer monitor usually has no HDMI-CEC.
+
+**Q: How do I turn the screen off when nobody is around?**
+
+**A:** With an infrared motion sensor (HC-SR501) on the GPIO: VCC to 5 V (pin 2), GND to ground (pin 6), OUT to GPIO 24 (pin 18). Enable it in `Screen > Display`; the card shows the last motion seen.
+
+**Q: How do I print photos during a party (photo booth)?**
+
+**A:** `Sharing > Guests`, "Photo booth" card: find the Wi-Fi printer, choose the paper (4×6 or A4), make a test print, then open the photo booth. During the party, guests get a "Print the photo on screen" button. If the message "Printing is not enabled" appears, run once `sudo ~/pimmich/utils/enable_printing.sh` on the Raspberry Pi.
+
+**Q: How do I show the slideshow on a TV without a cable?**
+
+**A:** With a Chromecast or Google TV on the same Wi-Fi: `Screen > Display`, "Cast to a TV". The `pychromecast` package must be installed (see [INSTALL_en.md](INSTALL_en.md#optional-packages)).
+
+**Q: How do I link two frames (mine and Grandma's)?**
+
+**A:** `Sharing > Guests`, "Family frames": on the other frame, create a pairing code, then add its address (Tailscale or local network) and that code here. You can then see its photo, send it photos or a message, make hearts fly up ("Thinking of you"), share new items automatically, and even build a "frame wall" that shows one big photo across several screens.
+
+**Q: My grandmother doesn't like apps: can she still use the frame?**
+
+**A:** Yes, with **grandparents mode** (`Sharing > Guests`): a QR code opens a page with very big buttons on her phone (next photo, ❤️, a note written or said out loud, turn on or off), no password, on the home Wi-Fi.
+
+**Q: Do Claude's automatic captions send my photos?**
+
+**A:** Yes: a reduced copy (1024 pixels) of each photo is sent to Anthropic to be described, with your API key (about 0.7 cents per photo). That's why it's off by default. The "Immich" option sends no photo out of the house. The key is never sent back to the browser.
+
+**Q: What are "forgotten photos" and video excerpts?**
+
+**A:** The frame counts how often each photo is shown: those never or rarely shown come back more often. For videos longer than a minute, it only shows the liveliest part (20 s by default). Both are set in `Screen > Display`.
+
+---
+
 ### Troubleshooting
 
 **Q: I have a problem, where can I find help?**

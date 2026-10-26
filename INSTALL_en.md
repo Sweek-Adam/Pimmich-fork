@@ -26,9 +26,12 @@ This guide starts from a blank SD card and ends with a photo frame that starts o
   - [Google Drive, Dropbox, OneDrive (rclone)](#google-drive-dropbox-onedrive-rclone)
   - [Voice control (Picovoice)](#voice-control-picovoice)
   - [Spotify, AirPlay and Bluetooth](#spotify-airplay-and-bluetooth)
-  - [TV: HDMI-CEC](#tv-hdmi-cec)
+  - [TV: HDMI-CEC and remote control](#tv-hdmi-cec-and-remote-control)
   - [Automatic orientation (accelerometer)](#automatic-orientation-accelerometer)
-  - [Physical button (GPIO)](#physical-button-gpio)
+  - [Physical button and motion sensor (GPIO)](#physical-button-and-motion-sensor-gpio)
+  - [Frame boot screen](#frame-boot-screen)
+  - [Printing (photo booth)](#printing-photo-booth)
+  - [Optional packages](#optional-packages)
 - [🔄 Updates and backup](#-updates-and-backup)
 - [🩺 Quick troubleshooting](#-quick-troubleshooting)
 - [❓ Going further](#-going-further)
@@ -336,9 +339,11 @@ The frame then appears as "**Cadre photo**". The `Screen > Sound` page, "The fra
 
 To check a service, for example: `systemctl --user status pimmich-spotify`.
 
-### TV: HDMI-CEC
+### TV: HDMI-CEC and remote control
 
 In `Screen > Display`, "Television" card, enable "**Control the TV via HDMI-CEC**": the TV switches on to the frame's input when it wakes up, and goes to standby with it. Also enable HDMI-CEC in the TV's settings (Anynet+, Bravia Sync, SimpLink…).
+
+"**Control the frame with the TV remote**" (on by default): when the TV is on the frame's input, its keys drive the slideshow (▶ / ◀, OK, ▲ or red ❤️, blue "thinking of you", Stop to sleep; any key wakes the frame). The account running Pimmich must be in the `input` group (it is on Raspberry Pi OS).
 
 Pimmich uses the `cec-ctl` command (package `v4l-utils`) and the `/dev/cec0` device. If `command -v cec-ctl` returns nothing, install the package:
 
@@ -354,9 +359,56 @@ sudo apt install v4l-utils
 
 The I2C library (`smbus2`) is already installed through `requirements.txt`.
 
-### Physical button (GPIO)
+### Physical button and motion sensor (GPIO)
 
-The slideshow code can handle a sleep button (GPIO 23 by default, wired to ground). But no page of the current interface lets you enable it, so this option is not covered by this guide.
+Both are set in `Screen > Display`; their cards show the last press or the last motion seen, handy to check the wiring.
+
+- **Button**: one leg on the chosen pin (GPIO 23 = physical pin 16 by default), the other on ground (pin 14). One press puts the frame to sleep, another wakes it up.
+- **Motion sensor** (PIR HC-SR501): VCC to 5 V (pin 2), GND to ground (pin 6), OUT to the chosen pin (GPIO 24 = physical pin 18 by default). The screen turns off after a few minutes with nobody around and comes back on at the first movement.
+
+If the card says "GPIO library missing", install it once:
+
+```bash
+sudo apt install -y liblgpio-dev swig && ~/pimmich/venv/bin/pip install rpi-lgpio
+```
+
+### Frame boot screen
+
+Replaces the Raspberry Pi OS boot screen with the frame's own: "Your photo frame is starting", in one of four styles picked at random, with the frame's features and the upload QR code; the same picture stays until the first photo (no black screen, no system text).
+
+```bash
+sudo ~/pimmich/utils/install_boot_screen.sh          # install (about a minute)
+sudo ~/pimmich/utils/install_boot_screen.sh --undo   # back to the Raspberry Pi OS screen
+```
+
+Run the install again if the frame's name changes (the QR code contains its address).
+
+### Printing (photo booth)
+
+The party photo booth prints on a recent Wi-Fi printer (driverless, "IPP Everywhere") through CUPS. `utils/optimize_pi.sh` prevents CUPS from starting with the Raspberry Pi; to print, enable it once (it then only starts when printing):
+
+```bash
+sudo ~/pimmich/utils/enable_printing.sh          # enable printing
+sudo ~/pimmich/utils/enable_printing.sh --undo   # disable it
+```
+
+Then choose the printer in `Sharing > Guests`, "Photo booth" card.
+
+### Optional packages
+
+Some features need an extra Python package (they're listed in `requirements.txt`, but an older install may lack them):
+
+| Feature | Package |
+|---|---|
+| Colourising black-and-white photos | `onnx` |
+| Casting to a Chromecast TV | `pychromecast` |
+| Captions suggested by Claude | `anthropic` |
+
+```bash
+~/pimmich/venv/bin/pip install onnx pychromecast anthropic
+```
+
+Then restart Pimmich (`System > Maintenance`).
 
 ---
 
@@ -408,7 +460,7 @@ Instead of `sudo reboot`, you can also use `System > Maintenance > Reboot Applic
 `System > Maintenance`, "**Full backup**" card:
 
 - "**Without photos**", then "**Download**": you get a `.zip` file containing the settings (`config/` folder), accounts, playlists, messages, drawings and voice messages, guestbook, captions, reactions, music and history. "Restore this file" applies it again, on this frame or on a new installation. **Keep this file safe**: `config/` contains your access keys and tokens (Immich, weather…).
-- "**With photos, on a USB drive or NAS**": first add a storage device in the "Photo storage" card.
+- "**With photos, on a USB drive or NAS**": first add a storage device in the "Photo storage" card. The "**Automatically every week, at night**" box redoes it weekly (day and number of backups kept are up to you; free space is checked first, and a notification warns you if it fails).
 - "**Automatic backup to Google Drive**": settings only, without photos, through an rclone connection.
 
 Two things are **not** in the backup: the `admin` password (`/boot/firmware/credentials.json`, outside the project folder) and the Spotify credentials (`~/.config/pimmich`). After restoring on a new installation, log in with that new installation's `admin` password.

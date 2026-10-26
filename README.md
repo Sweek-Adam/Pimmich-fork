@@ -1,6 +1,6 @@
 # 🖼️ Pimmich – Cadre photo connecté intelligent
 
-> 🎉 **Nouveau : édition « événement »** — Pimmich sur un Mac ou un PC, pour un mariage ou une fête : voir [EVENEMENT.md](EVENEMENT.md).
+> 📘 **Mode d'emploi du cadre** : [MANUEL.md](MANUEL.md) — 🎉 **Édition « événement »** (Mac ou PC, pour un mariage ou une fête) : [EVENEMENT.md](EVENEMENT.md).
 
 
 [![Tests](https://github.com/Sweek-Adam/Pimmich-fork/actions/workflows/tests.yml/badge.svg)](https://github.com/Sweek-Adam/Pimmich-fork/actions/workflows/tests.yml)
@@ -19,6 +19,7 @@ Pimmich est une application Python conçue pour transformer un Raspberry Pi en u
 
 ## 📖 Table des matières
 
+- [📘 Manuel utilisateur](MANUEL.md)
 - [🍴 Ajouts de ce fork](#-ajouts-de-ce-fork)
 - [✨ Fonctionnalités Principales](#-fonctionnalités-principales)
 - [🧰 Technologies utilisées](#-technologies-utilisées)
@@ -35,39 +36,59 @@ Pimmich est une application Python conçue pour transformer un Raspberry Pi en u
 
 ## 🍴 Ajouts de ce fork
 
-En plus de tout ce que propose Pimmich d'origine, ce fork ajoute notamment :
+En plus de tout ce que propose Pimmich d'origine, ce fork ajoute notamment (mode d'emploi détaillé :
+[📘 MANUEL.md](MANUEL.md)) :
 
 #### 🖥️ Nouvelle interface d'administration
-- Interface entièrement refaite (Vue 3), adaptée au téléphone, **mode sombre**, recherche, raccourcis vers chaque rubrique, visite guidée.
-- Historique des réglages avec annulation, glisser-déposer sur l'accueil, statistiques, bibliothèque avec recherche (date, source, personne).
+- Interface entièrement refaite (Vue 3), adaptée au téléphone, **mode sombre**, recherche, raccourcis vers chaque rubrique, visite guidée, page « Nouveautés ».
+- Historique des réglages avec annulation, glisser-déposer sur l'accueil, statistiques, bibliothèque avec recherche (date, source, personne, contenu via Immich).
 - Comptes par membre de la famille (envois et playlists personnels), administration de plusieurs cadres.
+- Adresse simple : `cadre-photo.local`, `.home` ou le nom Tailscale ; interface et cadre en 5 langues.
 
 #### 📸 Photos & sources
-- Google Drive, Dropbox, OneDrive (rclone), albums partagés iCloud, import WhatsApp, partage direct depuis Android.
+- Google Drive, Dropbox, OneDrive (rclone), albums partagés iCloud, e-mail, WhatsApp, partage direct depuis Android, GIF animés et **photos animées** des téléphones.
 - Tri automatique (photos floues, sombres, doublons, captures d'écran), personnes reconnues via Immich, recadrage qui garde les visages.
-- Albums intelligents, « Ce jour-là », légendes de lieu automatiques, légendes façon Snapchat sur photos et vidéos.
-- Plusieurs emplacements de stockage (disque USB, NAS) et rotation automatique de l'écran.
-- **Carte du monde des voyages** : regroupement des photos par lieu et par période, récits de voyage affichés sur le cadre.
+- **Scanner de photos papier** (bords trouvés, perspective redressée, couleurs ravivées) et **colorisation** des photos noir et blanc, sur le Raspberry Pi.
+- **Amélioration automatique** des photos sombres ou ternes (copie affichée seulement).
+- **Préparation des médias** : inventaire, rattrapage, suppression des médias en échec, grosses vidéos préparées la nuit, gain de place.
+- Albums intelligents, « Ce jour-là », légendes de lieu, **légendes proposées automatiquement** (Immich, ou Claude en option), légendes façon Snapchat.
+- Plusieurs emplacements de stockage (disque USB, NAS), rotation automatique de l'écran, carte du monde des voyages.
 
 #### 🖼️ Affichage
 - Dispositions (mosaïque, mur, magazine…) préparées à l'avance, mises en page familiales (anniversaires avec prénom et âge, fêtes…).
-- Mode **vidéos uniquement**, enchaînement sans écran de chargement.
-- Horloge entièrement personnalisable (police, taille, couleurs, fond), météo animée, soleil et lune, citation du jour.
-- Agenda familial (Google Agenda), comptes à rebours, fréquences d'affichage réglables, baisse de luminosité le soir et horloge de nuit.
-- Nouvelles transitions, synchronisées sur le rythme de la musique, et ambiances saisonnières (Halloween, Noël, Pâques…).
+- Effet **Ken Burns** (zoom lent vers les visages), **photos oubliées** remises en avant, **extraits** des longues vidéos (le passage le plus animé).
+- Horloge personnalisable, météo animée, soleil et lune, citation du jour, agenda familial, comptes à rebours.
+- Diapositives « Ce jour-là », « Cette semaine » et **« Votre semaine sur le cadre »** (le dimanche soir).
+- Baisse de luminosité le soir, horloge de nuit, transitions synchronisées sur la musique, ambiances saisonnières.
+- **Écran de démarrage** du cadre (4 styles, QR code d'envoi) qui enchaîne sur la première photo sans écran noir.
+- Diffusion sur une télé **Chromecast** (diaporama ou film).
 
-#### 💌 Messages & invités
-- Messages programmés ou récurrents, **dessins** avec autocollants, **messages vocaux**, réactions et **livre d'or**.
+#### 💌 Messages, invités & famille
+- Messages programmés ou récurrents, **dessins**, **messages vocaux**, réactions, **commentaires** sur la photo affichée, **livre d'or**.
+- **Souvenirs vocaux** : l'histoire d'une photo racontée de vive voix, lue quand la photo passe.
+- **Cadres jumelés** : partage automatique des nouveautés, **« Je pense à toi »** (des cœurs s'envolent sur l'autre cadre), **mur de cadres** (une grande photo sur plusieurs écrans).
+- **Mode grands-parents** : une page à très gros boutons, ouverte par un lien spécial.
+- **Photo du jour** et **bilan du mois** par e-mail pour les proches ; **rappels d'anniversaire**.
 - Lien invité accessible depuis l'extérieur (Tailscale) et invités de confiance validés automatiquement.
+
+#### 🎉 Fêtes & jeux
+- **Mode fête** : grand QR code, photos des invités affichées aussitôt, Mur de la fête, **QR code du Wi-Fi**.
+- **Photomaton** : tirages 10 × 15 (ou A4) sur une imprimante Wi-Fi, avec le nom de la fête.
+- **Onze jeux de famille** joués depuis les téléphones (« Où et quand ? », « Qui est-ce ? », bingo…).
+- **Édition « événement »** : Pimmich sur un Mac ou un PC pour un mariage ([EVENEMENT.md](EVENEMENT.md)).
+
+#### 🎁 Souvenirs à garder
+- **Livre photo de l'année** (PDF prêt à imprimer), **calendrier photo** avec les anniversaires, **film de l'année** en musique.
 
 #### 🎵 Musique
 - Spotify (lecteur, juke-box avec grande pochette, **karaoké** avec paroles synchronisées), radios internet et podcasts.
 - Bluetooth, AirPlay, minuterie de sommeil, musique selon l'heure, volume baissé pendant les vidéos et les messages vocaux.
 
 #### 🏠 Maison connectée & fiabilité
-- Home Assistant (MQTT), HDMI-CEC, détection de présence par Wi-Fi, notifications (ntfy).
-- Mise à jour en un clic avec retour arrière, surveillance qui relance le diaporama s'il se fige, rotation des journaux.
-- Protection de la carte SD (log2ram, zram), sauvegarde complète restaurable, accès HTTPS via Tailscale.
+- Home Assistant (MQTT), **télécommande de la télé** (HDMI-CEC), **détecteur de mouvement**, bouton physique, présence par Wi-Fi, notifications (ntfy).
+- Mise à jour en un clic avec retour arrière (et rechargement sans redémarrer le diaporama), surveillance qui relance le diaporama s'il se fige.
+- Profil matériel (Raspberry Pi 2 à 5), travail lourd la nuit, protection de la carte SD (log2ram, zram), droits sudo limités.
+- Sauvegarde complète restaurable, **sauvegarde automatique chaque semaine** sur disque USB ou NAS, accès HTTPS via Tailscale.
 - Tests automatisés et intégration continue.
 
 ---

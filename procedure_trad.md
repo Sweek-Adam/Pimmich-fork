@@ -84,6 +84,11 @@ pybabel compile -d translations
 
 Une fois ces étapes terminées, redémarrez l'application Pimmich pour que les nouvelles traductions soient prises en compte.
 
+> ⚠️ **Vérifiez que la compilation ne signale aucune erreur.** Un catalogue en erreur n'est pas recompilé : ses
+> anciennes traductions restent en place sans que rien ne le signale à l'écran. Piège fréquent : un texte qui contient
+> `%` suivi d'une espace ou d'une lettre (« `(% de la largeur)` ») est pris pour un code de formatage Python
+> (`% d`) et sa traduction est refusée. Écrivez plutôt « pourcentage », ou `%%` dans un texte qui a des paramètres.
+
 ---
 
 ## 3. Comment convertir ce document en PDF

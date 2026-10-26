@@ -164,6 +164,54 @@ Le cadre affiche la partie et ses règles à côté d'un QR code, et chacun rép
 
 **R :** Oui, avec `Écran > Affichage`, réglage « Langue des textes affichés sur le cadre » : français, anglais, espagnol, allemand ou japonais. L'interface d'administration, elle, suit la langue du navigateur.
 
+### Souvenirs, famille, télé et impression
+
+**Q : Comment faire un livre photo, un calendrier ou un film de l'année ?**
+
+**R :** En bas de `Photos > Bibliothèque`. Le **livre photo** (PDF A4 à l'italienne, prêt à imprimer) reprend les plus belles photos de l'année mois par mois. Le **calendrier** (A4 portrait) met une photo de chaque mois et les anniversaires de la famille. Le **film** (vidéo avec musique) se monte en une dizaine de minutes ; il peut ensuite passer sur le cadre ou sur une télé Chromecast. Tout est calculé sur le cadre.
+
+**Q : Comment numériser de vieilles photos papier ?**
+
+**R :** `Photos > Importer`, « Scanner une photo papier ». Posez le tirage sur une table sombre, sans reflet, et photographiez-le : le cadre trouve ses bords, redresse la perspective et ravive les couleurs. Les tirages noir et blanc peuvent être colorisés (voir la question suivante).
+
+**Q : Comment coloriser une photo noir et blanc ?**
+
+**R :** Une seule fois : `Photos > Importer`, « Installer la colorisation » (129 Mo, vérifiés par leur empreinte). Le paquet `onnx` doit être installé (voir [INSTALL.md](INSTALL.md#paquets-facultatifs)). Ensuite, dans la `Bibliothèque`, ouvrez la photo et touchez « Coloriser » : une copie en couleur rejoint le diaporama, l'original ne change pas. Les couleurs sont douces et plausibles, pas toujours exactes.
+
+**Q : Peut-on piloter le cadre avec la télécommande de la télé ?**
+
+**R :** Oui, si le cadre est branché sur une télé compatible HDMI-CEC (Anynet+, Bravia Sync, SimpLink…, à activer dans les réglages de la télé) et que la télé est sur l'entrée du cadre : ▶ / ◀ photo suivante ou précédente, OK pause, ▲ ou touche rouge ❤️, touche bleue « je pense à vous » vers les autres cadres, Stop ou Retour veille ; n'importe quelle touche réveille le cadre. Un moniteur d'ordinateur n'a en général pas de HDMI-CEC.
+
+**Q : Comment éteindre l'écran quand personne n'est là ?**
+
+**R :** Avec un détecteur de mouvement infrarouge (HC-SR501) branché sur le GPIO : VCC sur 5 V (broche 2), GND sur une masse (broche 6), OUT sur GPIO 24 (broche 18). Activez-le dans `Écran > Affichage` ; la carte indique le dernier mouvement vu.
+
+**Q : Comment imprimer des photos pendant une fête (photomaton) ?**
+
+**R :** `Partage > Invités`, carte « Photomaton » : cherchez l'imprimante Wi-Fi, choisissez le papier (10 × 15 ou A4), faites un tirage d'essai, puis ouvrez le photomaton. Pendant la fête, les invités ont un bouton « Imprimer la photo à l'écran ». Si le message « L'impression n'est pas activée » apparaît, lancez une fois `sudo ~/pimmich/utils/enable_printing.sh` sur le Raspberry Pi.
+
+**Q : Comment montrer le diaporama sur une télé sans câble ?**
+
+**R :** Avec une télé Chromecast ou Google TV sur le même Wi-Fi : `Écran > Affichage`, « Diffuser sur une télé ». Le paquet `pychromecast` doit être installé (voir [INSTALL.md](INSTALL.md#paquets-facultatifs)).
+
+**Q : Comment relier deux cadres (chez moi et chez Mamie) ?**
+
+**R :** `Partage > Invités`, « Cadres de la famille » : sur l'autre cadre, créez un code d'association, puis ajoutez ici son adresse (Tailscale ou réseau local) et ce code. Vous pouvez alors voir sa photo, lui envoyer des photos ou un message, faire s'envoler des cœurs (« Je pense à vous »), partager automatiquement les nouveautés, et même faire un « mur de cadres » qui affiche une grande photo sur plusieurs écrans.
+
+**Q : Ma grand-mère n'aime pas les applications : peut-elle quand même utiliser le cadre ?**
+
+**R :** Oui, avec le **mode grands-parents** (`Partage > Invités`) : un QR code ouvre sur son téléphone une page à très gros boutons (photo suivante, ❤️, un mot écrit ou dit à voix haute, allumer ou éteindre), sans mot de passe, sur le Wi-Fi de la maison.
+
+**Q : Les légendes automatiques par Claude envoient-elles mes photos ?**
+
+**R :** Oui : une copie réduite (1024 pixels) de chaque photo est envoyée à Anthropic pour être décrite, avec votre clé d'API (environ 0,7 centime par photo). C'est pourquoi c'est désactivé par défaut. La variante « Immich » ne fait sortir aucune photo de la maison. La clé n'est jamais renvoyée au navigateur.
+
+**Q : Que sont les « photos oubliées » et les extraits de vidéos ?**
+
+**R :** Le cadre compte les passages de chaque photo : celles jamais ou rarement montrées reviennent plus souvent. Pour les vidéos de plus d'une minute, il ne montre que le passage le plus animé (20 s par défaut). Les deux se règlent dans `Écran > Affichage`.
+
+---
+
 ### Dépannage (Troubleshooting)
 
 **Q : J'ai un problème, où puis-je trouver de l'aide ?**
