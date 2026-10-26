@@ -41,6 +41,7 @@
       <button class="big" data-action="next"><span class="icon">⏭️</span>{{ _('Après') }}</button>
       <button class="big" data-action="pause"><span class="icon">⏯️</span>{{ _('Pause') }}</button>
       <button class="big love" data-action="love"><span class="icon">❤️</span>{{ _("J'aime") }}</button>
+      {% if has_frames %}<button class="big love wide" data-action="heart"><span class="icon">💞</span>{{ _('Je pense à vous') }}</button>{% endif %}
       <button class="big" id="write"><span class="icon">✍️</span>{{ _('Écrire un mot') }}</button>
       <button class="big" id="record"><span class="icon">🎤</span><span id="record-label">{{ _('Dire un mot') }}</span></button>
       <button class="big wide" id="power"><span class="icon" id="power-icon">🌙</span><span id="power-label">{{ _('Éteindre le cadre') }}</span></button>

@@ -9,6 +9,7 @@ ne reçoive pas chaque touche une seconde fois.
     ▶ / ◀ (et avance, retour, chaîne + / -)   photo suivante / précédente
     OK, lecture, pause                          pause / reprise
     ▲ ou touche rouge                           ❤️ sur la photo affichée
+    touche bleue                                « je pense à toi » vers les autres cadres de la famille
     stop, retour, sortie                        mise en veille du cadre
     n'importe quelle touche (cadre en veille)   réveil
 """
@@ -31,6 +32,7 @@ ACTIONS = {
     105: "previous", 168: "previous", 165: "previous", 403: "previous",  # gauche, retour rapide, piste précédente, chaîne -
     352: "pause", 353: "pause", 28: "pause", 207: "pause", 119: "pause", 164: "pause", 201: "pause",  # OK, lecture, pause
     103: "love", 398: "love",                                     # haut, touche rouge
+    401: "heart",                                                 # touche bleue : « je pense à toi » aux autres cadres
     128: "sleep", 158: "sleep", 174: "sleep", 1: "sleep",         # stop, retour, sortie, échap
 }
 

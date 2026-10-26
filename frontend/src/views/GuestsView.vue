@@ -241,6 +241,7 @@ onMounted(() => {
             <button class="btn small" type="button" @click="frameAction(f, 'next')">{{ t("Photo suivante") }}</button>
             <label class="btn small">{{ t("Envoyer des photos") }}<input type="file" accept="image/*,video/*" multiple hidden @change="framePhotos(f, $event)"></label>
             <button class="btn small" type="button" @click="frameMessage(f)">{{ t("Envoyer un message") }}</button>
+            <button class="btn small" type="button" :title="t('Des cœurs s\'envolent sur ce cadre')" @click="frameAction(f, 'heart')">💞 {{ t("Je pense à vous") }}</button>
           </div>
           <div class="share small">
             <span class="muted">{{ t("Partager automatiquement avec ce cadre :") }}</span>

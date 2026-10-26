@@ -49,7 +49,7 @@ def simple_page():
     if not _allowed():
         return render_template("guest_link_invalid.html.jinja"), 401
     config = load_config()
-    return render_template("simple.html.jinja", name=config.get("simple_name") or "")
+    return render_template("simple.html.jinja", name=config.get("simple_name") or "", has_frames=bool(config.get("family_frames")))
 
 
 @app.route('/simple/now')
@@ -88,6 +88,12 @@ def simple_action_api():
             return jsonify({"success": False, "message": _("Le cadre est éteint.")}), 409
         reactions.add(photo, "love", who=load_config().get("simple_name") or "")
         return jsonify({"success": True, "message": "❤️"})
+    if action == "heart":
+        from web.routes_frames import send_heart_to_all
+        count = send_heart_to_all()
+        if not count:
+            return jsonify({"success": False, "message": _("Les autres cadres ne répondent pas.")}), 502
+        return jsonify({"success": True, "message": _("Des cœurs s'envolent sur %(count)s cadre(s) de la famille.", count=count)})
     if action in ("sleep", "wake"):
         if (action == "sleep") == running:
             from web.routes_slideshow import toggle_sleep

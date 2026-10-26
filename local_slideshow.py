@@ -2217,12 +2217,12 @@ def check_reaction(screen, photo_path, since):
     return since
 
 
-def comment_banner(screen, background, text, name="", seconds=6.0):
+def comment_banner(screen, background, text, name="", seconds=6.0, quoted=True):
     """Commentaire d'un invité en bandeau au bas de la photo (fondu à l'entrée et à la sortie)."""
     width, height = screen.get_size()
     big = pygame.font.Font(None, max(24, int(height * 0.055)))
     small = pygame.font.Font(None, max(18, int(height * 0.038)))
-    line = big.render(f"« {text} »", True, (255, 255, 255))
+    line = big.render(f"« {text} »" if quoted else text, True, (255, 255, 255))
     if line.get_width() > width * 0.86:
         line = pygame.transform.smoothscale(line, (int(width * 0.86), int(line.get_height() * width * 0.86 / line.get_width())))
     signature = small.render(f"— {name}", True, (255, 214, 190)) if name else None
@@ -2249,6 +2249,25 @@ def comment_banner(screen, background, text, name="", seconds=6.0):
         time.sleep(1 / 20)
     screen.blit(background, (0, 0))
     pygame.display.flip()
+
+
+def check_thinking(screen, since):
+    """« Je pense à toi » reçu d'un autre cadre : des cœurs s'envolent, avec le nom de l'expéditeur. Renvoie l'horodatage."""
+    try:
+        from utils import thinking
+        event = thinking.pending(since)
+        if event:
+            background = screen.copy()
+            reaction_burst(screen, background, "love", seconds=3.5)
+            text = _("%(name)s pense à vous", name=event["name"]) if event.get("name") else _("On pense à vous")
+            comment_banner(screen, background, text, seconds=5.0, quoted=False)
+            return event["at"]
+    except Exception as e:
+        logger.debug(f"Je pense à toi : {e}")
+    return since
+
+
+_thinking_since = [time.time() - 12 * 3600]  # au démarrage (réveil du cadre) : un message arrivé pendant la veille est montré
 
 
 def _static_key(photo_path):
@@ -2493,6 +2512,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
                 # Réaction d'un invité (❤️...) sur cette photo : elle s'envole à l'écran
                 reaction_since = check_reaction(screen, photo_path, reaction_since)
                 comment_since, comment_shown = check_comment(screen, photo_path, comment_since, comment_shown, start_sleep, config)
+                _thinking_since[0] = check_thinking(screen, _thinking_since[0])
 
                 # Météo animée : pluie ou neige sur la photo (au début de l'affichage, ou tout le temps)
                 if weather_fx and weather_fx_wanted(config, time.time() - start_sleep):

@@ -1077,6 +1077,9 @@ def tv_remote_action(code):
         action = "wake"  # cadre en veille : n'importe quelle touche le réveille
     elif action in ("next", "previous", "pause"):
         slideshow_commands.send(action)
+    elif action == "heart":
+        from web.routes_frames import send_heart_to_all
+        threading.Thread(target=send_heart_to_all, daemon=True, name="tv-remote-heart").start()
     elif action == "love":
         try:
             photo = Path(CURRENT_PHOTO_FILE).read_text().strip()

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 09:44+0100\n"
+"POT-Creation-Date: 2026-10-26 09:50+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -158,29 +158,38 @@ msgstr "(誕生日) %(num)d 年前"
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(誕生日) %(num)d 年前"
 
-#: local_slideshow.py:3287
+#: local_slideshow.py:2262
+#, python-format
+msgid "%(name)s pense à vous"
+msgstr "%(name)sがあなたを想っています"
+
+#: local_slideshow.py:2262
+msgid "On pense à vous"
+msgstr "あなたを想っています"
+
+#: local_slideshow.py:3307
 msgid "Aucune photo trouvée."
 msgstr "写真が見つかりませんでした。"
 
-#: local_slideshow.py:3288
+#: local_slideshow.py:3308
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "http://%(ip)s で設定します。"
 
-#: local_slideshow.py:3289
+#: local_slideshow.py:3309
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(SD のルートにある credentials.json 内の認証情報)"
 
-#: local_slideshow.py:3290
+#: local_slideshow.py:3310
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "画面解像度: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3291
+#: local_slideshow.py:3311
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "60 秒後に新たな試みが行われます..."
 
-#: local_slideshow.py:3317
+#: local_slideshow.py:3337
 msgid "Scannez pour configurer"
 msgstr "スキャンして設定する"
 
@@ -574,7 +583,7 @@ msgstr "毎年"
 #: frontend/src/components/PresenceCard.vue:62
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
-#: frontend/src/views/GuestsView.vue:254 frontend/src/views/GuestsView.vue:276
+#: frontend/src/views/GuestsView.vue:255 frontend/src/views/GuestsView.vue:277
 #: frontend/src/views/MaintenanceView.vue:314
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
@@ -1011,9 +1020,8 @@ msgid "Ajouter à droite :"
 msgstr "右に追加："
 
 #: frontend/src/components/FrameWallCard.vue:55
-#, python-format
-msgid "Espace entre les écrans (% de la largeur)"
-msgstr "画面の間隔（幅の%）"
+msgid "Espace entre les écrans (pourcentage de la largeur)"
+msgstr "画面の間隔（幅に対する割合）"
 
 #: frontend/src/components/FrameWallCard.vue:57
 msgid "Chaque photo (secondes)"
@@ -1801,7 +1809,7 @@ msgid "Album intelligent"
 msgstr "スマートアルバム"
 
 #: frontend/src/components/SmartAlbumEditor.vue:76
-#: frontend/src/views/GuestsView.vue:267
+#: frontend/src/views/GuestsView.vue:268
 #: templates/configure/_smart_albums.html.jinja:16
 #: templates/configure/tab_comptes.html.jinja:58
 #: templates/configure/tab_invites.html.jinja:161
@@ -2281,7 +2289,7 @@ msgid ""
 " cadre ne les récupère que deux fois par jour."
 msgstr "StormGlass の無料プランは 1 日の呼び出し回数に制限があるため、フォトフレームは 1 日 2 回だけ取得します。"
 
-#: frontend/src/components/VoiceMemo.vue:33 templates/simple.html.jinja:101
+#: frontend/src/components/VoiceMemo.vue:33 templates/simple.html.jinja:102
 msgid "Micro inaccessible : autorisez-le dans le navigateur."
 msgstr "マイクを使えません。ブラウザで許可してください。"
 
@@ -3652,12 +3660,14 @@ msgstr "テレビのリモコンでフレームを操作"
 #: frontend/src/views/DisplayView.vue:127
 msgid ""
 "Quand la TV est sur l'entrée du cadre : ▶ / ◀ photo suivante ou "
-"précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, Stop ou Retour "
+"précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, touche bleue « "
+"je pense à vous » vers les autres cadres de la famille, Stop ou Retour "
 "mise en veille ; n'importe quelle touche réveille le cadre. Nécessite le "
 "HDMI-CEC activé sur la TV."
 msgstr ""
 "テレビがフレームの入力になっているとき：▶ / ◀ で次・前の写真、OK で一時停止、▲ "
-"または赤ボタンで写真に❤️、停止または戻るでスリープ。どのキーでも復帰します。テレビのHDMI-CECを有効にしてください。"
+"または赤ボタンで写真に❤️、青ボタンで家族の他のフレームに「想っています」、停止または戻るでスリープ。どのキーでも復帰します。テレビのHDMI-"
+"CECを有効にしてください。"
 
 #: frontend/src/views/DisplayView.vue:129
 #: templates/configure/tab_affichage.html.jinja:333
@@ -4366,77 +4376,85 @@ msgstr "写真を送信する"
 msgid "Envoyer un message"
 msgstr "メッセージを送る"
 
-#: frontend/src/views/GuestsView.vue:246
+#: frontend/src/views/GuestsView.vue:244
+msgid "Des cœurs s'envolent sur ce cadre"
+msgstr "このフレームにハートを飛ばす"
+
+#: frontend/src/views/GuestsView.vue:244 templates/simple.html.jinja:44
+msgid "Je pense à vous"
+msgstr "想っています"
+
+#: frontend/src/views/GuestsView.vue:247
 msgid "Partager automatiquement avec ce cadre :"
 msgstr "このフレームと自動で共有："
 
-#: frontend/src/views/GuestsView.vue:248
+#: frontend/src/views/GuestsView.vue:249
 msgid "les nouvelles photos reçues"
 msgstr "新しく届いた写真"
 
-#: frontend/src/views/GuestsView.vue:250
+#: frontend/src/views/GuestsView.vue:251
 msgid "les messages"
 msgstr "メッセージ"
 
-#: frontend/src/views/GuestsView.vue:252
+#: frontend/src/views/GuestsView.vue:253
 #, python-brace-format
 msgid "Déjà partagés : {photos} photo(s), {messages} message(s)"
 msgstr "共有済み：写真{photos}枚、メッセージ{messages}件"
 
-#: frontend/src/views/GuestsView.vue:259
+#: frontend/src/views/GuestsView.vue:260
 #: templates/configure/tab_invites.html.jinja:153
 msgid "Ajouter un cadre"
 msgstr "フレームを追加"
 
-#: frontend/src/views/GuestsView.vue:261
+#: frontend/src/views/GuestsView.vue:262
 #: templates/configure/tab_invites.html.jinja:155
 msgid ""
 "Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
 "dessous), puis « Créer un code »."
 msgstr "もう一方のフレームで：共有 › ゲスト › 「ペアリングコード」（下）→「コードを作成」。"
 
-#: frontend/src/views/GuestsView.vue:262
+#: frontend/src/views/GuestsView.vue:263
 #: templates/configure/tab_invites.html.jinja:156
 msgid ""
 "Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
 "https://192.168.1.30) et ce code."
 msgstr "ここに：そのアドレス（例：Tailscaleならhttps://100.101.102.103、またはhttps://192.168.1.30）とコード。"
 
-#: frontend/src/views/GuestsView.vue:265
+#: frontend/src/views/GuestsView.vue:266
 #: frontend/src/views/MaintenanceView.vue:324
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
 msgstr "アドレス"
 
-#: frontend/src/views/GuestsView.vue:266
+#: frontend/src/views/GuestsView.vue:267
 #: templates/configure/tab_invites.html.jinja:160
 msgid "Code"
 msgstr "コード"
 
-#: frontend/src/views/GuestsView.vue:267
+#: frontend/src/views/GuestsView.vue:268
 #: templates/configure/tab_invites.html.jinja:161
 msgid "ex : Chez Mamie"
 msgstr "例：おばあちゃんの家"
 
-#: frontend/src/views/GuestsView.vue:268
+#: frontend/src/views/GuestsView.vue:269
 #: templates/configure/tab_invites.html.jinja:163
 msgid "Ajouter le cadre"
 msgstr "フレームを追加"
 
-#: frontend/src/views/GuestsView.vue:272
+#: frontend/src/views/GuestsView.vue:273
 #: templates/configure/tab_invites.html.jinja:166
 msgid "Code d'association de ce cadre"
 msgstr "このフレームのペアリングコード"
 
-#: frontend/src/views/GuestsView.vue:273
+#: frontend/src/views/GuestsView.vue:274
 #: templates/configure/tab_invites.html.jinja:167
 msgid ""
 "À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
 "l'accès."
 msgstr "このフレームを操作する側のフレームで入力します。コードを削除するとアクセスできなくなります。"
 
-#: frontend/src/views/GuestsView.vue:278
+#: frontend/src/views/GuestsView.vue:279
 #: templates/configure/tab_invites.html.jinja:169
 msgid "Créer un code"
 msgstr "コードを作成"
@@ -4475,7 +4493,7 @@ msgstr "一時停止"
 msgid "Mettre en veille"
 msgstr "スリープにする"
 
-#: frontend/src/views/HomeView.vue:162 templates/simple.html.jinja:75
+#: frontend/src/views/HomeView.vue:162 templates/simple.html.jinja:76
 msgid "Allumer le cadre"
 msgstr "フレームをオンにする"
 
@@ -5014,37 +5032,37 @@ msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "「{source}」の写真を「{target}」に移動しますか？"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "lundi"
 msgstr "月曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "mardi"
 msgstr "火曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "mercredi"
 msgstr "水曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "jeudi"
 msgstr "木曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "vendredi"
 msgstr "金曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "samedi"
 msgstr "土曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "dimanche"
 msgstr "日曜日"
 
@@ -5077,7 +5095,7 @@ msgstr "サーバーとの通信エラー。"
 
 #: frontend/src/views/MaintenanceView.vue:131
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:121
-#: web/routes_frames.py:294 web/routes_guests.py:96 web/routes_guests.py:101
+#: web/routes_frames.py:305 web/routes_guests.py:96 web/routes_guests.py:101
 #: web/routes_imports.py:654 web/routes_imports.py:692 web/routes_system.py:923
 msgid "Aucun fichier sélectionné."
 msgstr "ファイルが選択されていません。"
@@ -7934,7 +7952,7 @@ msgstr "こんにちは、%(name)s！"
 msgid "Bonjour !"
 msgstr "こんにちは！"
 
-#: templates/simple.html.jinja:37 templates/simple.html.jinja:72
+#: templates/simple.html.jinja:37 templates/simple.html.jinja:73
 #: web/routes_simple.py:76 web/routes_simple.py:88
 msgid "Le cadre est éteint."
 msgstr "フレームはオフです。"
@@ -7951,47 +7969,47 @@ msgstr "次へ"
 msgid "J'aime"
 msgstr "いいね"
 
-#: templates/simple.html.jinja:44
+#: templates/simple.html.jinja:45
 msgid "Écrire un mot"
 msgstr "メッセージを書く"
 
-#: templates/simple.html.jinja:45 templates/simple.html.jinja:108
+#: templates/simple.html.jinja:46 templates/simple.html.jinja:109
 msgid "Dire un mot"
 msgstr "声でメッセージ"
 
-#: templates/simple.html.jinja:46 templates/simple.html.jinja:75
+#: templates/simple.html.jinja:47 templates/simple.html.jinja:76
 msgid "Éteindre le cadre"
 msgstr "フレームをオフ"
 
-#: templates/simple.html.jinja:50
+#: templates/simple.html.jinja:51
 msgid "Votre mot pour la famille…"
 msgstr "家族へのメッセージ…"
 
-#: templates/simple.html.jinja:52
+#: templates/simple.html.jinja:53
 msgid "Retour"
 msgstr "戻る"
 
-#: templates/simple.html.jinja:53 templates/upload.html.jinja:141
+#: templates/simple.html.jinja:54 templates/upload.html.jinja:141
 msgid "Envoyer"
 msgstr "送信"
 
-#: templates/simple.html.jinja:72
+#: templates/simple.html.jinja:73
 msgid "Le cadre change de photo…"
 msgstr "写真を切り替え中…"
 
-#: templates/simple.html.jinja:80 web/routes_simple.py:80
+#: templates/simple.html.jinja:81 web/routes_simple.py:80
 msgid "Le cadre ne répond pas."
 msgstr "フレームが応答しません。"
 
-#: templates/simple.html.jinja:99
+#: templates/simple.html.jinja:100
 msgid "Micro indisponible sur ce téléphone."
 msgstr "このスマホではマイクを使えません。"
 
-#: templates/simple.html.jinja:111
+#: templates/simple.html.jinja:112
 msgid "Envoi…"
 msgstr "送信中…"
 
-#: templates/simple.html.jinja:117
+#: templates/simple.html.jinja:118
 msgid "Appuyez pour finir"
 msgstr "タップして終了"
 
@@ -11384,7 +11402,7 @@ msgstr "フォトフレームの問題（電源、熱、ディスク）"
 msgid "Imports terminés"
 msgstr "完了したインポート"
 
-#: utils/notify.py:23 web/workers.py:1260
+#: utils/notify.py:23 web/workers.py:1263
 msgid "Médias impossibles à préparer"
 msgstr "準備できないメディア"
 
@@ -11982,8 +12000,8 @@ msgstr "%(count)s件の日付を保存しました。"
 msgid "Autre cadre"
 msgstr "他のフレーム"
 
-#: web/routes_frames.py:110 web/routes_frames.py:299 web/routes_guests.py:308
-#: web/routes_simple.py:96
+#: web/routes_frames.py:110 web/routes_frames.py:310 web/routes_guests.py:308
+#: web/routes_simple.py:102
 msgid "Action inconnue."
 msgstr "アクションは不明。"
 
@@ -11996,61 +12014,61 @@ msgstr "%(count)s枚の写真を受け取りました。"
 msgid "Message publié : il apparaîtra dans le diaporama."
 msgstr "メッセージを公開しました。スライドショーに表示されます。"
 
-#: web/routes_frames.py:214
+#: web/routes_frames.py:223
 msgid "Adresse ou code invalide."
 msgstr "アドレスまたはコードが無効です。"
 
-#: web/routes_frames.py:219
+#: web/routes_frames.py:228
 msgid "Ce cadre ne répond pas : vérifiez son adresse (réseau local ou Tailscale)."
 msgstr "このフレームが応答しません。アドレス（ローカルネットワークまたはTailscale）を確認してください。"
 
-#: web/routes_frames.py:221
+#: web/routes_frames.py:230
 msgid "Le code d'association est refusé par ce cadre."
 msgstr "このフレームがペアリングコードを拒否しました。"
 
-#: web/routes_frames.py:226
+#: web/routes_frames.py:235
 #, python-format
 msgid "Cadre « %(name)s » ajouté."
 msgstr "フレーム「%(name)s」を追加しました。"
 
-#: web/routes_frames.py:238 web/routes_frames.py:286
+#: web/routes_frames.py:247 web/routes_frames.py:295
 msgid "Cadre inconnu."
 msgstr "不明なフレームです。"
 
-#: web/routes_frames.py:248
+#: web/routes_frames.py:257
 #, python-format
 msgid "Partage automatique vers « %(name)s » activé."
 msgstr "「%(name)s」への自動共有をオンにしました。"
 
-#: web/routes_frames.py:249
+#: web/routes_frames.py:258
 msgid "Partage automatique désactivé."
 msgstr "自動共有をオフにしました。"
 
-#: web/routes_frames.py:259
+#: web/routes_frames.py:268
 msgid "Cadre retiré."
 msgstr "フレームを削除しました。"
 
-#: web/routes_frames.py:301
+#: web/routes_frames.py:312
 msgid "Ce cadre ne répond pas."
 msgstr "このフレームが応答しません。"
 
-#: web/routes_frames.py:306
+#: web/routes_frames.py:317
 msgid "C'est fait."
 msgstr "完了しました。"
 
-#: web/routes_frames.py:306
+#: web/routes_frames.py:317
 msgid "Ce cadre a refusé la demande."
 msgstr "このフレームが要求を拒否しました。"
 
-#: web/routes_frames.py:394 web/routes_party.py:107 web/routes_settings.py:445
+#: web/routes_frames.py:405 web/routes_party.py:107 web/routes_settings.py:445
 msgid "Valeur invalide."
 msgstr "無効な値です。"
 
-#: web/routes_frames.py:399
+#: web/routes_frames.py:410
 msgid "Mur de cadres lancé : la première photo arrive dans quelques secondes."
 msgstr "フレームウォールを開始しました。数秒で最初の写真が表示されます。"
 
-#: web/routes_frames.py:399
+#: web/routes_frames.py:410
 msgid "Mur de cadres arrêté."
 msgstr "フレームウォールを停止しました。"
 
@@ -13174,22 +13192,31 @@ msgid "Ouvrez d'abord le lien du cadre."
 msgstr "先にフレームのリンクを開いてください。"
 
 #: web/routes_simple.py:95
+msgid "Les autres cadres ne répondent pas."
+msgstr "他のフレームが応答しません。"
+
+#: web/routes_simple.py:96
+#, python-format
+msgid "Des cœurs s'envolent sur %(count)s cadre(s) de la famille."
+msgstr "家族のフレーム%(count)s台にハートが飛びます。"
+
+#: web/routes_simple.py:101
 msgid "Le cadre s'éteint."
 msgstr "フレームをオフにします。"
 
-#: web/routes_simple.py:95
+#: web/routes_simple.py:101
 msgid "Le cadre s'allume."
 msgstr "フレームをオンにします。"
 
-#: web/routes_simple.py:114 web/routes_simple.py:129
+#: web/routes_simple.py:120 web/routes_simple.py:135
 msgid "Mode simple"
 msgstr "シンプルモード"
 
-#: web/routes_simple.py:119
+#: web/routes_simple.py:125
 msgid "Votre mot s'affiche sur le cadre."
 msgstr "メッセージがフレームに表示されます。"
 
-#: web/routes_simple.py:134
+#: web/routes_simple.py:140
 msgid "Votre message sera lu par le cadre."
 msgstr "フレームがメッセージを再生します。"
 
@@ -13748,52 +13775,52 @@ msgstr "%(source)s から %(count)s 枚の写真を追加しました。"
 msgid "Sauvegarde automatique impossible"
 msgstr "自動バックアップに失敗しました"
 
-#: web/workers.py:1212
+#: web/workers.py:1215
 msgid "Diaporama instable"
 msgstr "スライドショーが不安定"
 
-#: web/workers.py:1212
+#: web/workers.py:1215
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "1時間に %(count)s 回再起動が必要でした。"
 
-#: web/workers.py:1261
+#: web/workers.py:1264
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "
 "cette nuit : %(names)s"
 msgstr "今夜再試行しましたが、%(count)s件のメディアを準備できませんでした：%(names)s"
 
-#: web/workers.py:1304
+#: web/workers.py:1307
 #, python-format
 msgid "l'anniversaire de mariage de %(name)s (%(years)s ans)"
 msgstr "%(name)sの結婚記念日（%(years)s年）"
 
-#: web/workers.py:1306
+#: web/workers.py:1309
 #, python-format
 msgid "l'anniversaire de %(name)s (%(years)s ans)"
 msgstr "%(name)sの誕生日（%(years)s歳）"
 
-#: web/workers.py:1306
+#: web/workers.py:1309
 #, python-format
 msgid "l'anniversaire de %(name)s"
 msgstr "%(name)sの誕生日"
 
-#: web/workers.py:1308
+#: web/workers.py:1311
 msgid "C'est aujourd'hui !"
 msgstr "今日です！"
 
-#: web/workers.py:1308
+#: web/workers.py:1311
 #, python-format
 msgid "Aujourd'hui, c'est %(what)s."
 msgstr "今日は%(what)sです。"
 
-#: web/workers.py:1309
+#: web/workers.py:1312
 #, python-format
 msgid "Anniversaire dans %(days)s jours"
 msgstr "あと%(days)s日で誕生日"
 
-#: web/workers.py:1310
+#: web/workers.py:1313
 #, python-format
 msgid ""
 "%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot "

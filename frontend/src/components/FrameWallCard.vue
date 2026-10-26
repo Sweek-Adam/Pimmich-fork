@@ -52,7 +52,7 @@ onMounted(load);
       <button v-for="id in unused" :key="id" class="btn small" type="button" @click="add(id)"><i class="fas fa-plus"></i> {{ nameOf(id) }}</button>
     </div>
     <div class="row">
-      <label class="small">{{ t("Espace entre les écrans (% de la largeur)") }}
+      <label class="small">{{ t("Espace entre les écrans (pourcentage de la largeur)") }}
         <input type="number" min="0" max="30" :value="wall.gap" class="num" @change="save({ gap: Number(($event.target as HTMLInputElement).value) })"></label>
       <label class="small">{{ t("Chaque photo (secondes)") }}
         <input type="number" min="5" max="300" :value="wall.seconds" class="num" @change="save({ seconds: Number(($event.target as HTMLInputElement).value) })"></label>

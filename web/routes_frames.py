@@ -158,6 +158,15 @@ def frame_receive_message_api():
     return jsonify({"success": True, "message": _("Message publié : il apparaîtra dans le diaporama.")})
 
 
+@app.route('/api/frame/heart', methods=['POST'])
+@frame_token_required
+def frame_heart_receive_api():
+    """« Je pense à toi » venu d'un autre cadre : des cœurs s'envolent sur celui-ci."""
+    from utils import thinking
+    thinking.receive((request.get_json(silent=True) or {}).get("from"))
+    return jsonify({"success": True})
+
+
 # --- Côté cadre qui pilote : la liste des cadres de la famille ---
 
 def _frames():
@@ -288,6 +297,8 @@ def frames_action_api(frame_id, action):
     try:
         if action in ("next", "on", "off"):
             response = _call(frame, "POST", "/api/frame/command", json={"action": action})
+        elif action == "heart":
+            response = _call(frame, "POST", "/api/frame/heart", json={"from": heart_sender()})
         elif action == "photos":
             files = [("photos", (f.filename, f.stream, f.mimetype)) for f in request.files.getlist("photos") if f and f.filename]
             if not files:
@@ -454,3 +465,23 @@ def wall_loop():
         recent = (recent + [key])[-50:]
         show_at += wall["seconds"]
         time.sleep(max(0.0, show_at - frame_wall.LEAD - 1 - time.time()))  # la suivante part un peu avant la fin de celle-ci
+
+
+def heart_sender(config=None):
+    """Nom affiché sur les autres cadres (« Mamie pense à vous ») : le prénom du mode simple, sinon le nom du cadre."""
+    config = config or load_config()
+    return config.get("simple_name") or config.get("frame_name") or ""
+
+
+def send_heart_to_all():
+    """« Je pense à toi » vers tous les cadres de la famille ; retourne le nombre de cadres joints."""
+    import urllib3
+    urllib3.disable_warnings()
+    sent = 0
+    for frame in _frames():
+        try:
+            if _call(frame, "POST", "/api/frame/heart", json={"from": heart_sender()}).ok:
+                sent += 1
+        except requests.RequestException:
+            pass
+    return sent

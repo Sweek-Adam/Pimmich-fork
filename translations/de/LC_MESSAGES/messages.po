@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 09:44+0100\n"
+"POT-Creation-Date: 2026-10-26 09:50+0100\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -158,29 +158,38 @@ msgstr "(Jahrestag) Vor %(num)d Jahr"
 msgid "(Anniversaire) Il y a %(num)d ans"
 msgstr "(Jahrestag) Vor %(num)d Jahren"
 
-#: local_slideshow.py:3287
+#: local_slideshow.py:2262
+#, python-format
+msgid "%(name)s pense à vous"
+msgstr "%(name)s denkt an euch"
+
+#: local_slideshow.py:2262
+msgid "On pense à vous"
+msgstr "Jemand denkt an euch"
+
+#: local_slideshow.py:3307
 msgid "Aucune photo trouvée."
 msgstr "Keine Fotos gefunden."
 
-#: local_slideshow.py:3288
+#: local_slideshow.py:3308
 #, python-format
 msgid "Configurez sur : http://%(ip)s"
 msgstr "Konfigurieren unter: http://%(ip)s"
 
-#: local_slideshow.py:3289
+#: local_slideshow.py:3309
 msgid "(Identifiants dans credentials.json à la racine de la SD)"
 msgstr "(Zugangsdaten in credentials.json im Stammverzeichnis der SD-Karte)"
 
-#: local_slideshow.py:3290
+#: local_slideshow.py:3310
 #, python-format
 msgid "Résolution de l'écran : [%(w)s x %(h)s]"
 msgstr "Bildschirmauflösung: [%(w)s x %(h)s]"
 
-#: local_slideshow.py:3291
+#: local_slideshow.py:3311
 msgid "Nouvelle tentative dans 60 secondes..."
 msgstr "Neuer Versuch in 60 Sekunden..."
 
-#: local_slideshow.py:3317
+#: local_slideshow.py:3337
 msgid "Scannez pour configurer"
 msgstr "Zum Konfigurieren scannen"
 
@@ -601,7 +610,7 @@ msgstr "jedes Jahr"
 #: frontend/src/components/PresenceCard.vue:62
 #: frontend/src/components/RadioCard.vue:66
 #: frontend/src/components/sources/CloudCards.vue:111
-#: frontend/src/views/GuestsView.vue:254 frontend/src/views/GuestsView.vue:276
+#: frontend/src/views/GuestsView.vue:255 frontend/src/views/GuestsView.vue:277
 #: frontend/src/views/MaintenanceView.vue:314
 #: frontend/src/views/SoundView.vue:162
 #: templates/configure/_playlist_builder.html.jinja:41
@@ -1049,9 +1058,8 @@ msgid "Ajouter à droite :"
 msgstr "Rechts hinzufügen:"
 
 #: frontend/src/components/FrameWallCard.vue:55
-#, python-format
-msgid "Espace entre les écrans (% de la largeur)"
-msgstr "Abstand zwischen den Bildschirmen (% der Breite)"
+msgid "Espace entre les écrans (pourcentage de la largeur)"
+msgstr "Abstand zwischen den Bildschirmen (Prozent der Breite)"
 
 #: frontend/src/components/FrameWallCard.vue:57
 msgid "Chaque photo (secondes)"
@@ -1875,7 +1883,7 @@ msgid "Album intelligent"
 msgstr "Intelligentes Album"
 
 #: frontend/src/components/SmartAlbumEditor.vue:76
-#: frontend/src/views/GuestsView.vue:267
+#: frontend/src/views/GuestsView.vue:268
 #: templates/configure/_smart_albums.html.jinja:16
 #: templates/configure/tab_comptes.html.jinja:58
 #: templates/configure/tab_invites.html.jinja:161
@@ -2373,7 +2381,7 @@ msgstr ""
 "Der kostenlose StormGlass-Tarif begrenzt die Anfragen pro Tag: Der Rahmen"
 " ruft die Gezeiten nur zweimal täglich ab."
 
-#: frontend/src/components/VoiceMemo.vue:33 templates/simple.html.jinja:101
+#: frontend/src/components/VoiceMemo.vue:33 templates/simple.html.jinja:102
 msgid "Micro inaccessible : autorisez-le dans le navigateur."
 msgstr "Mikrofon nicht verfügbar: im Browser erlauben."
 
@@ -3803,14 +3811,16 @@ msgstr "Rahmen mit der TV-Fernbedienung steuern"
 #: frontend/src/views/DisplayView.vue:127
 msgid ""
 "Quand la TV est sur l'entrée du cadre : ▶ / ◀ photo suivante ou "
-"précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, Stop ou Retour "
+"précédente, OK pause, ▲ ou touche rouge ❤️ sur la photo, touche bleue « "
+"je pense à vous » vers les autres cadres de la famille, Stop ou Retour "
 "mise en veille ; n'importe quelle touche réveille le cadre. Nécessite le "
 "HDMI-CEC activé sur la TV."
 msgstr ""
 "Wenn der Fernseher auf dem Eingang des Rahmens ist: ▶ / ◀ nächstes oder "
-"vorheriges Foto, OK Pause, ▲ oder rote Taste ❤️ auf dem Foto, Stopp oder "
-"Zurück schaltet den Rahmen in den Ruhezustand; jede Taste weckt ihn. "
-"HDMI-CEC muss am Fernseher aktiviert sein."
+"vorheriges Foto, OK Pause, ▲ oder rote Taste ❤️ auf dem Foto, blaue Taste"
+" „Ich denk an euch“ an die anderen Rahmen der Familie, Stopp oder Zurück "
+"schaltet den Rahmen in den Ruhezustand; jede Taste weckt ihn. HDMI-CEC "
+"muss am Fernseher aktiviert sein."
 
 #: frontend/src/views/DisplayView.vue:129
 #: templates/configure/tab_affichage.html.jinja:333
@@ -4573,29 +4583,37 @@ msgstr "Senden Sie Fotos"
 msgid "Envoyer un message"
 msgstr "Nachricht senden"
 
-#: frontend/src/views/GuestsView.vue:246
+#: frontend/src/views/GuestsView.vue:244
+msgid "Des cœurs s'envolent sur ce cadre"
+msgstr "Herzen fliegen auf diesem Rahmen"
+
+#: frontend/src/views/GuestsView.vue:244 templates/simple.html.jinja:44
+msgid "Je pense à vous"
+msgstr "Ich denk an euch"
+
+#: frontend/src/views/GuestsView.vue:247
 msgid "Partager automatiquement avec ce cadre :"
 msgstr "Automatisch mit diesem Rahmen teilen:"
 
-#: frontend/src/views/GuestsView.vue:248
+#: frontend/src/views/GuestsView.vue:249
 msgid "les nouvelles photos reçues"
 msgstr "neu empfangene Fotos"
 
-#: frontend/src/views/GuestsView.vue:250
+#: frontend/src/views/GuestsView.vue:251
 msgid "les messages"
 msgstr "Nachrichten"
 
-#: frontend/src/views/GuestsView.vue:252
+#: frontend/src/views/GuestsView.vue:253
 #, python-brace-format
 msgid "Déjà partagés : {photos} photo(s), {messages} message(s)"
 msgstr "Bereits geteilt: {photos} Foto(s), {messages} Nachricht(en)"
 
-#: frontend/src/views/GuestsView.vue:259
+#: frontend/src/views/GuestsView.vue:260
 #: templates/configure/tab_invites.html.jinja:153
 msgid "Ajouter un cadre"
 msgstr "Rahmen hinzufügen"
 
-#: frontend/src/views/GuestsView.vue:261
+#: frontend/src/views/GuestsView.vue:262
 #: templates/configure/tab_invites.html.jinja:155
 msgid ""
 "Sur l'autre cadre : Partage › Invités › « Code d'association » (ci-"
@@ -4604,7 +4622,7 @@ msgstr ""
 "Auf dem anderen Rahmen: Teilen › Gäste › „Kopplungscode“ (unten), dann "
 "„Code erstellen“."
 
-#: frontend/src/views/GuestsView.vue:262
+#: frontend/src/views/GuestsView.vue:263
 #: templates/configure/tab_invites.html.jinja:156
 msgid ""
 "Ici : son adresse (ex. https://100.101.102.103 avec Tailscale, ou "
@@ -4613,34 +4631,34 @@ msgstr ""
 "Hier: seine Adresse (z. B. https://100.101.102.103 mit Tailscale oder "
 "https://192.168.1.30) und diesen Code."
 
-#: frontend/src/views/GuestsView.vue:265
+#: frontend/src/views/GuestsView.vue:266
 #: frontend/src/views/MaintenanceView.vue:324
 #: templates/configure/tab_invites.html.jinja:159
 #: templates/configure/tab_maintenance.html.jinja:226
 msgid "Adresse"
 msgstr "Adresse"
 
-#: frontend/src/views/GuestsView.vue:266
+#: frontend/src/views/GuestsView.vue:267
 #: templates/configure/tab_invites.html.jinja:160
 msgid "Code"
 msgstr "Code"
 
-#: frontend/src/views/GuestsView.vue:267
+#: frontend/src/views/GuestsView.vue:268
 #: templates/configure/tab_invites.html.jinja:161
 msgid "ex : Chez Mamie"
 msgstr "z. B. Bei Oma"
 
-#: frontend/src/views/GuestsView.vue:268
+#: frontend/src/views/GuestsView.vue:269
 #: templates/configure/tab_invites.html.jinja:163
 msgid "Ajouter le cadre"
 msgstr "Rahmen hinzufügen"
 
-#: frontend/src/views/GuestsView.vue:272
+#: frontend/src/views/GuestsView.vue:273
 #: templates/configure/tab_invites.html.jinja:166
 msgid "Code d'association de ce cadre"
 msgstr "Kopplungscode dieses Rahmens"
 
-#: frontend/src/views/GuestsView.vue:273
+#: frontend/src/views/GuestsView.vue:274
 #: templates/configure/tab_invites.html.jinja:167
 msgid ""
 "À saisir sur le cadre qui pilotera celui-ci. Retirez un code pour couper "
@@ -4649,7 +4667,7 @@ msgstr ""
 "Auf dem Rahmen eingeben, der diesen steuern soll. Entferne einen Code, um"
 " den Zugriff zu sperren."
 
-#: frontend/src/views/GuestsView.vue:278
+#: frontend/src/views/GuestsView.vue:279
 #: templates/configure/tab_invites.html.jinja:169
 msgid "Créer un code"
 msgstr "Code erstellen"
@@ -4690,7 +4708,7 @@ msgstr "Pause"
 msgid "Mettre en veille"
 msgstr "Ruhezustand"
 
-#: frontend/src/views/HomeView.vue:162 templates/simple.html.jinja:75
+#: frontend/src/views/HomeView.vue:162 templates/simple.html.jinja:76
 msgid "Allumer le cadre"
 msgstr "Rahmen einschalten"
 
@@ -5251,37 +5269,37 @@ msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "Fotos von „{source}“ nach „{target}“ verschieben?"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "lundi"
 msgstr "Montag"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "mardi"
 msgstr "Dienstag"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "mercredi"
 msgstr "Mittwoch"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "jeudi"
 msgstr "Donnerstag"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "vendredi"
 msgstr "Freitag"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "samedi"
 msgstr "Samstag"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1301
+#: utils/themed_compositions_extra.py:608 web/workers.py:1304
 msgid "dimanche"
 msgstr "Sonntag"
 
@@ -5316,7 +5334,7 @@ msgstr "Kommunikationsfehler mit dem Server."
 
 #: frontend/src/views/MaintenanceView.vue:131
 #: templates/configure/tab_maintenance.html.jinja:144 web/routes_frames.py:121
-#: web/routes_frames.py:294 web/routes_guests.py:96 web/routes_guests.py:101
+#: web/routes_frames.py:305 web/routes_guests.py:96 web/routes_guests.py:101
 #: web/routes_imports.py:654 web/routes_imports.py:692 web/routes_system.py:923
 msgid "Aucun fichier sélectionné."
 msgstr "Keine Dateien ausgewählt."
@@ -8282,7 +8300,7 @@ msgstr "Hallo %(name)s!"
 msgid "Bonjour !"
 msgstr "Hallo!"
 
-#: templates/simple.html.jinja:37 templates/simple.html.jinja:72
+#: templates/simple.html.jinja:37 templates/simple.html.jinja:73
 #: web/routes_simple.py:76 web/routes_simple.py:88
 msgid "Le cadre est éteint."
 msgstr "Der Rahmen ist aus."
@@ -8299,47 +8317,47 @@ msgstr "Weiter"
 msgid "J'aime"
 msgstr "Gefällt mir"
 
-#: templates/simple.html.jinja:44
+#: templates/simple.html.jinja:45
 msgid "Écrire un mot"
 msgstr "Ein Wort schreiben"
 
-#: templates/simple.html.jinja:45 templates/simple.html.jinja:108
+#: templates/simple.html.jinja:46 templates/simple.html.jinja:109
 msgid "Dire un mot"
 msgstr "Etwas sagen"
 
-#: templates/simple.html.jinja:46 templates/simple.html.jinja:75
+#: templates/simple.html.jinja:47 templates/simple.html.jinja:76
 msgid "Éteindre le cadre"
 msgstr "Rahmen ausschalten"
 
-#: templates/simple.html.jinja:50
+#: templates/simple.html.jinja:51
 msgid "Votre mot pour la famille…"
 msgstr "Dein Wort für die Familie…"
 
-#: templates/simple.html.jinja:52
+#: templates/simple.html.jinja:53
 msgid "Retour"
 msgstr "Zurück"
 
-#: templates/simple.html.jinja:53 templates/upload.html.jinja:141
+#: templates/simple.html.jinja:54 templates/upload.html.jinja:141
 msgid "Envoyer"
 msgstr "Schicken"
 
-#: templates/simple.html.jinja:72
+#: templates/simple.html.jinja:73
 msgid "Le cadre change de photo…"
 msgstr "Der Rahmen wechselt das Foto…"
 
-#: templates/simple.html.jinja:80 web/routes_simple.py:80
+#: templates/simple.html.jinja:81 web/routes_simple.py:80
 msgid "Le cadre ne répond pas."
 msgstr "Der Rahmen antwortet nicht."
 
-#: templates/simple.html.jinja:99
+#: templates/simple.html.jinja:100
 msgid "Micro indisponible sur ce téléphone."
 msgstr "Mikrofon auf diesem Handy nicht verfügbar."
 
-#: templates/simple.html.jinja:111
+#: templates/simple.html.jinja:112
 msgid "Envoi…"
 msgstr "Wird gesendet…"
 
-#: templates/simple.html.jinja:117
+#: templates/simple.html.jinja:118
 msgid "Appuyez pour finir"
 msgstr "Zum Beenden tippen"
 
@@ -11903,7 +11921,7 @@ msgstr "Rahmenprobleme (Strom, Hitze, Speicher)"
 msgid "Imports terminés"
 msgstr "Abgeschlossene Importe"
 
-#: utils/notify.py:23 web/workers.py:1260
+#: utils/notify.py:23 web/workers.py:1263
 msgid "Médias impossibles à préparer"
 msgstr "Medien, die nicht vorbereitet werden konnten"
 
@@ -12517,8 +12535,8 @@ msgstr "%(count)s Datum/Daten gespeichert."
 msgid "Autre cadre"
 msgstr "Anderer Rahmen"
 
-#: web/routes_frames.py:110 web/routes_frames.py:299 web/routes_guests.py:308
-#: web/routes_simple.py:96
+#: web/routes_frames.py:110 web/routes_frames.py:310 web/routes_guests.py:308
+#: web/routes_simple.py:102
 msgid "Action inconnue."
 msgstr "Unbekannte Aktion."
 
@@ -12531,63 +12549,63 @@ msgstr "%(count)s Foto(s) empfangen."
 msgid "Message publié : il apparaîtra dans le diaporama."
 msgstr "Nachricht veröffentlicht: Sie wird in der Diashow erscheinen."
 
-#: web/routes_frames.py:214
+#: web/routes_frames.py:223
 msgid "Adresse ou code invalide."
 msgstr "Ungültige Adresse oder ungültiger Code."
 
-#: web/routes_frames.py:219
+#: web/routes_frames.py:228
 msgid "Ce cadre ne répond pas : vérifiez son adresse (réseau local ou Tailscale)."
 msgstr ""
 "Dieser Rahmen antwortet nicht: Prüfe seine Adresse (lokales Netzwerk oder"
 " Tailscale)."
 
-#: web/routes_frames.py:221
+#: web/routes_frames.py:230
 msgid "Le code d'association est refusé par ce cadre."
 msgstr "Dieser Rahmen lehnt den Kopplungscode ab."
 
-#: web/routes_frames.py:226
+#: web/routes_frames.py:235
 #, python-format
 msgid "Cadre « %(name)s » ajouté."
 msgstr "Rahmen „%(name)s“ hinzugefügt."
 
-#: web/routes_frames.py:238 web/routes_frames.py:286
+#: web/routes_frames.py:247 web/routes_frames.py:295
 msgid "Cadre inconnu."
 msgstr "Unbekannter Rahmen."
 
-#: web/routes_frames.py:248
+#: web/routes_frames.py:257
 #, python-format
 msgid "Partage automatique vers « %(name)s » activé."
 msgstr "Automatisches Teilen mit „%(name)s“ aktiviert."
 
-#: web/routes_frames.py:249
+#: web/routes_frames.py:258
 msgid "Partage automatique désactivé."
 msgstr "Automatisches Teilen deaktiviert."
 
-#: web/routes_frames.py:259
+#: web/routes_frames.py:268
 msgid "Cadre retiré."
 msgstr "Rahmen entfernt."
 
-#: web/routes_frames.py:301
+#: web/routes_frames.py:312
 msgid "Ce cadre ne répond pas."
 msgstr "Dieser Rahmen antwortet nicht."
 
-#: web/routes_frames.py:306
+#: web/routes_frames.py:317
 msgid "C'est fait."
 msgstr "Erledigt."
 
-#: web/routes_frames.py:306
+#: web/routes_frames.py:317
 msgid "Ce cadre a refusé la demande."
 msgstr "Dieser Rahmen hat die Anfrage abgelehnt."
 
-#: web/routes_frames.py:394 web/routes_party.py:107 web/routes_settings.py:445
+#: web/routes_frames.py:405 web/routes_party.py:107 web/routes_settings.py:445
 msgid "Valeur invalide."
 msgstr "Ungültiger Wert."
 
-#: web/routes_frames.py:399
+#: web/routes_frames.py:410
 msgid "Mur de cadres lancé : la première photo arrive dans quelques secondes."
 msgstr "Rahmenwand gestartet: Das erste Foto kommt in wenigen Sekunden."
 
-#: web/routes_frames.py:399
+#: web/routes_frames.py:410
 msgid "Mur de cadres arrêté."
 msgstr "Rahmenwand gestoppt."
 
@@ -13755,22 +13773,31 @@ msgid "Ouvrez d'abord le lien du cadre."
 msgstr "Öffne zuerst den Link des Rahmens."
 
 #: web/routes_simple.py:95
+msgid "Les autres cadres ne répondent pas."
+msgstr "Die anderen Rahmen antworten nicht."
+
+#: web/routes_simple.py:96
+#, python-format
+msgid "Des cœurs s'envolent sur %(count)s cadre(s) de la famille."
+msgstr "Herzen fliegen auf %(count)s Rahmen der Familie."
+
+#: web/routes_simple.py:101
 msgid "Le cadre s'éteint."
 msgstr "Der Rahmen schaltet sich aus."
 
-#: web/routes_simple.py:95
+#: web/routes_simple.py:101
 msgid "Le cadre s'allume."
 msgstr "Der Rahmen schaltet sich ein."
 
-#: web/routes_simple.py:114 web/routes_simple.py:129
+#: web/routes_simple.py:120 web/routes_simple.py:135
 msgid "Mode simple"
 msgstr "Einfacher Modus"
 
-#: web/routes_simple.py:119
+#: web/routes_simple.py:125
 msgid "Votre mot s'affiche sur le cadre."
 msgstr "Dein Wort erscheint auf dem Rahmen."
 
-#: web/routes_simple.py:134
+#: web/routes_simple.py:140
 msgid "Votre message sera lu par le cadre."
 msgstr "Der Rahmen spielt deine Nachricht ab."
 
@@ -14372,16 +14399,16 @@ msgstr "%(count)s Foto(s) aus %(source)s hinzugefügt."
 msgid "Sauvegarde automatique impossible"
 msgstr "Automatische Sicherung fehlgeschlagen"
 
-#: web/workers.py:1212
+#: web/workers.py:1215
 msgid "Diaporama instable"
 msgstr "Instabile Diashow"
 
-#: web/workers.py:1212
+#: web/workers.py:1215
 #, python-format
 msgid "Il a dû être relancé %(count)s fois en une heure."
 msgstr "Sie musste %(count)s Mal in einer Stunde neu gestartet werden."
 
-#: web/workers.py:1261
+#: web/workers.py:1264
 #, python-format
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "
@@ -14390,36 +14417,36 @@ msgstr ""
 "%(count)s Medium/Medien konnten trotz eines erneuten Versuchs heute Nacht"
 " nicht vorbereitet werden: %(names)s"
 
-#: web/workers.py:1304
+#: web/workers.py:1307
 #, python-format
 msgid "l'anniversaire de mariage de %(name)s (%(years)s ans)"
 msgstr "der Hochzeitstag von %(name)s (%(years)s Jahre)"
 
-#: web/workers.py:1306
+#: web/workers.py:1309
 #, python-format
 msgid "l'anniversaire de %(name)s (%(years)s ans)"
 msgstr "der Geburtstag von %(name)s (%(years)s Jahre)"
 
-#: web/workers.py:1306
+#: web/workers.py:1309
 #, python-format
 msgid "l'anniversaire de %(name)s"
 msgstr "der Geburtstag von %(name)s"
 
-#: web/workers.py:1308
+#: web/workers.py:1311
 msgid "C'est aujourd'hui !"
 msgstr "Heute ist es so weit!"
 
-#: web/workers.py:1308
+#: web/workers.py:1311
 #, python-format
 msgid "Aujourd'hui, c'est %(what)s."
 msgstr "Heute ist %(what)s."
 
-#: web/workers.py:1309
+#: web/workers.py:1312
 #, python-format
 msgid "Anniversaire dans %(days)s jours"
 msgstr "Geburtstag in %(days)s Tagen"
 
-#: web/workers.py:1310
+#: web/workers.py:1313
 #, python-format
 msgid ""
 "%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot "
