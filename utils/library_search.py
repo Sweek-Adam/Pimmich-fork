@@ -32,6 +32,8 @@ def search(favorites=(), text="", start=None, end=None, source="", person="", on
     """
     from utils import immich_search
     captions = _captions()
+    from utils import auto_captions
+    proposed = auto_captions.load() if text else {}
     words = [w for w in _fold(text).split() if w]
     found = []
     for item in smart_albums.library(favorites):
@@ -55,7 +57,8 @@ def search(favorites=(), text="", start=None, end=None, source="", person="", on
             found.append(dict(item, caption=captions.get(item["path"], ""), _rank=position))
             continue
         if words:
-            haystack = _fold(" ".join([item["path"], item.get("place") or "", captions.get(item["path"], ""), " ".join(item["people"])]))
+            haystack = _fold(" ".join([item["path"], item.get("place") or "", captions.get(item["path"], ""), " ".join(item["people"]),
+                                       auto_captions.text_for(item["path"], proposed)]))
             if not all(w in haystack for w in words):
                 continue
         found.append(dict(item, caption=captions.get(item["path"], "")))

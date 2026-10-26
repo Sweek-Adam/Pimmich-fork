@@ -1280,6 +1280,25 @@ def night_work_worker():
         time.sleep(600)
 
 
+def auto_captions_worker():
+    """Légendes proposées automatiquement, la nuit (écran éteint), par lots ; une fois par nuit."""
+    from utils import night_work
+    time.sleep(300)
+    last_night = None
+    while True:
+        try:
+            config = load_config()
+            night = datetime.now().strftime("%Y-%m-%d")
+            if config.get("auto_captions_enabled") and not night_work.active_now(config) and last_night != night:
+                last_night = night
+                from web.routes_auto_captions import run_batch
+                count = run_batch(config, stop=lambda: night_work.active_now(load_config()))
+                logger.info(f"[Légendes] {count} photo(s) traitée(s) cette nuit")
+        except Exception as e:
+            logger.warning(f"[Légendes] {e}")
+        time.sleep(1800)
+
+
 def monthly_report_worker():
     """Bilan du mois par e-mail, le 1er du mois à 10 h (désactivé par défaut)."""
     from utils import monthly_report

@@ -209,7 +209,7 @@ ADMIN_ONLY = {"telegram_authorized_users", "wifi_hotspot_fallback", "hardware_pr
 
 # Secrets : jamais renvoyés au navigateur ; on sait seulement s'ils sont définis, et on peut les remplacer
 SECRETS = ("immich_token", "smb_password", "weather_api_key", "stormglass_api_key", "telegram_bot_token",
-           "porcupine_access_key", "home_assistant_token", "email_password", "mqtt_password")
+           "porcupine_access_key", "home_assistant_token", "email_password", "mqtt_password", "anthropic_api_key")
 
 
 def clean(key, value):

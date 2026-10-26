@@ -84,6 +84,19 @@
   ]
  ],
  [
+  "/api/auto_captions",
+  [
+   "GET",
+   "PUT"
+  ]
+ ],
+ [
+  "/api/auto_captions/run",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/backup/drive",
   [
    "POST"

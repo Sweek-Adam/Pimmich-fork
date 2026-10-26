@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 15:10+0100\n"
+"POT-Creation-Date: 2026-10-26 15:22+0100\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -259,7 +259,7 @@ msgstr "Home"
 msgid "Nouveautés"
 msgstr "What's new"
 
-#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:123
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:124
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:69
 msgid "Photos"
@@ -297,7 +297,7 @@ msgstr "Up next"
 msgid "Playlists"
 msgstr "Playlists"
 
-#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:128
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:129
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -333,7 +333,7 @@ msgstr "Display"
 msgid "Horloge & météo"
 msgstr "Clock & weather"
 
-#: frontend/src/nav.ts:41 frontend/src/views/CaptionsView.vue:12
+#: frontend/src/nav.ts:41 frontend/src/views/CaptionsView.vue:13
 #: templates/configure.html.jinja:160
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
@@ -642,6 +642,96 @@ msgstr "E.g. Holidays, Julie's wedding, Christmas"
 msgid "Ajouter"
 msgstr "Add"
 
+#: frontend/src/components/AutoCaptionsCard.vue:14
+msgid ""
+"Avec Claude, une copie réduite de chaque photo est envoyée à Anthropic "
+"pour être décrite (environ 0,7 centime par photo, facturé sur votre "
+"compte Anthropic). Continuer ?"
+msgstr ""
+"With Claude, a reduced copy of each photo is sent to Anthropic to be "
+"described (about 0.7 cents per photo, billed to your Anthropic account). "
+"Continue?"
+
+#: frontend/src/components/AutoCaptionsCard.vue:25
+msgid "Légendes proposées automatiquement"
+msgstr "Automatically suggested captions"
+
+#: frontend/src/components/AutoCaptionsCard.vue:26
+msgid ""
+"Chaque nuit, le cadre propose pour les photos une courte description et "
+"des mots-clés (plage, neige, anniversaire…). Ils servent à la recherche "
+"de la bibliothèque, et chaque proposition peut devenir la légende en un "
+"clic. Une légende écrite à la main n'est jamais remplacée."
+msgstr ""
+"Every night, the frame suggests a short description and keywords for "
+"photos (beach, snow, birthday…). They're used by the library search, and "
+"each suggestion can become the caption in one click. A handwritten "
+"caption is never replaced."
+
+#: frontend/src/components/AutoCaptionsCard.vue:28
+msgid "Proposer des légendes chaque nuit"
+msgstr "Suggest captions every night"
+
+#: frontend/src/components/AutoCaptionsCard.vue:31
+msgid ""
+"mots-clés seulement, gratuit, analysés par votre serveur Immich (photos "
+"importées d'Immich)."
+msgstr ""
+"keywords only, free, analysed by your Immich server (photos imported from"
+" Immich)."
+
+#: frontend/src/components/AutoCaptionsCard.vue:32
+msgid "Immich n'est pas configuré (Sources › Immich)."
+msgstr "Immich isn't set up (Sources › Immich)."
+
+#: frontend/src/components/AutoCaptionsCard.vue:34
+msgid ""
+"une phrase et des mots-clés pour toutes les photos ; les photos sont "
+"envoyées à Anthropic (environ 0,7 centime par photo)."
+msgstr ""
+"a sentence and keywords for every photo; photos are sent to Anthropic "
+"(about 0.7 cents per photo)."
+
+#: frontend/src/components/AutoCaptionsCard.vue:37
+msgid "Clé enregistrée (la remplacer…)"
+msgstr "Key saved (replace it…)"
+
+#: frontend/src/components/AutoCaptionsCard.vue:37
+msgid "Clé d’API Anthropic (sk-ant-…)"
+msgstr "Anthropic API key (sk-ant-…)"
+
+#: frontend/src/components/AutoCaptionsCard.vue:38
+#: frontend/src/components/CaptionEditor.vue:189
+#: frontend/src/components/HomeAssistantCard.vue:41
+#: frontend/src/components/QuoteCard.vue:63
+#: frontend/src/components/SettingField.vue:63
+#: frontend/src/components/SpotifyCard.vue:136
+#: frontend/src/components/sources/CloudCards.vue:132
+#: frontend/src/components/sources/GdriveCard.vue:75
+#: frontend/src/views/NetworkView.vue:181
+#: frontend/src/views/PlaylistsView.vue:202
+#: frontend/src/views/SoundView.vue:166
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:303
+#: templates/configure/tab_dispositions.html.jinja:132
+#: templates/configure/tab_legendes.html.jinja:123
+#: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_son.html.jinja:33
+#: templates/configure/tab_sources.html.jinja:543
+#: templates/upload.html.jinja:167
+msgid "Enregistrer"
+msgstr "Save"
+
+#: frontend/src/components/AutoCaptionsCard.vue:42
+msgid "Essayer maintenant"
+msgstr "Try now"
+
+#: frontend/src/components/AutoCaptionsCard.vue:43
+#, python-brace-format
+msgid "{done} photo(s) avec des propositions, dont {described} décrite(s)"
+msgstr "{done} photo(s) with suggestions, {described} described"
+
 #: frontend/src/components/ButtonCard.vue:24
 #: frontend/src/views/DisplayView.vue:145
 msgid "Bouton physique"
@@ -697,7 +787,7 @@ msgstr ""
 "resistor is needed."
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:162
+#: frontend/src/views/LibraryView.vue:163
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr "Style of this caption"
@@ -785,7 +875,7 @@ msgstr "Glow"
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:170
+#: frontend/src/views/LibraryView.vue:178
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -957,28 +1047,6 @@ msgstr "Use the general style"
 #: templates/upload.html.jinja:247
 msgid "Annuler"
 msgstr "Cancel"
-
-#: frontend/src/components/CaptionEditor.vue:189
-#: frontend/src/components/HomeAssistantCard.vue:41
-#: frontend/src/components/QuoteCard.vue:63
-#: frontend/src/components/SettingField.vue:63
-#: frontend/src/components/SpotifyCard.vue:136
-#: frontend/src/components/sources/CloudCards.vue:132
-#: frontend/src/components/sources/GdriveCard.vue:75
-#: frontend/src/views/NetworkView.vue:181
-#: frontend/src/views/PlaylistsView.vue:202
-#: frontend/src/views/SoundView.vue:166
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/_son_spotify.html.jinja:34
-#: templates/configure/tab_affichage.html.jinja:303
-#: templates/configure/tab_dispositions.html.jinja:132
-#: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_messages.html.jinja:236
-#: templates/configure/tab_son.html.jinja:33
-#: templates/configure/tab_sources.html.jinja:543
-#: templates/upload.html.jinja:167
-msgid "Enregistrer"
-msgstr "Save"
 
 #: frontend/src/components/DailyPhotoCard.vue:33
 msgid "Photo du jour par e-mail"
@@ -1808,7 +1876,7 @@ msgid "Non défini"
 msgstr "Undefined"
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:129 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:130 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "Clear"
 
@@ -1940,7 +2008,7 @@ msgid "du"
 msgstr "from"
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:127
+#: frontend/src/views/LibraryView.vue:128
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -1991,8 +2059,8 @@ msgid "Favoris uniquement"
 msgstr "Favourites only"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
-#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:168
-#: frontend/src/views/LibraryView.vue:122
+#: frontend/src/views/CaptionsView.vue:11 frontend/src/views/HomeView.vue:168
+#: frontend/src/views/LibraryView.vue:123
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
@@ -2950,32 +3018,32 @@ msgstr ""
 "Each account has its own uploads and playlists; a user does not see "
 "sensitive settings."
 
-#: frontend/src/views/CaptionsView.vue:10
+#: frontend/src/views/CaptionsView.vue:11
 #: templates/configure/tab_legendes.html.jinja:7
 msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
 msgstr "Caption typed under each photo or video (also on postcards)."
 
-#: frontend/src/views/CaptionsView.vue:11
+#: frontend/src/views/CaptionsView.vue:12
 #: templates/configure/tab_legendes.html.jinja:8
 msgid "Polaroïds"
 msgstr "Polaroids"
 
-#: frontend/src/views/CaptionsView.vue:11
+#: frontend/src/views/CaptionsView.vue:12
 #: templates/configure/tab_legendes.html.jinja:8
 msgid "Texte écrit dans la marge blanche des polaroïds."
 msgstr "Text written in the white margin of polaroids."
 
-#: frontend/src/views/CaptionsView.vue:12
+#: frontend/src/views/CaptionsView.vue:13
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Date et lieu affichés par le diaporama."
 msgstr "Date and place shown by the slideshow."
 
-#: frontend/src/views/CaptionsView.vue:34
+#: frontend/src/views/CaptionsView.vue:35
 #: templates/configure/tab_legendes.html.jinja:3
 msgid "Style des légendes"
 msgstr "Caption style"
 
-#: frontend/src/views/CaptionsView.vue:35
+#: frontend/src/views/CaptionsView.vue:36
 msgid ""
 "Choisissez l'apparence de chaque type de légende : police, taille, "
 "couleurs, fond, contour, ombre, position et inclinaison. Une photo ou une"
@@ -2985,12 +3053,12 @@ msgstr ""
 "outline, shadow, position and tilt. A photo or video can also have its "
 "own style (from the library)."
 
-#: frontend/src/views/CaptionsView.vue:43
+#: frontend/src/views/CaptionsView.vue:44
 #: templates/configure/tab_legendes.html.jinja:14
 msgid "Personnaliser"
 msgstr "Customise"
 
-#: frontend/src/views/CaptionsView.vue:47
+#: frontend/src/views/CaptionsView.vue:48
 #: templates/configure/tab_legendes.html.jinja:19
 msgid ""
 "Les légendes déjà posées sur les photos sont redessinées automatiquement "
@@ -3662,7 +3730,7 @@ msgstr ""
 "follows your browser's language."
 
 #: frontend/src/views/DisplayView.vue:103
-#: frontend/src/views/LibraryView.vue:124
+#: frontend/src/views/LibraryView.vue:125
 msgid "Vidéos"
 msgstr "Videos"
 
@@ -5126,7 +5194,7 @@ msgstr "Seasonal theme"
 msgid "Affiche les messages"
 msgstr "Shows messages"
 
-#: frontend/src/views/LibraryView.vue:20
+#: frontend/src/views/LibraryView.vue:21
 msgid ""
 "Recherche par contenu grâce à l'analyse des images d'Immich (photos "
 "importées d'Immich)"
@@ -5134,85 +5202,89 @@ msgstr ""
 "Search by content using Immich's image analysis (photos imported from "
 "Immich)"
 
-#: frontend/src/views/LibraryView.vue:63
+#: frontend/src/views/LibraryView.vue:64
 msgid "Ajoutée aux favoris."
 msgstr "Added to favorites."
 
-#: frontend/src/views/LibraryView.vue:63
+#: frontend/src/views/LibraryView.vue:64
 msgid "Retirée des favoris."
 msgstr "Removed from favorites."
 
-#: frontend/src/views/LibraryView.vue:77
+#: frontend/src/views/LibraryView.vue:78
 msgid "Légende enregistrée."
 msgstr "Caption saved."
 
-#: frontend/src/views/LibraryView.vue:110
+#: frontend/src/views/LibraryView.vue:111
 msgid "Décrivez la photo : plage, chien, neige…"
 msgstr "Describe the photo: beach, dog, snow…"
 
-#: frontend/src/views/LibraryView.vue:110
+#: frontend/src/views/LibraryView.vue:111
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "Search (place, caption, file name…)"
 
-#: frontend/src/views/LibraryView.vue:112
+#: frontend/src/views/LibraryView.vue:113
 msgid "Par contenu (Immich)"
 msgstr "By content (Immich)"
 
-#: frontend/src/views/LibraryView.vue:114
+#: frontend/src/views/LibraryView.vue:115
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "All sources"
 
-#: frontend/src/views/LibraryView.vue:118
+#: frontend/src/views/LibraryView.vue:119
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "Everyone"
 
-#: frontend/src/views/LibraryView.vue:126
+#: frontend/src/views/LibraryView.vue:127
 msgid "Du"
 msgstr "From"
 
-#: frontend/src/views/LibraryView.vue:132
+#: frontend/src/views/LibraryView.vue:133
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} results ({shown} shown)"
 
-#: frontend/src/views/LibraryView.vue:132
+#: frontend/src/views/LibraryView.vue:133
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} results"
 
-#: frontend/src/views/LibraryView.vue:138
+#: frontend/src/views/LibraryView.vue:139
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "No favorite photos yet: tap a photo's star to add it."
 
-#: frontend/src/views/LibraryView.vue:138
+#: frontend/src/views/LibraryView.vue:139
 msgid "Aucune photo ne correspond."
 msgstr "No photo matches."
 
-#: frontend/src/views/LibraryView.vue:143
-#: frontend/src/views/LibraryView.vue:169
+#: frontend/src/views/LibraryView.vue:144
+#: frontend/src/views/LibraryView.vue:177
 msgid "Favori"
 msgstr "Favorite"
 
-#: frontend/src/views/LibraryView.vue:150
+#: frontend/src/views/LibraryView.vue:151
 msgid "Précédente"
 msgstr "Previous"
 
-#: frontend/src/views/LibraryView.vue:160
+#: frontend/src/views/LibraryView.vue:161
 msgid "Ajouter une légende…"
 msgstr "Add a caption…"
 
-#: frontend/src/views/LibraryView.vue:169
+#: frontend/src/views/LibraryView.vue:170
+msgid "Utiliser comme légende"
+msgstr "Use as caption"
+
+#: frontend/src/views/LibraryView.vue:177
 msgid "Ajouter aux favoris"
 msgstr "Add to favorites"
 
-#: frontend/src/views/LibraryView.vue:173
+#: frontend/src/views/LibraryView.vue:181
 msgid "Suivante"
 msgstr "Next"
 
@@ -5275,37 +5347,37 @@ msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "Move the photos of “{source}” to “{target}”?"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "lundi"
 msgstr "Monday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "mardi"
 msgstr "Tuesday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "mercredi"
 msgstr "Wednesday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "jeudi"
 msgstr "Thursday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "vendredi"
 msgstr "Friday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "samedi"
 msgstr "Saturday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "dimanche"
 msgstr "Sunday"
 
@@ -12325,6 +12397,24 @@ msgstr "You cannot change your own role."
 msgid "Rôle de « %(name)s » modifié."
 msgstr "Role of “%(name)s” changed."
 
+#: web/routes_auto_captions.py:65
+msgid "Légendes automatiques enregistrées."
+msgstr "Automatic captions saved."
+
+#: web/routes_auto_captions.py:79
+msgid "Saisissez d'abord la clé d'API d'Anthropic."
+msgstr "Enter the Anthropic API key first."
+
+#: web/routes_auto_captions.py:81
+msgid "Des légendes sont déjà en cours de création."
+msgstr "Captions are already being created."
+
+#: web/routes_auto_captions.py:83
+msgid ""
+"C'est parti : les propositions apparaissent dans la bibliothèque au fur "
+"et à mesure."
+msgstr "Started: suggestions will appear in the library as they come."
+
 #: web/routes_captions.py:14
 msgid "Vacances à la mer avec mamie"
 msgstr "Seaside holiday with grandma"
@@ -13634,19 +13724,19 @@ msgstr "Photo not found: %(name)s"
 msgid "Playlist non trouvée."
 msgstr "Playlist not found."
 
-#: web/routes_playlists.py:396
+#: web/routes_playlists.py:398
 msgid "Aucun souvenir vocal sur cette photo."
 msgstr "No voice memory on this photo."
 
-#: web/routes_playlists.py:397
+#: web/routes_playlists.py:399
 msgid "Souvenir vocal supprimé."
 msgstr "Voice memory deleted."
 
-#: web/routes_playlists.py:401
+#: web/routes_playlists.py:403
 msgid "Photo ou enregistrement manquant."
 msgstr "Photo or recording missing."
 
-#: web/routes_playlists.py:407
+#: web/routes_playlists.py:409
 #, python-format
 msgid ""
 "Souvenir vocal enregistré (%(seconds)s s) : il sera lu quand la photo "
@@ -14348,36 +14438,36 @@ msgstr ""
 "%(count)s media could not be prepared despite another try tonight: "
 "%(names)s"
 
-#: web/workers.py:1325
+#: web/workers.py:1344
 #, python-format
 msgid "l'anniversaire de mariage de %(name)s (%(years)s ans)"
 msgstr "%(name)s's wedding anniversary (%(years)s years)"
 
-#: web/workers.py:1327
+#: web/workers.py:1346
 #, python-format
 msgid "l'anniversaire de %(name)s (%(years)s ans)"
 msgstr "%(name)s's birthday (%(years)s)"
 
-#: web/workers.py:1327
+#: web/workers.py:1346
 #, python-format
 msgid "l'anniversaire de %(name)s"
 msgstr "%(name)s's birthday"
 
-#: web/workers.py:1329
+#: web/workers.py:1348
 msgid "C'est aujourd'hui !"
 msgstr "It's today!"
 
-#: web/workers.py:1329
+#: web/workers.py:1348
 #, python-format
 msgid "Aujourd'hui, c'est %(what)s."
 msgstr "Today is %(what)s."
 
-#: web/workers.py:1330
+#: web/workers.py:1349
 #, python-format
 msgid "Anniversaire dans %(days)s jours"
 msgstr "Birthday in %(days)s days"
 
-#: web/workers.py:1331
+#: web/workers.py:1350
 #, python-format
 msgid ""
 "%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot "

@@ -422,7 +422,7 @@ def back_to_interface(app_route="", classic_tab=""):
 
 SECRET_CONFIG_KEYS = ['immich_token', 'smb_password', 'weather_api_key', 'stormglass_api_key', 'telegram_bot_token',
                       'telegram_authorized_users', 'porcupine_access_key', 'home_assistant_token', 'wifi_ssid', 'wifi_password',
-                      'email_password', 'mqtt_password', 'frame_link_tokens', 'family_frames', 'simple_link_token']
+                      'email_password', 'mqtt_password', 'frame_link_tokens', 'family_frames', 'simple_link_token', 'anthropic_api_key']
 
 
 @app.before_request

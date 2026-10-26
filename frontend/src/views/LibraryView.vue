@@ -13,6 +13,7 @@ const props = defineProps<{ favorites?: boolean }>();
 interface Item {
   path: string; thumb: string; url: string; date: string | null; place?: string | null; people: string[];
   caption?: string | null; video: boolean; favorite: boolean; source: string; voice?: number | null;
+  suggestion?: { caption?: string; tags?: string[] } | null;
 }
 
 const filters = reactive({ q: "", source: "", person: "", media: "", from: "", to: "", fav: !!props.favorites, smart: false });
@@ -161,6 +162,13 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
             <button class="btn" type="submit" :disabled="captionText === (current.caption || '')"><i class="fas fa-check"></i></button>
             <button class="btn" type="button" :title="t('Style de cette légende')" @click="styling = true"><i class="fas fa-palette"></i></button>
           </form>
+          <p v-if="current.suggestion && (current.suggestion.caption || current.suggestion.tags?.length)" class="small suggestion">
+            <i class="fas fa-magic"></i>
+            <span v-if="current.suggestion.caption">{{ current.suggestion.caption }}</span>
+            <span v-if="current.suggestion.tags?.length" class="dim"> · {{ current.suggestion.tags.join(", ") }}</span>
+            <button v-if="current.suggestion.caption && current.suggestion.caption !== captionText" class="btn small" type="button"
+                    @click="captionText = current.suggestion.caption || ''">{{ t("Utiliser comme légende") }}</button>
+          </p>
           <PhotoComments :path="current.path" />
           <VoiceMemo v-if="!current.video" :path="current.path" :seconds="current.voice" @changed="(s) => { if (current) current.voice = s; }" />
           <p class="small dim">{{ sourceLabel(current.source) }} · {{ current.path.split("/").pop() }}</p>
@@ -203,6 +211,8 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
 .info .btn { background: rgba(255, 255, 255, .1); color: #fff; border-color: rgba(255, 255, 255, .2); }
 .dim { opacity: .6; }
 .caption { display: flex; gap: .4rem; margin: .4rem 0; }
+.suggestion { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; margin: .3rem 0; }
+.suggestion .dim { opacity: .7; }
 .caption input { flex: 1; min-width: 0; font: inherit; color: #fff; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .25); border-radius: 10px; padding: .4rem .6rem; }
 .nav { border: 0; background: rgba(255, 255, 255, .08); color: #fff; width: 3rem; height: 3rem; border-radius: 50%; margin: 0 .5rem; cursor: pointer; flex: none; }
 @media (max-width: 760px) { .nav { position: absolute; bottom: 1rem; z-index: 2; } .prev { left: 1rem; } .next { right: 1rem; } .info { flex-wrap: wrap; padding-bottom: 3.5rem; } }

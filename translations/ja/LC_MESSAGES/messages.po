@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 15:10+0100\n"
+"POT-Creation-Date: 2026-10-26 15:22+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -259,7 +259,7 @@ msgstr "ホーム"
 msgid "Nouveautés"
 msgstr "新着情報"
 
-#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:123
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:124
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:69
 msgid "Photos"
@@ -297,7 +297,7 @@ msgstr "次に表示"
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:128
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:129
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -333,7 +333,7 @@ msgstr "画面"
 msgid "Horloge & météo"
 msgstr "時計と天気"
 
-#: frontend/src/nav.ts:41 frontend/src/views/CaptionsView.vue:12
+#: frontend/src/nav.ts:41 frontend/src/views/CaptionsView.vue:13
 #: templates/configure.html.jinja:160
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Infos des photos"
@@ -618,6 +618,85 @@ msgstr "例：休暇、ジュリーの結婚式、クリスマス"
 msgid "Ajouter"
 msgstr "追加"
 
+#: frontend/src/components/AutoCaptionsCard.vue:14
+msgid ""
+"Avec Claude, une copie réduite de chaque photo est envoyée à Anthropic "
+"pour être décrite (environ 0,7 centime par photo, facturé sur votre "
+"compte Anthropic). Continuer ?"
+msgstr "Claudeを使うと、各写真の縮小コピーが説明のためAnthropicに送信されます（1枚あたり約0.7セント、Anthropicアカウントに請求）。続けますか？"
+
+#: frontend/src/components/AutoCaptionsCard.vue:25
+msgid "Légendes proposées automatiquement"
+msgstr "自動キャプション提案"
+
+#: frontend/src/components/AutoCaptionsCard.vue:26
+msgid ""
+"Chaque nuit, le cadre propose pour les photos une courte description et "
+"des mots-clés (plage, neige, anniversaire…). Ils servent à la recherche "
+"de la bibliothèque, et chaque proposition peut devenir la légende en un "
+"clic. Une légende écrite à la main n'est jamais remplacée."
+msgstr "毎晩、フレームが写真の短い説明とキーワード（海、雪、誕生日…）を提案します。ライブラリ検索に使われ、提案はワンクリックでキャプションにできます。手書きのキャプションは置き換えません。"
+
+#: frontend/src/components/AutoCaptionsCard.vue:28
+msgid "Proposer des légendes chaque nuit"
+msgstr "毎晩キャプションを提案"
+
+#: frontend/src/components/AutoCaptionsCard.vue:31
+msgid ""
+"mots-clés seulement, gratuit, analysés par votre serveur Immich (photos "
+"importées d'Immich)."
+msgstr "キーワードのみ・無料。Immichサーバーが解析（Immichから取り込んだ写真）。"
+
+#: frontend/src/components/AutoCaptionsCard.vue:32
+msgid "Immich n'est pas configuré (Sources › Immich)."
+msgstr "Immichが設定されていません（ソース › Immich）。"
+
+#: frontend/src/components/AutoCaptionsCard.vue:34
+msgid ""
+"une phrase et des mots-clés pour toutes les photos ; les photos sont "
+"envoyées à Anthropic (environ 0,7 centime par photo)."
+msgstr "すべての写真に一文とキーワード。写真はAnthropicに送信されます（1枚約0.7セント）。"
+
+#: frontend/src/components/AutoCaptionsCard.vue:37
+msgid "Clé enregistrée (la remplacer…)"
+msgstr "キー保存済み（置き換える…）"
+
+#: frontend/src/components/AutoCaptionsCard.vue:37
+msgid "Clé d’API Anthropic (sk-ant-…)"
+msgstr "Anthropic APIキー（sk-ant-…）"
+
+#: frontend/src/components/AutoCaptionsCard.vue:38
+#: frontend/src/components/CaptionEditor.vue:189
+#: frontend/src/components/HomeAssistantCard.vue:41
+#: frontend/src/components/QuoteCard.vue:63
+#: frontend/src/components/SettingField.vue:63
+#: frontend/src/components/SpotifyCard.vue:136
+#: frontend/src/components/sources/CloudCards.vue:132
+#: frontend/src/components/sources/GdriveCard.vue:75
+#: frontend/src/views/NetworkView.vue:181
+#: frontend/src/views/PlaylistsView.vue:202
+#: frontend/src/views/SoundView.vue:166
+#: templates/configure/_playlist_builder.html.jinja:39
+#: templates/configure/_son_spotify.html.jinja:34
+#: templates/configure/tab_affichage.html.jinja:303
+#: templates/configure/tab_dispositions.html.jinja:132
+#: templates/configure/tab_legendes.html.jinja:123
+#: templates/configure/tab_messages.html.jinja:236
+#: templates/configure/tab_son.html.jinja:33
+#: templates/configure/tab_sources.html.jinja:543
+#: templates/upload.html.jinja:167
+msgid "Enregistrer"
+msgstr "保存"
+
+#: frontend/src/components/AutoCaptionsCard.vue:42
+msgid "Essayer maintenant"
+msgstr "今すぐ試す"
+
+#: frontend/src/components/AutoCaptionsCard.vue:43
+#, python-brace-format
+msgid "{done} photo(s) avec des propositions, dont {described} décrite(s)"
+msgstr "提案のある写真 {done}枚（説明付き {described}枚）"
+
 #: frontend/src/components/ButtonCard.vue:24
 #: frontend/src/views/DisplayView.vue:145
 msgid "Bouton physique"
@@ -672,7 +751,7 @@ msgstr ""
 "14）につなぎます。抵抗は不要です。"
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:162
+#: frontend/src/views/LibraryView.vue:163
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr "このキャプションのスタイル"
@@ -760,7 +839,7 @@ msgstr "グロー"
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:170
+#: frontend/src/views/LibraryView.vue:178
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -930,28 +1009,6 @@ msgstr "全体のスタイルに戻す"
 #: templates/upload.html.jinja:247
 msgid "Annuler"
 msgstr "キャンセル"
-
-#: frontend/src/components/CaptionEditor.vue:189
-#: frontend/src/components/HomeAssistantCard.vue:41
-#: frontend/src/components/QuoteCard.vue:63
-#: frontend/src/components/SettingField.vue:63
-#: frontend/src/components/SpotifyCard.vue:136
-#: frontend/src/components/sources/CloudCards.vue:132
-#: frontend/src/components/sources/GdriveCard.vue:75
-#: frontend/src/views/NetworkView.vue:181
-#: frontend/src/views/PlaylistsView.vue:202
-#: frontend/src/views/SoundView.vue:166
-#: templates/configure/_playlist_builder.html.jinja:39
-#: templates/configure/_son_spotify.html.jinja:34
-#: templates/configure/tab_affichage.html.jinja:303
-#: templates/configure/tab_dispositions.html.jinja:132
-#: templates/configure/tab_legendes.html.jinja:123
-#: templates/configure/tab_messages.html.jinja:236
-#: templates/configure/tab_son.html.jinja:33
-#: templates/configure/tab_sources.html.jinja:543
-#: templates/upload.html.jinja:167
-msgid "Enregistrer"
-msgstr "保存"
 
 #: frontend/src/components/DailyPhotoCard.vue:33
 msgid "Photo du jour par e-mail"
@@ -1743,7 +1800,7 @@ msgid "Non défini"
 msgstr "未定義"
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:129 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:130 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "クリア"
 
@@ -1869,7 +1926,7 @@ msgid "du"
 msgstr "開始"
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:127
+#: frontend/src/views/LibraryView.vue:128
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -1920,8 +1977,8 @@ msgid "Favoris uniquement"
 msgstr "お気に入りのみ"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
-#: frontend/src/views/CaptionsView.vue:10 frontend/src/views/HomeView.vue:168
-#: frontend/src/views/LibraryView.vue:122
+#: frontend/src/views/CaptionsView.vue:11 frontend/src/views/HomeView.vue:168
+#: frontend/src/views/LibraryView.vue:123
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
@@ -2852,44 +2909,44 @@ msgid ""
 "voit pas les réglages sensibles."
 msgstr "各アカウントは自分の写真とプレイリストを持ちます。一般ユーザーには重要な設定は表示されません。"
 
-#: frontend/src/views/CaptionsView.vue:10
+#: frontend/src/views/CaptionsView.vue:11
 #: templates/configure/tab_legendes.html.jinja:7
 msgid "Légende saisie sous chaque photo ou vidéo (aussi sur les cartes postales)."
 msgstr "各写真・動画の下に入力したキャプション（ポストカードにも表示）。"
 
-#: frontend/src/views/CaptionsView.vue:11
+#: frontend/src/views/CaptionsView.vue:12
 #: templates/configure/tab_legendes.html.jinja:8
 msgid "Polaroïds"
 msgstr "ポラロイド"
 
-#: frontend/src/views/CaptionsView.vue:11
+#: frontend/src/views/CaptionsView.vue:12
 #: templates/configure/tab_legendes.html.jinja:8
 msgid "Texte écrit dans la marge blanche des polaroïds."
 msgstr "ポラロイドの白い余白に書かれる文字。"
 
-#: frontend/src/views/CaptionsView.vue:12
+#: frontend/src/views/CaptionsView.vue:13
 #: templates/configure/tab_legendes.html.jinja:9
 msgid "Date et lieu affichés par le diaporama."
 msgstr "スライドショーに表示される日付と場所。"
 
-#: frontend/src/views/CaptionsView.vue:34
+#: frontend/src/views/CaptionsView.vue:35
 #: templates/configure/tab_legendes.html.jinja:3
 msgid "Style des légendes"
 msgstr "キャプションのスタイル"
 
-#: frontend/src/views/CaptionsView.vue:35
+#: frontend/src/views/CaptionsView.vue:36
 msgid ""
 "Choisissez l'apparence de chaque type de légende : police, taille, "
 "couleurs, fond, contour, ombre, position et inclinaison. Une photo ou une"
 " vidéo peut aussi avoir son propre style (depuis la bibliothèque)."
 msgstr "キャプションの種類ごとに見た目を選べます：フォント、サイズ、色、背景、縁取り、影、位置、傾き。写真や動画ごとの個別スタイルも（ライブラリから）設定できます。"
 
-#: frontend/src/views/CaptionsView.vue:43
+#: frontend/src/views/CaptionsView.vue:44
 #: templates/configure/tab_legendes.html.jinja:14
 msgid "Personnaliser"
 msgstr "カスタマイズ"
 
-#: frontend/src/views/CaptionsView.vue:47
+#: frontend/src/views/CaptionsView.vue:48
 #: templates/configure/tab_legendes.html.jinja:19
 msgid ""
 "Les légendes déjà posées sur les photos sont redessinées automatiquement "
@@ -3546,7 +3603,7 @@ msgid ""
 msgstr "日付、ゲーム、パーティーモード、組み合わせ表示、名言など。管理画面はブラウザの言語に従います。"
 
 #: frontend/src/views/DisplayView.vue:103
-#: frontend/src/views/LibraryView.vue:124
+#: frontend/src/views/LibraryView.vue:125
 msgid "Vidéos"
 msgstr "動画"
 
@@ -4936,91 +4993,95 @@ msgstr "季節のテーマ"
 msgid "Affiche les messages"
 msgstr "メッセージを表示"
 
-#: frontend/src/views/LibraryView.vue:20
+#: frontend/src/views/LibraryView.vue:21
 msgid ""
 "Recherche par contenu grâce à l'analyse des images d'Immich (photos "
 "importées d'Immich)"
 msgstr "Immichの画像解析による内容検索（Immichから取り込んだ写真）"
 
-#: frontend/src/views/LibraryView.vue:63
+#: frontend/src/views/LibraryView.vue:64
 msgid "Ajoutée aux favoris."
 msgstr "お気に入りに追加しました。"
 
-#: frontend/src/views/LibraryView.vue:63
+#: frontend/src/views/LibraryView.vue:64
 msgid "Retirée des favoris."
 msgstr "お気に入りから外しました。"
 
-#: frontend/src/views/LibraryView.vue:77
+#: frontend/src/views/LibraryView.vue:78
 msgid "Légende enregistrée."
 msgstr "キャプションを保存しました。"
 
-#: frontend/src/views/LibraryView.vue:110
+#: frontend/src/views/LibraryView.vue:111
 msgid "Décrivez la photo : plage, chien, neige…"
 msgstr "写真を説明：海、犬、雪…"
 
-#: frontend/src/views/LibraryView.vue:110
+#: frontend/src/views/LibraryView.vue:111
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "検索（場所、キャプション、ファイル名…）"
 
-#: frontend/src/views/LibraryView.vue:112
+#: frontend/src/views/LibraryView.vue:113
 msgid "Par contenu (Immich)"
 msgstr "内容で検索（Immich）"
 
-#: frontend/src/views/LibraryView.vue:114
+#: frontend/src/views/LibraryView.vue:115
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "すべてのソース"
 
-#: frontend/src/views/LibraryView.vue:118
+#: frontend/src/views/LibraryView.vue:119
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "全員"
 
-#: frontend/src/views/LibraryView.vue:126
+#: frontend/src/views/LibraryView.vue:127
 msgid "Du"
 msgstr "開始"
 
-#: frontend/src/views/LibraryView.vue:132
+#: frontend/src/views/LibraryView.vue:133
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} 件（{shown} 件を表示）"
 
-#: frontend/src/views/LibraryView.vue:132
+#: frontend/src/views/LibraryView.vue:133
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} 件"
 
-#: frontend/src/views/LibraryView.vue:138
+#: frontend/src/views/LibraryView.vue:139
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "お気に入りの写真はまだありません。写真の星をタップして追加してください。"
 
-#: frontend/src/views/LibraryView.vue:138
+#: frontend/src/views/LibraryView.vue:139
 msgid "Aucune photo ne correspond."
 msgstr "一致する写真はありません。"
 
-#: frontend/src/views/LibraryView.vue:143
-#: frontend/src/views/LibraryView.vue:169
+#: frontend/src/views/LibraryView.vue:144
+#: frontend/src/views/LibraryView.vue:177
 msgid "Favori"
 msgstr "お気に入り"
 
-#: frontend/src/views/LibraryView.vue:150
+#: frontend/src/views/LibraryView.vue:151
 msgid "Précédente"
 msgstr "前へ"
 
-#: frontend/src/views/LibraryView.vue:160
+#: frontend/src/views/LibraryView.vue:161
 msgid "Ajouter une légende…"
 msgstr "キャプションを追加…"
 
-#: frontend/src/views/LibraryView.vue:169
+#: frontend/src/views/LibraryView.vue:170
+msgid "Utiliser comme légende"
+msgstr "キャプションに使う"
+
+#: frontend/src/views/LibraryView.vue:177
 msgid "Ajouter aux favoris"
 msgstr "お気に入りに追加"
 
-#: frontend/src/views/LibraryView.vue:173
+#: frontend/src/views/LibraryView.vue:181
 msgid "Suivante"
 msgstr "次へ"
 
@@ -5083,37 +5144,37 @@ msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "「{source}」の写真を「{target}」に移動しますか？"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "lundi"
 msgstr "月曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "mardi"
 msgstr "火曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "mercredi"
 msgstr "水曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "jeudi"
 msgstr "木曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "vendredi"
 msgstr "金曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "samedi"
 msgstr "土曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608 web/workers.py:1322
+#: utils/themed_compositions_extra.py:608 web/workers.py:1341
 msgid "dimanche"
 msgstr "日曜日"
 
@@ -11919,6 +11980,24 @@ msgstr "自分の役割は変更できません。"
 msgid "Rôle de « %(name)s » modifié."
 msgstr "「%(name)s」の役割を変更しました。"
 
+#: web/routes_auto_captions.py:65
+msgid "Légendes automatiques enregistrées."
+msgstr "自動キャプションの設定を保存しました。"
+
+#: web/routes_auto_captions.py:79
+msgid "Saisissez d'abord la clé d'API d'Anthropic."
+msgstr "先にAnthropic APIキーを入力してください。"
+
+#: web/routes_auto_captions.py:81
+msgid "Des légendes sont déjà en cours de création."
+msgstr "キャプションはすでに作成中です。"
+
+#: web/routes_auto_captions.py:83
+msgid ""
+"C'est parti : les propositions apparaissent dans la bibliothèque au fur "
+"et à mesure."
+msgstr "開始しました。提案は順次ライブラリに表示されます。"
+
 #: web/routes_captions.py:14
 msgid "Vacances à la mer avec mamie"
 msgstr "おばあちゃんと海でバカンス"
@@ -13208,19 +13287,19 @@ msgstr "写真が見つかりません：%(name)s"
 msgid "Playlist non trouvée."
 msgstr "プレイリストが見つかりません。"
 
-#: web/routes_playlists.py:396
+#: web/routes_playlists.py:398
 msgid "Aucun souvenir vocal sur cette photo."
 msgstr "この写真には音声メモがありません。"
 
-#: web/routes_playlists.py:397
+#: web/routes_playlists.py:399
 msgid "Souvenir vocal supprimé."
 msgstr "音声メモを削除しました。"
 
-#: web/routes_playlists.py:401
+#: web/routes_playlists.py:403
 msgid "Photo ou enregistrement manquant."
 msgstr "写真または録音がありません。"
 
-#: web/routes_playlists.py:407
+#: web/routes_playlists.py:409
 #, python-format
 msgid ""
 "Souvenir vocal enregistré (%(seconds)s s) : il sera lu quand la photo "
@@ -13890,36 +13969,36 @@ msgid ""
 "cette nuit : %(names)s"
 msgstr "今夜再試行しましたが、%(count)s件のメディアを準備できませんでした：%(names)s"
 
-#: web/workers.py:1325
+#: web/workers.py:1344
 #, python-format
 msgid "l'anniversaire de mariage de %(name)s (%(years)s ans)"
 msgstr "%(name)sの結婚記念日（%(years)s年）"
 
-#: web/workers.py:1327
+#: web/workers.py:1346
 #, python-format
 msgid "l'anniversaire de %(name)s (%(years)s ans)"
 msgstr "%(name)sの誕生日（%(years)s歳）"
 
-#: web/workers.py:1327
+#: web/workers.py:1346
 #, python-format
 msgid "l'anniversaire de %(name)s"
 msgstr "%(name)sの誕生日"
 
-#: web/workers.py:1329
+#: web/workers.py:1348
 msgid "C'est aujourd'hui !"
 msgstr "今日です！"
 
-#: web/workers.py:1329
+#: web/workers.py:1348
 #, python-format
 msgid "Aujourd'hui, c'est %(what)s."
 msgstr "今日は%(what)sです。"
 
-#: web/workers.py:1330
+#: web/workers.py:1349
 #, python-format
 msgid "Anniversaire dans %(days)s jours"
 msgstr "あと%(days)s日で誕生日"
 
-#: web/workers.py:1331
+#: web/workers.py:1350
 #, python-format
 msgid ""
 "%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot "

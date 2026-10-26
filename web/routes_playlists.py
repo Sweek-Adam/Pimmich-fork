@@ -363,8 +363,9 @@ def library_search_api():
             return jsonify({"success": False, "message": _("Immich ne répond pas : %(error)s", error=str(e)[:120])}), 502
     items, total = library_search.search(favorites, "" if smart is not None else args.get("q", "")[:120], date(args.get("from")), date(args.get("to")),
                                          args.get("source", ""), args.get("person", ""), args.get("fav") == "1", args.get("media", ""), smart=smart)
-    from utils import photo_voice
+    from utils import auto_captions, photo_voice
     voices = photo_voice.load()
+    proposed = auto_captions.load()
     results = []
     for item in items:
         thumb = item["path"].rsplit(".", 1)[0] + "_thumbnail.jpg" if item["video"] else item["path"]
@@ -372,7 +373,8 @@ def library_search_api():
                         "video": item["video"], "favorite": item["path"] in favorite_set, "source": item["path"].split("/", 1)[0],
                         "thumb": url_for("static", filename=f"prepared/{thumb}"),
                         "url": url_for("static", filename=f"prepared/{item['path']}"),
-                        "voice": (voices.get(photo_voice.key_for(item["path"])) or {}).get("seconds")})
+                        "voice": (voices.get(photo_voice.key_for(item["path"])) or {}).get("seconds"),
+                        "suggestion": proposed.get(item["path"])})
     return jsonify({"success": True, "total": total, "items": results, "smart_available": immich_search.available(config)})
 
 

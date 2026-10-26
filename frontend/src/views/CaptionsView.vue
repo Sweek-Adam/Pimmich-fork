@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import CaptionEditor from "../components/CaptionEditor.vue";
+import AutoCaptionsCard from "../components/AutoCaptionsCard.vue";
 import { get } from "../api";
 import { t } from "../i18n";
 
@@ -47,6 +48,7 @@ onMounted(loadPreviews);
     <p class="small muted note">{{ t("Les légendes déjà posées sur les photos sont redessinées automatiquement avec le nouveau style. Les vidéos affichent leur légende en sous-titre pendant la lecture.") }}</p>
   </section>
   <CaptionEditor v-if="editing" :scope="editing" @close="editing = null" @saved="loadPreviews" />
+  <AutoCaptionsCard />
 </template>
 
 <style scoped>
