@@ -1030,11 +1030,23 @@ def build_playlist(media_list, config, favorites):
     anniversary_boost_enabled = config.get("anniversary_boost_enabled", False)
     anniversary_boost_factor = int(config.get("anniversary_boost_factor", 2))
 
+    # Photos oubliées (jamais ou rarement montrées) : quelques passages de plus
+    forgotten = {}
+    if config.get("forgotten_boost_enabled", True):
+        try:
+            from utils import stats
+            relatives = [re.sub(r'(_polaroid|_postcard)\.jpg$', '.jpg', str(Path(p).relative_to(PREPARED_BASE_DIR))) for p in media_list]
+            forgotten = stats.forgotten_extra(relatives, int(config.get("forgotten_boost_factor", 2)))
+        except (ValueError, OSError) as e:
+            logger.debug(f"Photos oubliées : {e}")
+
     playlist = []
     for media_path in media_list:
         playlist.append(media_path)
         relative_path = str(Path(media_path).relative_to(PREPARED_BASE_DIR))
         normalized_relative_path = re.sub(r'(_polaroid|_postcard)\.jpg$', '.jpg', relative_path)
+        for _ in range(forgotten.get(normalized_relative_path, 0)):
+            playlist.append(media_path)
 
         if telegram_boost_enabled and 'telegram' in media_path:
             match = re.search(r'telegram_(\d+)_', Path(media_path).name)

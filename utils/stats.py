@@ -83,3 +83,23 @@ def summary(days=14):
     by_source = sources()
     return {"top": top, "per_day": per_day, "sources": by_source, "total_views": sum(data["photos"].values()),
             "viewed": len([p for p in data["photos"] if existing(p)]), "updated": data.get("until") or None}
+
+
+def forgotten_extra(relative_paths, boost=2, counts=None):
+    """Photos oubliées : passages en plus dans la liste du diaporama ({chemin relatif: n}). Une photo jamais montrée
+    reçoit `boost` passages de plus, une photo parmi le quart le moins vu en reçoit un ; les autres rien."""
+    if boost <= 0:
+        return {}
+    counts = counts if counts is not None else _load().get("photos", {})
+    views = {rel: counts.get(rel, 0) for rel in relative_paths}
+    if not views:
+        return {}
+    ordered = sorted(views.values())
+    quarter = ordered[len(ordered) // 4]
+    extra = {}
+    for rel, seen in views.items():
+        if seen == 0:
+            extra[rel] = boost
+        elif seen <= quarter and quarter < ordered[-1]:
+            extra[rel] = max(1, boost // 2)
+    return extra

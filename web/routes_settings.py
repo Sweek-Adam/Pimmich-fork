@@ -43,6 +43,8 @@ SETTINGS = {
     "transition_fps": ("choice", ["auto", "30", "60"], "auto"),
     # Fréquence des photos
     "favorite_boost_factor": ("int", (0, 20), 2),
+    "forgotten_boost_enabled": ("bool", None, True),
+    "forgotten_boost_factor": ("int", (1, 10), 2),
     "anniversary_boost_enabled": ("bool", None, False),
     "anniversary_boost_factor": ("int", (0, 20), 2),
     "memories_banner": ("bool", None, True),
