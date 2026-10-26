@@ -939,6 +939,13 @@
   ]
  ],
  [
+  "/api/photo_comments",
+  [
+   "DELETE",
+   "GET"
+  ]
+ ],
+ [
   "/api/photo_voice",
   [
    "DELETE",
@@ -2135,6 +2142,12 @@
   "/upload",
   [
    "GET"
+  ]
+ ],
+ [
+  "/upload/comment",
+  [
+   "POST"
   ]
  ],
  [

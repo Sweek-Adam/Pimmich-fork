@@ -8,7 +8,7 @@ import pytest
 from conftest import ADMIN_USERNAME, login
 
 SAME_ORIGIN = {"Sec-Fetch-Site": "same-origin"}
-PUBLIC_RULES = {"/", "/login", "/logout", "/upload", "/handle_upload", "/upload/message", "/upload/message/preview", "/upload/share", "/upload/drawing", "/upload/voice", "/upload/now", "/upload/react", "/upload/guestbook", "/upload/print",
+PUBLIC_RULES = {"/", "/login", "/logout", "/upload", "/handle_upload", "/upload/message", "/upload/message/preview", "/upload/share", "/upload/drawing", "/upload/voice", "/upload/now", "/upload/react", "/upload/guestbook", "/upload/print", "/upload/comment",
                 "/jeu", "/jeu/state", "/jeu/new", "/jeu/join", "/jeu/start", "/jeu/answer",
                 "/jeu/photo", "/jeu/vote", "/jeu/bingo", "/jeu/modes",
                 "/rebooting", "/api/ping", "/static/<path:filename>"}

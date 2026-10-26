@@ -19,6 +19,8 @@
     .reactions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
     .reaction { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 1.1rem; cursor: pointer; }
     .reaction:hover { border-color: var(--accent); }
+    .comment { display: flex; gap: 8px; margin-top: 10px; }
+    .comment input { flex: 1; min-width: 0; }
     section[id] { scroll-margin-top: 64px; }
     .record { display: grid; justify-items: center; gap: 6px; }
     .party { background: linear-gradient(135deg, #6d28d9, #db2777); color: #fff; border: 0; }
@@ -78,6 +80,11 @@
       <div class="card-title"><span class="emoji">🖼️</span>{{ _('En ce moment sur le cadre') }}</div>
       <img id="now-photo" alt="{{ _('Photo affichée sur le cadre') }}">
       <div id="now-reactions" class="reactions"></div>
+      <form id="comment-form" class="comment">
+        <input id="comment-text" type="text" maxlength="120" placeholder="{{ _('Un petit mot sur cette photo…') }}">
+        <button class="btn" type="submit">💬</button>
+      </form>
+      <p id="comment-status" class="small muted"></p>
     </section>
     <script>
       (() => {
@@ -107,6 +114,16 @@
             $("now-reactions").appendChild(b);
           });
         }
+        $("comment-form").addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const text = $("comment-text").value.trim();
+          if (!text || !shown) return;
+          const name = (document.querySelector("#upload-form input[name=name]") || {}).value || "";
+          const r = await (await fetch("{{ url_for('guest_comment') }}", { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ photo: shown, text, name }) })).json().catch(() => ({ message: "" }));
+          $("comment-status").textContent = r.message || "";
+          if (r.success) $("comment-text").value = "";
+        });
         refresh(); setInterval(refresh, 8000);
       })();
     </script>

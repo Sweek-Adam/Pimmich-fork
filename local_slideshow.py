@@ -2217,6 +2217,69 @@ def check_reaction(screen, photo_path, since):
     return since
 
 
+def comment_banner(screen, background, text, name="", seconds=6.0):
+    """Commentaire d'un invité en bandeau au bas de la photo (fondu à l'entrée et à la sortie)."""
+    width, height = screen.get_size()
+    big = pygame.font.Font(None, max(24, int(height * 0.055)))
+    small = pygame.font.Font(None, max(18, int(height * 0.038)))
+    line = big.render(f"« {text} »", True, (255, 255, 255))
+    if line.get_width() > width * 0.86:
+        line = pygame.transform.smoothscale(line, (int(width * 0.86), int(line.get_height() * width * 0.86 / line.get_width())))
+    signature = small.render(f"— {name}", True, (255, 214, 190)) if name else None
+    pad = int(height * 0.025)
+    box_w = max(line.get_width(), signature.get_width() if signature else 0) + 2 * pad
+    box_h = line.get_height() + (signature.get_height() + pad // 2 if signature else 0) + 2 * pad
+    box = pygame.Surface((box_w, box_h), pygame.SRCALPHA)
+    pygame.draw.rect(box, (0, 0, 0, 165), box.get_rect(), border_radius=pad)
+    box.blit(line, (pad, pad))
+    if signature:
+        box.blit(signature, (box_w - pad - signature.get_width(), pad + line.get_height() + pad // 2))
+    position = ((width - box_w) // 2, int(height * 0.94) - box_h)
+    start = time.time()
+    while time.time() - start < seconds:
+        elapsed = time.time() - start
+        alpha = min(1.0, elapsed / 0.4, (seconds - elapsed) / 0.6)
+        screen.blit(background, (0, 0))
+        box.set_alpha(int(255 * max(0.0, alpha)))
+        screen.blit(box, position)
+        pygame.display.flip()
+        handle_slideshow_events(width)
+        if next_photo_requested or previous_photo_requested:
+            break
+        time.sleep(1 / 20)
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
+
+
+def _static_key(photo_path):
+    """Chemin d'une photo relatif à static/ (prepared/..., compositions/...), comme dans les commentaires et réactions."""
+    text = str(photo_path or "")
+    for marker in ("prepared/", "compositions/"):
+        if marker in text:
+            return text[text.index(marker):]
+    return None
+
+
+def check_comment(screen, photo_path, since, replayed, started, config):
+    """Commentaire d'invité : celui qui arrive pour la photo affichée, ou le dernier laissé sur elle (une fois, au bout de
+    quelques secondes). Renvoie (horodatage de la dernière vérification, dernier commentaire déjà montré)."""
+    try:
+        from utils import photo_comments
+        key = _static_key(photo_path)
+        event = photo_comments.latest_event(since)
+        if event and key and event["photo"] == key:
+            comment_banner(screen, screen.copy(), event["text"], event.get("name", ""))
+            return event["at"], True
+        if not replayed and key and time.time() - started > 2.5 and config.get("photo_comments_replay", True):
+            last = photo_comments.latest(key)
+            if last:
+                comment_banner(screen, screen.copy(), last["text"], last.get("name", ""), seconds=5.0)
+            return since, True
+    except Exception as e:
+        logger.debug(f"Commentaire : {e}")
+    return since, replayed
+
+
 _voice_played = {}
 
 
@@ -2378,6 +2441,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
             fx_background = screen.copy() if weather_fx else None
             last_frame = time.time()
             reaction_since = time.time()
+            comment_since, comment_shown = time.time(), False
             # Boucle d'attente pour rester réactif aux signaux
             start_sleep = time.time()
             while time.time() - start_sleep < display_duration:
@@ -2428,6 +2492,7 @@ def display_photo_with_pan_zoom(screen, pil_image, screen_width, screen_height, 
 
                 # Réaction d'un invité (❤️...) sur cette photo : elle s'envole à l'écran
                 reaction_since = check_reaction(screen, photo_path, reaction_since)
+                comment_since, comment_shown = check_comment(screen, photo_path, comment_since, comment_shown, start_sleep, config)
 
                 # Météo animée : pluie ou neige sur la photo (au début de l'affichage, ou tout le temps)
                 if weather_fx and weather_fx_wanted(config, time.time() - start_sleep):

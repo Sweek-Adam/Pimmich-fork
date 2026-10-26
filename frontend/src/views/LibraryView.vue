@@ -6,6 +6,7 @@ import { notify, run } from "../toast";
 import CaptionEditor from "../components/CaptionEditor.vue";
 import PhotoBookCard from "../components/PhotoBookCard.vue";
 import VoiceMemo from "../components/VoiceMemo.vue";
+import PhotoComments from "../components/PhotoComments.vue";
 
 const props = defineProps<{ favorites?: boolean }>();
 
@@ -160,6 +161,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
             <button class="btn" type="submit" :disabled="captionText === (current.caption || '')"><i class="fas fa-check"></i></button>
             <button class="btn" type="button" :title="t('Style de cette légende')" @click="styling = true"><i class="fas fa-palette"></i></button>
           </form>
+          <PhotoComments :path="current.path" />
           <VoiceMemo v-if="!current.video" :path="current.path" :seconds="current.voice" @changed="(s) => { if (current) current.voice = s; }" />
           <p class="small dim">{{ sourceLabel(current.source) }} · {{ current.path.split("/").pop() }}</p>
         </div>

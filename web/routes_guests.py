@@ -545,6 +545,42 @@ def guest_react():
     return jsonify({"success": True, "counts": counts})
 
 
+@app.route('/upload/comment', methods=['POST'])
+def guest_comment():
+    """Un petit mot sur la photo affichée : il s'affiche en bandeau sur le cadre."""
+    from utils import photo_comments
+    if not load_config().get("guest_reactions_enabled", True):
+        return jsonify({"success": False, "message": _("Les réactions sont désactivées.")}), 403
+    data = request.get_json(silent=True) or {}
+    key, _limit = _guest_key()
+    if not rate_limit.allow(("commentaire", key), 15, 3600):
+        return jsonify({"success": False, "message": _("Doucement ! Réessayez dans un moment.")}), 429
+    photo = _now_showing()
+    if not photo or str(data.get("photo") or "") != photo:
+        return jsonify({"success": False, "message": _("La photo a changé : réessayez sur la nouvelle.")}), 409
+    try:
+        photo_comments.add(photo, data.get("text"), data.get("name"))
+    except ValueError:
+        return jsonify({"success": False, "message": _("Écrivez d'abord un petit mot.")}), 400
+    return jsonify({"success": True, "message": _("Merci ! Votre mot s'affiche sur le cadre.")})
+
+
+@app.route('/api/photo_comments', methods=['GET', 'DELETE'])
+@login_required
+def photo_comments_api():
+    from utils import photo_comments
+    if request.method == 'DELETE':
+        data = request.get_json(silent=True) or {}
+        try:
+            ok = photo_comments.delete(str(data.get("photo") or ""), float(data.get("at")))
+        except (TypeError, ValueError):
+            ok = False
+        return (jsonify({"success": True, "message": _("Commentaire supprimé.")}) if ok
+                else (jsonify({"success": False, "message": _("Commentaire introuvable.")}), 404))
+    photo = str(request.args.get("photo") or "")
+    return jsonify({"success": True, "comments": photo_comments.for_photo(photo)})
+
+
 @app.route('/upload/guestbook', methods=['GET'])
 def guest_book_page():
     from utils import guestbook
