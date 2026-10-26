@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 15:32+0100\n"
+"POT-Creation-Date: 2026-10-26 15:46+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -259,13 +259,13 @@ msgstr "ホーム"
 msgid "Nouveautés"
 msgstr "新着情報"
 
-#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:124
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:125
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:69
 msgid "Photos"
 msgstr "写真"
 
-#: frontend/src/nav.ts:27 frontend/src/views/ImportView.vue:184
+#: frontend/src/nav.ts:27 frontend/src/views/ImportView.vue:185
 #: templates/configure.html.jinja:145
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
@@ -297,7 +297,7 @@ msgstr "次に表示"
 msgid "Playlists"
 msgstr "プレイリスト"
 
-#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:129
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:130
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -751,7 +751,7 @@ msgstr ""
 "14）につなぎます。抵抗は不要です。"
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:163
+#: frontend/src/views/LibraryView.vue:164
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr "このキャプションのスタイル"
@@ -839,7 +839,7 @@ msgstr "グロー"
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:178
+#: frontend/src/views/LibraryView.vue:181
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -1053,6 +1053,40 @@ msgstr "スライドショーをキャスト"
 #: frontend/src/components/CastCard.vue:59
 msgid "Diffuser le film"
 msgstr "ムービーをキャスト"
+
+#: frontend/src/components/ColorizeCard.vue:25
+msgid "Colorisation des photos noir et blanc"
+msgstr "白黒写真のカラー化"
+
+#: frontend/src/components/ColorizeCard.vue:26
+msgid ""
+"Les vieilles photos noir et blanc retrouvent des couleurs douces et "
+"plausibles, calculées sur le Raspberry Pi (aucun service en ligne). La "
+"version colorisée est toujours une copie : l'original reste tel quel."
+msgstr ""
+"古い白黒写真に自然でやさしい色をつけます。計算はRaspberry "
+"Pi上で行います（オンラインサービスなし）。カラー版は常にコピーで、元の写真はそのままです。"
+
+#: frontend/src/components/ColorizeCard.vue:28
+msgid ""
+"Colorisation installée. Dans la bibliothèque, ouvrez une photo noir et "
+"blanc et touchez « Coloriser »."
+msgstr "カラー化を導入しました。ライブラリで白黒写真を開き「カラー化」を押してください。"
+
+#: frontend/src/components/ColorizeCard.vue:30
+msgid ""
+"Coloriser aussi les tirages noir et blanc scannés (l'original noir et "
+"blanc est gardé à part)"
+msgstr "スキャンした白黒プリントもカラー化（白黒の元画像は別に保存）"
+
+#: frontend/src/components/ColorizeCard.vue:35
+#, python-brace-format
+msgid "Installation ({done}/{total})…"
+msgstr "インストール中（{done}/{total}）…"
+
+#: frontend/src/components/ColorizeCard.vue:35
+msgid "Installer la colorisation (129 Mo)"
+msgstr "カラー化を導入（129 MB）"
 
 #: frontend/src/components/DailyPhotoCard.vue:33
 msgid "Photo du jour par e-mail"
@@ -1839,7 +1873,7 @@ msgid "Non défini"
 msgstr "未定義"
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:130 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:131 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "クリア"
 
@@ -1965,7 +1999,7 @@ msgid "du"
 msgstr "開始"
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:128
+#: frontend/src/views/LibraryView.vue:129
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -2017,7 +2051,7 @@ msgstr "お気に入りのみ"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
 #: frontend/src/views/CaptionsView.vue:11 frontend/src/views/HomeView.vue:168
-#: frontend/src/views/LibraryView.vue:123
+#: frontend/src/views/LibraryView.vue:124
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
@@ -3642,7 +3676,7 @@ msgid ""
 msgstr "日付、ゲーム、パーティーモード、組み合わせ表示、名言など。管理画面はブラウザの言語に従います。"
 
 #: frontend/src/views/DisplayView.vue:104
-#: frontend/src/views/LibraryView.vue:125
+#: frontend/src/views/LibraryView.vue:126
 msgid "Vidéos"
 msgstr "動画"
 
@@ -4690,115 +4724,115 @@ msgstr "最近の操作"
 msgid "Rien pour l'instant."
 msgstr "まだありません。"
 
-#: frontend/src/views/ImportView.vue:12
+#: frontend/src/views/ImportView.vue:13
 #: templates/configure/tab_actions.html.jinja:74
 msgid "Importer depuis Google Drive"
 msgstr "Google Drive からインポート"
 
-#: frontend/src/views/ImportView.vue:13
+#: frontend/src/views/ImportView.vue:14
 #: templates/configure/tab_actions.html.jinja:56
 msgid "Importer depuis Immich"
 msgstr "イミッヒから輸入"
 
-#: frontend/src/views/ImportView.vue:14
+#: frontend/src/views/ImportView.vue:15
 #: templates/configure/tab_actions.html.jinja:65
 msgid "Importer depuis Samba"
 msgstr "Sambaからインポート"
 
-#: frontend/src/views/ImportView.vue:15
+#: frontend/src/views/ImportView.vue:16
 #: templates/configure/tab_actions.html.jinja:47
 msgid "Importer depuis la clé USB"
 msgstr "USB スティックからインポート"
 
-#: frontend/src/views/ImportView.vue:31
+#: frontend/src/views/ImportView.vue:32
 #: templates/configure/scripts_app.html.jinja:22
 #: templates/configure/scripts_gallery.html.jinja:9
 msgid "Erreur"
 msgstr "エラー"
 
-#: frontend/src/views/ImportView.vue:33
+#: frontend/src/views/ImportView.vue:34
 #: templates/configure/scripts_main.html.jinja:1608
 msgid "Erreur de connexion au serveur."
 msgstr "サーバー接続エラー。"
 
-#: frontend/src/views/ImportView.vue:41
+#: frontend/src/views/ImportView.vue:42
 #: templates/configure/scripts_main.html.jinja:1232
 msgid "Préparation terminée ! Redémarrage du diaporama..."
 msgstr "準備完了！スライドショーを再開しています..."
 
-#: frontend/src/views/ImportView.vue:44
+#: frontend/src/views/ImportView.vue:45
 #: templates/configure/scripts_main.html.jinja:1223
 msgid "Préparation :"
 msgstr "準備 ："
 
-#: frontend/src/views/ImportView.vue:45
+#: frontend/src/views/ImportView.vue:46
 #: templates/configure/scripts_main.html.jinja:1268
 msgid "Importation :"
 msgstr "輸入："
 
-#: frontend/src/views/ImportView.vue:54
+#: frontend/src/views/ImportView.vue:55
 #: templates/configure/scripts_main.html.jinja:1702
 msgid "Veuillez sélectionner au moins un fichier."
 msgstr "少なくとも 1 つのファイルを選択してください。"
 
-#: frontend/src/views/ImportView.vue:81
+#: frontend/src/views/ImportView.vue:82
 msgid "Importation réussie !"
 msgstr "取り込みが完了しました！"
 
-#: frontend/src/views/ImportView.vue:84
+#: frontend/src/views/ImportView.vue:85
 #: templates/configure/scripts_main.html.jinja:1775
 msgid "Erreur de communication :"
 msgstr "通信エラー:"
 
-#: frontend/src/views/ImportView.vue:96
+#: frontend/src/views/ImportView.vue:97
 #: templates/configure/tab_actions.html.jinja:138
 msgid "Retirer cette photo du cadre ?"
 msgstr "この写真をフレームから削除しますか？"
 
-#: frontend/src/views/ImportView.vue:117 frontend/src/views/ImportView.vue:118
-#: frontend/src/views/ImportView.vue:122
+#: frontend/src/views/ImportView.vue:118 frontend/src/views/ImportView.vue:119
+#: frontend/src/views/ImportView.vue:123
 #: templates/configure/tab_actions.html.jinja:178
 msgid "Envoi impossible."
 msgstr "送信できませんでした。"
 
-#: frontend/src/views/ImportView.vue:140
+#: frontend/src/views/ImportView.vue:141
 #: templates/configure/tab_actions.html.jinja:44
 msgid "Importation des photos"
 msgstr "写真のインポート"
 
-#: frontend/src/views/ImportView.vue:148
+#: frontend/src/views/ImportView.vue:149
 #: templates/configure/tab_actions.html.jinja:85
 msgid "Photo en cours de préparation"
 msgstr "写真準備中"
 
-#: frontend/src/views/ImportView.vue:150
+#: frontend/src/views/ImportView.vue:151
 msgid ""
 "L'import depuis Telegram se fait automatiquement à la réception des "
 "photos."
 msgstr "Telegram の写真は受信時に自動で取り込まれます。"
 
-#: frontend/src/views/ImportView.vue:155
+#: frontend/src/views/ImportView.vue:156
 #: templates/configure/tab_actions.html.jinja:98
 msgid "Importer depuis un Smartphone"
 msgstr "スマートフォンからのインポート"
 
-#: frontend/src/views/ImportView.vue:156
+#: frontend/src/views/ImportView.vue:157
 msgid "Envoyez des photos directement depuis votre téléphone via le navigateur."
 msgstr "ブラウザから直接スマートフォンの写真を送れます。"
 
-#: frontend/src/views/ImportView.vue:159
+#: frontend/src/views/ImportView.vue:160
 #: templates/configure/scripts_main.html.jinja:1744
 #: templates/configure/scripts_main.html.jinja:1777
 #: templates/configure/tab_actions.html.jinja:106
 msgid "Envoyer les photos"
 msgstr "写真を送信する"
 
-#: frontend/src/views/ImportView.vue:168
+#: frontend/src/views/ImportView.vue:169
 #: templates/configure/tab_actions.html.jinja:152
 msgid "Importer une discussion WhatsApp"
 msgstr "WhatsAppのトークをインポート"
 
-#: frontend/src/views/ImportView.vue:169
+#: frontend/src/views/ImportView.vue:170
 #: templates/configure/tab_actions.html.jinja:153
 msgid ""
 "Dans WhatsApp : ouvrez la discussion (ou le groupe familial) › nom en "
@@ -4810,61 +4844,61 @@ msgstr ""
 "WhatsAppで：トーク（または家族グループ）を開く › 上部の名前 › 「トークをエクスポート」 › "
 "「メディアを添付」。できた.zipファイルをここにアップロードしてください。Androidでは、Pimmichをホーム画面に追加していれば、共有メニューから直接「Pimmich」を選ぶこともできます。"
 
-#: frontend/src/views/ImportView.vue:173
+#: frontend/src/views/ImportView.vue:174
 #: templates/configure/tab_actions.html.jinja:177
 #, python-brace-format
 msgid "{photos} photos et {videos} vidéos, du {first} au {last}"
 msgstr "写真{photos}枚と動画{videos}本（{first}〜{last}）"
 
-#: frontend/src/views/ImportView.vue:174
+#: frontend/src/views/ImportView.vue:175
 #: templates/configure/tab_actions.html.jinja:159
 msgid "Expéditeurs à importer :"
 msgstr "インポートする送信者："
 
-#: frontend/src/views/ImportView.vue:177
+#: frontend/src/views/ImportView.vue:178
 #: templates/configure/tab_actions.html.jinja:161
 msgid "Légende des photos :"
 msgstr "写真のキャプション："
 
-#: frontend/src/views/ImportView.vue:179
+#: frontend/src/views/ImportView.vue:180
 #: templates/configure/tab_actions.html.jinja:163
 msgid "Le message qui accompagne la photo"
 msgstr "写真に添えられたメッセージ"
 
-#: frontend/src/views/ImportView.vue:180
+#: frontend/src/views/ImportView.vue:181
 #: templates/configure/tab_actions.html.jinja:164
 msgid "Le prénom de l'expéditeur et son message"
 msgstr "送信者の名前とメッセージ"
 
-#: frontend/src/views/ImportView.vue:181
+#: frontend/src/views/ImportView.vue:182
 #: templates/configure/tab_actions.html.jinja:165
 msgid "Le prénom de l'expéditeur"
 msgstr "送信者の名前"
 
-#: frontend/src/views/ImportView.vue:182 frontend/src/views/TripsView.vue:338
+#: frontend/src/views/ImportView.vue:183 frontend/src/views/TripsView.vue:338
 #: templates/configure/scripts_gallery.html.jinja:18
 #: templates/configure/tab_actions.html.jinja:166
 #: templates/configure/tab_carte.html.jinja:51
 msgid "Aucune"
 msgstr "なし"
 
-#: frontend/src/views/ImportView.vue:190
+#: frontend/src/views/ImportView.vue:191
 #: templates/configure/tab_actions.html.jinja:115
 msgid "Mes envois"
 msgstr "自分の送信"
 
-#: frontend/src/views/ImportView.vue:191
+#: frontend/src/views/ImportView.vue:192
 msgid ""
 "Les photos envoyées depuis ce compte s'ajoutent à votre source "
 "personnelle. Touchez la croix pour en retirer une."
 msgstr "このアカウントから送った写真は個人用ソースに入ります。×で削除できます。"
 
-#: frontend/src/views/ImportView.vue:192
+#: frontend/src/views/ImportView.vue:193
 #: templates/configure/tab_actions.html.jinja:118
 msgid "Aucun envoi pour l'instant."
 msgstr "まだ送信はありません。"
 
-#: frontend/src/views/ImportView.vue:195
+#: frontend/src/views/ImportView.vue:196
 #: templates/configure/tab_actions.html.jinja:136
 msgid "Retirer du cadre"
 msgstr "フレームから削除"
@@ -4942,7 +4976,7 @@ msgid ""
 "moment-là)"
 msgstr "季節のテーマは期間中のみ表示（その期間はより頻繁に表示）"
 
-#: frontend/src/views/LayoutsView.vue:58 web/routes_settings.py:421
+#: frontend/src/views/LayoutsView.vue:58 web/routes_settings.py:422
 msgid "Gardez au moins une disposition."
 msgstr "レイアウトを少なくとも1つ残してください。"
 
@@ -5046,81 +5080,89 @@ msgstr "お気に入りに追加しました。"
 msgid "Retirée des favoris."
 msgstr "お気に入りから外しました。"
 
-#: frontend/src/views/LibraryView.vue:78
+#: frontend/src/views/LibraryView.vue:79
 msgid "Légende enregistrée."
 msgstr "キャプションを保存しました。"
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:112
 msgid "Décrivez la photo : plage, chien, neige…"
 msgstr "写真を説明：海、犬、雪…"
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:112
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "検索（場所、キャプション、ファイル名…）"
 
-#: frontend/src/views/LibraryView.vue:113
+#: frontend/src/views/LibraryView.vue:114
 msgid "Par contenu (Immich)"
 msgstr "内容で検索（Immich）"
 
-#: frontend/src/views/LibraryView.vue:115
+#: frontend/src/views/LibraryView.vue:116
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "すべてのソース"
 
-#: frontend/src/views/LibraryView.vue:119
+#: frontend/src/views/LibraryView.vue:120
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "全員"
 
-#: frontend/src/views/LibraryView.vue:127
+#: frontend/src/views/LibraryView.vue:128
 msgid "Du"
 msgstr "開始"
 
-#: frontend/src/views/LibraryView.vue:133
+#: frontend/src/views/LibraryView.vue:134
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} 件（{shown} 件を表示）"
 
-#: frontend/src/views/LibraryView.vue:133
+#: frontend/src/views/LibraryView.vue:134
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} 件"
 
-#: frontend/src/views/LibraryView.vue:139
+#: frontend/src/views/LibraryView.vue:140
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "お気に入りの写真はまだありません。写真の星をタップして追加してください。"
 
-#: frontend/src/views/LibraryView.vue:139
+#: frontend/src/views/LibraryView.vue:140
 msgid "Aucune photo ne correspond."
 msgstr "一致する写真はありません。"
 
-#: frontend/src/views/LibraryView.vue:144
-#: frontend/src/views/LibraryView.vue:177
+#: frontend/src/views/LibraryView.vue:145
+#: frontend/src/views/LibraryView.vue:180
 msgid "Favori"
 msgstr "お気に入り"
 
-#: frontend/src/views/LibraryView.vue:151
+#: frontend/src/views/LibraryView.vue:152
 msgid "Précédente"
 msgstr "前へ"
 
-#: frontend/src/views/LibraryView.vue:161
+#: frontend/src/views/LibraryView.vue:162
 msgid "Ajouter une légende…"
 msgstr "キャプションを追加…"
 
-#: frontend/src/views/LibraryView.vue:170
+#: frontend/src/views/LibraryView.vue:171
 msgid "Utiliser comme légende"
 msgstr "キャプションに使う"
 
 #: frontend/src/views/LibraryView.vue:177
+msgid "Coloriser cette photo noir et blanc"
+msgstr "この白黒写真をカラー化"
+
+#: frontend/src/views/LibraryView.vue:178
+msgid "Coloriser"
+msgstr "カラー化"
+
+#: frontend/src/views/LibraryView.vue:180
 msgid "Ajouter aux favoris"
 msgstr "お気に入りに追加"
 
-#: frontend/src/views/LibraryView.vue:181
+#: frontend/src/views/LibraryView.vue:184
 msgid "Suivante"
 msgstr "次へ"
 
@@ -5393,7 +5435,7 @@ msgstr "このプロファイルのおすすめ設定："
 msgid "Appliquer les réglages conseillés"
 msgstr "おすすめ設定を適用"
 
-#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:580
+#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:581
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "設定はすでにおすすめどおりです。"
 
@@ -8647,9 +8689,9 @@ msgid "Enregistrement…"
 msgstr "保存中…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:366 web/routes_settings.py:431
-#: web/routes_settings.py:453 web/routes_settings.py:513
-#: web/routes_settings.py:537 web/routes_settings.py:547
+#: web/routes_settings.py:367 web/routes_settings.py:432
+#: web/routes_settings.py:454 web/routes_settings.py:514
+#: web/routes_settings.py:538 web/routes_settings.py:548
 msgid "Enregistré"
 msgstr "保存しました"
 
@@ -11356,6 +11398,10 @@ msgstr "1年のムービー"
 msgid "Photos papier scannées"
 msgstr "スキャンした紙の写真"
 
+#: utils/import_progress.py:14
+msgid "Photos colorisées"
+msgstr "カラー化した写真"
+
 #: utils/layout_engine.py:35
 msgid "Selon les réglages"
 msgstr "設定に従う"
@@ -12063,8 +12109,9 @@ msgstr "スタイルを保存しました：既存のキャプションをバッ
 msgid "Style enregistré : visible dès la photo suivante."
 msgstr "スタイルを保存しました：次の写真から反映されます。"
 
-#: web/routes_captions.py:112 web/routes_guests.py:540
-#: web/routes_imports.py:846 web/routes_imports.py:855 web/routes_photos.py:285
+#: web/routes_captions.py:112 web/routes_colorize.py:76
+#: web/routes_guests.py:540 web/routes_imports.py:846 web/routes_imports.py:855
+#: web/routes_photos.py:285
 msgid "Photo introuvable."
 msgstr "写真が見つかりません。"
 
@@ -12101,19 +12148,53 @@ msgstr "テレビへのキャストを開始しました。"
 msgid "Diffusion arrêtée."
 msgstr "キャストを停止しました。"
 
+#: web/routes_colorize.py:55
+msgid "Installation déjà en cours."
+msgstr "すでにインストール中です。"
+
+#: web/routes_colorize.py:59
+msgid "Lancez d'abord une fois : ~/pimmich/venv/bin/pip install onnx"
+msgstr "先に一度実行してください：~/pimmich/venv/bin/pip install onnx"
+
+#: web/routes_colorize.py:67
+msgid "Téléchargement du modèle de colorisation (129 Mo) : quelques minutes."
+msgstr "カラー化モデル（129 MB）をダウンロード中：数分かかります。"
+
+#: web/routes_colorize.py:78
+msgid "Installez d'abord la colorisation (page Importer › Colorisation)."
+msgstr "先にカラー化を導入してください（取り込みページ › カラー化）。"
+
+#: web/routes_colorize.py:84
+msgid "Cette photo est déjà en couleur."
+msgstr "この写真はすでにカラーです。"
+
+#: web/routes_colorize.py:86
+msgid "Colorisation déjà en cours."
+msgstr "すでにカラー化中です。"
+
+#: web/routes_colorize.py:92
+msgid "Colorisation"
+msgstr "カラー化"
+
+#: web/routes_colorize.py:100
+msgid ""
+"Colorisation en cours : la copie en couleur rejoindra le diaporama dans "
+"un instant."
+msgstr "カラー化中：まもなくカラー版がスライドショーに加わります。"
+
 #: web/routes_config.py:70
 msgid ""
 "La valeur pour la limite de photos Immich est invalide. La valeur "
 "précédente est conservée."
 msgstr "イミッチ写真制限の値が無効です。以前の値が保持されます。"
 
-#: web/routes_config.py:253 web/routes_settings.py:546
+#: web/routes_config.py:253 web/routes_settings.py:547
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive のキーが保存されませんでした：%(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:361
-#: web/routes_settings.py:429 web/routes_settings.py:511
+#: web/routes_config.py:281 web/routes_settings.py:362
+#: web/routes_settings.py:430 web/routes_settings.py:512
 msgid "Réglages modifiés"
 msgstr "設定を変更"
 
@@ -12180,8 +12261,8 @@ msgstr "送信できません：%(error)s"
 msgid "Photo envoyée à %(count)s adresse(s)."
 msgstr "%(count)s件のアドレスに写真を送りました。"
 
-#: web/routes_family.py:26 web/routes_settings.py:418
-#: web/routes_settings.py:531 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:419
+#: web/routes_settings.py:532 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "リストが無効です。"
 
@@ -12254,7 +12335,7 @@ msgstr "完了しました。"
 msgid "Ce cadre a refusé la demande."
 msgstr "このフレームが要求を拒否しました。"
 
-#: web/routes_frames.py:405 web/routes_party.py:109 web/routes_settings.py:448
+#: web/routes_frames.py:405 web/routes_party.py:109 web/routes_settings.py:449
 msgid "Valeur invalide."
 msgstr "無効な値です。"
 
@@ -12818,7 +12899,7 @@ msgid ""
 " Forcer la mise à jour »."
 msgstr "潮汐データはまだありません。スライドショーが取得するか、「強制更新」を使ってください。"
 
-#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:504
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:505
 #: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "不明なソースです。"
@@ -13390,37 +13471,37 @@ msgstr "縁が見つかりませんでした。色の補正のみ行います。
 msgid "Aperçu introuvable : recommencez."
 msgstr "プレビューが見つかりません。やり直してください。"
 
-#: web/routes_scan.py:83
+#: web/routes_scan.py:94
 msgid "Photo ajoutée au cadre."
 msgstr "写真をフレームに追加しました。"
 
-#: web/routes_settings.py:336
+#: web/routes_settings.py:337
 msgid "Aucun réglage à enregistrer."
 msgstr "保存する設定がありません。"
 
-#: web/routes_settings.py:340
+#: web/routes_settings.py:341
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "不明な設定：%(key)s"
 
-#: web/routes_settings.py:344
+#: web/routes_settings.py:345
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "「%(key)s」の値が無効です。"
 
-#: web/routes_settings.py:453
+#: web/routes_settings.py:454
 msgid "Supprimé."
 msgstr "削除しました。"
 
-#: web/routes_settings.py:561
+#: web/routes_settings.py:562
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "パソコン（Raspberry Piではありません）"
 
-#: web/routes_settings.py:584
+#: web/routes_settings.py:585
 msgid "Réglages conseillés appliqués"
 msgstr "おすすめ設定を適用しました"
 
-#: web/routes_settings.py:586
+#: web/routes_settings.py:587
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s件の設定をRaspberry Piに合わせました。"

@@ -74,6 +74,7 @@ async function toggleFavorite(item: Item) {
 
 watch(open, () => { captionText.value = current.value?.caption || ""; });
 
+async function colorizePhoto(item: Item) { await run(() => post("/api/colorize", { path: item.path })); }
 async function saveCaption(item: Item) {
   const done = await run(() => post<{ message?: string }>("/api/set_image_text", { photo: item.path, text: captionText.value }), t("Légende enregistrée."));
   if (done) { item.caption = captionText.value; item.url = item.url.split("?")[0] + `?v=${Date.now()}`; item.thumb = item.thumb.split("?")[0] + `?v=${Date.now()}`; }
@@ -173,6 +174,8 @@ onUnmounted(() => window.removeEventListener("keydown", onKey));
           <VoiceMemo v-if="!current.video" :path="current.path" :seconds="current.voice" @changed="(s) => { if (current) current.voice = s; }" />
           <p class="small dim">{{ sourceLabel(current.source) }} · {{ current.path.split("/").pop() }}</p>
         </div>
+        <button v-if="!current.video" class="btn" type="button" :title="t('Coloriser cette photo noir et blanc')" @click="colorizePhoto(current)">
+          <i class="fas fa-palette"></i>{{ t("Coloriser") }}</button>
         <button class="btn" type="button" @click="toggleFavorite(current)">
           <i :class="current.favorite ? 'fas fa-star' : 'far fa-star'"></i>{{ current.favorite ? t("Favori") : t("Ajouter aux favoris") }}</button>
         <button class="btn icon" type="button" :title="t('Fermer')" @click="open = null"><i class="fas fa-times"></i></button>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 15:32+0100\n"
+"POT-Creation-Date: 2026-10-26 15:46+0100\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -259,13 +259,13 @@ msgstr "Home"
 msgid "Nouveautés"
 msgstr "What's new"
 
-#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:124
+#: frontend/src/nav.ts:26 frontend/src/views/LibraryView.vue:125
 #: templates/configure.html.jinja:96 templates/configure.html.jinja:246
 #: templates/configure/_tour.html.jinja:32 templates/upload.html.jinja:69
 msgid "Photos"
 msgstr "Photos"
 
-#: frontend/src/nav.ts:27 frontend/src/views/ImportView.vue:184
+#: frontend/src/nav.ts:27 frontend/src/views/ImportView.vue:185
 #: templates/configure.html.jinja:145
 #: templates/configure/tab_actions.html.jinja:169
 msgid "Importer"
@@ -297,7 +297,7 @@ msgstr "Up next"
 msgid "Playlists"
 msgstr "Playlists"
 
-#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:129
+#: frontend/src/nav.ts:33 frontend/src/views/LibraryView.vue:130
 #: frontend/src/views/PlaylistsView.vue:185 templates/configure.html.jinja:150
 #: templates/configure/_playlist_builder.html.jinja:17
 #: templates/configure/tab_apercu.html.jinja:11
@@ -787,7 +787,7 @@ msgstr ""
 "resistor is needed."
 
 #: frontend/src/components/CaptionEditor.vue:30
-#: frontend/src/views/LibraryView.vue:163
+#: frontend/src/views/LibraryView.vue:164
 #: templates/configure/tab_legendes.html.jinja:177
 msgid "Style de cette légende"
 msgstr "Style of this caption"
@@ -875,7 +875,7 @@ msgstr "Glow"
 
 #: frontend/src/components/CaptionEditor.vue:115
 #: frontend/src/components/SmartAlbumEditor.vue:72
-#: frontend/src/views/LibraryView.vue:178
+#: frontend/src/views/LibraryView.vue:181
 #: frontend/src/views/PlaylistsView.vue:179
 #: frontend/src/views/TripsView.vue:301
 #: templates/configure/_playlist_builder.html.jinja:6
@@ -1093,6 +1093,45 @@ msgstr "Cast the slideshow"
 #: frontend/src/components/CastCard.vue:59
 msgid "Diffuser le film"
 msgstr "Cast the film"
+
+#: frontend/src/components/ColorizeCard.vue:25
+msgid "Colorisation des photos noir et blanc"
+msgstr "Colourising black-and-white photos"
+
+#: frontend/src/components/ColorizeCard.vue:26
+msgid ""
+"Les vieilles photos noir et blanc retrouvent des couleurs douces et "
+"plausibles, calculées sur le Raspberry Pi (aucun service en ligne). La "
+"version colorisée est toujours une copie : l'original reste tel quel."
+msgstr ""
+"Old black-and-white photos get soft, plausible colours, computed on the "
+"Raspberry Pi (no online service). The colourised version is always a "
+"copy: the original stays as it is."
+
+#: frontend/src/components/ColorizeCard.vue:28
+msgid ""
+"Colorisation installée. Dans la bibliothèque, ouvrez une photo noir et "
+"blanc et touchez « Coloriser »."
+msgstr ""
+"Colourisation installed. In the library, open a black-and-white photo and"
+" tap “Colourise”."
+
+#: frontend/src/components/ColorizeCard.vue:30
+msgid ""
+"Coloriser aussi les tirages noir et blanc scannés (l'original noir et "
+"blanc est gardé à part)"
+msgstr ""
+"Also colourise scanned black-and-white prints (the black-and-white "
+"original is kept aside)"
+
+#: frontend/src/components/ColorizeCard.vue:35
+#, python-brace-format
+msgid "Installation ({done}/{total})…"
+msgstr "Installing ({done}/{total})…"
+
+#: frontend/src/components/ColorizeCard.vue:35
+msgid "Installer la colorisation (129 Mo)"
+msgstr "Install colourisation (129 MB)"
 
 #: frontend/src/components/DailyPhotoCard.vue:33
 msgid "Photo du jour par e-mail"
@@ -1917,7 +1956,7 @@ msgid "Non défini"
 msgstr "Undefined"
 
 #: frontend/src/components/SettingField.vue:64
-#: frontend/src/views/LibraryView.vue:130 frontend/src/views/LogsView.vue:64
+#: frontend/src/views/LibraryView.vue:131 frontend/src/views/LogsView.vue:64
 msgid "Effacer"
 msgstr "Clear"
 
@@ -2049,7 +2088,7 @@ msgid "du"
 msgstr "from"
 
 #: frontend/src/components/SmartAlbumEditor.vue:88
-#: frontend/src/views/LibraryView.vue:128
+#: frontend/src/views/LibraryView.vue:129
 #: templates/configure/_smart_albums.html.jinja:22
 #: templates/configure/tab_apercu.html.jinja:7
 msgid "au"
@@ -2101,7 +2140,7 @@ msgstr "Favourites only"
 
 #: frontend/src/components/SmartAlbumEditor.vue:114
 #: frontend/src/views/CaptionsView.vue:11 frontend/src/views/HomeView.vue:168
-#: frontend/src/views/LibraryView.vue:123
+#: frontend/src/views/LibraryView.vue:124
 #: templates/configure/_smart_albums.html.jinja:44
 #: templates/configure/tab_apercu.html.jinja:10
 #: templates/configure/tab_legendes.html.jinja:7 web/routes_slideshow.py:606
@@ -3771,7 +3810,7 @@ msgstr ""
 "follows your browser's language."
 
 #: frontend/src/views/DisplayView.vue:104
-#: frontend/src/views/LibraryView.vue:125
+#: frontend/src/views/LibraryView.vue:126
 msgid "Vidéos"
 msgstr "Videos"
 
@@ -4876,115 +4915,115 @@ msgstr "Latest actions"
 msgid "Rien pour l'instant."
 msgstr "Nothing yet."
 
-#: frontend/src/views/ImportView.vue:12
+#: frontend/src/views/ImportView.vue:13
 #: templates/configure/tab_actions.html.jinja:74
 msgid "Importer depuis Google Drive"
 msgstr "Import from Google Drive"
 
-#: frontend/src/views/ImportView.vue:13
+#: frontend/src/views/ImportView.vue:14
 #: templates/configure/tab_actions.html.jinja:56
 msgid "Importer depuis Immich"
 msgstr "Import from Immich"
 
-#: frontend/src/views/ImportView.vue:14
+#: frontend/src/views/ImportView.vue:15
 #: templates/configure/tab_actions.html.jinja:65
 msgid "Importer depuis Samba"
 msgstr "Import from Samba"
 
-#: frontend/src/views/ImportView.vue:15
+#: frontend/src/views/ImportView.vue:16
 #: templates/configure/tab_actions.html.jinja:47
 msgid "Importer depuis la clé USB"
 msgstr "Import from USB drive"
 
-#: frontend/src/views/ImportView.vue:31
+#: frontend/src/views/ImportView.vue:32
 #: templates/configure/scripts_app.html.jinja:22
 #: templates/configure/scripts_gallery.html.jinja:9
 msgid "Erreur"
 msgstr "Error"
 
-#: frontend/src/views/ImportView.vue:33
+#: frontend/src/views/ImportView.vue:34
 #: templates/configure/scripts_main.html.jinja:1608
 msgid "Erreur de connexion au serveur."
 msgstr "Server connection error."
 
-#: frontend/src/views/ImportView.vue:41
+#: frontend/src/views/ImportView.vue:42
 #: templates/configure/scripts_main.html.jinja:1232
 msgid "Préparation terminée ! Redémarrage du diaporama..."
 msgstr "Preparation complete! Restarting the slideshow..."
 
-#: frontend/src/views/ImportView.vue:44
+#: frontend/src/views/ImportView.vue:45
 #: templates/configure/scripts_main.html.jinja:1223
 msgid "Préparation :"
 msgstr "Preparation :"
 
-#: frontend/src/views/ImportView.vue:45
+#: frontend/src/views/ImportView.vue:46
 #: templates/configure/scripts_main.html.jinja:1268
 msgid "Importation :"
 msgstr "Importation :"
 
-#: frontend/src/views/ImportView.vue:54
+#: frontend/src/views/ImportView.vue:55
 #: templates/configure/scripts_main.html.jinja:1702
 msgid "Veuillez sélectionner au moins un fichier."
 msgstr "Please select at least one file."
 
-#: frontend/src/views/ImportView.vue:81
+#: frontend/src/views/ImportView.vue:82
 msgid "Importation réussie !"
 msgstr "Import successful!"
 
-#: frontend/src/views/ImportView.vue:84
+#: frontend/src/views/ImportView.vue:85
 #: templates/configure/scripts_main.html.jinja:1775
 msgid "Erreur de communication :"
 msgstr "Communication error:"
 
-#: frontend/src/views/ImportView.vue:96
+#: frontend/src/views/ImportView.vue:97
 #: templates/configure/tab_actions.html.jinja:138
 msgid "Retirer cette photo du cadre ?"
 msgstr "Remove this photo from the frame?"
 
-#: frontend/src/views/ImportView.vue:117 frontend/src/views/ImportView.vue:118
-#: frontend/src/views/ImportView.vue:122
+#: frontend/src/views/ImportView.vue:118 frontend/src/views/ImportView.vue:119
+#: frontend/src/views/ImportView.vue:123
 #: templates/configure/tab_actions.html.jinja:178
 msgid "Envoi impossible."
 msgstr "Upload failed."
 
-#: frontend/src/views/ImportView.vue:140
+#: frontend/src/views/ImportView.vue:141
 #: templates/configure/tab_actions.html.jinja:44
 msgid "Importation des photos"
 msgstr "Importing photos"
 
-#: frontend/src/views/ImportView.vue:148
+#: frontend/src/views/ImportView.vue:149
 #: templates/configure/tab_actions.html.jinja:85
 msgid "Photo en cours de préparation"
 msgstr "Photo being prepared"
 
-#: frontend/src/views/ImportView.vue:150
+#: frontend/src/views/ImportView.vue:151
 msgid ""
 "L'import depuis Telegram se fait automatiquement à la réception des "
 "photos."
 msgstr "Telegram photos are imported automatically when they arrive."
 
-#: frontend/src/views/ImportView.vue:155
+#: frontend/src/views/ImportView.vue:156
 #: templates/configure/tab_actions.html.jinja:98
 msgid "Importer depuis un Smartphone"
 msgstr "Import from Smartphone"
 
-#: frontend/src/views/ImportView.vue:156
+#: frontend/src/views/ImportView.vue:157
 msgid "Envoyez des photos directement depuis votre téléphone via le navigateur."
 msgstr "Send photos directly from your phone through the browser."
 
-#: frontend/src/views/ImportView.vue:159
+#: frontend/src/views/ImportView.vue:160
 #: templates/configure/scripts_main.html.jinja:1744
 #: templates/configure/scripts_main.html.jinja:1777
 #: templates/configure/tab_actions.html.jinja:106
 msgid "Envoyer les photos"
 msgstr "Send photos"
 
-#: frontend/src/views/ImportView.vue:168
+#: frontend/src/views/ImportView.vue:169
 #: templates/configure/tab_actions.html.jinja:152
 msgid "Importer une discussion WhatsApp"
 msgstr "Import a WhatsApp chat"
 
-#: frontend/src/views/ImportView.vue:169
+#: frontend/src/views/ImportView.vue:170
 #: templates/configure/tab_actions.html.jinja:153
 msgid ""
 "Dans WhatsApp : ouvrez la discussion (ou le groupe familial) › nom en "
@@ -4998,50 +5037,50 @@ msgstr ""
 "Android, with Pimmich installed on the home screen, you can also pick "
 "“Pimmich” directly in the share menu."
 
-#: frontend/src/views/ImportView.vue:173
+#: frontend/src/views/ImportView.vue:174
 #: templates/configure/tab_actions.html.jinja:177
 #, python-brace-format
 msgid "{photos} photos et {videos} vidéos, du {first} au {last}"
 msgstr "{photos} photos and {videos} videos, from {first} to {last}"
 
-#: frontend/src/views/ImportView.vue:174
+#: frontend/src/views/ImportView.vue:175
 #: templates/configure/tab_actions.html.jinja:159
 msgid "Expéditeurs à importer :"
 msgstr "Senders to import:"
 
-#: frontend/src/views/ImportView.vue:177
+#: frontend/src/views/ImportView.vue:178
 #: templates/configure/tab_actions.html.jinja:161
 msgid "Légende des photos :"
 msgstr "Photo caption:"
 
-#: frontend/src/views/ImportView.vue:179
+#: frontend/src/views/ImportView.vue:180
 #: templates/configure/tab_actions.html.jinja:163
 msgid "Le message qui accompagne la photo"
 msgstr "The message sent with the photo"
 
-#: frontend/src/views/ImportView.vue:180
+#: frontend/src/views/ImportView.vue:181
 #: templates/configure/tab_actions.html.jinja:164
 msgid "Le prénom de l'expéditeur et son message"
 msgstr "The sender's first name and message"
 
-#: frontend/src/views/ImportView.vue:181
+#: frontend/src/views/ImportView.vue:182
 #: templates/configure/tab_actions.html.jinja:165
 msgid "Le prénom de l'expéditeur"
 msgstr "The sender's first name"
 
-#: frontend/src/views/ImportView.vue:182 frontend/src/views/TripsView.vue:338
+#: frontend/src/views/ImportView.vue:183 frontend/src/views/TripsView.vue:338
 #: templates/configure/scripts_gallery.html.jinja:18
 #: templates/configure/tab_actions.html.jinja:166
 #: templates/configure/tab_carte.html.jinja:51
 msgid "Aucune"
 msgstr "None"
 
-#: frontend/src/views/ImportView.vue:190
+#: frontend/src/views/ImportView.vue:191
 #: templates/configure/tab_actions.html.jinja:115
 msgid "Mes envois"
 msgstr "My uploads"
 
-#: frontend/src/views/ImportView.vue:191
+#: frontend/src/views/ImportView.vue:192
 msgid ""
 "Les photos envoyées depuis ce compte s'ajoutent à votre source "
 "personnelle. Touchez la croix pour en retirer une."
@@ -5049,12 +5088,12 @@ msgstr ""
 "Photos sent from this account go to your personal source. Tap the cross "
 "to remove one."
 
-#: frontend/src/views/ImportView.vue:192
+#: frontend/src/views/ImportView.vue:193
 #: templates/configure/tab_actions.html.jinja:118
 msgid "Aucun envoi pour l'instant."
 msgstr "No uploads yet."
 
-#: frontend/src/views/ImportView.vue:195
+#: frontend/src/views/ImportView.vue:196
 #: templates/configure/tab_actions.html.jinja:136
 msgid "Retirer du cadre"
 msgstr "Remove from the frame"
@@ -5139,7 +5178,7 @@ msgid ""
 "moment-là)"
 msgstr "Seasonal themes only during their period (and more frequent at that time)"
 
-#: frontend/src/views/LayoutsView.vue:58 web/routes_settings.py:421
+#: frontend/src/views/LayoutsView.vue:58 web/routes_settings.py:422
 msgid "Gardez au moins une disposition."
 msgstr "Keep at least one layout."
 
@@ -5251,81 +5290,89 @@ msgstr "Added to favorites."
 msgid "Retirée des favoris."
 msgstr "Removed from favorites."
 
-#: frontend/src/views/LibraryView.vue:78
+#: frontend/src/views/LibraryView.vue:79
 msgid "Légende enregistrée."
 msgstr "Caption saved."
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:112
 msgid "Décrivez la photo : plage, chien, neige…"
 msgstr "Describe the photo: beach, dog, snow…"
 
-#: frontend/src/views/LibraryView.vue:111
+#: frontend/src/views/LibraryView.vue:112
 msgid "Rechercher (lieu, légende, nom de fichier…)"
 msgstr "Search (place, caption, file name…)"
 
-#: frontend/src/views/LibraryView.vue:113
+#: frontend/src/views/LibraryView.vue:114
 msgid "Par contenu (Immich)"
 msgstr "By content (Immich)"
 
-#: frontend/src/views/LibraryView.vue:115
+#: frontend/src/views/LibraryView.vue:116
 #: frontend/src/views/PlaylistsView.vue:183
 #: templates/configure/tab_apercu.html.jinja:8
 msgid "Toutes les sources"
 msgstr "All sources"
 
-#: frontend/src/views/LibraryView.vue:119
+#: frontend/src/views/LibraryView.vue:120
 #: templates/configure/_playlist_builder.html.jinja:16
 #: templates/configure/_playlist_builder.html.jinja:110
 #: templates/configure/tab_apercu.html.jinja:9
 msgid "Tout le monde"
 msgstr "Everyone"
 
-#: frontend/src/views/LibraryView.vue:127
+#: frontend/src/views/LibraryView.vue:128
 msgid "Du"
 msgstr "From"
 
-#: frontend/src/views/LibraryView.vue:133
+#: frontend/src/views/LibraryView.vue:134
 #, python-brace-format
 msgid "{n} résultats ({shown} affichés)"
 msgstr "{n} results ({shown} shown)"
 
-#: frontend/src/views/LibraryView.vue:133
+#: frontend/src/views/LibraryView.vue:134
 #, python-brace-format
 msgid "{n} résultats"
 msgstr "{n} results"
 
-#: frontend/src/views/LibraryView.vue:139
+#: frontend/src/views/LibraryView.vue:140
 msgid ""
 "Aucune photo favorite pour l'instant : touchez l'étoile d'une photo pour "
 "l'ajouter."
 msgstr "No favorite photos yet: tap a photo's star to add it."
 
-#: frontend/src/views/LibraryView.vue:139
+#: frontend/src/views/LibraryView.vue:140
 msgid "Aucune photo ne correspond."
 msgstr "No photo matches."
 
-#: frontend/src/views/LibraryView.vue:144
-#: frontend/src/views/LibraryView.vue:177
+#: frontend/src/views/LibraryView.vue:145
+#: frontend/src/views/LibraryView.vue:180
 msgid "Favori"
 msgstr "Favorite"
 
-#: frontend/src/views/LibraryView.vue:151
+#: frontend/src/views/LibraryView.vue:152
 msgid "Précédente"
 msgstr "Previous"
 
-#: frontend/src/views/LibraryView.vue:161
+#: frontend/src/views/LibraryView.vue:162
 msgid "Ajouter une légende…"
 msgstr "Add a caption…"
 
-#: frontend/src/views/LibraryView.vue:170
+#: frontend/src/views/LibraryView.vue:171
 msgid "Utiliser comme légende"
 msgstr "Use as caption"
 
 #: frontend/src/views/LibraryView.vue:177
+msgid "Coloriser cette photo noir et blanc"
+msgstr "Colourise this black-and-white photo"
+
+#: frontend/src/views/LibraryView.vue:178
+msgid "Coloriser"
+msgstr "Colourise"
+
+#: frontend/src/views/LibraryView.vue:180
 msgid "Ajouter aux favoris"
 msgstr "Add to favorites"
 
-#: frontend/src/views/LibraryView.vue:181
+#: frontend/src/views/LibraryView.vue:184
 msgid "Suivante"
 msgstr "Next"
 
@@ -5606,7 +5653,7 @@ msgstr "Recommended settings for this profile:"
 msgid "Appliquer les réglages conseillés"
 msgstr "Apply recommended settings"
 
-#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:580
+#: frontend/src/views/MaintenanceView.vue:241 web/routes_settings.py:581
 msgid "Les réglages sont déjà ceux conseillés."
 msgstr "Settings already match the recommendations."
 
@@ -8964,9 +9011,9 @@ msgid "Enregistrement…"
 msgstr "Saving…"
 
 #: templates/configure/scripts_app.html.jinja:139 web/routes_config.py:288
-#: web/routes_settings.py:366 web/routes_settings.py:431
-#: web/routes_settings.py:453 web/routes_settings.py:513
-#: web/routes_settings.py:537 web/routes_settings.py:547
+#: web/routes_settings.py:367 web/routes_settings.py:432
+#: web/routes_settings.py:454 web/routes_settings.py:514
+#: web/routes_settings.py:538 web/routes_settings.py:548
 msgid "Enregistré"
 msgstr "Saved"
 
@@ -11775,6 +11822,10 @@ msgstr "Films of the year"
 msgid "Photos papier scannées"
 msgstr "Scanned paper photos"
 
+#: utils/import_progress.py:14
+msgid "Photos colorisées"
+msgstr "Colourised photos"
+
 #: utils/layout_engine.py:35
 msgid "Selon les réglages"
 msgstr "As per settings"
@@ -12482,8 +12533,9 @@ msgstr "Style saved: existing captions are being redrawn in the background."
 msgid "Style enregistré : visible dès la photo suivante."
 msgstr "Style saved: visible from the next photo."
 
-#: web/routes_captions.py:112 web/routes_guests.py:540
-#: web/routes_imports.py:846 web/routes_imports.py:855 web/routes_photos.py:285
+#: web/routes_captions.py:112 web/routes_colorize.py:76
+#: web/routes_guests.py:540 web/routes_imports.py:846 web/routes_imports.py:855
+#: web/routes_photos.py:285
 msgid "Photo introuvable."
 msgstr "Photo not found."
 
@@ -12520,6 +12572,40 @@ msgstr "Casting started on the TV."
 msgid "Diffusion arrêtée."
 msgstr "Casting stopped."
 
+#: web/routes_colorize.py:55
+msgid "Installation déjà en cours."
+msgstr "Installation already in progress."
+
+#: web/routes_colorize.py:59
+msgid "Lancez d'abord une fois : ~/pimmich/venv/bin/pip install onnx"
+msgstr "First run once: ~/pimmich/venv/bin/pip install onnx"
+
+#: web/routes_colorize.py:67
+msgid "Téléchargement du modèle de colorisation (129 Mo) : quelques minutes."
+msgstr "Downloading the colourisation model (129 MB): a few minutes."
+
+#: web/routes_colorize.py:78
+msgid "Installez d'abord la colorisation (page Importer › Colorisation)."
+msgstr "Install colourisation first (Import page › Colourisation)."
+
+#: web/routes_colorize.py:84
+msgid "Cette photo est déjà en couleur."
+msgstr "This photo is already in colour."
+
+#: web/routes_colorize.py:86
+msgid "Colorisation déjà en cours."
+msgstr "Colourisation already in progress."
+
+#: web/routes_colorize.py:92
+msgid "Colorisation"
+msgstr "Colourisation"
+
+#: web/routes_colorize.py:100
+msgid ""
+"Colorisation en cours : la copie en couleur rejoindra le diaporama dans "
+"un instant."
+msgstr "Colourising: the colour copy will join the slideshow in a moment."
+
 #: web/routes_config.py:70
 msgid ""
 "La valeur pour la limite de photos Immich est invalide. La valeur "
@@ -12528,13 +12614,13 @@ msgstr ""
 "The value for the Immich photo limit is invalid. The previous value is "
 "retained."
 
-#: web/routes_config.py:253 web/routes_settings.py:546
+#: web/routes_config.py:253 web/routes_settings.py:547
 #, python-format
 msgid "Clé Google Drive non enregistrée : %(error)s"
 msgstr "Google Drive key not saved: %(error)s"
 
-#: web/routes_config.py:281 web/routes_settings.py:361
-#: web/routes_settings.py:429 web/routes_settings.py:511
+#: web/routes_config.py:281 web/routes_settings.py:362
+#: web/routes_settings.py:430 web/routes_settings.py:512
 msgid "Réglages modifiés"
 msgstr "Settings changed"
 
@@ -12601,8 +12687,8 @@ msgstr "Sending failed: %(error)s"
 msgid "Photo envoyée à %(count)s adresse(s)."
 msgstr "Photo sent to %(count)s address(es)."
 
-#: web/routes_family.py:26 web/routes_settings.py:418
-#: web/routes_settings.py:531 web/routes_system.py:320
+#: web/routes_family.py:26 web/routes_settings.py:419
+#: web/routes_settings.py:532 web/routes_system.py:320
 msgid "Liste invalide."
 msgstr "Invalid list."
 
@@ -12677,7 +12763,7 @@ msgstr "Done."
 msgid "Ce cadre a refusé la demande."
 msgstr "This frame refused the request."
 
-#: web/routes_frames.py:405 web/routes_party.py:109 web/routes_settings.py:448
+#: web/routes_frames.py:405 web/routes_party.py:109 web/routes_settings.py:449
 msgid "Valeur invalide."
 msgstr "Invalid value."
 
@@ -13247,7 +13333,7 @@ msgid ""
 " Forcer la mise à jour »."
 msgstr "No tide data yet: the slideshow fetches it, or use \"Force update\"."
 
-#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:504
+#: web/routes_media.py:74 web/routes_media.py:105 web/routes_settings.py:505
 #: web/routes_storage.py:114
 msgid "Source inconnue."
 msgstr "Unknown source."
@@ -13831,37 +13917,37 @@ msgstr "Print edges not found: the photo is only revived."
 msgid "Aperçu introuvable : recommencez."
 msgstr "Preview not found: start again."
 
-#: web/routes_scan.py:83
+#: web/routes_scan.py:94
 msgid "Photo ajoutée au cadre."
 msgstr "Photo added to the frame."
 
-#: web/routes_settings.py:336
+#: web/routes_settings.py:337
 msgid "Aucun réglage à enregistrer."
 msgstr "No setting to save."
 
-#: web/routes_settings.py:340
+#: web/routes_settings.py:341
 #, python-format
 msgid "Réglage inconnu : %(key)s"
 msgstr "Unknown setting: %(key)s"
 
-#: web/routes_settings.py:344
+#: web/routes_settings.py:345
 #, python-format
 msgid "Valeur invalide pour « %(key)s »."
 msgstr "Invalid value for “%(key)s”."
 
-#: web/routes_settings.py:453
+#: web/routes_settings.py:454
 msgid "Supprimé."
 msgstr "Deleted."
 
-#: web/routes_settings.py:561
+#: web/routes_settings.py:562
 msgid "Ordinateur (pas un Raspberry Pi)"
 msgstr "Computer (not a Raspberry Pi)"
 
-#: web/routes_settings.py:584
+#: web/routes_settings.py:585
 msgid "Réglages conseillés appliqués"
 msgstr "Recommended settings applied"
 
-#: web/routes_settings.py:586
+#: web/routes_settings.py:587
 #, python-format
 msgid "%(count)s réglage(s) adapté(s) au Raspberry Pi."
 msgstr "%(count)s setting(s) adapted to the Raspberry Pi."

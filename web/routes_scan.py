@@ -69,6 +69,17 @@ def scan_keep_api(scan_id):
         (image.rotate(-rotate, expand=True) if rotate in (90, 180, 270) else image.copy()).save(final, "JPEG", quality=92)
     path.unlink(missing_ok=True)
     config = load_config()
+    from utils import colorize
+    if config.get("scan_colorize", True) and colorize.installed():
+        try:  # tirage noir et blanc : colorisé, l'original gardé à part (dossier caché)
+            from web.routes_colorize import colorize_file
+            keep = final.parent / ".noir_et_blanc" / final.name
+            keep.parent.mkdir(exist_ok=True)
+            shutil.copy2(final, keep)
+            if not colorize_file(keep, final):
+                keep.unlink(missing_ok=True)
+        except Exception as e:
+            logger.warning(f"[Scanner] Colorisation impossible : {e}")
     if SOURCE not in config.get("display_sources", []):
         save_config(dict(config, display_sources=list(config.get("display_sources", [])) + [SOURCE]))
 

@@ -4,6 +4,7 @@ import { get, post } from "../api";
 import { currentLang, t } from "../i18n";
 import { notify, run } from "../toast";
 import ScanCard from "../components/ScanCard.vue";
+import ColorizeCard from "../components/ColorizeCard.vue";
 
 type Source = "usb" | "immich" | "samba" | "gdrive";
 interface Step { percent?: number; message?: string; type?: string; stage?: string; current_photo_url?: string }
@@ -196,6 +197,7 @@ onUnmounted(() => stream?.close());
     </div>
   </section>
   <ScanCard />
+  <ColorizeCard />
 </template>
 
 <style scoped>
