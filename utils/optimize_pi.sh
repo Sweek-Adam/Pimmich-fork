@@ -23,9 +23,10 @@ SYSCTL=/etc/sysctl.d/90-pimmich.conf
 CLOUD_OFF=/etc/cloud/cloud-init.disabled
 # Services inutiles pour un cadre photo : mises à jour automatiques du système (remplacées par
 # utils/auto_update.sh à 4 h 30, pour éviter qu'elles se gênent), index des pages de manuel, attente du réseau
-# au démarrage (Pimmich réessaie tout seul), partages NFS (Pimmich utilise Samba) et impression.
+# au démarrage (Pimmich réessaie tout seul), partages NFS (Pimmich utilise Samba) et impression lancée au démarrage
+# (cups.socket reste tel quel : le photomaton démarre CUPS seulement pour imprimer, voir utils/enable_printing.sh).
 UNITS="apt-daily.timer apt-daily-upgrade.timer man-db.timer NetworkManager-wait-online.service
-       rpcbind.service rpcbind.socket nfs-blkmap.service cups.service cups.socket cups.path cups-browsed.service"
+       rpcbind.service rpcbind.socket nfs-blkmap.service cups.service cups.path cups-browsed.service"
 
 say() { echo "$*"; }
 run() {

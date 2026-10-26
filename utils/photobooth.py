@@ -51,6 +51,13 @@ def discover(timeout=6):
     return found
 
 
+NOT_RUNNING = "L'impression n'est pas activée sur le Raspberry Pi. Lancez une fois : sudo ~/pimmich/utils/enable_printing.sh"
+
+
+def _cups_down(output):
+    return "Unable to connect to server" in (output or "") or "Impossible de se connecter" in (output or "")
+
+
 def setup(uri):
     """Ajoute l'imprimante à CUPS (sans pilote). (succès, message d'erreur)."""
     if not re.match(r"^ipps?://[A-Za-z0-9.\-:\[\]]+(/[\w./\-]*)?$", uri or ""):
@@ -59,7 +66,10 @@ def setup(uri):
         result = subprocess.run(["lpadmin", "-p", QUEUE, "-E", "-v", uri, "-m", "everywhere"], capture_output=True, text=True, timeout=60)
     except (OSError, subprocess.SubprocessError) as e:
         return False, str(e)
-    return result.returncode == 0, (result.stderr or result.stdout).strip()[:300]
+    output = (result.stderr or result.stdout).strip()
+    if result.returncode != 0 and _cups_down(output):
+        return False, NOT_RUNNING
+    return result.returncode == 0, output[:300]
 
 
 def card(image, title="", subtitle=""):
@@ -93,7 +103,8 @@ def send(image, title="", subtitle="", queue=QUEUE):
     finally:
         Path(path).unlink(missing_ok=True)
     if result.returncode != 0:
-        raise RuntimeError((result.stderr or result.stdout).strip()[:300] or "impression refusée")
+        output = (result.stderr or result.stdout).strip()
+        raise RuntimeError(NOT_RUNNING if _cups_down(output) else output[:300] or "impression refusée")
     match = re.search(r"(\S+-\d+)", result.stdout)
     return match.group(1) if match else result.stdout.strip()
 

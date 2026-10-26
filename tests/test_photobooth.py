@@ -61,3 +61,10 @@ def test_guest_prints_the_photo_on_screen(admin_client, client, monkeypatch, tmp
         save_config(original)
         import shutil
         shutil.rmtree(folder, ignore_errors=True)
+
+
+def test_clear_message_when_printing_is_off(monkeypatch):
+    monkeypatch.setattr(photobooth.subprocess, "run", lambda *a, **k: subprocess.CompletedProcess(
+        a, 1, "", "lpadmin: Unable to connect to server: Mauvais descripteur de fichier"))
+    ok, message = photobooth.setup("ipp://EPSON1848C8.local:631/ipp/print")
+    assert not ok and "enable_printing.sh" in message
