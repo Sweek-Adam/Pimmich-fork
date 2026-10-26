@@ -13,7 +13,9 @@ def store(tmp_path, monkeypatch):
 
 
 def test_guest_comment_on_the_photo_on_screen(client, admin_client, monkeypatch):
+    from utils.config_manager import load_config
     from web import routes_guests
+    monkeypatch.setattr(routes_guests, "load_config", lambda: dict(load_config(), guest_reactions_enabled=True))
     monkeypatch.setattr(routes_guests, "_now_showing", lambda: "prepared/gdrive/plage.jpg")
     guest = client.application.test_client()
     assert guest.post("/upload/comment", json={"photo": "prepared/gdrive/autre.jpg", "text": "Super"}, headers=SAME).status_code == 409
