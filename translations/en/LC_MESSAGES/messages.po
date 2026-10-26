@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:58+0100\n"
+"POT-Creation-Date: 2026-10-26 08:22+0100\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -1330,23 +1330,36 @@ msgid ""
 "même Wi-Fi."
 msgstr "No printer found: turn it on and check it's on the same Wi-Fi."
 
-#: frontend/src/components/PhotoboothCard.vue:44
+#: frontend/src/components/PhotoboothCard.vue:43
+#: templates/upload.html.jinja:333
+msgid "Papier"
+msgstr "Paper"
+
+#: frontend/src/components/PhotoboothCard.vue:45
+msgid "Photo 10 × 15"
+msgstr "4×6 photo"
+
+#: frontend/src/components/PhotoboothCard.vue:46
+msgid "A4 (photo en grand)"
+msgstr "A4 (large photo)"
+
+#: frontend/src/components/PhotoboothCard.vue:49
 msgid "Ouvrir le photomaton pendant les fêtes"
 msgstr "Open the photo booth during parties"
 
-#: frontend/src/components/PhotoboothCard.vue:45
+#: frontend/src/components/PhotoboothCard.vue:50
 msgid "Tirages par invité"
 msgstr "Prints per guest"
 
-#: frontend/src/components/PhotoboothCard.vue:48
+#: frontend/src/components/PhotoboothCard.vue:53
 msgid "Imprimer aussi chaque photo reçue, au plus"
 msgstr "Also print every photo received, at most"
 
-#: frontend/src/components/PhotoboothCard.vue:49
+#: frontend/src/components/PhotoboothCard.vue:54
 msgid "par fête"
 msgstr "per party"
 
-#: frontend/src/components/PhotoboothCard.vue:50
+#: frontend/src/components/PhotoboothCard.vue:55
 msgid "Tirage d'essai"
 msgstr "Test print"
 
@@ -8329,7 +8342,7 @@ msgstr "Send my photos"
 msgid "Imprimer la photo à l'écran"
 msgstr "Print the photo on screen"
 
-#: templates/upload.html.jinja:58 web/routes_party.py:166
+#: templates/upload.html.jinja:58 web/routes_party.py:168
 msgid "L'imprimante ne répond pas."
 msgstr "The printer isn't responding."
 
@@ -8485,10 +8498,6 @@ msgstr "Your previous drawing has been restored."
 #: templates/upload.html.jinja:323
 msgid "Faites d'abord un dessin."
 msgstr "Draw something first."
-
-#: templates/upload.html.jinja:333
-msgid "Papier"
-msgstr "Paper"
 
 #: templates/upload.html.jinja:334
 msgid "Quadrillage"
@@ -12404,7 +12413,7 @@ msgstr "Done."
 msgid "Ce cadre a refusé la demande."
 msgstr "This frame refused the request."
 
-#: web/routes_frames.py:394 web/routes_party.py:105 web/routes_settings.py:443
+#: web/routes_frames.py:394 web/routes_party.py:107 web/routes_settings.py:443
 msgid "Valeur invalide."
 msgstr "Invalid value."
 
@@ -12590,7 +12599,7 @@ msgstr ""
 msgid "Les réactions sont désactivées."
 msgstr "Reactions are turned off."
 
-#: web/routes_guests.py:535 web/routes_party.py:156
+#: web/routes_guests.py:535 web/routes_party.py:158
 msgid "Doucement ! Réessayez dans un moment."
 msgstr "Easy there! Try again in a moment."
 
@@ -13275,47 +13284,47 @@ msgstr ""
 "Party over: the usual slideshow resumes. The party album stays in the "
 "sources."
 
-#: web/routes_party.py:109
+#: web/routes_party.py:111
 #, python-format
 msgid "Imprimante impossible à ajouter : %(error)s"
 msgstr "Unable to add the printer: %(error)s"
 
-#: web/routes_party.py:113
+#: web/routes_party.py:115
 msgid "Photomaton enregistré."
 msgstr "Photo booth saved."
 
-#: web/routes_party.py:130
+#: web/routes_party.py:132
 msgid "Choisissez d'abord l'imprimante."
 msgstr "Choose the printer first."
 
-#: web/routes_party.py:137
+#: web/routes_party.py:139
 msgid "Aucune photo à imprimer."
 msgstr "No photo to print."
 
-#: web/routes_party.py:141
+#: web/routes_party.py:143
 #, python-format
 msgid "Impression impossible : %(error)s"
 msgstr "Printing failed: %(error)s"
 
-#: web/routes_party.py:142
+#: web/routes_party.py:144
 #, python-format
 msgid "Tirage d'essai envoyé à l'imprimante (%(job)s)."
 msgstr "Test print sent to the printer (%(job)s)."
 
-#: web/routes_party.py:153
+#: web/routes_party.py:155
 msgid "Le photomaton n'est pas ouvert."
 msgstr "The photo booth isn't open."
 
-#: web/routes_party.py:159
+#: web/routes_party.py:161
 msgid "Attendez qu'une photo soit à l'écran."
 msgstr "Wait for a photo to be on screen."
 
-#: web/routes_party.py:161
+#: web/routes_party.py:163
 #, python-format
 msgid "Vous avez déjà imprimé vos %(count)s tirages."
 msgstr "You've already printed your %(count)s prints."
 
-#: web/routes_party.py:167
+#: web/routes_party.py:169
 msgid "C'est parti ! Votre photo sort de l'imprimante."
 msgstr "Here it comes! Your photo is printing."
 

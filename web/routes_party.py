@@ -83,7 +83,7 @@ def print_photo(path, config=None):
         image.draft("RGB", (2400, 2400))
         image.load()
         title, subtitle = photobooth.caption(config)
-        return photobooth.send(image.copy(), title, subtitle)
+        return photobooth.send(image.copy(), title, subtitle, paper=photobooth.settings(config)["paper"])
 
 
 @app.route('/api/photobooth', methods=['GET', 'PUT'])
@@ -97,6 +97,8 @@ def photobooth_api():
         for key in ("enabled", "auto"):
             if key in data:
                 wanted[key] = bool(data[key])
+        if data.get("paper") in photobooth.PAPERS:
+            wanted["paper"] = data["paper"]
         for key in ("per_guest", "max_auto"):
             if key in data:
                 try:

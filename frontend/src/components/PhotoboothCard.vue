@@ -5,7 +5,7 @@ import { t } from "../i18n";
 import { run } from "../toast";
 
 // Photomaton de fête : tirages 10 × 15 sur une imprimante Wi-Fi
-interface Booth { enabled: boolean; uri: string; name: string; per_guest: number; auto: boolean; max_auto: number }
+interface Booth { enabled: boolean; uri: string; name: string; per_guest: number; auto: boolean; max_auto: number; paper: "10x15" | "a4" }
 const booth = ref<Booth | null>(null);
 const printers = ref<{ uri: string; name: string }[] | null>(null);
 const searching = ref(false);
@@ -40,6 +40,11 @@ onMounted(load);
         <i class="fas fa-print"></i> {{ p.name }}</button>
     </div>
     <template v-if="booth.uri">
+      <label class="small">{{ t("Papier") }}
+        <select :value="booth.paper" @change="save({ paper: ($event.target as HTMLSelectElement).value as Booth['paper'] })">
+          <option value="10x15">{{ t("Photo 10 × 15") }}</option>
+          <option value="a4">{{ t("A4 (photo en grand)") }}</option>
+        </select></label>
       <label class="check"><input type="checkbox" :checked="booth.enabled" @change="save({ enabled: ($event.target as HTMLInputElement).checked })">
         {{ t("Ouvrir le photomaton pendant les fêtes") }}</label>
       <label class="small">{{ t("Tirages par invité") }}

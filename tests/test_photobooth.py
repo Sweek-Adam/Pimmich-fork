@@ -21,6 +21,7 @@ def test_card_is_a_captioned_print():
     assert landscape.getpixel((900, 500))[0] > 150                                            # la photo
     portrait = photobooth.card(Image.new("RGB", (1000, 1600)))
     assert portrait.size == (1200, 1800)
+    assert photobooth.card(Image.new("RGB", (4000, 3000)), "Fête", "", paper="a4").size == (3508, 2480)  # A4 à 300 points par pouce
 
 
 def test_discover_and_quota(monkeypatch):
@@ -37,7 +38,7 @@ def test_guest_prints_the_photo_on_screen(admin_client, client, monkeypatch, tmp
     from utils.config_manager import load_config, save_config
     from web import routes_guests, routes_party
     printed = []
-    monkeypatch.setattr(photobooth, "send", lambda image, title="", subtitle="": printed.append((image.size, title)) or "Pimmich_Photomaton-1")
+    monkeypatch.setattr(photobooth, "send", lambda image, title="", subtitle="", **k: printed.append((image.size, title)) or "Pimmich_Photomaton-1")
     folder = Path("static/prepared/fete_test")
     folder.mkdir(parents=True, exist_ok=True)
     Image.new("RGB", (640, 360), (20, 120, 200)).save(folder / "a.jpg")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:58+0100\n"
+"POT-Creation-Date: 2026-10-26 08:22+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -1280,23 +1280,36 @@ msgid ""
 "même Wi-Fi."
 msgstr "プリンターが見つかりません。電源を入れ、同じWi-Fiにあるか確認してください。"
 
-#: frontend/src/components/PhotoboothCard.vue:44
+#: frontend/src/components/PhotoboothCard.vue:43
+#: templates/upload.html.jinja:333
+msgid "Papier"
+msgstr "紙"
+
+#: frontend/src/components/PhotoboothCard.vue:45
+msgid "Photo 10 × 15"
+msgstr "L判（10×15）"
+
+#: frontend/src/components/PhotoboothCard.vue:46
+msgid "A4 (photo en grand)"
+msgstr "A4（大きく印刷）"
+
+#: frontend/src/components/PhotoboothCard.vue:49
 msgid "Ouvrir le photomaton pendant les fêtes"
 msgstr "パーティー中にフォトブースを開く"
 
-#: frontend/src/components/PhotoboothCard.vue:45
+#: frontend/src/components/PhotoboothCard.vue:50
 msgid "Tirages par invité"
 msgstr "ゲスト1人あたりの枚数"
 
-#: frontend/src/components/PhotoboothCard.vue:48
+#: frontend/src/components/PhotoboothCard.vue:53
 msgid "Imprimer aussi chaque photo reçue, au plus"
 msgstr "届いた写真もすべて印刷（最大"
 
-#: frontend/src/components/PhotoboothCard.vue:49
+#: frontend/src/components/PhotoboothCard.vue:54
 msgid "par fête"
 msgstr "枚／パーティー）"
 
-#: frontend/src/components/PhotoboothCard.vue:50
+#: frontend/src/components/PhotoboothCard.vue:55
 msgid "Tirage d'essai"
 msgstr "テスト印刷"
 
@@ -8048,7 +8061,7 @@ msgstr "写真を送る"
 msgid "Imprimer la photo à l'écran"
 msgstr "表示中の写真を印刷"
 
-#: templates/upload.html.jinja:58 web/routes_party.py:166
+#: templates/upload.html.jinja:58 web/routes_party.py:168
 msgid "L'imprimante ne répond pas."
 msgstr "プリンターが応答しません。"
 
@@ -8200,10 +8213,6 @@ msgstr "前回の絵を復元しました。"
 #: templates/upload.html.jinja:323
 msgid "Faites d'abord un dessin."
 msgstr "まず絵を描いてください。"
-
-#: templates/upload.html.jinja:333
-msgid "Papier"
-msgstr "紙"
 
 #: templates/upload.html.jinja:334
 msgid "Quadrillage"
@@ -12003,7 +12012,7 @@ msgstr "完了しました。"
 msgid "Ce cadre a refusé la demande."
 msgstr "このフレームが要求を拒否しました。"
 
-#: web/routes_frames.py:394 web/routes_party.py:105 web/routes_settings.py:443
+#: web/routes_frames.py:394 web/routes_party.py:107 web/routes_settings.py:443
 msgid "Valeur invalide."
 msgstr "無効な値です。"
 
@@ -12187,7 +12196,7 @@ msgstr "ありがとうございます！ボイスメッセージはフレーム
 msgid "Les réactions sont désactivées."
 msgstr "リアクションは無効です。"
 
-#: web/routes_guests.py:535 web/routes_party.py:156
+#: web/routes_guests.py:535 web/routes_party.py:158
 msgid "Doucement ! Réessayez dans un moment."
 msgstr "少し待ってからもう一度お試しください。"
 
@@ -12860,47 +12869,47 @@ msgid ""
 "dans les sources."
 msgstr "パーティー終了：いつものスライドショーに戻ります。パーティーのアルバムはソースに残ります。"
 
-#: web/routes_party.py:109
+#: web/routes_party.py:111
 #, python-format
 msgid "Imprimante impossible à ajouter : %(error)s"
 msgstr "プリンターを追加できません：%(error)s"
 
-#: web/routes_party.py:113
+#: web/routes_party.py:115
 msgid "Photomaton enregistré."
 msgstr "フォトブースを保存しました。"
 
-#: web/routes_party.py:130
+#: web/routes_party.py:132
 msgid "Choisissez d'abord l'imprimante."
 msgstr "先にプリンターを選んでください。"
 
-#: web/routes_party.py:137
+#: web/routes_party.py:139
 msgid "Aucune photo à imprimer."
 msgstr "印刷する写真がありません。"
 
-#: web/routes_party.py:141
+#: web/routes_party.py:143
 #, python-format
 msgid "Impression impossible : %(error)s"
 msgstr "印刷できません：%(error)s"
 
-#: web/routes_party.py:142
+#: web/routes_party.py:144
 #, python-format
 msgid "Tirage d'essai envoyé à l'imprimante (%(job)s)."
 msgstr "テスト印刷をプリンターに送りました（%(job)s）。"
 
-#: web/routes_party.py:153
+#: web/routes_party.py:155
 msgid "Le photomaton n'est pas ouvert."
 msgstr "フォトブースは開いていません。"
 
-#: web/routes_party.py:159
+#: web/routes_party.py:161
 msgid "Attendez qu'une photo soit à l'écran."
 msgstr "写真が表示されるまでお待ちください。"
 
-#: web/routes_party.py:161
+#: web/routes_party.py:163
 #, python-format
 msgid "Vous avez déjà imprimé vos %(count)s tirages."
 msgstr "印刷できる%(count)s枚をすでに使いました。"
 
-#: web/routes_party.py:167
+#: web/routes_party.py:169
 msgid "C'est parti ! Votre photo sort de l'imprimante."
 msgstr "印刷中です！プリンターから写真が出てきます。"
 

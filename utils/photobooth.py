@@ -1,5 +1,5 @@
 """
-Photomaton de fête : les photos de la fête imprimées sur une imprimante Wi-Fi, en tirages 10 × 15 cm.
+Photomaton de fête : les photos de la fête imprimées sur une imprimante Wi-Fi, en tirages 10 × 15 cm (ou en A4).
 
 - Imprimante : trouvée sur le réseau (ippfind) et ajoutée à CUPS sans pilote (« IPP Everywhere », la plupart des
   imprimantes récentes) sous le nom Pimmich_Photomaton.
@@ -22,10 +22,12 @@ from utils.platform_info import tmp_path
 
 QUEUE = "Pimmich_Photomaton"
 DPI = 300
-SIZE = (1800, 1200)       # 15 × 10 cm à 300 points par pouce
-MEDIA = "w288h432"        # 4 × 6 pouces (10 × 15 cm) pour CUPS
+PAPERS = {  # format -> (taille en pixels à 300 points par pouce, à l'italienne ; nom du papier pour CUPS)
+    "10x15": ((1800, 1200), "w288h432"),
+    "a4": ((3508, 2480), "A4"),
+}
 COUNTS_FILE = tmp_path("pimmich_photobooth.json")
-DEFAULTS = {"enabled": False, "uri": "", "name": "", "per_guest": 2, "auto": False, "max_auto": 50}
+DEFAULTS = {"enabled": False, "uri": "", "name": "", "per_guest": 2, "auto": False, "max_auto": 50, "paper": "10x15"}
 HAND = Path(__file__).resolve().parent.parent / "static" / "fonts" / "Caveat-Regular.ttf"
 _lock = threading.Lock()
 
@@ -34,6 +36,7 @@ def settings(config):
     data = dict(DEFAULTS, **((config or {}).get("photobooth") or {}))
     data["per_guest"] = max(0, min(20, int(data.get("per_guest") or 0)))
     data["max_auto"] = max(1, min(500, int(data.get("max_auto") or 50)))
+    data["paper"] = data.get("paper") if data.get("paper") in PAPERS else "10x15"
     return data
 
 
@@ -78,33 +81,36 @@ def setup(uri):
     return result.returncode == 0, output[:300]
 
 
-def card(image, title="", subtitle=""):
-    """Tirage 10 × 15 : la photo avec une marge blanche, le titre et la date dans la bande du bas."""
+def card(image, title="", subtitle="", paper="10x15"):
+    """Tirage (10 × 15 ou A4) : la photo avec une marge blanche, le titre et la date dans la bande du bas."""
     from utils.boot_screen import font
     image = ImageOps.exif_transpose(image).convert("RGB")
     portrait = image.height > image.width
-    w, h = (SIZE[1], SIZE[0]) if portrait else SIZE
+    size = PAPERS.get(paper, PAPERS["10x15"])[0]
+    w, h = (size[1], size[0]) if portrait else size
+    k = max(w, h) / 1800  # tout grandit avec le papier (marges, textes)
     page = Image.new("RGB", (w, h), (255, 255, 255))
-    margin, band = 50, 170 if (title or subtitle) else 50
+    margin, band = int(50 * k), int((170 if (title or subtitle) else 50) * k)
     photo = ImageOps.fit(image, (w - 2 * margin, h - margin - band), Image.LANCZOS, centering=(0.5, 0.42))
     page.paste(photo, (margin, margin))
     draw = ImageDraw.Draw(page)
     if title:
-        hand = font(90, 400, str(HAND)) if HAND.exists() else font(70, 700)
-        draw.text((margin + 10, h - band + 30), title, font=hand, fill=(40, 36, 48))
+        hand = font(90 * k, 400, str(HAND)) if HAND.exists() else font(70 * k, 700)
+        draw.text((margin + 10 * k, h - band + 30 * k), title, font=hand, fill=(40, 36, 48))
     if subtitle:
-        small = font(38, 600)
-        draw.text((w - margin - draw.textlength(subtitle, font=small), h - band + 72), subtitle, font=small, fill=(130, 124, 140))
+        small = font(38 * k, 600)
+        draw.text((w - margin - draw.textlength(subtitle, font=small), h - band + 72 * k), subtitle, font=small, fill=(130, 124, 140))
     return page
 
 
-def send(image, title="", subtitle="", queue=QUEUE):
+def send(image, title="", subtitle="", queue=QUEUE, paper="10x15"):
     """Imprime un tirage ; retourne l'identifiant du travail CUPS. RuntimeError si l'imprimante refuse."""
+    paper = paper if paper in PAPERS else "10x15"
     with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as tmp:
-        card(image, title, subtitle).save(tmp.name, "JPEG", quality=95, dpi=(DPI, DPI))
+        card(image, title, subtitle, paper).save(tmp.name, "JPEG", quality=95, dpi=(DPI, DPI))
         path = tmp.name
     try:
-        result = subprocess.run([_tool("lp"), "-d", queue, "-o", f"media={MEDIA}", "-o", "fit-to-page", "-o", "print-quality=5", path],
+        result = subprocess.run([_tool("lp"), "-d", queue, "-o", f"media={PAPERS[paper][1]}", "-o", "fit-to-page", "-o", "print-quality=5", path],
                                 capture_output=True, text=True, timeout=60)
     finally:
         Path(path).unlink(missing_ok=True)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 00:58+0100\n"
+"POT-Creation-Date: 2026-10-26 08:22+0100\n"
 "PO-Revision-Date: 2026-05-16 23:18+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -1334,23 +1334,36 @@ msgid ""
 "même Wi-Fi."
 msgstr "Kein Drucker gefunden: Einschalten und prüfen, ob er im selben WLAN ist."
 
-#: frontend/src/components/PhotoboothCard.vue:44
+#: frontend/src/components/PhotoboothCard.vue:43
+#: templates/upload.html.jinja:333
+msgid "Papier"
+msgstr "Papier"
+
+#: frontend/src/components/PhotoboothCard.vue:45
+msgid "Photo 10 × 15"
+msgstr "Foto 10 × 15"
+
+#: frontend/src/components/PhotoboothCard.vue:46
+msgid "A4 (photo en grand)"
+msgstr "A4 (großes Foto)"
+
+#: frontend/src/components/PhotoboothCard.vue:49
 msgid "Ouvrir le photomaton pendant les fêtes"
 msgstr "Fotobox während Feiern öffnen"
 
-#: frontend/src/components/PhotoboothCard.vue:45
+#: frontend/src/components/PhotoboothCard.vue:50
 msgid "Tirages par invité"
 msgstr "Abzüge pro Gast"
 
-#: frontend/src/components/PhotoboothCard.vue:48
+#: frontend/src/components/PhotoboothCard.vue:53
 msgid "Imprimer aussi chaque photo reçue, au plus"
 msgstr "Auch jedes empfangene Foto drucken, höchstens"
 
-#: frontend/src/components/PhotoboothCard.vue:49
+#: frontend/src/components/PhotoboothCard.vue:54
 msgid "par fête"
 msgstr "pro Feier"
 
-#: frontend/src/components/PhotoboothCard.vue:50
+#: frontend/src/components/PhotoboothCard.vue:55
 msgid "Tirage d'essai"
 msgstr "Testdruck"
 
@@ -8398,7 +8411,7 @@ msgstr "Meine Fotos senden"
 msgid "Imprimer la photo à l'écran"
 msgstr "Foto auf dem Bildschirm drucken"
 
-#: templates/upload.html.jinja:58 web/routes_party.py:166
+#: templates/upload.html.jinja:58 web/routes_party.py:168
 msgid "L'imprimante ne répond pas."
 msgstr "Der Drucker antwortet nicht."
 
@@ -8554,10 +8567,6 @@ msgstr "Ihre vorherige Zeichnung wurde wiederhergestellt."
 #: templates/upload.html.jinja:323
 msgid "Faites d'abord un dessin."
 msgstr "Male zuerst etwas."
-
-#: templates/upload.html.jinja:333
-msgid "Papier"
-msgstr "Papier"
 
 #: templates/upload.html.jinja:334
 msgid "Quadrillage"
@@ -12536,7 +12545,7 @@ msgstr "Erledigt."
 msgid "Ce cadre a refusé la demande."
 msgstr "Dieser Rahmen hat die Anfrage abgelehnt."
 
-#: web/routes_frames.py:394 web/routes_party.py:105 web/routes_settings.py:443
+#: web/routes_frames.py:394 web/routes_party.py:107 web/routes_settings.py:443
 msgid "Valeur invalide."
 msgstr "Ungültiger Wert."
 
@@ -12724,7 +12733,7 @@ msgstr "Danke! Der Rahmen spielt deine Sprachnachricht ab (bis %(date)s)."
 msgid "Les réactions sont désactivées."
 msgstr "Reaktionen sind deaktiviert."
 
-#: web/routes_guests.py:535 web/routes_party.py:156
+#: web/routes_guests.py:535 web/routes_party.py:158
 msgid "Doucement ! Réessayez dans un moment."
 msgstr "Langsam! Versuch es gleich noch einmal."
 
@@ -13431,47 +13440,47 @@ msgstr ""
 "Party vorbei: Die gewohnte Diashow läuft weiter. Das Party-Album bleibt "
 "in den Quellen."
 
-#: web/routes_party.py:109
+#: web/routes_party.py:111
 #, python-format
 msgid "Imprimante impossible à ajouter : %(error)s"
 msgstr "Drucker kann nicht hinzugefügt werden: %(error)s"
 
-#: web/routes_party.py:113
+#: web/routes_party.py:115
 msgid "Photomaton enregistré."
 msgstr "Fotobox gespeichert."
 
-#: web/routes_party.py:130
+#: web/routes_party.py:132
 msgid "Choisissez d'abord l'imprimante."
 msgstr "Wähle zuerst den Drucker."
 
-#: web/routes_party.py:137
+#: web/routes_party.py:139
 msgid "Aucune photo à imprimer."
 msgstr "Kein Foto zum Drucken."
 
-#: web/routes_party.py:141
+#: web/routes_party.py:143
 #, python-format
 msgid "Impression impossible : %(error)s"
 msgstr "Drucken fehlgeschlagen: %(error)s"
 
-#: web/routes_party.py:142
+#: web/routes_party.py:144
 #, python-format
 msgid "Tirage d'essai envoyé à l'imprimante (%(job)s)."
 msgstr "Testdruck an den Drucker gesendet (%(job)s)."
 
-#: web/routes_party.py:153
+#: web/routes_party.py:155
 msgid "Le photomaton n'est pas ouvert."
 msgstr "Die Fotobox ist nicht geöffnet."
 
-#: web/routes_party.py:159
+#: web/routes_party.py:161
 msgid "Attendez qu'une photo soit à l'écran."
 msgstr "Warte, bis ein Foto angezeigt wird."
 
-#: web/routes_party.py:161
+#: web/routes_party.py:163
 #, python-format
 msgid "Vous avez déjà imprimé vos %(count)s tirages."
 msgstr "Du hast deine %(count)s Abzüge schon gedruckt."
 
-#: web/routes_party.py:167
+#: web/routes_party.py:169
 msgid "C'est parti ! Votre photo sort de l'imprimante."
 msgstr "Los geht's! Dein Foto kommt aus dem Drucker."
 
