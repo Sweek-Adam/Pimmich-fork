@@ -38,6 +38,7 @@ from web import routes_photobook  # noqa: F401 (enregistre les routes)
 from web import routes_daily_photo  # noqa: F401 (enregistre les routes)
 from web import routes_scan  # noqa: F401 (enregistre les routes)
 from web import routes_simple  # noqa: F401 (enregistre les routes)
+from web import routes_monthly_report  # noqa: F401 (enregistre les routes)
 from web import routes_game  # noqa: F401 (enregistre les routes)
 from web.workers import *  # noqa: F401,F403
 
@@ -82,7 +83,8 @@ if __name__ == '__main__':
     threading.Thread(target=night_work_worker, daemon=True, name="night-work").start()
     threading.Thread(target=routes_party.party_worker, daemon=True, name="party").start()
     from web.workers import daily_summary_worker, frame_share_worker, auto_backup_worker, daily_photo_worker
-    from web.workers import occasion_reminder_worker
+    from web.workers import occasion_reminder_worker, monthly_report_worker
+    threading.Thread(target=monthly_report_worker, daemon=True, name="monthly-report").start()  # bilan du mois par e-mail
     threading.Thread(target=occasion_reminder_worker, daemon=True, name="occasion-reminders").start()  # rappels d'anniversaire
     threading.Thread(target=daily_photo_worker, daemon=True, name="daily-photo").start()  # photo du jour par e-mail
     threading.Thread(target=auto_backup_worker, daemon=True, name="auto-backup").start()  # sauvegarde de la semaine

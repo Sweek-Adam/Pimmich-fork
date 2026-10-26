@@ -1280,6 +1280,24 @@ def night_work_worker():
         time.sleep(600)
 
 
+def monthly_report_worker():
+    """Bilan du mois par e-mail, le 1er du mois à 10 h (désactivé par défaut)."""
+    from utils import monthly_report
+    time.sleep(240)
+    while True:
+        try:
+            config = load_config()
+            if monthly_report.due(config):
+                monthly_report.mark_sent()  # un seul essai par mois, même en cas d'échec
+                with app.app_context():
+                    from web.routes_monthly_report import send_monthly_report
+                    send_monthly_report(config)
+                logger.info(f"[Bilan du mois] Envoyé à {len(monthly_report.recipients(config))} adresse(s)")
+        except Exception as e:
+            logger.warning(f"[Bilan du mois] {e}")
+        time.sleep(1800)
+
+
 def occasion_reminder_worker():
     """Anniversaires de la famille : rappel quelques jours avant (pour préparer un mot ou un vocal), puis le jour J."""
     from utils import notify, occasions

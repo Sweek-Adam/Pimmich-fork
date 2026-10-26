@@ -19,17 +19,17 @@ def showing(now=None):
     return now.weekday() == 6 and now.hour >= START_HOUR
 
 
-def collect(photos_dir, prepared_dir, messages, reactions_recent, prepared_name, is_media, now=None):
-    """Chiffres de la semaine : {photos, by_source (Counter), messages, hearts, new_prepared [chemins], loved}."""
+def collect(photos_dir, prepared_dir, messages, reactions_recent, prepared_name, is_media, now=None, since=None):
+    """Chiffres de la semaine (ou de `since` à `now`) : {photos, by_source (Counter), messages, hearts, new_prepared, loved}."""
     now = now or time.time()
-    since = now - WEEK
+    since = now - WEEK if since is None else since
     by_source, new_prepared = Counter(), []
     for folder in Path(photos_dir).iterdir() if Path(photos_dir).is_dir() else []:
         if not folder.is_dir() or folder.name in NOT_COUNTED or folder.name.startswith("."):
             continue
         for path in folder.iterdir():
             try:
-                if not path.is_file() or not is_media(path.name) or path.stat().st_mtime < since:
+                if not path.is_file() or not is_media(path.name) or not since <= path.stat().st_mtime < now:
                     continue
             except OSError:
                 continue
@@ -40,11 +40,11 @@ def collect(photos_dir, prepared_dir, messages, reactions_recent, prepared_name,
     week_messages = 0
     for message in messages:
         try:
-            if time.mktime(time.strptime(message.get("created", ""), "%Y-%m-%d %H:%M")) >= since:
+            if since <= time.mktime(time.strptime(message.get("created", ""), "%Y-%m-%d %H:%M")) < now:
                 week_messages += 1
         except ValueError:
             pass
-    hearts = [r for r in reactions_recent if float(r.get("at") or 0) >= since]
+    hearts = [r for r in reactions_recent if since <= float(r.get("at") or 0) < now]
     loved = Counter(r.get("photo") for r in hearts).most_common()
     return {"photos": sum(by_source.values()), "by_source": by_source, "messages": week_messages, "hearts": len(hearts),
             "new_prepared": new_prepared, "loved": [p for p, _n in loved if p]}

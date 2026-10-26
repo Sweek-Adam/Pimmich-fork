@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
 import DailyPhotoCard from "../components/DailyPhotoCard.vue";
+import MonthlyReportCard from "../components/MonthlyReportCard.vue";
 import FrameWallCard from "../components/FrameWallCard.vue";
 import SimpleModeCard from "../components/SimpleModeCard.vue";
 import PhotoboothCard from "../components/PhotoboothCard.vue";
@@ -226,6 +227,7 @@ onMounted(() => {
   <SimpleModeCard v-if="boot.admin" />
   <FrameWallCard v-if="boot.admin" />
   <DailyPhotoCard v-if="boot.admin" />
+  <MonthlyReportCard v-if="boot.admin" />
   <section v-if="boot.admin" class="card frames-box">
     <div class="card-head"><h2><i class="fas fa-th"></i>{{ t("Cadres de la famille") }}</h2></div>
     <p class="small muted">{{ t("Pilotez d'ici les autres cadres Pimmich de la famille (chez Mamie, au chalet…) : voir la photo affichée, les allumer, leur envoyer des photos ou un message. Ils doivent être joignables : même réseau, ou Tailscale sur les deux cadres.") }}</p>
