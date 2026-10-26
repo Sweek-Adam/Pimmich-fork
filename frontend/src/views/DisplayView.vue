@@ -3,6 +3,7 @@ import ButtonCard from "../components/ButtonCard.vue";
 import HomeAssistantCard from "../components/HomeAssistantCard.vue";
 import PresenceCard from "../components/PresenceCard.vue";
 import MotionCard from "../components/MotionCard.vue";
+import CastCard from "../components/CastCard.vue";
 import ScreenCard from "../components/ScreenCard.vue";
 import SettingsPage from "../components/SettingsPage.vue";
 import SmartPlugCard from "../components/SmartPlugCard.vue";
@@ -162,6 +163,7 @@ const sections: Section[] = [
   <SettingsPage :sections="sections">
     <div class="extra">
       <ScreenCard />
+      <CastCard />
       <SmartPlugCard />
       <ButtonCard />
       <MotionCard />

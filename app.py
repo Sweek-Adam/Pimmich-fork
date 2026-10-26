@@ -40,6 +40,7 @@ from web import routes_scan  # noqa: F401 (enregistre les routes)
 from web import routes_simple  # noqa: F401 (enregistre les routes)
 from web import routes_monthly_report  # noqa: F401 (enregistre les routes)
 from web import routes_auto_captions  # noqa: F401 (enregistre les routes)
+from web import routes_chromecast  # noqa: F401 (enregistre les routes)
 from web import routes_game  # noqa: F401 (enregistre les routes)
 from web.workers import *  # noqa: F401,F403
 

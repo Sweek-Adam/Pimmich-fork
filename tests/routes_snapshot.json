@@ -207,6 +207,30 @@
   ]
  ],
  [
+  "/api/chromecast",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/chromecast/devices",
+  [
+   "GET"
+  ]
+ ],
+ [
+  "/api/chromecast/start",
+  [
+   "POST"
+  ]
+ ],
+ [
+  "/api/chromecast/stop",
+  [
+   "POST"
+  ]
+ ],
+ [
   "/api/clear_logs",
   [
    "POST"
