@@ -1277,6 +1277,40 @@ def night_work_worker():
         time.sleep(600)
 
 
+def occasion_reminder_worker():
+    """Anniversaires de la famille : rappel quelques jours avant (pour préparer un mot ou un vocal), puis le jour J."""
+    from utils import notify, occasions
+    time.sleep(180)
+    while True:
+        try:
+            config = load_config()
+            if datetime.now().hour >= 9 and notify.wants(config, "occasions"):
+                base = notify.base_url(config)
+                with app.app_context():
+                    for item in occasions.reminders(config):
+                        title, text = occasion_reminder_text(item)
+                        notify.send(config, "occasions", title, text, key=f"occasion:{item['kind']}:{item['name']}:{item['date']}:{item['delta']}",
+                                    click=f"{base}/app/#/messages" if base else None, repeat_after=30 * 86400)
+        except Exception as e:
+            logger.warning(f"[Rappels] {e}")
+        time.sleep(1800)
+
+
+def occasion_reminder_text(item):
+    """Titre et texte du rappel (dans l'application : traduits)."""
+    days = [_("lundi"), _("mardi"), _("mercredi"), _("jeudi"), _("vendredi"), _("samedi"), _("dimanche")]
+    name, years = item["name"], item["years"]
+    if item["kind"] == "wedding":
+        what = _("l'anniversaire de mariage de %(name)s (%(years)s ans)", name=name, years=years)
+    else:
+        what = _("l'anniversaire de %(name)s (%(years)s ans)", name=name, years=years) if years > 0 else _("l'anniversaire de %(name)s", name=name)
+    if item["delta"] == 0:
+        return _("C'est aujourd'hui !"), _("Aujourd'hui, c'est %(what)s.", what=what)
+    return (_("Anniversaire dans %(days)s jours", days=item["delta"]),
+            _("%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot (Messages, programmé pour le jour J) : le cadre l'affichera ce jour-là.",
+              day=days[item["date"].weekday()].capitalize(), what=what))
+
+
 def daily_summary_worker():
     """Bilan du jour, une fois par jour à l'heure choisie (si la notification « Bilan du jour » est cochée)."""
     from utils import daily_summary, notify

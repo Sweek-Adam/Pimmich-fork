@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 09:36+0100\n"
+"POT-Creation-Date: 2026-10-26 09:40+0100\n"
 "PO-Revision-Date: 2025-07-21 23:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -4955,37 +4955,37 @@ msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "lundi"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "mardi"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "mercredi"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "jeudi"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "vendredi"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "samedi"
 msgstr ""
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "dimanche"
 msgstr ""
 
@@ -11187,6 +11187,10 @@ msgid "Médias impossibles à préparer"
 msgstr ""
 
 #: utils/notify.py:24
+msgid "Anniversaires à venir (rappel quelques jours avant, et le jour J)"
+msgstr ""
+
+#: utils/notify.py:25
 msgid "Bilan du jour (photos reçues, échecs, place libre, température)"
 msgstr ""
 
@@ -13536,5 +13540,41 @@ msgstr ""
 msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "
 "cette nuit : %(names)s"
+msgstr ""
+
+#: web/workers.py:1304
+#, python-format
+msgid "l'anniversaire de mariage de %(name)s (%(years)s ans)"
+msgstr ""
+
+#: web/workers.py:1306
+#, python-format
+msgid "l'anniversaire de %(name)s (%(years)s ans)"
+msgstr ""
+
+#: web/workers.py:1306
+#, python-format
+msgid "l'anniversaire de %(name)s"
+msgstr ""
+
+#: web/workers.py:1308
+msgid "C'est aujourd'hui !"
+msgstr ""
+
+#: web/workers.py:1308
+#, python-format
+msgid "Aujourd'hui, c'est %(what)s."
+msgstr ""
+
+#: web/workers.py:1309
+#, python-format
+msgid "Anniversaire dans %(days)s jours"
+msgstr ""
+
+#: web/workers.py:1310
+#, python-format
+msgid ""
+"%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot "
+"(Messages, programmé pour le jour J) : le cadre l'affichera ce jour-là."
 msgstr ""
 

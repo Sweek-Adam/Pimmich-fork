@@ -140,3 +140,13 @@ def upcoming(config, today=None, days=60):
                 found.append({"kind": item["kind"], "name": item["name"], "date": when, "years": when.year - item["date"].year})
                 break
     return sorted(found, key=lambda o: o["date"])
+
+
+REMIND_DAYS = 3
+
+
+def reminders(config, today=None, days_before=REMIND_DAYS):
+    """Occasions à rappeler aujourd'hui : [{kind, name, date, years, delta}] (delta = jours restants : days_before ou 0)."""
+    today = today or date.today()
+    return [dict(o, delta=(o["date"] - today).days) for o in upcoming(config, today, days_before)
+            if (o["date"] - today).days in (0, days_before)]

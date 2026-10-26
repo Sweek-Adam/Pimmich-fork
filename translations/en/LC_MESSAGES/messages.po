@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 09:36+0100\n"
+"POT-Creation-Date: 2026-10-26 09:40+0100\n"
 "PO-Revision-Date: 2025-08-09 17:21+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -5191,37 +5191,37 @@ msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "Move the photos of “{source}” to “{target}”?"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "lundi"
 msgstr "Monday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "mardi"
 msgstr "Tuesday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "mercredi"
 msgstr "Wednesday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "jeudi"
 msgstr "Thursday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "vendredi"
 msgstr "Friday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "samedi"
 msgstr "Saturday"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "dimanche"
 msgstr "Sunday"
 
@@ -11776,6 +11776,10 @@ msgid "Médias impossibles à préparer"
 msgstr "Media that could not be prepared"
 
 #: utils/notify.py:24
+msgid "Anniversaires à venir (rappel quelques jours avant, et le jour J)"
+msgstr "Upcoming birthdays (reminder a few days before, and on the day)"
+
+#: utils/notify.py:25
 msgid "Bilan du jour (photos reçues, échecs, place libre, température)"
 msgstr "Daily summary (photos received, failures, free space, temperature)"
 
@@ -14178,4 +14182,42 @@ msgid ""
 msgstr ""
 "%(count)s media could not be prepared despite another try tonight: "
 "%(names)s"
+
+#: web/workers.py:1304
+#, python-format
+msgid "l'anniversaire de mariage de %(name)s (%(years)s ans)"
+msgstr "%(name)s's wedding anniversary (%(years)s years)"
+
+#: web/workers.py:1306
+#, python-format
+msgid "l'anniversaire de %(name)s (%(years)s ans)"
+msgstr "%(name)s's birthday (%(years)s)"
+
+#: web/workers.py:1306
+#, python-format
+msgid "l'anniversaire de %(name)s"
+msgstr "%(name)s's birthday"
+
+#: web/workers.py:1308
+msgid "C'est aujourd'hui !"
+msgstr "It's today!"
+
+#: web/workers.py:1308
+#, python-format
+msgid "Aujourd'hui, c'est %(what)s."
+msgstr "Today is %(what)s."
+
+#: web/workers.py:1309
+#, python-format
+msgid "Anniversaire dans %(days)s jours"
+msgstr "Birthday in %(days)s days"
+
+#: web/workers.py:1310
+#, python-format
+msgid ""
+"%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot "
+"(Messages, programmé pour le jour J) : le cadre l'affichera ce jour-là."
+msgstr ""
+"%(day)s is %(what)s. Record a voice message or write a note (Messages, "
+"scheduled for the day): the frame will show it that day."
 

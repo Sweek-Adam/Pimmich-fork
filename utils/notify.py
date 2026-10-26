@@ -21,6 +21,7 @@ EVENTS = {
     "health": {"label": N_("Problèmes du cadre (alimentation, chaleur, disque)"), "default": True, "tags": "rotating_light", "priority": 4},
     "imports": {"label": N_("Imports terminés"), "default": False, "tags": "white_check_mark", "priority": 2},
     "media": {"label": N_("Médias impossibles à préparer"), "default": True, "tags": "film_frames", "priority": 3},
+    "occasions": {"label": N_("Anniversaires à venir (rappel quelques jours avant, et le jour J)"), "default": True, "tags": "birthday", "priority": 3},
     "daily": {"label": N_("Bilan du jour (photos reçues, échecs, place libre, température)"), "default": False, "tags": "bar_chart", "priority": 2},
 }
 REPEAT_AFTER = 10 * 60

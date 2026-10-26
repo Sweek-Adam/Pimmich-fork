@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-26 09:36+0100\n"
+"POT-Creation-Date: 2026-10-26 09:40+0100\n"
 "PO-Revision-Date: 2026-05-17 14:16+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -5006,37 +5006,37 @@ msgid "Déplacer les photos de « {source} » vers « {target} » ?"
 msgstr "「{source}」の写真を「{target}」に移動しますか？"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "lundi"
 msgstr "月曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "mardi"
 msgstr "火曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "mercredi"
 msgstr "水曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "jeudi"
 msgstr "木曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "vendredi"
 msgstr "金曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "samedi"
 msgstr "土曜日"
 
 #: frontend/src/views/MaintenanceView.vue:109
-#: utils/themed_compositions_extra.py:608
+#: utils/themed_compositions_extra.py:608 web/workers.py:1301
 msgid "dimanche"
 msgstr "日曜日"
 
@@ -11377,6 +11377,10 @@ msgid "Médias impossibles à préparer"
 msgstr "準備できないメディア"
 
 #: utils/notify.py:24
+msgid "Anniversaires à venir (rappel quelques jours avant, et le jour J)"
+msgstr "近づく誕生日（数日前と当日にお知らせ）"
+
+#: utils/notify.py:25
 msgid "Bilan du jour (photos reçues, échecs, place libre, température)"
 msgstr "今日のまとめ（受信写真、失敗、空き容量、温度）"
 
@@ -13727,4 +13731,40 @@ msgid ""
 "%(count)s média(s) n'ont pas pu être préparés malgré un nouvel essai "
 "cette nuit : %(names)s"
 msgstr "今夜再試行しましたが、%(count)s件のメディアを準備できませんでした：%(names)s"
+
+#: web/workers.py:1304
+#, python-format
+msgid "l'anniversaire de mariage de %(name)s (%(years)s ans)"
+msgstr "%(name)sの結婚記念日（%(years)s年）"
+
+#: web/workers.py:1306
+#, python-format
+msgid "l'anniversaire de %(name)s (%(years)s ans)"
+msgstr "%(name)sの誕生日（%(years)s歳）"
+
+#: web/workers.py:1306
+#, python-format
+msgid "l'anniversaire de %(name)s"
+msgstr "%(name)sの誕生日"
+
+#: web/workers.py:1308
+msgid "C'est aujourd'hui !"
+msgstr "今日です！"
+
+#: web/workers.py:1308
+#, python-format
+msgid "Aujourd'hui, c'est %(what)s."
+msgstr "今日は%(what)sです。"
+
+#: web/workers.py:1309
+#, python-format
+msgid "Anniversaire dans %(days)s jours"
+msgstr "あと%(days)s日で誕生日"
+
+#: web/workers.py:1310
+#, python-format
+msgid ""
+"%(day)s, c'est %(what)s. Enregistrez un message vocal ou écrivez un mot "
+"(Messages, programmé pour le jour J) : le cadre l'affichera ce jour-là."
+msgstr "%(day)sは%(what)sです。音声メッセージや一言を（メッセージ画面で当日に予約して）用意すれば、当日フレームに表示されます。"
 
